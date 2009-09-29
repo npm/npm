@@ -88,47 +88,6 @@ npm.refreshSource = function npm_refreshSource (src) {
     }).addErrback(function () { p.emitError() });
   });
   
-  // var uri = http.parseUri(src);
-  // debug("parsed uri "+JSON.stringify(uri));
-  // var client = http.createClient(uri.port || 80, uri.host);
-  // var request = client.get(uri.path || "/");
-  // request.finish(function (response) {
-  //   puts("STATUS: " + response.statusCode);
-  //   puts("HEADERS: " + JSON.stringify(response.headers));
-  //   response.setBodyEncoding("utf8");
-  //   response.addListener("body", function (chunk) {
-  //     puts("BODY: " + chunk);
-  //   });
-  // });
-  // 
-  
-  // var client = http.createClient(uri.port || 80, uri.host);
-  // debug("created client");
-  // client.get(uri.path || "/").finish(function (response) {
-  //   debug("STATUS: " + response.statusCode);
-  //   debug("HEADERS: " + JSON.stringify(response.headers));
-  //   response.setBodyEncoding("utf8");
-  //   response.addListener("body", function (chunk) {
-  //     debug("BODY: " + chunk);
-  //   });
-  //   response.addListener("complete", function () {
-  //     debug("finished");
-  //     p.emitSuccess();
-  //   });
-  // });
-  
-  
-  // http.cat("http://example.com/", "utf-8")
-  //   .addCallback(function (data) {
-  //     debug("do something");
-  //     p.emitSuccess(data);
-  //   })
-  //   .addErrback(function (er) {
-  //     debug("error "+JSON.stringify(er));
-  //     p.emitError(er);
-  //   });
-    
-
   return p;
 };
 
