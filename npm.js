@@ -6,8 +6,20 @@ var npm = exports,
 
 include("/utils.js");
 
-npm.install = function npm_install () {
-  return dummyPromise()
+var CATALOG = {};
+
+npm.install = function npm_install (pkg, opt) {
+  var p = new node.Promise();
+  opt = opt || {};
+  
+  npm.readCatalog()
+    .addErrback(fail(p, "Couldn't load catalog"))
+    .addCallback(function () {
+      debug("ok, so install "+pkg+"already!");
+      p.emitSuccess();
+    });
+  
+  return p;
 };
 
 npm.refresh = function npm_refresh () {
@@ -26,7 +38,20 @@ npm.refresh = function npm_refresh () {
   return p;
 };
 
-var CATALOG = {};
+npm.readCatalog = function npm_readCatalog () {
+  var p = new node.Promise(),
+    path = node.path.join(ENV.HOME, ".npm", "catalog.json");
+  node.fs.cat(
+    path
+  ).addErrback(fail(p,
+    "couldn't open "+path+" for reading"
+  )).addCallback(function (data) {
+    debug("got catalog! " + data);
+    p.emitSuccess();
+  });
+  return p;
+};
+
 npm.writeCatalog = function npm_writeCatalog () {
   var p = new node.Promise();
   
