@@ -68,26 +68,16 @@ npm.getSources = function npm_getSources () {
 };  
 
 npm.refreshSource = function npm_refreshSource (src) {
-  // debug("refresh the source: "+src);
-  
   var p = new node.Promise();
-  
-  var uri = http.parseUri(src);
-  
-  // TODO: Replace this nonportable kludge with http.createClient.
-  var data = "";
-  exec("curl "+src+" > .npm.catalog.tmp").addCallback(function (stdout, stderr) {
-    // debug("it worked!" + stdout);
-    // now read the file, and parse it.
-    node.fs.cat(".npm.catalog.tmp").addCallback(function (data) {
+  http.cat(src)
+    .addErrback(fail(p, "Couldn't load "+src))
+    .addCallback(function (data) {
       try {
         data = JSON.parse(data);
         merge(CATALOG, data);
         p.emitSuccess(data);
       } catch (ex) { p.emitError(ex); return; }
-    }).addErrback(function () { p.emitError() });
-  });
-  
+    });
   return p;
 };
 
