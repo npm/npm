@@ -1,0 +1,5 @@
+[
+  "http://localhost/dev/sandbox/phpinfo.php",
+  "../npm-data/catalog.json",
+  "http://github.com/isaacs/npm-data/raw/master/catalog.json"
+]
