@@ -86,7 +86,7 @@ var script = [
   
   // call npm.install("--force", "npm")
   function () {
-    npm.install("--force", "npm").addErrback(fail(
+    npm.install("npm", {force : true}).addErrback(fail(
       "Failed installing npm with npm"
     )).addCallback(next);
   },

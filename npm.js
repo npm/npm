@@ -15,7 +15,17 @@ npm.install = function npm_install (pkg, opt) {
   npm.readCatalog()
     .addErrback(fail(p, "Couldn't load catalog"))
     .addCallback(function () {
-      debug("ok, so install "+pkg+"already!");
+      log("installing ["+pkg+"] with options: "+JSON.stringify(opt));
+      log("(well, not really.  but this is where I would be...)");
+      
+      // recurse through dependencies, then for each:
+      // fetch the tarball
+      // unpack in $HOME/.node_libraries/<package>/
+      // If it's got a build step, then cd into the folder, and run it.
+      // if it's a lib, then write ~/.node_libraries/<package>.js as
+      //   exports = require(<package>/<lib.js>)
+      // If it's got a start step, then run the start command.
+      
       p.emitSuccess();
     });
   
@@ -46,13 +56,14 @@ npm.readCatalog = function npm_readCatalog () {
   ).addErrback(fail(p,
     "couldn't open "+path+" for reading"
   )).addCallback(function (data) {
-    debug("got catalog! " + data);
-    p.emitSuccess();
+    // log("got catalog! " + data);
+    p.emitSuccess(data);
   });
   return p;
 };
 
 npm.writeCatalog = function npm_writeCatalog () {
+  log("writing catalog");
   var p = new node.Promise();
   
   node.fs.open(
@@ -122,5 +133,9 @@ function dummyPromise (name) {
 
 function fail (p, msg) { return function () {
   p.emitError();
-  debug("npm failed: "+msg);
+  log("failure:  "+msg);
 }};
+
+function log (msg) {
+  node.stdio.writeError("npm: "+msg+"\n");
+}
