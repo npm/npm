@@ -4,35 +4,79 @@
 
 var http = require("/http.js");
 
-exports.fetch = function fetch (remote, local, headers, encoding) {
+function get (obj, key) {
+  for (var i in obj) if (i.toLowerCase() === key.toLowerCase()) return obj[i];
+  return undefined;
+};
+function set (obj, key, val) {
+  for (var i in obj) if (i.toLowerCase() === key.toLowerCase()) return obj[i] = val;
+  return obj[key] = val;
+};
+
+function bind (o, fn) {
+  return function () {
+    return fn.apply(o, arguments);
+  };
+};
+
+exports.fetch = function fetch (remote, local, headers) {
   var p = new node.Promise();
-    
+  
   var uri = http.parseUri(remote);
   headers = headers || {};
   headers.Host = uri.host;
+  
+  node.fs.open(
+    local,
+    node.O_CREAT | node.O_WRONLY | node.O_TRUNC | node.O_APPEND | node.O_SYMLINK,
+    0755
+  ).addErrback(function () {
+    p.emitError("could not open "+local+" for writing.");
+  }).addCallback(function (fd) {
+    fetchAndWrite(remote, fd, p, headers);
+  });
+  
+  return p;
+};
+
+function fetchAndWrite (remote, fd, p, headers, maxRedirects, redirects) {
+  redirects = redirects || 0;
+  maxRedirects = maxRedirects || 10;
+  var uri = http.parseUri(remote);
+  log(remote);
+  set(headers, "Host", uri.host);
   
   http
     .createClient(uri.port || (uri.protocol === "https" ? 443 : 80), uri.host)
     .get(uri.path || "/", headers)
     .finish(function (response) {
-      // try to get the encoding
-      response.setBodyEncoding("utf8");
+      // handle redirects.
+      var loc = get(response.headers, "location");
+      if (loc && loc !== remote && redirects < maxRedirects) {
+        // This is a laughably naïve way to handle this situation.
+        // @TODO: Really need a full curl or wget style module that would 
+        // do all this kind of stuff for us.
+        var cookie = get(response.headers, "Set-Cookie");
+        if (cookie) {
+          cookie = cookie.split(";").shift();
+          set(headers, "Cookie", cookie);
+        }
+        return fetchAndWrite(loc, fd, p, headers, maxRedirects, redirects + 1);
+      }
       
-      
+      // don't set the encoding, because we're just going to write the bytes as-is
       response.addListener("body", function (chunk) {
         // write the chunk...
-        log("got a chunk of body");
+        node.fs.write(fd, chunk)
+          .addErrback(function () {
+            p.emitError("write error");
+          });
       });
-      response.addListener("error", function () {
-        log("failure: could not download "+tarball);
-        p.emitError();
-      });
-      response.addListener("complete", function () {
-        log("downloaded: "+tarball);
-        p.emitSuccess();
-      });
+      response.addListener("error", bind(p, p.emitError));
+      response.addListener("complete", bind(p, p.emitSuccess));
     });
-    
-  
-  return p;
-};
+}
+
+function log (msg) {
+  node.stdio.writeError("npm: fetch "+msg+"\n");
+}
