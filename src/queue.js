@@ -2,14 +2,20 @@
 exports.queue = function queue (items, fn) {
   return new Queue(items, fn).start();
 };
+exports.stack = function stack (items, fn) {
+  return new Queue(items, fn, true).start();
+};
 
 // items are the things
 // fn is what to do to each one.
 // promise is the promise that is fulfilled when it works.
-function Queue (items, fn) {
+function Queue (items, fn, reverse) {
   this.items = [];
-  for (var i = 0, l = items.length; i < l; i ++) if (i in items) {
-    this.push(items[i]);
+  this.keys = [];
+  var insert = reverse ? "unshift" : "push";
+  for (var i in items) {
+    this.items[insert](items[i]);
+    this.keys[insert](i);
   }
   this.fn = fn;
 }
@@ -21,7 +27,7 @@ function Queue_next () {
   np.addCallback(function () { Queue_next.call(self) });
   setTimeout(function () {
     try {
-      var fnP = self.fn.call(null, self.items.shift());
+      var fnP = self.fn.call(null, self.items.shift(), self.keys.shift());
       if (fnP instanceof node.Promise) fnP.addCallback(function () {
           np.emitSuccess();
         }).addErrback(function () {

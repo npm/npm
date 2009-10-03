@@ -4,10 +4,10 @@
 // Use the split-up single-package files instead.
 
 var npm = exports,
-  queue = require("./src/queue.js").queue,
   http = require("/http.js");
 
 include("/utils.js");
+include("./src/queue.js");
 
 var CATALOG = {};
 var REQS = [], INSTALL_SET = {}, INSTALL_OPTS = {};
@@ -54,23 +54,18 @@ function buildInstallSet (pkg) {
 npm.installPackages = function npm_installPackages (set, opt) {
   var p = new node.Promise();
   
-  var pkgs = [];
-  for (var pkg in set) if (set.hasOwnProperty(pkg)) {
-    set[pkg].name = pkg;
-    pkgs.push(set[pkg]);
-  }
-  queue(pkgs, function (pkg) {
-    return _install(pkg, opt);
+  stack(set, function (data, name) {
+    return _install(name, data, opt);
   }).addErrback(fail(p, "Failed to install package set. @TODO: rollback"))
     .addCallback(function () { p.emitSuccess() });
 
   return p;
 };
 
-function _install (pkg, opt) {
+function _install (name, data, opt) {
   var p = new node.Promise();
   setTimeout(function () {
-    log("@todo: install for " + JSON.stringify(pkg));
+    log("@todo: install for " + JSON.stringify(name));
     p.emitSuccess();
   });
   return p;
