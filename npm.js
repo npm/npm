@@ -64,10 +64,39 @@ npm.installPackages = function npm_installPackages (set, opt) {
 
 function _install (name, data, opt) {
   var p = new node.Promise();
-  setTimeout(function () {
-    log("@todo: install for " + JSON.stringify(name));
-    p.emitSuccess();
-  });
+  log("");
+  log("installing " + name);
+  // fetch the tarball
+  var tarball = data.tarball;
+  // don't use http.cat, because it might be pretty large.
+  var uri = http.parseUri(tarball);
+  log("fetch: "+tarball);
+  
+  http
+    .createClient(uri.port || (uri.protocol === "https" ? 443 : 80), uri.host)
+    .get(uri.path || "/", {Host:uri.host,"User-Agent":"npm"})
+    .finish(function (response) {
+      response.setBodyEncoding("utf8");
+      response.addListener("body", function (chunk) {
+        // write the chunk...
+        log("got a chunk of body");
+      });
+      response.addListener("error", function () {
+        log("failure: could not download "+tarball);
+        p.emitError();
+      });
+      response.addListener("complete", function () {
+        log("downloaded: "+tarball);
+        p.emitSuccess();
+      });
+    });
+  
+  // unpack in $HOME/.node_libraries/<package>/
+  // If it's got a build step, then cd into the folder, and run it.
+  // if it's a lib, then write ~/.node_libraries/<package>.js as
+  //   exports = require(<package>/<lib.js>)
+  // If it's got a start step, then run the start command.
+  // p.emitSuccess();
   return p;
 };
 
@@ -78,7 +107,7 @@ npm.install = function npm_install (pkg, opt) {
   buildInstallSet(pkg)
     .addErrback(fail(p,"Failed building requirements for "+pkg))
     .addCallback(function (set) {
-      log("Install set: "+JSON.stringify(set));
+      // log("Install set: "+JSON.stringify(set));
       npm.installPackages(set, opt)
         .addErrback(fail(p, "Failed to install"))
         .addCallback(function () {
@@ -86,18 +115,7 @@ npm.install = function npm_install (pkg, opt) {
           p.emitSuccess();
         });
     });
-  // recurse through dependencies, then for each:
-  // fetch the tarball
-  // unpack in $HOME/.node_libraries/<package>/
-  // If it's got a build step, then cd into the folder, and run it.
-  // if it's a lib, then write ~/.node_libraries/<package>.js as
-  //   exports = require(<package>/<lib.js>)
-  // If it's got a start step, then run the start command.
-  
-  
-  
-  
-  
+
   return p;
 };
 
