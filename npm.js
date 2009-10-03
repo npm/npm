@@ -1,5 +1,8 @@
 // the main guts
 
+// @TODO Don't fetch the whole catalog.json file.
+// Use the split-up single-package files instead.
+
 var npm = exports,
   queue = require("./src/queue.js").queue,
   http = require("/http.js");
@@ -7,27 +10,98 @@ var npm = exports,
 include("/utils.js");
 
 var CATALOG = {};
+var REQS = [], INSTALL_SET = {}, INSTALL_OPTS = {};
+
+function buildInstallSet (pkg) {
+  var p = new node.Promise();
+  var REQS = [pkg];
+  var INSTALL_SET = {};
+  var WAITING = 0;
+  
+  setTimeout(function installSetBuilder () {
+    var set = INSTALL_SET
+    if (REQS.length === 0) {
+      // done, move onto next phase.
+      p.emitSuccess(set);
+      return;
+    }
+    var pkg = REQS.shift();
+    // log("--- pkg = "+pkg);
+    if (set.hasOwnProperty(pkg)) {
+      // just pass by this one.
+      setTimeout(installSetBuilder);
+    } else {
+      // log("not already in set: "+pkg);
+      WAITING ++;
+      set[pkg] = npm.readCatalog(pkg);
+      set[pkg].addErrback(fail(p, "Failed to fetch catalog data for "+pkg));
+      set[pkg].addCallback(function (data) {
+        WAITING --;
+        log("adding: "+pkg);
+        set[pkg] = data;
+        if (data.hasOwnProperty("require")) {
+          REQS = REQS.concat(data.require);
+          setTimeout(installSetBuilder);
+        } else if (WAITING <= 0) p.emitSuccess(set);
+      });
+    }
+  });
+  
+  return p;
+};
+
+
+npm.installPackages = function npm_installPackages (set, opt) {
+  var p = new node.Promise();
+  
+  var pkgs = [];
+  for (var pkg in set) if (set.hasOwnProperty(pkg)) {
+    set[pkg].name = pkg;
+    pkgs.push(set[pkg]);
+  }
+  queue(pkgs, function (pkg) {
+    return _install(pkg, opt);
+  }).addErrback(fail(p, "Failed to install package set. @TODO: rollback"))
+    .addCallback(function () { p.emitSuccess() });
+
+  return p;
+};
+
+function _install (pkg, opt) {
+  var p = new node.Promise();
+  setTimeout(function () {
+    log("@todo: install for " + JSON.stringify(pkg));
+    p.emitSuccess();
+  });
+  return p;
+};
 
 npm.install = function npm_install (pkg, opt) {
   var p = new node.Promise();
   opt = opt || {};
   
-  npm.readCatalog()
-    .addErrback(fail(p, "Couldn't load catalog"))
-    .addCallback(function () {
-      log("installing ["+pkg+"] with options: "+JSON.stringify(opt));
-      log("(well, not really.  but this is where I would be...)");
-      
-      // recurse through dependencies, then for each:
-      // fetch the tarball
-      // unpack in $HOME/.node_libraries/<package>/
-      // If it's got a build step, then cd into the folder, and run it.
-      // if it's a lib, then write ~/.node_libraries/<package>.js as
-      //   exports = require(<package>/<lib.js>)
-      // If it's got a start step, then run the start command.
-      
-      p.emitSuccess();
+  buildInstallSet(pkg)
+    .addErrback(fail(p,"Failed building requirements for "+pkg))
+    .addCallback(function (set) {
+      log("Install set: "+JSON.stringify(set));
+      npm.installPackages(set, opt)
+        .addErrback(fail(p, "Failed to install"))
+        .addCallback(function () {
+          log("success!");
+          p.emitSuccess();
+        });
     });
+  // recurse through dependencies, then for each:
+  // fetch the tarball
+  // unpack in $HOME/.node_libraries/<package>/
+  // If it's got a build step, then cd into the folder, and run it.
+  // if it's a lib, then write ~/.node_libraries/<package>.js as
+  //   exports = require(<package>/<lib.js>)
+  // If it's got a start step, then run the start command.
+  
+  
+  
+  
   
   return p;
 };
@@ -48,7 +122,7 @@ npm.refresh = function npm_refresh () {
   return p;
 };
 
-npm.readCatalog = function npm_readCatalog () {
+npm.readCatalog = function npm_readCatalog (pkg) {
   var p = new node.Promise(),
     path = node.path.join(ENV.HOME, ".npm", "catalog.json");
   node.fs.cat(
@@ -56,8 +130,15 @@ npm.readCatalog = function npm_readCatalog () {
   ).addErrback(fail(p,
     "couldn't open "+path+" for reading"
   )).addCallback(function (data) {
-    // log("got catalog! " + data);
-    p.emitSuccess(data);
+    try {
+      data = JSON.parse(data);
+      if (pkg in data) {
+        p.emitSuccess(data[pkg]);
+      }
+      else fail(p, pkg+" not in catalog")();
+    } catch (ex) {
+      fail(p, "Error parsing catalog: "+ex.message)();
+    }  
   });
   return p;
 };
@@ -101,13 +182,14 @@ npm.getSources = function npm_getSources () {
       } catch (ex) { p.emitError(ex); return; }
     });
   return p;
-};  
+};
 
 npm.refreshSource = function npm_refreshSource (src) {
   var p = new node.Promise();
   http.cat(src)
     .addErrback(fail(p, "Couldn't load "+src))
     .addCallback(function (data) {
+      log("Refreshing data from "+src);
       try {
         data = JSON.parse(data);
         merge(CATALOG, data);
@@ -118,7 +200,7 @@ npm.refreshSource = function npm_refreshSource (src) {
 };
 
 function merge (dest, src) {
-  for (var i in src) dest[i] = src[i];
+  for (var i in src) if (!dest.hasOwnProperty(i)) dest[i] = src[i];
 };
 
 function dummyPromise (name) {
