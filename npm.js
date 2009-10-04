@@ -65,6 +65,59 @@ npm.installPackages = function npm_installPackages (set, opt) {
 
 function _install (name, data, opt) {
   var p = new node.Promise();
+  unpack(name, data, opt)
+    .addErrback(fail(p, "Failed to unpack "+name))
+    .addCallback(function () {
+      var steps = [];
+      // If it's got a build step, then cd into the folder, and run it.
+      // if it's a lib, then write ~/.node_libraries/<package>.js as
+      //   exports = require(<package>/<lib.js>)
+      // If it's got a start step, then run the start command.
+
+      if (data.lib) steps.push(linkPkgLib);
+      if (data.build) steps.push(buildPkg);
+      if (data.start) steps.push(startPkg);
+      queue(steps, function (fn) { return fn(name, data) })
+        .addCallback(method(p, "emitSuccess"))
+        .addErrback(method(p, "emitError"));
+    });
+  return p;
+};
+
+function linkPkgLib (name, data) {
+  var p = new node.Promise();
+
+  log("linkPkgLib " + data.lib, name);
+  var targetFile = node.path.join(ENV.HOME, ".node_libraries", name+".js");
+  node.fs.open(targetFile,
+    node.O_CREAT | node.O_TRUNC | node.O_WRONLY,
+    0755
+  ).addErrback(fail(p, "Couldn't create "+targetFile))
+    .addCallback(function (fd) {
+      node.fs.write(fd, 'setExports(require("./'+name+'/'+data.lib+'"));\n')
+        .addErrback(fail(p, "Couldn't write code to "+targetFile))
+        .addCallback(method(p, "emitSuccess"));
+    });
+  
+  return p;
+};
+function buildPkg (name, data) {
+  log("buildPkg " + data.build, name);
+  var p = new node.Promise();
+  setTimeout(method(p, "emitSuccess"));
+  return p;
+};
+function startPkg (name, data) {
+  log("buildPkg " + data.start, name);
+  var p = new node.Promise();
+  setTimeout(method(p, "emitSuccess"));
+  return p;
+};
+
+
+// unpack to $HOME/.node_libraries/<package>/
+function unpack (name, data, opt) {
+  var p = new node.Promise();
   log("");
   log(name, "install");
   // fetch the tarball
@@ -79,6 +132,7 @@ function _install (name, data, opt) {
     })
     .addCallback(function () {
       var targetFolder = node.path.join(ENV.HOME, ".npm", name);
+      var finalTarget = node.path.join(ENV.HOME, ".node_libraries", name);
       var staging = targetFolder + "-staging";
       
       queue([
@@ -87,7 +141,9 @@ function _install (name, data, opt) {
         "cd "+staging + " && tar -xf "+target,
         "cd "+staging + " && mv * "+targetFolder,
         "cd " + targetFolder,
-        "rm -rf "+staging
+        "rm -rf "+staging,
+        "rm -rf " + finalTarget,
+        "mv " + targetFolder + " " + finalTarget
       ], exec).addCallback(function (results) {
           log(name, "unpacked");
           p.emitSuccess();
@@ -101,11 +157,6 @@ function _install (name, data, opt) {
     
   
   return p;
-  // unpack in $HOME/.node_libraries/<package>/
-  // If it's got a build step, then cd into the folder, and run it.
-  // if it's a lib, then write ~/.node_libraries/<package>.js as
-  //   exports = require(<package>/<lib.js>)
-  // If it's got a start step, then run the start command.
 };
 
 npm.install = function npm_install (pkg, opt) {
