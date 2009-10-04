@@ -19,8 +19,9 @@ exports.method = function method (o, fn) {
   };
 };
 
-exports.log = function log (msg) {
-  node.stdio.writeError("npm: fetch "+msg+"\n");
+exports.log = function log (msg, pref) {
+  pref = (pref && " " + pref) || "";
+  node.stdio.writeError("npm"+pref+":"+msg+"\n");
 };
 
 exports.array = function array (arr) {
