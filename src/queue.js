@@ -1,4 +1,6 @@
 
+include("./utils.js");
+
 exports.queue = function queue (items, fn) {
   return new Queue(items, fn).start();
 };
@@ -12,6 +14,7 @@ exports.stack = function stack (items, fn) {
 function Queue (items, fn, reverse) {
   this.items = [];
   this.keys = [];
+  this.results = {};
   var insert = reverse ? "unshift" : "push";
   for (var i in items) {
     this.items[insert](items[i]);
@@ -20,22 +23,31 @@ function Queue (items, fn, reverse) {
   this.fn = fn;
 }
 function Queue_next () {
-  if (this.items.length <= 0) return this.promise.emitSuccess();
+  if (this.items.length <= 0) return this.promise.emitSuccess(this.results);
   
   var np = new node.Promise(),
-    self = this
-  np.addCallback(function () { Queue_next.call(self) });
+    self = this;
+  np.addCallback(function (key, args) {
+    self.results[key] = args;
+    Queue_next.call(self);
+  }).addErrback(method(self.promise, "emitError"));
+  
   setTimeout(function () {
+    var key = self.keys.shift(), item = self.items.shift();
     try {
-      var fnP = self.fn.call(null, self.items.shift(), self.keys.shift());
-      if (fnP instanceof node.Promise) fnP.addCallback(function () {
-          np.emitSuccess();
+      var fnP = self.fn.call(null, item, key);
+      if (
+        fnP &&
+        typeof(fnP.addCallback === "function") &&
+        typeof(fnP.addErrback === "function")
+      ) fnP.addCallback(function () {
+          np.emitSuccess(key, array(arguments));
         }).addErrback(function () {
-          np.emitError();
+          np.emitError(key, item, array(arguments));
         });
-      else np.emitSuccess();
+      else np.emitSuccess(key, [fnP]);
     } catch (ex) {
-      self.promise.emitError(ex);
+      np.emitError(key, item, [ex]);
     }
   });
   return this.promise;
