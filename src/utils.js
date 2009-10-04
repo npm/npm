@@ -20,8 +20,9 @@ exports.method = function method (o, fn) {
 };
 
 exports.log = function log (msg, pref) {
-  pref = (pref && " " + pref) || "";
-  node.stdio.writeError("npm"+pref+":"+msg+"\n");
+  pref = (pref && ": " + pref) || "";
+  if (msg) msg = "npm"+pref+": "+msg;
+  node.stdio.writeError(msg+"\n");
 };
 
 exports.array = function array (arr) {
