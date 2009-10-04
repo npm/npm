@@ -3,11 +3,12 @@
 // @TODO Don't fetch the whole catalog.json file.
 // Use the split-up single-package files instead.
 
-var npm = exports,
-  http = require("/http.js");
+var npm = exports;
+var http = require("/http.js");
 
 include("/utils.js");
 include("./src/queue.js");
+include("./src/fetch.js");
 
 var CATALOG = {};
 var REQS = [], INSTALL_SET = {}, INSTALL_OPTS = {};
@@ -37,7 +38,7 @@ function buildInstallSet (pkg) {
       set[pkg].addErrback(fail(p, "Failed to fetch catalog data for "+pkg));
       set[pkg].addCallback(function (data) {
         WAITING --;
-        log("adding: "+pkg);
+        log(pkg, "adding");
         set[pkg] = data;
         if (data.hasOwnProperty("require")) {
           REQS = REQS.concat(data.require);
@@ -65,39 +66,46 @@ npm.installPackages = function npm_installPackages (set, opt) {
 function _install (name, data, opt) {
   var p = new node.Promise();
   log("");
-  log("installing " + name);
+  log(name, "install");
   // fetch the tarball
   var tarball = data.tarball;
-  // don't use http.cat, because it might be pretty large.
   var uri = http.parseUri(tarball);
-  log("fetch: "+tarball);
-  
-  http
-    .createClient(uri.port || (uri.protocol === "https" ? 443 : 80), uri.host)
-    .get(uri.path || "/", {Host:uri.host,"User-Agent":"npm"})
-    .finish(function (response) {
-      response.setBodyEncoding("utf8");
-      response.addListener("body", function (chunk) {
-        // write the chunk...
-        log("got a chunk of body");
-      });
-      response.addListener("error", function () {
-        log("failure: could not download "+tarball);
-        p.emitError();
-      });
-      response.addListener("complete", function () {
-        log("downloaded: "+tarball);
-        p.emitSuccess();
-      });
+  var target = node.path.join(ENV.HOME, ".npm", name+".tgz");
+  fetch(tarball, target)
+    .addErrback(function (m) {
+      log("could not fetch "+tarball, "failure");
+      if (m) log(m);
+      p.emitError();
+    })
+    .addCallback(function () {
+      var targetFolder = node.path.join(ENV.HOME, ".npm", name);
+      var staging = targetFolder + "-staging";
+      
+      queue([
+        "rm -rf "+targetFolder,
+        "mkdir -p "+staging,
+        "cd "+staging + " && tar -xf "+target,
+        "cd "+staging + " && mv * "+targetFolder,
+        "cd " + targetFolder,
+        "rm -rf "+staging
+      ], exec).addCallback(function (results) {
+          log(name, "unpacked");
+          p.emitSuccess();
+        })
+        .addErrback(function (key, item, error) {
+          log("step: "+item, "failure");
+          log(error[2] || error[0].message, "failure");
+          p.emitError();
+        });
     });
+    
   
+  return p;
   // unpack in $HOME/.node_libraries/<package>/
   // If it's got a build step, then cd into the folder, and run it.
   // if it's a lib, then write ~/.node_libraries/<package>.js as
   //   exports = require(<package>/<lib.js>)
   // If it's got a start step, then run the start command.
-  // p.emitSuccess();
-  return p;
 };
 
 npm.install = function npm_install (pkg, opt) {
@@ -228,9 +236,5 @@ function dummyPromise (name) {
 
 function fail (p, msg) { return function () {
   p.emitError();
-  log("failure:  "+msg);
+  log(msg, "failure");
 }};
-
-function log (msg) {
-  node.stdio.writeError("npm: "+msg+"\n");
-}
