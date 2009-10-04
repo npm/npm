@@ -87,14 +87,19 @@ function _install (name, data, opt) {
 function linkPkgLib (name, data) {
   var p = new node.Promise();
 
-  log("linkPkgLib " + data.lib, name);
   var targetFile = node.path.join(ENV.HOME, ".node_libraries", name+".js");
+  log("linking /"+name+".js to /"+name+"/" + data.lib, name);
+  
+  var relPath = [ENV.HOME, ".node_libraries", name].concat(data.lib.split("/"));
+  relPath = node.path.join.apply(node.path, relPath);
+  relPath = relPath.replace(/"/g, "\\\"");
+  
   node.fs.open(targetFile,
     node.O_CREAT | node.O_TRUNC | node.O_WRONLY,
     0755
   ).addErrback(fail(p, "Couldn't create "+targetFile))
     .addCallback(function (fd) {
-      node.fs.write(fd, 'setExports(require("./'+name+'/'+data.lib+'"));\n')
+      node.fs.write(fd, 'setExports(require("'+relPath+'"));\n')
         .addErrback(fail(p, "Couldn't write code to "+targetFile))
         .addCallback(method(p, "emitSuccess"));
     });
@@ -102,8 +107,12 @@ function linkPkgLib (name, data) {
   return p;
 };
 function buildPkg (name, data) {
-  log("buildPkg " + data.build, name);
+  log(data.build, name);
   var p = new node.Promise();
+  
+  // exec("cd "+
+  // node.path.join(ENV.HOME, ".node_libraries", name+".js")
+  // )
   setTimeout(method(p, "emitSuccess"));
   return p;
 };
