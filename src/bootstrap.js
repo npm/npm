@@ -1,3 +1,5 @@
+// @TODO: Use the ./queue.js util for this.
+
 include("/utils.js");
 
 var npmDir = node.path.dirname(node.path.dirname(__filename)),
@@ -56,7 +58,7 @@ var script = [
     node.path.join(HOME, ".npm", "sources.json"), "isFile", next,
     function () {
       // try to copy the file over.
-      // seems like there outta be a node.fs.cp
+      // seems like there oughtta be a node.fs.cp
       node.fs.cat(
         node.path.join(npmDir, "sources.json")
       ).addErrback(fail(
