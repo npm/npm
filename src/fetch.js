@@ -4,20 +4,7 @@
 
 var http = require("/http.js");
 
-function get (obj, key) {
-  for (var i in obj) if (i.toLowerCase() === key.toLowerCase()) return obj[i];
-  return undefined;
-};
-function set (obj, key, val) {
-  for (var i in obj) if (i.toLowerCase() === key.toLowerCase()) return obj[i] = val;
-  return obj[key] = val;
-};
-
-function bind (o, fn) {
-  return function () {
-    return fn.apply(o, arguments);
-  };
-};
+include("./utils.js");
 
 exports.fetch = function fetch (remote, local, headers) {
   var p = new node.Promise();
@@ -43,7 +30,7 @@ function fetchAndWrite (remote, fd, p, headers, maxRedirects, redirects) {
   redirects = redirects || 0;
   maxRedirects = maxRedirects || 10;
   var uri = http.parseUri(remote);
-  log(remote);
+  log(remote, "fetch");
   set(headers, "Host", uri.host);
   
   http
@@ -75,8 +62,4 @@ function fetchAndWrite (remote, fd, p, headers, maxRedirects, redirects) {
       response.addListener("error", bind(p, p.emitError));
       response.addListener("complete", bind(p, p.emitSuccess));
     });
-}
-
-function log (msg) {
-  node.stdio.writeError("npm: fetch "+msg+"\n");
 }
