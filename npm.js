@@ -6,9 +6,9 @@
 var npm = exports;
 var http = require("/http.js");
 
-include("/utils.js");
-include("./src/queue.js");
-include("./src/fetch.js");
+node.mixin(require("/utils.js"));
+node.mixin(require("./src/queue.js"));
+node.mixin(require("./src/fetch.js"));
 
 var CATALOG = {};
 var REQS = [], INSTALL_SET = {}, INSTALL_OPTS = {};
