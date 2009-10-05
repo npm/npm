@@ -1,5 +1,5 @@
 
-include("./utils.js");
+node.mixin(require("./utils.js"));
 
 exports.queue = function queue (items, fn) {
   return new Queue(items, fn).start();

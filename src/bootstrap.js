@@ -1,6 +1,6 @@
 // @TODO: Use the ./queue.js util for this.
 
-include("/utils.js");
+node.mixin(require("/utils.js"));
 
 var npmDir = node.path.dirname(node.path.dirname(__filename)),
   HOME = ENV.HOME,

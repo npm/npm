@@ -99,7 +99,7 @@ function linkPkgLib (name, data) {
     0755
   ).addErrback(fail(p, "Couldn't create "+targetFile))
     .addCallback(function (fd) {
-      node.fs.write(fd, 'setExports(require("'+relPath+'"));\n')
+      node.fs.write(fd, '__module.exports = require("'+relPath+'");\n')
         .addErrback(fail(p, "Couldn't write code to "+targetFile))
         .addCallback(method(p, "emitSuccess"));
     });

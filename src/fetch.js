@@ -4,7 +4,7 @@
 
 var http = require("/http.js");
 
-include("./utils.js");
+node.mixin(require("./utils.js"));
 
 exports.fetch = function fetch (remote, local, headers) {
   var p = new node.Promise();
