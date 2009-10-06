@@ -24,6 +24,9 @@ All commands return 0 if they succeed, and usually 1 if they don't.  Normal outp
 
 npm learns all it knows about packages by looking at the JSON files specified in its catalog list.  Manage this catalog list via the `npm source` commands.
 
+Source URLs can contain `{tokens}` which are expanded based on what's being installed.  Currently only `{name}` is supported, but `{version}` and `{branch}` are planned.
+
+
 ### Update Package Metadata
 
 Fetch the latest info from every source by doing `npm refresh`.  Throw a `--force` on there if you want to clear the cache first.

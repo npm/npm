@@ -56,7 +56,8 @@ npm.installPackages = function npm_installPackages (set, opt) {
   var p = new node.Promise();
   
   stack(set, function (data, name) {
-    return _install(name, data, opt);
+    return _install(name, data, opt)
+      .addCallback(function () { log("installed" ,name) });
   }).addErrback(fail(p, "Failed to install package set. @TODO: rollback"))
     .addCallback(function () { p.emitSuccess() });
 
@@ -187,40 +188,39 @@ npm.install = function npm_install (pkg, opt) {
   return p;
 };
 
-npm.refresh = function npm_refresh () {
-  // get my list of sources.
-  var p = new node.Promise();
-  npm.getSources().addCallback(function (srcArr) {
-    queue(srcArr, function (src) {
-      return npm.refreshSource(src)
-    }).addCallback(function () {
-      node.fs.unlink(".npm.catalog.tmp");
-      npm.writeCatalog()
-        .addCallback(function () { p.emitSuccess(); })
-        .addErrback(function () { p.emitError(); });
-    }).addErrback(function () { p.emitError(); });
-  });
-  return p;
-};
-
 npm.readCatalog = function npm_readCatalog (pkg) {
-  var p = new node.Promise(),
-    path = node.path.join(ENV.HOME, ".npm", "catalog.json");
-  node.fs.cat(
-    path
-  ).addErrback(fail(p,
-    "couldn't open "+path+" for reading"
-  )).addCallback(function (data) {
-    try {
-      data = JSON.parse(data);
-      if (pkg in data) {
-        p.emitSuccess(data[pkg]);
+  
+  var p = new node.Promise();
+  
+  npm.getSources()
+    .addErrback(fail(p, "Could not load sources"))
+    .addCallback(function (sources) {
+      // for each one, swap out the package name, and try to http cat the url.
+      for (var i = 0, l = sources.length; i < l; i ++) {
+        var source = sources[i];
+        var url = source.replace(/\{name\}/gi, pkg);
+        log("Fetching package data from "+url);
+        try {
+          var parsePromise = new node.Promise();
+          http.cat(url).addCallback(function (d) {
+            try {
+              d = JSON.parse(d);
+              if (d) parsePromise.emitSuccess(d);
+              else parsePromise.emitError(d);
+            } catch (ex) {
+              parsePromise.emitError(ex);
+            }
+          });
+          var data = parsePromise.wait();
+        } catch (ex) {
+          continue;
+        }
+        break;
       }
-      else fail(p, pkg+" not in catalog")();
-    } catch (ex) {
-      fail(p, "Error parsing catalog: "+ex.message)();
-    }  
-  });
+      if (!data) fail(p, "Could not load data for "+pkg+" from any source.")();
+      else (p.emitSuccess(data));
+    });
+  
   return p;
 };
 
@@ -260,22 +260,10 @@ npm.getSources = function npm_getSources () {
       try {
         data = JSON.parse(data);
         if (data) p.emitSuccess(data);
-      } catch (ex) { p.emitError(ex); return; }
-    });
-  return p;
-};
-
-npm.refreshSource = function npm_refreshSource (src) {
-  var p = new node.Promise();
-  http.cat(src)
-    .addErrback(fail(p, "Couldn't load "+src))
-    .addCallback(function (data) {
-      log("Refreshing data from "+src);
-      try {
-        data = JSON.parse(data);
-        merge(CATALOG, data);
-        p.emitSuccess(data);
-      } catch (ex) { p.emitError(ex); return; }
+        else p.emitError(data);
+      } catch (ex) {
+        p.emitError(ex);
+      }
     });
   return p;
 };

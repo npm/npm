@@ -79,13 +79,6 @@ var script = [
     }
   ),
   
-  // call npm.refresh()
-  function () {
-    npm.refresh().addErrback(fail(
-      "Failed calling npm.refresh()"
-    )).addCallback(next);
-  },
-  
   // call npm.install("--force", "npm")
   function () {
     npm.install("npm", {force : true}).addErrback(fail(

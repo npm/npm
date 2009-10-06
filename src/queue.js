@@ -58,6 +58,7 @@ Queue.prototype = {
     if (this._started) return;
     this._started = true;
     this.promise = new node.Promise();
+    this.promise.addCallback((function (q) { return function () {q.items=[]} })(this));
     return Queue_next.call(this);
   },
   push : function (i) { this.items.push(i); }
