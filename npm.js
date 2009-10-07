@@ -145,6 +145,7 @@ function unpack (name, data, opt) {
       var finalTarget = node.path.join(ENV.HOME, ".node_libraries", name);
       var staging = targetFolder + "-staging";
       
+      // TODO: Break this up.
       queue([
         "rm -rf "+targetFolder,
         "mkdir -p "+staging,
@@ -154,7 +155,9 @@ function unpack (name, data, opt) {
         "rm -rf "+staging,
         "rm -rf " + finalTarget,
         "mv " + targetFolder + " " + finalTarget
-      ], exec).addCallback(function (results) {
+      ], function (cmd) {
+        return exec("/usr/bin/env bash -c '"+cmd+"'");
+      }).addCallback(function (results) {
           log(name, "unpacked");
           p.emitSuccess();
         })
