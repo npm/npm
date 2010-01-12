@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-mkdir .npm-install
-cd .npm-install
-curl -L http://github.com/isaacs/npm/tarball/master | tar -xz
-cd *
-node install.js
-cd ../..
-rm -rf .npm-install
