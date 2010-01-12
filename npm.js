@@ -1,1 +1,1 @@
-exports.install = require("./lib/install")
+exports.install = require("./lib/install");
