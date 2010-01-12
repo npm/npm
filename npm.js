@@ -144,25 +144,25 @@ function unpack (name, data, opt) {
       var targetFolder = node.path.join(ENV.HOME, ".npm", name);
       var finalTarget = node.path.join(ENV.HOME, ".node_libraries", name);
       var staging = targetFolder + "-staging";
-      
-      // TODO: Break this up.
+
       queue([
-        "rm -rf "+targetFolder,
-        "mkdir -p "+staging,
-        "cd "+staging + " && tar -xf "+target,
-        "cd "+staging + " && mv * "+targetFolder,
-        "cd " + targetFolder,
-        "rm -rf "+staging,
-        "rm -rf " + finalTarget,
-        "mv " + targetFolder + " " + finalTarget
-      ], function (cmd) {
-        return exec("/usr/bin/env bash -c '"+cmd+"'");
+        succeed(curry(method(node.fs, "rmdir"), targetFolder)),
+        curry(method(node.fs, "mkdir"), staging, 0755),
+        
+        // TODO: Break this up, remove the execs.
+        curry(exec, "cd "+staging + " && tar -xf "+target),
+        curry(exec, "cd "+staging + " && mv * "+targetFolder),
+        curry(method(node.fs, "rmdir"), staging),
+        succeed(curry(method(node.fs, "rmdir"), finalTarget)),
+        curry(method(node.fs, "rename"), targetFolder, finalTarget)
+      ], function (fn) {
+        return fn();
       }).addCallback(function (results) {
           log(name, "unpacked");
           p.emitSuccess();
         })
         .addErrback(function (key, item, error) {
-          log("step: "+item, "failure");
+          log("step: "+key, "failure");
           log(error[2] || error[0].message, "failure");
           p.emitError();
         });
