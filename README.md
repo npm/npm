@@ -12,7 +12,7 @@ where "install it" means:
 
 1. fetch the tarball
 2. unpack
-3. copy it to `ROOT/<name>/npm/`  
+3. copy it to `ROOT/<name>/npm/`.
   If it already exists, then insist that it be uninstalled first.
 4. read and parse the npm-package.json
 5. link `ROOT/<name>/index.js` to `ROOT/<name>/package/<lib>`, if there is one.
@@ -31,6 +31,7 @@ where "install it" means:
 * Figure out how to manage requirements without it being a total cluster.
 * Replace the reliance on tarballs with a list of names that REFER to tarballs
 * Versions.  Be able to install and activate different versions, have a url for the version info to update when necessary.
+* Interpret tusk-style package.json files.
 * Make a pizza and serve it up.
 * The kitchen sink.
 
