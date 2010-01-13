@@ -4,11 +4,15 @@ npm is a little package manager for the Node javascript library.
 
 For now, this README is more of a task list/roadmap than a proper "how to use this" type doc.
 
+## Contributing
+
+If you're interested in helping, that's awesome!  Please fork this project, implement some of the things on the list, and then let me know.  You can usually find me in #node.js on freenode.net, or you can reach me via <i@izs.me>.
+
 ## What works now:
 
 `require("./npm").install(tarball, name)`
 
-Given a name, and a url or filename of a tarball containing a `npm-package.json`, install it.
+Given a name, and a url or filename of a tarball containing a `package.json`, install it.
 
 where "install it" means:
 
@@ -16,7 +20,7 @@ where "install it" means:
 2. unpack
 3. copy it to `ROOT/<name>/npm/`.
   If it already exists, then insist that it be uninstalled first.
-4. read and parse the npm-package.json
+4. read and parse the package.json
 5. link `ROOT/<name>/index.js` to `ROOT/<name>/package/<lib>`, if there is one.
 6. Run the `make` command in the package dir (sh)
 
@@ -37,5 +41,3 @@ where "install it" means:
 * Interpret tusk-style package.json files.
 * Make a pizza and serve it up.
 * The kitchen sink.
-
-
