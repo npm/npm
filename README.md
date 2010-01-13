@@ -28,6 +28,7 @@ where "install it" means:
 
 ## Future
 
+* wrap it in a nice CLI
 * Support an "uninstall" command on the package.json, and run it when uninstalling.
 * Support "requires" which is a list of tarball urls that must be installed first.
 * Figure out how to manage requirements without it being a total cluster.
