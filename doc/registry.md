@@ -30,7 +30,7 @@ list of versions of foo, plus tools to manage the project.  (Mostly just forms t
 `/foo/nightly`  
 301 redirect to the tarball of the latest code, if there is such a place.  Typically something like `http://github.com/owner/project/tarball/master`.
 
-`https://.../-reset?rt=123456abcdefg&user=bob@foo.com`  (valid reset token & matching user)
+`https://.../?rt=123456abcdefg&user=bob@foo.com`  (valid reset token & matching user)
 Mint a new user token for bob@foo.com, reset all the user tokens on bob@foo.com's packages, and display the new user token, along with a message that bob should save it, because it can't be retrieved, only reset.
 
 
