@@ -5,7 +5,7 @@ require("./npm").install("http://github.com/isaacs/npm/tarball/master", "npm")
   .addErrback(function () {
     print
       ("Failure!\n")
-      ([].slice.call(arguments,0).join("\n"))
+      ([].join.call(arguments,"\n"))
       ("")
       (new Error().stack);
   });
