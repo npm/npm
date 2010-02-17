@@ -4,5 +4,8 @@
   "version":"0.0.1",
   "author":"Isaac Z. Schlueter <i@izs.me>",
   
-  "main":"./npm" // extension to commonjs standard
+  "directories" : {
+    "lib" : "lib"
+  },
+  "main":"./npm"
 }
