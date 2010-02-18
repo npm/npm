@@ -6,6 +6,9 @@
 // only run as main module.
 if (module.id !== ".") return;
 
+// supported commands.
+var commands = ["help", "install"];
+
 var npm = require("./npm"),
   sys = require("sys"),
   path = require("path"),
@@ -18,7 +21,6 @@ function p (m) { sys.error("NPM: "+m); return p };
 
 log("cli: "+sys.inspect(process.argv));
 
-var commands = ["help", "install"];
 npm.help = (function (h) { return function () {
   h && h.apply(npm, arguments);
   usage();
