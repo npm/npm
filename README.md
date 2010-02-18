@@ -7,37 +7,17 @@ For now, this README is more of a task list/roadmap than a proper "how to use th
 ## Contributing
 
 If you're interested in helping, that's awesome!  Please fork this project, implement some of the things on the list, and then let me know.  You can usually find me in #node.js on freenode.net, or you can reach me via <i@izs.me>.
-
+7
 ## What works now:
 
-`require("./npm").install(tarball, name)`
+In a nodejs program:
 
-Given a name, and a url or filename of a tarball containing a `package.json`, install it.
+    require("./npm").install(tarball)
 
-where "install it" means:
+on the command line:
 
-1. fetch the tarball
-2. unpack
-3. copy it to `ROOT/<name>/npm/`.
-  If it already exists, then insist that it be uninstalled first.
-4. read and parse the package.json
-5. link `ROOT/<name>/index.js` to `ROOT/<name>/package/<lib>`, if there is one.
-6. Run the `make` command in the package dir (sh)
+    ./cli.js install <tarball>
 
-## Goals for Next Iteration
+This installs the package, where `tarball` is a url or path to a `.tgz` file that contains a package with a `package.json` file in the root.
 
-* Keep a registry of what's been installed, and what tarball it came from.  Maybe something like `ROOT/<name>/from` or something.
-* Add an "uninstall" command that deletes the folder for a package.
-* Add a "reinstall" command that re-fetches a tarball and installs it with the same name as before
-
-## Future
-
-* wrap it in a nice CLI
-* Support an "uninstall" command on the package.json, and run it when uninstalling.
-* Support "requires" which is a list of tarball urls that must be installed first.
-* Figure out how to manage requirements without it being a total cluster.
-* Replace the reliance on tarballs with a list of names that REFER to tarballs
-* Versions.  Be able to install and activate different versions, have a url for the version info to update when necessary.
-* Interpret tusk-style package.json files.
-* Make a pizza and serve it up.
-* The kitchen sink.
+This'll create some stuff in `$HOME/.node_libraries`.  It supports installing multiple versions of the same thing.  Version activation, dependency resolution, and registry awareness are planned next.
