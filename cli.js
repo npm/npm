@@ -12,7 +12,8 @@ var commands = ["help", "install"];
 var npm = require("./npm"),
   sys = require("sys"),
   path = require("path"),
-  log = require("./lib/utils").log;
+  log = require("./lib/utils").log,
+  Promise = require("events").Promise;
 
 var argv = process.argv, arg = "";
 while (argv.shift() !== module.filename);
@@ -42,8 +43,6 @@ while (arg = argv.shift()) {
   } else globalOption(arg);
 }
 
-return npm[command].apply(npm, argv);
-
 function usage () {
   var out = (arg === "help" ? "puts" : "error");
   function p (m) { sys[out](m); return p };
@@ -57,3 +56,9 @@ function usage () {
     ("                   Supported: "+commands)
     ("[command options]  The arguments to pass to the function.");
 }
+
+var result = npm[command].apply(npm, argv);
+if (result instanceof Promise) result
+  .addCallback(function () { log("ok") })
+  .addErrback(function () { log("failed") });
+else log("ok");
