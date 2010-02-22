@@ -7,5 +7,6 @@
   "directories" : {
     "lib" : "lib"
   },
-  "main":"./npm"
+  "main":"./npm",
+  "make":"cp cli.js /usr/local/bin/npm"
 }
