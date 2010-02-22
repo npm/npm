@@ -7,7 +7,15 @@ For now, this README is more of a task list/roadmap than a proper "how to use th
 ## Contributing
 
 If you're interested in helping, that's awesome!  Please fork this project, implement some of the things on the list, and then let me know.  You can usually find me in #node.js on freenode.net, or you can reach me via <i@izs.me>.
-7
+
+## Installation
+
+To install npm, do this:
+
+    $ node install-npm.js
+
+That will use npm to install itself, like [Ouroboros](http://en.wikipedia.org/wiki/Ouroboros).  From there, you can call the command line program which is cleverly named `npm`.
+
 ## What works now:
 
 In a nodejs program:
@@ -16,7 +24,7 @@ In a nodejs program:
 
 on the command line:
 
-    ./cli.js install <tarball>
+    npm install <tarball>
 
 This installs the package, where `tarball` is a url or path to a `.tgz` file that contains a package with a `package.json` file in the root.
 
