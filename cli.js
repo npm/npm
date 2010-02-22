@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // usage:
-// node cli.js [global options] command [command args]
+// npm [global options] command [command args]
 
 // only run as main module.
 if (module.id !== ".") return;
@@ -9,22 +9,20 @@ if (module.id !== ".") return;
 // supported commands.
 var commands = ["help", "install"];
 
-var npm = require("./npm"),
+var npm = require("npm"),
   sys = require("sys"),
   path = require("path"),
-  log = require("./lib/utils").log,
-  Promise = require("events").Promise;
+  log = require("npm/lib/utils").log;
 
 var argv = process.argv, arg = "";
 while (argv.shift() !== module.filename);
 
-function p (m) { sys.error("NPM: "+m); return p };
-
 log("cli: "+sys.inspect(process.argv));
 
+// add usage onto any existing help documentation.
 npm.help = (function (h) { return function () {
-  h && h.apply(npm, arguments);
   usage();
+  h && h.apply(npm, arguments);
 }})(npm.help);
 
 var globalOption = (function () {
@@ -57,8 +55,8 @@ function usage () {
     ("[command options]  The arguments to pass to the function.");
 }
 
-var result = npm[command].apply(npm, argv);
-if (result instanceof Promise) result
-  .addCallback(function () { log("ok") })
-  .addErrback(function () { log("failed") });
-else log("ok");
+var result = npm[command].apply(npm, argv.concat(function (ok, er) {
+  if (er) {
+    log("failed " + er.message);
+  } else log("ok");
+});
