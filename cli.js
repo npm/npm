@@ -12,7 +12,7 @@ var commands = ["help", "install"];
 var npm = require("npm"),
   sys = require("sys"),
   path = require("path"),
-  log = require("npm/lib/utils").log;
+  log = require("npm/utils").log;
 
 var argv = process.argv, arg = "";
 while (argv.shift() !== module.filename);
@@ -55,8 +55,8 @@ function usage () {
     ("[command options]  The arguments to pass to the function.");
 }
 
-var result = npm[command].apply(npm, argv.concat(function (ok, er) {
+var result = npm[command].apply(npm, argv.concat(function (er, ok) {
   if (er) {
     log("failed " + er.message);
   } else log("ok");
-});
+}));
