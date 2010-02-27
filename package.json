@@ -3,10 +3,13 @@
   "description":"A package manager for node",
   "version":"0.0.1",
   "author":"Isaac Z. Schlueter <i@izs.me>",
-  
   "directories" : {
     "lib" : "lib"
   },
   "main":"./npm",
+  "scripts" : {
+    "install" : "scripts/install.js",
+    "uninstall" : "scripts/uninstall.js"
+  }
   "make":"cp cli.js /usr/local/bin/npm"
 }
