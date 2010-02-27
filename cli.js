@@ -58,5 +58,6 @@ function usage () {
 var result = npm[command].apply(npm, argv.concat(function (er, ok) {
   if (er) {
     log("failed " + er.message);
+    throw er;
   } else log("ok");
 }));
