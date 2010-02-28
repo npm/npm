@@ -10,6 +10,6 @@
   "scripts" : {
     "install" : "scripts/install.js",
     "uninstall" : "scripts/uninstall.js"
-  }
+  },
   "make":"cp cli.js /usr/local/bin/npm"
 }
