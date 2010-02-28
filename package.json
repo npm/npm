@@ -11,5 +11,5 @@
     "install" : "scripts/install.js",
     "uninstall" : "scripts/uninstall.js"
   },
-  "make":"cp cli.js /usr/local/bin/npm"
+  "make":"ln -s $(pwd)/cli.js /usr/local/bin/npm"
 }
