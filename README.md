@@ -29,3 +29,12 @@ on the command line:
 This installs the package, where `tarball` is a url or path to a `.tgz` file that contains a package with a `package.json` file in the root.
 
 This'll create some stuff in `$HOME/.node_libraries`.  It supports installing multiple versions of the same thing.  Version activation, dependency resolution, and registry awareness are planned next.
+
+
+## Todo
+
+* Install packages from the registry
+* Install missing dependencies.  This, with the registry, will make it so that circular dependencies are supported.
+* Safely uninstall packages, failing if anything depends on it.
+* Keep track of what depends on what.
+* Add an "activate" step.  Now that the deps are all included into the package, this isn't any big deal, really.  But the list command should show which one is active.
