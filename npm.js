@@ -2,6 +2,7 @@ var utils = require("./lib/utils");
 
 exports.install = require("./lib/install");
 exports.activate = require("./lib/activate");
+exports.ls = exports.list = require("./lib/ls");
 
 var registry = {};
 

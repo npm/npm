@@ -7,7 +7,7 @@
 if (module.id !== ".") return;
 
 // supported commands.
-var commands = ["help", "install"];
+var commands = ["help", "install", "activate", "ls", "list"];
 
 var npm = require("npm"),
   sys = require("sys"),
