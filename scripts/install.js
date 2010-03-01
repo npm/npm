@@ -13,7 +13,6 @@ fs.lstat(bin, function (er, st) {
 
 function linkBin (er) {
   if (er) throw er;
-  sys.puts("about to link " + clijs+" to " +bin);
   fs.symlinkSync(clijs, bin, function (er) {
     if (er) throw er;
   });
