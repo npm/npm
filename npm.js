@@ -1,4 +1,15 @@
+
+// always return the same npm object.  This is important, as
+// programs might want to set the paths or other things.
+var moduleName = __filename.replace(/\.js$/, '');
+if (module.id !== moduleName) {
+  module.exports = require(moduleName);
+  return;
+}
+
 var utils = require("./lib/utils");
+
+exports.moduleName = moduleName;
 
 exports.install = require("./lib/install");
 exports.activate = require("./lib/activate");
