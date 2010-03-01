@@ -1,7 +1,7 @@
 #!/usr/local/bin/node
 
 var fs = require("fs"),
-  version = process.env["npm.package.version"],
+  version = process.env.npm_package_version,
   bin = "/usr/local/bin/npm-"+version,
   clijs = require("path").join(process.cwd(), "cli.js"),
   sys = require("sys");

@@ -1,6 +1,6 @@
 #!/usr/local/bin/node
 var fs = require("fs"),
-  version = process.env["npm.package.version"],
+  version = process.env.npm_package_version,
   bin = "/usr/local/bin/npm",
   versionedBin = "/usr/local/bin/npm-"+version;
 
