@@ -6,9 +6,6 @@ var fs = require("fs"),
   clijs = require("path").join(process.cwd(), "cli.js"),
   sys = require("sys");
 
-sys.puts("1 about to link " + clijs+" to " +bin + "\ncwd:"+process.cwd());
-
-
 fs.lstat(bin, function (er, st) {
   if (!er) fs.unlink(bin, linkBin);
   else linkBin();
