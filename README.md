@@ -33,8 +33,6 @@ This'll create some stuff in `$HOME/.node_libraries`.  It supports installing mu
 
 ## Todo
 
-* Don't delete the tarball!  That's very annoying!
-* 
 * Install packages from the registry
 * Install missing dependencies.  This, with the registry, will make it so that circular dependencies are supported.
 * Safely uninstall packages, failing if anything depends on it.
