@@ -7,25 +7,28 @@ if (module.id !== moduleName) {
   return;
 }
 
+var npm = exports;
+
 var utils = require("./lib/utils");
 
-exports.moduleName = moduleName;
+npm.moduleName = moduleName;
 
-exports.install = require("./lib/install");
-exports.activate = require("./lib/activate");
-exports.ls = exports.list = require("./lib/ls");
+["install", "activate", "deactivate", "ls"].forEach(function (c) {
+  npm[c] = require("./lib/"+c);
+});
+npm.list = npm.ls;
 
 var registry = {};
 
-exports.set = set;
-exports.get = get;
+npm.set = set;
+npm.get = get;
 
 function set (name, data) { return utils.set(registry, name, data) };
 function get (name) { return utils.get(registry, name) };
 
 var path = require("path");
 
-exports.root = path.join(process.env.HOME, ".node_libraries");
-exports.__defineGetter__("dir", function () { return path.join(exports.root, ".npm") });
-exports.__defineGetter__("tmp", function () { return path.join(exports.dir, ".tmp") });
+npm.root = path.join(process.env.HOME, ".node_libraries");
+npm.__defineGetter__("dir", function () { return path.join(npm.root, ".npm") });
+npm.__defineGetter__("tmp", function () { return path.join(npm.dir, ".tmp") });
 
