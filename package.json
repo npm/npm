@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.0.2"
+, "version" : "0.0.3"
 , "author" : "Isaac Z. Schlueter <i@izs.me>"
 , "directories" :
   { "lib" : "lib"
