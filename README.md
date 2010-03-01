@@ -31,6 +31,37 @@ This installs the package, where `tarball` is a url or path to a `.tgz` file tha
 This'll create some stuff in `$HOME/.node_libraries`.  It supports installing multiple versions of the same thing.  Version activation, dependency resolution, and registry awareness are planned next.
 
 
+## Package Lifecycle Scripts
+
+npm supports the "scripts" member of the package.json script, for the following scripts:
+
+`preinstall` - Run BEFORE the package is installed
+
+`install` - Run AFTER the package is installed.
+
+`preactivate` - Run BEFORE the package is activated.
+
+`activate` - Run AFTER the package has been activated.
+
+`deactivate` - Run BEFORE the package is deactivated.
+
+`postdeactivate` - Run AFTER the package is deactivated.
+
+`uninstall` - Run BEFORE the package is uninstalled.
+
+`postuninstall` - Run AFTER the package is uninstalled.
+
+Package scripts are run in an environment where the package.json fields have been tacked onto the `npm_package_` prefix.  So, for instance, if you had `{"name":"foo", "version":"1.2.5"}` in your package.json file, then in your various lifecycle scripts, this would be true:
+
+    process.env.npm_package_name === "foo"
+    process.env.npm_package_version === "1.2.5"
+
+Objects are flattened following this format, so if you had `{"scripts":{"install":"foo.js"}}` in your package.json, then you'd see this in the script:
+
+    process.env.npm_package_scripts_install = "foo.js"
+
+If the script exits with a code other than 0, then this will abort the process.
+
 ## Todo
 
 * Install packages from the registry
