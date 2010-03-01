@@ -6,13 +6,24 @@
 // only run as main module.
 if (module.id !== ".") return;
 
-// supported commands.
-var commands = ["help", "install", "activate", "ls", "list"];
-
-var npm = require("npm"),
+// figure out where we're at.
+// don't assume that npm is installed in any particular spot, since this
+// might conceivably be a bootstrap attempt.
+var fs = require("fs"),
+  path = require("path"),
   sys = require("sys"),
   path = require("path"),
-  log = require("npm/utils").log;
+  npm;
+if (fs.lstatSync(__filename).isSymbolicLink()) {
+  npm = path.join(path.dirname(fs.readlinkSync(__filename)), "npm");
+} else {
+  npm = path.join(__dirname, "npm");
+}
+npm = require(npm);
+
+// supported commands.
+var commands = ["help", "install", "activate", "ls", "list"],
+  log = require(npm.moduleName+"/../lib/utils").log;
 
 var argv = process.argv, arg = "";
 while (argv.shift() !== module.filename);
