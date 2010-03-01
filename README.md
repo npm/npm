@@ -8,7 +8,7 @@ For now, this README is more of a task list/roadmap than a proper "how to use th
 
 3 isn't a very big number.  0 is even smaller, and there's 2 of those.
 
-This thing is a baby yet.  But these kids grow up before you know it!  Pretty soon, you'll be all tapping out your pipe on the front porch, saying in your withered old man voice, <q>I remember back before the war with the machines, when that npm thing couldn't even install itself, and didn't know what a version was.  We used promises for everything and the global object was called 'node'.  Movies were a nickel when we downloaded them from from the micro torrents, and soda pop had corn syrup of the highest fructose imaginable.  You youngins don't know how good you got it.</q>
+This thing is a baby yet.  But these kids grow up before you know it!  Pretty soon, you'll be all tapping out your pipe on the front porch, saying in your withered old man voice, <i>"I remember back before the war with the machines, when that npm thing couldn't even install itself, and didn't know what a version was.  We used promises for everything and the global object was called 'node'.  Movies were a nickel when we downloaded them from from the micro torrents, and soda pop had corn syrup of the highest fructose imaginable.  You youngins don't know how good you got it."</i>
 
 This isn't even beta, it's alpha.  When most of the core functionality is working, I'll make an announcement on the [node.js](http://groups.google.com/group/nodejs) list.
 
