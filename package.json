@@ -12,5 +12,4 @@
   , "activate" : "scripts/activate.js"
   , "deactivate" : "scripts/deactivate.js"
   }
-, "make":"ln -s $(pwd)/cli.js /usr/local/bin/npm"
 }

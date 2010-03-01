@@ -15,7 +15,10 @@ var fs = require("fs"),
   path = require("path"),
   npm;
 if (fs.lstatSync(__filename).isSymbolicLink()) {
-  npm = path.join(path.dirname(fs.readlinkSync(__filename)), "npm");
+  do {
+    __filename = fs.readlinkSync(__filename);
+    npm = path.join(path.dirname(__filename), "npm");
+  } while (fs.lstatSync(__filename).isSymbolicLink());
 } else {
   npm = path.join(__dirname, "npm");
 }
