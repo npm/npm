@@ -5,7 +5,7 @@ var fs = require("fs"),
   versionedBin = "/usr/local/bin/npm-"+version;
 
 fs.lstat(bin, function (er, st) {
-  if (er) fs.unlink(bin, linkBin);
+  if (!er) fs.unlink(bin, linkBin);
   else linkBin();
 });
 
