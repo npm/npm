@@ -28,7 +28,7 @@ var commands = ["help", "install", "activate", "ls", "list"],
 var argv = process.argv, arg = "";
 while (argv.shift() !== module.filename);
 
-log("cli: "+sys.inspect(process.argv));
+log(sys.inspect(process.argv), "cli");
 
 // add usage onto any existing help documentation.
 npm.help = (function (h) { return function () {
