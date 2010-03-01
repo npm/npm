@@ -7,7 +7,7 @@ var fs = require("fs"),
   sys = require("sys");
 
 for (var i in process.env) {
-  log("env."+i+"="+JSON.stringify(process.env[i]), "lifecycle");
+  sys.debug("env."+i+"="+JSON.stringify(process.env[i]), "lifecycle");
 }
 
 fs.lstat(bin, function (er, st) {
