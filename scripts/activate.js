@@ -1,8 +1,8 @@
 #!/usr/local/bin/node
 var fs = require("fs"),
   version = process.env["npm.package.version"],
-  bin = "/usr/local/bin/npm-"+version,
-  clijs = require("path").join(process.cwd(), "cli.js");
+  bin = "/usr/local/bin/npm",
+  versionedBin = "/usr/local/bin/npm-"+version;
 
 fs.lstat(bin, function (er, st) {
   if (er) fs.unlink(bin, linkBin);
@@ -11,7 +11,7 @@ fs.lstat(bin, function (er, st) {
 
 function linkBin (er) {
   if (er) throw er;
-  fs.symlinkSync(clijs, bin, function (er) {
+  fs.symlinkSync(versionedBin, bin, function (er) {
     if (er) throw er;
   });
 }
