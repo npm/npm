@@ -13,7 +13,12 @@ var utils = require("./lib/utils");
 
 npm.moduleName = moduleName;
 
-["install", "activate", "deactivate", "ls"].forEach(function (c) {
+[ "install"
+, "activate"
+, "deactivate"
+, "ls"
+, "build"
+].forEach(function (c) {
   npm[c] = require("./lib/"+c);
 });
 npm.list = npm.ls;
