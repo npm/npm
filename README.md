@@ -109,7 +109,13 @@ Note that these script files don't have to be nodejs or even javascript programs
 
 All the "core functionality" stuff above.  Most immediately:
 
-* Keep track of what depends on what.
 * Safely uninstall packages, failing if anything depends on it.
-* Install packages from the registry
-* Install missing dependencies.  This, with the registry, will make it so that circular dependencies are supported.
+* Install packages from the registry.  Implement a "fetch" command that writes to `.npm/{pkg}/{version}/package.json`.
+* Install missing dependencies.  For each one, fetch it, then figure out what it needs, then fetch that if we don't already have it, etc.  Put off the resolveDependencies step until everything on the todo list has been installed, then go back and do the dependency linking.
+* Install a link package from a folder.  (Rebuilding and installing npm every time I make a change SUCKS.)  It would be fine to just fs.symlink from the "package" folder to the folder being installed, and then read the package.json out of there, and do whatever.  It might be good to have the fetch/unpack stuff in "install", and create a separate "link" command, and then have both call a "build" command.  This way, I could factor a bunch more junk out of install.js.
+
+Some "nice to have" things that aren't quite core:
+
+* Use path.relative so that the whole root can be picked up and moved easily.
+* Specify the root (and other global options, perhaps) to the CLI.
+* Parse command line options better, and pass an object to the npm command functions, rather than having everything just take one or two positional arguments.
