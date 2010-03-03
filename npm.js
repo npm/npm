@@ -18,6 +18,7 @@ npm.moduleName = moduleName;
 , "deactivate"
 , "ls"
 , "build"
+, "link"
 ].forEach(function (c) {
   npm[c] = require("./lib/"+c);
 });
