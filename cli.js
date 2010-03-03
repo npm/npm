@@ -32,6 +32,7 @@ var commands =
     , "ls"
     , "list"
     , "build"
+    , "link"
     ],
   log = require(npm.moduleName+"/../lib/utils").log;
 
