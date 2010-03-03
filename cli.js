@@ -25,7 +25,14 @@ if (fs.lstatSync(__filename).isSymbolicLink()) {
 npm = require(npm);
 
 // supported commands.
-var commands = ["help", "install", "activate", "ls", "list"],
+var commands =
+    [ "help"
+    , "install"
+    , "activate"
+    , "ls"
+    , "list"
+    , "build"
+    ],
   log = require(npm.moduleName+"/../lib/utils").log;
 
 var argv = process.argv, arg = "";
