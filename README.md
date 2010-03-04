@@ -59,18 +59,45 @@ That will use npm to install itself, like [Ouroboros](http://en.wikipedia.org/wi
 
 ## What works now:
 
-In a nodejs program:
+These are the commands that actually do things, as of today.  If they don't do what they say they do, then please post an issue about it.
 
-    require("./npm").install(tarball)
-
-on the command line:
+### install
 
     npm install <tarball>
 
 This installs the package, where `tarball` is a url or path to a `.tgz` file that contains a package with a `package.json` file in the root.
 
-This'll create some stuff in `$HOME/.node_libraries`.  It supports installing multiple versions of the same thing.  Version activation, dependency resolution, and registry awareness are planned next.
+This'll create some stuff in `$HOME/.node_libraries`.  It supports installing multiple versions of the same thing.
 
+From here, you can do `require("foo-1.2.3")` where "foo" is the name of the package, and "1.2.3" is the version you installed.
+
+Installing by name and version alone is planned next.
+
+### activate
+
+    npm activate <name> <version>
+
+This "activates" a specific version of a package, so that you can just do `require("foo")` without having to specify the version.
+
+### deactivate
+
+    npm deactivate <name>
+
+If there's an active version of the package, this will unlink it from that preferential position.
+
+### link
+
+    npm link <folder>
+
+This will link a source folder into npm's registry using a symlink, and then build it according to the package.json file in that folder's root.  This is handy for installing your own stuff, so that you can work on it and test it iteratively without having to continually rebuild.
+
+### list
+
+    npm list [package]
+
+This will show the installed (and, potentially, activated) versions of all the packages that npm has installed, or just the `package` if specified.
+
+This is also aliased to `ls`.
 
 ## Package Lifecycle Scripts
 
@@ -92,6 +119,8 @@ npm supports the "scripts" member of the package.json script, for the following 
 
 `postuninstall` - Run AFTER the package is uninstalled.
 
+### Package Lifecycle Env Vars
+
 Package scripts are run in an environment where the package.json fields have been tacked onto the `npm_package_` prefix.  So, for instance, if you had `{"name":"foo", "version":"1.2.5"}` in your package.json file, then in your various lifecycle scripts, this would be true:
 
     process.env.npm_package_name === "foo"
@@ -109,7 +138,7 @@ Note that these script files don't have to be nodejs or even javascript programs
 
 For example, if your package.json contains this:
 
-    { "scripts" :
+    { "scripts" : 
       { "install" : "scripts/install.js"
       , "postinstall" : "scripts/install.js"
       , "activate" : "scripts/install.js"
@@ -119,16 +148,84 @@ For example, if your package.json contains this:
 
 then the `scripts/install.js` will be called for the install, post-install, and activate stages of the lifecycle, and the `scripts/uninstall.js` would be called when the package is uninstalled.
 
+## Deviations from and Extensions to the Packages/1.0 Spec
+
+npm aims to implement the commonjs [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec.  However, some adjustments have been made, which may eventually be unmade, but hopefully will be incorporated into the spec.
+
+### version
+
+Version must be [semver](http://semver.org)-compliant.  npm assumes that you've read the semver page, and that you comply with it.  Versions packages with non-semver versions will not be installed by npm.  It's just too tricky if you have more than one way to do it, and semver works well.
+
+(This is actually mentioned in the Packages/1.0 spec, but it's worth mentioning that npm enforces this requirement quite strictly, since it's pretty liberal about most other things.)
+
+### dependencies
+
+The Packages/1.0 spec's method for specifying dependencies is Unclean in My Sight.  So, npm is using a very simple semver-based method.
+
+Dependencies are specified with a simple hash of package name to version range.  The version range is EITHER a string with has one or more space-separated descriptors, OR a range of `version1 - version2`.
+
+Version range descriptors may be any of:
+
+1. `version`
+2. `=version` (this is the same as just `version`)
+3. `>version`
+4. `>=version`
+5. `<version`
+6. `<=version`
+
+For example, these are all valid:
+
+    { "dependencies" : 
+      { "foo" : "1.0.0 - 2.9999.9999"
+      , "bar" : ">=1.0.2 <2.1.2"
+      , "baz" : ">1.0.2 <=2.3.4"
+      , "boo" : "2.0.1"
+      }
+    }
+
+### link
+
+You may specify a `link` member in your package.json to have npm link dependencies in to a particular location inside your package dir.  For example:
+
+    { "dependencies" : 
+      { "boo" : "2.0.1"
+      , "baz" : ">1.0.2 <=2.3.4"
+      , "foo" : "1.0.0 - 2.9999.9999"
+      , "bar" : ">=1.0.2 <2.1.2"
+      }
+    , "link" : 
+      { "boo" : "./deps/boo"
+      , "baz" : "./lib/baz"
+      , "foo" : "./deps/foo"
+      , "bar" : "./deps/bar"
+      }
+    }
+
+This would link the dependencies into the specified locations, so that the package code could do `require("./deps/foo")` to import whichever version of `foo` was satisfying the requirement.
+
+<strong style="color:red">Warning!</strong> This is currently the *only* way in which npm modifies the pristine nature of the package directory, and it may go away eventually.  It's just that it satisfies a use case that is pretty tricky to do otherwise.
+
 ## Todo
 
 All the "core functionality" stuff above.  Most immediately:
 
+* Support a "bin" object that maps program names to things in the package, and installs into the same folder as node. (via mikeal)
 * Safely uninstall packages, failing if anything depends on it.
 * Install packages from the registry.  Implement a "fetch" command that writes to `.npm/{pkg}/{version}/package.json`.
-* Install missing dependencies.  For each one, fetch it, then figure out what it needs, then fetch that if we don't already have it, etc.  Put off the resolveDependencies step until everything on the todo list has been installed, then go back and do the dependency linking.
+* Install missing dependencies.  For each one, fetch it, then figure out what it needs, then fetch that if we don't already have it, etc.  Put off the resolveDependencies step until everything on the list has been installed, then go back and do the dependency linking.
 
 Some "nice to have" things that aren't quite core:
 
 * Use path.relative so that the whole root can be picked up and moved easily.
 * Specify the root (and other global options, perhaps) to the CLI.
 * Parse command line options better, and pass an object to the npm command functions, rather than having everything just take one or two positional arguments.
+
+## Version History
+
+0.0.1 - Lots of sketches and false starts.  Abandoned a few times.
+
+0.0.2 - Install worked mostly.  Still promise-based.
+
+0.0.3 - Converted to callbacks.  Mikeal Rogers wrote a registry for it.
+
+0.0.4 - Version dependencies, link packages, activation, lifecycle scripts

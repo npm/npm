@@ -1,10 +1,8 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.0.3"
+, "version" : "0.0.4beta"
 , "author" : "Isaac Z. Schlueter <i@izs.me>"
-, "directories" :
-  { "lib" : "lib"
-  }
+, "directories" : { "lib" : "lib" }
 , "main" : "./npm"
 , "scripts" :
   { "install" : "scripts/install.js"
