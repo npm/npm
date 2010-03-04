@@ -31,7 +31,7 @@ var commands =
     , "activate"
     , "ls"
     , "list"
-    , "build"
+    , "deactivate"
     , "link"
     ],
   log = require(npm.moduleName+"/../lib/utils").log;
