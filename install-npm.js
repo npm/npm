@@ -5,7 +5,7 @@ function print (m, cr) { process.stdio.writeError(m+(cr===false?"":"\n")); retur
 var npm = require("./npm"), sys = require("sys");
 npm.install("http://github.com/isaacs/npm/tarball/master", function (er, ok) {
   if (er) {
-    sys.error("\nFailed after "+ok.length+" step(s)\n");
+    sys.error("\nFailed after "+(ok && ok.length || 0)+" step(s)\n");
     throw er;
   }
   // sys.debug(sys.inspect(npm.get("npm")));
