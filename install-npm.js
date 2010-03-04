@@ -3,9 +3,9 @@ var sys = require("sys");
 function print (m, cr) { process.stdio.writeError(m+(cr===false?"":"\n")); return print };
 
 var npm = require("./npm"), sys = require("sys");
-npm.install("http://github.com/isaacs/npm/tarball/master", function (er, ok) {
+npm.install("http://github.com/isaacs/npm/tarball/master", function (er) {
   if (er) {
-    sys.error("\nFailed after "+(ok && ok.length || 0)+" step(s)\n");
+    sys.error("\nFail!\n");
     throw er;
   }
   // sys.debug(sys.inspect(npm.get("npm")));
