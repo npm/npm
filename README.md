@@ -101,9 +101,23 @@ Objects are flattened following this format, so if you had `{"scripts":{"install
 
     process.env.npm_package_scripts_install = "foo.js"
 
+Last but not least, the `npm_lifecycle_event` environment variable is set to whichever stage of the cycle is being executed.  So, you could have a single script used for different parts of the process which switches based on what's currently happening.
+
 If the script exits with a code other than 0, then this will abort the process.
 
 Note that these script files don't have to be nodejs or even javascript programs.  They just have to be some kind of executable file.
+
+For example, if your package.json contains this:
+
+    { "scripts" :
+      { "install" : "scripts/install.js"
+      , "postinstall" : "scripts/install.js"
+      , "activate" : "scripts/install.js"
+      , "uninstall" : "scripts/uninstall.js"
+      }
+    }
+
+then the `scripts/install.js` will be called for the install, post-install, and activate stages of the lifecycle, and the `scripts/uninstall.js` would be called when the package is uninstalled.
 
 ## Todo
 
