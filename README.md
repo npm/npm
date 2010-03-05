@@ -210,7 +210,6 @@ This would link the dependencies into the specified locations, so that the packa
 All the "core functionality" stuff above.  Most immediately:
 
 * Support a "bin" object that maps program names to things in the package, and installs into the same folder as node. (via mikeal)
-* Let the package specify the version of node that it's compatible with, in the "engines" field.
 * Safely uninstall packages, failing if anything depends on it.
 * Install packages from the registry.  Implement a "fetch" command that writes to `.npm/{pkg}/{version}/package.json`.
 * Install missing dependencies.  For each one, fetch it, then figure out what it needs, then fetch that if we don't already have it, etc.  Put off the resolveDependencies step until everything on the list has been installed, then go back and do the dependency linking.
