@@ -7,9 +7,9 @@ if (module.id !== moduleName) {
   return;
 }
 
-var npm = exports;
-
-var utils = require("./lib/utils");
+var npm = exports,
+  set = require("./lib/utils/set"),
+  get = require("./lib/utils/get");
 
 npm.moduleName = moduleName;
 
@@ -26,11 +26,8 @@ npm.list = npm.ls;
 
 var registry = {};
 
-npm.set = set;
-npm.get = get;
-
-function set (name, data) { return utils.set(registry, name, data) };
-function get (name) { return utils.get(registry, name) };
+npm.set = function set (name, data) { return set(registry, name, data) };
+npm.get = function get (name) { return get(registry, name) };
 
 var path = require("path");
 

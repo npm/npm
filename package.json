@@ -4,6 +4,7 @@
 , "author" : "Isaac Z. Schlueter <i@izs.me>"
 , "directories" : { "lib" : "lib" }
 , "main" : "./npm"
+, "bin" : { "npm" : "./cli.js" }
 , "scripts" :
   { "install" : "scripts/install.js"
   , "uninstall" : "scripts/uninstall.js"

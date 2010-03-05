@@ -34,7 +34,7 @@ var commands =
     , "deactivate"
     , "link"
     ],
-  log = require(npm.moduleName+"/../lib/utils").log;
+  log = require(npm.moduleName+"/../lib/utils/log");
 
 var argv = process.argv, arg = "";
 while (argv.shift() !== module.filename);
