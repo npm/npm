@@ -2,13 +2,7 @@
 , "description" : "A package manager for node"
 , "version" : "0.0.4beta"
 , "author" : "Isaac Z. Schlueter <i@izs.me>"
-, "directories" : { "lib" : "lib" }
+, "directories" : { "lib" : "./lib/" }
 , "main" : "./npm"
 , "bin" : { "npm" : "./cli.js" }
-, "scripts" :
-  { "install" : "scripts/install.js"
-  , "uninstall" : "scripts/uninstall.js"
-  , "activate" : "scripts/activate.js"
-  , "deactivate" : "scripts/deactivate.js"
-  }
 }
