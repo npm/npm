@@ -28,6 +28,7 @@ Here's what I mean by "core functionality":
 12. Be much smarter about cli arguments.
 13. Help topics.
 14. Install a "link" to a dev directory, so that it links it in rather than doing the moveIntoPlace step.
+15. Detect when a package has only been installed as a dependency, and be able to remove it when nothing else depends on it.
 
 ## Principles
 
@@ -242,6 +243,7 @@ All the "core functionality" stuff above.  Most immediately:
 * Safely uninstall packages, failing if anything depends on it.
 * Install packages from the registry.  Implement a "fetch" command that writes to `.npm/{pkg}/{version}/package.json`.
 * Install missing dependencies.  For each one, fetch it, then figure out what it needs, then fetch that if we don't already have it, etc.  Put off the resolveDependencies step until everything on the list has been installed, then go back and do the dependency linking.
+* Uninstall dependent packages.
 
 Some "nice to have" things that aren't quite core:
 
