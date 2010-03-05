@@ -26,8 +26,8 @@ npm.list = npm.ls;
 
 var registry = {};
 
-npm.set = function set (name, data) { return set(registry, name, data) };
-npm.get = function get (name) { return get(registry, name) };
+npm.set = function (name, data) { return set(registry, name, data) };
+npm.get = function (name) { return get(registry, name) };
 
 var path = require("path");
 
