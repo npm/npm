@@ -4,13 +4,11 @@ npm is a little package manager for the Node javascript library.
 
 For now, this README is more of a task list/roadmap than a proper "how to use this" type doc.
 
-## Version - 0.0.3
-
-3 isn't a very big number.  0 is even smaller, and there's 2 of those.
+## Status: alpha
 
 This thing is a baby yet.  But these kids grow up before you know it!  Pretty soon, you'll be all tapping out your pipe on the front porch, saying in your withered old man voice, <i>"I remember back before the war with the machines, when that npm thing couldn't even install itself, and didn't know what a version was.  We used promises for everything and the global object was called 'node'.  Movies were a nickel when we downloaded them from from the micro torrents, and soda pop had corn syrup of the highest fructose imaginable.  You youngins don't know how good you got it."</i>
 
-This isn't even beta, it's alpha.  When most of the core functionality is working, I'll make an announcement on the [node.js](http://groups.google.com/group/nodejs) list.
+This isn't even beta, it's alpha.  When most of the core functionality is working, I'll make an announcement on the [node.js](http://groups.google.com/group/nodejs) list.  That'll be the `0.1.0` version.
 
 Here's what I mean by "core functionality":
 
@@ -72,7 +70,13 @@ This'll create some stuff in `$HOME/.node_libraries`.  It supports installing mu
 
 From here, you can do `require("foo-1.2.3")` where "foo" is the name of the package, and "1.2.3" is the version you installed.
 
-Installing by name and version alone is planned next.
+Installing by name and version alone is planned for the next version.
+
+### uninstall
+
+    npm uninstall <name> <version>
+
+This uninstalls a package, completely removing everything installed for it.  If it's currently active, then it must be deactivated first.  If anything is depending on it, then those must be uninstalled first.
 
 ### activate
 
@@ -163,16 +167,19 @@ Version must be [semver](http://semver.org)-compliant.  npm assumes that you've 
 
 The Packages/1.0 spec's method for specifying dependencies is Unclean in My Sight.  So, npm is using a very simple semver-based method.
 
-Dependencies are specified with a simple hash of package name to version range.  The version range is EITHER a string with has one or more space-separated descriptors, OR a range of `version1 - version2`.
+Dependencies are specified with a simple hash of package name to version range.  The version range is EITHER a string with has one or more space-separated descriptors.
 
-Version range descriptors may be any of:
+Version range descriptors may be any of the following styles, where "version" is a semver compatible version identifier.
 
-1. `version`
-2. `=version` (this is the same as just `version`)
-3. `>version`
-4. `>=version`
+1. `version` Must match `version` exactly
+2. `=version` Same as just `version`
+3. `>version` Must be greater than `version`
+4. `>=version` etc
 5. `<version`
 6. `<=version`
+7. `*` Matches any version
+8. `""` (just an empty string) Same as `*`
+9. `version1 - version2` Same as `>=version1 <=version2`.
 
 For example, these are all valid:
 
@@ -240,7 +247,6 @@ So, when you install npm, it'll create a symlink from the `cli.js` script to `/u
 
 All the "core functionality" stuff above.  Most immediately:
 
-* Safely uninstall packages, failing if anything depends on it.
 * Install packages from the registry.  Implement a "fetch" command that writes to `.npm/{pkg}/{version}/package.json`.
 * Install missing dependencies.  For each one, fetch it, then figure out what it needs, then fetch that if we don't already have it, etc.  Put off the resolveDependencies step until everything on the list has been installed, then go back and do the dependency linking.
 * Uninstall dependent packages.
@@ -259,4 +265,4 @@ Some "nice to have" things that aren't quite core:
 
 0.0.3 - Converted to callbacks.  Mikeal Rogers wrote a registry for it.
 
-0.0.4 - Version dependencies, link packages, activation, lifecycle scripts, bin linking
+0.0.4 - Version dependencies, link packages, activation, lifecycle scripts, bin linking, uninstallation
