@@ -221,11 +221,24 @@ And, like with dependencies, if you don't specify the version (or if you specify
 
 If you specify an "engines" field, then npm will require that "node" be somewhere on that list.  If "engines" is omitted, then npm will just assume that it works on node.
 
+### bin
+
+A lot of packages have one or more executable files that they'd like to install into the PATH.  npm makes this pretty easy (in fact, it uses this feature to install the "npm" executable.)
+
+To use this, supply a `bin` field in your package.json which is a map of command name to local file name.  On install, npm will link that file into place right next to wherever node is installed.  (Presumably, this is in your PATH, and defaults to `/usr/local/bin`.)  On activation, the versioned file will get linked to the main filename (just like how the main.js stuff works, but with an executable in the PATH.)
+
+For example, npm has this:
+
+    { "bin" : { "npm" : "./cli" } }
+
+So, when you install npm, it'll create a symlink from the `cli.js` script to `/usr/local/bin/npm-version`.  Then, when you activate that version, it'll create a symlink from `/usr/local/bin/npm-version` to `/usr/local/bin/npm`.
+
+(props to [mikeal](http://github.com/mikeal) for the idea)
+
 ## Todo
 
 All the "core functionality" stuff above.  Most immediately:
 
-* Support a "bin" object that maps program names to things in the package, and installs into the same folder as node. (via mikeal)
 * Safely uninstall packages, failing if anything depends on it.
 * Install packages from the registry.  Implement a "fetch" command that writes to `.npm/{pkg}/{version}/package.json`.
 * Install missing dependencies.  For each one, fetch it, then figure out what it needs, then fetch that if we don't already have it, etc.  Put off the resolveDependencies step until everything on the list has been installed, then go back and do the dependency linking.
