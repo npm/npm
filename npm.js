@@ -16,6 +16,7 @@ npm.moduleName = moduleName;
 [ "install"
 , "activate"
 , "deactivate"
+, "uninstall"
 , "ls"
 , "build"
 , "link"
