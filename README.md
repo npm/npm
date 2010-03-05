@@ -211,11 +211,11 @@ Packages/1.0 says that you can have an "engines" field with an array of engine n
 
 With npm, you can use either of the following styles to specify the version of node that your stuff works on:
 
-    { engines: ["node >=0.1.27 <0.1.30"] }
+    { "engines" : [ "node >=0.1.27 <0.1.30" ] }
 
 or:
 
-    {engines:{"node":">=0.1.27 <0.1.30"}}
+    { "engines" : { "node" : ">=0.1.27 <0.1.30" } }
 
 And, like with dependencies, if you don't specify the version (or if you specify "*" as the version), then any version of node will do.
 
