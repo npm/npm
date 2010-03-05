@@ -257,4 +257,4 @@ Some "nice to have" things that aren't quite core:
 
 0.0.3 - Converted to callbacks.  Mikeal Rogers wrote a registry for it.
 
-0.0.4 - Version dependencies, link packages, activation, lifecycle scripts
+0.0.4 - Version dependencies, link packages, activation, lifecycle scripts, bin linking
