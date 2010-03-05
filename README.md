@@ -205,6 +205,22 @@ This would link the dependencies into the specified locations, so that the packa
 
 <strong style="color:red">Warning!</strong> This is currently the *only* way in which npm modifies the pristine nature of the package directory, and it may go away eventually.  It's just that it satisfies a use case that is pretty tricky to do otherwise.
 
+### engines
+
+Packages/1.0 says that you can have an "engines" field with an array of engine names.  However, it has no provision for specifying which version of the engine your stuff runs on.
+
+With npm, you can use either of the following styles to specify the version of node that your stuff works on:
+
+    { engines: ["node >=0.1.27 <0.1.30"] }
+
+or:
+
+    {engines:{"node":">=0.1.27 <0.1.30"}}
+
+And, like with dependencies, if you don't specify the version (or if you specify "*" as the version), then any version of node will do.
+
+If you specify an "engines" field, then npm will require that "node" be somewhere on that list.  If "engines" is omitted, then npm will just assume that it works on node.
+
 ## Todo
 
 All the "core functionality" stuff above.  Most immediately:
