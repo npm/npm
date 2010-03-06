@@ -259,10 +259,28 @@ Some "nice to have" things that aren't quite core:
 
 ## Version History
 
-0.0.1 - Lots of sketches and false starts.  Abandoned a few times.
+### 0.0.1
 
-0.0.2 - Install worked mostly.  Still promise-based.
+* Lots of sketches and false starts.  Abandoned a few times.
 
-0.0.3 - Converted to callbacks.  Mikeal Rogers wrote a registry for it.
+### 0.0.2
 
-0.0.4 - Version dependencies, link packages, activation, lifecycle scripts, bin linking, uninstallation
+* Install worked mostly.  Still promise-based.
+
+### 0.0.3
+
+* Converted to callbacks.
+* Mikeal Rogers wrote a registry for it.
+
+### 0.0.4
+
+* version dependencies
+* link packages
+* activation
+* lifecycle scripts
+* bin linking
+* uninstallation
+
+### 0.0.5
+
+* fix a few bugs in uninstall wrt dependent packages
