@@ -33,6 +33,7 @@ var commands =
     , "list"
     , "deactivate"
     , "uninstall"
+    , "rm"
     , "link"
     ],
   log = require(npm.moduleName+"/../lib/utils/log");

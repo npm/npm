@@ -24,6 +24,7 @@ npm.moduleName = moduleName;
   npm[c] = require("./lib/"+c);
 });
 npm.list = npm.ls;
+npm.rm = npm.uninstall;
 
 var registry = {};
 
