@@ -3,9 +3,6 @@
 // usage:
 // npm [global options] command [command args]
 
-// only run as main module.
-if (module.id !== ".") return;
-
 // figure out where we're at.
 // don't assume that npm is installed in any particular spot, since this
 // might conceivably be a bootstrap attempt.
@@ -13,16 +10,7 @@ var fs = require("fs"),
   path = require("path"),
   sys = require("sys"),
   path = require("path"),
-  npm;
-if (fs.lstatSync(__filename).isSymbolicLink()) {
-  do {
-    __filename = fs.readlinkSync(__filename);
-    npm = path.join(path.dirname(__filename), "npm");
-  } while (fs.lstatSync(__filename).isSymbolicLink());
-} else {
-  npm = path.join(__dirname, "npm");
-}
-npm = require(npm);
+  npm = require("./npm");
 
 // supported commands.
 var commands =
@@ -36,12 +24,12 @@ var commands =
     , "rm"
     , "link"
     ],
-  log = require(npm.moduleName+"/../lib/utils/log");
+  log = require("./lib/utils/log");
 
-var argv = process.argv, arg = "";
-while (argv.shift() !== module.filename);
+// slice off the "node cli.js" or "node /usr/local/bin/npm" from the argv
+var argv = process.argv.slice(2), arg = "";
 
-log(sys.inspect(process.argv), "cli");
+log(sys.inspect(argv), "cli");
 
 // add usage onto any existing help documentation.
 npm.help = (function (h) { return function () {
