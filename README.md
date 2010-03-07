@@ -237,7 +237,7 @@ To use this, supply a `bin` field in your package.json which is a map of command
 
 For example, npm has this:
 
-    { "bin" : { "npm" : "./cli" } }
+    { "bin" : { "npm" : "./cli.js" } }
 
 So, when you install npm, it'll create a symlink from the `cli.js` script to `/usr/local/bin/npm-version`.  Then, when you activate that version, it'll create a symlink from `/usr/local/bin/npm-version` to `/usr/local/bin/npm`.
 
