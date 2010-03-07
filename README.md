@@ -284,3 +284,4 @@ Some "nice to have" things that aren't quite core:
 ### 0.0.5
 
 * fix a few bugs in uninstall wrt dependent packages
+* fix relative require() for nodejs modules installed with the "bin" field. (issue #2)
