@@ -5,4 +5,5 @@
 , "directories" : { "lib" : "./lib/" }
 , "main" : "./npm"
 , "bin" : { "npm" : "./cli.js" }
+, "engines" : { "node" : ">=0.1.30" }
 }
