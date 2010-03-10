@@ -23,6 +23,7 @@ var commands =
     , "uninstall"
     , "rm"
     , "link"
+    , "publish"
     ],
   log = require("./lib/utils/log");
 

@@ -13,6 +13,18 @@ var npm = exports,
 
 npm.moduleName = moduleName;
 
+npm.config = {};
+
+// TODO: read configs from a conf file or cli
+// defaulting here is a wee bit hackish and potentially unsafe.
+// better to require that it be set in the conf or cli, and
+// fail if it's not set.
+
+// TODO: point this at a public js-registry instance some time soon.
+// This works right now by setting an /etc/hosts entry pointing
+// the "packages" hostname to a running instance of the js-registry
+npm.config.registry = "http://packages:5984/";
+
 [ "install"
 , "activate"
 , "deactivate"
@@ -20,6 +32,7 @@ npm.moduleName = moduleName;
 , "ls"
 , "build"
 , "link"
+, "publish"
 ].forEach(function (c) {
   npm[c] = require("./lib/"+c);
 });
