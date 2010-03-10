@@ -28,6 +28,24 @@ Create a new project in the registry.  Fails if this project already exists.  If
 
 Tag a project version with a tag, anything is fine.  Note that npm treats the "stable" tag a bit differently, preferring to install that one when not given a version.
 
+## Changed commands
+
+### install
+
+Assuming that the stable branch of foo is 0.1.3, then all three of these do the same thing:
+
+    npm install foo
+    npm install foo-0.1.3
+    npm install foo 0.1.3
+
+Furthermore, dependencies are installed implicitly.
+
+### list
+
+npm list will now also show packages that are in the registry for installation, along with info about their tags and versions, etc.  To limit to a particular tag, preface it with @, for instance: `npm list foo @stable` to show the stable version of foo.  `npm list @stable` would so all packages with a tag of `stable`.
+
+The current behavior will be available via `npm list @installed`.
+
 ## Configuration
 
 A registry base URL must be specified, either with the `--registry <url>` in the command line, or by setting a registry url in the .npmrc file.
