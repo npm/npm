@@ -24,6 +24,7 @@ var commands =
     , "rm"
     , "link"
     , "publish"
+    , "tag"
     ],
   log = require("./lib/utils/log");
 

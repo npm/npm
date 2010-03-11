@@ -33,6 +33,7 @@ npm.config.registry = "http://packages:5984/";
 , "build"
 , "link"
 , "publish"
+, "tag"
 ].forEach(function (c) {
   npm[c] = require("./lib/"+c);
 });
