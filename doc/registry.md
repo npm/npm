@@ -16,17 +16,15 @@ Fetches the tarball from the url, checks the package.json, and sends to the regi
 dist url.  Fails if the fetch is non-200, or if the version already exists in
 the registry for that package.
 
-### create
-
-    npm create <project>
-
-Create a new project in the registry.  Fails if this project already exists.  If given a path that contains a package.json file, then it'll use the name from that file.
+If the package is not already there, then publishing a tarball creates it.
 
 ### tag
 
     npm tag <project> <version> <tag>
 
 Tag a project version with a tag, anything is fine.  Note that npm treats the "stable" tag a bit differently, preferring to install that one when not given a version.
+
+If the version doesn't exist, then it fails.
 
 ## Changed commands
 
