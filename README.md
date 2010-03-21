@@ -381,3 +381,7 @@ Some "nice to have" things that aren't quite core:
   (issue #2)
 * update to work with node 0.1.33 (aka net2)
 * added publish and tag commands
+
+### 0.0.6
+
+* send content-length with registry PUTs
