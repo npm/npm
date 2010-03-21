@@ -13,7 +13,7 @@ npm.config = {};
 // TODO: point this at a public js-registry instance some time soon.
 // This works right now by setting an /etc/hosts entry pointing
 // the "packages" hostname to a running instance of the js-registry
-npm.config.registry = "http://packages:5984/";
+npm.config.registry = "http://registry.npmjs.org/";
 
 [ "install"
 , "activate"
