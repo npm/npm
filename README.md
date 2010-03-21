@@ -379,3 +379,4 @@ Some "nice to have" things that aren't quite core:
 * fix a few bugs in uninstall wrt dependent packages
 * fix relative require()for nodejs modules installed with the "bin" field.
   (issue #2)
+* update to work with node 0.1.33 (aka net2)
