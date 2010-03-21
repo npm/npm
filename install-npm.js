@@ -1,7 +1,5 @@
 var sys = require("sys");
 
-function print (m, cr) { process.stdio.writeError(m+(cr===false?"":"\n")); return print };
-
 var npm = require("./npm"), sys = require("sys");
 npm.install("http://github.com/isaacs/npm/tarball/master", function (er) {
   if (er) {
@@ -14,6 +12,6 @@ npm.install("http://github.com/isaacs/npm/tarball/master", function (er) {
       sys.error("\nFailed to activate\n");
       throw er;
     }
-    print("It worked!");
+    sys.puts("It worked!");
   });
 })
