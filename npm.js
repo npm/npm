@@ -1,9 +1,10 @@
 
 var npm = exports,
   set = require("./lib/utils/set"),
-  get = require("./lib/utils/get");
+  get = require("./lib/utils/get"),
+  ini = require("./lib/utils/ini");
 
-npm.config = {};
+npm.config = ini.getConfig();
 
 // TODO: read configs from a conf file or cli
 // defaulting here is a wee bit hackish and potentially unsafe.
@@ -13,7 +14,6 @@ npm.config = {};
 // TODO: point this at a public js-registry instance some time soon.
 // This works right now by setting an /etc/hosts entry pointing
 // the "packages" hostname to a running instance of the js-registry
-npm.config.registry = "http://registry.npmjs.org/";
 
 [ "install"
 , "activate"
@@ -24,6 +24,7 @@ npm.config.registry = "http://registry.npmjs.org/";
 , "link"
 , "publish"
 , "tag"
+, "adduser"
 ].forEach(function (c) {
   npm[c] = require("./lib/"+c);
 });
