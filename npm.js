@@ -38,13 +38,16 @@ npm.get = function (name) { return get(registry, name) };
 
 var path = require("path");
 
-npm.root = path.join(process.env.HOME, ".node_libraries");
+Object.defineProperty(npm, "root",
+  { get: function () { return npm.config.root }
+  , set: function (newRoot) { npm.config.set("root", newRoot) }
+  });
 Object.defineProperty(npm, "dir",
   { get: function () { return path.join(npm.root, ".npm") }
   , enumerable:true
   });
 Object.defineProperty(npm, "tmp",
-  { get: function () { return path.join(npm.dir, "tmp") }
+  { get: function () { return path.join(npm.root, ".npm", "tmp") }
   , enumerable:true
   });
 
