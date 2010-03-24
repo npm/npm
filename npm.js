@@ -51,3 +51,6 @@ Object.defineProperty(npm, "tmp",
   , enumerable:true
   });
 
+process.addListener("exit", function () {
+  npm.config.save();
+});
