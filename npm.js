@@ -6,15 +6,6 @@ var npm = exports,
 
 npm.config = ini.getConfig();
 
-// TODO: read configs from a conf file or cli
-// defaulting here is a wee bit hackish and potentially unsafe.
-// better to require that it be set in the conf or cli, and
-// fail if it's not set.
-
-// TODO: point this at a public js-registry instance some time soon.
-// This works right now by setting an /etc/hosts entry pointing
-// the "packages" hostname to a running instance of the js-registry
-
 [ "install"
 , "activate"
 , "deactivate"
