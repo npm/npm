@@ -47,7 +47,7 @@ Object.defineProperty(npm, "dir",
   , enumerable:true
   });
 Object.defineProperty(npm, "tmp",
-  { get: function () { return path.join(npm.root, ".npm", "tmp") }
+  { get: function () { return path.join(npm.root, ".npm", ".tmp") }
   , enumerable:true
   });
 
