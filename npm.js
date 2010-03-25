@@ -4,7 +4,7 @@ var npm = exports,
   get = require("./lib/utils/get"),
   ini = require("./lib/utils/ini");
 
-npm.config = ini.getConfig();
+npm.config = ini.config;
 
 [ "install"
 , "activate"
@@ -22,8 +22,10 @@ npm.config = ini.getConfig();
 npm.list = npm.ls;
 npm.rm = npm.uninstall;
 
+// Local store for package data, so it won't have to be fetched/read more than
+// once in a single pass.  TODO: cache this to disk somewhere when we're using
+// the registry, to cut down on HTTP calls.
 var registry = {};
-
 npm.set = function (name, data) { return set(registry, name, data) };
 npm.get = function (name) { return get(registry, name) };
 
@@ -31,7 +33,7 @@ var path = require("path");
 
 Object.defineProperty(npm, "root",
   { get: function () { return npm.config.root }
-  , set: function (newRoot) { npm.config.set("root", newRoot) }
+  , set: function (newRoot) { ini.set("root", newRoot) }
   });
 Object.defineProperty(npm, "dir",
   { get: function () { return path.join(npm.root, ".npm") }
@@ -43,5 +45,5 @@ Object.defineProperty(npm, "tmp",
   });
 
 process.addListener("exit", function () {
-  npm.config.save();
+  ini.save();
 });
