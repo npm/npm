@@ -2,9 +2,8 @@
 var npm = exports,
   set = require("./lib/utils/set"),
   get = require("./lib/utils/get"),
-  ini = require("./lib/utils/ini");
-
-npm.config = ini.config;
+  ini = require("./lib/utils/ini"),
+  log = require("./lib/utils/log");
 
 [ "install"
 , "activate"
@@ -33,7 +32,7 @@ npm.get = function (name) { return get(registry, name) };
 var path = require("path");
 
 Object.defineProperty(npm, "root",
-  { get: function () { return npm.config.root }
+  { get: function () { return ini.config.root }
   , set: function (newRoot) { ini.set("root", newRoot) }
   });
 Object.defineProperty(npm, "dir",
