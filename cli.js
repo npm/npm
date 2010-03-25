@@ -26,6 +26,7 @@ var commands =
     , "publish"
     , "tag"
     , "adduser"
+    , "config"
     ],
   log = require("./lib/utils/log");
 

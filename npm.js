@@ -16,6 +16,7 @@ npm.config = ini.config;
 , "publish"
 , "tag"
 , "adduser"
+, "config"
 ].forEach(function (c) {
   npm[c] = require("./lib/"+c);
 });
