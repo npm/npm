@@ -39,12 +39,11 @@ Here's what I mean by "core functionality":
 8. Provide a utility for uploading a package.json to a js-registry repository.
 9. Handle circular dependencies nicely.
 10. Install and activate automatically.
-11. Read settings from a .npmrc file.
-12. Be much smarter about cli arguments.
-13. Help topics.
-14. Install a "link" to a dev directory, so that it links it in rather than
+11. Be much smarter about cli arguments.
+12. Help topics.
+13. Install a "link" to a dev directory, so that it links it in rather than
     doing the moveIntoPlace step.
-15. Detect when a package has only been installed as a dependency, and be able
+14. Detect when a package has only been installed as a dependency, and be able
     to remove it when nothing else depends on it.
 
 ## Principles
@@ -144,6 +143,129 @@ packages that npm has installed, or just the `package` if specified.
 
 This is also aliased to `ls`.
 
+**FIXME**: Prints to stderr, but should really be stdout, since the log is what
+you're after.
+
+### adduser
+
+    npm adduser bob password bob@email.com
+
+Create a user named "bob" in the npm registry, and save the credentials to the
+`.npmrc` file. Note that this leaves the password in your `.bash_history`, and
+it is currently stored in the clear in the config file. So, don't use a
+password you care too much about.
+
+This will be changed within the next few versions. The registry will use an ssl
+connection, and the user commands will attempt to make use of
+[node-crypto](http://github.com/waveto/node-crypto) if it is available. Watch
+for this in the next couple versions.
+
+For now, if you somehow break your `.npmrc` file, and have forgotten your
+password, you're boned. [Email isaacs](mailto:i@izs.me) and he'll delete the
+record from the registry so that you can re-add it.
+
+If you break your `.npmrc` file, but you remember your file, you can put your
+user auth back by using the `base64` program like so:
+
+    npm config set auth $( echo user:pass | base64 )
+
+Take your pick of apt-get, yum, homebrew, or macports to install base64 if you
+don't already have it on your system.
+
+### config
+
+The config command is a way to interact with the `.npmrc` file. This file is a
+JSON encoded list of values that npm is concerned with. The first time you run
+npm, it will create a conf file filled with default values.
+
+On exit, the current state of the config is always saved, so that any changes
+will be recorded. You may safely modify the file (as long as it's still
+parseable JSON), but it is safer to use the npm config commands.
+
+Config supports the following sub-commands:
+
+#### set
+
+    npm config set key value
+
+Sets the config key to the value.
+
+#### get
+
+    npm config get key
+
+Echo the config value to stdout. (NOTE: All the other npm logging is done to
+stderr, so pipes should work properly, and you can do `npm get key 2>/dev/null`
+to print out JUST the config value.)
+
+#### list
+
+    npm config list
+
+Show all the config settings.
+
+**FIXME**: Prints to stderr, but should really be stdout, since the log is what
+you're after.
+
+#### delete key
+
+    npm config delete key
+
+Deletes the key from the configuration file.
+
+### publish
+
+    npm publish http://host.com/path/to/tarball.tgz
+
+Publishes a tarball containing a package to the npm registry.
+
+When installation from the registry is supported, this will be much more
+relevant.
+
+### tag
+
+    npm tag packagename 1.2.3 tagname
+
+Tags the specified version of "packagename" with the specified "tagname".
+
+The only tag with any special significance is "stable".
+
+When installation from the registry is supported, this will be much more
+relevant.
+
+## Config File Settings
+
+### auto-activate
+
+Default: true
+
+Automatically activate a package after installation, if it's the only version
+available.
+
+**FIXME**: Not yet supported.
+
+### root
+
+Default: ~/.node_libraries
+
+The root folder where packages are installed and npm keeps its data.
+
+### registry
+
+Default: http://registry.npmjs.org/
+
+The base URL of the npm package registry.
+
+### auth
+
+A base-64 encoded "user:pass" pair.
+
+**FIXME**: This is not encoded in any kind of security sense. It's just base-64
+encoded strictly so that it can be sent along the wire with HTTP Basic
+authentication. An upcoming version of npm will encrypt this and save it back
+to the registry as `auth-crypt`, which will be quite a bit more secure. Until
+then, use a unique password that you don't mind being compromised.
+
 ## Package Lifecycle Scripts
 
 npm supports the "scripts" member of the package.json script, for the
@@ -212,6 +334,39 @@ npm aims to implement the commonjs
 [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec. However, some
 adjustments have been made, which may eventually be unmade, but hopefully will
 be incorporated into the spec.
+
+npm responds to the `node` and `npm` env-specific package.json values, which
+you can hang on any of the following keys: `"overlay", "env", "context",
+"ctx", "vnd", "vendor"`.
+
+For example:
+
+    { "name" : "foo"
+    , "version" : 7
+    , "description" : "generic description"
+    , "vnd" :
+      { "node" :
+        { "name" : "bar"
+        , "description" : "description for node"
+        }
+      , "npm" :
+        { "version" : "1.0.7"
+        , "description" : "description for npm"
+        }
+      , "narwhal" :
+        { "description" : "description for narwhal" }
+      }
+    }
+
+In this case, this is what npm will treat it as:
+
+    { "name" : "bar"
+    , "version" : "1.0.7"
+    , "description" : "description for npm"
+    }
+
+This way, even if npm is not exactly the same as some other package management
+system, you can still use both, and it can be a happy planet.
 
 ### version
 
@@ -384,4 +539,9 @@ Some "nice to have" things that aren't quite core:
 
 ### 0.0.6
 
+* set up a public registry
 * send content-length with registry PUTs
+* adduser command (Mikeal Rogers)
+* ini file stuff (Mikeal Rogers)
+* env-specific package.json
+* added more info to npm's the package.json (bugs, contributors, etc.)
