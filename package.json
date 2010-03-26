@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.0.6"
+, "version" : "0.0.7beta"
 , "author" : "Isaac Z. Schlueter <i@izs.me>"
 , "contributors" : [ "Mikeal Rogers <mikeal.rogers@gmail.com>" ]
 , "repository" :
@@ -11,9 +11,9 @@
   { "mail" : "npm-@googlegroups.com"
   , "web" : "http://github.com/isaacs/npm/issues"
   }
-, "os": ["linux", "darwin", "freebsd"]
+, "os" : [ "linux", "darwin", "freebsd" ]
 , "directories" : { "lib" : "./lib/" }
 , "main" : "./npm"
 , "bin" : { "npm" : "./cli.js" }
-, "engines" : { "node" : ">=0.1.30" }
+, "engines" : { "node" : ">=0.1.32" }
 }
