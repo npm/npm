@@ -1,9 +1,6 @@
-# npm – The Node Package Manager
+# npm – node package manager
 
 npm is a little package manager for the Node javascript library.
-
-For now, this README is more of a task list/roadmap than a proper "how to use
-this" type doc.
 
 ## Status: alpha
 
@@ -33,16 +30,18 @@ Here's what I mean by "core functionality":
 5. Talk to a centralized repository to do all this package/version lookup
    magic.
 6. Install more than one version of a package, and optionally select an
-   "active" version.
+   "active" version. (this works now)
 7. Safely uninstall packages, not removing them unless they have no dependents.
-   (Override with a `--force` flag, of course.)
+   (Override with a `--force` flag, of course.) (this works mostly, minus the
+   `--force` bit.)
 8. Provide a utility for uploading a package.json to a js-registry repository.
+   (totally works now. check out `npm publish <tarball-url>`.)
 9. Handle circular dependencies nicely.
-10. Install and activate automatically.
+10. Install and activate automatically. (works now)
 11. Be much smarter about cli arguments.
 12. Help topics.
 13. Install a "link" to a dev directory, so that it links it in rather than
-    doing the moveIntoPlace step.
+    doing the moveIntoPlace step. (works)
 14. Detect when a package has only been installed as a dependency, and be able
     to remove it when nothing else depends on it.
 
@@ -70,6 +69,12 @@ implement some of the things on the list, and then let me know. You can
 usually find me in #node.js on freenode.net, or you can reach me via
 <i@izs.me>.
 
+If you don't want to contribute code, that's also cool.  It's very helpful
+to have people play with npm and send issues or complaints.  It's stable in
+what it does, so you may find it useful even if you just link in your stuff
+by doing `npm link .` to put it in the `NODE_PATH` so you can pull it in
+more easily.
+
 If you have strong feelings about package managers, I'd love to hear your
 opinions.
 
@@ -86,7 +91,8 @@ the command line program which is cleverly named `npm`.
 ## What works now:
 
 These are the commands that actually do things, as of today. If they don't do
-what they say they do, then please post an issue about it.
+what they say they do, then please [post an issue](http://github.com/isaacs/npm/issues)
+about it.
 
 ### install
 
@@ -164,7 +170,7 @@ For now, if you somehow break your `.npmrc` file, and have forgotten your
 password, you're boned. [Email isaacs](mailto:i@izs.me) and he'll delete the
 record from the registry so that you can re-add it.
 
-If you break your `.npmrc` file, but you remember your file, you can put your
+If you break your `.npmrc` file, but you remember your password, you can put your
 user auth back by using the `base64` program like so:
 
     npm config set auth $( echo user:pass | base64 )
@@ -239,10 +245,8 @@ relevant.
 
 Default: true
 
-Automatically activate a package after installation, if it's the only version
-available.
-
-**FIXME**: Not yet supported.
+Automatically activate a package after installation, if there is not an active
+version already.  Set to "always" to always activate when installing.
 
 ### root
 
@@ -326,7 +330,23 @@ For example, if your package.json contains this:
 
 then the `scripts/install.js` will be called for the install, post-install,
 and activate stages of the lifecycle, and the `scripts/uninstall.js` would be
-called when the package is uninstalled.
+called when the package is uninstalled.  Since `scripts/install.js` is running
+for three different phases, it would be wise in this case to look at the
+`npm_lifecycle_event` environment variable.
+
+If you want to run a make command, you can do so.  This works just fine:
+
+    { "scripts" :
+      { "preinstall" : "./configure"
+      , "install" : "make"
+      , "test" : "make test"
+      }
+    }
+
+However, the script line is not simply a command line, so `make && make install`
+would try to execute the `make` command with the arguments `&&`, `make`, and
+`install`.  If you have a lot of stuff to run in a command, put it in a script
+file.
 
 ## Deviations from and Extensions to the Packages/1.0 Spec
 
@@ -545,3 +565,7 @@ Some "nice to have" things that aren't quite core:
 * ini file stuff (Mikeal Rogers)
 * env-specific package.json
 * added more info to npm's the package.json (bugs, contributors, etc.)
+
+### 0.0.7
+
+* fixed a bug in semver
