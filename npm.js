@@ -5,22 +5,25 @@ var npm = exports,
   ini = require("./lib/utils/ini"),
   log = require("./lib/utils/log");
 
-[ "install"
-, "activate"
-, "deactivate"
-, "uninstall"
-, "ls"
-, "build"
-, "link"
-, "publish"
-, "tag"
-, "adduser"
-, "config"
-].forEach(function (c) {
-  npm[c] = require("./lib/"+c);
-});
-npm.list = npm.ls;
-npm.rm = npm.uninstall;
+npm.commands = {}
+
+; [ "install"
+  , "activate"
+  , "deactivate"
+  , "uninstall"
+  , "ls"
+  , "build"
+  , "link"
+  , "publish"
+  , "tag"
+  , "adduser"
+  , "config"
+  ].forEach(function (c) {
+    npm.commands[c] = require("./lib/"+c);
+  })
+
+npm.commands.list = npm.commands.ls;
+npm.commands.rm = npm.commands.uninstall;
 
 // Local store for package data, so it won't have to be fetched/read more than
 // once in a single pass.  TODO: cache this to disk somewhere when we're using
