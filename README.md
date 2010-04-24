@@ -1,4 +1,6 @@
-# npm – node package manager
+
+npm(1) -- node package manager
+==========================
 
 npm is a little package manager for the Node javascript library.
 
@@ -6,12 +8,12 @@ npm is a little package manager for the Node javascript library.
 
 This thing is a baby yet. But these kids grow up before you know it! Pretty
 soon, you'll be all tapping out your pipe on the front porch, saying in your
-withered old man voice, <i>"I remember back before the war with the machines,
+withered old man voice, ***"I remember back before the war with the machines,
 when that npm thing couldn't even install itself, and didn't know what a
 version was. We used promises for everything and the global object was called
 'node'. Movies were a nickel when we downloaded them from from the micro
 torrents, and soda pop had corn syrup of the highest fructose imaginable. You
-youngins don't know how good you got it."</i>
+youngins don't know how good you got it."***
 
 This isn't even beta, it's alpha. When most of the core functionality is
 working, I'll make an announcement on the
@@ -82,7 +84,7 @@ opinions.
 
 To install npm, do this:
 
-    $ node install-npm.js
+    node install-npm.js
 
 That will use npm to install itself, like
 [Ouroboros](http://en.wikipedia.org/wiki/Ouroboros). From there, you can call
