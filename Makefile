@@ -15,10 +15,7 @@ uninstall: clean
 man:
 	mkdir man
 
-doc: man man/npm.1 $(docs)
-
-man/npm.1: README.md
-	ronn --roff README.md > $@
+doc: man $(docs)
 
 man/%.1: doc/%.md
 	ronn --roff $< > $@
