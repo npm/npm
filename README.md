@@ -101,13 +101,6 @@ These are the commands that actually do things, as of today. If they don't do
 what they say they do, then please [post an issue](http://github.com/isaacs/npm/issues)
 about it.
 
-### deactivate
-
-    npm deactivate <name>
-
-If there's an active version of the package, this will unlink it from that
-preferential position.
-
 ### link
 
     npm link <folder>

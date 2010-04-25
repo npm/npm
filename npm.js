@@ -18,6 +18,7 @@ npm.commands = {}
   , "tag"
   , "adduser"
   , "config"
+  , "help"
   ].forEach(function (c) {
     npm.commands[c] = require("./lib/"+c);
   })
