@@ -20,9 +20,6 @@ var fs = require("fs")
 
 log(sys.inspect(argv), "cli")
 
-// add usage onto any existing help documentation.
-npm.commands.help = usage
-
 while (arg = argv.shift()) {
   if (!command && (arg in npm.commands)) command = arg
   else if (!key && arg.charAt(0) === "-") key = arg.replace(/^-+/, '')
@@ -33,23 +30,10 @@ while (arg = argv.shift()) {
 }
 if (key) conf[key] = true
 
-if (!command) command = "help"
-
-npm.commands[command](arglist, conf, function (er, ok) {
+if (!command) npm.commands.help.usage(sys.error)
+else npm.commands[command](arglist, conf, function (er, ok) {
   if (er) {
     log("failed " + er.message)
     throw er
   } else log("ok")
 })
-
-function usage () {
-  var out = (arg === "help" ? "puts" : "error");
-  function p (m) { sys[out](m); return p };
-  p("")
-  p("Usage: ")
-  p("  " + path.basename(module.filename) + " [global options] <command> [command options]")
-  p("")
-  p("<command>          Method to call on the npm object.")
-  p("                   Supported: "+commands)
-  p("[command options]  The arguments to pass to the function.");
-}
