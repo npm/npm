@@ -39,29 +39,29 @@ version.
 
 Here's what I mean by "core functionality":
 
-1. Install packages by name, and get the stable version.
-2. Install packages by supplying a name and version, and get the version
+* Install packages by name, and get the stable version.
+* Install packages by supplying a name and version, and get the version
    specified.
-3. Install more than one package at a time by specifying them all on the
+* Install more than one package at a time by specifying them all on the
    command line.
-4. Install pre-requisites automatically, pulling the stable versions of the
+* Install pre-requisites automatically, pulling the stable versions of the
    dependencies.
-5. Talk to a centralized repository to do all this package/version lookup
+* Talk to a centralized repository to do all this package/version lookup
    magic.
-6. Install more than one version of a package, and optionally select an
+* Install more than one version of a package, and optionally select an
    "active" version. (this works now)
-7. Safely uninstall packages, not removing them unless they have no dependents.
+* Safely uninstall packages, not removing them unless they have no dependents.
    (Override with a `--force` flag, of course.) (this works mostly, minus the
    `--force` bit.)
-8. Provide a utility for uploading a package.json to a js-registry repository.
+* Provide a utility for uploading a package.json to a js-registry repository.
    (totally works now. check out `npm publish <tarball-url>`.)
-9. Handle circular dependencies nicely.
-10. Install and activate automatically. (works now)
-11. Be much smarter about cli arguments.
-12. Help topics.
-13. Install a "link" to a dev directory, so that it links it in rather than
+* Handle circular dependencies nicely.
+* Install and activate automatically. (works now)
+* Be much smarter about cli arguments.
+* Help topics.
+* Install a "link" to a dev directory, so that it links it in rather than
     doing the moveIntoPlace step. (works)
-14. Detect when a package has only been installed as a dependency, and be able
+* Detect when a package has only been installed as a dependency, and be able
     to remove it when nothing else depends on it.
 
 ## Principles
