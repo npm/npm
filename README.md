@@ -1,7 +1,25 @@
 npm(1) -- node package manager
-==========================
+==============================
+
+## DESCRIPTION
 
 npm is a little package manager for the Node javascript library.
+
+## Installing
+
+To install npm, do this:
+
+    make install
+
+If you get any complaints, try
+
+    sudo make install
+
+That will use npm to install itself, like
+[Ouroboros](http://en.wikipedia.org/wiki/Ouroboros). From there, you can call
+the command line program `npm`, and read this file by doing `man npm`.
+
+Try `npm help` for more information.
 
 ## Status: alpha
 
@@ -10,7 +28,7 @@ soon, you'll be all tapping out your pipe on the front porch, saying in your
 withered old man voice, ***"I remember back before the war with the machines,
 when that npm thing couldn't even install itself, and didn't know what a
 version was. We used promises for everything and the global object was called
-'node'. Movies were a nickel when we downloaded them from from the micro
+node. Movies were a nickel when we downloaded them from from the micro
 torrents, and soda pop had corn syrup of the highest fructose imaginable. You
 youngins don't know how good you got it."***
 
@@ -79,21 +97,6 @@ more easily.
 If you have strong feelings about package managers, I'd love to hear your
 opinions.
 
-## Installation
-
-To install npm, do this:
-
-    make install
-
-If you get any complaints, try
-
-    sudo make install
-
-That will use npm to install itself, like
-[Ouroboros](http://en.wikipedia.org/wiki/Ouroboros). From there, you can call
-the command line program `npm`, and read this file by doing `man npm`.
-
-Try `npm help` for more information.
 
 ## What works now:
 
