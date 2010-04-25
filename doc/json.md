@@ -1,5 +1,5 @@
-npm package.json(1) -- Deviations from and Extensions to the Packages/1.0 Spec
-==============================================================================
+npm-json(1) -- Specifics of npm's package.json handling
+=======================================================
 
 ## DESCRIPTION
 
