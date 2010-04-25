@@ -101,15 +101,6 @@ These are the commands that actually do things, as of today. If they don't do
 what they say they do, then please [post an issue](http://github.com/isaacs/npm/issues)
 about it.
 
-### link
-
-    npm link <folder>
-
-This will link a source folder into npm's registry using a symlink, and then
-build it according to the package.json file in that folder's root. This is
-handy for installing your own stuff, so that you can work on it and test it
-iteratively without having to continually rebuild.
-
 ### list
 
     npm list [package]
