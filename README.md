@@ -84,11 +84,15 @@ opinions.
 
 To install npm, do this:
 
-    node install-npm.js
+    make install
+
+If you get any complaints, try
+
+    sudo make install
 
 That will use npm to install itself, like
 [Ouroboros](http://en.wikipedia.org/wiki/Ouroboros). From there, you can call
-the command line program which is cleverly named `npm`.
+the command line program `npm`, and read this file by doing `man npm`.
 
 ## What works now:
 
