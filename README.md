@@ -101,32 +101,6 @@ These are the commands that actually do things, as of today. If they don't do
 what they say they do, then please [post an issue](http://github.com/isaacs/npm/issues)
 about it.
 
-### adduser
-
-    npm adduser bob password bob@email.com
-
-Create a user named "bob" in the npm registry, and save the credentials to the
-`.npmrc` file. Note that this leaves the password in your `.bash_history`, and
-it is currently stored in the clear in the config file. So, don't use a
-password you care too much about.
-
-This will be changed within the next few versions. The registry will use an ssl
-connection, and the user commands will attempt to make use of
-[node-crypto](http://github.com/waveto/node-crypto) if it is available. Watch
-for this in the next couple versions.
-
-For now, if you somehow break your `.npmrc` file, and have forgotten your
-password, you're boned. [Email isaacs](mailto:i@izs.me) and he'll delete the
-record from the registry so that you can re-add it.
-
-If you break your `.npmrc` file, but you remember your password, you can put your
-user auth back by using the `base64` program like so:
-
-    npm config set auth $( echo user:pass | base64 )
-
-Take your pick of apt-get, yum, homebrew, or macports to install base64 if you
-don't already have it on your system.
-
 ### config
 
 The config command is a way to interact with the `.npmrc` file. This file is a
