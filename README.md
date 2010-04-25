@@ -101,14 +101,6 @@ These are the commands that actually do things, as of today. If they don't do
 what they say they do, then please [post an issue](http://github.com/isaacs/npm/issues)
 about it.
 
-### uninstall
-
-    npm uninstall <name> <version>
-
-This uninstalls a package, completely removing everything installed for it. If
-it's currently active, then it must be deactivated first. If anything is
-depending on it, then those must be uninstalled first.
-
 ### activate
 
     npm activate <name> <version>
