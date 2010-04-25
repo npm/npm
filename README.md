@@ -101,18 +101,6 @@ These are the commands that actually do things, as of today. If they don't do
 what they say they do, then please [post an issue](http://github.com/isaacs/npm/issues)
 about it.
 
-### list
-
-    npm list [package]
-
-This will show the installed (and, potentially, activated) versions of all the
-packages that npm has installed, or just the `package` if specified.
-
-This is also aliased to `ls`.
-
-**FIXME**: Prints to stderr, but should really be stdout, since the log is what
-you're after.
-
 ### adduser
 
     npm adduser bob password bob@email.com
