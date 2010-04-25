@@ -1,8 +1,5 @@
 #!/usr/bin/env node
 
-// usage:
-// npm [global options] command [command args]
-
 // don't assume that npm is installed in any particular spot, since this
 // might conceivably be a bootstrap attempt.
 var fs = require("fs")
@@ -16,21 +13,34 @@ var fs = require("fs")
   , argv = process.argv.slice(2)
   , arg = ""
 
-var parsed = {}
+  , conf = {}
   , key
-  , val
-while (arg = argv.shift()) {
-  if (arg in npm.commands) {
-    command = arg;
-    break;
-  }
-  
-}
+  , arglist = []
+  , command
 
 log(sys.inspect(argv), "cli")
 
 // add usage onto any existing help documentation.
 npm.commands.help = usage
+
+while (arg = argv.shift()) {
+  if (!command && (arg in npm.commands)) command = arg
+  else if (!key && arg.charAt(0) === "-") key = arg.replace(/^-+/, '')
+  else if (key) {
+    conf[key] = arg
+    key = null
+  } else arglist.push(arg)
+}
+if (key) conf[key] = true
+
+if (!command) command = "help"
+
+npm.commands[command](arglist, conf, function (er, ok) {
+  if (er) {
+    log("failed " + er.message)
+    throw er
+  } else log("ok")
+})
 
 function usage () {
   var out = (arg === "help" ? "puts" : "error");
@@ -43,10 +53,3 @@ function usage () {
   p("                   Supported: "+commands)
   p("[command options]  The arguments to pass to the function.");
 }
-
-npm.commands[command].apply(npm.commands, argv.concat(function (er, ok) {
-  if (er) {
-    log("failed " + er.message);
-    throw er;
-  } else log("ok");
-}));
