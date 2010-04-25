@@ -101,13 +101,6 @@ These are the commands that actually do things, as of today. If they don't do
 what they say they do, then please [post an issue](http://github.com/isaacs/npm/issues)
 about it.
 
-### activate
-
-    npm activate <name> <version>
-
-This "activates" a specific version of a package, so that you can just do
-`require("foo")` without having to specify the version.
-
 ### deactivate
 
     npm deactivate <name>
