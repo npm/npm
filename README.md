@@ -1,4 +1,3 @@
-
 npm(1) -- node package manager
 ==========================
 
@@ -94,26 +93,13 @@ That will use npm to install itself, like
 [Ouroboros](http://en.wikipedia.org/wiki/Ouroboros). From there, you can call
 the command line program `npm`, and read this file by doing `man npm`.
 
+Try `npm help` for more information.
+
 ## What works now:
 
 These are the commands that actually do things, as of today. If they don't do
 what they say they do, then please [post an issue](http://github.com/isaacs/npm/issues)
 about it.
-
-### install
-
-    npm install <tarball>
-
-This installs the package, where `tarball` is a url or path to a `.tgz` file
-that contains a package with a `package.json` file in the root.
-
-This'll create some stuff in `$HOME/.node_libraries`. It supports installing
-multiple versions of the same thing.
-
-From here, you can do `require("foo-1.2.3")` where "foo" is the name of the
-package, and "1.2.3" is the version you installed.
-
-Installing by name and version alone is planned for the next version.
 
 ### uninstall
 
