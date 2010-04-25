@@ -1,9 +1,26 @@
 
+docs = $(shell ls doc/*.md | sed 's|.md|.1|g' | sed 's|doc/|man/|g')
+
 install: doc
 	node install-npm.js
-	mv npm.1 /usr/local/share/man/man1/npm.1
+	cp man/npm.1 /usr/local/share/man/man1/npm.1
 
-doc:
-	ronn --roff README.md > npm.1
+clean:
+	rm -r man
 
-.PHONY: install doc
+uninstall: clean
+	rm /usr/local/share/man/man1/npm.1
+	@echo TODO - npm uninstall itself
+
+man:
+	mkdir man
+
+doc: man man/npm.1 $(docs)
+
+man/npm.1: README.md
+	ronn --roff README.md > $@
+
+man/%.1: doc/%.md
+	ronn --roff $< > $@
+
+.PHONY: install doc clean uninstall
