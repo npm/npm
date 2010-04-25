@@ -41,28 +41,28 @@ Here's what I mean by "core functionality":
 
 * Install packages by name, and get the stable version.
 * Install packages by supplying a name and version, and get the version
-   specified.
+  specified.
 * Install more than one package at a time by specifying them all on the
-   command line.
+  command line.
 * Install pre-requisites automatically, pulling the stable versions of the
-   dependencies.
+  dependencies.
 * Talk to a centralized repository to do all this package/version lookup
-   magic.
+  magic.
 * Install more than one version of a package, and optionally select an
-   "active" version. (this works now)
+  "active" version. (this works now)
 * Safely uninstall packages, not removing them unless they have no dependents.
-   (Override with a `--force` flag, of course.) (this works mostly, minus the
-   `--force` bit.)
+  (Override with a `--force` flag, of course.) (this works mostly, minus the
+  `--force` bit.)
 * Provide a utility for uploading a package.json to a js-registry repository.
-   (totally works now. check out `npm publish <tarball-url>`.)
+  (totally works now. check out `npm publish <tarball-url>`.)
 * Handle circular dependencies nicely.
 * Install and activate automatically. (works now)
 * Be much smarter about cli arguments.
 * Help topics.
 * Install a "link" to a dev directory, so that it links it in rather than
-    doing the moveIntoPlace step. (works)
+  doing the moveIntoPlace step. (works)
 * Detect when a package has only been installed as a dependency, and be able
-    to remove it when nothing else depends on it.
+  to remove it when nothing else depends on it.
 
 ## Principles
 
@@ -86,7 +86,7 @@ javascript.
 If you're interested in helping, that's awesome! Please fork this project,
 implement some of the things on the list, and then let me know. You can
 usually find me in #node.js on freenode.net, or you can reach me via
-<i@izs.me>.
+i@izs.me.
 
 If you don't want to contribute code, that's also cool.  It's very helpful
 to have people play with npm and send issues or complaints.  It's stable in
