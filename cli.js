@@ -33,7 +33,11 @@ if (key) conf[key] = true
 if (!command) npm.commands.help.usage(sys.error)
 else npm.commands[command](arglist, conf, function (er, ok) {
   if (er) {
-    log("failed " + er.message)
-    throw er
+    npm.commands.help([command], conf, function () {
+      log(er.stack, "failed")
+      process.stdout.flush()
+      process.stderr.flush()
+      throw er
+    })
   } else log("ok")
 })
