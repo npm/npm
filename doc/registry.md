@@ -1,32 +1,17 @@
-# npm registry
+npm-registry(1) -- Notes on the JavaScript package registry
+===========================================================
+
+## MARKED FOR REMOVAL
+
+This doc file will be removed once its contents have been implemented and its
+data moved to the relevant command documentation.
+
+## npm registry
 
 Notes on npm's use of the [js-registry](http://github.com/mikeal/js-registry).
 
-None of this has been implemented as of 2010-03-10.
-
-## New Commands
-
-Add the following commands:
-
-### publish
-
-    npm publish <url>
-
-Fetches the tarball from the url, checks the package.json, and sends to the
-registry as the dist url. Fails if the fetch is non-200, or if the version
-already exists in the registry for that package.
-
-If the package is not already there, then publishing a tarball creates it.
-
-### tag
-
-    npm tag <project> <version> <tag>
-
-Tag a project version with a tag, anything is fine. Note that npm treats the
-"stable" tag a bit differently, preferring to install that one when not given
-a version.
-
-If the version doesn't exist, then it fails.
+As of 2010-04-25, the "new commands" have been added, but the changes to the
+"changed commands" have not been made yet.
 
 ## Changed commands
 

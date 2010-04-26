@@ -1,7 +1,7 @@
 npm-help(1) -- Get help about npm commands
 ==========================================
 
-## Usage
+## SYNOPSIS
 
     npm help <section>
 

@@ -1,7 +1,11 @@
 npm adduser(1) -- Add a registry user account
 =============================================
 
+## SYNOPSIS
+
     npm adduser bob password bob@email.com
+
+## DESCRIPTION
 
 Create a user named "bob" in the npm registry, and save the credentials to the
 `.npmrc` file. Note that this leaves the password in your `.bash_history`, and

@@ -1,6 +1,15 @@
 npm-config(1) -- Manage the npm configuration file
 ==================================================
 
+## SYNOPSIS
+
+    npm config set <key> <value>
+    npm config get <key>
+    npm config delete <key>
+    npm config list
+
+## DESCRIPTION
+
 The config command is a way to interact with the `.npmrc` file. This file is a
 JSON encoded list of values that npm is concerned with. The first time you run
 npm, it will create a conf file filled with default values.
@@ -36,7 +45,7 @@ Show all the config settings.
 **FIXME**: Prints to stderr, but should really be stdout, since the log is what
 you're after.
 
-### delete key
+### delete
 
     npm config delete key
 

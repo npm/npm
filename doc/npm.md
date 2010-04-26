@@ -1,13 +1,13 @@
 npm(1) -- node package manager
 ==============================
 
-## DESCRIPTION
-
-npm is a little package manager for the Node javascript library.
-
 ## SYNOPSIS
 
     npm <command> [args]
+
+## DESCRIPTION
+
+npm is a little package manager for the Node javascript library.
 
 Run `npm help` for more details.
 
@@ -152,5 +152,5 @@ Some "nice to have" things that aren't quite core:
 ### 0.0.7
 
 * fixed a bug in semver
-
-
+* refactor documentation
+* add "help" command

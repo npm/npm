@@ -1,4 +1,7 @@
-# Folder Structures Used by npm
+npm-folders(1) -- Folder Structures Used by npm
+===============================================
+
+## DESCRIPTION
 
 Everything lives in the `root` setting. This defaults to
 `$HOME/.node_libraries/`. I'd like to be able to override it, but that's not

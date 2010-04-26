@@ -1,7 +1,7 @@
 npm-install(1) -- install a package
 ===================================
 
-## SUMMARY
+## SYNOPSIS
 
     npm install <tarball>
 
@@ -24,7 +24,7 @@ be automatically performed some or all of the time.
 
 Installing by name and version alone is planned for the next version.
 
-See also:
+## SEE ALSO
 
 * npm help config
 * npm help activate
