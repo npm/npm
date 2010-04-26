@@ -21,16 +21,25 @@ var fs = require("fs")
 log(sys.inspect(argv), "cli")
 
 while (arg = argv.shift()) {
-  if (!command && (arg in npm.commands)) command = arg
-  else if (!key && arg.charAt(0) === "-") key = arg.replace(/^-+/, '')
-  else if (key) {
+  if (!command && (arg in npm.commands)) {
+    if (key) {
+      conf[key] = true
+      key = null
+    }
+    command = arg
+  } else if (arg.substr(0, 2) === "--") {
+    if (key) conf[key] = true
+    key = arg.substr(2)
+  } else if (key) {
     conf[key] = arg
     key = null
   } else arglist.push(arg)
 }
 if (key) conf[key] = true
 
-if (!command) npm.commands.help([])
+for (var k in conf) npm.config.set(k, conf[k])
+
+if (!command) npm.commands.help([arglist.join(" ")])
 else npm.commands[command](arglist, conf, function (er, ok) {
   if (er) {
     npm.commands.help([command], conf, function () {
