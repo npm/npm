@@ -30,7 +30,7 @@ while (arg = argv.shift()) {
 }
 if (key) conf[key] = true
 
-if (!command) npm.commands.help.usage(sys.error)
+if (!command) npm.commands.help([])
 else npm.commands[command](arglist, conf, function (er, ok) {
   if (er) {
     npm.commands.help([command], conf, function () {
