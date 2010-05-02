@@ -36,13 +36,13 @@ while (arg = argv.shift()) {
   } else arglist.push(arg)
 }
 if (key) conf[key] = true
-
+npm.argv = arglist
 for (var k in conf) npm.config.set(k, conf[k])
 
 if (!command) npm.commands.help([arglist.join(" ")])
-else npm.commands[command](arglist, conf, function (er, ok) {
+else npm.commands[command](arglist, function (er, ok) {
   if (er) {
-    npm.commands.help([command], conf, function () {
+    npm.commands.help([command], function () {
       log(er.stack, "failed")
       process.stdout.flush()
       process.stderr.flush()
