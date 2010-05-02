@@ -17,6 +17,7 @@ var fs = require("fs")
   , key
   , arglist = []
   , command
+  , flagsDone
 
 log(sys.inspect(argv), "cli")
 
@@ -27,9 +28,10 @@ while (arg = argv.shift()) {
       key = null
     }
     command = arg
-  } else if (arg.substr(0, 2) === "--") {
+  } else if (!flagsDone && arg.substr(0, 2) === "--") {
     if (key) conf[key] = true
     key = arg.substr(2)
+    flagsDone = (key === "")
   } else if (key) {
     conf[key] = arg
     key = null
