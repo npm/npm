@@ -47,7 +47,6 @@ else npm.commands[command](arglist, function (er, ok) {
     npm.commands.help([command], function () {
       log(er.stack, "failed")
       process.stdout.flush()
-      process.stderr.flush()
       throw er
     })
   } else log("ok")
