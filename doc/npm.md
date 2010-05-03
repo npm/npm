@@ -156,3 +156,10 @@ opinions.
 * add install from registry
 * everything else core
 * push to beta
+
+### 0.1.0
+
+* push to beta, and announce
+* clean up some bugs around lifecycle scripts
+* reduce reliance on makefile
+* documentation updates
