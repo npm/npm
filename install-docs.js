@@ -15,7 +15,7 @@ log(event, "install docs")
 
 fs.readdir(path.join(process.cwd(), "man"), function (er, docs) {
   log(path.join(process.cwd(), "man"), "readdir")
-  if (er) throw new Error(er)
+  if (er) return
   ;(function R (doc) {
     if (!doc) return
     var target = path.join(process.installPrefix, "share/man/man1", "npm-"+doc)
