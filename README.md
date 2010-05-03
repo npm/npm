@@ -1,5 +1,8 @@
 # npm
 
+Note: This is only half the info you need.  The rest can be seen via
+`man npm` after installation.
+
 ## Installing
 
 To install npm and its documentation, do this:
