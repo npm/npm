@@ -1,0 +1,40 @@
+.\" generated with Ronn/v0.4.1
+.\" http://github.com/rtomayko/ronn/
+.
+.TH "NPM\-FOLDERS" "1" "April 2010" "" ""
+.
+.SH "NAME"
+\fBnpm\-folders\fR \-\- Folder Structures Used by npm
+.
+.SH "DESCRIPTION"
+Everything lives in the \fBroot\fR setting. This defaults to \fB$HOME/.node_libraries/\fR. I'd like to be able to override it, but that's not
+possible yet.
+.
+.P
+\fBroot/.npm/foo\fR is where the stuff for package \fBfoo\fR would go.
+.
+.P
+\fBroot/.npm/foo/1.0.0/package\fR the contents of the tarball containing foo
+version 1.0.0
+.
+.P
+\fBroot/.npm/foo/1.0.0/main.js\fR Generated file that exports the \fBmain\fR module in
+foo.
+.
+.P
+\fBroot/.npm/foo/1.0.0/lib\fR symlink to the \fBlib\fR dir in foo.
+.
+.P
+\fBroot/.npm/foo/active\fR symlink to the active version.
+.
+.P
+\fBroot/foo\-1.0.0.js\fR symlink to \fB.npm/foo/1.0.0/main.js\fR
+.
+.P
+\fBroot/foo.js\fR symlink to \fB.npm/foo/active/main.js\fR
+.
+.P
+\fBroot/foo\fR symlink to \fB.npm/foo/active/lib\fR
+.
+.P
+\fBroot/foo\-1.0.0\fR symlink to \fB.npm/foo/1.0.0/lib\fR

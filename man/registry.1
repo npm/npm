@@ -1,0 +1,55 @@
+.\" generated with Ronn/v0.4.1
+.\" http://github.com/rtomayko/ronn/
+.
+.TH "NPM\-REGISTRY" "1" "April 2010" "" ""
+.
+.SH "NAME"
+\fBnpm\-registry\fR \-\- Notes on the JavaScript package registry
+.
+.SH "MARKED FOR REMOVAL"
+This doc file will be removed once its contents have been implemented and its
+data moved to the relevant command documentation.
+.
+.SH "npm registry"
+Notes on npm's use of the \fIjs\-registry\fR.
+.
+.P
+As of 2010\-04\-25, the "new commands" have been added, but the changes to the
+"changed commands" have not been made yet.
+.
+.SH "Changed commands"
+.
+.SS "install"
+Assuming that the stable branch of foo is 0.1.3, then all three of these do
+the same thing:
+.
+.IP "" 4
+.
+.nf
+npm install foo
+npm install foo\-0.1.3
+npm install foo 0.1.3
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Furthermore, dependencies are installed implicitly.
+.
+.SS "list"
+npm list will now also show packages that are in the registry for
+installation, along with info about their tags and versions, etc. To limit to
+a particular tag, preface it with @, for instance: \fBnpm list foo @stable\fR to
+show the stable version of foo. \fBnpm list @stable\fR would so all packages with
+a tag of \fBstable\fR.
+.
+.P
+The current behavior will be available via \fBnpm list @installed\fR.
+.
+.SH "Configuration"
+A registry base URL must be specified, either with the \fB\-\-registry <url>\fR in
+the command line, or by setting a registry url in the .npmrc file.
+.
+.P
+Also, need something to keep track of the user who's logged in? That's dicey.

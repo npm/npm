@@ -1,0 +1,26 @@
+.\" generated with Ronn/v0.4.1
+.\" http://github.com/rtomayko/ronn/
+.
+.TH "NPM\-LIST" "1" "April 2010" "" ""
+.
+.SH "NAME"
+\fBnpm\-list\fR \-\- List installed packages
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm list [package]
+npm ls [package]
+.
+.fi
+.
+.SH "DESCRIPTION"
+This will show the installed (and, potentially, activated) versions of all the
+packages that npm has installed, or just the \fBpackage\fR if specified.
+.
+.P
+This is also aliased to \fBls\fR.
+.
+.P
+\fBFIXME\fR: Prints to stderr, but should really be stdout, since the log is what
+you're after.

@@ -1,0 +1,305 @@
+.\" generated with Ronn/v0.4.1
+.\" http://github.com/rtomayko/ronn/
+.
+.TH "NPM" "1" "May 2010" "" ""
+.
+.SH "NAME"
+\fBnpm\fR \-\- node package manager
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm <command> [args]
+.
+.fi
+.
+.SH "DESCRIPTION"
+npm is a little package manager for the Node javascript library.
+.
+.P
+Run \fBnpm help\fR for more details about specific commands.
+.
+.SH "STATUS: beta"
+The core functionality is there.  You can publish, tag, and install.  It
+handles dependencies relatively smartly.
+.
+.P
+Please use this software.  It will cut you occasionally.  Let me know when
+you find a rough edge, and I'll sand it down for you.
+.
+.P
+I appreciate your sense of adventure.
+.
+.P
+If you are a package maintainer, please investigate the documentation on
+the \fBjson\fR, \fBpublish\fR, and \fBtag\fR sections first.  You might also want to
+take a look at the \fBfolders\fR section to see how you can leverage npm's
+functionality for your own purposes.  You can get to these by running \fBnpm help <subject>\fR or, if you've installed the documentation, by doing \fBman npm\-<subject>\fR.
+.
+.P
+Here's what I mean by "core functionality":
+.
+.IP "\(bu" 4
+Install packages by name, and get the stable version.
+.
+.IP "\(bu" 4
+Install packages by supplying a name and version, and get the version
+specified.
+.
+.IP "\(bu" 4
+Install more than one package at a time by specifying them all on the
+command line.
+.
+.IP "\(bu" 4
+Install pre\-requisites automatically, pulling the stable versions of the
+dependencies.
+.
+.IP "\(bu" 4
+Talk to a centralized repository to do all this package/version lookup
+magic.
+.
+.IP "\(bu" 4
+Install more than one version of a package, and optionally select an
+"active" version.
+.
+.IP "\(bu" 4
+Safely uninstall packages, not removing them unless they have no dependents.
+.
+.IP "\(bu" 4
+Provide a utility for uploading a package.json to a js\-registry repository.
+.
+.IP "\(bu" 4
+Handle circular dependencies nicely.
+.
+.IP "\(bu" 4
+Install and activate automatically.
+.
+.IP "\(bu" 4
+Be much smarter about cli arguments.
+.
+.IP "\(bu" 4
+Help topics.
+.
+.IP "\(bu" 4
+Install a "link" to a dev directory, so that it links it in rather than
+doing the moveIntoPlace step.
+.
+.IP "" 0
+.
+.SH "Principles"
+Put the files where they need to be so that node can find them using the
+methods it already uses.
+.
+.P
+Be lazy, not clever.
+.
+.P
+The file system is the database.
+.
+.P
+Sync with habits that are already in use.
+.
+.P
+Packages should be maintained by their authors, not by the package manager
+author.
+.
+.P
+Run it on node. Cuz a node package manager should be written in evented
+javascript.
+.
+.SH "Contributing"
+If you're interested in helping, that's awesome! Please fork this project,
+implement some of the things on the todo list, or fix an issue, or even
+just write or edit some documentation.  You have no idea just how thankful
+I'll be.
+.
+.P
+You can usually find me in #node.js on freenode.net, or you can reach me via
+i@izs.me.
+.
+.P
+If you don't want to contribute patches, that's also cool.  It's very helpful
+to have people play with npm and send issues or complaints.  It's stable in
+what it does, so you may find it useful even if you just link in your stuff
+by doing \fBnpm link .\fR to put it in the \fBNODE_PATH\fR so you can pull it in
+more easily.
+.
+.P
+If you have strong feelings about package managers, I'd love to hear your
+opinions.
+.
+.SH "Todo"
+.
+.IP "\(bu" 4
+Uninstall dependent packages.
+.
+.IP "\(bu" 4
+Update dependencies when a new satisfying version is installed.
+.
+.IP "\(bu" 4
+A few of the commands are still a bit user\-hostile, and crash in
+strange or un\-helpful ways when they are not given the data they expect.
+Make them not do that.
+.
+.IP "\(bu" 4
+Some sugar to make it simpler to tie a git repo to a published package, and then
+automatically update the registry whenever a specific branch (or semver\-looking
+tag) is pushed.
+.
+.IP "\(bu" 4
+Clean up after botched builds.  Rather than removing stuff, move it aside, and
+only remove it when the process succeeds.  If it fails, then roll it all back
+to the way it was beforehand.
+.
+.IP "\(bu" 4
+Show what can be installed by looking at the registry.
+.
+.IP "\(bu" 4
+Use path.relative so that the whole root can be picked up and moved easily.
+.
+.IP "\(bu" 4
+Change the registry so that it keeps the tarball as a couchdb attachment.
+(That's more a change to js\-registry, not to npm, but they are related.)
+.
+.IP "\(bu" 4
+Ability to talk to more than one registry at a time.
+.
+.IP "\(bu" 4
+Abbrev support on the CLI commands
+.
+.IP "\(bu" 4
+A bash\-completion script
+.
+.IP "" 0
+.
+.SH "Version History"
+.
+.SS "0.0.1"
+.
+.IP "\(bu" 4
+Lots of sketches and false starts.  Abandoned a few times.
+.
+.IP "" 0
+.
+.SS "0.0.2"
+.
+.IP "\(bu" 4
+Install worked mostly.  Still promise\-based.
+.
+.IP "" 0
+.
+.SS "0.0.3"
+.
+.IP "\(bu" 4
+Converted to callbacks.
+.
+.IP "\(bu" 4
+Mikeal Rogers wrote a registry for it.
+.
+.IP "" 0
+.
+.SS "0.0.4"
+.
+.IP "\(bu" 4
+version dependencies
+.
+.IP "\(bu" 4
+link packages
+.
+.IP "\(bu" 4
+activation
+.
+.IP "\(bu" 4
+lifecycle scripts
+.
+.IP "\(bu" 4
+bin linking
+.
+.IP "\(bu" 4
+uninstallation
+.
+.IP "" 0
+.
+.SS "0.0.5"
+.
+.IP "\(bu" 4
+fix a few bugs in uninstall wrt dependent packages
+.
+.IP "\(bu" 4
+fix relative require()for nodejs modules installed with the "bin" field.
+(issue #2)
+.
+.IP "\(bu" 4
+update to work with node 0.1.33 (aka net2)
+.
+.IP "\(bu" 4
+added publish and tag commands
+.
+.IP "" 0
+.
+.SS "0.0.6"
+.
+.IP "\(bu" 4
+set up a public registry
+.
+.IP "\(bu" 4
+send content\-length with registry PUTs
+.
+.IP "\(bu" 4
+adduser command (Mikeal Rogers)
+.
+.IP "\(bu" 4
+ini file stuff (Mikeal Rogers)
+.
+.IP "\(bu" 4
+env\-specific package.json
+.
+.IP "\(bu" 4
+added more info to npm's the package.json (bugs, contributors, etc.)
+.
+.IP "" 0
+.
+.SS "0.0.7"
+.
+.IP "\(bu" 4
+fixed a few bugs in semver
+.
+.IP "\(bu" 4
+refactor documentation
+.
+.IP "\(bu" 4
+add "help" command
+.
+.IP "\(bu" 4
+add install from registry
+.
+.IP "\(bu" 4
+everything else core
+.
+.IP "\(bu" 4
+push to beta
+.
+.IP "" 0
+.
+.SS "0.1.0"
+.
+.IP "\(bu" 4
+push to beta, and announce
+.
+.IP "\(bu" 4
+clean up some bugs around lifecycle scripts
+.
+.IP "\(bu" 4
+reduce reliance on makefile
+.
+.IP "\(bu" 4
+documentation updates
+.
+.IP "" 0
+.
+.SS "0.1.1"
+.
+.IP "\(bu" 4
+Fixed 2 DOA bugs in 0.1.0
+.
+.IP "" 0

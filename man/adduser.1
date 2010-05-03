@@ -1,0 +1,37 @@
+.\" generated with Ronn/v0.4.1
+.\" http://github.com/rtomayko/ronn/
+.
+.TH "ADDUSER" "1" "April 2010" "" ""
+.
+.SH "NAME"
+\fBadduser\fR \-\- Add a registry user account
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm adduser bob password bob@email.com
+.
+.fi
+.
+.SH "DESCRIPTION"
+Create a user named "bob" in the npm registry, and save the credentials to the\fB.npmrc\fR file. Note that this leaves the password in your \fB.bash_history\fR, and
+it is currently stored in the clear in the config file. So, don't use a
+password you care too much about.
+.
+.P
+For now, if you somehow break your \fB.npmrc\fR file, and have forgotten your
+password, you're boned. \fIEmail isaacs\fR and he'll delete the
+record from the registry so that you can re\-add it.
+.
+.P
+If you break your \fB.npmrc\fR file, but you remember your password, you can put your
+user auth back by using the \fBbase64\fR program like so:
+.
+.IP "" 4
+.
+.nf
+npm config set auth $( echo user:pass | base64 )
+.
+.fi
+.
+.IP "" 0
