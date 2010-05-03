@@ -18,7 +18,10 @@ fs.readdir(path.join(process.cwd(), "man"), function (er, docs) {
   if (er) return
   ;(function R (doc) {
     if (!doc) return
+    if (doc === "." || doc === "..") return R(docs.pop())
     var target = path.join(process.installPrefix, "share/man/man1", "npm-"+doc)
+    target = target.replace(/npm-npm\.1$/, "npm.1")
+    log(target, event)
     switch (event) {
       case "activate":
         rm( target
