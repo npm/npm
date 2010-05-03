@@ -9,23 +9,24 @@ npm(1) -- node package manager
 
 npm is a little package manager for the Node javascript library.
 
-Run `npm help` for more details.
+Run `npm help` for more details about specific commands.
 
-## STATUS: alpha
+## STATUS: beta
 
-This thing is a baby yet. But these kids grow up before you know it! Pretty
-soon, you'll be all tapping out your pipe on the front porch, saying in your
-withered old man voice, ***"I remember back before the war with the machines,
-when that npm thing couldn't even install itself, and didn't know what a
-version was. We used promises for everything and the global object was called
-node. Movies were a nickel when we downloaded them from from the micro
-torrents, and soda pop had corn syrup of the highest fructose imaginable. You
-youngins don't know how good you got it."***
+The core functionality is there.  You can publish, tag, and install.  It
+handles dependencies relatively smartly.
 
-This isn't even beta, it's alpha. When most of the core functionality is
-working, I'll make an announcement on the
-[node.js](http://groups.google.com/group/nodejs) list. That'll be the `0.1.0`
-version.
+Please use this software.  It will cut you occasionally.  Let me know when
+you find a rough edge, and I'll sand it down for you.
+
+I appreciate your sense of adventure.
+
+If you are a package maintainer, please investigate the documentation on
+the `json`, `publish`, and `tag` sections first.  You might also want to
+take a look at the `folders` section to see how you can leverage npm's
+functionality for your own purposes.  You can get to these by running
+`npm help <subject>` or, if you've installed the documentation, by doing
+`man npm-<subject>`.
 
 Here's what I mean by "core functionality":
 
@@ -39,34 +40,29 @@ Here's what I mean by "core functionality":
 * Talk to a centralized repository to do all this package/version lookup
   magic.
 * Install more than one version of a package, and optionally select an
-  "active" version. (this works now)
+  "active" version.
 * Safely uninstall packages, not removing them unless they have no dependents.
-  (Override with a `--force` flag, of course.) (this works mostly, minus the
-  `--force` bit.)
 * Provide a utility for uploading a package.json to a js-registry repository.
-  (totally works now. check out `npm publish <tarball-url>`.)
 * Handle circular dependencies nicely.
-* Install and activate automatically. (works now)
+* Install and activate automatically.
 * Be much smarter about cli arguments.
 * Help topics.
 * Install a "link" to a dev directory, so that it links it in rather than
-  doing the moveIntoPlace step. (works)
-* Detect when a package has only been installed as a dependency, and be able
-  to remove it when nothing else depends on it.
+  doing the moveIntoPlace step.
 
 ## Principles
 
 Put the files where they need to be so that node can find them using the
 methods it already uses.
 
-Be easy, not clever.
+Be lazy, not clever.
 
 The file system is the database.
 
-Sync with the habits that are already in use.
+Sync with habits that are already in use.
 
 Packages should be maintained by their authors, not by the package manager
-author. (Especially if that's me, because I'm lazy.)
+author.
 
 Run it on node. Cuz a node package manager should be written in evented
 javascript.
@@ -74,11 +70,14 @@ javascript.
 ## Contributing
 
 If you're interested in helping, that's awesome! Please fork this project,
-implement some of the things on the list, and then let me know. You can
-usually find me in #node.js on freenode.net, or you can reach me via
+implement some of the things on the todo list, or fix an issue, or even
+just write or edit some documentation.  You have no idea just how thankful
+I'll be.
+
+You can usually find me in #node.js on freenode.net, or you can reach me via
 i@izs.me.
 
-If you don't want to contribute code, that's also cool.  It's very helpful
+If you don't want to contribute patches, that's also cool.  It's very helpful
 to have people play with npm and send issues or complaints.  It's stable in
 what it does, so you may find it useful even if you just link in your stuff
 by doing `npm link .` to put it in the `NODE_PATH` so you can pull it in
@@ -89,24 +88,26 @@ opinions.
 
 ## Todo
 
-All the "core functionality" stuff above.  Most immediately:
-
-* Install packages from the registry.
-* Install missing dependencies. For each one, fetch it, then figure out what
-  it needs, then fetch that if we don't already have it, etc. Put off the
-  resolveDependencies step until everything on the list has been installed,
-  then go back and do the dependency linking.
 * Uninstall dependent packages.
 * Update dependencies when a new satisfying version is installed.
-* Make the CLI not so user-hostile.
+* A few of the commands are still a bit user-hostile, and crash in
+  strange or un-helpful ways when they are not given the data they expect.
+  Make them not do that.
+* Some sugar to make it simpler to tie a git repo to a published package, and then
+  automatically update the registry whenever a specific branch (or semver-looking
+  tag) is pushed.
+* Clean up after botched builds.  Rather than removing stuff, move it aside, and
+  only remove it when the process succeeds.  If it fails, then roll it all back
+  to the way it was beforehand.
 
 Some "nice to have" things that aren't quite core:
 
 * Use path.relative so that the whole root can be picked up and moved easily.
-* Specify the root (and other global options, perhaps) to the CLI.
-* Parse command line options better, and pass an object to the npm command
-  functions, rather than having everything just take one or two positional
-  arguments.
+* Change the registry so that it keeps the tarball as a couchdb attachment.
+  (That's more a change to js-registry, not to npm, but they are related.)
+* Ability to talk to more than one registry at a time.
+* Abbrev support on the CLI commands
+* A bash-completion script
 
 ## Version History
 
@@ -151,6 +152,9 @@ Some "nice to have" things that aren't quite core:
 
 ### 0.0.7
 
-* fixed a bug in semver
+* fixed a few bugs in semver
 * refactor documentation
 * add "help" command
+* add install from registry
+* everything else core
+* push to beta
