@@ -44,10 +44,12 @@ for (var k in conf) npm.config.set(k, conf[k])
 if (!command) npm.commands.help([arglist.join(" ")])
 else npm.commands[command](arglist, function (er, ok) {
   if (er) {
-    npm.commands.help([command], function () {
-      log(er.stack, "failed")
-      process.stdout.flush()
-      throw er
-    })
+    sys.error("")
+    log("Error: "+er.message, "!")
+    var s = er.stack.split("\n").slice(2)
+    s.forEach(function (s) { log(s, "!") })
+    sys.error("")
+    log("try running: 'npm help "+command+"'", "failure")
+    log("or report this to <npm-@googlegroups.com>", "failure")
   } else log("ok")
 })
