@@ -16,4 +16,9 @@
 , "main" : "./npm"
 , "bin" : { "npm" : "./cli.js" }
 , "engines" : { "node" : ">=0.1.32" }
+, "scripts" :
+  { "preactivate" : "make doc"
+  , "activate" : "node install-docs.js"
+  , "deactivate" : "node install-docs.js"
+  }
 }

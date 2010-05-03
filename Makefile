@@ -4,28 +4,16 @@ docs = $(shell ls doc/*.md \
         |sed 's|doc/|man/|g' \
         )
 
-install: doc_install
-	node install-npm.js
-
-doc_install: doc
-	cd man && \
-	for d in $(shell ls *.1); do \
-	  cp man/$$d /usr/local/share/man/man1/npm-$$d; \
-	done;
-
-clean:
-	rm -r man
-
-uninstall: clean
-	rm /usr/local/share/man/man1/npm{-*,}.1
-	@echo TODO - npm uninstall itself
+install:
+	@node install-npm.js
 
 man:
 	mkdir man
 
 doc: man $(docs)
+	true
 
 man/%.1: doc/%.md
 	ronn --roff $< > $@
 
-.PHONY: install doc clean uninstall doc_install
+.PHONY: install doc clean uninstall
