@@ -79,9 +79,9 @@ The `--tag` argument will apply to all of the specified install targets.
 
 ## SEE ALSO
 
-* npm help build
-* npm help registry
-* npm help build
-* npm help link
-* npm help folders
-* npm help tag
+* npm-build(1)
+* npm-registry(1)
+* npm-build(1)
+* npm-link(1)
+* npm-folders(1)
+* npm-tag(1)
