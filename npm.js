@@ -19,6 +19,7 @@ npm.commands = {}
   , "adduser"
   , "config"
   , "help"
+  , "registry-install"
   ].forEach(function (c) { npm.commands[c] = require("./lib/"+c) })
 
 npm.commands.list = npm.commands.ls
