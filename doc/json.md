@@ -66,15 +66,15 @@ space-separated descriptors.
 Version range descriptors may be any of the following styles, where "version"
 is a semver compatible version identifier.
 
-1. `version` Must match `version` exactly
-2. `=version` Same as just `version`
-3. `>version` Must be greater than `version`
-4. `>=version` etc
-5. `<version`
-6. `<=version`
-7. `*` Matches any version
-8. `""` (just an empty string) Same as `*`
-9. `version1 - version2` Same as `>=version1 <=version2`.
+* `version` Must match `version` exactly
+* `=version` Same as just `version`
+* `>version` Must be greater than `version`
+* `>=version` etc
+* `<version`
+* `<=version`
+* `*` Matches any version
+* `""` (just an empty string) Same as `*`
+* `version1 - version2` Same as `>=version1 <=version2`.
 
 For example, these are all valid:
 
