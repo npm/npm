@@ -163,3 +163,7 @@ opinions.
 * clean up some bugs around lifecycle scripts
 * reduce reliance on makefile
 * documentation updates
+
+### 0.1.1
+
+* Fixed 2 DOA bugs in 0.1.0
