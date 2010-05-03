@@ -2,7 +2,7 @@
 
 ## Installing
 
-To install npm, do this:
+To install npm and its documentation, do this:
 
     make install
 
@@ -10,10 +10,20 @@ If you get any complaints, try
 
     sudo make install
 
-That will use npm to install itself, like
-[Ouroboros](http://en.wikipedia.org/wiki/Ouroboros).
-
 Then do `man npm` or `npm help` for more information.
+
+If you want to just install npm, but leave your man folder untouched,
+you can try this instead:
+
+    node install-npm.js
+
+If you'd prefer to just symlink in the current code so you can hack
+on it, then you can do this to create a symlink:
+
+    ./cli.js link .
+
+Any of these will use npm to install itself, like
+[Ouroboros](http://en.wikipedia.org/wiki/Ouroboros).
 
 ## A note about password security
 
