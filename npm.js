@@ -28,8 +28,14 @@ npm.commands.rm = npm.commands.uninstall
 // once in a single pass.  TODO: cache this to disk somewhere when we're using
 // the registry, to cut down on HTTP calls.
 var registry = {}
-npm.set = function (name, data) { return set(registry, name, data) }
-npm.get = function (name) { return get(registry, name) }
+npm.set = function (key, val) {
+  if (typeof key === "object" && !val && key._id) {
+    val = key
+    key = key._id
+  }
+  return set(registry, key, val)
+}
+npm.get = function (key) { return get(registry, key) }
 
 var path = require("path")
   , config = Object.create(ini.config)
@@ -38,6 +44,10 @@ npm.config =
       return ini.get(key, config)
     }
   , set : function (key, val) {
+      if (typeof key === "object" && !val && key._id) {
+        val = key
+        key = key._id
+      }
       return ini.set(key, val, config)
     }
   , del : function (key, val) {
