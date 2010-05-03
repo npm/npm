@@ -15,17 +15,17 @@ log(event, "install docs")
 
 fs.readdir(path.join(process.cwd(), "man"), function (er, docs) {
   log(path.join(process.cwd(), "man"), "readdir")
-  if (er) throw er
+  if (er) throw new Error(er)
   ;(function R (doc) {
     if (!doc) return
+    var target = path.join(process.installPrefix, "share/man/man1", "npm-"+doc)
     switch (event) {
       case "activate":
-        var target = path.join(process.prefix, "share/man/man1/", doc)
         rm( target
           , function () {
               fs.symlink
                 ( path.join(process.cwd(), "man", doc)
-                , path.join(target)
+                , target
                 , function (er, ok) {
                     if (er) throw er
                     R(docs.pop())
@@ -35,9 +35,7 @@ fs.readdir(path.join(process.cwd(), "man"), function (er, docs) {
           )
       break
       case "deactivate":
-        rm( path.join(process.prefix, "share/man/man1/", doc)
-          , function (er) { R(docs.pop()) }
-          )
+        rm( target, function (er) { R(docs.pop()) })
       break
       default: throw new Error("invalid state"); break
     }
