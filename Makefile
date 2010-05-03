@@ -8,10 +8,10 @@ install:
 	@node install-npm.js
 
 man:
-	mkdir man
+	@mkdir man
 
 doc: man $(docs)
-	true
+	@true
 
 man/%.1: doc/%.md
 	ronn --roff $< > $@
