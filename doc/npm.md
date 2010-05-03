@@ -99,9 +99,7 @@ opinions.
 * Clean up after botched builds.  Rather than removing stuff, move it aside, and
   only remove it when the process succeeds.  If it fails, then roll it all back
   to the way it was beforehand.
-
-Some "nice to have" things that aren't quite core:
-
+* Show what can be installed by looking at the registry.
 * Use path.relative so that the whole root can be picked up and moved easily.
 * Change the registry so that it keeps the tarball as a couchdb attachment.
   (That's more a change to js-registry, not to npm, but they are related.)
