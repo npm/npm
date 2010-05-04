@@ -17,7 +17,13 @@ npm <command> [args]
 npm is a little package manager for the Node javascript library.
 .
 .P
-Run \fBnpm help\fR for more details about specific commands.
+See npm\-help(1) for more details about specific commands.
+.
+.P
+If you are a package maintainer, please investigate the documentation at
+npm\-json(1), npm\-publish(1), and npm\-tag(1) sections first.  See
+npm\-folders(1) section to see how you can leverage npm's functionality
+for your own purposes.
 .
 .SH "STATUS: beta"
 The core functionality is there.  You can publish, tag, and install.  It
@@ -29,62 +35,6 @@ you find a rough edge, and I'll sand it down for you.
 .
 .P
 I appreciate your sense of adventure.
-.
-.P
-If you are a package maintainer, please investigate the documentation on
-the \fBjson\fR, \fBpublish\fR, and \fBtag\fR sections first.  You might also want to
-take a look at the \fBfolders\fR section to see how you can leverage npm's
-functionality for your own purposes.  You can get to these by running \fBnpm help <subject>\fR or, if you've installed the documentation, by doing \fBman npm\-<subject>\fR.
-.
-.P
-Here's what I mean by "core functionality":
-.
-.IP "\(bu" 4
-Install packages by name, and get the stable version.
-.
-.IP "\(bu" 4
-Install packages by supplying a name and version, and get the version
-specified.
-.
-.IP "\(bu" 4
-Install more than one package at a time by specifying them all on the
-command line.
-.
-.IP "\(bu" 4
-Install pre\-requisites automatically, pulling the stable versions of the
-dependencies.
-.
-.IP "\(bu" 4
-Talk to a centralized repository to do all this package/version lookup
-magic.
-.
-.IP "\(bu" 4
-Install more than one version of a package, and optionally select an
-"active" version.
-.
-.IP "\(bu" 4
-Safely uninstall packages, not removing them unless they have no dependents.
-.
-.IP "\(bu" 4
-Provide a utility for uploading a package.json to a js\-registry repository.
-.
-.IP "\(bu" 4
-Handle circular dependencies nicely.
-.
-.IP "\(bu" 4
-Install and activate automatically.
-.
-.IP "\(bu" 4
-Be much smarter about cli arguments.
-.
-.IP "\(bu" 4
-Help topics.
-.
-.IP "\(bu" 4
-Install a "link" to a dev directory, so that it links it in rather than
-doing the moveIntoPlace step.
-.
-.IP "" 0
 .
 .SH "Principles"
 Put the files where they need to be so that node can find them using the
@@ -114,10 +64,6 @@ just write or edit some documentation.  You have no idea just how thankful
 I'll be.
 .
 .P
-You can usually find me in #node.js on freenode.net, or you can reach me via
-i@izs.me.
-.
-.P
 If you don't want to contribute patches, that's also cool.  It's very helpful
 to have people play with npm and send issues or complaints.  It's stable in
 what it does, so you may find it useful even if you just link in your stuff
@@ -127,6 +73,10 @@ more easily.
 .P
 If you have strong feelings about package managers, I'd love to hear your
 opinions.
+.
+.P
+You can usually find me in #node.js on freenode.net, or you can reach me via
+i@izs.me.
 .
 .SH "Todo"
 .
@@ -184,131 +134,114 @@ instead of some random garbage filename.
 .
 .SH "Version History"
 .
-.SS "0.0.1"
-.
-.IP "\(bu" 4
+.TP
+0.0.1
 Lots of sketches and false starts.  Abandoned a few times.
 .
-.IP "" 0
-.
-.SS "0.0.2"
-.
-.IP "\(bu" 4
+.TP
+0.0.2
 Install worked mostly.  Still promise\-based.
 .
-.IP "" 0
-.
-.SS "0.0.3"
-.
-.IP "\(bu" 4
+.TP
+0.0.3
 Converted to callbacks.
 .
-.IP "\(bu" 4
+.br
 Mikeal Rogers wrote a registry for it.
 .
-.IP "" 0
-.
-.SS "0.0.4"
-.
-.IP "\(bu" 4
+.TP
+0.0.4
 version dependencies
 .
-.IP "\(bu" 4
+.br
 link packages
 .
-.IP "\(bu" 4
+.br
 activation
 .
-.IP "\(bu" 4
+.br
 lifecycle scripts
 .
-.IP "\(bu" 4
+.br
 bin linking
 .
-.IP "\(bu" 4
+.br
 uninstallation
 .
-.IP "" 0
-.
-.SS "0.0.5"
-.
-.IP "\(bu" 4
+.TP
+0.0.5
 fix a few bugs in uninstall wrt dependent packages
 .
-.IP "\(bu" 4
+.br
 fix relative require()for nodejs modules installed with the "bin" field.
+.
+.br
 (issue #2)
 .
-.IP "\(bu" 4
+.br
 update to work with node 0.1.33 (aka net2)
 .
-.IP "\(bu" 4
+.br
 added publish and tag commands
 .
-.IP "" 0
-.
-.SS "0.0.6"
-.
-.IP "\(bu" 4
+.TP
+0.0.6
 set up a public registry
 .
-.IP "\(bu" 4
+.br
 send content\-length with registry PUTs
 .
-.IP "\(bu" 4
+.br
 adduser command (Mikeal Rogers)
 .
-.IP "\(bu" 4
+.br
 ini file stuff (Mikeal Rogers)
 .
-.IP "\(bu" 4
+.br
 env\-specific package.json
 .
-.IP "\(bu" 4
+.br
 added more info to npm's the package.json (bugs, contributors, etc.)
 .
-.IP "" 0
-.
-.SS "0.0.7"
-.
-.IP "\(bu" 4
+.TP
+0.0.7
 fixed a few bugs in semver
 .
-.IP "\(bu" 4
+.br
 refactor documentation
 .
-.IP "\(bu" 4
+.br
 add "help" command
 .
-.IP "\(bu" 4
+.br
 add install from registry
 .
-.IP "\(bu" 4
+.br
 everything else core
 .
-.IP "\(bu" 4
+.br
 push to beta
 .
-.IP "" 0
-.
-.SS "0.1.0 \- 0.1.2"
-.
-.IP "\(bu" 4
+.TP
+0.1.0 \- 0.1.2
 push to beta, and announce
 .
-.IP "\(bu" 4
+.br
 clean up some bugs around lifecycle scripts
 .
-.IP "\(bu" 4
+.br
 reduce reliance on makefile
 .
-.IP "\(bu" 4
+.br
 documentation updates
 .
-.IP "\(bu" 4
+.br
 Fixed DOA bugs
 .
-.IP "\(bu" 4
+.br
 Removed dependence on ronn
 .
-.IP "" 0
+.SH "SEE ALSO"
+npm\-help(1)
+.
+.br
