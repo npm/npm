@@ -170,6 +170,16 @@ Abbrev support on the CLI commands
 .IP "\(bu" 4
 A bash\-completion script
 .
+.IP "\(bu" 4
+chmod 0755 the bins automatically
+.
+.IP "\(bu" 4
+Use buffers to download tarballs, instead of the "binary" encoding.
+.
+.IP "\(bu" 4
+When the tarball is downloaded, save it to .tmp/name/ver/package.tgz,
+instead of some random garbage filename.
+.
 .IP "" 0
 .
 .SH "Version History"
@@ -281,7 +291,7 @@ push to beta
 .
 .IP "" 0
 .
-.SS "0.1.0"
+.SS "0.1.0 \- 0.1.2"
 .
 .IP "\(bu" 4
 push to beta, and announce
@@ -295,11 +305,10 @@ reduce reliance on makefile
 .IP "\(bu" 4
 documentation updates
 .
-.IP "" 0
-.
-.SS "0.1.1"
+.IP "\(bu" 4
+Fixed DOA bugs
 .
 .IP "\(bu" 4
-Fixed 2 DOA bugs in 0.1.0
+Removed dependence on ronn
 .
 .IP "" 0

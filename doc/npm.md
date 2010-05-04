@@ -106,6 +106,11 @@ opinions.
 * Ability to talk to more than one registry at a time.
 * Abbrev support on the CLI commands
 * A bash-completion script
+* chmod 0755 the bins automatically
+* Use buffers to download tarballs, instead of the "binary" encoding.
+* When the tarball is downloaded, save it to .tmp/name/ver/package.tgz,
+  instead of some random garbage filename.
+
 
 ## Version History
 
