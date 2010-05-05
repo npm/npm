@@ -10,21 +10,7 @@ data moved to the relevant command documentation.
 
 Notes on npm's use of the [js-registry](http://github.com/mikeal/js-registry).
 
-As of 2010-04-25, the "new commands" have been added, but the changes to the
-"changed commands" have not been made yet.
-
 ## Changed commands
-
-### install
-
-Assuming that the stable branch of foo is 0.1.3, then all three of these do
-the same thing:
-
-    npm install foo
-    npm install foo-0.1.3
-    npm install foo 0.1.3
-
-Furthermore, dependencies are installed implicitly.
 
 ### list
 
