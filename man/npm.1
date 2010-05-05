@@ -81,25 +81,17 @@ i@izs.me.
 .SH "Todo"
 .
 .IP "\(bu" 4
-Uninstall dependent packages.
-.
-.IP "\(bu" 4
 Update dependencies when a new satisfying version is installed.
-.
-.IP "\(bu" 4
-A few of the commands are still a bit user\-hostile, and crash in
-strange or un\-helpful ways when they are not given the data they expect.
-Make them not do that.
-.
-.IP "\(bu" 4
-Some sugar to make it simpler to tie a git repo to a published package, and then
-automatically update the registry whenever a specific branch (or semver\-looking
-tag) is pushed.
 .
 .IP "\(bu" 4
 Clean up after botched builds.  Rather than removing stuff, move it aside, and
 only remove it when the process succeeds.  If it fails, then roll it all back
 to the way it was beforehand.
+.
+.IP "\(bu" 4
+Some sugar to make it simpler to tie a git repo to a published package, and then
+automatically update the registry whenever a specific branch (or semver\-looking
+tag) is pushed.
 .
 .IP "\(bu" 4
 Show what can be installed by looking at the registry.
@@ -129,6 +121,10 @@ Use buffers to download tarballs, instead of the "binary" encoding.
 .IP "\(bu" 4
 When the tarball is downloaded, save it to .tmp/name/ver/package.tgz,
 instead of some random garbage filename.
+.
+.IP "\(bu" 4
+Cache JSON files locally to .tmp/name/ver/package.json, even if the
+package isn't installed.  This would cut down on calls to the registry.
 .
 .IP "" 0
 .
