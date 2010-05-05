@@ -15,7 +15,7 @@ npm-install(1) -- install a package
 This command installs a package, and any packages that it depends on.  It
 resolves circular dependencies by talking to the npm registry.
 
-* npm install <tarball file>:
+* npm install `<tarball file>`:
   Install a package that is sitting on the filesystem.  Note: if you just want
   to link a dev directory into your npm root, you can do this more easily by
   using `npm link`.
@@ -27,7 +27,7 @@ resolves circular dependencies by talking to the npm registry.
 
       npm install ./package.tgz
 
-* npm install <tarball url>:
+* npm install `<tarball url>`:
   Fetch the tarball url, and then install it.  In order to distinguish between
   this and other options, the argument must start with "http://" or "https://"
 
@@ -35,15 +35,15 @@ resolves circular dependencies by talking to the npm registry.
 
       npm install http://github.com/waveto/node-crypto/tarball/v0.0.5
 
-* npm install <pkg>:
-  Do a <pkg>@<tag> install, where <tag> is the "tag" config from either your
+* npm install `<pkg>`:
+  Do a `<pkg>@<tag>` install, where `<tag>` is the "tag" config from either your
   .npmrc file, or the --tag argument on the command line.
 
   Example:
 
       npm install sax
 
-* npm install <pkg>@<tag>:
+* npm install `<pkg>@<tag>`:
   Install the version of the package that is referenced by the specified tag.
   If the tag does not exist in the registry data for that package, then this
   will fail.
@@ -52,7 +52,7 @@ resolves circular dependencies by talking to the npm registry.
 
       npm install sax@stable
 
-* npm install <pkg>@<version>:
+* npm install `<pkg>@<version>`:
   Install the specified version of the package.  This will fail if the version
   has not been published to the registry.
 
@@ -60,7 +60,7 @@ resolves circular dependencies by talking to the npm registry.
 
       npm install sax@0.1.1
 
-* npm install <pkg>@<version range>:
+* npm install `<pkg>@<version range>`:
   Install a version of the package matching the specified version range.  This
   will follow the same rules for resolving dependencies described in `npm help json`.
 

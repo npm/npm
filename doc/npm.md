@@ -139,6 +139,11 @@ i@izs.me.
   Fixed DOA bugs  
   Removed dependence on ronn
 
+* 0.1.3:
+  Changed a few details with configs (fix #5)  
+  Update adduser and publish to put author info in the data  
+  Use buffer api for file writes, hopefully fix #4
+
 ## SEE ALSO
 
 npm-help(1)  
