@@ -20,6 +20,20 @@ npm is a little package manager for the Node javascript library.
 See npm\-help(1) for more details about specific commands.
 .
 .P
+npm supports a very basic argument parser.  For any of the settings
+in npm\-config(1), you can set them explicitly for a single command by
+doing:
+.
+.IP "" 4
+.
+.nf
+npm \-\-key val <command>
+.
+.fi
+.
+.IP "" 0
+.
+.P
 If you are a package maintainer, please investigate the documentation at
 npm\-json(1), npm\-publish(1), and npm\-tag(1) sections first.  See
 npm\-folders(1) section to see how you can leverage npm's functionality

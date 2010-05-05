@@ -7,17 +7,6 @@ Note: This is only half the info you need.  The rest can be seen via
 
 To install npm and its documentation, do this:
 
-    make install
-
-If you get any complaints, try
-
-    sudo make install
-
-Then do `man npm` or `npm help` for more information.
-
-If you want to just install npm, but leave your man folder untouched,
-you can try this instead:
-
     node install-npm.js
 
 If you'd prefer to just symlink in the current code so you can hack
@@ -25,8 +14,12 @@ on it, then you can do this to create a symlink:
 
     ./cli.js link .
 
-Any of these will use npm to install itself, like
-[Ouroboros](http://en.wikipedia.org/wiki/Ouroboros).
+If it dies with a "Permission Denied" or EACCESS error, then that probably
+means that you are running node in a shared root-owned location.  In that
+case, you'll have to use sudo, and it'll behave like a multi-user app.
+
+You can customize this behavior by using the `root` and `binroot` config
+options.  See npm-config(1)
 
 ## A note about password security
 
@@ -37,4 +30,4 @@ node 0.1.92, these functions aren't integrated yet.
 
 You can get around this by doing:
 
-    npm install http://github.com/waveto/node-crypto/tarball/v0.0.5
+    npm install crypto@0.0.5

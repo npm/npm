@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.4.1
 .\" http://github.com/rtomayko/ronn/
 .
-.TH "NPM\-CONFIG" "1" "April 2010" "" ""
+.TH "NPM\-CONFIG" "1" "May 2010" "" ""
 .
 .SH "NAME"
 \fBnpm\-config\fR \-\- Manage the npm configuration file
@@ -75,7 +75,22 @@ npm config delete key
 .P
 Deletes the key from the configuration file.
 .
-.SH "Config File Settings"
+.SH "Config Settings"
+npm supports a very basic argument parser.  For any of the settings
+in npm\-config(1), you can set them explicitly for a single command by
+doing:
+.
+.IP "" 4
+.
+.nf
+npm \-\-key val <command>
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Configurations defined on the command line are not saved to the .npmrc file.
 .
 .SS "auto\-activate"
 Default: true
@@ -85,23 +100,55 @@ Automatically activate a package after installation, if there is not an active
 version already.  Set to "always" to always activate when installing.
 .
 .SS "root"
-Default: ~/.node_libraries
+Default: ~/.node_libraries in single\-user mode, or \fB$INSTALL_PREFIX/lib/node\fR
+in sudo\-mode.
 .
 .P
 The root folder where packages are installed and npm keeps its data.
 .
+.SS "binroot"
+Default: \fB$INSTALL_PREFIX/bin\fR
+.
+.P
+The folder where executable programs are installed.
+.
 .SS "registry"
-Default: http://registry.npmjs.org/
+Default: https://registry.npmjs.org/
 .
 .P
 The base URL of the npm package registry.
 .
 .SS "auth"
-A base\-64 encoded "user:pass" pair.
+A base\-64 encoded "user:pass" pair.  This is created by npm\-adduser(1).
 .
 .P
-\fBFIXME\fR: This is not encoded in any kind of security sense. It's just base\-64
+If your config file is ever corrupted, you can set this manually by doing:
+.
+.IP "" 4
+.
+.nf
+npm config set auth $(echo "username:password" | base64 \-d)
+.
+.fi
+.
+.IP "" 0
+.
+.P
+\fBNOTE\fR: This is not encoded in any kind of security sense. It's just base\-64
 encoded strictly so that it can be sent along the wire with HTTP Basic
-authentication. An upcoming version of npm will encrypt this and save it back
-to the registry as \fBauth\-crypt\fR, which will be quite a bit more secure. Until
-then, use a unique password that you don't mind being compromised.
+authentication.
+.
+.SS "authCrypt"
+If crypto.Cipher is available, and you have some private keys in \fB$HOME/.ssh\fR,
+then npm will encrypt your "auth" config before saving to the .npmrc file,
+and will decrypt the "authCrypt" config when it reads the .npmrc file.
+.
+.SS "tag"
+Default: stable
+.
+.P
+If you ask npm to install a package and don't tell it a specific version, then
+it will install the specified tag.
+.
+.P
+Note: this has no effect on the npm\-tag(1) command.

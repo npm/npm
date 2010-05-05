@@ -51,7 +51,15 @@ you're after.
 
 Deletes the key from the configuration file.
 
-## Config File Settings
+## Config Settings
+
+npm supports a very basic argument parser.  For any of the settings
+in npm-config(1), you can set them explicitly for a single command by 
+doing:
+
+    npm --key val <command>
+
+Configurations defined on the command line are not saved to the .npmrc file.
 
 ### auto-activate
 
@@ -62,23 +70,46 @@ version already.  Set to "always" to always activate when installing.
 
 ### root
 
-Default: ~/.node_libraries
+Default: ~/.node_libraries in single-user mode, or `$INSTALL_PREFIX/lib/node`
+in sudo-mode.
 
 The root folder where packages are installed and npm keeps its data.
 
+### binroot
+
+Default: `$INSTALL_PREFIX/bin`
+
+The folder where executable programs are installed.
+
 ### registry
 
-Default: http://registry.npmjs.org/
+Default: https://registry.npmjs.org/
 
 The base URL of the npm package registry.
 
 ### auth
 
-A base-64 encoded "user:pass" pair.
+A base-64 encoded "user:pass" pair.  This is created by npm-adduser(1).
 
-**FIXME**: This is not encoded in any kind of security sense. It's just base-64
+If your config file is ever corrupted, you can set this manually by doing:
+
+    npm config set auth $(echo "username:password" | base64 -d)
+
+**NOTE**: This is not encoded in any kind of security sense. It's just base-64
 encoded strictly so that it can be sent along the wire with HTTP Basic
-authentication. An upcoming version of npm will encrypt this and save it back
-to the registry as `auth-crypt`, which will be quite a bit more secure. Until
-then, use a unique password that you don't mind being compromised.
+authentication.
 
+### authCrypt
+
+If crypto.Cipher is available, and you have some private keys in `$HOME/.ssh`,
+then npm will encrypt your "auth" config before saving to the .npmrc file,
+and will decrypt the "authCrypt" config when it reads the .npmrc file.
+
+### tag
+
+Default: stable
+
+If you ask npm to install a package and don't tell it a specific version, then
+it will install the specified tag.
+
+Note: this has no effect on the npm-tag(1) command.
