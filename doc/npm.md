@@ -148,6 +148,9 @@ i@izs.me.
   Update adduser and publish to put author info in the data  
   Use buffer api for file writes, hopefully fix #4
 
+* 0.1.4 - 0.1.5:
+  Fixes for a few more bugs and fix some documentation.
+
 ## SEE ALSO
 
 npm-help(1)  
