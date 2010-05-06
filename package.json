@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.1.4"
+, "version" : "0.1.5"
 , "author" : "Isaac Z. Schlueter <i@izs.me>"
 , "contributors" : [ "Mikeal Rogers <mikeal.rogers@gmail.com>" ]
 , "repository" :
