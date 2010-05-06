@@ -1,18 +1,16 @@
 # npm
 
-Note: This is only half the info you need.  The rest can be seen via
-`man npm` after installation.
+This is just enough info to get you up and running.
 
-## Installing
+More info available via `man npm`.
 
-To install npm and its documentation, do this:
+## Simple Install
 
-    node install-npm.js
+To install npm, do this:
 
-If you'd prefer to just symlink in the current code so you can hack
-on it, then you can do this to create a symlink:
-
-    ./cli.js link .
+    mkdir npm
+    curl -L http://github.com/isaacs/npm/tarball/stable | tar xz --strip 1 -C npm
+    node npm/install-npm.js
 
 If it dies with a "Permission Denied" or EACCESS error, then that probably
 means that you are running node in a shared root-owned location.  In that
@@ -20,6 +18,19 @@ case, you'll have to use sudo, and it'll behave like a multi-user app.
 
 You can customize this behavior by using the `root` and `binroot` config
 options.  See npm-config(1)
+
+## More Fancy Installing
+
+First, get the code.  Maybe use git for this.  That'd be cool.  Very fancy.
+
+Once you have the code, run this thing, just like the simple install:
+
+    node install-npm.js
+
+If you'd prefer to just symlink in the current code so you can hack
+on it, you can do this:
+
+    npm link .
 
 ## A note about password security
 
