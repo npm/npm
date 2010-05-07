@@ -70,26 +70,7 @@ i@izs.me.
 
 ## Todo
 
-* Update dependencies when a new satisfying version is installed.
-* Clean up after botched builds.  Rather than removing stuff, move it aside, and
-  only remove it when the process succeeds.  If it fails, then roll it all back
-  to the way it was beforehand.
-* Some sugar to make it simpler to tie a git repo to a published package, and then
-  automatically update the registry whenever a specific branch (or semver-looking
-  tag) is pushed.
-* Show what can be installed by looking at the registry.
-* Use path.relative so that the whole root can be picked up and moved easily.
-* Change the registry so that it keeps the tarball as a couchdb attachment.
-  (That's more a change to js-registry, not to npm, but they are related.)
-* Ability to talk to more than one registry at a time.
-* Abbrev support on the CLI commands
-* A bash-completion script
-* chmod 0755 the bins automatically
-* Use buffers to download tarballs, instead of the "binary" encoding.
-* When the tarball is downloaded, save it to .tmp/name/ver/package.tgz,
-  instead of some random garbage filename.
-* Cache JSON files locally to .tmp/name/ver/package.json, even if the
-  package isn't installed.  This would cut down on calls to the registry.
+See <http://github.com/isaacs/npm/issues> for current todo list.
 
 
 ## Version History
