@@ -50,6 +50,7 @@ else npm.commands[command](arglist, function (er, ok) {
     s.forEach(function (s) { log(s, "!") })
     sys.error("")
     log("try running: 'npm help "+command+"'", "failure")
-    log("or report this to <npm-@googlegroups.com>", "failure")
+    log("or report this at <http://github.com/isaacs/npm/issues>", "failure")
+    log("or email <npm-@googlegroups.com>", "failure")
   } else log("ok")
 })
