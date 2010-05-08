@@ -13,7 +13,7 @@ var event = process.env.npm_lifecycle_event
   , manTarget = path.join(process.installPrefix, "share/man/man1")
   , exec = require("./lib/utils/exec")
 
-log(event, "install docs")
+log(event, "docs")
 
 exec("man", ["-w"], function (er, code, stdout, stderr) {
   if (er) throw er
@@ -30,10 +30,11 @@ exec("man", ["-w"], function (er, code, stdout, stderr) {
 })
 function installDocs () {
   fs.readdir(path.join(process.cwd(), "man"), function (er, docs) {
-    log(path.join(process.cwd(), "man"), "readdir")
+    log(path.join(process.cwd(), "man"), "docs")
+    log(manTarget, "docs")
     if (er) return
     ;(function R (doc) {
-      if (!doc) return
+      if (!doc) return log("done", "docs")
       if (doc === "." || doc === "..") return R(docs.pop())
       var target = path.join(manTarget, "npm-"+doc)
       target = target.replace(/npm-npm\.1$/, "npm.1")
