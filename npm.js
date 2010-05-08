@@ -19,6 +19,7 @@ npm.commands = {}
   , "adduser"
   , "config"
   , "help"
+  , "cache"
   ].forEach(function (c) { npm.commands[c] = require("./lib/"+c) })
 
 npm.commands.list = npm.commands.ls
@@ -62,6 +63,10 @@ Object.defineProperty(npm, "root",
   })
 Object.defineProperty(npm, "dir",
   { get: function () { return path.join(npm.root, ".npm") }
+  , enumerable:true
+  })
+Object.defineProperty(npm, "cache",
+  { get: function () { return path.join(npm.root, ".npm", ".cache") }
   , enumerable:true
   })
 Object.defineProperty(npm, "tmp",
