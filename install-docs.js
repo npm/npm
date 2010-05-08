@@ -11,11 +11,24 @@ var event = process.env.npm_lifecycle_event
   , rm = require("./lib/utils/rm-rf")
   , mkdir = require("./lib/utils/mkdir-p")
   , manTarget = path.join(process.installPrefix, "share/man/man1")
+  , exec = require("./lib/utils/exec")
 
 log(event, "install docs")
 
-mkdir(manTarget, function (er) {
+exec("man", ["-w"], function (er, code, stdout, stderr) {
   if (er) throw er
+  var manpath = stdout.trim().split(":")
+  if (manpath.indexOf(path.dirname(manTarget)) === -1) {
+    log("It seems " + manTarget + " is not visible to man", "!")
+    log("For greater justice, please add it to your man path", "!")
+    log("See: man man", "!")
+  }
+  mkdir(manTarget, function (er) {
+    if (er) throw er
+    installDocs()
+  })
+})
+function installDocs () {
   fs.readdir(path.join(process.cwd(), "man"), function (er, docs) {
     log(path.join(process.cwd(), "man"), "readdir")
     if (er) return
@@ -24,7 +37,6 @@ mkdir(manTarget, function (er) {
       if (doc === "." || doc === "..") return R(docs.pop())
       var target = path.join(manTarget, "npm-"+doc)
       target = target.replace(/npm-npm\.1$/, "npm.1")
-      log(target, event)
       switch (event) {
         case "activate":
           rm( target
@@ -47,4 +59,4 @@ mkdir(manTarget, function (er) {
       }
     })(docs.pop())
   })
-})
+}
