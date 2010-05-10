@@ -132,7 +132,7 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 * 0.1.4 - 0.1.5:
   Fixes for a few more bugs and fix some documentation.
 
-* 0.1.6:
+* 0.1.6 - 0.1.7:
   Add cache functionality
   Use couchdb attachments to host tarballs
   Handle odd require.paths more appropriately
