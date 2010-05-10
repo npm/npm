@@ -10,7 +10,7 @@ To install npm, do this:
 
     mkdir npm
     curl -L http://github.com/isaacs/npm/tarball/stable | tar xz --strip 1 -C npm
-    node npm/install-npm.js
+    make
 
 If it dies with a "Permission Denied" or EACCESS error, then that probably
 means that you are running node in a shared root-owned location.  In that
@@ -23,14 +23,22 @@ options.  See npm-config(1)
 
 First, get the code.  Maybe use git for this.  That'd be cool.  Very fancy.
 
-Once you have the code, run this thing, just like the simple install:
+The default make target is `install-stable`, which downloads the current stable
+version of npm, and installs that for you.
 
-    node install-npm.js
+If you want to install the exact code that you're looking at, the bleeding-edge
+master branch, do this:
+
+    make install
 
 If you'd prefer to just symlink in the current code so you can hack
 on it, you can do this:
 
-    npm link .
+    make link
+
+If you check out the Makefile, you'll see that these are just running npm commands
+at the cli.js script directly.  You can also use npm without ever installing
+it by using `./cli.js` instead of "npm".
 
 ## A note about password security
 
