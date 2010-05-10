@@ -20,4 +20,9 @@
   { "activate" : "node scripts/install-docs.js"
   , "deactivate" : "node scripts/install-docs.js"
   }
+, "licenses" :
+  [ { "type" : "MIT"
+    , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
+    }
+  ]
 }
