@@ -4,8 +4,18 @@ docs = $(shell ls doc/*.md \
         |sed 's|doc/|man/|g' \
         )
 
+install-stable:
+	./cli.js --auto-activate always install npm@stable
+
 install:
-	@node install-npm.js
+	./cli.js --auto-activate always install .
+
+link:
+	./cli.js --auto-activate always link .
+
+uninstall:
+	@echo TODO: have npm uninstall itself.
+	@echo See http://github.com/isaacs/npm/issues/issue/27
 
 man:
 	@mkdir man
@@ -16,4 +26,4 @@ doc: man $(docs)
 man/%.1: doc/%.md
 	ronn --roff $< > $@
 
-.PHONY: install doc clean uninstall
+.PHONY: install install-stable link doc clean uninstall
