@@ -17,7 +17,7 @@
 , "bin" : { "npm" : "./cli.js" }
 , "engines" : { "node" : ">=0.1.91" }
 , "scripts" :
-  { "activate" : "node install-docs.js"
-  , "deactivate" : "node install-docs.js"
+  { "activate" : "node scripts/install-docs.js"
+  , "deactivate" : "node scripts/install-docs.js"
   }
 }
