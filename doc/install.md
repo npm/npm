@@ -5,6 +5,7 @@ npm-install(1) -- install a package
 
     npm install <tarball file>
     npm install <tarball url>
+    npm install <folder>
     npm install <pkg>
     npm install <pkg>@<tag>
     npm install <pkg>@<version>
@@ -21,7 +22,7 @@ resolves circular dependencies by talking to the npm registry.
   using `npm link`.
 
   In order to distinguish between this and remote installs, the argument
-  must start with either "file:", ".", or "/"
+  must either be "." or contain a "/" in it.
 
   Example:
 
