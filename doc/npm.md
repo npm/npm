@@ -132,6 +132,13 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 * 0.1.4 - 0.1.5:
   Fixes for a few more bugs and fix some documentation.
 
+* 0.1.6:
+  Add cache functionality
+  Use couchdb attachments to host tarballs
+  Handle odd require.paths more appropriately
+  Don't break on install if the man path is missing
+  Support publishing or installing a folder or local tarball
+
 ## SEE ALSO
 
 npm-help(1)  
