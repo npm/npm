@@ -20,6 +20,10 @@ npm.commands = {}
   , "config"
   , "help"
   , "cache"
+  , "test"
+  , "stop"
+  , "start"
+  , "restart"
   ].forEach(function (c) { npm.commands[c] = require("./lib/"+c) })
 
 npm.commands.list = npm.commands.ls
