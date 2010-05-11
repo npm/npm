@@ -139,6 +139,11 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
   Don't break on install if the man path is missing
   Support publishing or installing a folder or local tarball
 
+* 0.1.8:
+  Bugfixes
+  Add start, stop, restart, and test commands
+
+
 ## SEE ALSO
 
 npm-help(1)  
