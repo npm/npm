@@ -143,6 +143,8 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
   Bugfixes
   Add start, stop, restart, and test commands
 
+* 0.1.9:
+  npm list enhancements
 
 ## SEE ALSO
 
