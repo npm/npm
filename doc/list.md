@@ -3,15 +3,15 @@ npm-list(1) -- List installed packages
 
 ## SYNOPSIS
 
-    npm list [package]
-    npm ls [package]
+    npm list
+    npm ls
 
 ## DESCRIPTION
 
-This will show the installed (and, potentially, activated) versions of all the
-packages that npm has installed, or just the `package` if specified.
+This command will print to stdout all the versions of packages that are
+either installed or available in the registry, with their tags and whether
+or not they're active and/or stable.
 
-This is also aliased to `ls`.
+To filter a single package or state, pipe this command through grep.
 
-**FIXME**: Prints to stderr, but should really be stdout, since the log is what
-you're after.
+    npm ls | grep @stable
