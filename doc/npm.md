@@ -145,6 +145,7 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 
 * 0.1.9:
   npm list enhancements
+  fix the install bug
 
 ## SEE ALSO
 
