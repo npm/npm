@@ -4,14 +4,14 @@
 // reflect the current command.
 
 var event = process.env.npm_lifecycle_event
-  , exec = require("./lib/utils/exec")
-  , log = require("./lib/utils/log")
+  , exec = require("../lib/utils/exec")
+  , log = require("../lib/utils/log")
   , fs = require("fs")
   , path = require("path")
-  , rm = require("./lib/utils/rm-rf")
-  , mkdir = require("./lib/utils/mkdir-p")
+  , rm = require("../lib/utils/rm-rf")
+  , mkdir = require("../lib/utils/mkdir-p")
   , manTarget = path.join(process.installPrefix, "share/man/man1")
-  , exec = require("./lib/utils/exec")
+  , exec = require("../lib/utils/exec")
 
 log(event, "docs")
 
