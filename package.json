@@ -3,7 +3,8 @@
 , "version" : "0.1.10"
 , "author" : "Isaac Z. Schlueter <i@izs.me>"
 , "contributors" :
-  [ "Mikeal Rogers <mikeal.rogers@gmail.com>"
+  [ "Steve Steiner <ssteinerX@gmail.com>"
+  , "Mikeal Rogers <mikeal.rogers@gmail.com>"
   , "Aaron Blohowiak <aaron.blohowiak@gmail.com>"
   ]
 , "repository" :
