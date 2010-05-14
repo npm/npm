@@ -147,6 +147,12 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
   npm list enhancements
   fix the install bug
 
+* 0.1.10:
+  More errors found by Ryan Dahl and Kris Zyp
+  Better uninstall and list behavior
+  Docs for new developers.
+  Better tracking of ownership on the registry.
+
 ## SEE ALSO
 
 npm-help(1)  

@@ -8,7 +8,8 @@ npm-help(1) -- Get help about npm commands
 Where `<section>` is one of:  
 `activate`, `adduser`, `build`, `config`, `deactivate`, `folders`, `help`
 (this page), `install`, `json`, `link` (or `ln`), `list` (or `ls`), `npm`,
-`publish`, `registry`, `scripts`, `tag`, `uninstall` (or `rm`)
+`publish`, `registry`, `scripts`, `tag`, `uninstall` (or `rm`),
+`developers`, `coding-style`
 
 Note that you can get the exact same help content by doing:
 
