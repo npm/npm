@@ -1,4 +1,4 @@
-npm adduser(1) -- Add a registry user account
+npm-adduser(1) -- Add a registry user account
 =============================================
 
 ## SYNOPSIS
