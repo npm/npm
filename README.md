@@ -10,6 +10,7 @@ To install npm, do this:
 
     mkdir npm
     curl -L http://github.com/isaacs/npm/tarball/stable | tar xz --strip 1 -C npm
+    cd npm
     make
 
 If it dies with a "Permission Denied" or EACCESS error, then that probably
