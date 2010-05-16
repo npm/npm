@@ -41,16 +41,19 @@ if (key) conf[key] = true
 npm.argv = arglist
 for (var k in conf) npm.config.set(k, conf[k])
 
-if (!command) npm.commands.help([arglist.join(" ")])
-else npm.commands[command](arglist, function (er, ok) {
+if (!command) {
+  // npm.commands.help([arglist.join(" ")])
+  sys.error( "Usage:\n"
+           + "  npm [flags] <command> [args]\n"
+           + "Check 'man npm' or 'man npm-help' for more information"
+           )
+} else npm.commands[command](arglist, function (er, ok) {
   if (er) {
     sys.error("")
-    log("Error: "+er.message, "!")
-    var s = er.stack.split("\n").slice(2)
-    s.forEach(function (s) { log(s, "!") })
+    log(er, "!")
     sys.error("")
     log("try running: 'npm help "+command+"'", "failure")
-    log("or report this at <http://github.com/isaacs/npm/issues>", "failure")
-    log("or email <npm-@googlegroups.com>", "failure")
+    log("Report this *entire* log at <http://github.com/isaacs/npm/issues>", "failure")
+    log("or email it to <npm-@googlegroups.com>", "failure")
   } else log("ok")
 })
