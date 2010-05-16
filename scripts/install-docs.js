@@ -15,6 +15,11 @@ var event = process.env.npm_lifecycle_event
 
 log(event, "docs")
 
+function dontPanic (er) {
+  log(er, "doc install failed")
+  log("probably still ok otherwise, though", "don't panic")
+}
+
 exec("manpath", [], function (er, code, stdout, stderr) {
   var manpath = er ? [] : stdout.trim().split(":")
   if (manpath.indexOf(path.dirname(manTarget)) === -1) {
@@ -23,8 +28,8 @@ exec("manpath", [], function (er, code, stdout, stderr) {
     log("See: man man", "!")
   }
   mkdir(manTarget, function (er) {
-    if (er) throw er
-    installDocs()
+    if (er) dontPanic(er)
+    else installDocs()
   })
 })
 function installDocs () {
@@ -45,8 +50,8 @@ function installDocs () {
                   ( path.join(process.cwd(), "man", doc)
                   , target
                   , function (er, ok) {
-                      if (er) throw er
-                      R(docs.pop())
+                      if (er) dontPanic(er)
+                      else R(docs.pop())
                     }
                   )
               }
