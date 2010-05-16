@@ -15,11 +15,10 @@ var event = process.env.npm_lifecycle_event
 
 log(event, "docs")
 
-exec("man", ["-w"], function (er, code, stdout, stderr) {
-  if (er) throw er
-  var manpath = stdout.trim().split(":")
+exec("manpath", [], function (er, code, stdout, stderr) {
+  var manpath = er ? [] : stdout.trim().split(":")
   if (manpath.indexOf(path.dirname(manTarget)) === -1) {
-    log("It seems " + manTarget + " is not visible to man", "!")
+    log("It seems " + manTarget + " might not be visible to man", "!")
     log("For greater justice, please add it to your man path", "!")
     log("See: man man", "!")
   }
