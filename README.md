@@ -9,7 +9,7 @@ More info available via `man npm`.
 To install npm, do this:
 
     mkdir npm
-    curl -L http://github.com/isaacs/npm/tarball/stable | tar xz --strip 1 -C npm
+    curl -L http://github.com/isaacs/npm/tarball/master | tar xz --strip 1 -C npm
     cd npm
     make
 
