@@ -14,8 +14,7 @@ link:
 	./cli.js --auto-activate always link .
 
 uninstall:
-	@echo TODO: have npm uninstall itself.
-	@echo See http://github.com/isaacs/npm/issues/issue/27
+	./cli.js rm npm
 
 man:
 	@mkdir man
