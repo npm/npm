@@ -6,6 +6,7 @@
   [ "Steve Steiner <ssteinerX@gmail.com>"
   , "Mikeal Rogers <mikeal.rogers@gmail.com>"
   , "Aaron Blohowiak <aaron.blohowiak@gmail.com>"
+  , "Martyn Smith <martyn@dollyfish.net.nz>"
   ]
 , "repository" :
   { "type" : "git"
