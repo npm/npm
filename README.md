@@ -6,11 +6,10 @@ More info available via `man npm`.
 
 ## Simple Install
 
-To install npm, do this:
+To install npm, create a folder where you want to put the code, and then
+cd there, and do this:
 
-    mkdir npm
-    curl -L http://github.com/isaacs/npm/tarball/master | tar xz --strip 1 -C npm
-    cd npm
+    curl -L http://github.com/isaacs/npm/tarball/master | tar xz --strip 1
     make
 
 If it dies with a "Permission Denied" or EACCESS error, then that probably
