@@ -44,9 +44,11 @@ for (var k in conf) npm.config.set(k, conf[k])
 if (!command) {
   // npm.commands.help([arglist.join(" ")])
   if (arglist.length) log(arglist, "unknown command")
-  sys.error( "Usage:\n"
+  sys.error( "What do you want me to do?\n\n"
+           + "Usage:\n"
            + "  npm [flags] <command> [args]\n"
-           + "Check 'man npm' or 'man npm-help' for more information"
+           + "Check 'man npm' or 'man npm-help' for more information\n\n"
+           + "This is supposed to happen.  "
            )
 } else npm.commands[command](arglist, function (er, ok) {
   if (er) {
