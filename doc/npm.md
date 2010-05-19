@@ -153,6 +153,11 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
   Docs for new developers.
   Better tracking of ownership on the registry.
 
+* 0.1.11
+	Martyn Smith found a whole lot of bugs.
+	Make publish not die when the tarball is big.
+	"make uninstall" support
+
 ## SEE ALSO
 
 npm-help(1)  
