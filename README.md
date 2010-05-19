@@ -40,12 +40,22 @@ If you check out the Makefile, you'll see that these are just running npm comman
 at the cli.js script directly.  You can also use npm without ever installing
 it by using `./cli.js` instead of "npm".
 
+## Uninstalling
+
+So sad to see you go.
+
+		npm uninstall npm
+
+Or, if that fails,
+
+		make uninstall
+		
 ## A note about password security
 
 In order to publish your packages, you must have your auth info
 saved into your .npmrc file.  If Cipher and Decipher are supported
 in the "crypto" module, then npm will use them.  However, as of
-node 0.1.92, these functions aren't integrated yet.
+node 0.1.95, these functions aren't integrated yet.
 
 You can get around this by doing:
 
