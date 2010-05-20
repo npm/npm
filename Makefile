@@ -14,6 +14,7 @@ link:
 	./cli.js --auto-activate always link .
 
 uninstall:
+	./cli.js cache clean
 	./cli.js rm npm
 
 man:
