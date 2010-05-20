@@ -49,7 +49,15 @@ So sad to see you go.
 Or, if that fails,
 
 		make uninstall
-		
+
+## More Docs
+
+Check out the [docs](http://github.com/isaacs/npm/blob/master/doc/).
+
+If you're a developer, and you want to use npm to publish your program,
+you should
+[read this](http://github.com/isaacs/npm/blob/master/doc/developers.md#readme)
+
 ## A note about password security
 
 In order to publish your packages, you must have your auth info
