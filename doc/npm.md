@@ -158,6 +158,10 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 	Make publish not die when the tarball is big.
 	"make uninstall" support
 
+* 0.1.12
+	Fix the downloading bug that was breaking the tarballs
+	Update some docs
+
 ## SEE ALSO
 
 npm-help(1)  

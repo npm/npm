@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.1.11"
+, "version" : "0.1.12"
 , "author" : "Isaac Z. Schlueter <i@izs.me>"
 , "contributors" :
   [ "Steve Steiner <ssteinerX@gmail.com>"
