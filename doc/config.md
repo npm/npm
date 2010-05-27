@@ -93,7 +93,9 @@ A base-64 encoded "user:pass" pair.  This is created by npm-adduser(1).
 
 If your config file is ever corrupted, you can set this manually by doing:
 
-    npm config set auth $(echo "username:password" | base64 -d)
+    npm config set auth $(echo -n "my-user-name:my-password" | base64)
+		npm config set username my-user-name
+		npm config set email me@email.com
 
 **NOTE**: This is not encoded in any kind of security sense. It's just base-64
 encoded strictly so that it can be sent along the wire with HTTP Basic
