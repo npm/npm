@@ -5,7 +5,6 @@
 var fs = require("fs")
   , path = require("path")
   , sys = require("sys")
-  , path = require("path")
   , npm = require("./npm")
 
   // supported commands.
@@ -20,6 +19,7 @@ var fs = require("fs")
   , flagsDone
 
 log(sys.inspect(argv), "cli")
+log(npm.version, "version")  
 
 while (arg = argv.shift()) {
   if (!command && (arg in npm.commands)) {

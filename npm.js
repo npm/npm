@@ -4,8 +4,18 @@ var npm = exports
   , get = require("./lib/utils/get")
   , ini = require("./lib/utils/ini")
   , log = require("./lib/utils/log")
+  , fs = require("fs")
+  , path = require("path")
 
 npm.commands = {}
+
+try {
+  var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json")))
+  npm.version = j.version
+} catch (ex) {
+  npm.version = ex
+}
+
 
 ; [ "install"
   , "activate"
