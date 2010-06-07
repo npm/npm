@@ -153,14 +153,17 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
   Docs for new developers.
   Better tracking of ownership on the registry.
 
-* 0.1.11
+* 0.1.11:
 	Martyn Smith found a whole lot of bugs.
 	Make publish not die when the tarball is big.
 	"make uninstall" support
 
-* 0.1.12 - 0.1.13
+* 0.1.12 - 0.1.13:
 	Fix the downloading bug that was breaking the tarballs
 	Update some docs
+
+* 0.1.14:
+	Fix to stay in sync with node changes
 
 ## SEE ALSO
 
