@@ -20,7 +20,7 @@
 , "directories" : { "lib" : "./lib/" }
 , "main" : "./npm"
 , "bin" : { "npm" : "./cli.js" }
-, "engines" : { "node" : ">=0.1.97-0" }
+, "engines" : { "node" : ">=0.1.97" }
 , "scripts" :
   { "activate" : "node scripts/install-docs.js"
   , "deactivate" : "node scripts/install-docs.js"
