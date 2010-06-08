@@ -162,7 +162,7 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 	Fix the downloading bug that was breaking the tarballs  
 	Update some docs
 
-* 0.1.14:
+* 0.1.14 - 0.1.15:
 	Fix to stay in sync with node changes  
 	Put a special tag on link installs  
 	Modify semver comparison slightly  
