@@ -127,7 +127,9 @@ If your config file is ever corrupted, you can set this manually by doing:
 .IP "" 4
 .
 .nf
-npm config set auth $(echo "username:password" | base64 \-d)
+npm config set auth $(echo \-n "my\-user\-name:my\-password" | base64)
+    npm config set username my\-user\-name
+    npm config set email me@email.com
 .
 .fi
 .

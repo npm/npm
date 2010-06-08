@@ -133,37 +133,39 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
   Fixes for a few more bugs and fix some documentation.
 
 * 0.1.6 - 0.1.7:
-  Add cache functionality
-  Use couchdb attachments to host tarballs
-  Handle odd require.paths more appropriately
-  Don't break on install if the man path is missing
+  Add cache functionality  
+  Use couchdb attachments to host tarballs  
+  Handle odd require.paths more appropriately  
+  Don't break on install if the man path is missing  
   Support publishing or installing a folder or local tarball
 
 * 0.1.8:
-  Bugfixes
+  Bugfixes  
   Add start, stop, restart, and test commands
 
 * 0.1.9:
-  npm list enhancements
+  npm list enhancements  
   fix the install bug
 
 * 0.1.10:
-  More errors found by Ryan Dahl and Kris Zyp
-  Better uninstall and list behavior
-  Docs for new developers.
+  More errors found by Ryan Dahl and Kris Zyp  
+  Better uninstall and list behavior  
+  Docs for new developers.  
   Better tracking of ownership on the registry.
 
 * 0.1.11:
-	Martyn Smith found a whole lot of bugs.
-	Make publish not die when the tarball is big.
+	Martyn Smith found a whole lot of bugs.  
+	Make publish not die when the tarball is big.  
 	"make uninstall" support
 
 * 0.1.12 - 0.1.13:
-	Fix the downloading bug that was breaking the tarballs
+	Fix the downloading bug that was breaking the tarballs  
 	Update some docs
 
 * 0.1.14:
-	Fix to stay in sync with node changes
+	Fix to stay in sync with node changes  
+	Put a special tag on link installs  
+	Modify semver comparison slightly
 
 ## SEE ALSO
 
