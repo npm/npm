@@ -165,7 +165,8 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 * 0.1.14:
 	Fix to stay in sync with node changes  
 	Put a special tag on link installs  
-	Modify semver comparison slightly
+	Modify semver comparison slightly  
+	add unpublish command
 
 ## SEE ALSO
 
