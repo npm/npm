@@ -167,7 +167,8 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 	Put a special tag on link installs  
 	Modify semver comparison slightly  
 	add unpublish command  
-	Use the "drain" event properly for uploads
+	Use the "drain" event properly for uploads  
+	Handle thrown errors
 
 ## SEE ALSO
 
