@@ -168,7 +168,8 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 	Modify semver comparison slightly  
 	add unpublish command  
 	Use the "drain" event properly for uploads  
-	Handle thrown errors
+	Handle thrown errors  
+	Handle .npmignore
 
 ## SEE ALSO
 
