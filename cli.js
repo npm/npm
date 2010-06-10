@@ -41,6 +41,8 @@ if (key) conf[key] = true
 npm.argv = arglist
 for (var k in conf) npm.config.set(k, conf[k])
 
+process.addListener("uncaughtException", errorHandler)
+
 if (!command) {
   // npm.commands.help([arglist.join(" ")])
   if (arglist.length) log(arglist, "unknown command")
@@ -50,7 +52,9 @@ if (!command) {
            + "Check 'man npm' or 'man npm-help' for more information\n\n"
            + "This is supposed to happen.  "
            )
-} else npm.commands[command](arglist, function (er, ok) {
+} else npm.commands[command](arglist, errorHandler)
+
+function errorHandler (er) {
   if (er) {
     sys.error("")
     log(er, "!")
@@ -59,4 +63,5 @@ if (!command) {
     log("Report this *entire* log at <http://github.com/isaacs/npm/issues>", "failure")
     log("or email it to <npm-@googlegroups.com>", "failure")
   } else log("ok")
-})
+}
+
