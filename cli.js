@@ -19,7 +19,6 @@ var fs = require("fs")
   , flagsDone
 
 log(sys.inspect(argv), "cli")
-log(npm.version, "version")  
 
 while (arg = argv.shift()) {
   if (!command && (arg in npm.commands)) {
@@ -41,9 +40,16 @@ if (key) conf[key] = true
 npm.argv = arglist
 for (var k in conf) npm.config.set(k, conf[k])
 
+var vindex = arglist.indexOf("-v")
+  , printVersion = vindex !== -1 || conf.version
+if (printVersion) {
+  sys.puts(npm.version)
+  if (vindex !== -1) arglist.splice(vindex, 1)
+} else log(npm.version, "version")  
+
 process.addListener("uncaughtException", errorHandler)
 
-if (!command) {
+if (!command) { if (!printVersion) {
   // npm.commands.help([arglist.join(" ")])
   if (arglist.length) log(arglist, "unknown command")
   sys.error( "What do you want me to do?\n\n"
@@ -52,7 +58,7 @@ if (!command) {
            + "Check 'man npm' or 'man npm-help' for more information\n\n"
            + "This is supposed to happen.  "
            )
-} else npm.commands[command](arglist, errorHandler)
+}} else npm.commands[command](arglist, errorHandler)
 
 function errorHandler (er) {
   if (er) {
