@@ -20,7 +20,7 @@ function dontPanic (er) {
   log("probably still ok otherwise, though", "don't panic")
 }
 
-exec("manpath", [], function (er, code, stdout, stderr) {
+exec("manpath", [], null, true, function (er, code, stdout, stderr) {
   var manpath = er ? [] : stdout.trim().split(":")
   if (manpath.indexOf(path.dirname(manTarget)) === -1) {
     log("It seems " + manTarget + " might not be visible to man", "!")
