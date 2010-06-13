@@ -2,13 +2,16 @@
 
 // don't assume that npm is installed in any particular spot, since this
 // might conceivably be a bootstrap attempt.
+var log = require("./lib/utils/log")
+
+log("ok", "it worked if it ends with")
+
 var fs = require("fs")
   , path = require("path")
   , sys = require("sys")
   , npm = require("./npm")
 
   // supported commands.
-  , log = require("./lib/utils/log")
   , argv = process.argv.slice(2)
   , arg = ""
 
