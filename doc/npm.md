@@ -171,6 +171,9 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 	Handle thrown errors  
 	Handle .npmignore
 
+* 0.1.17:
+  Bug fixing and stabilization.
+
 ## SEE ALSO
 
 npm-help(1)  
