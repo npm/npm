@@ -7,6 +7,8 @@
   , "Mikeal Rogers <mikeal.rogers@gmail.com>"
   , "Aaron Blohowiak <aaron.blohowiak@gmail.com>"
   , "Martyn Smith <martyn@dollyfish.net.nz>"
+  , "Mathias Pettersson <mape@mape.me>"
+  , "Brian Hammond <brian@fictorial.com>"
   ]
 , "repository" :
   { "type" : "git"
