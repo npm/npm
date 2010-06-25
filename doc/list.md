@@ -18,6 +18,11 @@ packages, you could do this:
 
     npm ls @stable
 
+Another common usage is to find the set of all packages that are 
+installed. This can be accomplished by doing this:
+
+    npm ls @installed
+
 Strings are matched using the JavaScript "split" function, so regular
 expression strings are ok.  However, the highlighting is a simple
 split/join, so regexps probably won't get the funky colors.

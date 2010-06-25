@@ -1,32 +1,30 @@
-.\" generated with Ronn/v0.4.1
-.\" http://github.com/rtomayko/ronn/
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "NPM\-LIST" "1" "May 2010" "" ""
+.TH "NPM\-LIST" "1" "June 2010" "" ""
 .
 .SH "NAME"
-\fBnpm\-list\fR \-\- List installed packages
+\fBnpm\-list\fR \- List installed packages
 .
 .SH "SYNOPSIS"
 .
 .nf
+
 npm list
 npm ls
 .
 .fi
 .
 .SH "DESCRIPTION"
-This command will print to stdout all the versions of packages that are
-either installed or available in the registry, with their tags and whether
-or not they're active and/or stable.
+This command will print to stdout all the versions of packages that are either installed or available in the registry, with their tags and whether or not they\'re active and/or stable\.
 .
 .P
-To filter a single package or state, you can provide words to filter on
-and highlight (if appropriate).  For instance, to see all the stable
-packages, you could do this:
+To filter a single package or state, you can provide words to filter on and highlight (if appropriate)\. For instance, to see all the stable packages, you could do this:
 .
 .IP "" 4
 .
 .nf
+
 npm ls @stable
 .
 .fi
@@ -34,6 +32,17 @@ npm ls @stable
 .IP "" 0
 .
 .P
-Strings are matched using the JavaScript "split" function, so regular
-expression strings are ok.  However, the highlighting is a simple
-split/join, so regexps probably won't get the funky colors.
+Another common usage is to find the set of all packages that are installed\. This can be accomplished by doing this:
+.
+.IP "" 4
+.
+.nf
+
+npm ls @installed
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Strings are matched using the JavaScript "split" function, so regular expression strings are ok\. However, the highlighting is a simple split/join, so regexps probably won\'t get the funky colors\.
