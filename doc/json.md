@@ -8,56 +8,82 @@ npm aims to implement the commonjs
 adjustments have been made, which may eventually be unmade, but hopefully will
 be incorporated into the spec.
 
-## overlay
+This document is all you need to know about what's required in your package.json
+file.
 
-npm responds to the `node` and `npm` env-specific package.json values, which
-you can hang on any of the following keys: `"overlay", "env", "context",
-"ctx", "vnd", "vendor"`.
+## name
 
-For example:
+The *most* important things in your package.json are the name and version fields.
 
-    { "name" : "foo"
-    , "version" : 7
-    , "description" : "generic description"
-    , "overlay" :
-      { "node" :
-        { "name" : "bar"
-        , "description" : "description for node"
-        }
-      , "npm" :
-        { "version" : "1.0.7"
-        , "description" : "description for npm"
-        }
-      , "narwhal" :
-        { "description" : "description for narwhal" }
-      }
-    }
+The name is what your thing is called.  Some tips:
 
-In this case, this is what npm will treat it as:
-
-    { "name" : "bar"
-    , "version" : "1.0.7"
-    , "description" : "description for npm"
-    }
-
-This way, even if npm is not exactly the same as some other package management
-system, you can still use both, and it can be a happy planet.
+* Don't put "js" or "node" in the name.  It's assumed that it's js, since you're
+  writing a package.json file, and you can specify the engine using the "engines"
+  field.  (See below.)
+* The name ends up being part of a URL, an argument on the command line, and a
+  folder name. So, don't use characters that are annoying in those contexts, like
+  funny UTF things or parentheses or slashes, or else it'll break.
+* The name will probably be passed as an argument to require(), so it should
+  be something short, but also reasonably descriptive.
+* You may want to check the npm registry to see if there's something by that name
+  already, before you get too attached to it.  http://registry.npmjs.org/
 
 ## version
 
-Version must be [semver](http://semver.org)-compliant. npm assumes that you've
-read the semver page, and that you comply with it. Versions packages with
-non-semver versions will not be installed by npm. It's just too tricky if you
-have more than one way to do it, and semver works well.
+The *most* important things in your package.json are the name and version fields.
 
-(This is actually mentioned in the Packages/1.0 spec, but it's worth
-mentioning that npm enforces this requirement quite strictly, since it's
-pretty liberal about most other things.)
+Version must be [semver](http://semver.org)-compliant. npm assumes that you've
+read the semver page, and that you comply with it.  Here's how it deviates from
+what's on semver.org:
+
+* Versions can start with "v"
+* A numeric item separated from the main three-number version by a hyphen
+  will be interpreted as a "build" number, and will *increase* the version.
+  But, if the tag is not a number separated by a hyphen, then it's treated
+  as a pre-release tag, and is *less than* the version without a tag.
+  So, 0.1.2-7 > 0.1.2-6 > 0.1.2 > 0.1.2beta
+
+This is a little bit confusing to explain, but matches what you see in practice
+when people create tags in git like "v1.2.3" and then do "git describe" to generate
+a patch version.  (This is how node's versions are generated, and has driven this
+design.)
+
+## main
+
+The main field is a module ID that is the primary entry point to your program.
+That is, if your package is named `foo`, and a user installs it, and then does
+`require("foo")`, then your main module's exports object will be returned.
+
+This should be a module ID relative to the root of your package folder.
+
+For most modules, it makes the most sense to have a main script.
+
+## directories
+
+The "directories" member is an object hash of folders.
+
+### directories.lib
+
+The only directory that npm cares about is the "lib" directory.  This is a folder
+that will be mapped to the package name.  So, if you had a package named `foo`,
+and the package.json contains `"directories":{"lib":"./lib"}`, and there was
+a file called `./lib/bar.js`, then require("foo/bar") would include that module.
+
+This is handy if your package is a collection or library full of useful goodies.
+However, dependency paths are not corrected for modules in the lib folder, so it's
+a bit more complicated.
+
+Most of the time, delving into a package's folder is not as awesome.
+
+## scripts
+
+The "scripts" member is an object hash of script commands that are run
+at various times in the lifecycle of your package.  The key is the lifecycle
+event, and the value is the command to run at that point.
+
+See `npm help scripts` to find out more about writing package scripts.
 
 ## dependencies
-
-The Packages/1.0 spec's method for specifying dependencies is Unclean in My
-Sight. So, npm is using a very simple semver-based method.
 
 Dependencies are specified with a simple hash of package name to version
 range. The version range is EITHER a string with has one or more
@@ -157,4 +183,36 @@ So, when you install npm, it'll create a symlink from the `cli.js` script to
 `/usr/local/bin/npm-version`. Then, when you activate that version, it'll
 create a symlink from `/usr/local/bin/npm-version` to `/usr/local/bin/npm`.
 
-(props to [mikeal](http://github.com/mikeal) for the idea)
+## overlay
+
+npm responds to the `node` and `npm` env-specific package.json values, which
+you can hang on the "overlay" key.
+
+For example:
+
+    { "name" : "foo"
+    , "version" : 7
+    , "description" : "generic description"
+    , "overlay" :
+      { "node" :
+        { "name" : "bar"
+        , "description" : "description for node"
+        }
+      , "npm" :
+        { "version" : "1.0.7"
+        , "description" : "description for npm"
+        }
+      , "narwhal" :
+        { "description" : "description for narwhal" }
+      }
+    }
+
+In this case, this is what npm will treat it as:
+
+    { "name" : "bar"
+    , "version" : "1.0.7"
+    , "description" : "description for npm"
+    }
+
+This way, even if npm is not exactly the same as some other package management
+system, you can still use both, and it can be a happy planet.

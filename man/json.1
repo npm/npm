@@ -1,90 +1,86 @@
-.\" generated with Ronn/v0.4.1
-.\" http://github.com/rtomayko/ronn/
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "NPM\-JSON" "1" "May 2010" "" ""
+.TH "NPM\-JSON" "1" "June 2010" "" ""
 .
 .SH "NAME"
-\fBnpm\-json\fR \-\- Specifics of npm's package.json handling
+\fBnpm\-json\fR \- Specifics of npm\'s package\.json handling
 .
 .SH "DESCRIPTION"
-npm aims to implement the commonjs\fIPackages\fR spec. However, some
-adjustments have been made, which may eventually be unmade, but hopefully will
-be incorporated into the spec.
-.
-.SH "overlay"
-npm responds to the \fBnode\fR and \fBnpm\fR env\-specific package.json values, which
-you can hang on any of the following keys: \fB"overlay", "env", "context",
-"ctx", "vnd", "vendor"\fR.
+npm aims to implement the commonjs Packages \fIhttp://wiki\.commonjs\.org/wiki/Packages/1\.0\fR spec\. However, some adjustments have been made, which may eventually be unmade, but hopefully will be incorporated into the spec\.
 .
 .P
-For example:
+This document is all you need to know about what\'s required in your package\.json file\.
 .
-.IP "" 4
+.SH "name"
+The \fImost\fR important things in your package\.json are the name and version fields\.
 .
-.nf
-{ "name" : "foo"
-, "version" : 7
-, "description" : "generic description"
-, "overlay" :
-  { "node" :
-    { "name" : "bar"
-    , "description" : "description for node"
-    }
-  , "npm" :
-    { "version" : "1.0.7"
-    , "description" : "description for npm"
-    }
-  , "narwhal" :
-    { "description" : "description for narwhal" }
-  }
-}
+.P
+The name is what your thing is called\. Some tips:
 .
-.fi
+.IP "\(bu" 4
+Don\'t put "js" or "node" in the name\. It\'s assumed that it\'s js, since you\'re writing a package\.json file, and you can specify the engine using the "engines" field\. (See below\.)
+.
+.IP "\(bu" 4
+The name ends up being part of a URL, an argument on the command line, and a folder name\. So, don\'t use characters that are annoying in those contexts, like funny UTF things or parentheses or slashes, or else it\'ll break\.
+.
+.IP "\(bu" 4
+The name will probably be passed as an argument to require(), so it should be something short, but also reasonably descriptive\.
+.
+.IP "\(bu" 4
+You may want to check the npm registry to see if there\'s something by that name already, before you get too attached to it\. http://registry\.npmjs\.org/
 .
 .IP "" 0
-.
-.P
-In this case, this is what npm will treat it as:
-.
-.IP "" 4
-.
-.nf
-{ "name" : "bar"
-, "version" : "1.0.7"
-, "description" : "description for npm"
-}
-.
-.fi
-.
-.IP "" 0
-.
-.P
-This way, even if npm is not exactly the same as some other package management
-system, you can still use both, and it can be a happy planet.
 .
 .SH "version"
-Version must be \fIsemver\fR\-compliant. npm assumes that you've
-read the semver page, and that you comply with it. Versions packages with
-non\-semver versions will not be installed by npm. It's just too tricky if you
-have more than one way to do it, and semver works well.
+The \fImost\fR important things in your package\.json are the name and version fields\.
 .
 .P
-(This is actually mentioned in the Packages/1.0 spec, but it's worth
-mentioning that npm enforces this requirement quite strictly, since it's
-pretty liberal about most other things.)
+Version must be semver \fIhttp://semver\.org\fR\-compliant\. npm assumes that you\'ve read the semver page, and that you comply with it\. Here\'s how it deviates from what\'s on semver\.org:
+.
+.IP "\(bu" 4
+Versions can start with "v"
+.
+.IP "\(bu" 4
+A numeric item separated from the main three\-number version by a hyphen will be interpreted as a "build" number, and will \fIincrease\fR the version\. But, if the tag is not a number separated by a hyphen, then it\'s treated as a pre\-release tag, and is \fIless than\fR the version without a tag\. So, 0\.1\.2\-7 > 0\.1\.2\-6 > 0\.1\.2 > 0\.1\.2beta
+.
+.IP "" 0
+.
+.P
+This is a little bit confusing to explain, but matches what you see in practice when people create tags in git like "v1\.2\.3" and then do "git describe" to generate a patch version\. (This is how node\'s versions are generated, and has driven this design\.)
+.
+.SH "main"
+The main field is a module ID that is the primary entry point to your program\. That is, if your package is named \fBfoo\fR, and a user installs it, and then does \fBrequire("foo")\fR, then your main module\'s exports object will be returned\.
+.
+.P
+This should be a module ID relative to the root of your package folder\.
+.
+.P
+For most modules, it makes the most sense to have a main script\.
+.
+.SH "directories"
+The "directories" member is an object hash of folders\.
+.
+.SS "directories\.lib"
+The only directory that npm cares about is the "lib" directory\. This is a folder that will be mapped to the package name\. So, if you had a package named \fBfoo\fR, and the package\.json contains \fB"directories":{"lib":"\./lib"}\fR, and there was a file called \fB\./lib/bar\.js\fR, then require("foo/bar") would include that module\.
+.
+.P
+This is handy if your package is a collection or library full of useful goodies\. However, dependency paths are not corrected for modules in the lib folder, so it\'s a bit more complicated\.
+.
+.P
+Most of the time, delving into a package\'s folder is not as awesome\.
+.
+.SH "scripts"
+The "scripts" member is an object hash of script commands that are run at various times in the lifecycle of your package\. The key is the lifecycle event, and the value is the command to run at that point\.
+.
+.P
+See \fBnpm help scripts\fR to find out more about writing package scripts\.
 .
 .SH "dependencies"
-The Packages/1.0 spec's method for specifying dependencies is Unclean in My
-Sight. So, npm is using a very simple semver\-based method.
+Dependencies are specified with a simple hash of package name to version range\. The version range is EITHER a string with has one or more space\-separated descriptors\.
 .
 .P
-Dependencies are specified with a simple hash of package name to version
-range. The version range is EITHER a string with has one or more
-space\-separated descriptors.
-.
-.P
-Version range descriptors may be any of the following styles, where "version"
-is a semver compatible version identifier.
+Version range descriptors may be any of the following styles, where "version" is a semver compatible version identifier\.
 .
 .IP "\(bu" 4
 \fBversion\fR Must match \fBversion\fR exactly
@@ -111,7 +107,7 @@ is a semver compatible version identifier.
 \fB""\fR (just an empty string) Same as \fB*\fR
 .
 .IP "\(bu" 4
-\fBversion1 \- version2\fR Same as \fB>=version1 <=version2\fR.
+\fBversion1 \- version2\fR Same as \fB>=version1 <=version2\fR\.
 .
 .IP "" 0
 .
@@ -121,11 +117,12 @@ For example, these are all valid:
 .IP "" 4
 .
 .nf
+
 { "dependencies" :
-  { "foo" : "1.0.0 \- 2.9999.9999"
-  , "bar" : ">=1.0.2 <2.1.2"
-  , "baz" : ">1.0.2 <=2.3.4"
-  , "boo" : "2.0.1"
+  { "foo" : "1\.0\.0 \- 2\.9999\.9999"
+  , "bar" : ">=1\.0\.2 <2\.1\.2"
+  , "baz" : ">1\.0\.2 <=2\.3\.4"
+  , "boo" : "2\.0\.1"
   }
 }
 .
@@ -134,23 +131,23 @@ For example, these are all valid:
 .IP "" 0
 .
 .SH "link"
-You may specify a \fBlink\fR member in your package.json to have npm link
-dependencies in to a particular location inside your package dir. For example:
+You may specify a \fBlink\fR member in your package\.json to have npm link dependencies in to a particular location inside your package dir\. For example:
 .
 .IP "" 4
 .
 .nf
+
 { "dependencies" :
-  { "boo" : "2.0.1"
-  , "baz" : ">1.0.2 <=2.3.4"
-  , "foo" : "1.0.0 \- 2.9999.9999"
-  , "bar" : ">=1.0.2 <2.1.2"
+  { "boo" : "2\.0\.1"
+  , "baz" : ">1\.0\.2 <=2\.3\.4"
+  , "foo" : "1\.0\.0 \- 2\.9999\.9999"
+  , "bar" : ">=1\.0\.2 <2\.1\.2"
   }
 , "link" :
-  { "boo" : "./deps/boo"
-  , "baz" : "./lib/baz"
-  , "foo" : "./deps/foo"
-  , "bar" : "./deps/bar"
+  { "boo" : "\./deps/boo"
+  , "baz" : "\./lib/baz"
+  , "foo" : "\./deps/foo"
+  , "bar" : "\./deps/bar"
   }
 }
 .
@@ -159,28 +156,22 @@ dependencies in to a particular location inside your package dir. For example:
 .IP "" 0
 .
 .P
-This would link the dependencies into the specified locations, so that the
-package code could do \fBrequire("./deps/foo")\fR to import whichever version of \fBfoo\fR was satisfying the requirement.
+This would link the dependencies into the specified locations, so that the package code could do \fBrequire("\./deps/foo")\fR to import whichever version of \fBfoo\fR was satisfying the requirement\.
 .
 .P
-\fBWarning!\fR This is currently the \fIonly\fR way
-in which npm modifies the pristine nature of the package directory, and it may
-go away eventually. It's just that it satisfies a use case that is pretty
-tricky to do otherwise.
+\fBWarning!\fR This is currently the \fIonly\fR way in which npm modifies the pristine nature of the package directory, and it may go away eventually\. It\'s just that it satisfies a use case that is pretty tricky to do otherwise\.
 .
 .SH "engines"
-Packages/1.0 says that you can have an "engines" field with an array of engine
-names. However, it has no provision for specifying which version of the engine
-your stuff runs on.
+Packages/1\.0 says that you can have an "engines" field with an array of engine names\. However, it has no provision for specifying which version of the engine your stuff runs on\.
 .
 .P
-With npm, you can use either of the following styles to specify the version of
-node that your stuff works on:
+With npm, you can use either of the following styles to specify the version of node that your stuff works on:
 .
 .IP "" 4
 .
 .nf
-{ "engines" : [ "node >=0.1.27 <0.1.30" ] }
+
+{ "engines" : [ "node >=0\.1\.27 <0\.1\.30" ] }
 .
 .fi
 .
@@ -192,33 +183,24 @@ or:
 .IP "" 4
 .
 .nf
-{ "engines" : { "node" : ">=0.1.27 <0.1.30" } }
+
+{ "engines" : { "node" : ">=0\.1\.27 <0\.1\.30" } }
 .
 .fi
 .
 .IP "" 0
 .
 .P
-And, like with dependencies, if you don't specify the version (or if you
-specify "*" as the version), then any version of node will do.
+And, like with dependencies, if you don\'t specify the version (or if you specify "*" as the version), then any version of node will do\.
 .
 .P
-If you specify an "engines" field, then npm will require that "node" be
-somewhere on that list. If "engines" is omitted, then npm will just assume
-that it works on node.
+If you specify an "engines" field, then npm will require that "node" be somewhere on that list\. If "engines" is omitted, then npm will just assume that it works on node\.
 .
 .SH "bin"
-A lot of packages have one or more executable files that they'd like to
-install into the PATH. npm makes this pretty easy (in fact, it uses this
-feature to install the "npm" executable.)
+A lot of packages have one or more executable files that they\'d like to install into the PATH\. npm makes this pretty easy (in fact, it uses this feature to install the "npm" executable\.)
 .
 .P
-To use this, supply a \fBbin\fR field in your package.json which is a map of
-command name to local file name. On install, npm will link that file into
-place right next to wherever node is installed. (Presumably, this is in your
-PATH, and defaults to \fB/usr/local/bin\fR.) On activation, the versioned file
-will get linked to the main filename (just like how the main.js stuff works,
-but with an executable in the PATH.)
+To use this, supply a \fBbin\fR field in your package\.json which is a map of command name to local file name\. On install, npm will link that file into place right next to wherever node is installed\. (Presumably, this is in your PATH, and defaults to \fB/usr/local/bin\fR\.) On activation, the versioned file will get linked to the main filename (just like how the main\.js stuff works, but with an executable in the PATH\.)
 .
 .P
 For example, npm has this:
@@ -226,15 +208,62 @@ For example, npm has this:
 .IP "" 4
 .
 .nf
-{ "bin" : { "npm" : "./cli.js" } }
+
+{ "bin" : { "npm" : "\./cli\.js" } }
 .
 .fi
 .
 .IP "" 0
 .
 .P
-So, when you install npm, it'll create a symlink from the \fBcli.js\fR script to \fB/usr/local/bin/npm\-version\fR. Then, when you activate that version, it'll
-create a symlink from \fB/usr/local/bin/npm\-version\fR to \fB/usr/local/bin/npm\fR.
+So, when you install npm, it\'ll create a symlink from the \fBcli\.js\fR script to \fB/usr/local/bin/npm\-version\fR\. Then, when you activate that version, it\'ll create a symlink from \fB/usr/local/bin/npm\-version\fR to \fB/usr/local/bin/npm\fR\.
+.
+.SH "overlay"
+npm responds to the \fBnode\fR and \fBnpm\fR env\-specific package\.json values, which you can hang on the "overlay" key\.
 .
 .P
-(props to \fImikeal\fR for the idea)
+For example:
+.
+.IP "" 4
+.
+.nf
+
+{ "name" : "foo"
+, "version" : 7
+, "description" : "generic description"
+, "overlay" :
+  { "node" :
+    { "name" : "bar"
+    , "description" : "description for node"
+    }
+  , "npm" :
+    { "version" : "1\.0\.7"
+    , "description" : "description for npm"
+    }
+  , "narwhal" :
+    { "description" : "description for narwhal" }
+  }
+}
+.
+.fi
+.
+.IP "" 0
+.
+.P
+In this case, this is what npm will treat it as:
+.
+.IP "" 4
+.
+.nf
+
+{ "name" : "bar"
+, "version" : "1\.0\.7"
+, "description" : "description for npm"
+}
+.
+.fi
+.
+.IP "" 0
+.
+.P
+This way, even if npm is not exactly the same as some other package management system, you can still use both, and it can be a happy planet\.
