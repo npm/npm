@@ -24,6 +24,6 @@ doc: man $(docs)
 	@true
 
 man/%.1: doc/%.md
-	ronn --roff $< > $@
+	ronn --roff --pipe $< > $@
 
 .PHONY: install install-stable link doc clean uninstall
