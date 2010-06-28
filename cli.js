@@ -61,6 +61,7 @@ if (!command) { if (!printVersion) {
            + "Check 'man npm' or 'man npm-help' for more information\n\n"
            + "This is supposed to happen.  "
            )
+  process.exit(1)
 }} else npm.commands[command](arglist, errorHandler)
 
 function errorHandler (er) {
@@ -71,6 +72,7 @@ function errorHandler (er) {
     log("try running: 'npm help "+command+"'", "failure")
     log("Report this *entire* log at <http://github.com/isaacs/npm/issues>", "failure")
     log("or email it to <npm-@googlegroups.com>", "failure")
+    process.exit(1)
   } else log("ok")
 }
 
