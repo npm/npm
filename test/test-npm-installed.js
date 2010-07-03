@@ -1,0 +1,2 @@
+
+var npm = require("npm")
