@@ -44,8 +44,8 @@ main () {
 # fake functions
 npm () {
   "$NPMCLI" --binroot "$TESTDIR/bin" --root "$TESTDIR/root" "$@" \
-    # &>output.log \
-    # || fail npm "$@"
+    &>output.log \
+    || fail npm "$@"
   rm output.log
 }
 node () {
