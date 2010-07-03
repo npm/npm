@@ -172,7 +172,13 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 	Handle .npmignore
 
 * 0.1.17:
-  Bug fixing and stabilization.
+  Stabilization.
+
+* 0.1.18:
+  Change a few default configurations  
+  Add test harness  
+  Default publish, install, and link to "." if no arguments given  
+
 
 ## SEE ALSO
 
