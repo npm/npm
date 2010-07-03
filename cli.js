@@ -50,7 +50,7 @@ if (printVersion) {
   if (vindex !== -1) arglist.splice(vindex, 1)
 } else log(npm.version, "version")  
 
-process.addListener("uncaughtException", errorHandler)
+process.on("uncaughtException", errorHandler)
 
 if (!command) { if (!printVersion) {
   // npm.commands.help([arglist.join(" ")])

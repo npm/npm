@@ -90,4 +90,4 @@ Object.defineProperty(npm, "tmp",
   , enumerable:true
   })
 
-process.addListener("exit", function () { ini.save() })
+process.on("exit", function () { ini.save() })
