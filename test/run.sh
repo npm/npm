@@ -14,12 +14,25 @@ main () {
   
   node test-npm-installed.js
   
+  npm install "$TESTDIR"/packages/mjsunit.runner
+  npm install jsdom
+  npm rm jsdom 0.0.1
+  npm rm mjsunit.runner
+  
   # teardown
   npm rm npm
-  # FIXME: removing npm should take this with it.
-  rm -rf "$TESTDIR/root/.npm"
-  
-  [ $FAILURES -gt 0 ] && echo_err "FAILED: $FAILURES" || echo_err "ok"
+
+  if [ $FAILURES -eq 0 ]; then
+    # rm -rf "$ROOTDIR"
+    # rm -rf "$BINDIR"
+    rm -rf "$ROOTDIR/.npm/.cache"
+    rm -rf "$ROOTDIR/.npm/.tmp"
+    echo_err "ok"
+  else
+    rm -rf "$ROOTDIR/.npm/.cache"
+    rm -rf "$ROOTDIR/.npm/.tmp"
+    echo_err "FAILED: $FAILURES"
+  fi
   exit $FAILURES
 }
 
@@ -31,8 +44,8 @@ main () {
 # fake functions
 npm () {
   "$NPMCLI" --binroot "$TESTDIR/bin" --root "$TESTDIR/root" "$@" \
-    &>output.log \
-    || fail npm "$@"
+    # &>output.log \
+    # || fail npm "$@"
   rm output.log
 }
 node () {
@@ -62,6 +75,13 @@ done
 NPMPKG="$(dirname -- "$(dirname -- "$SELF_PATH")")"
 NPMCLI="$NPMPKG/cli.js"
 TESTDIR="$NPMPKG/test/"
+ROOTDIR="$TESTDIR/root"
+BINDIR="$TESTDIR/bin"
+
+[ -d "$ROOTDIR" ] && rm -rf -- "$ROOTDIR"
+[ -d "$BINDIR" ] && rm -rf -- "$BINDIR"
+mkdir -p -- "$ROOTDIR"
+mkdir -p -- "$BINDIR"
 
 echo_err () {
   echo "$@" >&2
