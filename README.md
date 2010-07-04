@@ -6,20 +6,15 @@ More info available via `man npm`.
 
 ## Simple Install
 
-To install npm, create a folder where you want to put the code, and then
-cd there, and do this:
+To install npm, do this:
 
-    mkdir npm
-    cd npm
-    curl -L http://github.com/isaacs/npm/tarball/master | tar xz --strip 1
-    make
+    curl http://npmjs.org/install.sh | sh
 
 If it dies with a "Permission Denied" or EACCESS error, then that probably
 means that you are running node in a shared root-owned location.  In that
-case, you'll have to use sudo, and it'll behave like a multi-user app.
+case, you'll have to use sudo.
 
-You can customize this behavior by using the `root` and `binroot` config
-options.  See npm-config(1)
+    curl http://npmjs.org/install.sh | sudo sh
 
 ## More Fancy Installing
 
@@ -56,17 +51,9 @@ Or, if that fails,
 
 Check out the [docs](http://github.com/isaacs/npm/blob/master/doc/).
 
+You can use the [npm help](http://github.com/isaacs/npm/blob/master/doc/help.md#readme)
+command to read any of them.
+
 If you're a developer, and you want to use npm to publish your program,
 you should
 [read this](http://github.com/isaacs/npm/blob/master/doc/developers.md#readme)
-
-## A note about password security
-
-In order to publish your packages, you must have your auth info
-saved into your .npmrc file.  If Cipher and Decipher are supported
-in the "crypto" module, then npm will use them.  However, as of
-node 0.1.95, these functions aren't integrated yet.
-
-You can get around this by doing:
-
-    npm install crypto@0.0.5
