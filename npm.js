@@ -1,4 +1,9 @@
 
+// kludge until this is normal.
+if (!process.EventEmitter.prototype.on) {
+  process.EventEmitter.prototype.on = process.EventEmitter.prototype.addListener
+}
+
 var npm = exports
   , set = require("./lib/utils/set")
   , get = require("./lib/utils/get")
