@@ -9,6 +9,8 @@ More info available via `man npm`.
 To install npm, create a folder where you want to put the code, and then
 cd there, and do this:
 
+    mkdir npm
+    cd npm
     curl -L http://github.com/isaacs/npm/tarball/master | tar xz --strip 1
     make
 
