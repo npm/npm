@@ -1,84 +1,67 @@
-.\" generated with Ronn/v0.4.1
-.\" http://github.com/rtomayko/ronn/
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
 .TH "NPM\-DEVELOPERS" "1" "May 2010" "" ""
 .
 .SH "NAME"
-\fBnpm\-developers\fR \-\- Developer Guide
+\fBnpm\-developers\fR \- Developer Guide
 .
 .SH "DESCRIPTION"
-So, you've decided to use npm to publish your project.
+So, you\'ve decided to use npm to publish your project\.
 .
 .P
 Fantastic!
 .
 .P
-There are a few things that you need to do above the simple steps
-that your users will do to install your program.
+There are a few things that you need to do above the simple steps that your users will do to install your program\.
 .
 .SH "About These Documents"
-These are man pages.  If you install npm, you should be able to
-then do \fBman npm\-thing\fR to get the documentation on a particular
-topic.
+These are man pages\. If you install npm, you should be able to then do \fBman npm\-thing\fR to get the documentation on a particular topic\.
 .
 .P
-Any time you see "see npm\-whatever(1)", you can do \fBman npm\-whatever\fR
-to get at the docs.
+Any time you see "see npm\-whatever(1)", you can do \fBman npm\-whatever\fR to get at the docs\.
 .
-.SH "The package.json File"
-You need to have a \fBpackage.json\fR file in the root of your project.
+.SH "The package\.json File"
+You need to have a \fBpackage\.json\fR file in the root of your project\.
 .
 .P
-See npm\-json(1) for details about what goes in that file.  At the very
-least, you need:
+See npm\-json(1) for details about what goes in that file\. At the very least, you need:
 .
 .TP
 name
-This should be a string that identifies your project.  Please do not
-use the name to specify that it runs on node, or is in JavaScript.
-You can use the "engines" field to explicitly state the versions of
-node (or whatever else) that your program requires, and it's pretty
-well assumed that it's javascript.
+This should be a string that identifies your project\. Please do not use the name to specify that it runs on node, or is in JavaScript\. You can use the "engines" field to explicitly state the versions of node (or whatever else) that your program requires, and it\'s pretty well assumed that it\'s javascript\.
 .
 .IP
-It does not necessarily need to match your github repository name.
+It does not necessarily need to match your github repository name\.
 .
 .P
-  So, \fBnode\-foo\fR and \fBbar\-js\fR are bad names.  \fBfoo\fR or \fBbar\fR are better.
+So, \fBnode\-foo\fR and \fBbar\-js\fR are bad names\. \fBfoo\fR or \fBbar\fR are better\.
 .
 .TP
 version
-A semver\-compatible version.
+A semver\-compatible version\.
 .
 .TP
 engines
-Specify the versions of node (or whatever else) that your program
-runs on.  The node API changes a lot, and there may be bugs or new
-functionality that you depend on.  Be explicit.
+Specify the versions of node (or whatever else) that your program runs on\. The node API changes a lot, and there may be bugs or new functionality that you depend on\. Be explicit\.
 .
 .TP
 author
-Take some credit.
+Take some credit\.
 .
 .TP
 scripts
-If you have a special compilation or installation script, then you
-should put it in the \fBscripts\fR hash.  See npm\-scripts(1).
+If you have a special compilation or installation script, then you should put it in the \fBscripts\fR hash\. See npm\-scripts(1)\.
 .
 .TP
 main
-If you have a single module that serves as the entry point to your
-program (like what the "foo" package gives you at require("foo")),
-then you need to specify that in the "main" field.
+If you have a single module that serves as the entry point to your program (like what the "foo" package gives you at require("foo")), then you need to specify that in the "main" field\.
 .
 .SH "Make Sure Your Package Installs and Works"
-\fBThis is important.\fR
+\fBThis is important\.\fR
 .
 .P
-If you can not install it locally, you'll have
-problems trying to publish it.  Or, worse yet, you'll be able to
-publish it, but you'll be publishing a broken or pointless package.
-So don't do that.
+If you can not install it locally, you\'ll have problems trying to publish it\. Or, worse yet, you\'ll be able to publish it, but you\'ll be publishing a broken or pointless package\. So don\'t do that\.
 .
 .P
 In the root of your package, do this:
@@ -86,53 +69,55 @@ In the root of your package, do this:
 .IP "" 4
 .
 .nf
-npm install .
+
+npm install \.
 .
 .fi
 .
 .IP "" 0
 .
 .P
-That'll show you that it's working.  If you'd rather just create a symlink
-package that points to your working directory, then do this:
+That\'ll show you that it\'s working\. If you\'d rather just create a symlink package that points to your working directory, then do this:
 .
 .IP "" 4
 .
 .nf
-npm link .
+
+npm link \.
 .
 .fi
 .
 .IP "" 0
 .
 .P
-Use \fBnpm ls @installed\fR to see if it's there.
+Use \fBnpm ls @installed\fR to see if it\'s there\.
 .
 .P
-Then go into the node\-repl, and try using require() to bring in your module's
-main and libs things.  Assuming that you have a package like this:
+Then go into the node\-repl, and try using require() to bring in your module\'s main and libs things\. Assuming that you have a package like this:
 .
 .IP "" 4
 .
 .nf
+
 node_foo/
   lib/
-    foo.js
-    bar.js
+    foo\.js
+    bar\.js
 .
 .fi
 .
 .IP "" 0
 .
 .P
-and you define your package.json with this in it:
+and you define your package\.json with this in it:
 .
 .IP "" 4
 .
 .nf
+
 { "name" : "foo"
-, "directories" : { "lib" : "./lib" }
-, "main" : "./lib/foo"
+, "directories" : { "lib" : "\./lib" }
+, "main" : "\./lib/foo"
 }
 .
 .fi
@@ -140,17 +125,15 @@ and you define your package.json with this in it:
 .IP "" 0
 .
 .P
-then you'd want to make sure that require("foo") and require("foo/bar") both
-work and bring in the appropriate modules.
+then you\'d want to make sure that require("foo") and require("foo/bar") both work and bring in the appropriate modules\.
 .
 .SH "Compile Node with OpenSSL"
-npm will stubbornly refuse to expose your password in the clear.  That
-means that you'll have to install whatever package provides openssl.h
-on your system.  When you \fB./configure\fR node, make sure that it says:
+npm will stubbornly refuse to expose your password in the clear\. That means that you\'ll have to install whatever package provides openssl\.h on your system\. When you \fB\./configure\fR node, make sure that it says:
 .
 .IP "" 4
 .
 .nf
+
 Checking for openssl                     : yes
 .
 .fi
@@ -158,24 +141,25 @@ Checking for openssl                     : yes
 .IP "" 0
 .
 .SH "Create a User Account"
-Create a user with the adduser command.  It works like this:
+Create a user with the adduser command\. It works like this:
 .
 .IP "" 4
 .
 .nf
-npm adduser bob password bob@email.com
+
+npm adduser bob password bob@email\.com
 .
 .fi
 .
 .IP "" 0
 .
 .P
-This is documented better in npm\-adduser(1).  So do this to get the
-details:
+This is documented better in npm\-adduser(1)\. So do this to get the details:
 .
 .IP "" 4
 .
 .nf
+
 man npm\-adduser
 .
 .fi
@@ -183,11 +167,12 @@ man npm\-adduser
 .IP "" 0
 .
 .SH "Publish your package"
-This part's easy.
+This part\'s easy\.
 .
 .IP "" 4
 .
 .nf
+
 npm publish /path/to/my\-package
 .
 .fi
@@ -195,28 +180,26 @@ npm publish /path/to/my\-package
 .IP "" 0
 .
 .P
-You can give publish a url to a tarball, or a filename of a tarball,
-or a path to a folder.  (Paths have to either be "." or contain a "/".)
+You can give publish a url to a tarball, or a filename of a tarball, or a path to a folder\. (Paths have to either be "\." or contain a "/"\.)
 .
-.SH "Tag your package as "stable""
-This makes it easier to install without your users having to know the
-version ahead of time.
+.SH "Tag your package as \"stable\""
+This makes it easier to install without your users having to know the version ahead of time\.
 .
 .IP "" 4
 .
 .nf
-npm tag my\-package 1.2.3 stable
+
+npm tag my\-package 1\.2\.3 stable
 .
 .fi
 .
 .IP "" 0
 .
 .P
-You can also use other tags, but "stable" and "latest" have reserved
-meanings.
+You can also use other tags, but "stable" and "latest" have reserved meanings\.
 .
 .SH "Brag about it"
-Send emails, write blogs, blab in IRC.
+Send emails, write blogs, blab in IRC\.
 .
 .P
 Tell the world how easy it is to install your program!

@@ -1,24 +1,24 @@
-.\" generated with Ronn/v0.4.1
-.\" http://github.com/rtomayko/ronn/
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
 .TH "NPM\-RESTART" "1" "May 2010" "" ""
 .
 .SH "NAME"
-\fBnpm\-restart\fR \-\- Start a package
+\fBnpm\-restart\fR \- Start a package
 .
 .SH "SYNOPSIS"
 .
 .nf
+
 npm restart <name> [<version>]
 .
 .fi
 .
 .SH "DESCRIPTION"
-This runs a package's "stop" script, if one was provided, and then
-the "start" script.
+This runs a package\'s "stop" script, if one was provided, and then the "start" script\.
 .
 .P
-If no version is specified, then it restarts the "active" version.
+If no version is specified, then it restarts the "active" version\.
 .
 .P
 This is identical to doing:
@@ -26,6 +26,7 @@ This is identical to doing:
 .IP "" 4
 .
 .nf
+
 npm stop <name>
 npm start <name>
 .
@@ -42,3 +43,4 @@ npm\-start(1)
 npm\-stop
 .
 .IP "" 0
+

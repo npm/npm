@@ -1,14 +1,15 @@
-.\" generated with Ronn/v0.4.1
-.\" http://github.com/rtomayko/ronn/
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
 .TH "NPM\-CONFIG" "1" "May 2010" "" ""
 .
 .SH "NAME"
-\fBnpm\-config\fR \-\- Manage the npm configuration file
+\fBnpm\-config\fR \- Manage the npm configuration file
 .
 .SH "SYNOPSIS"
 .
 .nf
+
 npm config set <key> <value>
 npm config get <key>
 npm config delete <key>
@@ -17,14 +18,10 @@ npm config list
 .fi
 .
 .SH "DESCRIPTION"
-The config command is a way to interact with the \fB.npmrc\fR file. This file is a
-JSON encoded list of values that npm is concerned with. The first time you run
-npm, it will create a conf file filled with default values.
+The config command is a way to interact with the \fB\.npmrc\fR file\. This file is a JSON encoded list of values that npm is concerned with\. The first time you run npm, it will create a conf file filled with default values\.
 .
 .P
-On exit, the current state of the config is always saved, so that any changes
-will be recorded. You may safely modify the file (as long as it's still
-parseable JSON), but it is safer to use the npm config commands.
+On exit, the current state of the config is always saved, so that any changes will be recorded\. You may safely modify the file (as long as it\'s still parseable JSON), but it is safer to use the npm config commands\.
 .
 .SH "Sub\-commands"
 Config supports the following sub\-commands:
@@ -32,57 +29,57 @@ Config supports the following sub\-commands:
 .SS "set"
 .
 .nf
+
 npm config set key value
 .
 .fi
 .
 .P
-Sets the config key to the value.
+Sets the config key to the value\.
 .
 .SS "get"
 .
 .nf
+
 npm config get key
 .
 .fi
 .
 .P
-Echo the config value to stdout. (NOTE: All the other npm logging is done to
-stderr, so pipes should work properly, and you can do \fBnpm get key 2>/dev/null\fR
-to print out JUST the config value.)
+Echo the config value to stdout\. (NOTE: All the other npm logging is done to stderr, so pipes should work properly, and you can do \fBnpm get key 2>/dev/null\fR to print out JUST the config value\.)
 .
 .SS "list"
 .
 .nf
+
 npm config list
 .
 .fi
 .
 .P
-Show all the config settings.
+Show all the config settings\.
 .
 .P
-\fBFIXME\fR: Prints to stderr, but should really be stdout, since the log is what
-you're after.
+\fBFIXME\fR: Prints to stderr, but should really be stdout, since the log is what you\'re after\.
 .
 .SS "delete"
 .
 .nf
+
 npm config delete key
 .
 .fi
 .
 .P
-Deletes the key from the configuration file.
+Deletes the key from the configuration file\.
 .
 .SH "Config Settings"
-npm supports a very basic argument parser.  For any of the settings
-in npm\-config(1), you can set them explicitly for a single command by
-doing:
+npm supports a very basic argument parser\. For any of the settings in npm\-config(1), you can set them explicitly for a single command by doing:
 .
 .IP "" 4
 .
 .nf
+
 npm \-\-key val <command>
 .
 .fi
@@ -90,36 +87,34 @@ npm \-\-key val <command>
 .IP "" 0
 .
 .P
-Configurations defined on the command line are not saved to the .npmrc file.
+Configurations defined on the command line are not saved to the \.npmrc file\.
 .
 .SS "auto\-activate"
 Default: true
 .
 .P
-Automatically activate a package after installation, if there is not an active
-version already.  Set to "always" to always activate when installing.
+Automatically activate a package after installation, if there is not an active version already\. Set to "always" to always activate when installing\.
 .
 .SS "root"
-Default: ~/.node_libraries in single\-user mode, or \fB$INSTALL_PREFIX/lib/node\fR
-in sudo\-mode.
+Default: ~/\.node_libraries in single\-user mode, or \fB$INSTALL_PREFIX/lib/node\fR in sudo\-mode\.
 .
 .P
-The root folder where packages are installed and npm keeps its data.
+The root folder where packages are installed and npm keeps its data\.
 .
 .SS "binroot"
 Default: \fB$INSTALL_PREFIX/bin\fR
 .
 .P
-The folder where executable programs are installed.
+The folder where executable programs are installed\.
 .
 .SS "registry"
-Default: https://registry.npmjs.org/
+Default: https://registry\.npmjs\.org/
 .
 .P
-The base URL of the npm package registry.
+The base URL of the npm package registry\.
 .
 .SS "auth"
-A base\-64 encoded "user:pass" pair.  This is created by npm\-adduser(1).
+A base\-64 encoded "user:pass" pair\. This is created by npm\-adduser(1)\.
 .
 .P
 If your config file is ever corrupted, you can set this manually by doing:
@@ -127,30 +122,26 @@ If your config file is ever corrupted, you can set this manually by doing:
 .IP "" 4
 .
 .nf
+
 npm config set auth $(echo \-n "my\-user\-name:my\-password" | base64)
     npm config set username my\-user\-name
-    npm config set email me@email.com
+    npm config set email me@email\.com
 .
 .fi
 .
 .IP "" 0
 .
 .P
-\fBNOTE\fR: This is not encoded in any kind of security sense. It's just base\-64
-encoded strictly so that it can be sent along the wire with HTTP Basic
-authentication.
+\fBNOTE\fR: This is not encoded in any kind of security sense\. It\'s just base\-64 encoded strictly so that it can be sent along the wire with HTTP Basic authentication\.
 .
 .SS "authCrypt"
-If crypto.Cipher is available, and you have some private keys in \fB$HOME/.ssh\fR,
-then npm will encrypt your "auth" config before saving to the .npmrc file,
-and will decrypt the "authCrypt" config when it reads the .npmrc file.
+If crypto\.Cipher is available, and you have some private keys in \fB$HOME/\.ssh\fR, then npm will encrypt your "auth" config before saving to the \.npmrc file, and will decrypt the "authCrypt" config when it reads the \.npmrc file\.
 .
 .SS "tag"
 Default: stable
 .
 .P
-If you ask npm to install a package and don't tell it a specific version, then
-it will install the specified tag.
+If you ask npm to install a package and don\'t tell it a specific version, then it will install the specified tag\.
 .
 .P
-Note: this has no effect on the npm\-tag(1) command.
+Note: this has no effect on the npm\-tag(1) command\.
