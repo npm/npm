@@ -10,7 +10,6 @@ To install npm, create a folder where you want to put the code, and then
 cd there, and do this:
 
     curl -L http://github.com/isaacs/npm/tarball/master | tar xz --strip 1
-		cd npm
     make
 
 If it dies with a "Permission Denied" or EACCESS error, then that probably
