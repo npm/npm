@@ -1,14 +1,15 @@
-.\" generated with Ronn/v0.4.1
-.\" http://github.com/rtomayko/ronn/
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
 .TH "NPM\-INSTALL" "1" "May 2010" "" ""
 .
 .SH "NAME"
-\fBnpm\-install\fR \-\- install a package
+\fBnpm\-install\fR \- install a package
 .
 .SH "SYNOPSIS"
 .
 .nf
+
 npm install <tarball file>
 npm install <tarball url>
 npm install <folder>
@@ -20,26 +21,23 @@ npm install <pkg>@<version range>
 .fi
 .
 .SH "DESCRIPTION"
-This command installs a package, and any packages that it depends on.  It
-resolves circular dependencies by talking to the npm registry.
+This command installs a package, and any packages that it depends on\. It resolves circular dependencies by talking to the npm registry\.
 .
 .TP
 npm install \fB<tarball file>\fR
-Install a package that is sitting on the filesystem.  Note: if you just want
-to link a dev directory into your npm root, you can do this more easily by
-using \fBnpm link\fR.
+Install a package that is sitting on the filesystem\. Note: if you just want to link a dev directory into your npm root, you can do this more easily by using \fBnpm link\fR\.
 .
 .IP
-In order to distinguish between this and remote installs, the argument
-must either be "." or contain a "/" in it.
+In order to distinguish between this and remote installs, the argument must either be "\." or contain a "/" in it\.
 .
 .P
-  Example:
+Example:
 .
 .IP "" 4
 .
 .nf
-  npm install ./package.tgz
+
+  npm install \./package\.tgz
 .
 .fi
 .
@@ -47,84 +45,79 @@ must either be "." or contain a "/" in it.
 .
 .TP
 npm install \fB<tarball url>\fR
-Fetch the tarball url, and then install it.  In order to distinguish between
-this and other options, the argument must start with "http://" or "https://"
+Fetch the tarball url, and then install it\. In order to distinguish between this and other options, the argument must start with "http://" or "https://"
 .
 .IP
 Example:
 .
 .IP
-  npm install http://github.com/waveto/node\-crypto/tarball/v0.0.5
+npm install http://github\.com/waveto/node\-crypto/tarball/v0\.0\.5
 .
 .TP
 npm install \fB<pkg>\fR
-Do a \fB<pkg>@<tag>\fR install, where \fB<tag>\fR is the "tag" config from either your
-.npmrc file, or the \-\-tag argument on the command line.
+Do a \fB<pkg>@<tag>\fR install, where \fB<tag>\fR is the "tag" config from either your \.npmrc file, or the \-\-tag argument on the command line\.
 .
 .IP
 Example:
 .
 .IP
-  npm install sax
+npm install sax
 .
 .TP
 npm install \fB<pkg>@<tag>\fR
-Install the version of the package that is referenced by the specified tag.
-If the tag does not exist in the registry data for that package, then this
-will fail.
+Install the version of the package that is referenced by the specified tag\. If the tag does not exist in the registry data for that package, then this will fail\.
 .
 .IP
 Example:
 .
 .IP
-  npm install sax@stable
+npm install sax@stable
 .
 .TP
 npm install \fB<pkg>@<version>\fR
-Install the specified version of the package.  This will fail if the version
-has not been published to the registry.
+Install the specified version of the package\. This will fail if the version has not been published to the registry\.
 .
 .IP
 Example:
 .
 .IP
-  npm install sax@0.1.1
+npm install sax@0\.1\.1
 .
 .TP
 npm install \fB<pkg>@<version range>\fR
-Install a version of the package matching the specified version range.  This
-will follow the same rules for resolving dependencies described in \fBnpm help json\fR.
+Install a version of the package matching the specified version range\. This will follow the same rules for resolving dependencies described in \fBnpm help json\fR\.
 .
 .IP
-Note that most version ranges must be put in quotes so that your shell will
-treat it as a single argument.
+Note that most version ranges must be put in quotes so that your shell will treat it as a single argument\.
 .
 .P
-  Example:
+Example:
 .
 .IP "" 4
 .
 .nf
-  npm install sax@">=0.1.0 <0.2.0"
+
+  npm install sax@">=0\.1\.0 <0\.2\.0"
 .
 .fi
 .
 .IP "" 0
 .
 .P
-You may combine multiple arguments, and even multiple types of arguments.  For example:
+You may combine multiple arguments, and even multiple types of arguments\. For example:
 .
 .IP "" 4
 .
 .nf
-npm install sax@">=0.1.0 <0.2.0" bench supervisor
+
+npm install sax@">=0\.1\.0 <0\.2\.0" bench supervisor
 .
 .fi
 .
 .IP "" 0
 .
 .P
-The \fB\-\-tag\fR argument will apply to all of the specified install targets.
+The \fB\-\-tag\fR argument will apply to all of the specified install targets\.
 .
 .SH "SEE ALSO"
 .
@@ -147,3 +140,4 @@ npm\-folders(1)
 npm\-tag(1)
 .
 .IP "" 0
+

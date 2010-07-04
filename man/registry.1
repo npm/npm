@@ -1,33 +1,27 @@
-.\" generated with Ronn/v0.4.1
-.\" http://github.com/rtomayko/ronn/
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
 .TH "NPM\-REGISTRY" "1" "May 2010" "" ""
 .
 .SH "NAME"
-\fBnpm\-registry\fR \-\- Notes on the JavaScript package registry
+\fBnpm\-registry\fR \- Notes on the JavaScript package registry
 .
 .SH "MARKED FOR REMOVAL"
-This doc file will be removed once its contents have been implemented and its
-data moved to the relevant command documentation.
+This doc file will be removed once its contents have been implemented and its data moved to the relevant command documentation\.
 .
 .SH "npm registry"
-Notes on npm's use of the \fIjs\-registry\fR.
+Notes on npm\'s use of the js\-registry \fIhttp://github\.com/mikeal/js\-registry\fR\.
 .
 .SH "Changed commands"
 .
 .SS "list"
-npm list will now also show packages that are in the registry for
-installation, along with info about their tags and versions, etc. To limit to
-a particular tag, preface it with @, for instance: \fBnpm list foo @stable\fR to
-show the stable version of foo. \fBnpm list @stable\fR would so all packages with
-a tag of \fBstable\fR.
+npm list will now also show packages that are in the registry for installation, along with info about their tags and versions, etc\. To limit to a particular tag, preface it with @, for instance: \fBnpm list foo @stable\fR to show the stable version of foo\. \fBnpm list @stable\fR would so all packages with a tag of \fBstable\fR\.
 .
 .P
-The current behavior will be available via \fBnpm list @installed\fR.
+The current behavior will be available via \fBnpm list @installed\fR\.
 .
 .SH "Configuration"
-A registry base URL must be specified, either with the \fB\-\-registry <url>\fR in
-the command line, or by setting a registry url in the .npmrc file.
+A registry base URL must be specified, either with the \fB\-\-registry <url>\fR in the command line, or by setting a registry url in the \.npmrc file\.
 .
 .P
-Also, need something to keep track of the user who's logged in? That's dicey.
+Also, need something to keep track of the user who\'s logged in? That\'s dicey\.

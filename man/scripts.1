@@ -1,14 +1,13 @@
-.\" generated with Ronn/v0.4.1
-.\" http://github.com/rtomayko/ronn/
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "NPM\-SCRIPTS" "1" "April 2010" "" ""
+.TH "NPM\-SCRIPTS" "1" "May 2010" "" ""
 .
 .SH "NAME"
-\fBnpm\-scripts\fR \-\- How npm handles the "scripts" field
+\fBnpm\-scripts\fR \- How npm handles the "scripts" field
 .
 .SH "DESCRIPTION"
-npm supports the "scripts" member of the package.json script, for the
-following scripts:
+npm supports the "scripts" member of the package\.json script, for the following scripts:
 .
 .TP
 preinstall
@@ -16,85 +15,80 @@ Run BEFORE the package is installed
 .
 .TP
 install
-Run AFTER the package is installed.
+Run AFTER the package is installed\.
 .
 .TP
 preactivate
-Run BEFORE the package is activated.
+Run BEFORE the package is activated\.
 .
 .TP
 activate
-Run AFTER the package has been activated.
+Run AFTER the package has been activated\.
 .
 .TP
 deactivate
-Run BEFORE the package is deactivated.
+Run BEFORE the package is deactivated\.
 .
 .TP
 postdeactivate
-Run AFTER the package is deactivated.
+Run AFTER the package is deactivated\.
 .
 .TP
 uninstall
-Run BEFORE the package is uninstalled.
+Run BEFORE the package is uninstalled\.
 .
 .TP
 postuninstall
-Run AFTER the package is uninstalled.
+Run AFTER the package is uninstalled\.
 .
 .SH "Package Lifecycle Env Vars"
-Package scripts are run in an environment where the package.json fields have
-been tacked onto the \fBnpm_package_\fR prefix. So, for instance, if you had \fB{"name":"foo", "version":"1.2.5"}\fR in your package.json file, then in your
-various lifecycle scripts, this would be true:
+Package scripts are run in an environment where the package\.json fields have been tacked onto the \fBnpm_package_\fR prefix\. So, for instance, if you had \fB{"name":"foo", "version":"1\.2\.5"}\fR in your package\.json file, then in your various lifecycle scripts, this would be true:
 .
 .IP "" 4
 .
 .nf
-process.env.npm_package_name === "foo"
-process.env.npm_package_version === "1.2.5"
+
+process\.env\.npm_package_name === "foo"
+process\.env\.npm_package_version === "1\.2\.5"
 .
 .fi
 .
 .IP "" 0
 .
 .P
-Objects are flattened following this format, so if you had\fB{"scripts":{"install":"foo.js"}}\fR in your package.json, then you'd see this
-in the script:
+Objects are flattened following this format, so if you had \fB{"scripts":{"install":"foo\.js"}}\fR in your package\.json, then you\'d see this in the script:
 .
 .IP "" 4
 .
 .nf
-process.env.npm_package_scripts_install = "foo.js"
+
+process\.env\.npm_package_scripts_install = "foo\.js"
 .
 .fi
 .
 .IP "" 0
 .
 .P
-Last but not least, the \fBnpm_lifecycle_event\fR environment variable is set to
-whichever stage of the cycle is being executed. So, you could have a single
-script used for different parts of the process which switches based on what's
-currently happening.
+Last but not least, the \fBnpm_lifecycle_event\fR environment variable is set to whichever stage of the cycle is being executed\. So, you could have a single script used for different parts of the process which switches based on what\'s currently happening\.
 .
 .P
-If the script exits with a code other than 0, then this will abort the
-process.
+If the script exits with a code other than 0, then this will abort the process\.
 .
 .P
-Note that these script files don't have to be nodejs or even javascript
-programs. They just have to be some kind of executable file.
+Note that these script files don\'t have to be nodejs or even javascript programs\. They just have to be some kind of executable file\.
 .
 .P
-For example, if your package.json contains this:
+For example, if your package\.json contains this:
 .
 .IP "" 4
 .
 .nf
+
 { "scripts" :
-  { "install" : "scripts/install.js"
-  , "postinstall" : "scripts/install.js"
-  , "activate" : "scripts/install.js"
-  , "uninstall" : "scripts/uninstall.js"
+  { "install" : "scripts/install\.js"
+  , "postinstall" : "scripts/install\.js"
+  , "activate" : "scripts/install\.js"
+  , "uninstall" : "scripts/uninstall\.js"
   }
 }
 .
@@ -103,19 +97,17 @@ For example, if your package.json contains this:
 .IP "" 0
 .
 .P
-then the \fBscripts/install.js\fR will be called for the install, post\-install,
-and activate stages of the lifecycle, and the \fBscripts/uninstall.js\fR would be
-called when the package is uninstalled.  Since \fBscripts/install.js\fR is running
-for three different phases, it would be wise in this case to look at the \fBnpm_lifecycle_event\fR environment variable.
+then the \fBscripts/install\.js\fR will be called for the install, post\-install, and activate stages of the lifecycle, and the \fBscripts/uninstall\.js\fR would be called when the package is uninstalled\. Since \fBscripts/install\.js\fR is running for three different phases, it would be wise in this case to look at the \fBnpm_lifecycle_event\fR environment variable\.
 .
 .P
-If you want to run a make command, you can do so.  This works just fine:
+If you want to run a make command, you can do so\. This works just fine:
 .
 .IP "" 4
 .
 .nf
+
 { "scripts" :
-  { "preinstall" : "./configure"
+  { "preinstall" : "\./configure"
   , "install" : "make"
   , "test" : "make test"
   }
@@ -126,6 +118,4 @@ If you want to run a make command, you can do so.  This works just fine:
 .IP "" 0
 .
 .P
-However, the script line is not simply a command line, so \fBmake && make install\fR
-would try to execute the \fBmake\fR command with the arguments \fB&&\fR, \fBmake\fR, and \fBinstall\fR.  If you have a lot of stuff to run in a command, put it in a script
-file.
+However, the script line is not simply a command line, so \fBmake && make install\fR would try to execute the \fBmake\fR command with the arguments \fB&&\fR, \fBmake\fR, and \fBinstall\fR\. If you have a lot of stuff to run in a command, put it in a script file\.
