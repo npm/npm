@@ -27,6 +27,7 @@
 , "scripts" :
   { "activate" : "node scripts/install-docs.js"
   , "deactivate" : "node scripts/install-docs.js"
+  , "test" : "make test"
   }
 , "licenses" :
   [ { "type" : "MIT"
