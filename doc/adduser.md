@@ -19,7 +19,7 @@ record from the registry so that you can re-add it.
 If you break your `.npmrc` file, but you remember your password, you
 can put your user auth back by using the `base64` program like so:
 
-    npm config set auth $( echo user:pass | base64 )
+    npm config set auth $( echo -n user:pass | base64 )
 
 Install base64 using whichever method you normally use to put programs on
 your computer.  (apt-get, homebrew, macports, yum, or just download the
