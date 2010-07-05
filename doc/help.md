@@ -5,16 +5,38 @@ npm-help(1) -- Get help about npm commands
 
     npm help <section>
 
-Where `<section>` is one of:  
-`activate`, `adduser`, `build`, `config`, `deactivate`, `folders`, `help`
-(this page), `install`, `json`, `link` (or `ln`), `list` (or `ls`), `npm`,
-`publish`, `registry`, `scripts`, `tag`, `uninstall` (or `rm`),
-`developers`, `coding-style`
+Where `<section>` is one of:
+activate
+adduser
+build
+cache
+coding-style
+config
+deactivate
+developers
+folders
+help
+install
+json
+link
+list
+ln
+ls
+npm
+publish
+registry
+restart
+rm
+scripts
+start
+stop
+tag
+test
+uninstall
+unpublish
 
-Note that you can get the exact same help content by doing:
-
-    man npm-<section>
 
 ## Todo
 
-It'd be nice if this page was automatically generated.
+It'd be nice if this page was automatically generated so that it stays
+up to date better.
