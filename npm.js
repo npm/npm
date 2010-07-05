@@ -1,4 +1,3 @@
-
 // kludge until this is normal.
 if (!process.EventEmitter.prototype.on) {
   process.EventEmitter.prototype.on = process.EventEmitter.prototype.addListener
@@ -13,6 +12,7 @@ var npm = exports
   , path = require("path")
 
 npm.commands = {}
+npm.SHOULD_EXIT = true
 
 try {
   var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))+"")
@@ -21,7 +21,6 @@ try {
   log(ex, "error reading version")
   npm.version = ex
 }
-
 
 ; [ "install"
   , "activate"
