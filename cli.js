@@ -51,6 +51,9 @@ if (printVersion) {
 } else log(npm.version, "version")  
 
 process.on("uncaughtException", errorHandler)
+process.on("exit", function () { if (!itWorked) log("not ok") })
+
+var itWorked = false
 
 if (!command) { if (!printVersion) {
   // npm.commands.help([arglist.join(" ")])
@@ -65,14 +68,18 @@ if (!command) { if (!printVersion) {
 }} else npm.commands[command](arglist, errorHandler)
 
 function errorHandler (er) {
-  if (er) {
-    sys.error("")
-    log(er, "!")
-    sys.error("")
-    log("try running: 'npm help "+command+"'", "failure")
-    log("Report this *entire* log at <http://github.com/isaacs/npm/issues>", "failure")
-    log("or email it to <npm-@googlegroups.com>", "failure")
-    process.exit(1)
-  } else log("ok")
+  if (!er) {
+    itWorked = true
+    log("ok")
+    if (npm.SHOULD_EXIT) process.exit()
+    return
+  }
+  sys.error("")
+  log(er, "!")
+  sys.error("")
+  log("try running: 'npm help "+command+"'", "failure")
+  log("Report this *entire* log at <http://github.com/isaacs/npm/issues>", "failure")
+  log("or email it to <npm-@googlegroups.com>", "failure")
+  process.exit(1)
 }
 
