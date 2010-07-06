@@ -2,6 +2,9 @@
 if (!process.EventEmitter.prototype.on) {
   process.EventEmitter.prototype.on = process.EventEmitter.prototype.addListener
 }
+if (!process.execPath) {
+  process.execPath = path.join(process.installPrefix, "bin", "node")
+}
 
 var npm = exports
   , set = require("./lib/utils/set")
