@@ -13,7 +13,7 @@ This functionality does not yet exist\.
 .
 .nf
 
-npm site start
+npm site [ start | stop ]
 .
 .fi
 .
@@ -32,8 +32,8 @@ admin
 A comma\-delimited list of admin users\. All of these must already be in the local adduser config\. If there is no admin, then the site will not allow remote management\. All admin usernames must already be in the userfile, and a userfile must be specified\.
 .
 .TP
-port
-Ports to listen on for WS requests, in the form "http\-port,https\-port"\. Defaults to "15080,15443"\.
+listen
+Ports to listen on for WS requests\. The first number is for http, the second for https, and the third for secure TCP\. Set any to "\-", or omit, to use the default\. Defaults to "80,443,15443"
 .
 .TP
 registry
@@ -45,29 +45,19 @@ isaacs: Make sure that this does loop\-detection, so that a "ring" of registries
 .P
 The content for the site is stored in the npm cache directory, which is inside the folder used for the \fBroot\fR setting, at \fB{root}/\.npm/\.cache\fR\. It is organized in a simple hierarchical folder structure corresponding to the web service URLs that npm uses\.
 .
-.SH "POST /\-/action"
-When an admin is specified, starting the npm site also enables the special \fBPOST /\-/action\fR command for doing remote management\. The body of the POST request is an object with the following members:
+.SH "TCP Server"
+The TCP server starts up to support the \fBnpm remote\fR command, if there is a valid admin userlist\.
 .
-.TP
-argv
-Array of positional command\-line arguments\.
+.SH "NOTE"
+This also is what happens when you do \fBnpm start npm\fR\.
 .
-.TP
-config
-Hash of name\-value pairs to override the default configuration\.
+.SH "SEE ALSO"
 .
-.P
-The npm site starts up with the default configuration set to the resolved configuration at the time of startup\. For instance, if you do:
+.IP "\(bu" 4
+npm\-remote(1)
 .
-.IP "" 4
-.
-.nf
-
-npm site \-\-foo bar
-.
-.fi
+.IP "\(bu" 4
+npm\-config(1)
 .
 .IP "" 0
-.
-.P
-then the "foo" config will be set to "bar" for the purposes of commands specified via \fBPOST /\-/action\fR\.
+
