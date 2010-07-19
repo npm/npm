@@ -25,11 +25,11 @@ try {
   npm.version = ex
 }
 
+var commandCache = {}
 ; [ "install"
   , "activate"
   , "deactivate"
   , "uninstall"
-  , "ls"
   , "build"
   , "link"
   , "publish"
@@ -43,10 +43,18 @@ try {
   , "start"
   , "restart"
   , "unpublish"
-  ].forEach(function (c) { npm.commands[c] = require("./lib/"+c) })
-
-npm.commands.list = npm.commands.ls
-npm.commands.rm = npm.commands.uninstall
+  , "list"
+  , "ls"
+  , "rm"
+  ].forEach(function (c) {
+    Object.defineProperty(npm.commands, c, { get : function () {
+      c = c === "list" ? "ls"
+        : c === "rm" ? "uninstall"
+        : c
+      if (c in commandCache) return commandCache[c]
+      return commandCache[c] = require("./lib/"+c)
+    }})
+  })
 
 // Local store for package data, so it won't have to be fetched/read more than
 // once in a single pass.  TODO: cache this to disk somewhere when we're using
