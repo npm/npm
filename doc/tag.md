@@ -3,7 +3,7 @@ npm-tag(1) -- Tag a published version
 
 ## SYNOPSIS
 
-    npm tag packagename 1.2.3 tagname
+    npm tag packagename@1.2.3 tagname
 
 ## DESCRIPTION
 
