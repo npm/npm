@@ -16,7 +16,7 @@ main () {
 
   npm install "$TESTDIR"/packages/mjsunit.runner
   npm install jsdom
-  npm rm jsdom 0.0.1
+  npm rm jsdom@0.0.1
   npm rm mjsunit.runner
 
   # teardown
