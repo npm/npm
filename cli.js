@@ -24,7 +24,7 @@ var fs = require("fs")
 log(sys.inspect(argv), "cli")
 
 while (arg = argv.shift()) {
-  if (!command && (arg in npm.commands)) {
+  if (!command && (npm.commands.hasOwnProperty(arg))) {
     if (key) {
       conf[key] = true
       key = null
