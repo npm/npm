@@ -82,7 +82,10 @@ npm.config =
 // shorthand a few of these, because they're common
 Object.defineProperty(npm, "root",
   { get: function () { return npm.config.get("root") }
-  , set: function (newRoot) { npm.config.set("root", newRoot) }
+  , set: function (newRoot) {
+      TEMPFOLDER = npm.temp
+      npm.config.set("root", newRoot)
+    }
   })
 Object.defineProperty(npm, "dir",
   { get: function () { return path.join(npm.root, ".npm") }
@@ -93,8 +96,22 @@ Object.defineProperty(npm, "cache",
   , enumerable:true
   })
 Object.defineProperty(npm, "tmp",
-  { get: function () { return path.join(npm.root, ".npm", ".tmp") }
+  { get: function () {
+      log(path.join(npm.root, ".npm", ".tmp"), "temp folder")
+      return path.join(npm.root, ".npm", ".tmp") }
   , enumerable:true
   })
 
-process.on("exit", function () { ini.save() })
+var TEMPFOLDER = npm.tmp
+process.on("exit", function () {
+  ini.save()
+  try {
+    var files = fs.readdirSync(TEMPFOLDER)
+  } catch (er) {
+    return log(er, "Couldn't clean up tmp folder")
+  }
+  files.forEach(function (f) {
+    try { fs.unlinkSync(TEMPFOLDER + "/" +f) }
+    catch (er) { log(er, "Couldn't remove "+TEMPFOLDER+"/"+f) }
+  })
+})
