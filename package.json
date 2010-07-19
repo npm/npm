@@ -20,7 +20,7 @@
   , "web" : "http://github.com/isaacs/npm/issues"
   }
 , "os" : [ "linux", "darwin", "freebsd" ]
-, "directories" : { "lib" : "./lib/" }
+, "directories" : { "doc" : "./doc", "man" : "./man" }
 , "main" : "./npm"
 , "bin" : { "npm" : "./cli.js" }
 , "engines" : { "node" : ">=0.1.99" }
