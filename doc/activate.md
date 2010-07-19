@@ -3,7 +3,7 @@ npm activate(1) -- Activate an installed version of a package
 
 ## SYNOPSIS
 
-    npm activate <name> <version>
+    npm activate <name>@<version> [<name>@<version> ...]
 
 ## DESCRIPTION
 
