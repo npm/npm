@@ -179,6 +179,10 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
   Add test harness  
   Default publish, install, and link to "." if no arguments given  
 
+* 0.1.19 - 0.1.20:
+  Create a bunch of bugs  
+  Fix a bunch of bugs
+
 
 ## SEE ALSO
 
