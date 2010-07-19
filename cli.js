@@ -48,7 +48,7 @@ var vindex = arglist.indexOf("-v")
 if (printVersion) {
   sys.puts(npm.version)
   if (vindex !== -1) arglist.splice(vindex, 1)
-} else log(npm.version, "version")  
+} else log(npm.version, "version")
 
 process.on("uncaughtException", errorHandler)
 process.on("exit", function () { if (!itWorked) log("not ok") })
