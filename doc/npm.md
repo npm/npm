@@ -181,7 +181,8 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 
 * 0.1.19 - 0.1.20:
   Create a bunch of bugs  
-  Fix a bunch of bugs
+  Fix a bunch of bugs  
+  Some minor speed improvements
 
 
 ## SEE ALSO
