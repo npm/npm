@@ -55,17 +55,19 @@ process.on("exit", function () { if (!itWorked) log("not ok") })
 
 var itWorked = false
 
-if (!command) { if (!printVersion) {
-  // npm.commands.help([arglist.join(" ")])
-  if (arglist.length) log(arglist, "unknown command")
-  sys.error( "What do you want me to do?\n\n"
-           + "Usage:\n"
-           + "  npm [flags] <command> [args]\n"
-           + "Check 'man npm' or 'man npm-help' for more information\n\n"
-           + "This is supposed to happen.  "
-           )
-  process.exit(1)
-}} else npm.commands[command](arglist, errorHandler)
+if (!command) {
+  if (!printVersion) {
+    // npm.commands.help([arglist.join(" ")])
+    if (arglist.length) log(arglist, "unknown command")
+    sys.error( "What do you want me to do?\n\n"
+             + "Usage:\n"
+             + "  npm [flags] <command> [args]\n"
+             + "Check 'man npm' or 'man npm-help' for more information\n\n"
+             + "This is supposed to happen.  "
+             )
+    process.exit(1)
+  } else itWorked = true
+} else npm.commands[command](arglist, errorHandler)
 
 function errorHandler (er) {
   if (!er) {
