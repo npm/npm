@@ -104,9 +104,7 @@ Object.defineProperty(npm, "cache",
   , enumerable:true
   })
 Object.defineProperty(npm, "tmp",
-  { get: function () {
-      log(path.join(npm.root, ".npm", ".tmp"), "temp folder")
-      return path.join(npm.root, ".npm", ".tmp") }
+  { get: function () { return path.join(npm.root, ".npm", ".tmp") }
   , enumerable:true
   })
 
