@@ -87,7 +87,7 @@ See `npm help scripts` to find out more about writing package scripts.
 
 Dependencies are specified with a simple hash of package name to version
 range. The version range is EITHER a string with has one or more
-space-separated descriptors.
+space-separated descriptors, OR a range like "fromVersion - toVersion"
 
 Version range descriptors may be any of the following styles, where "version"
 is a semver compatible version identifier.
