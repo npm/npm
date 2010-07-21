@@ -8,17 +8,17 @@ following scripts:
 
 * preinstall:
   Run BEFORE the package is installed
-* install:
+* install, postinstall:
   Run AFTER the package is installed.
 * preactivate:
   Run BEFORE the package is activated.
-* activate:
+* activate, postactivate:
   Run AFTER the package has been activated.
-* deactivate:
+* predeactivate, deactivate:
   Run BEFORE the package is deactivated.
 * postdeactivate:
   Run AFTER the package is deactivated.
-* uninstall:
+* preuninstall, uninstall:
   Run BEFORE the package is uninstalled.
 * postuninstall:
   Run AFTER the package is uninstalled.
@@ -75,7 +75,4 @@ If you want to run a make command, you can do so.  This works just fine:
       }
     }
 
-However, the script line is not simply a command line, so `make && make install`
-would try to execute the `make` command with the arguments `&&`, `make`, and
-`install`.  If you have a lot of stuff to run in a command, put it in a script
-file.
+Scripts are run by passing the line as a script argument to `sh`.
