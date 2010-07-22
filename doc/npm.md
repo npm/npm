@@ -9,30 +9,18 @@ npm(1) -- node package manager
 
 npm is a little package manager for the Node javascript library.
 
-See npm-help(1) for more details about specific commands.
+Run `npm help` for help.  That's probably what you meant to do.
 
-npm supports a very basic argument parser.  For any of the settings
-in npm-config(1), you can set them explicitly for a single command by 
-doing:
+## STATUS: Useful Beta
 
-    npm --key val <command>
-
-If you are a package maintainer, please investigate the documentation at
-npm-json(1), npm-publish(1), and npm-tag(1) sections first.  See
-npm-folders(1) section to see how you can leverage npm's functionality
-for your own purposes.
-
-## STATUS: beta
-
-The core functionality is there.  You can publish, tag, and install.  It
-handles dependencies relatively smartly.
+The core functionality is there.  It works.
 
 Please use this software.  It will cut you occasionally.  Let me know when
 you find a rough edge, and I'll sand it down for you.
 
 I appreciate your sense of adventure.
 
-## Principles
+## PRINCIPLES
 
 Put the files where they need to be so that node can find them using the
 methods it already uses.
@@ -46,34 +34,23 @@ Sync with habits that are already in use.
 Packages should be maintained by their authors, not by the package manager
 author.
 
-Run it on node. Cuz a node package manager should be written in evented
-javascript.
+Steer clear of dependency hell.
 
-## Contributing
+## BUGS
 
-If you're interested in helping, that's awesome! Please fork this project,
-implement some of the things on the todo list, or fix an issue, or even
-just write or edit some documentation.  You have no idea just how thankful
-I'll be.
+Plenty.  Luckily, npm is actively maintained as of this writing.
 
-If you don't want to contribute patches, that's also cool.  It's very helpful
-to have people play with npm and send issues or complaints.  It's stable in
-what it does, so you may find it useful even if you just link in your stuff
-by doing `npm link .` to put it in the `NODE_PATH` so you can pull it in
-more easily.
+When you find issues, please report them:
 
-If you have strong feelings about package managers, I'd love to hear your
-opinions.
+* web:
+  <http://github.com/isaacs/npm/issues>
+* email:
+  <npm-@googlegroups.com>.
 
-You can usually find me in #node.js on freenode.net, or you can reach me via
-i@izs.me.
+Be sure to include *all* of the output from the npm command that didn't work
+as expected.
 
-## Todo
-
-See <http://github.com/isaacs/npm/issues> for current todo list.
-
-
-## Version History
+## HISTORY
 
 * 0.0.1:
   Lots of sketches and false starts.  Abandoned a few times.
@@ -182,9 +159,4 @@ See <http://github.com/isaacs/npm/issues> for current todo list.
 * 0.1.19 - 0.1.20:
   Create a bunch of bugs  
   Fix a bunch of bugs  
-  Some minor speed improvements
-
-
-## SEE ALSO
-
-npm-help(1)  
+  Some minor speed improvements 
