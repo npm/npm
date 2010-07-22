@@ -5,7 +5,9 @@ npm-help(1) -- Get help about npm commands
 
     npm help <section>
 
-Where `<section>` is one of:
+## DESCRIPTION
+
+`<section>` is one of:
 activate
 adduser
 build
@@ -54,7 +56,14 @@ Use `npm ls installed` to show everything you've installed.
 Come bug isaacs in irc://freenode.net#node.js.  He'll ask you to copy the npm
 output to a pastie or gist, and perhaps to post an issue if it's a new bug.
 
-If you ask something that's answered by this doc, he'll probably tell you to RTFM.
+Failing that, report the issue:
+
+* web:
+  <http://github.com/isaacs/npm/issues>
+* email:
+  <npm-@googlegroups.com>.
+
+If you ask something that's answered by this doc, you may be told to RTFM.
 So, save yourself some time and read it now.
 
 ## Configs
@@ -81,7 +90,7 @@ If you're using npm to develop and publish your code, check out the following to
 * adduser:
   Use the `npm adduser` command to add a user account for the npm registry, or to
   authorize yourself on a new machine.  If you forget your password, send an email
-  to <npm-@googlegroups.com> and I'll delete your account so you can recreate it.
+  to <npm-@googlegroups.com> and we'll delete your account so you can recreate it.
 * publish:
   Use the `npm publish` command to upload your code to the registry, so that other
   people can install it easily.
