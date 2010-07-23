@@ -1,13 +1,13 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "NPM\-FOLDERS" "1" "May 2010" "" ""
+.TH "NPM\-FOLDERS" "1" "July 2010" "" ""
 .
 .SH "NAME"
 \fBnpm\-folders\fR \- Folder Structures Used by npm
 .
 .SH "DESCRIPTION"
-Everything lives in the \fBroot\fR setting\. This defaults to \fB$HOME/\.node_libraries/\fR\. I\'d like to be able to override it, but that\'s not possible yet\.
+Everything lives in the \fBroot\fR setting\. Check \fBnpm help config\fR for more on configuration options\.
 .
 .P
 \fBroot/\.npm/foo\fR is where the stuff for package \fBfoo\fR would go\.
@@ -16,10 +16,7 @@ Everything lives in the \fBroot\fR setting\. This defaults to \fB$HOME/\.node_li
 \fBroot/\.npm/foo/1\.0\.0/package\fR the contents of the tarball containing foo version 1\.0\.0
 .
 .P
-\fBroot/\.npm/foo/1\.0\.0/main\.js\fR Generated file that exports the \fBmain\fR module in foo\.
-.
-.P
-\fBroot/\.npm/foo/1\.0\.0/lib\fR symlink to the \fBlib\fR dir in foo\.
+\fBroot/\.npm/foo/1\.0\.0/main\.js\fR Generated file that exports the \fBmain\fR module in foo\. This is a shim, not a symbolic link, so that relative paths will work appropriately\.
 .
 .P
 \fBroot/\.npm/foo/active\fR symlink to the active version\.
@@ -29,9 +26,3 @@ Everything lives in the \fBroot\fR setting\. This defaults to \fB$HOME/\.node_li
 .
 .P
 \fBroot/foo\.js\fR symlink to \fB\.npm/foo/active/main\.js\fR
-.
-.P
-\fBroot/foo\fR symlink to \fB\.npm/foo/active/lib\fR
-.
-.P
-\fBroot/foo\-1\.0\.0\fR symlink to \fB\.npm/foo/1\.0\.0/lib\fR

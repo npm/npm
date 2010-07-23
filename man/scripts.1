@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "NPM\-SCRIPTS" "1" "May 2010" "" ""
+.TH "NPM\-SCRIPTS" "1" "July 2010" "" ""
 .
 .SH "NAME"
 \fBnpm\-scripts\fR \- How npm handles the "scripts" field
@@ -14,7 +14,7 @@ preinstall
 Run BEFORE the package is installed
 .
 .TP
-install
+install, postinstall
 Run AFTER the package is installed\.
 .
 .TP
@@ -22,11 +22,11 @@ preactivate
 Run BEFORE the package is activated\.
 .
 .TP
-activate
+activate, postactivate
 Run AFTER the package has been activated\.
 .
 .TP
-deactivate
+predeactivate, deactivate
 Run BEFORE the package is deactivated\.
 .
 .TP
@@ -34,7 +34,7 @@ postdeactivate
 Run AFTER the package is deactivated\.
 .
 .TP
-uninstall
+preuninstall, uninstall
 Run BEFORE the package is uninstalled\.
 .
 .TP
@@ -118,4 +118,4 @@ If you want to run a make command, you can do so\. This works just fine:
 .IP "" 0
 .
 .P
-However, the script line is not simply a command line, so \fBmake && make install\fR would try to execute the \fBmake\fR command with the arguments \fB&&\fR, \fBmake\fR, and \fBinstall\fR\. If you have a lot of stuff to run in a command, put it in a script file\.
+Scripts are run by passing the line as a script argument to \fBsh\fR\.

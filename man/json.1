@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "NPM\-JSON" "1" "June 2010" "" ""
+.TH "NPM\-JSON" "1" "July 2010" "" ""
 .
 .SH "NAME"
 \fBnpm\-json\fR \- Specifics of npm\'s package\.json handling
@@ -77,7 +77,7 @@ The "scripts" member is an object hash of script commands that are run at variou
 See \fBnpm help scripts\fR to find out more about writing package scripts\.
 .
 .SH "dependencies"
-Dependencies are specified with a simple hash of package name to version range\. The version range is EITHER a string with has one or more space\-separated descriptors\.
+Dependencies are specified with a simple hash of package name to version range\. The version range is EITHER a string with has one or more space\-separated descriptors, OR a range like "fromVersion \- toVersion"
 .
 .P
 Version range descriptors may be any of the following styles, where "version" is a semver compatible version identifier\.
