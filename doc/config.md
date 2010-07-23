@@ -87,25 +87,19 @@ Default: https://registry.npmjs.org/
 
 The base URL of the npm package registry.
 
-### auth
+### _auth
 
 A base-64 encoded "user:pass" pair.  This is created by npm-adduser(1).
 
 If your config file is ever corrupted, you can set this manually by doing:
 
-    npm config set auth $(echo -n "my-user-name:my-password" | base64)
-		npm config set username my-user-name
-		npm config set email me@email.com
+    npm adduser
 
-**NOTE**: This is not encoded in any kind of security sense. It's just base-64
-encoded strictly so that it can be sent along the wire with HTTP Basic
-authentication.
-
-### authCrypt
+### _authCrypt
 
 If crypto.Cipher is available, and you have some private keys in `$HOME/.ssh`,
-then npm will encrypt your "auth" config before saving to the .npmrc file,
-and will decrypt the "authCrypt" config when it reads the .npmrc file.
+then npm will encrypt your "_auth" config before saving to the .npmrc file,
+and will decrypt the "_authCrypt" config when it reads the .npmrc file.
 
 ### tag
 
