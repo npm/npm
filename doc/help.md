@@ -61,7 +61,7 @@ Failing that, report the issue:
 * web:
   <http://github.com/isaacs/npm/issues>
 * email:
-  <npm-@googlegroups.com>.
+  <npm-@googlegroups.com>
 
 If you ask something that's answered by this doc, you may be told to RTFM.
 So, save yourself some time and read it now.

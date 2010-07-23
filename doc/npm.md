@@ -45,7 +45,7 @@ When you find issues, please report them:
 * web:
   <http://github.com/isaacs/npm/issues>
 * email:
-  <npm-@googlegroups.com>.
+  <npm-@googlegroups.com>
 
 Be sure to include *all* of the output from the npm command that didn't work
 as expected.
