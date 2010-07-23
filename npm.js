@@ -89,7 +89,11 @@ npm.config =
 
 // shorthand a few of these, because they're common
 Object.defineProperty(npm, "root",
-  { get: function () { return npm.config.get("root") }
+  { get: function () {
+      var root = npm.config.get("root")
+      return root.charAt(0) === "/" ? root
+           : path.join(process.execPath, "..", "..", root)
+    }
   , set: function (newRoot) {
       TEMPFOLDER = npm.temp
       npm.config.set("root", newRoot)
