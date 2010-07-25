@@ -11,7 +11,7 @@ var event = process.env.npm_lifecycle_event
   , path = require("path")
   , rm = require("../lib/utils/rm-rf")
   , mkdir = require("../lib/utils/mkdir-p")
-  , manTarget = path.join(process.installPrefix, "share/man/man1")
+  , manTarget = path.join(process.execPath, "../../share/man/man1")
   , exec = require("../lib/utils/exec")
 
 log(event, "docs")
