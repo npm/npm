@@ -1,16 +1,17 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
 , "version" : "0.1.20"
-, "author" : "Isaac Z. Schlueter <i@izs.me>"
+, "homepage" : "http://npmjs.org/"
+, "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
-  [ "Steve Steiner <ssteinerX@gmail.com>"
-  , "Mikeal Rogers <mikeal.rogers@gmail.com>"
-  , "Aaron Blohowiak <aaron.blohowiak@gmail.com>"
-  , "Martyn Smith <martyn@dollyfish.net.nz>"
-  , "Mathias Pettersson <mape@mape.me>"
-  , "Brian Hammond <brian@fictorial.com>"
-  , "Charlie Robbins <charlie.robbins@gmail.com>"
-  , "Francisco Treacy <francisco.treacy@gmail.com>"
+  [ "Steve Steiner <ssteinerX@gmail.com> (http://websaucesoftware.com/blog/)"
+  , "Mikeal Rogers <mikeal.rogers@gmail.com> (http://www.mikealrogers.com/)"
+  , "Aaron Blohowiak <aaron.blohowiak@gmail.com> (http://aaronblohowiak.com/)"
+  , "Martyn Smith <martyn@dollyfish.net.nz> (http://dollyfish.net.nz/)"
+  , "Mathias Pettersson <mape@mape.me> (http://mape.me/)"
+  , "Brian Hammond <brian@fictorial.com> (http://fictorial.com/)"
+  , "Charlie Robbins <charlie.robbins@gmail.com> (http://www.charlierobbins.com/)"
+  , "Francisco Treacy <francisco.treacy@gmail.com> (http://franciscotreacy.com/)"
   ]
 , "repository" :
   { "type" : "git"
@@ -20,7 +21,6 @@
   { "mail" : "npm-@googlegroups.com"
   , "web" : "http://github.com/isaacs/npm/issues"
   }
-, "os" : [ "linux", "darwin", "freebsd" ]
 , "directories" : { "doc" : "./doc", "man" : "./man" }
 , "main" : "./npm"
 , "bin" : { "npm" : "./cli.js" }
