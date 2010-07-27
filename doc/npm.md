@@ -160,3 +160,7 @@ as expected.
   Create a bunch of bugs  
   Fix a bunch of bugs  
   Some minor speed improvements 
+
+* 0.1.21:
+  Relative paths
+  Global and environmental configuration
