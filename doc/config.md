@@ -109,3 +109,12 @@ If you ask npm to install a package and don't tell it a specific version, then
 it will install the specified tag.
 
 Note: this has no effect on the npm-tag(1) command.
+
+### proxy
+
+If proxy is available, then npm will fetch the modules from the registry via
+the proxy server.
+
+Example:
+
+    proxy = http://proxy-server:8080
