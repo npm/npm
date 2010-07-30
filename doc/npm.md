@@ -162,5 +162,11 @@ as expected.
   Some minor speed improvements 
 
 * 0.1.21:
-  Relative paths
-  Global and environmental configuration
+  Relative paths  
+  Support comments in package.json  
+  Add owner name to ls output  
+  Add "owner" command to manage package owners  
+  Support hook scripts in `{root}/.npm/.hooks/`  
+  Initial support for config file relative to node executable  
+  Support for http proxies  
+  Documentation updates

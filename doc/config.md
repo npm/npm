@@ -10,13 +10,16 @@ npm-config(1) -- Manage the npm configuration file
 
 ## DESCRIPTION
 
-The config command is a way to interact with the `.npmrc` file. This file is a
-JSON encoded list of values that npm is concerned with. The first time you run
-npm, it will create a conf file filled with default values.
+The config command is a way to interact with the `.npmrc` file. This file is an
+ini list of values that npm is concerned with.
 
 On exit, the current state of the config is always saved, so that any changes
-will be recorded. You may safely modify the file (as long as it's still
-parseable JSON), but it is safer to use the npm config commands.
+will be recorded. You may safely modify the file, but it is safer to use the
+npm config commands.
+
+If a file exists at `{PREFIX}/etc/npmrc`, then that is used, where `{PREFIX}`
+is the install prefix of the node binary.  (That is, `which node` would show
+`{PREFIX}/bin/node`.)  Otherwise, the file at `~/.npmrc` is read for values.
 
 ## Sub-commands
 
