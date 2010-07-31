@@ -161,7 +161,7 @@ as expected.
   Fix a bunch of bugs  
   Some minor speed improvements 
 
-* 0.1.21:
+* 0.1.21 - 0.1.22:
   Relative paths  
   Support comments in package.json  
   Add owner name to ls output  
