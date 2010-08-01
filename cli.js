@@ -6,13 +6,16 @@ var log = require("./lib/utils/log")
 
 log("ok", "it worked if it ends with")
 
-
-
-
-var sys = require("sys")
+var fs = require("fs")
+  , path = require("path")
+  , sys = require("sys")
   , npm = require("./npm")
+
+  // supported commands.
   , argv = process.argv.slice(2)
   , arg = ""
+
+  , conf = {}
   , key
   , arglist = []
   , command
@@ -64,7 +67,7 @@ if (!command) {
              )
     process.exit(1)
   } else itWorked = true
-} else npm.execute(command, arglist, errorHandler)
+} else npm.commands[command](arglist, errorHandler)
 
 function errorHandler (er) {
   if (!er) {
