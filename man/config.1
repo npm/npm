@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "NPM\-CONFIG" "1" "July 2010" "" ""
+.TH "NPM\-CONFIG" "1" "August 2010" "" ""
 .
 .SH "NAME"
 \fBnpm\-config\fR \- Manage the npm configuration file
@@ -10,7 +10,7 @@
 .
 .nf
 
-npm config set <key> <value>
+npm config set <key> <value> [\-\-global]
 npm config get <key>
 npm config delete <key>
 npm config list
@@ -18,13 +18,27 @@ npm config list
 .fi
 .
 .SH "DESCRIPTION"
-The config command is a way to interact with the \fB\.npmrc\fR file\. This file is an ini list of values that npm is concerned with\.
+npm gets its configuration values from 5 sources, in this priority:
 .
-.P
-On exit, the current state of the config is always saved, so that any changes will be recorded\. You may safely modify the file, but it is safer to use the npm config commands\.
+.TP
+cli
+The command line flags\. Putting \fB\-\-foo bar\fR on the command line sets the \fBfoo\fR configuration parameter to \fB"bar"\fR\. A \fB\-\-\fR argument tells the cli parser to stop reading flags\. A \fB\-\-flag\fR parameter that is at the \fIend\fR of the command will be given the value of \fBtrue\fR\.
 .
-.P
-If a file exists at \fB{PREFIX}/etc/npmrc\fR, then that is used, where \fB{PREFIX}\fR is the install prefix of the node binary\. (That is, \fBwhich node\fR would show \fB{PREFIX}/bin/node\fR\.) Otherwise, the file at \fB~/\.npmrc\fR is read for values\.
+.TP
+env
+Any environment variables that start with \fBnpm_config_\fR will be interpreted as a configuration parameter\. For example, putting \fBnpm_config_foo=bar\fR in your environment will set the \fBfoo\fR configuration parameter to \fBbar\fR\. Any environment configurations that are not given a value will be given the value of \fBtrue\fR\. Config values are case\-insensitive, so \fBNPM_CONFIG_FOO=bar\fR will work the same\.
+.
+.TP
+$HOME/\.npmrc (or the \fBuserconfig\fR param, if set above)
+This file is an ini\-file formatted list of \fBkey = value\fR parameters\.
+.
+.TP
+$PREFIX/etc/npmrc (or the \fBglobalconfig\fR param, if set above)
+This file is an ini\-file formatted list of \fBkey = value\fR parameters
+.
+.TP
+default configs
+This is a set of configuration parameters that are internal to npm, and are defaults if nothing else is specified\.
 .
 .SH "Sub\-commands"
 Config supports the following sub\-commands:
@@ -62,9 +76,6 @@ npm config list
 .P
 Show all the config settings\.
 .
-.P
-\fBFIXME\fR: Prints to stderr, but should really be stdout, since the log is what you\'re after\.
-.
 .SS "delete"
 .
 .nf
@@ -74,7 +85,7 @@ npm config delete key
 .fi
 .
 .P
-Deletes the key from the configuration file\.
+Deletes the key from all configuration files\.
 .
 .SH "Config Settings"
 npm supports a very basic argument parser\. For any of the settings in npm\-config(1), you can set them explicitly for a single command by doing:
@@ -99,7 +110,7 @@ Default: true
 Automatically activate a package after installation, if there is not an active version already\. Set to "always" to always activate when installing\.
 .
 .SS "root"
-Default: ~/\.node_libraries in single\-user mode, or \fB$INSTALL_PREFIX/lib/node\fR in sudo\-mode\.
+Default: \fB$INSTALL_PREFIX/lib/node\fR
 .
 .P
 The root folder where packages are installed and npm keeps its data\.
@@ -136,7 +147,7 @@ npm adduser
 If crypto\.Cipher is available, and you have some private keys in \fB$HOME/\.ssh\fR, then npm will encrypt your "\fIauth" config before saving to the \.npmrc file, and will decrypt the "\fRauthCrypt" config when it reads the \.npmrc file\.
 .
 .SS "tag"
-Default: stable
+Default: latest
 .
 .P
 If you ask npm to install a package and don\'t tell it a specific version, then it will install the specified tag\.
@@ -159,4 +170,18 @@ proxy = http://proxy\-server:8080
 .fi
 .
 .IP "" 0
-
+.
+.SS "userconfig"
+The default user configuration file is process\.env\.HOME+"/\.npmrc"\.
+.
+.P
+Note that this must be provided either in the cli or env settings\. Once the userconfig is read, it is irrelevant\.
+.
+.SS "globalconfig"
+The default global configuration file is resolved based on the location of the node executable\. It is process\.execPath+"/\.\./\.\./etc/npmrc"\. In the canonical NodeJS installation with \fBmake install\fR, this is \fB/usr/local/etc/npmrc\fR\. If you put the node binary somewhere else (for instance, if you are using nvm or nave), then it would be resolved relative to that location\.
+.
+.P
+Note that this must be provided in the cli, env, or userconfig settings\. Once the globalconfig is read, this parameter is irrelevant\.
+.
+.SS "global"
+If set to some truish value (for instance, by being the last cli flag or being passed a literal \fBtrue\fR or \fB1\fR), and the \fBnpm config set\fR param is being called, then the new configuration paramater is written global config file\. Otherwise, they are saved to the user config file\.
