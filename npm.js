@@ -111,6 +111,7 @@ process.on("exit", function () {
   try {
     var files = fs.readdirSync(tmp)
   } catch (er) {
+    if (er.message.indexOf("ENOENT") === 0) return
     return log(er, "Couldn't clean up tmp folder")
   }
   files.forEach(function (f) {
