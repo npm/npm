@@ -10,6 +10,7 @@ var fs = require("fs")
   , path = require("path")
   , sys = require("sys")
   , npm = require("./npm")
+  , ini = require("./lib/utils/ini")
 
   // supported commands.
   , argv = process.argv.slice(2)
@@ -41,7 +42,6 @@ while (arg = argv.shift()) {
 }
 if (key) conf[key] = true
 npm.argv = arglist
-for (var k in conf) npm.config.set(k, conf[k])
 
 var vindex = arglist.indexOf("-v")
   , printVersion = vindex !== -1 || conf.version
@@ -67,7 +67,13 @@ if (!command) {
              )
     process.exit(1)
   } else itWorked = true
-} else npm.commands[command](arglist, errorHandler)
+} else {
+  ini.resolveConfigs(conf, function (er) {
+    if (er) return errorHandler(er)
+    npm.config.set("root", ini.get("root"))
+    npm.commands[command](arglist, errorHandler)
+  })
+}
 
 function errorHandler (er) {
   if (!er) {
