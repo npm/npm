@@ -71,58 +71,50 @@ npm.set = function (key, val) {
 npm.get = function (key) { return get(registry, key) }
 
 var path = require("path")
-  , config = Object.create(ini.config)
 npm.config =
   { get : function (key) {
-      return ini.get(key, config)
+      return ini.get(key)
     }
   , set : function (key, val) {
-      if (typeof key === "object" && !val && key._id) {
-        val = key
-        key = key._id
-      }
-      return ini.set(key, val, config)
+      return ini.set(key, val, "cli")
     }
   , del : function (key, val) {
-      return ini.del(key, val, config)
+      return ini.del(key, val, "cli")
     }
   }
 
-// shorthand a few of these, because they're common
 Object.defineProperty(npm, "root",
-  { get: function () {
-      var root = npm.config.get("root")
-      return root.charAt(0) === "/" ? root
-           : path.join(process.execPath, "..", "..", root)
+  { get : function () { return npm.config.get("root") }
+  , set : function (r) {
+      r = r.charAt(0) === "/" ? r
+        : path.join(process.execPath, "..", "..", r)
+      return npm.config.set("root", r)
     }
-  , set: function (newRoot) {
-      TEMPFOLDER = npm.temp
-      npm.config.set("root", newRoot)
-    }
+  , enumerable : true
   })
 Object.defineProperty(npm, "dir",
-  { get: function () { return path.join(npm.root, ".npm") }
-  , enumerable:true
+  { get : function () { return path.join(npm.root, ".npm") }
+  , enumerable : true
   })
 Object.defineProperty(npm, "cache",
-  { get: function () { return path.join(npm.root, ".npm", ".cache") }
-  , enumerable:true
+  { get : function () { return path.join(npm.root, ".npm", ".cache") }
+  , enumerable : true
   })
 Object.defineProperty(npm, "tmp",
-  { get: function () { return path.join(npm.root, ".npm", ".tmp") }
-  , enumerable:true
+  { get : function () { return path.join(npm.root, ".npm", ".tmp") }
+  , enumerable : true
   })
 
-var TEMPFOLDER = npm.tmp
+
 process.on("exit", function () {
-  ini.save()
+  var tmp = npm.tmp
   try {
-    var files = fs.readdirSync(TEMPFOLDER)
+    var files = fs.readdirSync(tmp)
   } catch (er) {
     return log(er, "Couldn't clean up tmp folder")
   }
   files.forEach(function (f) {
-    try { fs.unlinkSync(TEMPFOLDER + "/" +f) }
-    catch (er) { log(er, "Couldn't remove "+TEMPFOLDER+"/"+f) }
+    try { fs.unlinkSync(tmp + "/" +f) }
+    catch (er) { log(er, "Couldn't remove "+tmp+"/"+f) }
   })
 })
