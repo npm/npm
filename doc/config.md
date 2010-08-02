@@ -3,23 +3,34 @@ npm-config(1) -- Manage the npm configuration file
 
 ## SYNOPSIS
 
-    npm config set <key> <value>
+    npm config set <key> <value> [--global]
     npm config get <key>
     npm config delete <key>
     npm config list
 
 ## DESCRIPTION
 
-The config command is a way to interact with the `.npmrc` file. This file is an
-ini list of values that npm is concerned with.
+npm gets its configuration values from 5 sources, in this priority:
 
-On exit, the current state of the config is always saved, so that any changes
-will be recorded. You may safely modify the file, but it is safer to use the
-npm config commands.
-
-If a file exists at `{PREFIX}/etc/npmrc`, then that is used, where `{PREFIX}`
-is the install prefix of the node binary.  (That is, `which node` would show
-`{PREFIX}/bin/node`.)  Otherwise, the file at `~/.npmrc` is read for values.
+* cli:
+  The command line flags.  Putting `--foo bar` on the command line sets the
+  `foo` configuration parameter to `"bar"`.  A `--` argument tells the cli
+  parser to stop reading flags.  A `--flag` parameter that is at the *end* of
+  the command will be given the value of `true`.
+* env:
+  Any environment variables that start with `npm_config_` will be interpreted
+  as a configuration parameter.  For example, putting `npm_config_foo=bar` in
+  your environment will set the `foo` configuration parameter to `bar`.  Any
+  environment configurations that are not given a value will be given the value
+  of `true`.  Config values are case-insensitive, so `NPM_CONFIG_FOO=bar` will
+  work the same.
+* $HOME/.npmrc (or the `userconfig` param, if set above):
+  This file is an ini-file formatted list of `key = value` parameters.
+* $PREFIX/etc/npmrc (or the `globalconfig` param, if set above):
+  This file is an ini-file formatted list of `key = value` parameters
+* default configs:
+  This is a set of configuration parameters that are internal to npm, and are
+  defaults if nothing else is specified.
 
 ## Sub-commands
 
@@ -45,14 +56,11 @@ to print out JUST the config value.)
 
 Show all the config settings.
 
-**FIXME**: Prints to stderr, but should really be stdout, since the log is what
-you're after.
-
 ### delete
 
     npm config delete key
 
-Deletes the key from the configuration file.
+Deletes the key from all configuration files.
 
 ## Config Settings
 
@@ -73,8 +81,7 @@ version already.  Set to "always" to always activate when installing.
 
 ### root
 
-Default: ~/.node_libraries in single-user mode, or `$INSTALL_PREFIX/lib/node`
-in sudo-mode.
+Default: `$INSTALL_PREFIX/lib/node`
 
 The root folder where packages are installed and npm keeps its data.
 
@@ -106,7 +113,7 @@ and will decrypt the "_authCrypt" config when it reads the .npmrc file.
 
 ### tag
 
-Default: stable
+Default: latest
 
 If you ask npm to install a package and don't tell it a specific version, then
 it will install the specified tag.
@@ -121,3 +128,28 @@ the proxy server.
 Example:
 
     proxy = http://proxy-server:8080
+
+### userconfig
+
+The default user configuration file is process.env.HOME+"/.npmrc".
+
+Note that this must be provided either in the cli or env settings. Once the
+userconfig is read, it is irrelevant.
+
+### globalconfig
+
+The default global configuration file is resolved based on the location of the
+node executable. It is process.execPath+"/../../etc/npmrc". In the canonical
+NodeJS installation with `make install`, this is `/usr/local/etc/npmrc`. If you
+put the node binary somewhere else (for instance, if you are using nvm or
+nave), then it would be resolved relative to that location.
+
+Note that this must be provided in the cli, env, or userconfig settings. Once
+the globalconfig is read, this parameter is irrelevant.
+
+### global
+
+If set to some truish value (for instance, by being the last cli flag or being
+passed a literal `true` or `1`), and the `npm config set` param is being
+called, then the new configuration paramater is written global config file.
+Otherwise, they are saved to the user config file.
