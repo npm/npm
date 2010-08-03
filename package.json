@@ -23,7 +23,6 @@
   , "web" : "http://github.com/isaacs/npm/issues"
   }
 , "directories" : { "doc" : "./doc", "man" : "./man" }
-, "main" : "./npm"
 , "bin" : { "npm" : "./cli.js" }
 , "engines" : { "node" : ">=0.1.99" }
 , "scripts" :
