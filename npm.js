@@ -74,15 +74,9 @@ npm.get = function (key) { return get(registry, key) }
 
 var path = require("path")
 npm.config =
-  { get : function (key) {
-      return ini.get(key)
-    }
-  , set : function (key, val) {
-      return ini.set(key, val, "cli")
-    }
-  , del : function (key, val) {
-      return ini.del(key, val, "cli")
-    }
+  { get : function (key) { return ini.get(key) }
+  , set : function (key, val) { return ini.set(key, val, "cli") }
+  , del : function (key, val) { return ini.del(key, val, "cli") }
   }
 
 Object.defineProperty(npm, "root",
