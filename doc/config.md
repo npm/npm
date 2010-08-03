@@ -79,6 +79,14 @@ Default: true
 Automatically activate a package after installation, if there is not an active
 version already.  Set to "always" to always activate when installing.
 
+### update-dependents
+
+Default: true
+
+Automatically update a package's dependencies after installation, if it is the
+newest version installed. Set to "always" to update dependents when a new
+version is installed, even if it's not the newest.
+
 ### root
 
 Default: `$INSTALL_PREFIX/lib/node`

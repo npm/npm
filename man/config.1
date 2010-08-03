@@ -109,6 +109,12 @@ Default: true
 .P
 Automatically activate a package after installation, if there is not an active version already\. Set to "always" to always activate when installing\.
 .
+.SS "update\-dependents"
+Default: true
+.
+.P
+Automatically update a package\'s dependencies after installation, if it is the newest version installed\. Set to "always" to update dependents when a new version is installed, even if it\'s not the newest\.
+.
 .SS "root"
 Default: \fB$INSTALL_PREFIX/lib/node\fR
 .
