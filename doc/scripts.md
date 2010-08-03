@@ -22,33 +22,44 @@ following scripts:
   Run BEFORE the package is uninstalled.
 * postuninstall:
   Run AFTER the package is uninstalled.
+* preupdate:
+  Run BEFORE the package is updated with the update command.
+* update, postupdate:
+  Run AFTER the package is updated with the update command.
+* preupdatedependencies:
+  Run BEFORE the package dependencies are pointed to the new version.
+* updatedependencies, postupdatedependencies:
+  Run AFTER the package dependencies are pointed to the new version.
 
-## Package Lifecycle Env Vars
+## ENVIRONMENT
 
-Package scripts are run in an environment where the package.json fields have
-been tacked onto the `npm_package_` prefix. So, for instance, if you had
-`{"name":"foo", "version":"1.2.5"}` in your package.json file, then in your
-various lifecycle scripts, this would be true:
+Package scripts run in an environment where many pieces of information are made available regarding the setup of npm and the current state of the process.
 
-    process.env.npm_package_name === "foo"
-    process.env.npm_package_version === "1.2.5"
+* package.json vars:
+  The package.json fields are tacked onto the `npm_package_` prefix. So, for
+  instance, if you had `{"name":"foo", "version":"1.2.5"}` in your package.json
+  file, then your package scripts would have the `npm_package_name` environment
+  variable set to "foo", and the `npm_package_version` set to "1.2.5"
+  
+* configuration vars:
+  Configuration parameters are put in the environment with the `npm_config_`
+  prefix. For instance, you can view the effective `root` config by checking the
+  `npm_config_root` environment variable.
+  
+* current lifecycle event:
+  Lastly, the `npm_lifecycle_event` environment variable is set to whichever
+  stage of the cycle is being executed. So, you could have a single script used
+  for different parts of the process which switches based on what's currently
+  happening.
+
 
 Objects are flattened following this format, so if you had
 `{"scripts":{"install":"foo.js"}}` in your package.json, then you'd see this
 in the script:
 
-    process.env.npm_package_scripts_install = "foo.js"
+    process.env.npm_package_scripts_install === "foo.js"
 
-Last but not least, the `npm_lifecycle_event` environment variable is set to
-whichever stage of the cycle is being executed. So, you could have a single
-script used for different parts of the process which switches based on what's
-currently happening.
-
-If the script exits with a code other than 0, then this will abort the
-process.
-
-Note that these script files don't have to be nodejs or even javascript
-programs. They just have to be some kind of executable file.
+## EXAMPLES
 
 For example, if your package.json contains this:
 
@@ -70,9 +81,17 @@ If you want to run a make command, you can do so.  This works just fine:
 
     { "scripts" :
       { "preinstall" : "./configure"
-      , "install" : "make"
+      , "install" : "make && make install"
       , "test" : "make test"
       }
     }
 
+## EXITING
+
 Scripts are run by passing the line as a script argument to `sh`.
+
+If the script exits with a code other than 0, then this will abort the
+process.
+
+Note that these script files don't have to be nodejs or even javascript
+programs. They just have to be some kind of executable file.
