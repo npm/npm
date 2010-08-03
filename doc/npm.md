@@ -170,3 +170,8 @@ as expected.
   Initial support for config file relative to node executable  
   Support for http proxies  
   Documentation updates
+
+* 0.1.23:
+  update command - This is huge.  
+  Rollback for failed installations  
+  Install dependencies for link packages
