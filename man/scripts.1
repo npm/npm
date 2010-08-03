@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "NPM\-SCRIPTS" "1" "July 2010" "" ""
+.TH "NPM\-SCRIPTS" "1" "August 2010" "" ""
 .
 .SH "NAME"
 \fBnpm\-scripts\fR \- How npm handles the "scripts" field
@@ -41,19 +41,36 @@ Run BEFORE the package is uninstalled\.
 postuninstall
 Run AFTER the package is uninstalled\.
 .
-.SH "Package Lifecycle Env Vars"
-Package scripts are run in an environment where the package\.json fields have been tacked onto the \fBnpm_package_\fR prefix\. So, for instance, if you had \fB{"name":"foo", "version":"1\.2\.5"}\fR in your package\.json file, then in your various lifecycle scripts, this would be true:
+.TP
+preupdate
+Run BEFORE the package is updated with the update command\.
 .
-.IP "" 4
+.TP
+update, postupdate
+Run AFTER the package is updated with the update command\.
 .
-.nf
-
-process\.env\.npm_package_name === "foo"
-process\.env\.npm_package_version === "1\.2\.5"
+.TP
+preupdatedependencies
+Run BEFORE the package dependencies are pointed to the new version\.
 .
-.fi
+.TP
+updatedependencies, postupdatedependencies
+Run AFTER the package dependencies are pointed to the new version\.
 .
-.IP "" 0
+.SH "ENVIRONMENT"
+Package scripts run in an environment where many pieces of information are made available regarding the setup of npm and the current state of the process\.
+.
+.TP
+package\.json vars
+The package\.json fields are tacked onto the \fBnpm_package_\fR prefix\. So, for instance, if you had \fB{"name":"foo", "version":"1\.2\.5"}\fR in your package\.json file, then your package scripts would have the \fBnpm_package_name\fR environment variable set to "foo", and the \fBnpm_package_version\fR set to "1\.2\.5"
+.
+.TP
+configuration vars
+Configuration parameters are put in the environment with the \fBnpm_config_\fR prefix\. For instance, you can view the effective \fBroot\fR config by checking the \fBnpm_config_root\fR environment variable\.
+.
+.TP
+current lifecycle event
+Lastly, the \fBnpm_lifecycle_event\fR environment variable is set to whichever stage of the cycle is being executed\. So, you could have a single script used for different parts of the process which switches based on what\'s currently happening\.
 .
 .P
 Objects are flattened following this format, so if you had \fB{"scripts":{"install":"foo\.js"}}\fR in your package\.json, then you\'d see this in the script:
@@ -62,22 +79,13 @@ Objects are flattened following this format, so if you had \fB{"scripts":{"insta
 .
 .nf
 
-process\.env\.npm_package_scripts_install = "foo\.js"
+process\.env\.npm_package_scripts_install === "foo\.js"
 .
 .fi
 .
 .IP "" 0
 .
-.P
-Last but not least, the \fBnpm_lifecycle_event\fR environment variable is set to whichever stage of the cycle is being executed\. So, you could have a single script used for different parts of the process which switches based on what\'s currently happening\.
-.
-.P
-If the script exits with a code other than 0, then this will abort the process\.
-.
-.P
-Note that these script files don\'t have to be nodejs or even javascript programs\. They just have to be some kind of executable file\.
-.
-.P
+.SH "EXAMPLES"
 For example, if your package\.json contains this:
 .
 .IP "" 4
@@ -108,7 +116,7 @@ If you want to run a make command, you can do so\. This works just fine:
 
 { "scripts" :
   { "preinstall" : "\./configure"
-  , "install" : "make"
+  , "install" : "make && make install"
   , "test" : "make test"
   }
 }
@@ -117,5 +125,11 @@ If you want to run a make command, you can do so\. This works just fine:
 .
 .IP "" 0
 .
-.P
+.SH "EXITING"
 Scripts are run by passing the line as a script argument to \fBsh\fR\.
+.
+.P
+If the script exits with a code other than 0, then this will abort the process\.
+.
+.P
+Note that these script files don\'t have to be nodejs or even javascript programs\. They just have to be some kind of executable file\.
