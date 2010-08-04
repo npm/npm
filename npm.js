@@ -55,7 +55,7 @@ var commandCache = {}
         : c === "rm" ? "uninstall"
         : c
       if (c in commandCache) return commandCache[c]
-      return commandCache[c] = require("./lib/"+c)
+      return commandCache[c] = require(__dirname+"/lib/"+c)
     }})
   })
 
