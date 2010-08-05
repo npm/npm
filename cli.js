@@ -22,7 +22,7 @@ var fs = require("fs")
   , command
   , flagsDone
 
-log(sys.inspect(argv), "cli")
+log(argv, "cli")
 
 while (arg = argv.shift()) {
   if (!command && (npm.commands.hasOwnProperty(arg))) {
