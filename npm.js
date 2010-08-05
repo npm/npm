@@ -55,13 +55,7 @@ var commandCache = {}
         : c === "rm" ? "uninstall"
         : c
       if (c in commandCache) return commandCache[c]
-      return commandCache[c] = function (args, cb) {
-        var f = require(__dirname+"/lib/"+c)
-        ini.resolveConfigs(function (er) {
-          if (er) return cb(er)
-          f(args, cb)
-        })
-      }
+      return commandCache[c] = require(__dirname+"/lib/"+c)
     }})
   })
 
