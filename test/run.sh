@@ -12,8 +12,6 @@ main () {
   # TODO: add more tests here.
   # Run node programs by doing node some-thing.js
 
-  node test-npm-installed.js
-
   npm install "$TESTDIR"/packages/mjsunit.runner
   npm install jsdom
   npm rm jsdom
