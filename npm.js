@@ -112,6 +112,11 @@ process.on("exit", function () {
   }
   files.forEach(function (f) {
     try { fs.unlinkSync(tmp + "/" +f) }
-    catch (er) { log(er, "Couldn't remove "+tmp+"/"+f) }
+    catch (er) {
+      log("Couldn't remove "+tmp+"/"+f, "tmp cleanup error")
+      log(er, "tmp cleanup error")
+      log("No big deal, just remove it manually.", "tmp cleanup error")
+      log("    rm "+tmp+"/"+f, "tmp cleanup error")
+    }
   })
 })
