@@ -7,10 +7,10 @@ doc_subfolders = $(shell find doc -type d \
 									|sed 's|doc/|man/|g' \
 									)
 
-install-stable:
+install:
 	./cli.js --auto-activate always install npm@stable
 
-install:
+dev:
 	./cli.js --auto-activate always install .
 
 link:
@@ -35,4 +35,4 @@ man/%/: doc/%/
 test:
 	./test/run.sh
 
-.PHONY: install install-stable link doc clean uninstall test
+.PHONY: install install-dev link doc clean uninstall test
