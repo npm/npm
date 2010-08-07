@@ -8,13 +8,13 @@ doc_subfolders = $(shell find doc -type d \
 									)
 
 install:
-	./cli.js --auto-activate always install npm@stable
+	./cli.js install npm
 
 dev:
-	./cli.js --auto-activate always install .
+	./cli.js install .
 
 link:
-	./cli.js --auto-activate always link .
+	./cli.js link .
 
 uninstall:
 	./cli.js cache clean
