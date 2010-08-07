@@ -20,13 +20,13 @@ case, you'll have to use sudo.
 
 First, get the code.  Maybe use git for this.  That'd be cool.  Very fancy.
 
-The default make target is `install-stable`, which downloads the current stable
+The default make target is `install`, which downloads the current stable
 version of npm, and installs that for you.
 
 If you want to install the exact code that you're looking at, the bleeding-edge
 master branch, do this:
 
-    make install
+    make dev
 
 If you'd prefer to just symlink in the current code so you can hack
 on it, you can do this:
