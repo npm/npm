@@ -174,4 +174,7 @@ as expected.
 * 0.1.23:
   update command - This is huge.  
   Rollback for failed installations  
-  Install dependencies for link packages
+  Install dependencies for link packages  
+  Silently read passwords for adduser  
+  Cascading configs: cli, env, user, global  
+  First pass at `npm view` command
