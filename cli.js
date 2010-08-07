@@ -80,7 +80,6 @@ function errorHandler (er) {
   if (!er) {
     itWorked = true
     log("ok")
-    if (npm.SHOULD_EXIT) process.exit()
     return
   }
   sys.error("")

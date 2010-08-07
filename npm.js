@@ -15,7 +15,6 @@ var npm = exports
   , fs = require("fs")
 
 npm.commands = {}
-npm.SHOULD_EXIT = true
 
 try {
   var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))+"")
