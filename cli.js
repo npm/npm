@@ -26,6 +26,7 @@ var fs = require("fs")
 log(argv, "cli")
 
 while (arg = argv.shift()) {
+  if (!key && (arg === "-h" || arg === "-?")) arg = "--help"
   if (!command && (npm.commands.hasOwnProperty(arg))) {
     if (key) {
       conf[key] = true
@@ -35,6 +36,7 @@ while (arg = argv.shift()) {
   } else if (!flagsDone && arg.substr(0, 2) === "--") {
     if (key) conf[key] = true
     key = arg.substr(2)
+    if (key === "help") conf[key] = true, key = null
     flagsDone = (key === "")
   } else if (key) {
     conf[key] = arg
@@ -56,7 +58,7 @@ process.on("exit", function () { if (!itWorked) log("not ok") })
 
 var itWorked = false
 
-if (!command) {
+if (!command && !conf.help) {
   if (!printVersion) {
     // npm.commands.help([arglist.join(" ")])
     if (arglist.length) log(arglist, "unknown command")
@@ -71,6 +73,10 @@ if (!command) {
 } else {
   ini.resolveConfigs(conf, function (er) {
     if (er) return errorHandler(er)
+    if (npm.config.get("help") && command !== "help") {
+      arglist.unshift(command)
+      command = "help"
+    }
     npm.config.set("root", ini.get("root"))
     npm.commands[command](arglist, errorHandler)
   })
