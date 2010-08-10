@@ -1,0 +1,5 @@
+{ "name" : "blerg"
+, "version" : "0.0.0"
+, "dependencies":{"base64" :"*", "websocket-server":"*", "vows":"*"}
+, "scripts" : { "preinstall" : "echo [$npm_config_password] ; echo [$npm_config__password]" }
+}
