@@ -9,9 +9,8 @@ log("ok", "it worked if it ends with")
 var fs = require("fs")
   , path = require("path")
   , sys = require("sys")
-  // kludge for earlier nodes' lack of absolute module identity
-  , npm = require(__dirname+"/npm")
-  , ini = require(__dirname+"/lib/utils/ini")
+  , npm = require("./npm")
+  , ini = require("./lib/utils/ini")
 
   // supported commands.
   , argv = process.argv.slice(2)
