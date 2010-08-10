@@ -178,3 +178,9 @@ as expected.
   Silently read passwords for adduser  
   Cascading configs: cli, env, user, global  
   First pass at `npm view` command
+
+* 0.1.24:
+  Fix a bunch of things  
+  Cleanup, etc.  
+  help via --help, -h, or -?  
+  
