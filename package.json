@@ -24,7 +24,7 @@
   }
 , "directories" : { "doc" : "./doc", "man" : "./man" }
 , "bin" : { "npm" : "./cli.js" }
-, "engines" : { "node" : ">=0.1.99" }
+, "engines" : { "node" : ">=0.1.103" }
 , "scripts" :
   { "activate" : "node scripts/install-docs.js"
   , "deactivate" : "node scripts/install-docs.js"
