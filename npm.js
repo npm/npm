@@ -49,6 +49,7 @@ var commandCache = {}
   , "update"
   , "update-dependents"
   , "view"
+  , "repl"
   ].forEach(function (c) {
     Object.defineProperty(npm.commands, c, { get : function () {
       c = c === "list" ? "ls"
@@ -56,7 +57,7 @@ var commandCache = {}
         : c
       if (c in commandCache) return commandCache[c]
       return commandCache[c] = require(__dirname+"/lib/"+c)
-    }})
+    }, enumerable: true})
   })
 
 // Local store for package data, so it won't have to be fetched/read more than
