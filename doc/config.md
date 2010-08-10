@@ -161,3 +161,10 @@ If set to some truish value (for instance, by being the last cli flag or being
 passed a literal `true` or `1`), and the `npm config set` param is being
 called, then the new configuration paramater is written global config file.
 Otherwise, they are saved to the user config file.
+
+### dev
+
+If set to a truish value, then it'll install the "devDependencies" as well as
+"dependencies" when installing a package.
+
+Note that devDependencies are *always* installed when linking a package.

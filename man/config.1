@@ -191,3 +191,9 @@ Note that this must be provided in the cli, env, or userconfig settings\. Once t
 .
 .SS "global"
 If set to some truish value (for instance, by being the last cli flag or being passed a literal \fBtrue\fR or \fB1\fR), and the \fBnpm config set\fR param is being called, then the new configuration paramater is written global config file\. Otherwise, they are saved to the user config file\.
+.
+.SS "dev"
+If set to a truish value, then it\'ll install the "devDependencies" as well as "dependencies" when installing a package\.
+.
+.P
+Note that devDependencies are \fIalways\fR installed when linking a package\.
