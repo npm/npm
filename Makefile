@@ -8,17 +8,17 @@ doc_subfolders = $(shell find doc -type d \
 									)
 
 install:
-	./cli.js install npm
+	node cli.js install npm
 
 dev:
-	./cli.js install .
+	node cli.js install .
 
 link:
-	./cli.js link .
+	node cli.js link .
 
 uninstall:
-	./cli.js cache clean
-	./cli.js rm npm
+	node cli.js cache clean
+	node cli.js rm npm
 
 man: $(doc_subfolders)
 	@if ! test -d man ; then mkdir -p man ; fi
