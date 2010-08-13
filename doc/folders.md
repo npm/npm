@@ -15,6 +15,13 @@ version 1.0.0
 foo.  This is a shim, not a symbolic link, so that relative paths will work
 appropriately.
 
+`root/.npm/foo/1.0.0/**/*.js` Generated shims for each `.js` file in 
+`root/.npm/foo/1.0.0/package/lib` These are only generated if the 
+directories lib option is used.
+
+`root/.npm/foo/1.0.0/{module-name}.js` Generated shim corresponding to a module
+defined in the modules option.
+
 `root/.npm/foo/active` symlink to the active version.
 
 `root/foo-1.0.0.js` shim to `.npm/foo/1.0.0/main.js`
