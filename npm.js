@@ -1,4 +1,6 @@
 
+process.title = "npm"
+
 var npm = exports
   , set = require("./lib/utils/set")
   , get = require("./lib/utils/get")
