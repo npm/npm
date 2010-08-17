@@ -25,8 +25,8 @@ list
 ln
 ls
 npm
+owner
 publish
-registry
 restart
 rm
 scripts
@@ -36,6 +36,8 @@ tag
 test
 uninstall
 unpublish
+update
+view
 
 ## 12-second Intro
 
