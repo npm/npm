@@ -16,12 +16,12 @@ To filter a single package or state, you can provide words to filter on
 and highlight (if appropriate).  For instance, to see all the stable
 packages, you could do this:
 
-    npm ls @stable
+    npm ls stable
 
 Another common usage is to find the set of all packages that are 
 installed. This can be accomplished by doing this:
 
-    npm ls @installed
+    npm ls installed
 
 Strings are matched using the JavaScript "split" function, so regular
 expression strings are ok.  However, the highlighting is a simple
