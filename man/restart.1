@@ -14,24 +14,12 @@ npm restart <name> [<version>]
 .fi
 .
 .SH "DESCRIPTION"
-This runs a package\'s "stop" script, if one was provided, and then
+This runs a package\'s "restart" script, if one was provided\.
+Otherwise it runs package\'s "stop" script, if one was provided, and then
 the "start" script\.
 .
 .P
 If no version is specified, then it restarts the "active" version\.
-.
-.P
-This is identical to doing:
-.
-.IP "" 4
-.
-.nf
-npm stop <name>
-npm start <name>
-.
-.fi
-.
-.IP "" 0
 .
 .SH "SEE ALSO"
 .
