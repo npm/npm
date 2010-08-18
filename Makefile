@@ -26,6 +26,7 @@ man: $(doc_subfolders)
 doc: man $(docs)
 	@true
 
+# use `npm install ronn` for this to work.
 man/%.1: doc/%.md
 	ronn --roff $< > $@
 

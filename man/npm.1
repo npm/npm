@@ -1,15 +1,14 @@
-.\" generated with Ronn/v0.7.3
-.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
 .
 .TH "NPM" "1" "August 2010" "" ""
 .
 .SH "NAME"
-\fBnpm\fR \- node package manager
+\fBnpm\fR \-\- node package manager
 .
 .SH "SYNOPSIS"
 .
 .nf
-
 npm <command> [args]
 .
 .fi
@@ -18,19 +17,21 @@ npm <command> [args]
 npm is a little package manager for the Node javascript library\.
 .
 .P
-Run \fBnpm help\fR for help\. That\'s probably what you meant to do\.
+Run \fBnpm help\fR for help\.  That\'s probably what you meant to do\.
 .
 .SH "STATUS: Useful Beta"
-The core functionality is there\. It works\.
+The core functionality is there\.  It works\.
 .
 .P
-Please use this software\. It will cut you occasionally\. Let me know when you find a rough edge, and I\'ll sand it down for you\.
+Please use this software\.  It will cut you occasionally\.  Let me know when
+you find a rough edge, and I\'ll sand it down for you\.
 .
 .P
 I appreciate your sense of adventure\.
 .
 .SH "PRINCIPLES"
-Put the files where they need to be so that node can find them using the methods it already uses\.
+Put the files where they need to be so that node can find them using the
+methods it already uses\.
 .
 .P
 Be lazy, not clever\.
@@ -42,47 +43,49 @@ The file system is the database\.
 Sync with habits that are already in use\.
 .
 .P
-Packages should be maintained by their authors, not by the package manager author\.
+Packages should be maintained by their authors, not by the package manager
+author\.
 .
 .P
 Steer clear of dependency hell\.
 .
 .SH "BUGS"
-Plenty\. Luckily, npm is actively maintained as of this writing\.
+Plenty\.  Luckily, npm is actively maintained as of this writing\.
 .
 .P
 When you find issues, please report them:
 .
-.TP
-web
-\fIhttp://github\.com/isaacs/npm/issues\fR
+.IP "\(bu" 4
+web: \fIhttp://github\.com/isaacs/npm/issues\fR
 .
-.TP
-email
-\fInpm\-@googlegroups\.com\fR
+.IP "\(bu" 4
+email: \fInpm\-@googlegroups\.com\fR
+.
+.IP "" 0
 .
 .P
-Be sure to include \fIall\fR of the output from the npm command that didn\'t work as expected\.
+Be sure to include \fIall\fR of the output from the npm command that didn\'t work
+as expected\.
 .
 .SH "HISTORY"
 .
-.TP
-0\.0\.1
-Lots of sketches and false starts\. Abandoned a few times\.
+.IP "\(bu" 4
+0\.0\.1:
+Lots of sketches and false starts\.  Abandoned a few times\.
 .
-.TP
-0\.0\.2
-Install worked mostly\. Still promise\-based\.
+.IP "\(bu" 4
+0\.0\.2:
+Install worked mostly\.  Still promise\-based\.
 .
-.TP
-0\.0\.3
+.IP "\(bu" 4
+0\.0\.3:
 Converted to callbacks\.
 .
 .br
 Mikeal Rogers wrote a registry for it\.
 .
-.TP
-0\.0\.4
+.IP "\(bu" 4
+0\.0\.4:
 version dependencies
 .
 .br
@@ -100,8 +103,8 @@ bin linking
 .br
 uninstallation
 .
-.TP
-0\.0\.5
+.IP "\(bu" 4
+0\.0\.5:
 fix a few bugs in uninstall wrt dependent packages
 .
 .br
@@ -116,8 +119,8 @@ update to work with node 0\.1\.33 (aka net2)
 .br
 added publish and tag commands
 .
-.TP
-0\.0\.6
+.IP "\(bu" 4
+0\.0\.6:
 set up a public registry
 .
 .br
@@ -135,8 +138,8 @@ env\-specific package\.json
 .br
 added more info to npm\'s the package\.json (bugs, contributors, etc\.)
 .
-.TP
-0\.0\.7
+.IP "\(bu" 4
+0\.0\.7:
 fixed a few bugs in semver
 .
 .br
@@ -154,8 +157,8 @@ everything else core
 .br
 push to beta
 .
-.TP
-0\.1\.0 \- 0\.1\.2
+.IP "\(bu" 4
+0\.1\.0 \- 0\.1\.2:
 push to beta, and announce
 .
 .br
@@ -173,8 +176,8 @@ Fixed DOA bugs
 .br
 Removed dependence on ronn
 .
-.TP
-0\.1\.3
+.IP "\(bu" 4
+0\.1\.3:
 Changed a few details with configs (fix #5)
 .
 .br
@@ -183,12 +186,12 @@ Update adduser and publish to put author info in the data
 .br
 Use buffer api for file writes, hopefully fix #4
 .
-.TP
-0\.1\.4 \- 0\.1\.5
+.IP "\(bu" 4
+0\.1\.4 \- 0\.1\.5:
 Fixes for a few more bugs and fix some documentation\.
 .
-.TP
-0\.1\.6 \- 0\.1\.7
+.IP "\(bu" 4
+0\.1\.6 \- 0\.1\.7:
 Add cache functionality
 .
 .br
@@ -203,22 +206,22 @@ Don\'t break on install if the man path is missing
 .br
 Support publishing or installing a folder or local tarball
 .
-.TP
-0\.1\.8
+.IP "\(bu" 4
+0\.1\.8:
 Bugfixes
 .
 .br
 Add start, stop, restart, and test commands
 .
-.TP
-0\.1\.9
+.IP "\(bu" 4
+0\.1\.9:
 npm list enhancements
 .
 .br
 fix the install bug
 .
-.TP
-0\.1\.10
+.IP "\(bu" 4
+0\.1\.10:
 More errors found by Ryan Dahl and Kris Zyp
 .
 .br
@@ -230,74 +233,71 @@ Docs for new developers\.
 .br
 Better tracking of ownership on the registry\.
 .
-.TP
-0\.1\.11
-Martyn Smith found a whole lot of bugs\.
+.IP "\(bu" 4
+0\.1\.11:
+	Martyn Smith found a whole lot of bugs\.
 .
 .br
-Make publish not die when the tarball is big\.
+	Make publish not die when the tarball is big\.
 .
 .br
-"make uninstall" support
+	"make uninstall" support
 .
-.TP
-0\.1\.12 \- 0\.1\.13
-Fix the downloading bug that was breaking the tarballs
-.
-.br
-Update some docs
-.
-.TP
-0\.1\.14 \- 0\.1\.16
-Fix to stay in sync with node changes
+.IP "\(bu" 4
+0\.1\.12 \- 0\.1\.13:
+	Fix the downloading bug that was breaking the tarballs
 .
 .br
-Put a special tag on link installs
+	Update some docs
+.
+.IP "\(bu" 4
+0\.1\.14 \- 0\.1\.16:
+	Fix to stay in sync with node changes
 .
 .br
-Modify semver comparison slightly
+	Put a special tag on link installs
 .
 .br
-add unpublish command
+	Modify semver comparison slightly
 .
 .br
-Use the "drain" event properly for uploads
+	add unpublish command
 .
 .br
-Handle thrown errors
+	Use the "drain" event properly for uploads
 .
 .br
-Handle \.npmignore
+	Handle thrown errors
 .
-.TP
-0\.1\.17
+.br
+	Handle \.npmignore
+.
+.IP "\(bu" 4
+0\.1\.17:
 Stabilization\.
 .
-.TP
-0\.1\.18
+.IP "\(bu" 4
+0\.1\.18:
 Change a few default configurations
 .
 .br
 Add test harness
 .
 .br
-Default publish, install, and link to "\." if no arguments given
+Default publish, install, and link to "\." if no arguments given  
 .
-.br
-
-.
-.TP
-0\.1\.19 \- 0\.1\.20
+.IP "\(bu" 4
+0\.1\.19 \- 0\.1\.20:
 Create a bunch of bugs
 .
 .br
 Fix a bunch of bugs
 .
 .br
-Some minor speed improvements
+Some minor speed improvements 
 .
-.TP
-0\.1\.21 \- 0\.1\.22
+.IP "\(bu" 4
+0\.1\.21 \- 0\.1\.22:
 Relative paths
 .
 .br
@@ -321,8 +321,8 @@ Support for http proxies
 .br
 Documentation updates
 .
-.TP
-0\.1\.23
+.IP "\(bu" 4
+0\.1\.23:
 update command \- This is huge\.
 .
 .br
@@ -340,16 +340,15 @@ Cascading configs: cli, env, user, global
 .br
 First pass at \fBnpm view\fR command
 .
-.TP
-0\.1\.24
+.IP "\(bu" 4
+0\.1\.24:
 Fix a bunch of things
 .
 .br
 Cleanup, etc\.
 .
 .br
-help via \-\-help, \-h, or \-?
+help via \-\-help, \-h, or \-?  
 .
-.br
-
+.IP "" 0
 
