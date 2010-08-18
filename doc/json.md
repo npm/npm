@@ -58,9 +58,9 @@ This should be a module ID relative to the root of your package folder.
 
 For most modules, it makes the most sense to have a main script.
 
-## directories
+## directories (deprecated)
 
-The "directories" member is an object hash of folders.
+The "directories" member is an object hash of folders. 
 
 ### directories.lib
 
@@ -70,10 +70,18 @@ and the package.json contains `"directories":{"lib":"./lib"}`, and there was
 a file called `./lib/bar.js`, then require("foo/bar") would include that module.
 
 This is handy if your package is a collection or library full of useful goodies.
-However, dependency paths are not corrected for modules in the lib folder, so it's
-a bit more complicated.
 
 Most of the time, delving into a package's folder is not as awesome.
+
+## modules
+
+The "modules" member exposes CommonJS modules in the package. So, if you had a 
+package named `foo`, and the package.json contains `"modules":{"bar":"./lib/baz"}`, 
+and there was a file called `./lib/baz.js`, then require("foo/bar") would include 
+the module defined in `./lib/baz.js`. If you want to expose all the modules in
+your package, then each module must have an entry in "modules".
+
+The "directories" member is deprecated in favor of the "modules" member.
 
 ## scripts
 
