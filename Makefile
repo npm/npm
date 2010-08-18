@@ -27,7 +27,7 @@ doc: man $(docs)
 	@true
 
 man/%.1: doc/%.md
-	ronn --roff --pipe $< > $@
+	ronn --roff $< > $@
 
 man/%/: doc/%/
 	@if ! test -d $@ ; then mkdir -p $@ ; fi
