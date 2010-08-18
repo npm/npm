@@ -58,30 +58,18 @@ This should be a module ID relative to the root of your package folder.
 
 For most modules, it makes the most sense to have a main script.
 
-## directories (deprecated)
-
-The "directories" member is an object hash of folders. 
-
-### directories.lib
-
-The only directory that npm cares about is the "lib" directory.  This is a folder
-that will be mapped to the package name.  So, if you had a package named `foo`,
-and the package.json contains `"directories":{"lib":"./lib"}`, and there was
-a file called `./lib/bar.js`, then require("foo/bar") would include that module.
-
-This is handy if your package is a collection or library full of useful goodies.
-
-Most of the time, delving into a package's folder is not as awesome.
-
 ## modules
 
 The "modules" member exposes CommonJS modules in the package. So, if you had a 
 package named `foo`, and the package.json contains `"modules":{"bar":"./lib/baz"}`, 
 and there was a file called `./lib/baz.js`, then require("foo/bar") would include 
-the module defined in `./lib/baz.js`. If you want to expose all the modules in
-your package, then each module must have an entry in "modules".
+the module defined in `./lib/baz.js`. 
 
-The "directories" member is deprecated in favor of the "modules" member.
+If the "modules" member is omitted, then all `.js` files in the `./lib` folder
+will be automatically exposed as modules. So, the module defined in`./lib/baz.js`, 
+can be loaded by calling `require("foo/baz")`.
+
+To suppress modules altogether, your package.json should contain `"modules":{}`.
 
 ## scripts
 
