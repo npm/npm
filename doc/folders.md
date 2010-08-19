@@ -18,8 +18,8 @@ appropriately.
 `root/.npm/foo/1.0.0/{module-name}.js` Generated shim corresponding to a module
 defined in the modules option. The module shim requires `root/.npm/foo/1.0.0/{module-path}.js`
 
-If no modules are defined then default modules are generated for all `.js` files
-in the `./lib` directory.
+If no `directories.lib` is provided in the package.json and no modules are defined 
+then default modules are generated for all `.js` files in the `./lib` directory.
 
 `root/.npm/foo/active` symlink to the active version.
 

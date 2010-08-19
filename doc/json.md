@@ -65,12 +65,6 @@ package named `foo`, and the package.json contains `"modules":{"bar":"./lib/baz"
 and there was a file called `./lib/baz.js`, then require("foo/bar") would include 
 the module defined in `./lib/baz.js`. 
 
-If the "modules" member is omitted, then all `.js` files in the `./lib` folder
-will be automatically exposed as modules. So, the module defined in`./lib/baz.js`, 
-can be loaded by calling `require("foo/baz")`.
-
-To suppress modules altogether, your package.json should contain `"modules":{}`.
-
 ## scripts
 
 The "scripts" member is an object hash of script commands that are run
