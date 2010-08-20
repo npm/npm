@@ -75,7 +75,7 @@ package that points to your working directory, then do this:
 
     npm link .
 
-Use `npm ls @installed` to see if it's there.
+Use `npm ls installed` to see if it's there.
 
 Then go into the node-repl, and try using require() to bring in your module's
 main and libs things.  Assuming that you have a package like this:
