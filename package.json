@@ -14,6 +14,7 @@
   , "Francisco Treacy <francisco.treacy@gmail.com> (http://franciscotreacy.com/)"
   , "Cliffano Subagio <cliffano@gmail.com> (http://blog.cliffano.com/)"
   , "Christian Eager <christian.eager@nokia.com> (http://perpenduum.com)"
+  , "Dav Glass <davglass@gmail.com> (http://blog.davglass.com)"
   ]
 , "repository" :
   { "type" : "git"
