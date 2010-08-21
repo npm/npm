@@ -128,7 +128,7 @@ or a path to a folder.  (Paths have to either be "." or contain a "/".)
 This makes it easier to install without your users having to know the
 version ahead of time.
 
-    npm tag my-package 1.2.3 stable
+    npm tag my-package@1.2.3 stable
 
 You can also use other tags, but "stable" and "latest" have reserved
 meanings.
