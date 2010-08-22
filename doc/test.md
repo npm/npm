@@ -3,7 +3,7 @@ npm-test(1) -- Test a package
 
 ## SYNOPSIS
 
-    npm test <name> [<version>]
+      npm test <name>[@<version>] [<name>[@<version>] ...]
 
 ## DESCRIPTION
 

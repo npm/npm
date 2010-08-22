@@ -3,7 +3,7 @@ npm-restart(1) -- Start a package
 
 ## SYNOPSIS
 
-    npm restart <name> [<version>]
+    npm restart <name>[@<version>] [<name>[@<version>] ...]
 
 ## DESCRIPTION
 
@@ -16,5 +16,4 @@ If no version is specified, then it restarts the "active" version.
 ## SEE ALSO
 
 * npm-start(1)
-* npm-stop
-
+* npm-stop(1)

@@ -3,7 +3,7 @@ npm-stop(1) -- Stop a package
 
 ## SYNOPSIS
 
-    npm stop <name> [<version>]
+    npm stop <name>[@<version>] [<name>[@<version>] ...]
 
 ## DESCRIPTION
 
