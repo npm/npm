@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.1.25modules"
+, "version" : "0.1.26alpha"
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
@@ -25,7 +25,7 @@
   { "mail" : "npm-@googlegroups.com"
   , "web" : "http://github.com/isaacs/npm/issues"
   }
-, "directories" : { "doc" : "./doc", "man" : "./man", "lib" : "./lib" }
+, "directories" : { "doc" : "./doc", "man" : "./man" }
 , "bin" : { "npm" : "./cli.js" }
 , "engines" : { "node" : ">=0.1.103" }
 , "scripts" :
