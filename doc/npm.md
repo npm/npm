@@ -179,8 +179,12 @@ as expected.
   Cascading configs: cli, env, user, global  
   First pass at `npm view` command
 
-* 0.1.24:
+* 0.1.24, 0.1.25:
   Fix a bunch of things  
   Cleanup, etc.  
   help via --help, -h, or -?  
   
+* 0.1.26:
+  "modules" hash in package.json (Alex K. Wolfe)  
+  Better "restart" command (Alex K Wolfe)  
+  Work on Cygwin  
