@@ -77,22 +77,15 @@ This should be a module ID relative to the root of your package folder\.
 .P
 For most modules, it makes the most sense to have a main script\.
 .
-.SH "directories"
-The "directories" member is an object hash of folders\.
-.
-.SS "directories\.lib"
-The only directory that npm cares about is the "lib" directory\.  This is a folder
-that will be mapped to the package name\.  So, if you had a package named \fBfoo\fR,
-and the package\.json contains \fB"directories":{"lib":"\./lib"}\fR, and there was
-a file called \fB\|\./lib/bar\.js\fR, then require("foo/bar") would include that module\.
+.SH "modules"
+The "modules" member exposes CommonJS modules in the package\. So, if you had a 
+package named \fBfoo\fR, and the package\.json contains \fB"modules":{"bar":"\./lib/baz"}\fR, 
+and there was a file called \fB\|\./lib/baz\.js\fR, then require("foo/bar") would include 
+the module defined in \fB\|\./lib/baz\.js\fR\|\.
 .
 .P
-This is handy if your package is a collection or library full of useful goodies\.
-However, dependency paths are not corrected for modules in the lib folder, so it\'s
-a bit more complicated\.
-.
-.P
-Most of the time, delving into a package\'s folder is not as awesome\.
+Just like the \fBmain\fR script, the modules linked in this fashion will have their
+dependencies and paths set up properly by npm\.
 .
 .SH "scripts"
 The "scripts" member is an object hash of script commands that are run
