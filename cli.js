@@ -11,6 +11,7 @@ var fs = require("fs")
   , sys = require("sys")
   , npm = require("./npm")
   , ini = require("./lib/utils/ini")
+  , rm = require("./lib/utils/rm-rf")
 
   // supported commands.
   , argv = process.argv.slice(2)
@@ -85,14 +86,12 @@ function errorHandler (er) {
   if (!er) {
     itWorked = true
     log("ok")
-    return
+    return rm(npm.tmp, function (er) { process.exit(0) })
   }
-  sys.error("")
-  log(er, "!")
-  sys.error("")
+  log.error(er, "!")
   log("try running: 'npm help "+command+"'", "failure")
   log("Report this *entire* log at <http://github.com/isaacs/npm/issues>", "failure")
   log("or email it to <npm-@googlegroups.com>", "failure")
-  process.exit(1)
+  rm(npm.tmp, function (er) { process.exit(1) })
 }
 

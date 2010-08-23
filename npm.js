@@ -96,23 +96,3 @@ Object.defineProperty(npm, "tmp",
   { get : function () { return path.join(npm.root, ".npm", ".tmp") }
   , enumerable : true
   })
-
-
-process.on("exit", function () {
-  var tmp = npm.tmp
-  try {
-    var files = fs.readdirSync(tmp)
-  } catch (er) {
-    if (er.message.indexOf("ENOENT") === 0) return
-    return log(er, "Couldn't clean up tmp folder")
-  }
-  files.forEach(function (f) {
-    try { fs.unlinkSync(tmp + "/" +f) }
-    catch (er) {
-      log("Couldn't remove "+tmp+"/"+f, "tmp cleanup error")
-      log(er, "tmp cleanup error")
-      log("No big deal, just remove it manually.", "tmp cleanup error")
-      log("    rm "+tmp+"/"+f, "tmp cleanup error")
-    }
-  })
-})
