@@ -188,3 +188,5 @@ as expected.
   "modules" hash in package.json (Alex K. Wolfe)  
   Better "restart" command (Alex K Wolfe)  
   Work on Cygwin  
+  Remove link packages properly  
+  Make several commands more parallel
