@@ -6,7 +6,7 @@ var npm = exports
   , get = require("./lib/utils/get")
   , ini = require("./lib/utils/ini")
   , log = require("./lib/utils/log")
-  , fs = require("fs")
+  , fs = require("./lib/utils/graceful-fs")
   , path = require("path")
 
 npm.commands = {}

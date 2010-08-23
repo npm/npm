@@ -6,7 +6,7 @@ var log = require("./lib/utils/log")
 
 log("ok", "it worked if it ends with")
 
-var fs = require("fs")
+var fs = require("./lib/utils/graceful-fs")
   , path = require("path")
   , sys = require("sys")
   , npm = require("./npm")
