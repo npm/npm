@@ -63,7 +63,10 @@ For most modules, it makes the most sense to have a main script.
 The "modules" member exposes CommonJS modules in the package. So, if you had a 
 package named `foo`, and the package.json contains `"modules":{"bar":"./lib/baz"}`, 
 and there was a file called `./lib/baz.js`, then require("foo/bar") would include 
-the module defined in `./lib/baz.js`. 
+the module defined in `./lib/baz.js`.
+
+Just like the `main` script, the modules linked in this fashion will have their
+dependencies and paths set up properly by npm.
 
 ## scripts
 
