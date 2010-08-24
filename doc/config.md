@@ -72,6 +72,15 @@ doing:
 
 Configurations defined on the command line are not saved to the .npmrc file.
 
+### loglevel
+
+Default: "info"
+
+The log level to show.  Levels are: verbose, info, warn, error, win, silent.
+Each of these maps to a numeric value, above which all logs must pass to be
+seen.  "win" only shows the "ok" or "not ok" ending message.  The other
+options are self-explanatory.
+
 ### auto-activate
 
 Default: true
