@@ -61,12 +61,11 @@ var itWorked = false
 if (!command && !conf.help) {
   if (!printVersion) {
     // npm.commands.help([arglist.join(" ")])
-    if (arglist.length) log(arglist, "unknown command")
+    if (arglist.length) log.error(arglist, "unknown command")
     sys.error( "What do you want me to do?\n\n"
              + "Usage:\n"
              + "  npm [flags] <command> [args]\n"
-             + "Check 'man npm' or 'man npm-help' for more information\n\n"
-             + "This is supposed to happen.  "
+             + "Check 'npm help' for more information\n\n"
              )
     process.exit(1)
   } else itWorked = true
