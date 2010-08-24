@@ -239,41 +239,6 @@ For example, these are all valid:
 .
 .IP "" 0
 .
-.SH "link"
-You may specify a \fBlink\fR member in your package\.json to have npm link
-dependencies in to a particular location inside your package dir\. For example:
-.
-.IP "" 4
-.
-.nf
-{ "dependencies" :
-  { "boo" : "2\.0\.1"
-  , "baz" : ">1\.0\.2 <=2\.3\.4"
-  , "foo" : "1\.0\.0 \- 2\.9999\.9999"
-  , "bar" : ">=1\.0\.2 <2\.1\.2"
-  }
-, "link" :
-  { "boo" : "\./deps/boo"
-  , "baz" : "\./lib/baz"
-  , "foo" : "\./deps/foo"
-  , "bar" : "\./deps/bar"
-  }
-}
-.
-.fi
-.
-.IP "" 0
-.
-.P
-This would link the dependencies into the specified locations, so that the
-package code could do \fBrequire("\./deps/foo")\fR to import whichever version of \fBfoo\fR was satisfying the requirement\.
-.
-.P
-<strong style="color:red">Warning!</strong> This is currently the \fIonly\fR way
-in which npm modifies the pristine nature of the package directory, and it may
-go away eventually\. It\'s just that it satisfies a use case that is pretty
-tricky to do otherwise\.
-.
 .SH "engines"
 Packages/1\.0 says that you can have an "engines" field with an array of engine
 names\. However, it has no provision for specifying which version of the engine

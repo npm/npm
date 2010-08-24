@@ -171,34 +171,6 @@ For example, these are all valid:
       }
     }
 
-## link
-
-You may specify a `link` member in your package.json to have npm link
-dependencies in to a particular location inside your package dir. For example:
-
-    { "dependencies" :
-      { "boo" : "2.0.1"
-      , "baz" : ">1.0.2 <=2.3.4"
-      , "foo" : "1.0.0 - 2.9999.9999"
-      , "bar" : ">=1.0.2 <2.1.2"
-      }
-    , "link" :
-      { "boo" : "./deps/boo"
-      , "baz" : "./lib/baz"
-      , "foo" : "./deps/foo"
-      , "bar" : "./deps/bar"
-      }
-    }
-
-This would link the dependencies into the specified locations, so that the
-package code could do `require("./deps/foo")` to import whichever version of
-`foo` was satisfying the requirement.
-
-<strong style="color:red">Warning!</strong> This is currently the *only* way
-in which npm modifies the pristine nature of the package directory, and it may
-go away eventually. It's just that it satisfies a use case that is pretty
-tricky to do otherwise.
-
 ## engines
 
 Packages/1.0 says that you can have an "engines" field with an array of engine
