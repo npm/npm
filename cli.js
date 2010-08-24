@@ -89,9 +89,9 @@ function errorHandler (er) {
     return rm(npm.tmp, function (er) { process.exit(0) })
   }
   log.error(er)
-  log("try running: 'npm help "+command+"'", "failure")
-  log("Report this *entire* log at <http://github.com/isaacs/npm/issues>", "failure")
-  log("or email it to <npm-@googlegroups.com>", "failure")
+  log.error("try running: 'npm help "+command+"'")
+  log.error("Report this *entire* log at <http://github.com/isaacs/npm/issues>")
+  log.error("or email it to <npm-@googlegroups.com>")
   rm(npm.tmp, function (er) { process.exit(1) })
 }
 
