@@ -67,6 +67,46 @@ when people create tags in git like "v1\.2\.3" and then do "git describe" to gen
 a patch version\.  (This is how node\'s versions are generated, and has driven this
 design\.)
 .
+.SH "description"
+Put a description in it\.  It\'s a string\.
+.
+.SH "homepage"
+The url to the project homepage\.
+.
+.SH ""people" fields: author, contributors"
+The "author" is one person\.  "contributors" is an array of people\.  A "person"
+is an object with a "name" field and optionally "url" and "email", like this:
+.
+.IP "" 4
+.
+.nf
+{ "name" : "Barney Rubble"
+, "email" : "b@rubble\.com"
+, "url" : "http://barnyrubble\.tumblr\.com/"
+}
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Or you can shorten that all into a single string, and npm will parse it for you:
+.
+.IP "" 4
+.
+.nf
+"Barney Rubble <b@rubble\.com> (http://barnyrubble\.tumblr\.com/)
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Both email and url are optional either way\.
+.
+.P
+npm also sets a top\-level "maintainers" field with your npm user info\.
+.
 .SH "main"
 The main field is a module ID that is the primary entry point to your program\.
 That is, if your package is named \fBfoo\fR, and a user installs it, and then does \fBrequire("foo")\fR, then your main module\'s exports object will be returned\.
@@ -75,7 +115,37 @@ That is, if your package is named \fBfoo\fR, and a user installs it, and then do
 This should be a module ID relative to the root of your package folder\.
 .
 .P
-For most modules, it makes the most sense to have a main script\.
+For most modules, it makes the most sense to have a main script and often not
+much else\.
+.
+.SH "bin"
+A lot of packages have one or more executable files that they\'d like to
+install into the PATH\. npm makes this pretty easy (in fact, it uses this
+feature to install the "npm" executable\.)
+.
+.P
+To use this, supply a \fBbin\fR field in your package\.json which is a map of
+command name to local file name\. On install, npm will link that file into
+place right next to wherever node is installed\. (Presumably, this is in your
+PATH, and defaults to \fB/usr/local/bin\fR\|\.) On activation, the versioned file
+will get linked to the main filename (just like how the main\.js stuff works,
+but with an executable in the PATH\.)
+.
+.P
+For example, npm has this:
+.
+.IP "" 4
+.
+.nf
+{ "bin" : { "npm" : "\./cli\.js" } }
+.
+.fi
+.
+.IP "" 0
+.
+.P
+So, when you install npm, it\'ll create a symlink from the \fBcli\.js\fR script to \fB/usr/local/bin/npm\-version\fR\|\. Then, when you activate that version, it\'ll
+create a symlink from \fB/usr/local/bin/npm\-version\fR to \fB/usr/local/bin/npm\fR\|\.
 .
 .SH "modules"
 The "modules" member exposes CommonJS modules in the package\. So, if you had a 
@@ -119,11 +189,14 @@ you\'ll see that it has directories for doc, lib, and man\.
 In the future, this information may be used in other creative ways\.
 .
 .SS "directories\.lib"
-If you specify a "lib" directory, and do not supply a modules hash, then the lib folder
-will be walked and any \fI\|\.js or \fR\|\.node files found will be exposed as a default module
-hash\.  This is to provide backwards compatibility for packages that may have relied
-on this functionality when the lib folder was symlinked directly\.  Providing an explicit
-modules hash is encouraged over exposing the entire lib folder\.
+If you specify a "lib" directory, and do not supply a modules hash, then the lib
+folder will be walked and any \fI\|\.js or \fR\|\.node files found will be exposed as a
+default module hash\. This is to provide backwards compatibility for packages that
+may have relied on this functionality when the lib folder was symlinked directly\.
+.
+.P
+Providing an explicit modules hash is encouraged over exposing the entire lib
+folder\.
 .
 .SH "repository"
 Specify the place where your code lives\. This is helpful for people who want to
@@ -277,35 +350,6 @@ specify "*" as the version), then any version of node will do\.
 If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list\. If "engines" is omitted, then npm will just assume
 that it works on node\.
-.
-.SH "bin"
-A lot of packages have one or more executable files that they\'d like to
-install into the PATH\. npm makes this pretty easy (in fact, it uses this
-feature to install the "npm" executable\.)
-.
-.P
-To use this, supply a \fBbin\fR field in your package\.json which is a map of
-command name to local file name\. On install, npm will link that file into
-place right next to wherever node is installed\. (Presumably, this is in your
-PATH, and defaults to \fB/usr/local/bin\fR\|\.) On activation, the versioned file
-will get linked to the main filename (just like how the main\.js stuff works,
-but with an executable in the PATH\.)
-.
-.P
-For example, npm has this:
-.
-.IP "" 4
-.
-.nf
-{ "bin" : { "npm" : "\./cli\.js" } }
-.
-.fi
-.
-.IP "" 0
-.
-.P
-So, when you install npm, it\'ll create a symlink from the \fBcli\.js\fR script to \fB/usr/local/bin/npm\-version\fR\|\. Then, when you activate that version, it\'ll
-create a symlink from \fB/usr/local/bin/npm\-version\fR to \fB/usr/local/bin/npm\fR\|\.
 .
 .SH "overlay"
 npm responds to the \fBnode\fR and \fBnpm\fR env\-specific package\.json values, which

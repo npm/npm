@@ -48,6 +48,32 @@ when people create tags in git like "v1.2.3" and then do "git describe" to gener
 a patch version.  (This is how node's versions are generated, and has driven this
 design.)
 
+## description
+
+Put a description in it.  It's a string.
+
+## homepage
+
+The url to the project homepage.
+
+## "people" fields: author, contributors
+
+The "author" is one person.  "contributors" is an array of people.  A "person"
+is an object with a "name" field and optionally "url" and "email", like this:
+
+    { "name" : "Barney Rubble"
+    , "email" : "b@rubble.com"
+    , "url" : "http://barnyrubble.tumblr.com/"
+    }
+
+Or you can shorten that all into a single string, and npm will parse it for you:
+
+    "Barney Rubble <b@rubble.com> (http://barnyrubble.tumblr.com/)
+
+Both email and url are optional either way.
+
+npm also sets a top-level "maintainers" field with your npm user info.
+
 ## main
 
 The main field is a module ID that is the primary entry point to your program.
@@ -56,7 +82,29 @@ That is, if your package is named `foo`, and a user installs it, and then does
 
 This should be a module ID relative to the root of your package folder.
 
-For most modules, it makes the most sense to have a main script.
+For most modules, it makes the most sense to have a main script and often not
+much else.
+
+## bin
+
+A lot of packages have one or more executable files that they'd like to
+install into the PATH. npm makes this pretty easy (in fact, it uses this
+feature to install the "npm" executable.)
+
+To use this, supply a `bin` field in your package.json which is a map of
+command name to local file name. On install, npm will link that file into
+place right next to wherever node is installed. (Presumably, this is in your
+PATH, and defaults to `/usr/local/bin`.) On activation, the versioned file
+will get linked to the main filename (just like how the main.js stuff works,
+but with an executable in the PATH.)
+
+For example, npm has this:
+
+    { "bin" : { "npm" : "./cli.js" } }
+
+So, when you install npm, it'll create a symlink from the `cli.js` script to
+`/usr/local/bin/npm-version`. Then, when you activate that version, it'll
+create a symlink from `/usr/local/bin/npm-version` to `/usr/local/bin/npm`.
 
 ## modules
 
@@ -92,11 +140,13 @@ In the future, this information may be used in other creative ways.
 
 ### directories.lib
 
-If you specify a "lib" directory, and do not supply a modules hash, then the lib folder
-will be walked and any *.js or *.node files found will be exposed as a default module
-hash.  This is to provide backwards compatibility for packages that may have relied
-on this functionality when the lib folder was symlinked directly.  Providing an explicit
-modules hash is encouraged over exposing the entire lib folder.
+If you specify a "lib" directory, and do not supply a modules hash, then the lib
+folder will be walked and any *.js or *.node files found will be exposed as a
+default module hash. This is to provide backwards compatibility for packages that
+may have relied on this functionality when the lib folder was symlinked directly.
+
+Providing an explicit modules hash is encouraged over exposing the entire lib
+folder.
 
 ## repository
 
@@ -192,27 +242,6 @@ specify "*" as the version), then any version of node will do.
 If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list. If "engines" is omitted, then npm will just assume
 that it works on node.
-
-## bin
-
-A lot of packages have one or more executable files that they'd like to
-install into the PATH. npm makes this pretty easy (in fact, it uses this
-feature to install the "npm" executable.)
-
-To use this, supply a `bin` field in your package.json which is a map of
-command name to local file name. On install, npm will link that file into
-place right next to wherever node is installed. (Presumably, this is in your
-PATH, and defaults to `/usr/local/bin`.) On activation, the versioned file
-will get linked to the main filename (just like how the main.js stuff works,
-but with an executable in the PATH.)
-
-For example, npm has this:
-
-    { "bin" : { "npm" : "./cli.js" } }
-
-So, when you install npm, it'll create a symlink from the `cli.js` script to
-`/usr/local/bin/npm-version`. Then, when you activate that version, it'll
-create a symlink from `/usr/local/bin/npm-version` to `/usr/local/bin/npm`.
 
 ## overlay
 
