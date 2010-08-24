@@ -65,8 +65,74 @@ package named `foo`, and the package.json contains `"modules":{"bar":"./lib/baz"
 and there was a file called `./lib/baz.js`, then require("foo/bar") would include 
 the module defined in `./lib/baz.js`.
 
+Subfolders are supported, so you can do this:
+
+    { "name" : "foo"
+    , "modules" :
+      { "bar/baz" : "./lib/bar/baz"
+      , "quux" : "./quux"
+      }
+    }
+
+And then, doing `require("foo/bar/baz")` would return the module at `./lib/bar/baz`
+in the foo package.
+
 Just like the `main` script, the modules linked in this fashion will have their
-dependencies and paths set up properly by npm.
+dependencies and paths set up properly by npm. (In fact, "main" is just sugar
+around setting a module named "index".)
+
+## directories
+
+The CommonJS [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec details a
+few ways that you can indicate the structure of your package using a `directories`
+hash. If you look at [npm's package.json](http://registry.npmjs.org/npm/latest),
+you'll see that it has directories for doc, lib, and man.
+
+In the future, this information may be used in other creative ways.
+
+### directories.lib
+
+If you specify a "lib" directory, and do not supply a modules hash, then the lib folder
+will be walked and any *.js or *.node files found will be exposed as a default module
+hash.  This is to provide backwards compatibility for packages that may have relied
+on this functionality when the lib folder was symlinked directly.  Providing an explicit
+modules hash is encouraged over exposing the entire lib folder.
+
+## repository
+
+Specify the place where your code lives. This is helpful for people who want to
+contribute, as well as perhaps maybe being the underpinning of some magical "track
+this package on git" feature someday maybe if somebody wants to write it ever.
+
+Do it like this:
+
+    "repository" :
+      { "type" : "git"
+      , "url" : "http://github.com/isaacs/npm.git"
+      }
+
+    "repository" :
+      { "type" : "svn"
+      , "url" : "http://v8.googlecode.com/svn/trunk/"
+      }
+
+The URL should be a publicly available (perhaps read-only) url that can be handed
+directly to a VCS program without any modification.  It should not be a url to an
+html project page that you put in your browser.  It's for computers.
+
+Here are some examples of Doing It Wrong:
+
+    WRONG!
+    "repository" :
+      { "type" : "git"
+      , "url" : "git@github.com:isaacs/npm.git" <-- THIS IS PRIVATE!
+      }
+    
+    ALSO WRONG!
+    "repository" :
+      { "type" : "git"
+      , "url" : "http://github.com/isaacs/npm" <-- THIS IS WEBPAGE!
+      }
 
 ## scripts
 
