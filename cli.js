@@ -3,7 +3,7 @@
 // don't assume that npm is installed in any particular spot, since this
 // might conceivably be a bootstrap attempt.
 var log = require("./lib/utils/log")
-
+log.waitForConfig()
 log.info("ok", "it worked if it ends with")
 
 var fs = require("./lib/utils/graceful-fs")
