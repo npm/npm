@@ -4,7 +4,7 @@
 // might conceivably be a bootstrap attempt.
 var log = require("./lib/utils/log")
 
-log("ok", "it worked if it ends with")
+log.info("ok", "it worked if it ends with")
 
 var fs = require("./lib/utils/graceful-fs")
   , path = require("path")
@@ -23,7 +23,7 @@ var fs = require("./lib/utils/graceful-fs")
   , command
   , flagsDone
 
-log(argv, "cli")
+log.verbose(argv, "cli")
 
 while (arg = argv.shift()) {
   if (!key && (arg === "-h" || arg === "-?")) arg = "--help"
@@ -54,7 +54,7 @@ if (printVersion) {
 } else log(npm.version, "version")
 
 process.on("uncaughtException", errorHandler)
-process.on("exit", function () { if (!itWorked) log("not ok") })
+process.on("exit", function () { if (!itWorked) log.win("not ok") })
 
 var itWorked = false
 
@@ -85,7 +85,7 @@ if (!command && !conf.help) {
 function errorHandler (er) {
   if (!er) {
     itWorked = true
-    log("ok")
+    log.win("ok")
     return rm(npm.tmp, function (er) { process.exit(0) })
   }
   log.error(er)
