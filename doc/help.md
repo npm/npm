@@ -17,6 +17,9 @@ config
 deactivate
 developers
 folders
+future-ideas/deploy
+future-ideas/remote
+future-ideas/site
 help
 install
 json
@@ -27,6 +30,7 @@ ls
 npm
 owner
 publish
+rebuild
 restart
 rm
 scripts
