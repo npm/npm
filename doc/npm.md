@@ -197,4 +197,5 @@ as expected.
   Control log output with the "loglevel" config  
   Support a "bin" directory of executables that get auto-linked  
   Un-deprecate the "lib" directory.  
-  Bug killing
+  Bug killing  
+  Split up the tar usage so it works on Solaris  
