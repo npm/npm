@@ -28,11 +28,7 @@
 , "directories" : { "doc" : "./doc", "man" : "./man", "lib" : "./lib" }
 , "bin" : { "npm" : "./cli.js" }
 , "engines" : { "node" : ">=0.1.103" }
-, "scripts" :
-  { "activate" : "node scripts/install-docs.js"
-  , "deactivate" : "node scripts/install-docs.js"
-  , "test" : "make test"
-  }
+, "scripts" : { "test" : "make test" }
 , "licenses" :
   [ { "type" : "MIT"
     , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
