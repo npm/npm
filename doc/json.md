@@ -11,6 +11,9 @@ be incorporated into the spec.
 This document is all you need to know about what's required in your package.json
 file.
 
+A lot of the behavior described in this document is affected by the config
+settings described in `npm help config`.
+
 ## name
 
 The *most* important things in your package.json are the name and version fields.
