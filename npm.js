@@ -45,6 +45,7 @@ var commandCache = {}
   , "update-dependents"
   , "view"
   , "repl"
+  , "rebuild"
   ].forEach(function (c) {
     Object.defineProperty(npm.commands, c, { get : function () {
       c = c === "list" ? "ls"
