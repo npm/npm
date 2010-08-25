@@ -108,11 +108,15 @@ Default: `$INSTALL_PREFIX/bin`
 
 The folder where executable programs are installed.
 
+Set to "false" to not install executables
+
 ### manroot
 
 Default: $INSTALL_PREFIX/share/man
 
 The folder where man pages are installed.
+
+Set to "false" to not install man pages.
 
 ### registry
 
