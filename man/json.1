@@ -15,6 +15,10 @@ be incorporated into the spec\.
 This document is all you need to know about what\'s required in your package\.json
 file\.
 .
+.P
+A lot of the behavior described in this document is affected by the config
+settings described in \fBnpm help config\fR\|\.
+.
 .SH "name"
 The \fImost\fR important things in your package\.json are the name and version fields\.
 .
@@ -179,6 +183,63 @@ Just like the \fBmain\fR script, the modules linked in this fashion will have th
 dependencies and paths set up properly by npm\. (In fact, "main" is just sugar
 around setting a module named "index"\.)
 .
+.SH "man"
+Specify either a single file or an array of filenames to put in place for the \fBman\fR program to find\.
+.
+.P
+If only a single file is provided, then it\'s installed such that it is the
+result from \fBman <pkgname>\fR, regardless of its actual filename\.  For example:
+.
+.IP "" 4
+.
+.nf
+{ "name" : "foo"
+, "man" : "\./man/doc\.1"
+}
+.
+.fi
+.
+.IP "" 0
+.
+.P
+would link the \fB\|\./man/doc\.1\fR file in such that it is the target for \fBman foo\fR
+.
+.P
+If the filename doesn\'t start with the package name, then it\'s prefixed\.
+So, this:
+.
+.IP "" 4
+.
+.nf
+{ "name" : "foo"
+, "man" : [ "\./man/foo\.1", "\./man/bar\.1" ]
+}
+.
+.fi
+.
+.IP "" 0
+.
+.P
+will create files to do \fBman foo\fR and \fBman foo\-bar\fR\|\.
+.
+.P
+Man files must end with a number, and optionally a \fB\|\.gz\fR suffix if they are
+compressed\.  The number dictates which man section the file is installed into\.
+.
+.IP "" 4
+.
+.nf
+{ "name" : "foo"
+, "man" : [ "\./man/foo\.1", "\./man/foo\.2" ]
+}
+.
+.fi
+.
+.IP "" 0
+.
+.P
+will create entries for \fBman foo\fR and \fBman 2 foo\fR
+.
 .SH "directories"
 The CommonJS Packages \fIhttp://wiki\.commonjs\.org/wiki/Packages/1\.0\fR spec details a
 few ways that you can indicate the structure of your package using a \fBdirectories\fR
@@ -191,12 +252,18 @@ In the future, this information may be used in other creative ways\.
 .SS "directories\.lib"
 If you specify a "lib" directory, and do not supply a modules hash, then the lib
 folder will be walked and any \fI\|\.js or \fR\|\.node files found will be exposed as a
-default module hash\. This is to provide backwards compatibility for packages that
-may have relied on this functionality when the lib folder was symlinked directly\.
+default module hash\.
 .
 .P
 Providing an explicit modules hash is encouraged over exposing the entire lib
 folder\.
+.
+.SS "directories\.bin"
+If you specify a "bin" directory, then all the files in that folder will be used
+as the "bin" hash\.
+.
+.P
+If you have a "bin" hash already, then this has no effect\.
 .
 .SH "repository"
 Specify the place where your code lives\. This is helpful for people who want to
