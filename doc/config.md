@@ -108,6 +108,12 @@ Default: `$INSTALL_PREFIX/bin`
 
 The folder where executable programs are installed.
 
+### manroot
+
+Default: $INSTALL_PREFIX/share/man
+
+The folder where man pages are installed.
+
 ### registry
 
 Default: https://registry.npmjs.org/
