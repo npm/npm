@@ -174,11 +174,17 @@ In the future, this information may be used in other creative ways.
 
 If you specify a "lib" directory, and do not supply a modules hash, then the lib
 folder will be walked and any *.js or *.node files found will be exposed as a
-default module hash. This is to provide backwards compatibility for packages that
-may have relied on this functionality when the lib folder was symlinked directly.
+default module hash.
 
 Providing an explicit modules hash is encouraged over exposing the entire lib
 folder.
+
+### directories.bin
+
+If you specify a "bin" directory, then all the files in that folder will be used
+as the "bin" hash.
+
+If you have a "bin" hash already, then this has no effect.
 
 ## repository
 
