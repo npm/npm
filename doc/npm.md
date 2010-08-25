@@ -190,3 +190,11 @@ as expected.
   Work on Cygwin  
   Remove link packages properly  
   Make several commands more parallel
+
+* 0.1.27:
+  Man pages handled with the "man" entry, or a "man" directory  
+  Install man pages in the "manroot" config dir  
+  Control log output with the "loglevel" config  
+  Support a "bin" directory of executables that get auto-linked  
+  Un-deprecate the "lib" directory.  
+  Bug killing
