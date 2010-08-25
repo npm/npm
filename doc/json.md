@@ -129,6 +129,38 @@ Just like the `main` script, the modules linked in this fashion will have their
 dependencies and paths set up properly by npm. (In fact, "main" is just sugar
 around setting a module named "index".)
 
+## man
+
+Specify either a single file or an array of filenames to put in place for the
+`man` program to find.
+
+If only a single file is provided, then it's installed such that it is the
+result from `man <pkgname>`, regardless of its actual filename.  For example:
+
+    { "name" : "foo"
+    , "man" : "./man/doc.1"
+    }
+
+would link the `./man/doc.1` file in such that it is the target for `man foo`
+
+If the filename doesn't start with the package name, then it's prefixed.
+So, this:
+
+    { "name" : "foo"
+    , "man" : [ "./man/foo.1", "./man/bar.1" ]
+    }
+
+will create files to do `man foo` and `man foo-bar`.
+
+Man files must end with a number, and optionally a `.gz` suffix if they are
+compressed.  The number dictates which man section the file is installed into.
+
+    { "name" : "foo"
+    , "man" : [ "./man/foo.1", "./man/foo.2" ]
+    }
+
+will create entries for `man foo` and `man 2 foo`
+
 ## directories
 
 The CommonJS [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec details a
