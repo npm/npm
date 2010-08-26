@@ -199,3 +199,5 @@ as expected.
   Un-deprecate the "lib" directory.  
   Bug killing  
   Split up the tar usage so it works on Solaris  
+  bundle command  
+  rebuild command
