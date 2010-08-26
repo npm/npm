@@ -187,3 +187,9 @@ If set to a truish value, then it'll install the "devDependencies" as well as
 "dependencies" when installing a package.
 
 Note that devDependencies are *always* installed when linking a package.
+
+### tar
+
+Default: env.TAR or "tar"
+
+The name of a GNU-compatible tar program on your system.
