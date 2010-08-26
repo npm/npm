@@ -193,3 +193,9 @@ Note that devDependencies are *always* installed when linking a package.
 Default: env.TAR or "tar"
 
 The name of a GNU-compatible tar program on your system.
+
+### gzip
+
+Default: env.GZIP or "gzip"
+
+The name of a GNU-compatible gzip program on your system.
