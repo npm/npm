@@ -11,6 +11,7 @@ npm-help(1) -- Get help about npm commands
 activate
 adduser
 build
+bundle
 cache
 coding-style
 config
