@@ -70,7 +70,7 @@ if (!command && !conf.help) {
              + "  npm [flags] <command> [args]\n"
              + "Check 'npm help' for more information\n\n"
              )
-    process.exit(1)
+    exit(1)
   } else itWorked = true
 } else {
   ini.resolveConfigs(conf, function (er) {
@@ -88,9 +88,10 @@ function errorHandler (er) {
   if (!er) {
     itWorked = true
     log.win("ok")
-    return rm(npm.tmp, function (er) { process.exit(0) })
+    return exit(0)
   }
   log.error(er)
+  if (!(er instanceof Error)) return exit(1)
   if (er.message.trim() === "ECONNREFUSED, Could not contact DNS servers") {
     log.error(["If you are using Cygwin, please set up your /etc/resolv.conf"
               ,"See step 3 in this wiki page:"
@@ -105,6 +106,9 @@ function errorHandler (er) {
               ,"or email it to <npm-@googlegroups.com>"
               ].join("\n"))
   }
-  rm(npm.tmp, function (er) { process.exit(1) })
+  exit(1)
 }
 
+function exit (code) {
+  rm(npm.tmp, function () { process.exit(code) })
+}
