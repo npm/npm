@@ -1,9 +1,4 @@
-{
-  "name":"flockfeed",
-  "version":"v0.0.1alpha",
-  "dependencies":{
-    "express":"1.0.0rc2",
-    "oauth":"0.8.1",
-    "ejs":"0.2.0"
-  }
+{ "name" : "bundletest"
+, "version" : "1.0.0"
+, "dependencies" : { "express" : "1.0.0rc2", "oauth" : "*", "ejs" : "0.2.0" }
 }
