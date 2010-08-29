@@ -196,6 +196,6 @@ The name of a GNU-compatible tar program on your system.
 
 ### gzip
 
-Default: env.GZIP or "gzip"
+Default: env.GZIPBIN or "gzip"
 
 The name of a GNU-compatible gzip program on your system.
