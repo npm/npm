@@ -7,28 +7,39 @@
 main () {
   # setup
   FAILURES=0
-  npm install "$NPMPKG"
 
   # TODO: add more tests here.
   # Run node programs by doing node some-thing.js
 
-  npm install "$TESTDIR"/packages/mjsunit.runner
-  npm install jsdom
-  npm rm jsdom
-  npm rm mjsunit.runner
+  cd "$TESTDIR"
 
-  # teardown
-  npm rm npm
+  # install
+  npm install "$NPMPKG" || exit 1
+  npm install $( ls packages | awk '{print "packages/" $1 }' ) || exit 1
+  (ls packages | while read pkg; do
+    npm test "$pkg"@"$(ls -- "$ROOTDIR"/.npm/"$pkg" | grep -v active)"
+  done) || exit 1
+  if [ "$FAILURES" == "0" ]; then
+    npm rm $(ls packages) npm || exit 1
+  fi
+  cleanup
+
+  # link
+  npm install "$NPMPKG" || exit 1 
+  (ls packages | awk '{print "packages/" $1 }' | while read pkg; do
+    npm link "$pkg"
+  done) || exit 1
+  (ls packages | while read pkg; do
+    npm test "$pkg"@"$(ls -- "$ROOTDIR"/.npm/"$pkg" | grep -v active)"
+  done) || exit 1
+  if [ "$FAILURES" == "0" ]; then
+    npm rm $(ls packages) npm || exit 1
+  fi
+  cleanup
 
   if [ $FAILURES -eq 0 ]; then
-    # rm -rf "$ROOTDIR"
-    # rm -rf "$BINDIR"
-    rm -rf "$ROOTDIR/.npm/.cache"
-    rm -rf "$ROOTDIR/.npm/.tmp"
     echo_err "ok"
   else
-    rm -rf "$ROOTDIR/.npm/.cache"
-    rm -rf "$ROOTDIR/.npm/.tmp"
     echo_err "FAILED: $FAILURES"
   fi
   exit $FAILURES
@@ -41,16 +52,16 @@ main () {
 
 # fake functions
 npm () {
-  "$NPMCLI" --binroot "$TESTDIR/bin" --root "$TESTDIR/root" "$@" \
-    &>output.log \
+  echo -e "npm $@"
+  "$NPMCLI" "$@" &>output.log \
     || fail npm "$@"
-  rm output.log
+  echo -n "" > output.log
 }
 node () {
   local prog="$TESTDIR/$1"
-  PATH="$PATH":"$TESTDIR/bin" NODE_PATH="$TESTDIR/root" $(which node) "$prog" \
-    &>output.log \
+  $(which node) "$prog" &>output.log \
     || fail node "$@"
+  echo -n "" > output.log
 }
 
 # get the absolute path of the executable
@@ -75,11 +86,25 @@ NPMCLI="$NPMPKG/cli.js"
 TESTDIR="$NPMPKG/test/"
 ROOTDIR="$TESTDIR/root"
 BINDIR="$TESTDIR/bin"
+MANDIR="$TESTDIR/man"
 
-[ -d "$ROOTDIR" ] && rm -rf -- "$ROOTDIR"
-[ -d "$BINDIR" ] && rm -rf -- "$BINDIR"
-mkdir -p -- "$ROOTDIR"
-mkdir -p -- "$BINDIR"
+cleanup () {
+  if [ "$FAILURES" != "0" ] && [ "$FAILURES" != "" ]; then
+    return
+  fi
+  [ -d "$ROOTDIR" ] && rm -rf -- "$ROOTDIR"
+  [ -d "$BINDIR" ] && rm -rf -- "$BINDIR"
+  [ -d "$MANDIR" ] && rm -rf -- "$MANDIR"
+  mkdir -p -- "$ROOTDIR"
+  mkdir -p -- "$BINDIR"
+  mkdir -p -- "$MANDIR"
+}
+
+export npm_config_root="$ROOTDIR"
+export npm_config_binroot="$BINDIR"
+export npm_config_manroot="$MANDIR"
+export PATH="$PATH":"$BINDIR"
+export NODE_PATH="$ROOTDIR"
 
 echo_err () {
   echo "$@" >&2
@@ -89,6 +114,8 @@ fail () {
   cat output.log
   echo_err ""
   echo_err -e "\033[33mFailure: $@\033[m"
+  exit 1
 }
 
+cleanup
 main
