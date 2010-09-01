@@ -14,6 +14,7 @@ npm.commands = {}
 try {
   var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))+"")
   npm.version = j.version
+  npm.nodeVersionRequired = j.engines.node
 } catch (ex) {
   log(ex, "error reading version")
   npm.version = ex
