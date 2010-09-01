@@ -1,5 +1,6 @@
 test/packages/test-package/random-data.txt
 test/packages/*/deps
 test/packages/*/vendor
+test/output.log
 test/root
 test/bin
