@@ -56,6 +56,16 @@ if (printVersion) {
   if (vindex !== -1) arglist.splice(vindex, 1)
 } else log(npm.version, "version")
 
+// make sure that this version of node works with this version of npm.
+var semver = require("./lib/utils/semver")
+  , nodeVer = process.version
+  , reqVer = npm.nodeVersionRequired
+if (!semver.satisfies(nodeVer, reqVer)) {
+  var badNodeVersion = new Error(
+    "npm doesn't work with node " + nodeVer + "\nRequired: node@" + reqVer)
+  throw badNodeVersion
+}
+
 process.on("uncaughtException", errorHandler)
 process.on("exit", function () { if (!itWorked) log.win("not ok") })
 
