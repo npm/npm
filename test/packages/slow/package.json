@@ -1,5 +1,5 @@
-{ "name" : "testing-slow"
-, "description" : "just like fast, but slower"
+{ "name" : "slow"
+, "description" : "just like fast, but even slower"
 , "version" : "1.2.3"
 , "scripts" :
   {   "preinstall" : "sleep 1 && echo slow 1 $(date +%s) && sleep 1 && echo slow 2 $(date +%s)"
