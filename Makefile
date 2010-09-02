@@ -17,7 +17,7 @@ link:
 	node cli.js link
 
 clean: uninstall
-  true
+	true
 
 uninstall:
 	node cli.js cache clean
