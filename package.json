@@ -16,6 +16,7 @@
   , "Christian Eager <christian.eager@nokia.com> (http://perpenduum.com)"
   , "Dav Glass <davglass@gmail.com> (http://blog.davglass.com)"
   , "Alex K. Wolfe <alexkwolfe@gmail.com>"
+  , "James Sanders <jimmyjazz14@gmail.com> (http://james-sanders.com/)"
   ]
 , "repository" :
   { "type" : "git"
