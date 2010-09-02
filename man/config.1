@@ -111,6 +111,15 @@ npm \-\-key val <command>
 .P
 Configurations defined on the command line are not saved to the \.npmrc file\.
 .
+.SS "loglevel"
+Default: "info"
+.
+.P
+The log level to show\.  Levels are: verbose, info, warn, error, win, silent\.
+Each of these maps to a numeric value, above which all logs must pass to be
+seen\.  "win" only shows the "ok" or "not ok" ending message\.  The other
+options are self\-explanatory\.
+.
 .SS "auto\-activate"
 Default: true
 .
@@ -137,6 +146,18 @@ Default: \fB$INSTALL_PREFIX/bin\fR
 .
 .P
 The folder where executable programs are installed\.
+.
+.P
+Set to "false" to not install executables
+.
+.SS "manroot"
+Default: $INSTALL_PREFIX/share/man
+.
+.P
+The folder where man pages are installed\.
+.
+.P
+Set to "false" to not install man pages\.
 .
 .SS "registry"
 Default: https://registry\.npmjs\.org/
@@ -220,3 +241,15 @@ If set to a truish value, then it\'ll install the "devDependencies" as well as
 .
 .P
 Note that devDependencies are \fIalways\fR installed when linking a package\.
+.
+.SS "tar"
+Default: env\.TAR or "tar"
+.
+.P
+The name of a GNU\-compatible tar program on your system\.
+.
+.SS "gzip"
+Default: env\.GZIPBIN or "gzip"
+.
+.P
+The name of a GNU\-compatible gzip program on your system\.

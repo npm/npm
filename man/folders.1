@@ -23,13 +23,17 @@ foo\.  This is a shim, not a symbolic link, so that relative paths will work
 appropriately\.
 .
 .P
+\fBroot/foo\-1\.0\.0/{module\-name}\.js\fR Generated shim corresponding to a module
+defined in the modules option\. The module shim requires \fBroot/\.npm/foo/1\.0\.0/package/{module\-path}\.js\fR
+.
+.P
+The \fBmain\fR script is implemented by creating an \fBindex\.js\fR file in this folder\.
+.
+.P
+\fBroot/foo/\fR Symlink to the active version\'s module folder\.
+.
+.P
 \fBroot/\.npm/foo/active\fR symlink to the active version\.
-.
-.P
-\fBroot/foo\-1\.0\.0\.js\fR shim to \fB\|\.npm/foo/1\.0\.0/main\.js\fR
-.
-.P
-\fBroot/foo\.js\fR shim to \fB\|\.npm/foo/active/main\.js\fR
 .
 .P
 \fBroot/\.npm/foo/1\.0\.0/dependencies\fR links to the modules that foo depends upon\.

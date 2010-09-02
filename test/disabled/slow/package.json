@@ -1,0 +1,12 @@
+{ "name" : "slow"
+, "description" : "just like fast, but even slower"
+, "version" : "1.2.3"
+, "scripts" :
+  {   "preinstall" : "sleep 1 && echo slow 1 $(date +%s) && sleep 1 && echo slow 2 $(date +%s)"
+  ,      "install" : "sleep 1 && echo slow 2 $(date +%s) && sleep 1 && echo slow 3 $(date +%s)"
+  ,  "postinstall" : "sleep 1 && echo slow 3 $(date +%s) && sleep 1 && echo slow 4 $(date +%s)"
+  ,  "preactivate" : "sleep 1 && echo slow 4 $(date +%s) && sleep 1 && echo slow 5 $(date +%s)"
+  ,     "activate" : "sleep 1 && echo slow 5 $(date +%s) && sleep 1 && echo slow 6 $(date +%s)"
+  , "postactivate" : "sleep 1 && echo slow 6 $(date +%s) && sleep 1 && echo slow 7 $(date +%s)"
+  }
+}

@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.1.25"
+, "version" : "0.1.27-12"
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
@@ -15,6 +15,8 @@
   , "Cliffano Subagio <cliffano@gmail.com> (http://blog.cliffano.com/)"
   , "Christian Eager <christian.eager@nokia.com> (http://perpenduum.com)"
   , "Dav Glass <davglass@gmail.com> (http://blog.davglass.com)"
+  , "Alex K. Wolfe <alexkwolfe@gmail.com>"
+  , "James Sanders <jimmyjazz14@gmail.com> (http://james-sanders.com/)"
   ]
 , "repository" :
   { "type" : "git"
@@ -24,14 +26,10 @@
   { "mail" : "npm-@googlegroups.com"
   , "web" : "http://github.com/isaacs/npm/issues"
   }
-, "directories" : { "doc" : "./doc", "man" : "./man" }
+, "directories" : { "doc" : "./doc", "man" : "./man", "lib" : "./lib" }
 , "bin" : { "npm" : "./cli.js" }
 , "engines" : { "node" : ">=0.1.103" }
-, "scripts" :
-  { "activate" : "node scripts/install-docs.js"
-  , "deactivate" : "node scripts/install-docs.js"
-  , "test" : "make test"
-  }
+, "scripts" : { "test" : "make test" }
 , "licenses" :
   [ { "type" : "MIT"
     , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"

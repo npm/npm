@@ -11,12 +11,16 @@ npm-help(1) -- Get help about npm commands
 activate
 adduser
 build
+bundle
 cache
 coding-style
 config
 deactivate
 developers
 folders
+future-ideas/deploy
+future-ideas/remote
+future-ideas/site
 help
 install
 json
@@ -27,6 +31,7 @@ ls
 npm
 owner
 publish
+rebuild
 restart
 rm
 scripts

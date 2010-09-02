@@ -3,7 +3,7 @@ npm-start(1) -- Start a package
 
 ## SYNOPSIS
 
-    npm start <name> [<version>]
+    npm start <name>[@<version>] [<name>[@<version>] ...]
 
 ## DESCRIPTION
 

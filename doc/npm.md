@@ -179,8 +179,25 @@ as expected.
   Cascading configs: cli, env, user, global  
   First pass at `npm view` command
 
-* 0.1.24:
+* 0.1.24, 0.1.25:
   Fix a bunch of things  
   Cleanup, etc.  
   help via --help, -h, or -?  
   
+* 0.1.26:
+  "modules" hash in package.json (Alex K. Wolfe)  
+  Better "restart" command (Alex K Wolfe)  
+  Work on Cygwin  
+  Remove link packages properly  
+  Make several commands more parallel
+
+* 0.1.27:
+  Man pages handled with the "man" entry, or a "man" directory  
+  Install man pages in the "manroot" config dir  
+  Control log output with the "loglevel" config  
+  Support a "bin" directory of executables that get auto-linked  
+  Un-deprecate the "lib" directory.  
+  Bug killing  
+  Split up the tar usage so it works on Solaris  
+  bundle command  
+  rebuild command

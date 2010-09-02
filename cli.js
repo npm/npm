@@ -3,14 +3,15 @@
 // don't assume that npm is installed in any particular spot, since this
 // might conceivably be a bootstrap attempt.
 var log = require("./lib/utils/log")
+log.waitForConfig()
+log.info("ok", "it worked if it ends with")
 
-log("ok", "it worked if it ends with")
-
-var fs = require("fs")
+var fs = require("./lib/utils/graceful-fs")
   , path = require("path")
   , sys = require("sys")
   , npm = require("./npm")
   , ini = require("./lib/utils/ini")
+  , rm = require("./lib/utils/rm-rf")
 
   // supported commands.
   , argv = process.argv.slice(2)
@@ -22,7 +23,7 @@ var fs = require("fs")
   , command
   , flagsDone
 
-log(argv, "cli")
+log.verbose(argv, "cli")
 
 while (arg = argv.shift()) {
   if (!key && (arg === "-h" || arg === "-?")) arg = "--help"
@@ -38,6 +39,9 @@ while (arg = argv.shift()) {
     if (key === "help") conf[key] = true, key = null
     flagsDone = (key === "")
   } else if (key) {
+    if (arg === "false" || arg === "null") arg = JSON.parse(arg)
+    else if ( arg === "undefined" ) arg = undefined
+    else if (!isNaN(arg)) arg = +arg
     conf[key] = arg
     key = null
   } else arglist.push(arg)
@@ -52,22 +56,31 @@ if (printVersion) {
   if (vindex !== -1) arglist.splice(vindex, 1)
 } else log(npm.version, "version")
 
+// make sure that this version of node works with this version of npm.
+var semver = require("./lib/utils/semver")
+  , nodeVer = process.version
+  , reqVer = npm.nodeVersionRequired
+if (!semver.satisfies(nodeVer, reqVer)) {
+  var badNodeVersion = new Error(
+    "npm doesn't work with node " + nodeVer + "\nRequired: node@" + reqVer)
+  throw badNodeVersion
+}
+
 process.on("uncaughtException", errorHandler)
-process.on("exit", function () { if (!itWorked) log("not ok") })
+process.on("exit", function () { if (!itWorked) log.win("not ok") })
 
 var itWorked = false
 
 if (!command && !conf.help) {
   if (!printVersion) {
     // npm.commands.help([arglist.join(" ")])
-    if (arglist.length) log(arglist, "unknown command")
+    if (arglist.length) log.error(arglist, "unknown command")
     sys.error( "What do you want me to do?\n\n"
              + "Usage:\n"
              + "  npm [flags] <command> [args]\n"
-             + "Check 'man npm' or 'man npm-help' for more information\n\n"
-             + "This is supposed to happen.  "
+             + "Check 'npm help' for more information\n\n"
              )
-    process.exit(1)
+    exit(1)
   } else itWorked = true
 } else {
   ini.resolveConfigs(conf, function (er) {
@@ -84,15 +97,28 @@ if (!command && !conf.help) {
 function errorHandler (er) {
   if (!er) {
     itWorked = true
-    log("ok")
-    return
+    log.win("ok")
+    return exit(0)
   }
-  sys.error("")
-  log(er, "!")
-  sys.error("")
-  log("try running: 'npm help "+command+"'", "failure")
-  log("Report this *entire* log at <http://github.com/isaacs/npm/issues>", "failure")
-  log("or email it to <npm-@googlegroups.com>", "failure")
-  process.exit(1)
+  log.error(er)
+  if (!(er instanceof Error)) return exit(1)
+  if (er.message.trim() === "ECONNREFUSED, Could not contact DNS servers") {
+    log.error(["If you are using Cygwin, please set up your /etc/resolv.conf"
+              ,"See step 3 in this wiki page:"
+              ,"    http://github.com/ry/node/wiki/Building-node.js-on-Cygwin-%28Windows%29"
+              ,"If you are not using Cygwin, please report this"
+              ,"at <http://github.com/isaacs/npm/issues>"
+              ,"or email it to <npm-@googlegroups.com>"
+              ].join("\n"))
+  } else {
+    log.error(["try running: 'npm help "+command+"'"
+              ,"Report this *entire* log at <http://github.com/isaacs/npm/issues>"
+              ,"or email it to <npm-@googlegroups.com>"
+              ].join("\n"))
+  }
+  exit(1)
 }
 
+function exit (code) {
+  rm(npm.tmp, function () { process.exit(code) })
+}

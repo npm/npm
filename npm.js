@@ -6,7 +6,7 @@ var npm = exports
   , get = require("./lib/utils/get")
   , ini = require("./lib/utils/ini")
   , log = require("./lib/utils/log")
-  , fs = require("fs")
+  , fs = require("./lib/utils/graceful-fs")
   , path = require("path")
 
 npm.commands = {}
@@ -14,6 +14,7 @@ npm.commands = {}
 try {
   var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))+"")
   npm.version = j.version
+  npm.nodeVersionRequired = j.engines.node
 } catch (ex) {
   log(ex, "error reading version")
   npm.version = ex
@@ -45,6 +46,8 @@ var commandCache = {}
   , "update-dependents"
   , "view"
   , "repl"
+  , "rebuild"
+  , "bundle"
   ].forEach(function (c) {
     Object.defineProperty(npm.commands, c, { get : function () {
       c = c === "list" ? "ls"
@@ -96,23 +99,3 @@ Object.defineProperty(npm, "tmp",
   { get : function () { return path.join(npm.root, ".npm", ".tmp") }
   , enumerable : true
   })
-
-
-process.on("exit", function () {
-  var tmp = npm.tmp
-  try {
-    var files = fs.readdirSync(tmp)
-  } catch (er) {
-    if (er.message.indexOf("ENOENT") === 0) return
-    return log(er, "Couldn't clean up tmp folder")
-  }
-  files.forEach(function (f) {
-    try { fs.unlinkSync(tmp + "/" +f) }
-    catch (er) {
-      log("Couldn't remove "+tmp+"/"+f, "tmp cleanup error")
-      log(er, "tmp cleanup error")
-      log("No big deal, just remove it manually.", "tmp cleanup error")
-      log("    rm "+tmp+"/"+f, "tmp cleanup error")
-    }
-  })
-})

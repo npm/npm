@@ -72,6 +72,15 @@ doing:
 
 Configurations defined on the command line are not saved to the .npmrc file.
 
+### loglevel
+
+Default: "info"
+
+The log level to show.  Levels are: verbose, info, warn, error, win, silent.
+Each of these maps to a numeric value, above which all logs must pass to be
+seen.  "win" only shows the "ok" or "not ok" ending message.  The other
+options are self-explanatory.
+
 ### auto-activate
 
 Default: true
@@ -98,6 +107,16 @@ The root folder where packages are installed and npm keeps its data.
 Default: `$INSTALL_PREFIX/bin`
 
 The folder where executable programs are installed.
+
+Set to "false" to not install executables
+
+### manroot
+
+Default: $INSTALL_PREFIX/share/man
+
+The folder where man pages are installed.
+
+Set to "false" to not install man pages.
 
 ### registry
 
@@ -168,3 +187,15 @@ If set to a truish value, then it'll install the "devDependencies" as well as
 "dependencies" when installing a package.
 
 Note that devDependencies are *always* installed when linking a package.
+
+### tar
+
+Default: env.TAR or "tar"
+
+The name of a GNU-compatible tar program on your system.
+
+### gzip
+
+Default: env.GZIPBIN or "gzip"
+
+The name of a GNU-compatible gzip program on your system.

@@ -15,11 +15,15 @@ version 1.0.0
 foo.  This is a shim, not a symbolic link, so that relative paths will work
 appropriately.
 
+`root/foo-1.0.0/{module-name}.js` Generated shim corresponding to a module
+defined in the modules option. The module shim requires
+`root/.npm/foo/1.0.0/package/{module-path}.js`
+
+The `main` script is implemented by creating an `index.js` file in this folder.
+
+`root/foo/` Symlink to the active version's module folder.
+
 `root/.npm/foo/active` symlink to the active version.
-
-`root/foo-1.0.0.js` shim to `.npm/foo/1.0.0/main.js`
-
-`root/foo.js` shim to `.npm/foo/active/main.js`
 
 `root/.npm/foo/1.0.0/dependencies` links to the modules that foo depends upon.
 This is loaded into the require path first in the foo shims.
