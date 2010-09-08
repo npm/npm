@@ -95,3 +95,34 @@ process.
 
 Note that these script files don't have to be nodejs or even javascript
 programs. They just have to be some kind of executable file.
+
+## HOOK SCRIPTS
+
+If you want to run a specific script at a specific lifecycle event for ALL
+packages, then you can use a hook script.
+
+Place an executable file at `{root}/.npm/.hooks/{eventname}`, and it'll get
+run for all packages when they are going through that point in the package
+lifecycle.
+
+Hook scripts are run exactly the same way as package.json scripts.  That is,
+they are in a separate child process, with the env described above.
+
+## BEST PRACTICES
+
+* Don't exit with a non-zero error code unless you *really* mean it.
+  Except for uninstall/deactivate scripts, this will cause the npm action
+  to fail, and potentially be rolled back.  If the failure is minor or
+  only will prevent some optional features, then it's better to just
+  print a warning and exit successfully.
+* Try not to use scripts to do what npm can do for you.  Read through
+  `npm help json` to see all the things that you can specify and enable
+  by simply describing your package appropriately.  In general, this will
+  lead to a more robust and consistent state.
+* Inspect the env to determine where to put things.  For instance, if
+  the `npm_config_binroot` environ is set to `/home/user/bin`, then don't
+  try to install executables into `/usr/local/bin`.  The user probably
+  set it up that way for a reason.
+* Don't prefix your script commands with "sudo".  If root permissions are
+  required for some reason, then it'll fail with that error, and the user
+  will sudo the npm command in question.

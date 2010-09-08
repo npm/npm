@@ -11,10 +11,13 @@ install:
 	node cli.js install npm
 
 dev:
-	node cli.js install .
+	node cli.js install
 
 link:
-	node cli.js link .
+	node cli.js link
+
+clean: uninstall
+	true
 
 uninstall:
 	node cli.js cache clean
