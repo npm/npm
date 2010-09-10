@@ -8,7 +8,7 @@ var path = require("path")
   , name = process.env.npm_package_name
   , version = process.env.npm_package_version
   , prog = path.join(binroot, "prog")
-  , progVer = path.join(binroot, "prog-"+version)
+  , progVer = path.join(binroot, "prog@"+version)
   , bin = path.join(root, ".npm", name, version, "package", "bin", "prog.js")
 
 assert.equal(require(bin), require(progVer), "require('"+ bin +"') !== require('"+ progVer +"')")
