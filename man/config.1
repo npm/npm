@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CONFIG" "1" "August 2010" "" ""
+.TH "NPM\-CONFIG" "1" "September 2010" "" ""
 .
 .SH "NAME"
 \fBnpm-config\fR \-\- Manage the npm configuration file
@@ -115,10 +115,39 @@ Configurations defined on the command line are not saved to the \.npmrc file\.
 Default: "info"
 .
 .P
-The log level to show\.  Levels are: verbose, info, warn, error, win, silent\.
-Each of these maps to a numeric value, above which all logs must pass to be
-seen\.  "win" only shows the "ok" or "not ok" ending message\.  The other
-options are self\-explanatory\.
+The log level to show\.
+.
+.P
+Each level maps to a numeric value, above which all logs must pass to be
+seen\.  So, setting it to "warn" shows "win", "error" and "warn" messages\.
+.
+.P
+The log levels:
+.
+.IP "\(bu" 4
+silent: Show no output\.  Nothing\.  If there is output on stderr, it\'s
+because something is broken\.
+.
+.IP "\(bu" 4
+win: Show the "npm ok" or "npm not ok", but that\'s all\.
+.
+.IP "\(bu" 4
+error: Errors, usually with a stack trace\.
+.
+.IP "\(bu" 4
+warn: Things that you should probably be aware of\.
+.
+.IP "\(bu" 4
+info: Helpful info\.
+.
+.IP "\(bu" 4
+silly: Not\-helpful info\.  (Lots of dumping whole objects and such\.)
+.
+.IP "" 0
+.
+.P
+Note that output to stdout is always printed\.  This setting just modifies
+what\'s logged to stderr\.
 .
 .SS "auto\-activate"
 Default: true
