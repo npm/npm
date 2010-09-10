@@ -201,3 +201,9 @@ as expected.
   Split up the tar usage so it works on Solaris  
   bundle command  
   rebuild command
+
+* 0.2.0:
+  Lots more bug killing  
+  Various fixes found during the Node Knockout extravaganza  
+  Change all "name-version" things to be "name@version"  
+  First allegedly "stable" release.
