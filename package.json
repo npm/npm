@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.2.0alpha"
+, "version" : "0.2.0"
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
@@ -28,6 +28,7 @@
   }
 , "directories" : { "doc" : "./doc", "man" : "./man", "lib" : "./lib" }
 , "bin" : { "npm" : "./cli.js" }
+, "main" : "npm"
 , "engines" : { "node" : ">=0.2.0" }
 , "scripts" : { "test" : "make test" }
 , "licenses" :
