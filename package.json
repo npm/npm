@@ -28,7 +28,7 @@
   }
 , "directories" : { "doc" : "./doc", "man" : "./man", "lib" : "./lib" }
 , "bin" : { "npm" : "./cli.js" }
-, "engines" : { "node" : ">=0.1.103" }
+, "engines" : { "node" : ">=0.2.0" }
 , "scripts" : { "test" : "make test" }
 , "licenses" :
   [ { "type" : "MIT"
