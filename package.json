@@ -17,6 +17,7 @@
   , "Dav Glass <davglass@gmail.com> (http://blog.davglass.com)"
   , "Alex K. Wolfe <alexkwolfe@gmail.com>"
   , "James Sanders <jimmyjazz14@gmail.com> (http://james-sanders.com/)"
+  , "Reid Burke <me@reidburke.com> (http://reidburke.com/)"
   ]
 , "repository" :
   { "type" : "git"
