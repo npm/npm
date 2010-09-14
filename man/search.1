@@ -1,0 +1,224 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-SEARCH" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-search\fR \-\- List installed packages
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm search
+.
+.fi
+.
+.SH "DESCRIPTION"
+This command will print to stdout all the versions of packages that are
+either installed or available in the registry, with whether
+or not they\'re installed, active, and/or stable by default\.
+.
+.P
+To filter a single package or state, you can provide words to filter on
+and highlight (if appropriate)\.  For instance, to see all the stable
+packages, you could do this:
+.
+.IP "" 4
+.
+.nf
+npm search stable
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Another common usage is to find the set of all packages that are
+installed\. This can be accomplished by doing this:
+.
+.IP "" 4
+.
+.nf
+npm search installed
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Matches may go beyond just using boolean tests and use filters\. These filters take a single argument of the following types\.
+.
+.IP "\(bu" 4
+Semantic Variable : \\d+\.\\d+\.\\d+
+.
+.IP "\(bu" 4
+Number : \\d+
+.
+.IP "\(bu" 4
+Date : whatever returns a Date from Date\.parse()
+.
+.IP "\(bu" 4
+Pattern : /regex/ a regular expression that will be given the flag \'i\', you cannot supply the flags
+.
+.IP "\(bu" 4
+String : "\.\.\." or \'\.\.\.\' or word
+.
+.IP "\(bu" 4
+Boolean : if you do not include test type npm will test if the filter could pass at all
+.
+.IP "" 0
+.
+.P
+These filters can compare the packages using:
+.
+.IP "\(bu" 4
+Equality : =
+Tests if the package matches the filter exactly (except for patterns, which test for any matches)
+.
+.IP "\(bu" 4
+Inequality : !=
+Inverts the equality test
+.
+.IP "\(bu" 4
+Superiority : >=
+Tests if the package is greater than or equal to the filter
+.
+.IP "\(bu" 4
+Inferiority : <=
+Tests if the package is less than or equal to the filter
+.
+.IP "" 0
+.
+.SS "Examples"
+.
+.IP "\(bu" 4
+list all packages with an author who\'s email or name has an \'m\'
+.
+.IP
+npm search author=/m/
+.
+.IP "\(bu" 4
+list all the packages that have a stable version greater than or equal to 1\.0\.0
+.
+.IP
+npm search stable>=1\.0\.0
+.
+.IP "\(bu" 4
+list all packages with authors \'ben\' and \'sally\'
+.
+.IP
+npm search author="ben" author="sally"
+.
+.IP "" 0
+.
+.SS "Filters"
+.
+.TP
+name=\.\.\.
+.Tests if the name matches the filter
+.
+.TP
+author=\.\.\.
+.Tests if ANY of the authors match the filter by name or email
+.
+.TP
+tag=\.\.\.
+.Tests if ANY of the tags match the filter
+.
+.TP
+description=\.\.\.
+.Tests if the description matches the filter
+.
+.TP
+stable=\.\.\.
+.Tests if the stable version number of the package matches the filter
+.
+.TP
+latest=\.\.\.
+.Tests if the latest version number of the package matches the filter
+.
+.TP
+created=\.\.\.
+.Tests if the time the package was created matches the filter
+.
+.TP
+modified=\.\.\.
+.Tests if the time the package was modified matches the filter
+.
+.SS "Formatting"
+.
+.TP
+\-\-orderby [sort[\-reverse],]
+.Allows you to sort the list of results in specific orders stabily\. Adding \'\-reverse\' to a sort will reverse the sort order\. Non\-present sorts are ignored\. Default sort order is by \'name\'\.
+.
+.IP "\(bu" 4
+name \- sorts alphabetically by name
+.
+.IP "\(bu" 4
+installed \- sort with installed packages first
+.
+.IP "\(bu" 4
+active \- sort with active packages first
+.
+.IP "\(bu" 4
+stable \- sort with stable packages first
+.
+.IP "\(bu" 4
+created \- sort chronologically by package creation time
+.
+.IP "\(bu" 4
+modified \- sort chronologically by package\'s last modification time
+.
+.IP "" 0
+.
+.P
+Listing the installed packages first and then sorting by name
+.
+.IP "" 4
+.
+.nf
+> npm search \-\-orderby installed,name
+fiz installed@0\.0\.0
+foo installed@0\.0\.0
+bar
+bat
+.
+.fi
+.
+.IP "" 0
+.
+.TP
+\-\-format
+.Allows you to template the output format of npm in a mustache\.js style templating engine\. Unlike mustache\.js whitespace is preserved\.
+.
+.IP "\(bu" 4
+looping can now do slices w/ [x\.\.y] (akin to Array\.slice)\. 0 indexed\.
+, [x\.\.] is from x to the end
+, [\.\.x] is from the start to x
+, [x] is just the element at x
+, negatives are allowed
+.
+.IP "\(bu" 4
+{{|}} is the length of a loop
+.
+.IP "\(bu" 4
+{{@}} is the index of a loop)
+.
+.IP "\(bu" 4
+exterior variables are available to enumerable loops as long as they are not masked
+.
+.IP "" 0
+.
+.IP "" 4
+.
+.nf
+> npm search \-\-format "{{name}} by{{#maintainers}} {{name}},{{/maintainers}}"
+bar by me, you,
+bat by me,
+fiz by you,
+foo by you,
+.
+.fi
+.
+.IP "" 0
+
