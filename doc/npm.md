@@ -207,3 +207,6 @@ as expected.
   Various fixes found during the Node Knockout extravaganza  
   Change all "name-version" things to be "name@version"  
   First allegedly "stable" release.
+
+* 0.2.1:
+  Minor updates and bugfixes
