@@ -131,22 +131,22 @@ as expected.
   Better tracking of ownership on the registry.
 
 * 0.1.11:
-	Martyn Smith found a whole lot of bugs.  
-	Make publish not die when the tarball is big.  
-	"make uninstall" support
+  Martyn Smith found a whole lot of bugs.  
+  Make publish not die when the tarball is big.  
+  "make uninstall" support
 
 * 0.1.12 - 0.1.13:
-	Fix the downloading bug that was breaking the tarballs  
-	Update some docs
+  Fix the downloading bug that was breaking the tarballs  
+  Update some docs
 
 * 0.1.14 - 0.1.16:
-	Fix to stay in sync with node changes  
-	Put a special tag on link installs  
-	Modify semver comparison slightly  
-	add unpublish command  
-	Use the "drain" event properly for uploads  
-	Handle thrown errors  
-	Handle .npmignore
+  Fix to stay in sync with node changes  
+  Put a special tag on link installs  
+  Modify semver comparison slightly  
+  add unpublish command  
+  Use the "drain" event properly for uploads  
+  Handle thrown errors  
+  Handle .npmignore
 
 * 0.1.17:
   Stabilization.
@@ -210,3 +210,9 @@ as expected.
 
 * 0.2.1:
   Minor updates and bugfixes
+
+* 0.2.2:
+  Update "help" to work on Solaris  
+  Remove updated packages that don't have dependencies.  
+  Allow implied suffixes on .js bins  
+  Fix an "adduser" bug
