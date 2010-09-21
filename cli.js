@@ -39,9 +39,6 @@ while (arg = argv.shift()) {
     if (key === "help") conf[key] = true, key = null
     flagsDone = (key === "")
   } else if (key) {
-    if (arg === "false" || arg === "null") arg = JSON.parse(arg)
-    else if ( arg === "undefined" ) arg = undefined
-    else if (!isNaN(arg)) arg = +arg
     conf[key] = arg
     key = null
   } else arglist.push(arg)
