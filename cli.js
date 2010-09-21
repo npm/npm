@@ -94,11 +94,14 @@ if (!command && !conf.help) {
   })
 }
 
+var cbCalled = false
 function errorHandler (er) {
+  if (cbCalled) throw new Error("Callback called more than once.")
+  cbCalled = true
   if (!er) {
     itWorked = true
     log.win("ok")
-    return exit(0)
+    return exit()
   }
   log.error(er)
   if (!(er instanceof Error)) return exit(1)
@@ -120,5 +123,5 @@ function errorHandler (er) {
 }
 
 function exit (code) {
-  rm(npm.tmp, function () { process.exit(code) })
+  rm(npm.tmp, function () { process.exit(code || 0) })
 }
