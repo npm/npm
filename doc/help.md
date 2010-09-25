@@ -29,6 +29,7 @@ list
 ln
 ls
 npm
+outdated
 owner
 publish
 rebuild
