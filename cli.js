@@ -51,7 +51,7 @@ var vindex = arglist.indexOf("-v")
 if (printVersion) {
   sys.puts(npm.version)
   if (vindex !== -1) arglist.splice(vindex, 1)
-} else log(npm.version, "version")
+} else log("npm@"+npm.version, "using")
 
 // make sure that this version of node works with this version of npm.
 var semver = require("./lib/utils/semver")
