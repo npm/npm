@@ -1,6 +1,7 @@
-test/packages/test-package/random-data.txt
+/.idea
+test/bin
+test/output.log
 test/packages/*/deps
 test/packages/*/vendor
-test/output.log
+test/packages/test-package/random-data.txt
 test/root
-test/bin
