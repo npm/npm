@@ -269,6 +269,7 @@ is a semver compatible version identifier.
 * `*` Matches any version
 * `""` (just an empty string) Same as `*`
 * `version1 - version2` Same as `>=version1 <=version2`.
+* `range1 || range2` Passes if either range1 or range2 are satisfied.
 
 For example, these are all valid:
 
@@ -277,6 +278,7 @@ For example, these are all valid:
       , "bar" : ">=1.0.2 <2.1.2"
       , "baz" : ">1.0.2 <=2.3.4"
       , "boo" : "2.0.1"
+      , "qux" : "<1.0.0 || >=2.3.1 <2.4.5 || >=2.5.2 <3.0.0"
       }
     }
 

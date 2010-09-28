@@ -391,6 +391,9 @@ is a semver compatible version identifier\.
 .IP "\(bu" 4
 \fBversion1 \- version2\fR Same as \fB>=version1 <=version2\fR\|\.
 .
+.IP "\(bu" 4
+\fBrange1 || range2\fR Passes if either range1 or range2 are satisfied\.
+.
 .IP "" 0
 .
 .P
@@ -404,6 +407,7 @@ For example, these are all valid:
   , "bar" : ">=1\.0\.2 <2\.1\.2"
   , "baz" : ">1\.0\.2 <=2\.3\.4"
   , "boo" : "2\.0\.1"
+  , "qux" : "<1\.0\.0 || >=2\.3\.1 <2\.4\.5 || >=2\.5\.2 <3\.0\.0"
   }
 }
 .
