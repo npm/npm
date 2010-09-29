@@ -5,45 +5,6 @@ npm-help(1) -- Get help about npm commands
 
     npm help <section>
 
-## DESCRIPTION
-
-`<section>` is one of:
-activate
-adduser
-build
-bundle
-cache
-coding-style
-config
-deactivate
-developers
-folders
-future-ideas/deploy
-future-ideas/remote
-future-ideas/site
-help
-install
-json
-link
-list
-ln
-ls
-npm
-owner
-publish
-rebuild
-restart
-rm
-scripts
-start
-stop
-tag
-test
-uninstall
-unpublish
-update
-view
-
 ## 12-second Intro
 
 You probably got npm because you want to install stuff.
@@ -111,10 +72,6 @@ Patches welcome!
   agree with it, but you do have to follow it.
 * docs:
   If you find an error in the documentation, edit the appropriate markdown file in the
-  "doc" folder.  If you have the "ronn" gem installed, then you can `make doc` to build
-  the man page, but this is not necessary for your patch to be accepted.
-* tests:
-  The tests are pretty limited.  It would be great to perhaps use
-  something like expresso or vows.
+  "doc" folder.  (Don't worry about generating the man page.)
 
 Contributors are listed in npm's `package.json` file.
