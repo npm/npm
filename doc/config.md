@@ -212,3 +212,10 @@ The name of a GNU-compatible tar program on your system.
 Default: env.GZIPBIN or "gzip"
 
 The name of a GNU-compatible gzip program on your system.
+
+### usage
+
+If set to `true`, then this will tell help to print out the short usage statement
+instead of the long manpage type thing.
+
+This is set automatically if you invoke help like `npm command -?`.
