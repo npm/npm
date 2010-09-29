@@ -77,7 +77,7 @@ Put a description in it\.  It\'s a string\.
 .SH "homepage"
 The url to the project homepage\.
 .
-.SH ""people" fields: author, contributors"
+.SH "people fields: author, contributors"
 The "author" is one person\.  "contributors" is an array of people\.  A "person"
 is an object with a "name" field and optionally "url" and "email", like this:
 .
@@ -151,6 +151,31 @@ For example, npm has this:
 So, when you install npm, it\'ll create a symlink from the \fBcli\.js\fR script to \fB/usr/local/bin/npm\-version\fR\|\. Then, when you activate that version, it\'ll
 create a symlink from \fB/usr/local/bin/npm\-version\fR to \fB/usr/local/bin/npm\fR\|\.
 .
+.P
+Shortcut: If you have a single executable, and its name is already what you
+want it to be, then you can just supply it as a string\.  For example:
+.
+.IP "" 4
+.
+.nf
+{ "bin" : "\./path/to/program" }
+.
+.fi
+.
+.IP "" 0
+.
+.P
+would be the same as this:
+.
+.IP "" 4
+.
+.nf
+{ "bin" : { "program" : "\./path/to/program" } }
+.
+.fi
+.
+.IP "" 0
+.
 .SH "modules"
 The "modules" member exposes CommonJS modules in the package\. So, if you had a 
 package named \fBfoo\fR, and the package\.json contains \fB"modules":{"bar":"\./lib/baz"}\fR, 
@@ -176,7 +201,7 @@ Subfolders are supported, so you can do this:
 .
 .P
 And then, doing \fBrequire("foo/bar/baz")\fR would return the module at \fB\|\./lib/bar/baz\fR
-in the foo package\.
+in the foo package\.  Doing \fBrequire("foo/quux")\fR would return the module at \fB\|\./quux\fR in the foo package\.
 .
 .P
 Just like the \fBmain\fR script, the modules linked in this fashion will have their
@@ -310,6 +335,13 @@ ALSO WRONG!
   { "type" : "git"
   , "url" : "http://github\.com/isaacs/npm" <\-\- THIS IS WEBPAGE!
   }
+This is ok, but completely unnecessary:
+"repository" :
+  { "type" : "git"
+  , "url" : "http://github\.com/isaacs/npm\.git"
+  , "private" : "git@github\.com:isaacs/npm\.git"
+  , "web" : "http://github\.com/isaacs/npm"
+  }
 .
 .fi
 .
@@ -359,6 +391,9 @@ is a semver compatible version identifier\.
 .IP "\(bu" 4
 \fBversion1 \- version2\fR Same as \fB>=version1 <=version2\fR\|\.
 .
+.IP "\(bu" 4
+\fBrange1 || range2\fR Passes if either range1 or range2 are satisfied\.
+.
 .IP "" 0
 .
 .P
@@ -372,6 +407,7 @@ For example, these are all valid:
   , "bar" : ">=1\.0\.2 <2\.1\.2"
   , "baz" : ">1\.0\.2 <=2\.3\.4"
   , "boo" : "2\.0\.1"
+  , "qux" : "<1\.0\.0 || >=2\.3\.1 <2\.4\.5 || >=2\.5\.2 <3\.0\.0"
   }
 }
 .

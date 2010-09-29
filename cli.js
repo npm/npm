@@ -26,7 +26,7 @@ var fs = require("./lib/utils/graceful-fs")
 log.verbose(argv, "cli")
 
 while (arg = argv.shift()) {
-  if (!key && (arg === "-h" || arg === "-?")) arg = "--help"
+  if (!key && (arg.match(/^-+[h?]$/i))) arg = "--usage"
   if (!command && (npm.commands.hasOwnProperty(arg))) {
     if (key) {
       conf[key] = true
@@ -36,7 +36,7 @@ while (arg = argv.shift()) {
   } else if (!flagsDone && arg.substr(0, 2) === "--") {
     if (key) conf[key] = true
     key = arg.substr(2)
-    if (key === "help") conf[key] = true, key = null
+    if (key === "usage") conf[key] = true, key = null
     flagsDone = (key === "")
   } else if (key) {
     conf[key] = arg
@@ -68,24 +68,17 @@ process.on("exit", function () { if (!itWorked) log.win("not ok") })
 
 var itWorked = false
 
-if (!command && !conf.help) {
-  if (!printVersion) {
-    // npm.commands.help([arglist.join(" ")])
-    if (arglist.length) log.error(arglist, "unknown command")
-    sys.error( "What do you want me to do?\n\n"
-             + "Usage:\n"
-             + "  npm [flags] <command> [args]\n"
-             + "Check 'npm help' for more information\n\n"
-             )
-    exit(1)
-  } else itWorked = true
-} else {
+
+if (!command && !printVersion) conf.usage = true
+
+if (printVersion) itWorked = true
+else {
+  if (conf.usage && command !== "help") {
+    arglist.unshift(command)
+    command = "help"
+  }
   ini.resolveConfigs(conf, function (er) {
     if (er) return errorHandler(er)
-    if (npm.config.get("help") && command !== "help") {
-      arglist.unshift(command)
-      command = "help"
-    }
     npm.config.set("root", ini.get("root"))
     npm.commands[command](arglist, errorHandler)
   })
@@ -111,6 +104,9 @@ function errorHandler (er) {
               ,"or email it to <npm-@googlegroups.com>"
               ].join("\n"))
   } else {
+    if (npm.commands[command].usage) {
+      log.error(npm.commands[command].usage)
+    }
     log.error(["try running: 'npm help "+command+"'"
               ,"Report this *entire* log at <http://github.com/isaacs/npm/issues>"
               ,"or email it to <npm-@googlegroups.com>"

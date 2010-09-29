@@ -59,7 +59,7 @@ Put a description in it.  It's a string.
 
 The url to the project homepage.
 
-## "people" fields: author, contributors
+## people fields: author, contributors
 
 The "author" is one person.  "contributors" is an array of people.  A "person"
 is an object with a "name" field and optionally "url" and "email", like this:
@@ -109,6 +109,15 @@ So, when you install npm, it'll create a symlink from the `cli.js` script to
 `/usr/local/bin/npm-version`. Then, when you activate that version, it'll
 create a symlink from `/usr/local/bin/npm-version` to `/usr/local/bin/npm`.
 
+Shortcut: If you have a single executable, and its name is already what you
+want it to be, then you can just supply it as a string.  For example:
+
+    { "bin" : "./path/to/program" }
+
+would be the same as this:
+
+    { "bin" : { "program" : "./path/to/program" } }
+
 ## modules
 
 The "modules" member exposes CommonJS modules in the package. So, if you had a 
@@ -126,7 +135,8 @@ Subfolders are supported, so you can do this:
     }
 
 And then, doing `require("foo/bar/baz")` would return the module at `./lib/bar/baz`
-in the foo package.
+in the foo package.  Doing `require("foo/quux")` would return the module at
+`./quux` in the foo package.
 
 Just like the `main` script, the modules linked in this fashion will have their
 dependencies and paths set up properly by npm. (In fact, "main" is just sugar
@@ -225,6 +235,14 @@ Here are some examples of Doing It Wrong:
       , "url" : "http://github.com/isaacs/npm" <-- THIS IS WEBPAGE!
       }
 
+    This is ok, but completely unnecessary:
+    "repository" :
+      { "type" : "git"
+      , "url" : "http://github.com/isaacs/npm.git"
+      , "private" : "git@github.com:isaacs/npm.git"
+      , "web" : "http://github.com/isaacs/npm"
+      }
+
 ## scripts
 
 The "scripts" member is an object hash of script commands that are run
@@ -251,6 +269,7 @@ is a semver compatible version identifier.
 * `*` Matches any version
 * `""` (just an empty string) Same as `*`
 * `version1 - version2` Same as `>=version1 <=version2`.
+* `range1 || range2` Passes if either range1 or range2 are satisfied.
 
 For example, these are all valid:
 
@@ -259,6 +278,7 @@ For example, these are all valid:
       , "bar" : ">=1.0.2 <2.1.2"
       , "baz" : ">1.0.2 <=2.3.4"
       , "boo" : "2.0.1"
+      , "qux" : "<1.0.0 || >=2.3.1 <2.4.5 || >=2.5.2 <3.0.0"
       }
     }
 
