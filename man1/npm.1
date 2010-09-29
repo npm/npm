@@ -14,10 +14,10 @@ npm <command> [args]
 .fi
 .
 .SH "DESCRIPTION"
-npm is a little package manager for the Node javascript library\.
+npm is a package manager for the Node javascript library\.
 .
 .P
-Run \fBnpm help\fR for help\.  That\'s probably what you meant to do\.
+Run \fBnpm help\fR to get a list of commands\.
 .
 .SH "STATUS: Useful Beta"
 The core functionality is there\.  It works\.
@@ -28,6 +28,76 @@ you find a rough edge, and I\'ll sand it down for you\.
 .
 .P
 I appreciate your sense of adventure\.
+.
+.SH "INTRO"
+You probably got npm because you want to install stuff\.
+.
+.P
+Use \fBnpm install blerg\fR to install the latest version of "blerg"\.  Check out \fBnpm help install\fR for more info\.  It can do a lot of stuff\.
+.
+.P
+Use the \fBnpm ls\fR command to show everything that\'s available\.  Looking for
+express\-related modules?  \fBnpm ls express\fR\|\.  Looking for the latest express? \fBnpm ls express latest\fR\|\.  (The arguments are just simple greps\.)  And of course, \fBnpm help ls\fR will tell you more\.
+.
+.P
+Use \fBnpm ls installed\fR to show everything you\'ve installed\.
+.
+.SH "CONFIGS"
+Use the \fBnpm config\fR command to manage how npm does stuff and where it puts things\.
+It stores your configs in the \fB~/\.npmrc\fR file\.  Check \fBnpm help config\fR for more
+info on that, if you care\.
+.
+.P
+You can override any config for just a single command by doing \fB\-\-configname value\fR
+on the command line\.
+.
+.SH "DEVELOPERS"
+If you\'re using npm to develop and publish your code, check out the following topics:
+.
+.IP "\(bu" 4
+json:
+Make a package\.json file\.  The "json" help doc will tell you what to put in it\.
+.
+.IP "\(bu" 4
+link:
+For linking your current working code into Node\'s path, so that you don\'t have to
+reinstall every time you make a change\.  Use "npm link" to do this\.
+.
+.IP "\(bu" 4
+install:
+It\'s a good idea to install things if you don\'t need the symbolic link\.  Especially,
+installing other peoples code from the registry is done via "npm install"\.
+.
+.IP "\(bu" 4
+adduser:
+Use the \fBnpm adduser\fR command to add a user account for the npm registry, or to
+authorize yourself on a new machine\.  If you forget your password, send an email
+to \fInpm\-@googlegroups\.com\fR and we\'ll delete your account so you can recreate it\.
+.
+.IP "\(bu" 4
+publish:
+Use the \fBnpm publish\fR command to upload your code to the registry, so that other
+people can install it easily\.
+.
+.IP "" 0
+.
+.SH "CONTRIBUTIONS"
+Patches welcome!
+.
+.IP "\(bu" 4
+code:
+Read through \fBnpm help coding\-style\fR if you plan to submit code\.  You don\'t have to
+agree with it, but you do have to follow it\.
+.
+.IP "\(bu" 4
+docs:
+If you find an error in the documentation, edit the appropriate markdown file in the
+"doc" folder\.  (Don\'t worry about generating the man page\.)
+.
+.IP "" 0
+.
+.P
+Contributors are listed in npm\'s \fBpackage\.json\fR file\.
 .
 .SH "PRINCIPLES"
 Put the files where they need to be so that node can find them using the
@@ -66,6 +136,9 @@ email: \fInpm\-@googlegroups\.com\fR
 .P
 Be sure to include \fIall\fR of the output from the npm command that didn\'t work
 as expected\.
+.
+.P
+You can also look for isaacs in #node\.js on irc://irc\.freenode\.net\.
 .
 .SH "HISTORY"
 .
