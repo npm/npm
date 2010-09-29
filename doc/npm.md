@@ -274,3 +274,7 @@ You can also look for isaacs in #node.js on irc://irc.freenode.net.
   Remove updated packages that don't have dependencies.  
   Allow implied suffixes on .js bins  
   Fix an "adduser" bug
+
+* 0.2.3:
+  Lots of documentation tweaks and cleanup  
+  Support || in version ranges
