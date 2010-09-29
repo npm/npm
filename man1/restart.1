@@ -1,0 +1,33 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-RESTART" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-restart\fR \-\- Start a package
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm restart <name>[@<version>] [<name>[@<version>] \.\.\.]
+.
+.fi
+.
+.SH "DESCRIPTION"
+This runs a package\'s "restart" script, if one was provided\.
+Otherwise it runs package\'s "stop" script, if one was provided, and then
+the "start" script\.
+.
+.P
+If no version is specified, then it restarts the "active" version\.
+.
+.SH "SEE ALSO"
+.
+.IP "\(bu" 4
+npm\-start(1)
+.
+.IP "\(bu" 4
+npm\-stop(1)
+.
+.IP "" 0
+

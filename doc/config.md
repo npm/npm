@@ -76,10 +76,23 @@ Configurations defined on the command line are not saved to the .npmrc file.
 
 Default: "info"
 
-The log level to show.  Levels are: verbose, info, warn, error, win, silent.
-Each of these maps to a numeric value, above which all logs must pass to be
-seen.  "win" only shows the "ok" or "not ok" ending message.  The other
-options are self-explanatory.
+The log level to show.
+
+Each level maps to a numeric value, above which all logs must pass to be
+seen.  So, setting it to "warn" shows "win", "error" and "warn" messages.
+
+The log levels:
+
+* silent: Show no output.  Nothing.  If there is output on stderr, it's
+  because something is broken.
+* win: Show the "npm ok" or "npm not ok", but that's all.
+* error: Errors, usually with a stack trace.
+* warn: Things that you should probably be aware of.
+* info: Helpful info.
+* silly: Not-helpful info.  (Lots of dumping whole objects and such.)
+
+Note that output to stdout is always printed.  This setting just modifies
+what's logged to stderr.
 
 ### auto-activate
 
@@ -199,3 +212,10 @@ The name of a GNU-compatible tar program on your system.
 Default: env.GZIPBIN or "gzip"
 
 The name of a GNU-compatible gzip program on your system.
+
+### usage
+
+If set to `true`, then this will tell help to print out the short usage statement
+instead of the long manpage type thing.
+
+This is set automatically if you invoke help like `npm command -?`.

@@ -1,0 +1,508 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm\fR \-\- node package manager
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm <command> [args]
+.
+.fi
+.
+.SH "DESCRIPTION"
+npm is a package manager for the Node javascript library\.
+.
+.P
+Run \fBnpm help\fR to get a list of commands\.
+.
+.SH "STATUS: Useful Beta"
+The core functionality is there\.  It works\.
+.
+.P
+Please use this software\.  It will cut you occasionally\.  Let me know when
+you find a rough edge, and I\'ll sand it down for you\.
+.
+.P
+I appreciate your sense of adventure\.
+.
+.SH "INTRO"
+You probably got npm because you want to install stuff\.
+.
+.P
+Use \fBnpm install blerg\fR to install the latest version of "blerg"\.  Check out \fBnpm help install\fR for more info\.  It can do a lot of stuff\.
+.
+.P
+Use the \fBnpm ls\fR command to show everything that\'s available\.  Looking for
+express\-related modules?  \fBnpm ls express\fR\|\.  Looking for the latest express? \fBnpm ls express latest\fR\|\.  (The arguments are just simple greps\.)  And of course, \fBnpm help ls\fR will tell you more\.
+.
+.P
+Use \fBnpm ls installed\fR to show everything you\'ve installed\.
+.
+.SH "CONFIGS"
+Use the \fBnpm config\fR command to manage how npm does stuff and where it puts things\.
+It stores your configs in the \fB~/\.npmrc\fR file\.  Check \fBnpm help config\fR for more
+info on that, if you care\.
+.
+.P
+You can override any config for just a single command by doing \fB\-\-configname value\fR
+on the command line\.
+.
+.SH "DEVELOPERS"
+If you\'re using npm to develop and publish your code, check out the following topics:
+.
+.IP "\(bu" 4
+json:
+Make a package\.json file\.  The "json" help doc will tell you what to put in it\.
+.
+.IP "\(bu" 4
+link:
+For linking your current working code into Node\'s path, so that you don\'t have to
+reinstall every time you make a change\.  Use "npm link" to do this\.
+.
+.IP "\(bu" 4
+install:
+It\'s a good idea to install things if you don\'t need the symbolic link\.  Especially,
+installing other peoples code from the registry is done via "npm install"\.
+.
+.IP "\(bu" 4
+adduser:
+Use the \fBnpm adduser\fR command to add a user account for the npm registry, or to
+authorize yourself on a new machine\.  If you forget your password, send an email
+to \fInpm\-@googlegroups\.com\fR and we\'ll delete your account so you can recreate it\.
+.
+.IP "\(bu" 4
+publish:
+Use the \fBnpm publish\fR command to upload your code to the registry, so that other
+people can install it easily\.
+.
+.IP "" 0
+.
+.SH "CONTRIBUTIONS"
+Patches welcome!
+.
+.IP "\(bu" 4
+code:
+Read through \fBnpm help coding\-style\fR if you plan to submit code\.  You don\'t have to
+agree with it, but you do have to follow it\.
+.
+.IP "\(bu" 4
+docs:
+If you find an error in the documentation, edit the appropriate markdown file in the
+"doc" folder\.  (Don\'t worry about generating the man page\.)
+.
+.IP "" 0
+.
+.P
+Contributors are listed in npm\'s \fBpackage\.json\fR file\.
+.
+.SH "PRINCIPLES"
+Put the files where they need to be so that node can find them using the
+methods it already uses\.
+.
+.P
+Be lazy, not clever\.
+.
+.P
+The file system is the database\.
+.
+.P
+Sync with habits that are already in use\.
+.
+.P
+Packages should be maintained by their authors, not by the package manager
+author\.
+.
+.P
+Steer clear of dependency hell\.
+.
+.SH "BUGS"
+Plenty\.  Luckily, npm is actively maintained as of this writing\.
+.
+.P
+When you find issues, please report them:
+.
+.IP "\(bu" 4
+web: \fIhttp://github\.com/isaacs/npm/issues\fR
+.
+.IP "\(bu" 4
+email: \fInpm\-@googlegroups\.com\fR
+.
+.IP "" 0
+.
+.P
+Be sure to include \fIall\fR of the output from the npm command that didn\'t work
+as expected\.
+.
+.P
+You can also look for isaacs in #node\.js on irc://irc\.freenode\.net\.
+.
+.SH "HISTORY"
+.
+.IP "\(bu" 4
+0\.0\.1:
+Lots of sketches and false starts\.  Abandoned a few times\.
+.
+.IP "\(bu" 4
+0\.0\.2:
+Install worked mostly\.  Still promise\-based\.
+.
+.IP "\(bu" 4
+0\.0\.3:
+Converted to callbacks\.
+.
+.br
+Mikeal Rogers wrote a registry for it\.
+.
+.IP "\(bu" 4
+0\.0\.4:
+version dependencies
+.
+.br
+link packages
+.
+.br
+activation
+.
+.br
+lifecycle scripts
+.
+.br
+bin linking
+.
+.br
+uninstallation
+.
+.IP "\(bu" 4
+0\.0\.5:
+fix a few bugs in uninstall wrt dependent packages
+.
+.br
+fix relative require()for nodejs modules installed with the "bin" field\.
+.
+.br
+(issue #2)
+.
+.br
+update to work with node 0\.1\.33 (aka net2)
+.
+.br
+added publish and tag commands
+.
+.IP "\(bu" 4
+0\.0\.6:
+set up a public registry
+.
+.br
+send content\-length with registry PUTs
+.
+.br
+adduser command (Mikeal Rogers)
+.
+.br
+ini file stuff (Mikeal Rogers)
+.
+.br
+env\-specific package\.json
+.
+.br
+added more info to npm\'s the package\.json (bugs, contributors, etc\.)
+.
+.IP "\(bu" 4
+0\.0\.7:
+fixed a few bugs in semver
+.
+.br
+refactor documentation
+.
+.br
+add "help" command
+.
+.br
+add install from registry
+.
+.br
+everything else core
+.
+.br
+push to beta
+.
+.IP "\(bu" 4
+0\.1\.0 \- 0\.1\.2:
+push to beta, and announce
+.
+.br
+clean up some bugs around lifecycle scripts
+.
+.br
+reduce reliance on makefile
+.
+.br
+documentation updates
+.
+.br
+Fixed DOA bugs
+.
+.br
+Removed dependence on ronn
+.
+.IP "\(bu" 4
+0\.1\.3:
+Changed a few details with configs (fix #5)
+.
+.br
+Update adduser and publish to put author info in the data
+.
+.br
+Use buffer api for file writes, hopefully fix #4
+.
+.IP "\(bu" 4
+0\.1\.4 \- 0\.1\.5:
+Fixes for a few more bugs and fix some documentation\.
+.
+.IP "\(bu" 4
+0\.1\.6 \- 0\.1\.7:
+Add cache functionality
+.
+.br
+Use couchdb attachments to host tarballs
+.
+.br
+Handle odd require\.paths more appropriately
+.
+.br
+Don\'t break on install if the man path is missing
+.
+.br
+Support publishing or installing a folder or local tarball
+.
+.IP "\(bu" 4
+0\.1\.8:
+Bugfixes
+.
+.br
+Add start, stop, restart, and test commands
+.
+.IP "\(bu" 4
+0\.1\.9:
+npm list enhancements
+.
+.br
+fix the install bug
+.
+.IP "\(bu" 4
+0\.1\.10:
+More errors found by Ryan Dahl and Kris Zyp
+.
+.br
+Better uninstall and list behavior
+.
+.br
+Docs for new developers\.
+.
+.br
+Better tracking of ownership on the registry\.
+.
+.IP "\(bu" 4
+0\.1\.11:
+Martyn Smith found a whole lot of bugs\.
+.
+.br
+Make publish not die when the tarball is big\.
+.
+.br
+"make uninstall" support
+.
+.IP "\(bu" 4
+0\.1\.12 \- 0\.1\.13:
+Fix the downloading bug that was breaking the tarballs
+.
+.br
+Update some docs
+.
+.IP "\(bu" 4
+0\.1\.14 \- 0\.1\.16:
+Fix to stay in sync with node changes
+.
+.br
+Put a special tag on link installs
+.
+.br
+Modify semver comparison slightly
+.
+.br
+add unpublish command
+.
+.br
+Use the "drain" event properly for uploads
+.
+.br
+Handle thrown errors
+.
+.br
+Handle \.npmignore
+.
+.IP "\(bu" 4
+0\.1\.17:
+Stabilization\.
+.
+.IP "\(bu" 4
+0\.1\.18:
+Change a few default configurations
+.
+.br
+Add test harness
+.
+.br
+Default publish, install, and link to "\." if no arguments given  
+.
+.IP "\(bu" 4
+0\.1\.19 \- 0\.1\.20:
+Create a bunch of bugs
+.
+.br
+Fix a bunch of bugs
+.
+.br
+Some minor speed improvements 
+.
+.IP "\(bu" 4
+0\.1\.21 \- 0\.1\.22:
+Relative paths
+.
+.br
+Support comments in package\.json
+.
+.br
+Add owner name to ls output
+.
+.br
+Add "owner" command to manage package owners
+.
+.br
+Support hook scripts in \fB{root}/\.npm/\.hooks/\fR
+.
+.br
+Initial support for config file relative to node executable
+.
+.br
+Support for http proxies
+.
+.br
+Documentation updates
+.
+.IP "\(bu" 4
+0\.1\.23:
+update command \- This is huge\.
+.
+.br
+Rollback for failed installations
+.
+.br
+Install dependencies for link packages
+.
+.br
+Silently read passwords for adduser
+.
+.br
+Cascading configs: cli, env, user, global
+.
+.br
+First pass at \fBnpm view\fR command
+.
+.IP "\(bu" 4
+0\.1\.24, 0\.1\.25:
+Fix a bunch of things
+.
+.br
+Cleanup, etc\.
+.
+.br
+help via \-\-help, \-h, or \-?  
+.
+.IP "\(bu" 4
+0\.1\.26:
+"modules" hash in package\.json (Alex K\. Wolfe)
+.
+.br
+Better "restart" command (Alex K Wolfe)
+.
+.br
+Work on Cygwin
+.
+.br
+Remove link packages properly
+.
+.br
+Make several commands more parallel
+.
+.IP "\(bu" 4
+0\.1\.27:
+Man pages handled with the "man" entry, or a "man" directory
+.
+.br
+Install man pages in the "manroot" config dir
+.
+.br
+Control log output with the "loglevel" config
+.
+.br
+Support a "bin" directory of executables that get auto\-linked
+.
+.br
+Un\-deprecate the "lib" directory\.
+.
+.br
+Bug killing
+.
+.br
+Split up the tar usage so it works on Solaris
+.
+.br
+bundle command
+.
+.br
+rebuild command
+.
+.IP "\(bu" 4
+0\.2\.0:
+Lots more bug killing
+.
+.br
+Various fixes found during the Node Knockout extravaganza
+.
+.br
+Change all "name\-version" things to be "name@version"
+.
+.br
+First allegedly "stable" release\.
+.
+.IP "\(bu" 4
+0\.2\.1:
+Minor updates and bugfixes
+.
+.IP "\(bu" 4
+0\.2\.2:
+Update "help" to work on Solaris
+.
+.br
+Remove updated packages that don\'t have dependencies\.
+.
+.br
+Allow implied suffixes on \.js bins
+.
+.br
+Fix an "adduser" bug
+.
+.IP "\(bu" 4
+0\.2\.3:
+Lots of documentation tweaks and cleanup
+.
+.br
+Support || in version ranges
+.
+.IP "" 0
+

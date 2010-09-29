@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.1.27-12"
+, "version" : "0.2.3-2"
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
@@ -17,6 +17,7 @@
   , "Dav Glass <davglass@gmail.com> (http://blog.davglass.com)"
   , "Alex K. Wolfe <alexkwolfe@gmail.com>"
   , "James Sanders <jimmyjazz14@gmail.com> (http://james-sanders.com/)"
+  , "Reid Burke <me@reidburke.com> (http://reidburke.com/)"
   ]
 , "repository" :
   { "type" : "git"
@@ -26,9 +27,10 @@
   { "mail" : "npm-@googlegroups.com"
   , "web" : "http://github.com/isaacs/npm/issues"
   }
-, "directories" : { "doc" : "./doc", "man" : "./man", "lib" : "./lib" }
+, "directories" : { "doc" : "./doc", "man" : "./man1", "lib" : "./lib" }
 , "bin" : { "npm" : "./cli.js" }
-, "engines" : { "node" : ">=0.1.103" }
+, "main" : "npm"
+, "engines" : { "node" : ">=0.2.0" }
 , "scripts" : { "test" : "make test" }
 , "licenses" :
   [ { "type" : "MIT"

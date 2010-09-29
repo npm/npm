@@ -1,0 +1,59 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-FOLDERS" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-folders\fR \-\- Folder Structures Used by npm
+.
+.SH "DESCRIPTION"
+Everything lives in the \fBroot\fR setting\.  Check \fBnpm help config\fR for more
+on configuration options\.
+.
+.P
+\fBroot/\.npm/foo\fR is where the stuff for package \fBfoo\fR would go\.
+.
+.P
+\fBroot/\.npm/foo/1\.0\.0/package\fR the contents of the tarball containing foo
+version 1\.0\.0
+.
+.P
+\fBroot/\.npm/foo/1\.0\.0/main\.js\fR Generated file that exports the \fBmain\fR module in
+foo\.  This is a shim, not a symbolic link, so that relative paths will work
+appropriately\.
+.
+.P
+\fBroot/foo\-1\.0\.0/{module\-name}\.js\fR Generated shim corresponding to a module
+defined in the modules option\. The module shim requires \fBroot/\.npm/foo/1\.0\.0/package/{module\-path}\.js\fR
+.
+.P
+The \fBmain\fR script is implemented by creating an \fBindex\.js\fR file in this folder\.
+.
+.P
+\fBroot/foo/\fR Symlink to the active version\'s module folder\.
+.
+.P
+\fBroot/\.npm/foo/active\fR symlink to the active version\.
+.
+.P
+\fBroot/\.npm/foo/1\.0\.0/dependencies\fR links to the modules that foo depends upon\.
+This is loaded into the require path first in the foo shims\.
+.
+.P
+\fBroot/\.npm/foo/1\.0\.0/dependson\fR links to the package folders that foo depends
+on\.  This is here so that npm can access those packages programmatically\.
+.
+.P
+\fBroot/\.npm/foo/1\.0\.0/dependents\fR links to the packages that depend upon foo\.
+.
+.P
+\fBroot/\.npm/\.cache\fR the cache folder\.
+.
+.P
+\fBroot/\.npm/\.cache/foo/1\.0\.0/package\.json\fR the parsed package\.json for foo@1\.0\.0
+.
+.P
+\fBroot/\.npm/\.cache/foo/1\.0\.0/package\.tgz\fR the tarball of foo@1\.0\.0
+.
+.P
+\fBroot/\.npm/\.cache/foo/1\.0\.0/package\fR the untouched pristine copy of foo@1\.0\.0

@@ -7,9 +7,9 @@ npm(1) -- node package manager
 
 ## DESCRIPTION
 
-npm is a little package manager for the Node javascript library.
+npm is a package manager for the Node javascript library.
 
-Run `npm help` for help.  That's probably what you meant to do.
+Run `npm help` to get a list of commands.
 
 ## STATUS: Useful Beta
 
@@ -19,6 +19,62 @@ Please use this software.  It will cut you occasionally.  Let me know when
 you find a rough edge, and I'll sand it down for you.
 
 I appreciate your sense of adventure.
+
+## INTRO
+
+You probably got npm because you want to install stuff.
+
+Use `npm install blerg` to install the latest version of "blerg".  Check out
+`npm help install` for more info.  It can do a lot of stuff.
+
+Use the `npm ls` command to show everything that's available.  Looking for
+express-related modules?  `npm ls express`.  Looking for the latest express?
+`npm ls express latest`.  (The arguments are just simple greps.)  And of course,
+`npm help ls` will tell you more.
+
+Use `npm ls installed` to show everything you've installed.
+
+## CONFIGS
+
+Use the `npm config` command to manage how npm does stuff and where it puts things.
+It stores your configs in the `~/.npmrc` file.  Check `npm help config` for more
+info on that, if you care.
+
+You can override any config for just a single command by doing `--configname value`
+on the command line.
+
+## DEVELOPERS
+
+If you're using npm to develop and publish your code, check out the following topics:
+
+* json:
+  Make a package.json file.  The "json" help doc will tell you what to put in it.
+* link:
+  For linking your current working code into Node's path, so that you don't have to
+  reinstall every time you make a change.  Use "npm link" to do this.
+* install:
+  It's a good idea to install things if you don't need the symbolic link.  Especially,
+  installing other peoples code from the registry is done via "npm install".
+* adduser:
+  Use the `npm adduser` command to add a user account for the npm registry, or to
+  authorize yourself on a new machine.  If you forget your password, send an email
+  to <npm-@googlegroups.com> and we'll delete your account so you can recreate it.
+* publish:
+  Use the `npm publish` command to upload your code to the registry, so that other
+  people can install it easily.
+
+## CONTRIBUTIONS
+
+Patches welcome!
+
+* code:
+  Read through `npm help coding-style` if you plan to submit code.  You don't have to
+  agree with it, but you do have to follow it.
+* docs:
+  If you find an error in the documentation, edit the appropriate markdown file in the
+  "doc" folder.  (Don't worry about generating the man page.)
+
+Contributors are listed in npm's `package.json` file.
 
 ## PRINCIPLES
 
@@ -49,6 +105,8 @@ When you find issues, please report them:
 
 Be sure to include *all* of the output from the npm command that didn't work
 as expected.
+
+You can also look for isaacs in #node.js on irc://irc.freenode.net.
 
 ## HISTORY
 
@@ -131,22 +189,22 @@ as expected.
   Better tracking of ownership on the registry.
 
 * 0.1.11:
-	Martyn Smith found a whole lot of bugs.  
-	Make publish not die when the tarball is big.  
-	"make uninstall" support
+  Martyn Smith found a whole lot of bugs.  
+  Make publish not die when the tarball is big.  
+  "make uninstall" support
 
 * 0.1.12 - 0.1.13:
-	Fix the downloading bug that was breaking the tarballs  
-	Update some docs
+  Fix the downloading bug that was breaking the tarballs  
+  Update some docs
 
 * 0.1.14 - 0.1.16:
-	Fix to stay in sync with node changes  
-	Put a special tag on link installs  
-	Modify semver comparison slightly  
-	add unpublish command  
-	Use the "drain" event properly for uploads  
-	Handle thrown errors  
-	Handle .npmignore
+  Fix to stay in sync with node changes  
+  Put a special tag on link installs  
+  Modify semver comparison slightly  
+  add unpublish command  
+  Use the "drain" event properly for uploads  
+  Handle thrown errors  
+  Handle .npmignore
 
 * 0.1.17:
   Stabilization.
@@ -201,3 +259,22 @@ as expected.
   Split up the tar usage so it works on Solaris  
   bundle command  
   rebuild command
+
+* 0.2.0:
+  Lots more bug killing  
+  Various fixes found during the Node Knockout extravaganza  
+  Change all "name-version" things to be "name@version"  
+  First allegedly "stable" release.
+
+* 0.2.1:
+  Minor updates and bugfixes
+
+* 0.2.2:
+  Update "help" to work on Solaris  
+  Remove updated packages that don't have dependencies.  
+  Allow implied suffixes on .js bins  
+  Fix an "adduser" bug
+
+* 0.2.3:
+  Lots of documentation tweaks and cleanup  
+  Support || in version ranges

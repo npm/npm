@@ -11,6 +11,12 @@ var npm = exports
 
 npm.commands = {}
 
+
+if (process.getuid() === 0) {
+  log.error( "\nRunning npm as root is not recommended!\n"
+           + "Seriously, don't do this!\n", "sudon't!")
+}
+
 try {
   var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))+"")
   npm.version = j.version

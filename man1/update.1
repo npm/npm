@@ -1,0 +1,33 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-UPDATE" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-update\fR \-\- Update a package
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm update [<pkg> [<pkg> \.\.\.]]
+.
+.fi
+.
+.SH "DESCRIPTION"
+This command will update all the packages listed to the latest version
+(specified by the \fBtag\fR config), as well as updating any dependent
+packages to use the new version, if possible\.
+.
+.P
+Additionally, it will activate the new version, and delete any old versions, if
+safe to do so
+.
+.P
+If the \fBupdate\-dependents\fR configuration parameter is set to \fB"true"\fR, then
+packages will always be updated when they are installed, if they are the newest
+version\.
+.
+.P
+If the \fBupdate\-dependents\fR configuration parameter is set to \fB"always"\fR, then
+packages will be updated when they are installed, even if to do so would be a
+downgrade\.

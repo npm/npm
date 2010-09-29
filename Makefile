@@ -1,10 +1,10 @@
 
 docs = $(shell find doc -name '*.md' \
 				|sed 's|.md|.1|g' \
-				|sed 's|doc/|man/|g' \
+				|sed 's|doc/|man1/|g' \
 				)
 doc_subfolders = $(shell find doc -type d \
-									|sed 's|doc/|man/|g' \
+									|sed 's|doc/|man1/|g' \
 									)
 
 install:
@@ -23,20 +23,23 @@ uninstall:
 	node cli.js cache clean
 	node cli.js rm npm
 
-man: $(doc_subfolders)
-	@if ! test -d man ; then mkdir -p man ; fi
+man: man1
+	@true
 
-doc: man $(docs)
+man1: $(doc_subfolders)
+	@if ! test -d man1 ; then mkdir -p man1 ; fi
+
+doc: man1 $(docs)
 	@true
 
 # use `npm install ronn` for this to work.
-man/%.1: doc/%.md
+man1/%.1: doc/%.md
 	ronn --roff $< > $@
 
-man/%/: doc/%/
+man1/%/: doc/%/
 	@if ! test -d $@ ; then mkdir -p $@ ; fi
 
 test:
 	./test/run.sh
 
-.PHONY: install install-dev link doc clean uninstall test
+.PHONY: install install-dev link doc clean uninstall test man

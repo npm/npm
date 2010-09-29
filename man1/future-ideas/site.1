@@ -1,0 +1,79 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-SITE" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-site\fR \-\- Run the npm web site
+.
+.SH "FUTURE"
+This functionality does not yet exist\.
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm site [ start | stop ]
+.
+.fi
+.
+.SH "DESCRIPTION"
+This starts up npm in "site" mode\.  The following configs are relevant,
+and can either be specified in the \fB\|\.npmrc\fR file, or as command line
+options\.
+.
+.IP "\(bu" 4
+userfile:
+A file containing the encrypted authorization info for all users\.  If
+specified, then this is used for \fBnpm adduser\fR requests
+to this registry\.  
+.
+.IP "\(bu" 4
+admin:
+A comma\-delimited list of admin users\.  All of these must already be
+in the local adduser config\.  If there is no admin, then the site will
+not allow remote management\.  All admin usernames must already be
+in the userfile, and a userfile must be specified\.
+.
+.IP "\(bu" 4
+listen:
+Ports to listen on for WS requests\.  The first number is for http,
+the second for https, and the third for secure TCP\.  Set any to "\-",
+or omit, to use the default\.
+Defaults to "80,443,15443"
+.
+.IP "\(bu" 4
+registry:
+If a package is not found, then its contents will be fetched from the
+upstream registry, and cached for future retrieval\.
+.
+.IP
+isaacs: Make sure that this does loop\-detection, so that a "ring" of
+registries can work as a distributed network\.  Also, once we have
+support for checking multiple registries, you could have a distribution
+ring that secondarily depends on some other upstream resource\.
+.
+.IP "" 0
+.
+.P
+The content for the site is stored in the npm cache directory, which is
+inside the folder used for the \fBroot\fR setting, at \fB{root}/\.npm/\.cache\fR\|\.
+It is organized in a simple hierarchical folder structure corresponding
+to the web service URLs that npm uses\.
+.
+.SH "TCP Server"
+The TCP server starts up to support the \fBnpm remote\fR command, if there is
+a valid admin userlist\.
+.
+.SH "NOTE"
+This also is what happens when you do \fBnpm start npm\fR\|\.
+.
+.SH "SEE ALSO"
+.
+.IP "\(bu" 4
+npm\-remote(1)
+.
+.IP "\(bu" 4
+npm\-config(1)
+.
+.IP "" 0
+

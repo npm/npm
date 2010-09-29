@@ -1,0 +1,28 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-REMOTE" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-remote\fR \-\- Execute commands on a remote machine
+.
+.SH "FUTURE"
+This functionality does not yet exist\.
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm remote <commands>
+.
+.fi
+.
+.SH "DESCRIPTION"
+Run a command on a remote npm site instance\.
+.
+.P
+In order to do this, the current authenticated user must be in
+the "admin" list on the server, and it must be running with https
+support\.
+.
+.P
+It uses the \fBhost\fR config to know where to do things\.

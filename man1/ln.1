@@ -1,0 +1,20 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-LINK" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-link\fR \-\- Symlink a package folder
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm link <folder>
+.
+.fi
+.
+.SH "DESCRIPTION"
+This will link a source folder into npm\'s registry using a symlink, and then
+build it according to the package\.json file in that folder\'s root\. This is
+handy for installing your own stuff, so that you can work on it and test it
+iteratively without having to continually rebuild\.

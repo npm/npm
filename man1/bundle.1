@@ -1,0 +1,125 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-BUNDLE" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-bundle\fR \-\- Bundle package dependencies
+.
+.SH "EXPERIMENTAL"
+This is experimental functionality\.  If you have thoughts about how it
+should work, please post a comment at:
+http://github\.com/isaacs/npm/issues/issue/74
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm bundle <folder> [<pkg>]
+.
+.fi
+.
+.IP "\(bu" 4
+\fB<folder>\fR:
+The place where bundled dependencies go\.
+.
+.IP "\(bu" 4
+\fB<pkg>\fR:
+The package whose dependencies are to be bundled\. Defaults to $PWD\.
+See \fBnpm help install\fR for more on the ways to identify a package\.
+.
+.IP "" 0
+.
+.SH "DESCRIPTION"
+Bundles all the dependencies of a package into a specific folder\.
+.
+.P
+Furthermore, sets up an index\.js in the folder that will shift it onto the
+require\.paths, and export the bundled modules\.
+.
+.P
+For example, to install of your requirements into a "deps" folder,
+you could do this:
+.
+.IP "" 4
+.
+.nf
+npm bundle deps
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Assuming your code is in the "lib" folder, and it depended on a package
+"foo", you could then do this:
+.
+.IP "" 4
+.
+.nf
+require("\.\./deps") // this sets the require\.paths properly\.
+var foo = require("foo")
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The bundle index will also return the modules that your package
+depends on\.  So, this would work as well:
+.
+.IP "" 4
+.
+.nf
+require("\.\./deps")\.foo\.createFoo(\.\.\.)
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The dependencies of those packages installed will also be installed and
+linked, just like an \fBnpm install\fR command\.  In fact, internally \fBbuffer\fR
+just sets the \fBroot\fR config and then does a normal \fBnpm install\fR to put
+the modules in place\.
+.
+.P
+To update to new versions (or if the dependencies change) then run the
+bundle command again\.
+.
+.SH "CAVEATS"
+There is no pretty to "remove" a package from a bundle at the moment\.
+However, you can do this:
+.
+.IP "" 4
+.
+.nf
+npm \-\-root \./deps rm foo
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Bins and man pages are not installed by bundle\.
+.
+.P
+Packages are \fIbuilt\fR, which often means they\'re compiled in that
+architecture and against that version of node\.  To update them, you can
+do:
+.
+.IP "" 4
+.
+.nf
+npm \-\-root \./deps rebuild
+.
+.fi
+.
+.IP "" 0
+.
+.P
+or run \fBnpm bundle deps\fR on the target machine\.
+.
+.P
+The \fBnpm update\fR command will do \fIhorrible\fR things to a bundle folder\.
+Don\'t ever point update at that root, or your bundles may no longer
+satisfy your dependencies\.

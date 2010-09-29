@@ -1,0 +1,49 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-DEPLOY" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-deploy\fR \-\- Deploy a package to a remote host
+.
+.SH "FUTURE"
+This functionality does not yet exist\.
+.
+.SH "SUMMARY"
+.
+.nf
+npm deploy <pkg> [\-\-host <hostname>]
+.
+.fi
+.
+.SH "DESCRIPTION"
+This is a porcelain command\.  It is equivalent to doing:
+.
+.IP "" 4
+.
+.nf
+npm publish \-\-registry $(npm config get host) <pkg>
+npm remote install <pkg\-name>@<pkg\-version>
+.
+.fi
+.
+.IP "" 0
+.
+.P
+That is, it first publishes the package to the server specified
+by the \fBhost\fR config, and then remotely installs that package
+on the host\.
+.
+.SH "SEE ALSO"
+.
+.IP "\(bu" 4
+npm\-remote(1)
+.
+.IP "\(bu" 4
+npm\-site(1)
+.
+.IP "\(bu" 4
+npm\-publish(1)
+.
+.IP "" 0
+

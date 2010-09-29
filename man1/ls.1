@@ -1,0 +1,52 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-LIST" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-list\fR \-\- List installed packages
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm list
+npm ls
+.
+.fi
+.
+.SH "DESCRIPTION"
+This command will print to stdout all the versions of packages that are
+either installed or available in the registry, with their tags and whether
+or not they\'re active and/or stable\.
+.
+.P
+To filter a single package or state, you can provide words to filter on
+and highlight (if appropriate)\.  For instance, to see all the stable
+packages, you could do this:
+.
+.IP "" 4
+.
+.nf
+npm ls stable
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Another common usage is to find the set of all packages that are 
+installed\. This can be accomplished by doing this:
+.
+.IP "" 4
+.
+.nf
+npm ls installed
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Strings are matched using the JavaScript "split" function, so regular
+expression strings are ok\.  However, the highlighting is a simple
+split/join, so regexps probably won\'t get the funky colors\.

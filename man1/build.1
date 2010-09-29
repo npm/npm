@@ -1,0 +1,46 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-BUILD" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-build\fR \-\- Build a package
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm build <package\-folder>
+.
+.fi
+.
+.IP "\(bu" 4
+\fB<package\-folder>\fR:
+A folder containing a \fBpackage\.json\fR file in its root\.
+.
+.IP "" 0
+.
+.SH "DESCRIPTION"
+This command should almost never need to be run directly\.  It is an abstraction
+of the functionality shared by both npm\-install(1) and npm\-link(1)\.
+.
+.P
+This command creates the various interwoven links that ensure a package\'s contents
+are available in the root appropriately, and that its dependencies are linked
+appropriately\.
+.
+.SH "SEE ALSO"
+.
+.IP "\(bu" 4
+npm\-install(1)
+.
+.IP "\(bu" 4
+npm\-link(1)
+.
+.IP "\(bu" 4
+npm\-scripts(1)
+.
+.IP "\(bu" 4
+npm\-json(1)
+.
+.IP "" 0
+

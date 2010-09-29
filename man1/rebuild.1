@@ -1,0 +1,34 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-REBUILD" "1" "September 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-rebuild\fR \-\- Rebuild a package
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm rebuild [<name>[@<version>] [name[@<version>] \.\.\.]]
+.
+.fi
+.
+.IP "\(bu" 4
+\fB<name>\fR:
+The package to rebuild
+.
+.IP "\(bu" 4
+\fB<version>\fR:
+The version range to rebuild\.  Any matching installed packages are rebuilt\.
+.
+.IP "" 0
+.
+.SH "DESCRIPTION"
+This command runs the \fBnpm build\fR command on the matched folders\.  This is useful
+when you install a new version of node, and must recompile all your C++ addons with
+the new binary\.
+.
+.P
+Regardless of the configuration settings, rebuild always sets \fBupdate\-dependents\fR
+and \fBauto\-activate\fR to false, to minimize unexpected side effects\.  It does not
+change any state outside of the package\'s folder\.
