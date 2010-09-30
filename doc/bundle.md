@@ -17,10 +17,6 @@ http://github.com/isaacs/npm/issues/issue/74
   The package whose dependencies are to be bundled. Defaults to $PWD.
   See `npm help install` for more on the ways to identify a package.
 
-Bundle does *not* support version ranges like
-
-    npm bundle deps sax@">=0.1.0 <0.2.0"
-
 ## DESCRIPTION
 
 Bundles all the dependencies of a package into a specific folder.
@@ -72,4 +68,8 @@ or run `npm bundle deps` on the target machine.
 The `npm update` command will do *horrible* things to a bundle folder.
 Don't ever point update at that root, or your bundles may no longer
 satisfy your dependencies.
+
+Bundle does *not* support version ranges like
+
+    npm bundle deps sax@">=0.1.0 <0.2.0"
 
