@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-JSON" "1" "September 2010" "" ""
+.TH "NPM\-JSON" "1" "October 2010" "" ""
 .
 .SH "NAME"
 \fBnpm-json\fR \-\- Specifics of npm\'s package\.json handling
@@ -289,6 +289,15 @@ as the "bin" hash\.
 .
 .P
 If you have a "bin" hash already, then this has no effect\.
+.
+.SS "directories\.man"
+A folder that is full of man pages\.  Sugar to generate a "man" array by walking the folder\.
+.
+.SS "directories\.doc"
+Put markdown files in here\.  Eventually, these will be displayed nicely, maybe, someday\.
+.
+.SS "directories\.example"
+Put example scripts in here\.  Someday, it might be exposed in some clever way\.
 .
 .SH "repository"
 Specify the place where your code lives\. This is helpful for people who want to
