@@ -10,7 +10,7 @@ var npm = exports
   , path = require("path")
 
 npm.commands = {}
-
+npm.ELIFECYCLE = {}
 
 if (process.getuid() === 0) {
   log.error( "\nRunning npm as root is not recommended!\n"
