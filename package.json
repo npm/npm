@@ -20,6 +20,7 @@
   , "Reid Burke <me@reidburke.com> (http://reidburke.com/)"
   , "Arlo Breault <arlolra@gmail.com> (http://thoughtherder.com/)"
   , "Timo Derstappen <teemow@gmail.com> (http://teemow.com)"
+  , "Bradley Meck <bradley.meck@gmail.com>"
   ]
 , "repository" :
   { "type" : "git"
