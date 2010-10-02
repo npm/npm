@@ -199,6 +199,18 @@ as the "bin" hash.
 
 If you have a "bin" hash already, then this has no effect.
 
+### directories.man
+
+A folder that is full of man pages.  Sugar to generate a "man" array by walking the folder.
+
+### directories.doc
+
+Put markdown files in here.  Eventually, these will be displayed nicely, maybe, someday.
+
+### directories.example
+
+Put example scripts in here.  Someday, it might be exposed in some clever way.
+
 ## repository
 
 Specify the place where your code lives. This is helpful for people who want to
