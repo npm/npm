@@ -12,6 +12,7 @@ var fs = require("./lib/utils/graceful-fs")
   , npm = require("./npm")
   , ini = require("./lib/utils/ini")
   , rm = require("./lib/utils/rm-rf")
+  , errorHandler = require("./lib/utils/error-handler")
 
   // supported commands.
   , argv = process.argv.slice(2)
@@ -64,10 +65,6 @@ if (!semver.satisfies(nodeVer, reqVer)) {
 }
 
 process.on("uncaughtException", errorHandler)
-process.on("exit", function () { if (!itWorked) log.win("not ok") })
-
-var itWorked = false
-
 
 if (!command && !printVersion) conf.usage = true
 
@@ -82,39 +79,4 @@ else {
     npm.config.set("root", ini.get("root"))
     npm.commands[command](arglist, errorHandler)
   })
-}
-
-var cbCalled = false
-function errorHandler (er) {
-  if (cbCalled) throw new Error("Callback called more than once.")
-  cbCalled = true
-  if (!er) {
-    itWorked = true
-    log.win("ok")
-    return exit()
-  }
-  log.error(er)
-  if (!(er instanceof Error)) return exit(1)
-  if (er.message.trim() === "ECONNREFUSED, Could not contact DNS servers") {
-    log.error(["If you are using Cygwin, please set up your /etc/resolv.conf"
-              ,"See step 3 in this wiki page:"
-              ,"    http://github.com/ry/node/wiki/Building-node.js-on-Cygwin-%28Windows%29"
-              ,"If you are not using Cygwin, please report this"
-              ,"at <http://github.com/isaacs/npm/issues>"
-              ,"or email it to <npm-@googlegroups.com>"
-              ].join("\n"))
-  } else {
-    if (npm.commands[command].usage) {
-      log.error(npm.commands[command].usage)
-    }
-    log.error(["try running: 'npm help "+command+"'"
-              ,"Report this *entire* log at <http://github.com/isaacs/npm/issues>"
-              ,"or email it to <npm-@googlegroups.com>"
-              ].join("\n"))
-  }
-  exit(1)
-}
-
-function exit (code) {
-  rm(npm.tmp, function () { process.exit(code || 0) })
 }
