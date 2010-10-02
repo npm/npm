@@ -21,6 +21,7 @@
   , "Arlo Breault <arlolra@gmail.com> (http://thoughtherder.com/)"
   , "Timo Derstappen <teemow@gmail.com> (http://teemow.com)"
   , "Bradley Meck <bradley.meck@gmail.com>"
+  , "Bart Teeuwisse <bart.teeuwisse@thecodemill.biz> (http://thecodemill.biz/)"
   ]
 , "repository" :
   { "type" : "git"
