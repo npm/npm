@@ -219,3 +219,10 @@ If set to `true`, then this will tell help to print out the short usage statemen
 instead of the long manpage type thing.
 
 This is set automatically if you invoke help like `npm command -?`.
+
+### viewer
+
+Default: "man"
+
+The program to use to view help content.  Set to "woman" to use the emacs troff viewer
+by that name.
