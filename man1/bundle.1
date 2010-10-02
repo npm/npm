@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-BUNDLE" "1" "September 2010" "" ""
+.TH "NPM\-BUNDLE" "1" "October 2010" "" ""
 .
 .SH "NAME"
 \fBnpm-bundle\fR \-\- Bundle package dependencies
@@ -123,3 +123,16 @@ or run \fBnpm bundle deps\fR on the target machine\.
 The \fBnpm update\fR command will do \fIhorrible\fR things to a bundle folder\.
 Don\'t ever point update at that root, or your bundles may no longer
 satisfy your dependencies\.
+.
+.P
+Bundle does \fInot\fR support version ranges like
+.
+.IP "" 4
+.
+.nf
+npm bundle deps sax@">=0\.1\.0 <0\.2\.0"
+.
+.fi
+.
+.IP "" 0
+
