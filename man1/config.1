@@ -13,6 +13,7 @@ npm config set <key> <value> [\-\-global]
 npm config get <key>
 npm config delete <key>
 npm config list
+npm config edit
 .
 .fi
 .
@@ -93,6 +94,16 @@ npm config delete key
 .
 .P
 Deletes the key from all configuration files\.
+.
+.SS "edit"
+.
+.nf
+npm config edit
+.
+.fi
+.
+.P
+Opens the config file in an editor\.  Use the \fB\-\-global\fR flag to edit the global config\.
 .
 .SH "Config Settings"
 npm supports a very basic argument parser\.  For any of the settings

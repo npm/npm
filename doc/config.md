@@ -7,6 +7,7 @@ npm-config(1) -- Manage the npm configuration file
     npm config get <key>
     npm config delete <key>
     npm config list
+    npm config edit
 
 ## DESCRIPTION
 
@@ -61,6 +62,12 @@ Show all the config settings.
     npm config delete key
 
 Deletes the key from all configuration files.
+
+### edit
+
+    npm config edit
+
+Opens the config file in an editor.  Use the `--global` flag to edit the global config.
 
 ## Config Settings
 
