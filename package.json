@@ -22,6 +22,7 @@
   , "Timo Derstappen <teemow@gmail.com> (http://teemow.com)"
   , "Bradley Meck <bradley.meck@gmail.com>"
   , "Bart Teeuwisse <bart.teeuwisse@thecodemill.biz> (http://thecodemill.biz/)"
+  , "Ben Noordhuis <info@bnoordhuis.nl> (http://bnoordhuis.nl/)"
   ]
 , "repository" :
   { "type" : "git"
