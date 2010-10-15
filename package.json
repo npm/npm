@@ -23,6 +23,7 @@
   , "Bradley Meck <bradley.meck@gmail.com>"
   , "Bart Teeuwisse <bart.teeuwisse@thecodemill.biz> (http://thecodemill.biz/)"
   , "Ben Noordhuis <info@bnoordhuis.nl> (http://bnoordhuis.nl/)"
+  , "Tor Valamo <tor.valamo@gmail.com> (http://www.magnimedia.no/)"
   ]
 , "repository" :
   { "type" : "git"
