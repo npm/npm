@@ -8,7 +8,7 @@ log.info("ok", "it worked if it ends with")
 
 var fs = require("./lib/utils/graceful-fs")
   , path = require("path")
-  , sys = require("sys")
+  , sys = require("./lib/utils/sys")
   , npm = require("./npm")
   , ini = require("./lib/utils/ini")
   , rm = require("./lib/utils/rm-rf")
