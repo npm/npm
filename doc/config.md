@@ -7,6 +7,7 @@ npm-config(1) -- Manage the npm configuration file
     npm config get <key>
     npm config delete <key>
     npm config list
+    npm config edit
 
 ## DESCRIPTION
 
@@ -61,6 +62,12 @@ Show all the config settings.
     npm config delete key
 
 Deletes the key from all configuration files.
+
+### edit
+
+    npm config edit
+
+Opens the config file in an editor.  Use the `--global` flag to edit the global config.
 
 ## Config Settings
 
@@ -219,3 +226,10 @@ If set to `true`, then this will tell help to print out the short usage statemen
 instead of the long manpage type thing.
 
 This is set automatically if you invoke help like `npm command -?`.
+
+### viewer
+
+Default: "man"
+
+The program to use to view help content.  Set to "woman" to use the emacs troff viewer
+by that name.

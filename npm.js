@@ -10,7 +10,8 @@ var npm = exports
   , path = require("path")
 
 npm.commands = {}
-
+npm.ELIFECYCLE = {}
+npm.E404 = {}
 
 if (process.getuid() === 0) {
   log.error( "\nRunning npm as root is not recommended!\n"
@@ -54,6 +55,7 @@ var commandCache = {}
   , "repl"
   , "rebuild"
   , "bundle"
+  , "outdated"
   ].forEach(function (c) {
     Object.defineProperty(npm.commands, c, { get : function () {
       c = c === "list" ? "ls"

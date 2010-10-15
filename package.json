@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.2.3-2"
+, "version" : "0.2.3-6"
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
@@ -18,6 +18,11 @@
   , "Alex K. Wolfe <alexkwolfe@gmail.com>"
   , "James Sanders <jimmyjazz14@gmail.com> (http://james-sanders.com/)"
   , "Reid Burke <me@reidburke.com> (http://reidburke.com/)"
+  , "Arlo Breault <arlolra@gmail.com> (http://thoughtherder.com/)"
+  , "Timo Derstappen <teemow@gmail.com> (http://teemow.com)"
+  , "Bradley Meck <bradley.meck@gmail.com>"
+  , "Bart Teeuwisse <bart.teeuwisse@thecodemill.biz> (http://thecodemill.biz/)"
+  , "Ben Noordhuis <info@bnoordhuis.nl> (http://bnoordhuis.nl/)"
   ]
 , "repository" :
   { "type" : "git"
