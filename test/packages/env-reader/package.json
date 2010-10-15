@@ -1,0 +1,4 @@
+{ "name" : "env-reader"
+, "version" : "1.2.3"
+, "scripts" : { "install" : "env | grep npm" }
+}

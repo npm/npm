@@ -1,0 +1,4 @@
+{ "name" : "depends-on-connect"
+, "version" : "1.2.3"
+, "dependencies" : { "connect" : "0.2.4" }
+}
