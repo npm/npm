@@ -39,6 +39,7 @@ main () {
 
   if [ $FAILURES -eq 0 ]; then
     echo_err "ok"
+    rm -rf $TMP
   else
     echo_err "FAILED: $FAILURES"
   fi
@@ -84,9 +85,10 @@ done
 NPMPKG="$(dirname -- "$(dirname -- "$SELF_PATH")")"
 NPMCLI="$NPMPKG/cli.js"
 TESTDIR="$NPMPKG/test/"
-ROOTDIR="$TESTDIR/root"
-BINDIR="$TESTDIR/bin"
-MANDIR="$TESTDIR/man"
+TMP=$(mktemp -dt npm)
+ROOTDIR="$TMP/root"
+BINDIR="$TMP/bin"
+MANDIR="$TMP/man"
 
 cleanup () {
   if [ "$FAILURES" != "0" ] && [ "$FAILURES" != "" ]; then
