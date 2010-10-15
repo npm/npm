@@ -4,3 +4,4 @@ build/
 .hg/
 .git/
 CVS/
+.npm/
