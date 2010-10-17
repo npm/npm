@@ -46,9 +46,9 @@ Create and edit a file at `~/.npmrc`.  This is an ini-formatted file, which
 you can use to set npm configs.  Do something like this to it:
 
     cat >>~/.npmrc <<NPMRC
-    root = $HOME/.node_libraries
-    binroot = $HOME/bin
-    manroot = $HOME/share/man
+    root = ~/.node_libraries
+    binroot = ~/bin
+    manroot = ~/share/man
     NPMRC
 
 ### Option 4: HOLY COW NOT RECOMMENDED!!
@@ -64,6 +64,13 @@ obnoxious warnings telling you that you're insane for doing this.
 If this causes horrible things to happen, you can't say I didn't warn you over
 and over again until everyone got sick of hearing about it and told me to shut
 up already.
+
+It is on the roadmap to make npm do a bunch of chown/setuid stuff when sudoed,
+so eventually it'll actually be *safer* to run as root than as a user account,
+but that's a refactor that is slowly progressing.
+
+If you have feelings about sudo use and what it should imply, then please go add
+some comments and thoughts on [this issue](http://github.com/isaacs/npm/issues/issue/294).
 
 ## More Fancy Installing
 
