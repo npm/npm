@@ -13,6 +13,25 @@ npm.commands = {}
 npm.ELIFECYCLE = {}
 npm.E404 = {}
 
+npm.getActiveVersion = function(module, cb) {
+    if (!cb) throw new Error('Requires a callback')
+    require("./lib/utils/read-installed")(module, function(err, data) {
+					      data = data[module]
+					      if (data) {
+						  for (var p in data) {
+						      var o = data[p]
+						      if ('active' in o && o.active) {
+							  cb(null, p)
+							  return;
+						      }
+						  }
+						  cb('No version found')
+					      } else {
+						  cb('Module is not installed')
+					      }
+					  })
+}
+
 if (process.getuid() === 0) {
   log.error( "\nRunning npm as root is not recommended!\n"
            + "Seriously, don't do this!\n", "sudon't!")
