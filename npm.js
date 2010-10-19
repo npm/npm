@@ -103,7 +103,11 @@ Object.defineProperty(npm, "cache",
   { get : function () { return path.join(npm.root, ".npm", ".cache") }
   , enumerable : true
   })
+var tmpFolder
 Object.defineProperty(npm, "tmp",
-  { get : function () { return path.join(npm.root, ".npm", ".tmp") }
+  { get : function () {
+      if (!tmpFolder) tmpFolder = "npm-"+Date.now()
+      return path.join(npm.config.get("tmproot"), tmpFolder)
+    }
   , enumerable : true
   })
