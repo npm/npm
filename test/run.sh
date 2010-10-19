@@ -85,7 +85,7 @@ done
 NPMPKG="$(dirname -- "$(dirname -- "$SELF_PATH")")"
 NPMCLI="$NPMPKG/cli.js"
 TESTDIR="$NPMPKG/test/"
-TMP=$(mktemp -dt npm)
+TMP=$(mktemp -dt npm.XXXXXX)
 ROOTDIR="$TMP/root"
 BINDIR="$TMP/bin"
 MANDIR="$TMP/man"
