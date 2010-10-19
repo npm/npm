@@ -278,3 +278,13 @@ You can also look for isaacs in #node.js on irc://irc.freenode.net.
 * 0.2.3:
   Lots of documentation tweaks and cleanup  
   Support || in version ranges
+
+* 0.2.4:
+  Contribution party!  
+  Better list whitespace  
+  Lots of config happiness  
+  Ignore all major SCM folders by default  
+  Handle proxies and hostnames with ports  
+  Better Bundling  
+  Add 'outdated' command  
+  Better handling of "engines" field

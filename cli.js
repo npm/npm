@@ -8,7 +8,7 @@ log.info("ok", "it worked if it ends with")
 
 var fs = require("./lib/utils/graceful-fs")
   , path = require("path")
-  , sys = require("sys")
+  , sys = require("./lib/utils/sys")
   , npm = require("./npm")
   , ini = require("./lib/utils/ini")
   , rm = require("./lib/utils/rm-rf")
@@ -27,7 +27,7 @@ var fs = require("./lib/utils/graceful-fs")
 log.verbose(argv, "cli")
 
 while (arg = argv.shift()) {
-  if (!key && (arg.match(/^-+[h?]$/i))) arg = "--usage"
+  if (!key && (arg.match(/^-+[h?]$/i) || arg.match(/^-+help$/i))) arg = "--usage"
   if (!command && (npm.commands.hasOwnProperty(arg))) {
     if (key) {
       conf[key] = true

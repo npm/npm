@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-DEVELOPERS" "1" "September 2010" "" ""
+.TH "NPM\-DEVELOPERS" "1" "October 2010" "" ""
 .
 .SH "NAME"
 \fBnpm-developers\fR \-\- Developer Guide
@@ -145,31 +145,20 @@ and you define your package\.json with this in it:
 then you\'d want to make sure that require("foo") and require("foo/bar") both
 work and bring in the appropriate modules\.
 .
-.SH "Compile Node with OpenSSL"
-npm will stubbornly refuse to expose your password in the clear\.  That
-means that you\'ll have to install whatever package provides openssl\.h
-on your system\.  When you \fB\|\./configure\fR node, make sure that it says:
-.
-.IP "" 4
-.
-.nf
-Checking for openssl                     : yes
-.
-.fi
-.
-.IP "" 0
-.
 .SH "Create a User Account"
 Create a user with the adduser command\.  It works like this:
 .
 .IP "" 4
 .
 .nf
-npm adduser bob password bob@email\.com
+npm adduser
 .
 .fi
 .
 .IP "" 0
+.
+.P
+and then follow the prompts\.
 .
 .P
 This is documented better in npm\-adduser(1)\.  So do this to get the
@@ -178,7 +167,7 @@ details:
 .IP "" 4
 .
 .nf
-man npm\-adduser
+npm help adduser
 .
 .fi
 .
@@ -198,24 +187,22 @@ npm publish /path/to/my\-package
 .
 .P
 You can give publish a url to a tarball, or a filename of a tarball,
-or a path to a folder\.  (Paths have to either be "\." or contain a "/"\.)
+or a path to a folder\.
 .
-.SH "Tag your package as "stable""
-This makes it easier to install without your users having to know the
-version ahead of time\.
+.P
+If you\'re in the root of your folder, then you can just do:
 .
 .IP "" 4
 .
 .nf
-npm tag my\-package@1\.2\.3 stable
+npm publish
 .
 .fi
 .
 .IP "" 0
 .
 .P
-You can also use other tags, but "stable" and "latest" have reserved
-meanings\.
+since the default argument is "\."\.
 .
 .SH "Brag about it"
 Send emails, write blogs, blab in IRC\.

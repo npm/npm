@@ -95,24 +95,18 @@ and you define your package.json with this in it:
 then you'd want to make sure that require("foo") and require("foo/bar") both
 work and bring in the appropriate modules.
 
-## Compile Node with OpenSSL
-
-npm will stubbornly refuse to expose your password in the clear.  That
-means that you'll have to install whatever package provides openssl.h
-on your system.  When you `./configure` node, make sure that it says:
-
-    Checking for openssl                     : yes
-
 ## Create a User Account
 
 Create a user with the adduser command.  It works like this:
 
-    npm adduser bob password bob@email.com
+    npm adduser
+
+and then follow the prompts.
 
 This is documented better in npm-adduser(1).  So do this to get the
 details:
 
-    man npm-adduser
+    npm help adduser
 
 ## Publish your package
 
@@ -121,17 +115,13 @@ This part's easy.
     npm publish /path/to/my-package
 
 You can give publish a url to a tarball, or a filename of a tarball,
-or a path to a folder.  (Paths have to either be "." or contain a "/".)
+or a path to a folder.
 
-## Tag your package as "stable"
+If you're in the root of your folder, then you can just do:
 
-This makes it easier to install without your users having to know the
-version ahead of time.
+    npm publish
 
-    npm tag my-package@1.2.3 stable
-
-You can also use other tags, but "stable" and "latest" have reserved
-meanings.
+since the default argument is ".".
 
 ## Brag about it
 
