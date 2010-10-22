@@ -58,7 +58,7 @@ if (printVersion) {
 var semver = require("./lib/utils/semver")
   , nodeVer = process.version
   , reqVer = npm.nodeVersionRequired
-if (!semver.satisfies(nodeVer, reqVer)) {
+if (reqVer && !semver.satisfies(nodeVer, reqVer)) {
   var badNodeVersion = new Error(
     "npm doesn't work with node " + nodeVer + "\nRequired: node@" + reqVer)
   throw badNodeVersion
