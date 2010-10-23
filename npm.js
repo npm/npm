@@ -2,11 +2,13 @@
 process.title = "npm"
 
 var npm = exports
+  , config = require("./lib/config")
   , set = require("./lib/utils/set")
   , get = require("./lib/utils/get")
   , ini = require("./lib/utils/ini")
   , log = require("./lib/utils/log")
   , fs = require("./lib/utils/graceful-fs")
+  , errorHandler = require("./lib/utils/error-handler")
   , path = require("path")
 
 npm.commands = {}
@@ -66,6 +68,19 @@ var commandCache = {}
       return commandCache[c] = require(__dirname+"/lib/"+c)
     }, enumerable: true})
   })
+
+npm.load = function (opts, cb) {
+  // don't assume that npm is installed in any particular spot, since this
+  // might conceivably be a bootstrap attempt.
+  var log = require("./lib/utils/log")
+  log.waitForConfig()
+  
+  ini.resolveConfigs(conf, function (er) {
+    if (er) return errorHandler(er, opts.exit)
+    npm.config.set("root", ini.get("root"))
+    cb(null, true)
+  })
+}
 
 // Local store for package data, so it won't have to be fetched/read more than
 // once in a single pass.  TODO: cache this to disk somewhere when we're using

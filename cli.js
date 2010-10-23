@@ -74,9 +74,7 @@ else {
     arglist.unshift(command)
     command = "help"
   }
-  ini.resolveConfigs(conf, function (er) {
-    if (er) return errorHandler(er)
-    npm.config.set("root", ini.get("root"))
+  npm.load({ conf: conf, exit: true }, function (err, loaded) {
     npm.commands[command](arglist, errorHandler)
-  })
+  });
 }
