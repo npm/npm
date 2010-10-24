@@ -8,7 +8,6 @@ var npm = exports
   , ini = require("./lib/utils/ini")
   , log = require("./lib/utils/log")
   , fs = require("./lib/utils/graceful-fs")
-  , errorHandler = require("./lib/utils/error-handler")
   , path = require("path")
 
 npm.commands = {}
@@ -69,17 +68,15 @@ var commandCache = {}
     }, enumerable: true})
   })
 
-npm.load = function (opts, cb) {
+var loaded = false
+npm.load = function (conf, cb) {
+  if (!cb && typeof conf === "function") cb = conf , conf = {}
+  if (loaded) return cb()
+  loaded = true
   // don't assume that npm is installed in any particular spot, since this
   // might conceivably be a bootstrap attempt.
-  var log = require("./lib/utils/log")
   log.waitForConfig()
-  
-  ini.resolveConfigs(conf, function (er) {
-    if (er) return errorHandler(er, opts.exit)
-    npm.config.set("root", ini.get("root"))
-    cb(null, true)
-  })
+  ini.resolveConfigs(conf, cb)
 }
 
 // Local store for package data, so it won't have to be fetched/read more than

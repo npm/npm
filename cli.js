@@ -51,7 +51,7 @@ var vindex = arglist.indexOf("-v")
   , printVersion = vindex !== -1 || conf.version
 if (printVersion) {
   sys.puts(npm.version)
-  if (vindex !== -1) arglist.splice(vindex, 1)
+  process.exit(0)
 } else log("npm@"+npm.version, "using")
 
 // make sure that this version of node works with this version of npm.
@@ -59,22 +59,23 @@ var semver = require("./lib/utils/semver")
   , nodeVer = process.version
   , reqVer = npm.nodeVersionRequired
 if (reqVer && !semver.satisfies(nodeVer, reqVer)) {
-  var badNodeVersion = new Error(
-    "npm doesn't work with node " + nodeVer + "\nRequired: node@" + reqVer)
-  throw badNodeVersion
+  errorHandler(new Error(
+    "npm doesn't work with node " + nodeVer + "\nRequired: node@" + reqVer), true)
 }
 
 process.on("uncaughtException", errorHandler)
 
-if (!command && !printVersion) conf.usage = true
+if (!command) conf.usage = true
 
-if (printVersion) itWorked = true
-else {
-  if (conf.usage && command !== "help") {
-    arglist.unshift(command)
-    command = "help"
-  }
-  npm.load({ conf: conf, exit: true }, function (err, loaded) {
-    npm.commands[command](arglist, errorHandler)
-  });
+if (conf.usage && command !== "help") {
+  arglist.unshift(command)
+  command = "help"
 }
+
+// now actually fire up npm and run the command.
+// this is how to use npm programmatically:
+conf._exit = true
+npm.load(conf, function (er) {
+  if (er) return errorHandler(er)
+  npm.commands[command](arglist, errorHandler)
+})
