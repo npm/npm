@@ -288,3 +288,6 @@ You can also look for isaacs in #node.js on irc://irc.freenode.net.
   Better Bundling  
   Add 'outdated' command  
   Better handling of "engines" field
+
+* 0.2.5:
+  Make npm OK to use programmatically (Charlie Robbins)
