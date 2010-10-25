@@ -29,10 +29,13 @@ try {
 }
 
 var commandCache = {}
+,   aliases = { list : "ls", uninstall : "rm", i : "install" }
 ; [ "install"
+  , "i" // alias install
   , "activate"
   , "deactivate"
   , "uninstall"
+  , "rm" // alias uninstall
   , "build"
   , "link"
   , "publish"
@@ -46,9 +49,8 @@ var commandCache = {}
   , "start"
   , "restart"
   , "unpublish"
-  , "list"
   , "ls"
-  , "rm"
+  , "list" // alias ls
   , "owner"
   , "update"
   , "update-dependents"
@@ -60,9 +62,7 @@ var commandCache = {}
   , "init"
   ].forEach(function (c) {
     Object.defineProperty(npm.commands, c, { get : function () {
-      c = c === "list" ? "ls"
-        : c === "rm" ? "uninstall"
-        : c
+      c = aliases[c] ? aliases[c] : c
       if (c in commandCache) return commandCache[c]
       return commandCache[c] = require(__dirname+"/lib/"+c)
     }, enumerable: true})

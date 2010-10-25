@@ -3,6 +3,13 @@ npm-install(1) -- install a package
 
 ## SYNOPSIS
 
+    npm i <tarball file>
+    npm i <tarball url>
+    npm i <folder>
+    npm i <pkg>
+    npm i <pkg>@<tag>
+    npm i <pkg>@<version>
+    npm i <pkg>@<version range>
     npm install <tarball file>
     npm install <tarball url>
     npm install <folder>
