@@ -9,6 +9,7 @@ var npm = exports
   , log = require("./lib/utils/log")
   , fs = require("./lib/utils/graceful-fs")
   , path = require("path")
+  , mkdir = require("./lib/utils/mkdir-p")
 
 npm.commands = {}
 npm.ELIFECYCLE = {}
@@ -77,7 +78,10 @@ npm.load = function (conf, cb) {
   // don't assume that npm is installed in any particular spot, since this
   // might conceivably be a bootstrap attempt.
   log.waitForConfig()
-  ini.resolveConfigs(conf, cb)
+  ini.resolveConfigs(conf, function (er) {
+    if (er) return cb(er)
+    mkdir(npm.tmp, cb)
+  })
 }
 
 // Local store for package data, so it won't have to be fetched/read more than
