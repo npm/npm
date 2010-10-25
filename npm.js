@@ -20,6 +20,7 @@ if (process.getuid() === 0) {
 }
 
 try {
+  // startup, ok to do this synchronously
   var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))+"")
   npm.version = j.version
   npm.nodeVersionRequired = j.engines.node
