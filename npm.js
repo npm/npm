@@ -15,11 +15,6 @@ npm.commands = {}
 npm.ELIFECYCLE = {}
 npm.E404 = {}
 
-if (process.getuid() === 0) {
-  log.error( "\nRunning npm as root is not recommended!\n"
-           + "Seriously, don't do this!\n", "sudon't!")
-}
-
 try {
   // startup, ok to do this synchronously
   var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))+"")
@@ -129,3 +124,8 @@ Object.defineProperty(npm, "tmp",
     }
   , enumerable : true
   })
+
+if (process.getuid() === 0) {
+  log.error( "\nRunning npm as root is not recommended!\n"
+           + "Seriously, don't do this!\n", "sudon't!")
+}
