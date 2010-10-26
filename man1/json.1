@@ -152,6 +152,13 @@ So, when you install npm, it\'ll create a symlink from the \fBcli\.js\fR script 
 create a symlink from \fB/usr/local/bin/npm\-version\fR to \fB/usr/local/bin/npm\fR\|\.
 .
 .P
+Notice that if the executable file is interpreted by node (i\.e\., specifying
+node in the shebang line), npm actually installs a shim instead of symlinking
+it, which causes expressions \fBrequire\.main === module\fR and \fBmodule\.id === "\."\fR
+evaluate to \fBfalse\fR within the file\. This seems unable to be resolved until
+node provides a "flexible \fBrequire()\fR"\.
+.
+.P
 Shortcut: If you have a single executable, and its name is already what you
 want it to be, then you can just supply it as a string\.  For example:
 .

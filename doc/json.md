@@ -109,6 +109,12 @@ So, when you install npm, it'll create a symlink from the `cli.js` script to
 `/usr/local/bin/npm-version`. Then, when you activate that version, it'll
 create a symlink from `/usr/local/bin/npm-version` to `/usr/local/bin/npm`.
 
+Notice that if the executable file is interpreted by node (i.e., specifying
+node in the shebang line), npm actually installs a shim instead of symlinking
+it, which causes expressions `require.main === module` and `module.id === "."`
+evaluate to `false` within the file. This seems unable to be resolved until
+node provides a "flexible `require()`".
+
 Shortcut: If you have a single executable, and its name is already what you
 want it to be, then you can just supply it as a string.  For example:
 
