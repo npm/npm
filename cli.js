@@ -53,6 +53,7 @@ if (printVersion) {
   sys.puts(npm.version)
   process.exit(0)
 } else log("npm@"+npm.version, "using")
+log("node@"+process.version, "using")
 
 // make sure that this version of node works with this version of npm.
 var semver = require("./lib/utils/semver")
