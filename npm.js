@@ -10,6 +10,7 @@ var npm = exports
   , fs = require("./lib/utils/graceful-fs")
   , path = require("path")
   , mkdir = require("./lib/utils/mkdir-p")
+  , abbrev = require("./lib/utils/abbrev")
 
 npm.commands = {}
 npm.ELIFECYCLE = {}
@@ -26,44 +27,59 @@ try {
 }
 
 var commandCache = {}
-; [ "install"
-  , "activate"
-  , "deactivate"
-  , "uninstall"
-  , "build"
-  , "link"
-  , "publish"
-  , "tag"
-  , "adduser"
-  , "config"
-  , "help"
-  , "cache"
-  , "test"
-  , "stop"
-  , "start"
-  , "restart"
-  , "unpublish"
-  , "list"
-  , "ls"
-  , "rm"
-  , "owner"
-  , "update"
-  , "update-dependents"
-  , "view"
-  , "repl"
-  , "rebuild"
-  , "bundle"
-  , "outdated"
-  , "init"
-  ].forEach(function (c) {
-    Object.defineProperty(npm.commands, c, { get : function () {
-      c = c === "list" ? "ls"
-        : c === "rm" ? "uninstall"
-        : c
-      if (c in commandCache) return commandCache[c]
-      return commandCache[c] = require(__dirname+"/lib/"+c)
-    }, enumerable: true})
-  })
+  // short names for common things
+  , aliases = { "rm" : "uninstall"
+              , "r" : "uninstall"
+              , "rb" : "rebuild"
+              , "bn" : "bundle"
+              , "list" : "ls"
+              , "ln" : "link"
+              , "i" : "install"
+              , "u" : "update"
+              , "up" : "update"
+              , "c" : "config"
+              }
+  , aliasNames = Object.keys(aliases)
+  // these are filenames in ./lib
+  , cmdList = [ "install"
+              , "activate"
+              , "deactivate"
+              , "uninstall"
+              , "build"
+              , "link"
+              , "publish"
+              , "tag"
+              , "adduser"
+              , "config"
+              , "help"
+              , "cache"
+              , "test"
+              , "stop"
+              , "start"
+              , "restart"
+              , "unpublish"
+              , "ls"
+              , "owner"
+              , "update"
+              , "update-dependents"
+              , "view"
+              , "repl"
+              , "rebuild"
+              , "bundle"
+              , "outdated"
+              , "init"
+              ]
+  , fullList = cmdList.concat(aliasNames)
+  , abbrevs = abbrev(fullList)
+
+Object.keys(abbrevs).forEach(function (c) {
+  Object.defineProperty(npm.commands, c, { get : function () {
+    var a = abbrevs[c]
+    if (aliases[a]) a = aliases[a]
+    if (commandCache[a]) return commandCache[a]
+    return commandCache[a] = require(__dirname+"/lib/"+a)
+  }, enumerable: fullList.indexOf(c) !== -1 })
+})
 
 var loaded = false
 npm.load = function (conf, cb) {
