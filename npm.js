@@ -9,7 +9,8 @@ if (require.main === module) {
   process.exit(1)
 }
 
-var npm = exports
+var EventEmitter = require("events").EventEmitter
+  , npm = module.exports = new EventEmitter
   , config = require("./lib/config")
   , set = require("./lib/utils/set")
   , get = require("./lib/utils/get")
@@ -90,12 +91,11 @@ Object.keys(abbrevs).forEach(function (c) {
 })
 
 var loaded = false
-npm.load = function (conf, cb) {
-  if (!cb && typeof conf === "function") cb = conf , conf = {}
+npm.load = function (conf, cb_) {
+  if (!cb_ && typeof conf === "function") cb_ = conf , conf = {}
+  function cb (er) { return cb_(er, npm) }
   if (loaded) return cb()
   loaded = true
-  // don't assume that npm is installed in any particular spot, since this
-  // might conceivably be a bootstrap attempt.
   log.waitForConfig()
   ini.resolveConfigs(conf, function (er) {
     if (er) return cb(er)
