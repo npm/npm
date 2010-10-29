@@ -77,28 +77,23 @@ var commandCache = {}
               , "bundle"
               , "outdated"
               , "init"
+              , "completion"
               ]
-  , fullList = cmdList.concat(aliasNames)
+  , fullList = npm.fullList = cmdList.concat(aliasNames)
   , abbrevs = abbrev(fullList)
 
 Object.keys(abbrevs).forEach(function (c) {
   Object.defineProperty(npm.commands, c, { get : function () {
-    var a = complete(c)
+    var a = npm.deref(c)
     if (commandCache[a]) return commandCache[a]
     return commandCache[a] = require(__dirname+"/lib/"+a)
   }, enumerable: fullList.indexOf(c) !== -1 })
 })
-function complete (c) {
+npm.deref = function (c) {
   var a = abbrevs[c]
   if (aliases[a]) a = aliases[a]
   return a
 }
-npm.commands.complete = function (args, cb_) {
-  var a = complete(args[0])
-  function cb (e) { cb_(e, a) }
-  require("./lib/utils/output").write(npm.config.get("outfd"), a, cb)
-}
-
 var loaded = false
 npm.load = function (conf, cb_) {
   if (!cb_ && typeof conf === "function") cb_ = conf , conf = {}
