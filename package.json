@@ -25,6 +25,7 @@
   , "Ben Noordhuis <info@bnoordhuis.nl> (http://bnoordhuis.nl/)"
   , "Tor Valamo <tor.valamo@gmail.com> (http://www.magnimedia.no/)"
   , "Whyme.Lyu <5longluna@gmail.com> (http://whyme.kuantu.com/)"
+  , "Olivier Melcher <olivier.melcher@gmail.com>"
   ]
 , "repository" :
   { "type" : "git"
