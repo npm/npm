@@ -28,4 +28,4 @@ __npm_completion () {
   return $?
 }
 
-complete -o default -o nospace -F __npm_completion npm
+complete -o default -F __npm_completion npm
