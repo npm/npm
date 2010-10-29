@@ -83,12 +83,21 @@ var commandCache = {}
 
 Object.keys(abbrevs).forEach(function (c) {
   Object.defineProperty(npm.commands, c, { get : function () {
-    var a = abbrevs[c]
-    if (aliases[a]) a = aliases[a]
+    var a = complete(c)
     if (commandCache[a]) return commandCache[a]
     return commandCache[a] = require(__dirname+"/lib/"+a)
   }, enumerable: fullList.indexOf(c) !== -1 })
 })
+function complete (c) {
+  var a = abbrevs[c]
+  if (aliases[a]) a = aliases[a]
+  return a
+}
+npm.commands.complete = function (args, cb_) {
+  var a = complete(args[0])
+  function cb (e) { cb_(e, a) }
+  require("./lib/utils/output").write(npm.config.get("outfd"), a, cb)
+}
 
 var loaded = false
 npm.load = function (conf, cb_) {
