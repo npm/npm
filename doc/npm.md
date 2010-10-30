@@ -291,3 +291,8 @@ You can also look for isaacs in #node.js on irc://irc.freenode.net.
 
 * 0.2.5:
   Make npm OK to use programmatically (Charlie Robbins)
+
+* 0.2.6:
+  More programmatic updates  
+  recursive package removal  
+  tab completion
