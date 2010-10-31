@@ -109,8 +109,7 @@ npm.load = function (conf, cb_) {
 }
 
 // Local store for package data, so it won't have to be fetched/read more than
-// once in a single pass.  TODO: cache this to disk somewhere when we're using
-// the registry, to cut down on HTTP calls.
+// once in a single pass.
 var registry = {}
 npm.set = function (key, val) {
   if (typeof key === "object" && !val && key._id) {
