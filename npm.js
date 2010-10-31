@@ -78,6 +78,7 @@ var commandCache = {}
               , "outdated"
               , "init"
               , "completion"
+              , "deprecate"
               ]
   , fullList = npm.fullList = cmdList.concat(aliasNames)
   , abbrevs = abbrev(fullList)
