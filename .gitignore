@@ -4,3 +4,4 @@ test/packages/*/deps
 test/packages/*/vendor
 test/packages/test-package/random-data.txt
 test/root
+*.swp
