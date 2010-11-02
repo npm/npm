@@ -153,7 +153,7 @@ Object.defineProperty(npm, "tmp",
   , enumerable : true
   })
 
-if (process.getuid() === 0) {
-  log.error( "\nRunning npm as root is not recommended!\n"
-           + "Seriously, don't do this!\n", "sudon't!")
-}
+if (process.getuid() === 0) process.nextTick(function () {
+  log( "\nRunning npm as root is not recommended!\n"
+     + "Seriously, don't do this!\n", "sudon't!", "error")
+})
