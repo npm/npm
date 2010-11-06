@@ -79,6 +79,17 @@ doing:
 
 Configurations defined on the command line are not saved to the .npmrc file.
 
+### recursive
+
+Default: false
+
+Set to some truish value to recursively remove dependent packages.  For
+example if foo depends on bar, and bar depends on baz, then:
+
+    npm uninstall baz --recursive
+
+will remove baz, bar, and foo.
+
 ### loglevel
 
 Default: "info"
@@ -233,3 +244,66 @@ Default: "man"
 
 The program to use to view help content.  Set to "woman" to use the emacs troff viewer
 by that name.
+
+### exit
+
+Default: true
+
+Whether or not to exit the process when the command is finished.  When
+using npm programmatically, it's a good idea to set this to `false`
+explicitly.
+
+### logfd
+
+Default: Standard Error FD (2)
+
+The file descriptor (integer) or stream object where npm will write log
+messages.
+
+When using npm programmatically, you may want to provide a
+FileWriteStream, or some other form of WritableStream.
+
+### outfd
+
+Default: Standard Output FD (1)
+
+The file descriptor (integer) or stream object where npm will write
+"normal" output.  For instance, the `ls` and `view` commands write their
+output here.
+
+When using npm programmatically, you may want to provide a
+FileWriteStream, or some other form of WritableStream.
+
+### color
+
+Default: true
+
+Set to false to disable colorized output.
+
+In versions of node that expose the `isatty` function, npm will never
+write colorized output to a non-terminal file descriptor.
+
+### tmproot
+
+Default: env.TMPDIR or "/tmp"
+
+The folder where temporary files should be placed.
+
+npm creates a subfolder whenever it is run, and attempts to delete it
+afterwards.
+
+### force
+
+Default: false
+
+Set to a truish value to force uninstalling packages, even if they have
+dependents.
+
+Note that setting `recursive` is safer, because forcing uninstall can
+create orphan packages that no longer function properly.
+
+### editor
+
+Default: env.EDITOR
+
+The program to use to edit files.
