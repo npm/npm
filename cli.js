@@ -45,6 +45,7 @@ while (arg = argv.shift()) {
   } else arglist.push(arg)
 }
 if (key) conf[key] = true
+if (conf.noreg) conf.registry = null
 npm.argv = arglist
 
 var vindex = arglist.indexOf("-v")
