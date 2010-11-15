@@ -27,10 +27,15 @@ and package installations can run arbitrary scripts.
 
 ### Option 1: Take ownership
 
-This is good if you have a single-user machine.  Run this command once, and
-never use sudo again to install stuff in /usr/local:
+Don't do this if you don't know what it does!  If you have software in
+/usr/local that depends on a specific ownership (such as MySQL), then it
+might break if you change its ownership.  Be careful.  Unix does not
+assume you don't know what you're doing!
 
-    sudo chown -R $USER /usr/local
+This is convenient if you have a single-user machine.  Run this command
+once, and never use sudo again to install stuff in /usr/local:
+
+    sudo chown -R $USER /usr/local/{share/man,bin,lib/node}
 
 You could also give your user permission to write into that directory by
 making it group-writable and adding your user to the group that owns it.
