@@ -31,7 +31,9 @@ try {
   npm.version = j.version
   npm.nodeVersionRequired = j.engines.node
 } catch (ex) {
-  log(ex, "error reading version")
+  try {
+    log(ex, "error reading version")
+  } catch (er) {}
   npm.version = ex
 }
 
