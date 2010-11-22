@@ -9,19 +9,12 @@
 .SH "SYNOPSIS"
 .
 .nf
-npm bundle [<pkg>]
+npm bundle [<cmd> \.\.\.]
 .
 .fi
 .
 .P
 Run in a package folder\.
-.
-.IP "\(bu" 4
-\fB<pkg>\fR:
-The package whose dependencies are to be bundled\. Defaults to $PWD\.
-See \fBnpm help install\fR for more on the ways to identify a package\.
-.
-.IP "" 0
 .
 .SH "DESCRIPTION"
 When run in a package folder, this command can be used to install
@@ -36,44 +29,21 @@ Furthermore, when installing, npm will not attempt to install
 dependencies that already exist in the bundle\.
 .
 .P
-In this way, a command like \fBnpm bundle http://github\.com/user/project/tarball/master\fR can be used
-to have a dependency that is not published on the npm registry\.  (It
-still must contain a package\.json, though, of course\.)
+To bundle all the dependencies of a given package, run \fBnpm bundle\fR
+without any arguments\.
 .
 .P
-If called without an argument, it bundles all the dependencies of the
-package\.
+To operate on the bundle packages, any npm command and arguments may be
+passed to the \fBnpm bundle\fR command\.  For example, to install a package
+into the bundle, you can do \fBnpm bundle install express\fR\|\.
 .
 .P
-In all ways, \fBnpm bundle\fR is a shorthand for this:
-.
-.IP "" 4
-.
-.nf
-npm install (whatever)  \\
-  \-\-root \./node_modules \\
-  \-\-binroot false       \\
-  \-\-manroot false
-.
-.fi
-.
-.IP "" 0
+To list the packages in the bundle, do \fBnpm bundle ls\fR\|\.  
 .
 .P
-Bundles all the dependencies
+In this way, a command like \fBnpm bundle install http://github\.com/user/project/tarball/master\fR can be used
+to have a dependency that is not published on the npm registry\.  (It still
+must contain a package\.json, though, of course\.)
 .
 .SH "CAVEATS"
-There is no pretty to "remove" a package from a bundle at the moment\.
-However, you can do this:
-.
-.IP "" 4
-.
-.nf
-npm \-\-root \./node_modules rm foo
-.
-.fi
-.
-.IP "" 0
-.
-.P
 Bins and man pages are not installed by bundle\.
