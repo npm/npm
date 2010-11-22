@@ -6,21 +6,15 @@
 .SH "NAME"
 \fBnpm-bundle\fR \-\- Bundle package dependencies
 .
-.SH "EXPERIMENTAL"
-This is experimental functionality\.  If you have thoughts about how it
-should work, please post a comment at:
-http://github\.com/isaacs/npm/issues/issue/74
-.
 .SH "SYNOPSIS"
 .
 .nf
-npm bundle <folder> [<pkg>]
+npm bundle [<pkg>]
 .
 .fi
 .
-.IP "\(bu" 4
-\fB<folder>\fR:
-The place where bundled dependencies go\.
+.P
+Run in a package folder\.
 .
 .IP "\(bu" 4
 \fB<pkg>\fR:
@@ -30,61 +24,43 @@ See \fBnpm help install\fR for more on the ways to identify a package\.
 .IP "" 0
 .
 .SH "DESCRIPTION"
-Bundles all the dependencies of a package into a specific folder\.
+When run in a package folder, this command can be used to install
+package dependencies into the \fBnode_modules\fR folder\.
 .
 .P
-Furthermore, sets up an index\.js in the folder that will shift it onto the
-require\.paths, and export the bundled modules\.
+When the package is installed, it will read dependencies from the local
+bundle \fIbefore\fR reading any dependencies that are already installed\.
 .
 .P
-For example, to install of your requirements into a "deps" folder,
-you could do this:
+Furthermore, when installing, npm will not attempt to install
+dependencies that already exist in the bundle\.
+.
+.P
+In this way, a command like \fBnpm bundle http://github\.com/user/project/tarball/master\fR can be used
+to have a dependency that is not published on the npm registry\.  (It
+still must contain a package\.json, though, of course\.)
+.
+.P
+If called without an argument, it bundles all the dependencies of the
+package\.
+.
+.P
+In all ways, \fBnpm bundle\fR is a shorthand for this:
 .
 .IP "" 4
 .
 .nf
-npm bundle deps
+npm install (whatever)  \\
+  \-\-root \./node_modules \\
+  \-\-binroot false       \\
+  \-\-manroot false
 .
 .fi
 .
 .IP "" 0
 .
 .P
-Assuming your code is in the "lib" folder, and it depended on a package
-"foo", you could then do this:
-.
-.IP "" 4
-.
-.nf
-require("\.\./deps") // this sets the require\.paths properly\.
-var foo = require("foo")
-.
-.fi
-.
-.IP "" 0
-.
-.P
-The bundle index will also return the modules that your package
-depends on\.  So, this would work as well:
-.
-.IP "" 4
-.
-.nf
-require("\.\./deps")\.foo\.createFoo(\.\.\.)
-.
-.fi
-.
-.IP "" 0
-.
-.P
-The dependencies of those packages installed will also be installed and
-linked, just like an \fBnpm install\fR command\.  In fact, internally \fBbuffer\fR
-just sets the \fBroot\fR config and then does a normal \fBnpm install\fR to put
-the modules in place\.
-.
-.P
-To update to new versions (or if the dependencies change) then run the
-bundle command again\.
+Bundles all the dependencies
 .
 .SH "CAVEATS"
 There is no pretty to "remove" a package from a bundle at the moment\.
@@ -93,7 +69,7 @@ However, you can do this:
 .IP "" 4
 .
 .nf
-npm \-\-root \./deps rm foo
+npm \-\-root \./node_modules rm foo
 .
 .fi
 .
@@ -101,38 +77,3 @@ npm \-\-root \./deps rm foo
 .
 .P
 Bins and man pages are not installed by bundle\.
-.
-.P
-Packages are \fIbuilt\fR, which often means they\'re compiled in that
-architecture and against that version of node\.  To update them, you can
-do:
-.
-.IP "" 4
-.
-.nf
-npm \-\-root \./deps rebuild
-.
-.fi
-.
-.IP "" 0
-.
-.P
-or run \fBnpm bundle deps\fR on the target machine\.
-.
-.P
-The \fBnpm update\fR command will do \fIhorrible\fR things to a bundle folder\.
-Don\'t ever point update at that root, or your bundles may no longer
-satisfy your dependencies\.
-.
-.P
-Bundle does \fInot\fR support version ranges like
-.
-.IP "" 4
-.
-.nf
-npm bundle deps sax@">=0\.1\.0 <0\.2\.0"
-.
-.fi
-.
-.IP "" 0
-
