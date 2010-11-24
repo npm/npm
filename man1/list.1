@@ -50,3 +50,19 @@ npm ls installed
 Strings are matched using the JavaScript "split" function, so regular
 expression strings are ok\.  However, the highlighting is a simple
 split/join, so regexps probably won\'t get the funky colors\.
+.
+.P
+You can also provide default arguments that are appended to all npm ls
+executions
+.
+.IP "" 4
+.
+.nf
+npm config set listopts remote 
+.
+.fi
+.
+.IP "" 0
+.
+.P
+This will append the remote argument each time \fBnpm ls\fR is called\.
