@@ -26,3 +26,10 @@ installed. This can be accomplished by doing this:
 Strings are matched using the JavaScript "split" function, so regular
 expression strings are ok.  However, the highlighting is a simple
 split/join, so regexps probably won't get the funky colors.
+
+You can also provide default arguments that are appended to all npm ls
+executions
+
+    npm config set listopts remote 
+
+This will append the remote argument each time `npm ls` is called.
