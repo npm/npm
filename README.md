@@ -27,10 +27,15 @@ and package installations can run arbitrary scripts.
 
 ### Option 1: Take ownership
 
-This is good if you have a single-user machine.  Run this command once, and
-never use sudo again to install stuff in /usr/local:
+Don't do this if you don't know what it does!  If you have software in
+/usr/local that depends on a specific ownership (such as MySQL), then it
+might break if you change its ownership.  Be careful.  Unix does not
+assume you don't know what you're doing!
 
-    sudo chown -R $USER /usr/local
+This is convenient if you have a single-user machine.  Run this command
+once, and never use sudo again to install stuff in /usr/local:
+
+    sudo chown -R $USER /usr/local/{share/man,bin,lib/node}
 
 You could also give your user permission to write into that directory by
 making it group-writable and adding your user to the group that owns it.
@@ -105,13 +110,27 @@ Or, if that fails,
 
 		make uninstall
 
-## Install Problems
+## Using npm Programmatically
 
-There's was an issue prior to npm version 0.2.0 where packages whose names contained
-hyphen characters would be odd.
+If you would like to use npm programmatically, you can do that as of
+version 0.2.6.  It's not very well documented, but it IS rather simple.
 
-If you've installed any packages with `-` in the name prior to 0.2.0, then you ought
-to remove and reinstall them.
+    var npm = require("npm")
+    npm.load(myConfigObject, function (er) {
+      if (er) return handlError(er)
+      npm.commands.install(["some", "args"], function (er, data) {
+        if (er) return commandFailed(er)
+        // command succeeded, and data might have some info
+      })
+      npm.on("log", function (message) { .... })
+    })
+
+See `./cli.js` for an example of pulling config values off of the
+command line arguments.  You may also want to check out `npm help
+config` to learn about all the options you can set there.
+
+As more features are added for programmatic access to the npm library,
+this section will likely be split out into its own documentation page.
 
 ## More Docs
 

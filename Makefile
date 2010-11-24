@@ -13,24 +13,21 @@ install:
 dev:
 	node cli.js install
 
-link:
+link: uninstall
 	node cli.js link
 
 clean: uninstall
-	true
 
 uninstall:
 	node cli.js cache clean
 	node cli.js rm npm
 
 man: man1
-	@true
 
 man1: $(doc_subfolders)
 	@if ! test -d man1 ; then mkdir -p man1 ; fi
 
 doc: man1 $(docs)
-	@true
 
 # use `npm install ronn` for this to work.
 man1/%.1: doc/%.md

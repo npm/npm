@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CONFIG" "1" "October 2010" "" ""
+.TH "NPM\-CONFIG" "1" "November 2010" "" ""
 .
 .SH "NAME"
 \fBnpm-config\fR \-\- Manage the npm configuration file
@@ -121,6 +121,25 @@ npm \-\-key val <command>
 .
 .P
 Configurations defined on the command line are not saved to the \.npmrc file\.
+.
+.SS "recursive"
+Default: false
+.
+.P
+Set to some truish value to recursively remove dependent packages\.  For
+example if foo depends on bar, and bar depends on baz, then:
+.
+.IP "" 4
+.
+.nf
+npm uninstall baz \-\-recursive
+.
+.fi
+.
+.IP "" 0
+.
+.P
+will remove baz, bar, and foo\.
 .
 .SS "loglevel"
 Default: "info"
@@ -307,3 +326,71 @@ Default: "man"
 .P
 The program to use to view help content\.  Set to "woman" to use the emacs troff viewer
 by that name\.
+.
+.SS "exit"
+Default: true
+.
+.P
+Whether or not to exit the process when the command is finished\.  When
+using npm programmatically, it\'s a good idea to set this to \fBfalse\fR
+explicitly\.
+.
+.SS "logfd"
+Default: Standard Error FD (2)
+.
+.P
+The file descriptor (integer) or stream object where npm will write log
+messages\.
+.
+.P
+When using npm programmatically, you may want to provide a
+FileWriteStream, or some other form of WritableStream\.
+.
+.SS "outfd"
+Default: Standard Output FD (1)
+.
+.P
+The file descriptor (integer) or stream object where npm will write
+"normal" output\.  For instance, the \fBls\fR and \fBview\fR commands write their
+output here\.
+.
+.P
+When using npm programmatically, you may want to provide a
+FileWriteStream, or some other form of WritableStream\.
+.
+.SS "color"
+Default: true
+.
+.P
+Set to false to disable colorized output\.
+.
+.P
+In versions of node that expose the \fBisatty\fR function, npm will never
+write colorized output to a non\-terminal file descriptor\.
+.
+.SS "tmproot"
+Default: env\.TMPDIR or "/tmp"
+.
+.P
+The folder where temporary files should be placed\.
+.
+.P
+npm creates a subfolder whenever it is run, and attempts to delete it
+afterwards\.
+.
+.SS "force"
+Default: false
+.
+.P
+Set to a truish value to force uninstalling packages, even if they have
+dependents\.
+.
+.P
+Note that setting \fBrecursive\fR is safer, because forcing uninstall can
+create orphan packages that no longer function properly\.
+.
+.SS "editor"
+Default: env\.EDITOR
+.
+.P
+The program to use to edit files\.

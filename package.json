@@ -1,6 +1,6 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
-, "version" : "0.2.4-1"
+, "version" : "0.2.8-1"
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
@@ -25,6 +25,8 @@
   , "Ben Noordhuis <info@bnoordhuis.nl> (http://bnoordhuis.nl/)"
   , "Tor Valamo <tor.valamo@gmail.com> (http://www.magnimedia.no/)"
   , "Whyme.Lyu <5longluna@gmail.com> (http://whyme.kuantu.com/)"
+  , "Olivier Melcher <olivier.melcher@gmail.com>"
+  , "Tomaž Muraus <kami@k5-storitve.net> (http://www.tomaz-muraus.info)"
   ]
 , "repository" :
   { "type" : "git"

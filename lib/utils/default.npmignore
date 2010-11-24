@@ -1,7 +1,8 @@
 .lock-wscript
 build/
+*/build/
+./build
 .svn/
 .hg/
 .git/
 CVS/
-.npm/

@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-JSON" "1" "October 2010" "" ""
+.TH "NPM\-JSON" "1" "November 2010" "" ""
 .
 .SH "NAME"
 \fBnpm-json\fR \-\- Specifics of npm\'s package\.json handling
@@ -150,6 +150,13 @@ For example, npm has this:
 .P
 So, when you install npm, it\'ll create a symlink from the \fBcli\.js\fR script to \fB/usr/local/bin/npm\-version\fR\|\. Then, when you activate that version, it\'ll
 create a symlink from \fB/usr/local/bin/npm\-version\fR to \fB/usr/local/bin/npm\fR\|\.
+.
+.P
+Notice that if the executable file is interpreted by node (i\.e\., specifying
+node in the shebang line), npm actually installs a shim instead of symlinking
+it, which causes expressions \fBrequire\.main === module\fR and \fBmodule\.id === "\."\fR
+evaluate to \fBfalse\fR within the file\. This seems unable to be resolved until
+node provides a "flexible \fBrequire()\fR"\.
 .
 .P
 Shortcut: If you have a single executable, and its name is already what you

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+;(function () { // wrapper in case we're in module_context mode
 // don't assume that npm is installed in any particular spot, since this
 // might conceivably be a bootstrap attempt.
 var log = require("./lib/utils/log")
@@ -45,38 +45,40 @@ while (arg = argv.shift()) {
   } else arglist.push(arg)
 }
 if (key) conf[key] = true
+if (conf.noreg) conf.registry = null
 npm.argv = arglist
 
 var vindex = arglist.indexOf("-v")
   , printVersion = vindex !== -1 || conf.version
 if (printVersion) {
-  sys.puts(npm.version)
-  if (vindex !== -1) arglist.splice(vindex, 1)
+  console.log(npm.version)
+  return
 } else log("npm@"+npm.version, "using")
+log("node@"+process.version, "using")
 
 // make sure that this version of node works with this version of npm.
 var semver = require("./lib/utils/semver")
   , nodeVer = process.version
   , reqVer = npm.nodeVersionRequired
-if (!semver.satisfies(nodeVer, reqVer)) {
-  var badNodeVersion = new Error(
-    "npm doesn't work with node " + nodeVer + "\nRequired: node@" + reqVer)
-  throw badNodeVersion
+if (reqVer && !semver.satisfies(nodeVer, reqVer)) {
+  errorHandler(new Error(
+    "npm doesn't work with node " + nodeVer + "\nRequired: node@" + reqVer), true)
 }
 
 process.on("uncaughtException", errorHandler)
 
-if (!command && !printVersion) conf.usage = true
+if (!command) conf.usage = true
 
-if (printVersion) itWorked = true
-else {
-  if (conf.usage && command !== "help") {
-    arglist.unshift(command)
-    command = "help"
-  }
-  ini.resolveConfigs(conf, function (er) {
-    if (er) return errorHandler(er)
-    npm.config.set("root", ini.get("root"))
-    npm.commands[command](arglist, errorHandler)
-  })
+if (conf.usage && command !== "help") {
+  arglist.unshift(command)
+  command = "help"
 }
+
+// now actually fire up npm and run the command.
+// this is how to use npm programmatically:
+conf._exit = true
+npm.load(conf, function (er) {
+  if (er) return errorHandler(er)
+  npm.commands[command](arglist, errorHandler)
+})
+})()
