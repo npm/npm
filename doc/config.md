@@ -307,3 +307,15 @@ create orphan packages that no longer function properly.
 Default: env.EDITOR
 
 The program to use to edit files.
+
+### listopts
+
+Default: ""
+
+A whitespace-separated list of extra args that are always passed to npm ls
+
+For example: `listopts = remote`
+
+`npm ls`
+
+The output here will always filter by remote
