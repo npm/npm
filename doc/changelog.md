@@ -193,3 +193,10 @@ npm-changelog(1) -- Changes
 * 0.2.7 - 0.2.8:
   Bundle treated like a first-class citizen, and simplified  
   Many bug fixes
+
+* 0.2.9:
+  npm version command  
+  shasums on all tarballs  
+  More portable tar option usage  
+  Much beefed up bundle command  
+  Deep view command
