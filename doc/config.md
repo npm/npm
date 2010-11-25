@@ -319,3 +319,11 @@ For example: `listopts = remote`
 `npm ls`
 
 The output here will always filter by remote
+
+### must-install
+
+Default: true
+
+Set to false to not install over packages that already exist.  By
+default, `npm install foo` will fetch and install the latest version of
+`foo`, even if it matches a version already installed.

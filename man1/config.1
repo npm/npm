@@ -409,3 +409,10 @@ For example: \fBlistopts = remote\fR
 .
 .P
 The output here will always filter by remote
+.
+.SS "must\-install"
+Default: true
+.
+.P
+Set to false to not install over packages that already exist\.  By
+default, \fBnpm install foo\fR will fetch and install the latest version of \fBfoo\fR, even if it matches a version already installed\.
