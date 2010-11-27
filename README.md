@@ -16,6 +16,12 @@ To install npm, do this:
 
     curl http://npmjs.org/install.sh | sh
 
+If that fails, try this:
+
+    git clone http://github.com/isaacs/npm.git
+    cd npm
+    make
+
 ## Permission Errors
 
 If it dies with a "Permission Denied" or EACCESS error, then that probably
