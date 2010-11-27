@@ -7,94 +7,97 @@ npm(1) -- node package manager
 
 ## DESCRIPTION
 
-npm is a package manager for the Node javascript library.
+npm is the package manager for the Node JavaScript platform.  It puts
+modules in place so that node can find them, and manages dependency
+conflicts intelligently.
 
-Run `npm help` to get a list of commands.
+It is extremely configurable to support a wide variety of use cases.
+Most commonly, it is used to publish, discover, install, and develop node
+programs.
 
-## STATUS: Useful Beta
+Run `npm help` to get a list of available commands.
 
-The core functionality is there.  It works.
-
-Please use this software.  It will cut you occasionally.  Let me know when
-you find a rough edge, and I'll sand it down for you.
-
-I appreciate your sense of adventure.
-
-## INTRO
+## INTRODUCTION
 
 You probably got npm because you want to install stuff.
 
 Use `npm install blerg` to install the latest version of "blerg".  Check out
 `npm help install` for more info.  It can do a lot of stuff.
 
-Use the `npm ls` command to show everything that's available.  Looking for
-express-related modules?  `npm ls express`.  Looking for the latest express?
-`npm ls express latest`.  (The arguments are just simple greps.)  And of course,
+Use the `npm ls` command to show everything that's available.
+Use `npm ls installed` to show everything you've installed.
 `npm help ls` will tell you more.
 
-Use `npm ls installed` to show everything you've installed.
+## DEVELOPER USAGE
 
-## CONFIGS
-
-Use the `npm config` command to manage how npm does stuff and where it puts things.
-It stores your configs in the `~/.npmrc` file.  Check `npm help config` for more
-info on that, if you care.
-
-You can override any config for just a single command by doing `--configname value`
-on the command line.
-
-## DEVELOPERS
-
-If you're using npm to develop and publish your code, check out the following topics:
+If you're using npm to develop and publish your code, check out the
+following help topics:
 
 * json:
-  Make a package.json file.  The "json" help doc will tell you what to put in it.
+  Make a package.json file.  See `npm help json`.
 * link:
-  For linking your current working code into Node's path, so that you don't have to
-  reinstall every time you make a change.  Use "npm link" to do this.
+  For linking your current working code into Node's path, so that you
+  don't have to reinstall every time you make a change.  Use
+  `npm link` to do this.
 * install:
-  It's a good idea to install things if you don't need the symbolic link.  Especially,
-  installing other peoples code from the registry is done via "npm install".
+  It's a good idea to install things if you don't need the symbolic link.
+  Especially, installing other peoples code from the registry is done via
+  `npm install`
 * adduser:
-  Use the `npm adduser` command to add a user account for the npm registry, or to
-  authorize yourself on a new machine.  If you forget your password, send an email
-  to <npm-@googlegroups.com> and we'll delete your account so you can recreate it.
+  Create an account or log in.  Creditials are stored (encrypted) in the
+  user config file.
 * publish:
-  Use the `npm publish` command to upload your code to the registry, so that other
-  people can install it easily.
+  Use the `npm publish` command to upload your code to the registry.
+
+## CONFIGURATION
+
+npm is extremely configurable.  It reads its configuration options from
+5 places.
+
+* Command line switches:  
+  Set a config with `--key val`.  All keys take a value, even if they
+  are booleans (the config parser doesn't know what the options are at
+  the time of parsing.)  If no value is provided, then the option is set
+  to boolean `true`.
+* Environment Variables:  
+  Set any config by prefixing the name in an environment variable with
+  `npm_config_`.  For example, `export npm_config_key=val`.
+* User Configs:  
+  The file at $HOME/.npmrc is an ini-formatted list of configs.  If
+  present, it is parsed.  If the `userconfig` option is set in the cli
+  or env, then that will be used instead.
+* Global Configs:  
+  The file found at ../etc/npmrc (from the node executable, by default
+  this resolves to /usr/local/etc/npmrc) will be parsed if it is found.
+  If the `globalconfig` option is set in the cli, env, or user config,
+  then that file is parsed instead.
+* Defaults:  
+  npm's default configuration options are defined in
+  lib/utils/default-config.js.  These should not be changed.
+
+See `npm help config` for more information.
 
 ## CONTRIBUTIONS
 
 Patches welcome!
 
 * code:
-  Read through `npm help coding-style` if you plan to submit code.  You don't have to
-  agree with it, but you do have to follow it.
+  Read through `npm help coding-style` if you plan to submit code.
+  You don't have to agree with it, but you do have to follow it.
 * docs:
-  If you find an error in the documentation, edit the appropriate markdown file in the
-  "doc" folder.  (Don't worry about generating the man page.)
+  If you find an error in the documentation, edit the appropriate markdown
+  file in the "doc" folder.  (Don't worry about generating the man page.)
 
-Contributors are listed in npm's `package.json` file.
+Contributors are listed in npm's `package.json` file.  You can view them
+easily by doing `npm view npm contributors`.
 
-## PRINCIPLES
+If you would like to contribute, but don't know what to work on, check
+the issues list or ask on the mailing list.
 
-Put the files where they need to be so that node can find them using the
-methods it already uses.
-
-Be lazy, not clever.
-
-The file system is the database.
-
-Sync with habits that are already in use.
-
-Packages should be maintained by their authors, not by the package manager
-author.
-
-Steer clear of dependency hell.
+* <http://github.com/isaacs/npm/issues>
+* <npm-@googlegroups.com>
 
 ## BUGS
-
-Plenty.  Luckily, npm is actively maintained as of this writing.
 
 When you find issues, please report them:
 
@@ -106,8 +109,13 @@ When you find issues, please report them:
 Be sure to include *all* of the output from the npm command that didn't work
 as expected.
 
-You can also look for isaacs in #node.js on irc://irc.freenode.net.
+You can also look for isaacs in #node.js on irc://irc.freenode.net.  He
+will no doubt tell you to put the output in a gist or email.
 
 ## HISTORY
 
 See npm-changelog(1)
+
+## AUTHOR
+
+Isaac Z. Schlueter :: isaacs :: @izs :: <i@izs.me>

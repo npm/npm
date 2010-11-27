@@ -14,115 +14,137 @@ npm <command> [args]
 .fi
 .
 .SH "DESCRIPTION"
-npm is a package manager for the Node javascript library\.
+npm is the package manager for the Node JavaScript platform\.  It puts
+modules in place so that node can find them, and manages dependency
+conflicts intelligently\.
 .
 .P
-Run \fBnpm help\fR to get a list of commands\.
-.
-.SH "STATUS: Useful Beta"
-The core functionality is there\.  It works\.
-.
-.P
-Please use this software\.  It will cut you occasionally\.  Let me know when
-you find a rough edge, and I\'ll sand it down for you\.
+It is extremely configurable to support a wide variety of use cases\.
+Most commonly, it is used to publish, discover, install, and develop node
+programs\.
 .
 .P
-I appreciate your sense of adventure\.
+Run \fBnpm help\fR to get a list of available commands\.
 .
-.SH "INTRO"
+.SH "INTRODUCTION"
 You probably got npm because you want to install stuff\.
 .
 .P
 Use \fBnpm install blerg\fR to install the latest version of "blerg"\.  Check out \fBnpm help install\fR for more info\.  It can do a lot of stuff\.
 .
 .P
-Use the \fBnpm ls\fR command to show everything that\'s available\.  Looking for
-express\-related modules?  \fBnpm ls express\fR\|\.  Looking for the latest express? \fBnpm ls express latest\fR\|\.  (The arguments are just simple greps\.)  And of course, \fBnpm help ls\fR will tell you more\.
+Use the \fBnpm ls\fR command to show everything that\'s available\.
+Use \fBnpm ls installed\fR to show everything you\'ve installed\. \fBnpm help ls\fR will tell you more\.
 .
-.P
-Use \fBnpm ls installed\fR to show everything you\'ve installed\.
-.
-.SH "CONFIGS"
-Use the \fBnpm config\fR command to manage how npm does stuff and where it puts things\.
-It stores your configs in the \fB~/\.npmrc\fR file\.  Check \fBnpm help config\fR for more
-info on that, if you care\.
-.
-.P
-You can override any config for just a single command by doing \fB\-\-configname value\fR
-on the command line\.
-.
-.SH "DEVELOPERS"
-If you\'re using npm to develop and publish your code, check out the following topics:
+.SH "DEVELOPER USAGE"
+If you\'re using npm to develop and publish your code, check out the
+following help topics:
 .
 .IP "\(bu" 4
 json:
-Make a package\.json file\.  The "json" help doc will tell you what to put in it\.
+Make a package\.json file\.  See \fBnpm help json\fR\|\.
 .
 .IP "\(bu" 4
 link:
-For linking your current working code into Node\'s path, so that you don\'t have to
-reinstall every time you make a change\.  Use "npm link" to do this\.
+For linking your current working code into Node\'s path, so that you
+don\'t have to reinstall every time you make a change\.  Use \fBnpm link\fR to do this\.
 .
 .IP "\(bu" 4
 install:
-It\'s a good idea to install things if you don\'t need the symbolic link\.  Especially,
-installing other peoples code from the registry is done via "npm install"\.
+It\'s a good idea to install things if you don\'t need the symbolic link\.
+Especially, installing other peoples code from the registry is done via \fBnpm install\fR
 .
 .IP "\(bu" 4
 adduser:
-Use the \fBnpm adduser\fR command to add a user account for the npm registry, or to
-authorize yourself on a new machine\.  If you forget your password, send an email
-to \fInpm\-@googlegroups\.com\fR and we\'ll delete your account so you can recreate it\.
+Create an account or log in\.  Creditials are stored (encrypted) in the
+user config file\.
 .
 .IP "\(bu" 4
 publish:
-Use the \fBnpm publish\fR command to upload your code to the registry, so that other
-people can install it easily\.
+Use the \fBnpm publish\fR command to upload your code to the registry\.
 .
 .IP "" 0
+.
+.SH "CONFIGURATION"
+npm is extremely configurable\.  It reads its configuration options from
+5 places\.
+.
+.IP "\(bu" 4
+Command line switches:
+.
+.br
+Set a config with \fB\-\-key val\fR\|\.  All keys take a value, even if they
+are booleans (the config parser doesn\'t know what the options are at
+the time of parsing\.)  If no value is provided, then the option is set
+to boolean \fBtrue\fR\|\.
+.
+.IP "\(bu" 4
+Environment Variables:
+.
+.br
+Set any config by prefixing the name in an environment variable with \fBnpm_config_\fR\|\.  For example, \fBexport npm_config_key=val\fR\|\.
+.
+.IP "\(bu" 4
+User Configs:
+.
+.br
+The file at $HOME/\.npmrc is an ini\-formatted list of configs\.  If
+present, it is parsed\.  If the \fBuserconfig\fR option is set in the cli
+or env, then that will be used instead\.
+.
+.IP "\(bu" 4
+Global Configs:
+.
+.br
+The file found at \.\./etc/npmrc (from the node executable, by default
+this resolves to /usr/local/etc/npmrc) will be parsed if it is found\.
+If the \fBglobalconfig\fR option is set in the cli, env, or user config,
+then that file is parsed instead\.
+.
+.IP "\(bu" 4
+Defaults:
+.
+.br
+npm\'s default configuration options are defined in
+lib/utils/default\-config\.js\.  These should not be changed\.
+.
+.IP "" 0
+.
+.P
+See \fBnpm help config\fR for more information\.
 .
 .SH "CONTRIBUTIONS"
 Patches welcome!
 .
 .IP "\(bu" 4
 code:
-Read through \fBnpm help coding\-style\fR if you plan to submit code\.  You don\'t have to
-agree with it, but you do have to follow it\.
+Read through \fBnpm help coding\-style\fR if you plan to submit code\.
+You don\'t have to agree with it, but you do have to follow it\.
 .
 .IP "\(bu" 4
 docs:
-If you find an error in the documentation, edit the appropriate markdown file in the
-"doc" folder\.  (Don\'t worry about generating the man page\.)
+If you find an error in the documentation, edit the appropriate markdown
+file in the "doc" folder\.  (Don\'t worry about generating the man page\.)
 .
 .IP "" 0
 .
 .P
-Contributors are listed in npm\'s \fBpackage\.json\fR file\.
-.
-.SH "PRINCIPLES"
-Put the files where they need to be so that node can find them using the
-methods it already uses\.
+Contributors are listed in npm\'s \fBpackage\.json\fR file\.  You can view them
+easily by doing \fBnpm view npm contributors\fR\|\.
 .
 .P
-Be lazy, not clever\.
+If you would like to contribute, but don\'t know what to work on, check
+the issues list or ask on the mailing list\.
 .
-.P
-The file system is the database\.
+.IP "\(bu" 4
+\fIhttp://github\.com/isaacs/npm/issues\fR
 .
-.P
-Sync with habits that are already in use\.
+.IP "\(bu" 4
+\fInpm\-@googlegroups\.com\fR
 .
-.P
-Packages should be maintained by their authors, not by the package manager
-author\.
-.
-.P
-Steer clear of dependency hell\.
+.IP "" 0
 .
 .SH "BUGS"
-Plenty\.  Luckily, npm is actively maintained as of this writing\.
-.
-.P
 When you find issues, please report them:
 .
 .IP "\(bu" 4
@@ -138,7 +160,11 @@ Be sure to include \fIall\fR of the output from the npm command that didn\'t wor
 as expected\.
 .
 .P
-You can also look for isaacs in #node\.js on irc://irc\.freenode\.net\.
+You can also look for isaacs in #node\.js on irc://irc\.freenode\.net\.  He
+will no doubt tell you to put the output in a gist or email\.
 .
 .SH "HISTORY"
 See npm\-changelog(1)
+.
+.SH "AUTHOR"
+Isaac Z\. Schlueter :: isaacs :: @izs :: \fIi@izs\.me\fR
