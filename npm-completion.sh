@@ -23,7 +23,8 @@ __npm_completion () {
   cur="${COMP_WORDS[COMP_CWORD]}"
   prev="${COMP_WORDS[COMP_CWORD-1]}"
   # opts=$(npm complete --loglevel silent --color false -- "$cur")
-  COMPREPLY=( $(COMP_CWORD=${COMP_CWORD} npm completion --loglevel silent --color false \
+  COMPREPLY=( $(COMP_CWORD=${COMP_CWORD} \
+                npm completion --color false \
                 -- "${COMP_WORDS[@]}" ) )
   return $?
 }
