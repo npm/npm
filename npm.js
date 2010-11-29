@@ -89,6 +89,9 @@ var commandCache = {}
 
 Object.keys(abbrevs).forEach(function (c) {
   Object.defineProperty(npm.commands, c, { get : function () {
+    if (!loaded) throw new Error(
+      "Call npm.load(conf, cb) before using this command.\n"+
+      "See the README.md or cli.js for example usage.")
     var a = npm.deref(c)
     if (commandCache[a]) return commandCache[a]
     return commandCache[a] = require(__dirname+"/lib/"+a)
