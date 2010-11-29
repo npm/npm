@@ -89,10 +89,14 @@ while (foo) {
 .IP "" 0
 .
 .SH "Semicolons"
-Don\'t use them except in three situations:
+Don\'t use them except in four situations:
 .
 .IP "\(bu" 4
-for (;;) loops\.  They\'re actually required\.
+\fBfor (;;)\fR loops\.  They\'re actually required\.
+.
+.IP "\(bu" 4
+null loops like: \fBwhile (something) ;\fR (But you\'d better have a good
+reason for doing that\.)
 .
 .IP "\(bu" 4
 case "foo": doSomething(); break
@@ -210,3 +214,29 @@ Please clean up logs when they are no longer helpful\.  In particular,
 logging the same object over and over again is not helpful\.  Logs should
 report what\'s happening so that it\'s easier to track down where a fault
 occurs\.
+.
+.P
+Use appropriate log levels\.  The default log() function logs at the
+"info" level\.  See \fBnpm help config\fR and search for "loglevel"\.
+.
+.SH "Case, naming, etc\."
+Use lowerCamelCase for multiword identifiers when they refer to objects,
+functions, methods, members, or anything not specified in this section\.
+.
+.P
+Use UpperCamelCase for class names (things that you\'d pass to "new")\.
+.
+.P
+Use all\-lower\-hyphen\-css\-case for multiword filenames and config keys\.
+.
+.P
+Use named functions\.  They make stack traces easier to follow\.
+.
+.P
+Use CAPS\fISNAKE\fRCASE for constants, things that should never change
+and are rarely used\.
+.
+.P
+Use a single uppercase letter for function names where the function
+would normally be anonymous, but needs to call itself recursively\.  It
+makes it clear that it\'s a "throwaway" function\.

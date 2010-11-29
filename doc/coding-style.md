@@ -54,9 +54,11 @@ Good:
 
 ## Semicolons
 
-Don't use them except in three situations:
+Don't use them except in four situations:
 
-* for (;;) loops.  They're actually required.
+* `for (;;)` loops.  They're actually required.
+* null loops like: `while (something) ;` (But you'd better have a good
+  reason for doing that.)
 * case "foo": doSomething(); break
 * In front of a leading ( or [ at the start of the line.
   This prevents the expression from being interpreted
@@ -147,3 +149,24 @@ Please clean up logs when they are no longer helpful.  In particular,
 logging the same object over and over again is not helpful.  Logs should
 report what's happening so that it's easier to track down where a fault
 occurs.
+
+Use appropriate log levels.  The default log() function logs at the
+"info" level.  See `npm help config` and search for "loglevel".
+
+## Case, naming, etc.
+
+Use lowerCamelCase for multiword identifiers when they refer to objects,
+functions, methods, members, or anything not specified in this section.
+
+Use UpperCamelCase for class names (things that you'd pass to "new").
+
+Use all-lower-hyphen-css-case for multiword filenames and config keys.
+
+Use named functions.  They make stack traces easier to follow.
+
+Use CAPS_SNAKE_CASE for constants, things that should never change
+and are rarely used.
+
+Use a single uppercase letter for function names where the function
+would normally be anonymous, but needs to call itself recursively.  It
+makes it clear that it's a "throwaway" function.
