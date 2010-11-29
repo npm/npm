@@ -83,6 +83,7 @@ var commandCache = {}
               , "deprecate"
               , "version"
               , "edit"
+              , "install-deps"
               ]
   , fullList = npm.fullList = cmdList.concat(aliasNames)
   , abbrevs = abbrev(fullList)
