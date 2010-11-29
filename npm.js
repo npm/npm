@@ -41,12 +41,12 @@ var commandCache = {}
   // short names for common things
   , aliases = { "rm" : "uninstall"
               , "r" : "uninstall"
+              , "un" : "uninstall"
               , "rb" : "rebuild"
               , "bn" : "bundle"
               , "list" : "ls"
               , "ln" : "link"
               , "i" : "install"
-              , "u" : "update"
               , "up" : "update"
               , "c" : "config"
               }
