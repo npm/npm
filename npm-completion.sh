@@ -15,6 +15,7 @@
 # much more useful and complete.
 
 export COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
 __npm_completion () {
   COMPREPLY=()
   local cur prev opts
