@@ -3,9 +3,9 @@ npm-owner(1) -- Manage package owners
 
 ## SYNOPSIS
 
-    npm owner ls <pkg>
-    npm owner add <user> <pkg>
-    npm owner rm <user> <pkg>
+    npm owner ls <package name>
+    npm owner add <user> <package name>
+    npm owner rm <user> <package name>
 
 ## DESCRIPTION
 

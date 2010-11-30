@@ -3,7 +3,7 @@ npm-view(1) -- View registry info
 
 ## SYNOPSIS
 
-    npm view pkg[@version] [<field>[.subfield]...]
+    npm view <name>[@<version>] [<field>[.<subfield>]...]
 
 ## DESCRIPTION
 

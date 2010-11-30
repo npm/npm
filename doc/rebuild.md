@@ -3,7 +3,7 @@ npm-rebuild(1) -- Rebuild a package
 
 ## SYNOPSIS
 
-    npm rebuild [<name>[@<version>] [name[@<version>] ...]]
+    npm rebuild [<name>[@<version>] [<name>[@<version>] ...]]
 
 * `<name>`:
   The package to rebuild

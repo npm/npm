@@ -6,10 +6,10 @@ npm-install(1) -- install a package
     npm install <tarball file>
     npm install <tarball url>
     npm install <folder>
-    npm install <pkg>
-    npm install <pkg>@<tag>
-    npm install <pkg>@<version>
-    npm install <pkg>@<version range>
+    npm install <name>
+    npm install <name>@<tag>
+    npm install <name>@<version>
+    npm install <name>@<version range>
 
 ## DESCRIPTION
 
@@ -36,15 +36,15 @@ resolves circular dependencies by talking to the npm registry.
 
       npm install http://github.com/waveto/node-crypto/tarball/v0.0.5
 
-* npm install `<pkg>`:
-  Do a `<pkg>@<tag>` install, where `<tag>` is the "tag" config from either your
+* npm install `<name>`:
+  Do a `<name>@<tag>` install, where `<tag>` is the "tag" config from either your
   .npmrc file, or the --tag argument on the command line.
 
   Example:
 
       npm install sax
 
-* npm install `<pkg>@<tag>`:
+* npm install `<name>@<tag>`:
   Install the version of the package that is referenced by the specified tag.
   If the tag does not exist in the registry data for that package, then this
   will fail.
@@ -53,7 +53,7 @@ resolves circular dependencies by talking to the npm registry.
 
       npm install sax@stable
 
-* npm install `<pkg>@<version>`:
+* npm install `<name>@<version>`:
   Install the specified version of the package.  This will fail if the version
   has not been published to the registry.
 
@@ -61,7 +61,7 @@ resolves circular dependencies by talking to the npm registry.
 
       npm install sax@0.1.1
 
-* npm install `<pkg>@<version range>`:
+* npm install `<name>@<version range>`:
   Install a version of the package matching the specified version range.  This
   will follow the same rules for resolving dependencies described in `npm help json`.
 

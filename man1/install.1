@@ -12,10 +12,10 @@
 npm install <tarball file>
 npm install <tarball url>
 npm install <folder>
-npm install <pkg>
-npm install <pkg>@<tag>
-npm install <pkg>@<version>
-npm install <pkg>@<version range>
+npm install <name>
+npm install <name>@<tag>
+npm install <name>@<version>
+npm install <name>@<version range>
 .
 .fi
 .
@@ -51,8 +51,8 @@ Example:
   npm install http://github\.com/waveto/node\-crypto/tarball/v0\.0\.5
 .
 .IP "\(bu" 4
-npm install \fB<pkg>\fR:
-Do a \fB<pkg>@<tag>\fR install, where \fB<tag>\fR is the "tag" config from either your
+npm install \fB<name>\fR:
+Do a \fB<name>@<tag>\fR install, where \fB<tag>\fR is the "tag" config from either your
 \|\.npmrc file, or the \-\-tag argument on the command line\.
 .
 .IP
@@ -62,7 +62,7 @@ Example:
   npm install sax
 .
 .IP "\(bu" 4
-npm install \fB<pkg>@<tag>\fR:
+npm install \fB<name>@<tag>\fR:
 Install the version of the package that is referenced by the specified tag\.
 If the tag does not exist in the registry data for that package, then this
 will fail\.
@@ -74,7 +74,7 @@ Example:
   npm install sax@stable
 .
 .IP "\(bu" 4
-npm install \fB<pkg>@<version>\fR:
+npm install \fB<name>@<version>\fR:
 Install the specified version of the package\.  This will fail if the version
 has not been published to the registry\.
 .
@@ -85,7 +85,7 @@ Example:
   npm install sax@0\.1\.1
 .
 .IP "\(bu" 4
-npm install \fB<pkg>@<version range>\fR:
+npm install \fB<name>@<version range>\fR:
 Install a version of the package matching the specified version range\.  This
 will follow the same rules for resolving dependencies described in \fBnpm help json\fR\|\.
 .

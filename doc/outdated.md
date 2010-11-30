@@ -3,7 +3,7 @@ npm-outdated(1) -- Check for outdated packages
 
 ## SYNOPSIS
 
-    npm outdated [<pkg> [<pkg> ...]]
+    npm outdated [<name> [<name> ...]]
 
 ## DESCRIPTION
 
