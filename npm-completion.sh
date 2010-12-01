@@ -14,8 +14,9 @@
 # Special thanks to Evan Meagher for making the npm completion command
 # much more useful and complete.
 
-export COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
-export COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS
 __npm_completion () {
   COMPREPLY=()
   local cur prev opts
