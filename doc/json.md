@@ -53,11 +53,23 @@ design.)
 
 ## description
 
-Put a description in it.  It's a string.
+Put a description in it.  It's a string.  This helps people discover your
+package, as it's listed in `npm ls`.
+
+## keywords
+
+Put keywords in it.  It's an array of strings.  This helps people
+discover your package as it's listed in `npm ls`.
 
 ## homepage
 
 The url to the project homepage.
+
+**NOTE**: This is *not* the same as "url".  If you put a "url" field,
+then the registry will think it's a redirection to your package that has
+been published somewhere else, and spit at you.
+
+Literally.  Spit.  I'm so not kidding.
 
 ## people fields: author, contributors
 

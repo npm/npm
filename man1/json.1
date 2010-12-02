@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-JSON" "1" "November 2010" "" ""
+.TH "NPM\-JSON" "1" "December 2010" "" ""
 .
 .SH "NAME"
 \fBnpm-json\fR \-\- Specifics of npm\'s package\.json handling
@@ -72,10 +72,23 @@ a patch version\.  (This is how node\'s versions are generated, and has driven t
 design\.)
 .
 .SH "description"
-Put a description in it\.  It\'s a string\.
+Put a description in it\.  It\'s a string\.  This helps people discover your
+package, as it\'s listed in \fBnpm ls\fR\|\.
+.
+.SH "keywords"
+Put keywords in it\.  It\'s an array of strings\.  This helps people
+discover your package as it\'s listed in \fBnpm ls\fR\|\.
 .
 .SH "homepage"
 The url to the project homepage\.
+.
+.P
+\fBNOTE\fR: This is \fInot\fR the same as "url"\.  If you put a "url" field,
+then the registry will think it\'s a redirection to your package that has
+been published somewhere else, and spit at you\.
+.
+.P
+Literally\.  Spit\.  I\'m so not kidding\.
 .
 .SH "people fields: author, contributors"
 The "author" is one person\.  "contributors" is an array of people\.  A "person"
