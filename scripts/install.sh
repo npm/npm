@@ -10,8 +10,8 @@ if [ -n "$TMP" ]; then
   fi
 fi
 BACK="$PWD"
-tar=${TAR}
-if [ -n "$tar" ]; then
+tar="${TAR}"
+if [ -z "$tar" ]; then
   if which gtar 1>/dev/null 2>/dev/null; then
     tar=gtar
   else
