@@ -19,7 +19,12 @@ COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
 export COMP_WORDBREAKS
 __npm_completion () {
   COMPREPLY=()
-  local cur prev opts
+  local cur prev opts logfile
+  if [ "${loglevel:-silent}" == "silent" ]; then
+    logfile=/dev/null
+  else
+    logfile=/tmp/npm-completion.log
+  fi
   cur="${COMP_WORDS[COMP_CWORD]}"
   prev="${COMP_WORDS[COMP_CWORD-1]}"
   # opts=$(npm complete --loglevel silent --color false -- "$cur")
@@ -28,9 +33,9 @@ __npm_completion () {
                 COMP_POINT=$COMP_POINT \
                 COMP_WORDBREAKS=$COMP_WORDBREAKS \
                 COMP_WORDS="${COMP_WORDS[@]}" \
-                npm completion --color false --loglevel warn \
+                npm completion --color false --loglevel "${loglevel:-silent}" \
                 -- "${COMP_WORDS[@]}" \
-                2>>./npm-completion.log ) )
+                2>>$logfile ) )
   return $?
 }
 
