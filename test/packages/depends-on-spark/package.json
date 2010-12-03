@@ -1,0 +1,5 @@
+{"name":"depends-on-spark"
+,"version":"1.2.3"
+,"dependencies":{"spark":"*"}
+,"scripts":{"test":"echo $PATH >> which-spark.log; which spark >> which-spark.log"}
+}
