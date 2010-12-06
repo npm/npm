@@ -86,10 +86,15 @@ var commandCache = {}
               , "explore"
               , "docs"
               ]
-  , fullList = npm.fullList = cmdList.concat(aliasNames)
+  , plumbing = [ "build"
+               , "update-dependents"
+               ]
+  , fullList = npm.fullList = cmdList.concat(aliasNames).filter(function (c) {
+      return plumbing.indexOf(c) === -1
+    })
   , abbrevs = abbrev(fullList)
 
-Object.keys(abbrevs).forEach(function (c) {
+Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
   Object.defineProperty(npm.commands, c, { get : function () {
     if (!loaded) throw new Error(
       "Call npm.load(conf, cb) before using this command.\n"+
@@ -100,6 +105,7 @@ Object.keys(abbrevs).forEach(function (c) {
   }, enumerable: fullList.indexOf(c) !== -1 })
 })
 npm.deref = function (c) {
+  if (plumbing.indexOf(c) !== -1) return c
   var a = abbrevs[c]
   if (aliases[a]) a = aliases[a]
   return a
