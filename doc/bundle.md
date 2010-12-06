@@ -35,5 +35,6 @@ must contain a package.json, though, of course.)
 
 ## CAVEATS
 
-Bins and man pages are not installed by bundle.
+Man pages are not installed by bundle.
 
+Bins are installed, but not globally.
