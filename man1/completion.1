@@ -1,0 +1,32 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-COMPLETION" "1" "December 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-completion\fR \-\- Tab Completion for npm
+.
+.SH "DESCRIPTION"
+You should set up tab completion for npm if you haven\'t already\.
+There are a few ways to do this:
+.
+.IP "1" 4
+Add \fB\|\. /path/to/npm\-completion\.sh\fR to your ~/\.bashrc file\. OR:
+.
+.IP "2" 4
+Create a symlink like this if you have automatic bash completion set up: \fBln \- /path/to/npm\-completion\.sh /etc/bash\-completion\.d/npm\fR
+or, perhaps: \fBln \- /path/to/npm\-completion\.sh /usr/local/etc/bash\-completion\.d/npm\fR
+.
+.IP "" 0
+.
+.P
+If you\'re using a non\-bash shell (like zsh or ksh) then this might not work\.
+.
+.P
+To get the path to the npm\-completion\.sh file, use \fBnpm explore npm pwd\fR\|\.
+.
+.P
+It\'s a very new feature, and it would be great to get feedback on it\.
+Hopefully, I\'ll be able to work out a way to install the completion script
+automatically\.  If you have any ideas about how that should work, then please
+share them\.
