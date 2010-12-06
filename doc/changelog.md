@@ -210,4 +210,6 @@ npm-changelog(1) -- Changes
   complete tab completion: see `npm help completion` (Evan Meagher)  
   explore command: see `npm help explore`  
   docs command: see `npm help docs`  
-  keywords and description in `npm ls`
+  keywords and description in `npm ls`  
+  Frequently asked questions at `npm help faq`
+
