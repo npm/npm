@@ -57,23 +57,28 @@ least, you need:
   program (like what the "foo" package gives you at require("foo")),
   then you need to specify that in the "main" field.
 
+* directories:
+  This is a hash of folders.  The best ones to include are "lib" and
+  "doc", but if you specify a folder full of man pages in "man", then
+  they'll get installed just like these ones.
+
 ## Make Sure Your Package Installs and Works
 
 **This is important.**
 
-If you can not install it locally, you'll have 
+If you can not install it locally, you'll have
 problems trying to publish it.  Or, worse yet, you'll be able to
 publish it, but you'll be publishing a broken or pointless package.
 So don't do that.
 
 In the root of your package, do this:
 
-    npm install .
+    npm install
 
 That'll show you that it's working.  If you'd rather just create a symlink
 package that points to your working directory, then do this:
 
-    npm link .
+    npm link
 
 Use `npm ls installed` to see if it's there.
 
@@ -110,22 +115,15 @@ details:
 
 ## Publish your package
 
-This part's easy.
-
-    npm publish /path/to/my-package
-
-You can give publish a url to a tarball, or a filename of a tarball,
-or a path to a folder.
-
-If you're in the root of your folder, then you can just do:
+This part's easy.  IN the root of your folder, do this:
 
     npm publish
 
-since the default argument is ".".
+You can give publish a url to a tarball, or a filename of a tarball,
+or a path to a folder.
 
 ## Brag about it
 
 Send emails, write blogs, blab in IRC.
 
 Tell the world how easy it is to install your program!
-
