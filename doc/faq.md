@@ -60,6 +60,9 @@ You don't.  Try one of these:
 
 See `npm help developers` and `npm help json`.
 
+You'll most likely want to `npm link` your development folder.  That's
+awesomely handy.
+
 ## Can I list a url as a dependency?
 
 No.
