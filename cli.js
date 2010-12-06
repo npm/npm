@@ -28,6 +28,19 @@ log.verbose(argv, "cli")
 
 while (arg = argv.shift()) {
   if (!key && (arg.match(/^-+[h?]$/i) || arg.match(/^-+help$/i))) arg = "--usage"
+  if (!key && arg.match(/^-d+$/i)) {
+    // -d --loglevel info
+    // -dd --loglevel verbose
+    // -ddd --loglevel silly
+    key = "loglevel"
+    switch (arg.length) {
+      case 2: arg = "info"
+        break
+      case 3: arg = "verbose"
+        break
+      default: arg = "silly"
+    }
+  }
   if (!command && (npm.commands.hasOwnProperty(arg))) {
     if (key) {
       conf[key] = true
