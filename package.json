@@ -1,7 +1,7 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
 , "keywords" : [ "package manager", "modules", "install", "package.json" ]
-, "version" : "0.2.10-1"
+, "version" : "0.2.11"
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
@@ -41,8 +41,10 @@
 , "directories" : { "doc" : "./doc", "man" : "./man1", "lib" : "./lib" }
 , "bin" : { "npm" : "./cli.js" }
 , "main" : "npm"
-, "engines" : { "node" : ">=0.2.0" }
-, "scripts" : { "test" : "make test" }
+, "engines" : { "node" : ">=0.2.3" }
+, "scripts" : { "test" : "make test"
+              , "postinstall" : "./scripts/install-message.sh"
+              }
 , "licenses" :
   [ { "type" : "MIT"
     , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
