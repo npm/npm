@@ -3,7 +3,8 @@ npm-developers(1) -- Developer Guide
 
 ## DESCRIPTION
 
-So, you've decided to use npm to publish your project.
+So, you've decided to use npm to develop (and maybe publish/deploy)
+your project.
 
 Fantastic!
 
@@ -17,11 +18,28 @@ then do `man npm-thing` to get the documentation on a particular
 topic.
 
 Any time you see "see npm-whatever(1)", you can do `man npm-whatever`
-to get at the docs.
+or `npm help whatever` to get at the docs.
+
+## What is a "package"
+
+A package is:
+
+* a) a folder containing a program described by a package.json file
+* b) a gzipped tarball containing (a)
+* c) a url that resolves to (b)
+* d) a `<name>@<version>` that is published on the registry with (c)
+* e) a `<name>@<tag>` that points to (d)
+* f) a `<name>` that has a "latest" tag satisfying (e)
+
+Even if you never publish your package, you can still get a lot of
+benefits of using npm if you just want to write a node program (a), and
+perhaps if you also want to be able to easily install it elsewhere
+after packing it up into a tarball (b).
 
 ## The package.json File
 
-You need to have a `package.json` file in the root of your project.
+You need to have a `package.json` file in the root of your project to do
+much of anything with npm.  That is basically the whole interface.
 
 See npm-json(1) for details about what goes in that file.  At the very
 least, you need:
@@ -62,7 +80,37 @@ least, you need:
   "doc", but if you specify a folder full of man pages in "man", then
   they'll get installed just like these ones.
 
-## Make Sure Your Package Installs and Works
+You can use `npm init` in the root of your package in order to get you
+started with a pretty basic package.json file.  See `npm-init(1)` for
+more info.
+
+## Bundling Dependencies
+
+If you depend on something that is not published (but has a package.json
+file) then you can `bundle` that dependency into your package.
+
+* Add the `"name":"version"` to your dependency hash, as if it was a
+  published package.
+* Do `npm bundle install <pkg>` where `<pkg>` is the path/tarball/url to
+  the unpublished package.
+
+To bundle dependencies that ARE published (perhaps, if you will not have
+access to the registry when it is installed, or if you would like to
+make some modifications to them), you can use `npm bundle` (with no
+other arguments) to bundle-install all your dependencies.
+
+More info at `npm-bundle(1)`.
+
+## Link Packages
+
+`npm link` is designed to install a development package and see the
+changes in real time without having to keep re-installing it.  (You do
+need to either re-link or `npm rebuild` to update compiled packages,
+of course.)
+
+More info at `npm-link(1)`.
+
+## Before Publishing: Make Sure Your Package Installs and Works
 
 **This is important.**
 
