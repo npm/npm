@@ -84,6 +84,7 @@ var commandCache = {}
               , "version"
               , "edit"
               , "explore"
+              , "docs"
               ]
   , fullList = npm.fullList = cmdList.concat(aliasNames)
   , abbrevs = abbrev(fullList)
