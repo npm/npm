@@ -1,0 +1,25 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-EXPLORE" "1" "December 2010" "" ""
+.
+.SH "NAME"
+\fBnpm-explore\fR \-\- Browse an installed package
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm explore <name>[@<version>] [<cmd>]
+.
+.fi
+.
+.SH "DESCRIPTION"
+Spawn a subshell in the directory of the installed package specified\.
+.
+.P
+If a command is specified, then it is run in the subshell, which then
+immediately terminates\.
+.
+.P
+Note that the package is \fInot\fR automatically rebuilt afterwards, so be
+sure to use \fBnpm rebuild <pkg>\fR if you make any changes\.
