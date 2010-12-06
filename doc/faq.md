@@ -125,6 +125,7 @@ someone kick it or something.
 ## Who does npm?
 
 `npm view npm author`
+
 `npm view npm contributors`
 
 ## I have a question or request not addressed here. Where should I put it?
