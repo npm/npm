@@ -3,7 +3,9 @@ npm-bundle(1) -- Bundle package dependencies
 
 ## SYNOPSIS
 
-    npm bundle [<cmd> ...]
+    npm bundle
+    npm bundle destroy
+    npm bundle <cmd> <args>
 
 Run in a package folder.
 
@@ -20,6 +22,8 @@ dependencies that already exist in the bundle.
 
 To bundle all the dependencies of a given package, run `npm bundle`
 without any arguments.
+
+To completely remove the bundle folder, run `npm bundle destroy`.
 
 To operate on the bundle packages, any npm command and arguments may be
 passed to the `npm bundle` command.  For example, to install a package

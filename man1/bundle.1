@@ -9,7 +9,9 @@
 .SH "SYNOPSIS"
 .
 .nf
-npm bundle [<cmd> \.\.\.]
+npm bundle
+npm bundle destroy
+npm bundle <cmd> <args>
 .
 .fi
 .
@@ -31,6 +33,9 @@ dependencies that already exist in the bundle\.
 .P
 To bundle all the dependencies of a given package, run \fBnpm bundle\fR
 without any arguments\.
+.
+.P
+To completely remove the bundle folder, run \fBnpm bundle destroy\fR\|\.
 .
 .P
 To operate on the bundle packages, any npm command and arguments may be
