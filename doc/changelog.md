@@ -200,3 +200,14 @@ npm-changelog(1) -- Changes
   More portable tar option usage  
   Much beefed up bundle command  
   Deep view command
+
+* 0.2.10:
+  npm edit command  
+  various stability bugfixes.
+
+* 0.2.11:
+  ~> and 1.2.x style version ranges  
+  complete tab completion: see `npm help completion` (Evan Meagher)  
+  explore command: see `npm help explore`  
+  docs command: see `npm help docs`  
+  keywords and description in `npm ls`
