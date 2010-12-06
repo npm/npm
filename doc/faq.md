@@ -56,6 +56,10 @@ You don't.  Try one of these:
 * <http://github.com/isaacs/nave>
 * <http://github.com/creationix/nvm>
 
+## How can I use npm for development?
+
+See `npm help developers` and `npm help json`.
+
 ## Can I list a url as a dependency?
 
 No.
