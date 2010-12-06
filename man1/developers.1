@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-DEVELOPERS" "1" "November 2010" "" ""
+.TH "NPM\-DEVELOPERS" "1" "December 2010" "" ""
 .
 .SH "NAME"
 \fBnpm-developers\fR \-\- Developer Guide
@@ -71,13 +71,19 @@ If you have a single module that serves as the entry point to your
 program (like what the "foo" package gives you at require("foo")),
 then you need to specify that in the "main" field\.
 .
+.IP "\(bu" 4
+directories:
+This is a hash of folders\.  The best ones to include are "lib" and
+"doc", but if you specify a folder full of man pages in "man", then
+they\'ll get installed just like these ones\.
+.
 .IP "" 0
 .
 .SH "Make Sure Your Package Installs and Works"
 \fBThis is important\.\fR
 .
 .P
-If you can not install it locally, you\'ll have 
+If you can not install it locally, you\'ll have
 problems trying to publish it\.  Or, worse yet, you\'ll be able to
 publish it, but you\'ll be publishing a broken or pointless package\.
 So don\'t do that\.
@@ -88,7 +94,7 @@ In the root of your package, do this:
 .IP "" 4
 .
 .nf
-npm install \.
+npm install
 .
 .fi
 .
@@ -101,7 +107,7 @@ package that points to your working directory, then do this:
 .IP "" 4
 .
 .nf
-npm link \.
+npm link
 .
 .fi
 .
@@ -174,23 +180,7 @@ npm help adduser
 .IP "" 0
 .
 .SH "Publish your package"
-This part\'s easy\.
-.
-.IP "" 4
-.
-.nf
-npm publish /path/to/my\-package
-.
-.fi
-.
-.IP "" 0
-.
-.P
-You can give publish a url to a tarball, or a filename of a tarball,
-or a path to a folder\.
-.
-.P
-If you\'re in the root of your folder, then you can just do:
+This part\'s easy\.  IN the root of your folder, do this:
 .
 .IP "" 4
 .
@@ -202,7 +192,8 @@ npm publish
 .IP "" 0
 .
 .P
-since the default argument is "\."\.
+You can give publish a url to a tarball, or a filename of a tarball,
+or a path to a folder\.
 .
 .SH "Brag about it"
 Send emails, write blogs, blab in IRC\.
