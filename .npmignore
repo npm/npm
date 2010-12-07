@@ -3,3 +3,4 @@ test/packages/*/node_modules
 test/output.log
 test/root
 test/bin
+*.swp
