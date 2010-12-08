@@ -85,6 +85,7 @@ var commandCache = {}
               , "edit"
               , "explore"
               , "docs"
+              , "faq"
               ]
   , plumbing = [ "build"
                , "update-dependents"
