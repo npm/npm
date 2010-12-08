@@ -49,6 +49,22 @@ upcoming version:
 
 <https://github.com/isaacs/npm/issues/issue/294>
 
+## What is a "package"
+
+A package is:
+
+* a) a folder containing a program described by a package.json file
+* b) a gzipped tarball containing (a)
+* c) a url that resolves to (b)
+* d) a `<name>@<version>` that is published on the registry with (c)
+* e) a `<name>@<tag>` that points to (d)
+* f) a `<name>` that has a "latest" tag satisfying (e)
+
+Even if you never publish your package, you can still get a lot of
+benefits of using npm if you just want to write a node program (a), and
+perhaps if you also want to be able to easily install it elsewhere
+after packing it up into a tarball (b).
+
 ## How do I install node with npm?
 
 You don't.  Try one of these:
