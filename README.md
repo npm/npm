@@ -2,7 +2,7 @@
 
 This is just enough info to get you up and running.
 
-More info available via `npm help` once it's installed.
+Much more info available via `npm help` once it's installed.
 
 ## IMPORTANT
 
@@ -12,7 +12,7 @@ You shouldn't use sudo with it.
 
 ## Simple Install
 
-To install npm, do this:
+To install npm with one command, do this:
 
     curl http://npmjs.org/install.sh | sh
 
@@ -21,6 +21,18 @@ If that fails, try this:
     git clone http://github.com/isaacs/npm.git
     cd npm
     make
+
+If you're sitting in the code folder reading this document in your
+terminal, then you've already got the code.  Just do:
+
+    make
+
+and npm will install itself.
+
+If you don't have make, and don't have curl or git, and ALL you have is
+this code and node, you can do:
+
+    node ./cli.js install npm
 
 ## Permission Errors
 
@@ -81,7 +93,8 @@ so eventually it'll actually be *safer* to run as root than as a user account,
 but that's a refactor that is slowly progressing.
 
 If you have feelings about sudo use and what it should imply, then please go add
-some comments and thoughts on [this issue](http://github.com/isaacs/npm/issues/issue/294).
+some comments and thoughts on
+[this issue](http://github.com/isaacs/npm/issues/issue/294).
 
 ## More Fancy Installing
 
@@ -140,10 +153,11 @@ this section will likely be split out into its own documentation page.
 
 ## More Docs
 
-Check out the [docs](http://github.com/isaacs/npm/blob/master/doc/).
+Check out the [docs](http://github.com/isaacs/npm/blob/master/doc/),
+especially the
+[faq](http://github.com/isaacs/npm/blob/master/doc/faq.md#readme).
 
-You can use the [npm help](http://github.com/isaacs/npm/blob/master/doc/help.md#readme)
-command to read any of them.
+You can use the `npm help` command to read any of them.
 
 If you're a developer, and you want to use npm to publish your program,
 you should
