@@ -20,7 +20,7 @@ topic.
 Any time you see "see npm-whatever(1)", you can do `man npm-whatever`
 or `npm help whatever` to get at the docs.
 
-## What is a "package"
+## What is a `package`
 
 A package is:
 

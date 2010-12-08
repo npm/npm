@@ -49,7 +49,7 @@ upcoming version:
 
 <https://github.com/isaacs/npm/issues/issue/294>
 
-## What is a "package"
+## What is a `package`
 
 A package is:
 
