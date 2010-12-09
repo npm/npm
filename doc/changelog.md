@@ -213,3 +213,7 @@ npm-changelog(1) -- Changes
   keywords and description in `npm ls`  
   Frequently asked questions at `npm help faq`
 
+* 0.2.12:
+  Various bugfixes (0.2.11 was big, broke some stuff)  
+  gzip command flags changed to support BusyBox OS  
+  `npm faq` command (wrapper for `npm help faq`)
