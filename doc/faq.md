@@ -56,7 +56,7 @@ A package is:
 * a) a folder containing a program described by a package.json file
 * b) a gzipped tarball containing (a)
 * c) a url that resolves to (b)
-* d) a `<name>@<version>` that is published on the registry with (c)
+ d) a `<name>@<version>` that is published on the registry with (c)
 * e) a `<name>@<tag>` that points to (d)
 * f) a `<name>` that has a "latest" tag satisfying (e)
 
@@ -110,6 +110,10 @@ lot of use cases, and is very easy to maintain.
 ## How do I symlink to a dev folder so that I don't have to keep re-installing?
 
 `npm link`
+
+## The package registry website.  What is that exactly?
+
+See `npm help registry` for more info.
 
 ## What's up with the insecure channel warnings?
 
