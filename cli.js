@@ -1,10 +1,17 @@
 #!/usr/bin/env node
 ;(function () { // wrapper in case we're in module_context mode
-// don't assume that npm is installed in any particular spot, since this
-// might conceivably be a bootstrap attempt.
 var log = require("./lib/utils/log")
 log.waitForConfig()
 log.info("ok", "it worked if it ends with")
+
+if (__filename.match(/Cellar\/npm\/[^\/]+\/libexec\/cli.js$/)
+    ||process.execPath.match(/Cellar\/node\/[^\/]+\/bin\/node$/) {
+  log.warn("This program is not compatible with Homebrew."
+          +"\n   brew rm npm ; brew rm node"
+          +"\nThen use one of the techniques in this gist instead:"
+          +"\nhttps://gist.github.com/579814", "brew incompatible")
+}
+
 
 var fs = require("./lib/utils/graceful-fs")
   , path = require("path")
