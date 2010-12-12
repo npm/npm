@@ -5,7 +5,7 @@ log.waitForConfig()
 log.info("ok", "it worked if it ends with")
 
 if (__filename.match(/Cellar\/npm\/[^\/]+\/libexec\/cli.js$/)
-    ||process.execPath.match(/Cellar\/node\/[^\/]+\/bin\/node$/) {
+    ||process.execPath.match(/Cellar\/node\/[^\/]+\/bin\/node$/)) {
   log.warn("This program is not compatible with Homebrew."
           +"\n   brew rm npm ; brew rm node"
           +"\nThen use one of the techniques in this gist instead:"
