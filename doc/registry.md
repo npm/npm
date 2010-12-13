@@ -63,7 +63,7 @@ this:
     , "url":"http://my-different-registry.com/blerg/my-local-package"
     }
 
-(Keywords and destription are optional, but recommended.  Name,
+(Keywords and description are optional, but recommended.  Name,
 maintainers, and url are required.)
 
 Then, when a user tries to install "my-foreign-package", it'll redirect
