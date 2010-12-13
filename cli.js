@@ -25,7 +25,12 @@ var fs = require("./lib/utils/graceful-fs")
 log.verbose(argv, "cli")
 
 while (arg = argv.shift()) {
-  if (!key && (arg.match(/^-+[h?]$/i) || arg.match(/^-+help$/i))) arg = "--usage"
+  // FIXME: This is a mess right here.
+  // FIXME: Add a "config.flags" somewhere for configs that don't take values
+  // FIXME: Add config aliases for the shorthands and such.
+  if (!key && (arg.match(/^-+[h?]$/i) || arg.match(/^-+help$/i))) {
+    arg = "--usage"
+  }
   if (!key && arg.match(/^-d+$/i)) {
     // -d --loglevel info
     // -dd --loglevel verbose
@@ -38,6 +43,13 @@ while (arg = argv.shift()) {
         break
       default: arg = "silly"
     }
+  }
+  if (!key && (arg.match(/^-+s$/) || arg.match(/^--silent$/))) {
+    key = "loglevel"
+    arg = "silent"
+  } else if (!key && arg.match(/^--verbose$/)) {
+    key = "loglevel"
+    arg = "verbose"
   }
   if (!command && (npm.commands.hasOwnProperty(arg))) {
     if (key) {
