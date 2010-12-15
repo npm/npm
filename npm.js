@@ -88,6 +88,8 @@ var commandCache = {}
               , "docs"
               , "faq"
               , "run-script"
+              , "set"
+              , "get"
               ]
   , plumbing = [ "build"
                , "update-dependents"
