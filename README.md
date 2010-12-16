@@ -6,7 +6,7 @@ Much more info available via `npm help` once it's installed.
 
 ## IMPORTANT
 
-You need node v0.2.0 or higher to run this program.
+You need node v0.2.3 or higher to run this program.
 
 You shouldn't use sudo with it.
 
