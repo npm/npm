@@ -12,68 +12,19 @@ var fs = require("./lib/utils/graceful-fs")
   , rm = require("./lib/utils/rm-rf")
   , errorHandler = require("./lib/utils/error-handler")
 
-  // supported commands.
   , argv = process.argv.slice(2)
-  , arg = ""
-
-  , conf = {}
-  , key
-  , arglist = []
-  , command
-  , flagsDone
+  , parseArgs = require("./lib/utils/parse-args")
 
 log.verbose(argv, "cli")
 
-while (arg = argv.shift()) {
-  // FIXME: This is a mess right here.
-  // FIXME: Add a "config.flags" somewhere for configs that don't take values
-  // FIXME: Add config aliases for the shorthands and such.
-  if (!key && (arg.match(/^-+[h?]$/i) || arg.match(/^-+help$/i))) {
-    arg = "--usage"
-  }
-  if (!key && arg.match(/^-d+$/i)) {
-    // -d --loglevel info
-    // -dd --loglevel verbose
-    // -ddd --loglevel silly
-    key = "loglevel"
-    switch (arg.length) {
-      case 2: arg = "info"
-        break
-      case 3: arg = "verbose"
-        break
-      default: arg = "silly"
-    }
-  }
-  if (!key && (arg.match(/^-+s$/) || arg.match(/^--silent$/))) {
-    key = "loglevel"
-    arg = "silent"
-  } else if (!key && arg.match(/^--verbose$/)) {
-    key = "loglevel"
-    arg = "verbose"
-  }
-  if (!command && (npm.commands.hasOwnProperty(arg))) {
-    if (key) {
-      conf[key] = true
-      key = null
-    }
-    command = arg
-  } else if (!flagsDone && arg.substr(0, 2) === "--") {
-    if (key) conf[key] = true
-    key = arg.substr(2)
-    if (key === "usage") conf[key] = true, key = null
-    flagsDone = (key === "")
-  } else if (key) {
-    conf[key] = arg
-    key = null
-  } else arglist.push(arg)
+var conf = parseArgs(argv)
+npm.argv = conf.argv.remain
+if (-1 !== npm.fullList.indexOf(npm.argv[0])) {
+  npm.command = npm.argv.shift()
 }
-if (key) conf[key] = true
-if (conf.noreg) conf.registry = null
-npm.argv = arglist
 
-var vindex = arglist.indexOf("-v")
-  , printVersion = vindex !== -1 || conf.version
-if (printVersion) {
+
+if (conf.version) {
   console.log(npm.version)
   return
 } else log("npm@"+npm.version, "using")
@@ -84,17 +35,16 @@ var semver = require("./lib/utils/semver")
   , nodeVer = process.version
   , reqVer = npm.nodeVersionRequired
 if (reqVer && !semver.satisfies(nodeVer, reqVer)) {
-  errorHandler(new Error(
-    "npm doesn't work with node " + nodeVer + "\nRequired: node@" + reqVer), true)
+  return errorHandler(new Error(
+    "npm doesn't work with node " + nodeVer
+    + "\nRequired: node@" + reqVer), true)
 }
 
 process.on("uncaughtException", errorHandler)
 
-if (!command) conf.usage = true
-
-if (conf.usage && command !== "help") {
-  arglist.unshift(command)
-  command = "help"
+if (conf.usage && npm.command && npm.command !== "help") {
+  npm.argv.unshift(npm.command)
+  npm.command = "help"
 }
 
 // now actually fire up npm and run the command.
@@ -102,6 +52,6 @@ if (conf.usage && command !== "help") {
 conf._exit = true
 npm.load(conf, function (er) {
   if (er) return errorHandler(er)
-  npm.commands[command](arglist, errorHandler)
+  npm.commands[npm.command](npm.argv, errorHandler)
 })
 })()
