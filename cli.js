@@ -19,7 +19,7 @@ log.verbose(argv, "cli")
 
 var conf = parseArgs(argv)
 npm.argv = conf.argv.remain
-if (-1 !== npm.fullList.indexOf(npm.argv[0])) {
+if (npm.deref(npm.argv[0])) {
   npm.command = npm.argv.shift()
 }
 
@@ -42,7 +42,7 @@ if (reqVer && !semver.satisfies(nodeVer, reqVer)) {
 
 process.on("uncaughtException", errorHandler)
 
-if (conf.usage && npm.command && npm.command !== "help") {
+if (conf.usage && npm.command !== "help") {
   npm.argv.unshift(npm.command)
   npm.command = "help"
 }
