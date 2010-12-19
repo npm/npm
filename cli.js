@@ -19,9 +19,8 @@ log.verbose(argv, "cli")
 
 var conf = parseArgs(argv)
 npm.argv = conf.argv.remain
-if (npm.deref(npm.argv[0])) {
-  npm.command = npm.argv.shift()
-}
+if (npm.deref(npm.argv[0])) npm.command = npm.argv.shift()
+else conf.usage = true
 
 
 if (conf.version) {
