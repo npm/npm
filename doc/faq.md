@@ -49,14 +49,14 @@ upcoming version:
 
 <https://github.com/isaacs/npm/issues/issue/294>
 
-## What is a `package`
+## What is a `package`?
 
 A package is:
 
 * a) a folder containing a program described by a package.json file
 * b) a gzipped tarball containing (a)
 * c) a url that resolves to (b)
- d) a `<name>@<version>` that is published on the registry with (c)
+* d) a `<name>@<version>` that is published on the registry with (c)
 * e) a `<name>@<tag>` that points to (d)
 * f) a `<name>` that has a "latest" tag satisfying (e)
 
