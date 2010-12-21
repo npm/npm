@@ -1,38 +1,51 @@
-#!/bin/bash
-TMP=$(mktemp -dt npm.XXXXXX)
-if [ -n "$TMP" ]; then
-  TMP=$PWD/npm-install-please-remove-this
-  rm -rf -- $TMP || true
-  mkdir -- "$TMP"
-  if [ $? -ne 0 ]; then
-    echo "failed to mkdir $TMP" >&2
-    exit 1
-  fi
+#!/bin/sh
+
+TMP="${TMPDIR}"
+if [ "x$TMP" = "x" ]; then
+  TMP="/tmp"
 fi
+TMP="${TMP}/npm.$$"
+rm -rf "$TMP" || true
+mkdir "$TMP"
+if [ $? -ne 0 ]; then
+  echo "failed to mkdir $TMP" >&2
+  exit 1
+fi
+
 BACK="$PWD"
 tar="${TAR}"
 if [ -z "$tar" ]; then
-  if which gtar 1>/dev/null 2>/dev/null; then
-    tar=gtar
-  else
+  # sniff for gtar/gegrep
+  # use which, but don't trust it very much.
+  tar=`which gtar 2>&1`
+  if [ $? -ne 0 ] || ! [ -x $tar ]; then
     tar=tar
   fi
 fi
 
-if which gegrep 1>/dev/null 2>/dev/null; then
-  egrep="gegrep"
-else
-  egrep="egrep"
+egrep=`which gegrep 2>&1`
+if [ $? -ne 0 ] || ! [ -x $egrep ]; then
+  egrep=egrep
 fi
 
-cd -- "$TMP" \
-  && curl -L $(
-      curl http://registry.npmjs.org/npm/latest \
+url=`curl http://registry.npmjs.org/npm/latest \
       | $egrep -o 'tarball":"[^"]+' \
-      | $egrep -o 'http://.*'
-    ) | $tar -xzf - \
+      | $egrep -o 'http://.*'`
+ret=$?
+if [ $ret -ne 0 ]; then
+  echo "Failed to get tarball url" >&2
+  exit $ret
+fi
+
+cd "$TMP" \
+  && curl -L "$url" | $tar -xzf - \
   && cd * \
   && make uninstall install \
-  && cd -- "$BACK" \
-  && rm -rf -- "$TMP" \
+  && cd "$BACK" \
+  && rm -rf "$TMP" \
   && echo "It worked"
+ret=$?
+if [ $ret -ne 0 ]; then
+  echo "It failed" >&2
+fi
+exit $ret
