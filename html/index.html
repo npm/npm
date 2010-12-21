@@ -3,7 +3,9 @@
 <html>
 <head>
 <style>
-html { background:#202050 }
+  html { background:#202050;
+	font-family:CentSchbook Mono BT, Bitstream Vera Sans Mono, monofont, monospace;
+  }
 body { background:#ddd; width:600px; border:10px solid #fff; margin:2em auto; padding:2em }
 h1 {
   font-size:200px;
@@ -18,9 +20,37 @@ h1 {
   width:519px;
   background:url(npm.png) center;
 }
-p { margin:1em 0 0; padding:0 }
+h2 {
+  color:#202050;
+  font-size:100%;
+}
+p, ul, ol { margin:1em 0 0; padding:0 }
+li { list-style-position:inside }
 a { color:#f00; text-decoration:none; }
 a:hover { text-decoration:underline; }
+code { background:#fff ; outline: 1px solid #ccc; padding:0 2px; }
+
+@font-face {
+	font-family:monofont;
+	src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMono.ttf) format("truetype");
+}
+@font-face {
+	font-family:monofont;
+	font-style:italic;
+	src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMoIt.ttf) format("truetype");
+}
+@font-face {
+	font-family:monofont;
+	font-weight:bold;
+	src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMoBd.ttf) format("truetype");
+}
+@font-face {
+	font-family:monofont;
+	font-style:italic;
+	font-weight:bold;
+	src: url(http://foohack.com/tpl/fonts/Bitstream-Vera-Sans-Mono/VeraMoBI.ttf) format("truetype");
+}
+
 </style>
 	<title>npm - Node Package Manager</title>
 </head>
@@ -29,16 +59,26 @@ a:hover { text-decoration:underline; }
 <p>npm is a package manager for <a href="http://nodejs.org/">node</a>.  You can use it to install
   and publish your node programs.  It manages dependencies and does other cool stuff.</p>
 
-<p>Not much here at the moment.  Check out <a href="http://github.com/isaacs/npm">the
-  git repository</a>.</p>
+<h2>One Line Install</h2>
 
-<p><strong>Want some swag!?</strong> <a href="http://www.zazzle.com/isaacschlueter*">Go get some!</a>
-  All profits go towards buying more swag to hand out at NodeJS meetups and incentivize
-  contributors.</p>
+<code>curl http://npmjs.org/install.sh | sh</code>
 
-<p><strong>Hate swag!?</strong> <a href="http://pledgie.com/campaigns/11626">Donate anyway!</a>
-  All profits go towards the npm marketing budget, and may be drawn upon to buy pizza when
-  noders congregate.</p>
+<h2>More Than One Line Install</h2>
+
+<ol>
+  <li><a href="https://github.com/isaacs/npm/tarball/master">Get the code.</a>
+  <li>Run <code>make</code>
+</ol>
+
+<h2>Other Cool Stuff</h2>
+
+<ul>
+  <li><a href="https://github.com/isaacs/npm#readme">README</a>
+  <li><a href="https://github.com/isaacs/npm/blob/master/doc/faq.md#readme">FAQ</a>
+  <li><a href="http://search.npmjs.org/">Search for Packages</a>
+  <li><a href="http://groups.google.com/group/npm-">Mailing List</a>
+  <li><a href="https://github.com/isaacs/npm/issues">Bugs</a>
+</ul>
 
 </body>
 </html>
