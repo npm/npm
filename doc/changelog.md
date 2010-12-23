@@ -216,3 +216,9 @@ npm-changelog(1) -- Changes
 * 0.2.12:
   Various bugfixes (0.2.11 was big, broke some stuff)  
   `npm faq` command (wrapper for `npm help faq`)
+
+* 0.2.13:
+  Merry Xmas!  
+  Config setting on the command line with grace and gusto  
+  Portability and stability fixes.  
+  Mostly sort of works with Homebrew-installed nodejs.

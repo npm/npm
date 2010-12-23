@@ -90,6 +90,7 @@ var commandCache = {}
               , "run-script"
               , "set"
               , "get"
+              , "xmas"
               ]
   , plumbing = [ "build"
                , "update-dependents"
