@@ -30,6 +30,18 @@ following scripts:
   Run BEFORE the package dependencies are pointed to the new version.
 * updatedependencies, postupdatedependencies:
   Run AFTER the package dependencies are pointed to the new version.
+* pretest, test, posttest:
+  Run by the `npm test` command.
+* prestop, stop, poststop:
+  Run by the `npm stop` command.
+* prestart, start, poststart:
+  Run by the `npm start` command.
+* prerestart, restart, postrestart:
+  Run by the `npm restart` command. Note: `npm restart` will run the
+  stop and start scripts if no `restart` script is provided.
+
+Additionally, arbitrary scrips can be run by doing
+`npm run-script <stage> <pkg>`.
 
 ## ENVIRONMENT
 
