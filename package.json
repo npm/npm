@@ -29,6 +29,7 @@
   , "Olivier Melcher <olivier.melcher@gmail.com>"
   , "Tomaž Muraus <kami@k5-storitve.net> (http://www.tomaz-muraus.info)"
   , "Evan Meagher <evan.meagher@gmail.com> (http://evanmeagher.net/)"
+  , "Orlando Vazquez <ovazquez@gmail.com> (http://2wycked.net/)"
   ]
 , "repository" :
   { "type" : "git"
