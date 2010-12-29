@@ -15,6 +15,10 @@ main () {
 
   # install
   npm install "$NPMPKG" || exit 1
+
+  # used in test later
+  npm config set package-config:foo boo || exit 1
+
   npm install $( ls packages | awk '{print "packages/" $1 }' ) || exit 1
   (ls packages | while read pkg; do
     npm test "$pkg"@"$(ls -- "$ROOTDIR"/.npm/"$pkg" | grep -v active)"
@@ -26,6 +30,10 @@ main () {
 
   # link
   npm install "$NPMPKG" || exit 1 
+
+  # used in test later
+  npm config set package-config:foo boo || exit 1
+
   (ls packages | awk '{print "packages/" $1 }' | while read pkg; do
     npm link "$pkg"
   done) || exit 1
