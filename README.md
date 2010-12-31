@@ -123,11 +123,11 @@ but at this point, you probably grok all that anyway.)
 
 So sad to see you go.
 
-		npm uninstall npm
+    npm uninstall npm
 
 Or, if that fails,
 
-		make uninstall
+    make uninstall
 
 ## Using npm Programmatically
 
