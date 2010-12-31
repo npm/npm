@@ -80,7 +80,6 @@ var commandCache = {}
               , "bundle"
               , "outdated"
               , "init"
-              , "completion"
               , "deprecate"
               , "version"
               , "edit"
@@ -94,6 +93,7 @@ var commandCache = {}
               ]
   , plumbing = [ "build"
                , "update-dependents"
+               , "completion"
                ]
   , fullList = npm.fullList = cmdList.concat(aliasNames).filter(function (c) {
       return plumbing.indexOf(c) === -1
