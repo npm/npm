@@ -48,6 +48,10 @@ in this folder:
 * package.tgz:
   The tarball for that version.
 
-## HISTORY
+## CONFIG
 
-Added in npm version 0.1.6
+### root
+
+Default: `$INSTALL_PREFIX/lib/node`
+
+The root folder where packages are installed and npm keeps its data.

@@ -35,6 +35,8 @@ npm gets its configuration values from 5 sources, in this priority:
   This is a set of configuration parameters that are internal to npm, and are
   defaults if nothing else is specified.
 
+
+
 ## Sub-commands
 
 Config supports the following sub-commands:
@@ -92,13 +94,12 @@ then the user could change the behavior by doing:
 
 ## Config Settings
 
-npm supports a very basic argument parser.  For any of the settings
-in npm-config(1), you can set them explicitly for a single command by 
-doing:
+### auto-activate
 
-    npm --key val <command>
+Default: true
 
-Configurations defined on the command line are not saved to the .npmrc file.
+Automatically activate a package after installation, if there is not an active
+version already.  Set to "always" to always activate when installing.
 
 ### rebuild-bundle
 
@@ -139,13 +140,6 @@ The log levels:
 
 Note that output to stdout is always printed.  This setting just modifies
 what's logged to stderr.
-
-### auto-activate
-
-Default: true
-
-Automatically activate a package after installation, if there is not an active
-version already.  Set to "always" to always activate when installing.
 
 ### update-dependents
 
@@ -197,6 +191,20 @@ If crypto.Cipher is available, and you have some private keys in `$HOME/.ssh`,
 then npm will encrypt your "_auth" config before saving to the .npmrc file,
 and will decrypt the "_authCrypt" config when it reads the .npmrc file.
 
+### username, _password
+
+Once the configuration is parsed, the `_auth` config is split into
+`username` and `_password`.  This is the part before the ":"
+
+### proxy
+
+If proxy is available, then npm will access the registry via
+the proxy server.
+
+Example:
+
+    proxy = http://user:password@proxy-server:8080
+
 ### tag
 
 Default: latest
@@ -205,15 +213,6 @@ If you ask npm to install a package and don't tell it a specific version, then
 it will install the specified tag.
 
 Note: this has no effect on the npm-tag(1) command.
-
-### proxy
-
-If proxy is available, then npm will fetch the modules from the registry via
-the proxy server.
-
-Example:
-
-    proxy = http://proxy-server:8080
 
 ### userconfig
 
@@ -273,7 +272,7 @@ Default: "man"
 The program to use to view help content.  Set to "woman" to use the emacs troff viewer
 by that name.
 
-### exit
+### _exit
 
 Default: true
 
@@ -355,3 +354,9 @@ Default: true
 Set to false to not install over packages that already exist.  By
 default, `npm install foo` will fetch and install the latest version of
 `foo`, even if it matches a version already installed.
+
+## description
+
+Default: true
+
+Show the package description in npm ls.

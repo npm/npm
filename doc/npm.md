@@ -75,7 +75,7 @@ npm is extremely configurable.  It reads its configuration options from
   npm's default configuration options are defined in
   lib/utils/default-config.js.  These should not be changed.
 
-See `npm help config` for more information.
+See `npm help config` for much much more information.
 
 ## CONTRIBUTIONS
 

@@ -20,3 +20,13 @@ Publishes a package to the registry so that it can be installed by name.
 
 Fails if the package name and version combination already exists in
 the registry.
+
+## CONFIGURATION
+
+See `npm help registry`
+
+## SEE ALSO
+
+* npm-registry(1)
+* npm-adduser(1)
+* npm-owner(1)

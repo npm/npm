@@ -170,3 +170,15 @@ and are rarely used.
 Use a single uppercase letter for function names where the function
 would normally be anonymous, but needs to call itself recursively.  It
 makes it clear that it's a "throwaway" function.
+
+## null, undefined, false, 0
+
+Boolean variables and functions should always be either `true` or
+`false`.  Don't set it to 0 unless it's supposed to be a number.
+
+When something is intentionally missing or removed, set it to `null`.
+
+Don't set things to `undefined`.  Reserve that value to mean "not yet
+set to anything."
+
+Boolean objects are verboten.

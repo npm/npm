@@ -15,4 +15,14 @@ something like this:
 
     npm deprecate my-thing@"< 0.2.3" "critical bug fixed in v0.2.3"
 
-Note that you must be the package owner to deprecate something.
+Note that you must be the package owner to deprecate something.  See the
+`owner` and `adduser` help topics.
+
+## CONFIG
+
+### registry
+
+Default: https://registry.npmjs.org/
+
+The base URL of the npm package registry.
+

@@ -170,6 +170,11 @@ This part's easy.  IN the root of your folder, do this:
 You can give publish a url to a tarball, or a filename of a tarball,
 or a path to a folder.
 
+Note that pretty much **everything in that folder will be exposed**
+by default.  So, if you have secret stuff in there, use a `.npminclude`
+or `.npmignore` file to list out the globs to include/ignore, or publish
+from a fresh checkout.
+
 ## Brag about it
 
 Send emails, write blogs, blab in IRC.

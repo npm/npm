@@ -19,3 +19,7 @@ the new binary.
 Regardless of the configuration settings, rebuild always sets `update-dependents`
 and `auto-activate` to false, to minimize unexpected side effects.  It does not
 change any state outside of the package's folder.
+
+## CONFIGURATION
+
+See `npm help build`

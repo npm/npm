@@ -23,3 +23,8 @@ This way, linking the same folder will always result in the same version
 number, even if you bump the version in the package.json file.  The
 extremely high major version ensures that it will always be considered
 the "highest" version, since it is a development bleeding-edge thing.
+
+## CONFIG
+
+See the config section of `npm help install`.  The `dev` configuration
+setting is always set to `true` when doing a link install.

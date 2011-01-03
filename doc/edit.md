@@ -20,3 +20,11 @@ conjunction with `npm bundle`.
 For instance, you can do `npm bundle install connect` to install connect
 into your package, and then `npm bundle edit connect` to make a few
 changes to your locally bundled copy.
+
+## CONFIG
+
+### editor
+
+Default: env.EDITOR
+
+The program to use to edit files.

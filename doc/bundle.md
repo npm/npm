@@ -42,3 +42,16 @@ must contain a package.json, though, of course.)
 Man pages are not installed by bundle.
 
 Bins are installed, but not globally.
+
+## CONFIGS
+
+The bundle command itself is a proxy for `install`, or whichever command
+is passed as the first argument.  As such, it uses
+the same configuration parameters as the commands it proxies,
+but with the following temporary changes:
+
+* root: $PWD/node_modules/
+* binroot: $PWD/node_modules/.bin
+* manroot: null
+
+See `npm help config` for more information on these.

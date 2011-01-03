@@ -10,6 +10,15 @@ npm activate(1) -- Activate an installed version of a package
 This "activates" a specific version of a package, so that you can just do
 `require("foo")` without having to specify the version.
 
+## CONFIG
+
+### auto-activate
+
+Default: true
+
+Automatically activate a package after installation, if there is not an active
+version already.  Set to "always" to always activate when installing.
+
 ## SEE ALSO
 
 npm-deactivate(1)

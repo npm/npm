@@ -76,3 +76,52 @@ ask for help on the <npm-@googlegroups.com> mailing list.
 No, but such a thing is planned, and a tiny bit developed.
 
 Stay tuned!
+
+## CONFIGURATION
+
+### registry
+
+Default: https://registry.npmjs.org/
+
+The base URL of the npm package registry.
+
+### _auth
+
+A base-64 encoded "user:pass" pair.  This is created by npm-adduser(1).
+
+If your config file is ever corrupted, you can set this manually by doing:
+
+    npm adduser
+
+### _authCrypt
+
+If crypto.Cipher is available, and you have some private keys in `$HOME/.ssh`,
+then npm will encrypt your "_auth" config before saving to the .npmrc file,
+and will decrypt the "_authCrypt" config when it reads the .npmrc file.
+
+### username, _password
+
+Once the configuration is parsed, the `_auth` config is split into
+`username` and `_password`.  This is the part before the ":"
+
+### proxy
+
+If proxy is available, then npm will access the registry via
+the proxy server.
+
+Example:
+
+    proxy = http://user:password@proxy-server:8080
+
+### tar
+
+Default: env.TAR or "tar"
+
+The name of a GNU-compatible tar program on your system.
+
+### gzip
+
+Default: env.GZIPBIN or "gzip"
+
+The name of a GNU-compatible gzip program on your system.
+
