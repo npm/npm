@@ -1,4 +1,18 @@
 { "name" : "env-reader"
 , "version" : "1.2.3"
-, "scripts" : { "install" : "env | grep npm" }
+, "dependencies" : { "connect":"*", "fab":"*", "glob":"*" }
+, "scripts" :
+  { "install"       : "./test.sh"
+  , "preinstall"    : "./test.sh"
+  , "activate"      : "./test.sh"
+  , "postactivate"  : "./test.sh"
+  , "preuninstall"  : "./test.sh"
+  , "postuninstall" : "./test.sh"
+  , "predeactivate" : "./test.sh"
+  , "test"          : "./test.sh"
+  , "stop"          : "./test.sh"
+  , "start"         : "./test.sh"
+  , "restart"       : "./test.sh"
+  , "foo"           : "./test.sh"
+  }
 }
