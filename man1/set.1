@@ -149,21 +149,13 @@ npm config set foo:port 80
 .IP "" 0
 .
 .SH "Config Settings"
-npm supports a very basic argument parser\.  For any of the settings
-in npm\-config(1), you can set them explicitly for a single command by 
-doing:
 .
-.IP "" 4
-.
-.nf
-npm \-\-key val <command>
-.
-.fi
-.
-.IP "" 0
+.SS "auto\-activate"
+Default: true
 .
 .P
-Configurations defined on the command line are not saved to the \.npmrc file\.
+Automatically activate a package after installation, if there is not an active
+version already\.  Set to "always" to always activate when installing\.
 .
 .SS "rebuild\-bundle"
 Default: true
@@ -229,13 +221,6 @@ silly: Not\-helpful info\.  (Lots of dumping whole objects and such\.)
 Note that output to stdout is always printed\.  This setting just modifies
 what\'s logged to stderr\.
 .
-.SS "auto\-activate"
-Default: true
-.
-.P
-Automatically activate a package after installation, if there is not an active
-version already\.  Set to "always" to always activate when installing\.
-.
 .SS "update\-dependents"
 Default: true
 .
@@ -294,6 +279,25 @@ If crypto\.Cipher is available, and you have some private keys in \fB$HOME/\.ssh
 then npm will encrypt your "\fIauth" config before saving to the \.npmrc file,
 and will decrypt the "\fRauthCrypt" config when it reads the \.npmrc file\.
 .
+.SS "username, _password"
+Once the configuration is parsed, the \fB_auth\fR config is split into \fBusername\fR and \fB_password\fR\|\.  This is the part before the ":"
+.
+.SS "proxy"
+If proxy is available, then npm will access the registry via
+the proxy server\.
+.
+.P
+Example:
+.
+.IP "" 4
+.
+.nf
+proxy = http://user:password@proxy\-server:8080
+.
+.fi
+.
+.IP "" 0
+.
 .SS "tag"
 Default: latest
 .
@@ -303,22 +307,6 @@ it will install the specified tag\.
 .
 .P
 Note: this has no effect on the npm\-tag(1) command\.
-.
-.SS "proxy"
-If proxy is available, then npm will fetch the modules from the registry via
-the proxy server\.
-.
-.P
-Example:
-.
-.IP "" 4
-.
-.nf
-proxy = http://proxy\-server:8080
-.
-.fi
-.
-.IP "" 0
 .
 .SS "userconfig"
 The default user configuration file is process\.env\.HOME+"/\.npmrc"\.
@@ -377,7 +365,7 @@ Default: "man"
 The program to use to view help content\.  Set to "woman" to use the emacs troff viewer
 by that name\.
 .
-.SS "exit"
+.SS "_exit"
 Default: true
 .
 .P
@@ -466,3 +454,9 @@ Default: true
 .P
 Set to false to not install over packages that already exist\.  By
 default, \fBnpm install foo\fR will fetch and install the latest version of \fBfoo\fR, even if it matches a version already installed\.
+.
+.SH "description"
+Default: true
+.
+.P
+Show the package description in npm ls\.
