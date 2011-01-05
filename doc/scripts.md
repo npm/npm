@@ -45,24 +45,47 @@ Additionally, arbitrary scrips can be run by doing
 
 ## ENVIRONMENT
 
-Package scripts run in an environment where many pieces of information are made available regarding the setup of npm and the current state of the process.
+Package scripts run in an environment where many pieces of information are
+made available regarding the setup of npm and the current state of the
+process.
 
-* package.json vars:
-  The package.json fields are tacked onto the `npm_package_` prefix. So, for
-  instance, if you had `{"name":"foo", "version":"1.2.5"}` in your package.json
-  file, then your package scripts would have the `npm_package_name` environment
-  variable set to "foo", and the `npm_package_version` set to "1.2.5"
-  
-* configuration vars:
-  Configuration parameters are put in the environment with the `npm_config_`
-  prefix. For instance, you can view the effective `root` config by checking the
-  `npm_config_root` environment variable.
-  
-* current lifecycle event:
-  Lastly, the `npm_lifecycle_event` environment variable is set to whichever
-  stage of the cycle is being executed. So, you could have a single script used
-  for different parts of the process which switches based on what's currently
-  happening.
+### package.json vars
+
+The package.json fields are tacked onto the `npm_package_` prefix. So, for
+instance, if you had `{"name":"foo", "version":"1.2.5"}` in your package.json
+file, then your package scripts would have the `npm_package_name` environment
+variable set to "foo", and the `npm_package_version` set to "1.2.5"
+
+### configuration
+
+Configuration parameters are put in the environment with the `npm_config_`
+prefix. For instance, you can view the effective `root` config by checking the
+`npm_config_root` environment variable.
+
+### Special: package.json "config" hash
+
+The package.json "config" keys are overwritten in the environment if
+there is a config param of `<name>[@<version>]:<key>`.  For example, if
+the package.json has this:
+
+    { "name" : "foo"
+    , "config" : { "port" : "8080" }
+    , "scripts" : { "start" : "node server.js" } }
+
+and the server.js is this:
+
+    http.createServer(...).listen(process.env.npm_package_config_port)
+
+then the user could change the behavior by doing:
+
+    npm config set foo:port 80
+
+### current lifecycle event
+
+Lastly, the `npm_lifecycle_event` environment variable is set to whichever
+stage of the cycle is being executed. So, you could have a single script used
+for different parts of the process which switches based on what's currently
+happening.
 
 
 Objects are flattened following this format, so if you had

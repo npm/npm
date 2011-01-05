@@ -89,6 +89,22 @@ Both email and url are optional either way.
 
 npm also sets a top-level "maintainers" field with your npm user info.
 
+## files
+
+The "files" field is an array of files to include in your project.  If
+you name a folder in the array, then it will also include the files
+inside that folder.  The default is just `[""]` which includes the
+entire package folder in the tarball, but you may want to only include
+specific things.
+
+If you specify modules, bins, or man pages, then those will be
+automatically added to the files array, even if they would not
+ordinarily be included.
+
+You can also provide a ".npmignore" file in the root of your package,
+which will keep files from being included, even if they would be picked
+up by the files array.
+
 ## main
 
 The main field is a module ID that is the primary entry point to your program.
@@ -280,6 +296,22 @@ at various times in the lifecycle of your package.  The key is the lifecycle
 event, and the value is the command to run at that point.
 
 See `npm help scripts` to find out more about writing package scripts.
+
+## config
+
+A "config" hash can be used to set configuration
+parameters used in package scripts that persist across upgrades.  For
+instance, if a package had the following:
+
+    { "name" : "foo"
+    , "config" : { "port" : "8080" } }
+
+and then had a "start" command that then referenced the
+`npm_package_config_port` environment variable, then the user could
+override that by doing `npm config set foo:port 8001`.
+
+See `npm help config` and `npm help scripts` for more on package
+configs.
 
 ## dependencies
 

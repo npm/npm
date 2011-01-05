@@ -71,6 +71,25 @@ Deletes the key from all configuration files.
 
 Opens the config file in an editor.  Use the `--global` flag to edit the global config.
 
+## Per-Package Config Settings
+
+When running scripts (see `npm help scripts`)
+the package.json "config" keys are overwritten in the environment if
+there is a config param of `<name>[@<version>]:<key>`.  For example, if
+the package.json has this:
+
+    { "name" : "foo"
+    , "config" : { "port" : "8080" }
+    , "scripts" : { "start" : "node server.js" } }
+
+and the server.js is this:
+
+    http.createServer(...).listen(process.env.npm_package_config_port)
+
+then the user could change the behavior by doing:
+
+    npm config set foo:port 80
+
 ## Config Settings
 
 npm supports a very basic argument parser.  For any of the settings
