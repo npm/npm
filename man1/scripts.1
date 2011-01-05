@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-SCRIPTS" "1" "December 2010" "" ""
+.TH "NPM\-SCRIPTS" "1" "January 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-scripts\fR \-\- How npm handles the "scripts" field
@@ -81,28 +81,65 @@ stop and start scripts if no \fBrestart\fR script is provided\.
 Additionally, arbitrary scrips can be run by doing \fBnpm run\-script <stage> <pkg>\fR\|\.
 .
 .SH "ENVIRONMENT"
-Package scripts run in an environment where many pieces of information are made available regarding the setup of npm and the current state of the process\.
+Package scripts run in an environment where many pieces of information are
+made available regarding the setup of npm and the current state of the
+process\.
 .
-.IP "\(bu" 4
-package\.json vars:
+.SS "package\.json vars"
 The package\.json fields are tacked onto the \fBnpm_package_\fR prefix\. So, for
 instance, if you had \fB{"name":"foo", "version":"1\.2\.5"}\fR in your package\.json
 file, then your package scripts would have the \fBnpm_package_name\fR environment
 variable set to "foo", and the \fBnpm_package_version\fR set to "1\.2\.5"
 .
-.IP "\(bu" 4
-configuration vars:
+.SS "configuration"
 Configuration parameters are put in the environment with the \fBnpm_config_\fR
 prefix\. For instance, you can view the effective \fBroot\fR config by checking the \fBnpm_config_root\fR environment variable\.
 .
-.IP "\(bu" 4
-current lifecycle event:
+.SS "Special: package\.json "config" hash"
+The package\.json "config" keys are overwritten in the environment if
+there is a config param of \fB<name>[@<version>]:<key>\fR\|\.  For example, if
+the package\.json has this:
+.
+.IP "" 4
+.
+.nf
+{ "name" : "foo"
+, "config" : { "port" : "8080" }
+, "scripts" : { "start" : "node server\.js" } }
+.
+.fi
+.
+.IP "" 0
+.
+.P
+and the server\.js is this:
+.
+.IP "" 4
+.
+.nf
+http\.createServer(\.\.\.)\.listen(process\.env\.npm_package_config_port)
+.
+.fi
+.
+.IP "" 0
+.
+.P
+then the user could change the behavior by doing:
+.
+.IP "" 4
+.
+.nf
+npm config set foo:port 80
+.
+.fi
+.
+.IP "" 0
+.
+.SS "current lifecycle event"
 Lastly, the \fBnpm_lifecycle_event\fR environment variable is set to whichever
 stage of the cycle is being executed\. So, you could have a single script used
 for different parts of the process which switches based on what\'s currently
 happening\.
-.
-.IP "" 0
 .
 .P
 Objects are flattened following this format, so if you had \fB{"scripts":{"install":"foo\.js"}}\fR in your package\.json, then you\'d see this

@@ -107,6 +107,47 @@ npm config edit
 .P
 Opens the config file in an editor\.  Use the \fB\-\-global\fR flag to edit the global config\.
 .
+.SH "Per\-Package Config Settings"
+When running scripts (see \fBnpm help scripts\fR)
+the package\.json "config" keys are overwritten in the environment if
+there is a config param of \fB<name>[@<version>]:<key>\fR\|\.  For example, if
+the package\.json has this:
+.
+.IP "" 4
+.
+.nf
+{ "name" : "foo"
+, "config" : { "port" : "8080" }
+, "scripts" : { "start" : "node server\.js" } }
+.
+.fi
+.
+.IP "" 0
+.
+.P
+and the server\.js is this:
+.
+.IP "" 4
+.
+.nf
+http\.createServer(\.\.\.)\.listen(process\.env\.npm_package_config_port)
+.
+.fi
+.
+.IP "" 0
+.
+.P
+then the user could change the behavior by doing:
+.
+.IP "" 4
+.
+.nf
+npm config set foo:port 80
+.
+.fi
+.
+.IP "" 0
+.
 .SH "Config Settings"
 npm supports a very basic argument parser\.  For any of the settings
 in npm\-config(1), you can set them explicitly for a single command by 

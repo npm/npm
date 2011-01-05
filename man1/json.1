@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-JSON" "1" "December 2010" "" ""
+.TH "NPM\-JSON" "1" "January 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-json\fR \-\- Specifics of npm\'s package\.json handling
@@ -123,6 +123,23 @@ Both email and url are optional either way\.
 .
 .P
 npm also sets a top\-level "maintainers" field with your npm user info\.
+.
+.SH "files"
+The "files" field is an array of files to include in your project\.  If
+you name a folder in the array, then it will also include the files
+inside that folder\.  The default is just \fB[""]\fR which includes the
+entire package folder in the tarball, but you may want to only include
+specific things\.
+.
+.P
+If you specify modules, bins, or man pages, then those will be
+automatically added to the files array, even if they would not
+ordinarily be included\.
+.
+.P
+You can also provide a "\.npmignore" file in the root of your package,
+which will keep files from being included, even if they would be picked
+up by the files array\.
 .
 .SH "main"
 The main field is a module ID that is the primary entry point to your program\.
@@ -383,6 +400,29 @@ event, and the value is the command to run at that point\.
 .
 .P
 See \fBnpm help scripts\fR to find out more about writing package scripts\.
+.
+.SH "config"
+A "config" hash can be used to set configuration
+parameters used in package scripts that persist across upgrades\.  For
+instance, if a package had the following:
+.
+.IP "" 4
+.
+.nf
+{ "name" : "foo"
+, "config" : { "port" : "8080" } }
+.
+.fi
+.
+.IP "" 0
+.
+.P
+and then had a "start" command that then referenced the \fBnpm_package_config_port\fR environment variable, then the user could
+override that by doing \fBnpm config set foo:port 8001\fR\|\.
+.
+.P
+See \fBnpm help config\fR and \fBnpm help scripts\fR for more on package
+configs\.
 .
 .SH "dependencies"
 Dependencies are specified with a simple hash of package name to version
