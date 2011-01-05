@@ -81,6 +81,13 @@ doing:
 
 Configurations defined on the command line are not saved to the .npmrc file.
 
+### rebuild-bundle
+
+Default: true
+
+Set to some truish value to rebuild bundled dependencies after
+installation.
+
 ### recursive
 
 Default: false
