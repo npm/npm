@@ -95,6 +95,11 @@ variable set to "foo", and the \fBnpm_package_version\fR set to "1\.2\.5"
 Configuration parameters are put in the environment with the \fBnpm_config_\fR
 prefix\. For instance, you can view the effective \fBroot\fR config by checking the \fBnpm_config_root\fR environment variable\.
 .
+.SS "dependency path and versions"
+All of the resolved dependencies are available in the environtment as \fBnpm_dependency_<name>=<version>\fR and \fBnpm_dependency_<name>_path=<dir>\fR\|\.  So, if you need to refer to files
+from dependency packages, or see which version is installed, you can
+refer to those environment variables\.
+.
 .SS "Special: package\.json "config" hash"
 The package\.json "config" keys are overwritten in the environment if
 there is a config param of \fB<name>[@<version>]:<key>\fR\|\.  For example, if

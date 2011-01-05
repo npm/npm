@@ -62,6 +62,14 @@ Configuration parameters are put in the environment with the `npm_config_`
 prefix. For instance, you can view the effective `root` config by checking the
 `npm_config_root` environment variable.
 
+### dependency path and versions
+
+All of the resolved dependencies are available in the environtment as
+`npm_dependency_<name>=<version>` and
+`npm_dependency_<name>_path=<dir>`.  So, if you need to refer to files
+from dependency packages, or see which version is installed, you can
+refer to those environment variables.
+
 ### Special: package.json "config" hash
 
 The package.json "config" keys are overwritten in the environment if
