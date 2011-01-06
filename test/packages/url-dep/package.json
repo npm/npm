@@ -1,0 +1,6 @@
+{ "name" : "url-dep"
+, "version" : "1.2.3"
+, "files" : []
+, "dependencies" :
+  { "express" : "*"
+  , "npm" : "http://registry.npmjs.org/npm/-/npm-0.2.13-3.tgz" } }
