@@ -117,11 +117,21 @@ npm.deref = function (c) {
   return a
 }
 var loaded = false
+  , loading = false
+  , loadListeners = []
 npm.load = function (conf, cb_) {
   if (!cb_ && typeof conf === "function") cb_ = conf , conf = {}
-  function cb (er) { return cb_(er, npm) }
+  loadListeners.push(cb_)
   if (loaded) return cb()
-  loaded = true
+  if (loading) return
+  loading = true
+  function cb (er) {
+    loaded = true
+    loadListeners.forEach(function (cb) {
+      cb(er, npm)
+    })
+    loadListeners.length = 0
+  }
   log.waitForConfig()
   which(process.argv[0], function (er, node) {
     if (!er && node !== process.execPath) {
