@@ -78,7 +78,7 @@ You may combine multiple arguments, and even multiple types of arguments.  For e
 
 The `--tag` argument will apply to all of the specified install targets.
 
-## CONFIG
+## CONFIGURATION
 
 ### root
 

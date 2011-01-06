@@ -48,7 +48,7 @@ in this folder:
 * package.tgz:
   The tarball for that version.
 
-## CONFIG
+## CONFIGURATION
 
 ### root
 

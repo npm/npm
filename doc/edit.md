@@ -21,7 +21,7 @@ For instance, you can do `npm bundle install connect` to install connect
 into your package, and then `npm bundle edit connect` to make a few
 changes to your locally bundled copy.
 
-## CONFIG
+## CONFIGURATION
 
 ### editor
 

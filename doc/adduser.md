@@ -21,7 +21,7 @@ or password.
 You may use this command multiple times with the same user account to
 authorize on a new machine.
 
-## CONFIG
+## CONFIGURATION
 
 ### _auth
 

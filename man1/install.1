@@ -116,6 +116,89 @@ npm install sax@">=0\.1\.0 <0\.2\.0" bench supervisor
 .P
 The \fB\-\-tag\fR argument will apply to all of the specified install targets\.
 .
+.SH "CONFIGURATION"
+.
+.SS "root"
+Default: \fB$INSTALL_PREFIX/lib/node\fR
+.
+.P
+The root folder where packages are installed and npm keeps its data\.
+.
+.SS "binroot"
+Default: \fB$INSTALL_PREFIX/bin\fR
+.
+.P
+The folder where executable programs are installed\.
+.
+.P
+Set to "false" to not install executables
+.
+.SS "manroot"
+Default: $INSTALL_PREFIX/share/man
+.
+.P
+The folder where man pages are installed\.
+.
+.P
+Set to "false" to not install man pages\.
+.
+.SS "registry"
+Default: https://registry\.npmjs\.org/
+.
+.P
+The base URL of the npm package registry\.
+.
+.SS "tag"
+Default: latest
+.
+.P
+If you ask npm to install a package and don\'t tell it a specific version, then
+it will install the specified tag\.
+.
+.P
+Note: this has no effect on the npm\-tag(1) command\.
+.
+.SS "dev"
+If set to a truish value, then it\'ll install the "devDependencies" as well as
+"dependencies" when installing a package\.
+.
+.P
+Note that devDependencies are \fIalways\fR installed when linking a package\.
+.
+.SS "tar"
+Default: env\.TAR or "tar"
+.
+.P
+The name of a GNU\-compatible tar program on your system\.
+.
+.SS "gzip"
+Default: env\.GZIPBIN or "gzip"
+.
+.P
+The name of a GNU\-compatible gzip program on your system\.
+.
+.SS "must\-install"
+Default: true
+.
+.P
+Set to false to not install over packages that already exist\.  By
+default, \fBnpm install foo\fR will fetch and install the latest version of \fBfoo\fR, even if it matches a version already installed\.
+.
+.SS "auto\-activate"
+Default: true
+.
+.P
+Automatically activate a package after installation, if there is not an active
+version already\.  Set to "always" to always activate when installing\.
+.
+.SS "update\-dependents"
+Default: true
+.
+.P
+Automatically update a package\'s dependencies after installation, if it is the
+newest version installed\. Set to "always" to update dependents when a new
+version is installed, even if it\'s not the newest\.
+.
 .SH "SEE ALSO"
 .
 .IP "\(bu" 4

@@ -46,23 +46,53 @@ npm ls installed
 .
 .IP "" 0
 .
-.P
-Strings are matched using the JavaScript "split" function, so regular
-expression strings are ok\.  However, the highlighting is a simple
-split/join, so regexps probably won\'t get the funky colors\.
+.SH "CONFIGURATION"
+.
+.SS "registry"
+Default: https://registry\.npmjs\.org/
 .
 .P
-You can also provide default arguments that are appended to all npm ls
-executions
+The base URL of the npm package registry\.
 .
-.IP "" 4
-.
-.nf
-npm config set listopts remote 
-.
-.fi
-.
-.IP "" 0
+.SS "listopts"
+Default: ""
 .
 .P
-This will append the remote argument each time \fBnpm ls\fR is called\.
+A whitespace\-separated list of extra args that are always passed to npm ls
+.
+.P
+For example: \fBlistopts = remote\fR
+.
+.P
+\fBnpm ls\fR
+.
+.P
+The output here will always filter by remote
+.
+.SH "description"
+Default: true
+.
+.P
+Show the package description in npm ls\.
+.
+.SS "outfd"
+Default: Standard Output FD (1)
+.
+.P
+The file descriptor (integer) or stream object where npm will write
+"normal" output\.  For instance, the \fBls\fR and \fBview\fR commands write their
+output here\.
+.
+.P
+When using npm programmatically, you may want to provide a
+FileWriteStream, or some other form of WritableStream\.
+.
+.SS "color"
+Default: true
+.
+.P
+Set to false to disable colorized output\.
+.
+.P
+In versions of node that expose the \fBisatty\fR function, npm will never
+write colorized output to a non\-terminal file descriptor\.

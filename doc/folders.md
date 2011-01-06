@@ -66,7 +66,7 @@ version of foo.
 `manroot/man8/foo-bar@1.0.0.8` A section 8 manpage for foo version
 1.0.0.
 
-## CONFIG
+## CONFIGURATION
 
 ### root
 

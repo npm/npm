@@ -7,8 +7,22 @@
 \fBnpm-folders\fR \-\- Folder Structures Used by npm
 .
 .SH "DESCRIPTION"
-Everything lives in the \fBroot\fR setting\.  Check \fBnpm help config\fR for more
+Node modules and metadata live
+in the \fBroot\fR setting\.  Check \fBnpm help config\fR for more
 on configuration options\.
+.
+.P
+\fBroot/foo\fR Symlink to the active version\'s module folder\.
+.
+.P
+\fBroot/foo@1\.0\.0/\fR Node modules for the foo package\.
+.
+.P
+\fBroot/foo@1\.0\.0/{module\-name}\.js\fR Generated shim corresponding to a module
+defined in the modules option\. The module shim requires \fBroot/\.npm/foo/1\.0\.0/package/{module\-path}\.js\fR
+.
+.P
+The \fBmain\fR script is implemented by creating an \fBindex\.js\fR file in this folder\.
 .
 .P
 \fBroot/\.npm/foo\fR is where the stuff for package \fBfoo\fR would go\.
@@ -23,20 +37,10 @@ foo\.  This is a shim, not a symbolic link, so that relative paths will work
 appropriately\.
 .
 .P
-\fBroot/foo\-1\.0\.0/{module\-name}\.js\fR Generated shim corresponding to a module
-defined in the modules option\. The module shim requires \fBroot/\.npm/foo/1\.0\.0/package/{module\-path}\.js\fR
-.
-.P
-The \fBmain\fR script is implemented by creating an \fBindex\.js\fR file in this folder\.
-.
-.P
-\fBroot/foo/\fR Symlink to the active version\'s module folder\.
-.
-.P
 \fBroot/\.npm/foo/active\fR symlink to the active version\.
 .
 .P
-\fBroot/\.npm/foo/1\.0\.0/dependencies\fR links to the modules that foo depends upon\.
+\fBroot/\.npm/foo/1\.0\.0/node_modules\fR links to the modules that foo depends upon\.
 This is loaded into the require path first in the foo shims\.
 .
 .P
@@ -57,3 +61,59 @@ on\.  This is here so that npm can access those packages programmatically\.
 .
 .P
 \fBroot/\.npm/\.cache/foo/1\.0\.0/package\fR the untouched pristine copy of foo@1\.0\.0
+.
+.P
+Executables are installed to the folder specified by the \fBbinroot\fR config\.
+.
+.P
+\fBbinroot/foo\fR Symlink to the active version of the "foo" executable\.
+.
+.P
+\fBbinroot/foo@1\.0\.0\fR An executable for foo at version 1\.0\.0\.  Either a
+symbolic link or a shim to a file in the foo package\.
+.
+.P
+Man pages are installed to the folder specified by the \fBmanroot\fR config\.
+Man pages named something other than the package name are prefixed with
+the package name\.
+.
+.P
+\fBmanroot/man1/foo\.1\fR Symlink to the section 1 manpage for the active
+version of foo\.
+.
+.P
+\fBmanroot/man1/foo@1\.0\.0\.1\fR Section 1 man page for foo version 1\.0\.0
+.
+.P
+\fBmanroot/man8/foo\-bar\.8\fR Symlink to a section 8 manpage for the active
+version of foo\.
+.
+.P
+\fBmanroot/man8/foo\-bar@1\.0\.0\.8\fR A section 8 manpage for foo version
+1\.0\.0\.
+.
+.SH "CONFIGURATION"
+.
+.SS "root"
+Default: \fB$INSTALL_PREFIX/lib/node\fR
+.
+.P
+The root folder where packages are installed and npm keeps its data\.
+.
+.SS "binroot"
+Default: \fB$INSTALL_PREFIX/bin\fR
+.
+.P
+The folder where executable programs are installed\.
+.
+.P
+Set to "false" to not install executables
+.
+.SS "manroot"
+Default: $INSTALL_PREFIX/share/man
+.
+.P
+The folder where man pages are installed\.
+.
+.P
+Set to "false" to not install man pages\.
