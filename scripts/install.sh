@@ -36,6 +36,25 @@ if [ $? -ne 0 ] || ! [ -x $egrep ]; then
   egrep=egrep
 fi
 
+# TODO: Add cli interfaces to lib/utils/semver.js and lib/utils/read-json.js,
+# and pull the required node version out of the package.json
+# then do something like this:
+# ./bin/semver \
+#   -v `node --version 2>&1` \
+#   -r `./bin/read-json package.json engines.node`
+node_version=`$node --version 2>&1`
+ret=$?
+if [ $ret -eq 0 ]; then
+  echo $node_version | $egrep -v -q '^v?0\.([01]\.|2\.[0-2][^0-9])'
+  ret=$?
+fi
+if [ $ret -ne 0 ]; then
+  echo "You need node v0.2.3 or higher to run this program." >&2
+  echo "node --version reports: $node_version" >&2
+  echo "Please upgrade node before continuing."
+  exit $ret
+fi
+
 make=`which gmake 2>&1`
 if [ $? -ne 0 ] || ! [ -x $make ]; then
   make=`which make 2>&1`
