@@ -222,3 +222,12 @@ npm-changelog(1) -- Changes
   Config setting on the command line with grace and gusto  
   Portability and stability fixes.  
   Mostly sort of works with Homebrew-installed nodejs.
+
+* 0.2.14:
+  A little bit of documentation overhaul.  
+  Support for `"<name>":"<url>"` for dependencies.  
+  Fix for "unpublish" regression.  
+  Support for "files" array.  
+  Dependency info in lifecycle scripts.  
+  More data validation.
+
