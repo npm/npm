@@ -328,6 +328,9 @@ is a semver compatible version identifier.
 * `>=version` etc
 * `<version`
 * `<=version`
+* `~version` See 'Tilde Version Ranges' below
+* `1.2.x` See 'X Version Ranges' below
+* `http://...` See 'URLs as Dependencies' below
 * `*` Matches any version
 * `""` (just an empty string) Same as `*`
 * `version1 - version2` Same as `>=version1 <=version2`.
@@ -341,8 +344,51 @@ For example, these are all valid:
       , "baz" : ">1.0.2 <=2.3.4"
       , "boo" : "2.0.1"
       , "qux" : "<1.0.0 || >=2.3.1 <2.4.5 || >=2.5.2 <3.0.0"
+      , "asd" : "http://asdf.com/asdf.tar.gz"
+      , "til" : "~1.2"
+      , "elf" : "~1.2.3"
+      , "two" : "2.x"
+      , "thr" : "3.3.x"
       }
     }
+
+### Tilde Version Ranges
+
+A range specifier starting with a tilde `~` character is matched against
+a version in the following fashion.
+
+* The version must be at least as high as the range.
+* The version must be less than the next major revision above the range.
+
+For example, the following are equivalent:
+
+* `"~1.2.3" = ">=1.2.3 <1.3.0"`
+* `"~1.2" = ">=1.2.0 <2.0.0"`
+* `"~1" = ">=1.0.0 <2.0.0"`
+
+### X Version Ranges
+
+An "x" in a version range specifies that the version number must start
+with the supplied digits, but any digit may be used in place of the x.
+
+The following are equivalent:
+
+* `"1.2.x" = ">=1.2.0 <1.3.0"`
+* `"1.x.x" = ">=1.0.0 <2.0.0"`
+* `"1.2" = "1.2.x"`
+* `"1.x" = "1.x.x"`
+* `"1" = "1.x.x"`
+
+You may not supply a comparator with a version containing an x.  Any
+digits after the first "x" are ignored.
+
+### URLs as Dependencies
+
+Starting with npm version 0.2.14, you may specify a tarball URL in place
+of a version range.
+
+This tarball will be downloaded and installed as a bundle at install
+time.  See `npm help bundle`
 
 ## engines
 
