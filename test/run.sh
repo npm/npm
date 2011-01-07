@@ -93,7 +93,10 @@ done
 NPMPKG="$(dirname -- "$(dirname -- "$SELF_PATH")")"
 NPMCLI="$NPMPKG/cli.js"
 TESTDIR="$NPMPKG/test/"
-TMP=$(mktemp -dt npm.XXXXXX)
+TMP=${TMPDIR:-/tmp}
+rm -rf $TMP/npm*
+TMP=$TMP/npm-test-$$
+echo "Testing in $TMP ..."
 ROOTDIR="$TMP/root"
 BINDIR="$TMP/bin"
 MANDIR="$TMP/man"
