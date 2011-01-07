@@ -43,7 +43,10 @@ Man pages are not installed by bundle.
 
 Bins are installed, but not globally.
 
-## CONFIGS
+When a dependency is specified as a URL rather than a version range, it
+is bundled with the package depending upon it.
+
+## CONFIGURATION
 
 The bundle command itself is a proxy for `install`, or whichever command
 is passed as the first argument.  As such, it uses
