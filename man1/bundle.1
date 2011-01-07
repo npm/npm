@@ -56,3 +56,27 @@ Man pages are not installed by bundle\.
 .
 .P
 Bins are installed, but not globally\.
+.
+.P
+When a dependency is specified as a URL rather than a version range, it
+is bundled with the package depending upon it\.
+.
+.SH "CONFIGURATION"
+The bundle command itself is a proxy for \fBinstall\fR, or whichever command
+is passed as the first argument\.  As such, it uses
+the same configuration parameters as the commands it proxies,
+but with the following temporary changes:
+.
+.IP "\(bu" 4
+root: $PWD/node_modules/
+.
+.IP "\(bu" 4
+binroot: $PWD/node_modules/\.bin
+.
+.IP "\(bu" 4
+manroot: null
+.
+.IP "" 0
+.
+.P
+See \fBnpm help config\fR for more information on these\.
