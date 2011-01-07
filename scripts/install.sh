@@ -36,6 +36,12 @@ if [ $? -ne 0 ] || ! [ -x $egrep ]; then
   egrep=egrep
 fi
 
+node_version=`node --version 2>&1`
+if echo $node_version | $egrep -qE "^0\.([01]\..+|2\.[0-2]$)"; then
+  echo "You need node v0.2.3 or higher to run this program." >&2
+  exit $ret
+fi
+
 make=`which gmake 2>&1`
 if [ $? -ne 0 ] || ! [ -x $make ]; then
   make=`which make 2>&1`
