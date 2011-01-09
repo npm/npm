@@ -37,6 +37,9 @@ In this way, a command like
 to have a dependency that is not published on the npm registry.  (It still
 must contain a package.json, though, of course.)
 
+If there is a `directories.bundle` folder specified in the package.json,
+then it will use that folder rather than `node_modules`.
+
 ## CAVEATS
 
 Man pages are not installed by bundle.
