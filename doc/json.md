@@ -245,11 +245,6 @@ Put markdown files in here.  Eventually, these will be displayed nicely, maybe, 
 
 Put example scripts in here.  Someday, it might be exposed in some clever way.
 
-### directories.bundle
-
-The location where bundled dependencies live.  This defaults to
-"node_modules", but can be set to anything you like.
-
 ## repository
 
 Specify the place where your code lives. This is helpful for people who want to
