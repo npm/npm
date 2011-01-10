@@ -39,4 +39,10 @@ man1/%/: doc/%/
 test:
 	./test/run.sh
 
+publish:
+	[ "$(shell cat .git/HEAD)" = "ref: refs/heads/master" ] \
+		&& git tag -s -m v$(shell npm -v) v$(shell npm -v) \
+		&& git push origin master \
+		&& npm publish
+
 .PHONY: install install-dev link doc clean uninstall test man
