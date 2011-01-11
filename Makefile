@@ -39,7 +39,11 @@ man1/%/: doc/%/
 test:
 	./test/run.sh
 
-publish:
+version: link
+	git add package.json \
+		&& git ci -m v$(shell npm -v)
+
+publish: link
 	[ "$(shell cat .git/HEAD)" = "ref: refs/heads/master" ] \
 		&& git tag -s -m v$(shell npm -v) v$(shell npm -v) \
 		&& git push origin master \
