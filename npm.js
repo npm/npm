@@ -18,7 +18,6 @@ var EventEmitter = require("events").EventEmitter
   , log = require("./lib/utils/log")
   , fs = require("./lib/utils/graceful-fs")
   , path = require("path")
-  , mkdir = require("./lib/utils/mkdir-p")
   , abbrev = require("./lib/utils/abbrev")
   , which = require("./lib/utils/which")
 
@@ -138,10 +137,7 @@ npm.load = function (conf, cb_) {
       log.verbose("node symlink", node)
       process.execPath = node
     }
-    ini.resolveConfigs(conf, function (er) {
-      if (er) return cb(er)
-      mkdir(npm.tmp, cb)
-    })
+    ini.resolveConfigs(conf, cb)
   })
 }
 
