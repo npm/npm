@@ -8,3 +8,4 @@ build/
 CVS/
 *~
 *.bak
+.DS_Store
