@@ -6,3 +6,5 @@ build/
 .hg/
 .git/
 CVS/
+*~
+*.bak
