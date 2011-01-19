@@ -126,10 +126,9 @@ npm.load = function (conf, cb_) {
   loading = true
   function cb (er) {
     loaded = true
-    loadListeners.forEach(function (cb) {
-      cb(er, npm)
-    })
-    loadListeners.length = 0
+    while (loadListeners.length > 0) {
+      loadListeners.shift()(er, npm)
+    }
   }
   log.waitForConfig()
   which(process.argv[0], function (er, node) {
