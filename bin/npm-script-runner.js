@@ -1,31 +1,26 @@
-#!/usr/bin/env/ node
+#!/usr/bin/env node
 
-// Run a command as nobody
+// Run a command as a specific user.
 // env is passed through untouched.
-// usage: npm-script-runner $folder $uid "make test"
+// usage: npm-script-runner $folder $uid $gid "make test"
 // This is internal plumbing
-
-console.error(process.argv)
 
 var argv = process.argv.slice(2)
   , cwd = argv.shift()
-  , cmd = argv.shift()
   , uid = argv.shift()
+  , gid = argv.shift()
+  , cmd = argv.shift()
   , stdio = process.binding("stdio")
+  , cp = require("child_process")
 
-try {
-  process.setuid(uid)
-} catch (ex) {
-  console.error("Could not setuid to "+uid)
-  throw ex
-}
+process.setgid(gid)
+process.setuid(uid)
 
-
-require("child_process").spawn( "sh", ["-c", cmd]
-                              , { env : process.env
-                                , cwd : cwd
-                                , customFDs: [ stdio.stdinFD
-                                             , stdio.stdoutFD
-                                             , stdio.stderrFD ]
-                                })
-                        .on("exit", function (c) { process.exit(c) })
+cp.spawn( "sh", ["-c", cmd]
+        , { env : process.env
+          , cwd : cwd
+          , customFds: [ stdio.stdinFD
+                       , stdio.stdoutFD
+                       , stdio.stderrFD ]
+          } )
+  .on("exit", function (c) { process.exit(c) })
