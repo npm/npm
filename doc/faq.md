@@ -26,6 +26,13 @@ silly`.
 
 You can also set it to `win` or `silent` for even more quietness.
 
+## How do I list installed packages?
+
+`npm ls installed`
+
+If you just want to see the names, and not all the registry data, you
+can do: `npm ls installed --no-registry` to turn off the registry.
+
 ## How do I search for packages?
 
 `npm ls`
