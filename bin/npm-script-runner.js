@@ -13,6 +13,15 @@ var argv = process.argv.slice(2)
   , stdio = process.binding("stdio")
   , cp = require("child_process")
 
+if (!isNaN(uid)) uid = +uid
+if (!isNaN(gid)) gid = +gid
+
+if (!uid || !gid || uid === "root") throw new Error(
+  "Please set a non-zero/non-root uid and gid")
+
+console.error("uid=%s gid=%s euid=%s egid=%s"
+             , process.getuid(), process.getgid(), uid, gid)
+console.error("cmd=%s", cmd)
 process.setgid(gid)
 process.setuid(uid)
 
