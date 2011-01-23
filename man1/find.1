@@ -1,0 +1,98 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-LIST" "1" "January 2011" "" ""
+.
+.SH "NAME"
+\fBnpm-list\fR \-\- List installed packages
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm list
+npm ls
+.
+.fi
+.
+.SH "DESCRIPTION"
+This command will print to stdout all the versions of packages that are
+either installed or available in the registry, with their tags and whether
+or not they\'re active and/or stable\.
+.
+.P
+To filter a single package or state, you can provide words to filter on
+and highlight (if appropriate)\.  For instance, to see all the stable
+packages, you could do this:
+.
+.IP "" 4
+.
+.nf
+npm ls stable
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Another common usage is to find the set of all packages that are 
+installed\. This can be accomplished by doing this:
+.
+.IP "" 4
+.
+.nf
+npm ls installed
+.
+.fi
+.
+.IP "" 0
+.
+.SH "CONFIGURATION"
+.
+.SS "registry"
+Default: https://registry\.npmjs\.org/
+.
+.P
+The base URL of the npm package registry\.
+.
+.SS "listopts"
+Default: ""
+.
+.P
+A whitespace\-separated list of extra args that are always passed to npm ls
+.
+.P
+For example: \fBlistopts = remote\fR
+.
+.P
+\fBnpm ls\fR
+.
+.P
+The output here will always filter by remote
+.
+.SS "description"
+Default: true
+.
+.P
+Show the package description in npm ls\.
+.
+.SS "outfd"
+Default: Standard Output FD (1)
+.
+.P
+The file descriptor (integer) or stream object where npm will write
+"normal" output\.  For instance, the \fBls\fR and \fBview\fR commands write their
+output here\.
+.
+.P
+When using npm programmatically, you may want to provide a
+FileWriteStream, or some other form of WritableStream\.
+.
+.SS "color"
+Default: true
+.
+.P
+Set to false to disable colorized output\.
+.
+.P
+In versions of node that expose the \fBisatty\fR function, npm will never
+write colorized output to a non\-terminal file descriptor\.

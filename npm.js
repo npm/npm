@@ -45,6 +45,8 @@ var commandCache = {}
               , "rb" : "rebuild"
               , "bn" : "bundle"
               , "list" : "ls"
+              , "search" : "ls"
+              , "find" : "ls"
               , "ln" : "link"
               , "i" : "install"
               , "up" : "update"
