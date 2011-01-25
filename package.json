@@ -54,4 +54,5 @@
     , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
     }
   ]
+, "dependencies" : {"url":"1","querystring":"1"}
 }
