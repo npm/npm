@@ -1,0 +1,10 @@
+{"name":"querystring"
+,"version":"1.0.0"
+,"description":"The querystring module from nodejs"
+,"author":"Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)"
+,"license":{"type":"MIT"
+           ,"url":"https://github.com/isaacs/node-querystring/raw/master/LICENSE"}
+,"main":"querystring.js"
+,"repositories":[{"type":"git"
+                 ,"url":"https://github.com/isaacs/node-querystring.git"}]
+,"scripts":{"test":"node test-querystring.js"}}
