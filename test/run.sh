@@ -116,6 +116,7 @@ cleanup () {
 export npm_config_root="$ROOTDIR"
 export npm_config_binroot="$BINDIR"
 export npm_config_manroot="$MANDIR"
+export npm_config_color="always"
 export PATH="$PATH":"$BINDIR"
 export NODE_PATH="$ROOTDIR"
 
