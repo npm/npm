@@ -25,6 +25,10 @@ the registry.
 
 See `npm help registry`
 
+Also, the `force` configuration param will cause it to unpublish an
+existing package, so that it can be published over.  Please use with
+caution!
+
 ## SEE ALSO
 
 * npm-registry(1)
