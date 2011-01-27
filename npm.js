@@ -24,6 +24,8 @@ var EventEmitter = require("events").EventEmitter
 npm.commands = {}
 npm.ELIFECYCLE = {}
 npm.E404 = {}
+npm.EPUBLISHCONFLICT = {}
+
 
 try {
   // startup, ok to do this synchronously
