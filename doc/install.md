@@ -78,6 +78,10 @@ You may combine multiple arguments, and even multiple types of arguments.  For e
 
 The `--tag` argument will apply to all of the specified install targets.
 
+The `--force` argument will force npm to fetch remote resources even if a local copy exists on disk.
+
+    npm install sax --force
+
 ## CONFIGURATION
 
 ### root
