@@ -21,13 +21,27 @@ if [ $? -ne 0 ]; then
 fi
 
 BACK="$PWD"
+
+# sniff for gtar/gegrep/gmake
+# use which, but don't trust it very much.
+
 tar="${TAR}"
 if [ -z "$tar" ]; then
-  # sniff for gtar/gegrep
-  # use which, but don't trust it very much.
   tar=`which gtar 2>&1`
   if [ $? -ne 0 ] || ! [ -x $tar ]; then
     tar=tar
+  else
+    # tar is used by npm, so let's set the config all over the place.
+    # This isn't guaranteed to work, but it is very likely.
+    if [ -d $HOME ]; then
+      echo "tar = $tar" >> $HOME/.npmrc
+    fi
+    globalconfig=`dirname "$node"`
+    globalconfig=`dirname "$globalconfig"`
+    globalconfig="$globalconfig"/etc/npmrc
+    echo "tar = $tar" >> $globalconfig
+
+    echo "It would be wise to add 'TAR=$tar' to your environment." >&2
   fi
 fi
 
