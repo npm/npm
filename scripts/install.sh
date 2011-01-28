@@ -36,20 +36,6 @@ if [ $? -ne 0 ] || ! [ -x $egrep ]; then
   egrep=egrep
 fi
 
-node_version=`$node --version 2>&1`
-ret=$?
-if [ $ret -eq 0 ]; then
-  req=`$node bin/read-package-json.js package.json engines.node`
-  $node bin/semver.js -v "$node_version" -r "$req"
-  ret=$?
-fi
-if [ $ret -ne 0 ]; then
-  echo "You need node $req to run this program." >&2
-  echo "node --version reports: $node_version" >&2
-  echo "Please upgrade node before continuing."
-  exit $ret
-fi
-
 make=`which gmake 2>&1`
 if [ $? -ne 0 ] || ! [ -x $make ]; then
   make=`which make 2>&1`
@@ -71,6 +57,19 @@ fi
 cd "$TMP" \
   && curl -L "$url" | $tar -xzf - \
   && cd * \
+  && (node_version=`$node --version 2>&1`
+      ret=$?
+      if [ $ret -eq 0 ]; then
+        req=`$node bin/read-package-json.js package.json engines.node`
+        $node bin/semver.js -v "$node_version" -r "$req"
+        ret=$?
+      fi
+      if [ $ret -ne 0 ]; then
+        echo "You need node $req to run this program." >&2
+        echo "node --version reports: $node_version" >&2
+        echo "Please upgrade node before continuing."
+        exit $ret
+      fi)
   && (if ! [ "$make" = "NOMAKE" ]; then
         $make uninstall dev
       else
