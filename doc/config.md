@@ -360,3 +360,12 @@ default, `npm install foo` will fetch and install the latest version of
 Default: true
 
 Show the package description in npm ls.
+
+## node-version
+
+Default: `process.version` from the node environment
+
+An effective version of node to use when checking for "engines"
+compliance.
+
+Set to null or false to suppress engine checking altogether.
