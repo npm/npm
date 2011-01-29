@@ -83,7 +83,7 @@ cd "$TMP" \
         echo "node --version reports: $node_version" >&2
         echo "Please upgrade node before continuing."
         exit $ret
-      fi)
+      fi) \
   && (if ! [ "$make" = "NOMAKE" ]; then
         $make uninstall dev
       else
