@@ -470,3 +470,14 @@ compliance\.
 .
 .P
 Set to null or false to suppress engine checking altogether\.
+.
+.SH "onload\-script"
+Default: false
+.
+.P
+A script to run when npm loads\.  Use this to hook into various events in
+the npm flow in a programmatic way, even when using npm from the command
+line\.
+.
+.P
+If false, then don\'t do any onload stuff\.

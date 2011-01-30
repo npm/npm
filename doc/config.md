@@ -369,3 +369,13 @@ An effective version of node to use when checking for "engines"
 compliance.
 
 Set to null or false to suppress engine checking altogether.
+
+## onload-script
+
+Default: false
+
+A script to run when npm loads.  Use this to hook into various events in
+the npm flow in a programmatic way, even when using npm from the command
+line.
+
+If false, then don't do any onload stuff.

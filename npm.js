@@ -128,12 +128,17 @@ npm.load = function (conf, cb_) {
   if (loaded) return cb()
   if (loading) return
   loading = true
+  var onload = true
   function cb (er) {
     loaded = true
     loadListeners.forEach(function (cb) {
       process.nextTick(function () { cb(er, npm) })
     })
     loadListeners.length = 0
+    if (onload = onload && npm.config.get("onload-script")) {
+      require(onload)
+      onload = false
+    }
   }
   log.waitForConfig()
   which(process.argv[0], function (er, node) {
