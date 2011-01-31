@@ -1,0 +1,282 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-FOLDERS" "1" "January 2011" "" ""
+.
+.SH "NAME"
+\fBnpm-folders\fR \-\- Folder Structures Used by npm
+.
+.SH "FUTURE"
+This functionality is not yet implemented\.  It is a plan, not reality\.
+It is not the map, nor the territory, but a blueprint with blank areas\.
+.
+.P
+In particular, this is the scheme that will be used starting in npm@0\.3,
+which will require node@0\.5\.0 or above\.
+.
+.SH "GOALS"
+.
+.IP "\(bu" 4
+Don\'t splat stuff across the filesystem so much\.  Just specify a single
+root location, and be done with it\.
+.
+.IP "\(bu" 4
+Work on windows\.
+.
+.IP "\(bu" 4
+Minimize shim/symlink usage\.
+.
+.IP "\(bu" 4
+Do not rely on any global system path for node modules\.
+.
+.IP "\(bu" 4
+Remove the "activation" concept\.
+.
+.IP "" 0
+.
+.SH "DESCRIPTION"
+npm metadata lives in the \fBroot\fR setting\.  There is the cache folder,
+and the contents of all installed packages\.
+.
+.P
+The default npm root folder is \fB/usr/local/lib/npm\fR\|\.
+.
+.P
+TODO: What should the root folder be on windows?
+.
+.SS "Cache folder"
+The cache folder is a mirror of the data in the registry, as well as a
+working space for unpacking and creating tarballs\.
+.
+.P
+Files and folders created in the cache are owned by the executing user,
+often "root"\.
+.
+.P
+Files are created with 0666 and folders with 0777, so that they can be
+modified by any user\.
+.
+.IP "\(bu" 4
+\fBroot/cache\fR Cache folder
+.
+.IP "\(bu" 4
+\fBroot/cache/foo/cache\.json\fR Expirable cache of registry/foo json data
+.
+.IP "\(bu" 4
+\fBroot/cache/foo/1\.2\.3/package\fR Pristine copy of foo package contents
+.
+.IP "\(bu" 4
+\fBroot/cache/foo/1\.2\.3/package\.tgz\fR tarball of foo@1\.2\.3
+.
+.IP "" 0
+.
+.SS "Package folders"
+In the npm root folder, package contents are unpacked, built, and then
+moved into the desired location\.
+.
+.IP "\(bu" 4
+\fBroot/packages/foo/1\.2\.3\fR Metadata and contents of foo@1\.2\.3
+.
+.IP "\(bu" 4
+\fBroot/packages/foo/1\.2\.3/package\fR Build location of foo@1\.2\.3
+.
+.IP "\(bu" 4
+\fBroot/packages/foo/1\.2\.3/node_modules\fR Links to (or, on windows, copies of)
+dependencies of foo@1\.2\.3
+.
+.IP "\(bu" 4
+\fBroot/packages/foo/1\.2\.3/metadata\.json\fR Metadata about the foo package\.
+.
+.IP "" 0
+.
+.SS "Installation in `node_modules` Folders"
+When you run \fBnpm install foo@1\.2\.3\fR it downloads and builds the
+package, and then, if there is a package\.json file in the current
+working directory, it copies it to \fB$PWD/node_modules/foo\fR, so that your
+current package will get it when you do \fBrequire("foo")\fR\|\.
+.
+.P
+When this is done, it also installs all of foo\'s dependencies to \fB\|\./node_modules/foo/node_modules/\fR, so that it will get its dependencies
+appropriately when it calls \fBrequire()\fR\|\.  If foo depends on bar, and bar
+depends on baz, then there will also be a \fB\|\./node_modules/foo/node_modules/bar/node_modules/baz\fR, and so on\.
+.
+.P
+If there is not a package\.json in the current working directory, then
+npm walks up the working dir parent paths looking for a package\.json,
+indicating the root of a package, or a node_modules folder,
+indicating an npm package deployment location, and then take the party to that
+location\.  This behavior may be suppressed by setting the \fBseek\-root\fR
+config value to false\.
+.
+.P
+If no package root is found, then a global installation is performed\.
+The global installation may be supressed by setting the \fBglobal\fR
+configuration to false, in which case, the install will fail\.
+.
+.SS "Global Installation"
+If the \fBglobal\fR configuration is set to true, or if it is not explicitly
+set false and no suitable node_modules folder was found, then npm will
+install packages "globally"\.
+.
+.P
+This means that the module contents are symlinked (or, on windows,
+copied) from \fBroot/<name>/<version>/package\fR to \fBroot/node_modules/<name>\fR\|\.
+.
+.SS "Installing executables"
+When installing globally, executables are linked (or, on windows,
+shimmed with a \.bat file) to \fBroot/bin\fR\|\.
+.
+.P
+When doing a
+localized installation, executables are linked (or, on windows, shimmed)
+to \fB\|\./node_modules/\.bin\fR\|\.  This also applies to the case when a globally
+installed package\'s dependents are being installed into it\.  Basically,
+whenever writing \fB\|\.\.\./node_modules/foo\fR, and the "foo"
+package has an executable named "bar", it\'ll write it to \fB\|\.\.\./node_modules/\.bin/bar\fR\|\.
+.
+.P
+It is up to the user to update their PATH environment variable
+appropriately for globally installed executables\.  When running package
+lifecycle scripts (for example, to build, start, test, etc\.), npm will
+put \fB\|\./node_modules/\.bin\fR as the first item in the PATH environ\.
+.
+.SS "Installing manpages"
+npm will install man pages to \fBroot/share/man\fR\|\.  It is up to the user to
+make sure that their man program searches this location\.
+.
+.SS "Cycles, Conflicts, and Folder Parsimony"
+Cycles are handled using the property of node\'s module system that it
+walks up the directories looking for node\fImodules folders\.  So, at every
+stage, if a package is already installed in an ancestor node\fRmodules
+folder, then it is not installed at the current location\.
+.
+.P
+Consider the case above, where \fBfoo \-> bar \-> baz\fR\|\.  Imagine if, in
+addition to that, baz depended on bar, so you\'d have: \fBfoo \-> bar \-> baz \-> bar \-> baz \.\.\.\fR\|\.  However, since the folder
+structure is: foo/node\fImodules/bar/node\fRmodules/baz, there\'s no need to
+put another copy of bar into \.\.\./baz/node\fImodules, since when it calls
+require("bar"), it will get the copy that is installed in
+foo/node\fRmodules/bar\.
+.
+.P
+This shortcut is only used if the exact same
+version would be installed in multiple nested node_modules folders\.  It
+is still possible to have \fBa/node_modules/b/node_modules/a\fR if the two
+"a" packages are different versions\.  However, without repeating the
+exact same package multiple times, an infinite regress will always be
+prevented\.
+.
+.P
+Another optimization can be made by installing dependencies at the
+highest level possible, below the localized "target" folder\.
+.
+.P
+For example, consider this dependency graph:
+.
+.IP "" 4
+.
+.nf
+foo
++\-\- bar@1\.2\.3
+|   +\-\- baz@2\.x
+|   |   `\-\- quux@3\.x
+|   `\-\- asdf@*
+`\-\- baz@1\.2\.3
+    `\-\- quux@3\.x
+.
+.fi
+.
+.IP "" 0
+.
+.P
+In this case, we\'d expect a folder structure like this:
+.
+.IP "" 4
+.
+.nf
+foo
++\-\- node_modules
+    +\-\- bar (1\.2\.3)
+    |   `\-\- node_modules
+    |       `\-\- baz (2\.0\.2)
+    +\-\- quux (3\.2\.0)
+    +\-\- asdf (0\.2\.5)
+    `\-\- baz (1\.2\.3)
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Since foo depends directly on bar@1\.2\.3 and baz@1\.2\.3, those are
+installed in foo\'s node_modules folder\.
+.
+.P
+Since baz@1\.2\.3 depends on quux@3\.x, a satisfying version is placed in
+foo\'s node_modules folder, because there are no conflicts\.
+.
+.P
+Since bar@1\.2\.3 depends on asdf@*, a satisfying version is placed in
+foo\'s node\fImodules folder\.  It also depends on baz@2\.x, but this
+conflicts with the version already installed in foo\'s node\fRmodules
+folder, so it is installed into the node_modules folder under bar@1\.2\.3\.
+.
+.P
+baz@2\.0\.2 depends on quux@3\.x, but this dependency is already satisfied
+by the quux version installed in foo\'s node_modules folder, so nothing
+further needs to be done\.
+.
+.SS "Snapshotting"
+Whenever the \fBnpm snapshot\fR command is run, the package\.json file is
+updated to include the versions of all of the packages in the \fB\|\./node_modules\fR folder as dependencies\.
+.
+.SS "Publishing"
+Upon publishing, npm will look in the node_modules folder\.  If any of
+the items there are on the "dependencies" or "devDependencies" list, and
+are unmodified copies of the corresponding packages in \fBroot/node_modules/<name>/<version>/package\fR, then they will not be
+included in the package tarball\.
+.
+.P
+If the package has been modified, then it is left as\-is, and included in
+the package\.
+.
+.P
+This allows a package maintainer to install all of their dependencies
+(and dev dependencies) locally, but only publish those items that cannot
+be found elsewhere\.
+.
+.SS "Updating"
+npm keeps track of every installation of foo@1\.2\.3 in \fBroot/packages/foo/1\.2\.3/metadata\.json\fR\|\.
+.
+.P
+When updating in a package folder (see algorithm for determining this in
+"Installation in \fBnode_modules\fR Folders"), npm updates the packages in
+the local folder to the latest versions that are compatible with the
+requirements in the package\.json file\.
+.
+.P
+If global is set to \fB"super"\fR, then npm will attempt to update
+all copies of packages installed anywhere and everywhere that it is
+aware of\.
+.
+.P
+If \fBglobal\fR is set to `true, or implied by not being in a package folder
+at the time, then npm will update the globally installed packages\.
+.
+.P
+If you do \fBnpm update foo\fR, and you\'re in a local package folder, but \fBfoo\fR is not installed there, and it \fIis\fR installed globally, then that
+will be equivalent to doing \fBnpm update foo \-\-global\fR\|\.
+.
+.SS "Uninstalling"
+Uninstalling works like updating\.
+.
+.P
+If global is set to "super", then it removes all traces from everywhere\.
+.
+.P
+If global is set to "true", or implied, then it removes the global copy\.
+.
+.P
+If global is set to "false", or unset and the command is in a package
+folder with a copy of the package being removed, then it removes it from
+the local folder\.

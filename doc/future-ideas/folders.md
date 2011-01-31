@@ -27,6 +27,10 @@ root location, and be done with it.
 npm metadata lives in the `root` setting.  There is the cache folder,
 and the contents of all installed packages.
 
+The default npm root folder is `/usr/local/lib/npm`.
+
+TODO: What should the root folder be on windows?
+
 ### Cache folder
 
 The cache folder is a mirror of the data in the registry, as well as a
@@ -38,25 +42,21 @@ often "root".
 Files are created with 0666 and folders with 0777, so that they can be
 modified by any user.
 
-`root/cache` Cache folder
-`root/cache/foo/cache.json` Expirable cache of registry/foo json data
-`root/cache/foo/1.2.3/package` Pristine copy of foo package contents
-`root/cache/foo/1.2.3/package.tgz` tarball of foo@1.2.3
+* `root/cache` Cache folder
+* `root/cache/foo/cache.json` Expirable cache of registry/foo json data
+* `root/cache/foo/1.2.3/package` Pristine copy of foo package contents
+* `root/cache/foo/1.2.3/package.tgz` tarball of foo@1.2.3
 
 ### Package folders
 
 In the npm root folder, package contents are unpacked, built, and then
 moved into the desired location.
 
-The default npm root folder is `/usr/local/lib/npm`.
-
-TODO: What should the root folder be on windows?
-
-`root/packages/foo/1.2.3` Metadata and contents of foo@1.2.3
-`root/packages/foo/1.2.3/package` Build location of foo@1.2.3
-`root/packages/foo/1.2.3/node_modules` Links to (or, on windows, copies of)
-dependencies of foo@1.2.3
-`root/packages/foo/1.2.3/metadata.json` Metadata about the foo package.
+* `root/packages/foo/1.2.3` Metadata and contents of foo@1.2.3
+* `root/packages/foo/1.2.3/package` Build location of foo@1.2.3
+* `root/packages/foo/1.2.3/node_modules` Links to (or, on windows, copies of)
+  dependencies of foo@1.2.3
+* `root/packages/foo/1.2.3/metadata.json` Metadata about the foo package.
 
 ### Installation in `node_modules` Folders
 
