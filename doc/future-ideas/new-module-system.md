@@ -230,4 +230,3 @@ If global is set to "false", or unset and the command is in a package
 folder with a copy of the package being removed, then it removes it from
 the local folder.
 
-
