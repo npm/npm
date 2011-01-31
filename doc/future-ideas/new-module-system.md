@@ -230,3 +230,47 @@ If global is set to "false", or unset and the command is in a package
 folder with a copy of the package being removed, then it removes it from
 the local folder.
 
+### Linking
+
+When `npm link` is run without any arguments in a package folder, then a
+symbolic link is created from that folder to `root/<name>/LINK`.
+Additionally, its package dependencies are installed to its
+./node_modules folder as necessary.
+
+When `npm link <name>` is run in another package folder, a symbolic
+link is created from `root/<name>/LINK` to `./node_modules/<name>`, and
+its dependencies are also installed if necessary.  (Generally, it will
+not be necessary, as the package will already have its own node_modules
+folder containing its dependencies.)
+
+When publishing, linked package dependencies are resolved to their
+current state.  It is assumed that the linked folder was linked for a
+reason, and may contain changes required for the proper functioning of
+the host program.
+
+#### npm link use case
+
+    # create a linked "request" package
+    cd ~/projects/request
+    npm link
+
+    # now write a program that uses request
+    mkdir -p ~/projects/my-program
+    cd ~/projects/my-program
+    git init
+    # do your git stuff...
+    npm init
+    # enter some package.json values
+    # now we're ready to rock.
+    # use redis, but don't need bleeding edge.
+    npm install redis
+    # use the linked copy of request
+    npm link request
+
+    # now any changes to ~/projects/request will
+    # be immediately effective in my-program when
+    # I do require("request")
+
+#### link on Windows
+
+Not sure how this will work.  Maybe linking simply isn't possible?
