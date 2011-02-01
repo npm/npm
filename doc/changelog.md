@@ -231,3 +231,9 @@ npm-changelog(1) -- Changes
   Dependency info in lifecycle scripts.  
   More data validation.
 
+* 0.2.15 - 0.2.17:
+  Added "--force" for publish  
+  Support argless "unpublish" and "uninstall" in package dirs  
+  Document future stuff  
+  Remove support for "modules" hash  
+  Read package defaults when reading json
