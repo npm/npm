@@ -20,7 +20,7 @@ clean: uninstall
 
 uninstall:
 	node cli.js cache clean
-	node cli.js rm npm
+	node cli.js rm npm -r
 
 man: man1
 
