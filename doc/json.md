@@ -97,7 +97,7 @@ inside that folder.  The default is just `[""]` which includes the
 entire package folder in the tarball, but you may want to only include
 specific things.
 
-If you specify modules, bins, or man pages, then those will be
+If you specify bins or man pages, then those will be
 automatically added to the files array, even if they would not
 ordinarily be included.
 
@@ -152,30 +152,6 @@ would be the same as this:
 
     { "bin" : { "program" : "./path/to/program" } }
 
-## modules
-
-The "modules" member exposes CommonJS modules in the package. So, if you had a 
-package named `foo`, and the package.json contains `"modules":{"bar":"./lib/baz"}`, 
-and there was a file called `./lib/baz.js`, then require("foo/bar") would include 
-the module defined in `./lib/baz.js`.
-
-Subfolders are supported, so you can do this:
-
-    { "name" : "foo"
-    , "modules" :
-      { "bar/baz" : "./lib/bar/baz"
-      , "quux" : "./quux"
-      }
-    }
-
-And then, doing `require("foo/bar/baz")` would return the module at `./lib/bar/baz`
-in the foo package.  Doing `require("foo/quux")` would return the module at
-`./quux` in the foo package.
-
-Just like the `main` script, the modules linked in this fashion will have their
-dependencies and paths set up properly by npm. (In fact, "main" is just sugar
-around setting a module named "index".)
-
 ## man
 
 Specify either a single file or an array of filenames to put in place for the
@@ -219,12 +195,12 @@ In the future, this information may be used in other creative ways.
 
 ### directories.lib
 
-If you specify a "lib" directory, and do not supply a modules hash, then the lib
+If you specify a "lib" directory, then the lib
 folder will be walked and any *.js or *.node files found will be exposed as a
 default module hash.
 
-Providing an explicit modules hash is encouraged over exposing the entire lib
-folder.
+**The lib directory mapping will be deprecated soon. Please do not rely
+on it.**
 
 ### directories.bin
 
