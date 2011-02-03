@@ -179,11 +179,11 @@ Object.defineProperty(npm, "root",
   , enumerable : true
   })
 Object.defineProperty(npm, "dir",
-  { get : function () { return path.join(npm.root, ".npm") }
+  { get : function () { return path.join(npm.root, npm.config.get('dotnpm')) }
   , enumerable : true
   })
 Object.defineProperty(npm, "cache",
-  { get : function () { return path.join(npm.root, ".npm", ".cache") }
+  { get : function () { return path.join(npm.root, npm.config.get('dotnpm'), ".cache") }
   , enumerable : true
   })
 var tmpFolder
