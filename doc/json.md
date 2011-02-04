@@ -292,7 +292,7 @@ configs.
 ## dependencies
 
 Dependencies are specified with a simple hash of package name to version
-range. The version range is EITHER a string with has one or more
+range. The version range is EITHER a string which has one or more
 space-separated descriptors, OR a range like "fromVersion - toVersion"
 
 Version range descriptors may be any of the following styles, where "version"
