@@ -195,7 +195,5 @@ Object.defineProperty(npm, "tmp",
   , enumerable : true
   })
 
-if (process.getuid() === 0) process.nextTick(function () {
-  log( "\nRunning npm as root is not recommended!\n"
-     + "Seriously, don't do this!\n", "sudon't!", "error")
-})
+// platforms without uid/gid support are assumed to be in unsafe-perm mode.
+if (!process.getuid) npm.config.set("unsafe-perm", true)
