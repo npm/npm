@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-JSON" "1" "January 2011" "" ""
+.TH "NPM\-JSON" "1" "February 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-json\fR \-\- Specifics of npm\'s package\.json handling
@@ -132,7 +132,7 @@ entire package folder in the tarball, but you may want to only include
 specific things\.
 .
 .P
-If you specify modules, bins, or man pages, then those will be
+If you specify bins or man pages, then those will be
 automatically added to the files array, even if they would not
 ordinarily be included\.
 .
@@ -213,38 +213,6 @@ would be the same as this:
 .
 .IP "" 0
 .
-.SH "modules"
-The "modules" member exposes CommonJS modules in the package\. So, if you had a 
-package named \fBfoo\fR, and the package\.json contains \fB"modules":{"bar":"\./lib/baz"}\fR, 
-and there was a file called \fB\|\./lib/baz\.js\fR, then require("foo/bar") would include 
-the module defined in \fB\|\./lib/baz\.js\fR\|\.
-.
-.P
-Subfolders are supported, so you can do this:
-.
-.IP "" 4
-.
-.nf
-{ "name" : "foo"
-, "modules" :
-  { "bar/baz" : "\./lib/bar/baz"
-  , "quux" : "\./quux"
-  }
-}
-.
-.fi
-.
-.IP "" 0
-.
-.P
-And then, doing \fBrequire("foo/bar/baz")\fR would return the module at \fB\|\./lib/bar/baz\fR
-in the foo package\.  Doing \fBrequire("foo/quux")\fR would return the module at \fB\|\./quux\fR in the foo package\.
-.
-.P
-Just like the \fBmain\fR script, the modules linked in this fashion will have their
-dependencies and paths set up properly by npm\. (In fact, "main" is just sugar
-around setting a module named "index"\.)
-.
 .SH "man"
 Specify either a single file or an array of filenames to put in place for the \fBman\fR program to find\.
 .
@@ -312,13 +280,13 @@ you\'ll see that it has directories for doc, lib, and man\.
 In the future, this information may be used in other creative ways\.
 .
 .SS "directories\.lib"
-If you specify a "lib" directory, and do not supply a modules hash, then the lib
+If you specify a "lib" directory, then the lib
 folder will be walked and any \fI\|\.js or \fR\|\.node files found will be exposed as a
 default module hash\.
 .
 .P
-Providing an explicit modules hash is encouraged over exposing the entire lib
-folder\.
+\fBThe lib directory mapping will be deprecated soon\. Please do not rely
+on it\.\fR
 .
 .SS "directories\.bin"
 If you specify a "bin" directory, then all the files in that folder will be used
@@ -426,7 +394,7 @@ configs\.
 .
 .SH "dependencies"
 Dependencies are specified with a simple hash of package name to version
-range\. The version range is EITHER a string with has one or more
+range\. The version range is EITHER a string which has one or more
 space\-separated descriptors, OR a range like "fromVersion \- toVersion"
 .
 .P
