@@ -14,87 +14,68 @@ You shouldn't use sudo with it.
 
 To install npm with one command, do this:
 
-    curl http://npmjs.org/install.sh | sh
+    curl http://npmjs.org/install.sh | sudo sh
 
 If that fails, try this:
 
     git clone http://github.com/isaacs/npm.git
     cd npm
-    make
+    sudo make install
 
 If you're sitting in the code folder reading this document in your
 terminal, then you've already got the code.  Just do:
 
-    make
+    sudo make install
 
 and npm will install itself.
 
 If you don't have make, and don't have curl or git, and ALL you have is
 this code and node, you can do:
 
-    node ./cli.js install npm
+    sudo node ./cli.js install npm
 
-## Permission Errors
+## Permissions
 
-If it dies with a "Permission Denied" or EACCESS error, then that probably
-means that you are running node in a shared root-owned location.  You've
-got options.
+**tl;dr** Use `sudo` when running the `install`,
+`rm`, and `test` commands. If you forget, that's fine, it'll fail and
+remind you.
 
-Using sudo with npm is Very Not Recommended.  Anyone can publish anything,
-and package installations can run arbitrary scripts.
+### More details...
 
-### Option 1: Take ownership
+As of version 0.3, it is recommended to run some npm commands as root.
+This allows npm to change the user identifier to the `nobody` user prior
+to running any package build or test commands.
 
-Don't do this if you don't know what it does!  If you have software in
-/usr/local that depends on a specific ownership (such as MySQL), then it
-might break if you change its ownership.  Be careful.  Unix does not
-assume you don't know what you're doing!
+If this user id switch fails (generally because you are not the root
+user) then the command will fail.
 
-This is convenient if you have a single-user machine.  Run this command
-once, and never use sudo again to install stuff in /usr/local:
+If you would prefer to run npm as your own user, giving package scripts
+the same rights that your user account enjoys, then you may do so by
+setting the `unsafe-perm` config value to `true`:
 
-    sudo chown -R $USER /usr/local/{share/man,bin,lib/node}
+    npm config set unsafe-perm true
 
-You could also give your user permission to write into that directory by
-making it group-writable and adding your user to the group that owns it.
+or simply by setting the `--unsafe` flag to any individual command:
 
-### Option 2: Don't leave $HOME
+    npm test express --unsafe
 
-Install node in `$HOME/local` and npm will default to living right alongside
-it.  Follow the steps in this gist: <http://gist.github.com/579814>
 
-### Option 3: Customize npm to your heart's content
+Note that root/sudo access is only required when npm is doing the
+following actions:
 
-Create and edit a file at `~/.npmrc`.  This is an ini-formatted file, which
-you can use to set npm configs.  Do something like this to it:
+1. Writing files and folders to the root.
+2. Running package lifecycle scripts (generally to either build or
+   test).
 
-    cat >>~/.npmrc <<NPMRC
-    root = ~/.node_libraries
-    binroot = ~/bin
-    manroot = ~/share/man
-    NPMRC
+If you run npm without root privileges, and it doesn't have to do either
+of these things, then no error will occur.
 
-### Option 4: HOLY COW NOT RECOMMENDED!!
+npm will automatically attempt to escalate permissions (generally by
+prompting for your password) if it attempts to *remove* a file and fails
+with an EPERM or EACCES error.  No other permission escalation is
+attempted.
 
-You *can* just use sudo all the time for everything, and ignore the incredibly
-obnoxious warnings telling you that you're insane for doing this.
-
-    # you must REALLY trust me to do this!
-    curl http://npmjs.org/install.sh | sudo sh
-    sudo npm ls
-    sudo npm install please-pwn-my-machine-kthx
-
-If this causes horrible things to happen, you can't say I didn't warn you over
-and over again until everyone got sick of hearing about it and told me to shut
-up already.
-
-It is on the roadmap to make npm do a bunch of chown/setuid stuff when sudoed,
-so eventually it'll actually be *safer* to run as root than as a user account,
-but that's a refactor that is slowly progressing.
-
-If you have feelings about sudo use and what it should imply, then please go add
-some comments and thoughts on
-[this issue](http://github.com/isaacs/npm/issues/issue/294).
+This is a departure from npm's history, and comes at long last.
 
 ## More Fancy Installing
 
@@ -106,12 +87,12 @@ version of npm, and installs that for you.
 If you want to install the exact code that you're looking at, the bleeding-edge
 master branch, do this:
 
-    make dev
+    sudo make dev
 
 If you'd prefer to just symlink in the current code so you can hack
 on it, you can do this:
 
-    make link
+    sudo make link
 
 If you check out the Makefile, you'll see that these are just running npm commands
 at the cli.js script directly.  You can also use npm without ever installing
@@ -123,11 +104,11 @@ but at this point, you probably grok all that anyway.)
 
 So sad to see you go.
 
-    npm uninstall npm
+    sudo npm uninstall npm
 
 Or, if that fails,
 
-    make uninstall
+    sudo make uninstall
 
 ## Using npm Programmatically
 

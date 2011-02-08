@@ -237,3 +237,6 @@ npm-changelog(1) -- Changes
   Document future stuff  
   Remove support for "modules" hash  
   Read package defaults when reading json
+
+* 0.3.0:
+  More correct permission/uid handling.  (Sudo is now ok!)

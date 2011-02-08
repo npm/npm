@@ -46,16 +46,6 @@ Arguments are greps.  `npm ls jsdom` shows jsdom packages.
 You can also update all outdated packages by doing `npm update` without
 any arguments.
 
-## Why does it yell at me when I do `sudo npm install ...`?
-
-Because you're not supposed to.
-
-It is not safe to install things with sudo at this time.  See this
-bug for discussion on why this is and how it will be changed in an
-upcoming version:
-
-<https://github.com/isaacs/npm/issues/issue/294>
-
 ## What is a `package`?
 
 A package is:
