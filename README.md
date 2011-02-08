@@ -8,7 +8,7 @@ Much more info available via `npm help` once it's installed.
 
 You need node v0.2.3 or higher to run this program.
 
-You shouldn't use sudo with it.
+Node 0.3.5 or higher is *highly* recommended.
 
 ## Simple Install
 
