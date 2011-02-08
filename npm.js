@@ -20,6 +20,7 @@ var EventEmitter = require("events").EventEmitter
   , path = require("path")
   , abbrev = require("./lib/utils/abbrev")
   , which = require("./lib/utils/which")
+  , semver = require("./lib/utils/semver")
 
 npm.commands = {}
 npm.ELIFECYCLE = {}
@@ -196,4 +197,16 @@ Object.defineProperty(npm, "tmp",
   })
 
 // platforms without uid/gid support are assumed to be in unsafe-perm mode.
-if (!process.getuid) npm.config.set("unsafe-perm", true)
+var sudoOk = !semver.lt(process.version, '0.3.5')
+if (!process.getuid || !sudoOk) {
+  npm.config.set("unsafe-perm", true)
+}
+if (process.getuid && process.getuid() === 0 && !sudoOk) {
+  process.nextTick(function () {
+    log([""
+        ,"Please upgrade to node 0.3.5 or higher"
+        ,"if you are going to be running npm as root."
+        ,"It is not safe otherwise."
+        ,""].join("\n"), "", "error")
+  })
+}
