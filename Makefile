@@ -44,8 +44,7 @@ version: link
 		&& git ci -m v$(shell npm -v)
 
 publish: link
-	[ "$(shell cat .git/HEAD)" = "ref: refs/heads/master" ] \
-		&& git tag -s -m v$(shell npm -v) v$(shell npm -v) \
+	git tag -s -m v$(shell npm -v) v$(shell npm -v) \
 		&& git push origin master \
 		&& npm publish
 
