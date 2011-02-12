@@ -46,6 +46,7 @@
                   , "bin" : "./bin"
                   }
 , "main" : "npm"
+, "dependencies" : { "semver" : "1" }
 , "engines" : { "node" : ">=0.2.3" }
 , "scripts" : { "test" : "make test"
               , "postinstall" : "./scripts/install-message.sh"
