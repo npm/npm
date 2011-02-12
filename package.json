@@ -34,7 +34,7 @@
   ]
 , "repository" :
   { "type" : "git"
-  , "url" : "http://github.com/isaacs/npm.git"
+  , "url" : "git://github.com/isaacs/npm.git"
   }
 , "bugs" :
   { "mail" : "npm-@googlegroups.com"
