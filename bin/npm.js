@@ -30,7 +30,7 @@ if (conf.version) {
 log("node@"+process.version, "using")
 
 // make sure that this version of node works with this version of npm.
-var semver = require("../lib/utils/semver")
+var semver = require("semver")
   , nodeVer = process.version
   , reqVer = npm.nodeVersionRequired
 if (reqVer && !semver.satisfies(nodeVer, reqVer)) {

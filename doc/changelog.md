@@ -239,4 +239,7 @@ npm-changelog(1) -- Changes
   Read package defaults when reading json
 
 * 0.3.0:
-  More correct permission/uid handling.  (Sudo is now ok!)
+  More correct permission/uid handling.  (Sudo is now ok!)  
+  Require node 0.4.0  
+  Separate semver out into a separate utility.
+

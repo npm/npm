@@ -1,7 +1,7 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
 , "keywords" : [ "package manager", "modules", "install", "package.json" ]
-, "version" : "0.3.0"
+, "version" : "0.3.0-beta"
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
@@ -34,7 +34,7 @@
   ]
 , "repository" :
   { "type" : "git"
-  , "url" : "http://github.com/isaacs/npm.git"
+  , "url" : "git://github.com/isaacs/npm.git"
   }
 , "bugs" :
   { "mail" : "npm-@googlegroups.com"
@@ -46,7 +46,8 @@
                   , "bin" : "./bin"
                   }
 , "main" : "npm"
-, "engines" : { "node" : ">=0.2.3" }
+, "dependencies" : { "semver" : "1" }
+, "engines" : { "node" : "0.4 || 0.5" }
 , "scripts" : { "test" : "make test"
               , "postinstall" : "./scripts/install-message.sh"
               }

@@ -31,12 +31,6 @@ If your config file is ever corrupted, you can set this manually by doing:
 
     npm adduser
 
-### _authCrypt
-
-If crypto.Cipher is available, and you have some private keys in `$HOME/.ssh`,
-then npm will encrypt your "_auth" config before saving to the .npmrc file,
-and will decrypt the "_authCrypt" config when it reads the .npmrc file.
-
 ### registry
 
 Default: https://registry.npmjs.org/
