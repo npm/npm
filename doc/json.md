@@ -35,9 +35,11 @@ The name is what your thing is called.  Some tips:
 
 The *most* important things in your package.json are the name and version fields.
 
-Version must be [semver](http://semver.org)-compliant. npm assumes that you've
-read the semver page, and that you comply with it.  Here's how it deviates from
-what's on semver.org:
+Version must be [semver](https://github.com/isaacs/semver)-compliant.
+npm assumes that you've
+read the semver page, and that you comply with it.
+
+Here's how it deviates from what's on semver.org:
 
 * Versions can start with "v"
 * A numeric item separated from the main three-number version by a hyphen

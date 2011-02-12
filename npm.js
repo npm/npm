@@ -20,7 +20,7 @@ var EventEmitter = require("events").EventEmitter
   , path = require("path")
   , abbrev = require("./lib/utils/abbrev")
   , which = require("./lib/utils/which")
-  , semver = require("./lib/utils/semver")
+  , semver = require("semver")
 
 npm.commands = {}
 npm.ELIFECYCLE = {}
