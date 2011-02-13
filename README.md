@@ -20,13 +20,13 @@ If that fails, try this:
 
     git clone http://github.com/isaacs/npm.git
     cd npm
-    git submodule init --update
+    git submodule update --init
     sudo make install
 
 If you're sitting in the code folder reading this document in your
 terminal, then you've already got the code.  Just do:
 
-    git submodule init --update
+    git submodule update --init
     sudo make install
 
 and npm will install itself.
