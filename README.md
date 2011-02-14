@@ -6,9 +6,14 @@ Much more info available via `npm help` once it's installed.
 
 ## IMPORTANT
 
-You need node v0.2.3 or higher to run this program.
+**You need node v0.4 or higher to run this program.**
 
-Node 0.3.5 or higher is *highly* recommended.
+To install on older versions of node, do the following:
+
+    git clone git://github.com/isaacs/npm.git ./npm
+    cd npm
+    git checkout v0.2.18
+    make dev
 
 ## Simple Install
 
