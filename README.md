@@ -12,7 +12,7 @@ To install on older versions of node, do the following:
 
     git clone git://github.com/isaacs/npm.git ./npm
     cd npm
-    git checkout v0.2.18
+    git checkout 0.2
     make dev
 
 ## Simple Install
@@ -45,7 +45,8 @@ this code and node, you can do:
 
 **tl;dr** Use `sudo` when running the `install`,
 `rm`, and `test` commands. If you forget, that's fine, it'll fail and
-remind you.
+remind you.  If you want it back the way it was, do `npm config set
+unsafe-perm true`
 
 ### More details...
 
