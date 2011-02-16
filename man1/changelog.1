@@ -515,13 +515,19 @@ Read package defaults when reading json
 .
 .IP "\(bu" 4
 0\.3\.0:
-More correct permission/uid handling\.  (Sudo is now ok!)
+More correct permission/uid handling\.  (Sudo is now encouraged!)
 .
 .br
 Require node 0\.4\.0
 .
 .br
 Separate semver out into a separate utility\.
+.
+.br
+Packages without "main" modules don\'t export modules\.
+.
+.br
+No shims! (Still has symlinks, though)
 .
 .IP "" 0
 
