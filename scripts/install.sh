@@ -68,6 +68,13 @@ if [ $ret -ne 0 ]; then
   exit $ret
 fi
 
+me=`whoami`
+sudo=""
+if ! [ "x$me" = "xroot" ]; then
+  echo "Not running as root.  Will attempt to use sudo." >&2
+  sudo="sudo"
+fi
+
 cd "$TMP" \
   && curl -L "$url" | $tar -xzf - \
   && cd * \
@@ -85,13 +92,16 @@ cd "$TMP" \
         exit $ret
       fi) \
   && (if ! [ "$make" = "NOMAKE" ]; then
-        $make uninstall dev
+        $sudo $make uninstall dev || \
+          (npm_unsafe_perm=true $make install dev)
       else
-        $node cli.js install .
+        $sudo $node cli.js install . || \
+          (npm_unsafe_perm=true $node cli.js install .)
       fi) \
   && cd "$BACK" \
   && rm -rf "$TMP" \
   && echo "It worked"
+
 ret=$?
 if [ $ret -ne 0 ]; then
   echo "It failed" >&2
