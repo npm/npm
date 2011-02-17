@@ -59,7 +59,7 @@ if [ $? -ne 0 ] || ! [ -x $make ]; then
   fi
 fi
 
-url=`curl http://registry.npmjs.org/npm/latest \
+url=`curl -s http://registry.npmjs.org/npm/latest \
       | $egrep -o 'tarball":"[^"]+' \
       | $egrep -o 'http://.*'`
 ret=$?
@@ -76,7 +76,7 @@ if ! [ "x$me" = "xroot" ]; then
 fi
 
 cd "$TMP" \
-  && curl -L "$url" | $tar -xzf - \
+  && curl -s -L "$url" | $tar -xzf - \
   && cd * \
   && (node_version=`$node --version 2>&1`
       ret=$?
@@ -92,11 +92,13 @@ cd "$TMP" \
         exit $ret
       fi) \
   && (if ! [ "$make" = "NOMAKE" ]; then
-        $sudo $make uninstall dev || \
-          (npm_unsafe_perm=true $make install dev)
+        SUDO_PROMPT='[npm install] Password:' $sudo $make uninstall dev || \
+          ( echo "sudo failed, attempting with unsafe-perm" >&2
+            npm_config_unsafe_perm=true $make install dev)
       else
-        $sudo $node cli.js install . || \
-          (npm_unsafe_perm=true $node cli.js install .)
+        SUDO_PROMPT='[npm install] Password:' $sudo $node cli.js install . || \
+          ( echo "sudo failed, attempting with unsafe-perm" >&2
+            npm_config_unsafe_perm=true $node cli.js install .)
       fi) \
   && cd "$BACK" \
   && rm -rf "$TMP" \
