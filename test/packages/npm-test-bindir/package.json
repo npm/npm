@@ -1,4 +1,4 @@
-{ "name" : "bindir"
+{ "name" : "npm-test-bindir"
 , "version" : "1.0.0"
 , "directories" : { "bin" : "./bin" }
 , "scripts" : { "test" : "node ./test.js" }

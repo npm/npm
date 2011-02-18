@@ -1,4 +1,4 @@
-{ "name" : "npmignore"
+{ "name" : "npm-test-npmignore"
 , "version" : "1.2.3"
 , "files" : ["foo", "test.sh", ""]
 , "scripts" : {"test":"./test.sh"}}

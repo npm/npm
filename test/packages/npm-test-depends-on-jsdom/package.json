@@ -1,4 +1,4 @@
-{ "name" : "depends-on-jsdom"
+{ "name":"npm-test-depends-on-jsdom"
 , "version" : "1.0.0"
 , "dependencies" : { "jsdom" : "*" }
 , "scripts" : { "test" : "node test.js" }

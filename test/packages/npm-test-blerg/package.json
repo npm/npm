@@ -1,4 +1,4 @@
-{ "name" : "blerg"
+{ "name":"npm-test-blerg"
 , "version" : "0.0.0"
 , "scripts" : { "test" : "node test.js" }
 }

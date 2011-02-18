@@ -29,7 +29,7 @@ main () {
   cleanup
 
   # link
-  npm install "$NPMPKG" || exit 1 
+  npm install "$NPMPKG" || exit 1
 
   # used in test later
   npm config set package-config:foo boo || exit 1
@@ -39,6 +39,19 @@ main () {
   done) || exit 1
   (ls packages | while read pkg; do
     npm test "$pkg"@"$(ls -- "$ROOTDIR"/.npm/"$pkg" | grep -v active)"
+  done) || exit 1
+  if [ "$FAILURES" == "0" ]; then
+    npm rm $(ls packages) npm || exit 1
+  fi
+  cleanup
+
+  # attempt to publish and unpublish each of them.
+  npm install "$NPMPKG" || exit 1
+
+  (ls packages | grep -v 'npm-test-private' | while read pkg; do
+    npm publish packages/$pkg || exit 1
+    npm install $pkg || exit 1
+    npm unpublish $pkg || exit 1
   done) || exit 1
   if [ "$FAILURES" == "0" ]; then
     npm rm $(ls packages) npm || exit 1
@@ -62,7 +75,7 @@ main () {
 # fake functions
 npm () {
   echo -e "npm $@"
-  "$NPMCLI" "$@" &>output.log \
+  "$NPMCLI" "$@" \
     || fail npm "$@"
   echo -n "" > output.log
 }

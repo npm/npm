@@ -1,4 +1,4 @@
-{"name":"depends-on-spark"
+{"name":"npm-test-depends-on-spark"
 ,"version":"1.2.3"
 ,"dependencies":{"spark":"*"}
 ,"scripts":{"test":"echo $PATH >> which-spark.log; which spark >> which-spark.log"}

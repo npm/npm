@@ -1,4 +1,4 @@
-{ "name" : "url-dep"
+{ "name":"npm-test-url-dep"
 , "version" : "1.2.3"
 , "files" : []
 , "dependencies" :

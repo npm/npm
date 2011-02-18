@@ -1,4 +1,4 @@
-{ "name" : "env-reader"
+{ "name":"npm-test-env-reader"
 , "version" : "1.2.3"
 , "dependencies" : { "connect":"*", "fab":"*", "glob":"*" }
 , "scripts" :
