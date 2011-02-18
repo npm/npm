@@ -1,16 +1,18 @@
 
 docs = $(shell find doc -name '*.md' \
 				|sed 's|.md|.1|g' \
-				|sed 's|doc/|man1/|g' \
-				)
-doc_subfolders = $(shell find doc -type d \
-									|sed 's|doc/|man1/|g' \
-									)
+				|sed 's|doc/|man1/|g' )
 
-install:
+doc_subfolders = $(shell find doc -type d \
+									|sed 's|doc/|man1/|g' )
+
+submodules:
+	git submodule update --init
+
+install: submodules
 	node cli.js install npm
 
-dev:
+dev: submodules
 	node cli.js install
 
 link: uninstall
@@ -18,7 +20,7 @@ link: uninstall
 
 clean: uninstall
 
-uninstall:
+uninstall: submodules
 	node cli.js cache clean
 	node cli.js rm npm -r
 
@@ -36,7 +38,7 @@ man1/%.1: doc/%.md
 man1/%/: doc/%/
 	@if ! test -d $@ ; then mkdir -p $@ ; fi
 
-test:
+test: submodules
 	./test/run.sh
 
 version: link
