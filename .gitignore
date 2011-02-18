@@ -1,7 +1,6 @@
 test/bin
 test/output.log
 test/packages/*/node_modules
-test/packages/test-package/random-data.txt
-test/packages/depends-on-spark/which-spark.log
+test/packages/npm-test-depends-on-spark/which-spark.log
 test/root
 *.swp
