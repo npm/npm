@@ -7,7 +7,7 @@ doc_subfolders = $(shell find doc -type d \
 									|sed 's|doc/|man1/|g' )
 
 submodules:
-	git submodule update --init
+	! [ -d .git ] || git submodule update --init
 
 install: submodules
 	node cli.js install npm
