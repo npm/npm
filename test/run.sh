@@ -33,6 +33,7 @@ main () {
 
   # used in test later
   npm config set package-config:foo boo || exit 1
+  (cd packages/npm-test-bundletest && npm bundle || exit 1) || exit 1
 
   (ls packages | awk '{print "packages/" $1 }' | while read pkg; do
     npm link "$pkg"

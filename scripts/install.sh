@@ -68,13 +68,6 @@ if [ $ret -ne 0 ]; then
   exit $ret
 fi
 
-me=`whoami`
-sudo=""
-if ! [ "x$me" = "xroot" ]; then
-  echo "Not running as root.  Will attempt to use sudo." >&2
-  sudo="sudo"
-fi
-
 cd "$TMP" \
   && curl -s -L "$url" | $tar -xzf - \
   && cd * \
@@ -92,13 +85,9 @@ cd "$TMP" \
         exit $ret
       fi) \
   && (if ! [ "$make" = "NOMAKE" ]; then
-        SUDO_PROMPT='[npm install] Password:' $sudo $make uninstall dev || \
-          ( echo "sudo failed, attempting with unsafe-perm" >&2
-            npm_config_unsafe_perm=true $make install dev)
+        $make uninstall dev
       else
-        SUDO_PROMPT='[npm install] Password:' $sudo $node cli.js install . || \
-          ( echo "sudo failed, attempting with unsafe-perm" >&2
-            npm_config_unsafe_perm=true $node cli.js install .)
+        $node cli.js install .
       fi) \
   && cd "$BACK" \
   && rm -rf "$TMP" \
