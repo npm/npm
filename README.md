@@ -12,26 +12,24 @@ To install on older versions of node, do the following:
 
     git clone git://github.com/isaacs/npm.git ./npm
     cd npm
-    git checkout 0.2
+    git checkout origin/0.2
     make dev
 
 ## Simple Install
 
 To install npm with one command, do this:
 
-    curl http://npmjs.org/install.sh | sudo sh
+    curl http://npmjs.org/install.sh | sh
 
 If that fails, try this:
 
     git clone http://github.com/isaacs/npm.git
     cd npm
-    git submodule update --init
     sudo make install
 
 If you're sitting in the code folder reading this document in your
 terminal, then you've already got the code.  Just do:
 
-    git submodule update --init
     sudo make install
 
 and npm will install itself.
@@ -43,10 +41,14 @@ this code and node, you can do:
 
 ## Permissions
 
-**tl;dr** Use `sudo` when running the `install`,
-`rm`, and `test` commands. If you forget, that's fine, it'll fail and
-remind you.  If you want it back the way it was, do `npm config set
-unsafe-perm true`
+**tl;dr**
+
+* Use `sudo` for greater safety.
+* To enforce this added safety, do `npm config set unsafe-perm false`,
+  or add `--no-unsafe` to the command line.
+* npm will downgrade permissions if it's root before running any build
+  scripts that package authors specified.
+* If you were fine before, you can safely ignore this change.
 
 ### More details...
 
