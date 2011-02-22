@@ -1,3 +1,5 @@
+SHELL = bash
+
 
 docs = $(shell find doc -name '*.md' \
 				|sed 's|.md|.1|g' \
