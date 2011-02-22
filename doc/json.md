@@ -389,37 +389,3 @@ specify "*" as the version), then any version of node will do.
 If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list. If "engines" is omitted, then npm will just assume
 that it works on node.
-
-## overlay
-
-npm responds to the `node` and `npm` env-specific package.json values, which
-you can hang on the "overlay" key.
-
-For example:
-
-    { "name" : "foo"
-    , "version" : 7
-    , "description" : "generic description"
-    , "overlay" :
-      { "node" :
-        { "name" : "bar"
-        , "description" : "description for node"
-        }
-      , "npm" :
-        { "version" : "1.0.7"
-        , "description" : "description for npm"
-        }
-      , "narwhal" :
-        { "description" : "description for narwhal" }
-      }
-    }
-
-In this case, this is what npm will treat it as:
-
-    { "name" : "bar"
-    , "version" : "1.0.7"
-    , "description" : "description for npm"
-    }
-
-This way, even if npm is not exactly the same as some other package management
-system, you can still use both, and it can be a happy planet.
