@@ -8,9 +8,6 @@ main () {
   # setup
   FAILURES=0
 
-  # TODO: add more tests here.
-  # Run node programs by doing node some-thing.js
-
   cd "$TESTDIR"
 
   # install
@@ -33,7 +30,7 @@ main () {
 
   # used in test later
   npm config set package-config:foo boo || exit 1
-  (cd packages/npm-test-bundletest && npm bundle || exit 1) || exit 1
+  (cd packages/npm-test-bundletest && npm bundle) || exit 1
 
   (ls packages | awk '{print "packages/" $1 }' | while read pkg; do
     npm link "$pkg"
@@ -50,10 +47,24 @@ main () {
   npm install "$NPMPKG" || exit 1
 
   (ls packages | grep -v 'npm-test-private' | while read pkg; do
+    if [ "$pkg" != "npm-test-bundletest" ]; then
+      (cd packages/$pkg ; npm bundle destroy)
+    fi
     npm publish packages/$pkg || exit 1
     npm install $pkg || exit 1
     npm unpublish $pkg || exit 1
   done) || exit 1
+
+  # verify that the private package can't be published
+  # bypass the test-harness npm function.
+  "$NPMCLI" publish packages/npm-test-private && (
+    npm unpublish npm-test-private
+    exit 1000
+  )
+  if [ $? -eq 1000 ]; then
+    fail "Private package shouldn't be publishable" >&2
+  fi
+
   if [ "$FAILURES" == "0" ]; then
     npm rm $(ls packages) npm || exit 1
   fi
@@ -78,13 +89,6 @@ npm () {
   echo -e "npm $@"
   "$NPMCLI" "$@" \
     || fail npm "$@"
-  echo -n "" > output.log
-}
-node () {
-  local prog="$TESTDIR/$1"
-  $(which node) "$prog" &>output.log \
-    || fail node "$@"
-  echo -n "" > output.log
 }
 
 # get the absolute path of the executable
@@ -139,7 +143,6 @@ echo_err () {
 }
 fail () {
   let 'FAILURES += 1'
-  cat output.log
   echo_err ""
   echo_err -e "\033[33mFailure: $@\033[m"
   exit 1
