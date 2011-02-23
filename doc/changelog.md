@@ -245,3 +245,7 @@ npm-changelog(1) -- Changes
   Packages without "main" modules don't export modules.  
   No shims! (Still has symlinks, though)
 
+* 0.3.1-0.3.5:
+  Ease up on permission forcing.  
+  Fix bugs around proxy handling.  
+  Remove support for invalid JSON (since node doesn't support it)
