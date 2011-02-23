@@ -1,6 +1,5 @@
 SHELL = bash
 
-
 docs = $(shell find doc -name '*.md' \
 				|sed 's|.md|.1|g' \
 				|sed 's|doc/|man1/|g' )
@@ -8,14 +7,23 @@ docs = $(shell find doc -name '*.md' \
 doc_subfolders = $(shell find doc -type d \
 									|sed 's|doc/|man1/|g' )
 
+# This is the default make target.
+# Since 'make' typically does non-installation build stuff,
+# it seems appropriate.
 submodules:
 	! [ -d .git ] || git submodule update --init
 
-install: submodules
-	node cli.js install npm
-
-dev: submodules
+latest: submodules
+	@echo "Installing latest published npm"
+	@echo "Use 'make install' or 'make link' to install the code"
+	@echo "in this folder that you're looking at right now."
 	node cli.js install
+
+install: submodules
+	node cli.js install
+
+# backwards compat
+dev: install
 
 link: uninstall
 	node cli.js link
@@ -24,7 +32,7 @@ clean: uninstall
 
 uninstall: submodules
 	node cli.js cache clean
-	node cli.js rm npm -r
+	node cli.js rm npm -f
 
 man: man1
 
@@ -52,4 +60,4 @@ publish: link
 		&& git push origin master \
 		&& npm publish
 
-.PHONY: install install-dev link doc clean uninstall test man
+.PHONY: latest install dev link doc clean uninstall test man

@@ -85,8 +85,10 @@ cd "$TMP" \
         exit $ret
       fi) \
   && (if ! [ "$make" = "NOMAKE" ]; then
-        $make uninstall dev
+        $make clean install
       else
+        $node cli.js cache clean
+        $node cli.js rm npm -f
         $node cli.js install .
       fi) \
   && cd "$BACK" \
