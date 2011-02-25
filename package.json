@@ -1,7 +1,7 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
 , "keywords" : [ "package manager", "modules", "install", "package.json" ]
-, "version" : "0.3.7"
+, "version" : "0.3.8"
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
 , "contributors" :
@@ -50,7 +50,7 @@
 , "dependencies" : { "semver" : "1" }
 , "engines" : { "node" : "0.4 || 0.5" }
 , "scripts" : { "test" : "make test"
-              , "postinstall" : "./scripts/install-message.sh"
+              , "postinstall" : "sh ./scripts/install-message.sh"
               }
 , "licenses" :
   [ { "type" : "MIT"
