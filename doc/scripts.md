@@ -30,6 +30,8 @@ following scripts:
   Run BEFORE the package dependencies are pointed to the new version.
 * updatedependencies, postupdatedependencies:
   Run AFTER the package dependencies are pointed to the new version.
+* (pre,post,)updatedependency-foo:
+  Run (before,after) the "foo" dependency is modified.
 * pretest, test, posttest:
   Run by the `npm test` command.
 * prestop, stop, poststop:
