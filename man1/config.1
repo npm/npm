@@ -428,6 +428,17 @@ Default: env\.EDITOR
 .P
 The program to use to edit files\.
 .
+.SS "listexclude"
+Default: null
+.
+.P
+A whitespace separated list of strings which \fIprevent\fR items from being
+shown to \fBnpm ls\fR\|\.
+.
+.P
+For example, \fBnpm ls installed \-\-listexclude zombie\fR will show all
+installed packages \fIexcept\fR zombie\.
+.
 .SS "listopts"
 Default: ""
 .

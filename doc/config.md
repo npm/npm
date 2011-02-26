@@ -329,6 +329,16 @@ Default: env.EDITOR
 
 The program to use to edit files.
 
+### listexclude
+
+Default: null
+
+A whitespace separated list of strings which *prevent* items from being
+shown to `npm ls`.
+
+For example, `npm ls installed --listexclude zombie` will show all
+installed packages *except* zombie.
+
 ### listopts
 
 Default: ""
