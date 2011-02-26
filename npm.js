@@ -81,7 +81,6 @@ var commandCache = {}
               , "update"
               , "update-dependents"
               , "view"
-              , "repl"
               , "rebuild"
               , "bundle"
               , "outdated"
