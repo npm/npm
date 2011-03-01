@@ -132,6 +132,9 @@ npm.load = function (conf, cb_) {
   loading = true
   var onload = true
   function cb (er) {
+    if (!npm.config.get("global")) {
+      npm.config.set("prefix", process.getcwd())
+    }
     loaded = true
     loadListeners.forEach(function (cb) {
       process.nextTick(function () { cb(er, npm) })
@@ -171,28 +174,25 @@ npm.config =
   , del : function (key, val) { return ini.del(key, val, "cli") }
   }
 
-Object.defineProperty(npm, "root",
-  { get : function () { return npm.config.get("root") }
-  , set : function (r) {
-      r = r.charAt(0) === "/" ? r
-        : path.join(process.execPath, "..", "..", r)
-      return npm.config.set("root", r)
-    }
+Object.defineProperty(npm, "prefix",
+  { get : function () { return npm.config.get("prefix") }
+  , set : function (r) { return npm.config.set("prefix", r) }
   , enumerable : true
   })
 Object.defineProperty(npm, "dir",
-  { get : function () { return path.join(npm.root, npm.config.get('dotnpm')) }
+  { get : function () { return path.resolve(npm.prefix, "node_modules") }
   , enumerable : true
   })
 Object.defineProperty(npm, "cache",
-  { get : function () { return path.join(npm.root, npm.config.get('dotnpm'), ".cache") }
+  { get : function () { return npm.config.get("cache") }
+  , set : function (r) { return npm.config.set("cache", r) }
   , enumerable : true
   })
 var tmpFolder
 Object.defineProperty(npm, "tmp",
   { get : function () {
       if (!tmpFolder) tmpFolder = "npm-"+Date.now()
-      return path.join(npm.config.get("tmproot"), tmpFolder)
+      return path.resolve(npm.config.get("tmp"), tmpFolder)
     }
   , enumerable : true
   })
