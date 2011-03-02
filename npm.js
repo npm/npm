@@ -133,7 +133,7 @@ npm.load = function (conf, cb_) {
   var onload = true
   function cb (er) {
     if (!npm.config.get("global")) {
-      npm.config.set("prefix", process.getcwd())
+      npm.config.set("prefix", process.cwd())
     }
     loaded = true
     loadListeners.forEach(function (cb) {
