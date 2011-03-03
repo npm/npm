@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-JSON" "1" "February 2011" "" ""
+.TH "NPM\-JSON" "1" "March 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-json\fR \-\- Specifics of npm\'s package\.json handling
@@ -401,6 +401,9 @@ range\. The version range is EITHER a string which has one or more
 space\-separated descriptors, OR a range like "fromVersion \- toVersion"
 .
 .P
+\fBPlease do not put test harnesses in your \fBdependencies\fR hash\.\fR  See \fBdevDependencies\fR, below\.
+.
+.P
 Version range descriptors may be any of the following styles, where "version"
 is a semver compatible version identifier\.
 .
@@ -530,6 +533,20 @@ of a version range\.
 .P
 This tarball will be downloaded and installed as a bundle at install
 time\.  See \fBnpm help bundle\fR
+.
+.SH "devDependencies"
+If someone is planning on downloading and using your module in their
+program, then they probably don\'t want or need to download and build
+the external test or documentation framework that you use\.
+.
+.P
+In this case, it\'s best to list these additional items in a \fBdevDependencies\fR hash\.
+.
+.P
+These things will be installed whenever the \fB\-\-dev\fR configuration flag
+is set\.  This flag is set automatically when doing \fBnpm link\fR, and can
+be managed like any other npm configuration param\.  See \fBnpm help
+config\fR for more on the topic\.
 .
 .SH "engines"
 Packages/1\.0 says that you can have an "engines" field with an array of engine
