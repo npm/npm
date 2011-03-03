@@ -48,6 +48,7 @@
                   }
 , "main" : "npm"
 , "dependencies" : { "semver" : "1" }
+, "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5" }
 , "scripts" : { "test" : "make test"
               , "postinstall" : "sh ./scripts/install-message.sh"

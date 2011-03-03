@@ -297,6 +297,9 @@ Dependencies are specified with a simple hash of package name to version
 range. The version range is EITHER a string which has one or more
 space-separated descriptors, OR a range like "fromVersion - toVersion"
 
+**Please do not put test harnesses in your `dependencies` hash.**  See
+`devDependencies`, below.
+
 Version range descriptors may be any of the following styles, where "version"
 is a semver compatible version identifier.
 
@@ -367,6 +370,20 @@ of a version range.
 
 This tarball will be downloaded and installed as a bundle at install
 time.  See `npm help bundle`
+
+## devDependencies
+
+If someone is planning on downloading and using your module in their
+program, then they probably don't want or need to download and build
+the external test or documentation framework that you use.
+
+In this case, it's best to list these additional items in a
+`devDependencies` hash.
+
+These things will be installed whenever the `--dev` configuration flag
+is set.  This flag is set automatically when doing `npm link`, and can
+be managed like any other npm configuration param.  See `npm help
+config` for more on the topic.
 
 ## engines
 
