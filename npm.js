@@ -95,6 +95,7 @@ var commandCache = {}
               , "set"
               , "get"
               , "xmas"
+              , "unbuild"
               ]
   , plumbing = [ "build"
                , "update-dependents"
