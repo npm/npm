@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CODING\-STYLE" "1" "January 2011" "" ""
+.TH "NPM\-CODING\-STYLE" "1" "March 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-coding-style\fR \-\- npm\'s "funny" coding style
@@ -240,3 +240,16 @@ and are rarely used\.
 Use a single uppercase letter for function names where the function
 would normally be anonymous, but needs to call itself recursively\.  It
 makes it clear that it\'s a "throwaway" function\.
+.
+.SH "null, undefined, false, 0"
+Boolean variables and functions should always be either \fBtrue\fR or \fBfalse\fR\|\.  Don\'t set it to 0 unless it\'s supposed to be a number\.
+.
+.P
+When something is intentionally missing or removed, set it to \fBnull\fR\|\.
+.
+.P
+Don\'t set things to \fBundefined\fR\|\.  Reserve that value to mean "not yet
+set to anything\."
+.
+.P
+Boolean objects are verboten\.

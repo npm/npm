@@ -1,0 +1,58 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-ADDUSER" "1" "March 2011" "" ""
+.
+.SH "NAME"
+\fBnpm-adduser\fR \-\- Add a registry user account
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm adduser
+.
+.fi
+.
+.SH "DESCRIPTION"
+Create or verify a user named \fB<username>\fR in the npm registry, and
+save the credentials to the \fB\|\.npmrc\fR file\.
+.
+.P
+The username, password, and email are read in from prompts\.  This command
+cannot be scripted\.  If you think you need to script the creation of new
+users, or the authorization of existing ones, without human intervention,
+please rethink your use case\.  That\'s a very bad idea\.
+.
+.P
+You may use this command to change your email address, but not username
+or password\.
+.
+.P
+You may use this command multiple times with the same user account to
+authorize on a new machine\.
+.
+.SH "CONFIGURATION"
+.
+.SS "_auth"
+A base\-64 encoded "user:pass" pair\.  This is created by npm\-adduser(1)\.
+.
+.P
+If your config file is ever corrupted, you can set this manually by doing:
+.
+.IP "" 4
+.
+.nf
+npm adduser
+.
+.fi
+.
+.IP "" 0
+.
+.SS "registry"
+Default: https://registry\.npmjs\.org/
+.
+.P
+The base URL of the npm package registry\.
+.
+.SS "username, _password"
+Once the configuration is parsed, the \fB_auth\fR config is split into \fBusername\fR and \fB_password\fR\|\.  This is the part before the ":"

@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-DEVELOPERS" "1" "January 2011" "" ""
+.TH "NPM\-DEVELOPERS" "1" "March 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-developers\fR \-\- Developer Guide
@@ -262,6 +262,12 @@ npm publish
 .P
 You can give publish a url to a tarball, or a filename of a tarball,
 or a path to a folder\.
+.
+.P
+Note that pretty much \fBeverything in that folder will be exposed\fR
+by default\.  So, if you have secret stuff in there, use a \fB\|\.npminclude\fR
+or \fB\|\.npmignore\fR file to list out the globs to include/ignore, or publish
+from a fresh checkout\.
 .
 .SH "Brag about it"
 Send emails, write blogs, blab in IRC\.
