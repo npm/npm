@@ -27,6 +27,7 @@ npm.ELIFECYCLE = {}
 npm.E404 = {}
 npm.EPUBLISHCONFLICT = {}
 npm.EJSONPARSE = {}
+npm.EISGIT = {}
 
 
 try {
