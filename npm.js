@@ -28,6 +28,7 @@ npm.E404 = {}
 npm.EPUBLISHCONFLICT = {}
 npm.EJSONPARSE = {}
 npm.EISGIT = {}
+npm.ECYCLE = {}
 
 
 try {
@@ -62,7 +63,6 @@ var commandCache = {}
   // these are filenames in ./lib
   , cmdList = [ "install"
               , "uninstall"
-              , "build"
               , "link"
               , "cache"
               , "config"
