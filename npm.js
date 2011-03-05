@@ -29,6 +29,7 @@ npm.EPUBLISHCONFLICT = {}
 npm.EJSONPARSE = {}
 npm.EISGIT = {}
 npm.ECYCLE = {}
+npm.EENGINE = {}
 
 
 try {
