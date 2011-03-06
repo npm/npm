@@ -64,14 +64,15 @@ var commandCache = {}
   // these are filenames in ./lib
   , cmdList = [ "install"
               , "uninstall"
-              , "link"
               , "cache"
               , "config"
               , "set"
               , "get"
               , "update"
-              , "rebuild"
               , "outdated"
+
+              , "rebuild"
+              , "link"
 
               , "publish"
               , "tag"
