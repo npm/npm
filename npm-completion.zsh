@@ -1,6 +1,6 @@
 #compdef npm
 
-# Zsh completion script for npm, modified from hg version.
+# Zsh completion script for npm, modified from hg version
 # Rename this file to _npm and copy
 # it into your zsh function path (/usr/share/zsh/site-functions for
 # instance)
