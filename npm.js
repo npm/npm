@@ -52,7 +52,6 @@ var commandCache = {}
               , "rb" : "rebuild"
               , "bn" : "bundle"
               , "list" : "ls"
-              , "search" : "ls"
               , "find" : "ls"
               , "ln" : "link"
               , "i" : "install"
@@ -83,6 +82,7 @@ var commandCache = {}
 
               , "help"
               , "ls"
+              , "search"
               , "view"
               , "init"
               , "version"
@@ -91,6 +91,7 @@ var commandCache = {}
               , "docs"
               , "faq"
               , "xmas"
+              , "root"
 
               , "test"
               , "stop"
