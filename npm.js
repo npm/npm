@@ -139,6 +139,10 @@ npm.load = function (conf, cb_) {
     if (!npm.config.get("global")) {
       npm.config.set("prefix", process.cwd())
     }
+    var p = npm.config.get("prefix")
+    while (path.basename(p) === "node_modules") {
+      npm.config.set("prefix", p = path.dirname(p))
+    }
     loaded = true
     loadListeners.forEach(function (cb) {
       process.nextTick(function () { cb(er, npm) })
