@@ -52,7 +52,8 @@ var commandCache = {}
               , "rb" : "rebuild"
               , "bn" : "bundle"
               , "list" : "ls"
-              , "find" : "ls"
+              , "la" : "ls"
+              , "ll" : "ls"
               , "ln" : "link"
               , "i" : "install"
               , "up" : "update"
@@ -116,6 +117,9 @@ Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
       "Call npm.load(conf, cb) before using this command.\n"+
       "See the README.md or cli.js for example usage.")
     var a = npm.deref(c)
+    if (c === "la" || c === "ll") {
+      npm.config.set("long", true)
+    }
     if (commandCache[a]) return commandCache[a]
     return commandCache[a] = require(__dirname+"/lib/"+a)
   }, enumerable: fullList.indexOf(c) !== -1 })
