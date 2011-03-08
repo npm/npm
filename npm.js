@@ -69,6 +69,7 @@ var commandCache = {}
               , "get"
               , "update"
               , "outdated"
+              , "prune"
 
               , "rebuild"
               , "link"
