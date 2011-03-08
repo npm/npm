@@ -159,18 +159,6 @@ npm.load = function (conf, cb_) {
   })
 }
 
-// Local store for package data, so it won't have to be fetched/read more than
-// once in a single pass.
-var registry = {}
-npm.set = function (key, val) {
-  if (typeof key === "object" && !val && key._id) {
-    val = key
-    key = key._id
-  }
-  return set(registry, key, val)
-}
-npm.get = function (key) { return get(registry, key) }
-
 var path = require("path")
 npm.config =
   { get : function (key) { return ini.get(key) }
