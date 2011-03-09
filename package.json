@@ -50,6 +50,7 @@
 , "main" : "npm"
 , "bin" : "./bin/npm.js"
 , "dependencies" : { "semver" : "1" }
+, "bundleDependencies" : [ "semver" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5" }
 , "scripts" : { "test" : "make test"
