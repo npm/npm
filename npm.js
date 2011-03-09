@@ -21,6 +21,7 @@ var EventEmitter = require("events").EventEmitter
   , abbrev = require("./lib/utils/abbrev")
   , which = require("./lib/utils/which")
   , semver = require("semver")
+  , findPrefix = require("./lib/utils/find-prefix")
 
 npm.commands = {}
 npm.ELIFECYCLE = {}
@@ -37,6 +38,15 @@ try {
   var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))+"")
   npm.version = j.version
   npm.nodeVersionRequired = j.engines.node
+  if (!semver.satisfies(process.version, j.engines.node)) {
+    log.error([""
+              ,"npm requires node version: "+j.engines.node
+              ,"And you have: "+process.version
+              ,"which is not satisfactory."
+              ,""
+              ,"Bad things will likely happen.  You have been warned."
+              ,""].join("\n"), "unsupported version")
+  }
 } catch (ex) {
   try {
     log(ex, "error reading version")
@@ -125,15 +135,18 @@ Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
     return commandCache[a] = require(__dirname+"/lib/"+a)
   }, enumerable: fullList.indexOf(c) !== -1 })
 })
+
 npm.deref = function (c) {
   if (plumbing.indexOf(c) !== -1) return c
   var a = abbrevs[c]
   if (aliases[a]) a = aliases[a]
   return a
 }
+
 var loaded = false
   , loading = false
   , loadListeners = []
+
 npm.load = function (conf, cb_) {
   if (!cb_ && typeof conf === "function") cb_ = conf , conf = {}
   loadListeners.push(cb_)
@@ -141,14 +154,15 @@ npm.load = function (conf, cb_) {
   if (loading) return
   loading = true
   var onload = true
+
+  function handleError (er) {
+    loadListeners.forEach(function (cb) {
+      process.nextTick(function () { cb(er, npm) })
+    })
+  }
+
   function cb (er) {
-    if (!npm.config.get("global")) {
-      npm.config.set("prefix", process.cwd())
-    }
-    var p = npm.config.get("prefix")
-    while (path.basename(p) === "node_modules") {
-      npm.config.set("prefix", p = path.dirname(p))
-    }
+    if (er) return handleError(er)
     loaded = true
     loadListeners.forEach(function (cb) {
       process.nextTick(function () { cb(er, npm) })
@@ -165,7 +179,23 @@ npm.load = function (conf, cb_) {
       log.verbose("node symlink", node)
       process.execPath = node
     }
-    ini.resolveConfigs(conf, cb)
+    ini.resolveConfigs(conf, function (er) {
+      if (er) return handleError(er)
+      if (!npm.config.get("global")) {
+        ini.defaultConfig.prefix = process.cwd()
+      }
+      // if already setting to some explicit thing, then use that.
+      // user knows best.
+      if (npm.config.get("prefix") !== ini.defaultConfig.prefix) {
+        return cb()
+      }
+      // try to guess at a good node_modules location.
+      findPrefix(ini.defaultConfig.prefix, function (er, p) {
+        if (er) return handleError(er)
+        ini.defaultConfig.prefix = p
+        return cb()
+      })
+    })
   })
 }
 
@@ -198,18 +228,3 @@ Object.defineProperty(npm, "tmp",
     }
   , enumerable : true
   })
-
-// platforms without uid/gid support are assumed to be in unsafe-perm mode.
-var sudoOk = !semver.lt(process.version, '0.3.5')
-if (!process.getuid || !sudoOk) {
-  npm.config.set("unsafe-perm", true)
-}
-if (process.getuid && process.getuid() === 0 && !sudoOk) {
-  process.nextTick(function () {
-    log([""
-        ,"Please upgrade to node 0.3.5 or higher"
-        ,"if you are going to be running npm as root."
-        ,"It is not safe otherwise."
-        ,""].join("\n"), "", "error")
-  })
-}
