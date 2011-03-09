@@ -59,6 +59,7 @@ var commandCache = {}
               , "up" : "update"
               , "c" : "config"
               , "info" : "view"
+              , "find" : "search"
               }
   , aliasNames = Object.keys(aliases)
   // these are filenames in ./lib
