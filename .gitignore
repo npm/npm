@@ -7,3 +7,4 @@ test/packages/test-package/random-data.txt
 test/root
 node_modules/ronn
 node_modules/.bin
+npm-debug.log
