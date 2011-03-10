@@ -7,13 +7,8 @@
 \fBnpm-json\fR \-\- Specifics of npm\'s package\.json handling
 .
 .SH "DESCRIPTION"
-npm aims to implement the commonjs Packages \fIhttp://wiki\.commonjs\.org/wiki/Packages/1\.0\fR spec\. However, some
-adjustments have been made, which may eventually be unmade, but hopefully will
-be incorporated into the spec\.
-.
-.P
 This document is all you need to know about what\'s required in your package\.json
-file\.
+file\.  It must be actual JSON, not just a JavaScript object literal\.
 .
 .P
 A lot of the behavior described in this document is affected by the config
@@ -21,6 +16,10 @@ settings described in \fBnpm help config\fR\|\.
 .
 .SH "name"
 The \fImost\fR important things in your package\.json are the name and version fields\.
+Those are actually required, and your package won\'t install without
+them\.  The name and version together form an identifier that is assumed
+to be completely unique\.  Changes to the package should come along with
+changes to the version\.
 .
 .P
 The name is what your thing is called\.  Some tips:
@@ -32,8 +31,8 @@ field\.  (See below\.)
 .
 .IP "\(bu" 4
 The name ends up being part of a URL, an argument on the command line, and a
-folder name\. So, don\'t use characters that are annoying in those contexts, like
-funny UTF things or parentheses or slashes, or else it\'ll break\.
+folder name\. Any name with non\-url\-safe characters will be rejected\.
+Also, it can\'t start with a dot or an underscore\.
 .
 .IP "\(bu" 4
 The name will probably be passed as an argument to require(), so it should
@@ -47,14 +46,17 @@ already, before you get too attached to it\.  http://registry\.npmjs\.org/
 .
 .SH "version"
 The \fImost\fR important things in your package\.json are the name and version fields\.
+Those are actually required, and your package won\'t install without
+them\.  The name and version together form an identifier that is assumed
+to be completely unique\.  Changes to the package should come along with
+changes to the version\.
 .
 .P
-Version must be semver \fIhttps://github\.com/isaacs/semver\fR\-compliant\.
-npm assumes that you\'ve
-read the semver page, and that you comply with it\.
+Version must be parseable by node\-semver \fIhttps://github\.com/isaacs/node\-semver\fR, which is bundled
+with npm as a dependency\.  (\fBnpm install semver\fR to use it yourself\.)
 .
 .P
-Here\'s how it deviates from what\'s on semver\.org:
+Here\'s how npm\'s semver implementation deviates from what\'s on semver\.org:
 .
 .IP "\(bu" 4
 Versions can start with "v"
@@ -64,15 +66,14 @@ A numeric item separated from the main three\-number version by a hyphen
 will be interpreted as a "build" number, and will \fIincrease\fR the version\.
 But, if the tag is not a number separated by a hyphen, then it\'s treated
 as a pre\-release tag, and is \fIless than\fR the version without a tag\.
-So, 0\.1\.2\-7 > 0\.1\.2\-6 > 0\.1\.2 > 0\.1\.2beta
+So, \fB0\.1\.2\-7 > 0\.1\.2\-7\-beta > 0\.1\.2\-6 > 0\.1\.2 > 0\.1\.2beta\fR
 .
 .IP "" 0
 .
 .P
 This is a little bit confusing to explain, but matches what you see in practice
 when people create tags in git like "v1\.2\.3" and then do "git describe" to generate
-a patch version\.  (This is how node\'s versions are generated, and has driven this
-design\.)
+a patch version\.
 .
 .SH "description"
 Put a description in it\.  It\'s a string\.  This helps people discover your

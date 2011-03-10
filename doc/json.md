@@ -3,13 +3,8 @@ npm-json(1) -- Specifics of npm's package.json handling
 
 ## DESCRIPTION
 
-npm aims to implement the commonjs
-[Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec. However, some
-adjustments have been made, which may eventually be unmade, but hopefully will
-be incorporated into the spec.
-
 This document is all you need to know about what's required in your package.json
-file.
+file.  It must be actual JSON, not just a JavaScript object literal.
 
 A lot of the behavior described in this document is affected by the config
 settings described in `npm help config`.
@@ -17,6 +12,10 @@ settings described in `npm help config`.
 ## name
 
 The *most* important things in your package.json are the name and version fields.
+Those are actually required, and your package won't install without
+them.  The name and version together form an identifier that is assumed
+to be completely unique.  Changes to the package should come along with
+changes to the version.
 
 The name is what your thing is called.  Some tips:
 
@@ -24,8 +23,8 @@ The name is what your thing is called.  Some tips:
   writing a package.json file, and you can specify the engine using the "engines"
   field.  (See below.)
 * The name ends up being part of a URL, an argument on the command line, and a
-  folder name. So, don't use characters that are annoying in those contexts, like
-  funny UTF things or parentheses or slashes, or else it'll break.
+  folder name. Any name with non-url-safe characters will be rejected.
+  Also, it can't start with a dot or an underscore.
 * The name will probably be passed as an argument to require(), so it should
   be something short, but also reasonably descriptive.
 * You may want to check the npm registry to see if there's something by that name
@@ -34,24 +33,27 @@ The name is what your thing is called.  Some tips:
 ## version
 
 The *most* important things in your package.json are the name and version fields.
+Those are actually required, and your package won't install without
+them.  The name and version together form an identifier that is assumed
+to be completely unique.  Changes to the package should come along with
+changes to the version.
 
-Version must be [semver](https://github.com/isaacs/semver)-compliant.
-npm assumes that you've
-read the semver page, and that you comply with it.
+Version must be parseable by
+[node-semver](https://github.com/isaacs/node-semver), which is bundled
+with npm as a dependency.  (`npm install semver` to use it yourself.)
 
-Here's how it deviates from what's on semver.org:
+Here's how npm's semver implementation deviates from what's on semver.org:
 
 * Versions can start with "v"
 * A numeric item separated from the main three-number version by a hyphen
   will be interpreted as a "build" number, and will *increase* the version.
   But, if the tag is not a number separated by a hyphen, then it's treated
   as a pre-release tag, and is *less than* the version without a tag.
-  So, 0.1.2-7 > 0.1.2-6 > 0.1.2 > 0.1.2beta
+  So, `0.1.2-7 > 0.1.2-7-beta > 0.1.2-6 > 0.1.2 > 0.1.2beta`
 
 This is a little bit confusing to explain, but matches what you see in practice
 when people create tags in git like "v1.2.3" and then do "git describe" to generate
-a patch version.  (This is how node's versions are generated, and has driven this
-design.)
+a patch version.
 
 ## description
 
