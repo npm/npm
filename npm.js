@@ -105,6 +105,7 @@ var commandCache = {}
               , "faq"
               , "xmas"
               , "root"
+              , "prefix"
 
               , "test"
               , "stop"
