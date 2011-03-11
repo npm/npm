@@ -182,18 +182,20 @@ npm.load = function (conf, cb_) {
     }
     ini.resolveConfigs(conf, function (er) {
       if (er) return handleError(er)
+      var p
       if (!npm.config.get("global")) {
-        ini.defaultConfig.prefix = process.cwd()
-      }
-      // if already setting to some explicit thing, then use that.
-      // user knows best.
-      if (npm.config.get("prefix") !== ini.defaultConfig.prefix) {
-        return cb()
+        p = process.cwd()
+      } else {
+        p = npm.config.get("prefix")
       }
       // try to guess at a good node_modules location.
-      findPrefix(ini.defaultConfig.prefix, function (er, p) {
+      findPrefix(p, function (er, p) {
         if (er) return handleError(er)
-        ini.defaultConfig.prefix = p
+        Object.defineProperty(npm, "prefix",
+          { get : function () { return p }
+          , set : function (r) { return p = r }
+          , enumerable : true
+          })
         return cb()
       })
     })
@@ -207,15 +209,11 @@ npm.config =
   , del : function (key, val) { return ini.del(key, val, "cli") }
   }
 
-Object.defineProperty(npm, "prefix",
-  { get : function () { return npm.config.get("prefix") }
-  , set : function (r) { return npm.config.set("prefix", r) }
-  , enumerable : true
-  })
 Object.defineProperty(npm, "dir",
   { get : function () { return path.resolve(npm.prefix, "node_modules") }
   , enumerable : true
   })
+
 Object.defineProperty(npm, "cache",
   { get : function () { return npm.config.get("cache") }
   , set : function (r) { return npm.config.set("cache", r) }
