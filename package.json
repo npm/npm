@@ -52,7 +52,7 @@
 , "dependencies" : { "semver" : "1" }
 , "bundleDependencies" : [ "semver" ]
 , "devDependencies" : { "ronn" : "" }
-, "engines" : { "node" : "0.4 || 0.5" }
+, "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
 , "scripts" : { "test" : "make test"
               , "postinstall" : "sh ./scripts/install-message.sh"
               }
