@@ -180,11 +180,11 @@ npm.load = function (conf, cb_) {
       log.verbose("node symlink", node)
       process.execPath = node
     }
-    if (conf.hasOwnProperty("prefix")) conf.global = true
     ini.resolveConfigs(conf, function (er) {
       if (er) return handleError(er)
       var p
-      if (!npm.config.get("global")) {
+      if (!npm.config.get("global")
+          && !conf.hasOwnProperty("prefix")) {
         p = process.cwd()
       } else {
         p = npm.config.get("prefix")
