@@ -43,7 +43,7 @@ doc: man1 $(docs)
 
 # use `npm install ronn` for this to work.
 man1/%.1: doc/%.md
-	node cli.js install ronn
+	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
 	./node_modules/.bin/ronn --roff $< > $@
 
 man1/%/: doc/%/
