@@ -13,12 +13,11 @@ export COMP_WORDBREAKS
 
 if complete &>/dev/null; then
   _npm_completion () {
-    COMPREPLY=( $(COMP_CWORD="$COMP_CWORD" \
-                  COMP_LINE="$COMP_LINE" \
-                  COMP_POINT="$COMP_POINT" \
-                  npm completion -- "${COMP_WORDS[@]}" \
-                  2>npm-completion.log ) )
-    return $?
+    IFS=$'\n' COMPREPLY=( $(COMP_CWORD="$COMP_CWORD" \
+                            COMP_LINE="$COMP_LINE" \
+                            COMP_POINT="$COMP_POINT" \
+                            npm completion -- "${COMP_WORDS[@]}" \
+                            2>npm-completion.log) ) || return $?
   }
   complete -F _npm_completion npm
 elif compctl &>/dev/null; then
