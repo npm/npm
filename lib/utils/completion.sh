@@ -36,7 +36,7 @@ elif compctl &>/dev/null; then
                        COMP_LINE="$line" \
                        COMP_POINT="$point" \
                        npm completion -- "${words[@]}" \
-                       2>npm-completion.log) || return $?
+                       2>npm-completion.log)) || return $?
     IFS="$si"
   }
   compctl -K _npm_completion npm
