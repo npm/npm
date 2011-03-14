@@ -13,14 +13,32 @@ export COMP_WORDBREAKS
 
 if complete &>/dev/null; then
   _npm_completion () {
-    IFS=$'\n' COMPREPLY=( $(COMP_CWORD="$COMP_CWORD" \
-                            COMP_LINE="$COMP_LINE" \
-                            COMP_POINT="$COMP_POINT" \
-                            npm completion -- "${COMP_WORDS[@]}" \
-                            2>npm-completion.log) ) || return $?
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${COMP_WORDS[@]}" \
+                           2>npm-completion.log)) || return $?
+    #debugging, remove me.
+    IFS=$'\n' echo "${COMPREPLY[@]}" >> npm-completion.log
+    IFS="$si"
   }
   complete -F _npm_completion npm
 elif compctl &>/dev/null; then
-  echo "todo: zsh version"
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>npm-completion.log) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
 fi
 ###-end-npm-completion-###
