@@ -387,6 +387,10 @@ is set.  This flag is set automatically when doing `npm link`, and can
 be managed like any other npm configuration param.  See `npm help
 config` for more on the topic.
 
+## bundledDependencies
+
+Array of package names that will be bundled when publishing the package.
+
 ## engines
 
 Packages/1.0 says that you can have an "engines" field with an array of engine

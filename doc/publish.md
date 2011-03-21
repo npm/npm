@@ -19,15 +19,7 @@ Publishes a package to the registry so that it can be installed by name.
   with a package.json file inside.
 
 Fails if the package name and version combination already exists in
-the registry.
-
-## CONFIGURATION
-
-See `npm help registry`
-
-Also, the `force` configuration param will cause it to unpublish an
-existing package, so that it can be published over.  Please use with
-caution!
+the registry.  Overwrites when the "--force" flag is set.
 
 ## SEE ALSO
 

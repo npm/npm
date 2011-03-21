@@ -3,28 +3,33 @@ npm-link(1) -- Symlink a package folder
 
 ## SYNOPSIS
 
-    npm link <folder>
+    npm link (in package folder)
+    npm link <pkgname>
+
 
 ## DESCRIPTION
 
-This will link a source folder into npm's registry using a symlink, and then
-build it according to the package.json file in that folder's root. This is
+Package linking is a two-step process.
+
+First, `npm link` in a package folder will create a globally-installed
+symbolic link from `prefix/package-name` to the current folder.
+
+Next, in some other location, `npm link package-name` will create a
+symlink from the local `node_modules` folder to the global symlink.
+
+When creating tarballs for `npm publish`, the linked packages are
+"snapshotted" to their current state by resolving the symbolic links.
+
+This is
 handy for installing your own stuff, so that you can work on it and test it
 iteratively without having to continually rebuild.
 
-## Linked Package Version
+For example:
 
-When linking a package folder, npm doesn't use the version in the
-package.json file.  Instead, it creates a "fake" version number of:
+    cd ~/projects/node-redis    # go into the package directory
+    npm link                    # creates global link
+    cd ~/projects/node-bloggy   # go into some other package directory.
+    npm link redis              # link-install the package
 
-    "9999.0.0-LINK-" + hash(folder)
-
-This way, linking the same folder will always result in the same version
-number, even if you bump the version in the package.json file.  The
-extremely high major version ensures that it will always be considered
-the "highest" version, since it is a development bleeding-edge thing.
-
-## CONFIGURATION
-
-See the config section of `npm help install`.  The `dev` configuration
-setting is always set to `true` when doing a link install.
+Now, any changes to ~/projects/node-redis will be reflected in
+~/projects/node-bloggy/node_modules/redis/
