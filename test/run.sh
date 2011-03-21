@@ -112,6 +112,8 @@ cleanup () {
 export npm_config_prefix="$ROOTDIR"
 export npm_config_color="always"
 export npm_config_global=true
+# have to set this to false, or it'll try to test itself forever
+export npm_config_npat=false
 export PATH="$PATH":"$ROOTDIR/bin":"$ROOTDIR/node_modules/.bin"
 export NODE_PATH="$ROOTDIR/node_modules"
 
