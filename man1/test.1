@@ -9,7 +9,7 @@
 .SH "SYNOPSIS"
 .
 .nf
-  npm test <name>[@<version>] [<name>[@<version>] \.\.\.]
+  npm test <name>
 .
 .fi
 .
@@ -17,4 +17,5 @@
 This runs a package\'s "test" script, if one was provided\.
 .
 .P
-If no version is specified, then it tests the "active" version\.
+To run tests as a condition of installation, set the \fBnpat\fR config to
+true\.

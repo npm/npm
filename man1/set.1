@@ -65,6 +65,9 @@ npm config set key value
 .P
 Sets the config key to the value\.
 .
+.P
+If value is omitted, then it sets it to "true"\.
+.
 .SS "get"
 .
 .nf
@@ -73,9 +76,7 @@ npm config get key
 .fi
 .
 .P
-Echo the config value to stdout\. (NOTE: All the other npm logging is done to
-stderr, so pipes should work properly, and you can do \fBnpm get key 2>/dev/null\fR
-to print out JUST the config value\.)
+Echo the config value to stdout\.
 .
 .SS "list"
 .
@@ -105,7 +106,91 @@ npm config edit
 .fi
 .
 .P
-Opens the config file in an editor\.  Use the \fB\-\-global\fR flag to edit the global config\.
+Opens the config file in an editor\.  Use the \fB\-\-global\fR flag to edit the
+global config\.
+.
+.SH "Shorthands and Other CLI Niceties"
+The following shorthands are parsed on the command\-line:
+.
+.IP "\(bu" 4
+\fB\-v\fR: \fB\-\-version\fR
+.
+.IP "\(bu" 4
+\fB\-h\fR, \fB\-?\fR, \fB\-\-help\fR, \fB\-H\fR: \fB\-\-usage\fR
+.
+.IP "\(bu" 4
+\fB\-s\fR, \fB\-\-silent\fR: \fB\-\-loglevel silent\fR
+.
+.IP "\(bu" 4
+\fB\-d\fR: \fB\-\-loglevel info\fR
+.
+.IP "\(bu" 4
+\fB\-dd\fR, \fB\-\-verbose\fR: \fB\-\-loglevel verbose\fR
+.
+.IP "\(bu" 4
+\fB\-ddd\fR: \fB\-\-loglevel silly\fR
+.
+.IP "\(bu" 4
+\fB\-g\fR: \fB\-\-global\fR
+.
+.IP "\(bu" 4
+\fB\-l\fR: \fB\-\-long\fR
+.
+.IP "\(bu" 4
+\fB\-p\fR, \fB\-\-porcelain\fR: \fB\-\-parseable\fR
+.
+.IP "\(bu" 4
+\fB\-reg\fR: \fB\-\-registry\fR
+.
+.IP "\(bu" 4
+\fB\-v\fR: \fB\-\-version\fR
+.
+.IP "\(bu" 4
+\fB\-f\fR: \fB\-\-force\fR
+.
+.IP "\(bu" 4
+\fB\-l\fR: \fB\-\-long\fR
+.
+.IP "\(bu" 4
+\fB\-desc\fR: \fB\-\-description\fR
+.
+.IP "\(bu" 4
+\fBll\fR and \fBla\fR commands: \fBls \-\-long\fR
+.
+.IP "" 0
+.
+.P
+If the specified configuration param resolves unambiguously to a known
+configuration parameter, then it is expanded to that configuration
+parameter\.  For example:
+.
+.IP "" 4
+.
+.nf
+npm ls \-\-par
+# same as:
+npm ls \-\-parseable
+.
+.fi
+.
+.IP "" 0
+.
+.P
+If multiple single\-character shorthands are strung together, and the
+resulting combination is unambiguously not some other configuration
+param, then it is expanded to its various component pieces\.  For
+example:
+.
+.IP "" 4
+.
+.nf
+npm ls \-gpld
+# same as:
+npm ls \-\-global \-\-parseable \-\-long \-\-loglevel info
+.
+.fi
+.
+.IP "" 0
 .
 .SH "Per\-Package Config Settings"
 When running scripts (see \fBnpm help scripts\fR)
@@ -150,340 +235,547 @@ npm config set foo:port 80
 .
 .SH "Config Settings"
 .
-.SS "auto\-activate"
-Default: true
+.SS "browser"
+.
+.IP "\(bu" 4
+Default: OS X: \fB"open"\fR, others: \fB"google\-chrome"\fR
+.
+.IP "\(bu" 4
+Type: String
+.
+.IP "" 0
 .
 .P
-Automatically activate a package after installation, if there is not an active
-version already\.  Set to "always" to always activate when installing\.
+The browser that is called by the \fBnpm docs\fR command to open websites\.
+.
+.SS "cache"
+.
+.IP "\(bu" 4
+Default: Windows: \fB~/npm\-cache\fR, Posix: \fB~/\.npm\fR
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+The location of npm\'s cache directory\.  See \fBnpm help cache\fR
+.
+.SS "color"
+.
+.IP "\(bu" 4
+Default: true
+.
+.IP "\(bu" 4
+Type: Boolean or \fB"always"\fR
+.
+.IP "" 0
+.
+.P
+If false, never shows colors\.  If \fB"always"\fR then always shows colors\.
+If true, then only prints color codes for tty file descriptors\.
+.
+.SS "depth"
+.
+.IP "\(bu" 4
+Default: Infinity
+.
+.IP "\(bu" 4
+Type: Number
+.
+.IP "" 0
+.
+.P
+The depth to go when recursing directories for \fBnpm ls\fR and \fBnpm cache ls\fR\|\.
+.
+.SS "description"
+.
+.IP "\(bu" 4
+Default: true
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Whether or not to show the description in \fBnpm search\fR
+.
+.SS "dev"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Whether or not to install \fBdev\-dependencies\fR along with packages\.
+.
+.P
+Note that \fBdev\-dependencies\fR are also installed if the \fBnpat\fR flag is
+set\.
+.
+.SS "editor"
+.
+.IP "\(bu" 4
+Default: \fBEDITOR\fR environment variable if set, or \fB"vi"\fR
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+The command to run for \fBnpm edit\fR or \fBnpm config edit\fR\|\.
+.
+.SS "force"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Makes various commands more forceful\.
+.
+.IP "\(bu" 4
+lifecycle script failure does not block progress\.
+.
+.IP "\(bu" 4
+publishing clobbers previously published versions\.
+.
+.IP "\(bu" 4
+skips cache when requesting from the registry\.
+.
+.IP "\(bu" 4
+prevents checks against clobbering non\-npm files\.
+.
+.IP "" 0
+.
+.SS "global"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Operates in "global" mode, so that packages are installed into the \fBprefix\fR folder instead of the current working directory\.  See \fBnpm help global\fR for more on the differences in behavior\.
+.
+.IP "\(bu" 4
+packages are installed into the \fBprefix/node_modules\fR folder, instead of the
+current working directory\.
+.
+.IP "\(bu" 4
+bin files are linked to \fBprefix/bin\fR
+.
+.IP "\(bu" 4
+man pages are linked to \fBprefix/share/man\fR
+.
+.IP "" 0
+.
+.SS "globalconfig"
+.
+.IP "\(bu" 4
+Default: {prefix}/etc/npmrc
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+The config file to read for global config options\.
+.
+.SS "group"
+.
+.IP "\(bu" 4
+Default: GID of the current process
+.
+.IP "\(bu" 4
+Type: String or Number
+.
+.IP "" 0
+.
+.P
+The group to use when running package scripts in global mode as the root
+user\.
+.
+.SS "gzipbin"
+.
+.IP "\(bu" 4
+Default: "gzip"
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+The gzip binary
+.
+.SS "logfd"
+.
+.IP "\(bu" 4
+Default: stderr file descriptor
+.
+.IP "\(bu" 4
+Type: Number or Stream
+.
+.IP "" 0
+.
+.P
+The location to write log output\.
+.
+.SS "loglevel"
+.
+.IP "\(bu" 4
+Default: "warn"
+.
+.IP "\(bu" 4
+Type: String
+.
+.IP "\(bu" 4
+Values: "silent", "win", "error", "warn", "info", "verbose", "silly"
+.
+.IP "" 0
+.
+.P
+What level of logs to report\.  On failure, \fIall\fR logs are written to \fBnpm\-debug\.log\fR in the current working directory\.
+.
+.SS "long"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Whether or not to show extended information in \fBnpm ls\fR
+.
+.SS "node\-version"
+.
+.IP "\(bu" 4
+Default: process\.version
+.
+.IP "\(bu" 4
+Type: semver
+.
+.IP "" 0
+.
+.P
+The node version to use when checking package\'s "engines" hash\.
+.
+.SS "npat"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Whether or not to run tests on installation and report results to the \fBnpaturl\fR\|\.
+.
+.SS "npaturl"
+.
+.IP "\(bu" 4
+Default: Not yet implemented
+.
+.IP "\(bu" 4
+Type: url
+.
+.IP "" 0
+.
+.P
+The url to report npat test results\.
+.
+.SS "onload\-script"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+A node module to \fBrequire()\fR when npm loads\.  Useful for programmatic
+usage\.
+.
+.SS "outfd"
+.
+.IP "\(bu" 4
+Default: standard output file descriptor
+.
+.IP "\(bu" 4
+Type: Number or Stream
+.
+.IP "" 0
+.
+.P
+Where to write "normal" output\.  This has no effect on log output\.
+.
+.SS "parseable"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Whether or not to output parseable results from commands that write to
+standard output\.
+.
+.SS "prefix"
+.
+.IP "\(bu" 4
+Default: node\'s process\.installPrefix
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+The location to install global items\.  If set on the command line, then
+it forces non\-global commands to run in the specified folder\.
+.
+.SS "proxy"
+.
+.IP "\(bu" 4
+Default: "HTTP\fIPROXY" or "http\fRproxy" environment variable, or null
+.
+.IP "\(bu" 4
+Type: url
+.
+.IP "" 0
+.
+.P
+A proxy to use for outgoing http requests\.
 .
 .SS "rebuild\-bundle"
+.
+.IP "\(bu" 4
 Default: true
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
 .
 .P
 Set to some truish value to rebuild bundled dependencies after
 installation\.
 .
-.SS "recursive"
-Default: false
-.
-.P
-Set to some truish value to recursively remove dependent packages\.  For
-example if foo depends on bar, and bar depends on baz, then:
-.
-.IP "" 4
-.
-.nf
-npm uninstall baz \-\-recursive
-.
-.fi
-.
-.IP "" 0
-.
-.P
-will remove baz, bar, and foo\.
-.
-.SS "loglevel"
-Default: "info"
-.
-.P
-The log level to show\.
-.
-.P
-Each level maps to a numeric value, above which all logs must pass to be
-seen\.  So, setting it to "warn" shows "win", "error" and "warn" messages\.
-.
-.P
-The log levels:
-.
-.IP "\(bu" 4
-silent: Show no output\.  Nothing\.  If there is output on stderr, it\'s
-because something is broken\.
-.
-.IP "\(bu" 4
-win: Show the "npm ok" or "npm not ok", but that\'s all\.
-.
-.IP "\(bu" 4
-error: Errors, usually with a stack trace\.
-.
-.IP "\(bu" 4
-warn: Things that you should probably be aware of\.
-.
-.IP "\(bu" 4
-info: Helpful info\.
-.
-.IP "\(bu" 4
-silly: Not\-helpful info\.  (Lots of dumping whole objects and such\.)
-.
-.IP "" 0
-.
-.P
-Note that output to stdout is always printed\.  This setting just modifies
-what\'s logged to stderr\.
-.
-.SS "update\-dependents"
-Default: true
-.
-.P
-Automatically update a package\'s dependencies after installation, if it is the
-newest version installed\. Set to "always" to update dependents when a new
-version is installed, even if it\'s not the newest\.
-.
-.SS "root"
-Default: \fB$INSTALL_PREFIX/lib/node\fR
-.
-.P
-The root folder where packages are installed and npm keeps its data\.
-.
-.SS "binroot"
-Default: \fB$INSTALL_PREFIX/bin\fR
-.
-.P
-The folder where executable programs are installed\.
-.
-.P
-Set to "false" to not install executables
-.
-.SS "manroot"
-Default: $INSTALL_PREFIX/share/man
-.
-.P
-The folder where man pages are installed\.
-.
-.P
-Set to "false" to not install man pages\.
-.
 .SS "registry"
+.
+.IP "\(bu" 4
 Default: https://registry\.npmjs\.org/
+.
+.IP "\(bu" 4
+Type: url
+.
+.IP "" 0
 .
 .P
 The base URL of the npm package registry\.
 .
-.SS "_auth"
-A base\-64 encoded "user:pass" pair\.  This is created by npm\-adduser(1)\.
+.SS "searchopts"
 .
-.P
-If your config file is ever corrupted, you can set this manually by doing:
+.IP "\(bu" 4
+Default: ""
 .
-.IP "" 4
-.
-.nf
-npm adduser
-.
-.fi
+.IP "\(bu" 4
+Type: String
 .
 .IP "" 0
 .
-.SS "username, _password"
-Once the configuration is parsed, the \fB_auth\fR config is split into \fBusername\fR and \fB_password\fR\|\.  This is the part before the ":"
-.
-.SS "proxy"
-If proxy is available, then npm will access the registry via
-the proxy server\.
-.
 .P
-Example:
+Space\-separated options that are always passed to search\.
 .
-.IP "" 4
+.SS "searchexclude"
 .
-.nf
-proxy = http://user:password@proxy\-server:8080
+.IP "\(bu" 4
+Default: ""
 .
-.fi
+.IP "\(bu" 4
+Type: String
 .
 .IP "" 0
+.
+.P
+Space\-separated options that limit the results from search\.
+.
+.SS "shell"
+.
+.IP "\(bu" 4
+Default: SHELL environment variable, or "bash"
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+The shell to run for the \fBnpm explore\fR command\.
 .
 .SS "tag"
+.
+.IP "\(bu" 4
 Default: latest
+.
+.IP "\(bu" 4
+Type: String
+.
+.IP "" 0
 .
 .P
 If you ask npm to install a package and don\'t tell it a specific version, then
 it will install the specified tag\.
 .
 .P
-Note: this has no effect on the npm\-tag(1) command\.
-.
-.SS "userconfig"
-The default user configuration file is process\.env\.HOME+"/\.npmrc"\.
-.
-.P
-Note that this must be provided either in the cli or env settings\. Once the
-userconfig is read, it is irrelevant\.
-.
-.SS "globalconfig"
-The default global configuration file is resolved based on the location of the
-node executable\. It is process\.execPath+"/\.\./\.\./etc/npmrc"\. In the canonical
-NodeJS installation with \fBmake install\fR, this is \fB/usr/local/etc/npmrc\fR\|\. If you
-put the node binary somewhere else (for instance, if you are using nvm or
-nave), then it would be resolved relative to that location\.
-.
-.P
-Note that this must be provided in the cli, env, or userconfig settings\. Once
-the globalconfig is read, this parameter is irrelevant\.
-.
-.SS "global"
-If set to some truish value (for instance, by being the last cli flag or being
-passed a literal \fBtrue\fR or \fB1\fR), and the \fBnpm config set\fR param is being
-called, then the new configuration paramater is written global config file\.
-Otherwise, they are saved to the user config file\.
-.
-.SS "dev"
-If set to a truish value, then it\'ll install the "devDependencies" as well as
-"dependencies" when installing a package\.
-.
-.P
-Note that devDependencies are \fIalways\fR installed when linking a package\.
+Also the tag that is added to the package@version specified by the \fBnpm
+tag\fR command, if no explicit tag is given\.
 .
 .SS "tar"
-Default: env\.TAR or "tar"
+.
+.IP "\(bu" 4
+Default: TAR environment variable, or "tar"
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
 .
 .P
-The name of a GNU\-compatible tar program on your system\.
+The tar executable
 .
-.SS "gzip"
-Default: env\.GZIPBIN or "gzip"
+.SS "tmp"
+.
+.IP "\(bu" 4
+Default: TMPDIR environment variable, or "/tmp"
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
 .
 .P
-The name of a GNU\-compatible gzip program on your system\.
+Where to store temporary files and folders\.  All temp files are deleted
+on success, but left behind on failure for forensic purposes\.
+.
+.SS "unsafe\-perm"
+.
+.IP "\(bu" 4
+Default: false if running as root, true otherwise
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Set to true to suppress the UID/GID switching when running package
+scripts\.  If set explicitly to false, then installing as a non\-root user
+will fail\.
 .
 .SS "usage"
-If set to \fBtrue\fR, then this will tell help to print out the short usage statement
-instead of the long manpage type thing\.
 .
-.P
-This is set automatically if you invoke help like \fBnpm command \-?\fR\|\.
-.
-.SS "viewer"
-Default: "man"
-.
-.P
-The program to use to view help content\.  Set to "woman" to use the emacs troff viewer
-by that name\.
-.
-.SS "_exit"
-Default: true
-.
-.P
-Whether or not to exit the process when the command is finished\.  When
-using npm programmatically, it\'s a good idea to set this to \fBfalse\fR
-explicitly\.
-.
-.SS "logfd"
-Default: Standard Error FD (2)
-.
-.P
-The file descriptor (integer) or stream object where npm will write log
-messages\.
-.
-.P
-When using npm programmatically, you may want to provide a
-FileWriteStream, or some other form of WritableStream\.
-.
-.SS "outfd"
-Default: Standard Output FD (1)
-.
-.P
-The file descriptor (integer) or stream object where npm will write
-"normal" output\.  For instance, the \fBls\fR and \fBview\fR commands write their
-output here\.
-.
-.P
-When using npm programmatically, you may want to provide a
-FileWriteStream, or some other form of WritableStream\.
-.
-.SS "color"
-Default: true
-.
-.P
-Set to false to disable colorized output\.
-.
-.P
-In versions of node that expose the \fBisatty\fR function, npm will never
-write colorized output to a non\-terminal file descriptor\.
-.
-.SS "tmproot"
-Default: env\.TMPDIR or "/tmp"
-.
-.P
-The folder where temporary files should be placed\.
-.
-.P
-npm creates a subfolder whenever it is run, and attempts to delete it
-afterwards\.
-.
-.SS "force"
+.IP "\(bu" 4
 Default: false
 .
-.P
-Set to a truish value to force uninstalling packages, even if they have
-dependents\.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
 .
 .P
-Note that setting \fBrecursive\fR is safer, because forcing uninstall can
-create orphan packages that no longer function properly\.
+Set to show short usage output (like the \-H output)
+instead of complete help when doing \fBnpm help\fR\|\.
 .
-.SS "editor"
-Default: env\.EDITOR
+.SS "user"
+.
+.IP "\(bu" 4
+Default: "nobody"
+.
+.IP "\(bu" 4
+Type: String or Number
+.
+.IP "" 0
 .
 .P
-The program to use to edit files\.
+The UID to set to when running package scripts as root\.
 .
-.SS "listexclude"
+.SS "username"
+.
+.IP "\(bu" 4
 Default: null
 .
-.P
-A whitespace separated list of strings which \fIprevent\fR items from being
-shown to \fBnpm ls\fR\|\.
+.IP "\(bu" 4
+Type: String
+.
+.IP "" 0
 .
 .P
-For example, \fBnpm ls installed \-\-listexclude zombie\fR will show all
-installed packages \fIexcept\fR zombie\.
+The username on the npm registry\.  Set with \fBnpm adduser\fR
 .
-.SS "listopts"
-Default: ""
+.SS "userconfig"
 .
-.P
-A whitespace\-separated list of extra args that are always passed to npm ls
+.IP "\(bu" 4
+Default: ~/\.npmrc on Posix, or ~/npm\-config on Windows
 .
-.P
-For example: \fBlistopts = remote\fR
+.IP "\(bu" 4
+Type: path
 .
-.P
-\fBnpm ls\fR
+.IP "" 0
 .
 .P
-The output here will always filter by remote
+The location of user\-level configuration settings\.
 .
-.SS "must\-install"
-Default: true
+.SS "version"
 .
-.P
-Set to false to not install over packages that already exist\.  By
-default, \fBnpm install foo\fR will fetch and install the latest version of \fBfoo\fR, even if it matches a version already installed\.
-.
-.SH "description"
-Default: true
-.
-.P
-Show the package description in npm ls\.
-.
-.SH "node\-version"
-Default: \fBprocess\.version\fR from the node environment
-.
-.P
-An effective version of node to use when checking for "engines"
-compliance\.
-.
-.P
-Set to null or false to suppress engine checking altogether\.
-.
-.SH "onload\-script"
+.IP "\(bu" 4
 Default: false
 .
-.P
-A script to run when npm loads\.  Use this to hook into various events in
-the npm flow in a programmatic way, even when using npm from the command
-line\.
+.IP "\(bu" 4
+Type: boolean
+.
+.IP "" 0
 .
 .P
-If false, then don\'t do any onload stuff\.
+If true, output the npm version and exit successfully\.
+.
+.P
+Only relevant when specified explicitly on the command line\.
+.
+.SS "viewer"
+.
+.IP "\(bu" 4
+Default: "man"
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+The program to use to view help content\.

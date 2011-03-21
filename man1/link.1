@@ -9,35 +9,46 @@
 .SH "SYNOPSIS"
 .
 .nf
-npm link <folder>
+npm link (in package folder)
+npm link <pkgname>
 .
 .fi
 .
 .SH "DESCRIPTION"
-This will link a source folder into npm\'s registry using a symlink, and then
-build it according to the package\.json file in that folder\'s root\. This is
+Package linking is a two\-step process\.
+.
+.P
+First, \fBnpm link\fR in a package folder will create a globally\-installed
+symbolic link from \fBprefix/package\-name\fR to the current folder\.
+.
+.P
+Next, in some other location, \fBnpm link package\-name\fR will create a
+symlink from the local \fBnode_modules\fR folder to the global symlink\.
+.
+.P
+When creating tarballs for \fBnpm publish\fR, the linked packages are
+"snapshotted" to their current state by resolving the symbolic links\.
+.
+.P
+This is
 handy for installing your own stuff, so that you can work on it and test it
 iteratively without having to continually rebuild\.
 .
-.SH "Linked Package Version"
-When linking a package folder, npm doesn\'t use the version in the
-package\.json file\.  Instead, it creates a "fake" version number of:
+.P
+For example:
 .
 .IP "" 4
 .
 .nf
-"9999\.0\.0\-LINK\-" + hash(folder)
+cd ~/projects/node\-redis    # go into the package directory
+npm link                    # creates global link
+cd ~/projects/node\-bloggy   # go into some other package directory\.
+npm link redis              # link\-install the package
 .
 .fi
 .
 .IP "" 0
 .
 .P
-This way, linking the same folder will always result in the same version
-number, even if you bump the version in the package\.json file\.  The
-extremely high major version ensures that it will always be considered
-the "highest" version, since it is a development bleeding\-edge thing\.
-.
-.SH "CONFIGURATION"
-See the config section of \fBnpm help install\fR\|\.  The \fBdev\fR configuration
-setting is always set to \fBtrue\fR when doing a link install\.
+Now, any changes to ~/projects/node\-redis will be reflected in
+~/projects/node\-bloggy/node_modules/redis/

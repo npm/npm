@@ -9,14 +9,9 @@
 .SH "SYNOPSIS"
 .
 .nf
-npm tag <name>@<version> <tagname>
+npm tag <name>@<version> [<tag>]
 .
 .fi
 .
 .SH "DESCRIPTION"
-Tags the specified version of the package with the specified "tagname"\.
-.
-.P
-The only tag with special significance is "latest"\.  That version is
-installed by default when no other tag or version number is specified,
-and always points to the most recently updated version of a package\.
+Tags the specified version of the package with the specified tag, or the \fB\-\-tag\fR config if not specified\.

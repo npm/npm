@@ -19,22 +19,6 @@ install, postinstall:
 Run AFTER the package is installed\.
 .
 .IP "\(bu" 4
-preactivate:
-Run BEFORE the package is activated\.
-.
-.IP "\(bu" 4
-activate, postactivate:
-Run AFTER the package has been activated\.
-.
-.IP "\(bu" 4
-predeactivate, deactivate:
-Run BEFORE the package is deactivated\.
-.
-.IP "\(bu" 4
-postdeactivate:
-Run AFTER the package is deactivated\.
-.
-.IP "\(bu" 4
 preuninstall, uninstall:
 Run BEFORE the package is uninstalled\.
 .
@@ -49,14 +33,6 @@ Run BEFORE the package is updated with the update command\.
 .IP "\(bu" 4
 update, postupdate:
 Run AFTER the package is updated with the update command\.
-.
-.IP "\(bu" 4
-preupdatedependencies:
-Run BEFORE the package dependencies are pointed to the new version\.
-.
-.IP "\(bu" 4
-updatedependencies, postupdatedependencies:
-Run AFTER the package dependencies are pointed to the new version\.
 .
 .IP "\(bu" 4
 (pre,post,)updatedependency\-foo:
@@ -98,11 +74,6 @@ variable set to "foo", and the \fBnpm_package_version\fR set to "1\.2\.5"
 .SS "configuration"
 Configuration parameters are put in the environment with the \fBnpm_config_\fR
 prefix\. For instance, you can view the effective \fBroot\fR config by checking the \fBnpm_config_root\fR environment variable\.
-.
-.SS "dependency path and versions"
-All of the resolved dependencies are available in the environtment as \fBnpm_dependency_<name>=<version>\fR and \fBnpm_dependency_<name>_path=<dir>\fR\|\.  So, if you need to refer to files
-from dependency packages, or see which version is installed, you can
-refer to those environment variables\.
 .
 .SS "Special: package\.json "config" hash"
 The package\.json "config" keys are overwritten in the environment if
