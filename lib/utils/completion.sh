@@ -19,8 +19,6 @@ if complete &>/dev/null; then
                            COMP_POINT="$COMP_POINT" \
                            npm completion -- "${COMP_WORDS[@]}" \
                            2>npm-completion.log)) || return $?
-    #debugging, remove me.
-    IFS=$'\n' echo "${COMPREPLY[@]}" >> npm-completion.log
     IFS="$si"
   }
   complete -F _npm_completion npm
