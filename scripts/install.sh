@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if ! [ "x$NPM_DEBUG" = "x" ]; then
+  set +x
+fi
+
+
 node=`which node 2>&1`
 ret=$?
 if [ $ret -ne 0 ] || ! [ -x $node ]; then
@@ -44,9 +49,16 @@ if [ $? -ne 0 ] || ! [ -x $make ]; then
   fi
 fi
 
-url=`curl -s http://registry.npmjs.org/npm/latest \
+t="${npm_install}"
+if [ -z "$t" ]; then
+  t="latest"
+fi
+
+url=`curl -s http://registry.npmjs.org/npm/$t \
       | $egrep -o 'tarball":"[^"]+' \
       | $egrep -o 'http://.*'`
+echo "fetching: $url" >&2
+
 ret=$?
 if [ $ret -ne 0 ]; then
   echo "Failed to get tarball url" >&2
