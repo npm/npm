@@ -1,4 +1,0 @@
-{ "name":"npm-test-files-array-simple"
-, "version" : "1.2.3"
-, "files" : ["foo", "test.sh"]
-, "scripts" : {"test":"./test.sh"}}

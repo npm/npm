@@ -20,7 +20,7 @@ latest: submodules
 	node cli.js install
 
 install: submodules
-	node cli.js install
+	node cli.js install -g
 
 # backwards compat
 dev: install
@@ -32,7 +32,7 @@ clean: uninstall
 
 uninstall: submodules
 	node cli.js cache clean
-	node cli.js rm npm -f
+	node cli.js rm npm -g
 
 man: man1
 
@@ -43,7 +43,8 @@ doc: man1 $(docs)
 
 # use `npm install ronn` for this to work.
 man1/%.1: doc/%.md
-	ronn --roff $< > $@
+	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
+	./node_modules/.bin/ronn --roff $< > $@
 
 man1/%/: doc/%/
 	@if ! test -d $@ ; then mkdir -p $@ ; fi

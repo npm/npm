@@ -16,32 +16,37 @@ I don't know yet.
 Read the error output, and if you can't figure out what it means,
 do what it says and post a bug with all the information it asks for.
 
-If there doesn't seem to be enough output for your liking, run the
-command with `--loglevel verbose` or if you're really brave, `--loglevel
-silly`.
+## Where does npm put stuff?
 
-## How do I make npm less noisy?
+See `npm help folders`
 
-`npm config set loglevel error`
+## I installed something globally, but I can't `require()` it
 
-You can also set it to `win` or `silent` for even more quietness.
+Install it locally.
+
+## I don't wanna.
+
+Ok, then do this:
+
+    echo 'export NODE_PATH="'$(npm root -g)'"' >> ~/.bashrc
+    . ~/.bashrc
 
 ## How do I list installed packages?
 
-`npm ls installed`
+`npm ls`
 
 If you just want to see the names, and not all the registry data, you
 can do: `npm ls installed --no-registry` to turn off the registry.
 
 ## How do I search for packages?
 
-`npm ls`
+`npm search`
 
 Arguments are greps.  `npm ls jsdom` shows jsdom packages.
 
 ## How do I update npm?
 
-`npm update npm`
+`npm update npm -g`
 
 You can also update all outdated packages by doing `npm update` without
 any arguments.
@@ -78,19 +83,8 @@ awesomely handy.
 
 ## Can I list a url as a dependency?
 
-No.
-
-If you need to depend on something that isn't published, or a package
-that is published, but which you've modified slightly, you can do this.
-
-The correct way is to do the following:
-
-* add a `"name":"version"` entry to your package.json file.
-* `npm bundle install <pkg>` where `<pkg>` is a url or path to your
-  custom unpublished package.
-
-When installing your package, npm will skip over any dependencies that
-are bundled.
+Yes.  It should be a url to a gzipped tarball containing a single folder
+that has a package.json in its root.
 
 ## OK, but can I list a git repo as a dependency?
 
@@ -106,7 +100,7 @@ lot of use cases, and is very easy to maintain.
 
 ## How do I symlink to a dev folder so that I don't have to keep re-installing?
 
-`npm link`
+See `npm help link`
 
 ## The package registry website.  What is that exactly?
 
@@ -123,8 +117,7 @@ https reliably.
 
 ## I forgot my password, and can't publish.  How do I reset it?
 
-Email <i@izs.me> from the email address that you signed up with.  Then
-wait a day or two maybe.
+Go to <http://admin.npmjs.org/> to reset it.
 
 ## I get ECONNREFUSED a lot.  What's up?
 
@@ -132,7 +125,8 @@ Either the registry is down, or node's DNS isn't able to reach out.
 This happens a lot if you don't follow *all* the steps in the Cygwin
 setup doc.
 
-To check if the registry is down, open up <http://registry.npmjs.org/>
+To check if the registry is down, open up
+<http://registry.npmjs.org/-/short>
 in a web browser.  This will also tell you if you are just unable to
 access the internet for some reason.
 

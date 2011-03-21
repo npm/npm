@@ -1,5 +1,0 @@
-{"name":"npm-test-bundletest"
-,"version":"1.0.0"
-,"main":"./foo"
-,"dependencies":{"express":"1.0.0","oauth":"*","ejs":"0.2.0","npm":"*"}
-,"scripts":{"test":"node foo.js"}}

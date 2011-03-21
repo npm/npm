@@ -3,6 +3,7 @@ npm-install(1) -- install a package
 
 ## SYNOPSIS
 
+    npm install (with no args in a package dir)
     npm install <tarball file>
     npm install <tarball url>
     npm install <folder>
@@ -13,8 +14,12 @@ npm-install(1) -- install a package
 
 ## DESCRIPTION
 
-This command installs a package, and any packages that it depends on.  It
-resolves circular dependencies by talking to the npm registry.
+This command installs a package, and any packages that it depends on.
+
+* npm install (in package directory):
+  Install the dependencies in the local node_modules folder.
+
+  In global mode, it is the same as `npm install $PWD`
 
 * npm install `<tarball file>`:
   Install a package that is sitting on the filesystem.  Note: if you just want
@@ -37,8 +42,8 @@ resolves circular dependencies by talking to the npm registry.
       npm install http://github.com/waveto/node-crypto/tarball/v0.0.5
 
 * npm install `<name>`:
-  Do a `<name>@<tag>` install, where `<tag>` is the "tag" config from either your
-  .npmrc file, or the --tag argument on the command line.
+  Do a `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
+  `npm help config`)
 
   Example:
 
@@ -72,96 +77,17 @@ resolves circular dependencies by talking to the npm registry.
 
       npm install sax@">=0.1.0 <0.2.0"
 
-You may combine multiple arguments, and even multiple types of arguments.  For example:
+You may combine multiple arguments, and even multiple types of arguments.
+For example:
 
     npm install sax@">=0.1.0 <0.2.0" bench supervisor
 
 The `--tag` argument will apply to all of the specified install targets.
 
-The `--force` argument will force npm to fetch remote resources even if a local copy exists on disk.
+The `--force` argument will force npm to fetch remote resources even if a
+local copy exists on disk.
 
     npm install sax --force
-
-## CONFIGURATION
-
-### root
-
-Default: `$INSTALL_PREFIX/lib/node`
-
-The root folder where packages are installed and npm keeps its data.
-
-### binroot
-
-Default: `$INSTALL_PREFIX/bin`
-
-The folder where executable programs are installed.
-
-Set to "false" to not install executables
-
-### manroot
-
-Default: $INSTALL_PREFIX/share/man
-
-The folder where man pages are installed.
-
-Set to "false" to not install man pages.
-
-### registry
-
-Default: https://registry.npmjs.org/
-
-The base URL of the npm package registry.
-
-### tag
-
-Default: latest
-
-If you ask npm to install a package and don't tell it a specific version, then
-it will install the specified tag.
-
-Note: this has no effect on the npm-tag(1) command.
-
-### dev
-
-If set to a truish value, then it'll install the "devDependencies" as well as
-"dependencies" when installing a package.
-
-Note that devDependencies are *always* installed when linking a package.
-
-### tar
-
-Default: env.TAR or "tar"
-
-The name of a GNU-compatible tar program on your system.
-
-### gzip
-
-Default: env.GZIPBIN or "gzip"
-
-The name of a GNU-compatible gzip program on your system.
-
-### must-install
-
-Default: true
-
-Set to false to not install over packages that already exist.  By
-default, `npm install foo` will fetch and install the latest version of
-`foo`, even if it matches a version already installed.
-
-### auto-activate
-
-Default: true
-
-Automatically activate a package after installation, if there is not an active
-version already.  Set to "always" to always activate when installing.
-
-### update-dependents
-
-Default: true
-
-Automatically update a package's dependencies after installation, if it is the
-newest version installed. Set to "always" to update dependents when a new
-version is installed, even if it's not the newest.
 
 ## SEE ALSO
 

@@ -3,10 +3,11 @@ npm-test(1) -- Test a package
 
 ## SYNOPSIS
 
-      npm test <name>[@<version>] [<name>[@<version>] ...]
+      npm test <name>
 
 ## DESCRIPTION
 
 This runs a package's "test" script, if one was provided.
 
-If no version is specified, then it tests the "active" version.
+To run tests as a condition of installation, set the `npat` config to
+true.

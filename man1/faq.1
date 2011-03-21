@@ -19,32 +19,40 @@ I don\'t know yet\.
 Read the error output, and if you can\'t figure out what it means,
 do what it says and post a bug with all the information it asks for\.
 .
-.P
-If there doesn\'t seem to be enough output for your liking, run the
-command with \fB\-\-loglevel verbose\fR or if you\'re really brave, \fB\-\-loglevel
-silly\fR\|\.
+.SH "Where does npm put stuff?"
+See \fBnpm help folders\fR
 .
-.SH "How do I make npm less noisy?"
-\fBnpm config set loglevel error\fR
+.SH "I installed something globally, but I can\'t `require()` it"
+Install it locally\.
 .
-.P
-You can also set it to \fBwin\fR or \fBsilent\fR for even more quietness\.
+.SH "I don\'t wanna\."
+Ok, then do this:
+.
+.IP "" 4
+.
+.nf
+echo \'export NODE_PATH="\'$(npm root \-g)\'"\' >> ~/\.bashrc
+\|\. ~/\.bashrc
+.
+.fi
+.
+.IP "" 0
 .
 .SH "How do I list installed packages?"
-\fBnpm ls installed\fR
+\fBnpm ls\fR
 .
 .P
 If you just want to see the names, and not all the registry data, you
 can do: \fBnpm ls installed \-\-no\-registry\fR to turn off the registry\.
 .
 .SH "How do I search for packages?"
-\fBnpm ls\fR
+\fBnpm search\fR
 .
 .P
 Arguments are greps\.  \fBnpm ls jsdom\fR shows jsdom packages\.
 .
 .SH "How do I update npm?"
-\fBnpm update npm\fR
+\fBnpm update npm \-g\fR
 .
 .P
 You can also update all outdated packages by doing \fBnpm update\fR without
@@ -98,27 +106,8 @@ You\'ll most likely want to \fBnpm link\fR your development folder\.  That\'s
 awesomely handy\.
 .
 .SH "Can I list a url as a dependency?"
-No\.
-.
-.P
-If you need to depend on something that isn\'t published, or a package
-that is published, but which you\'ve modified slightly, you can do this\.
-.
-.P
-The correct way is to do the following:
-.
-.IP "\(bu" 4
-add a \fB"name":"version"\fR entry to your package\.json file\.
-.
-.IP "\(bu" 4
-\fBnpm bundle install <pkg>\fR where \fB<pkg>\fR is a url or path to your
-custom unpublished package\.
-.
-.IP "" 0
-.
-.P
-When installing your package, npm will skip over any dependencies that
-are bundled\.
+Yes\.  It should be a url to a gzipped tarball containing a single folder
+that has a package\.json in its root\.
 .
 .SH "OK, but can I list a git repo as a dependency?"
 No\.
@@ -134,7 +123,7 @@ point in the future, but not likely\.  The current system allows for a
 lot of use cases, and is very easy to maintain\.
 .
 .SH "How do I symlink to a dev folder so that I don\'t have to keep re\-installing?"
-\fBnpm link\fR
+See \fBnpm help link\fR
 .
 .SH "The package registry website\.  What is that exactly?"
 See \fBnpm help registry\fR for more info\.
@@ -149,8 +138,7 @@ The warnings will disappear when node supports uploading tarballs over
 https reliably\.
 .
 .SH "I forgot my password, and can\'t publish\.  How do I reset it?"
-Email \fIi@izs\.me\fR from the email address that you signed up with\.  Then
-wait a day or two maybe\.
+Go to \fIhttp://admin\.npmjs\.org/\fR to reset it\.
 .
 .SH "I get ECONNREFUSED a lot\.  What\'s up?"
 Either the registry is down, or node\'s DNS isn\'t able to reach out\.
@@ -158,7 +146,7 @@ This happens a lot if you don\'t follow \fIall\fR the steps in the Cygwin
 setup doc\.
 .
 .P
-To check if the registry is down, open up \fIhttp://registry\.npmjs\.org/\fR
+To check if the registry is down, open up \fIhttp://registry\.npmjs\.org/\-/short\fR
 in a web browser\.  This will also tell you if you are just unable to
 access the internet for some reason\.
 .

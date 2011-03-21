@@ -10,14 +10,6 @@ following scripts:
   Run BEFORE the package is installed
 * install, postinstall:
   Run AFTER the package is installed.
-* preactivate:
-  Run BEFORE the package is activated.
-* activate, postactivate:
-  Run AFTER the package has been activated.
-* predeactivate, deactivate:
-  Run BEFORE the package is deactivated.
-* postdeactivate:
-  Run AFTER the package is deactivated.
 * preuninstall, uninstall:
   Run BEFORE the package is uninstalled.
 * postuninstall:
@@ -26,10 +18,6 @@ following scripts:
   Run BEFORE the package is updated with the update command.
 * update, postupdate:
   Run AFTER the package is updated with the update command.
-* preupdatedependencies:
-  Run BEFORE the package dependencies are pointed to the new version.
-* updatedependencies, postupdatedependencies:
-  Run AFTER the package dependencies are pointed to the new version.
 * (pre,post,)updatedependency-foo:
   Run (before,after) the "foo" dependency is modified.
 * pretest, test, posttest:
@@ -63,14 +51,6 @@ variable set to "foo", and the `npm_package_version` set to "1.2.5"
 Configuration parameters are put in the environment with the `npm_config_`
 prefix. For instance, you can view the effective `root` config by checking the
 `npm_config_root` environment variable.
-
-### dependency path and versions
-
-All of the resolved dependencies are available in the environtment as
-`npm_dependency_<name>=<version>` and
-`npm_dependency_<name>_path=<dir>`.  So, if you need to refer to files
-from dependency packages, or see which version is installed, you can
-refer to those environment variables.
 
 ### Special: package.json "config" hash
 

@@ -16,33 +16,3 @@ npm outdated [<name> [<name> \.\.\.]]
 .SH "DESCRIPTION"
 This command will check the registry to see if any (or, specific) installed
 packages are currently outdated\.
-.
-.SH "CONFIGURATION"
-.
-.SS "registry"
-Default: https://registry\.npmjs\.org/
-.
-.P
-The base URL of the npm package registry\.
-.
-.SS "tag"
-Default: latest
-.
-.P
-If you ask npm to install a package and don\'t tell it a specific version, then
-it will install the specified tag\.
-.
-.P
-Note: this has no effect on the npm\-tag(1) command\.
-.
-.SS "outfd"
-Default: Standard Output FD (1)
-.
-.P
-The file descriptor (integer) or stream object where npm will write
-"normal" output\.  For instance, the \fBls\fR and \fBview\fR commands write their
-output here\.
-.
-.P
-When using npm programmatically, you may want to provide a
-FileWriteStream, or some other form of WritableStream\.

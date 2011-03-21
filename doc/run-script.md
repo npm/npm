@@ -3,13 +3,11 @@ npm-run-script(1) -- Run arbitrary package scripts
 
 ## SYNOPSIS
 
-    npm run-script <script> <name>[@<version>] [<name>[@<version] ...]
+    npm run-script <script> <name>
 
 ## DESCRIPTION
 
 This runs an arbitrary command from a package's "scripts" object.
-
-If no version is provided then it uses the active version.
 
 It is used by the test, start, restart, and stop commands, but can be
 called directly, as well.

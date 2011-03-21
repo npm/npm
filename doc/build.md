@@ -10,15 +10,9 @@ npm-build(1) -- Build a package
 
 ## DESCRIPTION
 
-This command should almost never need to be run directly.  It is an abstraction
-of the functionality shared by both npm-install(1) and npm-link(1).
+This is the plumbing command called by `npm link` and `npm install`.
 
-This command creates the various interwoven links that ensure a package's contents
-are available in the root appropriately, and that its dependencies are linked
-appropriately.
-
-## CONFIGURATION
-
+It should generally not be called directly.
 
 ## SEE ALSO
 

@@ -18,8 +18,8 @@ account information\.
 .
 .P
 The official public npm registry is at \fIhttp://registry\.npmjs\.org/\fR\|\.  It
-is powered by a CouchDB database at \fIhttp://isaacs\.couchone\.com/jsregistry\fR\|\.  The code for the couchapp is
-available at \fIhttp://github\.com/isaacs/js\-registry\fR\|\.  npm user accounts
+is powered by a CouchDB database at \fIhttp://isaacs\.couchone\.com/registry\fR\|\.  The code for the couchapp is
+available at \fIhttp://github\.com/isaacs/npmjs\.org\fR\|\.  npm user accounts
 are CouchDB users, stored in the \fIhttp://isaacs\.couchone\.com/_users\fR
 database\.
 .
@@ -86,57 +86,3 @@ No, but such a thing is planned, and a tiny bit developed\.
 .
 .P
 Stay tuned!
-.
-.SH "CONFIGURATION"
-.
-.SS "registry"
-Default: https://registry\.npmjs\.org/
-.
-.P
-The base URL of the npm package registry\.
-.
-.SS "_auth"
-A base\-64 encoded "user:pass" pair\.  This is created by npm\-adduser(1)\.
-.
-.P
-If your config file is ever corrupted, you can set this manually by doing:
-.
-.IP "" 4
-.
-.nf
-npm adduser
-.
-.fi
-.
-.IP "" 0
-.
-.SS "username, _password"
-Once the configuration is parsed, the \fB_auth\fR config is split into \fBusername\fR and \fB_password\fR\|\.  This is the part before the ":"
-.
-.SS "proxy"
-If proxy is available, then npm will access the registry via
-the proxy server\.
-.
-.P
-Example:
-.
-.IP "" 4
-.
-.nf
-proxy = http://user:password@proxy\-server:8080
-.
-.fi
-.
-.IP "" 0
-.
-.SS "tar"
-Default: env\.TAR or "tar"
-.
-.P
-The name of a GNU\-compatible tar program on your system\.
-.
-.SS "gzip"
-Default: env\.GZIPBIN or "gzip"
-.
-.P
-The name of a GNU\-compatible gzip program on your system\.

@@ -3,89 +3,171 @@ npm-folders(1) -- Folder Structures Used by npm
 
 ## DESCRIPTION
 
-Node modules and metadata live
-in the `root` setting.  Check `npm help config` for more
-on configuration options.
+npm puts various things on your computer.  That's its job.
 
-`root/foo` Symlink to the active version's module folder.
+This document will tell you what it puts where.
 
-`root/foo@1.0.0/` Node modules for the foo package.
+### prefix Configuration
 
-`root/foo@1.0.0/{module-name}.js` Generated shim corresponding to a module
-defined in the modules option. The module shim requires
-`root/.npm/foo/1.0.0/package/{module-path}.js`
+The `prefix` config defaults to node's `process.installPrefix`.  On most
+systems, this is `/usr/local`.
 
-The `main` script is implemented by creating an `index.js` file in this folder.
+When the `global` flag is set, npm installs things into this prefix.
+When it is not set, it uses the root of the current package, or the
+current working directory if not in a package already.
 
-`root/.npm/foo` is where the stuff for package `foo` would go.
+### Node Modules
 
-`root/.npm/foo/1.0.0/package` the contents of the tarball containing foo
-version 1.0.0
+Packages are droped into the `node_modules` folder under the `prefix`.
+When installing locally, this means that you can
+`require("packagename")` to load its main module, or
+`require("packagename/path/to/sub/module")` to load other modules.
 
-`root/.npm/foo/1.0.0/main.js` Generated file that exports the `main` module in
-foo.  This is a shim, not a symbolic link, so that relative paths will work
-appropriately.
+If you wish to install node modules globally which can be loaded via
+`require()` from anywhere, then add the `prefix/node_modules` folder to
+your NODE_PATH environment variable.
 
-`root/.npm/foo/active` symlink to the active version.
+### Executables
 
-`root/.npm/foo/1.0.0/node_modules` links to the modules that foo depends upon.
-This is loaded into the require path first in the foo shims.
+When in global mode, executables are linked into `prefix/bin`.
 
-`root/.npm/foo/1.0.0/dependson` links to the package folders that foo depends
-on.  This is here so that npm can access those packages programmatically.
+When in local mode, executables are linked into
+`prefix/node_modules/.bin`.
 
-`root/.npm/foo/1.0.0/dependents` links to the packages that depend upon foo.
+### Man Pages
 
-`root/.npm/.cache` the cache folder.
+When in global mode, man pages are linked into `prefix/share/man`.
 
-`root/.npm/.cache/foo/1.0.0/package.json` the parsed package.json for foo@1.0.0
+When in local node, man pages are not installed.
 
-`root/.npm/.cache/foo/1.0.0/package.tgz` the tarball of foo@1.0.0
+### Cache
 
-`root/.npm/.cache/foo/1.0.0/package` the untouched pristine copy of foo@1.0.0
+See `npm help cache`.  Cache files are stored in `~/.npm` on Posix, or
+`~/npm-cache` on Windows.
 
-Executables are installed to the folder specified by the `binroot` config.
+This is controlled by the `cache` configuration param.
 
-`binroot/foo` Symlink to the active version of the "foo" executable.
+### Temp Files
 
-`binroot/foo@1.0.0` An executable for foo at version 1.0.0.  Either a
-symbolic link or a shim to a file in the foo package.
+Temporary files are stored by default in the folder specified by the
+`tmp` config, which defaults to either the TMPDIR environment
+variable, or `/tmp`.
 
-Man pages are installed to the folder specified by the `manroot` config.
-Man pages named something other than the package name are prefixed with
-the package name.
+Temp files are given a unique folder under this root for each run of the
+program, and are deleted upon successful exit.
 
-`manroot/man1/foo.1` Symlink to the section 1 manpage for the active
-version of foo.
+## More Information
 
-`manroot/man1/foo@1.0.0.1` Section 1 man page for foo version 1.0.0
+When you run `npm install foo@1.2.3` it downloads and builds the
+package, and then, if there is a package.json file in the current
+working directory, it copies it to `$PWD/node_modules/foo`, so that your
+current package will get it when you do `require("foo")`.
 
-`manroot/man8/foo-bar.8` Symlink to a section 8 manpage for the active
-version of foo.
+When this is done, it also installs all of foo's dependencies to
+`./node_modules/foo/node_modules/`, so that it will get its dependencies
+appropriately when it calls `require()`.  If foo depends on bar, and bar
+depends on baz, then there will also be a
+`./node_modules/foo/node_modules/bar/node_modules/baz`, and so on.
 
-`manroot/man8/foo-bar@1.0.0.8` A section 8 manpage for foo version
-1.0.0.
+If there is not a package.json in the current working directory, then
+npm walks up the working dir parent paths looking for a package.json,
+indicating the root of a package, or a node_modules folder,
+indicating an npm package deployment location, and then take the party to that
+location.  This behavior may be suppressed by setting the `seek-root`
+config value to false.
 
-## CONFIGURATION
+If no package root is found, then a global installation is performed.
+The global installation may be supressed by setting the `global`
+configuration to false, in which case, the install will fail.
 
-### root
+### Global Installation
 
-Default: `$INSTALL_PREFIX/lib/node`
+If the `global` configuration is set to true, or if it is not explicitly
+set false and no suitable node_modules folder was found, then npm will
+install packages "globally".
 
-The root folder where packages are installed and npm keeps its data.
+This means that the module contents are symlinked (or, on windows,
+copied) from `root/<name>/<version>/package` to
+`root/node_modules/<name>`.
 
-### binroot
+### Cycles, Conflicts, and Folder Parsimony
 
-Default: `$INSTALL_PREFIX/bin`
+Cycles are handled using the property of node's module system that it
+walks up the directories looking for node_modules folders.  So, at every
+stage, if a package is already installed in an ancestor node_modules
+folder, then it is not installed at the current location.
 
-The folder where executable programs are installed.
+Consider the case above, where `foo -> bar -> baz`.  Imagine if, in
+addition to that, baz depended on bar, so you'd have:
+`foo -> bar -> baz -> bar -> baz ...`.  However, since the folder
+structure is: foo/node_modules/bar/node_modules/baz, there's no need to
+put another copy of bar into .../baz/node_modules, since when it calls
+require("bar"), it will get the copy that is installed in
+foo/node_modules/bar.
 
-Set to "false" to not install executables
+This shortcut is only used if the exact same
+version would be installed in multiple nested node_modules folders.  It
+is still possible to have `a/node_modules/b/node_modules/a` if the two
+"a" packages are different versions.  However, without repeating the
+exact same package multiple times, an infinite regress will always be
+prevented.
 
-### manroot
+Another optimization can be made by installing dependencies at the
+highest level possible, below the localized "target" folder.
 
-Default: $INSTALL_PREFIX/share/man
+For example, consider this dependency graph:
 
-The folder where man pages are installed.
+    foo
+    +-- bar@1.2.3
+    |   +-- baz@2.x
+    |   |   `-- quux@3.x
+    |   |       `-- bar@1.2.3 (cycle)
+    |   `-- asdf@*
+    `-- baz@1.2.3
+        `-- quux@3.x
+            `-- bar
 
-Set to "false" to not install man pages.
+In this case, we might expect a folder structure like this:
+
+    foo
+    +-- node_modules
+        +-- bar (1.2.3)
+        |   +-- node_modules
+        |   |   `-- baz (2.0.2)
+        |   |       `-- node_modules
+        |   |           `-- quux (3.2.0)
+        |   `-- asdf (2.3.4)
+        `-- baz (1.2.3)
+            `-- node_modules
+                `-- quux (3.2.0)
+                    `-- node_modules
+                        `-- bar (1.2.3)
+                            `-- node_modules
+                                `-- asdf (2.3.4)
+
+Since foo depends directly on bar@1.2.3 and baz@1.2.3, those are
+installed in foo's node_modules folder.
+
+Bar has dependencies on baz and asdf, so those are installed in bar's
+node_modules folder.  Baz has a dependency on quux, so that is installed
+in its node_modules folder.
+
+Underneath bar, the `baz->quux->bar` dependency creates a cycle.
+However, because `bar` is already in `quux`'s ancestry, it does not
+unpack another copy of bar into that folder.
+
+Similarly, underneath `foo->baz`, the same cycle is gradually prevented
+because `bar`'s `quux` dependency is satisfied by its parent folder.
+
+For a graphical breakdown of what is installed where, use `npm ls`.
+
+### Publishing
+
+Upon publishing, npm will look in the node_modules folder.  If any of
+the items there are on the "dependencies" or "devDependencies" list,
+and are not in the `bundledDependencies` array, then they will not be
+included in the package tarball.
+
+This allows a package maintainer to install all of their dependencies
+(and dev dependencies) locally, but only re-publish those items that
+cannot be found elsewhere.

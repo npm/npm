@@ -1,6 +1,10 @@
+*.swp
 test/bin
 test/output.log
 test/packages/*/node_modules
 test/packages/npm-test-depends-on-spark/which-spark.log
+test/packages/test-package/random-data.txt
 test/root
-*.swp
+node_modules/ronn
+node_modules/.bin
+npm-debug.log

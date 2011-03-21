@@ -24,9 +24,8 @@ You probably got npm because you want to install stuff.
 Use `npm install blerg` to install the latest version of "blerg".  Check out
 `npm help install` for more info.  It can do a lot of stuff.
 
-Use the `npm ls` command to show everything that's available.
-Use `npm ls installed` to show everything you've installed.
-`npm help ls` will tell you more.
+Use the `npm search` command to show everything that's available.
+Use `npm ls` to show everything you've installed.
 
 ## DEVELOPER USAGE
 
@@ -107,7 +106,7 @@ When you find issues, please report them:
   <npm-@googlegroups.com>
 
 Be sure to include *all* of the output from the npm command that didn't work
-as expected.
+as expected.  The `npm-debug.log` file is also helpful to provide.
 
 You can also look for isaacs in #node.js on irc://irc.freenode.net.  He
 will no doubt tell you to put the output in a gist or email.

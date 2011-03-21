@@ -13,8 +13,8 @@ account information.
 
 The official public npm registry is at <http://registry.npmjs.org/>.  It
 is powered by a CouchDB database at
-<http://isaacs.couchone.com/jsregistry>.  The code for the couchapp is
-available at <http://github.com/isaacs/js-registry>.  npm user accounts
+<http://isaacs.couchone.com/registry>.  The code for the couchapp is
+available at <http://github.com/isaacs/npmjs.org>.  npm user accounts
 are CouchDB users, stored in the <http://isaacs.couchone.com/_users>
 database.
 
@@ -76,46 +76,3 @@ ask for help on the <npm-@googlegroups.com> mailing list.
 No, but such a thing is planned, and a tiny bit developed.
 
 Stay tuned!
-
-## CONFIGURATION
-
-### registry
-
-Default: https://registry.npmjs.org/
-
-The base URL of the npm package registry.
-
-### _auth
-
-A base-64 encoded "user:pass" pair.  This is created by npm-adduser(1).
-
-If your config file is ever corrupted, you can set this manually by doing:
-
-    npm adduser
-
-### username, _password
-
-Once the configuration is parsed, the `_auth` config is split into
-`username` and `_password`.  This is the part before the ":"
-
-### proxy
-
-If proxy is available, then npm will access the registry via
-the proxy server.
-
-Example:
-
-    proxy = http://user:password@proxy-server:8080
-
-### tar
-
-Default: env.TAR or "tar"
-
-The name of a GNU-compatible tar program on your system.
-
-### gzip
-
-Default: env.GZIPBIN or "gzip"
-
-The name of a GNU-compatible gzip program on your system.
-

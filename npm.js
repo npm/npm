@@ -21,12 +21,16 @@ var EventEmitter = require("events").EventEmitter
   , abbrev = require("./lib/utils/abbrev")
   , which = require("./lib/utils/which")
   , semver = require("semver")
+  , findPrefix = require("./lib/utils/find-prefix")
 
 npm.commands = {}
 npm.ELIFECYCLE = {}
 npm.E404 = {}
 npm.EPUBLISHCONFLICT = {}
 npm.EJSONPARSE = {}
+npm.EISGIT = {}
+npm.ECYCLE = {}
+npm.EENGINE = {}
 
 
 try {
@@ -34,6 +38,15 @@ try {
   var j = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))+"")
   npm.version = j.version
   npm.nodeVersionRequired = j.engines.node
+  if (!semver.satisfies(process.version, j.engines.node)) {
+    log.error([""
+              ,"npm requires node version: "+j.engines.node
+              ,"And you have: "+process.version
+              ,"which is not satisfactory."
+              ,""
+              ,"Bad things will likely happen.  You have been warned."
+              ,""].join("\n"), "unsupported version")
+  }
 } catch (ex) {
   try {
     log(ex, "error reading version")
@@ -49,55 +62,62 @@ var commandCache = {}
               , "rb" : "rebuild"
               , "bn" : "bundle"
               , "list" : "ls"
-              , "search" : "ls"
-              , "find" : "ls"
+              , "la" : "ls"
+              , "ll" : "ls"
               , "ln" : "link"
               , "i" : "install"
               , "up" : "update"
               , "c" : "config"
               , "info" : "view"
+              , "find" : "search"
+              , "s" : "search"
+              , "author" : "owner"
               }
   , aliasNames = Object.keys(aliases)
   // these are filenames in ./lib
   , cmdList = [ "install"
-              , "activate"
-              , "deactivate"
               , "uninstall"
-              , "build"
+              , "cache"
+              , "config"
+              , "set"
+              , "get"
+              , "update"
+              , "outdated"
+              , "prune"
+
+              , "rebuild"
               , "link"
+
               , "publish"
               , "tag"
               , "adduser"
-              , "config"
-              , "help"
-              , "cache"
-              , "test"
-              , "stop"
-              , "start"
-              , "restart"
               , "unpublish"
-              , "ls"
               , "owner"
-              , "update"
-              , "update-dependents"
-              , "view"
-              , "rebuild"
-              , "bundle"
-              , "outdated"
-              , "init"
               , "deprecate"
+
+              , "help"
+              , "ls"
+              , "search"
+              , "view"
+              , "init"
               , "version"
               , "edit"
               , "explore"
               , "docs"
               , "faq"
-              , "run-script"
-              , "set"
-              , "get"
               , "xmas"
+              , "root"
+              , "prefix"
+
+              , "test"
+              , "stop"
+              , "start"
+              , "restart"
+              , "run-script"
+
               ]
   , plumbing = [ "build"
-               , "update-dependents"
+               , "unbuild"
                , "completion"
                ]
   , fullList = npm.fullList = cmdList.concat(aliasNames).filter(function (c) {
@@ -111,19 +131,25 @@ Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
       "Call npm.load(conf, cb) before using this command.\n"+
       "See the README.md or cli.js for example usage.")
     var a = npm.deref(c)
+    if (c === "la" || c === "ll") {
+      npm.config.set("long", true)
+    }
     if (commandCache[a]) return commandCache[a]
     return commandCache[a] = require(__dirname+"/lib/"+a)
   }, enumerable: fullList.indexOf(c) !== -1 })
 })
+
 npm.deref = function (c) {
   if (plumbing.indexOf(c) !== -1) return c
   var a = abbrevs[c]
   if (aliases[a]) a = aliases[a]
   return a
 }
+
 var loaded = false
   , loading = false
   , loadListeners = []
+
 npm.load = function (conf, cb_) {
   if (!cb_ && typeof conf === "function") cb_ = conf , conf = {}
   loadListeners.push(cb_)
@@ -131,7 +157,15 @@ npm.load = function (conf, cb_) {
   if (loading) return
   loading = true
   var onload = true
+
+  function handleError (er) {
+    loadListeners.forEach(function (cb) {
+      process.nextTick(function () { cb(er, npm) })
+    })
+  }
+
   function cb (er) {
+    if (er) return handleError(er)
     loaded = true
     loadListeners.forEach(function (cb) {
       process.nextTick(function () { cb(er, npm) })
@@ -148,21 +182,28 @@ npm.load = function (conf, cb_) {
       log.verbose("node symlink", node)
       process.execPath = node
     }
-    ini.resolveConfigs(conf, cb)
+    ini.resolveConfigs(conf, function (er) {
+      if (er) return handleError(er)
+      var p
+      if (!npm.config.get("global")
+          && !conf.hasOwnProperty("prefix")) {
+        p = process.cwd()
+      } else {
+        p = npm.config.get("prefix")
+      }
+      // try to guess at a good node_modules location.
+      findPrefix(p, function (er, p) {
+        if (er) return handleError(er)
+        Object.defineProperty(npm, "prefix",
+          { get : function () { return p }
+          , set : function (r) { return p = r }
+          , enumerable : true
+          })
+        return cb()
+      })
+    })
   })
 }
-
-// Local store for package data, so it won't have to be fetched/read more than
-// once in a single pass.
-var registry = {}
-npm.set = function (key, val) {
-  if (typeof key === "object" && !val && key._id) {
-    val = key
-    key = key._id
-  }
-  return set(registry, key, val)
-}
-npm.get = function (key) { return get(registry, key) }
 
 var path = require("path")
 npm.config =
@@ -171,43 +212,21 @@ npm.config =
   , del : function (key, val) { return ini.del(key, val, "cli") }
   }
 
-Object.defineProperty(npm, "root",
-  { get : function () { return npm.config.get("root") }
-  , set : function (r) {
-      r = r.charAt(0) === "/" ? r
-        : path.join(process.execPath, "..", "..", r)
-      return npm.config.set("root", r)
-    }
-  , enumerable : true
-  })
 Object.defineProperty(npm, "dir",
-  { get : function () { return path.join(npm.root, npm.config.get('dotnpm')) }
+  { get : function () { return path.resolve(npm.prefix, "node_modules") }
   , enumerable : true
   })
+
 Object.defineProperty(npm, "cache",
-  { get : function () { return path.join(npm.root, npm.config.get('dotnpm'), ".cache") }
+  { get : function () { return npm.config.get("cache") }
+  , set : function (r) { return npm.config.set("cache", r) }
   , enumerable : true
   })
 var tmpFolder
 Object.defineProperty(npm, "tmp",
   { get : function () {
       if (!tmpFolder) tmpFolder = "npm-"+Date.now()
-      return path.join(npm.config.get("tmproot"), tmpFolder)
+      return path.resolve(npm.config.get("tmp"), tmpFolder)
     }
   , enumerable : true
   })
-
-// platforms without uid/gid support are assumed to be in unsafe-perm mode.
-var sudoOk = !semver.lt(process.version, '0.3.5')
-if (!process.getuid || !sudoOk) {
-  npm.config.set("unsafe-perm", true)
-}
-if (process.getuid && process.getuid() === 0 && !sudoOk) {
-  process.nextTick(function () {
-    log([""
-        ,"Please upgrade to node 0.3.5 or higher"
-        ,"if you are going to be running npm as root."
-        ,"It is not safe otherwise."
-        ,""].join("\n"), "", "error")
-  })
-}

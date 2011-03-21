@@ -9,6 +9,7 @@
 .SH "SYNOPSIS"
 .
 .nf
+npm install (with no args in a package dir)
 npm install <tarball file>
 npm install <tarball url>
 npm install <folder>
@@ -20,8 +21,14 @@ npm install <name>@<version range>
 .fi
 .
 .SH "DESCRIPTION"
-This command installs a package, and any packages that it depends on\.  It
-resolves circular dependencies by talking to the npm registry\.
+This command installs a package, and any packages that it depends on\.
+.
+.IP "\(bu" 4
+npm install (in package directory):
+Install the dependencies in the local node_modules folder\.
+.
+.IP
+In global mode, it is the same as \fBnpm install $PWD\fR
 .
 .IP "\(bu" 4
 npm install \fB<tarball file>\fR:
@@ -52,8 +59,7 @@ Example:
 .
 .IP "\(bu" 4
 npm install \fB<name>\fR:
-Do a \fB<name>@<tag>\fR install, where \fB<tag>\fR is the "tag" config from either your
-\|\.npmrc file, or the \-\-tag argument on the command line\.
+Do a \fB<name>@<tag>\fR install, where \fB<tag>\fR is the "tag" config\. (See \fBnpm help config\fR)
 .
 .IP
 Example:
@@ -102,7 +108,8 @@ Example:
 .IP "" 0
 .
 .P
-You may combine multiple arguments, and even multiple types of arguments\.  For example:
+You may combine multiple arguments, and even multiple types of arguments\.
+For example:
 .
 .IP "" 4
 .
@@ -117,7 +124,8 @@ npm install sax@">=0\.1\.0 <0\.2\.0" bench supervisor
 The \fB\-\-tag\fR argument will apply to all of the specified install targets\.
 .
 .P
-The \fB\-\-force\fR argument will force npm to fetch remote resources even if a local copy exists on disk\.
+The \fB\-\-force\fR argument will force npm to fetch remote resources even if a
+local copy exists on disk\.
 .
 .IP "" 4
 .
@@ -127,89 +135,6 @@ npm install sax \-\-force
 .fi
 .
 .IP "" 0
-.
-.SH "CONFIGURATION"
-.
-.SS "root"
-Default: \fB$INSTALL_PREFIX/lib/node\fR
-.
-.P
-The root folder where packages are installed and npm keeps its data\.
-.
-.SS "binroot"
-Default: \fB$INSTALL_PREFIX/bin\fR
-.
-.P
-The folder where executable programs are installed\.
-.
-.P
-Set to "false" to not install executables
-.
-.SS "manroot"
-Default: $INSTALL_PREFIX/share/man
-.
-.P
-The folder where man pages are installed\.
-.
-.P
-Set to "false" to not install man pages\.
-.
-.SS "registry"
-Default: https://registry\.npmjs\.org/
-.
-.P
-The base URL of the npm package registry\.
-.
-.SS "tag"
-Default: latest
-.
-.P
-If you ask npm to install a package and don\'t tell it a specific version, then
-it will install the specified tag\.
-.
-.P
-Note: this has no effect on the npm\-tag(1) command\.
-.
-.SS "dev"
-If set to a truish value, then it\'ll install the "devDependencies" as well as
-"dependencies" when installing a package\.
-.
-.P
-Note that devDependencies are \fIalways\fR installed when linking a package\.
-.
-.SS "tar"
-Default: env\.TAR or "tar"
-.
-.P
-The name of a GNU\-compatible tar program on your system\.
-.
-.SS "gzip"
-Default: env\.GZIPBIN or "gzip"
-.
-.P
-The name of a GNU\-compatible gzip program on your system\.
-.
-.SS "must\-install"
-Default: true
-.
-.P
-Set to false to not install over packages that already exist\.  By
-default, \fBnpm install foo\fR will fetch and install the latest version of \fBfoo\fR, even if it matches a version already installed\.
-.
-.SS "auto\-activate"
-Default: true
-.
-.P
-Automatically activate a package after installation, if there is not an active
-version already\.  Set to "always" to always activate when installing\.
-.
-.SS "update\-dependents"
-Default: true
-.
-.P
-Automatically update a package\'s dependencies after installation, if it is the
-newest version installed\. Set to "always" to update dependents when a new
-version is installed, even if it\'s not the newest\.
 .
 .SH "SEE ALSO"
 .

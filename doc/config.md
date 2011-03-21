@@ -35,8 +35,6 @@ npm gets its configuration values from 5 sources, in this priority:
   This is a set of configuration parameters that are internal to npm, and are
   defaults if nothing else is specified.
 
-
-
 ## Sub-commands
 
 Config supports the following sub-commands:
@@ -47,13 +45,13 @@ Config supports the following sub-commands:
 
 Sets the config key to the value.
 
+If value is omitted, then it sets it to "true".
+
 ### get
 
     npm config get key
 
-Echo the config value to stdout. (NOTE: All the other npm logging is done to
-stderr, so pipes should work properly, and you can do `npm get key 2>/dev/null`
-to print out JUST the config value.)
+Echo the config value to stdout.
 
 ### list
 
@@ -71,7 +69,45 @@ Deletes the key from all configuration files.
 
     npm config edit
 
-Opens the config file in an editor.  Use the `--global` flag to edit the global config.
+Opens the config file in an editor.  Use the `--global` flag to edit the
+global config.
+
+## Shorthands and Other CLI Niceties
+
+The following shorthands are parsed on the command-line:
+
+* `-v`: `--version`
+* `-h`, `-?`, `--help`, `-H`: `--usage`
+* `-s`, `--silent`: `--loglevel silent`
+* `-d`: `--loglevel info`
+* `-dd`, `--verbose`: `--loglevel verbose`
+* `-ddd`: `--loglevel silly`
+* `-g`: `--global`
+* `-l`: `--long`
+* `-p`, `--porcelain`: `--parseable`
+* `-reg`: `--registry`
+* `-v`: `--version`
+* `-f`: `--force`
+* `-l`: `--long`
+* `-desc`: `--description`
+* `ll` and `la` commands: `ls --long`
+
+If the specified configuration param resolves unambiguously to a known
+configuration parameter, then it is expanded to that configuration
+parameter.  For example:
+
+    npm ls --par
+    # same as:
+    npm ls --parseable
+
+If multiple single-character shorthands are strung together, and the
+resulting combination is unambiguously not some other configuration
+param, then it is expanded to its various component pieces.  For
+example:
+
+    npm ls -gpld
+    # same as:
+    npm ls --global --parseable --long --loglevel info
 
 ## Per-Package Config Settings
 
@@ -94,292 +130,303 @@ then the user could change the behavior by doing:
 
 ## Config Settings
 
-### auto-activate
+### browser
 
-Default: true
+* Default: OS X: `"open"`, others: `"google-chrome"`
+* Type: String
 
-Automatically activate a package after installation, if there is not an active
-version already.  Set to "always" to always activate when installing.
+The browser that is called by the `npm docs` command to open websites.
+
+### cache
+
+* Default: Windows: `~/npm-cache`, Posix: `~/.npm`
+* Type: path
+
+The location of npm's cache directory.  See `npm help cache`
+
+### color
+
+* Default: true
+* Type: Boolean or `"always"`
+
+If false, never shows colors.  If `"always"` then always shows colors.
+If true, then only prints color codes for tty file descriptors.
+
+### depth
+
+* Default: Infinity
+* Type: Number
+
+The depth to go when recursing directories for `npm ls` and
+`npm cache ls`.
+
+### description
+
+* Default: true
+* Type: Boolean
+
+Whether or not to show the description in `npm search`
+
+### dev
+
+* Default: false
+* Type: Boolean
+
+Whether or not to install `dev-dependencies` along with packages.
+
+Note that `dev-dependencies` are also installed if the `npat` flag is
+set.
+
+### editor
+
+* Default: `EDITOR` environment variable if set, or `"vi"`
+* Type: path
+
+The command to run for `npm edit` or `npm config edit`.
+
+### force
+
+* Default: false
+* Type: Boolean
+
+Makes various commands more forceful.
+
+* lifecycle script failure does not block progress.
+* publishing clobbers previously published versions.
+* skips cache when requesting from the registry.
+* prevents checks against clobbering non-npm files.
+
+### global
+
+* Default: false
+* Type: Boolean
+
+Operates in "global" mode, so that packages are installed into the
+`prefix` folder instead of the current working directory.  See
+`npm help global` for more on the differences in behavior.
+
+* packages are installed into the `prefix/node_modules` folder, instead of the
+  current working directory.
+* bin files are linked to `prefix/bin`
+* man pages are linked to `prefix/share/man`
+
+### globalconfig
+
+* Default: {prefix}/etc/npmrc
+* Type: path
+
+The config file to read for global config options.
+
+### group
+
+* Default: GID of the current process
+* Type: String or Number
+
+The group to use when running package scripts in global mode as the root
+user.
+
+### gzipbin
+
+* Default: "gzip"
+* Type: path
+
+The gzip binary
+
+### logfd
+
+* Default: stderr file descriptor
+* Type: Number or Stream
+
+The location to write log output.
+
+### loglevel
+
+* Default: "warn"
+* Type: String
+* Values: "silent", "win", "error", "warn", "info", "verbose", "silly"
+
+What level of logs to report.  On failure, *all* logs are written to
+`npm-debug.log` in the current working directory.
+
+### long
+
+* Default: false
+* Type: Boolean
+
+Whether or not to show extended information in `npm ls`
+
+### node-version
+
+* Default: process.version
+* Type: semver
+
+The node version to use when checking package's "engines" hash.
+
+### npat
+
+* Default: false
+* Type: Boolean
+
+Whether or not to run tests on installation and report results to the
+`npaturl`.
+
+### npaturl
+
+* Default: Not yet implemented
+* Type: url
+
+The url to report npat test results.
+
+### onload-script
+
+* Default: false
+* Type: path
+
+A node module to `require()` when npm loads.  Useful for programmatic
+usage.
+
+### outfd
+
+* Default: standard output file descriptor
+* Type: Number or Stream
+
+Where to write "normal" output.  This has no effect on log output.
+
+### parseable
+
+* Default: false
+* Type: Boolean
+
+Whether or not to output parseable results from commands that write to
+standard output.
+
+### prefix
+
+* Default: node's process.installPrefix
+* Type: path
+
+The location to install global items.  If set on the command line, then
+it forces non-global commands to run in the specified folder.
+
+### proxy
+
+* Default: "HTTP_PROXY" or "http_proxy" environment variable, or null
+* Type: url
+
+A proxy to use for outgoing http requests.
 
 ### rebuild-bundle
 
-Default: true
+* Default: true
+* Type: Boolean
 
 Set to some truish value to rebuild bundled dependencies after
 installation.
 
-### recursive
-
-Default: false
-
-Set to some truish value to recursively remove dependent packages.  For
-example if foo depends on bar, and bar depends on baz, then:
-
-    npm uninstall baz --recursive
-
-will remove baz, bar, and foo.
-
-### loglevel
-
-Default: "info"
-
-The log level to show.
-
-Each level maps to a numeric value, above which all logs must pass to be
-seen.  So, setting it to "warn" shows "win", "error" and "warn" messages.
-
-The log levels:
-
-* silent: Show no output.  Nothing.  If there is output on stderr, it's
-  because something is broken.
-* win: Show the "npm ok" or "npm not ok", but that's all.
-* error: Errors, usually with a stack trace.
-* warn: Things that you should probably be aware of.
-* info: Helpful info.
-* silly: Not-helpful info.  (Lots of dumping whole objects and such.)
-
-Note that output to stdout is always printed.  This setting just modifies
-what's logged to stderr.
-
-### update-dependents
-
-Default: true
-
-Automatically update a package's dependencies after installation, if it is the
-newest version installed. Set to "always" to update dependents when a new
-version is installed, even if it's not the newest.
-
-### root
-
-Default: `$INSTALL_PREFIX/lib/node`
-
-The root folder where packages are installed and npm keeps its data.
-
-### binroot
-
-Default: `$INSTALL_PREFIX/bin`
-
-The folder where executable programs are installed.
-
-Set to "false" to not install executables
-
-### manroot
-
-Default: $INSTALL_PREFIX/share/man
-
-The folder where man pages are installed.
-
-Set to "false" to not install man pages.
-
 ### registry
 
-Default: https://registry.npmjs.org/
+* Default: https://registry.npmjs.org/
+* Type: url
 
 The base URL of the npm package registry.
 
-### _auth
+### searchopts
 
-A base-64 encoded "user:pass" pair.  This is created by npm-adduser(1).
+* Default: ""
+* Type: String
 
-If your config file is ever corrupted, you can set this manually by doing:
+Space-separated options that are always passed to search.
 
-    npm adduser
+### searchexclude
 
-### username, _password
+* Default: ""
+* Type: String
 
-Once the configuration is parsed, the `_auth` config is split into
-`username` and `_password`.  This is the part before the ":"
+Space-separated options that limit the results from search.
 
-### proxy
+### shell
 
-If proxy is available, then npm will access the registry via
-the proxy server.
+* Default: SHELL environment variable, or "bash"
+* Type: path
 
-Example:
-
-    proxy = http://user:password@proxy-server:8080
+The shell to run for the `npm explore` command.
 
 ### tag
 
-Default: latest
+* Default: latest
+* Type: String
 
 If you ask npm to install a package and don't tell it a specific version, then
 it will install the specified tag.
 
-Note: this has no effect on the npm-tag(1) command.
-
-### userconfig
-
-The default user configuration file is process.env.HOME+"/.npmrc".
-
-Note that this must be provided either in the cli or env settings. Once the
-userconfig is read, it is irrelevant.
-
-### globalconfig
-
-The default global configuration file is resolved based on the location of the
-node executable. It is process.execPath+"/../../etc/npmrc". In the canonical
-NodeJS installation with `make install`, this is `/usr/local/etc/npmrc`. If you
-put the node binary somewhere else (for instance, if you are using nvm or
-nave), then it would be resolved relative to that location.
-
-Note that this must be provided in the cli, env, or userconfig settings. Once
-the globalconfig is read, this parameter is irrelevant.
-
-### global
-
-If set to some truish value (for instance, by being the last cli flag or being
-passed a literal `true` or `1`), and the `npm config set` param is being
-called, then the new configuration paramater is written global config file.
-Otherwise, they are saved to the user config file.
-
-### dev
-
-If set to a truish value, then it'll install the "devDependencies" as well as
-"dependencies" when installing a package.
-
-Note that devDependencies are *always* installed when linking a package.
+Also the tag that is added to the package@version specified by the `npm
+tag` command, if no explicit tag is given.
 
 ### tar
 
-Default: env.TAR or "tar"
+* Default: TAR environment variable, or "tar"
+* Type: path
 
-The name of a GNU-compatible tar program on your system.
+The tar executable
 
-### gzip
+### tmp
 
-Default: env.GZIPBIN or "gzip"
+* Default: TMPDIR environment variable, or "/tmp"
+* Type: path
 
-The name of a GNU-compatible gzip program on your system.
+Where to store temporary files and folders.  All temp files are deleted
+on success, but left behind on failure for forensic purposes.
+
+### unsafe-perm
+
+* Default: false if running as root, true otherwise
+* Type: Boolean
+
+Set to true to suppress the UID/GID switching when running package
+scripts.  If set explicitly to false, then installing as a non-root user
+will fail.
 
 ### usage
 
-If set to `true`, then this will tell help to print out the short usage statement
-instead of the long manpage type thing.
+* Default: false
+* Type: Boolean
 
-This is set automatically if you invoke help like `npm command -?`.
+Set to show short usage output (like the -H output)
+instead of complete help when doing `npm help`.
+
+### user
+
+* Default: "nobody"
+* Type: String or Number
+
+The UID to set to when running package scripts as root.
+
+### username
+
+* Default: null
+* Type: String
+
+The username on the npm registry.  Set with `npm adduser`
+
+### userconfig
+
+* Default: ~/.npmrc on Posix, or ~/npm-config on Windows
+* Type: path
+
+The location of user-level configuration settings.
+
+### version
+
+* Default: false
+* Type: boolean
+
+If true, output the npm version and exit successfully.
+
+Only relevant when specified explicitly on the command line.
 
 ### viewer
 
-Default: "man"
+* Default: "man"
+* Type: path
 
-The program to use to view help content.  Set to "woman" to use the emacs troff viewer
-by that name.
-
-### _exit
-
-Default: true
-
-Whether or not to exit the process when the command is finished.  When
-using npm programmatically, it's a good idea to set this to `false`
-explicitly.
-
-### logfd
-
-Default: Standard Error FD (2)
-
-The file descriptor (integer) or stream object where npm will write log
-messages.
-
-When using npm programmatically, you may want to provide a
-FileWriteStream, or some other form of WritableStream.
-
-### outfd
-
-Default: Standard Output FD (1)
-
-The file descriptor (integer) or stream object where npm will write
-"normal" output.  For instance, the `ls` and `view` commands write their
-output here.
-
-When using npm programmatically, you may want to provide a
-FileWriteStream, or some other form of WritableStream.
-
-### color
-
-Default: true
-
-Set to false to disable colorized output.
-
-In versions of node that expose the `isatty` function, npm will never
-write colorized output to a non-terminal file descriptor.
-
-### tmproot
-
-Default: env.TMPDIR or "/tmp"
-
-The folder where temporary files should be placed.
-
-npm creates a subfolder whenever it is run, and attempts to delete it
-afterwards.
-
-### force
-
-Default: false
-
-Set to a truish value to force uninstalling packages, even if they have
-dependents.
-
-Note that setting `recursive` is safer, because forcing uninstall can
-create orphan packages that no longer function properly.
-
-### editor
-
-Default: env.EDITOR
-
-The program to use to edit files.
-
-### listexclude
-
-Default: null
-
-A whitespace separated list of strings which *prevent* items from being
-shown to `npm ls`.
-
-For example, `npm ls installed --listexclude zombie` will show all
-installed packages *except* zombie.
-
-### listopts
-
-Default: ""
-
-A whitespace-separated list of extra args that are always passed to npm ls
-
-For example: `listopts = remote`
-
-`npm ls`
-
-The output here will always filter by remote
-
-### must-install
-
-Default: true
-
-Set to false to not install over packages that already exist.  By
-default, `npm install foo` will fetch and install the latest version of
-`foo`, even if it matches a version already installed.
-
-## description
-
-Default: true
-
-Show the package description in npm ls.
-
-## node-version
-
-Default: `process.version` from the node environment
-
-An effective version of node to use when checking for "engines"
-compliance.
-
-Set to null or false to suppress engine checking altogether.
-
-## onload-script
-
-Default: false
-
-A script to run when npm loads.  Use this to hook into various events in
-the npm flow in a programmatic way, even when using npm from the command
-line.
-
-If false, then don't do any onload stuff.
+The program to use to view help content.

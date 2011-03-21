@@ -20,15 +20,10 @@ A folder containing a \fBpackage\.json\fR file in its root\.
 .IP "" 0
 .
 .SH "DESCRIPTION"
-This command should almost never need to be run directly\.  It is an abstraction
-of the functionality shared by both npm\-install(1) and npm\-link(1)\.
+This is the plumbing command called by \fBnpm link\fR and \fBnpm install\fR\|\.
 .
 .P
-This command creates the various interwoven links that ensure a package\'s contents
-are available in the root appropriately, and that its dependencies are linked
-appropriately\.
-.
-.SH "CONFIGURATION"
+It should generally not be called directly\.
 .
 .SH "SEE ALSO"
 .
