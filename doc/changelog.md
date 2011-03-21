@@ -46,4 +46,5 @@ npm-changelog(1) -- Changes
 
 * 1.0  
   Simplify configuration greatly.  
-  Install locally (bundle by default)
+  Install locally (bundle by default)  
+  Drastic rearchitecture
