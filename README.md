@@ -19,7 +19,7 @@ To install on older versions of node, do the following:
 
 To install npm with one command, do this:
 
-    curl http://npmjs.org/install.sh | sh
+    curl http://npmjs.org/install.sh | npm_install=rc sh
 
 If that fails, try this:
 
@@ -37,7 +37,7 @@ and npm will install itself.
 If you don't have make, and don't have curl or git, and ALL you have is
 this code and node, you can do:
 
-    sudo node ./cli.js install npm
+    sudo node ./cli.js install -g
 
 ## Permissions
 
@@ -114,7 +114,7 @@ but at this point, you probably grok all that anyway.)
 
 So sad to see you go.
 
-    sudo npm uninstall npm
+    sudo npm uninstall npm -g
 
 Or, if that fails,
 
