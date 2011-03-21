@@ -18,57 +18,41 @@ main () {
 
   npm install $( ls packages | awk '{print "packages/" $1 }' ) || exit 1
   (ls packages | while read pkg; do
-    npm test "$pkg"@"$(ls -- "$ROOTDIR"/.npm/"$pkg" | grep -v active)"
+    npm test "$pkg"
   done) || exit 1
   if [ "$FAILURES" == "0" ]; then
     npm rm $(ls packages) npm || exit 1
   fi
   cleanup
 
-  # link
-  npm install "$NPMPKG" || exit 1
+  if ! [ "$npm_package_config_publishtest" == "true" ]; then
+    echo_err "To test publishing: npm config set npm:publishtest true"
+  else
+    # attempt to publish and unpublish each of them.
+    npm install "$NPMPKG" || exit 1
 
-  # used in test later
-  npm config set package-config:foo boo || exit 1
-  (cd packages/npm-test-bundletest && npm bundle) || exit 1
+    (ls packages | grep -v 'npm-test-private' | while read pkg; do
+      npm publish packages/$pkg || exit 1
+      npm install $pkg || exit 1
+      npm unpublish $pkg || exit 1
+    done) || exit 1
 
-  (ls packages | awk '{print "packages/" $1 }' | while read pkg; do
-    npm link "$pkg"
-  done) || exit 1
-  (ls packages | while read pkg; do
-    npm test "$pkg"@"$(ls -- "$ROOTDIR"/.npm/"$pkg" | grep -v active)"
-  done) || exit 1
-  if [ "$FAILURES" == "0" ]; then
-    npm rm $(ls packages) npm || exit 1
-  fi
-  cleanup
-
-  # attempt to publish and unpublish each of them.
-  npm install "$NPMPKG" || exit 1
-
-  (ls packages | grep -v 'npm-test-private' | while read pkg; do
-    if [ "$pkg" != "npm-test-bundletest" ]; then
-      (cd packages/$pkg ; npm bundle destroy)
+    # verify that the private package can't be published
+    # bypass the test-harness npm function.
+    "$NPMCLI" publish packages/npm-test-private && (
+      npm unpublish npm-test-private
+      exit 1000
+    )
+    if [ $? -eq 1000 ]; then
+      fail "Private package shouldn't be publishable" >&2
     fi
-    npm publish packages/$pkg || exit 1
-    npm install $pkg || exit 1
-    npm unpublish $pkg || exit 1
-  done) || exit 1
 
-  # verify that the private package can't be published
-  # bypass the test-harness npm function.
-  "$NPMCLI" publish packages/npm-test-private && (
-    npm unpublish npm-test-private
-    exit 1000
-  )
-  if [ $? -eq 1000 ]; then
-    fail "Private package shouldn't be publishable" >&2
-  fi
+    if [ "$FAILURES" == "0" ]; then
+      npm rm $(ls packages) npm || exit 1
+    fi
+    cleanup
 
-  if [ "$FAILURES" == "0" ]; then
-    npm rm $(ls packages) npm || exit 1
   fi
-  cleanup
 
   if [ $FAILURES -eq 0 ]; then
     echo_err "ok"
@@ -116,27 +100,20 @@ rm -rf $TMP/npm*
 TMP=$TMP/npm-test-$$
 echo "Testing in $TMP ..."
 ROOTDIR="$TMP/root"
-BINDIR="$TMP/bin"
-MANDIR="$TMP/man"
 
 cleanup () {
   if [ "$FAILURES" != "0" ] && [ "$FAILURES" != "" ]; then
     return
   fi
   [ -d "$ROOTDIR" ] && rm -rf -- "$ROOTDIR"
-  [ -d "$BINDIR" ] && rm -rf -- "$BINDIR"
-  [ -d "$MANDIR" ] && rm -rf -- "$MANDIR"
   mkdir -p -- "$ROOTDIR"
-  mkdir -p -- "$BINDIR"
-  mkdir -p -- "$MANDIR"
 }
 
-export npm_config_root="$ROOTDIR"
-export npm_config_binroot="$BINDIR"
-export npm_config_manroot="$MANDIR"
+export npm_config_prefix="$ROOTDIR"
 export npm_config_color="always"
-export PATH="$PATH":"$BINDIR"
-export NODE_PATH="$ROOTDIR"
+export npm_config_global=true
+export PATH="$PATH":"$ROOTDIR/bin":"$ROOTDIR/node_modules/.bin"
+export NODE_PATH="$ROOTDIR/node_modules"
 
 echo_err () {
   echo "$@" >&2

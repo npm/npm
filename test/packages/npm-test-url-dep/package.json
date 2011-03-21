@@ -3,4 +3,4 @@
 , "files" : []
 , "dependencies" :
   { "express" : "*"
-  , "npm" : "http://registry.npmjs.org/npm/-/npm-0.2.13-3.tgz" } }
+  , "npm" : "http://registry.npmjs.org/npm/-/npm-0.3.17.tgz" } }
