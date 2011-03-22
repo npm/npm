@@ -108,6 +108,7 @@ var commandCache = {}
               , "xmas"
               , "root"
               , "prefix"
+              , "bin"
 
               , "test"
               , "stop"
