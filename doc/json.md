@@ -97,17 +97,12 @@ npm also sets a top-level "maintainers" field with your npm user info.
 
 The "files" field is an array of files to include in your project.  If
 you name a folder in the array, then it will also include the files
-inside that folder.  The default is just `[""]` which includes the
-entire package folder in the tarball, but you may want to only include
-specific things.
-
-If you specify bins or man pages, then those will be
-automatically added to the files array, even if they would not
-ordinarily be included.
+inside that folder. (Unless they would be ignored by another rule.)
 
 You can also provide a ".npmignore" file in the root of your package,
 which will keep files from being included, even if they would be picked
-up by the files array.
+up by the files array.  The ".npmignore" file works just like a
+".gitignore".
 
 ## main
 
@@ -199,27 +194,25 @@ In the future, this information may be used in other creative ways.
 
 ### directories.lib
 
-If you specify a "lib" directory, then the lib
-folder will be walked and any *.js or *.node files found will be exposed as a
-default module hash.
-
-**The lib directory mapping will be deprecated soon. Please do not rely
-on it.**
+Tell people where the bulk of your library is.  Nothing special is done
+with the lib folder in any way, but it's useful meta info.
 
 ### directories.bin
 
-If you specify a "bin" directory, then all the files in that folder will be used
-as the "bin" hash.
+If you specify a "bin" directory, then all the files in that folder will
+be used as the "bin" hash.
 
 If you have a "bin" hash already, then this has no effect.
 
 ### directories.man
 
-A folder that is full of man pages.  Sugar to generate a "man" array by walking the folder.
+A folder that is full of man pages.  Sugar to generate a "man" array by
+walking the folder.
 
 ### directories.doc
 
-Put markdown files in here.  Eventually, these will be displayed nicely, maybe, someday.
+Put markdown files in here.  Eventually, these will be displayed nicely,
+maybe, someday.
 
 ### directories.example
 
@@ -227,9 +220,9 @@ Put example scripts in here.  Someday, it might be exposed in some clever way.
 
 ## repository
 
-Specify the place where your code lives. This is helpful for people who want to
-contribute, as well as perhaps maybe being the underpinning of some magical "track
-this package on git" feature someday maybe if somebody wants to write it ever.
+Specify the place where your code lives. This is helpful for people who
+want to contribute.  If the git repo is on github, then the `npm docs`
+command will be able to find you.
 
 Do it like this:
 
@@ -246,28 +239,6 @@ Do it like this:
 The URL should be a publicly available (perhaps read-only) url that can be handed
 directly to a VCS program without any modification.  It should not be a url to an
 html project page that you put in your browser.  It's for computers.
-
-Here are some examples of Doing It Wrong:
-
-    WRONG!
-    "repository" :
-      { "type" : "git"
-      , "url" : "git@github.com:isaacs/npm.git" <-- THIS IS PRIVATE!
-      }
-    
-    ALSO WRONG!
-    "repository" :
-      { "type" : "git"
-      , "url" : "http://github.com/isaacs/npm" <-- THIS IS WEBPAGE!
-      }
-
-    This is ok, but completely unnecessary:
-    "repository" :
-      { "type" : "git"
-      , "url" : "http://github.com/isaacs/npm.git"
-      , "private" : "git@github.com:isaacs/npm.git"
-      , "web" : "http://github.com/isaacs/npm"
-      }
 
 ## scripts
 
@@ -370,8 +341,8 @@ digits after the first "x" are ignored.
 Starting with npm version 0.2.14, you may specify a tarball URL in place
 of a version range.
 
-This tarball will be downloaded and installed as a bundle at install
-time.  See `npm help bundle`
+This tarball will be downloaded and installed locally to your package at
+install time.
 
 ## devDependencies
 
@@ -412,3 +383,15 @@ specify "*" as the version), then any version of node will do.
 If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list. If "engines" is omitted, then npm will just assume
 that it works on node.
+
+## tag
+
+By default, when a package is published, it gets tagged with the value
+of the `tag` config, or `"latest"` if nothing is specified.  By setting
+a "tag" member in the package.json, the package will get tagged
+differently.  This enabled limited releases with a "beta" or "rc" tag,
+so that users can do `npm install foo@beta` to get the package version
+tagged "beta".
+
+To update it to latest, either remove the "tag" member and re-publish,
+or do `npm tag foo@1.2.3 latest`.
