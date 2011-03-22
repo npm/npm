@@ -4,6 +4,14 @@ This is just enough info to get you up and running.
 
 Much more info available via `npm help` once it's installed.
 
+## RELEASE CANDIDATE
+
+The master branch contains the latest release candidate, which as of
+this time is 1.0.something.  If you want version 0.2 or 0.3, then you'll
+need to check those branches out explicitly.
+
+The "latest" on the registry is 0.3, because 1.0 is not yet stable.
+
 ## IMPORTANT
 
 **You need node v0.4 or higher to run this program.**
