@@ -115,11 +115,10 @@ var commandCache = {}
               , "start"
               , "restart"
               , "run-script"
-
+              , "completion"
               ]
   , plumbing = [ "build"
                , "unbuild"
-               , "completion"
                ]
   , fullList = npm.fullList = cmdList.concat(aliasNames).filter(function (c) {
       return plumbing.indexOf(c) === -1
