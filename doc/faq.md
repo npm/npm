@@ -35,9 +35,6 @@ Ok, then do this:
 
 `npm ls`
 
-If you just want to see the names, and not all the registry data, you
-can do: `npm ls installed --no-registry` to turn off the registry.
-
 ## How do I search for packages?
 
 `npm search`
@@ -46,10 +43,17 @@ Arguments are greps.  `npm ls jsdom` shows jsdom packages.
 
 ## How do I update npm?
 
-`npm update npm -g`
+**NOTE**: This is the release candidate documentation.  To update to the
+newer 1.0 release candidate, do this:
 
-You can also update all outdated packages by doing `npm update` without
-any arguments.
+    npm install npm@rc -g
+
+Once 1.0 is stable, do this:
+
+    npm update npm -g
+
+You can also update all outdated local packages by doing `npm update` without
+any arguments, or global packages by doing `npm update -g`.
 
 ## What is a `package`?
 
@@ -72,6 +76,7 @@ after packing it up into a tarball (b).
 You don't.  Try one of these:
 
 * <http://github.com/isaacs/nave>
+* <http://github.com/visionmedia/n>
 * <http://github.com/creationix/nvm>
 
 ## How can I use npm for development?
@@ -84,7 +89,7 @@ awesomely handy.
 ## Can I list a url as a dependency?
 
 Yes.  It should be a url to a gzipped tarball containing a single folder
-that has a package.json in its root.
+that has a package.json in its root.  (See "what is a package?" above.)
 
 ## OK, but can I list a git repo as a dependency?
 
@@ -98,13 +103,19 @@ It's possible that something a bit more snazzy will be developed at some
 point in the future, but not likely.  The current system allows for a
 lot of use cases, and is very easy to maintain.
 
+If you really really want to have the latest checkout in your program,
+you can clone the git repo, and then `npm link` it, and then `npm link
+<name>` in any packages that use it to install the link locally to that
+package.
+
 ## How do I symlink to a dev folder so that I don't have to keep re-installing?
 
 See `npm help link`
 
 ## The package registry website.  What is that exactly?
 
-See `npm help registry` for more info.
+See `npm help registry` for more info, or just visit
+<http://github.com/isaacs/npmjs.org>.
 
 ## What's up with the insecure channel warnings?
 
