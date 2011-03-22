@@ -213,7 +213,13 @@ npm.config =
   }
 
 Object.defineProperty(npm, "dir",
-  { get : function () { return path.resolve(npm.prefix, "node_modules") }
+  { get : function () {
+      if (npm.config.get("global")) {
+        return path.resolve(npm.prefix, "lib", "node_modules")
+      } else {
+        return path.resolve(npm.prefix, "node_modules")
+      }
+    }
   , enumerable : true
   })
 
