@@ -22,6 +22,20 @@ do what it says and post a bug with all the information it asks for\.
 .SH "Where does npm put stuff?"
 See \fBnpm help folders\fR
 .
+.P
+tl;dr:
+.
+.IP "\(bu" 4
+Use the \fBnpm root\fR command to see where modules go, and the \fBnpm bin\fR
+command to see where executables go
+.
+.IP "\(bu" 4
+Global installs are different from local installs\.  If you install
+something with the \fB\-g\fR flag, then its executables go in \fBnpm bin \-g\fR
+and its modules go in \fBnpm root \-g\fR\|\.
+.
+.IP "" 0
+.
 .SH "I installed something globally, but I can\'t `require()` it"
 Install it locally\.
 .
@@ -41,10 +55,6 @@ echo \'export NODE_PATH="\'$(npm root \-g)\'"\' >> ~/\.bashrc
 .SH "How do I list installed packages?"
 \fBnpm ls\fR
 .
-.P
-If you just want to see the names, and not all the registry data, you
-can do: \fBnpm ls installed \-\-no\-registry\fR to turn off the registry\.
-.
 .SH "How do I search for packages?"
 \fBnpm search\fR
 .
@@ -52,11 +62,33 @@ can do: \fBnpm ls installed \-\-no\-registry\fR to turn off the registry\.
 Arguments are greps\.  \fBnpm ls jsdom\fR shows jsdom packages\.
 .
 .SH "How do I update npm?"
-\fBnpm update npm \-g\fR
+\fBNOTE\fR: This is the release candidate documentation\.  To update to the
+newer 1\.0 release candidate, do this:
+.
+.IP "" 4
+.
+.nf
+npm install npm@rc \-g
+.
+.fi
+.
+.IP "" 0
 .
 .P
-You can also update all outdated packages by doing \fBnpm update\fR without
-any arguments\.
+Once 1\.0 is stable, do this:
+.
+.IP "" 4
+.
+.nf
+npm update npm \-g
+.
+.fi
+.
+.IP "" 0
+.
+.P
+You can also update all outdated local packages by doing \fBnpm update\fR without
+any arguments, or global packages by doing \fBnpm update \-g\fR\|\.
 .
 .SH "What is a `package`?"
 A package is:
@@ -94,6 +126,9 @@ You don\'t\.  Try one of these:
 \fIhttp://github\.com/isaacs/nave\fR
 .
 .IP "\(bu" 4
+\fIhttp://github\.com/visionmedia/n\fR
+.
+.IP "\(bu" 4
 \fIhttp://github\.com/creationix/nvm\fR
 .
 .IP "" 0
@@ -107,7 +142,7 @@ awesomely handy\.
 .
 .SH "Can I list a url as a dependency?"
 Yes\.  It should be a url to a gzipped tarball containing a single folder
-that has a package\.json in its root\.
+that has a package\.json in its root\.  (See "what is a package?" above\.)
 .
 .SH "OK, but can I list a git repo as a dependency?"
 No\.
@@ -122,11 +157,17 @@ It\'s possible that something a bit more snazzy will be developed at some
 point in the future, but not likely\.  The current system allows for a
 lot of use cases, and is very easy to maintain\.
 .
+.P
+If you really really want to have the latest checkout in your program,
+you can clone the git repo, and then \fBnpm link\fR it, and then \fBnpm link
+<name>\fR in any packages that use it to install the link locally to that
+package\.
+.
 .SH "How do I symlink to a dev folder so that I don\'t have to keep re\-installing?"
 See \fBnpm help link\fR
 .
 .SH "The package registry website\.  What is that exactly?"
-See \fBnpm help registry\fR for more info\.
+See \fBnpm help registry\fR for more info, or just visit \fIhttp://github\.com/isaacs/npmjs\.org\fR\|\.
 .
 .SH "What\'s up with the insecure channel warnings?"
 As of this writing, node has problems uploading files over HTTPS\.  That

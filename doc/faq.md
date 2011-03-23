@@ -20,6 +20,14 @@ do what it says and post a bug with all the information it asks for.
 
 See `npm help folders`
 
+tl;dr:
+
+* Use the `npm root` command to see where modules go, and the `npm bin`
+  command to see where executables go
+* Global installs are different from local installs.  If you install
+  something with the `-g` flag, then its executables go in `npm bin -g`
+  and its modules go in `npm root -g`.
+
 ## I installed something globally, but I can't `require()` it
 
 Install it locally.
