@@ -49,8 +49,8 @@
                   }
 , "main" : "npm"
 , "bin" : "./bin/npm.js"
-, "dependencies" : { "semver" : "1" }
-, "bundleDependencies" : [ "semver" ]
+, "dependencies" : { "semver" : "1", "abbrev" : "1" }
+, "bundleDependencies" : [ "semver", "abbrev" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
 , "scripts" : { "test" : "make test"

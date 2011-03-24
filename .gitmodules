@@ -1,3 +1,6 @@
 [submodule "node_modules/semver"]
 	path = node_modules/semver
 	url = git://github.com/isaacs/node-semver.git
+[submodule "node_modules/abbrev"]
+	path = node_modules/abbrev
+	url = git://github.com/isaacs/abbrev-js.git
