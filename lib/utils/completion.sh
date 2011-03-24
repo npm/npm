@@ -27,6 +27,7 @@ elif compctl &>/dev/null; then
     local cword line point words si
     read -Ac words
     read -cn cword
+    let cword-=1
     read -l line
     read -ln point
     si="$IFS"
