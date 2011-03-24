@@ -50,9 +50,9 @@ least, you need:
   You can use the "engines" field to explicitly state the versions of
   node (or whatever else) that your program requires, and it's pretty
   well assumed that it's javascript.
-  
+
   It does not necessarily need to match your github repository name.
-  
+
   So, `node-foo` and `bar-js` are bad names.  `foo` or `bar` are better.
 
 * version:
@@ -68,7 +68,9 @@ least, you need:
 
 * scripts:
   If you have a special compilation or installation script, then you
-  should put it in the `scripts` hash.  See npm-scripts(1).
+  should put it in the `scripts` hash.  You should definitely have at
+  least a basic smoke-test command as the "scripts.test" field.
+  See npm-scripts(1).
 
 * main:
   If you have a single module that serves as the entry point to your
@@ -84,28 +86,19 @@ You can use `npm init` in the root of your package in order to get you
 started with a pretty basic package.json file.  See `npm-init(1)` for
 more info.
 
-## Bundling Dependencies
+## Keeping files *out* of your package
 
-If you depend on something that is not published (but has a package.json
-file) then you can `bundle` that dependency into your package.
-
-* Add the `"name":"version"` to your dependency hash, as if it was a
-  published package.
-* Do `npm bundle install <pkg>` where `<pkg>` is the path/tarball/url to
-  the unpublished package.
-
-To bundle dependencies that ARE published (perhaps, if you will not have
-access to the registry when it is installed, or if you would like to
-make some modifications to them), you can use `npm bundle` (with no
-other arguments) to bundle-install all your dependencies.
-
-More info at `npm-bundle(1)`.
+Use a `.npmignore` file to keep stuff out of your package.  If there's
+no .npmignore file, but there *is* a .gitignore file, then npm will
+ignore the stuff matched by the .gitignore file.  If you *want* to
+include something that is excluded by your .gitignore file, you can
+create an empty .npmignore file to override it.
 
 ## Link Packages
 
 `npm link` is designed to install a development package and see the
 changes in real time without having to keep re-installing it.  (You do
-need to either re-link or `npm rebuild` to update compiled packages,
+need to either re-link or `npm rebuild -g` to update compiled packages,
 of course.)
 
 More info at `npm-link(1)`.
@@ -121,32 +114,24 @@ So don't do that.
 
 In the root of your package, do this:
 
-    npm install
+    npm install . -g
 
 That'll show you that it's working.  If you'd rather just create a symlink
 package that points to your working directory, then do this:
 
     npm link
 
-Use `npm ls installed` to see if it's there.
+Use `npm ls -g` to see if it's there.
 
-Then go into the node-repl, and try using require() to bring in your module's
-main and libs things.  Assuming that you have a package like this:
+To test a local install, go into some other folder, and then do:
 
-    node_foo/
-      lib/
-        foo.js
-        bar.js
+    cd ../some-other-folder
+    npm install ../my-package
 
-and you define your package.json with this in it:
+to install it locally into the node_modules folder in that other place.
 
-    { "name" : "foo"
-    , "directories" : { "lib" : "./lib" }
-    , "main" : "./lib/foo"
-    }
-
-then you'd want to make sure that require("foo") and require("foo/bar") both
-work and bring in the appropriate modules.
+Then go into the node-repl, and try using require("my-thing") to
+bring in your module's main module.
 
 ## Create a User Account
 
