@@ -12,12 +12,14 @@ var fs = require("../lib/utils/graceful-fs")
   , rm = require("../lib/utils/rm-rf")
   , errorHandler = require("../lib/utils/error-handler")
 
-  , argv = process.argv.slice(2)
-  , parseArgs = require("../lib/utils/parse-args")
+  , configDefs = require("../lib/utils/config-defs")
+  , shorthands = configDefs.shorthands
+  , types = configDefs.types
+  , optparse = require("optparse")
 
-log.verbose(argv, "cli")
+log.verbose(process.argv, "cli")
 
-var conf = parseArgs(argv)
+var conf = optparse(types, shorthands)
 npm.argv = conf.argv.remain
 if (npm.deref(npm.argv[0])) npm.command = npm.argv.shift()
 else conf.usage = true

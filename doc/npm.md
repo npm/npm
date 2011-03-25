@@ -72,7 +72,7 @@ npm is extremely configurable.  It reads its configuration options from
   then that file is parsed instead.
 * Defaults:  
   npm's default configuration options are defined in
-  lib/utils/default-config.js.  These should not be changed.
+  lib/utils/config-defs.js.  These must not be changed.
 
 See `npm help config` for much much more information.
 
