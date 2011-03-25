@@ -4,3 +4,6 @@
 [submodule "node_modules/abbrev"]
 	path = node_modules/abbrev
 	url = git://github.com/isaacs/abbrev-js.git
+[submodule "node_modules/optparse"]
+	path = node_modules/optparse
+	url = git://github.com/isaacs/node-optparse.git
