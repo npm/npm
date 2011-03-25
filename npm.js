@@ -70,8 +70,10 @@ var commandCache = {}
               , "info" : "view"
               , "find" : "search"
               , "s" : "search"
+              , "se" : "search"
               , "author" : "owner"
               }
+
   , aliasNames = Object.keys(aliases)
   // these are filenames in ./lib
   , cmdList = [ "install"
