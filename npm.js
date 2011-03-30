@@ -182,6 +182,7 @@ npm.load = function (conf, cb_) {
     if (!er && node !== process.execPath) {
       log.verbose("node symlink", node)
       process.execPath = node
+      process.installPrefix = path.resolve(node, "..", "..")
     }
     ini.resolveConfigs(conf, function (er) {
       if (er) return handleError(er)
