@@ -15,11 +15,11 @@ var fs = require("../lib/utils/graceful-fs")
   , configDefs = require("../lib/utils/config-defs")
   , shorthands = configDefs.shorthands
   , types = configDefs.types
-  , optparse = require("optparse")
+  , nopt = require("nopt")
 
 log.verbose(process.argv, "cli")
 
-var conf = optparse(types, shorthands)
+var conf = nopt(types, shorthands)
 npm.argv = conf.argv.remain
 if (npm.deref(npm.argv[0])) npm.command = npm.argv.shift()
 else conf.usage = true
