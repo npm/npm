@@ -235,6 +235,29 @@ npm config set foo:port 80
 .
 .SH "Config Settings"
 .
+.SS "bindist"
+.
+.IP "\(bu" 4
+Default: Unstable node versions, \fBnull\fR, otherwise \fB"<node version>\-<platform>\-<os release>"\fR
+.
+.IP "\(bu" 4
+Type: String or \fBnull\fR
+.
+.IP "" 0
+.
+.P
+Experimental: on stable versions of node, binary distributions will be
+created with this tag\.  If a user then installs that package, and their \fBbindist\fR tag is found in the list of binary distributions, they will
+get that prebuilt version\.
+.
+.P
+Pre\-build node packages have their preinstall, install, and postinstall
+scripts stripped (since they are run prior to publishing), and do not
+have their \fBbuild\fR directories automatically ignored\.
+.
+.P
+It\'s yet to be seen if this is a good idea\.
+.
 .SS "browser"
 .
 .IP "\(bu" 4
