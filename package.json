@@ -53,9 +53,7 @@
 , "bundleDependencies" : [ "semver", "abbrev", "nopt" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
-, "scripts" : { "test" : "make test"
-              , "postinstall" : "sh ./scripts/install-message.sh"
-              }
+, "scripts" : { "test" : "make test" }
 , "licenses" :
   [ { "type" : "MIT"
     , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
