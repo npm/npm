@@ -85,9 +85,7 @@ cd "$TMP" \
         echo "Please upgrade node before continuing."
         exit $ret
       fi) \
-  && (if ! [ "$make" = "NOMAKE" ]; then
-        $make clean install
-      else
+  && (if [ "$make" = "NOMAKE" ] || ! $make clean install; then
         $node cli.js cache clean
         $node cli.js rm npm --force --global
         $node cli.js install . --force --global
