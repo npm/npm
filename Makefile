@@ -20,19 +20,19 @@ latest: submodules
 	node cli.js install
 
 install: submodules
-	node cli.js install -g
+	node cli.js install -g -f
 
 # backwards compat
 dev: install
 
 link: uninstall
-	node cli.js link
+	node cli.js link -f
 
 clean: uninstall
 
 uninstall: submodules
 	node cli.js cache clean
-	node cli.js rm npm -g
+	node cli.js rm npm -g -f
 
 man: man1
 

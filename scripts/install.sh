@@ -56,6 +56,7 @@ fi
 
 url=`curl -s http://registry.npmjs.org/npm/$t \
       | $egrep -o 'tarball":"[^"]+' \
+      | head -n 1 \
       | $egrep -o 'http://.*'`
 echo "fetching: $url" >&2
 
