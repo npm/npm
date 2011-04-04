@@ -33,6 +33,7 @@
   , "Orlando Vazquez <ovazquez@gmail.com> (http://2wycked.net/)"
   , "George Miroshnykov <gmiroshnykov@lohika.com>"
   , "Geoff Flarity (http://ca.linkedin.com/pub/geoff-flarity/a/536/43a)"
+  , "Pete Kruckenberg <pete@kruckenberg.com>"
   ]
 , "repository" :
   { "type" : "git"
