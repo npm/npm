@@ -72,7 +72,11 @@ cd "$TMP" \
       ret=$?
       if [ $ret -eq 0 ]; then
         req=`$node bin/read-package-json.js package.json engines.node`
-        $node node_modules/semver/bin/semver -v "$node_version" -r "$req"
+        if [ -e node_modules ]; then
+            $node node_modules/semver/bin/semver -v "$node_version" -r "$req"
+        else
+            $node bin/semver.js -v "$node_version" -r "$req"
+        fi
         ret=$?
       fi
       if [ $ret -ne 0 ]; then
