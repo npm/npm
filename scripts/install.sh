@@ -85,8 +85,8 @@ cd "$TMP" \
         $make clean install
       else
         $node cli.js cache clean
-        $node cli.js rm npm -f
-        $node cli.js install .
+        $node cli.js rm npm --force --global
+        $node cli.js install . --force --global
       fi) \
   && cd "$BACK" \
   && rm -rf "$TMP" \
