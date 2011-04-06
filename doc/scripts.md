@@ -18,8 +18,10 @@ following scripts:
   Run BEFORE the package is updated with the update command.
 * update, postupdate:
   Run AFTER the package is updated with the update command.
-* (pre,post,)updatedependency-foo:
-  Run (before,after) the "foo" dependency is modified.
+* prepublish:
+  Run BEFORE the package is published.
+* publish, postpublish:
+  Run AFTER the package is published.
 * pretest, test, posttest:
   Run by the `npm test` command.
 * prestop, stop, poststop:
