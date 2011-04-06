@@ -54,7 +54,7 @@ if [ -z "$t" ]; then
   t="latest"
 fi
 
-url=`curl -s http://registry.npmjs.org/npm/$t \
+url=`curl -s -L http://registry.npmjs.org/npm/$t \
       | $egrep -o 'tarball":"[^"]+' \
       | head -n 1 \
       | $egrep -o 'http://.*'`
