@@ -384,14 +384,11 @@ If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list. If "engines" is omitted, then npm will just assume
 that it works on node.
 
-## tag
+## preferGlobal
 
-By default, when a package is published, it gets tagged with the value
-of the `tag` config, or `"latest"` if nothing is specified.  By setting
-a "tag" member in the package.json, the package will get tagged
-differently.  This enabled limited releases with a "beta" or "rc" tag,
-so that users can do `npm install foo@beta` to get the package version
-tagged "beta".
+If your package is primarily a command-line application that should be
+installed globally, then set this value to `true` to provide a warning
+if it is installed locally.
 
-To update it to latest, either remove the "tag" member and re-publish,
-or do `npm tag foo@1.2.3 latest`.
+It doesn't actually prevent users from installing it locally, but it
+does help prevent some confusion if it doesn't work as expected.
