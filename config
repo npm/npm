@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# this is a wicked hack, but whatever.
+
+CONFIGS=()
+i=0
+
+while [ $# -gt 0 ]; do
+  conf="$1"
+  case $conf in
+    --help)
+      echo "./config --param=value ..."
+      exit 0
+      ;;
+    --*)
+      CONFIGS[$i]="${conf:2}"
+      ;;
+    *)
+      CONFIGS[$i]="$conf"
+      ;;
+  esac
+  let i++
+  shift
+done
+
+for c in "${CONFIGS[@]}"; do
+  echo '+node ./bin/npm.js config set "'"$c"'"'
+  node ./bin/npm.js config set "$c"
+done
+echo
+
+echo +node ./bin/npm.js config ls
+echo
+node ./bin/npm.js config ls
