@@ -59,6 +59,7 @@ var commandCache = {}
   , aliases = { "rm" : "uninstall"
               , "r" : "uninstall"
               , "un" : "uninstall"
+              , "unlink" : "uninstall"
               , "rb" : "rebuild"
               , "list" : "ls"
               , "la" : "ls"
