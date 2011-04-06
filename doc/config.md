@@ -249,6 +249,34 @@ user.
 
 The gzip binary
 
+### init.version 
+
+* Default: "0.0.0"
+* Type: String
+
+The value `npm init` should use by default for the package version.
+
+### init.author.name
+
+* Default: "0.0.0"
+* Type: String
+
+The value `npm init` should use by default for the package author's name.
+
+### init.author.email
+
+* Default: "0.0.0"
+* Type: String
+
+The value `npm init` should use by default for the package author's email.
+
+### init.author.url
+
+* Default: "0.0.0"
+* Type: String
+
+The value `npm init` should use by default for the package author's homepage.
+
 ### logfd
 
 * Default: stderr file descriptor
