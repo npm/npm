@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-SCRIPTS" "1" "March 2011" "" ""
+.TH "NPM\-SCRIPTS" "1" "April 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-scripts\fR \-\- How npm handles the "scripts" field
@@ -35,8 +35,12 @@ update, postupdate:
 Run AFTER the package is updated with the update command\.
 .
 .IP "\(bu" 4
-(pre,post,)updatedependency\-foo:
-Run (before,after) the "foo" dependency is modified\.
+prepublish:
+Run BEFORE the package is published\.
+.
+.IP "\(bu" 4
+publish, postpublish:
+Run AFTER the package is published\.
 .
 .IP "\(bu" 4
 pretest, test, posttest:

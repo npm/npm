@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-JSON" "1" "March 2011" "" ""
+.TH "NPM\-JSON" "1" "April 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-json\fR \-\- Specifics of npm\'s package\.json handling
@@ -554,14 +554,25 @@ If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list\. If "engines" is omitted, then npm will just assume
 that it works on node\.
 .
-.SH "tag"
-By default, when a package is published, it gets tagged with the value
-of the \fBtag\fR config, or \fB"latest"\fR if nothing is specified\.  By setting
-a "tag" member in the package\.json, the package will get tagged
-differently\.  This enabled limited releases with a "beta" or "rc" tag,
-so that users can do \fBnpm install foo@beta\fR to get the package version
-tagged "beta"\.
+.SH "preferGlobal"
+If your package is primarily a command\-line application that should be
+installed globally, then set this value to \fBtrue\fR to provide a warning
+if it is installed locally\.
 .
 .P
-To update it to latest, either remove the "tag" member and re\-publish,
-or do \fBnpm tag foo@1\.2\.3 latest\fR\|\.
+It doesn\'t actually prevent users from installing it locally, but it
+does help prevent some confusion if it doesn\'t work as expected\.
+.
+.SH "publishConfig"
+This is a set of config values that will be used at publish\-time\.  It\'s
+especially handy if you want to set the tag or registry, so that you can
+ensure that a given package is not tagged with "latest" or published to
+the global public registry by default\.
+.
+.P
+Any config values can be overridden, but of course only "tag" and
+"registry" probably matter for the purposes of publishing\.
+.
+.P
+See \fBnpm help config\fR to see the list of config options that can be
+overridden\.
