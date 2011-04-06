@@ -252,7 +252,7 @@ The gzip binary
 ### init.version 
 
 * Default: "0.0.0"
-* Type: String
+* Type: semver
 
 The value `npm init` should use by default for the package version.
 
@@ -265,14 +265,14 @@ The value `npm init` should use by default for the package author's name.
 
 ### init.author.email
 
-* Default: "0.0.0"
+* Default: ""
 * Type: String
 
 The value `npm init` should use by default for the package author's email.
 
 ### init.author.url
 
-* Default: "0.0.0"
+* Default: ""
 * Type: String
 
 The value `npm init` should use by default for the package author's homepage.
@@ -303,7 +303,7 @@ Whether or not to show extended information in `npm ls`
 ### node-version
 
 * Default: process.version
-* Type: semver
+* Type: semver or false
 
 The node version to use when checking package's "engines" hash.
 
