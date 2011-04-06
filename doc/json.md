@@ -392,3 +392,16 @@ if it is installed locally.
 
 It doesn't actually prevent users from installing it locally, but it
 does help prevent some confusion if it doesn't work as expected.
+
+## publishConfig
+
+This is a set of config values that will be used at publish-time.  It's
+especially handy if you want to set the tag or registry, so that you can
+ensure that a given package is not tagged with "latest" or published to
+the global public registry by default.
+
+Any config values can be overridden, but of course only "tag" and
+"registry" probably matter for the purposes of publishing.
+
+See `npm help config` to see the list of config options that can be
+overridden.
