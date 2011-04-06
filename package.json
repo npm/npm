@@ -1,7 +1,7 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
 , "keywords" : [ "package manager", "modules", "install", "package.json" ]
-, "version" : "1.0.1rc5"
+, "version" : "1.0.1rc6"
 , "preferGlobal" : true
 , "publishConfig" : { "tag" : "rc" }
 , "homepage" : "http://npmjs.org/"
@@ -55,7 +55,9 @@
 , "bundleDependencies" : [ "semver", "abbrev", "nopt" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
-, "scripts" : { "test" : "make test" }
+, "scripts" : { "test" : "make test"
+              , "prepublish" : "make doc"
+              }
 , "licenses" :
   [ { "type" : "MIT"
     , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
