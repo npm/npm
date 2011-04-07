@@ -35,6 +35,7 @@
   , "George Miroshnykov <gmiroshnykov@lohika.com>"
   , "Geoff Flarity (http://ca.linkedin.com/pub/geoff-flarity/a/536/43a)"
   , "Pete Kruckenberg <pete@kruckenberg.com>"
+  , "Chris Wong <chris@chriswongstudio.com>"
   ]
 , "repository" :
   { "type" : "git"
