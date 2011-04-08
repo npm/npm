@@ -1,7 +1,7 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
 , "keywords" : [ "package manager", "modules", "install", "package.json" ]
-, "version" : "1.0.1rc6"
+, "version" : "1.0.1rc7"
 , "preferGlobal" : true
 , "publishConfig" : { "tag" : "rc" }
 , "homepage" : "http://npmjs.org/"
