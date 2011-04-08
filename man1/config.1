@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CONFIG" "1" "March 2011" "" ""
+.TH "NPM\-CONFIG" "1" "April 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-config\fR \-\- Manage the npm configuration file
@@ -235,6 +235,20 @@ npm config set foo:port 80
 .
 .SH "Config Settings"
 .
+.SS "always\-auth"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Force npm to always require authentication when accessing the registry,
+even for \fBGET\fR requests\.
+.
 .SS "bindist"
 .
 .IP "\(bu" 4
@@ -446,6 +460,58 @@ Type: path
 .P
 The gzip binary
 .
+.SS "init\.version"
+.
+.IP "\(bu" 4
+Default: "0\.0\.0"
+.
+.IP "\(bu" 4
+Type: semver
+.
+.IP "" 0
+.
+.P
+The value \fBnpm init\fR should use by default for the package version\.
+.
+.SS "init\.author\.name"
+.
+.IP "\(bu" 4
+Default: "0\.0\.0"
+.
+.IP "\(bu" 4
+Type: String
+.
+.IP "" 0
+.
+.P
+The value \fBnpm init\fR should use by default for the package author\'s name\.
+.
+.SS "init\.author\.email"
+.
+.IP "\(bu" 4
+Default: ""
+.
+.IP "\(bu" 4
+Type: String
+.
+.IP "" 0
+.
+.P
+The value \fBnpm init\fR should use by default for the package author\'s email\.
+.
+.SS "init\.author\.url"
+.
+.IP "\(bu" 4
+Default: ""
+.
+.IP "\(bu" 4
+Type: String
+.
+.IP "" 0
+.
+.P
+The value \fBnpm init\fR should use by default for the package author\'s homepage\.
+.
 .SS "logfd"
 .
 .IP "\(bu" 4
@@ -494,7 +560,7 @@ Whether or not to show extended information in \fBnpm ls\fR
 Default: process\.version
 .
 .IP "\(bu" 4
-Type: semver
+Type: semver or false
 .
 .IP "" 0
 .

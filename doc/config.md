@@ -130,6 +130,14 @@ then the user could change the behavior by doing:
 
 ## Config Settings
 
+### always-auth
+
+* Default: false
+* Type: Boolean
+
+Force npm to always require authentication when accessing the registry,
+even for `GET` requests.
+
 ### bindist
 
 * Default: Unstable node versions, `null`, otherwise
