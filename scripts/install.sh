@@ -8,9 +8,15 @@ fi
 node=`which node 2>&1`
 ret=$?
 if [ $ret -ne 0 ] || ! [ -x $node ]; then
-  echo "npm cannot be installed without nodejs." >&2
-  echo "Install node first, and then try again." >&2
-  exit $ret
+
+	if [ -x /usr/local/bin/node ]; then
+		echo 'WARNING: Your distribution has node installed, outside of $PATH.' >&2
+		node="/usr/local/bin/node"
+	else
+		echo "npm cannot be installed without nodejs." >&2
+		echo "Install node first, and then try again." >&2
+		exit $ret
+	fi
 fi
 
 TMP="${TMPDIR}"
