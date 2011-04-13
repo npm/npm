@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-LINK" "1" "March 2011" "" ""
+.TH "NPM\-LINK" "1" "April 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-link\fR \-\- Symlink a package folder
@@ -52,3 +52,34 @@ npm link redis              # link\-install the package
 .P
 Now, any changes to ~/projects/node\-redis will be reflected in
 ~/projects/node\-bloggy/node_modules/redis/
+.
+.P
+You may also shortcut the two steps in one\.  For example, to do the
+above use\-case in a shorter way:
+.
+.IP "" 4
+.
+.nf
+cd ~/projects/node\-bloggy  # go into the dir of your main project
+npm link \.\./node\-redis     # link the dir of your dependency
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The second line is the equivalent of doing:
+.
+.IP "" 4
+.
+.nf
+(cd \.\./node\-redis; npm link)
+npm link redis
+.
+.fi
+.
+.IP "" 0
+.
+.P
+That is, it first creates a global link, and then links the global
+installation target into your project\'s \fBnode_modules\fR folder\.
