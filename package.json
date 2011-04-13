@@ -56,7 +56,7 @@
 , "bundleDependencies" : [ "semver", "abbrev", "nopt" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
-, "scripts" : { "test" : "make test"
+, "scripts" : { "test" : "./test/run.sh"
               , "prepublish" : "make doc"
               }
 , "licenses" :

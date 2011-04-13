@@ -50,7 +50,7 @@ man1/%/: doc/%/
 	@if ! test -d $@ ; then mkdir -p $@ ; fi
 
 test: submodules
-	./test/run.sh
+	node cli.js test
 
 version: link
 	git add package.json \
