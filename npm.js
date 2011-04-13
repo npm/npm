@@ -111,6 +111,7 @@ var commandCache = {}
               , "root"
               , "prefix"
               , "bin"
+              , "whoami"
 
               , "test"
               , "stop"
