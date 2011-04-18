@@ -18,7 +18,7 @@ current working directory if not in a package already.
 
 ### Node Modules
 
-Packages are droped into the `node_modules` folder under the `prefix`.
+Packages are dropped into the `node_modules` folder under the `prefix`.
 When installing locally, this means that you can
 `require("packagename")` to load its main module, or
 `require("packagename/path/to/sub/module")` to load other modules.
