@@ -190,14 +190,14 @@ The depth to go when recursing directories for `npm ls` and
 * Default: true
 * Type: Boolean
 
-Whether or not to show the description in `npm search`
+Show the description in `npm search`
 
 ### dev
 
 * Default: false
 * Type: Boolean
 
-Whether or not to install `dev-dependencies` along with packages.
+Install `dev-dependencies` along with packages.
 
 Note that `dev-dependencies` are also installed if the `npat` flag is
 set.
@@ -306,7 +306,7 @@ What level of logs to report.  On failure, *all* logs are written to
 * Default: false
 * Type: Boolean
 
-Whether or not to show extended information in `npm ls`
+Show extended information in `npm ls`
 
 ### node-version
 
@@ -320,7 +320,7 @@ The node version to use when checking package's "engines" hash.
 * Default: false
 * Type: Boolean
 
-Whether or not to run tests on installation and report results to the
+Run tests on installation and report results to the
 `npaturl`.
 
 ### npaturl
@@ -350,7 +350,7 @@ Where to write "normal" output.  This has no effect on log output.
 * Default: false
 * Type: Boolean
 
-Whether or not to output parseable results from commands that write to
+Output parseable results from commands that write to
 standard output.
 
 ### prefix
@@ -373,8 +373,7 @@ A proxy to use for outgoing http requests.
 * Default: true
 * Type: Boolean
 
-Set to some truish value to rebuild bundled dependencies after
-installation.
+Rebuild bundled dependencies after installation.
 
 ### registry
 
@@ -382,6 +381,13 @@ installation.
 * Type: url
 
 The base URL of the npm package registry.
+
+### rollback
+
+* Default: true
+* Type: Boolean
+
+Remove failed installs.
 
 ### searchopts
 
