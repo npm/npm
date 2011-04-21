@@ -32,12 +32,12 @@ clean: uninstall
 
 uninstall: submodules
 	node cli.js cache clean
-	node cli.js rm npm -g -f
+	node cli.js rm npm -g -f --loglevel error
 
 man: man1
 
 man1: $(doc_subfolders)
-	@if ! test -d man1 ; then mkdir -p man1 ; fi
+	[ -d man1 ] || mkdir -p man1
 
 doc: man1 $(docs)
 
@@ -47,18 +47,18 @@ man1/%.1: doc/%.md
 	./node_modules/.bin/ronn --roff $< > $@
 
 man1/%/: doc/%/
-	@if ! test -d $@ ; then mkdir -p $@ ; fi
+	@[ -d $@ ] || mkdir -p $@
 
 test: submodules
 	node cli.js test
 
 version: link
-	git add package.json \
-		&& git ci -m v$(shell npm -v)
+	git add package.json &&\
+	git ci -m v$(shell npm -v)
 
 publish: link
-	git tag -s -m v$(shell npm -v) v$(shell npm -v) \
-		&& git push origin master \
-		&& npm publish
+	git tag -s -m v$(shell npm -v) v$(shell npm -v) &&\
+	git push origin master &&\
+	npm publish
 
 .PHONY: latest install dev link doc clean uninstall test man
