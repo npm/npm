@@ -336,7 +336,7 @@ Type: Boolean
 .IP "" 0
 .
 .P
-Whether or not to show the description in \fBnpm search\fR
+Show the description in \fBnpm search\fR
 .
 .SS "dev"
 .
@@ -349,7 +349,7 @@ Type: Boolean
 .IP "" 0
 .
 .P
-Whether or not to install \fBdev\-dependencies\fR along with packages\.
+Install \fBdev\-dependencies\fR along with packages\.
 .
 .P
 Note that \fBdev\-dependencies\fR are also installed if the \fBnpat\fR flag is
@@ -406,7 +406,7 @@ Type: Boolean
 .IP "" 0
 .
 .P
-Operates in "global" mode, so that packages are installed into the \fBprefix\fR folder instead of the current working directory\.  See \fBnpm help global\fR for more on the differences in behavior\.
+Operates in "global" mode, so that packages are installed into the \fBprefix\fR folder instead of the current working directory\.  See \fBnpm help folders\fR for more on the differences in behavior\.
 .
 .IP "\(bu" 4
 packages are installed into the \fBprefix/node_modules\fR folder, instead of the
@@ -552,7 +552,7 @@ Type: Boolean
 .IP "" 0
 .
 .P
-Whether or not to show extended information in \fBnpm ls\fR
+Show extended information in \fBnpm ls\fR
 .
 .SS "node\-version"
 .
@@ -578,7 +578,7 @@ Type: Boolean
 .IP "" 0
 .
 .P
-Whether or not to run tests on installation and report results to the \fBnpaturl\fR\|\.
+Run tests on installation and report results to the \fBnpaturl\fR\|\.
 .
 .SS "npaturl"
 .
@@ -631,7 +631,7 @@ Type: Boolean
 .IP "" 0
 .
 .P
-Whether or not to output parseable results from commands that write to
+Output parseable results from commands that write to
 standard output\.
 .
 .SS "prefix"
@@ -672,8 +672,7 @@ Type: Boolean
 .IP "" 0
 .
 .P
-Set to some truish value to rebuild bundled dependencies after
-installation\.
+Rebuild bundled dependencies after installation\.
 .
 .SS "registry"
 .
@@ -687,6 +686,19 @@ Type: url
 .
 .P
 The base URL of the npm package registry\.
+.
+.SS "rollback"
+.
+.IP "\(bu" 4
+Default: true
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Remove failed installs\.
 .
 .SS "searchopts"
 .
