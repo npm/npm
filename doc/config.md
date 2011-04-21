@@ -228,7 +228,7 @@ Makes various commands more forceful.
 
 Operates in "global" mode, so that packages are installed into the
 `prefix` folder instead of the current working directory.  See
-`npm help global` for more on the differences in behavior.
+`npm help folders` for more on the differences in behavior.
 
 * packages are installed into the `prefix/node_modules` folder, instead of the
   current working directory.
