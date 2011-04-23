@@ -1,0 +1,63 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM\-REMOVAL" "1" "April 2011" "" ""
+.
+.SH "NAME"
+\fBnpm-removal\fR \-\- Cleaning the SlateSo sad to see you go\.
+.
+.IP "" 4
+.
+.nf
+sudo npm uninstall npm \-g
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Or, if that fails,
+.
+.IP "" 4
+.
+.nf
+sudo make uninstall
+.
+.fi
+.
+.IP "" 0
+.
+.SH "More Severe Uninstalling"
+Usually, the above instructions are sufficient\.  That will remove
+npm, but leave behind anything you\'ve installed\.
+.
+.P
+If that doesn\'t work, or if you require more drastic measures,
+continue reading\.
+.
+.P
+This assumes that you installed node and npm in the default place\.  If
+you configured node with a different \fB\-\-prefix\fR, or installed npm with a
+different prefix setting, then adjust the paths accordingly, replacing \fB/usr/local\fR with your install prefix\.
+.
+.P
+   rm \-rf /usr/local/{lib/node,lib/node/\.npm,bin,share/man}/npm*
+.
+.P
+If you installed things \fIwith\fR npm, then your best bet is to uninstall
+them with npm first, and then install them again once you have a
+proper install\.  This can help find any symlinks that are lying
+around:
+.
+.P
+   ls \-laF /usr/local/{lib/node,lib/node/\.npm,bin,share/man} | grep npm
+.
+.P
+Prior to version 0\.3, npm used shim files for executables and node
+modules\.  To track those down, you can do the following:
+.
+.P
+   find /usr/local/{lib/node,bin} \-exec grep \-l npm {} \\; ;
+.
+.P
+(This is also in the README file\.)
