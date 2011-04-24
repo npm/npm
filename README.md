@@ -12,11 +12,14 @@ need to check those branches out explicitly.
 
 The "latest" on the registry is 0.3, because 1.0 is not yet stable.
 
+It will be the default install target at the end of April, 2011.
+
 ## IMPORTANT
 
 **You need node v0.4 or higher to run this program.**
 
-To install on older versions of node, do the following:
+To install an old **and unsupported** version of npm that works on node 0.3
+and prior:
 
     git clone git://github.com/isaacs/npm.git ./npm
     cd npm
@@ -43,20 +46,21 @@ terminal, then you've already got the code.  Just do:
 and npm will install itself.
 
 If you don't have make, and don't have curl or git, and ALL you have is
-this code and node, you can do:
+this code and node, you can probably do this:
 
     sudo node ./cli.js install -g
+
+However, note that github tarballs **do not contain submodules**, so
+those won't work.  You'll have to also fetch the appropriate submodules
+listed in the .gitmodules file.
 
 ## Permissions
 
 **tl;dr**
 
-* Use `sudo` for greater safety.
-* To enforce this added safety, do `npm config set unsafe-perm false`,
-  or add `--no-unsafe` to the command line.
+* Use `sudo` for greater safety.  Or don't.
 * npm will downgrade permissions if it's root before running any build
   scripts that package authors specified.
-* If you were fine before, you can safely ignore this change.
 
 ### More details...
 
@@ -87,13 +91,6 @@ following actions:
 
 If you run npm without root privileges, and it doesn't have to do either
 of these things, then no error will occur.
-
-npm will automatically attempt to escalate permissions (generally by
-prompting for your password) if it attempts to *remove* a file and fails
-with an EPERM or EACCES error.  No other permission escalation is
-attempted.
-
-This is a departure from npm's history, and comes at long last.
 
 ## More Fancy Installing
 
@@ -188,3 +185,42 @@ You can use the `npm help` command to read any of them.
 If you're a developer, and you want to use npm to publish your program,
 you should
 [read this](http://github.com/isaacs/npm/blob/master/doc/developers.md#readme)
+
+## Legal Stuff
+
+"npm" and "the npm registry" are owned by Isaac Z. Schlueter.  All
+rights not explicitly granted in the MIT license are reserved. See the
+included LICENSE file for more details.
+
+"Node.js" and "node" are trademarks owned by Joyent, Inc.  npm is not
+officially part of the Node.js project, and is neither owned by nor
+officially affiliated with Joyent, Inc.
+
+The packages in the npm registry are not part of npm itself, and are the
+sole property of their respective maintainers.  While every effort is
+made to ensure accountability, there is absolutely no guarantee,
+warrantee, or assertion made as to the quality, fitness for a specific
+purpose, or lack of malice in any given npm package.  Modules
+published on the npm registry are not affiliated with or endorsed by
+Joyent, Inc., Isaac Z. Schlueter, Ryan Dahl, or the Node.js project.
+
+If you have a complaint about a package in the npm registry, and cannot
+resolve it with the package owner, please express your concerns to
+Isaac Z. Schlueter at <i@izs.me>.
+
+### In plain english
+
+This is mine; not my employer's, not Node's, not Joyent's, not Ryan
+Dahl's.
+
+If you publish something, it's yours, and you are solely accountable
+for it.  Not me, not Node, not Joyent, not Ryan Dahl.
+
+If other people publish something, it's theirs.  Not mine, not Node's,
+not Joyent's, not Ryan Dahl's.
+
+Yes, you can publish something evil.  It will be removed promptly if
+reported, and we'll lose respect for you.  But there is no vetting
+process for published modules.
+
+If this concerns you, inspect the source before using packages.
