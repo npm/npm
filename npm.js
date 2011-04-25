@@ -227,11 +227,15 @@ Object.defineProperty(npm, "dir",
   , enumerable : true
   })
 
+Object.defineProperty(npm, "root",
+  { get : function () { return npm.dir } })
+
 Object.defineProperty(npm, "cache",
   { get : function () { return npm.config.get("cache") }
   , set : function (r) { return npm.config.set("cache", r) }
   , enumerable : true
   })
+
 var tmpFolder
 Object.defineProperty(npm, "tmp",
   { get : function () {
