@@ -30,6 +30,3 @@ officially affiliated with Joyent, Inc.
 Packages published in the npm registry are not part of npm
 itself, and are the sole property of their respective
 maintainers.
-
-This software contains the node-uuid library. Copyright 2010
-Robert Kieffer. Used under the MIT license.
