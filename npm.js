@@ -155,6 +155,8 @@ var loaded = false
 
 npm.load = function (conf, cb_) {
   if (!cb_ && typeof conf === "function") cb_ = conf , conf = {}
+  if (!cb_) cb_ = function () {}
+  if (!conf) conf = {}
   loadListeners.push(cb_)
   if (loaded) return cb()
   if (loading) return
@@ -179,6 +181,7 @@ npm.load = function (conf, cb_) {
       onload = false
     }
   }
+
   log.waitForConfig()
   which(process.argv[0], function (er, node) {
     if (!er && node !== process.execPath) {
