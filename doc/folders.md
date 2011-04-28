@@ -38,7 +38,7 @@ When in local mode, executables are linked into
 
 When in global mode, man pages are linked into `prefix/share/man`.
 
-When in local node, man pages are not installed.
+When in local mode, man pages are not installed.
 
 ### Cache
 
