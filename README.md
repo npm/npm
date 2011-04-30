@@ -22,6 +22,14 @@ To install npm with one command, do this:
 
     curl http://npmjs.org/install.sh | sh
 
+To skip the npm 0.x cleanup, do this:
+
+    curl http://npmjs.org/install.sh | clean=no sh
+
+To say "yes" to the 0.x cleanup, but skip the prompt:
+
+    curl http://npmjs.org/install.sh | clean=yes sh
+
 If that fails, try this:
 
     git clone http://github.com/isaacs/npm.git
