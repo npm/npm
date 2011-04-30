@@ -28,16 +28,27 @@ tl;dr:
   something with the `-g` flag, then its executables go in `npm bin -g`
   and its modules go in `npm root -g`.
 
+## How do I install something everywhere?
+
+Install it globally by tacking `-g` or `--global` to the command.
+
 ## I installed something globally, but I can't `require()` it
 
 Install it locally.
 
 ## I don't wanna.
 
-Ok, then do this:
+Check out `npm link`.  You might like it.
+
+## No, I really want 0.x style "everything's global" style.
+
+Ok, fine.  Do this:
 
     echo 'export NODE_PATH="'$(npm root -g)'"' >> ~/.bashrc
     . ~/.bashrc
+    npm config set global true
+
+This is not recommended.
 
 ## How do I list installed packages?
 
@@ -51,17 +62,19 @@ Arguments are greps.  `npm ls jsdom` shows jsdom packages.
 
 ## How do I update npm?
 
-**NOTE**: This is the release candidate documentation.  To update to the
-newer 1.0 release candidate, do this:
-
-    npm install npm@rc -g
-
-Once 1.0 is stable, do this:
-
     npm update npm -g
 
 You can also update all outdated local packages by doing `npm update` without
 any arguments, or global packages by doing `npm update -g`.
+
+Occasionally, the version of npm will progress such that the current
+version cannot be properly installed with the version that you have
+installed already.  (Consider, if there is ever a bug in the `update`
+command.)
+
+In those cases, you can do this:
+
+    curl http://npmjs.org/install.sh | sh
 
 ## What is a `package`?
 
@@ -94,6 +107,8 @@ See `npm help developers` and `npm help json`.
 You'll most likely want to `npm link` your development folder.  That's
 awesomely handy.
 
+To set up your own private registry, check out `npm help registry`.
+
 ## Can I list a url as a dependency?
 
 Yes.  It should be a url to a gzipped tarball containing a single folder
@@ -103,40 +118,29 @@ that has a package.json in its root.  (See "what is a package?" above.)
 
 No.
 
-Source repositories change quickly.  That is their purpose.  Whatever
-you bundle into your package is your business, but having the registry
-refer to a git URL as a "dependency" defeats the whole purpose.
+However, you can list a url as a dependency.
 
-It's possible that something a bit more snazzy will be developed at some
-point in the future, but not likely.  The current system allows for a
-lot of use cases, and is very easy to maintain.
-
-If you really really want to have the latest checkout in your program,
-you can clone the git repo, and then `npm link` it, and then `npm link
-<name>` in any packages that use it to install the link locally to that
-package.
-
-## How do I symlink to a dev folder so that I don't have to keep re-installing?
+## How do I symlink to a dev folder so I don't have to keep re-installing?
 
 See `npm help link`
 
 ## The package registry website.  What is that exactly?
 
-See `npm help registry` for more info, or just visit
-<http://github.com/isaacs/npmjs.org>.
+See `npm help registry`.
 
 ## What's up with the insecure channel warnings?
 
 As of this writing, node has problems uploading files over HTTPS.  That
-means that publishes go over HTTP.
+means that publishes go over HTTP by default.
 
-Until the problem is solved, npm will complain about being insecure.
-The warnings will disappear when node supports uploading tarballs over
-https reliably.
+Allegedly this problem is solved in node 0.4.7.  You can suppress those
+warnings by doing this:
+
+    npm config set registry https://registry.npmjs.org
 
 ## I forgot my password, and can't publish.  How do I reset it?
 
-Go to <http://admin.npmjs.org/> to reset it.
+Go to <http://admin.npmjs.org/>.
 
 ## I get ECONNREFUSED a lot.  What's up?
 
