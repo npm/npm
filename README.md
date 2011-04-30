@@ -4,16 +4,6 @@ This is just enough info to get you up and running.
 
 Much more info available via `npm help` once it's installed.
 
-## RELEASE CANDIDATE
-
-The master branch contains the latest release candidate, which as of
-this time is 1.0.something.  If you want version 0.2 or 0.3, then you'll
-need to check those branches out explicitly.
-
-The "latest" on the registry is 0.3, because 1.0 is not yet stable.
-
-It will be the default install target at the end of April, 2011.
-
 ## IMPORTANT
 
 **You need node v0.4 or higher to run this program.**
@@ -30,7 +20,7 @@ and prior:
 
 To install npm with one command, do this:
 
-    curl http://npmjs.org/install.sh | npm_install=rc sh
+    curl http://npmjs.org/install.sh | sh
 
 If that fails, try this:
 
@@ -58,62 +48,26 @@ listed in the .gitmodules file.
 
 **tl;dr**
 
-* Use `sudo` for greater safety.  Or don't.
+* Use `sudo` for greater safety.  Or don't, if you prefer not to.
 * npm will downgrade permissions if it's root before running any build
   scripts that package authors specified.
 
 ### More details...
 
-As of version 0.3, it is recommended to run some npm commands as root.
+As of version 0.3, it is recommended to run npm as root.
 This allows npm to change the user identifier to the `nobody` user prior
 to running any package build or test commands.
 
-If this user id switch fails (generally because you are not the root
-user) then the command will fail.
+If you are not the root user, or if you are on a platform that does not
+support uid switching, then npm will not attempt to change the userid.
 
-If you would prefer to run npm as your own user, giving package scripts
-the same rights that your user account enjoys, then you may do so by
-setting the `unsafe-perm` config value to `true`:
+If you would like to ensure that npm **always** runs scripts as the
+"nobody" user, and have it fail if it cannot downgrade permissions, then
+set the following configuration param:
 
-    npm config set unsafe-perm true
+    npm config set unsafe-perm false
 
-or simply by setting the `--unsafe` flag to any individual command:
-
-    npm test express --unsafe
-
-
-Note that root/sudo access is only required when npm is doing the
-following actions:
-
-1. Writing files and folders to the root.
-2. Running package lifecycle scripts (generally to either build or
-   test).
-
-If you run npm without root privileges, and it doesn't have to do either
-of these things, then no error will occur.
-
-## More Fancy Installing
-
-First, get the code.  Maybe use git for this.  That'd be cool.  Very fancy.
-
-The default make target is `install`, which downloads the current stable
-version of npm, and installs that for you.
-
-If you want to install the exact code that you're looking at, the bleeding-edge
-master branch, do this:
-
-    sudo make dev
-
-If you'd prefer to just symlink in the current code so you can hack
-on it, you can do this:
-
-    sudo make link
-
-If you check out the Makefile, you'll see that these are just running npm commands
-at the cli.js script directly.  You can also use npm without ever installing
-it by using `node cli.js` instead of "npm".  Set up an alias if you want, that's
-fine.  (You'll still need read permission to the root/binroot/manroot folders,
-but at this point, you probably grok all that anyway.)
+to prevent it from ever running in unsafe mode, even as non-root users.
 
 ## Uninstalling
 
@@ -130,32 +84,19 @@ Or, if that fails,
 Usually, the above instructions are sufficient.  That will remove
 npm, but leave behind anything you've installed.
 
-If that doesn't work, or if you require more drastic measures,
-continue reading.
+If you would like to remove all the packages that you have installed,
+then you can use the `npm ls` command to find them, and then `npm rm` to
+remove them.
 
-This assumes that you installed node and npm in the default place.  If
-you configured node with a different `--prefix`, or installed npm with a
-different prefix setting, then adjust the paths accordingly, replacing
-`/usr/local` with your install prefix.
+To remove cruft left behind by npm 0.x, you can use the included
+`clean-old.sh` script file.  You can run it conveniently like this:
 
-   rm -rf /usr/local/{lib/node,lib/node/.npm,bin,share/man}/npm*
-
-If you installed things *with* npm, then your best bet is to uninstall
-them with npm first, and then install them again once you have a
-proper install.  This can help find any symlinks that are lying
-around:
-
-   ls -laF /usr/local/{lib/node,lib/node/.npm,bin,share/man} | grep npm
-
-Prior to version 0.3, npm used shim files for executables and node
-modules.  To track those down, you can do the following:
-
-   find /usr/local/{lib/node,bin} -exec grep -l npm \{\} \; ;
+    npm explore npm -g -- sh scripts/clean-old.sh
 
 ## Using npm Programmatically
 
-If you would like to use npm programmatically, you can do that as of
-version 0.2.6.  It's not very well documented, but it IS rather simple.
+If you would like to use npm programmatically, you can do that.
+It's not very well documented, but it IS rather simple.
 
     var npm = require("npm")
     npm.load(myConfigObject, function (er) {
@@ -167,12 +108,9 @@ version 0.2.6.  It's not very well documented, but it IS rather simple.
       npm.on("log", function (message) { .... })
     })
 
-See `./cli.js` for an example of pulling config values off of the
-command line arguments.  You may also want to check out `npm help
-config` to learn about all the options you can set there.
-
-As more features are added for programmatic access to the npm library,
-this section will likely be split out into its own documentation page.
+See `./bin/npm.js` for an example of pulling config values off of the
+command line arguments using nopt.  You may also want to check out `npm
+help config` to learn about all the options you can set there.
 
 ## More Docs
 
