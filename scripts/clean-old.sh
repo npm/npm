@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # look for old 0.x cruft, and get rid of it.
-# we're already in the npm folder
+# Should already be sitting in the npm folder.
 
 node="$NODE"
 if [ "x$node" = "x" ]; then
@@ -46,8 +46,8 @@ if ! [ "x$packages" = "x" ]; then
   for pkg in $packages; do
     echo "    $pkg"
   done
-  echo "Make a note of these. You may install them with"
-  echo "npm 1.0 when this process is completed."
+  echo "Make a note of these. You may want to install them"
+  echo "with npm 1.0 when this process is completed."
   echo ""
 fi
 
@@ -120,5 +120,8 @@ for prefix in $PREFIXES; do
     fi
   done
 done
+
+echo ""
+echo 'All clean!'
 
 exit 0
