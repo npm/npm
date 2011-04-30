@@ -1,9 +1,8 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
 , "keywords" : [ "package manager", "modules", "install", "package.json" ]
-, "version" : "1.0.1rcFINAL"
+, "version" : "1.0.1"
 , "preferGlobal" : true
-, "publishConfig" : { "tag" : "rc" }
 , "config" : { "publishtest" : false }
 , "homepage" : "http://npmjs.org/"
 , "author" : "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)"
