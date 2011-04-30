@@ -120,7 +120,9 @@ cd "$TMP" \
 
       ret=0
       if [ $isnpm10 -eq 1 ] && [ -f "scripts/clean-old.sh" ]; then
-        if ! [ "x$skipclean" = "x" ]; then
+        if ! [ "x$skipclean" = "x" ] \
+            || [ "x$clean" = "xno" ] \
+            || [ "x$clean" = "xn" ]; then
           echo "Skipping 0.x cruft clean" >&2
           ret=0
         elif [ "x$clean" = "xy" ] || [ "x$clean" = "xyes" ]; then
