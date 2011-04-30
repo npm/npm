@@ -1,5 +1,14 @@
 #!/bin/sh
 
+if [ "x$0" = "xsh" ]; then
+  # run as curl | sh
+  cat > npm-install-$$.sh
+  sh npm-install-$$.sh
+  ret=$?
+  rm npm-install-$$.sh
+  exit $ret
+fi
+
 if ! [ "x$NPM_DEBUG" = "x" ]; then
   set +x
 fi
@@ -111,8 +120,16 @@ cd "$TMP" \
 
       ret=0
       if [ $isnpm10 -eq 1 ] && [ -f "scripts/clean-old.sh" ]; then
-        NODE=$node /bin/sh "scripts/clean-old.sh"
-        ret=$?
+        if ! [ "x$skipclean" = "x" ]; then
+          echo "Skipping 0.x cruft clean" >&2
+          ret=0
+        elif [ "x$clean" = "xy" ] || [ "x$clean" = "xyes" ]; then
+          NODE=$node /bin/sh "scripts/clean-old.sh" "-y"
+          ret=$?
+        else
+          NODE=$node /bin/sh "scripts/clean-old.sh" </dev/tty
+          ret=$?
+        fi
       fi
       if [ $ret -ne 0 ]; then
         echo "Aborted 0.x cleanup.  Exiting." >&2
