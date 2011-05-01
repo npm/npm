@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CHANGELOG" "1" "March 2011" "" ""
+.TH "NPM\-CHANGELOG" "1" "April 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-changelog\fR \-\- Changes
@@ -17,38 +17,11 @@ Lots of sketches and false starts\.  Abandoned a few times\.
 .br
 Core functionality established\.
 .
-.br
-alpha\.
-.
 .IP "\(bu" 4
 0\.1
 .
 .br
 push to beta, and announce
-.
-.br
-documentation, caching, more robust script support
-.
-.br
-ownership tracking in the registry (no more admin party!)
-.
-.br
-more robust config and option parsing
-.
-.br
-stabilize semver semantics
-.
-.br
-tests
-.
-.br
-update command
-.
-.br
-bundle command
-.
-.br
-Rollback for failed installations
 .
 .br
 Solaris and Cygwin support
@@ -58,51 +31,30 @@ Solaris and Cygwin support
 .
 .br
 First allegedly "stable" release\.
-Various fixes found during the Node Knockout extravaganza
 .
 .br
-Minor updates and bugfixes
+Most functionality implemented\.
 .
 .br
-more complete semver functionality
+Used shim files and \fBname@version\fR symlinks
 .
 .br
-Make npm OK to use programmatically (Charlie Robbins)
-recursive package removal
+Feature explosion
 .
 .br
-tab completion (Evan Meagher)
-.
-.br
-shasums on all tarballs
-.
-.br
-explore command: see \fBnpm help explore\fR
-.
-.br
-docs command: see \fBnpm help docs\fR
-.
-.br
-Frequently asked questions at \fBnpm faq\fR
-xmas easter egg
-.
-.br
-work with homebrew nodejs
-.
-.br
-Support for \fB"<name>":"<url>"\fR for dependencies\.
+Kind of a mess\.
 .
 .IP "\(bu" 4
 0\.3
 .
 .br
-More correct permission/uid handling\.  (Sudo now encouraged!)
+More correct permission/uid handling when running as root
 .
 .br
 Require node 0\.4\.0
 .
 .br
-Separate semver out into a separate utility\.
+Reduce featureset
 .
 .br
 Packages without "main" modules don\'t export modules\.
@@ -110,14 +62,11 @@ Packages without "main" modules don\'t export modules\.
 .br
 Remove support for invalid JSON (since node doesn\'t support it)
 .
-.br
-No shims! (Still has symlinks, though)
-.
 .IP "\(bu" 4
 1\.0
 .
 .br
-Simplify configuration greatly\.
+Simplify folder structure greatly\.
 .
 .br
 Install locally (bundle by default)

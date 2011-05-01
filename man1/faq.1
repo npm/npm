@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-FAQ" "1" "March 2011" "" ""
+.TH "NPM\-FAQ" "1" "April 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-faq\fR \-\- Frequently Asked Questions
@@ -36,21 +36,31 @@ and its modules go in \fBnpm root \-g\fR\|\.
 .
 .IP "" 0
 .
+.SH "How do I install something everywhere?"
+Install it globally by tacking \fB\-g\fR or \fB\-\-global\fR to the command\.
+.
 .SH "I installed something globally, but I can\'t `require()` it"
 Install it locally\.
 .
 .SH "I don\'t wanna\."
-Ok, then do this:
+Check out \fBnpm link\fR\|\.  You might like it\.
+.
+.SH "No, I really want 0\.x style "everything\'s global" style\."
+Ok, fine\.  Do this:
 .
 .IP "" 4
 .
 .nf
 echo \'export NODE_PATH="\'$(npm root \-g)\'"\' >> ~/\.bashrc
 \|\. ~/\.bashrc
+npm config set global true
 .
 .fi
 .
 .IP "" 0
+.
+.P
+This is not recommended\.
 .
 .SH "How do I list installed packages?"
 \fBnpm ls\fR
@@ -62,33 +72,33 @@ echo \'export NODE_PATH="\'$(npm root \-g)\'"\' >> ~/\.bashrc
 Arguments are greps\.  \fBnpm ls jsdom\fR shows jsdom packages\.
 .
 .SH "How do I update npm?"
-\fBNOTE\fR: This is the release candidate documentation\.  To update to the
-newer 1\.0 release candidate, do this:
-.
-.IP "" 4
-.
-.nf
-npm install npm@rc \-g
-.
-.fi
-.
-.IP "" 0
-.
-.P
-Once 1\.0 is stable, do this:
-.
-.IP "" 4
 .
 .nf
 npm update npm \-g
 .
 .fi
 .
-.IP "" 0
-.
 .P
 You can also update all outdated local packages by doing \fBnpm update\fR without
 any arguments, or global packages by doing \fBnpm update \-g\fR\|\.
+.
+.P
+Occasionally, the version of npm will progress such that the current
+version cannot be properly installed with the version that you have
+installed already\.  (Consider, if there is ever a bug in the \fBupdate\fR
+command\.)
+.
+.P
+In those cases, you can do this:
+.
+.IP "" 4
+.
+.nf
+curl http://npmjs\.org/install\.sh | sh
+.
+.fi
+.
+.IP "" 0
 .
 .SH "What is a `package`?"
 A package is:
@@ -140,6 +150,9 @@ See \fBnpm help developers\fR and \fBnpm help json\fR\|\.
 You\'ll most likely want to \fBnpm link\fR your development folder\.  That\'s
 awesomely handy\.
 .
+.P
+To set up your own private registry, check out \fBnpm help registry\fR\|\.
+.
 .SH "Can I list a url as a dependency?"
 Yes\.  It should be a url to a gzipped tarball containing a single folder
 that has a package\.json in its root\.  (See "what is a package?" above\.)
@@ -148,38 +161,33 @@ that has a package\.json in its root\.  (See "what is a package?" above\.)
 No\.
 .
 .P
-Source repositories change quickly\.  That is their purpose\.  Whatever
-you bundle into your package is your business, but having the registry
-refer to a git URL as a "dependency" defeats the whole purpose\.
+However, you can list a url as a dependency\.
 .
-.P
-It\'s possible that something a bit more snazzy will be developed at some
-point in the future, but not likely\.  The current system allows for a
-lot of use cases, and is very easy to maintain\.
-.
-.P
-If you really really want to have the latest checkout in your program,
-you can clone the git repo, and then \fBnpm link\fR it, and then \fBnpm link
-<name>\fR in any packages that use it to install the link locally to that
-package\.
-.
-.SH "How do I symlink to a dev folder so that I don\'t have to keep re\-installing?"
+.SH "How do I symlink to a dev folder so I don\'t have to keep re\-installing?"
 See \fBnpm help link\fR
 .
 .SH "The package registry website\.  What is that exactly?"
-See \fBnpm help registry\fR for more info, or just visit \fIhttp://github\.com/isaacs/npmjs\.org\fR\|\.
+See \fBnpm help registry\fR\|\.
 .
 .SH "What\'s up with the insecure channel warnings?"
 As of this writing, node has problems uploading files over HTTPS\.  That
-means that publishes go over HTTP\.
+means that publishes go over HTTP by default\.
 .
 .P
-Until the problem is solved, npm will complain about being insecure\.
-The warnings will disappear when node supports uploading tarballs over
-https reliably\.
+Allegedly this problem is solved in node 0\.4\.7\.  You can suppress those
+warnings by doing this:
+.
+.IP "" 4
+.
+.nf
+npm config set registry https://registry\.npmjs\.org
+.
+.fi
+.
+.IP "" 0
 .
 .SH "I forgot my password, and can\'t publish\.  How do I reset it?"
-Go to \fIhttp://admin\.npmjs\.org/\fR to reset it\.
+Go to \fIhttp://admin\.npmjs\.org/\fR\|\.
 .
 .SH "I get ECONNREFUSED a lot\.  What\'s up?"
 Either the registry is down, or node\'s DNS isn\'t able to reach out\.
