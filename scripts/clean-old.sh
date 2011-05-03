@@ -3,26 +3,29 @@
 # look for old 0.x cruft, and get rid of it.
 # Should already be sitting in the npm folder.
 
-node="$NODE"
-if [ "x$node" = "x" ]; then
-  node=`which node`
+if ! [ "x$npm_config_preix" = "x" ]; then
+  PREFIXES=$npm_config_prefix
+else
+  node="$NODE"
+  if [ "x$node" = "x" ]; then
+    node=`which node`
+  fi
+  if [ "x$node" = "x" ]; then
+    echo "Can't find node to determine prefix. Aborting."
+  fi
+
+
+  PREFIX=`dirname $node`
+  PREFIX=`dirname $PREFIX`
+  echo "prefix=$PREFIX"
+  PREFIXES=$PREFIX
+
+  altprefix=`$node -e process.installPrefix`
+  if ! [ "x$altprefix" = "x" ] && ! [ "x$altprefix" = "x$PREFIX" ]; then
+    echo "altprefix=$altprefix"
+    PREFIXES="$PREFIX $altprefix"
+  fi
 fi
-if [ "x$node" = "x" ]; then
-  echo "Can't find node to determine prefix. Aborting."
-fi
-
-
-PREFIX=`dirname $node`
-PREFIX=`dirname $PREFIX`
-echo "prefix=$PREFIX"
-PREFIXES=$PREFIX
-
-altprefix=`$node -e process.installPrefix`
-if ! [ "x$altprefix" = "x" ] && ! [ "x$altprefix" = "x$PREFIX" ]; then
-  echo "altprefix=$altprefix"
-  PREFIXES="$PREFIX $altprefix"
-fi
-
 
 # now prefix is where npm would be rooted by default
 # go hunting.
