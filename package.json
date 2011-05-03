@@ -25,7 +25,8 @@
   { "semver" : "1"
   , "abbrev" : "1"
   , "nopt" : "1"
-  , "node-uuid" : "1.1" }
+  , "node-uuid" : "1.1"
+  , "underscore" : "1" }
 , "bundleDependencies" : [ "semver", "abbrev", "nopt" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
