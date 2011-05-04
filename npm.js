@@ -98,6 +98,7 @@ var commandCache = {}
               , "deprecate"
 
               , "help"
+              , "help-search"
               , "ls"
               , "search"
               , "view"
