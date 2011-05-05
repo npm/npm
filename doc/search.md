@@ -1,5 +1,5 @@
-npm-ls(1) -- List installed packages
-======================================
+npm-search(1) -- Search for packages
+====================================
 
 ## SYNOPSIS
 
