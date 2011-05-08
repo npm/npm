@@ -35,3 +35,11 @@ Show extended information.
 * Type: Boolean
 
 Show parseable output instead of tree view.
+
+### global
+
+* Default: false
+* Type: Boolean
+
+List packages in the global install prefix instead of in the current
+project.

@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM" "1" "April 2011" "" ""
+.TH "NPM" "1" "May 2011" "" ""
 .
 .SH "NAME"
 \fBnpm\fR \-\- node package manager
@@ -35,6 +35,31 @@ Use \fBnpm install blerg\fR to install the latest version of "blerg"\.  Check ou
 .P
 Use the \fBnpm search\fR command to show everything that\'s available\.
 Use \fBnpm ls\fR to show everything you\'ve installed\.
+.
+.SH "DIRECTORIES"
+See \fBnpm help folders\fR to learn about where npm puts stuff\.
+.
+.P
+In particular, npm has two modes of operation:
+.
+.IP "\(bu" 4
+global mode:
+.
+.br
+npm installs packages into the install prefix at \fBprefix/lib/node_modules\fR and bins are installed in \fBprefix/bin\fR\|\.
+.
+.IP "\(bu" 4
+local mode:
+.
+.br
+npm installs packages into the current project directory, which
+defaults to the current working directory\.  Packages are installed to \fB\|\./node_modules\fR, and bins are installed to \fB\|\./node_modules/\.bin\fR\|\.
+.
+.IP "" 0
+.
+.P
+Local mode is the default\.  Use \fB\-\-global\fR or \fB\-g\fR on any command to
+operate in global mode instead\.
 .
 .SH "DEVELOPER USAGE"
 If you\'re using npm to develop and publish your code, check out the

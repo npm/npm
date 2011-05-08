@@ -19,7 +19,8 @@ This command installs a package, and any packages that it depends on.
 * npm install (in package directory):
   Install the dependencies in the local node_modules folder.
 
-  In global mode, it is the same as `npm install $PWD`
+  In global mode (ie, with `-g` or `--global` appended to the command),
+  it is the same as `npm install $PWD`
 
 * npm install `<tarball file>`:
   Install a package that is sitting on the filesystem.  Note: if you just want
@@ -88,6 +89,9 @@ The `--force` argument will force npm to fetch remote resources even if a
 local copy exists on disk.
 
     npm install sax --force
+
+The `--global` argument will cause npm to install the package globally
+rather than locally.  See `npm help global`.
 
 ## SEE ALSO
 
