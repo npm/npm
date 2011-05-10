@@ -3,7 +3,7 @@
 # look for old 0.x cruft, and get rid of it.
 # Should already be sitting in the npm folder.
 
-if ! [ "x$npm_config_preix" = "x" ]; then
+if ! [ "x$npm_config_prefix" = "x" ]; then
   PREFIXES=$npm_config_prefix
 else
   node="$NODE"
