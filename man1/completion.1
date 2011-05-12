@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-COMPLETION" "1" "March 2011" "" ""
+.TH "NPM\-COMPLETION" "1" "May 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-completion\fR \-\- Tab Completion for npm
@@ -9,17 +9,20 @@
 .SH "SYNOPSIS"
 .
 .nf
-npm completion >> ~/\.bashrc
-npm completion >> ~/\.zshrc
+\|\. <(npm completion)
 .
 .fi
 .
 .SH "DESCRIPTION"
-Sets up a function that enables tab\-completion in all npm commands\.
+Enables tab\-completion in all npm commands\.  The synopsis above
+loads the completions into your current shell\.  Adding it to
+your ~/\.bashrc or ~/\.zshrc will make the completions available
+everywhere\.
 .
 .P
-You may of course also pipe the relevant script to a file such as \fB/usr/local/etc/bash_completion\.d/npm\fR if you have a system that will
-read that file for you\.
+You may of course also pipe the output of npm completion to a file
+such as \fB/usr/local/etc/bash_completion\.d/npm\fR if you have a system
+that will read that file for you\.
 .
 .P
 When \fBCOMP_CWORD\fR, \fBCOMP_LINE\fR, and \fBCOMP_POINT\fR are defined in the

@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-JSON" "1" "April 2011" "" ""
+.TH "NPM\-JSON" "1" "May 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-json\fR \-\- Specifics of npm\'s package\.json handling
@@ -562,6 +562,17 @@ if it is installed locally\.
 .P
 It doesn\'t actually prevent users from installing it locally, but it
 does help prevent some confusion if it doesn\'t work as expected\.
+.
+.SH "private"
+If you set \fB"private": true\fR in your package\.json, then npm will refuse
+to publish it\.
+.
+.P
+This is a way to prevent accidental publication of private repositories\.
+If you would like to ensure that a given package is only ever published
+to a speciic registry (for example, an internal registry),
+then use the \fBpublishConfig\fR hash described below
+to override the \fBregistry\fR config param at publish\-time\.
 .
 .SH "publishConfig"
 This is a set of config values that will be used at publish\-time\.  It\'s
