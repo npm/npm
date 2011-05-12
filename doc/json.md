@@ -393,6 +393,17 @@ if it is installed locally.
 It doesn't actually prevent users from installing it locally, but it
 does help prevent some confusion if it doesn't work as expected.
 
+## private
+
+If you set `"private": true` in your package.json, then npm will refuse
+to publish it.
+
+This is a way to prevent accidental publication of private repositories.
+If you would like to ensure that a given package is only ever published
+to a speciic registry (for example, an internal registry),
+then use the `publishConfig` hash described below
+to override the `registry` config param at publish-time.
+
 ## publishConfig
 
 This is a set of config values that will be used at publish-time.  It's
