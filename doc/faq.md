@@ -58,7 +58,7 @@ This is not recommended.
 
 `npm search`
 
-Arguments are greps.  `npm ls jsdom` shows jsdom packages.
+Arguments are greps.  `npm search jsdom` shows jsdom packages.
 
 ## How do I update npm?
 
