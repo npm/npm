@@ -9,7 +9,7 @@ while [ $# -gt 0 ]; do
   conf="$1"
   case $conf in
     --help)
-      echo "./config --param=value ..."
+      echo "./configure --param=value ..."
       exit 0
       ;;
     --*)
