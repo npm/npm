@@ -120,6 +120,18 @@ See `./bin/npm.js` for an example of pulling config values off of the
 command line arguments using nopt.  You may also want to check out `npm
 help config` to learn about all the options you can set there.
 
+## How to create or edit package.json file?
+
+`cd` into your project folder and execute `npm init`
+It will ask you bunch of questions, and write that file for you!
+
+## How to install modules to your project?
+
+`cd` into your project folder and execute:
+`npm search PackageName` // first search takes little longer.
+`npm install PackageName`
+
+
 ## More Docs
 
 Check out the [docs](http://github.com/isaacs/npm/blob/master/doc/),
