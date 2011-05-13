@@ -123,14 +123,22 @@ help config` to learn about all the options you can set there.
 ## How to create or edit package.json file?
 
 `cd` into your project folder and execute `npm init`
+
 It will ask you bunch of questions, and write that file for you!
 
 ## How to install modules to your project?
 
 `cd` into your project folder and execute:
+
 `npm search PackageName` // first search takes little longer.
+
 `npm install PackageName`
 
+## How to add dependencies to your package.json file?
+
+you add them manually. see `npm json` for help about package.json.
+
+you may also: `cd` into your project folder and execute: `npm ls` to see what versions are installed.
 
 ## More Docs
 
