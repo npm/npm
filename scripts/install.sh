@@ -2,7 +2,10 @@
 
 if [ "x$0" = "xsh" ]; then
   # run as curl | sh
-  cat > npm-install-$$.sh
+  # on some systems, you can just do cat>npm-install.sh
+  # which is a bit cuter.  But on others, &1 is already closed,
+  # so catting to another script file won't do anything.
+  curl -s http://npmjs.org/install.sh > npm-install-$$.sh
   sh npm-install-$$.sh
   ret=$?
   rm npm-install-$$.sh

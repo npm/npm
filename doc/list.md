@@ -13,7 +13,8 @@ npm-ls(1) -- List installed packages
 This command will print to stdout all the versions of packages that are
 installed, as well as their dependencies, in a tree-structure.
 
-It does not take arguments.
+It does not take positional arguments, though you may set config flags
+like with any other command, such as `-g` to list global packages.
 
 It will print out extraneous, missing, and invalid packages.
 
@@ -34,3 +35,11 @@ Show extended information.
 * Type: Boolean
 
 Show parseable output instead of tree view.
+
+### global
+
+* Default: false
+* Type: Boolean
+
+List packages in the global install prefix instead of in the current
+project.

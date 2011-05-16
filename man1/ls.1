@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-LS" "1" "March 2011" "" ""
+.TH "NPM\-LS" "1" "May 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-ls\fR \-\- List installed packages
@@ -21,7 +21,8 @@ This command will print to stdout all the versions of packages that are
 installed, as well as their dependencies, in a tree\-structure\.
 .
 .P
-It does not take arguments\.
+It does not take positional arguments, though you may set config flags
+like with any other command, such as \fB\-g\fR to list global packages\.
 .
 .P
 It will print out extraneous, missing, and invalid packages\.
@@ -56,3 +57,17 @@ Type: Boolean
 .
 .P
 Show parseable output instead of tree view\.
+.
+.SS "global"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+List packages in the global install prefix instead of in the current
+project\.

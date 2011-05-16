@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-INSTALL" "1" "March 2011" "" ""
+.TH "NPM\-INSTALL" "1" "May 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-install\fR \-\- install a package
@@ -28,7 +28,8 @@ npm install (in package directory):
 Install the dependencies in the local node_modules folder\.
 .
 .IP
-In global mode, it is the same as \fBnpm install $PWD\fR
+In global mode (ie, with \fB\-g\fR or \fB\-\-global\fR appended to the command),
+it is the same as \fBnpm install $PWD\fR
 .
 .IP "\(bu" 4
 npm install \fB<tarball file>\fR:
@@ -135,6 +136,10 @@ npm install sax \-\-force
 .fi
 .
 .IP "" 0
+.
+.P
+The \fB\-\-global\fR argument will cause npm to install the package globally
+rather than locally\.  See \fBnpm help global\fR\|\.
 .
 .SH "SEE ALSO"
 .
