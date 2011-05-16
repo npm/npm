@@ -160,6 +160,9 @@ If only a single file is provided, then it's installed such that it is the
 result from `man <pkgname>`, regardless of its actual filename.  For example:
 
     { "name" : "foo"
+    , "version" : "1.2.3"
+    , "description" : "A packaged foo fooer for fooing foos"
+    , "main" : "foo.js"
     , "man" : "./man/doc.1"
     }
 
@@ -169,6 +172,9 @@ If the filename doesn't start with the package name, then it's prefixed.
 So, this:
 
     { "name" : "foo"
+    , "version" : "1.2.3"
+    , "description" : "A packaged foo fooer for fooing foos"
+    , "main" : "foo.js"
     , "man" : [ "./man/foo.1", "./man/bar.1" ]
     }
 
@@ -178,6 +184,9 @@ Man files must end with a number, and optionally a `.gz` suffix if they are
 compressed.  The number dictates which man section the file is installed into.
 
     { "name" : "foo"
+    , "version" : "1.2.3"
+    , "description" : "A packaged foo fooer for fooing foos"
+    , "main" : "foo.js"
     , "man" : [ "./man/foo.1", "./man/foo.2" ]
     }
 
