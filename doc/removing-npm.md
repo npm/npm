@@ -1,11 +1,13 @@
 npm-removal(1) -- Cleaning the Slate
 ====================================
 
+## SUMMARY
+
 So sad to see you go.
 
     sudo npm uninstall npm -g
 
-Or, if that fails,
+Or, if that fails, get the npm source code, and do:
 
     sudo make uninstall
 
