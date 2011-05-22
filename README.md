@@ -126,6 +126,14 @@ help config` to learn about all the options you can set there.
 
 It will ask you bunch of questions, and write that file for you!
 
+when you done with your module then publish it like:
+
+`npm adduser` 
+
+`npm publish` 
+
+* in package.json remember to change the node version to something like '>=0.3.5' with your version
+
 ## How to install modules to your project?
 
 `cd` into your project folder and execute:
@@ -134,11 +142,18 @@ It will ask you bunch of questions, and write that file for you!
 
 `npm install PackageName`
 
+or to install packages as global like tools for example, use:
+
+`npm install -g PackageName`
+
+
 ## How to add dependencies to your package.json file?
 
-you add them manually. see `npm help json` for help about package.json.
+you edit package.json manually. see `npm help json` for help about package.json.
 
 you may also: `cd` into your project folder and execute: `npm ls` to see what versions are installed.
+
+for more automatic ways see [require-analyzer](https://github.com/nodejitsu/require-analyzer)
 
 ## More Docs
 
