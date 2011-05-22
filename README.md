@@ -120,6 +120,7 @@ See `./bin/npm.js` for an example of pulling config values off of the
 command line arguments using nopt.  You may also want to check out `npm
 help config` to learn about all the options you can set there.
 
+
 ## How to create or edit package.json file?
 
 `cd` into your project folder and execute `npm init`
@@ -132,7 +133,20 @@ when you done with your module then publish it like:
 
 `npm publish` 
 
-* in package.json remember to change the node version to something like '>=0.3.5' with your version
+\* in package.json remember to change the node version to something like '>=0.3.5' with your version
+
+## How to add dependencies to your package.json file?
+
+package.json meant to be edited manually. see `npm help json` for help about package.json.
+
+you may also: `cd` into your project folder and execute: 
+
+`npm ls`
+
+to see what versions of modules are installed.
+
+for more automatic way see [require-analyzer](https://github.com/nodejitsu/require-analyzer)
+
 
 ## How to install modules to your project?
 
@@ -146,14 +160,6 @@ or to install packages as global like tools for example, use:
 
 `npm install -g PackageName`
 
-
-## How to add dependencies to your package.json file?
-
-you edit package.json manually. see `npm help json` for help about package.json.
-
-you may also: `cd` into your project folder and execute: `npm ls` to see what versions are installed.
-
-for more automatic ways see [require-analyzer](https://github.com/nodejitsu/require-analyzer)
 
 ## More Docs
 
