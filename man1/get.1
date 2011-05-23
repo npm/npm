@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CONFIG" "1" "April 2011" "" ""
+.TH "NPM\-CONFIG" "1" "May 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-config\fR \-\- Manage the npm configuration file
@@ -433,6 +433,24 @@ Type: path
 .P
 The config file to read for global config options\.
 .
+.SS "globalignorefil"
+.
+.IP "\(bu" 4
+Default: {prefix}/etc/npmignore
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+The config file to read for global ignore patterns to apply to all users
+and all projects\.
+.
+.P
+If not found, but there is a "gitignore" file in the
+same directory, then that will be used instead\.
+.
 .SS "group"
 .
 .IP "\(bu" 4
@@ -459,6 +477,20 @@ Type: path
 .
 .P
 The gzip binary
+.
+.SS "ignore"
+.
+.IP "\(bu" 4
+Default: ""
+.
+.IP "\(bu" 4
+Type: string
+.
+.IP "" 0
+.
+.P
+A white\-space separated list of glob patterns of files to always exclude
+from packages when building tarballs\.
 .
 .SS "init\.version"
 .
@@ -842,7 +874,7 @@ The username on the npm registry\.  Set with \fBnpm adduser\fR
 .SS "userconfig"
 .
 .IP "\(bu" 4
-Default: ~/\.npmrc on Posix, or ~/npm\-config on Windows
+Default: ~/\.npmrc
 .
 .IP "\(bu" 4
 Type: path
@@ -851,6 +883,23 @@ Type: path
 .
 .P
 The location of user\-level configuration settings\.
+.
+.SS "userignorefile"
+.
+.IP "\(bu" 4
+Default: ~/\.npmignore
+.
+.IP "\(bu" 4
+Type: path
+.
+.IP "" 0
+.
+.P
+The location of a user\-level ignore file to apply to all packages\.
+.
+.P
+If not found, but there is a \.gitignore file in the same directory, then
+that will be used instead\.
 .
 .SS "version"
 .

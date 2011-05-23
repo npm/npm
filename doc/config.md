@@ -242,6 +242,17 @@ Operates in "global" mode, so that packages are installed into the
 
 The config file to read for global config options.
 
+### globalignorefile
+
+* Default: {prefix}/etc/npmignore
+* Type: path
+
+The config file to read for global ignore patterns to apply to all users
+and all projects.
+
+If not found, but there is a "gitignore" file in the
+same directory, then that will be used instead.
+
 ### group
 
 * Default: GID of the current process
@@ -256,6 +267,14 @@ user.
 * Type: path
 
 The gzip binary
+
+### ignore
+
+* Default: ""
+* Type: string
+
+A white-space separated list of glob patterns of files to always exclude
+from packages when building tarballs.
 
 ### init.version 
 
@@ -469,10 +488,20 @@ The username on the npm registry.  Set with `npm adduser`
 
 ### userconfig
 
-* Default: ~/.npmrc on Posix, or ~/npm-config on Windows
+* Default: ~/.npmrc
 * Type: path
 
 The location of user-level configuration settings.
+
+### userignorefile
+
+* Default: ~/.npmignore
+* Type: path
+
+The location of a user-level ignore file to apply to all packages.
+
+If not found, but there is a .gitignore file in the same directory, then
+that will be used instead.
 
 ### version
 

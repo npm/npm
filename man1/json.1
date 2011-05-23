@@ -222,6 +222,9 @@ result from \fBman <pkgname>\fR, regardless of its actual filename\.  For exampl
 .
 .nf
 { "name" : "foo"
+, "version" : "1\.2\.3"
+, "description" : "A packaged foo fooer for fooing foos"
+, "main" : "foo\.js"
 , "man" : "\./man/doc\.1"
 }
 .
@@ -240,6 +243,9 @@ So, this:
 .
 .nf
 { "name" : "foo"
+, "version" : "1\.2\.3"
+, "description" : "A packaged foo fooer for fooing foos"
+, "main" : "foo\.js"
 , "man" : [ "\./man/foo\.1", "\./man/bar\.1" ]
 }
 .
@@ -258,6 +264,9 @@ compressed\.  The number dictates which man section the file is installed into\.
 .
 .nf
 { "name" : "foo"
+, "version" : "1\.2\.3"
+, "description" : "A packaged foo fooer for fooing foos"
+, "main" : "foo\.js"
 , "man" : [ "\./man/foo\.1", "\./man/foo\.2" ]
 }
 .
