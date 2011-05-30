@@ -35,6 +35,20 @@ following scripts:
 Additionally, arbitrary scrips can be run by doing
 `npm run-script <stage> <pkg>`.
 
+## DEFAULT VALUES
+
+npm will default some script values based on package contents.
+
+* `"start": "node server.js"`:
+
+  If there is a `server.js` file in the root of your package, then npm
+  will default the `start` command to `node server.js`.
+
+* `"preinstall": "node-waf clean || true; node-waf configure build"`:
+
+  If there is a `wscript` file in the root of your package, npm will
+  default the `preinstall` command to compile using node-waf.
+
 ## ENVIRONMENT
 
 Package scripts run in an environment where many pieces of information are
