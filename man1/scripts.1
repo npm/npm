@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-SCRIPTS" "1" "April 2011" "" ""
+.TH "NPM\-SCRIPTS" "1" "May 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-scripts\fR \-\- How npm handles the "scripts" field
@@ -63,6 +63,25 @@ stop and start scripts if no \fBrestart\fR script is provided\.
 .
 .P
 Additionally, arbitrary scrips can be run by doing \fBnpm run\-script <stage> <pkg>\fR\|\.
+.
+.SH "DEFAULT VALUES"
+npm will default some script values based on package contents\.
+.
+.IP "\(bu" 4
+\fB"start": "node server\.js"\fR:
+.
+.IP
+If there is a \fBserver\.js\fR file in the root of your package, then npm
+will default the \fBstart\fR command to \fBnode server\.js\fR\|\.
+.
+.IP "\(bu" 4
+\fB"preinstall": "node\-waf clean || true; node\-waf configure build"\fR:
+.
+.IP
+If there is a \fBwscript\fR file in the root of your package, npm will
+default the \fBpreinstall\fR command to compile using node\-waf\.
+.
+.IP "" 0
 .
 .SH "ENVIRONMENT"
 Package scripts run in an environment where many pieces of information are
@@ -195,9 +214,9 @@ If you want to run a specific script at a specific lifecycle event for ALL
 packages, then you can use a hook script\.
 .
 .P
-Place an executable file at \fB{root}/\.npm/\.hooks/{eventname}\fR, and it\'ll get
+Place an executable file at \fBnode_modules/\.hooks/{eventname}\fR, and it\'ll get
 run for all packages when they are going through that point in the package
-lifecycle\.
+lifecycle for any packages installed in that root\.
 .
 .P
 Hook scripts are run exactly the same way as package\.json scripts\.  That is,
