@@ -60,6 +60,7 @@ var commandCache = {}
               , "r" : "uninstall"
               , "un" : "uninstall"
               , "unlink" : "uninstall"
+              , "remove" : "uninstall"
               , "rb" : "rebuild"
               , "list" : "ls"
               , "la" : "ls"
