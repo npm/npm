@@ -433,7 +433,7 @@ Type: path
 .P
 The config file to read for global config options\.
 .
-.SS "globalignorefil"
+.SS "globalignorefile"
 .
 .IP "\(bu" 4
 Default: {prefix}/etc/npmignore
@@ -543,6 +543,34 @@ Type: String
 .
 .P
 The value \fBnpm init\fR should use by default for the package author\'s homepage\.
+.
+.SS "link"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+If true, then local installs will link if there is a suitable globally
+installed package\.
+.
+.P
+Note that this means that local installs can cause things to be
+installed into the global space at the same time\.  The link is only done
+if one of the two conditions are met:
+.
+.IP "\(bu" 4
+The package is not already installed globally, or
+.
+.IP "\(bu" 4
+the globally installed version is identical to the version that is
+being installed locally\.
+.
+.IP "" 0
 .
 .SS "logfd"
 .
