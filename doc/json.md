@@ -79,12 +79,12 @@ a patch version.
 ## description
 
 Put a description in it.  It's a string.  This helps people discover your
-package, as it's listed in `npm ls`.
+package, as it's listed in `npm search`.
 
 ## keywords
 
 Put keywords in it.  It's an array of strings.  This helps people
-discover your package as it's listed in `npm ls`.
+discover your package as it's listed in `npm search`.
 
 ## homepage
 
