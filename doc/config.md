@@ -304,6 +304,22 @@ The value `npm init` should use by default for the package author's email.
 
 The value `npm init` should use by default for the package author's homepage.
 
+### link
+
+* Default: false
+* Type: Boolean
+
+If true, then local installs will link if there is a suitable globally
+installed package.
+
+Note that this means that local installs can cause things to be
+installed into the global space at the same time.  The link is only done
+if one of the two conditions are met:
+
+* The package is not already installed globally, or
+* the globally installed version is identical to the version that is
+  being installed locally.
+
 ### logfd
 
 * Default: stderr file descriptor

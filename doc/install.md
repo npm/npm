@@ -112,8 +112,15 @@ local copy exists on disk.
 The `--global` argument will cause npm to install the package globally
 rather than locally.  See `npm help global`.
 
+The `--link` argument will cause npm to link global installs into the
+local space in some cases.
+
+See `npm help config`.  Many of the configuration params have some
+effect on installation, since that's most of what npm does.
+
 ## SEE ALSO
 
+* npm-config(1)
 * npm-build(1)
 * npm-registry(1)
 * npm-build(1)
