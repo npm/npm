@@ -3,6 +3,19 @@
 # look for old 0.x cruft, and get rid of it.
 # Should already be sitting in the npm folder.
 
+# Sorry, if readlink isn't available, then this is just too tricky.
+# However, greadlink is fine, so Solaris can join the party, too.
+readlink="readlink"
+which $readlink >/dev/null 2>/dev/null
+if [ $? -ne 0 ]; then
+  readlink="greadlink"
+  which $readlink >/dev/null 2>/dev/null
+  if [ $? -ne 0 ]; then
+    echo "Can't find the readlink or greadlink command. Aborting."
+    exit 1
+  fi
+fi
+
 if ! [ "x$npm_config_prefix" = "x" ]; then
   PREFIXES=$npm_config_prefix
 else
@@ -12,6 +25,7 @@ else
   fi
   if [ "x$node" = "x" ]; then
     echo "Can't find node to determine prefix. Aborting."
+    exit 1
   fi
 
 
@@ -75,7 +89,7 @@ for prefix in $PREFIXES; do
   # version-named shims/symlinks.
   for folder in share/man bin lib/node; do
     find $prefix/$folder -type l | while read file; do
-      target=`readlink $file | grep '/\.npm/'`
+      target=`$readlink $file | grep '/\.npm/'`
       if ! [ "x$target" = "x" ]; then
         # found one!
         echo rm -rf "$file"
@@ -86,7 +100,7 @@ for prefix in $PREFIXES; do
         if ! [ "x$base" = "x" ]; then
           find "`dirname $file`" -type l -name "$base"'*' \
           | while read l; do
-              target=`readlink "$l" | grep "$base"`
+              target=`$readlink "$l" | grep "$base"`
               if ! [ "x$target" = "x" ]; then
                 echo rm -rf $l
                 rm -rf $l
