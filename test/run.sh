@@ -10,6 +10,8 @@ main () {
 
   cd "$TESTDIR"
 
+  npm config ls
+
   # install
   npm install "$NPMPKG" || exit 1
 
