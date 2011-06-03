@@ -11,42 +11,56 @@ Much more info available via `npm help` once it's installed.
 To install an old **and unsupported** version of npm that works on node 0.3
 and prior:
 
-    git clone git://github.com/isaacs/npm.git ./npm
-    cd npm
-    git checkout origin/0.2
-    make dev
+```bash
+git clone git://github.com/isaacs/npm.git ./npm
+cd npm
+git checkout origin/0.2
+make dev
+```
 
 ## Simple Install
 
 To install npm with one command, do this:
 
-    curl http://npmjs.org/install.sh | sh
+```bash
+curl http://npmjs.org/install.sh | sh
+```
 
 To skip the npm 0.x cleanup, do this:
 
-    curl http://npmjs.org/install.sh | clean=no sh
+```bash
+curl http://npmjs.org/install.sh | clean=no sh
+```
 
 To say "yes" to the 0.x cleanup, but skip the prompt:
 
-    curl http://npmjs.org/install.sh | clean=yes sh
+```bash
+curl http://npmjs.org/install.sh | clean=yes sh
+```
 
 If that fails, try this:
 
-    git clone http://github.com/isaacs/npm.git
-    cd npm
-    sudo make install
+```bash
+git clone http://github.com/isaacs/npm.git
+cd npm
+sudo make install
+```
 
 If you're sitting in the code folder reading this document in your
 terminal, then you've already got the code.  Just do:
 
-    sudo make install
+```bash
+sudo make install
+```
 
 and npm will install itself.
 
 If you don't have make, and don't have curl or git, and ALL you have is
 this code and node, you can probably do this:
 
-    sudo node ./cli.js install -g
+```bash
+sudo node ./cli.js install -g
+```
 
 However, note that github tarballs **do not contain submodules**, so
 those won't work.  You'll have to also fetch the appropriate submodules
@@ -73,19 +87,25 @@ If you would like to ensure that npm **always** runs scripts as the
 "nobody" user, and have it fail if it cannot downgrade permissions, then
 set the following configuration param:
 
-    npm config set unsafe-perm false
+```bash
+npm config set unsafe-perm false
+```
 
-to prevent it from ever running in unsafe mode, even as non-root users.
+This will prevent running in unsafe mode, even as non-root users.
 
 ## Uninstalling
 
 So sad to see you go.
 
-    sudo npm uninstall npm -g
+```bash
+sudo npm uninstall npm -g
+```
 
 Or, if that fails,
 
-    sudo make uninstall
+```bash
+sudo make uninstall
+```
 
 ## More Severe Uninstalling
 
@@ -99,22 +119,26 @@ remove them.
 To remove cruft left behind by npm 0.x, you can use the included
 `clean-old.sh` script file.  You can run it conveniently like this:
 
-    npm explore npm -g -- sh scripts/clean-old.sh
+```bash
+npm explore npm -g -- sh scripts/clean-old.sh
+```
 
 ## Using npm Programmatically
 
 If you would like to use npm programmatically, you can do that.
-It's not very well documented, but it IS rather simple.
+It's not very well documented, but it *is* rather simple.
 
-    var npm = require("npm")
-    npm.load(myConfigObject, function (er) {
-      if (er) return handlError(er)
-      npm.commands.install(["some", "args"], function (er, data) {
-        if (er) return commandFailed(er)
-        // command succeeded, and data might have some info
-      })
-      npm.on("log", function (message) { .... })
-    })
+```javascript
+var npm = require("npm")
+npm.load(myConfigObject, function (er) {
+  if (er) return handlError(er)
+  npm.commands.install(["some", "args"], function (er, data) {
+    if (er) return commandFailed(er)
+    // command succeeded, and data might have some info
+  })
+  npm.on("log", function (message) { .... })
+})
+```
 
 See `./bin/npm.js` for an example of pulling config values off of the
 command line arguments using nopt.  You may also want to check out `npm
