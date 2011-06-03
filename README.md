@@ -125,7 +125,7 @@ help config` to learn about all the options you can set there.
 
 `cd` into your project folder and execute `npm init`
 
-It will ask you bunch of questions, and write that file for you!
+You'll get asked a few questions, after which npm will generate package.json for you.
 
 when you done with your module then publish it like:
 
@@ -133,11 +133,11 @@ when you done with your module then publish it like:
 
 `npm publish` 
 
-\* in package.json remember to change the node version to something like '>=0.3.5' with your version
+\* In package.json, remember to change the node version (to something like '>=0.3.5') along with your version.
 
 ## How to add dependencies to your package.json file?
 
-package.json meant to be edited manually. see `npm help json` for help about package.json.
+package.json is meant to be edited manually. See `npm help json` for help about package.json.
 
 you may also: `cd` into your project folder and execute: 
 
