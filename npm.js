@@ -22,6 +22,7 @@ var EventEmitter = require("events").EventEmitter
   , which = require("./lib/utils/which")
   , semver = require("semver")
   , findPrefix = require("./lib/utils/find-prefix")
+  , getUid = require("./lib/utils/uid-number")
 
 npm.commands = {}
 npm.ELIFECYCLE = {}
@@ -200,16 +201,30 @@ npm.load = function (conf, cb_) {
       } else {
         p = npm.config.get("prefix")
       }
-      // try to guess at a good node_modules location.
-      findPrefix(p, function (er, p) {
-        if (er) return handleError(er)
-        Object.defineProperty(npm, "prefix",
-          { get : function () { return p }
-          , set : function (r) { return p = r }
-          , enumerable : true
-          })
-        return cb()
-      })
+
+      // if we're not in unsafe-perm mode, then figure out who
+      // to run stuff as.  Do this first, to support `npm update npm -g`
+      if (!npm.config.get("unsafe-perm")) {
+        getUid( npm.config.get("user"), npm.config.get("group")
+              , function (er, uid, gid) {
+          if (er) return log.er(cb, "Could not get uid/gid")(er)
+          next()
+        })
+      } else next()
+
+      function next () {
+        // try to guess at a good node_modules location.
+        findPrefix(p, function (er, p) {
+          if (er) return handleError(er)
+          Object.defineProperty(npm, "prefix",
+            { get : function () { return p }
+            , set : function (r) { return p = r }
+            , enumerable : true
+            })
+          return cb()
+        })
+      }
+
     })
   })
 }
