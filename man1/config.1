@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CONFIG" "1" "May 2011" "" ""
+.TH "NPM\-CONFIG" "1" "June 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-config\fR \-\- Manage the npm configuration file
@@ -248,6 +248,22 @@ Type: Boolean
 .P
 Force npm to always require authentication when accessing the registry,
 even for \fBGET\fR requests\.
+.
+.SS "bin\-publish"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+If set to true, then binary packages will be created on publish\.
+.
+.P
+This is the way to opt into the "bindist" behavior described below\.
 .
 .SS "bindist"
 .

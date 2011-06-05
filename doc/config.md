@@ -138,6 +138,15 @@ then the user could change the behavior by doing:
 Force npm to always require authentication when accessing the registry,
 even for `GET` requests.
 
+### bin-publish
+
+* Default: false
+* Type: Boolean
+
+If set to true, then binary packages will be created on publish.
+
+This is the way to opt into the "bindist" behavior described below.
+
 ### bindist
 
 * Default: Unstable node versions, `null`, otherwise
