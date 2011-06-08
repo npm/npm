@@ -74,6 +74,22 @@ listed in the .gitmodules file.
 * npm will downgrade permissions if it's root before running any build
   scripts that package authors specified.
 
+## Troubleshooting
+
+If the installation script fails, here are a few things to look out
+for:
+
+* `Timeout while contacting DNS servers` & other network-related
+errors: if you can't ping registry.npmjs.org, the script can't
+download the installation package.
+* `File not found error`: check that your npmignore or gitignore
+config don't references files and folders from the npm installation
+package (hint: it's a bad idea to have a "bin" entry in your gitignore
+global config). See the [config doc]
+(http://github.com/isaacs/npm/blob/master/doc/config.md)
+* `Permission error`: install with sudo, i.e. `curl
+http://npmjs.org/install.sh | sudo sh`
+
 ### More details...
 
 As of version 0.3, it is recommended to run npm as root.
