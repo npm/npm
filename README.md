@@ -87,7 +87,7 @@ if not, add it:
 
 the run:
 
-```soure ~/.bashrc
+```source ~/.bashrc
 ```
 
 and try installing npm again.
