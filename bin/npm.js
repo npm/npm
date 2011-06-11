@@ -17,6 +17,12 @@ var fs = require("../lib/utils/graceful-fs")
   , types = configDefs.types
   , nopt = require("nopt")
 
+// if npm is called as "npmg" or "npm_g", then
+// run in global mode.
+if(path.basename(process.argv[1]).slice(-1)  === "g") {
+  process.argv.splice(1, 1, "npm", "-g")
+}
+
 log.verbose(process.argv, "cli")
 
 var conf = nopt(types, shorthands)

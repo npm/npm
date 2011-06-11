@@ -20,7 +20,9 @@
                   , "bin" : "./bin"
                   }
 , "main" : "npm"
-, "bin" : "./bin/npm.js"
+, "bin" : { "npm" : "./bin/npm.js"
+          , "npm_g" : "./bin/npm.js"
+          , "npm-g" : "./bin/npm.js" }
 , "dependencies" :
   { "semver" : "1"
   , "abbrev" : "1"
