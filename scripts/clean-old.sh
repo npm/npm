@@ -29,12 +29,12 @@ else
   fi
 
 
-  PREFIX=`dirname $node`
+  PREFIX=`dirname "$node"`
   PREFIX=`dirname $PREFIX`
   echo "prefix=$PREFIX"
   PREFIXES=$PREFIX
 
-  altprefix=`$node -e process.installPrefix`
+  altprefix=`"$node" -e process.installPrefix`
   if ! [ "x$altprefix" = "x" ] && ! [ "x$altprefix" = "x$PREFIX" ]; then
     echo "altprefix=$altprefix"
     PREFIXES="$PREFIX $altprefix"
