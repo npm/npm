@@ -19,7 +19,7 @@ fi
 # make sure that node exists
 node=`which node 2>&1`
 ret=$?
-if [ $ret -ne 0 ] || ! [ -x $node ]; then
+if [ $ret -ne 0 ] || ! [ -x "$node" ]; then
   echo "npm cannot be installed without nodejs." >&2
   echo "Install node first, and then try again." >&2
   echo "" >&2
@@ -87,15 +87,15 @@ fi
 cd "$TMP" \
   && curl -s -L "$url" | gzip --decompress --stdout | $tar -xf - \
   && cd * \
-  && (node_version=`$node --version 2>&1`
+  && (node_version=`"$node" --version 2>&1`
       ret=$?
       if [ $ret -eq 0 ]; then
-        req=`$node bin/read-package-json.js package.json engines.node`
+        req=`"$node" bin/read-package-json.js package.json engines.node`
         if [ -e node_modules ]; then
-          $node node_modules/semver/bin/semver -v "$node_version" -r "$req"
+          "$node" node_modules/semver/bin/semver -v "$node_version" -r "$req"
           ret=$?
         else
-          $node bin/semver.js -v "$node_version" -r "$req"
+          "$node" bin/semver.js -v "$node_version" -r "$req"
           ret=$?
         fi
       fi
@@ -105,17 +105,17 @@ cd "$TMP" \
         echo "Please upgrade node before continuing."
         exit $ret
       fi) \
-  && (ver=`$node bin/read-package-json.js package.json version`
+  && (ver=`"$node" bin/read-package-json.js package.json version`
       isnpm10=0
       if [ $ret -eq 0 ]; then
-        req=`$node bin/read-package-json.js package.json engines.node`
+        req=`"$node" bin/read-package-json.js package.json engines.node`
         if [ -e node_modules ]; then
-          if $node node_modules/semver/bin/semver -v "$ver" -r "1"
+          if "$node" node_modules/semver/bin/semver -v "$ver" -r "1"
           then
             isnpm10=1
           fi
         else
-          if $node bin/semver -v "$ver" -r ">=1.0"; then
+          if "$node" bin/semver -v "$ver" -r ">=1.0"; then
             isnpm10=1
           fi
         fi
@@ -129,10 +129,10 @@ cd "$TMP" \
           echo "Skipping 0.x cruft clean" >&2
           ret=0
         elif [ "x$clean" = "xy" ] || [ "x$clean" = "xyes" ]; then
-          NODE=$node /bin/sh "scripts/clean-old.sh" "-y"
+          NODE="$node" /bin/sh "scripts/clean-old.sh" "-y"
           ret=$?
         else
-          NODE=$node /bin/sh "scripts/clean-old.sh" </dev/tty
+          NODE="$node" /bin/sh "scripts/clean-old.sh" </dev/tty
           ret=$?
         fi
       fi
@@ -141,9 +141,9 @@ cd "$TMP" \
         exit $ret
       fi) \
   && (if [ "$make" = "NOMAKE" ] || ! $make clean install; then
-        $node cli.js cache clean
-        $node cli.js rm npm --force --global
-        $node cli.js install . --force --global
+        "$node" cli.js cache clean
+        "$node" cli.js rm npm --force --global
+        "$node" cli.js install . --force --global
       fi) \
   && cd "$BACK" \
   && rm -rf "$TMP" \
