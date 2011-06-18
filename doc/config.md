@@ -90,6 +90,7 @@ The following shorthands are parsed on the command-line:
 * `-f`: `--force`
 * `-l`: `--long`
 * `-desc`: `--description`
+* `-S`: `--save`
 * `ll` and `la` commands: `ls --long`
 
 If the specified configuration param resolves unambiguously to a known
@@ -432,6 +433,15 @@ The base URL of the npm package registry.
 * Type: Boolean
 
 Remove failed installs.
+
+### save
+
+* Default: false
+* Type: Boolean
+
+Save installed packages to a package.json file as dependencies.
+
+Only works if there is already a package.json file present.
 
 ### searchopts
 
