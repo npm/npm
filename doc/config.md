@@ -408,7 +408,7 @@ it forces non-global commands to run in the specified folder.
 
 ### proxy
 
-* Default: "HTTP_PROXY" or "http_proxy" environment variable, or null
+* Default: `HTTP_PROXY` or `http_proxy` environment variable, or null
 * Type: url
 
 A proxy to use for outgoing http requests.
