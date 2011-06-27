@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-FOLDERS" "1" "April 2011" "" ""
+.TH "NPM\-FOLDERS" "1" "June 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-folders\fR \-\- Folder Structures Used by npm
@@ -15,7 +15,7 @@ This document will tell you what it puts where\.
 .SS "tl;dr"
 .
 .IP "\(bu" 4
-Local install (default): puts stuff in \./node_modules
+Local install (default): puts stuff in \fB\|\./node_modules\fR
 .
 .IP "\(bu" 4
 Global install (with \fB\-g\fR): puts stuff in /usr/local
@@ -96,8 +96,7 @@ Any bin files are symlinked to \fB\|\./node_modules/\.bin/\fR, so that they may
 be found by npm scripts when necessary\.
 .
 .SS "Global Installation"
-If the \fBglobal\fR configuration is set to true, or if it is not explicitly
-set false and no suitable node_modules folder was found, then npm will
+If the \fBglobal\fR configuration is set to true, then npm will
 install packages "globally"\.
 .
 .P
@@ -107,21 +106,20 @@ linked to \fB/usr/local/bin\fR instead of \fB\|\./node_modules/\.bin\fR\|\.
 .
 .SS "Cycles, Conflicts, and Folder Parsimony"
 Cycles are handled using the property of node\'s module system that it
-walks up the directories looking for node\fImodules folders\.  So, at every
-stage, if a package is already installed in an ancestor node\fRmodules
+walks up the directories looking for \fBnode_modules\fR folders\.  So, at every
+stage, if a package is already installed in an ancestor \fBnode_modules\fR
 folder, then it is not installed at the current location\.
 .
 .P
 Consider the case above, where \fBfoo \-> bar \-> baz\fR\|\.  Imagine if, in
 addition to that, baz depended on bar, so you\'d have: \fBfoo \-> bar \-> baz \-> bar \-> baz \.\.\.\fR\|\.  However, since the folder
-structure is: foo/node\fImodules/bar/node\fRmodules/baz, there\'s no need to
-put another copy of bar into \.\.\./baz/node\fImodules, since when it calls
-require("bar"), it will get the copy that is installed in
-foo/node\fRmodules/bar\.
+structure is: \fBfoo/node_modules/bar/node_modules/baz\fR, there\'s no need to
+put another copy of bar into \fB\|\.\.\./baz/node_modules\fR, since when it calls
+require("bar"), it will get the copy that is installed in \fBfoo/node_modules/bar\fR\|\.
 .
 .P
 This shortcut is only used if the exact same
-version would be installed in multiple nested node_modules folders\.  It
+version would be installed in multiple nested \fBnode_modules\fR folders\.  It
 is still possible to have \fBa/node_modules/b/node_modules/a\fR if the two
 "a" packages are different versions\.  However, without repeating the
 exact same package multiple times, an infinite regress will always be
@@ -175,12 +173,11 @@ foo
 .
 .P
 Since foo depends directly on bar@1\.2\.3 and baz@1\.2\.3, those are
-installed in foo\'s node_modules folder\.
+installed in foo\'s \fBnode_modules\fR folder\.
 .
 .P
-Bar [A] has dependencies on baz and asdf, so those are installed in bar\'s
-node\fImodules folder\.  Because it depends on \fBbaz@2\.x\fR, it cannot re\-use
-the \fBbaz@1\.2\.3\fR installed in the parent node\fRmodules folder [C], and
+Bar [A] has dependencies on baz and asdf, so those are installed in bar\'s \fBnode_modules\fR folder\.  Because it depends on \fBbaz@2\.x\fR, it cannot re\-use
+the \fBbaz@1\.2\.3\fR installed in the parent \fBnode_modules\fR folder [C], and
 must install its own copy [B]\.
 .
 .P
@@ -196,7 +193,7 @@ dependnecy on bar is satisfied by the parent folder copy installed at [A]\.
 For a graphical breakdown of what is installed where, use \fBnpm ls\fR\|\.
 .
 .SS "Publishing"
-Upon publishing, npm will look in the node_modules folder\.  If any of
+Upon publishing, npm will look in the \fBnode_modules\fR folder\.  If any of
 the items there are on the "dependencies" or "devDependencies" list,
 and are not in the \fBbundledDependencies\fR array, then they will not be
 included in the package tarball\.
