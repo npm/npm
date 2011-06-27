@@ -23,6 +23,11 @@ while [ $# -gt 0 ]; do
   shift
 done
 
+# Pull in submodules, since npm can't work without them.
+if [ -f .git ]; then
+  git submodule update --init
+fi
+
 for c in "${CONFIGS[@]}"; do
   echo '+node ./bin/npm.js config set "'"$c"'"'
   node ./bin/npm.js config set "$c"
