@@ -43,6 +43,8 @@ If that fails, try this:
 ```bash
 git clone http://github.com/isaacs/npm.git
 cd npm
+git submodule init
+git submodule update
 sudo make install
 ```
 
