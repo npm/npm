@@ -123,6 +123,19 @@ To remove cruft left behind by npm 0.x, you can use the included
 npm explore npm -g -- sh scripts/clean-old.sh
 ```
 
+npm uses two configuration files, one for per-user configs, and another
+for global (every-user) configs.  You can view them by doing:
+
+```bash
+npm config get userconfig   # defaults to ~/.npmrc
+npm config get globalconfig # defaults to /usr/local/etc/npmrc
+```
+
+Uninstalling npm does not remove configuration files by default.  You
+must remove them yourself manually if you want them gone.  Note that
+this means that future npm installs will not remember the settings that
+you have chosen.
+
 ## Using npm Programmatically
 
 If you would like to use npm programmatically, you can do that.
