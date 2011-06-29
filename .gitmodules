@@ -9,4 +9,4 @@
 	url = git://github.com/isaacs/nopt.git
 [submodule "node_modules/node-uuid"]
 	path = node_modules/node-uuid
-	url = http://github.com/broofa/node-uuid
+	url = git://github.com/broofa/node-uuid
