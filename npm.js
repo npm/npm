@@ -88,6 +88,7 @@ var commandCache = {}
               , "update"
               , "outdated"
               , "prune"
+              , "submodule"
 
               , "rebuild"
               , "link"
