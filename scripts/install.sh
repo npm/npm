@@ -45,17 +45,12 @@ fi
 
 BACK="$PWD"
 
-# sniff for gtar/gegrep/gmake
+# sniff for gtar/gmake
 # use which, but don't trust it very much.
 
 tar="${TAR}"
 if [ -z "$tar" ]; then
   tar=tar
-fi
-
-egrep=`which gegrep 2>&1`
-if [ $? -ne 0 ] || ! [ -x $egrep ]; then
-  egrep=egrep
 fi
 
 make=`which gmake 2>&1`
@@ -73,9 +68,9 @@ if [ -z "$t" ]; then
 fi
 
 url=`curl -s -L http://registry.npmjs.org/npm/$t \
-      | $egrep -o 'tarball":"[^"]+' \
-      | head -n 1 \
-      | $egrep -o 'http://.*'`
+    | sed -re 's/^.+tarball\"\:\"//' \
+    | sed -re 's/tgz.+/tgz/'`
+
 echo "fetching: $url" >&2
 
 ret=$?
