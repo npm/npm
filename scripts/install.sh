@@ -85,7 +85,7 @@ if [ $ret -ne 0 ]; then
 fi
 
 cd "$TMP" \
-  && curl -s -L "$url" | gzip --decompress --stdout | $tar -xf - \
+  && curl -s -L "$url" | gzip --decompress --stdout | $tar -xof - \
   && cd * \
   && (node_version=`"$node" --version 2>&1`
       ret=$?
