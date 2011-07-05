@@ -172,3 +172,5 @@ Discuss it on the mailing list, or post an issue.
 ## Why does npm hate me?
 
 npm is not capable of hatred.  It loves everyone, especially you.
+
+## How can I mirror different machines (all npm setups and installed packages), so that all machines are always up to date? Which directories and files exactly do I need to copy?
