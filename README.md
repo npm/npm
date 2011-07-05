@@ -145,7 +145,7 @@ you may also: `cd` into your project folder and execute:
 
 to see what versions of modules are installed.
 
-for more automatic way see [require-analyzer](https://github.com/nodejitsu/require-analyzer)
+for an automatic way see [require-analyzer](https://github.com/nodejitsu/require-analyzer)
 
 
 ## How to install modules to your project?
