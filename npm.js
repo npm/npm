@@ -75,6 +75,7 @@ var commandCache = {}
               , "s" : "search"
               , "se" : "search"
               , "author" : "owner"
+              , "home" : "docs"
               }
 
   , aliasNames = Object.keys(aliases)
