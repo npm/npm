@@ -60,7 +60,7 @@ following help topics:
   Especially, installing other peoples code from the registry is done via
   `npm install`
 * adduser:
-  Create an account or log in.  Creditials are stored (encrypted) in the
+  Create an account or log in.  Creditials are stored in the
   user config file.
 * publish:
   Use the `npm publish` command to upload your code to the registry.
