@@ -50,6 +50,14 @@ Ok, fine.  Do this:
 
 This is not recommended.
 
+Many things **will not work** if you do this.  Make sure you read and
+understand `npm help config` and `npm help global` before you complain
+about things being broken.
+
+When you realize what a mistake it was, do this to switch back:
+
+    npm config delete global --local
+
 ## How do I list installed packages?
 
 `npm ls`
