@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-FAQ" "1" "May 2011" "" ""
+.TH "NPM\-FAQ" "1" "July 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-faq\fR \-\- Frequently Asked Questions
@@ -61,6 +61,23 @@ npm config set global true
 .
 .P
 This is not recommended\.
+.
+.P
+Many things \fBwill not work\fR if you do this\.  Make sure you read and
+understand \fBnpm help config\fR and \fBnpm help global\fR before you complain
+about things being broken\.
+.
+.P
+When you realize what a mistake it was, do this to switch back:
+.
+.IP "" 4
+.
+.nf
+npm config delete global \-\-local
+.
+.fi
+.
+.IP "" 0
 .
 .SH "How do I list installed packages?"
 \fBnpm ls\fR
