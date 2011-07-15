@@ -90,6 +90,7 @@ var commandCache = {}
               , "outdated"
               , "prune"
               , "submodule"
+              , "pack"
 
               , "rebuild"
               , "link"
