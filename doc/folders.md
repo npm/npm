@@ -17,8 +17,9 @@ This document will tell you what it puts where.
 
 ### prefix Configuration
 
-The `prefix` config defaults to node's `process.installPrefix`.  On most
-systems, this is `/usr/local`.
+The `prefix` config defaults to the location where node is installed.
+On most systems, this is `/usr/local`, and most of the time is the same
+as node's `process.installPrefix`.
 
 When the `global` flag is set, npm installs things into this prefix.
 When it is not set, it uses the root of the current package, or the
