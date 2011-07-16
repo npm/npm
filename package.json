@@ -26,9 +26,11 @@
 , "dependencies" :
   { "semver" : "1"
   , "abbrev" : "1"
+  , "minimatch" : "0"
   , "nopt" : "1"
   , "node-uuid" : "1.2" }
-, "bundleDependencies" : [ "semver", "abbrev", "nopt", "node-uuid" ]
+, "bundleDependencies" :
+  [ "semver", "abbrev", "minimatch", "nopt", "node-uuid" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
 , "scripts" : { "test" : "./test/run.sh"
