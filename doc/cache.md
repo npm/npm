@@ -1,5 +1,5 @@
-npm-cache(1) -- install a package
-===================================
+npm-cache(1) -- Manipulates packages cache
+==========================================
 
 ## SYNOPSIS
 
