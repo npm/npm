@@ -11,7 +11,7 @@ doc_subfolders = $(shell find doc -type d \
 # Since 'make' typically does non-installation build stuff,
 # it seems appropriate.
 submodules:
-	! [ -d .git ] || git submodule update --init
+	! [ -d .git ] || git submodule update --init --recursive
 
 latest: submodules
 	@echo "Installing latest published npm"
