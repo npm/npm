@@ -17,7 +17,7 @@ latest: submodules
 	@echo "Installing latest published npm"
 	@echo "Use 'make install' or 'make link' to install the code"
 	@echo "in this folder that you're looking at right now."
-	node cli.js install
+	node cli.js install -g -f npm
 
 install: submodules
 	node cli.js install -g -f
