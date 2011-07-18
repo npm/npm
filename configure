@@ -24,8 +24,8 @@ while [ $# -gt 0 ]; do
 done
 
 # Pull in submodules, since npm can't work without them.
-if [ -f .git ]; then
-  git submodule update --init
+if [ -d .git ]; then
+  git submodule update --init --recursive
 fi
 
 for c in "${CONFIGS[@]}"; do
