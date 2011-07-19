@@ -16,7 +16,7 @@ if [ $? -ne 0 ]; then
   fi
 fi
 
-if ! [ "x$npm_config_prefix" = "x" ]; then
+if [ "x$npm_config_prefix" != "x" ]; then
   PREFIXES=$npm_config_prefix
 else
   node="$NODE"
@@ -35,7 +35,7 @@ else
   PREFIXES=$PREFIX
 
   altprefix=`"$node" -e process.installPrefix`
-  if ! [ "x$altprefix" = "x" ] && ! [ "x$altprefix" = "x$PREFIX" ]; then
+  if [ "x$altprefix" != "x" ] && [ "x$altprefix" != "x$PREFIX" ]; then
     echo "altprefix=$altprefix"
     PREFIXES="$PREFIX $altprefix"
   fi
@@ -57,7 +57,7 @@ echo "This script will find and eliminate any shims, symbolic"
 echo "links, and other cruft that was installed by npm 0.x."
 echo ""
 
-if ! [ "x$packages" = "x" ]; then
+if [ "x$packages" != "x" ]; then
   echo "The following packages appear to have been installed with"
   echo "an old version of npm, and will be removed forcibly:"
   for pkg in $packages; do
@@ -73,7 +73,7 @@ if [ "x$1" = "x-y" ]; then
   OK="yes"
 fi
 
-while ! [ "$OK" = "y" ] && ! [ "$OK" = "yes" ] && ! [ "$OK" = "no" ]; do
+while [ "$OK" != "y" ] && [ "$OK" != "yes" ] && [ "$OK" != "no" ]; do
   echo "Is this OK? enter 'yes' or 'no' "
   read OK
 done
@@ -90,18 +90,18 @@ for prefix in $PREFIXES; do
   for folder in share/man bin lib/node; do
     find $prefix/$folder -type l | while read file; do
       target=`$readlink $file | grep '/\.npm/'`
-      if ! [ "x$target" = "x" ]; then
+      if [ "x$target" != "x" ]; then
         # found one!
         echo rm -rf "$file"
         rm -rf "$file"
         # also remove any symlinks to this file.
         base=`basename "$file"`
         base=`echo "$base" | awk -F@ '{print $1}'`
-        if ! [ "x$base" = "x" ]; then
+        if [ "x$base" != "x" ]; then
           find "`dirname $file`" -type l -name "$base"'*' \
           | while read l; do
               target=`$readlink "$l" | grep "$base"`
-              if ! [ "x$target" = "x" ]; then
+              if [ "x$target" != "x" ]; then
                 echo rm -rf $l
                 rm -rf $l
               fi
@@ -121,7 +121,7 @@ for prefix in $PREFIXES; do
   done
 
   # now remove the package modules, and the .npm folder itself.
-  if ! [ "x$packages" = "x" ]; then
+  if [ "x$packages" != "x" ]; then
     for pkg in $packages; do
       echo rm -rf $prefix/lib/node/$pkg
       rm -rf $prefix/lib/node/$pkg
