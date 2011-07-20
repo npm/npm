@@ -16,3 +16,6 @@
 [submodule "node_modules/graceful-fs"]
 	path = node_modules/graceful-fs
 	url = git://github.com/isaacs/node-graceful-fs.git
+[submodule "node_modules/slide"]
+	path = node_modules/slide
+	url = git://github.com/isaacs/slide-flow-control.git

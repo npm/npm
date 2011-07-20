@@ -25,13 +25,20 @@
           , "npm-g" : "./bin/npm.js" }
 , "dependencies" :
   { "semver" : "1"
+  , "slide" : "1"
   , "abbrev" : "1"
   , "graceful-fs" : "1"
   , "minimatch" : "0"
   , "nopt" : "1"
   , "node-uuid" : "1.2" }
 , "bundleDependencies" :
-  [ "semver", "abbrev", "graceful-fs", "minimatch", "nopt", "node-uuid" ]
+  [ "slide"
+  , "semver"
+  , "abbrev"
+  , "graceful-fs"
+  , "minimatch"
+  , "nopt"
+  , "node-uuid" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
 , "scripts" : { "test" : "./test/run.sh"
