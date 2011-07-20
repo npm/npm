@@ -4,7 +4,7 @@ var log = require("../lib/utils/log")
 log.waitForConfig()
 log.info("ok", "it worked if it ends with")
 
-var fs = require("../lib/utils/graceful-fs")
+var fs = require("graceful-fs")
   , path = require("path")
   , sys = require("../lib/utils/sys")
   , npm = require("../npm")

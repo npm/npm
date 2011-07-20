@@ -13,3 +13,6 @@
 [submodule "node_modules/minimatch"]
 	path = node_modules/minimatch
 	url = git://github.com/isaacs/minimatch.git
+[submodule "node_modules/graceful-fs"]
+	path = node_modules/graceful-fs
+	url = git://github.com/isaacs/node-graceful-fs.git
