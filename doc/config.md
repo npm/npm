@@ -406,6 +406,17 @@ standard output.
 The location to install global items.  If set on the command line, then
 it forces non-global commands to run in the specified folder.
 
+### production
+
+* Default: false
+* Type: Boolean
+
+Set to true to run in "production" mode.
+
+1. devDependencies are not installed at the topmost level when running
+   local `npm install` without any arguments.
+2. Set the NODE_ENV="production" for lifecycle scripts.
+
 ### proxy
 
 * Default: `HTTP_PROXY` or `http_proxy` environment variable, or null
