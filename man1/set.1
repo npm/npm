@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CONFIG" "1" "June 2011" "" ""
+.TH "NPM\-CONFIG" "1" "July 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-config\fR \-\- Manage the npm configuration file
@@ -726,6 +726,28 @@ Type: path
 .P
 The location to install global items\.  If set on the command line, then
 it forces non\-global commands to run in the specified folder\.
+.
+.SS "production"
+.
+.IP "\(bu" 4
+Default: false
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Set to true to run in "production" mode\.
+.
+.IP "1" 4
+devDependencies are not installed at the topmost level when running
+local \fBnpm install\fR without any arguments\.
+.
+.IP "2" 4
+Set the NODE_ENV="production" for lifecycle scripts\.
+.
+.IP "" 0
 .
 .SS "proxy"
 .
