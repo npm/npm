@@ -31,7 +31,7 @@ else
 
   PREFIX=`dirname $node`
   PREFIX=`dirname $PREFIX`
-  echo "prefix=$PREFIX"
+  echo "cleanup prefix=$PREFIX"
   PREFIXES=$PREFIX
 
   altprefix=`"$node" -e process.installPrefix`
