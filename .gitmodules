@@ -1,21 +1,21 @@
 [submodule "node_modules/semver"]
 	path = node_modules/semver
-	url = git://github.com/isaacs/node-semver.git
+	url = https://github.com/isaacs/node-semver.git
 [submodule "node_modules/abbrev"]
 	path = node_modules/abbrev
-	url = git://github.com/isaacs/abbrev-js.git
+	url = https://github.com/isaacs/abbrev-js.git
 [submodule "node_modules/nopt"]
 	path = node_modules/nopt
-	url = git://github.com/isaacs/nopt.git
+	url = https://github.com/isaacs/nopt.git
 [submodule "node_modules/node-uuid"]
 	path = node_modules/node-uuid
-	url = git://github.com/broofa/node-uuid
+	url = https://github.com/broofa/node-uuid
 [submodule "node_modules/minimatch"]
 	path = node_modules/minimatch
-	url = git://github.com/isaacs/minimatch.git
+	url = https://github.com/isaacs/minimatch.git
 [submodule "node_modules/graceful-fs"]
 	path = node_modules/graceful-fs
-	url = git://github.com/isaacs/node-graceful-fs.git
+	url = https://github.com/isaacs/node-graceful-fs.git
 [submodule "node_modules/slide"]
 	path = node_modules/slide
-	url = git://github.com/isaacs/slide-flow-control.git
+	url = https://github.com/isaacs/slide-flow-control.git
