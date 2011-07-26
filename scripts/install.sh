@@ -136,14 +136,14 @@ cd "$TMP" \
           ret=$?
         fi
       fi
+
       if [ $ret -ne 0 ]; then
         echo "Aborted 0.x cleanup.  Exiting." >&2
         exit $ret
       fi) \
   && (if [ "$make" = "NOMAKE" ] || ! $make clean install; then
-        "$node" cli.js cache clean
-        "$node" cli.js rm npm --force --global
-        "$node" cli.js install . --force --global
+        "$node" cli.js rm npm -gf
+        "$node" cli.js install -gf
       fi) \
   && cd "$BACK" \
   && rm -rf "$TMP" \
