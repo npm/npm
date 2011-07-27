@@ -12,9 +12,12 @@ if [ "x$0" = "xsh" ]; then
   exit $ret
 fi
 
-if ! [ "x$NPM_DEBUG" = "x" ]; then
-  set +x
+npm_config_loglevel="error"
+if ! [ "x$npm_debug" = "x" ]; then
+  set -x
+  npm_config_loglevel="verbose"
 fi
+export npm_config_loglevel
 
 # make sure that node exists
 node=`which node 2>&1`

@@ -32,7 +32,7 @@ clean: uninstall
 	node cli.js cache clean
 
 uninstall: submodules
-	node cli.js rm npm -g -f --loglevel error
+	node cli.js rm npm -g -f
 
 man: man1
 
