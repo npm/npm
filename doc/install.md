@@ -1,4 +1,4 @@
-npm-install(1) -- install a package
+npm-install(1) -- Install a package
 ===================================
 
 ## SYNOPSIS
