@@ -157,31 +157,31 @@ npm.deref = function (c) {
 
 var loaded = false
   , loading = false
+  , loadErr = null
   , loadListeners = []
+
+function loadCb (er) {
+  loadListeners.forEach(function (cb) {
+    process.nextTick(cb.bind(npm, er, npm))
+  })
+  loadListeners.length = 0
+}
+
 
 npm.load = function (conf, cb_) {
   if (!cb_ && typeof conf === "function") cb_ = conf , conf = {}
   if (!cb_) cb_ = function () {}
   if (!conf) conf = {}
   loadListeners.push(cb_)
-  if (loaded) return cb()
+  if (loaded || loadErr) return cb(loadErr)
   if (loading) return
   loading = true
   var onload = true
 
-  function handleError (er) {
-    loadListeners.forEach(function (cb) {
-      process.nextTick(function () { cb(er, npm) })
-    })
-  }
-
   function cb (er) {
-    if (er) return handleError(er)
+    if (loadErr) return
     loaded = true
-    loadListeners.forEach(function (cb) {
-      process.nextTick(function () { cb(er, npm) })
-    })
-    loadListeners.length = 0
+    loadCb(loadErr = er)
     if (onload = onload && npm.config.get("onload-script")) {
       require(onload)
       onload = false
@@ -189,50 +189,69 @@ npm.load = function (conf, cb_) {
   }
 
   log.waitForConfig()
+
+  load(npm, conf, cb)
+}
+
+
+function load (npm, conf, cb) {
   which(process.argv[0], function (er, node) {
     if (!er && node !== process.execPath) {
       log.verbose("node symlink", node)
       process.execPath = node
       process.installPrefix = path.resolve(node, "..", "..")
     }
+
+    // look up configs
     ini.resolveConfigs(conf, function (er) {
-      if (er) return handleError(er)
-      var p
-      if (!npm.config.get("global")
-          && !conf.hasOwnProperty("prefix")) {
-        p = process.cwd()
-      } else {
-        p = npm.config.get("prefix")
+      if (er) return cb(er)
+
+      var n = 2
+        , errState
+
+      loadPrefix(npm, conf, next)
+      loadUid(npm, conf, next)
+
+      function next (er) {
+        if (errState) return
+        if (er) return cb(errState = er)
+        if (-- n <= 0) return cb()
       }
-
-      // if we're not in unsafe-perm mode, then figure out who
-      // to run stuff as.  Do this first, to support `npm update npm -g`
-      if (!npm.config.get("unsafe-perm")) {
-        getUid( npm.config.get("user"), npm.config.get("group")
-              , function (er, uid, gid) {
-          if (er) return log.er(cb, "Could not get uid/gid")(er)
-          next()
-        })
-      } else next()
-
-      function next () {
-        // try to guess at a good node_modules location.
-        findPrefix(p, function (er, p) {
-          if (er) return handleError(er)
-          Object.defineProperty(npm, "prefix",
-            { get : function () { return p }
-            , set : function (r) { return p = r }
-            , enumerable : true
-            })
-          return cb()
-        })
-      }
-
     })
   })
 }
 
-var path = require("path")
+
+function loadPrefix (npm, conf, cb) {
+  // try to guess at a good node_modules location.
+  var p
+  if (!npm.config.get("global")
+      && !conf.hasOwnProperty("prefix")) {
+    p = process.cwd()
+  } else {
+    p = npm.config.get("prefix")
+  }
+
+  findPrefix(p, function (er, p) {
+    Object.defineProperty(npm, "prefix",
+      { get : function () { return p }
+      , set : function (r) { return p = r }
+      , enumerable : true
+      })
+    cb()
+  })
+}
+
+
+function loadUid (npm, conf, cb) {
+  // if we're not in unsafe-perm mode, then figure out who
+  // to run stuff as.  Do this first, to support `npm update npm -g`
+  if (!npm.config.get("unsafe-perm")) {
+    getUid(npm.config.get("user"), npm.config.get("group"), cb)
+  } else cb()
+}
+
+
 npm.config =
   { get : function (key) { return ini.get(key) }
   , set : function (key, val) { return ini.set(key, val, "cli") }
