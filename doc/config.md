@@ -503,6 +503,14 @@ The tar executable
 Where to store temporary files and folders.  All temp files are deleted
 on success, but left behind on failure for forensic purposes.
 
+### unicode
+
+* Default: true
+* Type: Boolean
+
+When set to true, npm uses unicode characters in the tree output.  When
+false, it uses ascii characters to draw trees.
+
 ### unsafe-perm
 
 * Default: false if running as root, true otherwise
