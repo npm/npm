@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CONFIG" "1" "July 2011" "" ""
+.TH "NPM\-CONFIG" "1" "August 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-config\fR \-\- Manage the npm configuration file
@@ -156,6 +156,12 @@ The following shorthands are parsed on the command\-line:
 .
 .IP "\(bu" 4
 \fB\-S\fR: \fB\-\-save\fR
+.
+.IP "\(bu" 4
+\fB\-y\fR: \fB\-\-yes\fR
+.
+.IP "\(bu" 4
+\fB\-n\fR: \fB\-\-yes false\fR
 .
 .IP "\(bu" 4
 \fBll\fR and \fBla\fR commands: \fBls \-\-long\fR
@@ -901,6 +907,20 @@ Type: path
 Where to store temporary files and folders\.  All temp files are deleted
 on success, but left behind on failure for forensic purposes\.
 .
+.SS "unicode"
+.
+.IP "\(bu" 4
+Default: true
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+When set to true, npm uses unicode characters in the tree output\.  When
+false, it uses ascii characters to draw trees\.
+.
 .SS "unsafe\-perm"
 .
 .IP "\(bu" 4
@@ -1014,3 +1034,21 @@ Type: path
 .
 .P
 The program to use to view help content\.
+.
+.SS "yes"
+.
+.IP "\(bu" 4
+Default: null
+.
+.IP "\(bu" 4
+Type: Boolean or null
+.
+.IP "" 0
+.
+.P
+If set to \fBnull\fR, then prompt the user for responses in some
+circumstances\.
+.
+.P
+If set to \fBtrue\fR, then answer "yes" to any prompt\.  If set to \fBfalse\fR
+then answer "no" to any prompt\.
