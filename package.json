@@ -30,7 +30,8 @@
   , "graceful-fs" : "1"
   , "minimatch" : "0"
   , "nopt" : "1"
-  , "node-uuid" : "1.2" }
+  , "node-uuid" : "1.2"
+  , "rimraf" : "1" }
 , "bundleDependencies" :
   [ "slide"
   , "semver"
