@@ -40,7 +40,7 @@ Install it locally.
 
 Check out `npm link`.  You might like it.
 
-## No, I really want 0.x style "everything's global" style.
+## No, I really want 0.x style 'everything global' style.
 
 Ok, fine.  Do this:
 
@@ -58,7 +58,7 @@ When you realize what a mistake it was, do this to switch back:
 
     npm config delete global --local
 
-## If "npm" is an acronym, why is it never capitalized?
+## If 'npm' is an acronym, why is it never capitalized?
 
 Contrary to the belief of many, "npm" is not in fact an abbreviation for
 "Node Package Manager".  It is a recursive bacronymic abbreviation for
@@ -155,17 +155,12 @@ See `npm help registry`.
 
 ## What's up with the insecure channel warnings?
 
-As of this writing, node has problems uploading files over HTTPS.  That
-means that publishes go over HTTP by default.
-
-Allegedly this problem is solved in node 0.4.7.  You can suppress those
-warnings by doing this:
-
-    npm config set registry https://registry.npmjs.org
+Until node 0.4.10, there were problems sending big files over HTTPS.  That
+means that publishes go over HTTP by default in those versions of node.
 
 ## I forgot my password, and can't publish.  How do I reset it?
 
-Go to <http://admin.npmjs.org/>.
+Go to <http://admin.npmjs.org/reset>.
 
 ## I get ECONNREFUSED a lot.  What's up?
 
@@ -178,8 +173,8 @@ To check if the registry is down, open up
 in a web browser.  This will also tell you if you are just unable to
 access the internet for some reason.
 
-If the registry IS down, let me know by emailing <i@izs.me>.  I'll have
-someone kick it or something.
+If the registry IS down, let me know by emailing or posting an issue.
+We'll have someone kick it or something.
 
 ## Who does npm?
 
