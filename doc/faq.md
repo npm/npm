@@ -58,6 +58,23 @@ When you realize what a mistake it was, do this to switch back:
 
     npm config delete global --local
 
+## If "npm" is an acronym, why is it never capitalized?
+
+Contrary to the belief of many, "npm" is not in fact an abbreviation for
+"Node Package Manager".  It is a recursive bacronymic abbreviation for
+"npm is not an acronym".
+
+"NPM", however, *is* an acronym for the National Association of
+Pastoral Musicians.  You can learn more about them at <http://npm.org/>.
+It is not an acronym, you see, but rather a capitonym.
+
+In all earnestness, "npm" is named after its command-line utility,
+which was mostly designed to be easily typed by right-handed programmers
+using US QWERTY keyboard layouts, ending with the right-ring-finger in a
+postition to type the `"-"` key for flags and other command-line
+arguments, and is always lower-case, though it starts most sentences it
+is a part of.
+
 ## How do I list installed packages?
 
 `npm ls`
