@@ -28,3 +28,6 @@
 [submodule "node_modules/ini"]
 	path = node_modules/ini
 	url = https://github.com/isaacs/ini.git
+[submodule "node_modules/which"]
+	path = node_modules/which
+	url = https://github.com/isaacs/node-which.git
