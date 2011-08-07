@@ -11,18 +11,18 @@ if (require.main === module) {
 
 var EventEmitter = require("events").EventEmitter
   , npm = module.exports = new EventEmitter
-  , config = require("./lib/config")
-  , set = require("./lib/utils/set")
-  , get = require("./lib/utils/get")
-  , ini = require("./lib/utils/ini")
-  , log = require("./lib/utils/log")
+  , config = require("./lib/config.js")
+  , set = require("./lib/utils/set.js")
+  , get = require("./lib/utils/get.js")
+  , ini = require("./lib/utils/ini.js")
+  , log = require("./lib/utils/log.js")
   , fs = require("graceful-fs")
   , path = require("path")
   , abbrev = require("abbrev")
   , which = require("which")
   , semver = require("semver")
-  , findPrefix = require("./lib/utils/find-prefix")
-  , getUid = require("./lib/utils/uid-number")
+  , findPrefix = require("./lib/utils/find-prefix.js")
+  , getUid = require("./lib/utils/uid-number.js")
 
 npm.commands = {}
 npm.ELIFECYCLE = {}
@@ -144,7 +144,7 @@ Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
       npm.config.set("long", true)
     }
     if (commandCache[a]) return commandCache[a]
-    return commandCache[a] = require(__dirname+"/lib/"+a)
+    return commandCache[a] = require(__dirname+"/lib/"+a+".js")
   }, enumerable: fullList.indexOf(c) !== -1 })
 })
 
