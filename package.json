@@ -31,6 +31,7 @@
   , "minimatch" : "0"
   , "nopt" : "1"
   , "node-uuid" : "1.2"
+  , "proto-list": "1"
   , "rimraf" : "1" }
 , "bundleDependencies" :
   [ "slide"
@@ -39,7 +40,9 @@
   , "graceful-fs"
   , "minimatch"
   , "nopt"
-  , "node-uuid" ]
+  , "node-uuid"
+  , "rimraf"
+  , "proto-list" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
 , "scripts" : { "test" : "./test/run.sh"

@@ -22,3 +22,6 @@
 [submodule "node_modules/rimraf"]
 	path = node_modules/rimraf
 	url = https://github.com/isaacs/rimraf.git
+[submodule "node_modules/proto-list"]
+	path = node_modules/proto-list
+	url = https://github.com/isaacs/proto-list.git
