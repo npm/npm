@@ -205,24 +205,11 @@ See \fBnpm help link\fR
 See \fBnpm help registry\fR\|\.
 .
 .SH "What\'s up with the insecure channel warnings?"
-As of this writing, node has problems uploading files over HTTPS\.  That
-means that publishes go over HTTP by default\.
-.
-.P
-Allegedly this problem is solved in node 0\.4\.7\.  You can suppress those
-warnings by doing this:
-.
-.IP "" 4
-.
-.nf
-npm config set registry https://registry\.npmjs\.org
-.
-.fi
-.
-.IP "" 0
+Until node 0\.4\.10, there were problems sending big files over HTTPS\.  That
+means that publishes go over HTTP by default in those versions of node\.
 .
 .SH "I forgot my password, and can\'t publish\.  How do I reset it?"
-Go to \fIhttp://admin\.npmjs\.org/\fR\|\.
+Go to \fIhttp://admin\.npmjs\.org/reset\fR\|\.
 .
 .SH "I get ECONNREFUSED a lot\.  What\'s up?"
 Either the registry is down, or node\'s DNS isn\'t able to reach out\.
@@ -235,8 +222,8 @@ in a web browser\.  This will also tell you if you are just unable to
 access the internet for some reason\.
 .
 .P
-If the registry IS down, let me know by emailing \fIi@izs\.me\fR\|\.  I\'ll have
-someone kick it or something\.
+If the registry IS down, let me know by emailing or posting an issue\.
+We\'ll have someone kick it or something\.
 .
 .SH "Who does npm?"
 \fBnpm view npm author\fR
