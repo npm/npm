@@ -8,7 +8,6 @@ var fs = require("graceful-fs")
   , path = require("path")
   , npm = require("../npm")
   , ini = require("../lib/utils/ini")
-  , rm = require("../lib/utils/rm-rf")
   , errorHandler = require("../lib/utils/error-handler")
 
   , configDefs = require("../lib/utils/config-defs")
