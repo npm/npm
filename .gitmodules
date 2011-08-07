@@ -25,3 +25,6 @@
 [submodule "node_modules/proto-list"]
 	path = node_modules/proto-list
 	url = https://github.com/isaacs/proto-list.git
+[submodule "node_modules/ini"]
+	path = node_modules/ini
+	url = https://github.com/isaacs/ini.git

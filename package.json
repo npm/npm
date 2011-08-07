@@ -25,6 +25,7 @@
           , "npm-g" : "./bin/npm.js" }
 , "dependencies" :
   { "semver" : "1"
+  , "ini" : "1"
   , "slide" : "1"
   , "abbrev" : "1"
   , "graceful-fs" : "1"
@@ -35,6 +36,7 @@
   , "rimraf" : "1" }
 , "bundleDependencies" :
   [ "slide"
+  , "ini"
   , "semver"
   , "abbrev"
   , "graceful-fs"
