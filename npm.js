@@ -89,6 +89,7 @@ var commandCache = {}
               , "link"
 
               , "publish"
+              , "star"
               , "tag"
               , "adduser"
               , "unpublish"
