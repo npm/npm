@@ -144,9 +144,23 @@ Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
       npm.config.set("long", true)
     }
     if (commandCache[a]) return commandCache[a]
-    return commandCache[a] = require(__dirname+"/lib/"+a+".js")
+    var cmd = require(__dirname+"/lib/"+a+".js")
+    commandCache[a] = function () {
+      if (typeof arguments[arguments.length - 1] !== "function") {
+        Array.prototype.push.call(arguments, defaultCb)
+      }
+      cmd.apply(npm, arguments)
+    }
+    commandCache[a].completion = cmd.completion
+    commandCache[a].usage = cmd.usage
+    return commandCache[a]
   }, enumerable: fullList.indexOf(c) !== -1 })
 })
+
+function defaultCb (er, data) {
+  if (er) console.error(er.stack || er.message)
+  else console.log(data)
+}
 
 npm.deref = function (c) {
   if (plumbing.indexOf(c) !== -1) return c
