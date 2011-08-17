@@ -300,3 +300,25 @@ Object.defineProperty(npm, "tmp",
     }
   , enumerable : true
   })
+
+// the better to repl you with
+Object.getOwnPropertyNames(npm.commands).forEach(function (n) {
+  if (npm.hasOwnProperty(n)) return
+
+  Object.defineProperty(npm, n, { get: function () {
+    return function () {
+      var args = Array.prototype.slice.call(arguments, 0)
+        , cb = defaultCb
+
+      if (args.length === 1 && Array.isArray(args[0])) {
+        args = args[0]
+      }
+
+      if (typeof args[args.length - 1] === "function") {
+        cb = args.pop()
+      }
+
+      npm.commands[n](args, cb)
+    }
+  }, enumerable: false, configurable: true })
+})
