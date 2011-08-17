@@ -151,8 +151,9 @@ Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
       }
       cmd.apply(npm, arguments)
     }
-    commandCache[a].completion = cmd.completion
-    commandCache[a].usage = cmd.usage
+    Object.keys(cmd).forEach(function (k) {
+      commandCache[a][k] = cmd[k]
+    })
     return commandCache[a]
   }, enumerable: fullList.indexOf(c) !== -1 })
 })
