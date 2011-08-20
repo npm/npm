@@ -1,0 +1,107 @@
+.\" Generated with Ronnjs/v0.1
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "NPM" "3" "August 2011" "" ""
+.
+.SH "NAME"
+\fBnpm\fR \-\- node package manager
+.
+.SH "SYNOPSIS"
+.
+.nf
+npm\.commands\.<command>([args])
+.
+.fi
+.
+.SH "DESCRIPTION"
+npm is the package manager for the Node JavaScript platform\.  It puts
+modules in place so that node can find them, and manages dependency
+conflicts intelligently\.
+.
+.P
+It is extremely configurable to support a wide variety of use cases\.
+Most commonly, it is used to publish, discover, install, and develop node
+programs\.
+.
+.P
+Run \fBnpm help\fR to get a list of available commands\.
+.
+.SH "INTRODUCTION"
+Since you\'re looking at this man page, you are probably wanting to integrate
+npm into your fantastic program\.
+.
+.P
+Every time you use npm, you must call npm\.load() with an object hash of
+command\-line configs\. After that, each of the functions are accessible in the
+commands object: \fBnpm\.commands\.<cmd>\fR  Check out \fBnpm help config\fR or \fBman npm\-config\fR for all available options\.
+.
+.P
+All commands on the command object take an \fBarray\fR of positional argument \fBstrings\fR\|\. The last argument to any function is a callback\. Some commands are
+special and take other optional arguments\.
+.
+.P
+Configs cannot currently be set on a per function basis, as each call to
+npm\.config\.set will change the value for \fIall\fR npm commands in that process\.
+.
+.P
+To find API documentation for a specific command, try the man pages first\.
+For example, if you wanted documentation on how the "update" command works, try \fBman 3 npm\-commands\-load\fR\|\.
+.
+.P
+If all else fails, read the source\.
+.
+.SH "CONTRIBUTIONS"
+Patches welcome!
+.
+.IP "\(bu" 4
+code:
+Read through \fBnpm help coding\-style\fR if you plan to submit code\.
+You don\'t have to agree with it, but you do have to follow it\.
+.
+.IP "\(bu" 4
+docs:
+If you find an error in the documentation, edit the appropriate markdown
+file in the "doc" folder\.  (Don\'t worry about generating the man page\.)
+.
+.IP "" 0
+.
+.P
+Contributors are listed in npm\'s \fBpackage\.json\fR file\.  You can view them
+easily by doing \fBnpm view npm contributors\fR\|\.
+.
+.P
+If you would like to contribute, but don\'t know what to work on, check
+the issues list or ask on the mailing list\.
+.
+.IP "\(bu" 4
+\fIhttp://github\.com/isaacs/npm/issues\fR
+.
+.IP "\(bu" 4
+\fInpm\-@googlegroups\.com\fR
+.
+.IP "" 0
+.
+.SH "BUGS"
+When you find issues, please report them:
+.
+.IP "\(bu" 4
+web: \fIhttp://github\.com/isaacs/npm/issues\fR
+.
+.IP "\(bu" 4
+email: \fInpm\-@googlegroups\.com\fR
+.
+.IP "" 0
+.
+.P
+Be sure to include \fIall\fR of the output from the npm command that didn\'t work
+as expected\.  The \fBnpm\-debug\.log\fR file is also helpful to provide\.
+.
+.P
+You can also look for isaacs in #node\.js on irc://irc\.freenode\.net\.  He
+will no doubt tell you to put the output in a gist or email\.
+.
+.SH "HISTORY"
+See npm\-changelog(3)
+.
+.SH "AUTHOR"
+Isaac Z\. Schlueter :: isaacs :: @izs :: \fIi@izs\.me\fR
