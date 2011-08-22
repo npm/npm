@@ -111,11 +111,22 @@ A package is:
 * d) a `<name>@<version>` that is published on the registry with (c)
 * e) a `<name>@<tag>` that points to (d)
 * f) a `<name>` that has a "latest" tag satisfying (e)
+* g) a `git` url that, when cloned, results in (a).
 
 Even if you never publish your package, you can still get a lot of
 benefits of using npm if you just want to write a node program (a), and
 perhaps if you also want to be able to easily install it elsewhere
 after packing it up into a tarball (b).
+
+Git urls can be of the form:
+
+    git://github.com/user/project.git#commit-ish
+    git+ssh://user@hostname:project.git#commit-ish
+    git+http://user@hostname/project/blah.git#commit-ish
+    git+https://user@hostname/project/blah.git#commit-ish
+
+The `commit-ish` can be any tag, sha, or branch which can be supplied as
+an argument to `git checkout`.  The default is `master`.
 
 ## How do I install node with npm?
 
@@ -137,13 +148,8 @@ To set up your own private registry, check out `npm help registry`.
 ## Can I list a url as a dependency?
 
 Yes.  It should be a url to a gzipped tarball containing a single folder
-that has a package.json in its root.  (See "what is a package?" above.)
-
-## OK, but can I list a git repo as a dependency?
-
-No.
-
-However, you can list a url as a dependency.
+that has a package.json in its root, or a git url.
+(See "what is a package?" above.)
 
 ## How do I symlink to a dev folder so I don't have to keep re-installing?
 
