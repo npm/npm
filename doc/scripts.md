@@ -49,6 +49,13 @@ npm will default some script values based on package contents.
   If there is a `wscript` file in the root of your package, npm will
   default the `preinstall` command to compile using node-waf.
 
+## USER
+
+If npm was invoked with root privileges, then it will change the uid to
+the user account or uid specified by the `user` config, which defaults
+to `nobody`.  Set the `unsafe-perm` flag to run scripts with root
+privileges.
+
 ## ENVIRONMENT
 
 Package scripts run in an environment where many pieces of information are
