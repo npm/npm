@@ -15,7 +15,7 @@
   , "web" : "http://github.com/isaacs/npm/issues"
   }
 , "directories" : { "doc" : "./doc"
-                  , "man" : "./man1"
+                  , "man" : "./man"
                   , "lib" : "./lib"
                   , "bin" : "./bin"
                   }

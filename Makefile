@@ -1,12 +1,12 @@
 SHELL = bash
 
-cli_docs = $(shell find doc -name '*.md' \
+cli_docs = $(shell find doc/cli -name '*.md' \
 				|sed 's|.md|.1|g' \
-				|sed 's|doc/|man1/|g' )
+				|sed 's|doc/cli/|man/man1/|g' )
 
-api_docs = $(shell find api-doc -name '*.md' \
+api_docs = $(shell find doc/api -name '*.md' \
 				|sed 's|.md|.3|g' \
-				|sed 's|api-doc/|man3/|g' )
+				|sed 's|doc/api/|man/man3/|g' )
 
 cli_doc_subfolders = $(shell find doc -type d \
 									|sed 's|doc/|man1/|g' )
@@ -41,30 +41,24 @@ clean: uninstall
 uninstall: submodules
 	node cli.js rm npm -g -f
 
-man: man1 man3
+doc: man
 
-man1: $(cli_doc_subfolders)
-	[ -d man1 ] || mkdir -p man1
+man: man/man1 man/man3
 
-man3: $(api_doc_subfolders)
-	[ -d man3 ] || mkdir -p man3
+man/man1: $(cli_docs)
+	[ -d man/man1 ] || mkdir -p man/man1
 
-doc: man1 $(cli_docs) man3 $(api_docs)
+man/man3: $(api_docs)
+	[ -d man/man3 ] || mkdir -p man/man3
 
 # use `npm install ronn` for this to work.
-man1/%.1: doc/%.md
+man/man1/%.1: doc/cli/%.md
 	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
 	./node_modules/.bin/ronn --roff $< > $@
 
-man1/%/: doc/%/
-	@[ -d $@ ] || mkdir -p $@
-
-man3/%.3: api-doc/%.md
+man/man3/%.3: doc/api/%.md
 	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
 	./node_modules/.bin/ronn --roff $< > $@
-
-man3/%/: api-doc/%/
-	@[ -d $@ ] || mkdir -p $@
 
 test: submodules
 	node cli.js test
