@@ -146,10 +146,12 @@ Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
     if (commandCache[a]) return commandCache[a]
     var cmd = require(__dirname+"/lib/"+a+".js")
     commandCache[a] = function () {
-      if (typeof arguments[arguments.length - 1] !== "function") {
-        Array.prototype.push.call(arguments, defaultCb)
+      var args = Array.prototype.slice.call(arguments, 0)
+      if (!Array.isArray(args[0])) args.unshift([])
+      if (typeof args[args.length - 1] !== "function") {
+        args.push(defaultCb)
       }
-      cmd.apply(npm, arguments)
+      cmd.apply(npm, args)
     }
     Object.keys(cmd).forEach(function (k) {
       commandCache[a][k] = cmd[k]
