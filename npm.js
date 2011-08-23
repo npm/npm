@@ -1,14 +1,6 @@
 
 process.title = "npm"
 
-if (require.main === module) {
-  console.error(["It looks like you're doing 'node npm.js'."
-                ,"Don't do that.  Instead, run 'make install'"
-                ,"and then use the 'npm' command line utility."
-                ].join("\n"))
-  process.exit(1)
-}
-
 var EventEmitter = require("events").EventEmitter
   , npm = module.exports = new EventEmitter
   , config = require("./lib/config.js")
@@ -325,3 +317,7 @@ Object.getOwnPropertyNames(npm.commands).forEach(function (n) {
     }
   }, enumerable: false, configurable: true })
 })
+
+if (require.main === module) {
+  require("./bin/npm.js")
+}
