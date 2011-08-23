@@ -41,7 +41,7 @@ curl http://npmjs.org/install.sh | clean=yes sh
 If that fails, try this:
 
 ```bash
-git clone http://github.com/isaacs/npm.git
+git clone https://github.com/isaacs/npm.git
 cd npm
 sudo make install
 ```

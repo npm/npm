@@ -166,6 +166,7 @@ function defaultCb (er, data) {
 }
 
 npm.deref = function (c) {
+  if (!c) return ""
   if (c.match(/[A-Z]/)) c = c.replace(/([A-Z])/g, function (m) {
     return "-" + m.toLowerCase()
   })
