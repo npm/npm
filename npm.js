@@ -127,7 +127,7 @@ var commandCache = {}
     })
   , abbrevs = abbrev(fullList)
 
-Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
+Object.keys(abbrevs).concat(plumbing).forEach(function addCommand (c) {
   Object.defineProperty(npm.commands, c, { get : function () {
     if (!loaded) throw new Error(
       "Call npm.load(conf, cb) before using this command.\n"+
@@ -151,6 +151,13 @@ Object.keys(abbrevs).concat(plumbing).forEach(function (c) {
     })
     return commandCache[a]
   }, enumerable: fullList.indexOf(c) !== -1 })
+
+  // make css-case commands callable via camelCase as well
+  if (c.match(/\-([a-z])/)) {
+    addCommand(c.replace(/\-([a-z])/g, function (a, b) {
+      return b.toUpperCase()
+    }))
+  }
 })
 
 function defaultCb (er, data) {
@@ -159,6 +166,9 @@ function defaultCb (er, data) {
 }
 
 npm.deref = function (c) {
+  if (c.match(/[A-Z]/)) c = c.replace(/([A-Z])/g, function (m) {
+    return "-" + m.toLowerCase()
+  })
   if (plumbing.indexOf(c) !== -1) return c
   var a = abbrevs[c]
   if (aliases[a]) a = aliases[a]
