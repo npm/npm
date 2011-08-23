@@ -8,12 +8,6 @@ api_docs = $(shell find doc/api -name '*.md' \
 				|sed 's|.md|.3|g' \
 				|sed 's|doc/api/|man/man3/|g' )
 
-cli_doc_subfolders = $(shell find doc -type d \
-									|sed 's|doc/|man1/|g' )
-
-api_doc_subfolders = $(shell find api-doc -type d \
-									|sed 's|api-doc/|man3/|g' )
-
 # This is the default make target.
 # Since 'make' typically does non-installation build stuff,
 # it seems appropriate.
@@ -43,20 +37,20 @@ uninstall: submodules
 
 doc: man
 
-man: man/man1 man/man3
+man: $(cli_docs) $(api_docs)
 
-man/man1: $(cli_docs)
+man/man1:
 	[ -d man/man1 ] || mkdir -p man/man1
 
-man/man3: $(api_docs)
+man/man3:
 	[ -d man/man3 ] || mkdir -p man/man3
 
 # use `npm install ronn` for this to work.
-man/man1/%.1: doc/cli/%.md
+man/man1/%.1: doc/cli/%.md man/man1
 	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
 	./node_modules/.bin/ronn --roff $< > $@
 
-man/man3/%.3: doc/api/%.md
+man/man3/%.3: doc/api/%.md man/man3
 	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
 	./node_modules/.bin/ronn --roff $< > $@
 
