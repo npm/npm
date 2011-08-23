@@ -3,24 +3,15 @@ npm(3) -- node package manager
 
 ## SYNOPSIS
 
-    npm.commands.<command>([args])
+    var npm = require("npm")
+    npm.load(configObject, function (er, npm) {
+      // use the npm object, now that it's loaded.
+    })
 
 ## DESCRIPTION
 
-npm is the package manager for the Node JavaScript platform.  It puts
-modules in place so that node can find them, and manages dependency
-conflicts intelligently.
-
-It is extremely configurable to support a wide variety of use cases.
-Most commonly, it is used to publish, discover, install, and develop node
-programs.
-
-Run `npm help` to get a list of available commands.
-
-## INTRODUCTION
-
 Since you're looking at this man page, you are probably wanting to integrate
-npm into your fantastic program.
+npm into your program.  If you want to 
 
 Every time you use npm, you must call npm.load() with an object hash of
 command-line configs. After that, each of the functions are accessible in the
