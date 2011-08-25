@@ -1,6 +1,4 @@
 { "name":"npm-test-url-dep"
 , "version" : "1.2.3"
-, "files" : []
 , "dependencies" :
-  { "express" : "*"
-  , "npm" : "https://github.com/isaacs/npm/tarball/master" } }
+  { "express" : "https://github.com/visionmedia/express/tarball/master" } }
