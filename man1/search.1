@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-SEARCH" "1" "July 2011" "" ""
+.TH "NPM\-SEARCH" "1" "August 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-search\fR \-\- Search for packages
@@ -14,4 +14,17 @@ npm search [search terms \.\.\.]
 .fi
 .
 .SH "DESCRIPTION"
-Search the registry for packages matching the search terms\.
+Search the registry for packages matching the search terms\. It is possible to
+use the following special characters:
+.
+.IP "\(bu" 4
+| means OR
+.
+.IP "\(bu" 4
+& means AND (equivalent to whitespace between two words)
+.
+.IP "\(bu" 4
+() may be used for priority (default: parse left to right)
+.
+.IP "" 0
+
