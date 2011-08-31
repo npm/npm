@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-SCRIPTS" "1" "July 2011" "" ""
+.TH "NPM\-SCRIPTS" "1" "August 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-scripts\fR \-\- How npm handles the "scripts" field
@@ -82,6 +82,12 @@ If there is a \fBwscript\fR file in the root of your package, npm will
 default the \fBpreinstall\fR command to compile using node\-waf\.
 .
 .IP "" 0
+.
+.SH "USER"
+If npm was invoked with root privileges, then it will change the uid to
+the user account or uid specified by the \fBuser\fR config, which defaults
+to \fBnobody\fR\|\.  Set the \fBunsafe\-perm\fR flag to run scripts with root
+privileges\.
 .
 .SH "ENVIRONMENT"
 Package scripts run in an environment where many pieces of information are
