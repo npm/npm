@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-CONFIG" "1" "August 2011" "" ""
+.TH "NPM\-CONFIG" "1" "September 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-config\fR \-\- Manage the npm configuration file
@@ -502,6 +502,19 @@ Type: path
 .
 .P
 The gzip binary
+.
+.SS "https\-proxy"
+.
+.IP "\(bu" 4
+Default: the \fBHTTPS_PROXY\fR or \fBhttps_proxy\fR or \fBHTTP_PROXY\fR or \fBhttp_proxy\fR environment variables\.
+.
+.IP "\(bu" 4
+Type: url
+.
+.IP "" 0
+.
+.P
+A proxy to use for outgoing https requests\.
 .
 .SS "ignore"
 .

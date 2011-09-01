@@ -280,6 +280,14 @@ user.
 
 The gzip binary
 
+### https-proxy
+
+* Default: the `HTTPS_PROXY` or `https_proxy` or `HTTP_PROXY` or
+  `http_proxy` environment variables.
+* Type: url
+
+A proxy to use for outgoing https requests.
+
 ### ignore
 
 * Default: ""
