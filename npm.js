@@ -216,7 +216,7 @@ npm.load = function (conf, cb_) {
 
 function load (npm, conf, cb) {
   which(process.argv[0], function (er, node) {
-    if (!er && node !== process.execPath) {
+    if (!er && node.toUpperCase() !== process.execPath.toUpperCase()) {
       log.verbose("node symlink", node)
       process.execPath = node
       process.installPrefix = path.resolve(node, "..", "..")
