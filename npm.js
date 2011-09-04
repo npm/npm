@@ -216,6 +216,7 @@ npm.load = function (conf, cb_) {
 
 function load (npm, conf, cb) {
   which(process.argv[0], function (er, node) {
+    //console.error("back from which")
     if (!er && node.toUpperCase() !== process.execPath.toUpperCase()) {
       log.verbose("node symlink", node)
       process.execPath = node
@@ -223,7 +224,10 @@ function load (npm, conf, cb) {
     }
 
     // look up configs
+    //console.error("about to look up configs")
+
     ini.resolveConfigs(conf, function (er) {
+      //console.error("back from config lookup", er && er.stack)
       if (er) return cb(er)
 
       var n = 2
@@ -233,6 +237,7 @@ function load (npm, conf, cb) {
       loadUid(npm, conf, next)
 
       function next (er) {
+        //console.error("next", er && er.stack)
         if (errState) return
         if (er) return cb(errState = er)
         if (-- n <= 0) return cb()
@@ -253,6 +258,7 @@ function loadPrefix (npm, conf, cb) {
   }
 
   findPrefix(p, function (er, p) {
+    //console.log("Back from findPrefix", er && er.stack, p)
     Object.defineProperty(npm, "prefix",
       { get : function () { return p }
       , set : function (r) { return p = r }
@@ -268,7 +274,10 @@ function loadUid (npm, conf, cb) {
   // to run stuff as.  Do this first, to support `npm update npm -g`
   if (!npm.config.get("unsafe-perm")) {
     getUid(npm.config.get("user"), npm.config.get("group"), cb)
-  } else cb()
+  } else {
+    //console.error("skipping loadUid")
+    process.nextTick(cb)
+  }
 }
 
 
