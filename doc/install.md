@@ -51,7 +51,7 @@ after packing it up into a tarball (b).
 
   Example:
 
-      npm install ./package.tgz
+        npm install ./package.tgz
 
 * npm install `<tarball url>`:
   Fetch the tarball url, and then install it.  In order to distinguish between
@@ -59,7 +59,7 @@ after packing it up into a tarball (b).
 
   Example:
 
-      npm install http://github.com/waveto/node-crypto/tarball/v0.0.5
+        npm install http://github.com/waveto/node-crypto/tarball/v0.0.5
 
 * npm install `<name>`:
   Do a `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
@@ -67,7 +67,7 @@ after packing it up into a tarball (b).
 
   Example:
 
-      npm install sax
+        npm install sax
 
 * npm install `<name>@<tag>`:
   Install the version of the package that is referenced by the specified tag.
@@ -76,7 +76,7 @@ after packing it up into a tarball (b).
 
   Example:
 
-      npm install sax@stable
+        npm install sax@stable
 
 * npm install `<name>@<version>`:
   Install the specified version of the package.  This will fail if the version
@@ -84,7 +84,7 @@ after packing it up into a tarball (b).
 
   Example:
 
-      npm install sax@0.1.1
+        npm install sax@0.1.1
 
 * npm install `<name>@<version range>`:
   Install a version of the package matching the specified version range.  This
@@ -95,7 +95,7 @@ after packing it up into a tarball (b).
 
   Example:
 
-      npm install sax@">=0.1.0 <0.2.0"
+        npm install sax@">=0.1.0 <0.2.0"
 
 You may combine multiple arguments, and even multiple types of arguments.
 For example:
