@@ -1,6 +1,8 @@
 npm(1) -- node package manager
 ==============================
 
+## SYNOPSIS
+
 This is just enough info to get you up and running.
 
 Much more info available via `npm help` once it's installed.
@@ -187,3 +189,9 @@ reported, and we'll lose respect for you.  But there is no vetting
 process for published modules.
 
 If this concerns you, inspect the source before using packages.
+
+## SEE ALSO
+
+* npm(1)
+* npm-faq(1)
+* npm-help(1)

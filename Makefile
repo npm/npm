@@ -2,7 +2,7 @@ SHELL = bash
 
 docs = $(shell find doc -name '*.md' \
 				|sed 's|.md|.1|g' \
-				|sed 's|doc/|man1/|g' )
+				|sed 's|doc/|man1/|g' ) man1/README.1
 
 htmldocs = $(shell find doc -name '*.md' \
 						|sed 's|.md|.html|g' \
