@@ -364,8 +364,7 @@ input.submit, input#submit, input.button, button, input[type=submit] {
 <script>
 ;(function () {
 var wrapper = document.getElementById("wrapper")
-var els = Array.prototype.slice.call(wrapper)
-  .getElementsByTagName("*"), 0)
+var els = Array.prototype.slice.call(wrapper.getElementsByTagName("*"), 0)
   .filter(function (el) {
     return el.parentNode === wrapper
         && el.tagName.match(/H[1-6]/)
