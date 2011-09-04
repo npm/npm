@@ -3,7 +3,11 @@ npm-faq(1) -- Frequently Asked Questions
 
 ## Where can I find these docs in HTML?
 
-<http://npmjs.org/doc/>
+<http://npmjs.org/doc/>, or run:
+
+    npm config set viewer browser
+
+to open these documents in your default web browser rather than `man`.
 
 ## It didn't work.
 
