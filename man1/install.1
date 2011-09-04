@@ -1,7 +1,7 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.TH "NPM\-INSTALL" "1" "August 2011" "" ""
+.TH "NPM\-INSTALL" "1" "September 2011" "" ""
 .
 .SH "NAME"
 \fBnpm-install\fR \-\- install a package
@@ -78,8 +78,15 @@ must either be "\." or contain a "/" in it\.
 .IP
 Example:
 .
-.IP
-  npm install \./package\.tgz
+.IP "" 4
+.
+.nf
+npm install \./package\.tgz
+.
+.fi
+.
+.IP "" 0
+
 .
 .IP "\(bu" 4
 npm install \fB<tarball url>\fR:
@@ -89,8 +96,15 @@ this and other options, the argument must start with "http://" or "https://"
 .IP
 Example:
 .
-.IP
-  npm install http://github\.com/waveto/node\-crypto/tarball/v0\.0\.5
+.IP "" 4
+.
+.nf
+npm install http://github\.com/waveto/node\-crypto/tarball/v0\.0\.5
+.
+.fi
+.
+.IP "" 0
+
 .
 .IP "\(bu" 4
 npm install \fB<name>\fR:
@@ -99,8 +113,15 @@ Do a \fB<name>@<tag>\fR install, where \fB<tag>\fR is the "tag" config\. (See \f
 .IP
 Example:
 .
-.IP
-  npm install sax
+.IP "" 4
+.
+.nf
+npm install sax
+.
+.fi
+.
+.IP "" 0
+
 .
 .IP "\(bu" 4
 npm install \fB<name>@<tag>\fR:
@@ -111,8 +132,15 @@ will fail\.
 .IP
 Example:
 .
-.IP
-  npm install sax@stable
+.IP "" 4
+.
+.nf
+npm install sax@stable
+.
+.fi
+.
+.IP "" 0
+
 .
 .IP "\(bu" 4
 npm install \fB<name>@<version>\fR:
@@ -122,8 +150,15 @@ has not been published to the registry\.
 .IP
 Example:
 .
-.IP
-  npm install sax@0\.1\.1
+.IP "" 4
+.
+.nf
+npm install sax@0\.1\.1
+.
+.fi
+.
+.IP "" 0
+
 .
 .IP "\(bu" 4
 npm install \fB<name>@<version range>\fR:
@@ -137,8 +172,15 @@ treat it as a single argument\.
 .IP
 Example:
 .
-.IP
-  npm install sax@">=0\.1\.0 <0\.2\.0"
+.IP "" 4
+.
+.nf
+npm install sax@">=0\.1\.0 <0\.2\.0"
+.
+.fi
+.
+.IP "" 0
+
 .
 .IP "" 0
 .

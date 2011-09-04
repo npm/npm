@@ -326,7 +326,7 @@ The location of npm\'s cache directory\.  See \fBnpm help cache\fR
 .SS "color"
 .
 .IP "\(bu" 4
-Default: true
+Default: true on Posix, false on Windows
 .
 .IP "\(bu" 4
 Type: Boolean or \fB"always"\fR
@@ -638,6 +638,20 @@ Values: "silent", "win", "error", "warn", "info", "verbose", "silly"
 .
 .P
 What level of logs to report\.  On failure, \fIall\fR logs are written to \fBnpm\-debug\.log\fR in the current working directory\.
+.
+.SS "logprefix"
+.
+.IP "\(bu" 4
+Default: true on Posix, false on Windows
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Whether or not to prefix log messages with "npm" and the log level\.  See
+also "color" and "loglevel"\.
 .
 .SS "long"
 .
