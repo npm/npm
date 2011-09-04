@@ -1,0 +1,440 @@
+<!doctype html>
+<html>
+  <title>npm-registry</title>
+<style type="text/css">
+
+/* reset */
+* {
+    margin:0;
+    padding:0;
+    border:none;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:inherit;
+}
+:target::before {
+    content:" → ";
+    position:absolute;
+    display:block;
+    opacity:0.5;
+    color:#f00;
+    margin:0 0 0 -1.2em;
+}
+abbr, acronym {
+  border-bottom:1px dotted #aaa;
+}
+kbd, code, pre {
+  font-family:monospace;
+    margin:0;
+    font-size:18px;
+    line-height:24px;
+  background:#eee;
+  outline:1px solid #ccc;
+}
+kbd code, kbd pre, kbd kbd,
+pre code, pre pre, pre kbd,
+code code, code pre, code kbd { outline: none }
+.dollar::before {
+  content:"$ ";
+  display:inline;
+}
+p, ul, ol, dl, pre {
+    margin:30px 0;
+    line-height:30px;
+}
+hr {
+    margin:30px auto 29px;
+    width:66%;
+    height:1px;
+    background:#aaa;
+}
+pre {
+    display:block;
+}
+dd :first-child {
+    margin-top:0;
+}
+
+body {
+    quotes:"“" "”" "‘" "’";
+    width:666px;
+    margin:30px auto 120px;
+    font-family:Times New Roman, serif;
+    font-size:20px;
+    background:#fff;
+    line-height:30px;
+    color:#111;
+}
+
+blockquote {
+    position:relative;
+    font-size:16px;
+    line-height:30px;
+    font-weight:bold;
+    width:85%;
+    margin:0 auto;
+}
+blockquote::before {
+    font-size:90px;
+    display:block;
+    position:absolute;
+    top:20px;
+    right:100%;
+    content:"“";
+    padding-right:10px;
+    color:#ccc;
+}
+.source cite::before {
+    content:"— ";
+}
+.source {
+    padding-left:20%;
+    margin-top:30px;
+}
+.source cite span {
+    font-style:normal;
+}
+blockquote p {
+    margin-bottom:0;
+}
+.quote blockquote {
+    font-weight:normal;
+}
+
+h1, h2, h3, h4, h5, h6, dt, #header {
+  font-family:serif;
+  font-size:20px;
+  font-weight:bold;
+}
+h2 {
+  background:#eee;
+}
+h1, h2 {
+  line-height:40px;
+}
+
+i, em, cite {
+    font-style:italic;
+}
+b, strong { 
+    font-weight:bold;
+}
+i, em, cite, b, strong, small {
+    line-height:28px;
+}
+small, .small, .small *, aside {
+    font-style:italic;
+    color:#669;
+    font-size:18px;
+}
+spall a, .small a {
+    text-decoration:underline;
+}
+del {
+    text-decoration:line-through;
+}
+ins {
+    text-decoration:underline;
+}
+.alignright { display:block; float:right; margin-left:1em; }
+.alignleft { display:block; float:left; margin-right:1em; }
+
+q:before, q q q:before, q q q q q:before, q q q q q q q:before { content:"“"; }
+q q:before, q q q q:before, q q q q q q:before, q q q q q q q q:before { content:"‘"; }
+q:after, q q q:after, q q q q q:after, q q q q q q q:after { content:"”"; }
+q q:after, q q q q:after, q q q q q q:after, q q q q q q q q:after { content:"’"; }
+
+a { color:#00f; text-decoration:none; }
+a:visited { color:#636; }
+a:hover, a:active { color:#900!important; text-decoration:underline; }
+
+h1 {
+  font-weight:bold;
+  background:#fff;
+}
+
+.navigation {
+    display:table;
+    width:100%;
+    margin:0 0 30px 0;
+    position:relative;
+}
+#nav-above {
+    margin-bottom:0;
+}
+.navigation .nav-previous {
+    display:table-cell;
+    text-align:left;
+    width:50%;
+}
+/* hang the » and « off into the margins */
+.navigation .nav-previous a:before, .navigation .nav-next a:after {
+    content: "«";
+    display:block;
+    height:30px;
+    margin-bottom:-30px;
+    text-decoration:none;
+    margin-left:-15px;
+}
+.navigation .nav-next a:after {
+    content: "»";
+    text-align:right;
+    margin-left:0;
+    margin-top:-30px;
+    margin-right:-15px;
+}
+
+
+.navigation .nav-next {
+    display:table-cell;
+    text-align:right;
+    width:50%;
+}
+.navigation a {
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+input, button, textarea {
+    border:0;
+    line-height:30px;
+}
+textarea {
+    height:300px;
+}
+input {
+    height:30px;
+    line-height:30px;
+}
+input.submit, input#submit, input.button, button, input[type=submit] {
+    cursor:hand; cursor:pointer;
+    outline:1px solid #ccc;
+}
+
+#wrapper {
+    margin-bottom:90px;
+    position:relative;
+    z-index:1;
+    *zoom:1;
+    background:#fff;
+}
+#wrapper:after {
+    display:block;
+    content:".";
+    visibility:hidden;
+    width:0;
+    height:0;
+    clear:both;
+}
+
+.sidebar .xoxo > li {
+    float:left;
+    width:50%;
+}
+.sidebar li {
+    list-style:none;
+}
+.sidebar #elsewhere {
+    margin-left:-10%;
+    margin-right:-10%;
+}
+.sidebar #rss-links, .sidebar #twitter-feeds {
+    float:right;
+    clear:right;
+    width:20%;
+}
+.sidebar #comment {
+  clear:both;
+  float:none;
+  width:100%;
+}
+.sidebar #search {
+    clear:both;
+    float:none;
+    width:100%;
+}
+.sidebar #search h2 {
+    margin-left:40%;
+}
+.sidebar #search #s {
+    width:90%;
+    float:left;
+}
+.sidebar #search #searchsubmit {
+    width:10%;
+    float:right;
+}
+.sidebar * {
+    font-size:15px;
+    line-height:30px;
+}
+
+#footer, #footer * {
+    margin:300px 0 0;
+    text-align:right;
+    font-size:14px;
+    line-height:90px;
+}
+
+#toc {
+  position:absolute;
+  top:0;
+  right:0;
+  padding:40px 0 40px 20px;
+  margin:0;
+  width:200px;
+  opacity:0.2;
+  z-index:-1;
+}
+#toc:hover {
+  opacity:1;
+  background:#fff;
+  z-index:999;
+}
+#toc ul {
+  padding:0;
+  margin:0;
+}
+#toc, #toc li {
+  list-style-type:none;
+  font-size:15px;
+  line-height:15px;
+}
+#toc li {
+  padding:0 0 0 10px;
+}
+
+
+@media print {
+    a[href] {
+        color:inherit;
+    }
+    a[href]:after {
+        white-space:nowrap;
+        content:" " attr(href);
+    }
+    a[href^=\#], .navigation {
+        display:none;
+    }
+}
+</style>
+
+  <body>
+    <div id="wrapper">
+<h1><a href="registry.html">npm-registry(1)</a> -- The JavaScript Package Registry</h1>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>To resolve packages by name and version, npm talks to a registry website
+that implements the CommonJS Package Registry specification for reading
+package info.</p>
+
+<p>Additionally, npm's package registry implementation supports several
+write APIs as well, to allow for publishing packages and managing user
+account information.</p>
+
+<p>The official public npm registry is at <a href="http://registry.npmjs.org/">http://registry.npmjs.org/</a>.  It
+is powered by a CouchDB database at
+<a href="http://isaacs.couchone.com/registry">http://isaacs.couchone.com/registry</a>.  The code for the couchapp is
+available at <a href="http://github.com/isaacs/npmjs.org">http://github.com/isaacs/npmjs.org</a>.  npm user accounts
+are CouchDB users, stored in the <a href="http://isaacs.couchone.com/_users">http://isaacs.couchone.com/_users</a>
+database.</p>
+
+<p>The registry URL is supplied by the <code>registry</code> config parameter.  See
+<code>npm help config</code> for more on managing npm's configuration.</p>
+
+<h2 id="Can-I-run-my-own-private-registry">Can I run my own private registry?</h2>
+
+<p>Yes!</p>
+
+<p>The easiest way is to replicate the couch database, and use the same (or
+similar) design doc to implement the APIs.</p>
+
+<p>If you set up continuous replication from the official CouchDB, and then
+set your internal CouchDB as the registry config, then you'll be able
+to read any published packages, in addition to your private ones, and by
+default will only publish internally.  If you then want to publish a
+package for the whole world to see, you can simply override the
+<code>--registry</code> config for that command.</p>
+
+<h2 id="I-don-t-want-my-package-published-in-the-official-registry-It-s-private">I don't want my package published in the official registry. It's private.</h2>
+
+<p>Set <code>"private": true</code> in your package.json to prevent it from being
+published at all, or
+<code>"publishConfig":{"registry":"http://my-internal-registry.local"}</code>
+to force it to be published only to your internal registry.</p>
+
+<p>See <code>npm help json</code> for more info on what goes in the package.json file.</p>
+
+<h2 id="Will-you-replicate-from-my-registry-into-the-public-one">Will you replicate from my registry into the public one?</h2>
+
+<p>No.  If you want things to be public, then publish them into the public
+registry using npm.  What little security there is would be for nought
+otherwise.</p>
+
+<h2 id="Do-I-have-to-use-couchdb-to-build-a-registry-that-npm-can-talk-to">Do I have to use couchdb to build a registry that npm can talk to?</h2>
+
+<p>No, but it's way easier.</p>
+
+<h2 id="I-published-something-elsewhere-and-want-to-tell-the-npm-registry-about-it">I published something elsewhere, and want to tell the npm registry about it.</h2>
+
+<p>That is supported, but not using the npm client.  You'll have to get
+your hands dirty and do some HTTP.  The request looks something like
+this:</p>
+
+<pre><code>PUT /my-foreign-package
+content-type:application/json
+accept:application/json
+authorization:Basic $base_64_encoded
+
+{ "name":"my-foreign-package"
+, "maintainers":["owner","usernames"]
+, "description":"A package that is hosted elsewhere"
+, "keywords":["nih","my cheese smells the best"]
+, "url":"http://my-different-registry.com/blerg/my-local-package"
+}</code></pre>
+
+<p>(Keywords and description are optional, but recommended.  Name,
+maintainers, and url are required.)</p>
+
+<p>Then, when a user tries to install "my-foreign-package", it'll redirect
+to your registry.  If that doesn't resolve to a valid package entry,
+then it'll fail, so please make sure that you understand the spec, and
+ask for help on the <a href="mailto:npm-@googlegroups.com">npm-@googlegroups.com</a> mailing list.</p>
+
+<h2 id="Is-there-a-website-or-something-to-see-package-docs-and-such">Is there a website or something to see package docs and such?</h2>
+
+<p>No, but such a thing is planned, and a tiny bit developed.</p>
+
+<p>Stay tuned!</p>
+</div>
+<script>
+els = Array.prototype.slice.call((wrapper = document.getElementById("wrapper"))
+.getElementsByTagName("*"), 0)
+.filter(function (el) {
+  return el.parentNode === wrapper
+      && el.tagName.match(/H[1-6]/)
+      && el.id
+})
+var l = 2
+;(toc = document.createElement("ul")).innerHTML = els.map(function (el) {
+  var i = el.tagName.charAt(1)
+    , out = ""
+  while (i > l) {
+    out += "<ul>"
+    l ++
+  }
+  while (i < l) {
+    out += "</ul>"
+    l --
+  }
+  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  return out
+}).join("\n")
+toc.id = "toc"
+document.body.appendChild(toc)
+
+</script>
+</body></html>
+<!-- npm help registry - 2011-31-04 05:09:24 -->

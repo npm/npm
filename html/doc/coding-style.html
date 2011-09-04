@@ -1,0 +1,534 @@
+<!doctype html>
+<html>
+  <title>npm-coding-style</title>
+<style type="text/css">
+
+/* reset */
+* {
+    margin:0;
+    padding:0;
+    border:none;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:inherit;
+}
+:target::before {
+    content:" → ";
+    position:absolute;
+    display:block;
+    opacity:0.5;
+    color:#f00;
+    margin:0 0 0 -1.2em;
+}
+abbr, acronym {
+  border-bottom:1px dotted #aaa;
+}
+kbd, code, pre {
+  font-family:monospace;
+    margin:0;
+    font-size:18px;
+    line-height:24px;
+  background:#eee;
+  outline:1px solid #ccc;
+}
+kbd code, kbd pre, kbd kbd,
+pre code, pre pre, pre kbd,
+code code, code pre, code kbd { outline: none }
+.dollar::before {
+  content:"$ ";
+  display:inline;
+}
+p, ul, ol, dl, pre {
+    margin:30px 0;
+    line-height:30px;
+}
+hr {
+    margin:30px auto 29px;
+    width:66%;
+    height:1px;
+    background:#aaa;
+}
+pre {
+    display:block;
+}
+dd :first-child {
+    margin-top:0;
+}
+
+body {
+    quotes:"“" "”" "‘" "’";
+    width:666px;
+    margin:30px auto 120px;
+    font-family:Times New Roman, serif;
+    font-size:20px;
+    background:#fff;
+    line-height:30px;
+    color:#111;
+}
+
+blockquote {
+    position:relative;
+    font-size:16px;
+    line-height:30px;
+    font-weight:bold;
+    width:85%;
+    margin:0 auto;
+}
+blockquote::before {
+    font-size:90px;
+    display:block;
+    position:absolute;
+    top:20px;
+    right:100%;
+    content:"“";
+    padding-right:10px;
+    color:#ccc;
+}
+.source cite::before {
+    content:"— ";
+}
+.source {
+    padding-left:20%;
+    margin-top:30px;
+}
+.source cite span {
+    font-style:normal;
+}
+blockquote p {
+    margin-bottom:0;
+}
+.quote blockquote {
+    font-weight:normal;
+}
+
+h1, h2, h3, h4, h5, h6, dt, #header {
+  font-family:serif;
+  font-size:20px;
+  font-weight:bold;
+}
+h2 {
+  background:#eee;
+}
+h1, h2 {
+  line-height:40px;
+}
+
+i, em, cite {
+    font-style:italic;
+}
+b, strong { 
+    font-weight:bold;
+}
+i, em, cite, b, strong, small {
+    line-height:28px;
+}
+small, .small, .small *, aside {
+    font-style:italic;
+    color:#669;
+    font-size:18px;
+}
+spall a, .small a {
+    text-decoration:underline;
+}
+del {
+    text-decoration:line-through;
+}
+ins {
+    text-decoration:underline;
+}
+.alignright { display:block; float:right; margin-left:1em; }
+.alignleft { display:block; float:left; margin-right:1em; }
+
+q:before, q q q:before, q q q q q:before, q q q q q q q:before { content:"“"; }
+q q:before, q q q q:before, q q q q q q:before, q q q q q q q q:before { content:"‘"; }
+q:after, q q q:after, q q q q q:after, q q q q q q q:after { content:"”"; }
+q q:after, q q q q:after, q q q q q q:after, q q q q q q q q:after { content:"’"; }
+
+a { color:#00f; text-decoration:none; }
+a:visited { color:#636; }
+a:hover, a:active { color:#900!important; text-decoration:underline; }
+
+h1 {
+  font-weight:bold;
+  background:#fff;
+}
+
+.navigation {
+    display:table;
+    width:100%;
+    margin:0 0 30px 0;
+    position:relative;
+}
+#nav-above {
+    margin-bottom:0;
+}
+.navigation .nav-previous {
+    display:table-cell;
+    text-align:left;
+    width:50%;
+}
+/* hang the » and « off into the margins */
+.navigation .nav-previous a:before, .navigation .nav-next a:after {
+    content: "«";
+    display:block;
+    height:30px;
+    margin-bottom:-30px;
+    text-decoration:none;
+    margin-left:-15px;
+}
+.navigation .nav-next a:after {
+    content: "»";
+    text-align:right;
+    margin-left:0;
+    margin-top:-30px;
+    margin-right:-15px;
+}
+
+
+.navigation .nav-next {
+    display:table-cell;
+    text-align:right;
+    width:50%;
+}
+.navigation a {
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+input, button, textarea {
+    border:0;
+    line-height:30px;
+}
+textarea {
+    height:300px;
+}
+input {
+    height:30px;
+    line-height:30px;
+}
+input.submit, input#submit, input.button, button, input[type=submit] {
+    cursor:hand; cursor:pointer;
+    outline:1px solid #ccc;
+}
+
+#wrapper {
+    margin-bottom:90px;
+    position:relative;
+    z-index:1;
+    *zoom:1;
+    background:#fff;
+}
+#wrapper:after {
+    display:block;
+    content:".";
+    visibility:hidden;
+    width:0;
+    height:0;
+    clear:both;
+}
+
+.sidebar .xoxo > li {
+    float:left;
+    width:50%;
+}
+.sidebar li {
+    list-style:none;
+}
+.sidebar #elsewhere {
+    margin-left:-10%;
+    margin-right:-10%;
+}
+.sidebar #rss-links, .sidebar #twitter-feeds {
+    float:right;
+    clear:right;
+    width:20%;
+}
+.sidebar #comment {
+  clear:both;
+  float:none;
+  width:100%;
+}
+.sidebar #search {
+    clear:both;
+    float:none;
+    width:100%;
+}
+.sidebar #search h2 {
+    margin-left:40%;
+}
+.sidebar #search #s {
+    width:90%;
+    float:left;
+}
+.sidebar #search #searchsubmit {
+    width:10%;
+    float:right;
+}
+.sidebar * {
+    font-size:15px;
+    line-height:30px;
+}
+
+#footer, #footer * {
+    margin:300px 0 0;
+    text-align:right;
+    font-size:14px;
+    line-height:90px;
+}
+
+#toc {
+  position:absolute;
+  top:0;
+  right:0;
+  padding:40px 0 40px 20px;
+  margin:0;
+  width:200px;
+  opacity:0.2;
+  z-index:-1;
+}
+#toc:hover {
+  opacity:1;
+  background:#fff;
+  z-index:999;
+}
+#toc ul {
+  padding:0;
+  margin:0;
+}
+#toc, #toc li {
+  list-style-type:none;
+  font-size:15px;
+  line-height:15px;
+}
+#toc li {
+  padding:0 0 0 10px;
+}
+
+
+@media print {
+    a[href] {
+        color:inherit;
+    }
+    a[href]:after {
+        white-space:nowrap;
+        content:" " attr(href);
+    }
+    a[href^=\#], .navigation {
+        display:none;
+    }
+}
+</style>
+
+  <body>
+    <div id="wrapper">
+<h1><a href="coding-style.html">npm-coding-style(1)</a> -- npm's "funny" coding style</h1>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>npm's coding style is a bit unconventional.  It is not different for
+difference's sake, but rather a carefully crafted style that is
+designed to reduce visual clutter and make bugs more apparent.</p>
+
+<p>If you want to contribute to npm (which is very encouraged), you should
+make your code conform to npm's style.</p>
+
+<h2 id="Line-Length">Line Length</h2>
+
+<p>Keep lines shorter than 80 characters.  It's better for lines to be
+too short than to be too long.  Break up long lists, objects, and other
+statements onto multiple lines.</p>
+
+<h2 id="Indentation">Indentation</h2>
+
+<p>Two-spaces.  Tabs are better, but they look like hell in web browsers
+(and on github), and node uses 2 spaces, so that's that.</p>
+
+<p>Configure your editor appropriately.</p>
+
+<h2 id="Curly-braces">Curly braces</h2>
+
+<p>Curly braces belong on the same line as the thing that necessitates them.</p>
+
+<p>Bad:</p>
+
+<pre><code>function ()
+{</code></pre>
+
+<p>Good:</p>
+
+<pre><code>function () {</code></pre>
+
+<p>If a block needs to wrap to the next line, use a curly brace.  Don't
+use it if it doesn't.</p>
+
+<p>Bad:</p>
+
+<pre><code>if (foo) { bar() }
+while (foo)
+  bar()</code></pre>
+
+<p>Good:</p>
+
+<pre><code>if (foo) bar()
+while (foo) {
+  bar()
+}</code></pre>
+
+<h2 id="Semicolons">Semicolons</h2>
+
+<p>Don't use them except in four situations:</p>
+
+<ul><li><code>for (;;)</code> loops.  They're actually required.</li><li>null loops like: <code>while (something) ;</code> (But you'd better have a good
+reason for doing that.)</li><li>case "foo": doSomething(); break</li><li>In front of a leading ( or [ at the start of the line.
+This prevents the expression from being interpreted
+as a function call or property access, respectively.</li></ul>
+
+<p>Some examples of good semicolon usage:</p>
+
+<pre><code>;(x || y).doSomething()
+;[a, b, c].forEach(doSomething)
+for (var i = 0; i &lt; 10; i ++) {
+  switch (state) {
+    case "begin": start(); continue
+    case "end": finish(); break
+    default: throw new Error("unknown state")
+  }
+  end()
+}</code></pre>
+
+<p>Note that starting lines with <code>-</code> and <code>+</code> also should be prefixed
+with a semicolon, but this is much less common.</p>
+
+<h2 id="Comma-First">Comma First</h2>
+
+<p>If there is a list of things separated by commas, and it wraps
+across multiple lines, put the comma at the start of the next
+line, directly below the token that starts the list.  Put the
+final token in the list on a line by itself.  For example:</p>
+
+<pre><code>var magicWords = [ "abracadabra"
+                 , "gesundheit"
+                 , "ventrilo"
+                 ]
+  , spells = { "fireball" : function () { setOnFire() }
+             , "water" : function () { putOut() }
+             }
+  , a = 1
+  , b = "abc"
+  , etc
+  , somethingElse</code></pre>
+
+<h2 id="Whitespace">Whitespace</h2>
+
+<p>Put a single space in front of ( for anything other than a function call.
+Also use a single space wherever it makes things more readable.</p>
+
+<p>Don't leave trailing whitespace at the end of lines.  Don't indent empty
+lines.  Don't use more spaces than are helpful.</p>
+
+<h2 id="Functions">Functions</h2>
+
+<p>Use named functions.  They make stack traces a lot easier to read.</p>
+
+<h2 id="Callbacks-Sync-async-Style">Callbacks, Sync/async Style</h2>
+
+<p>Use the asynchronous/non-blocking versions of things as much as possible.
+It might make more sense for npm to use the synchronous fs APIs, but this
+way, the fs and http and child process stuff all uses the same callback-passing
+methodology.</p>
+
+<p>The callback should always be the last argument in the list.  Its first
+argument is the Error or null.</p>
+
+<p>Be very careful never to ever ever throw anything.  It's worse than useless.
+Just send the error message back as the first argument to the callback.</p>
+
+<h2 id="Errors">Errors</h2>
+
+<p>Always create a new Error object with your message.  Don't just return a
+string message to the callback.  Stack traces are handy.</p>
+
+<p>Use the <code>require("./utils/log").er</code> function.  It takes a callback and an
+error message, and returns an object that will report the message in the
+event of a failure.  It's quite handy.</p>
+
+<pre><code>function myThing (args, cb) {
+  getData(args, function (er, data) {
+    if (er) return log.er(cb, "Couldn't get data")(er)
+    doSomethingElse(data, cb)
+  })
+}
+function justHasToWork (cb) {
+  doSomething(log.er(cb, "the doSomething failed."))
+}</code></pre>
+
+<h2 id="Logging">Logging</h2>
+
+<p>Please clean up logs when they are no longer helpful.  In particular,
+logging the same object over and over again is not helpful.  Logs should
+report what's happening so that it's easier to track down where a fault
+occurs.</p>
+
+<p>Use appropriate log levels.  The default log() function logs at the
+"info" level.  See <code>npm help config</code> and search for "loglevel".</p>
+
+<h2 id="Case-naming-etc">Case, naming, etc.</h2>
+
+<p>Use lowerCamelCase for multiword identifiers when they refer to objects,
+functions, methods, members, or anything not specified in this section.</p>
+
+<p>Use UpperCamelCase for class names (things that you'd pass to "new").</p>
+
+<p>Use all-lower-hyphen-css-case for multiword filenames and config keys.</p>
+
+<p>Use named functions.  They make stack traces easier to follow.</p>
+
+<p>Use CAPS<em>SNAKE</em>CASE for constants, things that should never change
+and are rarely used.</p>
+
+<p>Use a single uppercase letter for function names where the function
+would normally be anonymous, but needs to call itself recursively.  It
+makes it clear that it's a "throwaway" function.</p>
+
+<h2 id="null-undefined-false-0">null, undefined, false, 0</h2>
+
+<p>Boolean variables and functions should always be either <code>true</code> or
+<code>false</code>.  Don't set it to 0 unless it's supposed to be a number.</p>
+
+<p>When something is intentionally missing or removed, set it to <code>null</code>.</p>
+
+<p>Don't set things to <code>undefined</code>.  Reserve that value to mean "not yet
+set to anything."</p>
+
+<p>Boolean objects are verboten.</p>
+</div>
+<script>
+els = Array.prototype.slice.call((wrapper = document.getElementById("wrapper"))
+.getElementsByTagName("*"), 0)
+.filter(function (el) {
+  return el.parentNode === wrapper
+      && el.tagName.match(/H[1-6]/)
+      && el.id
+})
+var l = 2
+;(toc = document.createElement("ul")).innerHTML = els.map(function (el) {
+  var i = el.tagName.charAt(1)
+    , out = ""
+  while (i > l) {
+    out += "<ul>"
+    l ++
+  }
+  while (i < l) {
+    out += "</ul>"
+    l --
+  }
+  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  return out
+}).join("\n")
+toc.id = "toc"
+document.body.appendChild(toc)
+
+</script>
+</body></html>
+<!-- npm help coding-style - 2011-31-04 05:09:20 -->

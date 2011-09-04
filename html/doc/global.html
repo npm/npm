@@ -1,0 +1,534 @@
+<!doctype html>
+<html>
+  <title>npm-global</title>
+<style type="text/css">
+
+/* reset */
+* {
+    margin:0;
+    padding:0;
+    border:none;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:inherit;
+}
+:target::before {
+    content:" → ";
+    position:absolute;
+    display:block;
+    opacity:0.5;
+    color:#f00;
+    margin:0 0 0 -1.2em;
+}
+abbr, acronym {
+  border-bottom:1px dotted #aaa;
+}
+kbd, code, pre {
+  font-family:monospace;
+    margin:0;
+    font-size:18px;
+    line-height:24px;
+  background:#eee;
+  outline:1px solid #ccc;
+}
+kbd code, kbd pre, kbd kbd,
+pre code, pre pre, pre kbd,
+code code, code pre, code kbd { outline: none }
+.dollar::before {
+  content:"$ ";
+  display:inline;
+}
+p, ul, ol, dl, pre {
+    margin:30px 0;
+    line-height:30px;
+}
+hr {
+    margin:30px auto 29px;
+    width:66%;
+    height:1px;
+    background:#aaa;
+}
+pre {
+    display:block;
+}
+dd :first-child {
+    margin-top:0;
+}
+
+body {
+    quotes:"“" "”" "‘" "’";
+    width:666px;
+    margin:30px auto 120px;
+    font-family:Times New Roman, serif;
+    font-size:20px;
+    background:#fff;
+    line-height:30px;
+    color:#111;
+}
+
+blockquote {
+    position:relative;
+    font-size:16px;
+    line-height:30px;
+    font-weight:bold;
+    width:85%;
+    margin:0 auto;
+}
+blockquote::before {
+    font-size:90px;
+    display:block;
+    position:absolute;
+    top:20px;
+    right:100%;
+    content:"“";
+    padding-right:10px;
+    color:#ccc;
+}
+.source cite::before {
+    content:"— ";
+}
+.source {
+    padding-left:20%;
+    margin-top:30px;
+}
+.source cite span {
+    font-style:normal;
+}
+blockquote p {
+    margin-bottom:0;
+}
+.quote blockquote {
+    font-weight:normal;
+}
+
+h1, h2, h3, h4, h5, h6, dt, #header {
+  font-family:serif;
+  font-size:20px;
+  font-weight:bold;
+}
+h2 {
+  background:#eee;
+}
+h1, h2 {
+  line-height:40px;
+}
+
+i, em, cite {
+    font-style:italic;
+}
+b, strong { 
+    font-weight:bold;
+}
+i, em, cite, b, strong, small {
+    line-height:28px;
+}
+small, .small, .small *, aside {
+    font-style:italic;
+    color:#669;
+    font-size:18px;
+}
+spall a, .small a {
+    text-decoration:underline;
+}
+del {
+    text-decoration:line-through;
+}
+ins {
+    text-decoration:underline;
+}
+.alignright { display:block; float:right; margin-left:1em; }
+.alignleft { display:block; float:left; margin-right:1em; }
+
+q:before, q q q:before, q q q q q:before, q q q q q q q:before { content:"“"; }
+q q:before, q q q q:before, q q q q q q:before, q q q q q q q q:before { content:"‘"; }
+q:after, q q q:after, q q q q q:after, q q q q q q q:after { content:"”"; }
+q q:after, q q q q:after, q q q q q q:after, q q q q q q q q:after { content:"’"; }
+
+a { color:#00f; text-decoration:none; }
+a:visited { color:#636; }
+a:hover, a:active { color:#900!important; text-decoration:underline; }
+
+h1 {
+  font-weight:bold;
+  background:#fff;
+}
+
+.navigation {
+    display:table;
+    width:100%;
+    margin:0 0 30px 0;
+    position:relative;
+}
+#nav-above {
+    margin-bottom:0;
+}
+.navigation .nav-previous {
+    display:table-cell;
+    text-align:left;
+    width:50%;
+}
+/* hang the » and « off into the margins */
+.navigation .nav-previous a:before, .navigation .nav-next a:after {
+    content: "«";
+    display:block;
+    height:30px;
+    margin-bottom:-30px;
+    text-decoration:none;
+    margin-left:-15px;
+}
+.navigation .nav-next a:after {
+    content: "»";
+    text-align:right;
+    margin-left:0;
+    margin-top:-30px;
+    margin-right:-15px;
+}
+
+
+.navigation .nav-next {
+    display:table-cell;
+    text-align:right;
+    width:50%;
+}
+.navigation a {
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+input, button, textarea {
+    border:0;
+    line-height:30px;
+}
+textarea {
+    height:300px;
+}
+input {
+    height:30px;
+    line-height:30px;
+}
+input.submit, input#submit, input.button, button, input[type=submit] {
+    cursor:hand; cursor:pointer;
+    outline:1px solid #ccc;
+}
+
+#wrapper {
+    margin-bottom:90px;
+    position:relative;
+    z-index:1;
+    *zoom:1;
+    background:#fff;
+}
+#wrapper:after {
+    display:block;
+    content:".";
+    visibility:hidden;
+    width:0;
+    height:0;
+    clear:both;
+}
+
+.sidebar .xoxo > li {
+    float:left;
+    width:50%;
+}
+.sidebar li {
+    list-style:none;
+}
+.sidebar #elsewhere {
+    margin-left:-10%;
+    margin-right:-10%;
+}
+.sidebar #rss-links, .sidebar #twitter-feeds {
+    float:right;
+    clear:right;
+    width:20%;
+}
+.sidebar #comment {
+  clear:both;
+  float:none;
+  width:100%;
+}
+.sidebar #search {
+    clear:both;
+    float:none;
+    width:100%;
+}
+.sidebar #search h2 {
+    margin-left:40%;
+}
+.sidebar #search #s {
+    width:90%;
+    float:left;
+}
+.sidebar #search #searchsubmit {
+    width:10%;
+    float:right;
+}
+.sidebar * {
+    font-size:15px;
+    line-height:30px;
+}
+
+#footer, #footer * {
+    margin:300px 0 0;
+    text-align:right;
+    font-size:14px;
+    line-height:90px;
+}
+
+#toc {
+  position:absolute;
+  top:0;
+  right:0;
+  padding:40px 0 40px 20px;
+  margin:0;
+  width:200px;
+  opacity:0.2;
+  z-index:-1;
+}
+#toc:hover {
+  opacity:1;
+  background:#fff;
+  z-index:999;
+}
+#toc ul {
+  padding:0;
+  margin:0;
+}
+#toc, #toc li {
+  list-style-type:none;
+  font-size:15px;
+  line-height:15px;
+}
+#toc li {
+  padding:0 0 0 10px;
+}
+
+
+@media print {
+    a[href] {
+        color:inherit;
+    }
+    a[href]:after {
+        white-space:nowrap;
+        content:" " attr(href);
+    }
+    a[href^=\#], .navigation {
+        display:none;
+    }
+}
+</style>
+
+  <body>
+    <div id="wrapper">
+<h1><a href="folders.html">npm-folders(1)</a> -- Folder Structures Used by npm</h1>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>npm puts various things on your computer.  That's its job.</p>
+
+<p>This document will tell you what it puts where.</p>
+
+<h3 id="tl-dr">tl;dr</h3>
+
+<ul><li>Local install (default): puts stuff in <code>./node_modules</code></li><li>Global install (with <code>-g</code>): puts stuff in /usr/local</li><li>Install it <strong>locally</strong> if you're going to <code>require()</code> it.</li><li>Install it <strong>globally</strong> if you're going to run it on the command line.</li><li>If you need both, then install it in both places, or use <code>npm link</code>.</li></ul>
+
+<h3 id="prefix-Configuration">prefix Configuration</h3>
+
+<p>The <code>prefix</code> config defaults to the location where node is installed.
+On most systems, this is <code>/usr/local</code>, and most of the time is the same
+as node's <code>process.installPrefix</code>.</p>
+
+<p>When the <code>global</code> flag is set, npm installs things into this prefix.
+When it is not set, it uses the root of the current package, or the
+current working directory if not in a package already.</p>
+
+<h3 id="Node-Modules">Node Modules</h3>
+
+<p>Packages are dropped into the <code>node_modules</code> folder under the <code>prefix</code>.
+When installing locally, this means that you can
+<code>require("packagename")</code> to load its main module, or
+<code>require("packagename/lib/path/to/sub/module")</code> to load other modules.</p>
+
+<p>If you wish to <code>require()</code> a package, then install it locally.</p>
+
+<h3 id="Executables">Executables</h3>
+
+<p>When in global mode, executables are linked into <code>prefix/bin</code>.</p>
+
+<p>When in local mode, executables are linked into
+<code>prefix/node_modules/.bin</code>.</p>
+
+<h3 id="Man-Pages">Man Pages</h3>
+
+<p>When in global mode, man pages are linked into <code>prefix/share/man</code>.</p>
+
+<p>When in local mode, man pages are not installed.</p>
+
+<h3 id="Cache">Cache</h3>
+
+<p>See <code>npm help cache</code>.  Cache files are stored in <code>~/.npm</code> on Posix, or
+<code>~/npm-cache</code> on Windows.</p>
+
+<p>This is controlled by the <code>cache</code> configuration param.</p>
+
+<h3 id="Temp-Files">Temp Files</h3>
+
+<p>Temporary files are stored by default in the folder specified by the
+<code>tmp</code> config, which defaults to either the TMPDIR environment
+variable, or <code>/tmp</code>.</p>
+
+<p>Temp files are given a unique folder under this root for each run of the
+program, and are deleted upon successful exit.</p>
+
+<h2 id="More-Information">More Information</h2>
+
+<p>When doing local installings, npm first tries to find an appropriate
+<code>prefix</code> folder.  This is so that <code>npm install foo@1.2.3</code> will install
+to the sensible root of your package, even if you happen to have <code>cd</code>ed
+into some other folder.</p>
+
+<p>Starting at the $PWD, npm will walk up the folder tree checking for a
+folder that contains either a <code>package.json</code> file, or a <code>node_modules</code>
+folder.  If such a thing is found, then that is treated as the effective
+"current directory" for the purpose of running npm commands.  (This
+behavior is inspired by and similar to git's .git-folder seeking
+logic when running git commands in a working dir.)</p>
+
+<p>If no package root is found, then the current folder is used.</p>
+
+<p>When you run <code>npm install foo@1.2.3</code>, then the package is loaded into
+the cache, and then unpacked into <code>./node_modules/foo</code>.  Then, any of
+foo's dependencies are similarly unpacked into
+<code>./node_modules/foo/node_modules/...</code>.</p>
+
+<p>Any bin files are symlinked to <code>./node_modules/.bin/</code>, so that they may
+be found by npm scripts when necessary.</p>
+
+<h3 id="Global-Installation">Global Installation</h3>
+
+<p>If the <code>global</code> configuration is set to true, then npm will
+install packages "globally".</p>
+
+<p>For global installation, packages are installed roughly the same way,
+but the module root is <code>/usr/local/lib/node_modules</code>, and bin files are
+linked to <code>/usr/local/bin</code> instead of <code>./node_modules/.bin</code>.</p>
+
+<h3 id="Cycles-Conflicts-and-Folder-Parsimony">Cycles, Conflicts, and Folder Parsimony</h3>
+
+<p>Cycles are handled using the property of node's module system that it
+walks up the directories looking for <code>node_modules</code> folders.  So, at every
+stage, if a package is already installed in an ancestor <code>node_modules</code>
+folder, then it is not installed at the current location.</p>
+
+<p>Consider the case above, where <code>foo -&gt; bar -&gt; baz</code>.  Imagine if, in
+addition to that, baz depended on bar, so you'd have:
+<code>foo -&gt; bar -&gt; baz -&gt; bar -&gt; baz ...</code>.  However, since the folder
+structure is: <code>foo/node_modules/bar/node_modules/baz</code>, there's no need to
+put another copy of bar into <code>.../baz/node_modules</code>, since when it calls
+require("bar"), it will get the copy that is installed in
+<code>foo/node_modules/bar</code>.</p>
+
+<p>This shortcut is only used if the exact same
+version would be installed in multiple nested <code>node_modules</code> folders.  It
+is still possible to have <code>a/node_modules/b/node_modules/a</code> if the two
+"a" packages are different versions.  However, without repeating the
+exact same package multiple times, an infinite regress will always be
+prevented.</p>
+
+<p>Another optimization can be made by installing dependencies at the
+highest level possible, below the localized "target" folder.</p>
+
+<h4 id="Example">Example</h4>
+
+<p>Consider this dependency graph:</p>
+
+<pre><code>foo
++-- blerg@1.2.5
++-- bar@1.2.3
+|   +-- blerg@1.x (latest=1.3.7)
+|   +-- baz@2.x
+|   |   `-- quux@3.x
+|   |       `-- bar@1.2.3 (cycle)
+|   `-- asdf@*
+`-- baz@1.2.3
+    `-- quux@3.x
+        `-- bar</code></pre>
+
+<p>In this case, we might expect a folder structure like this:</p>
+
+<pre><code>foo
++-- node_modules
+    +-- blerg (1.2.5) &lt;---[A]
+    +-- bar (1.2.3) &lt;---[B]
+    |   +-- node_modules
+    |   |   `-- baz (2.0.2) &lt;---[C]
+    |   |       `-- node_modules
+    |   |           `-- quux (3.2.0)
+    |   `-- asdf (2.3.4)
+    `-- baz (1.2.3) &lt;---[D]
+        `-- node_modules
+            `-- quux (3.2.0) &lt;---[E]</code></pre>
+
+<p>Since foo depends directly on bar@1.2.3 and baz@1.2.3, those are
+installed in foo's <code>node_modules</code> folder.</p>
+
+<p>Even though the latest copy of blerg is 1.3.7, foo has a specific
+dependency on version 1.2.5.  So, that gets installed at [A].  Since the
+parent installation of blerg satisfie's bar's dependency on blerg@1.x,
+it does not install another copy under [B].</p>
+
+<p>Bar [B] also has dependencies on baz and asdf, so those are installed in
+bar's <code>node_modules</code> folder.  Because it depends on <code>baz@2.x</code>, it cannot
+re-use the <code>baz@1.2.3</code> installed in the parent <code>node_modules</code> folder [D],
+and must install its own copy [C].</p>
+
+<p>Underneath bar, the <code>baz-&gt;quux-&gt;bar</code> dependency creates a cycle.
+However, because <code>bar</code> is already in <code>quux</code>'s ancestry [B], it does not
+unpack another copy of bar into that folder.</p>
+
+<p>Underneath <code>foo-&gt;baz</code> [D], quux's [E] folder tree is empty, because its
+dependency on bar is satisfied by the parent folder copy installed at [B].</p>
+
+<p>For a graphical breakdown of what is installed where, use <code>npm ls</code>.</p>
+
+<h3 id="Publishing">Publishing</h3>
+
+<p>Upon publishing, npm will look in the <code>node_modules</code> folder.  If any of
+the items there are not in the <code>bundledDependencies</code> array, then they will
+not be included in the package tarball.</p>
+
+<p>This allows a package maintainer to install all of their dependencies
+(and dev dependencies) locally, but only re-publish those items that
+cannot be found elsewhere.  See <code>npm help json</code> for more information.</p>
+</div>
+<script>
+els = Array.prototype.slice.call((wrapper = document.getElementById("wrapper"))
+.getElementsByTagName("*"), 0)
+.filter(function (el) {
+  return el.parentNode === wrapper
+      && el.tagName.match(/H[1-6]/)
+      && el.id
+})
+var l = 2
+;(toc = document.createElement("ul")).innerHTML = els.map(function (el) {
+  var i = el.tagName.charAt(1)
+    , out = ""
+  while (i > l) {
+    out += "<ul>"
+    l ++
+  }
+  while (i < l) {
+    out += "</ul>"
+    l --
+  }
+  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  return out
+}).join("\n")
+toc.id = "toc"
+document.body.appendChild(toc)
+
+</script>
+</body></html>
+<!-- npm help global - 2011-31-04 05:09:21 -->

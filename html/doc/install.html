@@ -1,0 +1,426 @@
+<!doctype html>
+<html>
+  <title>npm-install</title>
+<style type="text/css">
+
+/* reset */
+* {
+    margin:0;
+    padding:0;
+    border:none;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:inherit;
+}
+:target::before {
+    content:" → ";
+    position:absolute;
+    display:block;
+    opacity:0.5;
+    color:#f00;
+    margin:0 0 0 -1.2em;
+}
+abbr, acronym {
+  border-bottom:1px dotted #aaa;
+}
+kbd, code, pre {
+  font-family:monospace;
+    margin:0;
+    font-size:18px;
+    line-height:24px;
+  background:#eee;
+  outline:1px solid #ccc;
+}
+kbd code, kbd pre, kbd kbd,
+pre code, pre pre, pre kbd,
+code code, code pre, code kbd { outline: none }
+.dollar::before {
+  content:"$ ";
+  display:inline;
+}
+p, ul, ol, dl, pre {
+    margin:30px 0;
+    line-height:30px;
+}
+hr {
+    margin:30px auto 29px;
+    width:66%;
+    height:1px;
+    background:#aaa;
+}
+pre {
+    display:block;
+}
+dd :first-child {
+    margin-top:0;
+}
+
+body {
+    quotes:"“" "”" "‘" "’";
+    width:666px;
+    margin:30px auto 120px;
+    font-family:Times New Roman, serif;
+    font-size:20px;
+    background:#fff;
+    line-height:30px;
+    color:#111;
+}
+
+blockquote {
+    position:relative;
+    font-size:16px;
+    line-height:30px;
+    font-weight:bold;
+    width:85%;
+    margin:0 auto;
+}
+blockquote::before {
+    font-size:90px;
+    display:block;
+    position:absolute;
+    top:20px;
+    right:100%;
+    content:"“";
+    padding-right:10px;
+    color:#ccc;
+}
+.source cite::before {
+    content:"— ";
+}
+.source {
+    padding-left:20%;
+    margin-top:30px;
+}
+.source cite span {
+    font-style:normal;
+}
+blockquote p {
+    margin-bottom:0;
+}
+.quote blockquote {
+    font-weight:normal;
+}
+
+h1, h2, h3, h4, h5, h6, dt, #header {
+  font-family:serif;
+  font-size:20px;
+  font-weight:bold;
+}
+h2 {
+  background:#eee;
+}
+h1, h2 {
+  line-height:40px;
+}
+
+i, em, cite {
+    font-style:italic;
+}
+b, strong { 
+    font-weight:bold;
+}
+i, em, cite, b, strong, small {
+    line-height:28px;
+}
+small, .small, .small *, aside {
+    font-style:italic;
+    color:#669;
+    font-size:18px;
+}
+spall a, .small a {
+    text-decoration:underline;
+}
+del {
+    text-decoration:line-through;
+}
+ins {
+    text-decoration:underline;
+}
+.alignright { display:block; float:right; margin-left:1em; }
+.alignleft { display:block; float:left; margin-right:1em; }
+
+q:before, q q q:before, q q q q q:before, q q q q q q q:before { content:"“"; }
+q q:before, q q q q:before, q q q q q q:before, q q q q q q q q:before { content:"‘"; }
+q:after, q q q:after, q q q q q:after, q q q q q q q:after { content:"”"; }
+q q:after, q q q q:after, q q q q q q:after, q q q q q q q q:after { content:"’"; }
+
+a { color:#00f; text-decoration:none; }
+a:visited { color:#636; }
+a:hover, a:active { color:#900!important; text-decoration:underline; }
+
+h1 {
+  font-weight:bold;
+  background:#fff;
+}
+
+.navigation {
+    display:table;
+    width:100%;
+    margin:0 0 30px 0;
+    position:relative;
+}
+#nav-above {
+    margin-bottom:0;
+}
+.navigation .nav-previous {
+    display:table-cell;
+    text-align:left;
+    width:50%;
+}
+/* hang the » and « off into the margins */
+.navigation .nav-previous a:before, .navigation .nav-next a:after {
+    content: "«";
+    display:block;
+    height:30px;
+    margin-bottom:-30px;
+    text-decoration:none;
+    margin-left:-15px;
+}
+.navigation .nav-next a:after {
+    content: "»";
+    text-align:right;
+    margin-left:0;
+    margin-top:-30px;
+    margin-right:-15px;
+}
+
+
+.navigation .nav-next {
+    display:table-cell;
+    text-align:right;
+    width:50%;
+}
+.navigation a {
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+input, button, textarea {
+    border:0;
+    line-height:30px;
+}
+textarea {
+    height:300px;
+}
+input {
+    height:30px;
+    line-height:30px;
+}
+input.submit, input#submit, input.button, button, input[type=submit] {
+    cursor:hand; cursor:pointer;
+    outline:1px solid #ccc;
+}
+
+#wrapper {
+    margin-bottom:90px;
+    position:relative;
+    z-index:1;
+    *zoom:1;
+    background:#fff;
+}
+#wrapper:after {
+    display:block;
+    content:".";
+    visibility:hidden;
+    width:0;
+    height:0;
+    clear:both;
+}
+
+.sidebar .xoxo > li {
+    float:left;
+    width:50%;
+}
+.sidebar li {
+    list-style:none;
+}
+.sidebar #elsewhere {
+    margin-left:-10%;
+    margin-right:-10%;
+}
+.sidebar #rss-links, .sidebar #twitter-feeds {
+    float:right;
+    clear:right;
+    width:20%;
+}
+.sidebar #comment {
+  clear:both;
+  float:none;
+  width:100%;
+}
+.sidebar #search {
+    clear:both;
+    float:none;
+    width:100%;
+}
+.sidebar #search h2 {
+    margin-left:40%;
+}
+.sidebar #search #s {
+    width:90%;
+    float:left;
+}
+.sidebar #search #searchsubmit {
+    width:10%;
+    float:right;
+}
+.sidebar * {
+    font-size:15px;
+    line-height:30px;
+}
+
+#footer, #footer * {
+    margin:300px 0 0;
+    text-align:right;
+    font-size:14px;
+    line-height:90px;
+}
+
+#toc {
+  position:absolute;
+  top:0;
+  right:0;
+  padding:40px 0 40px 20px;
+  margin:0;
+  width:200px;
+  opacity:0.2;
+  z-index:-1;
+}
+#toc:hover {
+  opacity:1;
+  background:#fff;
+  z-index:999;
+}
+#toc ul {
+  padding:0;
+  margin:0;
+}
+#toc, #toc li {
+  list-style-type:none;
+  font-size:15px;
+  line-height:15px;
+}
+#toc li {
+  padding:0 0 0 10px;
+}
+
+
+@media print {
+    a[href] {
+        color:inherit;
+    }
+    a[href]:after {
+        white-space:nowrap;
+        content:" " attr(href);
+    }
+    a[href^=\#], .navigation {
+        display:none;
+    }
+}
+</style>
+
+  <body>
+    <div id="wrapper">
+<h1><a href="install.html">npm-install(1)</a> -- install a package</h1>
+
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
+
+<pre><code>npm install (with no args in a package dir)
+npm install &lt;tarball file&gt;
+npm install &lt;tarball url&gt;
+npm install &lt;folder&gt;
+npm install &lt;name&gt;
+npm install &lt;name&gt;@&lt;tag&gt;
+npm install &lt;name&gt;@&lt;version&gt;
+npm install &lt;name&gt;@&lt;version range&gt;</code></pre>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>This command installs a package, and any packages that it depends on.</p>
+
+<p>A <code>package</code> is:</p>
+
+<ul><li>a) a folder containing a program described by a package.json file</li><li>b) a gzipped tarball containing (a)</li><li>c) a url that resolves to (b)</li><li>d) a <code>&lt;name&gt;@&lt;version&gt;</code> that is published on the registry with (c)</li><li>e) a <code>&lt;name&gt;@&lt;tag&gt;</code> that points to (d)</li><li>f) a <code>&lt;name&gt;</code> that has a "latest" tag satisfying (e)</li></ul>
+
+<p>Even if you never publish your package, you can still get a lot of
+benefits of using npm if you just want to write a node program (a), and
+perhaps if you also want to be able to easily install it elsewhere
+after packing it up into a tarball (b).</p>
+
+<ul><li><p>npm install (in package directory, no arguments):
+Install the dependencies in the local node_modules folder.</p><p>In global mode (ie, with <code>-g</code> or <code>--global</code> appended to the command),
+it installs the current package context (ie, the current working
+directory) as a global package.</p></li><li><p>npm install <code>&lt;folder&gt;</code>:
+Install a package that is sitting in a folder on the filesystem.</p></li><li><p>npm install <code>&lt;tarball file&gt;</code>:
+Install a package that is sitting on the filesystem.  Note: if you just want
+to link a dev directory into your npm root, you can do this more easily by
+using <code>npm link</code>.</p><p>In order to distinguish between this and remote installs, the argument
+must either be "." or contain a "/" in it.</p><p>Example:</p><pre><code>npm install ./package.tgz</code></pre></li><li><p>npm install <code>&lt;tarball url&gt;</code>:
+Fetch the tarball url, and then install it.  In order to distinguish between
+this and other options, the argument must start with "http://" or "https://"</p><p>Example:</p><pre><code>npm install http://github.com/waveto/node-crypto/tarball/v0.0.5</code></pre></li><li><p>npm install <code>&lt;name&gt;</code>:
+Do a <code>&lt;name&gt;@&lt;tag&gt;</code> install, where <code>&lt;tag&gt;</code> is the "tag" config. (See
+<code>npm help config</code>)</p><p>Example:</p><pre><code>npm install sax</code></pre></li><li><p>npm install <code>&lt;name&gt;@&lt;tag&gt;</code>:
+Install the version of the package that is referenced by the specified tag.
+If the tag does not exist in the registry data for that package, then this
+will fail.</p><p>Example:</p><pre><code>npm install sax@stable</code></pre></li><li><p>npm install <code>&lt;name&gt;@&lt;version&gt;</code>:
+Install the specified version of the package.  This will fail if the version
+has not been published to the registry.</p><p>Example:</p><pre><code>npm install sax@0.1.1</code></pre></li><li><p>npm install <code>&lt;name&gt;@&lt;version range&gt;</code>:
+Install a version of the package matching the specified version range.  This
+will follow the same rules for resolving dependencies described in <code>npm help json</code>.</p><p>Note that most version ranges must be put in quotes so that your shell will
+treat it as a single argument.</p><p>Example:</p><pre><code>npm install sax@"&gt;=0.1.0 &lt;0.2.0"</code></pre></li></ul>
+
+<p>You may combine multiple arguments, and even multiple types of arguments.
+For example:</p>
+
+<pre><code>npm install sax@"&gt;=0.1.0 &lt;0.2.0" bench supervisor</code></pre>
+
+<p>The <code>--tag</code> argument will apply to all of the specified install targets.</p>
+
+<p>The <code>--force</code> argument will force npm to fetch remote resources even if a
+local copy exists on disk.</p>
+
+<pre><code>npm install sax --force</code></pre>
+
+<p>The <code>--global</code> argument will cause npm to install the package globally
+rather than locally.  See <code>npm help global</code>.</p>
+
+<p>The <code>--link</code> argument will cause npm to link global installs into the
+local space in some cases.</p>
+
+<p>See <code>npm help config</code>.  Many of the configuration params have some
+effect on installation, since that's most of what npm does.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<ul><li><a href="config.html">npm-config(1)</a></li><li><a href="build.html">npm-build(1)</a></li><li><a href="registry.html">npm-registry(1)</a></li><li><a href="build.html">npm-build(1)</a></li><li><a href="link.html">npm-link(1)</a></li><li><a href="folders.html">npm-folders(1)</a></li><li><a href="tag.html">npm-tag(1)</a></li></ul>
+</div>
+<script>
+els = Array.prototype.slice.call((wrapper = document.getElementById("wrapper"))
+.getElementsByTagName("*"), 0)
+.filter(function (el) {
+  return el.parentNode === wrapper
+      && el.tagName.match(/H[1-6]/)
+      && el.id
+})
+var l = 2
+;(toc = document.createElement("ul")).innerHTML = els.map(function (el) {
+  var i = el.tagName.charAt(1)
+    , out = ""
+  while (i > l) {
+    out += "<ul>"
+    l ++
+  }
+  while (i < l) {
+    out += "</ul>"
+    l --
+  }
+  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  return out
+}).join("\n")
+toc.id = "toc"
+document.body.appendChild(toc)
+
+</script>
+</body></html>
+<!-- npm help install - 2011-31-04 05:09:22 -->

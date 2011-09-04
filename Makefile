@@ -4,6 +4,10 @@ docs = $(shell find doc -name '*.md' \
 				|sed 's|.md|.1|g' \
 				|sed 's|doc/|man1/|g' )
 
+htmldocs = $(shell find doc -name '*.md' \
+						|sed 's|.md|.html|g' \
+						|sed 's|doc/|html/doc/|g' ) html/doc/index.html
+
 doc_subfolders = $(shell find doc -type d \
 									|sed 's|doc/|man1/|g' )
 
@@ -39,14 +43,35 @@ man: man1
 man1: $(doc_subfolders)
 	[ -d man1 ] || mkdir -p man1
 
-doc: man1 $(docs)
+html/doc: $(doc_subfolders)
+	[ -d html/doc ] || mkdir -p html/doc
+
+doc: $(docs) $(htmldocs)
 
 # use `npm install ronn` for this to work.
-man1/%.1: doc/%.md
+man1/%.1: doc/%.md man1
 	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
 	./node_modules/.bin/ronn --roff $< > $@
 
-man1/%/: doc/%/
+man1/%/: doc/%/ man1
+	@[ -d $@ ] || mkdir -p $@
+
+# use `npm install ronn` for this to work.
+html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html html/doc
+	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
+	(cat html/dochead.html && \
+	 ./node_modules/.bin/ronn -f $< && \
+	 cat html/docfoot.html )\
+	| sed 's|@NAME@|$*|g' \
+	| sed 's|@DATE@|$(shell date -u +'%Y-%M-%d %H:%m:%S')|g' \
+	| perl -pi -e 's/npm-([^\)]+)\(1\)/<a href="\1.html">npm-\1(1)<\/a>/g' \
+	| perl -pi -e 's/npm\(1\)/<a href="index.html">npm(1)<\/a>/g' \
+	> $@
+
+html/doc/index.html: html/doc/npm.html
+	cp $< $@
+
+html/doc/%/: doc/%/ html/doc
 	@[ -d $@ ] || mkdir -p $@
 
 test: submodules

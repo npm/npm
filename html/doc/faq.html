@@ -1,0 +1,543 @@
+<!doctype html>
+<html>
+  <title>npm-faq</title>
+<style type="text/css">
+
+/* reset */
+* {
+    margin:0;
+    padding:0;
+    border:none;
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:inherit;
+}
+:target::before {
+    content:" → ";
+    position:absolute;
+    display:block;
+    opacity:0.5;
+    color:#f00;
+    margin:0 0 0 -1.2em;
+}
+abbr, acronym {
+  border-bottom:1px dotted #aaa;
+}
+kbd, code, pre {
+  font-family:monospace;
+    margin:0;
+    font-size:18px;
+    line-height:24px;
+  background:#eee;
+  outline:1px solid #ccc;
+}
+kbd code, kbd pre, kbd kbd,
+pre code, pre pre, pre kbd,
+code code, code pre, code kbd { outline: none }
+.dollar::before {
+  content:"$ ";
+  display:inline;
+}
+p, ul, ol, dl, pre {
+    margin:30px 0;
+    line-height:30px;
+}
+hr {
+    margin:30px auto 29px;
+    width:66%;
+    height:1px;
+    background:#aaa;
+}
+pre {
+    display:block;
+}
+dd :first-child {
+    margin-top:0;
+}
+
+body {
+    quotes:"“" "”" "‘" "’";
+    width:666px;
+    margin:30px auto 120px;
+    font-family:Times New Roman, serif;
+    font-size:20px;
+    background:#fff;
+    line-height:30px;
+    color:#111;
+}
+
+blockquote {
+    position:relative;
+    font-size:16px;
+    line-height:30px;
+    font-weight:bold;
+    width:85%;
+    margin:0 auto;
+}
+blockquote::before {
+    font-size:90px;
+    display:block;
+    position:absolute;
+    top:20px;
+    right:100%;
+    content:"“";
+    padding-right:10px;
+    color:#ccc;
+}
+.source cite::before {
+    content:"— ";
+}
+.source {
+    padding-left:20%;
+    margin-top:30px;
+}
+.source cite span {
+    font-style:normal;
+}
+blockquote p {
+    margin-bottom:0;
+}
+.quote blockquote {
+    font-weight:normal;
+}
+
+h1, h2, h3, h4, h5, h6, dt, #header {
+  font-family:serif;
+  font-size:20px;
+  font-weight:bold;
+}
+h2 {
+  background:#eee;
+}
+h1, h2 {
+  line-height:40px;
+}
+
+i, em, cite {
+    font-style:italic;
+}
+b, strong { 
+    font-weight:bold;
+}
+i, em, cite, b, strong, small {
+    line-height:28px;
+}
+small, .small, .small *, aside {
+    font-style:italic;
+    color:#669;
+    font-size:18px;
+}
+spall a, .small a {
+    text-decoration:underline;
+}
+del {
+    text-decoration:line-through;
+}
+ins {
+    text-decoration:underline;
+}
+.alignright { display:block; float:right; margin-left:1em; }
+.alignleft { display:block; float:left; margin-right:1em; }
+
+q:before, q q q:before, q q q q q:before, q q q q q q q:before { content:"“"; }
+q q:before, q q q q:before, q q q q q q:before, q q q q q q q q:before { content:"‘"; }
+q:after, q q q:after, q q q q q:after, q q q q q q q:after { content:"”"; }
+q q:after, q q q q:after, q q q q q q:after, q q q q q q q q:after { content:"’"; }
+
+a { color:#00f; text-decoration:none; }
+a:visited { color:#636; }
+a:hover, a:active { color:#900!important; text-decoration:underline; }
+
+h1 {
+  font-weight:bold;
+  background:#fff;
+}
+
+.navigation {
+    display:table;
+    width:100%;
+    margin:0 0 30px 0;
+    position:relative;
+}
+#nav-above {
+    margin-bottom:0;
+}
+.navigation .nav-previous {
+    display:table-cell;
+    text-align:left;
+    width:50%;
+}
+/* hang the » and « off into the margins */
+.navigation .nav-previous a:before, .navigation .nav-next a:after {
+    content: "«";
+    display:block;
+    height:30px;
+    margin-bottom:-30px;
+    text-decoration:none;
+    margin-left:-15px;
+}
+.navigation .nav-next a:after {
+    content: "»";
+    text-align:right;
+    margin-left:0;
+    margin-top:-30px;
+    margin-right:-15px;
+}
+
+
+.navigation .nav-next {
+    display:table-cell;
+    text-align:right;
+    width:50%;
+}
+.navigation a {
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+input, button, textarea {
+    border:0;
+    line-height:30px;
+}
+textarea {
+    height:300px;
+}
+input {
+    height:30px;
+    line-height:30px;
+}
+input.submit, input#submit, input.button, button, input[type=submit] {
+    cursor:hand; cursor:pointer;
+    outline:1px solid #ccc;
+}
+
+#wrapper {
+    margin-bottom:90px;
+    position:relative;
+    z-index:1;
+    *zoom:1;
+    background:#fff;
+}
+#wrapper:after {
+    display:block;
+    content:".";
+    visibility:hidden;
+    width:0;
+    height:0;
+    clear:both;
+}
+
+.sidebar .xoxo > li {
+    float:left;
+    width:50%;
+}
+.sidebar li {
+    list-style:none;
+}
+.sidebar #elsewhere {
+    margin-left:-10%;
+    margin-right:-10%;
+}
+.sidebar #rss-links, .sidebar #twitter-feeds {
+    float:right;
+    clear:right;
+    width:20%;
+}
+.sidebar #comment {
+  clear:both;
+  float:none;
+  width:100%;
+}
+.sidebar #search {
+    clear:both;
+    float:none;
+    width:100%;
+}
+.sidebar #search h2 {
+    margin-left:40%;
+}
+.sidebar #search #s {
+    width:90%;
+    float:left;
+}
+.sidebar #search #searchsubmit {
+    width:10%;
+    float:right;
+}
+.sidebar * {
+    font-size:15px;
+    line-height:30px;
+}
+
+#footer, #footer * {
+    margin:300px 0 0;
+    text-align:right;
+    font-size:14px;
+    line-height:90px;
+}
+
+#toc {
+  position:absolute;
+  top:0;
+  right:0;
+  padding:40px 0 40px 20px;
+  margin:0;
+  width:200px;
+  opacity:0.2;
+  z-index:-1;
+}
+#toc:hover {
+  opacity:1;
+  background:#fff;
+  z-index:999;
+}
+#toc ul {
+  padding:0;
+  margin:0;
+}
+#toc, #toc li {
+  list-style-type:none;
+  font-size:15px;
+  line-height:15px;
+}
+#toc li {
+  padding:0 0 0 10px;
+}
+
+
+@media print {
+    a[href] {
+        color:inherit;
+    }
+    a[href]:after {
+        white-space:nowrap;
+        content:" " attr(href);
+    }
+    a[href^=\#], .navigation {
+        display:none;
+    }
+}
+</style>
+
+  <body>
+    <div id="wrapper">
+<h1><a href="faq.html">npm-faq(1)</a> -- Frequently Asked Questions</h1>
+
+<h2 id="Where-can-I-find-these-docs-in-HTML">Where can I find these docs in HTML?</h2>
+
+<p><a href="https://github.com/isaacs/npm/tree/master/doc">https://github.com/isaacs/npm/tree/master/doc</a></p>
+
+<h2 id="It-didn-t-work">It didn't work.</h2>
+
+<p>That's not really a question.</p>
+
+<h2 id="Why-didn-t-it-work">Why didn't it work?</h2>
+
+<p>I don't know yet.</p>
+
+<p>Read the error output, and if you can't figure out what it means,
+do what it says and post a bug with all the information it asks for.</p>
+
+<h2 id="Where-does-npm-put-stuff">Where does npm put stuff?</h2>
+
+<p>See <code>npm help folders</code></p>
+
+<p>tl;dr:</p>
+
+<ul><li>Use the <code>npm root</code> command to see where modules go, and the <code>npm bin</code>
+command to see where executables go</li><li>Global installs are different from local installs.  If you install
+something with the <code>-g</code> flag, then its executables go in <code>npm bin -g</code>
+and its modules go in <code>npm root -g</code>.</li></ul>
+
+<h2 id="How-do-I-install-something-everywhere">How do I install something everywhere?</h2>
+
+<p>Install it globally by tacking <code>-g</code> or <code>--global</code> to the command.</p>
+
+<h2 id="I-installed-something-globally-but-I-can-t-require-it">I installed something globally, but I can't `require()` it</h2>
+
+<p>Install it locally.</p>
+
+<h2 id="I-don-t-wanna">I don't wanna.</h2>
+
+<p>Check out <code>npm link</code>.  You might like it.</p>
+
+<h2 id="No-I-really-want-0-x-style-everything-global-style">No, I really want 0.x style 'everything global' style.</h2>
+
+<p>Ok, fine.  Do this:</p>
+
+<pre><code>echo 'export NODE_PATH="'$(npm root -g)'"' &gt;&gt; ~/.bashrc
+. ~/.bashrc
+npm config set global true</code></pre>
+
+<p>This is not recommended.</p>
+
+<p>Many things <strong>will not work</strong> if you do this.  Make sure you read and
+understand <code>npm help config</code> and <code>npm help global</code> before you complain
+about things being broken.</p>
+
+<p>When you realize what a mistake it was, do this to switch back:</p>
+
+<pre><code>npm config delete global --local</code></pre>
+
+<h2 id="If-npm-is-an-acronym-why-is-it-never-capitalized">If 'npm' is an acronym, why is it never capitalized?</h2>
+
+<p>Contrary to the belief of many, "npm" is not in fact an abbreviation for
+"Node Package Manager".  It is a recursive bacronymic abbreviation for
+"npm is not an acronym".</p>
+
+<p>"NPM", however, <em>is</em> an acronym for the National Association of
+Pastoral Musicians.  You can learn more about them at <a href="http://npm.org/">http://npm.org/</a>.
+It is not an acronym, you see, but rather a capitonym.</p>
+
+<p>In all earnestness, "npm" is named after its command-line utility,
+which was mostly designed to be easily typed by right-handed programmers
+using US QWERTY keyboard layouts, ending with the right-ring-finger in a
+postition to type the <code>"-"</code> key for flags and other command-line
+arguments, and is always lower-case, though it starts most sentences it
+is a part of.</p>
+
+<h2 id="How-do-I-list-installed-packages">How do I list installed packages?</h2>
+
+<p><code>npm ls</code></p>
+
+<h2 id="How-do-I-search-for-packages">How do I search for packages?</h2>
+
+<p><code>npm search</code></p>
+
+<p>Arguments are greps.  <code>npm search jsdom</code> shows jsdom packages.</p>
+
+<h2 id="How-do-I-update-npm">How do I update npm?</h2>
+
+<pre><code>npm update npm -g</code></pre>
+
+<p>You can also update all outdated local packages by doing <code>npm update</code> without
+any arguments, or global packages by doing <code>npm update -g</code>.</p>
+
+<p>Occasionally, the version of npm will progress such that the current
+version cannot be properly installed with the version that you have
+installed already.  (Consider, if there is ever a bug in the <code>update</code>
+command.)</p>
+
+<p>In those cases, you can do this:</p>
+
+<pre><code>curl http://npmjs.org/install.sh | sh</code></pre>
+
+<h2 id="What-is-a-package">What is a `package`?</h2>
+
+<p>A package is:</p>
+
+<ul><li>a) a folder containing a program described by a package.json file</li><li>b) a gzipped tarball containing (a)</li><li>c) a url that resolves to (b)</li><li>d) a <code>&lt;name&gt;@&lt;version&gt;</code> that is published on the registry with (c)</li><li>e) a <code>&lt;name&gt;@&lt;tag&gt;</code> that points to (d)</li><li>f) a <code>&lt;name&gt;</code> that has a "latest" tag satisfying (e)</li><li>g) a <code>git</code> url that, when cloned, results in (a).</li></ul>
+
+<p>Even if you never publish your package, you can still get a lot of
+benefits of using npm if you just want to write a node program (a), and
+perhaps if you also want to be able to easily install it elsewhere
+after packing it up into a tarball (b).</p>
+
+<p>Git urls can be of the form:</p>
+
+<pre><code>git://github.com/user/project.git#commit-ish
+git+ssh://user@hostname:project.git#commit-ish
+git+http://user@hostname/project/blah.git#commit-ish
+git+https://user@hostname/project/blah.git#commit-ish</code></pre>
+
+<p>The <code>commit-ish</code> can be any tag, sha, or branch which can be supplied as
+an argument to <code>git checkout</code>.  The default is <code>master</code>.</p>
+
+<h2 id="How-do-I-install-node-with-npm">How do I install node with npm?</h2>
+
+<p>You don't.  Try one of these:</p>
+
+<ul><li><a href="http://github.com/isaacs/nave">http://github.com/isaacs/nave</a></li><li><a href="http://github.com/visionmedia/n">http://github.com/visionmedia/n</a></li><li><a href="http://github.com/creationix/nvm">http://github.com/creationix/nvm</a></li></ul>
+
+<h2 id="How-can-I-use-npm-for-development">How can I use npm for development?</h2>
+
+<p>See <code>npm help developers</code> and <code>npm help json</code>.</p>
+
+<p>You'll most likely want to <code>npm link</code> your development folder.  That's
+awesomely handy.</p>
+
+<p>To set up your own private registry, check out <code>npm help registry</code>.</p>
+
+<h2 id="Can-I-list-a-url-as-a-dependency">Can I list a url as a dependency?</h2>
+
+<p>Yes.  It should be a url to a gzipped tarball containing a single folder
+that has a package.json in its root, or a git url.
+(See "what is a package?" above.)</p>
+
+<h2 id="How-do-I-symlink-to-a-dev-folder-so-I-don-t-have-to-keep-re-installing">How do I symlink to a dev folder so I don't have to keep re-installing?</h2>
+
+<p>See <code>npm help link</code></p>
+
+<h2 id="The-package-registry-website-What-is-that-exactly">The package registry website.  What is that exactly?</h2>
+
+<p>See <code>npm help registry</code>.</p>
+
+<h2 id="What-s-up-with-the-insecure-channel-warnings">What's up with the insecure channel warnings?</h2>
+
+<p>Until node 0.4.10, there were problems sending big files over HTTPS.  That
+means that publishes go over HTTP by default in those versions of node.</p>
+
+<h2 id="I-forgot-my-password-and-can-t-publish-How-do-I-reset-it">I forgot my password, and can't publish.  How do I reset it?</h2>
+
+<p>Go to <a href="http://admin.npmjs.org/reset">http://admin.npmjs.org/reset</a>.</p>
+
+<h2 id="I-get-ECONNREFUSED-a-lot-What-s-up">I get ECONNREFUSED a lot.  What's up?</h2>
+
+<p>Either the registry is down, or node's DNS isn't able to reach out.
+This happens a lot if you don't follow <em>all</em> the steps in the Cygwin
+setup doc.</p>
+
+<p>To check if the registry is down, open up
+<a href="http://registry.npmjs.org/-/short">http://registry.npmjs.org/-/short</a>
+in a web browser.  This will also tell you if you are just unable to
+access the internet for some reason.</p>
+
+<p>If the registry IS down, let me know by emailing or posting an issue.
+We'll have someone kick it or something.</p>
+
+<h2 id="Who-does-npm">Who does npm?</h2>
+
+<p><code>npm view npm author</code></p>
+
+<p><code>npm view npm contributors</code></p>
+
+<h2 id="I-have-a-question-or-request-not-addressed-here-Where-should-I-put-it">I have a question or request not addressed here. Where should I put it?</h2>
+
+<p>Discuss it on the mailing list, or post an issue.</p>
+
+<ul><li><a href="mailto:npm-@googlegroups.com">npm-@googlegroups.com</a></li><li><a href="http://github.com/isaacs/npm/issues">http://github.com/isaacs/npm/issues</a></li></ul>
+
+<h2 id="Why-does-npm-hate-me">Why does npm hate me?</h2>
+
+<p>npm is not capable of hatred.  It loves everyone, especially you.</p>
+</div>
+<script>
+els = Array.prototype.slice.call((wrapper = document.getElementById("wrapper"))
+.getElementsByTagName("*"), 0)
+.filter(function (el) {
+  return el.parentNode === wrapper
+      && el.tagName.match(/H[1-6]/)
+      && el.id
+})
+var l = 2
+;(toc = document.createElement("ul")).innerHTML = els.map(function (el) {
+  var i = el.tagName.charAt(1)
+    , out = ""
+  while (i > l) {
+    out += "<ul>"
+    l ++
+  }
+  while (i < l) {
+    out += "</ul>"
+    l --
+  }
+  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  return out
+}).join("\n")
+toc.id = "toc"
+document.body.appendChild(toc)
+
+</script>
+</body></html>
+<!-- npm help faq - 2011-31-04 05:09:21 -->
