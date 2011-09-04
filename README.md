@@ -1,4 +1,5 @@
-# npm
+npm(1) -- node package manager
+==============================
 
 This is just enough info to get you up and running.
 
@@ -11,56 +12,42 @@ Much more info available via `npm help` once it's installed.
 To install an old **and unsupported** version of npm that works on node 0.3
 and prior:
 
-```bash
-git clone git://github.com/isaacs/npm.git ./npm
-cd npm
-git checkout origin/0.2
-make dev
-```
+    git clone git://github.com/isaacs/npm.git ./npm
+    cd npm
+    git checkout origin/0.2
+    make dev
 
 ## Simple Install
 
 To install npm with one command, do this:
 
-```bash
-curl http://npmjs.org/install.sh | sh
-```
+    curl http://npmjs.org/install.sh | sh
 
 To skip the npm 0.x cleanup, do this:
 
-```bash
-curl http://npmjs.org/install.sh | clean=no sh
-```
+    curl http://npmjs.org/install.sh | clean=no sh
 
 To say "yes" to the 0.x cleanup, but skip the prompt:
 
-```bash
-curl http://npmjs.org/install.sh | clean=yes sh
-```
+    curl http://npmjs.org/install.sh | clean=yes sh
 
 If that fails, try this:
 
-```bash
-git clone https://github.com/isaacs/npm.git
-cd npm
-sudo make install
-```
+    git clone https://github.com/isaacs/npm.git
+    cd npm
+    sudo make install
 
 If you're sitting in the code folder reading this document in your
 terminal, then you've already got the code.  Just do:
 
-```bash
-sudo make install
-```
+    sudo make install
 
 and npm will install itself.
 
 If you don't have make, and don't have curl or git, and ALL you have is
 this code and node, you can probably do this:
 
-```bash
-sudo node ./cli.js install -g
-```
+    sudo node ./cli.js install -g
 
 However, note that github tarballs **do not contain submodules**, so
 those won't work.  You'll have to also fetch the appropriate submodules
@@ -87,9 +74,7 @@ If you would like to ensure that npm **always** runs scripts as the
 "nobody" user, and have it fail if it cannot downgrade permissions, then
 set the following configuration param:
 
-```bash
-npm config set unsafe-perm false
-```
+    npm config set unsafe-perm false
 
 This will prevent running in unsafe mode, even as non-root users.
 
@@ -97,15 +82,11 @@ This will prevent running in unsafe mode, even as non-root users.
 
 So sad to see you go.
 
-```bash
-sudo npm uninstall npm -g
-```
+    sudo npm uninstall npm -g
 
 Or, if that fails,
 
-```bash
-sudo make uninstall
-```
+    sudo make uninstall
 
 ## More Severe Uninstalling
 
@@ -119,17 +100,13 @@ remove them.
 To remove cruft left behind by npm 0.x, you can use the included
 `clean-old.sh` script file.  You can run it conveniently like this:
 
-```bash
-npm explore npm -g -- sh scripts/clean-old.sh
-```
+    npm explore npm -g -- sh scripts/clean-old.sh
 
 npm uses two configuration files, one for per-user configs, and another
 for global (every-user) configs.  You can view them by doing:
 
-```bash
-npm config get userconfig   # defaults to ~/.npmrc
-npm config get globalconfig # defaults to /usr/local/etc/npmrc
-```
+    npm config get userconfig   # defaults to ~/.npmrc
+    npm config get globalconfig # defaults to /usr/local/etc/npmrc
 
 Uninstalling npm does not remove configuration files by default.  You
 must remove them yourself manually if you want them gone.  Note that
@@ -141,17 +118,15 @@ you have chosen.
 If you would like to use npm programmatically, you can do that.
 It's not very well documented, but it *is* rather simple.
 
-```javascript
-var npm = require("npm")
-npm.load(myConfigObject, function (er) {
-  if (er) return handlError(er)
-  npm.commands.install(["some", "args"], function (er, data) {
-    if (er) return commandFailed(er)
-    // command succeeded, and data might have some info
-  })
-  npm.on("log", function (message) { .... })
-})
-```
+    var npm = require("npm")
+    npm.load(myConfigObject, function (er) {
+      if (er) return handlError(er)
+      npm.commands.install(["some", "args"], function (er, data) {
+        if (er) return commandFailed(er)
+        // command succeeded, and data might have some info
+      })
+      npm.on("log", function (message) { .... })
+    })
 
 The `load` function takes an object hash of the command-line configs.
 The various `npm.commands.<cmd>` functions take an **array** of
@@ -169,15 +144,15 @@ help config` to learn about all the options you can set there.
 
 ## More Docs
 
-Check out the [docs](http://github.com/isaacs/npm/blob/master/doc/),
+Check out the [docs](http://npmjs.org/doc/),
 especially the
-[faq](http://github.com/isaacs/npm/blob/master/doc/faq.md#readme).
+[faq](http://npmjs.org/doc/faq.html).
 
 You can use the `npm help` command to read any of them.
 
 If you're a developer, and you want to use npm to publish your program,
 you should
-[read this](http://github.com/isaacs/npm/blob/master/doc/developers.md#readme)
+[read this](http://npmjs.org/doc/developers.html)
 
 ## Legal Stuff
 
