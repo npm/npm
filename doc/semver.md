@@ -1,5 +1,5 @@
-semver(1) -- The semantic versioner for npm
-===========================================
+npm-semver(1) -- The semantic versioner for npm
+===============================================
 
 ## Usage
 
