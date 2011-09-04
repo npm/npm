@@ -356,6 +356,14 @@ The location to write log output.
 What level of logs to report.  On failure, *all* logs are written to
 `npm-debug.log` in the current working directory.
 
+### logprefix
+
+* Default: true on Posix, false on Windows
+* Type: Boolean
+
+Whether or not to prefix log messages with "npm" and the log level.  See
+also "color" and "loglevel".
+
 ### long
 
 * Default: false
