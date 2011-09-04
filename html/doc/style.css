@@ -154,6 +154,10 @@ h1 a, h1 a:visited {
   color:#900;
   display:block;
 }
+h1 a:focus, h1 a:hover, h1 a:active {
+  color:#f00!important;
+  text-decoration:none;
+}
 
 .navigation {
     display:table;
