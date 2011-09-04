@@ -34,6 +34,7 @@
   , "node-uuid" : "1.2"
   , "proto-list": "1"
   , "rimraf" : "1"
+  , "request": "~2.1.1"
   , "which" : "1" }
 , "bundleDependencies" :
   [ "slide"
@@ -45,6 +46,7 @@
   , "nopt"
   , "node-uuid"
   , "rimraf"
+  , "request"
   , "proto-list"
   , "which" ]
 , "devDependencies" : { "ronn" : "" }

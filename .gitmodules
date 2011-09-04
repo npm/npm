@@ -31,3 +31,6 @@
 [submodule "node_modules/which"]
 	path = node_modules/which
 	url = https://github.com/isaacs/node-which.git
+[submodule "node_modules/request"]
+	path = node_modules/request
+	url = https://github.com/mikeal/request.git
