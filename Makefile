@@ -64,8 +64,10 @@ html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html html/doc
 	 cat html/docfoot.html )\
 	| sed 's|@NAME@|$*|g' \
 	| sed 's|@DATE@|$(shell date -u +'%Y-%M-%d %H:%m:%S')|g' \
-	| perl -pi -e 's/npm-([^\)]+)\(1\)/<a href="\1.html">npm-\1(1)<\/a>/g' \
-	| perl -pi -e 's/npm\(1\)/<a href="npm.html">npm(1)<\/a>/g' \
+	| perl -pi -e 's/<h1>npm-([^\(]+\([0-9]\)) -- (.*?)<\/h1>/<h1>npm-\1<\/h1> <p>\2<\/p>/g' \
+	| perl -pi -e 's/npm-([^\)]+)\(1\)/<a href="\1.html">npm-\1<\/a>/g' \
+	| perl -pi -e 's/npm\(1\)/<a href="npm.html">npm<\/a>/g' \
+	| perl -pi -e 's/npm\(1\)/<a href="npm.html">npm<\/a>/g' \
 	> $@
 
 html/doc/%/: doc/%/ html/doc
