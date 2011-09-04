@@ -3,7 +3,7 @@ npm-faq(1) -- Frequently Asked Questions
 
 ## Where can I find these docs in HTML?
 
-<https://github.com/isaacs/npm/tree/master/doc>
+<http://npmjs.org/doc/>
 
 ## It didn't work.
 
