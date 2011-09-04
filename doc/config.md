@@ -183,7 +183,7 @@ The location of npm's cache directory.  See `npm help cache`
 
 ### color
 
-* Default: true
+* Default: true on Posix, false on Windows
 * Type: Boolean or `"always"`
 
 If false, never shows colors.  If `"always"` then always shows colors.
