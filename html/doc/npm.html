@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-  <title>npm-npm</title>
+  <title>npm</title>
   <meta http-equiv="content-type" value="text/html;utf-8">
 <style type="text/css">
 
@@ -337,7 +337,7 @@ input.submit, input#submit, input.button, button, input[type=submit] {
 
   <body>
     <div id="wrapper">
-<h1><a href="npm.html">npm</a></h1> <p>node package manager</p>
+<h1><a href=".html">npm </a></h1> <p>node package manager</p>
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
@@ -420,7 +420,7 @@ lib/utils/config-defs.js.  These must not be changed.</li></ul>
 <p>Patches welcome!</p>
 
 <ul><li>code:
-Read through <code><a href="coding.html">npm coding</a>-style</code> if you plan to submit code.
+Read through <code><a href="coding-style.html">npm coding-style</a></code> if you plan to submit code.
 You don't have to agree with it, but you do have to follow it.</li><li>docs:
 If you find an error in the documentation, edit the appropriate markdown
 file in the "doc" folder.  (Don't worry about generating the man page.)</li></ul>
@@ -459,15 +459,18 @@ will no doubt tell you to put the output in a gist or email.</p>
 <a href="mailto:i@izs.me">i@izs.me</a></p>
 </div>
 <script>
-els = Array.prototype.slice.call((wrapper = document.getElementById("wrapper"))
-.getElementsByTagName("*"), 0)
-.filter(function (el) {
-  return el.parentNode === wrapper
-      && el.tagName.match(/H[1-6]/)
-      && el.id
-})
+;(function () {
+var wrapper = document.getElementById("wrapper")
+var els = Array.prototype.slice.call(wrapper)
+  .getElementsByTagName("*"), 0)
+  .filter(function (el) {
+    return el.parentNode === wrapper
+        && el.tagName.match(/H[1-6]/)
+        && el.id
+  })
 var l = 2
-;(toc = document.createElement("ul")).innerHTML = els.map(function (el) {
+  , toc = document.createElement("ul")
+toc.innerHTML = els.map(function (el) {
   var i = el.tagName.charAt(1)
     , out = ""
   while (i > l) {
@@ -483,7 +486,6 @@ var l = 2
 }).join("\n")
 toc.id = "toc"
 document.body.appendChild(toc)
-
+})()
 </script>
 </body></html>
-<!-- npm help npm - 2011-30-04 08:09:02 -->

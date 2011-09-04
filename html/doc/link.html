@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-  <title>npm-link</title>
+  <title>link</title>
   <meta http-equiv="content-type" value="text/html;utf-8">
 <style type="text/css">
 
@@ -386,15 +386,18 @@ npm link redis</code></pre>
 installation target into your project's <code>node_modules</code> folder.</p>
 </div>
 <script>
-els = Array.prototype.slice.call((wrapper = document.getElementById("wrapper"))
-.getElementsByTagName("*"), 0)
-.filter(function (el) {
-  return el.parentNode === wrapper
-      && el.tagName.match(/H[1-6]/)
-      && el.id
-})
+;(function () {
+var wrapper = document.getElementById("wrapper")
+var els = Array.prototype.slice.call(wrapper)
+  .getElementsByTagName("*"), 0)
+  .filter(function (el) {
+    return el.parentNode === wrapper
+        && el.tagName.match(/H[1-6]/)
+        && el.id
+  })
 var l = 2
-;(toc = document.createElement("ul")).innerHTML = els.map(function (el) {
+  , toc = document.createElement("ul")
+toc.innerHTML = els.map(function (el) {
   var i = el.tagName.charAt(1)
     , out = ""
   while (i > l) {
@@ -410,7 +413,6 @@ var l = 2
 }).join("\n")
 toc.id = "toc"
 document.body.appendChild(toc)
-
+})()
 </script>
 </body></html>
-<!-- npm help link - 2011-11-04 08:09:44 -->
