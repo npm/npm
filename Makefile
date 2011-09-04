@@ -46,6 +46,7 @@ man1/%.1: doc/%.md
 	@[ -d man1 ] || mkdir -p man1
 	./node_modules/.bin/ronn --roff $< \
 	| perl -pi -e 's/npm\\-([^\(]*)\([0-9]\)/npm help \1/g' \
+	| perl -pi -e 's/npm\([0-9]\)/npm help npm/g' \
 	> $@
 
 man1/%/: doc/%/
