@@ -47,3 +47,12 @@ The second line is the equivalent of doing:
 
 That is, it first creates a global link, and then links the global
 installation target into your project's `node_modules` folder.
+
+## SEE ALSO
+
+* npm-developers(1)
+* npm-faq(1)
+* npm-json(1)
+* npm-install(1)
+* npm-folders(1)
+* npm-config(1)

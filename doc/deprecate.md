@@ -17,3 +17,8 @@ something like this:
 
 Note that you must be the package owner to deprecate something.  See the
 `owner` and `adduser` help topics.
+
+## SEE ALSO
+
+* npm-publish(1)
+* npm-registry(1)

@@ -85,3 +85,8 @@ ask for help on the <npm-@googlegroups.com> mailing list.
 No, but such a thing is planned, and a tiny bit developed.
 
 Stay tuned!
+
+## SEE ALSO
+
+* npm-config(1)
+* npm-developers(1)

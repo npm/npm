@@ -1,11 +1,19 @@
-npm-uninstall(1) -- Remove a package
-====================================
+npm-rm(1) -- Remove a package
+=============================
 
 ## SYNOPSIS
 
-    npm uninstall <name>
     npm rm <name>
+    npm uninstall <name>
 
 ## DESCRIPTION
 
-This uninstalls a package, completely removing everything installed for it.
+This uninstalls a package, completely removing everything npm installed
+on its behalf.
+
+## SEE ALSO
+
+* npm-prune(1)
+* npm-install(1)
+* npm-folders(1)
+* npm-config(1)

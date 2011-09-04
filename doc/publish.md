@@ -26,3 +26,5 @@ the registry.  Overwrites when the "--force" flag is set.
 * npm-registry(1)
 * npm-adduser(1)
 * npm-owner(1)
+* npm-deprecate(1)
+* npm-tag(1)

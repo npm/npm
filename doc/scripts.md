@@ -174,3 +174,10 @@ they are in a separate child process, with the env described above.
 * Don't prefix your script commands with "sudo".  If root permissions are
   required for some reason, then it'll fail with that error, and the user
   will sudo the npm command in question.
+
+## SEE ALSO
+
+* npm-run-script(1)
+* npm-json(1)
+* npm-developers(1)
+* npm-install(1)

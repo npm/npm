@@ -27,3 +27,8 @@ authorize on a new machine.
 Default: http://registry.npmjs.org/
 
 The base URL of the npm package registry.
+
+## SEE ALSO
+
+* npm-registry(1)
+* npm-config(1)

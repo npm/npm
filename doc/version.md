@@ -12,3 +12,9 @@ data back to the package.json file.
 
 If run in a git repo, it will also create a version commit and tag, and
 fail if the repo is not clean.
+
+## SEE ALSO
+
+* npm-init(1)
+* npm-json(1)
+* npm-semver(1)

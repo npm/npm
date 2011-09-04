@@ -58,3 +58,11 @@ they do not make an HTTP request to the registry.
 Default: `$HOME/.npm` on Posix, or `$HOME/npm-cache` on Windows.
 
 The root cache folder.
+
+## SEE ALSO
+
+* npm-folders(1)
+* npm-config(1)
+* npm-install(1)
+* npm-publish(1)
+* npm-pack(1)

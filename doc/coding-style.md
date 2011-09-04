@@ -182,3 +182,9 @@ Don't set things to `undefined`.  Reserve that value to mean "not yet
 set to anything."
 
 Boolean objects are verboten.
+
+## SEE ALSO
+
+* npm-developers(1)
+* npm-faq(1)
+* npm(1)

@@ -8,3 +8,10 @@ npm-bin(1) -- Display npm bin folder
 ## DESCRIPTION
 
 Print the folder where npm will install executables.
+
+## SEE ALSO
+
+* npm-prefix(1)
+* npm-root(1)
+* npm-folders(1)
+* npm-config(1)

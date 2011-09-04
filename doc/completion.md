@@ -19,3 +19,9 @@ that will read that file for you.
 When `COMP_CWORD`, `COMP_LINE`, and `COMP_POINT` are defined in the
 environment, `npm completion` acts in "plumbing mode", and outputs
 completions based on the arguments.
+
+## SEE ALSO
+
+* npm-developers(1)
+* npm-faq(1)
+* npm(1)

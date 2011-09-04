@@ -350,8 +350,26 @@ input.submit, input#submit, input.button, button, input[type=submit] {
 <p>If a command is specified, then it is run in the subshell, which then
 immediately terminates.</p>
 
+<p>This is particularly handy in the case of git submodules in the
+<code>node_modules</code> folder:</p>
+
+<pre><code>npm explore some-dependency -- git pull origin master</code></pre>
+
 <p>Note that the package is <em>not</em> automatically rebuilt afterwards, so be
 sure to use <code>npm rebuild &lt;pkg&gt;</code> if you make any changes.</p>
+
+<h2 id="CONFIGURATION">CONFIGURATION</h2>
+
+<h3 id="shell">shell</h3>
+
+<ul><li>Default: SHELL environment variable, or "bash" on Posix, or "cmd" on
+Windows</li><li>Type: path</li></ul>
+
+<p>The shell to run for the <code>npm explore</code> command.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<ul><li><a href="submodule.html">npm submodule</a></li><li><a href="folders.html">npm folders</a></li><li><a href="edit.html">npm edit</a></li><li><a href="rebuild.html">npm rebuild</a></li><li><a href="build.html">npm build</a></li><li><a href="install.html">npm install</a></li></ul>
 </div>
 <script>
 ;(function () {

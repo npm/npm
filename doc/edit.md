@@ -16,3 +16,20 @@ changes in compiled packages.
 For instance, you can do `npm install connect` to install connect
 into your package, and then `npm edit connect` to make a few
 changes to your locally installed copy.
+
+## CONFIGURATION
+
+### editor
+
+* Default: `EDITOR` environment variable if set, or `"vi"` on Posix,
+  or `"notepad"` on Windows.
+* Type: path
+
+The command to run for `npm edit` or `npm config edit`.
+
+## SEE ALSO
+
+* npm-folders(1)
+* npm-explore(1)
+* npm-install(1)
+* npm-config(1)

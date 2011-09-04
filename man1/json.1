@@ -552,26 +552,12 @@ for more on the topic\.
 .SH "bundledDependencies"
 Array of package names that will be bundled when publishing the package\.
 .
+.P
+If this is spelled \fB"bundleDependencies"\fR, then that is also honorable\.
+.
 .SH "engines"
-Packages/1\.0 says that you can have an "engines" field with an array of engine
-names\. However, it has no provision for specifying which version of the engine
-your stuff runs on\.
-.
-.P
-With npm, you can use either of the following styles to specify the version of
+You can specify the version of
 node that your stuff works on:
-.
-.IP "" 4
-.
-.nf
-{ "engines" : [ "node >=0\.1\.27 <0\.1\.30" ] }
-.
-.fi
-.
-.IP "" 0
-.
-.P
-or:
 .
 .IP "" 4
 .
@@ -590,6 +576,19 @@ specify "*" as the version), then any version of node will do\.
 If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list\. If "engines" is omitted, then npm will just assume
 that it works on node\.
+.
+.P
+You can also use the "engines" field to specify which versions of npm
+are capable of properly installing your program\.  For example:
+.
+.IP "" 4
+.
+.nf
+{ "engines" : { "npm" : "~1\.0\.20" } }
+.
+.fi
+.
+.IP "" 0
 .
 .SH "preferGlobal"
 If your package is primarily a command\-line application that should be
@@ -624,3 +623,35 @@ Any config values can be overridden, but of course only "tag" and
 .P
 See \fBnpm help config\fR to see the list of config options that can be
 overridden\.
+.
+.SH "SEE ALSO"
+.
+.IP "\(bu" 4
+npm help semver
+.
+.IP "\(bu" 4
+npm help init
+.
+.IP "\(bu" 4
+npm help version
+.
+.IP "\(bu" 4
+npm help config
+.
+.IP "\(bu" 4
+npm help help
+.
+.IP "\(bu" 4
+npm help faq
+.
+.IP "\(bu" 4
+npm help install
+.
+.IP "\(bu" 4
+npm help publish
+.
+.IP "\(bu" 4
+npm help rm
+.
+.IP "" 0
+

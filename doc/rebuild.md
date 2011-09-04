@@ -14,6 +14,7 @@ This command runs the `npm build` command on the matched folders.  This is usefu
 when you install a new version of node, and must recompile all your C++ addons with
 the new binary.
 
-## CONFIGURATION
+## SEE ALSO
 
-See `npm-build(1)`
+* npm-build(1)
+* npm-install(1)

@@ -216,7 +216,8 @@ set.
 
 ### editor
 
-* Default: `EDITOR` environment variable if set, or `"vi"`
+* Default: `EDITOR` environment variable if set, or `"vi"` on Posix,
+  or `"notepad"` on Windows.
 * Type: path
 
 The command to run for `npm edit` or `npm config edit`.
@@ -488,7 +489,8 @@ Space-separated options that limit the results from search.
 
 ### shell
 
-* Default: SHELL environment variable, or "bash"
+* Default: SHELL environment variable, or "bash" on Posix, or "cmd" on
+  Windows
 * Type: path
 
 The shell to run for the `npm explore` command.
@@ -603,3 +605,8 @@ circumstances.
 
 If set to `true`, then answer "yes" to any prompt.  If set to `false`
 then answer "no" to any prompt.
+
+## SEE ALSO
+
+* npm-folders(1)
+* npm(1)

@@ -5,6 +5,10 @@ npm(1) -- node package manager
 
     npm <command> [args]
 
+## VERSION
+
+@VERSION@
+
 ## DESCRIPTION
 
 npm is the package manager for the Node JavaScript platform.  It puts
@@ -138,3 +142,12 @@ See npm-changelog(1)
 [isaacs](https://github.com/isaacs/) ::
 [@izs](http://twitter.com/izs) ::
 <i@izs.me>
+
+## SEE ALSO
+
+* npm-help(1)
+* npm-faq(1)
+* README
+* npm-json(1)
+* npm-install(1)
+* npm-config(1)

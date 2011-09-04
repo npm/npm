@@ -690,25 +690,19 @@ the external test or documentation framework that you use.</p>
 
 <p>These things will be installed whenever the <code>--dev</code> configuration flag
 is set.  This flag is set automatically when doing <code>npm link</code>, and can
-be managed like any other <a href=" configuration param.  See <code>npm-config.html">npm  configuration param.  See <code>npm-config</a></code>
+be managed like any other npm configuration param.  See <code><a href="config.html">npm config</a></code>
 for more on the topic.</p>
 
 <h2 id="bundledDependencies">bundledDependencies</h2>
 
 <p>Array of package names that will be bundled when publishing the package.</p>
 
+<p>If this is spelled <code>"bundleDependencies"</code>, then that is also honorable.</p>
+
 <h2 id="engines">engines</h2>
 
-<p>Packages/1.0 says that you can have an "engines" field with an array of engine
-names. However, it has no provision for specifying which version of the engine
-your stuff runs on.</p>
-
-<p>With npm, you can use either of the following styles to specify the version of
+<p>You can specify the version of
 node that your stuff works on:</p>
-
-<pre><code>{ "engines" : [ "node &gt;=0.1.27 &lt;0.1.30" ] }</code></pre>
-
-<p>or:</p>
 
 <pre><code>{ "engines" : { "node" : "&gt;=0.1.27 &lt;0.1.30" } }</code></pre>
 
@@ -718,6 +712,11 @@ specify "*" as the version), then any version of node will do.</p>
 <p>If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list. If "engines" is omitted, then npm will just assume
 that it works on node.</p>
+
+<p>You can also use the "engines" field to specify which versions of npm
+are capable of properly installing your program.  For example:</p>
+
+<pre><code>{ "engines" : { "npm" : "~1.0.20" } }</code></pre>
 
 <h2 id="preferGlobal">preferGlobal</h2>
 
@@ -751,6 +750,10 @@ the global public registry by default.</p>
 
 <p>See <code><a href="config.html">npm config</a></code> to see the list of config options that can be
 overridden.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<ul><li><a href="semver.html">npm semver</a></li><li><a href="init.html">npm init</a></li><li><a href="version.html">npm version</a></li><li><a href="config.html">npm config</a></li><li><a href="help.html">npm help</a></li><li><a href="faq.html">npm faq</a></li><li><a href="install.html">npm install</a></li><li><a href="publish.html">npm publish</a></li><li><a href="rm.html">npm rm</a></li></ul>
 </div>
 <script>
 ;(function () {

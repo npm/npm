@@ -346,7 +346,7 @@ input.submit, input#submit, input.button, button, input[type=submit] {
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
 <p>Opens the package folder in the default editor (or whatever you've
-configured as the <a href=" <code>editor</code> config -- see <code>npm-config.html">npm  <code>editor</code> config -- see <code>npm-config</a></code>.)</p>
+configured as the npm <code>editor</code> config -- see <code><a href="config.html">npm config</a></code>.)</p>
 
 <p>After it has been edited, the package is rebuilt so as to pick up any
 changes in compiled packages.</p>
@@ -354,6 +354,19 @@ changes in compiled packages.</p>
 <p>For instance, you can do <code>npm install connect</code> to install connect
 into your package, and then <code>npm edit connect</code> to make a few
 changes to your locally installed copy.</p>
+
+<h2 id="CONFIGURATION">CONFIGURATION</h2>
+
+<h3 id="editor">editor</h3>
+
+<ul><li>Default: <code>EDITOR</code> environment variable if set, or <code>"vi"</code> on Posix,
+or <code>"notepad"</code> on Windows.</li><li>Type: path</li></ul>
+
+<p>The command to run for <code>npm edit</code> or <code>npm config edit</code>.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<ul><li><a href="folders.html">npm folders</a></li><li><a href="explore.html">npm explore</a></li><li><a href="install.html">npm install</a></li><li><a href="config.html">npm config</a></li></ul>
 </div>
 <script>
 ;(function () {

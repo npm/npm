@@ -76,3 +76,9 @@ will be prefixed with the version it applies to.
 
 If multiple fields are requested, than each of them are prefixed with
 the field name.
+
+## SEE ALSO
+
+* npm-search(1)
+* npm-registry(1)
+* npm-config(1)

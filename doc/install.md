@@ -120,10 +120,13 @@ effect on installation, since that's most of what npm does.
 
 ## SEE ALSO
 
-* npm-config(1)
-* npm-build(1)
-* npm-registry(1)
-* npm-build(1)
+* npm-update(1)
 * npm-link(1)
+* npm-rebuild(1)
+* npm-scripts(1)
+* npm-build(1)
+* npm-config(1)
+* npm-registry(1)
 * npm-folders(1)
 * npm-tag(1)
+* npm-rm(1)

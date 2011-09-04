@@ -20,3 +20,28 @@ entry and removing the tarball\.
 .P
 If no version is specified, or if all versions are removed then
 the root package entry is removed from the registry entirely\.
+.
+.SH "NOTE"
+It is generally considered bad behavior to remove versions of a library
+that others are depending on!  Consider using the \fBdeprecate\fR command
+instead, if your intent is to encourage users to upgrade\.
+.
+.SH "SEE ALSO"
+.
+.IP "\(bu" 4
+npm help deprecate
+.
+.IP "\(bu" 4
+npm help publish
+.
+.IP "\(bu" 4
+npm help registry
+.
+.IP "\(bu" 4
+npm help adduser
+.
+.IP "\(bu" 4
+npm help owner
+.
+.IP "" 0
+

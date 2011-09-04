@@ -349,6 +349,24 @@ npm home &lt;pkgname&gt;</code></pre>
 <p>This command tries to guess at the likely location of a package's
 documentation URL, and then tries to open it using the <code>--browser</code>
 config param.</p>
+
+<h2 id="CONFIGURATION">CONFIGURATION</h2>
+
+<h3 id="browser">browser</h3>
+
+<ul><li>Default: OS X: <code>"open"</code>, others: <code>"google-chrome"</code></li><li>Type: String</li></ul>
+
+<p>The browser that is called by the <code>npm docs</code> command to open websites.</p>
+
+<h3 id="registry">registry</h3>
+
+<ul><li>Default: https://registry.npmjs.org/</li><li>Type: url</li></ul>
+
+<p>The base URL of the npm package registry.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<ul><li><a href="publish.html">npm publish</a></li><li><a href="registry.html">npm registry</a></li><li><a href="config.html">npm config</a></li><li><a href="json.html">npm json</a></li></ul>
 </div>
 <script>
 ;(function () {

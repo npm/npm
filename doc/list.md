@@ -43,3 +43,13 @@ Show parseable output instead of tree view.
 
 List packages in the global install prefix instead of in the current
 project.
+
+## SEE ALSO
+
+* npm-config(1)
+* npm-folders(1)
+* npm-install(1)
+* npm-link(1)
+* npm-prune(1)
+* npm-outdated(1)
+* npm-update(1)

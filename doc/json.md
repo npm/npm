@@ -392,18 +392,12 @@ for more on the topic.
 
 Array of package names that will be bundled when publishing the package.
 
+If this is spelled `"bundleDependencies"`, then that is also honorable.
+
 ## engines
 
-Packages/1.0 says that you can have an "engines" field with an array of engine
-names. However, it has no provision for specifying which version of the engine
-your stuff runs on.
-
-With npm, you can use either of the following styles to specify the version of
+You can specify the version of
 node that your stuff works on:
-
-    { "engines" : [ "node >=0.1.27 <0.1.30" ] }
-
-or:
 
     { "engines" : { "node" : ">=0.1.27 <0.1.30" } }
 
@@ -413,6 +407,11 @@ specify "*" as the version), then any version of node will do.
 If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list. If "engines" is omitted, then npm will just assume
 that it works on node.
+
+You can also use the "engines" field to specify which versions of npm
+are capable of properly installing your program.  For example:
+
+    { "engines" : { "npm" : "~1.0.20" } }
 
 ## preferGlobal
 
@@ -446,3 +445,15 @@ Any config values can be overridden, but of course only "tag" and
 
 See `npm-config(1)` to see the list of config options that can be
 overridden.
+
+## SEE ALSO
+
+* npm-semver(1)
+* npm-init(1)
+* npm-version(1)
+* npm-config(1)
+* npm-help(1)
+* npm-faq(1)
+* npm-install(1)
+* npm-publish(1)
+* npm-rm(1)

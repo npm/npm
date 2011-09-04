@@ -120,3 +120,7 @@ Ranges can be joined with either a space (which implies "and") or a
   range.
 * maxSatisfying(versions, range): Return the highest version in the list
   that satisfies the range, or null if none of them do.
+
+## SEE ALSO
+
+* npm-json(1)

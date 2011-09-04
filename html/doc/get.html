@@ -491,7 +491,7 @@ have their <code>build</code> directories automatically ignored.</p>
 
 <ul><li>Default: Windows: <code>~/npm-cache</code>, Posix: <code>~/.npm</code></li><li>Type: path</li></ul>
 
-<p>The location of <a href="'s cache directory.  See <code>npm-cache.html">npm 's cache directory.  See <code>npm-cache</a></code></p>
+<p>The location of npm's cache directory.  See <code><a href="cache.html">npm cache</a></code></p>
 
 <h3 id="color">color</h3>
 
@@ -524,7 +524,8 @@ set.</p>
 
 <h3 id="editor">editor</h3>
 
-<ul><li>Default: <code>EDITOR</code> environment variable if set, or <code>"vi"</code></li><li>Type: path</li></ul>
+<ul><li>Default: <code>EDITOR</code> environment variable if set, or <code>"vi"</code> on Posix,
+or <code>"notepad"</code> on Windows.</li><li>Type: path</li></ul>
 
 <p>The command to run for <code>npm edit</code> or <code>npm config edit</code>.</p>
 
@@ -755,7 +756,8 @@ local <code>npm install</code> without any arguments.</li><li>Set the NODE_ENV="
 
 <h3 id="shell">shell</h3>
 
-<ul><li>Default: SHELL environment variable, or "bash"</li><li>Type: path</li></ul>
+<ul><li>Default: SHELL environment variable, or "bash" on Posix, or "cmd" on
+Windows</li><li>Type: path</li></ul>
 
 <p>The shell to run for the <code>npm explore</code> command.</p>
 
@@ -856,6 +858,10 @@ circumstances.</p>
 
 <p>If set to <code>true</code>, then answer "yes" to any prompt.  If set to <code>false</code>
 then answer "no" to any prompt.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<ul><li><a href="folders.html">npm folders</a></li><li><a href="npm.html">npm</a></li></ul>
 </div>
 <script>
 ;(function () {

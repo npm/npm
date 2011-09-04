@@ -202,3 +202,11 @@ Discuss it on the mailing list, or post an issue.
 ## Why does npm hate me?
 
 npm is not capable of hatred.  It loves everyone, especially you.
+
+## SEE ALSO
+
+* npm(1)
+* npm-developers(1)
+* npm-json(1)
+* npm-config(1)
+* npm-folders(1)

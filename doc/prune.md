@@ -13,3 +13,9 @@ removed.
 
 Extraneous packages are packages that are not listed on the parent
 package's dependencies list.
+
+## SEE ALSO
+
+* npm-rm(1)
+* npm-folders(1)
+* npm-list(1)

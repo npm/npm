@@ -38,7 +38,7 @@ after packing it up into a tarball (b).
 You need to have a `package.json` file in the root of your project to do
 much of anything with npm.  That is basically the whole interface.
 
-See npm-json(1) for details about what goes in that file.  At the very
+See `npm-json(1)` for details about what goes in that file.  At the very
 least, you need:
 
 * name:
@@ -159,3 +159,14 @@ from a fresh checkout.
 Send emails, write blogs, blab in IRC.
 
 Tell the world how easy it is to install your program!
+
+## SEE ALSO
+
+* npm-faq(1)
+* npm(1)
+* npm-init(1)
+* npm-json(1)
+* npm-scripts(1)
+* npm-publish(1)
+* npm-adduser(1)
+* npm-registry(1)

@@ -15,5 +15,8 @@ If no version is specified, then it restarts the "active" version.
 
 ## SEE ALSO
 
+* npm-run-script(1)
+* npm-scripts(1)
+* npm-test(1)
 * npm-start(1)
 * npm-stop(1)

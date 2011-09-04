@@ -20,4 +20,5 @@ without a really good reason to do so.
 
 ## SEE ALSO
 
-npm-json(1)
+* npm-json(1)
+* npm-version(1)

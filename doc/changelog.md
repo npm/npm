@@ -29,3 +29,8 @@ npm-changelog(1) -- Changes
 ### 0.0  
 * Lots of sketches and false starts; abandoned a few times
 * Core functionality established
+
+## SEE ALSO
+
+* npm(1)
+* npm-faq(1)
