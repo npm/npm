@@ -24,18 +24,18 @@ you configured node with a different `--prefix`, or installed npm with a
 different prefix setting, then adjust the paths accordingly, replacing
 `/usr/local` with your install prefix.
 
-   rm -rf /usr/local/{lib/node,lib/node/.npm,bin,share/man}/npm*
+    rm -rf /usr/local/{lib/node,lib/node/.npm,bin,share/man}/npm*
 
 If you installed things *with* npm, then your best bet is to uninstall
 them with npm first, and then install them again once you have a
 proper install.  This can help find any symlinks that are lying
 around:
 
-   ls -laF /usr/local/{lib/node,lib/node/.npm,bin,share/man} | grep npm
+    ls -laF /usr/local/{lib/node,lib/node/.npm,bin,share/man} | grep npm
 
 Prior to version 0.3, npm used shim files for executables and node
 modules.  To track those down, you can do the following:
 
-   find /usr/local/{lib/node,bin} -exec grep -l npm \{\} \; ;
+    find /usr/local/{lib/node,bin} -exec grep -l npm \{\} \; ;
 
 (This is also in the README file.)

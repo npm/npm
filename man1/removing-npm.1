@@ -43,8 +43,14 @@ This assumes that you installed node and npm in the default place\.  If
 you configured node with a different \fB\-\-prefix\fR, or installed npm with a
 different prefix setting, then adjust the paths accordingly, replacing \fB/usr/local\fR with your install prefix\.
 .
-.P
-   rm \-rf /usr/local/{lib/node,lib/node/\.npm,bin,share/man}/npm*
+.IP "" 4
+.
+.nf
+rm \-rf /usr/local/{lib/node,lib/node/\.npm,bin,share/man}/npm*
+.
+.fi
+.
+.IP "" 0
 .
 .P
 If you installed things \fIwith\fR npm, then your best bet is to uninstall
@@ -52,15 +58,27 @@ them with npm first, and then install them again once you have a
 proper install\.  This can help find any symlinks that are lying
 around:
 .
-.P
-   ls \-laF /usr/local/{lib/node,lib/node/\.npm,bin,share/man} | grep npm
+.IP "" 4
+.
+.nf
+ls \-laF /usr/local/{lib/node,lib/node/\.npm,bin,share/man} | grep npm
+.
+.fi
+.
+.IP "" 0
 .
 .P
 Prior to version 0\.3, npm used shim files for executables and node
 modules\.  To track those down, you can do the following:
 .
-.P
-   find /usr/local/{lib/node,bin} \-exec grep \-l npm {} \\; ;
+.IP "" 4
+.
+.nf
+find /usr/local/{lib/node,bin} \-exec grep \-l npm \\{\\} \\; ;
+.
+.fi
+.
+.IP "" 0
 .
 .P
 (This is also in the README file\.)

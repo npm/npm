@@ -362,19 +362,19 @@ you configured node with a different <code>--prefix</code>, or installed npm wit
 different prefix setting, then adjust the paths accordingly, replacing
 <code>/usr/local</code> with your install prefix.</p>
 
-<p>   rm -rf /usr/local/{lib/node,lib/node/.npm,bin,share/man}/npm*</p>
+<pre><code>rm -rf /usr/local/{lib/node,lib/node/.npm,bin,share/man}/npm*</code></pre>
 
 <p>If you installed things <em>with</em> npm, then your best bet is to uninstall
 them with npm first, and then install them again once you have a
 proper install.  This can help find any symlinks that are lying
 around:</p>
 
-<p>   ls -laF /usr/local/{lib/node,lib/node/.npm,bin,share/man} | grep npm</p>
+<pre><code>ls -laF /usr/local/{lib/node,lib/node/.npm,bin,share/man} | grep npm</code></pre>
 
 <p>Prior to version 0.3, npm used shim files for executables and node
 modules.  To track those down, you can do the following:</p>
 
-<p>   find /usr/local/{lib/node,bin} -exec grep -l npm {} \; ;</p>
+<pre><code>find /usr/local/{lib/node,bin} -exec grep -l npm \{\} \; ;</code></pre>
 
 <p>(This is also in the README file.)</p>
 </div>
@@ -406,4 +406,4 @@ document.body.appendChild(toc)
 
 </script>
 </body></html>
-<!-- npm help removing-npm - 2011-11-04 08:09:47 -->
+<!-- npm help removing-npm - 2011-35-04 08:09:30 -->
