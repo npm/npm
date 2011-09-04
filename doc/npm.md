@@ -134,4 +134,4 @@ See npm-changelog(1)
 
 ## AUTHOR
 
-Isaac Z. Schlueter :: isaacs :: @izs :: <i@izs.me>
+Isaac Z. Schlueter :: isaacs :: [@izs](http://twitter.com/izs) :: <i@izs.me>
