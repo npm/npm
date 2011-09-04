@@ -164,7 +164,7 @@ they are in a separate child process, with the env described above.
   only will prevent some optional features, then it's better to just
   print a warning and exit successfully.
 * Try not to use scripts to do what npm can do for you.  Read through
-  `npm help json` to see all the things that you can specify and enable
+  `npm-json(1)` to see all the things that you can specify and enable
   by simply describing your package appropriately.  In general, this will
   lead to a more robust and consistent state.
 * Inspect the env to determine where to put things.  For instance, if

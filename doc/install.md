@@ -63,7 +63,7 @@ after packing it up into a tarball (b).
 
 * npm install `<name>`:
   Do a `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
-  `npm help config`)
+  `npm-config(1)`)
 
   Example:
 
@@ -88,7 +88,7 @@ after packing it up into a tarball (b).
 
 * npm install `<name>@<version range>`:
   Install a version of the package matching the specified version range.  This
-  will follow the same rules for resolving dependencies described in `npm help json`.
+  will follow the same rules for resolving dependencies described in `npm-json(1)`.
 
   Note that most version ranges must be put in quotes so that your shell will
   treat it as a single argument.
@@ -110,12 +110,12 @@ local copy exists on disk.
     npm install sax --force
 
 The `--global` argument will cause npm to install the package globally
-rather than locally.  See `npm help global`.
+rather than locally.  See `npm-global(1)`.
 
 The `--link` argument will cause npm to link global installs into the
 local space in some cases.
 
-See `npm help config`.  Many of the configuration params have some
+See `npm-config(1)`.  Many of the configuration params have some
 effect on installation, since that's most of what npm does.
 
 ## SEE ALSO

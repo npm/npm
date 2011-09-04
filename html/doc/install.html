@@ -375,14 +375,14 @@ must either be "." or contain a "/" in it.</p><p>Example:</p><pre><code>npm inst
 Fetch the tarball url, and then install it.  In order to distinguish between
 this and other options, the argument must start with "http://" or "https://"</p><p>Example:</p><pre><code>npm install http://github.com/waveto/node-crypto/tarball/v0.0.5</code></pre></li><li><p>npm install <code>&lt;name&gt;</code>:
 Do a <code>&lt;name&gt;@&lt;tag&gt;</code> install, where <code>&lt;tag&gt;</code> is the "tag" config. (See
-<code>npm help config</code>)</p><p>Example:</p><pre><code>npm install sax</code></pre></li><li><p>npm install <code>&lt;name&gt;@&lt;tag&gt;</code>:
+<code><a href="config.html">npm config</a></code>)</p><p>Example:</p><pre><code>npm install sax</code></pre></li><li><p>npm install <code>&lt;name&gt;@&lt;tag&gt;</code>:
 Install the version of the package that is referenced by the specified tag.
 If the tag does not exist in the registry data for that package, then this
 will fail.</p><p>Example:</p><pre><code>npm install sax@stable</code></pre></li><li><p>npm install <code>&lt;name&gt;@&lt;version&gt;</code>:
 Install the specified version of the package.  This will fail if the version
 has not been published to the registry.</p><p>Example:</p><pre><code>npm install sax@0.1.1</code></pre></li><li><p>npm install <code>&lt;name&gt;@&lt;version range&gt;</code>:
 Install a version of the package matching the specified version range.  This
-will follow the same rules for resolving dependencies described in <code>npm help json</code>.</p><p>Note that most version ranges must be put in quotes so that your shell will
+will follow the same rules for resolving dependencies described in <code><a href="json.html">npm json</a></code>.</p><p>Note that most version ranges must be put in quotes so that your shell will
 treat it as a single argument.</p><p>Example:</p><pre><code>npm install sax@"&gt;=0.1.0 &lt;0.2.0"</code></pre></li></ul>
 
 <p>You may combine multiple arguments, and even multiple types of arguments.
@@ -398,12 +398,12 @@ local copy exists on disk.</p>
 <pre><code>npm install sax --force</code></pre>
 
 <p>The <code>--global</code> argument will cause npm to install the package globally
-rather than locally.  See <code>npm help global</code>.</p>
+rather than locally.  See <code><a href="global.html">npm global</a></code>.</p>
 
 <p>The <code>--link</code> argument will cause npm to link global installs into the
 local space in some cases.</p>
 
-<p>See <code>npm help config</code>.  Many of the configuration params have some
+<p>See <code><a href="config.html">npm config</a></code>.  Many of the configuration params have some
 effect on installation, since that's most of what npm does.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
@@ -438,4 +438,4 @@ document.body.appendChild(toc)
 
 </script>
 </body></html>
-<!-- npm help install - 2011-11-04 08:09:43 -->
+<!-- npm help install - 2011-30-04 08:09:02 -->

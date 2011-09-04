@@ -22,14 +22,14 @@ Run `npm help` to get a list of available commands.
 You probably got npm because you want to install stuff.
 
 Use `npm install blerg` to install the latest version of "blerg".  Check out
-`npm help install` for more info.  It can do a lot of stuff.
+`npm-install(1)` for more info.  It can do a lot of stuff.
 
 Use the `npm search` command to show everything that's available.
 Use `npm ls` to show everything you've installed.
 
 ## DIRECTORIES
 
-See `npm help folders` to learn about where npm puts stuff.
+See `npm-folders(1)` to learn about where npm puts stuff.
 
 In particular, npm has two modes of operation:
 
@@ -50,7 +50,7 @@ If you're using npm to develop and publish your code, check out the
 following help topics:
 
 * json:
-  Make a package.json file.  See `npm help json`.
+  Make a package.json file.  See `npm-json(1)`.
 * link:
   For linking your current working code into Node's path, so that you
   don't have to reinstall every time you make a change.  Use
@@ -91,14 +91,14 @@ npm is extremely configurable.  It reads its configuration options from
   npm's default configuration options are defined in
   lib/utils/config-defs.js.  These must not be changed.
 
-See `npm help config` for much much more information.
+See `npm-config(1)` for much much more information.
 
 ## CONTRIBUTIONS
 
 Patches welcome!
 
 * code:
-  Read through `npm help coding-style` if you plan to submit code.
+  Read through `npm-coding(1)-style` if you plan to submit code.
   You don't have to agree with it, but you do have to follow it.
 * docs:
   If you find an error in the documentation, edit the appropriate markdown
@@ -134,4 +134,7 @@ See npm-changelog(1)
 
 ## AUTHOR
 
-Isaac Z. Schlueter :: isaacs :: [@izs](http://twitter.com/izs) :: <i@izs.me>
+[Isaac Z. Schlueter](http://blog.izs.me/) ::
+[isaacs](https://github.com/isaacs/) ::
+[@izs](http://twitter.com/izs) ::
+<i@izs.me>

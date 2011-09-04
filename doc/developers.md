@@ -15,10 +15,7 @@ that your users will do to install your program.
 
 These are man pages.  If you install npm, you should be able to
 then do `man npm-thing` to get the documentation on a particular
-topic.
-
-Any time you see "see npm-whatever(1)", you can do `man npm-whatever`
-or `npm help whatever` to get at the docs.
+topic, or `npm help thing` to see the same information.
 
 ## What is a `package`
 
@@ -141,10 +138,7 @@ Create a user with the adduser command.  It works like this:
 
 and then follow the prompts.
 
-This is documented better in npm-adduser(1).  So do this to get the
-details:
-
-    npm help adduser
+This is documented better in npm-adduser(1).
 
 ## Publish your package
 

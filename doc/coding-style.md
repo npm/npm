@@ -151,7 +151,7 @@ report what's happening so that it's easier to track down where a fault
 occurs.
 
 Use appropriate log levels.  The default log() function logs at the
-"info" level.  See `npm help config` and search for "loglevel".
+"info" level.  See `npm-config(1)` and search for "loglevel".
 
 ## Case, naming, etc.
 

@@ -19,7 +19,7 @@ are CouchDB users, stored in the <http://isaacs.couchone.com/_users>
 database.
 
 The registry URL is supplied by the `registry` config parameter.  See
-`npm help config` for more on managing npm's configuration.
+`npm-config(1)` for more on managing npm's configuration.
 
 ## Can I run my own private registry?
 
@@ -42,7 +42,7 @@ published at all, or
 `"publishConfig":{"registry":"http://my-internal-registry.local"}`
 to force it to be published only to your internal registry.
 
-See `npm help json` for more info on what goes in the package.json file.
+See `npm-json(1)` for more info on what goes in the package.json file.
 
 ## Will you replicate from my registry into the public one?
 

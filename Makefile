@@ -44,7 +44,9 @@ doc: $(docs) $(htmldocs)
 man1/%.1: doc/%.md
 	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
 	@[ -d man1 ] || mkdir -p man1
-	./node_modules/.bin/ronn --roff $< > $@
+	./node_modules/.bin/ronn --roff $< \
+	| perl -pi -e 's/npm\\-([^\(]*)\([0-9]\)/npm help \1/g' \
+	> $@
 
 man1/%/: doc/%/
 	@[ -d $@ ] || mkdir -p $@

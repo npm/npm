@@ -18,7 +18,7 @@ do what it says and post a bug with all the information it asks for.
 
 ## Where does npm put stuff?
 
-See `npm help folders`
+See `npm-folders(1)`
 
 tl;dr:
 
@@ -51,7 +51,7 @@ Ok, fine.  Do this:
 This is not recommended.
 
 Many things **will not work** if you do this.  Make sure you read and
-understand `npm help config` and `npm help global` before you complain
+understand `npm-config(1)` and `npm-global(1)` before you complain
 about things being broken.
 
 When you realize what a mistake it was, do this to switch back:
@@ -138,12 +138,12 @@ You don't.  Try one of these:
 
 ## How can I use npm for development?
 
-See `npm help developers` and `npm help json`.
+See `npm-developers(1)` and `npm-json(1)`.
 
 You'll most likely want to `npm link` your development folder.  That's
 awesomely handy.
 
-To set up your own private registry, check out `npm help registry`.
+To set up your own private registry, check out `npm-registry(1)`.
 
 ## Can I list a url as a dependency?
 
@@ -153,11 +153,11 @@ that has a package.json in its root, or a git url.
 
 ## How do I symlink to a dev folder so I don't have to keep re-installing?
 
-See `npm help link`
+See `npm-link(1)`
 
 ## The package registry website.  What is that exactly?
 
-See `npm help registry`.
+See `npm-registry(1)`.
 
 ## What's up with the insecure channel warnings?
 

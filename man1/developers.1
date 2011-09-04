@@ -20,11 +20,7 @@ that your users will do to install your program\.
 .SH "About These Documents"
 These are man pages\.  If you install npm, you should be able to
 then do \fBman npm\-thing\fR to get the documentation on a particular
-topic\.
-.
-.P
-Any time you see "see npm\-whatever(1)", you can do \fBman npm\-whatever\fR
-or \fBnpm help whatever\fR to get at the docs\.
+topic, or \fBnpm help thing\fR to see the same information\.
 .
 .SH "What is a `package`"
 A package is:
@@ -60,7 +56,7 @@ You need to have a \fBpackage\.json\fR file in the root of your project to do
 much of anything with npm\.  That is basically the whole interface\.
 .
 .P
-See npm\-json(1) for details about what goes in that file\.  At the very
+See npm help json for details about what goes in that file\.  At the very
 least, you need:
 .
 .IP "\(bu" 4
@@ -96,7 +92,7 @@ scripts:
 If you have a special compilation or installation script, then you
 should put it in the \fBscripts\fR hash\.  You should definitely have at
 least a basic smoke\-test command as the "scripts\.test" field\.
-See npm\-scripts(1)\.
+See npm help scripts\.
 .
 .IP "\(bu" 4
 main:
@@ -114,7 +110,7 @@ they\'ll get installed just like these ones\.
 .
 .P
 You can use \fBnpm init\fR in the root of your package in order to get you
-started with a pretty basic package\.json file\.  See \fBnpm\-init(1)\fR for
+started with a pretty basic package\.json file\.  See \fBnpm help init\fR for
 more info\.
 .
 .SH "Keeping files *out* of your package"
@@ -131,7 +127,7 @@ need to either re\-link or \fBnpm rebuild \-g\fR to update compiled packages,
 of course\.)
 .
 .P
-More info at \fBnpm\-link(1)\fR\|\.
+More info at \fBnpm help link\fR\|\.
 .
 .SH "Before Publishing: Make Sure Your Package Installs and Works"
 \fBThis is important\.\fR
@@ -206,17 +202,7 @@ npm adduser
 and then follow the prompts\.
 .
 .P
-This is documented better in npm\-adduser(1)\.  So do this to get the
-details:
-.
-.IP "" 4
-.
-.nf
-npm help adduser
-.
-.fi
-.
-.IP "" 0
+This is documented better in npm help adduser\.
 .
 .SH "Publish your package"
 This part\'s easy\.  IN the root of your folder, do this:

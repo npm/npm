@@ -55,7 +55,7 @@ can do this:
 
 "Person" fields are shown as a string if they would be shown as an
 object.  So, for example, this will show the list of npm contributors in
-the shortened string format.  (See `npm help json` for more on this.)
+the shortened string format.  (See `npm-json(1)` for more on this.)
 
     npm view npm contributors
 

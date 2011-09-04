@@ -114,7 +114,7 @@ example:
 
 ## Per-Package Config Settings
 
-When running scripts (see `npm help scripts`)
+When running scripts (see `npm-scripts(1)`)
 the package.json "config" keys are overwritten in the environment if
 there is a config param of `<name>[@<version>]:<key>`.  For example, if
 the package.json has this:
@@ -179,7 +179,7 @@ The browser that is called by the `npm docs` command to open websites.
 * Default: Windows: `~/npm-cache`, Posix: `~/.npm`
 * Type: path
 
-The location of npm's cache directory.  See `npm help cache`
+The location of npm's cache directory.  See `npm-cache(1)`
 
 ### color
 
@@ -240,7 +240,7 @@ Makes various commands more forceful.
 
 Operates in "global" mode, so that packages are installed into the
 `prefix` folder instead of the current working directory.  See
-`npm help folders` for more on the differences in behavior.
+`npm-folders(1)` for more on the differences in behavior.
 
 * packages are installed into the `prefix/node_modules` folder, instead of the
   current working directory.
@@ -542,7 +542,7 @@ will fail.
 * Type: Boolean
 
 Set to show short usage output (like the -H output)
-instead of complete help when doing `npm help`.
+instead of complete help when doing `npm-help(1)`.
 
 ### user
 

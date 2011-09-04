@@ -16,4 +16,4 @@ the new binary.
 
 ## CONFIGURATION
 
-See `npm help build`
+See `npm-build(1)`

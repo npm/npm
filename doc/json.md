@@ -7,7 +7,7 @@ This document is all you need to know about what's required in your package.json
 file.  It must be actual JSON, not just a JavaScript object literal.
 
 A lot of the behavior described in this document is affected by the config
-settings described in `npm help config`.
+settings described in `npm-config(1)`.
 
 ## DEFAULT VALUES
 
@@ -276,7 +276,7 @@ The "scripts" member is an object hash of script commands that are run
 at various times in the lifecycle of your package.  The key is the lifecycle
 event, and the value is the command to run at that point.
 
-See `npm help scripts` to find out more about writing package scripts.
+See `npm-scripts(1)` to find out more about writing package scripts.
 
 ## config
 
@@ -291,7 +291,7 @@ and then had a "start" command that then referenced the
 `npm_package_config_port` environment variable, then the user could
 override that by doing `npm config set foo:port 8001`.
 
-See `npm help config` and `npm help scripts` for more on package
+See `npm-config(1)` and `npm-scripts(1)` for more on package
 configs.
 
 ## dependencies
@@ -385,8 +385,8 @@ In this case, it's best to list these additional items in a
 
 These things will be installed whenever the `--dev` configuration flag
 is set.  This flag is set automatically when doing `npm link`, and can
-be managed like any other npm configuration param.  See `npm help
-config` for more on the topic.
+be managed like any other npm configuration param.  See `npm-config(1)`
+for more on the topic.
 
 ## bundledDependencies
 
@@ -444,5 +444,5 @@ the global public registry by default.
 Any config values can be overridden, but of course only "tag" and
 "registry" probably matter for the purposes of publishing.
 
-See `npm help config` to see the list of config options that can be
+See `npm-config(1)` to see the list of config options that can be
 overridden.

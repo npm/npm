@@ -49,7 +49,7 @@ When in local mode, man pages are not installed.
 
 ### Cache
 
-See `npm help cache`.  Cache files are stored in `~/.npm` on Posix, or
+See `npm-cache(1)`.  Cache files are stored in `~/.npm` on Posix, or
 `~/npm-cache` on Windows.
 
 This is controlled by the `cache` configuration param.
@@ -182,4 +182,4 @@ not be included in the package tarball.
 
 This allows a package maintainer to install all of their dependencies
 (and dev dependencies) locally, but only re-publish those items that
-cannot be found elsewhere.  See `npm help json` for more information.
+cannot be found elsewhere.  See `npm-json(1)` for more information.
