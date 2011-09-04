@@ -586,10 +586,12 @@ Only relevant when specified explicitly on the command line.
 
 ### viewer
 
-* Default: "man"
+* Default: "man" on Posix, "browser" on Windows
 * Type: path
 
 The program to use to view help content.
+
+Set to `"browser"` to view html help content in the default web browser.
 
 ### yes
 
