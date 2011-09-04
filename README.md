@@ -10,12 +10,7 @@ Much more info available via `npm help` once it's installed.
 **You need node v0.4 or higher to run this program.**
 
 To install an old **and unsupported** version of npm that works on node 0.3
-and prior:
-
-    git clone git://github.com/isaacs/npm.git ./npm
-    cd npm
-    git checkout origin/0.2
-    make dev
+and prior, clone the git repo and dig through the old tags and branches.
 
 ## Simple Install
 
