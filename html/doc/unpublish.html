@@ -343,6 +343,16 @@ input.submit, input#submit, input.button, button, input[type=submit] {
 
 <pre><code>npm unpublish &lt;name&gt;[@&lt;version&gt;]</code></pre>
 
+<h2 id="WARNING">WARNING</h2>
+
+<p><strong>It is generally considered bad behavior to remove versions of a library
+that others are depending on!</strong></p>
+
+<p>Consider using the <code>deprecate</code> command
+instead, if your intent is to encourage users to upgrade.</p>
+
+<p>There is plenty of room on the registry.</p>
+
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
 <p>This removes a package version from the registry, deleting its
@@ -350,12 +360,6 @@ entry and removing the tarball.</p>
 
 <p>If no version is specified, or if all versions are removed then
 the root package entry is removed from the registry entirely.</p>
-
-<h2 id="NOTE">NOTE</h2>
-
-<p>It is generally considered bad behavior to remove versions of a library
-that others are depending on!  Consider using the <code>deprecate</code> command
-instead, if your intent is to encourage users to upgrade.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
