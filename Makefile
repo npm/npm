@@ -6,7 +6,7 @@ docs = $(shell find doc -name '*.md' \
 
 htmldocs = $(shell find doc -name '*.md' \
 						|sed 's|.md|.html|g' \
-						|sed 's|doc/|html/doc/|g' ) html/doc/index.html
+						|sed 's|doc/|html/doc/|g' )
 
 doc_subfolders = $(shell find doc -type d \
 									|sed 's|doc/|man1/|g' )
@@ -65,11 +65,8 @@ html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html html/doc
 	| sed 's|@NAME@|$*|g' \
 	| sed 's|@DATE@|$(shell date -u +'%Y-%M-%d %H:%m:%S')|g' \
 	| perl -pi -e 's/npm-([^\)]+)\(1\)/<a href="\1.html">npm-\1(1)<\/a>/g' \
-	| perl -pi -e 's/npm\(1\)/<a href="index.html">npm(1)<\/a>/g' \
+	| perl -pi -e 's/npm\(1\)/<a href="npm.html">npm(1)<\/a>/g' \
 	> $@
-
-html/doc/index.html: html/doc/npm.html
-	cp $< $@
 
 html/doc/%/: doc/%/ html/doc
 	@[ -d $@ ] || mkdir -p $@
