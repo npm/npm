@@ -1,5 +1,5 @@
-npm-help-search(1) Search npm help documentation
-================================================
+npm-help-search(1) -- Search npm help documentation
+===================================================
 
 ## SYNOPSIS
 

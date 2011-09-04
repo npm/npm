@@ -38,34 +38,28 @@ clean: uninstall
 uninstall: submodules
 	node cli.js rm npm -g -f
 
-man: man1
-
-man1: $(doc_subfolders)
-	[ -d man1 ] || mkdir -p man1
-
-html/doc: $(doc_subfolders)
-	[ -d html/doc ] || mkdir -p html/doc
-
 doc: $(docs) $(htmldocs)
 
 # use `npm install ronn` for this to work.
-man1/%.1: doc/%.md man1
+man1/%.1: doc/%.md
 	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
+	@[ -d man1 ] || mkdir -p man1
 	./node_modules/.bin/ronn --roff $< > $@
 
-man1/%/: doc/%/ man1
+man1/%/: doc/%/
 	@[ -d $@ ] || mkdir -p $@
 
 # use `npm install ronn` for this to work.
-html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html html/doc
+html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html
 	@[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
+	@[ -d html/doc ] || mkdir -p html/doc
 	(cat html/dochead.html && \
 	 ./node_modules/.bin/ronn -f $< && \
 	 cat html/docfoot.html )\
 	| sed 's|@NAME@|$*|g' \
 	| sed 's|@DATE@|$(shell date -u +'%Y-%M-%d %H:%m:%S')|g' \
-	| perl -pi -e 's/<h1>npm-([^\(]+\([0-9]\)) -- (.*?)<\/h1>/<h1>npm-\1<\/h1> <p>\2<\/p>/g' \
-	| perl -pi -e 's/npm-([^\)]+)\(1\)/<a href="\1.html">npm-\1<\/a>/g' \
+	| perl -pi -e 's/<h1>npm(-?[^\(]*\([0-9]\)) -- (.*?)<\/h1>/<h1>npm\1<\/h1> <p>\2<\/p>/g' \
+	| perl -pi -e 's/npm-?([^\)]+)\(1\)/<a href="\1.html">npm \1<\/a>/g' \
 	| perl -pi -e 's/npm\(1\)/<a href="npm.html">npm<\/a>/g' \
 	| perl -pi -e 's/npm\(1\)/<a href="npm.html">npm<\/a>/g' \
 	> $@
