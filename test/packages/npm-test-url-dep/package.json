@@ -1,4 +1,4 @@
 { "name":"npm-test-url-dep"
 , "version" : "1.2.3"
 , "dependencies" :
-  { "express" : "https://github.com/visionmedia/express/tarball/master" } }
+  { "dnode" : "https://github.com/substack/dnode/tarball/master" } }

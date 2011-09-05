@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$DEBUG" != "" ]; then
+  set -x
+fi
+
+
 # the "npm" command is set to a custom function here so that we can
 # test the code in this repo, rather than whichever version of npm
 # happens to be installed.
