@@ -174,6 +174,17 @@ It's yet to be seen if this is a good idea.
 
 The browser that is called by the `npm docs` command to open websites.
 
+### ca
+
+* Default: The npm CA certificate
+* Type: String or null
+
+The Certificate Authority signing certificate that is trusted for SSL
+connections to the registry.
+
+Set to `null` to only allow "known" registrars, or to a specific CA cert
+to trust only that specific signing authority.
+
 ### cache
 
 * Default: Windows: `~/npm-cache`, Posix: `~/.npm`

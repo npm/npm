@@ -310,6 +310,24 @@ Type: String
 .P
 The browser that is called by the \fBnpm docs\fR command to open websites\.
 .
+.SS "ca"
+.
+.IP "\(bu" 4
+Default: The npm CA certificate
+.
+.IP "\(bu" 4
+Type: String or null
+.
+.IP "" 0
+.
+.P
+The Certificate Authority signing certificate that is trusted for SSL
+connections to the registry\.
+.
+.P
+Set to \fBnull\fR to only allow "known" registrars, or to a specific CA cert
+to trust only that specific signing authority\.
+.
 .SS "cache"
 .
 .IP "\(bu" 4

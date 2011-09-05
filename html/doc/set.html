@@ -156,6 +156,16 @@ have their <code>build</code> directories automatically ignored.</p>
 
 <p>The browser that is called by the <code>npm docs</code> command to open websites.</p>
 
+<h3 id="ca">ca</h3>
+
+<ul><li>Default: The npm CA certificate</li><li>Type: String or null</li></ul>
+
+<p>The Certificate Authority signing certificate that is trusted for SSL
+connections to the registry.</p>
+
+<p>Set to <code>null</code> to only allow "known" registrars, or to a specific CA cert
+to trust only that specific signing authority.</p>
+
 <h3 id="cache">cache</h3>
 
 <ul><li>Default: Windows: <code>~/npm-cache</code>, Posix: <code>~/.npm</code></li><li>Type: path</li></ul>
