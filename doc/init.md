@@ -1,4 +1,4 @@
-npm init(1) -- Interactively create a package.json file
+npm-init(1) -- Interactively create a package.json file
 =======================================================
 
 ## SYNOPSIS
