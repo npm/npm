@@ -31,6 +31,7 @@ The base URL of the npm package registry.
 
 ## SEE ALSO
 
+* npm-view(1)
 * npm-publish(1)
 * npm-registry(1)
 * npm-config(1)

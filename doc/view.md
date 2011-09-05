@@ -82,3 +82,4 @@ the field name.
 * npm-search(1)
 * npm-registry(1)
 * npm-config(1)
+* npm-docs(1)
