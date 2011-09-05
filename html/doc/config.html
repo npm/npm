@@ -166,6 +166,8 @@ connections to the registry.</p>
 <p>Set to <code>null</code> to only allow "known" registrars, or to a specific CA cert
 to trust only that specific signing authority.</p>
 
+<p>See also the <code>strict-ssl</code> config.</p>
+
 <h3 id="cache">cache</h3>
 
 <ul><li>Default: Windows: <code>~/npm-cache</code>, Posix: <code>~/.npm</code></li><li>Type: path</li></ul>
@@ -439,6 +441,15 @@ local <code>npm install</code> without any arguments.</li><li>Set the NODE_ENV="
 Windows</li><li>Type: path</li></ul>
 
 <p>The shell to run for the <code>npm explore</code> command.</p>
+
+<h3 id="strict-ssl">strict-ssl</h3>
+
+<ul><li>Default: true</li><li>Type: Boolean</li></ul>
+
+<p>Whether or not to do SSL key validation when making requests to the
+registry via https.</p>
+
+<p>See also the <code>ca</code> config.</p>
 
 <h3 id="tag">tag</h3>
 

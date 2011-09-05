@@ -185,6 +185,8 @@ connections to the registry.
 Set to `null` to only allow "known" registrars, or to a specific CA cert
 to trust only that specific signing authority.
 
+See also the `strict-ssl` config.
+
 ### cache
 
 * Default: Windows: `~/npm-cache`, Posix: `~/.npm`
@@ -505,6 +507,16 @@ Space-separated options that limit the results from search.
 * Type: path
 
 The shell to run for the `npm explore` command.
+
+### strict-ssl
+
+* Default: true
+* Type: Boolean
+
+Whether or not to do SSL key validation when making requests to the
+registry via https.
+
+See also the `ca` config.
 
 ### tag
 

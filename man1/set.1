@@ -328,6 +328,9 @@ connections to the registry\.
 Set to \fBnull\fR to only allow "known" registrars, or to a specific CA cert
 to trust only that specific signing authority\.
 .
+.P
+See also the \fBstrict\-ssl\fR config\.
+.
 .SS "cache"
 .
 .IP "\(bu" 4
@@ -908,6 +911,23 @@ Type: path
 .
 .P
 The shell to run for the \fBnpm explore\fR command\.
+.
+.SS "strict\-ssl"
+.
+.IP "\(bu" 4
+Default: true
+.
+.IP "\(bu" 4
+Type: Boolean
+.
+.IP "" 0
+.
+.P
+Whether or not to do SSL key validation when making requests to the
+registry via https\.
+.
+.P
+See also the \fBca\fR config\.
 .
 .SS "tag"
 .
