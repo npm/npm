@@ -32,3 +32,4 @@ The base URL of the npm package registry.
 
 * npm-registry(1)
 * npm-config(1)
+* npm-owner(1)
