@@ -52,21 +52,24 @@ listed in the .gitmodules file.
 
 ### Installing on Windows
 
-The easiest way to get up and running with npm on Windows is clone the project
-from github. If you don't already have git,
-[install it](https://git.wiki.kernel.org/index.php/MSysGit:InstallMSysGit) and
-run:
+The easiest way to get up and running with npm on Windows is to clone the
+[github repository](https://github.com/isaacs/npm). If you don't already have
+git, [install it](https://git.wiki.kernel.org/index.php/MSysGit:InstallMSysGit) and run:
 
     git clone --recursive git://github.com/isaacs/npm
 
-If this fails with a message about "error setting certificate verify locations":
+If this fails with a message about "error setting certificate verify locations"
+remove the failed install, set a config entry and retry, like so:
 
-    git rm -rf npm
+    rm -rf npm
     git config --system http.sslcainfo \\bin\curl-ca-bundle.crt
     git clone --recursive git://github.com/isaacs/npm
+
+Congratulations -- you should now have a (still very broken) npm install. Now
+navigate into the newly installed npm folder:
+
     cd npm
 
-Congratulations -- you should now have a (almost completely broken) npm install.
 To run npm from the command line be sure to add it your PATH:
 
     set path="%PATH%;%CD%\bin"
