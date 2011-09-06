@@ -318,7 +318,7 @@ input.submit, input#submit, input.button, button, input[type=submit] {
 
 @font-face {
   font-family:gubblefont;
-  src: url(http://static.izs.me/fonts/GubbleBum-Blocky.ttf) format("truetype");
+  src: url(./GubbleBum-Blocky.ttf) format("truetype");
 }
 
 @media print {
