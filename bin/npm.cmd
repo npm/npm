@@ -1,1 +1,1 @@
-node %~dp0\..\npm.js %*
+@node %~dp0\..\npm.js %*
