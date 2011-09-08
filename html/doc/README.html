@@ -35,7 +35,18 @@ and prior, clone the git repo and dig through the old tags and branches.</p>
 
 <pre><code>curl http://npmjs.org/install.sh | clean=yes sh</code></pre>
 
-<p>If that fails, try this:</p>
+<p>If you get permission errors, you can either install node someplace that
+you have permission to write to (recommended!) or you <em>can</em> place a <strong>very
+unsafe amount of trust</strong> in me, and in your network, and do this:</p>
+
+<pre><code>curl http://npmjs.org/install.sh | sudo sh</code></pre>
+
+<p><strong>Note</strong>: You need to <code>sudo</code> the <code>sh</code>, <strong>not</strong> the <code>curl</code>.  Fetching stuff
+from the internet typically doesn't require elevated permissions.</p>
+
+<h2 id="Dev-Install">Dev Install</h2>
+
+<p>To install the latest <strong>unstable</strong> development version from git:</p>
 
 <pre><code>git clone https://github.com/isaacs/npm.git
 cd npm

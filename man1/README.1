@@ -56,7 +56,25 @@ curl http://npmjs\.org/install\.sh | clean=yes sh
 .IP "" 0
 .
 .P
-If that fails, try this:
+If you get permission errors, you can either install node someplace that
+you have permission to write to (recommended!) or you \fIcan\fR place a \fBvery
+unsafe amount of trust\fR in me, and in your network, and do this:
+.
+.IP "" 4
+.
+.nf
+curl http://npmjs\.org/install\.sh | sudo sh
+.
+.fi
+.
+.IP "" 0
+.
+.P
+\fBNote\fR: You need to \fBsudo\fR the \fBsh\fR, \fBnot\fR the \fBcurl\fR\|\.  Fetching stuff
+from the internet typically doesn\'t require elevated permissions\.
+.
+.SH "Dev Install"
+To install the latest \fBunstable\fR development version from git:
 .
 .IP "" 4
 .

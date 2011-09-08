@@ -28,7 +28,18 @@ To say "yes" to the 0.x cleanup, but skip the prompt:
 
     curl http://npmjs.org/install.sh | clean=yes sh
 
-If that fails, try this:
+If you get permission errors, you can either install node someplace that
+you have permission to write to (recommended!) or you *can* place a **very
+unsafe amount of trust** in me, and in your network, and do this:
+
+    curl http://npmjs.org/install.sh | sudo sh
+
+**Note**: You need to `sudo` the `sh`, **not** the `curl`.  Fetching stuff
+from the internet typically doesn't require elevated permissions.
+
+## Dev Install
+
+To install the latest **unstable** development version from git:
 
     git clone https://github.com/isaacs/npm.git
     cd npm
