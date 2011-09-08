@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="unpublish.html">npm unpublish</a></h1> <p>Remove a package from the registry</p>
+<h1><a href="unpublish.html">unpublish</a></h1> <p>Remove a package from the registry</p>
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
@@ -32,7 +32,7 @@ the root package entry is removed from the registry entirely.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="deprecate.html">npm deprecate</a></li><li><a href="publish.html">npm publish</a></li><li><a href="registry.html">npm registry</a></li><li><a href="adduser.html">npm adduser</a></li><li><a href="owner.html">npm owner</a></li></ul>
+<ul><li><a href="deprecate.html">deprecate</a></li><li><a href="publish.html">publish</a></li><li><a href="registry.html">registry</a></li><li><a href="adduser.html">adduser</a></li><li><a href="owner.html">owner</a></li></ul>
 </div>
 <p id="footer">unpublish &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -57,7 +57,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

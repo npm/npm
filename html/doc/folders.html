@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="folders.html">npm folders</a></h1> <p>Folder Structures Used by npm</p>
+<h1><a href="folders.html">folders</a></h1> <p>Folder Structures Used by npm</p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
@@ -52,7 +52,7 @@ When installing locally, this means that you can
 
 <h3 id="Cache">Cache</h3>
 
-<p>See <code><a href="cache.html">npm cache</a></code>.  Cache files are stored in <code>~/.npm</code> on Posix, or
+<p>See <code><a href="cache.html">cache</a></code>.  Cache files are stored in <code>~/.npm</code> on Posix, or
 <code>~/npm-cache</code> on Windows.</p>
 
 <p>This is controlled by the <code>cache</code> configuration param.</p>
@@ -185,11 +185,11 @@ not be included in the package tarball.</p>
 
 <p>This allows a package maintainer to install all of their dependencies
 (and dev dependencies) locally, but only re-publish those items that
-cannot be found elsewhere.  See <code><a href="json.html">npm json</a></code> for more information.</p>
+cannot be found elsewhere.  See <code><a href="json.html">json</a></code> for more information.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="faq.html">npm faq</a></li><li><a href="json.html">npm json</a></li><li><a href="install.html">npm install</a></li><li><a href="pack.html">npm pack</a></li><li><a href="cache.html">npm cache</a></li><li><a href="config.html">npm config</a></li><li><a href="publish.html">npm publish</a></li></ul>
+<ul><li><a href="faq.html">faq</a></li><li><a href="json.html">json</a></li><li><a href="install.html">install</a></li><li><a href="pack.html">pack</a></li><li><a href="cache.html">cache</a></li><li><a href="config.html">config</a></li><li><a href="publish.html">publish</a></li></ul>
 </div>
 <p id="footer">folders &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -214,7 +214,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

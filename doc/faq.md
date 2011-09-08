@@ -1,6 +1,10 @@
 npm-faq(1) -- Frequently Asked Questions
 ========================================
 
+## SYNOPSIS
+
+Questions asked frequently.
+
 ## Where can I find these docs in HTML?
 
 <http://npmjs.org/doc/>, or run:

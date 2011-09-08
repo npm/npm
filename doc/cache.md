@@ -14,6 +14,8 @@ npm-cache(1) -- install a package
 
 ## DESCRIPTION
 
+Used to add, list, or clear the npm cache folder.
+
 * add:
   Add the specified package to the local cache.  This command is primarily
   intended to be used internally by npm, but it can provide a way to

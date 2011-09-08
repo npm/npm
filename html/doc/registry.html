@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="registry.html">npm registry</a></h1> <p>The JavaScript Package Registry</p>
+<h1><a href="registry.html">registry</a></h1> <p>The JavaScript Package Registry</p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
@@ -26,7 +26,7 @@ are CouchDB users, stored in the <a href="http://isaacs.couchone.com/_users">htt
 database.</p>
 
 <p>The registry URL is supplied by the <code>registry</code> config parameter.  See
-<code><a href="config.html">npm config</a></code> for more on managing npm's configuration.</p>
+<code><a href="config.html">config</a></code> for more on managing npm's configuration.</p>
 
 <h2 id="Can-I-run-my-own-private-registry">Can I run my own private registry?</h2>
 
@@ -49,7 +49,7 @@ published at all, or
 <code>"publishConfig":{"registry":"http://my-internal-registry.local"}</code>
 to force it to be published only to your internal registry.</p>
 
-<p>See <code><a href="json.html">npm json</a></code> for more info on what goes in the package.json file.</p>
+<p>See <code><a href="json.html">json</a></code> for more info on what goes in the package.json file.</p>
 
 <h2 id="Will-you-replicate-from-my-registry-into-the-public-one">Will you replicate from my registry into the public one?</h2>
 
@@ -95,7 +95,7 @@ ask for help on the <a href="mailto:npm-@googlegroups.com">npm-@googlegroups.com
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="config.html">npm config</a></li><li><a href="developers.html">npm developers</a></li></ul>
+<ul><li><a href="config.html">config</a></li><li><a href="developers.html">developers</a></li></ul>
 </div>
 <p id="footer">registry &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -120,7 +120,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

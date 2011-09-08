@@ -1,7 +1,11 @@
 npm-semver(1) -- The semantic versioner for npm
 ===============================================
 
-## Usage
+## SYNOPSIS
+
+The npm semantic versioning utility.
+
+## DESCRIPTION
 
 As a node module:
 

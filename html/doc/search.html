@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="search.html">npm search</a></h1> <p>Search for packages</p>
+<h1><a href="search.html">search</a></h1> <p>Search for packages</p>
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
@@ -38,7 +38,7 @@
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="registry.html">npm registry</a></li><li><a href="config.html">npm config</a></li><li><a href="view.html">npm view</a></li></ul>
+<ul><li><a href="registry.html">registry</a></li><li><a href="config.html">config</a></li><li><a href="view.html">view</a></li></ul>
 </div>
 <p id="footer">search &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -63,7 +63,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

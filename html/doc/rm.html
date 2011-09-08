@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="rm.html">npm rm</a></h1> <p>Remove a package</p>
+<h1><a href="rm.html">rm</a></h1> <p>Remove a package</p>
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
@@ -20,7 +20,7 @@ on its behalf.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="prune.html">npm prune</a></li><li><a href="install.html">npm install</a></li><li><a href="folders.html">npm folders</a></li><li><a href="config.html">npm config</a></li></ul>
+<ul><li><a href="prune.html">prune</a></li><li><a href="install.html">install</a></li><li><a href="folders.html">folders</a></li><li><a href="config.html">config</a></li></ul>
 </div>
 <p id="footer">rm &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -45,7 +45,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

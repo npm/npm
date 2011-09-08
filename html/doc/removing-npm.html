@@ -6,9 +6,9 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="removal.html">npm removal</a></h1> <p>Cleaning the Slate</p>
+<h1><a href="removal.html">removal</a></h1> <p>Cleaning the Slate</p>
 
-<h2 id="SUMMARY">SUMMARY</h2>
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
 
 <p>So sad to see you go.</p>
 
@@ -56,7 +56,7 @@ modules.  To track those down, you can do the following:</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="README.html">README</a></li><li><a href="rm.html">npm rm</a></li><li><a href="prune.html">npm prune</a></li></ul>
+<ul><li><a href="README.html">README</a></li><li><a href="rm.html">rm</a></li><li><a href="prune.html">prune</a></li></ul>
 </div>
 <p id="footer">removing-npm &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -81,7 +81,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

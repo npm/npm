@@ -6,7 +6,6 @@ npm-link(1) -- Symlink a package folder
     npm link (in package folder)
     npm link <pkgname>
 
-
 ## DESCRIPTION
 
 Package linking is a two-step process.

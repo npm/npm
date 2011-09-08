@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="developers.html">npm developers</a></h1> <p>Developer Guide</p>
+<h1><a href="developers.html">developers</a></h1> <p>Developer Guide</p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
@@ -40,7 +40,7 @@ after packing it up into a tarball (b).</p>
 <p>You need to have a <code>package.json</code> file in the root of your project to do
 much of anything with npm.  That is basically the whole interface.</p>
 
-<p>See <code><a href="json.html">npm json</a></code> for details about what goes in that file.  At the very
+<p>See <code><a href="json.html">json</a></code> for details about what goes in that file.  At the very
 least, you need:</p>
 
 <ul><li><p>name:
@@ -57,7 +57,7 @@ Take some credit.</p></li><li><p>scripts:
 If you have a special compilation or installation script, then you
 should put it in the <code>scripts</code> hash.  You should definitely have at
 least a basic smoke-test command as the "scripts.test" field.
-See <a href="scripts.html">npm scripts</a>.</p></li><li><p>main:
+See <a href="scripts.html">scripts</a>.</p></li><li><p>main:
 If you have a single module that serves as the entry point to your
 program (like what the "foo" package gives you at require("foo")),
 then you need to specify that in the "main" field.</p></li><li><p>directories:
@@ -66,7 +66,7 @@ This is a hash of folders.  The best ones to include are "lib" and
 they'll get installed just like these ones.</p></li></ul>
 
 <p>You can use <code>npm init</code> in the root of your package in order to get you
-started with a pretty basic package.json file.  See <code><a href="init.html">npm init</a></code> for
+started with a pretty basic package.json file.  See <code><a href="init.html">init</a></code> for
 more info.</p>
 
 <h2 id="Keeping-files-out-of-your-package">Keeping files *out* of your package</h2>
@@ -84,7 +84,7 @@ changes in real time without having to keep re-installing it.  (You do
 need to either re-link or <code>npm rebuild -g</code> to update compiled packages,
 of course.)</p>
 
-<p>More info at <code><a href="link.html">npm link</a></code>.</p>
+<p>More info at <code><a href="link.html">link</a></code>.</p>
 
 <h2 id="Before-Publishing-Make-Sure-Your-Package-Installs-and-Works">Before Publishing: Make Sure Your Package Installs and Works</h2>
 
@@ -124,7 +124,7 @@ bring in your module's main module.</p>
 
 <p>and then follow the prompts.</p>
 
-<p>This is documented better in <a href="adduser.html">npm adduser</a>.</p>
+<p>This is documented better in <a href="adduser.html">adduser</a>.</p>
 
 <h2 id="Publish-your-package">Publish your package</h2>
 
@@ -148,7 +148,7 @@ from a fresh checkout.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="faq.html">npm faq</a></li><li><a href="npm.html">npm</a></li><li><a href="init.html">npm init</a></li><li><a href="json.html">npm json</a></li><li><a href="scripts.html">npm scripts</a></li><li><a href="publish.html">npm publish</a></li><li><a href="adduser.html">npm adduser</a></li><li><a href="registry.html">npm registry</a></li></ul>
+<ul><li><a href="faq.html">faq</a></li><li><a href="npm.html">npm</a></li><li><a href="init.html">init</a></li><li><a href="json.html">json</a></li><li><a href="scripts.html">scripts</a></li><li><a href="publish.html">publish</a></li><li><a href="adduser.html">adduser</a></li><li><a href="registry.html">registry</a></li></ul>
 </div>
 <p id="footer">developers &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -173,7 +173,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="start.html">npm start</a></h1> <p>Start a package</p>
+<h1><a href="start.html">start</a></h1> <p>Start a package</p>
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
@@ -18,7 +18,7 @@
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="run-script.html">npm run-script</a></li><li><a href="scripts.html">npm scripts</a></li><li><a href="test.html">npm test</a></li><li><a href="restart.html">npm restart</a></li><li><a href="stop.html">npm stop</a></li></ul>
+<ul><li><a href="run-script.html">run-script</a></li><li><a href="scripts.html">scripts</a></li><li><a href="test.html">test</a></li><li><a href="restart.html">restart</a></li><li><a href="stop.html">stop</a></li></ul>
 </div>
 <p id="footer">start &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -43,7 +43,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

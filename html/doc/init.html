@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="init.html">npm init</a></h1> <p>Interactively create a package.json file</p>
+<h1><a href="init.html">init</a></h1> <p>Interactively create a package.json file</p>
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
@@ -27,7 +27,7 @@ without a really good reason to do so.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="json.html">npm json</a></li><li><a href="version.html">npm version</a></li></ul>
+<ul><li><a href="json.html">json</a></li><li><a href="version.html">version</a></li></ul>
 </div>
 <p id="footer">init &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -52,7 +52,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

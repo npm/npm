@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="build.html">npm build</a></h1> <p>Build a package</p>
+<h1><a href="build.html">build</a></h1> <p>Build a package</p>
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
@@ -23,7 +23,7 @@ A folder containing a <code>package.json</code> file in its root.</li></ul>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="install.html">npm install</a></li><li><a href="link.html">npm link</a></li><li><a href="scripts.html">npm scripts</a></li><li><a href="json.html">npm json</a></li></ul>
+<ul><li><a href="install.html">install</a></li><li><a href="link.html">link</a></li><li><a href="scripts.html">scripts</a></li><li><a href="json.html">json</a></li></ul>
 </div>
 <p id="footer">build &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -48,7 +48,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="coding-style.html">npm coding-style</a></h1> <p>npm's "funny" coding style</p>
+<h1><a href="coding-style.html">coding-style</a></h1> <p>npm's "funny" coding style</p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
@@ -155,7 +155,7 @@ report what's happening so that it's easier to track down where a fault
 occurs.</p>
 
 <p>Use appropriate log levels.  The default log() function logs at the
-"info" level.  See <code><a href="config.html">npm config</a></code> and search for "loglevel".</p>
+"info" level.  See <code><a href="config.html">config</a></code> and search for "loglevel".</p>
 
 <h2 id="Case-naming-etc">Case, naming, etc.</h2>
 
@@ -189,7 +189,7 @@ set to anything."</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="developers.html">npm developers</a></li><li><a href="faq.html">npm faq</a></li><li><a href="npm.html">npm</a></li></ul>
+<ul><li><a href="developers.html">developers</a></li><li><a href="faq.html">faq</a></li><li><a href="npm.html">npm</a></li></ul>
 </div>
 <p id="footer">coding-style &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -214,7 +214,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="json.html">npm json</a></h1> <p>Specifics of npm's package.json handling</p>
+<h1><a href="json.html">json</a></h1> <p>Specifics of npm's package.json handling</p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
@@ -14,7 +14,7 @@
 file.  It must be actual JSON, not just a JavaScript object literal.</p>
 
 <p>A lot of the behavior described in this document is affected by the config
-settings described in <code><a href="config.html">npm config</a></code>.</p>
+settings described in <code><a href="config.html">config</a></code>.</p>
 
 <h2 id="DEFAULT-VALUES">DEFAULT VALUES</h2>
 
@@ -264,7 +264,7 @@ html project page that you put in your browser.  It's for computers.</p>
 at various times in the lifecycle of your package.  The key is the lifecycle
 event, and the value is the command to run at that point.</p>
 
-<p>See <code><a href="scripts.html">npm scripts</a></code> to find out more about writing package scripts.</p>
+<p>See <code><a href="scripts.html">scripts</a></code> to find out more about writing package scripts.</p>
 
 <h2 id="config">config</h2>
 
@@ -279,7 +279,7 @@ instance, if a package had the following:</p>
 <code>npm_package_config_port</code> environment variable, then the user could
 override that by doing <code>npm config set foo:port 8001</code>.</p>
 
-<p>See <code><a href="config.html">npm config</a></code> and <code><a href="scripts.html">npm scripts</a></code> for more on package
+<p>See <code><a href="config.html">config</a></code> and <code><a href="scripts.html">scripts</a></code> for more on package
 configs.</p>
 
 <h2 id="dependencies">dependencies</h2>
@@ -354,7 +354,7 @@ the external test or documentation framework that you use.</p>
 
 <p>These things will be installed whenever the <code>--dev</code> configuration flag
 is set.  This flag is set automatically when doing <code>npm link</code>, and can
-be managed like any other npm configuration param.  See <code><a href="config.html">npm config</a></code>
+be managed like any other npm configuration param.  See <code><a href="config.html">config</a></code>
 for more on the topic.</p>
 
 <h2 id="bundledDependencies">bundledDependencies</h2>
@@ -412,12 +412,12 @@ the global public registry by default.</p>
 <p>Any config values can be overridden, but of course only "tag" and
 "registry" probably matter for the purposes of publishing.</p>
 
-<p>See <code><a href="config.html">npm config</a></code> to see the list of config options that can be
+<p>See <code><a href="config.html">config</a></code> to see the list of config options that can be
 overridden.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="semver.html">npm semver</a></li><li><a href="init.html">npm init</a></li><li><a href="version.html">npm version</a></li><li><a href="config.html">npm config</a></li><li><a href="help.html">npm help</a></li><li><a href="faq.html">npm faq</a></li><li><a href="install.html">npm install</a></li><li><a href="publish.html">npm publish</a></li><li><a href="rm.html">npm rm</a></li></ul>
+<ul><li><a href="semver.html">semver</a></li><li><a href="init.html">init</a></li><li><a href="version.html">version</a></li><li><a href="config.html">config</a></li><li><a href="help.html">help</a></li><li><a href="faq.html">faq</a></li><li><a href="install.html">install</a></li><li><a href="publish.html">publish</a></li><li><a href="rm.html">rm</a></li></ul>
 </div>
 <p id="footer">json &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -442,7 +442,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

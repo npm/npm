@@ -9,6 +9,8 @@ npm-owner(1) -- Manage package owners
 
 ## DESCRIPTION
 
+Manage ownership of published packages.
+
 * ls:
   List all the users who have access to modify a package and push new versions.
   Handy when you need to know who to bug for help.

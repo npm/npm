@@ -1,7 +1,7 @@
 npm-removal(1) -- Cleaning the Slate
 ====================================
 
-## SUMMARY
+## SYNOPSIS
 
 So sad to see you go.
 

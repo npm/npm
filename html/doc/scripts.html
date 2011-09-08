@@ -6,7 +6,7 @@
 
   <body>
     <div id="wrapper">
-<h1><a href="scripts.html">npm scripts</a></h1> <p>How npm handles the "scripts" field</p>
+<h1><a href="scripts.html">scripts</a></h1> <p>How npm handles the "scripts" field</p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
@@ -151,7 +151,7 @@ Except for uninstall scripts, this will cause the npm action
 to fail, and potentially be rolled back.  If the failure is minor or
 only will prevent some optional features, then it's better to just
 print a warning and exit successfully.</li><li>Try not to use scripts to do what npm can do for you.  Read through
-<code><a href="json.html">npm json</a></code> to see all the things that you can specify and enable
+<code><a href="json.html">json</a></code> to see all the things that you can specify and enable
 by simply describing your package appropriately.  In general, this will
 lead to a more robust and consistent state.</li><li>Inspect the env to determine where to put things.  For instance, if
 the <code>npm_config_binroot</code> environ is set to <code>/home/user/bin</code>, then don't
@@ -162,7 +162,7 @@ will sudo the npm command in question.</li></ul>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="run-script.html">npm run-script</a></li><li><a href="json.html">npm json</a></li><li><a href="developers.html">npm developers</a></li><li><a href="install.html">npm install</a></li></ul>
+<ul><li><a href="run-script.html">run-script</a></li><li><a href="json.html">json</a></li><li><a href="developers.html">developers</a></li><li><a href="install.html">install</a></li></ul>
 </div>
 <p id="footer">scripts &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -187,7 +187,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"

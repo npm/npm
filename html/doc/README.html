@@ -209,7 +209,7 @@ process for published modules.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<ul><li><a href="npm.html">npm</a></li><li><a href="faq.html">npm faq</a></li><li><a href="help.html">npm help</a></li></ul>
+<ul><li><a href="npm.html">npm</a></li><li><a href="faq.html">faq</a></li><li><a href="help.html">help</a></li></ul>
 </div>
 <p id="footer"><a href="README.html">README</a> &mdash; npm@1.0.28-pre-DEV-UNSTABLE</p>
 <script>
@@ -234,7 +234,9 @@ toc.innerHTML = els.map(function (el) {
     out += "</ul>"
     l --
   }
-  out += "<li><a href='#" + el.id + "'>" + el.innerHTML + "</a>"
+  out += "<li><a href='#" + el.id + "'>" +
+    ( el.innerText || el.text || el.innerHTML)
+    + "</a>"
   return out
 }).join("\n")
 toc.id = "toc"
