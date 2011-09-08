@@ -50,22 +50,20 @@ doc-clean:
 	rm $(docs) $(htmldocs)
 
 # use `npm install ronn` for this to work.
-man1/README.1: README.md
+man1/README.1: README.md scripts/doc-build.sh
 	scripts/doc-build.sh $< $@
 
-man1/%.1: doc/%.md
+man1/%.1: doc/%.md scripts/doc-build.sh
 	scripts/doc-build.sh $< $@
 
-html/doc/README.html: README.md html/dochead.html html/docfoot.html
+html/doc/README.html: README.md html/dochead.html html/docfoot.html scripts/doc-build.sh
 	scripts/doc-build.sh $< $@
 
-html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html
+html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh
 	scripts/doc-build.sh $< $@
 
-doc/index.md: $(markdowns)
+doc/index.md: $(markdowns) scripts/index-build.js
 	node scripts/index-build.js > doc/index.md
-
-
 
 test: submodules
 	node cli.js test
