@@ -17,7 +17,7 @@ version=$(npm -v)
 mkdir -p $(dirname $dest)
 
 case $dest in
-	*.html)
+  *.html)
     (cat html/dochead.html && \
      ./node_modules/.bin/ronn -f $src && \
      cat html/docfoot.html )\
@@ -25,22 +25,23 @@ case $dest in
     | sed "s|@DATE@|$date|g" \
     | sed "s|@VERSION@|$version|g" \
     | perl -pi -e 's/<h1>npm(-?[^\(]*\([0-9]\)) -- (.*?)<\/h1>/<h1>npm\1<\/h1> <p>\2<\/p>/g' \
-    | perl -pi -e 's/npm-([^\)]+)\(1\)/<a href="\1.html">npm \1<\/a>/g' \
-    | perl -pi -e 's/npm\(1\)/<a href="npm.html">npm<\/a>/g' \
+    | perl -pi -e 's/npm-npm/npm/g' \
+    | perl -pi -e 's/([^"-])npm-([^\(]+)\(1\)/\1<a href="\2.html">\2<\/a>/g' \
+    | perl -pi -e 's/([^"-])npm\(1\)/\1<a href="npm.html">npm<\/a>/g' \
     | perl -pi -e 's/README/<a href="README.html">README<\/a>/g' \
     > $dest
-		exit $?
-		;;
-	*.1)
+    exit $?
+    ;;
+  *.1)
     ./node_modules/.bin/ronn --roff $src \
     | sed "s|@VERSION@|$version|g" \
     | perl -pi -e 's/npm\\-([^\(]*)\([0-9]\)/npm help \1/g' \
     | perl -pi -e 's/npm\([0-9]\)/npm help npm/g' \
     > $dest
-		exit $?
-		;;
-	*)
-		echo "Invalid destination type: $dest" >&2
-		exit 1
-	  ;;
+    exit $?
+    ;;
+  *)
+    echo "Invalid destination type: $dest" >&2
+    exit 1
+    ;;
 esac
