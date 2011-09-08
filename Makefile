@@ -6,7 +6,8 @@ docs = $(shell find doc -name '*.md' \
 			  |grep -v 'index' \
 				|sed 's|.md|.1|g' \
 				|sed 's|doc/|man1/|g' ) \
-				man1/README.1
+				man1/README.1 \
+				man1/index.1
 
 htmldocs = $(shell find doc -name '*.md' \
 						|sed 's|.md|.html|g' \

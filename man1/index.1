@@ -1,185 +1,195 @@
 .\" Generated with Ronnjs/v0.1
 .\" http://github.com/kapouer/ronnjs/
 .
-.IP "\(bu" 4
-\|\./adduser\.html
+.TH "NPM\-INDEX" "1" "September 2011" "" ""
 .
-.IP "\(bu" 4
-\|\./author\.html
+.SH "NAME"
+\fBnpm-index\fR \-\- Index of all npm documentation
 .
-.IP "\(bu" 4
-\|\./bin\.html
+.SH "npm help README"
+This is just enough info to get you up and running\.
 .
-.IP "\(bu" 4
-\|\./build\.html
+.SH "npm help adduser"
+Create or verify a user named \fB<username>\fR in the npm registry, and
+save the credentials to the \fB\|\.npmrc\fR file\.
 .
-.IP "\(bu" 4
-\|\./bundle\.html
+.SH "npm help bin"
+Print the folder where npm will install executables\.
 .
-.IP "\(bu" 4
-\|\./cache\.html
+.SH "npm help build"
+This is the plumbing command called by \fBnpm link\fR and \fBnpm install\fR\|\.
 .
-.IP "\(bu" 4
-\|\./changelog\.html
+.SH "npm help bundle"
+The \fBnpm bundle\fR command has been removed in 1\.0, for the simple reason
+that it is no longer necessary, as the default behavior is now to
+install packages into the local space\.
 .
-.IP "\(bu" 4
-\|\./coding\-style\.html
+.SH "npm help cache"
+Used to add, list, or clear the npm cache folder\.
 .
-.IP "\(bu" 4
-\|\./completion\.html
+.SH "npm help changelog"
+A brief history\.
 .
-.IP "\(bu" 4
-\|\./config\.html
+.SH "npm help coding\-style"
+npm\'s coding style is a bit unconventional\.  It is not different for
+difference\'s sake, but rather a carefully crafted style that is
+designed to reduce visual clutter and make bugs more apparent\.
 .
-.IP "\(bu" 4
-\|\./deprecate\.html
+.SH "npm help completion"
+Enables tab\-completion in all npm commands\.
 .
-.IP "\(bu" 4
-\|\./developers\.html
+.SH "npm help config"
+npm gets its configuration values from 5 sources, in this priority:
 .
-.IP "\(bu" 4
-\|\./docs\.html
+.SH "npm help deprecate"
+This command will update the npm registry entry for a package, providing
+a deprecation warning to all who attempt to install it\.
 .
-.IP "\(bu" 4
-\|\./edit\.html
+.SH "npm help developers"
+So, you\'ve decided to use npm to develop (and maybe publish/deploy)
+your project\.
 .
-.IP "\(bu" 4
-\|\./explore\.html
+.SH "npm help docs"
+This command tries to guess at the likely location of a package\'s
+documentation URL, and then tries to open it using the \fB\-\-browser\fR
+config param\.
 .
-.IP "\(bu" 4
-\|\./faq\.html
+.SH "npm help edit"
+Opens the package folder in the default editor (or whatever you\'ve
+configured as the npm \fBeditor\fR config \-\- see \fBnpm help config\fR\|\.)
 .
-.IP "\(bu" 4
-\|\./folders\.html
+.SH "npm help explore"
+Spawn a subshell in the directory of the installed package specified\.
 .
-.IP "\(bu" 4
-\|\./get\.html
+.SH "npm help faq"
+Questions asked frequently\.
 .
-.IP "\(bu" 4
-\|\./global\.html
+.SH "npm help folders"
+npm puts various things on your computer\.  That\'s its job\.
 .
-.IP "\(bu" 4
-\|\./help\-search\.html
+.SH "npm help help\-search"
+This command will search the npm markdown documentation files for the
+terms provided, and then list the results, sorted by relevance\.
 .
-.IP "\(bu" 4
-\|\./help\.html
+.SH "npm help help"
+If supplied a topic, then show the appropriate documentation page\.
 .
-.IP "\(bu" 4
-\|\./home\.html
+.SH "npm help init"
+This will ask you a bunch of questions, and then write a package\.json for you\.
 .
-.IP "\(bu" 4
-\|\./init\.html
+.SH "npm help install"
+This command installs a package, and any packages that it depends on\.
 .
-.IP "\(bu" 4
-\|\./install\.html
+.SH "npm help json"
+This document is all you need to know about what\'s required in your package\.json
+file\.  It must be actual JSON, not just a JavaScript object literal\.
 .
-.IP "\(bu" 4
-\|\./json\.html
+.SH "npm help link"
+Package linking is a two\-step process\.
 .
-.IP "\(bu" 4
-\|\./link\.html
+.SH "npm help list"
+This command will print to stdout all the versions of packages that are
+installed, as well as their dependencies, in a tree\-structure\.
 .
-.IP "\(bu" 4
-\|\./list\.html
+.SH "npm help npm"
+npm is the package manager for the Node JavaScript platform\.  It puts
+modules in place so that node can find them, and manages dependency
+conflicts intelligently\.
 .
-.IP "\(bu" 4
-\|\./ln\.html
+.SH "npm help outdated"
+This command will check the registry to see if any (or, specific) installed
+packages are currently outdated\.
 .
-.IP "\(bu" 4
-\|\./ls\.html
+.SH "npm help owner"
+Manage ownership of published packages\.
 .
-.IP "\(bu" 4
-\|\./npm\.html
+.SH "npm help pack"
+For anything that\'s installable (that is, a package folder, tarball,
+tarball url, name@tag, name@version, or name), this command will fetch
+it to the cache, and then copy the tarball to the current working
+directory as \fB<name>\-<version>\.tgz\fR, and then write the filenames out to
+stdout\.
 .
-.IP "\(bu" 4
-\|\./outdated\.html
+.SH "npm help prefix"
+Print the prefix to standard out\.
 .
-.IP "\(bu" 4
-\|\./owner\.html
+.SH "npm help prune"
+This command removes "extraneous" packages\.  If a package name is
+provided, then only packages matching one of the supplied names are
+removed\.
 .
-.IP "\(bu" 4
-\|\./pack\.html
+.SH "npm help publish"
+Publishes a package to the registry so that it can be installed by name\.
 .
-.IP "\(bu" 4
-\|\./prefix\.html
+.SH "npm help rebuild"
+This command runs the \fBnpm build\fR command on the matched folders\.  This is useful
+when you install a new version of node, and must recompile all your C++ addons with
+the new binary\.
 .
-.IP "\(bu" 4
-\|\./prune\.html
+.SH "npm help registry"
+To resolve packages by name and version, npm talks to a registry website
+that implements the CommonJS Package Registry specification for reading
+package info\.
 .
-.IP "\(bu" 4
-\|\./publish\.html
+.SH "npm help removing\-npm"
+So sad to see you go\.
 .
-.IP "\(bu" 4
-\|\./rebuild\.html
+.SH "npm help restart"
+This runs a package\'s "restart" script, if one was provided\.
+Otherwise it runs package\'s "stop" script, if one was provided, and then
+the "start" script\.
 .
-.IP "\(bu" 4
-\|\./registry\.html
+.SH "npm help root"
+Print the effective \fBnode_modules\fR folder to standard out\.
 .
-.IP "\(bu" 4
-\|\./removing\-npm\.html
+.SH "npm help run\-script"
+This runs an arbitrary command from a package\'s "scripts" object\.
 .
-.IP "\(bu" 4
-\|\./restart\.html
+.SH "npm help scripts"
+npm supports the "scripts" member of the package\.json script, for the
+following scripts:
 .
-.IP "\(bu" 4
-\|\./rm\.html
+.SH "npm help search"
+Search the registry for packages matching the search terms\.
 .
-.IP "\(bu" 4
-\|\./root\.html
+.SH "npm help semver"
+As a node module:
 .
-.IP "\(bu" 4
-\|\./run\-script\.html
+.SH "npm help start"
+This runs a package\'s "start" script, if one was provided\.
 .
-.IP "\(bu" 4
-\|\./scripts\.html
+.SH "npm help stop"
+This runs a package\'s "stop" script, if one was provided\.
 .
-.IP "\(bu" 4
-\|\./search\.html
+.SH "npm help submodule"
+If the specified package has a git repository url in its package\.json
+description, then this command will add it as a git submodule at \fBnode_modules/<pkg name>\fR\|\.
 .
-.IP "\(bu" 4
-\|\./semver\.html
+.SH "npm help tag"
+Tags the specified version of the package with the specified tag, or the \fB\-\-tag\fR config if not specified\.
 .
-.IP "\(bu" 4
-\|\./set\.html
+.SH "npm help test"
+This runs a package\'s "test" script, if one was provided\.
 .
-.IP "\(bu" 4
-\|\./start\.html
+.SH "npm help uninstall"
+This uninstalls a package, completely removing everything npm installed
+on its behalf\.
 .
-.IP "\(bu" 4
-\|\./stop\.html
+.SH "npm help unpublish"
+This removes a package version from the registry, deleting its
+entry and removing the tarball\.
 .
-.IP "\(bu" 4
-\|\./submodule\.html
+.SH "npm help update"
+This command will update all the packages listed to the latest version
+(specified by the \fBtag\fR config)\.
 .
-.IP "\(bu" 4
-\|\./tag\.html
+.SH "npm help version"
+Run this in a package directory to bump the version and write the new
+data back to the package\.json file\.
 .
-.IP "\(bu" 4
-\|\./test\.html
+.SH "npm help view"
+This command shows data about a package and prints it to the stream
+referenced by the \fBoutfd\fR config, which defaults to stdout\.
 .
-.IP "\(bu" 4
-\|\./uninstall\.html
-.
-.IP "\(bu" 4
-\|\./unpublish\.html
-.
-.IP "\(bu" 4
-\|\./update\.html
-.
-.IP "\(bu" 4
-\|\./version\.html
-.
-.IP "\(bu" 4
-\|\./view\.html
-.
-.IP "\(bu" 4
-\|\./whoami\.html
-.
-.IP "\(bu" 4
-\|\./README\.html
-.
-.IP "\(bu" 4
-\|\./index\.html
-.
-.IP "" 0
-
+.SH "npm help whoami"
+Print the \fBusername\fR config to standard output\.
