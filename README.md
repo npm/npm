@@ -206,3 +206,4 @@ If this concerns you, inspect the source before using packages.
 * npm(1)
 * npm-faq(1)
 * npm-help(1)
+* npm-index(1)
