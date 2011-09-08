@@ -15,20 +15,11 @@ fs.readdir(docdir, function (er, docs) {
   })).forEach(function (d) {
     var doc = path.resolve(docdir, d)
       , s = fs.lstatSync(doc)
-      , content = fs.readFileSync(doc, "utf8").split("\n\n")
-      , syn
-      , desc
+      , content = fs.readFileSync(doc, "utf8").split("\n")[0].split("--")[1]
 
     if (s.isSymbolicLink()) return
 
-    content.forEach(function (c, i) {
-      c = c.trim()
-      //console.log([c, i])
-      if (c === "## SYNOPSIS") syn = content[i + 1]
-      if (c === "## DESCRIPTION") syn = content[i + 1]
-    })
     console.log(d.replace(/^.*?([^\/]*)\.md$/, "## npm-$1(1)") + "\n")
-    if (desc) console.log(desc + "\n")
-    else if (syn) console.log(syn + "\n")
+    console.log(content + "\n")
   })
 })

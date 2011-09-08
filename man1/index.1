@@ -7,189 +7,154 @@
 \fBnpm-index\fR \-\- Index of all npm documentation
 .
 .SH "npm help README"
-This is just enough info to get you up and running\.
+ node package manager
 .
 .SH "npm help adduser"
-Create or verify a user named \fB<username>\fR in the npm registry, and
-save the credentials to the \fB\|\.npmrc\fR file\.
+ Add a registry user account
 .
 .SH "npm help bin"
-Print the folder where npm will install executables\.
+ Display npm bin folder
 .
 .SH "npm help build"
-This is the plumbing command called by \fBnpm link\fR and \fBnpm install\fR\|\.
+ Build a package
 .
 .SH "npm help bundle"
-The \fBnpm bundle\fR command has been removed in 1\.0, for the simple reason
-that it is no longer necessary, as the default behavior is now to
-install packages into the local space\.
+ REMOVED
 .
 .SH "npm help cache"
-Used to add, list, or clear the npm cache folder\.
+ install a package
 .
 .SH "npm help changelog"
-A brief history\.
+ Changes
 .
 .SH "npm help coding\-style"
-npm\'s coding style is a bit unconventional\.  It is not different for
-difference\'s sake, but rather a carefully crafted style that is
-designed to reduce visual clutter and make bugs more apparent\.
+ npm\'s "funny" coding style
 .
 .SH "npm help completion"
-Enables tab\-completion in all npm commands\.
+ Tab Completion for npm
 .
 .SH "npm help config"
-npm gets its configuration values from 5 sources, in this priority:
+ Manage the npm configuration file
 .
 .SH "npm help deprecate"
-This command will update the npm registry entry for a package, providing
-a deprecation warning to all who attempt to install it\.
+ Deprecate a version of a package
 .
 .SH "npm help developers"
-So, you\'ve decided to use npm to develop (and maybe publish/deploy)
-your project\.
+ Developer Guide
 .
 .SH "npm help docs"
-This command tries to guess at the likely location of a package\'s
-documentation URL, and then tries to open it using the \fB\-\-browser\fR
-config param\.
+ Docs for a package in a web browser maybe
 .
 .SH "npm help edit"
-Opens the package folder in the default editor (or whatever you\'ve
-configured as the npm \fBeditor\fR config \-\- see \fBnpm help config\fR\|\.)
+ Edit an installed package
 .
 .SH "npm help explore"
-Spawn a subshell in the directory of the installed package specified\.
+ Browse an installed package
 .
 .SH "npm help faq"
-Questions asked frequently\.
+ Frequently Asked Questions
 .
 .SH "npm help folders"
-npm puts various things on your computer\.  That\'s its job\.
+ Folder Structures Used by npm
 .
 .SH "npm help help\-search"
-This command will search the npm markdown documentation files for the
-terms provided, and then list the results, sorted by relevance\.
+ Search npm help documentation
 .
 .SH "npm help help"
-If supplied a topic, then show the appropriate documentation page\.
+ Get help on npm
 .
 .SH "npm help init"
-This will ask you a bunch of questions, and then write a package\.json for you\.
+ Interactively create a package\.json file
 .
 .SH "npm help install"
-This command installs a package, and any packages that it depends on\.
+ install a package
 .
 .SH "npm help json"
-This document is all you need to know about what\'s required in your package\.json
-file\.  It must be actual JSON, not just a JavaScript object literal\.
+ Specifics of npm\'s package\.json handling
 .
 .SH "npm help link"
-Package linking is a two\-step process\.
+ Symlink a package folder
 .
 .SH "npm help list"
-This command will print to stdout all the versions of packages that are
-installed, as well as their dependencies, in a tree\-structure\.
+ List installed packages
 .
 .SH "npm help npm"
-npm is the package manager for the Node JavaScript platform\.  It puts
-modules in place so that node can find them, and manages dependency
-conflicts intelligently\.
+ node package manager
 .
 .SH "npm help outdated"
-This command will check the registry to see if any (or, specific) installed
-packages are currently outdated\.
+ Check for outdated packages
 .
 .SH "npm help owner"
-Manage ownership of published packages\.
+ Manage package owners
 .
 .SH "npm help pack"
-For anything that\'s installable (that is, a package folder, tarball,
-tarball url, name@tag, name@version, or name), this command will fetch
-it to the cache, and then copy the tarball to the current working
-directory as \fB<name>\-<version>\.tgz\fR, and then write the filenames out to
-stdout\.
+ Create a tarball from a package
 .
 .SH "npm help prefix"
-Print the prefix to standard out\.
+ Display prefix
 .
 .SH "npm help prune"
-This command removes "extraneous" packages\.  If a package name is
-provided, then only packages matching one of the supplied names are
-removed\.
+ Remove extraneous packages
 .
 .SH "npm help publish"
-Publishes a package to the registry so that it can be installed by name\.
+ Publish a package
 .
 .SH "npm help rebuild"
-This command runs the \fBnpm build\fR command on the matched folders\.  This is useful
-when you install a new version of node, and must recompile all your C++ addons with
-the new binary\.
+ Rebuild a package
 .
 .SH "npm help registry"
-To resolve packages by name and version, npm talks to a registry website
-that implements the CommonJS Package Registry specification for reading
-package info\.
+ The JavaScript Package Registry
 .
 .SH "npm help removing\-npm"
-So sad to see you go\.
+ Cleaning the Slate
 .
 .SH "npm help restart"
-This runs a package\'s "restart" script, if one was provided\.
-Otherwise it runs package\'s "stop" script, if one was provided, and then
-the "start" script\.
+ Start a package
 .
 .SH "npm help root"
-Print the effective \fBnode_modules\fR folder to standard out\.
+ Display npm root
 .
 .SH "npm help run\-script"
-This runs an arbitrary command from a package\'s "scripts" object\.
+ Run arbitrary package scripts
 .
 .SH "npm help scripts"
-npm supports the "scripts" member of the package\.json script, for the
-following scripts:
+ How npm handles the "scripts" field
 .
 .SH "npm help search"
-Search the registry for packages matching the search terms\.
+ Search for packages
 .
 .SH "npm help semver"
-As a node module:
+ The semantic versioner for npm
 .
 .SH "npm help start"
-This runs a package\'s "start" script, if one was provided\.
+ Start a package
 .
 .SH "npm help stop"
-This runs a package\'s "stop" script, if one was provided\.
+ Stop a package
 .
 .SH "npm help submodule"
-If the specified package has a git repository url in its package\.json
-description, then this command will add it as a git submodule at \fBnode_modules/<pkg name>\fR\|\.
+ Add a package as a git submodule
 .
 .SH "npm help tag"
-Tags the specified version of the package with the specified tag, or the \fB\-\-tag\fR config if not specified\.
+ Tag a published version
 .
 .SH "npm help test"
-This runs a package\'s "test" script, if one was provided\.
+ Test a package
 .
 .SH "npm help uninstall"
-This uninstalls a package, completely removing everything npm installed
-on its behalf\.
+ Remove a package
 .
 .SH "npm help unpublish"
-This removes a package version from the registry, deleting its
-entry and removing the tarball\.
+ Remove a package from the registry
 .
 .SH "npm help update"
-This command will update all the packages listed to the latest version
-(specified by the \fBtag\fR config)\.
+ Update a package
 .
 .SH "npm help version"
-Run this in a package directory to bump the version and write the new
-data back to the package\.json file\.
+ Bump a package version
 .
 .SH "npm help view"
-This command shows data about a package and prints it to the stream
-referenced by the \fBoutfd\fR config, which defaults to stdout\.
+ View registry info
 .
 .SH "npm help whoami"
-Print the \fBusername\fR config to standard output\.
+ Display npm username

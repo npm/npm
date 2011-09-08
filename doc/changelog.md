@@ -1,10 +1,6 @@
 npm-changelog(1) -- Changes
 ===========================
 
-## SYNOPSIS
-
-A brief history.
-
 ## HISTORY
 
 ### 1.0  
