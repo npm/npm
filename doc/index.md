@@ -1,6 +1,9 @@
-npm-index(1) -- Index of all npm documentation files
-====================================================
+npm-index(1) -- Index of all npm documentation
+==============================================
 
+## npm-README(1)
+
+This is just enough info to get you up and running.
 
 ## npm-adduser(1)
 

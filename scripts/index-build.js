@@ -4,15 +4,15 @@ var fs = require("fs")
   , docdir = path.resolve(__dirname, "..", "doc")
 
 console.log(
-  "npm-index(1) -- Index of all npm documentation files\n" +
-  "====================================================\n\n")
+  "npm-index(1) -- Index of all npm documentation\n" +
+  "==============================================\n")
 fs.readdir(docdir, function (er, docs) {
   if (er) throw er
-  docs.filter(function (d) {
+  ;["../README.md"].concat(docs.filter(function (d) {
     return d !== "index.md"
          && d.charAt(0) !== "."
          && d.match(/\.md$/)
-  }).forEach(function (d) {
+  })).forEach(function (d) {
     var doc = path.resolve(docdir, d)
       , s = fs.lstatSync(doc)
       , content = fs.readFileSync(doc, "utf8").split("\n\n")
@@ -27,7 +27,7 @@ fs.readdir(docdir, function (er, docs) {
       if (c === "## SYNOPSIS") syn = content[i + 1]
       if (c === "## DESCRIPTION") syn = content[i + 1]
     })
-    console.log(d.replace(/^(.*)\.md$/, "## npm-$1(1)") + "\n")
+    console.log(d.replace(/^.*?([^\/]*)\.md$/, "## npm-$1(1)") + "\n")
     if (desc) console.log(desc + "\n")
     else if (syn) console.log(syn + "\n")
   })
