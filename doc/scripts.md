@@ -114,13 +114,12 @@ For example, if your package.json contains this:
     { "scripts" :
       { "install" : "scripts/install.js"
       , "postinstall" : "scripts/install.js"
-      , "activate" : "scripts/install.js"
       , "uninstall" : "scripts/uninstall.js"
       }
     }
 
 then the `scripts/install.js` will be called for the install, post-install,
-and activate stages of the lifecycle, and the `scripts/uninstall.js` would be
+stages of the lifecycle, and the `scripts/uninstall.js` would be
 called when the package is uninstalled.  Since `scripts/install.js` is running
 for three different phases, it would be wise in this case to look at the
 `npm_lifecycle_event` environment variable.
@@ -159,7 +158,7 @@ they are in a separate child process, with the env described above.
 ## BEST PRACTICES
 
 * Don't exit with a non-zero error code unless you *really* mean it.
-  Except for uninstall/deactivate scripts, this will cause the npm action
+  Except for uninstall scripts, this will cause the npm action
   to fail, and potentially be rolled back.  If the failure is minor or
   only will prevent some optional features, then it's better to just
   print a warning and exit successfully.

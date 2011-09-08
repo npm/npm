@@ -4,11 +4,8 @@
 , "scripts" :
   { "install"       : "./test.sh"
   , "preinstall"    : "./test.sh"
-  , "activate"      : "./test.sh"
-  , "postactivate"  : "./test.sh"
   , "preuninstall"  : "./test.sh"
   , "postuninstall" : "./test.sh"
-  , "predeactivate" : "./test.sh"
   , "test"          : "./test.sh"
   , "stop"          : "./test.sh"
   , "start"         : "./test.sh"

@@ -143,34 +143,30 @@ install into the PATH. npm makes this pretty easy (in fact, it uses this
 feature to install the "npm" executable.)
 
 To use this, supply a `bin` field in your package.json which is a map of
-command name to local file name. On install, npm will link that file into
-place right next to wherever node is installed. (Presumably, this is in your
-PATH, and defaults to `/usr/local/bin`.) On activation, the versioned file
-will get linked to the main filename (just like how the main.js stuff works,
-but with an executable in the PATH.)
+command name to local file name. On install, npm will symlink that file into
+`prefix/bin` for global installs, or `./node_modules/.bin/` for local
+installs.
+
 
 For example, npm has this:
 
     { "bin" : { "npm" : "./cli.js" } }
 
 So, when you install npm, it'll create a symlink from the `cli.js` script to
-`/usr/local/bin/npm-version`. Then, when you activate that version, it'll
-create a symlink from `/usr/local/bin/npm-version` to `/usr/local/bin/npm`.
+`/usr/local/bin/npm`.
 
-Notice that if the executable file is interpreted by node (i.e., specifying
-node in the shebang line), npm actually installs a shim instead of symlinking
-it, which causes expressions `require.main === module` and `module.id === "."`
-evaluate to `false` within the file. This seems unable to be resolved until
-node provides a "flexible `require()`".
+If you have a single executable, and its name should be the name
+of the package, then you can just supply it as a string.  For example:
 
-Shortcut: If you have a single executable, and its name is already what you
-want it to be, then you can just supply it as a string.  For example:
-
-    { "bin" : "./path/to/program" }
+    { "name": "my-program"
+    , "version": "1.2.5"
+    , "bin": "./path/to/program" }
 
 would be the same as this:
 
-    { "bin" : { "program" : "./path/to/program" } }
+    { "name": "my-program"
+    , "version": "1.2.5"
+    , "bin" : { "my-program" : "./path/to/program" } }
 
 ## man
 
