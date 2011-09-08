@@ -1,6 +1,6 @@
 SHELL = bash
 
-markdowns = $(shell find doc -name '*.md' | grep -v 'index')
+markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
 docs = $(shell find doc -name '*.md' \
 			  |grep -v 'index' \
