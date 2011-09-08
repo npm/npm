@@ -1,9 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
 # look for old 0.x cruft, and get rid of it.
 # Should already be sitting in the npm folder.
 
-# Sorry, if readlink isn't available, then this is just too tricky.
+# This doesn't have to be quite as cross-platform as install.sh.
+# There are some bash-isms, because maintaining *two*
+# fully-portable posix/bourne sh scripts is too much for
+# one project with a sane maintainer.
+
+# If readlink isn't available, then this is just too tricky.
 # However, greadlink is fine, so Solaris can join the party, too.
 readlink="readlink"
 which $readlink >/dev/null 2>/dev/null

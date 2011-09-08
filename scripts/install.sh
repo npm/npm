@@ -1,5 +1,17 @@
 #!/bin/sh
 
+# A word about this shell script:
+#
+# It must work everywhere, including on systems that lack
+# a /bin/bash, map 'sh' to ksh, ksh97, bash, ash, or zsh,
+# and potentially have either a posix shell or bourne
+# shell living at /bin/sh.
+#
+# See this helpful document on writing portable shell scripts:
+# http://www.gnu.org/s/hello/manual/autoconf/Portable-Shell.html
+#
+# The only shell it won't ever work on is cmd.exe.
+
 if [ "x$0" = "xsh" ]; then
   # run as curl | sh
   # on some systems, you can just do cat>npm-install.sh
@@ -13,8 +25,13 @@ if [ "x$0" = "xsh" ]; then
 fi
 
 npm_config_loglevel="error"
-if ! [ "x$npm_debug" = "x" ]; then
-  set -x
+if [ "x$npm_debug" = "x" ]; then
+  (exit 0)
+else
+  echo "Running in debug mode."
+  echo "Note that this requires bash or zsh."
+  set -o xtrace
+  set -o pipefail
   npm_config_loglevel="verbose"
 fi
 export npm_config_loglevel
@@ -22,7 +39,9 @@ export npm_config_loglevel
 # make sure that node exists
 node=`which node 2>&1`
 ret=$?
-if [ $ret -ne 0 ] || ! [ -x "$node" ]; then
+if [ $ret -eq 0 ] && [ -x "$node" ]; then
+  (exit 0)
+else
   echo "npm cannot be installed without nodejs." >&2
   echo "Install node first, and then try again." >&2
   echo "" >&2
@@ -57,17 +76,44 @@ if [ -z "$tar" ]; then
 fi
 
 egrep=`which gegrep 2>&1`
-if [ $? -ne 0 ] || ! [ -x $egrep ]; then
+if [ $? -eq 0 ] && [ -x $egrep ]; then
+  (exit 0)
+else
   egrep=egrep
 fi
 
-make=`which gmake 2>&1`
-if [ $? -ne 0 ] || ! [ -x $make ]; then
-  make=`which make 2>&1`
-  if [ $? -ne 0 ] || ! [ -x $make ]; then
-    make=NOMAKE
-    echo "Installing without make. This may fail." >&2
+
+# Try to find a suitable make
+# If the MAKE environment var is set, use that.
+# otherwise, try to find gmake, and then make.
+# If no make is found, then just execute the necessary commands.
+if [ "x$MAKE" = "x" ]; then
+  make="$MAKE"
+else
+  make=`which gmake 2>&1`
+  if [ $? -eq 0 ] && [ -x $make ]; then
+    (exit 0)
+  else
+    make=`which make 2>&1`
+    if [ $? -eq 0 ] && [ -x $make ]; then
+      (exit 0)
+    else
+      make=NOMAKE
+    fi
   fi
+fi
+if [ -x $make ]; then
+  (exit 0)
+else
+  echo "Installing without make. This may fail." >&2
+  make=NOMAKE
+fi
+
+# If there's no bash, then don't even try to clean
+if [ -x "/bin/bash" ]; then
+  (exit 0)
+else
+  clean="no"
 fi
 
 t="${npm_install}"
@@ -126,16 +172,20 @@ cd "$TMP" \
 
       ret=0
       if [ $isnpm10 -eq 1 ] && [ -f "scripts/clean-old.sh" ]; then
-        if ! [ "x$skipclean" = "x" ] \
-            || [ "x$clean" = "xno" ] \
+        if [ "x$skipclean" = "x" ]; then
+          (exit 0)
+        else
+          clean=no
+        fi
+        if [ "x$clean" = "xno" ] \
             || [ "x$clean" = "xn" ]; then
           echo "Skipping 0.x cruft clean" >&2
           ret=0
         elif [ "x$clean" = "xy" ] || [ "x$clean" = "xyes" ]; then
-          NODE="$node" /bin/sh "scripts/clean-old.sh" "-y"
+          NODE="$node" /bin/bash "scripts/clean-old.sh" "-y"
           ret=$?
         else
-          NODE="$node" /bin/sh "scripts/clean-old.sh" </dev/tty
+          NODE="$node" /bin/bash "scripts/clean-old.sh" </dev/tty
           ret=$?
         fi
       fi
@@ -144,7 +194,14 @@ cd "$TMP" \
         echo "Aborted 0.x cleanup.  Exiting." >&2
         exit $ret
       fi) \
-  && (if [ "$make" = "NOMAKE" ] || ! $make clean install; then
+  && (if [ "$make" = "NOMAKE" ]; then
+        (exit 0)
+      elif $make clean install; then
+        (exit 0)
+      else
+        make="NOMAKE"
+      fi
+      if [ "$make" = "NOMAKE" ]; then
         "$node" cli.js rm npm -gf
         "$node" cli.js install -gf
       fi) \
