@@ -36,6 +36,7 @@ unsafe amount of trust** in me, and in your network, and do this:
 
 **Note**: You need to `sudo` the `sh`, **not** the `curl`.  Fetching stuff
 from the internet typically doesn't require elevated permissions.
+Running it might.
 
 ## Dev Install
 
