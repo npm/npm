@@ -40,6 +40,9 @@ uninstall: submodules
 
 doc: $(docs) $(htmldocs)
 
+doc-clean:
+	rm $(docs) $(htmldocs)
+
 # use `npm install ronn` for this to work.
 man1/README.1: README.md
 	scripts/doc-build.sh $< $@
@@ -70,4 +73,4 @@ publish: link
 doc-publish: doc
 	rsync -vazu --stats --no-implied-dirs --delete html/doc/ npmjs.org:/var/www/npmjs.org/public/doc
 
-.PHONY: latest install dev link doc clean uninstall test man doc-publish
+.PHONY: latest install dev link doc clean uninstall test man doc-publish doc-clean
