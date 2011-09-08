@@ -1,12 +1,18 @@
 SHELL = bash
 
+markdowns = $(shell find doc -name '*.md' | grep -v 'index')
+
 docs = $(shell find doc -name '*.md' \
+			  |grep -v 'index' \
 				|sed 's|.md|.1|g' \
-				|sed 's|doc/|man1/|g' ) man1/README.1
+				|sed 's|doc/|man1/|g' ) \
+				man1/README.1
 
 htmldocs = $(shell find doc -name '*.md' \
 						|sed 's|.md|.html|g' \
-						|sed 's|doc/|html/doc/|g' ) html/doc/README.html
+						|sed 's|doc/|html/doc/|g' ) \
+						html/doc/README.html \
+						html/doc/index.html
 
 doc_subfolders = $(shell find doc -type d \
 									|sed 's|doc/|man1/|g' )
@@ -55,6 +61,10 @@ html/doc/README.html: README.md html/dochead.html html/docfoot.html
 
 html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html
 	scripts/doc-build.sh $< $@
+
+doc/index.md: $(markdowns)
+	node scripts/index-build.js > doc/index.md
+
 
 
 test: submodules
