@@ -88,8 +88,6 @@ fi
 # otherwise, try to find gmake, and then make.
 # If no make is found, then just execute the necessary commands.
 if [ "x$MAKE" = "x" ]; then
-  make="$MAKE"
-else
   make=`which gmake 2>&1`
   if [ $? -eq 0 ] && [ -x $make ]; then
     (exit 0)
@@ -101,8 +99,11 @@ else
       make=NOMAKE
     fi
   fi
+else
+  make="$MAKE"
 fi
-if [ -x $make ]; then
+
+if [ -x "$make" ]; then
   (exit 0)
 else
   echo "Installing without make. This may fail." >&2
@@ -196,7 +197,7 @@ cd "$TMP" \
       fi) \
   && (if [ "$make" = "NOMAKE" ]; then
         (exit 0)
-      elif $make clean install; then
+      elif "$make" clean install; then
         (exit 0)
       else
         make="NOMAKE"
