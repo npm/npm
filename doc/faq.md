@@ -66,18 +66,29 @@ When you realize what a mistake it was, do this to switch back:
 
 Contrary to the belief of many, "npm" is not in fact an abbreviation for
 "Node Package Manager".  It is a recursive bacronymic abbreviation for
-"npm is not an acronym".
+"npm is not an acronym".  (If it was "ninaa", then it would be an
+acronym, and thus incorrectly named.)
 
-"NPM", however, *is* an acronym for the National Association of
-Pastoral Musicians.  You can learn more about them at <http://npm.org/>.
-It is not an acronym, you see, but rather a capitonym.
+"NPM", however, *is* an acronym (more precisely, a capitonym) for the
+National Association of Pastoral Musicians.  You can learn more
+about them at <http://npm.org/>.
 
-In all earnestness, "npm" is named after its command-line utility,
-which was mostly designed to be easily typed by right-handed programmers
-using US QWERTY keyboard layouts, ending with the right-ring-finger in a
-postition to type the `"-"` key for flags and other command-line
-arguments, and is always lower-case, though it starts most sentences it
-is a part of.
+In software, "NPM" is a non-parametric mapping utility written by
+Chris Rorden.  You can analyze pictures of brains with it.  Learn more
+about the (capitalized) NPM program at <http://www.cabiatl.com/mricro/npm/>.
+
+The first seed that eventually grew into this flower was a bash utility
+named "pm", which was a shortened descendent of "pkgmakeinst", a
+bash function that was used to install various different things on different
+platforms, most often using Yahoo's `yinst`.  If `npm` was ever an
+acronym for anything, it was `node pm` or maybe `new pm`.
+
+So, in all seriousness, the "npm" project is named after its command-line
+utility, which was organically selected to be easily typed by a right-handed
+programmer using a US QWERTY keyboard layout, ending with the
+right-ring-finger in a postition to type the `-` key for flags and
+other command-line arguments.  That command-line utility is always
+lower-case, though it starts most sentences it is a part of.
 
 ## How do I list installed packages?
 
