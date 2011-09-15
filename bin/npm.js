@@ -17,7 +17,7 @@ var fs = require("graceful-fs")
 
 // if npm is called as "npmg" or "npm_g", then
 // run in global mode.
-if(path.basename(process.argv[1]).slice(-1)  === "g") {
+if (path.basename(process.argv[1]).slice(-1)  === "g") {
   process.argv.splice(1, 1, "npm", "-g")
 }
 
@@ -32,8 +32,10 @@ else conf.usage = true
 if (conf.version) {
   console.log(npm.version)
   return
-} else log("npm@"+npm.version, "using")
-log("node@"+process.version, "using")
+}
+
+log.info("npm@"+npm.version, "using")
+log.info("node@"+process.version, "using")
 
 // make sure that this version of node works with this version of npm.
 var semver = require("semver")
@@ -59,4 +61,5 @@ npm.load(conf, function (er) {
   if (er) return errorHandler(er)
   npm.commands[npm.command](npm.argv, errorHandler)
 })
+
 })()
