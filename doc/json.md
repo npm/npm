@@ -254,7 +254,7 @@ Do it like this:
 
     "repository" :
       { "type" : "git"
-      , "url" : "http://github.com/isaacs/npm.git"
+      , "url" : "http://github.com/isaacs/npm"
       }
 
     "repository" :
