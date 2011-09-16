@@ -3,20 +3,21 @@ SHELL = bash
 markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
 docs = $(shell find doc -name '*.md' \
-			  |grep -v 'index' \
-				|sed 's|.md|.1|g' \
-				|sed 's|doc/|man1/|g' ) \
-				man1/README.1 \
-				man1/index.1
+        |grep -v 'index.md' \
+        |sed 's|.md|.1|g' \
+        |sed 's|doc/|man1/|g' ) \
+        man1/README.1 \
+        man1/index.1
 
 htmldocs = $(shell find doc -name '*.md' \
-						|sed 's|.md|.html|g' \
-						|sed 's|doc/|html/doc/|g' ) \
-						html/doc/README.html \
-						html/doc/index.html
+            |grep -v 'index.md' \
+            |sed 's|.md|.html|g' \
+            |sed 's|doc/|html/doc/|g' ) \
+            html/doc/README.html \
+            html/doc/index.html
 
 doc_subfolders = $(shell find doc -type d \
-									|sed 's|doc/|man1/|g' )
+                  |sed 's|doc/|man1/|g' )
 
 # This is the default make target.
 # Since 'make' typically does non-installation build stuff,
