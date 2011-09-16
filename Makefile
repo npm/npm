@@ -49,7 +49,7 @@ uninstall: submodules
 doc: $(docs) $(htmldocs)
 
 doc-clean:
-	rm $(docs) $(htmldocs)
+	rm $(docs) $(htmldocs) &>/dev/null || true
 
 # use `npm install ronn` for this to work.
 man1/README.1: README.md scripts/doc-build.sh package.json
