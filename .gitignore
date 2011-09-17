@@ -10,3 +10,4 @@ node_modules/.bin
 npm-debug.log
 html/doc/*.html
 man1/*.1
+doc/index.md
