@@ -67,19 +67,12 @@ fi
 
 BACK="$PWD"
 
-# sniff for gtar/gegrep/gmake
+# sniff for gtar/gmake
 # use which, but don't trust it very much.
 
 tar="${TAR}"
 if [ -z "$tar" ]; then
   tar=tar
-fi
-
-egrep=`which gegrep 2>&1`
-if [ $? -eq 0 ] && [ -x $egrep ]; then
-  (exit 0)
-else
-  egrep=egrep
 fi
 
 
@@ -122,17 +115,18 @@ if [ -z "$t" ]; then
   t="latest"
 fi
 
-url=`curl -s -L http://registry.npmjs.org/npm/$t \
-      | $egrep -o 'tarball":"[^"]+' \
-      | head -n 1 \
-      | $egrep -o 'http://.*'`
-echo "fetching: $url" >&2
+# need to echo "" after, because Posix sed doesn't treat EOF
+# as an implied end of line.
+url=`(curl -SsL http://registry.npmjs.org/npm/$t; echo "") \
+     | sed -e 's/^.*tarball":"//' -e 's/".*$//'`
 
 ret=$?
 if [ $ret -ne 0 ]; then
   echo "Failed to get tarball url" >&2
   exit $ret
 fi
+
+echo "fetching: $url" >&2
 
 cd "$TMP" \
   && curl -s -L "$url" | gzip --decompress --stdout | $tar -xf - \
