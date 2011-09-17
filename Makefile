@@ -76,7 +76,7 @@ version: link
 
 publish: link
 	git tag -s -m v$(shell npm -v) v$(shell npm -v) &&\
-	git push origin master &&\
+	git push origin master --tags &&\
 	npm publish &&\
 	make doc-publish
 
