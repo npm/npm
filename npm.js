@@ -15,6 +15,7 @@ var EventEmitter = require("events").EventEmitter
   , semver = require("semver")
   , findPrefix = require("./lib/utils/find-prefix.js")
   , getUid = require("./lib/utils/uid-number.js")
+  , mkdir = require("./lib/utils/mkdir-p.js")
 
 npm.commands = {}
 npm.ELIFECYCLE = {}
@@ -264,7 +265,8 @@ function loadPrefix (npm, conf, cb) {
       , set : function (r) { return p = r }
       , enumerable : true
       })
-    cb()
+    // the prefix MUST exist, or else nothing works.
+    mkdir(p, cb)
   })
 }
 
