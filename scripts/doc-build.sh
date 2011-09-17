@@ -27,6 +27,7 @@ case $dest in
     | perl -pi -e 's/<h1>npm(-?[^\(]*\([0-9]\)) -- (.*?)<\/h1>/<h1>npm\1<\/h1> <p>\2<\/p>/g' \
     | perl -pi -e 's/npm-npm/npm/g' \
     | perl -pi -e 's/([^"-])(npm-)?README(\(1\))?/\1<a href="README.html">README<\/a>/g' \
+    | perl -pi -e 's/<title><a href="README.html">README<\/a><\/title>/<title>README<\/title>/g' \
     | perl -pi -e 's/([^"-])npm-([^\(]+)\(1\)/\1<a href="\2.html">\2<\/a>/g' \
     | perl -pi -e 's/([^"-])npm\(1\)/\1<a href="npm.html">npm<\/a>/g' \
     > $dest
