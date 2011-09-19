@@ -13,6 +13,8 @@ a vaguely positive way to show that you care.
 
 "Unstarring" is the same thing, but in reverse.
 
+It's a boolean thing.  Starring repeatedly has no additional effect.
+
 ## SEE ALSO
 
 * npm-view(1)
