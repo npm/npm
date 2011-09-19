@@ -69,6 +69,7 @@ var commandCache = {}
               , "se" : "search"
               , "author" : "owner"
               , "home" : "docs"
+              , "unstar": "star" // same function
               }
 
   , aliasNames = Object.keys(aliases)
@@ -137,6 +138,7 @@ Object.keys(abbrevs).concat(plumbing).forEach(function addCommand (c) {
     if (c === "la" || c === "ll") {
       npm.config.set("long", true)
     }
+    npm.command = c
     if (commandCache[a]) return commandCache[a]
     var cmd = require(__dirname+"/lib/"+a+".js")
     commandCache[a] = function () {
