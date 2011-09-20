@@ -115,9 +115,29 @@ if [ -z "$t" ]; then
   t="latest"
 fi
 
+# the npmca cert
+cacert='
+-----BEGIN CERTIFICATE-----
+MIIChzCCAfACCQDauvz/KHp8ejANBgkqhkiG9w0BAQUFADCBhzELMAkGA1UEBhMC
+VVMxCzAJBgNVBAgTAkNBMRAwDgYDVQQHEwdPYWtsYW5kMQwwCgYDVQQKEwNucG0x
+IjAgBgNVBAsTGW5wbSBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkxDjAMBgNVBAMTBW5w
+bUNBMRcwFQYJKoZIhvcNAQkBFghpQGl6cy5tZTAeFw0xMTA5MDUwMTQ3MTdaFw0y
+MTA5MDIwMTQ3MTdaMIGHMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExEDAOBgNV
+BAcTB09ha2xhbmQxDDAKBgNVBAoTA25wbTEiMCAGA1UECxMZbnBtIENlcnRpZmlj
+YXRlIEF1dGhvcml0eTEOMAwGA1UEAxMFbnBtQ0ExFzAVBgkqhkiG9w0BCQEWCGlA
+aXpzLm1lMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDLI4tIqPpRW+ACw9GE
+OgBlJZwK5f8nnKCLK629Pv5yJpQKs3DENExAyOgDcyaF0HD0zk8zTp+ZsLaNdKOz
+Gn2U181KGprGKAXP6DU6ByOJDWmTlY6+Ad1laYT0m64fERSpHw/hjD3D+iX4aMOl
+y0HdbT5m1ZGh6SJz3ZqxavhHLQIDAQABMA0GCSqGSIb3DQEBBQUAA4GBAC4ySDbC
+l7W1WpLmtLGEQ/yuMLUf6Jy/vr+CRp4h+UzL+IQpCv8FfxsYE7dhf/bmWTEupBkv
+yNL18lipt2jSvR3v6oAHAReotvdjqhxddpe5Holns6EQd1/xEZ7sB1YhQKJtvUrl
+ZNufy1Jf1r0ldEGeA+0ISck7s+xSh9rQD2Op
+-----END CERTIFICATE-----
+'
+
 # need to echo "" after, because Posix sed doesn't treat EOF
 # as an implied end of line.
-url=`(curl -SsL http://registry.npmjs.org/npm/$t; echo "") \
+url=`(curl -SsL --cacert "$cacert" https://registry.npmjs.org/npm/$t; echo "") \
      | sed -e 's/^.*tarball":"//' -e 's/".*$//'`
 
 ret=$?
@@ -129,7 +149,8 @@ fi
 echo "fetching: $url" >&2
 
 cd "$TMP" \
-  && curl -s -L "$url" | gzip --decompress --stdout | $tar -xf - \
+  && curl -SsL --cacert "$cacert" "$url" \
+     | gzip --decompress --stdout | $tar -xf - \
   && cd * \
   && (node_version=`"$node" --version 2>&1`
       ret=$?
