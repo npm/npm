@@ -2,12 +2,12 @@ SHELL = bash
 
 markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
-docs = $(shell find doc -name '*.md' \
-        |grep -v 'index.md' \
-        |sed 's|.md|.1|g' \
-        |sed 's|doc/|man1/|g' ) \
-        man1/README.1 \
-        man1/index.1
+mandocs = $(shell find doc -name '*.md' \
+           |grep -v 'index.md' \
+           |sed 's|.md|.1|g' \
+           |sed 's|doc/|man1/|g' ) \
+           man1/README.1 \
+           man1/index.1
 
 htmldocs = $(shell find doc -name '*.md' \
             |grep -v 'index.md' \
@@ -19,9 +19,8 @@ htmldocs = $(shell find doc -name '*.md' \
 doc_subfolders = $(shell find doc -type d \
                   |sed 's|doc/|man1/|g' )
 
-# This is the default make target.
-# Since 'make' typically does non-installation build stuff,
-# it seems appropriate.
+all: submodules doc
+
 submodules:
 	! [ -d .git ] || git submodule update --init --recursive
 
@@ -31,7 +30,7 @@ latest: submodules
 	@echo "in this folder that you're looking at right now."
 	node cli.js install -g -f npm
 
-install: submodules
+install: all
 	node cli.js install -g -f
 
 # backwards compat
@@ -40,16 +39,19 @@ dev: install
 link: uninstall
 	node cli.js link -f
 
-clean: uninstall
+clean: doc-clean uninstall
 	node cli.js cache clean
 
 uninstall: submodules
 	node cli.js rm npm -g -f
 
-doc: $(docs) $(htmldocs)
+doc: node_modules/ronn $(mandocs) $(htmldocs)
 
 doc-clean:
-	rm doc/index.md $(docs) $(htmldocs) &>/dev/null || true
+	rm -rf node_modules/ronn doc/index.md $(mandocs) $(htmldocs) &>/dev/null || true
+
+node_modules/ronn:
+	node cli.js install git+https://github.com/isaacs/ronnjs.git
 
 # use `npm install ronn` for this to work.
 man1/README.1: README.md scripts/doc-build.sh package.json
@@ -83,4 +85,4 @@ publish: link
 doc-publish: doc
 	rsync -vazu --stats --no-implied-dirs --delete html/doc/ npmjs.org:/var/www/npmjs.org/public/doc
 
-.PHONY: latest install dev link doc clean uninstall test man doc-publish doc-clean
+.PHONY: all latest install dev link doc clean uninstall test man doc-publish doc-clean
