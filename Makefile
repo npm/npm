@@ -47,6 +47,7 @@ uninstall: submodules
 
 doc: node_modules/ronn $(mandocs) $(htmldocs)
 
+docclean: doc-clean
 doc-clean:
 	rm -rf node_modules/ronn doc/index.md $(mandocs) $(htmldocs) &>/dev/null || true
 
@@ -82,7 +83,11 @@ publish: link
 	npm publish &&\
 	make doc-publish
 
+docpublish: doc-publish
 doc-publish: doc
 	rsync -vazu --stats --no-implied-dirs --delete html/doc/ npmjs.org:/var/www/npmjs.org/public/doc
 
-.PHONY: all latest install dev link doc clean uninstall test man doc-publish doc-clean
+sandwich:
+	@[ $$(whoami) = "root" ] && (echo "ok"; echo "ham" > sandwich) || echo "make it yourself"
+
+.PHONY: all latest install dev link doc clean uninstall test man doc-publish doc-clean docclean docpublish
