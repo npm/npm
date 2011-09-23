@@ -67,12 +67,24 @@ fi
 
 BACK="$PWD"
 
-# sniff for gtar/gmake
-# use which, but don't trust it very much.
-
 tar="${TAR}"
 if [ -z "$tar" ]; then
-  tar=tar
+  tar=`which tar 2>&1`
+  ret=$?
+
+  if [ $ret -eq 0 ] && [ -x "$tar" ]; then
+    echo "tar=$tar"
+    echo "version:"
+    $tar --version
+    ret=$?
+  fi
+
+  if [ $ret -eq 0 ]; then
+    (exit 0)
+  else
+    echo "No suitable tar program found."
+    exit 1
+  fi
 fi
 
 
