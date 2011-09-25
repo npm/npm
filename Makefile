@@ -75,9 +75,11 @@ man/man1/README.1: README.md scripts/doc-build.sh package.json
 	scripts/doc-build.sh $< $@
 
 man/man1/%.1: doc/cli/%.md scripts/doc-build.sh package.json
+	@[ -d man/man1 ] || mkdir -p man/man1
 	scripts/doc-build.sh $< $@
 
-man/man3/%.3: doc/api/%.md man/man3 node_modules/ronn
+man/man3/%.3: doc/api/%.md scripts/doc-build.sh package.json
+	@[ -d man/man3 ] || mkdir -p man/man3
 	scripts/doc-build.sh $< $@
 
 html/doc/README.html: README.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
@@ -95,12 +97,6 @@ doc/cli/index.md: $(markdowns) scripts/index-build.js scripts/doc-build.sh packa
 doc: man
 
 man: $(cli_docs) $(api_docs)
-
-man/man1:
-	[ -d man/man1 ] || mkdir -p man/man1
-
-man/man3:
-	[ -d man/man3 ] || mkdir -p man/man3
 
 test: submodules
 	node cli.js test
