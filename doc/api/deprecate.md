@@ -12,9 +12,21 @@ a deprecation warning to all who attempt to install it.
 
 The 'args' parameter must have exactly two elements:
 
-* package@version:
-  To specify a range, wrap the version in quotes (e.g. pkg@"< 1.2")
-* message
+* `package[@version]`
+
+    The `version` portion is optional, and may be either a range, or a
+    specific version, or a tag.
+
+* `message`
+
+    The warning message that will be printed whenever a user attempts to
+    install the package.
 
 Note that you must be the package owner to deprecate something.  See the
 `owner` and `adduser` help topics.
+
+## SEE ALSO
+
+* npm-publish(3)
+* npm-unpublish(3)
+* npm-registry(1)

@@ -3,13 +3,18 @@ npm-bin(3) -- Display npm bin folder
 
 ## SYNOPSIS
 
-    npm.commands.bin(args, callback)
+    npm.commands.bin(args, cb)
 
 ## DESCRIPTION
 
 Print the folder where npm will install executables.
 
-'args' is never used and callback is never called with data.
-'args' must be present or things will break.
+This function should not be used programmatically.  The logic for
+attaining the bin folder is quite simple.
 
-This function is not useful programmatically.
+    var bin
+    if (npm.config.get("global")) {
+      bin = path.resolve(npm.prefix, "bin")
+    } else {
+      bin = path.resolve(npm.dir, ".bin")
+    }

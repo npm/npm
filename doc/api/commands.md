@@ -3,7 +3,7 @@ npm-commands(3) -- npm commands
 
 ## SYNOPSIS
 
-    npm.commands.<command>(args, callback)
+    npm.commands[<command>](args, callback)
 
 ## DESCRIPTION
 
@@ -17,54 +17,6 @@ commands are special and take other optional arguments.
 All commands have their own man page. See `man npm-<command>` for command-line
 usage, or `man 3 npm-<command>` for programmatic usage.
 
-## COMMANDS
+## SEE ALSO
 
-### install
-
-Install a package.
-
-* "install"
-* "uninstall"
-  "cache"
-* "config"
-* "set"
-* "get"
-* "update"
-* "outdated"
-* "prune"
-* "submodule"
-* "pack"
-
-* "rebuild"
-* "link"
-
-* "publish"
-* "tag"
-  "adduser"
-* "unpublish"
-* "owner"
-* "deprecate"
-
-  "help"
-* "help-search"
-* "ls"
-* "search"
-* "view"
-* "init"
-* "version"
-* "edit"
-* "explore"
-* "docs"
-  "faq"
-* "root"
-* "prefix"
-* "bin"
-* "whoami"
-
-* "test"
-* "stop"
-* "start"
-* "restart"
-* "run-script"
-  "completion"
-
+* npm-index(1)
