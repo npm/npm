@@ -33,9 +33,11 @@ function next () {
     return [3, path.resolve(api, d)]
   })
 
-  clidocs = [[1, readme]].concat(clidocs.filter(filter).map(function (d) {
+  clidocs = clidocs.filter(filter).map(function (d) {
     return [1, path.resolve(cli, d)]
-  }))
+  })
+
+  writeLine([1, readme])
 
   console.log("# Command Line Documentation")
 

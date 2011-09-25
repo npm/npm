@@ -38,10 +38,11 @@ case $dest in
     | perl -pi -e 's/npm-npm/npm/g' \
     | perl -pi -e 's/([^"-])(npm-)?README(\(1\))?/\1<a href="..\/doc\/README.html">README<\/a>/g' \
     | perl -pi -e 's/<title><a href="..\/doc\/README.html">README<\/a><\/title>/<title>README<\/title>/g' \
-    | perl -pi -e 's/([^"-])npm-([^\(]+)\(1\)/\1<a href="..\/doc\/\2.html">\2<\/a>/g' \
-    | perl -pi -e 's/([^"-])npm-([^\(]+)\(3\)/\1<a href="..\/api\/\2.html">\2<\/a>/g' \
-    | perl -pi -e 's/([^"-])npm\(1\)/\1<a href="..\/doc\/npm.html">npm<\/a>/g' \
-    | perl -pi -e 's/([^"-])npm\(3\)/\1<a href="..\/api\/npm.html">npm<\/a>/g' \
+    | perl -pi -e 's/([^"-])npm-([^\(]+)(\(1\))/\1<a href="..\/doc\/\2.html">\2\3<\/a>/g' \
+    | perl -pi -e 's/([^"-])npm-([^\(]+)(\(3\))/\1<a href="..\/api\/\2.html">\2\3<\/a>/g' \
+    | perl -pi -e 's/([^"-])npm\(1\)/\1<a href="..\/doc\/npm.html">npm(1)<\/a>/g' \
+    | perl -pi -e 's/([^"-])npm\(3\)/\1<a href="..\/api\/npm.html">npm(3)<\/a>/g' \
+    | perl -pi -e 's/\([13]\)<\/a><\/h1>/<\/a><\/h1>/g' \
     > $dest
     exit $?
     ;;
