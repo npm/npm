@@ -70,6 +70,7 @@ var commandCache = {}
               , "author" : "owner"
               , "home" : "docs"
               , "unstar": "star" // same function
+              , "apihelp" : "help"
               }
 
   , aliasNames = Object.keys(aliases)

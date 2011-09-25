@@ -2,22 +2,30 @@ SHELL = bash
 
 markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
-mandocs = $(shell find doc -name '*.md' \
-           |grep -v 'index.md' \
-           |sed 's|.md|.1|g' \
-           |sed 's|doc/|man1/|g' ) \
-           man1/README.1 \
-           man1/index.1
+cli_mandocs = $(shell find doc/cli -name '*.md' \
+               |sed 's|.md|.1|g' \
+               |sed 's|doc/cli/|man/man1/|g' ) \
+               man/man1/README.1 \
+               man/man1/index.1
 
-htmldocs = $(shell find doc -name '*.md' \
-            |grep -v 'index.md' \
-            |sed 's|.md|.html|g' \
-            |sed 's|doc/|html/doc/|g' ) \
-            html/doc/README.html \
-            html/doc/index.html
+api_mandocs = $(shell find doc/api -name '*.md' \
+               |sed 's|.md|.3|g' \
+               |sed 's|doc/api/|man/man3/|g' )
 
-doc_subfolders = $(shell find doc -type d \
-                  |sed 's|doc/|man1/|g' )
+cli_htmldocs = $(shell find doc/cli -name '*.md' \
+                |grep -v 'index.md' \
+                |sed 's|.md|.html|g' \
+                |sed 's|doc/cli/|html/doc/|g' ) \
+                html/doc/README.html \
+                html/doc/index.html
+
+api_htmldocs = $(shell find doc/api -name '*.md' \
+                |sed 's|.md|.html|g' \
+                |sed 's|doc/api/|html/api/|g' )
+
+mandocs = $(api_mandocs) $(cli_mandocs)
+
+htmldocs = $(api_htmldocs) $(cli_htmldocs)
 
 all: submodules doc
 
@@ -49,26 +57,50 @@ doc: node_modules/ronn $(mandocs) $(htmldocs)
 
 docclean: doc-clean
 doc-clean:
-	rm -rf node_modules/ronn doc/index.md $(mandocs) $(htmldocs) &>/dev/null || true
+	rm -rf \
+    node_modules/ronn \
+    doc/cli/index.md \
+    doc/api/index.md \
+    $(api_mandocs) \
+    $(cli_mandocs) \
+    $(api_htmldocs) \
+    $(cli_htmldocs) \
+		&>/dev/null || true
 
 node_modules/ronn:
 	node cli.js install git+https://github.com/isaacs/ronnjs.git
 
 # use `npm install ronn` for this to work.
-man1/README.1: README.md scripts/doc-build.sh package.json
+man/man1/README.1: README.md scripts/doc-build.sh package.json
 	scripts/doc-build.sh $< $@
 
-man1/%.1: doc/%.md scripts/doc-build.sh package.json
+man/man1/%.1: doc/%.md scripts/doc-build.sh package.json
+	scripts/doc-build.sh $< $@
+
+man/man3/%.3: doc/api/%.md man/man3 node_modules/ronn
 	scripts/doc-build.sh $< $@
 
 html/doc/README.html: README.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
 	scripts/doc-build.sh $< $@
 
-html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+html/doc/%.html: doc/cli/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
 	scripts/doc-build.sh $< $@
 
-doc/index.md: $(markdowns) scripts/index-build.js scripts/doc-build.sh package.json
-	node scripts/index-build.js > doc/index.md
+html/api/%.html: doc/api/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+	scripts/doc-build.sh $< $@
+
+doc/cli/index.md: $(markdowns) scripts/index-build.js scripts/doc-build.sh package.json
+	node scripts/index-build.js > $@
+
+doc: man
+
+man: $(cli_docs) $(api_docs)
+
+man/man1:
+	[ -d man/man1 ] || mkdir -p man/man1
+
+man/man3:
+	[ -d man/man3 ] || mkdir -p man/man3
 
 test: submodules
 	node cli.js test
@@ -86,6 +118,7 @@ publish: link
 docpublish: doc-publish
 doc-publish: doc
 	rsync -vazu --stats --no-implied-dirs --delete html/doc/ npmjs.org:/var/www/npmjs.org/public/doc
+	rsync -vazu --stats --no-implied-dirs --delete html/api/ npmjs.org:/var/www/npmjs.org/public/api
 
 sandwich:
 	@[ $$(whoami) = "root" ] && (echo "ok"; echo "ham" > sandwich) || echo "make it yourself"
