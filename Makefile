@@ -74,7 +74,7 @@ node_modules/ronn:
 man/man1/README.1: README.md scripts/doc-build.sh package.json
 	scripts/doc-build.sh $< $@
 
-man/man1/%.1: doc/%.md scripts/doc-build.sh package.json
+man/man1/%.1: doc/cli/%.md scripts/doc-build.sh package.json
 	scripts/doc-build.sh $< $@
 
 man/man3/%.3: doc/api/%.md man/man3 node_modules/ronn
