@@ -1,6 +1,10 @@
 
 process.title = "npm"
 
+
+// FIXME there really ought to be a path.split in node core
+require("path").SPLIT_CHAR = process.platform === "win32" ? "\\" : "/"
+
 var EventEmitter = require("events").EventEmitter
   , npm = module.exports = new EventEmitter
   , config = require("./lib/config.js")
@@ -26,6 +30,29 @@ npm.EISGIT = {}
 npm.ECYCLE = {}
 npm.EENGINE = {}
 
+// HACK for windows
+if (process.platform === "win32") {
+  // stub in unavailable methods from process and fs binding
+  if (!process.getuid) process.getuid = function() {}
+  if (!process.getgid) process.getgid = function() {}
+  var fsBinding = process.binding("fs")
+  if (!fsBinding.chown) fsBinding.chown = function() {
+    var cb = arguments[arguments.length - 1]
+    if (typeof cb == "function") cb()
+  }
+  
+  // patch rename/renameSync, but this should really be fixed in node
+  var _fsRename = fs.rename
+    , _fsPathPatch
+  _fsPathPatch = function(p) {
+    return p && p.replace(/\\/g, "/") || p;
+  }
+  fs.rename = function(p1, p2) {
+    arguments[0] = _fsPathPatch(p1)
+    arguments[1] = _fsPathPatch(p2)
+    return _fsRename.apply(fs, arguments);
+  }
+}
 
 try {
   // startup, ok to do this synchronously
