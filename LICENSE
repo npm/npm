@@ -42,13 +42,3 @@ This program includes a BSDTar/LibArchive version 2.8.3-1 binary,
 originally distributed as part of the MinGW suite, compiled for
 Win32, used according to the terms of the BSD license.
 See deps/basic-bsdtar-2.8.3-1-ming32-bin/basic-bsdtar.LICENSE.
-
-This program includes a binary copy of GZIP version 1.2.4 by
-Jean-loup Gailly (jloup@gzip.org), and Mark Adler, compiled for
-Win32, used according to the terms of the GPL license.
-See: deps/gzip124xN/COPYING
-
-IMPORTANT: If you are using npm according to the terms of the MIT
-license, in such a way that is *not* compatible with the GPL license,
-then remove the deps/gzip124xN folder.  This is only necessary for
-windows support, and not required on Unix systems.
