@@ -162,7 +162,7 @@ echo "fetching: $url" >&2
 
 cd "$TMP" \
   && curl -SsL --cacert "$cacert" "$url" \
-     | gzip --decompress --stdout | $tar -xf - \
+     | $tar -xzf - \
   && cd * \
   && (node_version=`"$node" --version 2>&1`
       ret=$?
