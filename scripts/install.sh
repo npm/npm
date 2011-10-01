@@ -147,6 +147,9 @@ ZNufy1Jf1r0ldEGeA+0ISck7s+xSh9rQD2Op
 -----END CERTIFICATE-----
 '
 
+echo "$cacert" > "$TMP/cafile.crt"
+cacert="$TMP/cafile.crt"
+
 # need to echo "" after, because Posix sed doesn't treat EOF
 # as an implied end of line.
 url=`(curl -SsL --cacert "$cacert" https://registry.npmjs.org/npm/$t; echo "") \
