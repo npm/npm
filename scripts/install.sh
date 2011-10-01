@@ -166,7 +166,8 @@ echo "fetching: $url" >&2
 cd "$TMP" \
   && curl -SsL --cacert "$cacert" "$url" \
      | $tar -xzf - \
-  && cd * \
+  && rm "$cacert" \
+  && cd "$TMP"/* \
   && (node_version=`"$node" --version 2>&1`
       ret=$?
       if [ $ret -eq 0 ]; then
