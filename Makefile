@@ -2,26 +2,33 @@ SHELL = bash
 
 markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
-docs = $(shell find doc -name '*.md' \
-        |grep -v 'index.md' \
-        |sed 's|.md|.1|g' \
-        |sed 's|doc/|man1/|g' ) \
-        man1/README.1 \
-        man1/index.1
+cli_mandocs = $(shell find doc/cli -name '*.md' \
+               |sed 's|.md|.1|g' \
+               |sed 's|doc/cli/|man/man1/|g' ) \
+               man/man1/README.1 \
+               man/man1/index.1
 
-htmldocs = $(shell find doc -name '*.md' \
-            |grep -v 'index.md' \
-            |sed 's|.md|.html|g' \
-            |sed 's|doc/|html/doc/|g' ) \
-            html/doc/README.html \
-            html/doc/index.html
+api_mandocs = $(shell find doc/api -name '*.md' \
+               |sed 's|.md|.3|g' \
+               |sed 's|doc/api/|man/man3/|g' )
 
-doc_subfolders = $(shell find doc -type d \
-                  |sed 's|doc/|man1/|g' )
+cli_htmldocs = $(shell find doc/cli -name '*.md' \
+                |grep -v 'index.md' \
+                |sed 's|.md|.html|g' \
+                |sed 's|doc/cli/|html/doc/|g' ) \
+                html/doc/README.html \
+                html/doc/index.html
 
-# This is the default make target.
-# Since 'make' typically does non-installation build stuff,
-# it seems appropriate.
+api_htmldocs = $(shell find doc/api -name '*.md' \
+                |sed 's|.md|.html|g' \
+                |sed 's|doc/api/|html/api/|g' )
+
+mandocs = $(api_mandocs) $(cli_mandocs)
+
+htmldocs = $(api_htmldocs) $(cli_htmldocs)
+
+all: submodules doc
+
 submodules:
 	! [ -d .git ] || git submodule update --init --recursive
 
@@ -31,7 +38,7 @@ latest: submodules
 	@echo "in this folder that you're looking at right now."
 	node cli.js install -g -f npm
 
-install: submodules
+install: all
 	node cli.js install -g -f
 
 # backwards compat
@@ -40,32 +47,56 @@ dev: install
 link: uninstall
 	node cli.js link -f
 
-clean: uninstall
+clean: doc-clean uninstall
 	node cli.js cache clean
 
 uninstall: submodules
 	node cli.js rm npm -g -f
 
-doc: $(docs) $(htmldocs)
+doc: node_modules/ronn $(mandocs) $(htmldocs)
 
+docclean: doc-clean
 doc-clean:
-	rm doc/index.md $(docs) $(htmldocs) &>/dev/null || true
+	rm -rf \
+    node_modules/ronn \
+    doc/cli/index.md \
+    doc/api/index.md \
+    $(api_mandocs) \
+    $(cli_mandocs) \
+    $(api_htmldocs) \
+    $(cli_htmldocs) \
+		&>/dev/null || true
+
+node_modules/ronn:
+	node cli.js install git+https://github.com/isaacs/ronnjs.git
 
 # use `npm install ronn` for this to work.
-man1/README.1: README.md scripts/doc-build.sh package.json
+man/man1/README.1: README.md scripts/doc-build.sh package.json
 	scripts/doc-build.sh $< $@
 
-man1/%.1: doc/%.md scripts/doc-build.sh package.json
+man/man1/%.1: doc/cli/%.md scripts/doc-build.sh package.json
+	@[ -d man/man1 ] || mkdir -p man/man1
+	scripts/doc-build.sh $< $@
+
+man/man3/%.3: doc/api/%.md scripts/doc-build.sh package.json
+	@[ -d man/man3 ] || mkdir -p man/man3
 	scripts/doc-build.sh $< $@
 
 html/doc/README.html: README.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
 	scripts/doc-build.sh $< $@
 
-html/doc/%.html: doc/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+html/doc/%.html: doc/cli/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
 	scripts/doc-build.sh $< $@
 
-doc/index.md: $(markdowns) scripts/index-build.js scripts/doc-build.sh package.json
-	node scripts/index-build.js > doc/index.md
+html/api/%.html: doc/api/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+	scripts/doc-build.sh $< $@
+
+doc/cli/index.md: $(markdowns) scripts/index-build.js scripts/doc-build.sh package.json
+	node scripts/index-build.js > $@
+
+doc: man
+
+man: $(cli_docs) $(api_docs)
 
 test: submodules
 	node cli.js test
@@ -80,7 +111,12 @@ publish: link
 	npm publish &&\
 	make doc-publish
 
+docpublish: doc-publish
 doc-publish: doc
 	rsync -vazu --stats --no-implied-dirs --delete html/doc/ npmjs.org:/var/www/npmjs.org/public/doc
+	rsync -vazu --stats --no-implied-dirs --delete html/api/ npmjs.org:/var/www/npmjs.org/public/api
 
-.PHONY: latest install dev link doc clean uninstall test man doc-publish doc-clean
+sandwich:
+	@[ $$(whoami) = "root" ] && (echo "ok"; echo "ham" > sandwich) || echo "make it yourself"
+
+.PHONY: all latest install dev link doc clean uninstall test man doc-publish doc-clean docclean docpublish

@@ -294,6 +294,10 @@ user.
 
 The gzip binary
 
+**DEPRECATED** This is no longer used.
+
+npm now requires a tar that supports the `-z` flag.
+
 ### https-proxy
 
 * Default: the `HTTPS_PROXY` or `https_proxy` or `HTTP_PROXY` or
@@ -535,6 +539,8 @@ tag` command, if no explicit tag is given.
 * Type: path
 
 The tar executable
+
+npm now requires a tar that supports the `-z` flag.
 
 ### tmp
 

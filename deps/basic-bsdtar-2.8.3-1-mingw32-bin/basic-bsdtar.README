@@ -1,0 +1,117 @@
+basic-bsdtar-2.8.3-mingw32-bin.zip
+basic-bsdtar-2.8.3-mingw32-src.tar.lzma
+========================================================================
+
+This build of bsdtar from libarchive is provided as a convenience, for
+those who need a standalone, win32 tar program that supports lzma and
+xz decompression.  (The "regular" bsdtar provided by the MinGW project
+is dynamically linked, and has several additional dependencies).
+
+In contrast, this version is:
+	native win32
+	linked statically against libz (zlib), libbz2 (bzip2),
+		and liblzma (xz). This, it supports intrinsically
+		.tar.lzma, .tar.xz, .tar.bz2, and .tar.gz. It also
+		supports .iso and various other formats, but that's
+		not important here.
+
+You should be able to unpack this archive, and use the included
+bsdtar.exe without any other prerequisites.  Like its more full-
+featured cousin, however, there are several KNOWN ISSUES; bsdtar
+fails some of its own testsuite tests.  These failures should not
+cause any issues when used for the intended purpose:
+
+	unpacking MinGW/MSYS archives distributed from mingw.org
+	and/or http://sourceforge.net/projects/mingw/files/
+
+If you attempt to use it for any other purpose, and it fails,
+kills your cat, destroys your data, or causes marital problems,
+you are on your own.  In fact, that's true even if you DO use
+it for its intended purpose, so let's go ahead an make that clear:
+
+
+LICENSE
+========================================================================
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer
+   in this position and unchanged.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR(S) ``AS IS'' AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE AUTHOR(S) BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+
+
+HOW TO BUILD
+========================================================================
+You'll need a working MSYS installation. You'll also need the following
+packages:
+
+Build requirements (these, or newer)
+  MinGW compiler
+    binutils-2.20-1-mingw32-bin
+    gcc-core-4.4.0-mingw32-bin
+    gcc-core-4.4.0-mingw32-dll
+    mingwrt-3.17-mingw32-dev
+    mingwrt-3.17-mingw32-dll
+    w32api-3.14-mingw32-dev
+    gmp-4.2.4-mingw32-dll
+    mpfr-2.4.1-mingw32-dll
+
+  Devel Tools and Dependent Libraries
+    autoconf-7-1-mingw32-bin
+    autoconf2.5-2.64-1-mingw32-bin
+    automake-4-1-mingw32-bin
+    automake1.11-1.11-1-mingw32-bin
+    gettext-0.17-1-mingw32-bin
+    gettext-0.17-1-mingw32-dev
+    libgettextpo-0.17-1-mingw32-dll-0
+    libtool-2.2.7a-1-mingw32-bin
+    libz-1.2.3-1-mingw32-dev
+    libbz2-1.0.5-2-mingw32-dev
+    liblzma-4.999beta9_20100401-mingw32-dev
+
+  MSYS Environment
+    msysCORE-1.0.13-1-msys-1.0.13-bin
+    coreutils-5.97-2-msys-1.0.11-bin
+    bash-3.1.17-2-msys-1.0.11-bin
+    make-3.81-2-msys-1.0.11-bin
+    patch-2.5.9-1-msys-1.0.11-bin
+    tar-1.22-1-msys-1.0.11-bin
+    libbz2-1.0.5-2-msys-1.0.13-dll-1
+    bzip2-1.0.5-2-msys-1.0.13-bin
+    gzip-1.3.12-1-msys-1.0.11-bin
+    sed-4.2.1-1-msys-1.0.11-bin
+    gawk-3.1.7-1-msys-1.0.11-bin
+    texinfo-4.13a-1-msys-1.0.11-bin
+    file-5.03-1-msys-1.0.11-bin
+    cvs-1.12.13-1-msys-1.0.11-bin
+    perl-5.6.1_2-2-msys-1.0.13-bin
+    libcrypt-1.1_1-3-msys-1.0.13-dll-0
+    libgdbm-1.8.3-3-msys-1.0.13-dll-3
+    zlib-1.2.3-2-msys-1.0.13-dll
+
+Unpack the -src package, and
+
+	$ ./mingw-build-basic-bsdtar libarchive-2.8.3.tar.gz
+
+That's it. You should end up with new -bin.tar.gz and -src.tar.gz
+packages.  For upload to sourceforge, I usually repackage the -bin.tar.gz
+as a .zip, just to avoid chicken-and-egg problems.  I do this manually,
+using the GnuWin32 project's zip.exe.
+

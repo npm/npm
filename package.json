@@ -15,7 +15,7 @@
   , "web" : "http://github.com/isaacs/npm/issues"
   }
 , "directories" : { "doc" : "./doc"
-                  , "man" : "./man1"
+                  , "man" : "./man"
                   , "lib" : "./lib"
                   , "bin" : "./bin"
                   }
@@ -51,7 +51,7 @@
   , "which" ]
 , "devDependencies" : { "ronn" : "" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
-, "scripts" : { "test" : "./test/run.sh"
+, "scripts" : { "test" : "./test/run"
               , "prepublish" : "make doc"
               , "dumpconf": "env | grep npm | sort | uniq"
               }
