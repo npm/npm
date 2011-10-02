@@ -40,7 +40,7 @@ if (process.platform === "win32") {
     var cb = arguments[arguments.length - 1]
     if (typeof cb == "function") cb()
   }
-  
+
   // patch rename/renameSync, but this should really be fixed in node
   var _fsRename = fs.rename
     , _fsPathPatch
@@ -135,6 +135,7 @@ var commandCache = {}
               , "edit"
               , "explore"
               , "docs"
+              , "bugs"
               , "faq"
               , "root"
               , "prefix"
