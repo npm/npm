@@ -49,7 +49,7 @@ You will probably need the latest version of node, **at least** version
 `0.5.8` or higher.  You can get it from
 <http://nodejs.org/dist/v0.5.8/node.exe>.
 
-### Step 2: Update the `%PATH%` environment variable
+### Step 2: Update the %PATH% environment variable
 
 Update your `%PATH%` environment variable in System Properties:
 Advanced: Environment, so that it includes the `bin` folder you chose.
@@ -58,7 +58,7 @@ The entries are separated by semicolons.
 You *may* be able to do this from the command line using `set` and
 `setx`.  `cd` into the `bin` folder you created in step 1, and do this:
 
-    set path="%PATH%;%CD%"
+    set path=%PATH%;%CD%
     setx path "%PATH%"
 
 ### Step 3: Install git
