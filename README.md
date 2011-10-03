@@ -73,7 +73,7 @@ Run `git --version` to make sure that it's at least version 1.7.6.
 Lastly, **after** node.exe, git, and your %PATH% have *all* been set up
 properly, install npm itself:
 
-    git config --system http.sslcainfo \\bin\curl-ca-bundle.crt
+    git config --system http.sslcainfo /bin/curl-ca-bundle.crt
     git clone --recursive git://github.com/isaacs/npm.git
     cd npm
     node cli.js install npm -gf
