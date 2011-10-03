@@ -28,7 +28,7 @@ npm.EPUBLISHCONFLICT = {}
 npm.EJSONPARSE = {}
 npm.EISGIT = {}
 npm.ECYCLE = {}
-npm.EENGINE = {}
+npm.ENOTSUP = {}
 
 // HACK for windows
 if (process.platform === "win32") {
