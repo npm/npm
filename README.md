@@ -121,6 +121,32 @@ However, note that github tarballs **do not contain submodules**, so
 those won't work.  You'll have to also fetch the appropriate submodules
 listed in the .gitmodules file.
 
+## "npm cannot be installed without nodejs" message
+
+Npm will output a bunch of lines, read the one starting with `PATH` then run:
+
+```which node
+```
+
+If you get something like `node not found` node is not properly
+installed, fix that first. Otherwise you would get a path like:
+
+```/usr/local/bin/node
+```
+
+For this example you should check that `/usr/local/bin/` in `PATH`,
+if not, add it:
+
+```echo 'export PATH="/usr/local/bin/:$PATH"' >> ~/.bashrc
+```
+
+the run:
+
+```source ~/.bashrc
+```
+
+and try installing npm again.
+
 ## Permissions
 
 **tl;dr**
