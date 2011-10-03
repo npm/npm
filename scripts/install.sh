@@ -228,7 +228,7 @@ cd "$TMP" \
       fi) \
   && (if [ "$make" = "NOMAKE" ]; then
         (exit 0)
-      elif "$make" clean install; then
+      elif "$make" uninstall install; then
         (exit 0)
       else
         make="NOMAKE"
