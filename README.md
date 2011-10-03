@@ -45,6 +45,10 @@ folders rooted in a specific `prefix`.  For now, it works best if you
 put node.exe in a folder named `bin`, for example,
 `C:\projects\node\bin\node.exe`.
 
+You will probably need the latest version of node, **at least** version
+`0.5.8` or higher.  You can get it from
+<http://nodejs.org/dist/v0.5.8/node.exe>.
+
 ### Step 2: Update the `%PATH%` environment variable
 
 Update your `%PATH%` environment variable in System Properties:
