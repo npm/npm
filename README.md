@@ -28,6 +28,54 @@ To say "yes" to the 0.x cleanup, but skip the prompt:
 
     curl http://npmjs.org/install.sh | clean=yes sh
 
+## Installing on Windows -- Experimental
+
+**IMPORTANT: Please read this and do every step.**  npm **will not** work
+properly if you don't, and I'll ruthlessly close your bug report and direct
+you to this document.
+
+There are 4 steps.
+
+Yes, this sucks.  A convenient one-liner is coming soon.
+
+### Step 1: Choose a location for node.exe that ends in `bin`
+
+npm uses a somewhat posix-centric folder structure, with `bin` and `lib`
+folders rooted in a specific `prefix`.  For now, it works best if you
+put node.exe in a folder named `bin`, for example,
+`C:\projects\node\bin\node.exe`.
+
+### Step 2: Update the `%PATH%` environment variable
+
+Update your `%PATH%` environment variable in System Properties:
+Advanced: Environment, so that it includes the `bin` folder you chose.
+The entries are separated by semicolons.
+
+You *may* be able to do this from the command line using `set` and
+`setx`.  `cd` into the `bin` folder you created in step 1, and do this:
+
+    set path="%PATH%;%CD%"
+    setx path "%PATH%"
+
+### Step 3: Install git
+
+If you don't already have git,
+[install it](https://git.wiki.kernel.org/index.php/MSysGit:InstallMSysGit).
+
+Run `git --version` to make sure that it's at least version 1.7.6.
+
+### Step 4: install npm
+
+Lastly, **after** node.exe, git, and your %PATH% have *all* been set up
+properly, install npm itself:
+
+    git config --system http.sslcainfo \\bin\curl-ca-bundle.crt
+    git clone --recursive git://github.com/isaacs/npm.git
+    cd npm
+    node cli.js install npm -gf
+
+## Permission Errors on Installation
+
 If you get permission errors, you can either install node someplace that
 you have permission to write to (recommended!) or you *can* place a **very
 unsafe amount of trust** in me, and in your network, and do this:
@@ -37,6 +85,13 @@ unsafe amount of trust** in me, and in your network, and do this:
 **Note**: You need to `sudo` the `sh`, **not** the `curl`.  Fetching stuff
 from the internet typically doesn't require elevated permissions.
 Running it might.
+
+## Installing on Cygwin
+
+Don't.
+
+It's not supported, and terrible.  Use the windows native approach,
+or use a Linux or Solaris virtual machine in VMWare or VirtualBox.
 
 ## Dev Install
 
@@ -61,37 +116,6 @@ this code and node, you can probably do this:
 However, note that github tarballs **do not contain submodules**, so
 those won't work.  You'll have to also fetch the appropriate submodules
 listed in the .gitmodules file.
-
-### Installing on Windows
-
-The easiest way to get up and running with npm on Windows is to clone the
-[github repository](https://github.com/isaacs/npm). If you don't already have
-git, [install it](https://git.wiki.kernel.org/index.php/MSysGit:InstallMSysGit) and run:
-
-    git clone --recursive git://github.com/isaacs/npm
-
-If this fails with a message about "error setting certificate verify locations"
-remove the failed install, set a config entry and retry, like so:
-
-    rm -rf npm
-    git config --system http.sslcainfo \\bin\curl-ca-bundle.crt
-    git clone --recursive git://github.com/isaacs/npm
-
-Congratulations -- you should now have a (still very broken) npm install. Now
-navigate into the newly installed npm folder:
-
-    cd npm
-
-To run npm from the command line be sure to add it your PATH:
-
-    set path="%PATH%;%CD%\bin"
-
-If available you can use `setx` to make this PATH addition permanent:
-
-    setx path "%PATH%"
-
-Otherwise you can make this change manually in "Advanced System Settings".
-
 
 ## Permissions
 
