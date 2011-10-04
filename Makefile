@@ -53,12 +53,14 @@ clean: doc-clean uninstall
 uninstall: submodules
 	node cli.js rm npm -g -f
 
-doc: node_modules/ronn $(mandocs) $(htmldocs)
+doc: $(mandocs) $(htmldocs)
 
 docclean: doc-clean
 doc-clean:
 	rm -rf \
     node_modules/ronn \
+    node_modules/.bin/ronn \
+		.building_ronn \
     doc/cli/index.md \
     doc/api/index.md \
     $(api_mandocs) \
@@ -66,9 +68,6 @@ doc-clean:
     $(api_htmldocs) \
     $(cli_htmldocs) \
 		&>/dev/null || true
-
-node_modules/ronn:
-	node cli.js install git+https://github.com/isaacs/ronnjs.git
 
 # use `npm install ronn` for this to work.
 man/man1/README.1: README.md scripts/doc-build.sh package.json
@@ -93,6 +92,9 @@ html/api/%.html: doc/api/%.md html/dochead.html html/docfoot.html scripts/doc-bu
 
 doc/cli/index.md: $(markdowns) scripts/index-build.js scripts/doc-build.sh package.json
 	node scripts/index-build.js > $@
+
+node_modules/ronn:
+	node cli.js install https://github.com/isaacs/ronnjs/tarball/master
 
 doc: man
 

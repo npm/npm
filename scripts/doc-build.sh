@@ -6,7 +6,25 @@ fi
 set -o errexit
 set -o pipefail
 
-[ -x ./node_modules/.bin/ronn ] || node cli.js install ronn
+if ! [ -x node_modules/.bin/ronn ]; then
+  if [ -f .building_ronn ]; then
+    while [ -f .building_ronn ]; do
+      sleep 1
+    done
+  else
+    # a race to see which make process will be the one to install ronn
+    echo $$ > .building_ronn
+    sleep 1
+    if [ $(cat .building_ronn) == $$ ]; then
+      make node_modules/ronn
+      rm .building_ronn
+    else
+      while [ -f .building_ronn ]; do
+        sleep 1
+      done
+    fi
+  fi
+fi
 
 src=$1
 dest=$2
