@@ -53,7 +53,7 @@
   { "ronn" : "https://github.com/isaacs/ronnjs/tarball/master" }
 , "engines" : { "node" : "0.4 || 0.5", "npm" : "1" }
 , "scripts" : { "test" : "./test/run"
-              , "prepublish" : "make doc"
+              , "prepublish" : "make -j4 doc"
               , "dumpconf": "env | grep npm | sort | uniq"
               }
 , "licenses" :
