@@ -91,6 +91,7 @@ var commandCache = {}
               , "up" : "update"
               , "c" : "config"
               , "info" : "view"
+              , "show" : "view"
               , "find" : "search"
               , "s" : "search"
               , "se" : "search"
