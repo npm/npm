@@ -57,7 +57,7 @@
               , "dumpconf": "env | grep npm | sort | uniq"
               }
 , "licenses" :
-  [ { "type" : "MIT"
+  [ { "type" : "MIT +no-false-attribs"
     , "url" : "http://github.com/isaacs/npm/raw/master/LICENSE"
     }
   ]
