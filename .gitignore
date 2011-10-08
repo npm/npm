@@ -12,3 +12,4 @@ html/api/*.html
 html/doc/*.html
 man/
 doc/*/index.md
+./npmrc
