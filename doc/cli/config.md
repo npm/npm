@@ -13,7 +13,7 @@ npm-config(1) -- Manage the npm configuration file
 
 ## DESCRIPTION
 
-npm gets its configuration values from 5 sources, in this priority:
+npm gets its configuration values from 6 sources, in this priority:
 
 * cli:
   The command line flags.  Putting `--foo bar` on the command line sets the
@@ -31,6 +31,11 @@ npm gets its configuration values from 5 sources, in this priority:
   This file is an ini-file formatted list of `key = value` parameters.
 * $PREFIX/etc/npmrc (or the `globalconfig` param, if set above):
   This file is an ini-file formatted list of `key = value` parameters
+* path/to/npm/itself/npmrc:  This is an unchangeable "builtin"
+  configuration file that npm keeps consistent across updates.  Set
+  fields in here using the `./configure` script that comes with npm.
+  This is primarily for distribution maintainers to override default
+  configs in a standard and consistent manner.
 * default configs:
   This is a set of configuration parameters that are internal to npm, and are
   defaults if nothing else is specified.
