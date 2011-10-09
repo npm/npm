@@ -96,6 +96,23 @@ been published somewhere else, and spit at you.
 
 Literally.  Spit.  I'm so not kidding.
 
+## bugs
+
+The url to your project's issue tracker and / or the email address to which
+issues should be reported. These are helpful for people who encounter issues
+with your package.
+
+It should look like this:
+
+    { "url" : "http://github.com/owner/project/issues"
+    , "email" : "project@hostname.com"
+    }
+
+You can specify either one or both values. If you want to provide only a url,
+you can specify the value for "bugs" as a simple string instead of an object.
+
+If a url is provided, it will be used by the `npm bugs` command.
+
 ## people fields: author, contributors
 
 The "author" is one person.  "contributors" is an array of people.  A "person"
