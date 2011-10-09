@@ -48,6 +48,7 @@ link: uninstall
 	node cli.js link -f
 
 clean: doc-clean uninstall
+	rm npmrc
 	node cli.js cache clean
 
 uninstall: submodules
