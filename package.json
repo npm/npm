@@ -11,8 +11,8 @@
   , "url" : "https://github.com/isaacs/npm"
   }
 , "bugs" :
-  { "mail" : "npm-@googlegroups.com"
-  , "web" : "http://github.com/isaacs/npm/issues"
+  { "email" : "npm-@googlegroups.com"
+  , "url" : "http://github.com/isaacs/npm/issues"
   }
 , "directories" : { "doc" : "./doc"
                   , "man" : "./man"
