@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 var argv = process.argv
 if (argv.length < 3) {
   console.error("Usage: read-package.json <file> [<fields> ...]")

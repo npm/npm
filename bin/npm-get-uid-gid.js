@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 var argv = process.argv.slice(2)
   , user = argv[0] || process.getuid()
   , group = argv[1] || process.getgid()
