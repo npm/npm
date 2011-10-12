@@ -153,7 +153,8 @@ cacert="$TMP/cafile.crt"
 # need to echo "" after, because Posix sed doesn't treat EOF
 # as an implied end of line.
 url=`(curl -SsL --cacert "$cacert" https://registry.npmjs.org/npm/$t; echo "") \
-     | sed -e 's/^.*tarball":"//' -e 's/".*$//'`
+     | sed -e 's/^.*tarball":"//' \
+     | sed -e 's/".*$//'`
 
 ret=$?
 if [ $ret -ne 0 ]; then
