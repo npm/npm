@@ -9,7 +9,8 @@ This document will tell you what it puts where.
 
 ### tl;dr
 
-* Local install (default): puts stuff in `./node_modules`
+* Local install (default): puts stuff in `./node_modules` of the current
+  package root.
 * Global install (with `-g`): puts stuff in /usr/local
 * Install it **locally** if you're going to `require()` it.
 * Install it **globally** if you're going to run it on the command line.
