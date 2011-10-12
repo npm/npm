@@ -80,3 +80,14 @@ If multiple fields are requested, than each of them are prefixed with
 the field name.
 
 Console output can be disabled by setting the 'silent' parameter to true.
+
+## RETURN VALUE
+
+The data returned will be an object in this formation:
+
+    { <version>:
+      { <field>: <value>
+      , ... }
+    , ... }
+
+corresponding to the list of fields selected.
