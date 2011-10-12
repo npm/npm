@@ -611,6 +611,18 @@ The location of a user-level ignore file to apply to all packages.
 If not found, but there is a .gitignore file in the same directory, then
 that will be used instead.
 
+### umask
+
+* Default: 022
+* Type: Octal numeric string
+
+The "umask" value to use when setting the file creation mode on files
+and folders.
+
+Folders and executables are given a mode which is `0777` masked against
+this value.  Other files are given a mode which is `0666` masked against
+this value.  Thus, the defaults are `0755` and `0644` respectively.
+
 ### version
 
 * Default: false
