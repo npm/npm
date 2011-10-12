@@ -271,8 +271,9 @@ function load (npm, conf, cb) {
       loadUid(npm, conf, next)
 
       var umask = parseInt(conf.umask, 8)
-      npm.modes = { exec: 0777 ^ umask
-                  , file: 0666 ^ umask }
+      npm.modes = { exec: 0777 & (~umask)
+                  , file: 0666 & (~umask)
+                  , umask: umask }
 
       function next (er) {
         //console.error("next", er && er.stack)
