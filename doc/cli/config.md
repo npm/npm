@@ -89,6 +89,7 @@ The following shorthands are parsed on the command-line:
 * `-ddd`: `--loglevel silly`
 * `-g`: `--global`
 * `-l`: `--long`
+* `-m`: `--message`
 * `-p`, `--porcelain`: `--parseable`
 * `-reg`: `--registry`
 * `-v`: `--version`
@@ -393,6 +394,13 @@ also "color" and "loglevel".
 * Type: Boolean
 
 Show extended information in `npm ls`
+
+### message
+* Default: null
+* Type: [null, String]
+
+Commit message which is used by `npm version` when creating version commit.
+When null, "version <version>" is used.
 
 ### node-version
 
