@@ -397,11 +397,12 @@ Show extended information in `npm ls`
 
 ### message
 
-* Default: null
-* Type: [null, String]
+* Default: "%s"
+* Type: String
 
 Commit message which is used by `npm version` when creating version commit.
-When null, "version <version>" is used.
+
+Any "%s" in the message will be replaced with the version number.
 
 ### node-version
 
