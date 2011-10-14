@@ -129,6 +129,7 @@ var commandCache = {}
               , "help"
               , "help-search"
               , "ls"
+              , "checkdeps"
               , "search"
               , "view"
               , "init"
