@@ -1,16 +1,28 @@
 #!/usr/bin/env node
 ;(function () { // wrapper in case we're in module_context mode
-var log = require("../lib/utils/log")
+
+// windows: running "npm blah" in this folder will invoke WSH, not node.
+if (typeof WScript !== "undefined") {
+  WScript.echo("npm does not work when run\n"
+              +"with the Windows Scripting Host\n\n"
+              +"'cd' to a different directory,\n"
+              +"or type 'npm.cmd <args>',\n"
+              +"or type 'node npm <args>'.")
+  WScript.quit(1)
+  return
+}
+
+var log = require("../lib/utils/log.js")
 log.waitForConfig()
 log.info("ok", "it worked if it ends with")
 
 var fs = require("graceful-fs")
   , path = require("path")
-  , npm = require("../npm")
-  , ini = require("../lib/utils/ini")
-  , errorHandler = require("../lib/utils/error-handler")
+  , npm = require("../lib/npm.js")
+  , ini = require("../lib/utils/ini.js")
+  , errorHandler = require("../lib/utils/error-handler.js")
 
-  , configDefs = require("../lib/utils/config-defs")
+  , configDefs = require("../lib/utils/config-defs.js")
   , shorthands = configDefs.shorthands
   , types = configDefs.types
   , nopt = require("nopt")

@@ -206,7 +206,7 @@ You cannot set configs individually for any single npm function at this
 time.  Since `npm` is a singleton, any call to `npm.config.set` will
 change the value for *all* npm commands in that process.
 
-See `./bin/npm.js` for an example of pulling config values off of the
+See `./bin/npm-cli.js` for an example of pulling config values off of the
 command line arguments using nopt.  You may also want to check out `npm
 help config` to learn about all the options you can set there.
 

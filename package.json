@@ -19,10 +19,10 @@
                   , "lib" : "./lib"
                   , "bin" : "./bin"
                   }
-, "main" : "npm"
-, "bin" : { "npm" : "./bin/npm.js"
-          , "npm_g" : "./bin/npm.js"
-          , "npm-g" : "./bin/npm.js" }
+, "main" : "./lib/npm.js"
+, "bin" : { "npm" : "./bin/npm-cli.js"
+          , "npm_g" : "./bin/npm-cli.js"
+          , "npm-g" : "./bin/npm-cli.js" }
 , "dependencies" :
   { "semver" : "1"
   , "ini" : "1"
