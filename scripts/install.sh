@@ -24,6 +24,11 @@ if [ "x$0" = "xsh" ]; then
   exit $ret
 fi
 
+# See what "npm_config_*" things there are in the env,
+# and make them permanent.
+# If this fails, it's not such a big deal.
+configures="`env | grep 'npm_config_' | sed -e 's|^npm_config_||g'`"
+
 npm_config_loglevel="error"
 if [ "x$npm_debug" = "x" ]; then
   (exit 0)
@@ -92,6 +97,11 @@ fi
 # If the MAKE environment var is set, use that.
 # otherwise, try to find gmake, and then make.
 # If no make is found, then just execute the necessary commands.
+
+# XXX For some reason, make is building all the docs every time.  This
+# is an annoying source of bugs. Figure out why this happens.
+MAKE=NOMAKE
+
 if [ "x$MAKE" = "x" ]; then
   make=`which gmake 2>&1`
   if [ $? -eq 0 ] && [ -x $make ]; then
@@ -226,6 +236,12 @@ cd "$TMP" \
       if [ $ret -ne 0 ]; then
         echo "Aborted 0.x cleanup.  Exiting." >&2
         exit $ret
+      fi) \
+  && (if [ "x$configures" = "x" ]; then
+        (exit 0)
+      else
+        echo "./configure "$configures
+        echo "$configures" > npmrc
       fi) \
   && (if [ "$make" = "NOMAKE" ]; then
         (exit 0)
