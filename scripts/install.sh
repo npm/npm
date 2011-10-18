@@ -167,10 +167,17 @@ url=`(curl -SsL --cacert "$cacert" https://registry.npmjs.org/npm/$t; echo "") \
      | sed -e 's/".*$//'`
 
 ret=$?
+if [ "x$url" = "x" ]; then
+  ret=125
+fi
 if [ $ret -ne 0 ]; then
-  echo "Failed to get tarball url" >&2
+  echo "Failed to get tarball url for npm/$t" >&2
+  (curl -SsL -k https://registry.npmjs.org/npm/$t; echo "") \
+  | sed -e 's/^.*tarball":"//' \
+  | sed -e 's/".*$//'
   exit $ret
 fi
+
 
 echo "fetching: $url" >&2
 
