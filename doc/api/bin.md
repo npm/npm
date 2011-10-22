@@ -9,12 +9,5 @@ npm-bin(3) -- Display npm bin folder
 
 Print the folder where npm will install executables.
 
-This function should not be used programmatically.  The logic for
-attaining the bin folder is quite simple.
-
-    var bin
-    if (npm.config.get("global")) {
-      bin = path.resolve(npm.prefix, "bin")
-    } else {
-      bin = path.resolve(npm.dir, ".bin")
-    }
+This function should not be used programmatically.  Instead, just refer
+to the `npm.bin` member.
