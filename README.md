@@ -14,7 +14,7 @@ Much more info available via `npm help` once it's installed.
 To install an old **and unsupported** version of npm that works on node 0.3
 and prior, clone the git repo and dig through the old tags and branches.
 
-## Simple Install
+## Simple Install (Unix only, sorry)
 
 To install npm with one command, do this:
 
@@ -28,28 +28,20 @@ To say "yes" to the 0.x cleanup, but skip the prompt:
 
     curl http://npmjs.org/install.sh | clean=yes sh
 
+If you get permission errors, see the section below, entitled
+"Permission Errors on Installation".
+
 ## Installing on Windows -- Experimental
-
-**IMPORTANT: Please read this and do every step.**  npm **will not** work
-properly if you don't, and I'll ruthlessly close your bug report and direct
-you to this document.
-
-There are 4 steps.
 
 Yes, this sucks.  A convenient one-liner is coming soon.
 
-### Step 1: Choose a location for node.exe that ends in `bin`
-
-npm uses a somewhat posix-centric folder structure, with `bin` and `lib`
-folders rooted in a specific `prefix`.  For now, it works best if you
-put node.exe in a folder named `bin`, for example,
-`C:\projects\node\bin\node.exe`.
+### Step 1: Drop the node.exe somewhere
 
 You will probably need the latest version of node, **at least** version
 `0.5.8` or higher.  You can get it from
 <http://nodejs.org/dist/v0.5.8/node.exe>.
 
-### Step 2: Update the %PATH% environment variable
+### Step 2 (optional): Update the %PATH% environment variable
 
 Update your `%PATH%` environment variable in System Properties:
 Advanced: Environment, so that it includes the `bin` folder you chose.
@@ -60,6 +52,13 @@ You *may* be able to do this from the command line using `set` and
 
     set path=%PATH%;%CD%
     setx path "%PATH%"
+
+This will have the added advantage that you'll be able to simply type
+`npm` or `node` in any project folder to access those commands.
+
+If you decide not to update the PATH, and put the node.exe file in
+`C:\node\node.exe`, then the npm executable will end up `C:\node\npm.cmd`,
+and you'll have to type `C:\node\npm <command>` to use it.
 
 ### Step 3: Install git
 
@@ -90,6 +89,13 @@ unsafe amount of trust** in me, and in your network, and do this:
 from the internet typically doesn't require elevated permissions.
 Running it might.
 
+I highly recommend that you first download the file, and make sure that
+it is what you expect, and *then* run it.
+
+    curl -O http://npmjs.org/install.sh
+    # inspect file..
+    sudo sh install.sh
+
 ## Installing on Cygwin
 
 Don't.
@@ -103,7 +109,7 @@ To install the latest **unstable** development version from git:
 
     git clone https://github.com/isaacs/npm.git
     cd npm
-    sudo make install
+    sudo make install     # (or: `node cli.js install -gf`)
 
 If you're sitting in the code folder reading this document in your
 terminal, then you've already got the code.  Just do:
