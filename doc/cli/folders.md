@@ -11,7 +11,8 @@ This document will tell you what it puts where.
 
 * Local install (default): puts stuff in `./node_modules` of the current
   package root.
-* Global install (with `-g`): puts stuff in /usr/local
+* Global install (with `-g`): puts stuff in /usr/local or wherever node
+  is installed.
 * Install it **locally** if you're going to `require()` it.
 * Install it **globally** if you're going to run it on the command line.
 * If you need both, then install it in both places, or use `npm link`.
@@ -21,6 +22,10 @@ This document will tell you what it puts where.
 The `prefix` config defaults to the location where node is installed.
 On most systems, this is `/usr/local`, and most of the time is the same
 as node's `process.installPrefix`.
+
+On windows, this is the exact location of the node.exe binary.  On Unix
+systems, it's one level up, since node is typically installed at
+`{prefix}/bin/node` rather than `{prefix}/node.exe`.
 
 When the `global` flag is set, npm installs things into this prefix.
 When it is not set, it uses the root of the current package, or the
@@ -33,20 +38,29 @@ When installing locally, this means that you can
 `require("packagename")` to load its main module, or
 `require("packagename/lib/path/to/sub/module")` to load other modules.
 
+Global installs on Unix systems go to `{prefix}/lib/node_modules`.
+Global installs on Windows go to `{prefix}/node_modules` (that is, no
+`lib` folder.)
+
 If you wish to `require()` a package, then install it locally.
 
 ### Executables
 
-When in global mode, executables are linked into `prefix/bin`.
+When in global mode, executables are linked into `{prefix}/bin` on Unix,
+or directly into `{prefix}` on Windows.
 
 When in local mode, executables are linked into
-`prefix/node_modules/.bin`.
+`./node_modules/.bin` so that they can be made available to scripts run
+through npm.  (For example, so that a test runner will be in the path
+when you run `npm test`.)
 
 ### Man Pages
 
-When in global mode, man pages are linked into `prefix/share/man`.
+When in global mode, man pages are linked into `{prefix}/share/man`.
 
 When in local mode, man pages are not installed.
+
+Man pages are not installed on Windows systems.
 
 ### Cache
 
@@ -58,15 +72,15 @@ This is controlled by the `cache` configuration param.
 ### Temp Files
 
 Temporary files are stored by default in the folder specified by the
-`tmp` config, which defaults to either the TMPDIR environment
-variable, or `/tmp`.
+`tmp` config, which defaults to the TMPDIR, TMP, or TEMP environment
+variables, or `/tmp` on Unix and `c:\windows\temp` on Windows.
 
 Temp files are given a unique folder under this root for each run of the
 program, and are deleted upon successful exit.
 
 ## More Information
 
-When doing local installings, npm first tries to find an appropriate
+When installing locally, npm first tries to find an appropriate
 `prefix` folder.  This is so that `npm install foo@1.2.3` will install
 to the sensible root of your package, even if you happen to have `cd`ed
 into some other folder.
@@ -94,8 +108,7 @@ If the `global` configuration is set to true, then npm will
 install packages "globally".
 
 For global installation, packages are installed roughly the same way,
-but the module root is `/usr/local/lib/node_modules`, and bin files are
-linked to `/usr/local/bin` instead of `./node_modules/.bin`.
+but using the folders described above.
 
 ### Cycles, Conflicts, and Folder Parsimony
 
