@@ -121,7 +121,7 @@ fi
 if [ -x "$make" ]; then
   (exit 0)
 else
-  echo "Installing without make. This may fail." >&2
+  # echo "Installing without make. This may fail." >&2
   make=NOMAKE
 fi
 
