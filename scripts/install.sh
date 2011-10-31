@@ -72,25 +72,27 @@ fi
 
 BACK="$PWD"
 
+ret=0
 tar="${TAR}"
 if [ -z "$tar" ]; then
   tar=`which tar 2>&1`
   ret=$?
-
-  if [ $ret -eq 0 ] && [ -x "$tar" ]; then
-    echo "tar=$tar"
-    echo "version:"
-    $tar --version
-    ret=$?
-  fi
-
-  if [ $ret -eq 0 ]; then
-    (exit 0)
-  else
-    echo "No suitable tar program found."
-    exit 1
-  fi
 fi
+
+if [ $ret -eq 0 ] && [ -x "$tar" ]; then
+  echo "tar=$tar"
+  echo "version:"
+  $tar --version
+  ret=$?
+fi
+
+if [ $ret -eq 0 ]; then
+  (exit 0)
+else
+  echo "No suitable tar program found."
+  exit 1
+fi
+
 
 
 # Try to find a suitable make
