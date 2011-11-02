@@ -15,30 +15,47 @@ npm-config(1) -- Manage the npm configuration file
 
 npm gets its configuration values from 6 sources, in this priority:
 
-* cli:
-  The command line flags.  Putting `--foo bar` on the command line sets the
-  `foo` configuration parameter to `"bar"`.  A `--` argument tells the cli
-  parser to stop reading flags.  A `--flag` parameter that is at the *end* of
-  the command will be given the value of `true`.
-* env:
-  Any environment variables that start with `npm_config_` will be interpreted
-  as a configuration parameter.  For example, putting `npm_config_foo=bar` in
-  your environment will set the `foo` configuration parameter to `bar`.  Any
-  environment configurations that are not given a value will be given the value
-  of `true`.  Config values are case-insensitive, so `NPM_CONFIG_FOO=bar` will
-  work the same.
-* $HOME/.npmrc (or the `userconfig` param, if set above):
-  This file is an ini-file formatted list of `key = value` parameters.
-* $PREFIX/etc/npmrc (or the `globalconfig` param, if set above):
-  This file is an ini-file formatted list of `key = value` parameters
-* path/to/npm/itself/npmrc:  This is an unchangeable "builtin"
-  configuration file that npm keeps consistent across updates.  Set
-  fields in here using the `./configure` script that comes with npm.
-  This is primarily for distribution maintainers to override default
-  configs in a standard and consistent manner.
-* default configs:
-  This is a set of configuration parameters that are internal to npm, and are
-  defaults if nothing else is specified.
+### Command Line Flags
+
+Putting `--foo bar` on the command line sets the
+`foo` configuration parameter to `"bar"`.  A `--` argument tells the cli
+parser to stop reading flags.  A `--flag` parameter that is at the *end* of
+the command will be given the value of `true`.
+
+### Environment Variables
+
+Any environment variables that start with `npm_config_` will be interpreted
+as a configuration parameter.  For example, putting `npm_config_foo=bar` in
+your environment will set the `foo` configuration parameter to `bar`.  Any
+environment configurations that are not given a value will be given the value
+of `true`.  Config values are case-insensitive, so `NPM_CONFIG_FOO=bar` will
+work the same.
+
+### Per-user config file
+
+`$HOME/.npmrc` (or the `userconfig` param, if set above)
+
+This file is an ini-file formatted list of `key = value` parameters.
+
+### Global config file
+
+`$PREFIX/etc/npmrc` (or the `globalconfig` param, if set above):
+This file is an ini-file formatted list of `key = value` parameters
+
+### Built-in config file
+
+`path/to/npm/itself/npmrc`
+
+This is an unchangeable "builtin"
+configuration file that npm keeps consistent across updates.  Set
+fields in here using the `./configure` script that comes with npm.
+This is primarily for distribution maintainers to override default
+configs in a standard and consistent manner.
+
+### Default Configs
+
+A set of configuration parameters that are internal to npm, and are
+defaults if nothing else is specified.
 
 ## Sub-commands
 
