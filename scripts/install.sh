@@ -75,6 +75,9 @@ BACK="$PWD"
 ret=0
 tar="${TAR}"
 if [ -z "$tar" ]; then
+  tar="${npm_config_tar}"
+fi
+if [ -z "$tar" ]; then
   tar=`which tar 2>&1`
   ret=$?
 fi
