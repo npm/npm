@@ -60,14 +60,18 @@ If you decide not to update the PATH, and put the node.exe file in
 `C:\node\node.exe`, then the npm executable will end up `C:\node\npm.cmd`,
 and you'll have to type `C:\node\npm <command>` to use it.
 
-### Step 3: Install git
+### Step 3: Turn off antivirus software (highly recommended)
+
+Turn off antivirus software, it may lock some folders during npm installation
+
+### Step 4: Install git
 
 If you don't already have git,
 [install it](https://git.wiki.kernel.org/index.php/MSysGit:InstallMSysGit).
 
 Run `git --version` to make sure that it's at least version 1.7.6.
 
-### Step 4: install npm
+### Step 5: install npm
 
 Lastly, **after** node.exe, git, and your %PATH% have *all* been set up
 properly, install npm itself:
