@@ -200,7 +200,7 @@ cd "$TMP" \
       ret=$?
       if [ $ret -eq 0 ]; then
         req=`"$node" bin/read-package-json.js package.json engines.node`
-        if [ -e node_modules ]; then
+        if [ -d node_modules ]; then
           "$node" node_modules/semver/bin/semver -v "$node_version" -r "$req"
           ret=$?
         else
@@ -218,7 +218,7 @@ cd "$TMP" \
       isnpm10=0
       if [ $ret -eq 0 ]; then
         req=`"$node" bin/read-package-json.js package.json engines.node`
-        if [ -e node_modules ]; then
+        if [ -d node_modules ]; then
           if "$node" node_modules/semver/bin/semver -v "$ver" -r "1"
           then
             isnpm10=1
