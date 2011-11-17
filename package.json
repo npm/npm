@@ -1,7 +1,7 @@
 { "name" : "npm"
 , "description" : "A package manager for node"
 , "keywords" : [ "package manager", "modules", "install", "package.json" ]
-, "version" : "1.0.106"
+, "version" : "1.1.0-alpha"
 , "preferGlobal" : true
 , "config" : { "publishtest" : false }
 , "homepage" : "http://npmjs.org/"
@@ -57,7 +57,7 @@
   , "which" ]
 , "devDependencies" :
   { "ronn" : "https://github.com/isaacs/ronnjs/tarball/master" }
-, "engines" : { "node" : "0.4 || 0.5 || 0.6", "npm" : "1" }
+, "engines" : { "node" : "0.6 || 0.7 || 0.8", "npm" : "1" }
 , "scripts" : { "test" : "./test/run"
               , "prepublish" : "make -j4 doc"
               , "dumpconf": "env | grep npm | sort | uniq"
