@@ -34,3 +34,9 @@
 [submodule "node_modules/request"]
 	path = node_modules/request
 	url = https://github.com/isaacs/request.git
+[submodule "node_modules/tar"]
+	path = node_modules/tar
+	url = git://github.com/isaacs/node-tar.git
+[submodule "node_modules/fstream"]
+	path = node_modules/fstream
+	url = git://github.com/isaacs/fstream.git
