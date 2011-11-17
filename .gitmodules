@@ -40,3 +40,12 @@
 [submodule "node_modules/fstream"]
 	path = node_modules/fstream
 	url = git://github.com/isaacs/fstream.git
+[submodule "node_modules/inherits"]
+	path = node_modules/inherits
+	url = git://github.com/isaacs/inherits.git
+[submodule "node_modules/block-stream"]
+	path = node_modules/block-stream
+	url = git://github.com/isaacs/block-stream.git
+[submodule "node_modules/mkdirp"]
+	path = node_modules/mkdirp
+	url = git://github.com/isaacs/node-mkdirp.git
