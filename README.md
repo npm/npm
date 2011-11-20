@@ -77,16 +77,15 @@ properly, install npm itself:
     cd npm
     node cli.js install npm -gf
 
-## Permission Errors on Installation
+## Permission Errors (`EACCES` or `EACCESS`) on Installation
 
-If you get permission errors, you can either install node someplace that
-you have permission to write to (recommended!) or you *can* place a **very
-unsafe amount of trust** in me, and in your network, and do this:
+On Windows, you may need to run the command prompt in elevated
+permission mode.  (Right-click on cmd.exe, Run as Administrator.)
 
-    curl http://npmjs.org/install.sh | sudo sh
+On Unix, you may need to run as root, or use `sudo`.
 
-**Note**: You need to `sudo` the `sh`, **not** the `curl`.  Fetching stuff
-from the internet typically doesn't require elevated permissions.
+**Note**: You would need to `sudo` the `sh`, **not** the `curl`.  Fetching
+stuff from the internet typically doesn't require elevated permissions.
 Running it might.
 
 I highly recommend that you first download the file, and make sure that
@@ -98,10 +97,7 @@ it is what you expect, and *then* run it.
 
 ## Installing on Cygwin
 
-Don't.
-
-It's not supported, and terrible.  Use the windows native approach,
-or use a Linux or Solaris virtual machine in VMWare or VirtualBox.
+No.
 
 ## Dev Install
 
@@ -109,11 +105,13 @@ To install the latest **unstable** development version from git:
 
     git clone https://github.com/isaacs/npm.git
     cd npm
+    git submodule update --init --recursive
     sudo make install     # (or: `node cli.js install -gf`)
 
 If you're sitting in the code folder reading this document in your
 terminal, then you've already got the code.  Just do:
 
+    git submodule update --init --recursive
     sudo make install
 
 and npm will install itself.
@@ -121,13 +119,14 @@ and npm will install itself.
 If you don't have make, and don't have curl or git, and ALL you have is
 this code and node, you can probably do this:
 
+    git submodule update --init --recursive
     sudo node ./cli.js install -g
 
-However, note that github tarballs **do not contain submodules**, so
+Note that github tarballs **do not contain submodules**, so
 those won't work.  You'll have to also fetch the appropriate submodules
 listed in the .gitmodules file.
 
-## Permissions
+## Permissions when Using npm to Install Other Stuff
 
 **tl;dr**
 
