@@ -310,17 +310,6 @@ same directory, then that will be used instead.
 The group to use when running package scripts in global mode as the root
 user.
 
-### gzipbin
-
-* Default: "gzip"
-* Type: path
-
-The gzip binary
-
-**DEPRECATED** This is no longer used.
-
-npm now requires a tar that supports the `-z` flag.
-
 ### https-proxy
 
 * Default: the `HTTPS_PROXY` or `https_proxy` or `HTTP_PROXY` or
@@ -337,7 +326,7 @@ A proxy to use for outgoing https requests.
 A white-space separated list of glob patterns of files to always exclude
 from packages when building tarballs.
 
-### init.version 
+### init.version
 
 * Default: "0.0.0"
 * Type: semver
@@ -564,15 +553,6 @@ it will install the specified tag.
 
 Also the tag that is added to the package@version specified by the `npm
 tag` command, if no explicit tag is given.
-
-### tar
-
-* Default: TAR environment variable, or "tar"
-* Type: path
-
-The tar executable
-
-npm now requires a tar that supports the `-z` flag.
 
 ### tmp
 
