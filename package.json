@@ -1,4 +1,5 @@
 { "name": "npm"
+, "publishConfig": { "tag": "alpha" }
 , "description": "A package manager for node"
 , "keywords": [ "package manager", "modules", "install", "package.json" ]
 , "version": "1.1.0-alpha"
@@ -15,14 +16,14 @@
   , "url": "http://github.com/isaacs/npm/issues"
   }
 , "directories": { "doc": "./doc"
-                  , "man": "./man"
-                  , "lib": "./lib"
-                  , "bin": "./bin"
-                  }
+                 , "man": "./man"
+                 , "lib": "./lib"
+                 , "bin": "./bin"
+                 }
 , "main": "./lib/npm.js"
 , "bin": { "npm": "./bin/npm-cli.js"
-          , "npm_g": "./bin/npm-cli.js"
-          , "npm-g": "./bin/npm-cli.js" }
+         , "npm_g": "./bin/npm-cli.js"
+         , "npm-g": "./bin/npm-cli.js" }
 , "dependencies":
   { "semver": "1"
   , "ini": "1"
@@ -65,9 +66,9 @@
   { "ronn": "https://github.com/isaacs/ronnjs/tarball/master" }
 , "engines": { "node": "0.6 || 0.7 || 0.8", "npm": "1" }
 , "scripts": { "test": "./test/run"
-              , "prepublish": "make -j4 doc"
-              , "dumpconf": "env | grep npm | sort | uniq"
-              }
+             , "prepublish": "make -j4 doc"
+             , "dumpconf": "env | grep npm | sort | uniq"
+             }
 , "licenses":
   [ { "type": "MIT +no-false-attribs"
     , "url": "http://github.com/isaacs/npm/raw/master/LICENSE"
