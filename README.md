@@ -63,7 +63,7 @@ and you'll have to type `C:\node\npm <command>` to use it.
 ### Step 3: Install git
 
 If you don't already have git,
-[install it](https://git.wiki.kernel.org/index.php/MSysGit:InstallMSysGit).
+[install it](http://code.google.com/p/msysgit/downloads/list).
 
 Run `git --version` to make sure that it's at least version 1.7.6.
 
