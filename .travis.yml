@@ -1,3 +1,4 @@
 language: node_js
+before_install: make
 node_js:
   - 0.6
