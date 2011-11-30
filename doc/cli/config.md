@@ -474,6 +474,18 @@ Set to true to run in "production" mode.
    local `npm install` without any arguments.
 2. Set the NODE_ENV="production" for lifecycle scripts.
 
+### proprietary-attribs
+
+* Default: true
+* Type: Boolea
+
+Whether or not to include proprietary extended attributes in the
+tarballs created by npm.
+
+Unless you are expecting to unpack package tarballs with something other
+than npm -- particularly a very outdated tar implementation -- leave
+this as true.
+
 ### proxy
 
 * Default: `HTTP_PROXY` or `http_proxy` environment variable, or null
