@@ -477,7 +477,7 @@ Set to true to run in "production" mode.
 ### proprietary-attribs
 
 * Default: true
-* Type: Boolea
+* Type: Boolean
 
 Whether or not to include proprietary extended attributes in the
 tarballs created by npm.
