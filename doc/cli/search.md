@@ -9,6 +9,9 @@ npm-search(1) -- Search for packages
 
 Search the registry for packages matching the search terms.
 
+If a term starts with `/` and ends with `/`, then it's interpreted as a
+regular expression.
+
 ## CONFIGURATION
 
 ### description
