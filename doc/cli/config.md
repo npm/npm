@@ -225,6 +225,14 @@ The location of npm's cache directory.  See `npm-cache(1)`
 If false, never shows colors.  If `"always"` then always shows colors.
 If true, then only prints color codes for tty file descriptors.
 
+### coverage
+
+* Default: false
+* Type: Boolean
+
+A flag to tell test-harness to run with their coverage options enabled,
+if they respond to the `npm_config_coverage` environment variable.
+
 ### depth
 
 * Default: Infinity
