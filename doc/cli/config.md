@@ -545,6 +545,16 @@ Space-separated options that are always passed to search.
 
 Space-separated options that limit the results from search.
 
+### searchsort
+
+* Default: "name"
+* Type: String
+* Values: "name", "-name", "date", "-date", "description",
+  "-description", "keywords", "-keywords"
+
+Indication of which field to sort search results by.  Prefix with a `-`
+character to indicate reverse sort.
+
 ### shell
 
 * Default: SHELL environment variable, or "bash" on Posix, or "cmd" on
