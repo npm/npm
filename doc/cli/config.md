@@ -387,12 +387,15 @@ The location to write log output.
 
 ### loglevel
 
-* Default: "warn"
+* Default: "http"
 * Type: String
-* Values: "silent", "win", "error", "warn", "info", "verbose", "silly"
+* Values: "silent", "win", "error", "warn", "http", "info", "verbose", "silly"
 
 What level of logs to report.  On failure, *all* logs are written to
 `npm-debug.log` in the current working directory.
+
+Any logs of a higher level than the setting are shown.
+The default is "http", which shows http, warn, and error output.
 
 ### logprefix
 
