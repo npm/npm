@@ -52,3 +52,6 @@
 [submodule "node_modules/fast-list"]
 	path = node_modules/fast-list
 	url = git://github.com/isaacs/fast-list.git
+[submodule "node_modules/read"]
+	path = node_modules/read
+	url = https://github.com/isaacs/read.git

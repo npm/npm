@@ -24,6 +24,7 @@
 , "bin": { "npm": "./bin/npm-cli.js"
          , "npm_g": "./bin/npm-cli.js"
          , "npm-g": "./bin/npm-cli.js" }
+
 , "dependencies":
   { "semver": "1"
   , "ini": "1"
@@ -43,7 +44,9 @@
   , "inherits": "1"
   , "mkdirp": "0.1"
   , "fast-list": "~1.0.1"
+  , "read": "0"
   }
+
 , "bundleDependencies":
   [ "slide"
   , "ini"
@@ -63,9 +66,12 @@
   , "inherits"
   , "mkdirp"
   , "fast-list"
+  , "read"
   ]
+
 , "devDependencies":
   { "ronn": "https://github.com/isaacs/ronnjs/tarball/master" }
+
 , "engines": { "node": "0.6 || 0.7 || 0.8", "npm": "1" }
 , "scripts": { "test": "./test/run"
              , "prepublish": "make -j4 doc"
