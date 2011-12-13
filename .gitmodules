@@ -55,3 +55,6 @@
 [submodule "node_modules/read"]
 	path = node_modules/read
 	url = https://github.com/isaacs/read.git
+[submodule "node_modules/lru-cache"]
+	path = node_modules/lru-cache
+	url = https://github.com/isaacs/node-lru-cache.git

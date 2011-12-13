@@ -45,6 +45,7 @@
   , "mkdirp": "0.1"
   , "fast-list": "~1.0.1"
   , "read": "0"
+  , "lru-cache": "1"
   }
 
 , "bundleDependencies":
