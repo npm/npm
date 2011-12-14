@@ -41,13 +41,13 @@ main () {
     (ls packages | grep -v 'npm-test-private' | while read pkg; do
       npm publish packages/$pkg || exit 1
       npm install $pkg || exit 1
-      npm unpublish $pkg || exit 1
+      npm unpublish $pkg --force || exit 1
     done) || exit 1
 
     # verify that the private package can't be published
     # bypass the test-harness npm function.
     "$NPMCLI" publish packages/npm-test-private && (
-      npm unpublish npm-test-private
+      npm unpublish npm-test-private --force
       exit 1000
     )
     if [ $? -eq 1000 ]; then
