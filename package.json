@@ -68,6 +68,7 @@
   , "mkdirp"
   , "fast-list"
   , "read"
+  , "lru-cache"
   ]
 
 , "devDependencies":
