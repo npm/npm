@@ -15,6 +15,7 @@ var temp = process.env.TMPDIR
          || ( process.platform === "win32"
             ? "c:\\windows\\temp"
             : "/tmp" )
+
 temp = path.resolve(temp, "npm-test-" + process.pid)
 
 var root = path.resolve(temp, "root")
@@ -25,10 +26,14 @@ var failures = 0
 
 var pathEnvSplit = process.platform === "win32" ? ";" : ":"
   , pathEnv = process.env.PATH.split(pathEnvSplit)
+  , npmPath = process.platform === "win32" ? root : path.join(root, "bin")
 
-pathEnv.push( process.platform === "win32" ? root
-                                           : path.join(root, "bin")
-            , path.join(root, "node_modules", ".bin") )
+pathEnv.unshift(npmPath, path.join(root, "node_modules", ".bin"))
+
+// lastly, make sure that we get the same node that is being used to do
+// run this script.  That's very important, especially when running this
+// test file from in the node source folder.
+pathEnv.unshift(path.dirname(process.execPath))
 
 // the env for all the test installs etc.
 var env = {}
@@ -64,9 +69,10 @@ function exec (cmd, shouldFail, cb) {
   }
   console.error("\n+"+cmd + (shouldFail ? " (expect failure)" : ""))
 
-  // XXX DEBUGGING
-  // cmd = "echo RUN "+cmd
-  // shouldFail = false
+  // special: replace 'node' with the current execPath,
+  // and 'npm' with the thing we installed.
+  cmd = cmd.replace(/^npm /, path.resolve(npmPath, "npm") + " ")
+  cmd = cmd.replace(/^node /, process.execPath + " ")
 
   child_process.exec(cmd, {env: env}, function (er, stdout, stderr) {
     if (stdout) {
@@ -105,9 +111,9 @@ function flatten (arr) {
 function setup (cb) {
   cleanup(function (er) {
     if (er) return cb(er)
-    execChain(["node \""+path.resolve(npmpkg, "bin", "npm-cli.js")
+    execChain([ "node \""+path.resolve(npmpkg, "bin", "npm-cli.js")
               + "\" install \""+npmpkg+"\""
-              ,"npm config set package-config:foo boo"
+              , "npm config set package-config:foo boo"
               ], cb)
   })
 }
