@@ -201,20 +201,3 @@ main(function (er) {
   console.log("1.." + execCount)
   if (er) throw er
 })
-
-
-
-
-
-
-
-// First, install npm into a temporary global root.
-// Put that on the PATH for all child processes.
-//
-// Then, for each of the packages in test/packages/*,
-// do the following in the test root:
-//
-// 1. install the package
-// 2. uninstall the package
-// 3. link the package
-// 4. uninstall the package
