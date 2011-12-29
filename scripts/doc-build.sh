@@ -7,7 +7,7 @@ set -o errexit
 set -o pipefail
 
 if ! [ -x node_modules/.bin/ronn ]; then
-  if [ -f .building_ronn ]; then
+  if [ -f .building_ronn -a $(ps --no-headers -p $(cat .building_ronn) | wc -l) != 0 ]; then
     while [ -f .building_ronn ]; do
       sleep 1
     done
