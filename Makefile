@@ -109,10 +109,13 @@ version: link
 	git ci -m v$(shell npm -v)
 
 publish: link doc
+	git tag -d v$(shell npm -v) || true
+	git push origin :v$(shell npm -v) || true
+	npm unpublish npm@$(shell npm -v) || true
 	git tag -s -m v$(shell npm -v) v$(shell npm -v) &&\
 	git push origin --tags &&\
 	npm publish &&\
-	npm tag npm@$(shell npm -v) $(shell npm -v | awk -F. '{print $1 "." $2}') &&\
+	npm tag npm@$(shell npm -v) $(shell npm -v | awk -F. '{print $$1 "." $$2}') &&\
 	make doc-publish &&\
 	make zip-publish
 
