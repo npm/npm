@@ -278,6 +278,15 @@ Makes various commands more forceful.
 * skips cache when requesting from the registry.
 * prevents checks against clobbering non-npm files.
 
+### git
+
+* Default: `"git"`
+* Type: String
+
+The command to use for git commands.  If git is installed on the
+computer, but is not in the `PATH`, then set this to the full path to
+the git binary.
+
 ### global
 
 * Default: false
