@@ -27,12 +27,9 @@ mandocs = $(api_mandocs) $(cli_mandocs)
 
 htmldocs = $(api_htmldocs) $(cli_htmldocs)
 
-all: submodules doc
+all: doc
 
-submodules:
-	! [ -d .git ] || git submodule update --init --recursive
-
-latest: submodules
+latest:
 	@echo "Installing latest published npm"
 	@echo "Use 'make install' or 'make link' to install the code"
 	@echo "in this folder that you're looking at right now."
@@ -51,7 +48,7 @@ clean: doc-clean uninstall
 	rm npmrc
 	node cli.js cache clean
 
-uninstall: submodules
+uninstall:
 	node cli.js rm npm -g -f
 
 doc: $(mandocs) $(htmldocs)
@@ -101,7 +98,7 @@ doc: man
 
 man: $(cli_docs) $(api_docs)
 
-test: submodules
+test:
 	node cli.js test
 
 version: link
