@@ -106,9 +106,10 @@ version: link
 	git ci -m v$(shell npm -v)
 
 publish: link doc
-	git tag -d v$(shell npm -v) || true
-	git push origin :v$(shell npm -v) || true
-	npm unpublish npm@$(shell npm -v) || true
+	@git tag -d v$(shell npm -v) || true
+	@git push origin :v$(shell npm -v) || true
+	@npm unpublish npm@$(shell npm -v) || true
+	git clean -fd
 	git tag -s -m v$(shell npm -v) v$(shell npm -v) &&\
 	git push origin --tags &&\
 	npm publish &&\
