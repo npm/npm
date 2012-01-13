@@ -21,9 +21,7 @@
                  , "bin": "./bin"
                  }
 , "main": "./lib/npm.js"
-, "bin": { "npm": "./bin/npm-cli.js"
-         , "npm_g": "./bin/npm-cli.js"
-         , "npm-g": "./bin/npm-cli.js" }
+, "bin": "./bin/npm-cli.js"
 
 , "dependencies":
   { "semver": "1"
