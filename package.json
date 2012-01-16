@@ -86,7 +86,7 @@
   },
   "scripts": {
     "test": "node ./test/run.js",
-    "prepublish": "make -j4 doc",
+    "prepublish": "rm -rf node_modules/*/{test,example,bench}*; make -j4 doc",
     "dumpconf": "env | grep npm | sort | uniq"
   },
   "licenses": [
