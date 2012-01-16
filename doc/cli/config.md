@@ -101,6 +101,7 @@ The following shorthands are parsed on the command-line:
 * `-v`: `--version`
 * `-h`, `-?`, `--help`, `-H`: `--usage`
 * `-s`, `--silent`: `--loglevel silent`
+* `-q`, `--quiet`: `--loglevel warn`
 * `-d`: `--loglevel info`
 * `-dd`, `--verbose`: `--loglevel verbose`
 * `-ddd`: `--loglevel silly`
