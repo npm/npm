@@ -22,7 +22,7 @@ if ! [ -x node_modules/.bin/ronn ]; then
     echo $$ > .building_ronn
     sleep 1
     if [ $(cat .building_ronn) == $$ ]; then
-      make node_modules/ronn
+      make node_modules/.bin/ronn
       rm .building_ronn
     else
       while [ -f .building_ronn ]; do

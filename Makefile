@@ -91,7 +91,7 @@ html/api/%.html: doc/api/%.md html/dochead.html html/docfoot.html scripts/doc-bu
 doc/cli/index.md: $(markdowns) scripts/index-build.js scripts/doc-build.sh package.json
 	node scripts/index-build.js > $@
 
-node_modules/ronn:
+node_modules/.bin/ronn:
 	node cli.js install https://github.com/isaacs/ronnjs/tarball/master
 
 doc: man
