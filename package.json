@@ -38,7 +38,7 @@
     "ini": "1",
     "slide": "1",
     "abbrev": "1",
-    "graceful-fs": "~1.1.1",
+    "graceful-fs": "~1.1.4",
     "minimatch": "0",
     "nopt": "1",
     "node-uuid": "~1.3",
