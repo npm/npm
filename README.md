@@ -104,6 +104,10 @@ Note that github tarballs **do not contain submodules**, so
 those won't work.  You'll have to also fetch the appropriate submodules
 listed in the .gitmodules file.
 
+If you are actively developing you will need to `npm link` your current working directory
+containing your copy of npm. You might get an error if appropriate permissions are not set
+in `/usr/local`, `~/.npm`, and your repo.
+
 ## Permissions when Using npm to Install Other Stuff
 
 **tl;dr**
