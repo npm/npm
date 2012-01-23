@@ -224,6 +224,7 @@ fs.fchownSync = chownFixSync(fs.fchownSync)
 fs.lchownSync = chownFixSync(fs.lchownSync)
 
 function chownFix (orig) {
+  if (!orig) return orig
   return function (target, uid, gid, cb) {
     return orig.call(fs, target, uid, gid, function (er, res) {
       if (chownErOk(er)) er = null
@@ -233,6 +234,7 @@ function chownFix (orig) {
 }
 
 function chownFixSync (orig) {
+  if (!orig) return orig
   return function (target, uid, gid) {
     try {
       return orig.call(fs, target, uid, gid)
