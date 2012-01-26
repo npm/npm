@@ -10,7 +10,7 @@
     "install",
     "package.json"
   ],
-  "version": "1.1.0-2",
+  "version": "1.1.0-3",
   "preferGlobal": true,
   "config": {
     "publishtest": false
@@ -38,7 +38,7 @@
     "ini": "1",
     "slide": "1",
     "abbrev": "1",
-    "graceful-fs": "~1.1.4",
+    "graceful-fs": "~1.1.1",
     "minimatch": "0",
     "nopt": "1",
     "node-uuid": "~1.3",
