@@ -80,7 +80,7 @@ var myUid = function myUid () {
 
 
 function writable (s) {
-  var mode = s.mode && 0777
+  var mode = s.mode || 0777
     , uid = myUid()
     , gid = myGid()
   return (mode & 0002)
@@ -115,22 +115,6 @@ function rm_ (p, s, didWritableCheck, cb) {
       fs.rmdir(p, cb)
     })
   })
-}
-
-function realish (p, cb) {
-  fs.readlink(p, function (er, r) {
-    if (er) return cb(er)
-    return cb(null, path.resolve(path.dirname(p), r))
-  })
-}
-
-function clobberFail (p, g, cb) {
-  var er = new Error("Refusing to delete: "+p+" not in "+g)
-    , constants = require("constants")
-  er.errno = constants.EEXIST
-  er.code = "EEXIST"
-  er.path = p
-  return cb(er)
 }
 
 function asyncForEach (list, fn, cb) {
