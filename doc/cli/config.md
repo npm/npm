@@ -682,6 +682,16 @@ If true, output the npm version and exit successfully.
 
 Only relevant when specified explicitly on the command line.
 
+### versions
+
+* Default: false
+* Type: boolean
+
+If true, output the npm version as well as node's `process.versions`
+hash, and exit successfully.
+
+Only relevant when specified explicitly on the command line.
+
 ### viewer
 
 * Default: "man" on Posix, "browser" on Windows
