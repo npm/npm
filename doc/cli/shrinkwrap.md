@@ -146,6 +146,14 @@ shrinkwrap is constructed from a valid installation of B and recursively
 specifies all dependencies, the contents of B's shrinkwrap will implicitly be
 included in A's shrinkwrap.
 
+Shrinkwrap files only lock down package versions, not actual package contents.
+While discouraged, a package author can republish an existing version of a
+package, causing shrinkwrapped packages using that version to pick up different
+code than they were before. If you want to avoid any risk that a byzantine
+author replaces a package you're using with code that breaks your application,
+you could modify the shrinkwrap file to use git URL references rather than
+version numbers so that npm always fetches all packages from git.
+
 
 ## SEE ALSO
 
