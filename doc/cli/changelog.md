@@ -3,6 +3,30 @@ npm-changelog(1) -- Changes
 
 ## HISTORY
 
+### 1.1.2
+
+Dave Pacheco (2):
+      add "npm shrinkwrap"
+
+Martin Cooper (1):
+      Fix #1753 Make a copy of the cached objects we'll modify.
+
+Tim Oxley (1):
+      correctly remove readme from default npm view command.
+
+Tyler Green (1):
+      fix #2187 set terminal columns to Infinity if 0
+
+isaacs (19):
+      update minimatch
+      update request
+      Experimental: single-file modules
+      Fix #2172 Don't remove global mans uninstalling local pkgs
+      Add --versions flag to show the version of node as well
+      Support --json flag for ls output
+      update request to 2.9.151
+
+
 ### 1.0  
 * Greatly simplified folder structure 
 * Install locally (bundle by default) 
