@@ -27,7 +27,7 @@ As an example, consider package A:
 
     {
         "name": "A",
-        "version": "0.1.0"
+        "version": "0.1.0",
         "dependencies": {
             "B": "<0.1.0"
         }
@@ -37,7 +37,7 @@ package B:
 
     {
         "name": "B",
-        "version": "0.0.1"
+        "version": "0.0.1",
         "dependencies": {
             "C": "<0.1.0"
         }
@@ -46,7 +46,7 @@ package B:
 and package C:
 
     {
-        "name": "C
+        "name": "C,
         "version": "0.0.1"
     }
 
@@ -54,14 +54,14 @@ If these are the only versions of A, B, and C available in the registry, then
 a normal "npm install A" will install:
 
     A@0.1.0
-        B@0.0.1
-            C@0.0.1
+    `-- B@0.0.1
+        `-- C@0.0.1
 
 However, if B@0.0.2 is published, then a fresh "npm install A" will install:
 
     A@0.1.0
-        B@0.0.2
-           C@0.0.1
+    `-- B@0.0.2
+        `-- C@0.0.1
 
 assuming the new version did not modify B's dependencies. Of course, the new
 version of B could include a new version of C and any number of new
@@ -70,18 +70,18 @@ dependency on B@0.0.1. However, if A's author and B's author are not the same
 person, there's no way for A's author to say that he or she does not want to
 pull in newly published versions of C when B hasn't changed at all.
 
-In this case, A's author can use
+In this case, A's author can run
 
-    # npm shrinkwrap
+    npm shrinkwrap
 
 This generates npm-shrinkwrap.json, which will look something like this:
 
     {
-      "name": "A"
-      "version": "0.1.0"
+      "name": "A",
+      "version": "0.1.0",
       "dependencies": {
         "B": {
-          "version": "0.0.1"
+          "version": "0.0.1",
           "dependencies": {
             "C": {
               "version": "0.1.0"
@@ -121,14 +121,16 @@ To add or update a dependency in a shrinkwrapped package:
 1. Run "npm install" in the package root to install the current versions of all
    dependencies.
 2. Add or update dependencies. "npm install" each new or updated package
-   individually and then update package.json.
+   individually and then update package.json.  Note that they must be
+   explicitly named in order to be installed: running `npm install` with
+   no arguments will merely reproduce the existing shrinkwrap.
 3. Validate that the package works as expected with the new dependencies.
 4. Run "npm shrinkwrap", commit the new npm-shrinkwrap.json, and publish your
    package.
 
 You can use npm-outdated(1) to view dependencies with newer versions available.
 
-### Other notes
+### Other Notes
 
 Since "npm shrinkwrap" uses the locally installed packages to construct the
 shrinkwrap file, devDependencies will be included if and only if you've
@@ -146,6 +148,8 @@ shrinkwrap is constructed from a valid installation of B and recursively
 specifies all dependencies, the contents of B's shrinkwrap will implicitly be
 included in A's shrinkwrap.
 
+### Caveats
+
 Shrinkwrap files only lock down package versions, not actual package contents.
 While discouraged, a package author can republish an existing version of a
 package, causing shrinkwrapped packages using that version to pick up different
@@ -154,6 +158,11 @@ author replaces a package you're using with code that breaks your application,
 you could modify the shrinkwrap file to use git URL references rather than
 version numbers so that npm always fetches all packages from git.
 
+If you wish to lock down the specific bytes included in a package, for
+example to have 100% confidence in being able to reproduce a deployment
+or build, then you ought to check your dependencies into source control,
+or pursue some other mechanism that can verify contents rather than
+versions.
 
 ## SEE ALSO
 
