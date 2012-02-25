@@ -372,6 +372,17 @@ The value `npm init` should use by default for the package author's email.
 
 The value `npm init` should use by default for the package author's homepage.
 
+### json
+
+* Default: false
+* Type: Boolean
+
+Whether or not to output JSON data, rather than the normal output.
+
+This feature is currently experimental, and the output data structures
+for many commands is either not implemented in JSON yet, or subject to
+change.  Only the output from `npm ls --json` is currently valid.
+
 ### link
 
 * Default: false
