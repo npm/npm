@@ -30,7 +30,7 @@ if (process.platform == "win32") {
 
 
 function which (cmd, cb) {
-  if (isAbsolute(cmd)) return cmd
+  if (isAbsolute(cmd)) return cb(null, cmd)
   var pathEnv = (process.env.PATH || "").split(COLON)
     , pathExt = [""]
   if (process.platform === "win32") {
