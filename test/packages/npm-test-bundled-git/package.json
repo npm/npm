@@ -1,0 +1,4 @@
+{"name":"npm-test-bundled-git"
+,"version":"1.2.5"
+,"dependencies":{"glob":"git://github.com/isaacs/node-glob.git#npm-test"}
+,"bundledDependencies":["glob"]}
