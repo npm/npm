@@ -439,6 +439,33 @@ are capable of properly installing your program.  For example:
 
     { "engines" : { "npm" : "~1.0.20" } }
 
+## os
+
+You can specify which operating systems your
+module will run on:
+
+    { "os" : [ "darwin", "linux" ] }
+
+You can also blacklist instead of whitelist operating systems,
+just prepend the blacklisted os with a '!':
+
+    { "os" : [ "!win32" ] }
+
+The host operating system is determined by `process.platform()`
+
+## cpu
+
+If your code only runs on certain cpu architectures,
+you can specify which ones.
+
+    { "cpu" : [ "x64", "sparc" ] }
+
+Like the `os` option, you can also blacklist architectures:
+
+    { "cpu" : [ "!x64", "!sparc" ] }
+
+The host architecture is determined by `process.arch()`
+
 ## preferGlobal
 
 If your package is primarily a command-line application that should be
