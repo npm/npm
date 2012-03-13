@@ -76,7 +76,8 @@
     "mkdirp",
     "fast-list",
     "read",
-    "lru-cache"
+    "lru-cache",
+    "node-gyp"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master"
