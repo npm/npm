@@ -54,7 +54,8 @@
     "read": "0",
     "lru-cache": "1",
     "node-gyp": "~0.3.7",
-    "fstream-npm": "0.0"
+    "fstream-npm": "0.0",
+    "uid-number": "0.0"
   },
   "bundleDependencies": [
     "slide",
