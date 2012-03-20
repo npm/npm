@@ -6,8 +6,7 @@ var fs = require("fs")
 // there is such a thing as TOO graceful.
 if (fs.open === gracefulOpen) return
 
-var FastList = require("fast-list")
-  , queue = new FastList()
+var queue = []
   , curOpen = 0
   , constants = require("constants")
 
