@@ -259,16 +259,17 @@ function chownErOk (er) {
 // on Windows, A/V software can lock the directory, causing this
 // to fail with an EACCES or EPERM if the directory contains newly
 // created files.  Try again on failure, for up to 1 second.
-var rename_ = fs.rename
-fs.rename = function rename (from, to, cb) {
-  var start = Date.now()
-  rename_(from, to, function CB (er) {
-    if (er
-        && process.platform === "win32"
-        && (er.code === "EACCES" || er.code === "EPERM")
-        && Date.now() - start < 1000) {
-      return rename_(from, to, CB)
-    }
-    cb(er)
-  })
+if (process.platform === "win32") {
+  var rename_ = fs.rename
+  fs.rename = function rename (from, to, cb) {
+    var start = Date.now()
+    rename_(from, to, function CB (er) {
+      if (er
+          && (er.code === "EACCES" || er.code === "EPERM")
+          && Date.now() - start < 1000) {
+        return rename_(from, to, CB)
+      }
+      cb(er)
+    })
+  }
 }
