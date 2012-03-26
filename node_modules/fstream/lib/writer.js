@@ -123,12 +123,13 @@ Writer.prototype._stat = function (current) {
   var me = this
     , props = me.props
     , stat = props.follow ? "stat" : "lstat"
+    , who = me._proxy || me
 
   if (current) statCb(null, current)
   else fs[stat](me._path, statCb)
 
   function statCb (er, current) {
-    if (me.filter && !me.filter.call(me._proxy || me, current)) {
+    if (me.filter && !me.filter.call(who, who, current)) {
       me._aborted = true
       me.emit("end")
       me.emit("close")
