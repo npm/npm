@@ -53,7 +53,8 @@
     "mkdirp": "0.3",
     "read": "0",
     "lru-cache": "1",
-    "node-gyp": "~0.3.4"
+    "node-gyp": "~0.3.4",
+    "fstream-ignore": "0.0.2"
   },
   "bundleDependencies": [
     "slide",
