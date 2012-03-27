@@ -21,6 +21,7 @@ function Packer (props) {
 
   Ignore.call(this, props)
 
+  this.bundled = props.bundled
   this.package = props.package
 
   // in a node_modules folder, resolve symbolic links to
@@ -47,11 +48,15 @@ Packer.prototype.applyIgnores = function (entry, partial) {
   // also, prevent packages in node_modules from being affected
   // by rules set in the containing package, so that
   // bundles don't get busted.
+  // Also, once in a bundle, everything is installed as-is
+  if (this.bundled) return true
   if (this.basename === "node_modules") {
     if (entry.indexOf("/") === -1) {
+      if (this.bundled) return true
       var bd = this.package && this.package.bundleDependencies
       var shouldBundle = bd && bd.indexOf(entry) !== -1
       // console.error("should bundle?", shouldBundle, this.package)
+      this.bundled = shouldBundle
       return shouldBundle
     }
     return true
@@ -118,6 +123,8 @@ Packer.prototype.getChildProps = function (stat) {
   var props = Ignore.prototype.getChildProps.call(this, stat)
 
   props.package = this.package
+
+  props.bundled = this.bundled
 
   // Directories have to be read as Packers
   // otherwise fstream.Reader will create a DirReader instead.
