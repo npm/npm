@@ -47,15 +47,15 @@
     "request": "~2.9",
     "which": "1",
     "tar": "~0.1.12",
-    "fstream": "~0.1.16",
+    "fstream": "~0.1.17",
     "block-stream": "*",
     "inherits": "1",
     "mkdirp": "0.3",
     "read": "0",
     "lru-cache": "1",
     "node-gyp": "~0.3.7",
-    "fstream-npm": "0.0",
-    "uid-number": "0.0"
+    "fstream-npm": "0 >=0.0.3",
+    "uid-number": "0"
   },
   "bundleDependencies": [
     "slide",
