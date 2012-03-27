@@ -192,6 +192,8 @@ Packer.prototype.readRules = function (buf, e) {
   // ignore everything except what's in the files array.
   return ["*"].concat(p.files.map(function (f) {
     return "!" + f
+  })).concat(p.files.map(function (f) {
+    return "!" + f.replace(/\/+$/, "") + "/**"
   }))
 }
 

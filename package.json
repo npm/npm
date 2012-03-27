@@ -54,7 +54,7 @@
     "read": "0",
     "lru-cache": "1",
     "node-gyp": "~0.3.7",
-    "fstream-npm": "0 >=0.0.3",
+    "fstream-npm": "0 >=0.0.4",
     "uid-number": "0"
   },
   "bundleDependencies": [
