@@ -53,8 +53,8 @@
     "mkdirp": "0.3",
     "read": "0",
     "lru-cache": "1",
-    "node-gyp": "~0.3.4",
-    "fstream-npm": "0.0.1"
+    "node-gyp": "~0.3.7",
+    "fstream-npm": "0.0"
   },
   "bundleDependencies": [
     "slide",
@@ -77,7 +77,8 @@
     "fast-list",
     "read",
     "lru-cache",
-    "node-gyp"
+    "node-gyp",
+    "fstream-npm"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master"
