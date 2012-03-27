@@ -79,7 +79,8 @@
     "read",
     "lru-cache",
     "node-gyp",
-    "fstream-npm"
+    "fstream-npm",
+    "uid-number"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master"
