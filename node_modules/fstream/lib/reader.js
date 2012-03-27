@@ -200,17 +200,25 @@ Reader.prototype._stat = function (currentStat) {
     }
 
     // last chance to abort or disown before the flow starts!
-    me.emit("stat", props)
-    if (me._aborted) {
-      me.emit("end")
-      me.emit("close")
-      return
-    }
+    var events = ["_stat", "stat", "ready"]
+    var e = 0
+    ;(function go () {
+      if (me._aborted) {
+        me.emit("end")
+        me.emit("close")
+        return
+      }
 
-    me.emit("ready", props)
+      if (me._paused) {
+        me.once("resume", go)
+        return
+      }
 
-    // if it's a directory, then we'll be emitting "entry" events.
-    if (!me._paused) me._read()
+      var ev = events[e ++]
+      if (!ev) return me._read()
+      me.emit(ev, props)
+      go()
+    })()
   }
 }
 
