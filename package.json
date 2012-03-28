@@ -56,7 +56,8 @@
     "node-gyp": "~0.3.7",
     "fstream-npm": "0 >=0.0.4",
     "uid-number": "0",
-    "archy": "0"
+    "archy": "0",
+    "chownr": "0"
   },
   "bundleDependencies": [
     "slide",
@@ -82,7 +83,8 @@
     "node-gyp",
     "fstream-npm",
     "uid-number",
-    "archy"
+    "archy",
+    "chownr"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master"
