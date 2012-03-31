@@ -416,7 +416,13 @@ for more on the topic.
 
 ## bundledDependencies
 
-Array of package names that will be bundled when publishing the package.
+Package names that should be bundled from `node_modules/` when packing and/or
+publishing the package.
+
+If this is an array, then all of the package names in the array will be bundled.
+
+If this is a string, it will be used as a glob pattern and any package in
+`node_modules/` that matches the pattern will be bundled.
 
 If this is spelled `"bundleDependencies"`, then that is also honorable.
 
