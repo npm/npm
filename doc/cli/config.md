@@ -115,6 +115,8 @@ The following shorthands are parsed on the command-line:
 * `-l`: `--long`
 * `-desc`: `--description`
 * `-S`: `--save`
+* `-D`: `--save-dev`
+* `-O`: `--save-optional`
 * `-y`: `--yes`
 * `-n`: `--yes false`
 * `ll` and `la` commands: `ls --long`
