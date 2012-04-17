@@ -173,7 +173,7 @@ Packer.prototype.readRules = function (buf, e) {
 
   buf = buf.toString().trim()
 
-  if (buf.length === 0) return
+  if (buf.length === 0) return []
 
   try {
     var p = this.package = JSON.parse(buf)
