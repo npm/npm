@@ -54,7 +54,7 @@
     "read": "0",
     "lru-cache": "1",
     "node-gyp": "~0.4.1",
-    "fstream-npm": "0 >=0.0.4",
+    "fstream-npm": "0 >=0.0.5",
     "uid-number": "0",
     "archy": "0",
     "chownr": "0"
