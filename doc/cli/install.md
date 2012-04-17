@@ -7,9 +7,10 @@ npm-install(1) -- Install a package
     npm install <tarball file>
     npm install <tarball url>
     npm install <folder>
-    npm install <name>
+    npm install <name> [--save|--save-dev|--save-optional]
     npm install <name>@<tag>
     npm install <name>@<version>
+    npm install <name>@<version range>
     npm install <name>@<version range>
 
 ## DESCRIPTION
@@ -41,6 +42,7 @@ after packing it up into a tarball (b).
   it installs the current package context (ie, the current working
   directory) as a global package.
 
+
 * `npm install <folder>`:
   Install a package that is sitting in a folder on the filesystem.
 
@@ -61,13 +63,35 @@ after packing it up into a tarball (b).
 
         npm install https://github.com/indexzero/forever/tarball/v0.5.6
 
-* `npm install <name>`:
-  Do a `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
-  `npm-config(1)`)
+* `npm install <name> [--save|--save-dev|--save-optional]`: Do a 
+  `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
+  `npm-config(1)`.) 
+  
+  In most cases, this will install the latest version 
+  of the module published on npm.
 
   Example:
 
         npm install sax
+
+  `npm install` takes 3 exclusive, optional flags which save or update 
+  the package version in your main package.json:
+
+  `--save`:
+    Package will appear in your `dependencies`.
+
+  `--save-dev`:
+    Package will appear in your `devDependencies`.
+
+  `--save-optional`:
+    Package will appear in your `optionalDependencies`.
+
+  Examples:
+
+        npm install sax --save
+        npm install node-tap --save-dev
+        npm install dtrace-provider --save-optional
+
 
   **Note**: If there is a file or folder named `<name>` in the current
   working directory, then it will try to install that, and only try to
