@@ -1,4 +1,4 @@
-npm-exec(1) -- Add local package binaries to path and execute command
+npm-exec(1) -- Execute command using local package bin
 ====================================
 
 ## SYNOPSIS
