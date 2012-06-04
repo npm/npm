@@ -53,7 +53,7 @@
     "mkdirp": "0.3",
     "read": "0",
     "lru-cache": "1",
-    "node-gyp": "~0.4.4",
+    "node-gyp": "~0.4.5",
     "fstream-npm": "0.1",
     "uid-number": "0",
     "archy": "0",
