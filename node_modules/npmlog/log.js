@@ -49,14 +49,22 @@ log.log = function (lvl, prefix, message) {
   }
 
   var a = new Array(arguments.length - 2)
+  var stack = null
   for (var i = 2; i < arguments.length; i ++) {
-    a[i-2] = arguments[i]
+    var arg = a[i-2] = arguments[i]
+
+    // resolve stack traces to a plain string.
+    if (typeof arg === 'object' && arg &&
+        (arg instanceof Error) && arg.stack) {
+      arg.stack = stack = arg.stack + ''
+    }
   }
+  if (stack) a.unshift(stack + '\n')
   message = util.format.apply(util, a)
 
   var m = { id: id++,
             level: lvl,
-            prefix: prefix,
+            prefix: String(prefix || ''),
             message: message,
             messageRaw: a }
 
@@ -139,8 +147,8 @@ log.levels = {}
 log.disp = {}
 log.addLevel('silly', -Infinity, { inverse: true }, 'sill')
 log.addLevel('verbose', 1000, { fg: 'blue', bg: 'black' }, 'verb')
-log.addLevel('info', 2000, { fg: 'green', inverse: true })
-log.addLevel('http', 3000, { fg: 'green' })
+log.addLevel('info', 2000, { fg: 'green' })
+log.addLevel('http', 3000, { fg: 'green', bg: 'black' })
 log.addLevel('warn', 4000, { fg: 'black', bg: 'red' }, 'WARN')
 log.addLevel('error', 5000, { fg: 'red', bg: 'black' }, 'ERR!')
 log.addLevel('silent', Infinity)
