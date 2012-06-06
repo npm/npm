@@ -57,7 +57,9 @@
     "fstream-npm": "0.1",
     "uid-number": "0",
     "archy": "0",
-    "chownr": "0"
+    "chownr": "0",
+    "npmlog": "0",
+    "ansi": "~0.1.2"
   },
   "bundleDependencies": [
     "slide",
@@ -83,7 +85,9 @@
     "fstream-npm",
     "uid-number",
     "archy",
-    "chownr"
+    "chownr",
+    "npmlog",
+    "ansi"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master"
