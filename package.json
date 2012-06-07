@@ -50,7 +50,7 @@
     "fstream": "~0.1.17",
     "block-stream": "*",
     "inherits": "1",
-    "mkdirp": "0.3",
+    "mkdirp": "~0.3.3",
     "read": "0",
     "lru-cache": "1",
     "node-gyp": "~0.4.5",
