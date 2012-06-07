@@ -59,7 +59,8 @@
     "archy": "0",
     "chownr": "0",
     "npmlog": "0",
-    "ansi": "~0.1.2"
+    "ansi": "~0.1.2",
+    "npm-registry-client": "0"
   },
   "bundleDependencies": [
     "slide",
