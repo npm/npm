@@ -99,7 +99,7 @@
   },
   "scripts": {
     "test": "node ./test/run.js",
-    "prepublish": "npm prune; make -j4 doc",
+    "prepublish": "npm prune ; make -j4 doc",
     "dumpconf": "env | grep npm | sort | uniq"
   },
   "licenses": [
