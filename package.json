@@ -60,7 +60,8 @@
     "chownr": "0",
     "npmlog": "0",
     "ansi": "~0.1.2",
-    "npm-registry-client": "0"
+    "npm-registry-client": "0",
+    "report": "~0.1.0"
   },
   "bundleDependencies": [
     "slide",
