@@ -70,7 +70,7 @@ function publish (data, tarball, readme, cb) {
       if (er) return cb(er)
 
       var exists = fullData.versions && fullData.versions[data.version]
-      if (exists) return cb(conflictError(data._id))
+      if (exists) return cb(conflictError.call(this, data._id))
 
       // this way, it'll also get attached to packages that were previously
       // published with a version of npm that lacked this feature.
@@ -81,7 +81,7 @@ function publish (data, tarball, readme, cb) {
       this.request("PUT", dataURI, data, function (er) {
         if (er) {
           if (er.message.indexOf("conflict Document update conflict.") === 0) {
-            return cb(conflictError(data._id))
+            return cb(conflictError.call(this, data._id))
           }
           this.log.error("publish", "Error sending version data")
           return cb(er)
@@ -100,7 +100,6 @@ function publish (data, tarball, readme, cb) {
 
 function conflictError (pkgid) {
   var e = new Error("publish fail")
-  e.errno = this.EPUBLISHCONFLICT
   e.code = "EPUBLISHCONFLICT"
   e.pkgid = pkgid
   return e

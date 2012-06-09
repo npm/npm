@@ -32,9 +32,6 @@ client.get("npm", "latest", 1000, function (er, data, raw, res) {
   certificates.  Default = `true`
 * `userAgent` {String} User agent header to send.  Default =
   `"node/{process.version}"`
-* `E404` {Object} Error indicator to use when a 404 is encountered.
-* `EPUBLISHCONFLICT` {Object} Error indicator to use when a publish
-  conflict occurs.
 * `log` {Object} The logger to use.  Defaults to `require("npmlog")` if
   that works, otherwise logs are disabled.
 

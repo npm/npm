@@ -165,7 +165,7 @@ function requestDone (method, where, cb) {
         w = w.split("/")
         name = w[w.indexOf("_rewrite") + 1]
         er = new Error("404 Not Found: "+name)
-        er.errno = this.E404
+        er.code = "E404"
         er.pkgid = name
       } else {
         er = new Error(

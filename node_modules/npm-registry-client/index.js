@@ -56,9 +56,6 @@ function RegClient (options) {
   this.proxy = options.proxy
   this.httpsProxy = options.httpsProxy || options.proxy
 
-  this.E404 = options.E404 || {}
-  this.EPUBLISHCONFLICT = options.EPUBLISHCONFLICT || {}
-
   this.log = options.log || npmlog
 }
 
