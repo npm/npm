@@ -67,7 +67,6 @@ function readJson (file, cb) {
                 }
                 readJson.log.verbose("read json", file)
                 cb = (function (orig) { return function (er, data) {
-                                if (er) readJson.log.error("readJson", file, er)
                                 if (data) readJson.cache.set(file, data);
                                 return orig(er, data)
                 } })(cb)
