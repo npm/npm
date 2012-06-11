@@ -61,7 +61,7 @@ function publish (data, tarball, readme, cb) {
     var dataURI = encodeURIComponent(data.name)
                 + "/" + encodeURIComponent(data.version)
 
-    var tag = data.tag || this.tag || "latest"
+    var tag = data.tag || this.defaultTag || "latest"
     dataURI += "/-tag/" + tag
 
     // let's see what versions are already published.

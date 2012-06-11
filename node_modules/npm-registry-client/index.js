@@ -38,7 +38,7 @@ function RegClient (options) {
     this.password = a.join(":")
   }
   this.email = options.email || null
-  this.tag = options.tag || "latest"
+  this.defaultTag = options.tag || "latest"
 
   this.ca = options.ca || null
 
