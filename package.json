@@ -1,4 +1,5 @@
 {
+  "version": "1.1.25",
   "name": "npm",
   "publishConfig": {
     "proprietary-attribs": false
@@ -10,7 +11,6 @@
     "install",
     "package.json"
   ],
-  "version": "1.1.24",
   "preferGlobal": true,
   "config": {
     "publishtest": false
