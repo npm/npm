@@ -88,7 +88,8 @@
     "archy",
     "chownr",
     "npmlog",
-    "ansi"
+    "ansi",
+    "npm-registry-client"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master"
