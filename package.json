@@ -61,7 +61,8 @@
     "npmlog": "0",
     "ansi": "~0.1.2",
     "npm-registry-client": "0",
-    "read-package-json": "0"
+    "read-package-json": "0",
+    "read-installed": "0"
   },
   "bundleDependencies": [
     "slide",
@@ -91,7 +92,8 @@
     "npmlog",
     "ansi",
     "npm-registry-client",
-    "read-package-json"
+    "read-package-json",
+    "read-installed"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master"
