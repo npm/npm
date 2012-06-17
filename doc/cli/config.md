@@ -427,6 +427,18 @@ What level of logs to report.  On failure, *all* logs are written to
 Any logs of a higher level than the setting are shown.
 The default is "http", which shows http, warn, and error output.
 
+### logstream
+
+* Default: process.stderr
+* Type: Stream
+
+This is the stream that is passed to the
+[npmlog](https://github.com/isaacs/npmlog) module at run time.
+
+It cannot be set from the command line, but if you are using npm
+programmatically, you may wish to send logs to somewhere other than
+stderr.
+
 ### long
 
 * Default: false
