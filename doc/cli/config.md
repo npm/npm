@@ -117,6 +117,7 @@ The following shorthands are parsed on the command-line:
 * `-S`: `--save`
 * `-D`: `--save-dev`
 * `-O`: `--save-optional`
+* `-B`: `--save-bundle`
 * `-y`: `--yes`
 * `-n`: `--yes false`
 * `ll` and `la` commands: `ls --long`
@@ -572,7 +573,22 @@ Remove failed installs.
 
 Save installed packages to a package.json file as dependencies.
 
+When used with the `npm rm` command, it removes it from the dependencies
+hash.
+
 Only works if there is already a package.json file present.
+
+### save-bundle
+
+* Default: false
+* Type: Boolean
+
+If a package would be saved at install time by the use of `--save`,
+`--save-dev`, or `--save-optional`, then also put it in the
+`bundleDependencies` list.
+
+When used with the `npm rm` command, it removes it from the
+bundledDependencies list.
 
 ### save-dev
 
@@ -580,6 +596,9 @@ Only works if there is already a package.json file present.
 * Type: Boolean
 
 Save installed packages to a package.json file as devDependencies.
+
+When used with the `npm rm` command, it removes it from the devDependencies
+hash.
 
 Only works if there is already a package.json file present.
 
@@ -589,6 +608,9 @@ Only works if there is already a package.json file present.
 * Type: Boolean
 
 Save installed packages to a package.json file as optionalDependencies.
+
+When used with the `npm rm` command, it removes it from the devDependencies
+hash.
 
 Only works if there is already a package.json file present.
 
