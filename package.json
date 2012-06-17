@@ -63,7 +63,8 @@
     "npm-registry-client": "0",
     "read-package-json": "0",
     "read-installed": "0",
-    "glob": "~3.1.9"
+    "glob": "~3.1.9",
+    "init-package-json": "0"
   },
   "bundleDependencies": [
     "slide",
@@ -95,7 +96,8 @@
     "npm-registry-client",
     "read-package-json",
     "read-installed",
-    "glob"
+    "glob",
+    "init-package-json"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master"
