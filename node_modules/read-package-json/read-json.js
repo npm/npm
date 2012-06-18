@@ -209,16 +209,13 @@ function gitDescription (file, data, cb) {
 
 function readmeDescription (file, data) {
                 var d = data.readme
-                if (!d) return
-                d = d.split('\n')
-                d = d.filter(function (line) {
-                                return /\s+/.test(line)
-                                && line.trim() !== data.name
-                                && !line.trim().match(/^#/)
-                })[0]
-                d = d.trim()
-                d = d.replace(/\.$/, '')
-                if (d) data.description = d
+                if (!d) return;
+                // the first block of text before the first heading
+                // that isn't the first line heading
+                d = d.trim().split('\n')
+                for (var s = 0; d[s].trim().match(/^(#|$)/); s ++);
+                for (var e = s + 1; d[e].trim(); e ++);
+                data.description = d.slice(s, e).join(' ').trim()
 }
 
 function readme (file, data, cb) {
