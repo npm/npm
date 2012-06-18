@@ -64,7 +64,8 @@
     "read-package-json": "0",
     "read-installed": "0",
     "glob": "~3.1.9",
-    "init-package-json": "0"
+    "init-package-json": "0",
+    "osenv": "0.0.1"
   },
   "bundleDependencies": [
     "semver",
@@ -97,7 +98,8 @@
     "read-package-json",
     "read-installed",
     "glob",
-    "init-package-json"
+    "init-package-json",
+    "osenv"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master"
