@@ -65,7 +65,7 @@
     "read-installed": "0",
     "glob": "~3.1.9",
     "init-package-json": "0",
-    "osenv": "0.0.1"
+    "osenv": "0"
   },
   "bundleDependencies": [
     "semver",
