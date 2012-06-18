@@ -168,32 +168,6 @@ then the user could change the behavior by doing:
 Force npm to always require authentication when accessing the registry,
 even for `GET` requests.
 
-### bin-publish
-
-* Default: false
-* Type: Boolean
-
-If set to true, then binary packages will be created on publish.
-
-This is the way to opt into the "bindist" behavior described below.
-
-### bindist
-
-* Default: Unstable node versions, `null`, otherwise
-  `"<node version>-<platform>-<os release>"`
-* Type: String or `null`
-
-Experimental: on stable versions of node, binary distributions will be
-created with this tag.  If a user then installs that package, and their
-`bindist` tag is found in the list of binary distributions, they will
-get that prebuilt version.
-
-Pre-build node packages have their preinstall, install, and postinstall
-scripts stripped (since they are run prior to publishing), and do not
-have their `build` directories automatically ignored.
-
-It's yet to be seen if this is a good idea.
-
 ### browser
 
 * Default: OS X: `"open"`, others: `"google-chrome"`
