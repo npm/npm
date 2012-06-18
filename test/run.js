@@ -72,8 +72,8 @@ function exec (cmd, shouldFail, cb) {
   // special: replace 'node' with the current execPath,
   // and 'npm' with the thing we installed.
   var cmdShow = cmd
-  cmd = cmd.replace(/^npm /, "\"" + path.resolve(npmPath, "npm") + "\" ")
-  cmd = cmd.replace(/^node /, "\"" + process.execPath + "\" ")
+  cmd = cmd.replace(/^npm /, path.resolve(npmPath, "npm") + " ")
+  cmd = cmd.replace(/^node /, process.execPath + " ")
 
   child_process.exec(cmd, {env: env}, function (er, stdout, stderr) {
     if (stdout) {
