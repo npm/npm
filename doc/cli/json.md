@@ -23,11 +23,16 @@ npm will default some values based on package contents.
   If there is a `wscript` file in the root of your package, npm will
   default the `preinstall` command to compile using node-waf.
 
+* `"scripts":{"install": "node-gyp rebuild"}`
+
+  If there is a `binding.gyp` file in the root of your package, npm will
+  default the `install` command to compile using node-gyp.
+
 * `"contributors": [...]`
 
   If there is an `AUTHORS` file in the root of your package, npm will
   treat each line as a `Name <email> (url)` format, where email and url
-  are optional.  Lines which start with a `#` or are blank, will be
+  re optional.  Lines which start with a `#` or are blank, will be
   ignored.
 
 ## name
