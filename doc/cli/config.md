@@ -195,6 +195,27 @@ See also the `strict-ssl` config.
 
 The location of npm's cache directory.  See `npm-cache(1)`
 
+### cache-lock-stale
+
+* Default: 10000
+* Type: Number
+
+The number of ms before cache folder lockfiles are considered stale.
+
+### cache-lock-retries
+
+* Default: 3
+* Type: Number
+
+Number of times to retry to acquire a lock on cache folder lockfiles.
+
+### cache-lock-wait
+
+* Default: 1000
+* Type: Number
+
+Number of ms to wait for cache lock files to expire.
+
 ### cache-max
 
 * Default: Infinity
