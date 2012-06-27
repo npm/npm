@@ -287,6 +287,15 @@ set.
 
 The command to run for `npm edit` or `npm config edit`.
 
+### engine-strict
+
+* Default: false
+* Type: Boolean
+
+If set to true, then npm will stubbornly refuse to install (or even
+consider installing) any package that claims to not be compatible with
+the current Node.js version.
+
 ### force
 
 * Default: false
