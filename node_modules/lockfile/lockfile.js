@@ -137,6 +137,16 @@ exports.lock = function (path, opts, cb) {
 
     // someone's got this one.  see if it's valid.
     if (opts.stale) fs.stat(path, function (er, st) {
+      if (er) {
+        if (er.code === 'ENOENT') {
+          // expired already!
+          var opts_ = Object.create(opts, { stale: { value: false }})
+          exports.lock(path, opts_, cb)
+          return
+        }
+        return cb(er)
+      }
+
       var age = Date.now() - st.ctime.getTime()
       if (age > opts.stale) {
         exports.unlock(path, function (er) {
@@ -154,19 +164,37 @@ function notStale (er, path, opts, cb) {
   if (typeof opts.wait === 'number' && opts.wait > 0) {
     // wait for some ms for the lock to clear
     var start = Date.now()
-    var watcher = fs.watch(path, function (change) {
-      if (change === 'rename') {
-        // ok, try and get it now.
-        // if this fails, then continue waiting, maybe.
-        watcher.close()
-        clearTimeout(timer)
-        var newWait = Date.now() - start
-        var opts_ = Object.create(opts, { wait: { value: newWait }})
-        exports.lock(path, opts_, cb)
-      }
-    })
+
+    var retried = false
+    function retry () {
+      if (retried) return
+      retried = true
+      // maybe already closed.
+      try { watcher.close() } catch (e) {}
+      clearTimeout(timer)
+      var newWait = Date.now() - start
+      var opts_ = Object.create(opts, { wait: { value: newWait }})
+      exports.lock(path, opts_, cb)
+    }
+
+    try {
+      var watcher = fs.watch(path, function (change) {
+        if (change === 'rename') {
+          // ok, try and get it now.
+          // if this fails, then continue waiting, maybe.
+          retry()
+        }
+      })
+      watcher.on('error', function (er) {
+        // usually means it expired before the watcher spotted it
+        retry()
+      })
+    } catch (er) {
+      retry()
+    }
+
     var timer = setTimeout(function () {
-      watcher.close()
+      try { watcher.close() } catch (e) {}
       cb(er)
     }, opts.wait)
   } else {

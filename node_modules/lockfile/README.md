@@ -1,4 +1,4 @@
-# lock-file
+# lockfile
 
 A very polite lock file utility, which endeavors to not litter, and to
 wait patiently for others.
@@ -6,7 +6,7 @@ wait patiently for others.
 ## Usage
 
 ```javascript
-var lockFile = require('lock-file')
+var lockFile = require('lockfile')
 
 // opts is optional, and defaults to {}
 lockFile.lock('some-file.lock', opts, function (er, fd) {

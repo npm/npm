@@ -1,3 +1,3 @@
-var lockFile = require('../../lock-file.js')
+var lockFile = require('../../lockfile.js')
 
 lockFile.lock('never-forget', function () {})

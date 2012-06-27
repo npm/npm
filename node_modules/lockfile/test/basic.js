@@ -1,5 +1,5 @@
 var test = require('tap').test
-var lockFile = require('../lock-file.js')
+var lockFile = require('../lockfile.js')
 var path = require('path')
 var fs = require('fs')
 

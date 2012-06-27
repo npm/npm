@@ -1,4 +1,4 @@
-var lockFile = require('../../lock-file.js')
+var lockFile = require('../../lockfile.js')
 
 lockFile.lockSync('never-forget')
 
