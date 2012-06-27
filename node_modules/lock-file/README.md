@@ -72,3 +72,10 @@ error.
 
 A number of milliseconds before locks are considered to have expired.
 
+### opts.retries
+
+Used by lock and lockSync.  Retry `n` number of times before giving up.
+
+### opts.retryWait
+
+Used by lock.  Wait `n` milliseconds before retrying.

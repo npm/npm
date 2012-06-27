@@ -9,6 +9,7 @@ test('setup', function (t) {
   try { lockFile.unlockSync('never-forget') } catch (er) {}
   try { lockFile.unlockSync('stale-lock') } catch (er) {}
   try { lockFile.unlockSync('watch-lock') } catch (er) {}
+  try { lockFile.unlockSync('retry-lock') } catch (er) {}
   t.end()
 })
 
@@ -142,6 +143,76 @@ test('watch test', function (t) {
   })
 })
 
+test('retries', function (t) {
+  // next 5 opens will fail.
+  var opens = 5
+  fs._open = fs.open
+  fs.open = function (path, mode, cb) {
+    if (--opens === 0) {
+      fs.open = fs._open
+      return fs.open(path, mode, cb)
+    }
+    var er = new Error('bogus')
+    // to be, or not to be, that is the question.
+    er.code = opens % 2 ? 'EEXIST' : 'ENOENT'
+    process.nextTick(cb.bind(null, er))
+  }
+
+  lockFile.lock('retry-lock', { retries: opens }, function (er, fd) {
+    if (er) throw er
+    t.equal(opens, 0)
+    t.ok(fd)
+    lockFile.unlockSync('retry-lock')
+    t.end()
+  })
+})
+
+test('retryWait', function (t) {
+  // next 5 opens will fail.
+  var opens = 5
+  fs._open = fs.open
+  fs.open = function (path, mode, cb) {
+    if (--opens === 0) {
+      fs.open = fs._open
+      return fs.open(path, mode, cb)
+    }
+    var er = new Error('bogus')
+    // to be, or not to be, that is the question.
+    er.code = opens % 2 ? 'EEXIST' : 'ENOENT'
+    process.nextTick(cb.bind(null, er))
+  }
+
+  var opts = { retries: opens, retryWait: 100 }
+  lockFile.lock('retry-lock', opts, function (er, fd) {
+    if (er) throw er
+    t.equal(opens, 0)
+    t.ok(fd)
+    lockFile.unlockSync('retry-lock')
+    t.end()
+  })
+})
+
+test('retry sync', function (t) {
+  // next 5 opens will fail.
+  var opens = 5
+  fs._openSync = fs.openSync
+  fs.openSync = function (path, mode) {
+    if (--opens === 0) {
+      fs.openSync = fs._openSync
+      return fs.openSync(path, mode)
+    }
+    var er = new Error('bogus')
+    // to be, or not to be, that is the question.
+    er.code = opens % 2 ? 'EEXIST' : 'ENOENT'
+    throw er
+  }
+
+  var opts = { retries: opens }
+  lockFile.lockSync('retry-lock', opts)
+  t.equal(opens, 0)
+  lockFile.unlockSync('retry-lock')
+  t.end()
+})
 
 test('cleanup', function (t) {
   try { lockFile.unlockSync('basic-lock') } catch (er) {}
@@ -149,6 +220,7 @@ test('cleanup', function (t) {
   try { lockFile.unlockSync('never-forget') } catch (er) {}
   try { lockFile.unlockSync('stale-lock') } catch (er) {}
   try { lockFile.unlockSync('watch-lock') } catch (er) {}
+  try { lockFile.unlockSync('retry-lock') } catch (er) {}
   t.end()
 })
 

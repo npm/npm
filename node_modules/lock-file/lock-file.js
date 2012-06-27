@@ -9,7 +9,6 @@ if (process.version.match(/^v0.[456]/)) {
 var locks = {}
 
 process.on('exit', function () {
-  console.error('lock exit')
   // cleanup
   Object.keys(locks).forEach(exports.unlockSync)
 })
@@ -23,7 +22,7 @@ process.on('uncaughtException', function H (er) {
   if (!l.length) {
     // cleanup
     Object.keys(locks).forEach(exports.unlockSync)
-    process.removeListener(H)
+    process.removeListener('uncaughtException', H)
     throw er
   }
 })
@@ -111,6 +110,19 @@ exports.checkSync = function (path, opts) {
 
 exports.lock = function (path, opts, cb) {
   if (typeof opts === 'function') cb = opts, opts = {}
+
+  if (typeof opts.retries === 'number' && opts.retries > 0) {
+    cb = (function (orig) { return function (er, fd) {
+      if (!er) return orig(er, fd)
+      var newRT = opts.retries - 1
+      opts_ = Object.create(opts, { retries: { value: newRT }})
+      if (opts.retryWait) setTimeout(function() {
+        exports.lock(path, opts_, orig)
+      }, opts.retryWait)
+      else exports.lock(path, opts_, orig)
+    }})(cb)
+  }
+
   // try to engage the lock.
   // if this succeeds, then we're in business.
   fs.open(path, wx, function (er, fd) {
@@ -124,42 +136,48 @@ exports.lock = function (path, opts, cb) {
     if (er.code !== 'EEXIST') return cb(er)
 
     // someone's got this one.  see if it's valid.
-    if (opts.stale) {
-      return fs.stat(path, function (er, st) {
-        var age = Date.now() - st.ctime.getTime()
-        if (age > opts.stale) {
-          exports.unlock(path, function (er) {
-            if (er) return cb(er)
-            var opts_ = Object.create(opts, { stale: { value: false }})
-            exports.lock(path, opts_, cb)
-          })
-        }
-      })
-    } else if (opts.wait) {
-      // wait for some ms for the lock to clear
-      var watcher = fs.watch(path, function (change) {
-        if (change === 'rename') {
-          // ok, try and get it now.
-          watcher.close()
-          clearTimeout(timer)
-          var opts_ = Object.create(opts, { wait: { value: false }})
+    if (opts.stale) fs.stat(path, function (er, st) {
+      var age = Date.now() - st.ctime.getTime()
+      if (age > opts.stale) {
+        exports.unlock(path, function (er) {
+          if (er) return cb(er)
+          var opts_ = Object.create(opts, { stale: { value: false }})
           exports.lock(path, opts_, cb)
-        }
-      })
-      var timer = setTimeout(function () {
-        watcher.close()
-        cb(er)
-      }, opts.wait)
-    } else {
-      // failed to lock!
-      return cb(er)
-    }
+        })
+      } else notStale(er, path, opts, cb)
+    })
+    else notStale(er, path, opts, cb)
   })
+}
+
+function notStale (er, path, opts, cb) {
+  if (typeof opts.wait === 'number' && opts.wait > 0) {
+    // wait for some ms for the lock to clear
+    var start = Date.now()
+    var watcher = fs.watch(path, function (change) {
+      if (change === 'rename') {
+        // ok, try and get it now.
+        // if this fails, then continue waiting, maybe.
+        watcher.close()
+        clearTimeout(timer)
+        var newWait = Date.now() - start
+        var opts_ = Object.create(opts, { wait: { value: newWait }})
+        exports.lock(path, opts_, cb)
+      }
+    })
+    var timer = setTimeout(function () {
+      watcher.close()
+      cb(er)
+    }, opts.wait)
+  } else {
+    // failed to lock!
+    return cb(er)
+  }
 }
 
 exports.lockSync = function (path, opts) {
   opts = opts || {}
-  if (opts.wait) {
+  if (opts.wait || opts.retryWait) {
     throw new Error('opts.wait not supported sync for obvious reasons')
   }
 
@@ -168,19 +186,28 @@ exports.lockSync = function (path, opts) {
     locks[path] = fd
     return fd
   } catch (er) {
-    if (er.code !== 'EEXIST') throw er
+    if (er.code !== 'EEXIST') return retryThrow(path, opts, er)
 
     if (opts.stale) {
       var st = fs.statSync(path)
       var age = Date.now() - st.ctime.getTime()
       if (age > opts.stale) {
         exports.unlockSync(path)
-        var opts_ = Object.create(opts, { stale: { value: false }})
-        return exports.lockSync(path, opts_)
+        return exports.lockSync(path, opts)
       }
     }
 
     // failed to lock!
-    throw er
+    return retryThrow(path, opts, er)
   }
 }
+
+function retryThrow (path, opts, er) {
+  if (typeof opts.retries === 'number' && opts.retries > 0) {
+    var newRT = opts.retries - 1
+    var opts_ = Object.create(opts, { retries: { value: newRT }})
+    return exports.lockSync(path, opts_)
+  }
+  throw er
+}
+
