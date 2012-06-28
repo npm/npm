@@ -88,8 +88,11 @@ function regRequest (method, where, what, etag, nofollow, cb_) {
     self.log.info("retry", "registry request attempt " + currentAttempt
         + " at " + (new Date()).toLocaleTimeString())
     makeRequest.call(self, method, remote, where, what, etag, nofollow
-                     , function (er) {
-      if (operation.retry(er)) {
+                     , function (er, parsed, raw, response) {
+      // Only retry on 408, 5xx or no `response`.
+      var statusCode = response && response.statusCode
+      var statusRetry = !statusCode || (statusCode === 408 || statusCode >= 500)
+      if (er && statusRetry && operation.retry(er)) {
         self.log.info("retry", "will retry, error on last attempt: " + er)
         return
       }
