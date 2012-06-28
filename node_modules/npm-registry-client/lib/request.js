@@ -6,6 +6,7 @@ var url = require("url")
   , asyncMap = require("slide").asyncMap
   , Stream = require("stream").Stream
   , request = require("request")
+  , retry = require("retry")
 
 function regRequest (method, where, what, etag, nofollow, cb_) {
   if (typeof cb_ !== "function") cb_ = nofollow, nofollow = false
@@ -74,7 +75,27 @@ function regRequest (method, where, what, etag, nofollow, cb_) {
     remote.auth = new Buffer(auth, "base64").toString("utf8")
   }
 
-  makeRequest.call(this, method, remote, where, what, etag, nofollow, cb)
+  // Tuned to spread 3 attempts over about a minute.
+  // See formula at <https://github.com/tim-kos/node-retry>.
+  var operation = retry.operation({
+    retries: 2,
+    factor: 10,
+    minTimeout: 10000,
+    maxTimeout: 60 * 1000
+  })
+  var self = this
+  operation.attempt(function (currentAttempt) {
+    self.log.info("retry", "registry request attempt " + currentAttempt
+        + " at " + (new Date()).toLocaleTimeString())
+    makeRequest.call(self, method, remote, where, what, etag, nofollow
+                     , function (er) {
+      if (operation.retry(er)) {
+        self.log.info("retry", "will retry, error on last attempt: " + er)
+        return
+      }
+      cb.apply(null, arguments)
+    })
+  })
 }
 
 function makeRequest (method, remote, where, what, etag, nofollow, cb) {
