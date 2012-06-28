@@ -476,7 +476,7 @@ field is advisory only.
 
 If you are sure that your module will *definitely not* run properly on
 versions of Node/npm other than those specified in the `engines` hash,
-then you can set `"enginesStrict": true` in your package.json file.
+then you can set `"engineStrict": true` in your package.json file.
 This will override the user's `engine-strict` config setting.
 
 Please do not do this unless you are really very very sure.  If your
