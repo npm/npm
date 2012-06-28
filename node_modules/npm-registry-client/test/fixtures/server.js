@@ -11,19 +11,32 @@ server._expect = {}
 
 var expect = {}
 function handler (req, res) {
-  var u = "* " + req.url
-  , mu = req.method + " " + req.url
-  , k = expect[mu] ? mu : expect[u] ? u : null
+  req.connection.setTimeout(1000)
 
-  if (!k) throw Error("unexpected request", req.method, req.url)
-  expect[k] --
+  var u = '* ' + req.url
+  , mu = req.method + ' ' + req.url
 
-  if (Object.keys(expect).reduce(function (s, k) {
-    return s + expect[k]
-  }, 0) === 0) server.close()
+  var k = server._expect[mu] ? mu : server._expect[u] ? u : null
+  if (!k) throw Error('unexpected request', req.method, req.url)
+
+  var fn = server._expect[k].shift()
+  if (!fn) throw Error('unexpected request', req.method, req.url)
+
+
+  var remain = (Object.keys(server._expect).reduce(function (s, k) {
+    return s + server._expect[k].length
+  }, 0))
+  if (remain === 0) server.close()
+  else console.error("TEST SERVER: %d reqs remain", remain)
+  console.error(Object.keys(server._expect).map(function(k) {
+    return [k, server._expect[k].length]
+  }).reduce(function (acc, kv) {
+    acc[kv[0]] = kv[1]
+    return acc
+  }, {}))
 
   res.json = json
-  server._expect[k](req, res)
+  fn(req, res)
 }
 
 function json (o) {
@@ -32,13 +45,12 @@ function json (o) {
 }
 
 server.expect = function (method, u, fn) {
-  if (typeof u === "function") {
+  if (typeof u === 'function') {
     fn = u
     u = method
-    method = "*"
+    method = '*'
   }
-  u = method + " " + u
-  server._expect[u] = fn
-  expect[u] = expect[u] || 0
-  expect[u] ++
+  u = method + ' ' + u
+  server._expect[u] = server._expect[u] || []
+  server._expect[u].push(fn)
 }
