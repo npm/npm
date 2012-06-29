@@ -308,6 +308,38 @@ Makes various commands more forceful.
 * skips cache when requesting from the registry.
 * prevents checks against clobbering non-npm files.
 
+### fetch-retries
+
+* Default: 2
+* Type: Number
+
+The "retries" config for the `retry` module to use when fetching
+packages from the registry.
+
+### fetch-retry-factor
+
+* Default: 10
+* Type: Number
+
+The "factor" config for the `retry` module to use when fetching
+packages.
+
+### fetch-retry-mintimeout
+
+* Default: 10000 (10 seconds)
+* Type: Number
+
+The "minTimeout" config for the `retry` module to use when fetching
+packages.
+
+### fetch-retry-maxtimeout
+
+* Default: 60000 (1 minute)
+* Type: Number
+
+The "maxTimeout" config for the `retry` module to use when fetching
+packages.
+
 ### git
 
 * Default: `"git"`
