@@ -1,7 +1,7 @@
 var test = require("tap").test
   , fs = require("fs")
   , path = require("path")
-  , existsSync = fs.existsSync || path.existsSync
+  , existsSync = fs.existsSync || fs.existsSync
   , spawn = require("child_process").spawn
   , npm = require("../../")
 
