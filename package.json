@@ -67,7 +67,8 @@
     "init-package-json": "0",
     "osenv": "0",
     "lockfile": ">=0.2",
-    "retry": "~0.6.0"
+    "retry": "~0.6.0",
+    "couch-login": "~0.1.6"
   },
   "bundleDependencies": [
     "semver",
@@ -103,7 +104,8 @@
     "init-package-json",
     "osenv",
     "lockfile",
-    "retry"
+    "retry",
+    "couch-login"
   ],
   "devDependencies": {
     "ronn": "https://github.com/isaacs/ronnjs/tarball/master",
