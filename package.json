@@ -61,7 +61,7 @@
     "npmlog": "0",
     "ansi": "~0.1.2",
     "npm-registry-client": "0",
-    "read-package-json": "0",
+    "read-package-json": "~0.1.1",
     "read-installed": "0",
     "glob": "~3.1.9",
     "init-package-json": "0",
