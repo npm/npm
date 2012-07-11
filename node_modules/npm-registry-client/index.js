@@ -20,13 +20,19 @@ try {
 function noop () {}
 
 function RegClient (options) {
-  // a registry url must be provided.
-  var registry = url.parse(options.registry)
-  if (!registry.protocol) throw new Error(
-    'Invalid registry: ' + registry.url)
-  this.registry = registry.href
-  if (this.registry.slice(-1) !== '/') {
-    this.registry += '/'
+  // if provided, then the registry needs to be a url.
+  // if it's not provided, then we're just using the cache only.
+  var registry = options.registry
+  if (registry) {
+    registry = url.parse(registry)
+    if (!registry.protocol) throw new Error(
+      'Invalid registry: ' + registry.url)
+    this.registry = registry.href
+    if (this.registry.slice(-1) !== '/') {
+      this.registry += '/'
+    }
+  } else {
+    this.registry = null
   }
 
   this.retries = options.retries || 2
@@ -56,7 +62,7 @@ function RegClient (options) {
     }
   }
 
-  if (this.auth && !this.alwaysAuth) {
+  if (this.auth && !this.alwaysAuth && this.registry) {
     // if we're always authing, then we just send the
     // user/pass on every thing.  otherwise, create a
     // session, and use that.

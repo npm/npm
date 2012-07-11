@@ -13,6 +13,9 @@ function regRequest (method, where, what, etag, nofollow, cb_) {
   if (typeof cb_ !== "function") cb_ = etag, etag = null
   if (typeof cb_ !== "function") cb_ = what, what = null
 
+  if (!this.registry) return cb(new Error(
+    "No registry url provided: " + method + " " + where))
+
   // Since there are multiple places where an error could occur,
   // don't let the cb be called more than once.
   var errState = null
