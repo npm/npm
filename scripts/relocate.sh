@@ -9,12 +9,12 @@
 # bash /path/to/npm/scripts/relocate.sh $nodepath
 # If $nodepath is blank, then it'll use /usr/bin/env
 
-dir="$(dirname "$0")"
+dir="$(dirname "$(dirname "$0")")"
 cli="$dir"/bin/npm-cli.js
 tmp="$cli".tmp
 
 node="$1"
-if [ -n "$node" ]; then
+if [ "x$node" = "x" ]; then
   node="/usr/bin/env node"
 fi
 node="#!$node"
@@ -23,3 +23,4 @@ sed -e 1d "$cli" > "$tmp"
 echo "$node" > "$cli"
 cat "$tmp" >> "$cli"
 rm "$tmp"
+chmod ogu+x $cli
