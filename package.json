@@ -68,7 +68,8 @@
     "osenv": "0",
     "lockfile": ">=0.2",
     "retry": "~0.6.0",
-    "couch-login": "~0.1.6"
+    "couch-login": "~0.1.6",
+    "jsup": "~0.0.1"
   },
   "bundleDependencies": [
     "semver",
