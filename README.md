@@ -47,9 +47,9 @@ To say "yes" to the 0.x cleanup, but skip the prompt:
 
     curl http://npmjs.org/install.sh | clean=yes sh
 
-If you get permission errors, you'll need to **run** the script as root.
+If you get permission errors, you'll either need to **run** the script as root,
 (Note, just putting `sudo` in front of the `curl` will **fetch** the script
-as root.)
+as root.) or run `curl http://npmjs.org/install.sh | sudo sh`
 
 ### Slightly Fancier
 
