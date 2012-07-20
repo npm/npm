@@ -596,6 +596,18 @@ this as true.
 
 A proxy to use for outgoing http requests.
 
+### publish-privates
+
+* Default: false
+* Type: Boolean
+
+When set to false, npm will refuse to publish private packages (those
+having "private":true in package.json). When set to true, npm will
+publish private packages.
+
+Note, the official npm registry does not accept private packages. This
+feature requires a custom registry server.
+
 ### rebuild-bundle
 
 * Default: true
