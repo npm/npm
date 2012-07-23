@@ -4,12 +4,12 @@ module.exports = read
 var buffer = ""
   , tty = require("tty")
   , StringDecoder = require("string_decoder").StringDecoder
+  , stdin
+  , stdout
 
-function raw (mode) {
-  if (process.stdin.setRawMode) {
-    if (process.stdin.isTTY) {
-      process.stdin.setRawMode(mode)
-    }
+function raw (stdin, mode) {
+  if (stdin.setRawMode && stdin.isTTY) {
+    stdin.setRawMode(mode)
     return
   }
   // old style
@@ -28,19 +28,22 @@ function read (opts, cb) {
     , timeout = opts.timeout
     , num = opts.num || null
 
+  stdin = opts.stdin || process.stdin
+  stdout = opts.stdout || process.stdout
+  
   if (p && def) p += "("+(silent ? "<default hidden>" : def)+") "
-
+  
   // switching into raw mode is a little bit painful.
   // avoid if possible.
   var r = silent || num  ? rawRead : normalRead
-  if (r === rawRead && !process.stdin.isTTY) r = normalRead
+  if (r === rawRead && !stdin.isTTY) r = normalRead
 
   if (timeout) {
     cb = (function (cb) {
       var called = false
       var t = setTimeout(function () {
         raw(false)
-        process.stdout.write("\n")
+        stdout.write("\n")
         if (def) done(null, def)
         else done(new Error("timeout"))
       }, timeout)
@@ -58,9 +61,9 @@ function read (opts, cb) {
     })(cb)
   }
 
-  if (p && !process.stdout.write(p)) {
-    process.stdout.on("drain", function D () {
-      process.stdout.removeListener("drain", D)
+  if (p && !stdout.write(p)) {
+    stdout.on("drain", function D () {
+      stdout.removeListener("drain", D)
       r(def, timeout, silent, num, cb)
     })
   } else {
@@ -71,9 +74,12 @@ function read (opts, cb) {
 }
 
 function normalRead (def, timeout, silent, num, cb) {
-  var stdin = process.openStdin()
-    , val = ""
+  var val = ""
     , decoder = new StringDecoder("utf8")
+
+  if (stdin === process.stdin) {
+    stdin = process.openStdin()
+  }
 
   stdin.resume()
   stdin.on("error", cb)
@@ -121,11 +127,14 @@ function normalRead (def, timeout, silent, num, cb) {
 }
 
 function rawRead (def, timeout, silent, num, cb) {
-  var stdin = process.openStdin()
-    , val = ""
+  var val = ""
     , decoder = new StringDecoder
 
-  raw(true)
+  if (stdin === process.stdin) {
+    stdin = process.openStdin()
+  }
+
+  raw(stdin, true)
   stdin.resume()
   stdin.on("error", cb)
   stdin.on("data", function D (c) {
@@ -136,21 +145,21 @@ function rawRead (def, timeout, silent, num, cb) {
     LOOP: while (c = s.charAt(i++)) switch (c) {
       case "\u007f": // backspace
         val = val.substr(0, val.length - 1)
-        if (!silent) process.stdout.write('\b \b')
+        if (!silent) stdout.write('\b \b')
         break
 
       case "\u0004": // EOF
       case "\n":
-        raw(false)
+        raw(stdin, false)
         stdin.removeListener("data", D)
         stdin.removeListener("error", cb)
         val = val.trim() || def
-        process.stdout.write("\n")
+        stdout.write("\n")
         stdin.pause()
         return cb(null, val)
 
       case "\u0003": case "\0": // ^C or other signal abort
-        raw(false)
+        raw(stdin, false)
         stdin.removeListener("data", D)
         stdin.removeListener("error", cb)
         stdin.pause()
@@ -159,7 +168,7 @@ function rawRead (def, timeout, silent, num, cb) {
       default: // just a normal char
         val += buffer + c
         buffer = ""
-        if (!silent) process.stdout.write(c)
+        if (!silent) stdout.write(c)
 
         // explicitly process a delim if we have enough chars
         // and stop the processing.

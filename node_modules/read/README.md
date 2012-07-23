@@ -20,9 +20,11 @@ Every option is optional.
 * `num` Max number of chars to read from terminal.
 * `timeout` Number of ms to wait for user input before giving up.
 * `default` The default value if the user enters nothing.
+* `stdin` Readable stream to get input data from. (default `process.stdin`)
+* `stdout` Writeable stream to write prompts to. (default: `process.stdout`)
 
 If silent is true, or num is set, and the input is a TTY,
-then read will set raw mode, and read  character by character.
+then read will set raw mode, and read character by character.
 
 At this time, backspace and arrow keys are not supported very well.
 It's probably not too hard to add support for this, perhaps using node's
