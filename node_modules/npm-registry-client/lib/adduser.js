@@ -47,7 +47,9 @@ function adduser (username, password, email, cb) {
             , token: this.token }
 
   this.token = null
-  this.couchLogin.token = null
+  if (this.couchLogin) {
+    this.couchLogin.token = null
+  }
   this.username = username
   this.password = password
   this.auth = new Buffer(username + ':' + password).toString('base64')
@@ -110,9 +112,12 @@ function done (cb, pre) {
     }
 
     // there was some kind of error, re-instate previous auth/token/etc.
-    this.couchLogin.token = this.token = pre.token
-    if (this.couchLogin.tokenSet) {
-      this.couchLogin.tokenSet(pre.token)
+    this.token = pre.token
+    if (this.couchLogin) {
+      this.couchLogin.token = this.token
+      if (this.couchLogin.tokenSet) {
+        this.couchLogin.tokenSet(pre.token)
+      }
     }
     this.username = pre.username
     this.password = pre.password
