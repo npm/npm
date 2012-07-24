@@ -51,7 +51,7 @@
     "block-stream": "*",
     "inherits": "1",
     "mkdirp": "~0.3.3",
-    "read": "0",
+    "read": "~1",
     "lru-cache": "~1.1.0",
     "node-gyp": "~0.5",
     "fstream-npm": "0.1",
