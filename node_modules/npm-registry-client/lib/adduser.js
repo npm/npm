@@ -50,9 +50,9 @@ function adduser (username, password, email, cb) {
   if (this.couchLogin) {
     this.couchLogin.token = null
   }
-  this.username = username
-  this.password = password
-  this.auth = new Buffer(username + ':' + password).toString('base64')
+  this.username = null
+  this.password = null
+  this.auth = null
 
   cb = done.call(this, cb, pre)
 
@@ -77,6 +77,8 @@ function adduser (username, password, email, cb) {
           // use this info as auth
           var b = new Buffer(username + ":" + password)
           this.auth = b.toString("base64")
+          this.username = username
+          this.password = password
         }
 
         if (!error || !response || response.statusCode !== 409) {
