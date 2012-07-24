@@ -242,6 +242,11 @@ function addToken (res) {
     delete sc['max-age']
   }
 
+  // expire the session after 1 year, even if couch won't.
+  if (!sc.hasOwnProperty('expires')) {
+    sc.expires = Date.now() + (1000 * 60 * 60 * 24 * 365)
+  }
+
   this.token = sc
   if (this.tokenSet) this.tokenSet(this.token)
 }
