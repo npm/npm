@@ -146,11 +146,9 @@ proto.parseArgv = function parseOpts (argv) {
     if (name === npm_config_prefix + 'loglevel') {
       log.level = val
     } else {
-      // take the config name and check if it's one that node-gyp cares about
+      // add the user-defined options to the config
       name = name.substring(npm_config_prefix.length)
-      if (name in this.configDefs) {
-        this.opts[name] = val
-      }
+      this.opts[name] = val
     }
   }, this)
 
