@@ -113,10 +113,32 @@ publish: link doc
 
 docpublish: doc-publish
 doc-publish: doc
-	rsync -vazu --stats --no-implied-dirs --delete html/doc/ npmjs.org:/var/www/npmjs.org/public/doc
-	rsync -vazu --stats --no-implied-dirs --delete html/api/ npmjs.org:/var/www/npmjs.org/public/api
-	rsync -vazu --stats --no-implied-dirs --delete html/webfonts/ npmjs.org:/var/www/npmjs.org/public/webfonts
-	scp html/style.css npmjs.org:/var/www/npmjs.org/public/
+	# old site
+	rsync -vazu --stats --no-implied-dirs --delete \
+		html/doc/ \
+		173.203.97.118:/var/www/npmjs.org/public/doc
+	rsync -vazu --stats --no-implied-dirs --delete \
+		html/api/ \
+		173.203.97.118:/var/www/npmjs.org/public/api
+	rsync -vazu --stats --no-implied-dirs --delete \
+		html/webfonts/ \
+		173.203.97.118:/var/www/npmjs.org/public/static/webfonts
+	rsync -vazu --stats --no-implied-dirs --delete \
+		html/style.css \
+		173.203.97.118:/var/www/npmjs.org/public/static/
+	#new site
+	rsync -vazu --stats --no-implied-dirs --delete \
+		html/doc/ \
+		node@new.npmjs.org:/home/node/npm-www/doc
+	rsync -vazu --stats --no-implied-dirs --delete \
+		html/api/ \
+		node@new.npmjs.org:/home/node/npm-www/api
+	rsync -vazu --stats --no-implied-dirs --delete \
+		html/webfonts/ \
+		node@new.npmjs.org:/home/node/npm-www/static/webfonts
+	rsync -vazu --stats --no-implied-dirs --delete \
+		html/style.css \
+		node@new.npmjs.org:/home/node/npm-www/static/
 
 zip-publish: release
 	scp release/* npmjs.org:/var/www/npmjs.org/public/dist/
