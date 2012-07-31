@@ -40,7 +40,7 @@ Joe's appropriate course of action in each case is the same.
 
 1. `npm owner ls foo`.  This will tell Joe the email address of the
    owner (Bob).
-2. Joe emails Bob, explaining the situation **as respecfully as possible**,
+2. Joe emails Bob, explaining the situation **as respectfully as possible**,
    and what he would like to do with the module name.  He adds
    isaacs <i@izs.me> to the CC list of the email.  Mention in the email
    that Bob can run `npm owner add joe foo` to add Joe as an owner of
