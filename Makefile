@@ -127,7 +127,7 @@ doc-publish: doc
 		node@npmjs.org:/home/node/npm-www/static/
 
 zip-publish: release
-	scp release/* izs.me:/var/www/izs.me/static/public/npm/
+	scp release/* node@nodejs.org:dist/npm/
 
 release:
 	@bash scripts/release.sh
