@@ -92,7 +92,7 @@ doc/cli/index.md: $(markdowns) scripts/index-build.js scripts/doc-build.sh packa
 	node scripts/index-build.js > $@
 
 node_modules/.bin/ronn:
-	node cli.js install https://github.com/isaacs/ronnjs/tarball/master
+	node cli.js install
 
 doc: man
 

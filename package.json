@@ -108,7 +108,7 @@
     "couch-login"
   ],
   "devDependencies": {
-    "ronn": "https://github.com/isaacs/ronnjs/tarball/master",
+    "ronn": "~0.3.6",
     "tap": "~0.2.5"
   },
   "engines": {
