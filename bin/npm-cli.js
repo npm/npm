@@ -50,10 +50,9 @@ if (conf.version) {
 }
 
 if (conf.versions) {
-  var v = process.versions
-  v.npm = npm.version
-  console.log(v)
-  return
+  npm.command = "version"
+  conf.usage = false
+  npm.argv = []
 }
 
 log.info("using", "npm@%s", npm.version)
