@@ -68,7 +68,8 @@
     "osenv": "0",
     "lockfile": ">=0.2",
     "retry": "~0.6.0",
-    "couch-login": "~0.1.6"
+    "couch-login": "~0.1.6",
+    "once": "~1.1.1"
   },
   "bundleDependencies": [
     "semver",
@@ -105,7 +106,8 @@
     "osenv",
     "lockfile",
     "retry",
-    "couch-login"
+    "couch-login",
+    "once"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
