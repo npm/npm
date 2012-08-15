@@ -27,7 +27,7 @@ function LRUCache (options) {
 
   if (!options) options = {}
 
-  lengthCalculator = options.length || naiveLength
+  var lengthCalculator = options.length || naiveLength
 
   if (typeof lengthCalculator !== "function") {
     lengthCalculator = naiveLength
