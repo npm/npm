@@ -42,7 +42,6 @@
     "minimatch": "~0.2.6",
     "nopt": "~2.0",
     "node-uuid": "~1.3",
-    "proto-list": "1",
     "rimraf": "2",
     "request": "~2.9",
     "which": "1",
@@ -69,7 +68,8 @@
     "lockfile": ">=0.2",
     "retry": "~0.6.0",
     "couch-login": "~0.1.6",
-    "once": "~1.1.1"
+    "once": "~1.1.1",
+    "npmconf": "~0.0.6"
   },
   "bundleDependencies": [
     "semver",
@@ -80,7 +80,6 @@
     "minimatch",
     "nopt",
     "node-uuid",
-    "proto-list",
     "rimraf",
     "request",
     "which",
@@ -107,7 +106,8 @@
     "lockfile",
     "retry",
     "couch-login",
-    "once"
+    "once",
+    "npmconf"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
@@ -120,7 +120,8 @@
   "scripts": {
     "test": "node ./test/run.js && tap test/tap/*.js",
     "prepublish": "npm prune ; make -j4 doc",
-    "dumpconf": "env | grep npm | sort | uniq"
+    "dumpconf": "env | grep npm | sort | uniq",
+    "echo": "node bin/npm-cli.js"
   },
   "licenses": [
     {
