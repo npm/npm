@@ -22,10 +22,10 @@ log.info("it worked if it ends with", "ok")
 var fs = require("graceful-fs")
   , path = require("path")
   , npm = require("../lib/npm.js")
-  , ini = require("../lib/utils/ini.js")
+  , npmconf = require("npmconf")
   , errorHandler = require("../lib/utils/error-handler.js")
 
-  , configDefs = require("../lib/utils/config-defs.js")
+  , configDefs = npmconf.defs
   , shorthands = configDefs.shorthands
   , types = configDefs.types
   , nopt = require("nopt")
