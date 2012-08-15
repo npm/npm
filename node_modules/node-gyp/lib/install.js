@@ -373,7 +373,8 @@ function install (gyp, argv, callback) {
     return minimatch(file, '*.h', { matchBase: true })
       // non-legacy versions of node also extract the gyp build files
       || (!isLegacy &&
-            (minimatch(file, 'common.gypi', { matchBase: true })
+            (minimatch(file, '*.gypi', { matchBase: true })
+          || minimatch(file, 'tools/gyp_addon')
           || (minimatch(file, 'tools/gyp/**') && !minimatch(file, 'tools/gyp/test/**'))
             )
          )
