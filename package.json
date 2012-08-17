@@ -50,7 +50,7 @@
     "block-stream": "*",
     "inherits": "1",
     "mkdirp": "~0.3.3",
-    "read": "~1.0.3",
+    "read": "~1.0.4",
     "lru-cache": "~2.0.0",
     "node-gyp": "~0.6.4",
     "fstream-npm": "0.1",
@@ -114,7 +114,7 @@
     "tap": "~0.2.5"
   },
   "engines": {
-    "node": ">=0.8",
+    "node": ">=0.6",
     "npm": "1"
   },
   "scripts": {
