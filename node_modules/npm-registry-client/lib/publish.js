@@ -11,7 +11,9 @@ function publish (data, tarball, cb) {
   var username = this.conf.get('username')
 
   if (!email || !auth || !username) {
-    return cb(new Error("auth and email required for publishing"))
+    var er = new Error("auth and email required for publishing")
+    er.code = 'ENEEDAUTH'
+    return cb(er)
   }
 
   // add the dist-url to the data, pointing at the tarball.
