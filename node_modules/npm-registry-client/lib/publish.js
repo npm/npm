@@ -6,7 +6,11 @@ var path = require("path")
 
 function publish (data, tarball, cb) {
 
-  if (!this.email || !this.auth || !this.username) {
+  var email = this.conf.get('email')
+  var auth = this.conf.get('_auth')
+  var username = this.conf.get('username')
+
+  if (!email || !auth || !username) {
     return cb(new Error("auth and email required for publishing"))
   }
 
@@ -15,7 +19,7 @@ function publish (data, tarball, cb) {
   // if the {version} is already there, then fail.
   // then:
   // PUT the data to {config.registry}/{data.name}/{data.version}
-  var registry = this.registry
+  var registry = this.conf.get('registry')
 
   var fullData =
     { _id : data.name
@@ -25,8 +29,8 @@ function publish (data, tarball, cb) {
     , versions : {}
     , readme: data.readme || ""
     , maintainers :
-      [ { name : this.username
-        , email : this.email
+      [ { name : username
+        , email : email
         }
       ]
     }
@@ -58,7 +62,7 @@ function publish (data, tarball, cb) {
     var dataURI = encodeURIComponent(data.name)
                 + "/" + encodeURIComponent(data.version)
 
-    var tag = data.tag || this.defaultTag || "latest"
+    var tag = data.tag || this.conf.get('tag') || "latest"
     dataURI += "/-tag/" + tag
 
     // let's see what versions are already published.
