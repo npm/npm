@@ -73,9 +73,11 @@ function regRequest (method, where, what, etag, nofollow, cb_) {
 
     if (couch && !token) {
       // login to get a valid token
-      var a = { name: this.username, password: this.password }
+      var a = { name: this.conf.get('username'),
+                password: this.conf.get('_password') }
       var args = arguments
       return this.couchLogin.login(a, function (er, cr, data) {
+        console.error('logged in?', a)
         if (er || !couch.valid(couch.token)) {
           er = er || new Error('login error')
           return cb(er, cr, data)

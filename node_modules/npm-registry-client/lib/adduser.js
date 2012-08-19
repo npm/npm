@@ -1,18 +1,12 @@
-
 module.exports = adduser
 
-var uuid = require("node-uuid")
-  , crypto
-
-try {
-} catch (ex) {}
+var crypto = require('crypto')
 
 function sha (s) {
   return crypto.createHash("sha1").update(s).digest("hex")
 }
 
 function adduser (username, password, email, cb) {
-  if (!crypto) crypto = require("crypto")
 
   password = ("" + (password || "")).trim()
   if (!password) return cb(new Error("No password supplied."))
@@ -27,7 +21,7 @@ function adduser (username, password, email, cb) {
     "Sorry, ':' chars are not allowed in passwords.\n"+
     "See <https://issues.apache.org/jira/browse/COUCHDB-969> for why."))
 
-  var salt = uuid()
+  var salt = crypto.randomBytes(30).toString('hex')
     , userobj =
       { name : username
       , salt : salt
