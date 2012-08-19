@@ -1,7 +1,7 @@
 var test = require('tap').test
 var fs = require('fs')
-var pkg = process.env.npm_config_tmp || '/tmp/'
-pkg += 'npm-test-publish-config'
+var pkg = process.env.npm_config_tmp || '/tmp'
+pkg += '/npm-test-publish-config'
 
 require('mkdirp').sync(pkg)
 
