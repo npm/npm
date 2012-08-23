@@ -68,7 +68,8 @@
     "retry": "~0.6.0",
     "couch-login": "~0.1.9",
     "once": "~1.1.1",
-    "npmconf": "~0.0.6"
+    "npmconf": "~0.0.6",
+    "opener": ">=1.2.0"
   },
   "bundleDependencies": [
     "semver",
@@ -105,7 +106,8 @@
     "retry",
     "couch-login",
     "once",
-    "npmconf"
+    "npmconf",
+    "opener"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
