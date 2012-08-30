@@ -23,11 +23,13 @@ function Octal () {}
 function validateOctal (data, k, val) {
   // must be either an integer or an octal string.
   if (typeof val === "number") {
-    data[k] = "0" + val.toString(8)
+    data[k] = val
+    return true
   }
+
   if (typeof val === "string") {
     if (val.charAt(0) !== "0" || isNaN(val)) return false
-    data[k] = "0" + parseInt(val, 8).toString(8)
+    data[k] = parseInt(val, 8).toString(8)
   }
 }
 
