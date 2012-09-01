@@ -1,0 +1,1 @@
+require('npm-test-peer-deps-dep')

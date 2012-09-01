@@ -1,4 +1,4 @@
-{ "name": "npm-test-peer-deps"
+{ "name": "npm-test-peer-deps-fail"
 , "private": true
 , "version": "1.2.5"
 , "scripts": { "test": "node test.js" }
