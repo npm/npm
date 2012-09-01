@@ -132,7 +132,7 @@ function main (cb) {
   // get the list of packages
   var packages = fs.readdirSync(path.resolve(testdir, "packages"))
   packages = packages.filter(function (p) {
-    return p && !p.match(/^\./)
+    return p && !p.match(/^\.|peer/)
   })
 
   installAllThenTestAll()
@@ -166,6 +166,7 @@ function main (cb) {
             }) ]
         , [exec, "npm rm npm"]
         , publishTest
+        , peerDepsTest
         ], cb )
   }
 
@@ -179,7 +180,7 @@ function main (cb) {
     chain
       ( [ setup
         , [ execChain, packages.filter(function (p) {
-              return !p.match(/private/)
+              return !p.match(/private|peer/)
             }).map(function (p) {
               return [ "npm publish packages/"+p
                      , "npm install "+p
@@ -201,6 +202,19 @@ function main (cb) {
       }
       cleanup(cb)
     })
+  }
+
+  function peerDepsTest (cb) {
+    chain
+      ( [ setup
+        , [ exec, "npm install packages/npm-test-peer-deps", true ]
+        , [ execChain
+          , [ "npm install packages/npm-test-peer-deps --force" ]
+          , [ "npm test packages/npm-test-peer-deps" ]
+          , [ "npm rm packages/npm-test-peer-deps" ]
+          ]
+        , cleanup
+        ], cb )
   }
 }
 
