@@ -209,9 +209,10 @@ function main (cb) {
       ( [ setup
         , [ exec, "npm install packages/npm-test-peer-deps", true ]
         , [ execChain
-          , [ "npm install packages/npm-test-peer-deps --force" ]
-          , [ "npm test packages/npm-test-peer-deps" ]
-          , [ "npm rm packages/npm-test-peer-deps" ]
+          , [ "npm install packages/npm-test-peer-deps --force"
+            , "npm test npm-test-peer-deps"
+            , "npm rm npm-test-peer-deps"
+            ]
           ]
         , cleanup
         ], cb )
