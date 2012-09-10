@@ -269,7 +269,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
 exports.types =
   { "always-auth" : Boolean
   , browser : String
-  , ca: [null, String]
+  , ca: [null, String, Array]
   , cache : path
   , "cache-lock-stale": Number
   , "cache-lock-retries": Number
