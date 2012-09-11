@@ -1,0 +1,8 @@
+{ "name": "npm-test-peer-deps-fail"
+, "private": true
+, "version": "1.2.5"
+, "scripts": { "test": "node test.js" }
+, "dependencies":
+  { "npm-test-peer-deps-dep": "https://raw.github.com/gist/3562345/1b8c1652d04aa899298de9c1c56982a2581eb65c/index.js"
+  , "dnode": "*" }
+}

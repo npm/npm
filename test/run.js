@@ -63,11 +63,13 @@ function prefix (content, pref) {
 }
 
 var execCount = 0
-function exec (cmd, shouldFail, cb) {
-  if (typeof shouldFail === "function") {
-    cb = shouldFail, shouldFail = false
+function exec (cmd, opts, cb) {
+  if (typeof opts === "function") {
+    cb = opts, opts = {}
   }
-  console.error("\n+"+cmd + (shouldFail ? " (expect failure)" : ""))
+  if (typeof opts === 'boolean') opts = {shouldFail: true}
+  opts.env || (opts.env = env)
+  console.error("\n+"+cmd + (opts.shouldFail ? " (expect failure)" : ""))
 
   // special: replace 'node' with the current execPath,
   // and 'npm' with the thing we installed.
@@ -75,7 +77,7 @@ function exec (cmd, shouldFail, cb) {
   cmd = cmd.replace(/^npm /, path.resolve(npmPath, "npm") + " ")
   cmd = cmd.replace(/^node /, process.execPath + " ")
 
-  child_process.exec(cmd, {env: env}, function (er, stdout, stderr) {
+  child_process.exec(cmd, opts, function (er, stdout, stderr) {
     if (stdout) {
       console.error(prefix(stdout, " 1> "))
     }
@@ -84,7 +86,7 @@ function exec (cmd, shouldFail, cb) {
     }
 
     execCount ++
-    if (!shouldFail && !er || shouldFail && er) {
+    if (!opts.shouldFail && !er || opts.shouldFail && er) {
       // stdout = (""+stdout).trim()
       console.log("ok " + execCount + " " + cmdShow)
       return cb()
@@ -96,10 +98,13 @@ function exec (cmd, shouldFail, cb) {
 }
 
 function execChain (cmds, cb) {
+  if (typeof opts === "function") {
+    cb = opts, opts = {}
+  }
   chain(cmds.reduce(function (l, r) {
     return l.concat(r)
   }, []).map(function (cmd) {
-    return [exec, cmd]
+    return Array.isArray(cmd) ? [exec, cmd[0], cmd[1]] : [exec, cmd]
   }), cb)
 }
 
@@ -132,7 +137,7 @@ function main (cb) {
   // get the list of packages
   var packages = fs.readdirSync(path.resolve(testdir, "packages"))
   packages = packages.filter(function (p) {
-    return p && !p.match(/^\./)
+    return p && !p.match(/^\.|\-(fail|dev)$/)
   })
 
   installAllThenTestAll()
@@ -150,7 +155,7 @@ function main (cb) {
         , [ execChain, packages.concat("npm").map(function (p) {
               return "npm rm " + p
             }) ]
-        , installAndTestEach
+        , installAndTestEach, installAndTestEachDev, publishTest, peerDepsTest
         ]
       , cb
       )
@@ -165,7 +170,32 @@ function main (cb) {
                      , "npm rm "+p ]
             }) ]
         , [exec, "npm rm npm"]
-        , publishTest
+        ], cb )
+  }
+
+  function installAndTestEachDev (cb) {
+    var packages = fs.readdirSync(path.resolve(testdir, "packages"))
+    packages = packages.filter(function (p) {
+      return p && p.match(/\-dev$/)
+    })
+    if (!packages.length) return cb()
+
+    var devEnv = {}
+    Object.keys(env).forEach(function (k) {
+      devEnv[k] = env[k]
+    })
+    devEnv.npm_config_global = ""
+
+    chain
+      ( [ setup
+        , [ execChain, packages.map(function (p) {
+              var opts = { cwd: path.resolve(testdir, "packages/"+p)
+                , env: devEnv }
+              return [ [ "npm install", opts ]
+                     , [ "npm test", opts ]
+                     , "npm rm "+p ]
+            }) ]
+        , [exec, "npm rm npm"]
         ], cb )
   }
 
@@ -179,7 +209,7 @@ function main (cb) {
     chain
       ( [ setup
         , [ execChain, packages.filter(function (p) {
-              return !p.match(/private/)
+              return !p.match(/private|fail/)
             }).map(function (p) {
               return [ "npm publish packages/"+p
                      , "npm install "+p
@@ -201,6 +231,20 @@ function main (cb) {
       }
       cleanup(cb)
     })
+  }
+
+  function peerDepsTest (cb) {
+    chain
+      ( [ setup
+        , [ exec, "npm install packages/npm-test-peer-deps-fail", true ]
+        , [ execChain
+          , [ "npm install packages/npm-test-peer-deps-fail --force"
+            , "npm test npm-test-peer-deps-fail"
+            , "npm rm npm-test-peer-deps-fail"
+            ]
+          ]
+        , cleanup
+        ], cb )
   }
 }
 

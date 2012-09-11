@@ -1,0 +1,5 @@
+{ "name": "npm-test-peer-deps-dev"
+, "version": "1.2.0"
+, "scripts": { "test": "node test.js" }
+, "peerDependencies": { "lump": "*" }
+}
