@@ -1,4 +1,4 @@
-Copyright 2009-2012, Isaac Z. Schlueter (the "Original Author")
+Copyright (c) Isaac Z. Schlueter (the "Original Author")
 All rights reserved.
 
 MIT +no-false-attribs License
@@ -42,9 +42,10 @@ Original Author, when distributed with the Software.
 part of the Node.js project, and is neither owned by nor
 officially affiliated with Joyent, Inc.
 
-Packages published in the npm registry are not part of npm
-itself, are the sole property of their respective maintainers,
-and are not covered by this license.
+Packages published in the npm registry (other than the Software and
+its included dependencies) are not part of npm itself, are the sole
+property of their respective maintainers, and are not covered by
+this license.
 
 "npm Logo" created by Mathias Pettersson and Brian Hammond,
 used with permission.
