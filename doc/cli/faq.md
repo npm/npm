@@ -144,7 +144,7 @@ command.)
 
 In those cases, you can do this:
 
-    curl http://npmjs.org/install.sh | sh
+    curl https://npmjs.org/install.sh | sh
 
 ## What is a `package`?
 
