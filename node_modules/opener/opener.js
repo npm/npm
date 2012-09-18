@@ -24,7 +24,7 @@ function opener(args, options, callback) {
             // *always* use cmd on windows
             args = [options.command].concat(args);
         } else {
-            cmd = options.command;
+            command = options.command;
         }
     }
 
