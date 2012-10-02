@@ -3,11 +3,9 @@
 var tap = require('tap')
 , CouchLogin = require('../couch-login.js')
 
-// Yeah, go ahead and abuse my staging server, whatevs.
-
 var auth = { name: 'testuser', password: 'test' }
 , newAuth = { name: 'testuser', password: 'asdfasdf' }
-, couch = new CouchLogin('https://staging.npmjs.org/')
+, couch = new CouchLogin('http://127.0.0.1:15985/')
 , u = '/_users/org.couchdb.user:' + auth.name
 , userRecordMarker
 
@@ -204,7 +202,7 @@ tap.test('change password back easy', function (t) {
       t.ok(data, 'data')
       t.ok(couch.token, 'token')
       t.equal(data.testingCouchLogin, undefined)
-      t.equal(data.mustChangePass, false)
+      t.notOk(data.mustChangePass)
       userRecord = data
       t.end()
     })

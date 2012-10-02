@@ -1,11 +1,9 @@
 var tap = require('tap')
 , CouchLogin = require('../couch-login.js')
 
-// Yeah, go ahead and abuse my staging server, whatevs.
-
 var auth = { name: 'testuser', password: 'test' }
 , newAuth = { name: 'testuser', password: 'asdfasdf' }
-, couch = new CouchLogin('https://isaacs-staging.iriscouch.com/')
+, couch = new CouchLogin('http://localhost:15985/')
 , u = '/_users/org.couchdb.user:' + auth.name
 , userRecordMarker
 
