@@ -42,6 +42,18 @@ function CouchLogin (couch, tok) {
   this.proxy = null
 
   this.maxAge = YEAR
+
+  // replace with a CA cert string, or an array, or leave as null
+  // to use the defaults included in node.  Only relevant for HTTPS
+  // couches, of course.
+  this.ca = null
+
+  // set to boolean true or false to specify the strictSSL behavior.
+  // if left as null, then it'll use whatever node defaults to, which
+  // is false <=0.8.x, and true >=0.9.x
+  //
+  // Again, only relevant for https couches, of course.
+  this.strictSSL = null
 }
 
 CouchLogin.prototype =
@@ -135,6 +147,12 @@ function makeReq (meth, body, f) { return function madeReq (p, d, cb) {
 
   // we're handling cookies, don't do it for us.
   req.jar = false
+
+  if (this.ca)
+    req.ca = this.ca
+
+  if (this.strictSSL && this.strictSSL !== null)
+    req.strictSSL = this.strictSSL
 
   request(req, function (er, res, data) {
     // update cookie.
