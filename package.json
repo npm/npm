@@ -15,7 +15,7 @@
   "config": {
     "publishtest": false
   },
-  "homepage": "http://npmjs.org/",
+  "homepage": "https://npmjs.org/doc/",
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
   "repository": {
     "type": "git",
@@ -124,7 +124,7 @@
   "licenses": [
     {
       "type": "MIT +no-false-attribs",
-      "url": "http://github.com/isaacs/npm/raw/master/LICENSE"
+      "url": "https://github.com/isaacs/npm/raw/master/LICENSE"
     }
   ]
 }
