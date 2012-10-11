@@ -483,6 +483,13 @@ Any "%s" in the message will be replaced with the version number.
 
 The node version to use when checking package's "engines" hash.
 
+### noproxy
+
+* Default: `NO_PROXY` or `no_proxy` environment variable, or "null"
+* Type: String
+
+Hostnames which won't use proxy when being requested.
+
 ### npat
 
 * Default: false

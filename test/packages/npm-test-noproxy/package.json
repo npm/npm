@@ -1,0 +1,7 @@
+{ "name":"npm-test-noproxy"
+, "version" : "1.0.0"
+, "scripts" :
+  { "install" : "node test.js"
+  , "test"    : "node test.js"
+  }
+}
