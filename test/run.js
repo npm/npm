@@ -144,6 +144,12 @@ function main (cb) {
   installAllThenTestAll()
 
   function installAllThenTestAll () {
+    var packagesToRm = packages
+    if (process.platform !== "win32") {
+      // Windows can't handle npm rm npm due to file-in-use issues.
+      packagesToRm.push("npm")
+    }
+
     chain
       ( [ setup
         , [ exec, "npm install "+npmpkg ]
@@ -153,7 +159,7 @@ function main (cb) {
         , [ execChain, packages.map(function (p) {
               return "npm test "+p
             }) ]
-        , [ execChain, packages.concat("npm").map(function (p) {
+        , [ execChain, packagesToRm.map(function (p) {
               return "npm rm " + p
             }) ]
         , installAndTestEach
@@ -163,16 +169,21 @@ function main (cb) {
   }
 
   function installAndTestEach (cb) {
-    chain
-      ( [ setup
+    var thingsToChain = [
+        setup
         , [ execChain, packages.map(function (p) {
               return [ "npm install packages/"+p
                      , "npm test "+p
                      , "npm rm "+p ]
             }) ]
-        , [exec, "npm rm npm"]
-        , publishTest
-        ], cb )
+      ]
+    if (process.platform !== "win32") {
+      // Windows can't handle npm rm npm due to file-in-use issues.
+      thingsToChain.push([exec, "npm rm npm"])
+    }
+    thingsToChain.push(publishTest)
+
+    chain(thingsToChain, cb)
   }
 
   function publishTest (cb) {
