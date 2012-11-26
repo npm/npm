@@ -80,6 +80,18 @@ function readJson_ (file, cb) {
                 })
 }
 
+
+function stripBOM(content) {
+                // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
+                // because the buffer-to-string conversion in `fs.readFileSync()`
+                // translates it to FEFF, the UTF-16 BOM.
+                if (content.charCodeAt(0) === 0xFEFF) {
+                                content = content.slice(1);
+                }
+                return content;
+}
+
+
 function parseJson (file, er, d, cb) {
                 if (er && er.code === "ENOENT") {
                                 indexjs(file, er, cb)
@@ -87,7 +99,7 @@ function parseJson (file, er, d, cb) {
                 }
                 if (er) return cb(er);
                 try {
-                                d = JSON.parse(d)
+                                d = JSON.parse(stripBOM(d))
                 } catch (er) {
                                 d = parseIndex(d)
                                 if (!d) return cb(parseError(er, file));
