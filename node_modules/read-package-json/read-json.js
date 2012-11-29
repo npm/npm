@@ -29,7 +29,16 @@ var asyncMap = slide.asyncMap
 var semver = require("semver")
 
 // put more stuff on here to customize.
-readJson.extraSet = [gypfile, wscript, serverjs, authors, readme, mans, bins]
+readJson.extraSet = [
+                gypfile,
+                wscript,
+                serverjs,
+                authors,
+                readme,
+                mans,
+                bins,
+                githead
+]
 
 var typoWarned = {}
 // http://registry.npmjs.org/-/fields
@@ -301,6 +310,41 @@ function bins_ (file, data, bins, cb) {
                                 return acc
                 }, {})
                 return cb(null, data)
+}
+
+function githead (file, data, cb) {
+                if (data.gitHead) return cb(null, data);
+                var dir = path.dirname(file)
+                var head = path.resolve(dir, '.git/HEAD')
+                fs.readFile(head, 'utf8', function (er, head) {
+                                if (er) return cb(null, data);
+                                githead_(file, data, dir, head, cb)
+                })
+}
+function githead_ (file, data, dir, head, cb) {
+                if (!head.match(/^ref: /)) {
+                                data.gitHead = head.trim()
+                                return cb(null, data)
+                }
+                var headFile = head.replace(/^ref: /, '').trim()
+                headFile = path.resolve(dir, '.git', headFile)
+                fs.readFile(headFile, 'utf8', function (er, head) {
+                                head = head.replace(/^ref: /, '').trim()
+                                data.gitHead = head
+                                return cb(null, data)
+                })
+}
+
+
+try {
+  gitHead = fs.readFileSync('.git/HEAD', 'utf8').trim()
+  if (gitHead.match(/^ref: /)) {
+    gitHead = gitHead.replace(/^ref: /, '').trim()
+    gitHead = fs.readFileSync('.git/' + gitHead, 'utf8').trim()
+  }
+  config.HEAD = gitHead
+} catch (_) {
+  gitHead = '(not a git repo) ' + _.message
 }
 
 function final (file, data, cb) {
