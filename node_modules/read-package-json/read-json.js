@@ -335,18 +335,6 @@ function githead_ (file, data, dir, head, cb) {
                 })
 }
 
-
-try {
-  gitHead = fs.readFileSync('.git/HEAD', 'utf8').trim()
-  if (gitHead.match(/^ref: /)) {
-    gitHead = gitHead.replace(/^ref: /, '').trim()
-    gitHead = fs.readFileSync('.git/' + gitHead, 'utf8').trim()
-  }
-  config.HEAD = gitHead
-} catch (_) {
-  gitHead = '(not a git repo) ' + _.message
-}
-
 function final (file, data, cb) {
                 var ret = validName(file, data)
                 if (ret !== true) return cb(ret);
