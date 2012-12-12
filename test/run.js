@@ -144,7 +144,7 @@ function main (cb) {
   installAllThenTestAll()
 
   function installAllThenTestAll () {
-    var packagesToRm = packages
+    var packagesToRm = packages.slice(0)
     if (process.platform !== "win32") {
       // Windows can't handle npm rm npm due to file-in-use issues.
       packagesToRm.push("npm")
