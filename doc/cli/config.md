@@ -716,6 +716,13 @@ using `-s` to add a signature.
 Note that git requires you to have set up GPG keys in your git configs
 for this to work properly.
 
+### skip-installed
+
+* Default: true
+* Type: Boolean
+
+Whether to skip installation if a requested package already exists in the node_modules directory.
+
 ### strict-ssl
 
 * Default: true
