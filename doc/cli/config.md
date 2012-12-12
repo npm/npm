@@ -718,7 +718,7 @@ for this to work properly.
 
 ### skip-installed
 
-* Default: true
+* Default: false
 * Type: Boolean
 
 Whether to skip installation if a requested package already exists in the node_modules directory.
