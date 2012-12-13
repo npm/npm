@@ -5,7 +5,9 @@ process.env.npm_config_prefix = process.cwd()
 delete process.env.npm_config_global
 delete process.env.npm_config_depth
 
-var npm = path.resolve(process.env.npm_config_prefix, "../../npm")
+var npm = process.platform === "win32"
+        ? path.resolve(process.env.npm_config_prefix, "../../npm")
+        : path.resolve(process.env.npm_config_prefix, "../../../bin/npm")
 
 require("child_process").exec(npm + " ls --json", {
     stdio: "pipe", env: process.env, cwd: process.cwd() },
