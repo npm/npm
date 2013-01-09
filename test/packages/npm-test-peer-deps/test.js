@@ -5,7 +5,7 @@ process.env.npm_config_prefix = process.cwd()
 delete process.env.npm_config_global
 delete process.env.npm_config_depth
 
-var npm = path.resolve(process.env.npm_config_prefix, "../../npm")
+var npm = process.env.npm_execpath
 
 require("child_process").exec(npm + " ls --json", {
     env: process.env, cwd: process.cwd() },
