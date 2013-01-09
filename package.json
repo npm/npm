@@ -1,5 +1,5 @@
 {
-  "version": "1.1.70",
+  "version": "1.1.71",
   "name": "npm",
   "publishConfig": {
     "proprietary-attribs": false
