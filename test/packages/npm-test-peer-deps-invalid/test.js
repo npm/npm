@@ -19,6 +19,11 @@ require("child_process").exec(npm + " ls --json", {
   // ./npm-ls.json.
   delete actual.dict.problems
 
+  // It's undefined which peerDependency will get installed first, so
+  // this will be either version 1.1.0 or version 1.0.0
+  var dictVer = actual.dict.version
+  delete actual.dict.version
+  assert(dictVer === "1.1.0" || dictVer === "1.0.0")
   assert.deepEqual(actual, expected)
 
   assert.ok(err)
