@@ -9,8 +9,10 @@ following scripts:
 * prepublish:
   Run BEFORE the package is published.  (Also run on local `npm
   install` without any arguments.)
-* publish, postpublish:
-  Run AFTER the package is published.
+* publish:
+  Run AFTER the package is published on a directory which contains cached copy of directory from which `npm publish` was run.
+* postpublish
+  Run AFTER the package is published on a directory from which `npm publish` was run.
 * preinstall:
   Run BEFORE the package is installed
 * install, postinstall:
