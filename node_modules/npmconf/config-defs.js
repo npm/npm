@@ -227,6 +227,8 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "https-proxy" : process.env.HTTPS_PROXY || process.env.https_proxy ||
                       process.env.HTTP_PROXY || process.env.http_proxy || null
     , "user-agent" : "node/" + process.version
+                     + ' ' + process.platform
+                     + ' ' + process.arch
     , "rebuild-bundle" : true
     , registry : "https://registry.npmjs.org/"
     , rollback : true
