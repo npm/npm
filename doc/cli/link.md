@@ -16,6 +16,9 @@ symbolic link from `prefix/package-name` to the current folder.
 Next, in some other location, `npm link package-name` will create a
 symlink from the local `node_modules` folder to the global symlink.
 
+Note that `package-name` is taken from `package.json` ,
+not from directory name.
+
 When creating tarballs for `npm publish`, the linked packages are
 "snapshotted" to their current state by resolving the symbolic links.
 
@@ -25,23 +28,23 @@ iteratively without having to continually rebuild.
 
 For example:
 
-    cd ~/projects/node-redis    # go into the package directory
+    cd ~/projects/redis         # go into the package directory,
     npm link                    # creates global link
     cd ~/projects/node-bloggy   # go into some other package directory.
     npm link redis              # link-install the package
 
-Now, any changes to ~/projects/node-redis will be reflected in
+Now, any changes to ~/projects/redis will be reflected in
 ~/projects/node-bloggy/node_modules/redis/
 
 You may also shortcut the two steps in one.  For example, to do the
 above use-case in a shorter way:
 
     cd ~/projects/node-bloggy  # go into the dir of your main project
-    npm link ../node-redis     # link the dir of your dependency
+    npm link ../redis          # link the dir of your dependency
 
 The second line is the equivalent of doing:
 
-    (cd ../node-redis; npm link)
+    (cd ../redis; npm link)
     npm link redis
 
 That is, it first creates a global link, and then links the global
