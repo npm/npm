@@ -68,8 +68,7 @@
     "retry": "~0.6.0",
     "once": "~1.1.1",
     "npmconf": "0",
-    "opener": "~1.3.0",
-    "async": "~0.1.22"
+    "opener": "~1.3.0"
   },
   "bundleDependencies": [
     "semver",
