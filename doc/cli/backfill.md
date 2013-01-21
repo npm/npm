@@ -6,6 +6,8 @@ npm-backfill(1) -- Add installed modules to package.json
     npm backfill
     npm backfill <package-name> [ <package-name1> ... <package-nameN> ]
     npm backfill --clean
+    npm backfill [--save|--save-dev|--save-optional|--save-bundle]
+
 
 ## DESCRIPTION
 
@@ -28,6 +30,15 @@ packages:
 ```
   npm backfill
 ```
+
+`npm backfill` takes 4 exclusive, optional flags which save or update the package version in 
+your main package.json (respected in the same order):
+
+    * `--save`: Package will appear in your `dependencies`
+    * `--save-dev`: Package will appear in your `devDependencies`
+    * `--save-optional`: Package will appear in your `optionalDependencies`
+    * `--save-bundle`: Package will appear in your `bundleDependencies`
+
 
 Finally, if you've been installing and removing packages and wish to clean your package.json 
 dependency list you can backfill all currently installed packages clobbering those already 
