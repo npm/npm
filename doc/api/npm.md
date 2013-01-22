@@ -4,7 +4,7 @@ npm(3) -- node package manager
 ## SYNOPSIS
 
     var npm = require("npm")
-    npm.load(configObject, function (er, npm) {
+    npm.load([configObject,] function (er, npm) {
       // use the npm object, now that it's loaded.
 
       npm.config.set(key, val)
@@ -30,7 +30,8 @@ Prior to using npm's commands,
 top-level configs.  In the npm command line client,
 this set of configs is parsed from the command line options.  Additional
 configuration params are loaded from two configuration files.  See
-`npm-config(1)` for more information.
+`npm-config(1)` for more information. If `configObject` is ommitted,
+all available configuration sources are loaded.
 
 After that, each of the functions are accessible in the
 commands object: `npm.commands.<cmd>`.  See `npm-index(1)` for a list of
