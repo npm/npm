@@ -357,10 +357,10 @@ Operates in "global" mode, so that packages are installed into the
 `prefix` folder instead of the current working directory.  See
 `npm-folders(1)` for more on the differences in behavior.
 
-* packages are installed into the `prefix/node_modules` folder, instead of the
+* packages are installed into the `{prefix}/lib/node_modules` folder, instead of the
   current working directory.
-* bin files are linked to `prefix/bin`
-* man pages are linked to `prefix/share/man`
+* bin files are linked to `{prefix}/bin`
+* man pages are linked to `{prefix}/share/man`
 
 ### globalconfig
 
@@ -568,7 +568,7 @@ standard output.
 
 ### prefix
 
-* Default: node's process.installPrefix
+* Default: see npm-folders(1)
 * Type: path
 
 The location to install global items.  If set on the command line, then
