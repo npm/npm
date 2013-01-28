@@ -109,7 +109,7 @@
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
-    "tap": "~0.2.5"
+    "tap": "~0.4.0"
   },
   "engines": {
     "node": ">=0.6",
