@@ -141,27 +141,26 @@ exports.lock = function (path, opts, cb) {
     if (er.code !== 'EEXIST') return cb(er)
 
     // someone's got this one.  see if it's valid.
-    if (opts.stale) fs.stat(path, function (er, st) {
-      if (er) {
-        if (er.code === 'ENOENT') {
-          // expired already!
-          var opts_ = Object.create(opts, { stale: { value: false }})
-          exports.lock(path, opts_, cb)
-          return
-        }
-        return cb(er)
-      }
+    if (!opts.stale)
+      return notStale(er, path, opts, cb)
 
+    try {
+      var st = fs.statSync(path)
       var age = Date.now() - st.ctime.getTime()
       if (age > opts.stale) {
-        exports.unlock(path, function (er) {
-          if (er) return cb(er)
-          var opts_ = Object.create(opts, { stale: { value: false }})
-          exports.lock(path, opts_, cb)
-        })
+        exports.unlockSync(path)
+        var opts_ = Object.create(opts, { stale: { value: false }})
+        exports.lock(path, opts_, cb)
       } else notStale(er, path, opts, cb)
-    })
-    else notStale(er, path, opts, cb)
+    } catch(er) {
+      if (er.code === 'ENOENT') {
+        // expired already!
+        var opts_ = Object.create(opts, { stale: { value: false }})
+        exports.lock(path, opts_, cb)
+        return
+      }
+      return cb(er)
+    }
   })
 }
 
