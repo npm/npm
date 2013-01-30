@@ -167,6 +167,18 @@ then the user could change the behavior by doing:
 Force npm to always require authentication when accessing the registry,
 even for `GET` requests.
 
+### bin-links
+
+* Default: `true`
+* Type: Boolean
+
+Tells npm to create symlinks (or `.cmd` shims on Windows) for package
+executables.
+
+Set to false to have it not do this.  This can be used to work around
+the fact that some file systems don't support symlinks, even on
+ostensibly Unix systems.
+
 ### browser
 
 * Default: OS X: `"open"`, others: `"google-chrome"`
