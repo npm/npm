@@ -15,6 +15,11 @@ require("child_process").execFile(process.execPath, [npm, "ls", "--json"], {
 
   var actual = JSON.parse(stdout).dependencies
   var expected = require("./npm-ls.json")
+
+  // resolved url doesn't matter
+  delete actual.dict.resolved
+  delete expected.dict.resolved
+
   console.error(JSON.stringify(actual, null, 2))
   console.error(JSON.stringify(expected, null, 2))
 
