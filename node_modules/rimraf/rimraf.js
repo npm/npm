@@ -69,11 +69,11 @@ function rimraf_ (p, cb) {
 }
 
 function rmdir (p, originalEr, cb) {
-  // try to rmdir first, and only readdir on ENOTEMPTY
+  // try to rmdir first, and only readdir on ENOTEMPTY or EEXIST (SunOS)
   // if we guessed wrong, and it's not a directory, then
   // raise the original error.
   fs.rmdir(p, function (er) {
-    if (er && er.code === "ENOTEMPTY")
+    if (er && (er.code === "ENOTEMPTY" || er.code === "EEXIST"))
       rmkids(p, cb)
     else if (er && er.code === "ENOTDIR")
       cb(originalEr)
