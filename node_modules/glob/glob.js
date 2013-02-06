@@ -323,7 +323,7 @@ Glob.prototype._process = function (pattern, depth, index, cb_) {
         // either it's there, or it isn't.
         // nothing more to do, either way.
         if (exists) {
-          if (prefix.charAt(0) === "/" && !this.nomount) {
+          if (prefix && isAbsolute(prefix) && !this.nomount) {
             prefix = path.join(this.root, prefix)
           }
 
@@ -357,7 +357,9 @@ Glob.prototype._process = function (pattern, depth, index, cb_) {
   var read
   if (prefix === null) read = "."
   else if (isAbsolute(prefix) || isAbsolute(pattern.join("/"))) {
-    read = prefix = path.resolve(path.join("/", prefix))
+    if (!prefix || !isAbsolute(prefix))
+      prefix = path.join("/", prefix)
+    read = prefix = path.resolve(prefix)
 
     if (process.platform === "win32")
       read = prefix = prefix.replace(/^[a-zA-Z]:|\\/g, "/")
