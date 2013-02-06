@@ -10,13 +10,15 @@ test("installing dependencies that having conflicting peerDependencies", functio
   process.chdir(__dirname + "/peer-deps-invalid")
 
   npm.load(function () {
-    npm.install(".", function (err) {
+    npm.commands.install([], function (err) {
       if (!err) {
         t.fail("No error!")
+        process.exit(1)
         return
       }
 
       t.equal(err.code, "EPEERINVALID")
+      process.exit(0)
     })
   })
 })
