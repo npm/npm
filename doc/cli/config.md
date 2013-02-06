@@ -240,7 +240,7 @@ explicitly used, and that only GET requests use the cache.
 
 ### cache-min
 
-* Default: 0
+* Default: 10
 * Type: Number
 
 The minimum time (in seconds) to keep items in the registry cache before

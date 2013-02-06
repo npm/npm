@@ -183,7 +183,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "cache-lock-wait": 10000
 
     , "cache-max": Infinity
-    , "cache-min": 0
+    , "cache-min": 10
 
     , color : true
     , coverage: false
