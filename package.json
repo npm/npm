@@ -64,7 +64,7 @@
     "glob": "~3.1.18",
     "init-package-json": "0.0.6",
     "osenv": "0",
-    "lockfile": "~0.2.2",
+    "lockfile": "~0.3.0",
     "retry": "~0.6.0",
     "once": "~1.1.1",
     "npmconf": "0",

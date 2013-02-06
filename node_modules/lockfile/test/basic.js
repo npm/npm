@@ -23,7 +23,7 @@ test('lock contention', function (t) {
   // increases, because we're creating more and more watchers.
   // irl, you should never have several hundred contenders for a
   // single lock, so this situation is somewhat pathological.
-  var overhead = 20
+  var overhead = 200
   var wait = N * overhead + delay
 
   // first make it locked, so that everyone has to wait

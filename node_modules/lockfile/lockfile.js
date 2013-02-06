@@ -25,7 +25,7 @@ process.on('uncaughtException', function H (er) {
   })
   if (!l.length) {
     // cleanup
-    Object.keys(locks).forEach(exports.unlockSync)
+    try { Object.keys(locks).forEach(exports.unlockSync) } catch (e) {}
     process.removeListener('uncaughtException', H)
     throw er
   }
@@ -170,43 +170,19 @@ function notStale (er, path, opts, cb) {
   if (typeof opts.wait !== 'number' || opts.wait <= 0)
     return cb(er)
 
+  // console.error('wait', path, opts.wait)
   // wait for some ms for the lock to clear
   var start = Date.now()
   var end = start + opts.wait
 
   function retry () {
     var now = Date.now()
-    if (now > end)
-      return
-
-    // maybe already closed.
-    try { watcher.close() } catch (e) {}
-    clearTimeout(timer)
     var newWait = end - now
-    var opts_ = Object.create(opts, { wait: { value: newWait }})
-    exports.lock(path, opts_, cb)
+    var newOpts = Object.create(opts, { wait: { value: newWait }})
+    exports.lock(path, newOpts, cb)
   }
 
-  try {
-    var watcher = fs.watch(path, function (change) {
-      if (change === 'rename') {
-        // ok, try and get it now.
-        // if this fails, then continue waiting, maybe.
-        retry()
-      }
-    })
-    watcher.on('error', function (er) {
-      // usually means it expired before the watcher spotted it
-      retry()
-    })
-  } catch (er) {
-    retry()
-  }
-
-  var timer = setTimeout(function () {
-    try { watcher.close() } catch (e) {}
-    cb(er)
-  }, opts.wait)
+  var timer = setTimeout(retry, 10)
 }
 
 exports.lockSync = function (path, opts) {
