@@ -72,7 +72,7 @@ Write your own package manager, then.  It's not that hard.
 
 npm will not help you do something that is known to be a bad idea.
 
-## `"node_modules"` is the name of my diety's arch-rival, and a Forbidden Word in my religion.  Can I configure npm to use a different folder?
+## `"node_modules"` is the name of my deity's arch-rival, and a Forbidden Word in my religion.  Can I configure npm to use a different folder?
 
 No.  This will never happen.  This question comes up sometimes,
 because it seems silly from the outside that npm couldn't just be
@@ -89,7 +89,7 @@ npm is not involved **at all** at run-time, node itself would have to
 be configured to know where you've decided to stick stuff.  Complexity
 hurdle #1.  Since the Node module system is locked, this cannot be
 changed, and is enough to kill this request.  But I'll continue, in
-deference to your diety's delicate feelings regarding spelling.
+deference to your deity's delicate feelings regarding spelling.
 
 Many of the others are in dependencies that npm uses, which are not
 necessarily tightly coupled to npm (in the sense that they do not read
