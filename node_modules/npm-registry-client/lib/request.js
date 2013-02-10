@@ -110,6 +110,7 @@ function regRequest (method, where, what, etag, nofollow, cb_) {
   })
 
   var self = this
+  var reauthed = false;
   operation.attempt(function (currentAttempt) {
     self.log.info("trying", "registry request attempt " + currentAttempt
         + " at " + (new Date()).toLocaleTimeString())
@@ -123,7 +124,12 @@ function regRequest (method, where, what, etag, nofollow, cb_) {
 
       // Only retry on 408, 5xx or no `response`.
       var statusCode = response && response.statusCode
-      var reauth = statusCode === 401
+
+      var reauth = !reauthed &&
+                   ( statusCode === 401 ||
+                     statusCode === 400 ||
+                     statusCode === 403 )
+
       var timeout = statusCode === 408
       var serverError = statusCode >= 500
       var statusRetry = !statusCode || timeout || serverError
