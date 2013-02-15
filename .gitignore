@@ -16,3 +16,4 @@ npm-debug.log
 /npmrc
 /release/
 /npm-*.tgz
+/node_modules/npm-registry-client/test/fixtures
