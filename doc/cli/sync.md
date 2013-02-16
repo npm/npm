@@ -29,7 +29,8 @@ packages:
 ```
   npm sync
 ```
-Note: This will remove any packages which are not installed from your `package.json`.
+
+  Note: This will remove any packages which are not installed from your `package.json`.
 
 `npm sync` takes 4 exclusive, optional flags which save or update the package version in 
 your main package.json (respected in the same order):
