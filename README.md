@@ -42,11 +42,11 @@ There's a pretty robust install script at
 
 You can set any npm configuration params with that script:
 
-npm_config_prefix=/some/path sh install.sh
+    npm_config_prefix=/some/path sh install.sh
 
 Or, you can run it in uber-debuggery mode:
 
-npm_debug=1 sh install.sh
+    npm_debug=1 sh install.sh
 
 ### Even Fancier
 
@@ -72,23 +72,23 @@ No.
 
 ## Permissions when Using npm to Install Other Stuff
 
-**tl;dr**
+### tl;dr
 
-* Use `sudo` for greater safety.  Or don't, if you prefer not to.
+* Use `sudo` for greater safety.  (Or don't, if you prefer not to.)
 * npm will downgrade permissions if it's root before running any build
   scripts that package authors specified.
 
 ### More details...
 
-As of version 0.3, it is recommended to run npm as root.
+As of version 0.3, it is recommended to run npm as `root`.
 This allows npm to change the user identifier to the `nobody` user prior
 to running any package build or test commands.
 
-If you are not the root user, or if you are on a platform that does not
+If you aren't the `root` user, or if you are on a platform that does not
 support uid switching, then npm will not attempt to change the userid.
 
 If you would like to ensure that npm **always** runs scripts as the
-"nobody" user, and have it fail if it cannot downgrade permissions, then
+`nobody` user, and have it fail if it cannot downgrade permissions, then
 set the following configuration param:
 
     npm config set unsafe-perm false
@@ -135,12 +135,12 @@ you have chosen.
 If you would like to use npm programmatically, you can do that.
 It's not very well documented, but it *is* rather simple.
 
-Most of the time, unless you actually want to do all the things that
-npm does, you should try using one of npm's dependencies rather than
-using npm itself, if possible.
+Unless you actually want to do all the things that npm does,
+you should try using one of npm's dependencies (rather than
+npm itself), if possible.
 
 Eventually, npm will be just a thin cli wrapper around the modules
-that it depends on, but for now, there are some things that you must
+it depends on. But for now, there are some things that you must
 use npm itself to do.
 
     var npm = require("npm")
@@ -225,11 +225,11 @@ When you find issues, please report them:
 * email:
   <npm-@googlegroups.com>
 
-Be sure to include *all* of the output from the npm command that didn't work
+Be sure to include *all* output from the npm command that didn't work
 as expected.  The `npm-debug.log` file is also helpful to provide.
 
-You can also look for isaacs in #node.js on irc://irc.freenode.net.  He
-will no doubt tell you to put the output in a gist or email.
+You can also look for isaacs in `#node.js` on [irc://irc.freenode.net].
+He will no doubt tell you to put the output in a gist or email.
 
 ## SEE ALSO
 
