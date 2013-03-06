@@ -30,8 +30,7 @@ function clean (obj) {
   for (var i in obj) {
     if (i === "from" || i === "resolved")
       delete obj[i]
-    else if (i === "dependencies")
-      for (var j in obj[i])
-        clean(obj[i][j])
+    else if (typeof obj[i] === "object" && obj[i])
+      clean(obj[i])
   }
 }
