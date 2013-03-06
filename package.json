@@ -58,7 +58,7 @@
     "chownr": "0",
     "npmlog": "0",
     "ansi": "~0.1.2",
-    "npm-registry-client": "~0.2.13",
+    "npm-registry-client": "~0.2.18",
     "read-package-json": "~0.2.2",
     "read-installed": "0",
     "glob": "~3.1.21",
