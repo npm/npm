@@ -69,7 +69,7 @@
     "once": "~1.1.1",
     "npmconf": "0",
     "opener": "~1.3.0",
-    "chmodr": "0.0"
+    "chmodr": "~0.1.0"
   },
   "bundleDependencies": [
     "semver",
