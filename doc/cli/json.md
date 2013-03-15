@@ -437,9 +437,9 @@ In this case, it's best to list these additional items in a
 `devDependencies` hash.
 
 These things will be installed whenever the `--dev` configuration flag
-is set.  This flag is set automatically when doing `npm link`, and can
-be managed like any other npm configuration param.  See `npm-config(1)`
-for more on the topic.
+is set.  This flag is set automatically when doing `npm link` or when doing
+`npm install` from the root of a package, and can be managed like any other npm
+configuration param.  See `npm-config(1)` for more on the topic.
 
 ## bundledDependencies
 
