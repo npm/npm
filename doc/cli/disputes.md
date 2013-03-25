@@ -49,7 +49,8 @@ Joe's appropriate course of action in each case is the same.
    the `foo` package.
 3. After a reasonable amount of time, if Bob has not responded, or if
    Bob and Joe can't come to any sort of resolution, email isaacs
-   <i@izs.me> and we'll sort it out.
+   <i@izs.me> and we'll sort it out.  ("Reasonable" is usually about 4
+   weeks, but extra time is allowed around common holidays.)
 
 ## REASONING
 
@@ -71,17 +72,23 @@ Some things are not allowed, and will be removed without discussion if
 they are brought to the attention of the npm registry admins, including
 but not limited to:
 
-1. Malware (that is, a module designed to exploit or harm the machine on
-   which it is installed)
+1. Malware (that is, a package designed to exploit or harm the machine on
+   which it is installed).
 2. Violations of copyright or licenses (for example, cloning an
    MIT-licensed program, and then removing or changing the copyright and
-   license statement)
+   license statement).
 3. Illegal content.
 4. "Squatting" on a package name that you *plan* to use, but aren't
    actually using.  Sorry, I don't care how great the name is, or how
    perfect a fit it is for the thing that someday might happen.  If
    someone wants to use it today, and you're just taking up space with
    an empty tarball, you're going to be evicted.
+5. Putting empty packages in the registry.  Packages must have SOME
+   functionality.  It can be silly, but it can't be *nothing*.  (See
+   also: squatting.)
+6. Doing weird things with the registry, like using it as your own
+   personal application database or otherwise putting non-packagey
+   things into it.
 
 If you see bad behavior like this, please report it right away.
 
