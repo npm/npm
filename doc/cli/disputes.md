@@ -15,9 +15,9 @@ There sometimes arise cases where a user publishes a module, and then
 later, some other user wants to use that name.  Here are some common
 ways that happens (each of these is based on actual events.)
 
-1. Bob writes a JavaScript module `foo`, which is not node-specific.
-   Bob doesn't use node at all.  Joe wants to use `foo` in node, so he
-   wraps it in an npm module.  Some time later, Bob starts using node,
+1. Joe writes a JavaScript module `foo`, which is not node-specific.
+   Joe doesn't use node at all.  Bob   wants to use `foo` in node, so he
+   wraps it in an npm module.  Some time later, Joe starts using node,
    and wants to take over management of his program.
 2. Bob writes an npm module `foo`, and publishes it.  Perhaps much
    later, Joe finds a bug in `foo`, and fixes it.  He sends a pull
