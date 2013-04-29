@@ -72,7 +72,8 @@
     "chmodr": "~0.1.0",
     "cmd-shim": "~1.1.0",
     "sha": "~1.0.1",
-    "editor": "0.0.4"
+    "editor": "0.0.4",
+    "child-process-close": "~0.1.1"
   },
   "bundleDependencies": [
     "semver",
@@ -112,7 +113,9 @@
     "opener",
     "chmodr",
     "cmd-shim",
-    "sha"
+    "sha",
+    "child-process-close",
+    "editor"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
