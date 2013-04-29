@@ -12,8 +12,9 @@ documentation URL, and then tries to open it using the `--browser`
 config param.
 
 Like other commands, the first parameter is an array. This command only
-uses the first element, which is expected to be a package name with an
-optional version number.
+uses the first element if present, which is expected to be a package name with
+an optional version number. If no package name is passed and you are within a
+project directory, it will use the local package.json.
 
 This command will launch a browser, so this command may not be the most
 friendly for programmatic use.
