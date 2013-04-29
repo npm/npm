@@ -144,4 +144,9 @@ describe('qs.parse()', function(){
     expect(qs.parse({ 'user[name]': 'tobi', 'user[email][main]': 'tobi@lb.com' }))
       .to.eql({ user: { name: 'tobi', email: { main: 'tobi@lb.com' } }});
   })
+
+  it('should not produce empty keys', function(){
+    expect(qs.parse('_r=1&'))
+      .to.eql({ _r: '1' })
+  })
 })
