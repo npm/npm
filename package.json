@@ -71,7 +71,8 @@
     "opener": "~1.3.0",
     "chmodr": "~0.1.0",
     "cmd-shim": "~1.1.0",
-    "sha": "~1.0.1"
+    "sha": "~1.0.1",
+    "editor": "0.0.4"
   },
   "bundleDependencies": [
     "semver",
