@@ -224,11 +224,13 @@ an argument to `git checkout`.  The default is `master`.
 You don't.  Try one of these node version managers:
 
 Unix:
+
 * <http://github.com/isaacs/nave>
 * <http://github.com/visionmedia/n>
 * <http://github.com/creationix/nvm>
 
 Windows:
+
 * <http://github.com/marcelklehr/nodist>
 * <https://github.com/hakobera/nvmw>
 
