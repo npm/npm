@@ -42,7 +42,7 @@
     "minimatch": "~0.2.12",
     "nopt": "~2.1.1",
     "rimraf": "2",
-    "request": "~2.20.0",
+    "request": "~2.21.0",
     "which": "1",
     "tar": "~0.1.17",
     "fstream": "~0.1.22",
