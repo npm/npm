@@ -208,9 +208,7 @@ exports.lockSync = function (path, opts) {
         // with subsecond stat precision, but that's acceptable
         // in exchange for not mistakenly removing locks on
         // most other systems.
-        console.error('1bump up stale', opts.stale)
         opts.stale = 1000 * Math.ceil(opts.stale / 1000)
-        console.error('2bump up stale', opts.stale)
       }
       var age = Date.now() - ct
       if (age > opts.stale) {
