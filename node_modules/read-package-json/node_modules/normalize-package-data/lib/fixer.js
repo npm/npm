@@ -6,7 +6,7 @@ var url = require("url")
 
 var fixer = module.exports = {
   fixRepositoryField: function(data) {
-    if (data.repostories) {
+    if (data.repositories) {
       this.warn("'repositories' (plural) Not supported.\n" +
            "Please pick one as the 'repository' field");
       data.repository = data.repositories[0]
