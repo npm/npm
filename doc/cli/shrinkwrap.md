@@ -141,16 +141,19 @@ available.
 
 ### Other Notes
 
-Since "npm shrinkwrap" uses the locally installed packages to
-construct the shrinkwrap file, devDependencies will be included if and
-only if you've installed them already when you make the shrinkwrap.
-
 A shrinkwrap file must be consistent with the package's package.json
 file. "npm shrinkwrap" will fail if required dependencies are not
 already installed, since that would result in a shrinkwrap that
 wouldn't actually work. Similarly, the command will fail if there are
 extraneous packages (not referenced by package.json), since that would
 indicate that package.json is not correct.
+
+Since "npm shrinkwrap" is intended to lock down your dependencies for
+production use, `devDependencies` will not be included unless you
+explicitly set the `--dev` flag when you run `npm shrinkwrap`.  If
+installed `devDependencies` are excluded, then npm will print a
+warning.  If you want them to be installed with your module by
+default, please consider adding them to `dependencies` instead.
 
 If shrinkwrapped package A depends on shrinkwrapped package B, B's
 shrinkwrap will not be used as part of the installation of A. However,
