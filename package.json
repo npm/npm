@@ -38,7 +38,7 @@
     "ini": "~1.1.0",
     "slide": "~1.1.4",
     "abbrev": "~1.0.4",
-    "graceful-fs": "~1.2.0",
+    "graceful-fs": "~1.2.2",
     "minimatch": "~0.2.12",
     "nopt": "~2.1.1",
     "rimraf": "2",
