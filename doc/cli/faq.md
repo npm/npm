@@ -313,8 +313,9 @@ To check if the registry is down, open up <http://registry.npmjs.org/>
 in a web browser.  This will also tell you if you are just unable to
 access the internet for some reason.
 
-If the registry IS down, let me know by emailing or posting an issue.
-We'll have someone kick it or something.
+If the registry IS down, let me know by emailing <i@izs.me> or posting
+an issue at <https://github.com/isaacs/npm/issues>.  We'll have
+someone kick it or something.
 
 ## Why no namespaces?
 
@@ -334,9 +335,8 @@ There is not sufficient need to impose namespace rules on everyone.
 
 ## I have a question or request not addressed here. Where should I put it?
 
-Discuss it on the mailing list, or post an issue.
+Post an issue on the github project:
 
-* <npm-@googlegroups.com>
 * <https://github.com/isaacs/npm/issues>
 
 ## Why does npm hate me?
