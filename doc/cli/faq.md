@@ -301,11 +301,6 @@ See `npm-link(1)`
 
 See `npm-registry(1)`.
 
-## What's up with the insecure channel warnings?
-
-Until node 0.4.10, there were problems sending big files over HTTPS.  That
-means that publishes go over HTTP by default in those versions of node.
-
 ## I forgot my password, and can't publish.  How do I reset it?
 
 Go to <https://npmjs.org/forgot>.
