@@ -166,7 +166,8 @@ inside that folder. (Unless they would be ignored by another rule.)
 You can also provide a ".npmignore" file in the root of your package,
 which will keep files from being included, even if they would be picked
 up by the files array.  The ".npmignore" file works just like a
-".gitignore".
+".gitignore", and npm will use ".gitignore" if no ".npmignore" file exists. See
+`npm-developers(1)` for more information.
 
 ## main
 
