@@ -33,7 +33,7 @@ def GypTestFormat(title, format=None, msvs_version=None):
   Args:
     format: gyp format to test.
   Returns:
-    0 for sucesss, 1 for failure.
+    0 for success, 1 for failure.
   """
   if not format:
     format = title

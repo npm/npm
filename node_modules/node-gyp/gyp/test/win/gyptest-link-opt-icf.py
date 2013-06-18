@@ -26,7 +26,7 @@ if sys.platform == 'win32':
   if output.count('similar_function') != 6: # 3 definitions, 3 calls.
     test.fail_test()
 
-  # Explicitly off, all functions preserved seperately.
+  # Explicitly off, all functions preserved separately.
   output = test.run_dumpbin(
       '/disasm', test.built_file_path('test_opticf_no.exe', chdir=CHDIR))
   if output.count('similar_function') != 6: # 3 definitions, 3 calls.
