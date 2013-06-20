@@ -60,7 +60,7 @@ function install (gyp, argv, callback) {
   }
 
   // 0.x.y-pre versions are not published yet and cannot be installed. Bail.
-  if (version[5] && version[5].match(/\-pre$/)) {
+  if (version.prerelease[0] === 'pre') {
     log.verbose('detected "pre" node version', versionStr)
     if (gyp.opts.nodedir) {
       log.verbose('--nodedir flag was passed; skipping install', gyp.opts.nodedir)
@@ -72,7 +72,7 @@ function install (gyp, argv, callback) {
   }
 
   // flatten version into String
-  version = version.slice(1, 4).join('.')
+  version = version.version
   log.verbose('install', 'installing version: %s', version)
 
   // the directory where the dev files will be installed
