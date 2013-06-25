@@ -514,3 +514,18 @@ test('\nstrict vs loose ranges', function(t) {
   });
   t.end();
 });
+
+test('\nmax satisfying', function(t) {
+  [[['1.2.3', '1.2.4'], '1.2', '1.2.4'],
+    [['1.2.4', '1.2.3'], '1.2', '1.2.4'],
+    [['1.2.3','1.2.4','1.2.5','1.2.6'], '~1.2.3', '1.2.6']
+  ].forEach(function(v) {
+    var versions = v[0];
+    var range = v[1];
+    var expect = v[2];
+    var loose = v[3];
+    var actual = semver.maxSatisfying(versions, range, loose);
+    t.equal(actual, expect);
+  });
+  t.end();
+});

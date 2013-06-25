@@ -835,7 +835,7 @@ exports.maxSatisfying = maxSatisfying;
 function maxSatisfying(versions, range, loose) {
   return versions.filter(function(version) {
     return satisfies(version, range, loose);
-  }).sort(compare)[0] || null;
+  }).sort(rcompare)[0] || null;
 }
 
 exports.validRange = validRange;
