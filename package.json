@@ -41,7 +41,7 @@
     "graceful-fs": "~1.2.2",
     "minimatch": "~0.2.12",
     "nopt": "~2.1.1",
-    "rimraf": "2",
+    "rimraf": "~2.2.0",
     "request": "~2.21.0",
     "which": "1",
     "tar": "~0.1.17",
