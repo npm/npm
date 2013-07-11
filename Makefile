@@ -1,12 +1,13 @@
+# vim: set softtabstop=2 shiftwidth=2:
 SHELL = bash
 
 markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
 html_docdeps = html/dochead.html \
-							 html/docfoot.html \
-							 html/docfoot-script.html \
-							 scripts/doc-build.sh \
-							 package.json
+               html/docfoot.html \
+               html/docfoot-script.html \
+               scripts/doc-build.sh \
+               package.json
 
 cli_mandocs = $(shell find doc/cli -name '*.md' \
                |sed 's|.md|.1|g' \
@@ -20,13 +21,13 @@ api_mandocs = $(shell find doc/api -name '*.md' \
 files_mandocs = $(shell find doc/files -name '*.md' \
                |sed 's|.md|.5|g' \
                |sed 's|doc/files/|man/man5/|g' ) \
-							 man/man5/npm-json.5 \
-							 man/man5/npm-global.5
+               man/man5/npm-json.5 \
+               man/man5/npm-global.5
 
 misc_mandocs = $(shell find doc/misc -name '*.md' \
                |sed 's|.md|.7|g' \
                |sed 's|doc/misc/|man/man7/|g' ) \
-							 man/man7/index.7
+               man/man7/index.7
 
 cli_htmldocs = $(shell find doc/cli -name '*.md' \
                 |sed 's|.md|.html|g' \
@@ -40,13 +41,13 @@ api_htmldocs = $(shell find doc/api -name '*.md' \
 files_htmldocs = $(shell find doc/files -name '*.md' \
                   |sed 's|.md|.html|g' \
                   |sed 's|doc/files/|html/doc/files/|g' ) \
-									html/doc/files/npm-json.html \
-									html/doc/files/npm-global.html
+                  html/doc/files/npm-json.html \
+                  html/doc/files/npm-global.html
 
 misc_htmldocs = $(shell find doc/misc -name '*.md' \
                  |sed 's|.md|.html|g' \
                  |sed 's|doc/misc/|html/doc/misc/|g' ) \
-							   html/doc/index.html
+                 html/doc/index.html
 
 mandocs = $(api_mandocs) $(cli_mandocs) $(files_mandocs) $(misc_mandocs)
 
@@ -83,9 +84,9 @@ doc-clean:
 	rm -rf \
     node_modules/ronn \
     node_modules/.bin/ronn \
-		.building_ronn \
-		html/doc \
-		man/man*
+    .building_ronn \
+    html/doc \
+    man/man*
 
 # use `npm install ronn` for this to work.
 man/man1/npm-README.1: README.md scripts/doc-build.sh package.json
@@ -174,31 +175,31 @@ docpublish: doc-publish
 doc-publish: doc
 	# legacy urls
 	for f in $(shell find html/doc/{cli,files,misc}/ -name '*.html'); do \
-		j=$(shell basename $$i | sed 's|^npm-||g'); \
-		! [ -f $$j ] && cp $$i doc/$$j; \
+    j=$(shell basename $$i | sed 's|^npm-||g'); \
+    ! [ -f $$j ] && cp $$i doc/$$j; \
 	done
 	mkdir html/api
 	for f in $(shell find html/doc/api/ -name '*.html'); do \
-		j=$(shell basename $$i | sed 's|^npm-||g'); \
-		cp $$i api/$$j; \
+    j=$(shell basename $$i | sed 's|^npm-||g'); \
+    cp $$i api/$$j; \
 	done
 	rsync -vazu --stats --no-implied-dirs --delete \
-		html/doc/ \
-		node@npmjs.org:/home/node/npm-www/doc
+    html/doc/ \
+    node@npmjs.org:/home/node/npm-www/doc
 	rsync -vazu --stats --no-implied-dirs --delete \
-		html/static/webfonts/ \
-		node@npmjs.org:/home/node/npm-www/static/webfonts
+    html/static/webfonts/ \
+    node@npmjs.org:/home/node/npm-www/static/webfonts
 	rsync -vazu --stats --no-implied-dirs --delete \
-		html/static/style.css \
-		node@npmjs.org:/home/node/npm-www/static/
+    html/static/style.css \
+    node@npmjs.org:/home/node/npm-www/static/
 	#cleanup
 	rm -rf html/api
 	for f in html/doc/*.html; do \
-		case $$f in \
-			html/doc/README.html) continue ;; \
-			html/doc/index.html) continue ;; \
-			*) rm $$f ;; \
-		esac; \
+    case $$f in \
+      html/doc/README.html) continue ;; \
+      html/doc/index.html) continue ;; \
+      *) rm $$f ;; \
+    esac; \
 	done
 
 zip-publish: release
