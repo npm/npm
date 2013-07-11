@@ -26,4 +26,4 @@ then go ahead and use this programmatically.
 
 ## SEE ALSO
 
-npm-json(1)
+package.json(5)

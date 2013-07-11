@@ -24,5 +24,5 @@ dependencies into the submodule folder.
 
 ## SEE ALSO
 
-* npm-json(1)
+* package.json(5)
 * git help submodule

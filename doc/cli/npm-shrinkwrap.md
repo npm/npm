@@ -181,5 +181,5 @@ contents rather than versions.
 ## SEE ALSO
 
 * npm-install(1)
-* npm-json(1)
+* package.json(5)
 * npm-list(1)

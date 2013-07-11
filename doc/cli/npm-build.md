@@ -19,4 +19,4 @@ It should generally not be called directly.
 * npm-install(1)
 * npm-link(1)
 * npm-scripts(1)
-* npm-json(1)
+* package.json(5)

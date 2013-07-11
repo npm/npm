@@ -33,7 +33,7 @@ Use `npm ls` to show everything you've installed.
 
 ## DIRECTORIES
 
-See `npm-folders(1)` to learn about where npm puts stuff.
+See `npm-folders(7)` to learn about where npm puts stuff.
 
 In particular, npm has two modes of operation:
 
@@ -54,7 +54,7 @@ If you're using npm to develop and publish your code, check out the
 following help topics:
 
 * json:
-  Make a package.json file.  See `npm-json(1)`.
+  Make a package.json file.  See `package.json(5)`.
 * link:
   For linking your current working code into Node's path, so that you
   don't have to reinstall every time you make a change.  Use
@@ -148,7 +148,7 @@ See npm-changelog(1)
 * npm-help(1)
 * npm-faq(1)
 * README
-* npm-json(1)
+* package.json(5)
 * npm-install(1)
 * npm-config(1)
 * npm-index(1)

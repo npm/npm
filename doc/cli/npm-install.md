@@ -121,7 +121,7 @@ after packing it up into a tarball (b).
 * `npm install <name>@<version range>`:
 
     Install a version of the package matching the specified version range.  This
-    will follow the same rules for resolving dependencies described in `npm-json(1)`.
+    will follow the same rules for resolving dependencies described in `package.json(5)`.
 
     Note that most version ranges must be put in quotes so that your shell will
     treat it as a single argument.

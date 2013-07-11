@@ -35,4 +35,4 @@ The base URL of the npm package registry.
 * npm-publish(1)
 * npm-registry(1)
 * npm-config(1)
-* npm-json(1)
+* package.json(5)

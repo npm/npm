@@ -54,7 +54,7 @@ installation target into your project's `node_modules` folder.
 
 * npm-developers(1)
 * npm-faq(1)
-* npm-json(1)
+* package.json(5)
 * npm-install(1)
 * npm-folders(1)
 * npm-config(1)

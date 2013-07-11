@@ -42,7 +42,7 @@ published at all, or
 `"publishConfig":{"registry":"http://my-internal-registry.local"}`
 to force it to be published only to your internal registry.
 
-See `npm-json(1)` for more info on what goes in the package.json file.
+See `package.json(5)` for more info on what goes in the package.json file.
 
 ## Will you replicate from my registry into the public one?
 

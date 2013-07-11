@@ -21,5 +21,5 @@ without a really good reason to do so.
 ## SEE ALSO
 
 * <https://github.com/isaacs/init-package-json>
-* npm-json(1)
+* package.json(5)
 * npm-version(1)

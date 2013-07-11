@@ -41,5 +41,5 @@ in your git config for this to work properly.  For example:
 ## SEE ALSO
 
 * npm-init(1)
-* npm-json(1)
+* package.json(5)
 * npm-semver(1)
