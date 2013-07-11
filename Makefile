@@ -161,7 +161,7 @@ doc-publish: doc
 	# legacy urls
 	for f in $(shell find html/doc/{cli,files,misc}/ -name '*.html'); do \
 		j=$(shell basename $$i | sed 's|^npm-||g'); \
-		cp $$i doc/$$j; \
+		! [ -f $$j ] && cp $$i doc/$$j; \
 	done
 	mkdir html/api
 	for f in $(shell find html/doc/api/ -name '*.html'); do \
