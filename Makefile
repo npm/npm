@@ -73,10 +73,8 @@ doc-clean:
     node_modules/ronn \
     node_modules/.bin/ronn \
 		.building_ronn \
-    $(api_mandocs) \
-    $(cli_mandocs) \
-    $(htmldocs) \
-		&>/dev/null || true
+		html/doc \
+		man/man*
 
 # use `npm install ronn` for this to work.
 man/man1/npm-README.1: README.md scripts/doc-build.sh package.json
