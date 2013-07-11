@@ -86,6 +86,7 @@ doc-clean:
     node_modules/.bin/ronn \
     .building_ronn \
     html/doc \
+    html/api \
     man/man*
 
 # use `npm install ronn` for this to work.
@@ -174,15 +175,17 @@ publish: link doc
 docpublish: doc-publish
 doc-publish: doc
 	# legacy urls
-	for f in $(shell find html/doc/{cli,files,misc}/ -name '*.html'); do \
-    j=$(shell basename $$i | sed 's|^npm-||g'); \
-    ! [ -f $$j ] && cp $$i doc/$$j; \
-	done
-	mkdir html/api
-	for f in $(shell find html/doc/api/ -name '*.html'); do \
-    j=$(shell basename $$i | sed 's|^npm-||g'); \
-    cp $$i api/$$j; \
-	done
+	for f in $$(find html/doc/{cli,files,misc}/ -name '*.html'); do \
+    j=$$(basename $$f | sed 's|^npm-||g'); \
+    if ! [ -f html/doc/$$j ] && [ $$j != README.html ] && [ $$j != index.html ]; then \
+      perl -pi -e 's/ href="\.\.\// href="/g' <$$f >html/doc/$$j; \
+    fi; \
+  done
+	mkdir -p html/api
+	for f in $$(find html/doc/api/ -name '*.html'); do \
+    j=$$(basename $$f | sed 's|^npm-||g'); \
+    perl -pi -e 's/ href="\.\.\// href="/g' <$$f >html/api/$$j; \
+  done
 	rsync -vazu --stats --no-implied-dirs --delete \
     html/doc/ \
     node@npmjs.org:/home/node/npm-www/doc
@@ -200,7 +203,7 @@ doc-publish: doc
       html/doc/index.html) continue ;; \
       *) rm $$f ;; \
     esac; \
-	done
+  done
 
 zip-publish: release
 	scp release/* node@nodejs.org:dist/npm/
