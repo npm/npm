@@ -187,7 +187,7 @@ doc-publish: doc
     perl -pi -e 's/ href="\.\.\// href="/g' <$$f >html/api/$$j; \
   done
 	rsync -vazu --stats --no-implied-dirs --delete \
-    html/doc/ \
+    html/doc/* \
     node@npmjs.org:/home/node/npm-www/doc
 	rsync -vazu --stats --no-implied-dirs --delete \
     html/static/webfonts/ \
