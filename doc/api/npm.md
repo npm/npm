@@ -34,7 +34,7 @@ params are loaded from two configuration files. See `npm-config(1)`
 for more information.
 
 After that, each of the functions are accessible in the
-commands object: `npm.commands.<cmd>`.  See `npm-index(1)` for a list of
+commands object: `npm.commands.<cmd>`.  See `npm-index(7)` for a list of
 all possible commands.
 
 All commands on the command object take an **array** of positional argument

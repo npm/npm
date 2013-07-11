@@ -20,7 +20,7 @@ assumed to be the command to run. All other elements are ignored.
 
 ## SEE ALSO
 
-* npm-scripts(1)
+* npm-scripts(7)
 * npm-test(3)
 * npm-start(3)
 * npm-restart(3)

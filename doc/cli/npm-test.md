@@ -15,7 +15,7 @@ true.
 ## SEE ALSO
 
 * npm-run-script(1)
-* npm-scripts(1)
+* npm-scripts(7)
 * npm-start(1)
 * npm-restart(1)
 * npm-stop(1)

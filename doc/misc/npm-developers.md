@@ -201,7 +201,7 @@ Tell the world how easy it is to install your program!
 * npm(1)
 * npm-init(1)
 * package.json(5)
-* npm-scripts(1)
+* npm-scripts(7)
 * npm-publish(1)
 * npm-adduser(1)
 * npm-registry(7)

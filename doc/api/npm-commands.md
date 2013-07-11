@@ -19,4 +19,4 @@ usage, or `man 3 npm-<command>` for programmatic usage.
 
 ## SEE ALSO
 
-* npm-index(1)
+* npm-index(7)

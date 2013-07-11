@@ -25,6 +25,6 @@ the registry.  Overwrites when the "force" environment variable is set.
 
 ## SEE ALSO
 
-* npm-registry(1)
+* npm-registry(7)
 * npm-adduser(1)
 * npm-owner(3)

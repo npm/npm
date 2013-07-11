@@ -27,6 +27,6 @@ the root package entry is removed from the registry entirely.
 
 * npm-deprecate(1)
 * npm-publish(1)
-* npm-registry(1)
+* npm-registry(7)
 * npm-adduser(1)
 * npm-owner(1)

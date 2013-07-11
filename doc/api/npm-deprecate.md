@@ -31,4 +31,4 @@ To un-deprecate a package, specify an empty string (`""`) for the `message` argu
 
 * npm-publish(3)
 * npm-unpublish(3)
-* npm-registry(1)
+* npm-registry(7)

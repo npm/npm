@@ -13,5 +13,5 @@ packages are currently outdated.
 ## SEE ALSO
 
 * npm-update(1)
-* npm-registry(1)
+* npm-registry(7)
 * npm-folders(7)

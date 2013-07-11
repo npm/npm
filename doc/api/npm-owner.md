@@ -28,4 +28,4 @@ that is not implemented at this time.
 ## SEE ALSO
 
 * npm-publish(3)
-* npm-registry(1)
+* npm-registry(7)

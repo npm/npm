@@ -23,4 +23,4 @@ To un-deprecate a package, specify an empty string (`""`) for the `message` argu
 ## SEE ALSO
 
 * npm-publish(1)
-* npm-registry(1)
+* npm-registry(7)

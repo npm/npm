@@ -33,6 +33,6 @@ The base URL of the npm package registry.
 * npm-docs(1)
 * npm-view(1)
 * npm-publish(1)
-* npm-registry(1)
+* npm-registry(7)
 * npm-config(1)
 * package.json(5)

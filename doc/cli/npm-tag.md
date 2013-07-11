@@ -13,5 +13,5 @@ Tags the specified version of the package with the specified tag, or the
 ## SEE ALSO
 
 * npm-publish(1)
-* npm-registry(1)
+* npm-registry(7)
 * npm-config(1)

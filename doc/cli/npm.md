@@ -102,7 +102,7 @@ See `npm-config(1)` for much much more information.
 Patches welcome!
 
 * code:
-  Read through `npm-coding-style(1)` if you plan to submit code.
+  Read through `npm-coding-style(7)` if you plan to submit code.
   You don't have to agree with it, but you do have to follow it.
 * docs:
   If you find an error in the documentation, edit the appropriate markdown
@@ -146,10 +146,10 @@ See npm-changelog(1)
 ## SEE ALSO
 
 * npm-help(1)
-* npm-faq(1)
+* npm-faq(7)
 * README
 * package.json(5)
 * npm-install(1)
 * npm-config(1)
-* npm-index(1)
+* npm-index(7)
 * npm(3)

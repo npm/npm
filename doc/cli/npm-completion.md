@@ -24,6 +24,6 @@ completions based on the arguments.
 
 ## SEE ALSO
 
-* npm-developers(1)
-* npm-faq(1)
+* npm-developers(7)
+* npm-faq(7)
 * npm(1)
