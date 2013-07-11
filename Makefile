@@ -112,10 +112,10 @@ man/man5/%.5: doc/files/%.md scripts/doc-build.sh package.json
 	@[ -d man/man5 ] || mkdir -p man/man5
 	scripts/doc-build.sh $< $@
 
-doc/misc/index.md: scripts/index-build.js package.json
+doc/misc/npm-index.md: scripts/index-build.js package.json
 	node scripts/index-build.js > $@
 
-html/doc/index.html: doc/misc/index.md $(html_docdeps)
+html/doc/index.html: doc/misc/npm-index.md $(html_docdeps)
 	@[ -d html/doc ] || mkdir -p html/doc
 	scripts/doc-build.sh $< $@
 

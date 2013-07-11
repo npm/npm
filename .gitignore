@@ -12,7 +12,7 @@ npm-debug.log
 /html/api/
 /html/doc/
 /man/
-/doc/*/index.md
+/doc/*/npm-index.md
 /npmrc
 /release/
 /npm-*.tgz
