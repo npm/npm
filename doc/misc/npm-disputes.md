@@ -1,4 +1,4 @@
-npm-disputes(1) -- Handling Module Name Disputes
+npm-disputes(7) -- Handling Module Name Disputes
 ================================================
 
 ## SYNOPSIS
@@ -94,5 +94,5 @@ If you see bad behavior like this, please report it right away.
 
 ## SEE ALSO
 
-* npm-registry(1)
+* npm-registry(7)
 * npm-owner(1)

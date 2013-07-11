@@ -1,4 +1,4 @@
-npm-faq(1) -- Frequently Asked Questions
+npm-faq(7) -- Frequently Asked Questions
 ========================================
 
 ## Where can I find these docs in HTML?
@@ -22,7 +22,7 @@ do what it says and post a bug with all the information it asks for.
 
 ## Where does npm put stuff?
 
-See `npm-folders(1)`
+See `npm-folders(5)`
 
 tl;dr:
 
@@ -58,7 +58,7 @@ problems than it solves.
 
 It is much harder to avoid dependency conflicts without nesting
 dependencies.  This is fundamental to the way that npm works, and has
-proven to be an extremely successful approach.  See `npm-folders(1)` for
+proven to be an extremely successful approach.  See `npm-folders(5)` for
 more details.
 
 If you want a package to be installed in one place, and have all your
@@ -280,12 +280,12 @@ Windows:
 
 ## How can I use npm for development?
 
-See `npm-developers(1)` and `npm-json(1)`.
+See `npm-developers(7)` and `package.json(5)`.
 
 You'll most likely want to `npm link` your development folder.  That's
 awesomely handy.
 
-To set up your own private registry, check out `npm-registry(1)`.
+To set up your own private registry, check out `npm-registry(7)`.
 
 ## Can I list a url as a dependency?
 
@@ -299,7 +299,7 @@ See `npm-link(1)`
 
 ## The package registry website.  What is that exactly?
 
-See `npm-registry(1)`.
+See `npm-registry(7)`.
 
 ## I forgot my password, and can't publish.  How do I reset it?
 
@@ -346,7 +346,9 @@ npm is not capable of hatred.  It loves everyone, especially you.
 ## SEE ALSO
 
 * npm(1)
-* npm-developers(1)
-* npm-json(1)
+* npm-developers(7)
+* package.json(5)
 * npm-config(1)
-* npm-folders(1)
+* npmrc(5)
+* npm-config(7)
+* npm-folders(5)

@@ -1,4 +1,4 @@
-npm-registry(1) -- The JavaScript Package Registry
+npm-registry(7) -- The JavaScript Package Registry
 ==================================================
 
 ## DESCRIPTION
@@ -87,5 +87,6 @@ Yes, head over to <https://npmjs.org/>
 ## SEE ALSO
 
 * npm-config(1)
-* npm-developers(1)
-* npm-disputes(1)
+* npm-config(7)
+* npm-developers(7)
+* npm-disputes(7)

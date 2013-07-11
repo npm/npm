@@ -1,4 +1,4 @@
-npm-coding-style(1) -- npm's "funny" coding style
+npm-coding-style(7) -- npm's "funny" coding style
 =================================================
 
 ## DESCRIPTION
@@ -141,7 +141,7 @@ logging the same object over and over again is not helpful.  Logs should
 report what's happening so that it's easier to track down where a fault
 occurs.
 
-Use appropriate log levels.  See `npm-config(1)` and search for
+Use appropriate log levels.  See `npm-config(7)` and search for
 "loglevel".
 
 ## Case, naming, etc.
@@ -176,6 +176,6 @@ Boolean objects are verboten.
 
 ## SEE ALSO
 
-* npm-developers(1)
-* npm-faq(1)
+* npm-developers(7)
+* npm-faq(7)
 * npm(1)

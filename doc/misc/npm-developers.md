@@ -1,4 +1,4 @@
-npm-developers(1) -- Developer Guide
+npm-developers(7) -- Developer Guide
 ====================================
 
 ## DESCRIPTION
@@ -49,7 +49,7 @@ an argument to `git checkout`.  The default is `master`.
 You need to have a `package.json` file in the root of your project to do
 much of anything with npm.  That is basically the whole interface.
 
-See `npm-json(1)` for details about what goes in that file.  At the very
+See `package.json(5)` for details about what goes in that file.  At the very
 least, you need:
 
 * name:
@@ -78,7 +78,7 @@ least, you need:
   If you have a special compilation or installation script, then you
   should put it in the `scripts` hash.  You should definitely have at
   least a basic smoke-test command as the "scripts.test" field.
-  See npm-scripts(1).
+  See npm-scripts(7).
 
 * main:
   If you have a single module that serves as the entry point to your
@@ -197,11 +197,11 @@ Tell the world how easy it is to install your program!
 
 ## SEE ALSO
 
-* npm-faq(1)
+* npm-faq(7)
 * npm(1)
 * npm-init(1)
-* npm-json(1)
+* package.json(5)
 * npm-scripts(1)
 * npm-publish(1)
 * npm-adduser(1)
-* npm-registry(1)
+* npm-registry(7)
