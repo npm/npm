@@ -1,4 +1,4 @@
-npm-folders(1) -- Folder Structures Used by npm
+npm-folders(5) -- Folder Structures Used by npm
 ===============================================
 
 ## DESCRIPTION
@@ -196,14 +196,16 @@ not be included in the package tarball.
 
 This allows a package maintainer to install all of their dependencies
 (and dev dependencies) locally, but only re-publish those items that
-cannot be found elsewhere.  See `npm-json(1)` for more information.
+cannot be found elsewhere.  See `package.json(5)` for more information.
 
 ## SEE ALSO
 
-* npm-faq(1)
-* npm-json(1)
+* npm-faq(7)
+* package.json(5)
 * npm-install(1)
 * npm-pack(1)
 * npm-cache(1)
 * npm-config(1)
+* npmrc(5)
+* npm-config(7)
 * npm-publish(1)
