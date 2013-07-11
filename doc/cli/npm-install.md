@@ -70,7 +70,7 @@ after packing it up into a tarball (b).
 * `npm install <name> [--save|--save-dev|--save-optional]`:
 
     Do a `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
-    `npm-config(1)`.)
+    `npm-config(7)`.)
 
     In most cases, this will install the latest version
     of the module published on npm.
@@ -174,7 +174,7 @@ shrinkwrap file and use the package.json instead.
 The `--nodedir=/path/to/node/source` argument will allow npm to find the
 node source code so that npm can compile native modules.
 
-See `npm-config(1)`.  Many of the configuration params have some
+See `npm-config(7)`.  Many of the configuration params have some
 effect on installation, since that's most of what npm does.
 
 ## ALGORITHM
@@ -235,6 +235,8 @@ affects a real use-case, it will be investigated.
 * npm-scripts(7)
 * npm-build(1)
 * npm-config(1)
+* npm-config(7)
+* npmrc(5)
 * npm-registry(7)
 * npm-folders(7)
 * npm-tag(1)

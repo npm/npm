@@ -23,3 +23,5 @@ If no arguments are supplied, then npm packs the current package folder.
 * npm-cache(1)
 * npm-publish(1)
 * npm-config(1)
+* npm-config(7)
+* npmrc(5)

@@ -349,6 +349,7 @@ npm is not capable of hatred.  It loves everyone, especially you.
 * npm-developers(7)
 * package.json(5)
 * npm-config(1)
+* npm-config(7)
 * npmrc(5)
 * npm-config(7)
 * npm-folders(5)

@@ -17,3 +17,5 @@ on its behalf.
 * npm-install(1)
 * npm-folders(7)
 * npm-config(1)
+* npm-config(7)
+* npmrc(5)

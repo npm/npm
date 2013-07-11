@@ -15,3 +15,5 @@ Tags the specified version of the package with the specified tag, or the
 * npm-publish(1)
 * npm-registry(7)
 * npm-config(1)
+* npm-config(7)
+* npmrc(5)

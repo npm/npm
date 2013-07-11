@@ -30,8 +30,8 @@ If you provide `configObject` as an object hash of top-level
 configs, they override the values stored in the various config
 locations. In the npm command line client, this set of configs
 is parsed from the command line options. Additional configuration
-params are loaded from two configuration files. See `npm-config(1)`
-for more information.
+params are loaded from two configuration files. See `npm-config(1)`,
+`npm-config(7)`, and `npmrc(5)` for more information.
 
 After that, each of the functions are accessible in the
 commands object: `npm.commands.<cmd>`.  See `npm-index(7)` for a list of

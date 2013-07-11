@@ -17,4 +17,6 @@ expression characters must be escaped or quoted in most shells.)
 
 * npm-registry(7)
 * npm-config(1)
+* npm-config(7)
+* npmrc(5)
 * npm-view(1)

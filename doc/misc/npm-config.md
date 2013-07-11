@@ -820,6 +820,7 @@ then answer "no" to any prompt.
 ## SEE ALSO
 
 * npm-config(1)
+* npm-config(7)
 * npmrc(5)
 * npm-scripts(7)
 * npm-folders(5)

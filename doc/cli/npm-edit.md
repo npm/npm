@@ -8,7 +8,7 @@ npm-edit(1) -- Edit an installed package
 ## DESCRIPTION
 
 Opens the package folder in the default editor (or whatever you've
-configured as the npm `editor` config -- see `npm-config(1)`.)
+configured as the npm `editor` config -- see `npm-config(7)`.)
 
 After it has been edited, the package is rebuilt so as to pick up any
 changes in compiled packages.
@@ -33,3 +33,5 @@ The command to run for `npm edit` or `npm config edit`.
 * npm-explore(1)
 * npm-install(1)
 * npm-config(1)
+* npm-config(7)
+* npmrc(5)

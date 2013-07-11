@@ -19,7 +19,8 @@ are CouchDB users, stored in the <http://isaacs.iriscouch.com/_users>
 database.
 
 The registry URL is supplied by the `registry` config parameter.  See
-`npm-config(1)` for more on managing npm's configuration.
+`npm-config(1)`, `npmrc(5)`, and `npm-config(7)` for more on managing
+npm's configuration.
 
 ## Can I run my own private registry?
 
@@ -88,5 +89,6 @@ Yes, head over to <https://npmjs.org/>
 
 * npm-config(1)
 * npm-config(7)
+* npmrc(5)
 * npm-developers(7)
 * npm-disputes(7)

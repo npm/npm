@@ -15,3 +15,5 @@ Print the effective `node_modules` folder to standard out.
 * npm-bin(1)
 * npm-folders(7)
 * npm-config(1)
+* npm-config(7)
+* npmrc(5)

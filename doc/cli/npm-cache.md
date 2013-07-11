@@ -65,6 +65,8 @@ The root cache folder.
 
 * npm-folders(7)
 * npm-config(1)
+* npm-config(7)
+* npmrc(5)
 * npm-install(1)
 * npm-publish(1)
 * npm-pack(1)

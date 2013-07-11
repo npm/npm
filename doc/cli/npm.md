@@ -95,7 +95,7 @@ npm is extremely configurable.  It reads its configuration options from
   npm's default configuration options are defined in
   lib/utils/config-defs.js.  These must not be changed.
 
-See `npm-config(1)` for much much more information.
+See `npm-config(7)` for much much more information.
 
 ## CONTRIBUTIONS
 
@@ -151,5 +151,7 @@ See npm-changelog(1)
 * package.json(5)
 * npm-install(1)
 * npm-config(1)
+* npm-config(7)
+* npmrc(5)
 * npm-index(7)
 * npm(3)
