@@ -41,7 +41,7 @@ version=$(node cli.js -v)
 mkdir -p $(dirname $dest)
 
 case $dest in
-  *.[13])
+  *.[1357])
     ./node_modules/.bin/ronn --roff $src \
     | sed "s|@VERSION@|$version|g" \
     | perl -pi -e 's/npm\\-([^\(]*)\(1\)/npm help \1/g' \

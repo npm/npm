@@ -5,27 +5,41 @@ markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 cli_mandocs = $(shell find doc/cli -name '*.md' \
                |sed 's|.md|.1|g' \
                |sed 's|doc/cli/|man/man1/|g' ) \
-               man/man1/README.1 \
-               man/man1/index.1
+               man/man1/npm-README.1
 
 api_mandocs = $(shell find doc/api -name '*.md' \
                |sed 's|.md|.3|g' \
                |sed 's|doc/api/|man/man3/|g' )
 
+files_mandocs = $(shell find doc/files -name '*.md' \
+               |sed 's|.md|.5|g' \
+               |sed 's|doc/files/|man/man5/|g' )
+
+misc_mandocs = $(shell find doc/misc -name '*.md' \
+               |sed 's|.md|.7|g' \
+               |sed 's|doc/misc/|man/man7/|g' )
+
+
 cli_htmldocs = $(shell find doc/cli -name '*.md' \
-                |grep -v 'index.md' \
                 |sed 's|.md|.html|g' \
-                |sed 's|doc/cli/|html/doc/|g' ) \
-                html/doc/README.html \
-                html/doc/index.html
+                |sed 's|doc/cli/|html/doc/cli/|g' ) \
+                html/doc/README.html
 
 api_htmldocs = $(shell find doc/api -name '*.md' \
                 |sed 's|.md|.html|g' \
-                |sed 's|doc/api/|html/api/|g' )
+                |sed 's|doc/api/|html/doc/api/|g' )
 
-mandocs = $(api_mandocs) $(cli_mandocs)
+files_htmldocs = $(shell find doc/files -name '*.md' \
+                  |sed 's|.md|.html|g' \
+                  |sed 's|doc/files/|html/doc/files/|g' )
 
-htmldocs = $(api_htmldocs) $(cli_htmldocs)
+misc_htmldocs = $(shell find doc/misc -name '*.md' \
+                 |sed 's|.md|.html|g' \
+                 |sed 's|doc/misc/|html/doc/misc/|g' )
+
+mandocs = $(api_mandocs) $(cli_mandocs) $(files_mandocs) $(misc_mandocs)
+
+htmldocs = $(api_htmldocs) $(cli_htmldocs) $(files_htmldocs) $(misc_htmldocs)
 
 all: doc
 
@@ -59,16 +73,14 @@ doc-clean:
     node_modules/ronn \
     node_modules/.bin/ronn \
 		.building_ronn \
-    doc/cli/index.md \
-    doc/api/index.md \
     $(api_mandocs) \
     $(cli_mandocs) \
-    $(api_htmldocs) \
-    $(cli_htmldocs) \
+    $(htmldocs) \
 		&>/dev/null || true
 
 # use `npm install ronn` for this to work.
-man/man1/README.1: README.md scripts/doc-build.sh package.json
+man/man1/npm-README.1: README.md scripts/doc-build.sh package.json
+	@[ -d man/man1 ] || mkdir -p man/man1
 	scripts/doc-build.sh $< $@
 
 man/man1/%.1: doc/cli/%.md scripts/doc-build.sh package.json
@@ -79,17 +91,36 @@ man/man3/%.3: doc/api/%.md scripts/doc-build.sh package.json
 	@[ -d man/man3 ] || mkdir -p man/man3
 	scripts/doc-build.sh $< $@
 
+man/man5/%.5: doc/files/%.md scripts/doc-build.sh package.json
+	@[ -d man/man5 ] || mkdir -p man/man5
+	scripts/doc-build.sh $< $@
+
+man/man7/%.7: doc/misc/%.md scripts/doc-build.sh package.json
+	@[ -d man/man7 ] || mkdir -p man/man7
+	scripts/doc-build.sh $< $@
+
 html/doc/README.html: README.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+	@[ -d html/doc ] || mkdir -p html/doc
 	scripts/doc-build.sh $< $@
 
-html/doc/%.html: doc/cli/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+html/doc/cli/%.html: doc/cli/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+	@[ -d html/doc/cli ] || mkdir -p html/doc/cli
 	scripts/doc-build.sh $< $@
 
-html/api/%.html: doc/api/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+html/doc/api/%.html: doc/api/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+	@[ -d html/doc/api ] || mkdir -p html/doc/api
 	scripts/doc-build.sh $< $@
 
-doc/cli/index.md: $(markdowns) scripts/index-build.js scripts/doc-build.sh package.json
-	node scripts/index-build.js > $@
+html/doc/files/%.html: doc/files/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+	@[ -d html/doc/files ] || mkdir -p html/doc/files
+	scripts/doc-build.sh $< $@
+
+html/doc/misc/%.html: doc/misc/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+	@[ -d html/doc/misc ] || mkdir -p html/doc/misc
+	scripts/doc-build.sh $< $@
+
+
+
 
 node_modules/.bin/ronn:
 	node cli.js install ronn
@@ -114,18 +145,34 @@ publish: link doc
 
 docpublish: doc-publish
 doc-publish: doc
+	# legacy urls
+	for f in $(shell find html/doc/{cli,files,misc}/ -name '*.html'); do \
+		j=$(shell basename $$i | sed 's|^npm-||g'); \
+		cp $$i doc/$$j; \
+	done
+	mkdir html/api
+	for f in $(shell find html/doc/api/ -name '*.html'); do \
+		j=$(shell basename $$i | sed 's|^npm-||g'); \
+		cp $$i api/$$j; \
+	done
 	rsync -vazu --stats --no-implied-dirs --delete \
 		html/doc/ \
 		node@npmjs.org:/home/node/npm-www/doc
-	rsync -vazu --stats --no-implied-dirs --delete \
-		html/api/ \
-		node@npmjs.org:/home/node/npm-www/api
 	rsync -vazu --stats --no-implied-dirs --delete \
 		html/static/webfonts/ \
 		node@npmjs.org:/home/node/npm-www/static/webfonts
 	rsync -vazu --stats --no-implied-dirs --delete \
 		html/static/style.css \
 		node@npmjs.org:/home/node/npm-www/static/
+	#cleanup
+	rm -rf html/api
+	for f in html/doc/*.html; do \
+		case $$f in \
+			html/doc/README.html) continue ;; \
+			html/doc/index.html) continue ;; \
+			*) rm $$f ;; \
+		esac; \
+	done
 
 zip-publish: release
 	scp release/* node@nodejs.org:dist/npm/
