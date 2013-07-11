@@ -14,4 +14,4 @@ packages are currently outdated.
 
 * npm-update(1)
 * npm-registry(1)
-* npm-folders(1)
+* npm-folders(7)

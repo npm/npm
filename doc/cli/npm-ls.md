@@ -64,7 +64,7 @@ project.
 ## SEE ALSO
 
 * npm-config(1)
-* npm-folders(1)
+* npm-folders(7)
 * npm-install(1)
 * npm-link(1)
 * npm-prune(1)

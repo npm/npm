@@ -13,5 +13,5 @@ Print the folder where npm will install executables.
 
 * npm-prefix(1)
 * npm-root(1)
-* npm-folders(1)
+* npm-folders(7)
 * npm-config(1)

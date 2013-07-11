@@ -31,7 +31,7 @@ Set to `"browser"` to view html help content in the default web browser.
 * npm(1)
 * README
 * npm-faq(1)
-* npm-folders(1)
+* npm-folders(7)
 * npm-config(1)
 * package.json(5)
 * npm-help-search(1)

@@ -15,5 +15,5 @@ on its behalf.
 
 * npm-prune(1)
 * npm-install(1)
-* npm-folders(1)
+* npm-folders(7)
 * npm-config(1)

@@ -13,5 +13,5 @@ Print the effective `node_modules` folder to standard out.
 
 * npm-prefix(1)
 * npm-bin(1)
-* npm-folders(1)
+* npm-folders(7)
 * npm-config(1)
