@@ -61,15 +61,20 @@ case $dest in
     | sed "s|@VERSION@|$version|g" \
     | perl -pi -e 's/<h1>([^\(]*\([0-9]\)) -- (.*?)<\/h1>/<h1>\1<\/h1> <p>\2<\/p>/g' \
     | perl -pi -e 's/npm-npm/npm/g' \
-    | perl -pi -e 's/([^"-])(npm-)?README(\(1\))?/\1<a href="..\/doc\/README.html">README<\/a>/g' \
+    | perl -pi -e 's/([^"-])(npm-)?README(\(1\))?/\1<a href="..\/..\/doc\/README.html">README<\/a>/g' \
     | perl -pi -e 's/<title><a href="[^"]+README.html">README<\/a><\/title>/<title>README<\/title>/g' \
     | perl -pi -e 's/([^"-])([^\(> ]+)(\(1\))/\1<a href="..\/cli\/\2.html">\2\3<\/a>/g' \
     | perl -pi -e 's/([^"-])([^\(> ]+)(\(3\))/\1<a href="..\/api\/\2.html">\2\3<\/a>/g' \
     | perl -pi -e 's/([^"-])([^\(> ]+)(\(5\))/\1<a href="..\/files\/\2.html">\2\3<\/a>/g' \
     | perl -pi -e 's/([^"-])([^\(> ]+)(\(7\))/\1<a href="..\/misc\/\2.html">\2\3<\/a>/g' \
     | perl -pi -e 's/\([1357]\)<\/a><\/h1>/<\/a><\/h1>/g' \
-    > $dest
-    cat html/docfoot-script.html >> $dest
+    | (if [ $(basename $(dirname $dest)) == "doc" ]; then
+        perl -pi -e 's/ href="\.\.\// href="/g'
+      else
+        cat
+      fi) \
+    > $dest \
+    && cat html/docfoot-script.html >> $dest
     exit $?
     ;;
   *)

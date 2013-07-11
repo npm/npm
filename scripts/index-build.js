@@ -11,7 +11,7 @@ glob(root + "/{README.md,doc/*/*.md}", function (er, files) {
   output(files.map(function (f) {
     var b = path.basename(f)
     if (b === "README.md")
-      return [1, b]
+      return [0, b]
     if (b === "index.md")
       return null
     var s = conversion[path.basename(path.dirname(f))]
@@ -22,8 +22,6 @@ glob(root + "/{README.md,doc/*/*.md}", function (er, files) {
     return (a[0] === b[0])
            ? ( path.basename(a[1]) === "npm.md" ? -1
              : path.basename(b[1]) === "npm.md" ? 1
-             : path.basename(a[1]) === "README.md" ? -1
-             : path.basename(b[1]) === "README.md" ? 1
              : a[1] > b[1] ? 1 : -1 )
            : a[0] - b[0]
   }))
@@ -36,6 +34,7 @@ function output (files) {
     "npm-index(7) -- Index of all npm documentation\n" +
     "==============================================\n")
 
+  writeLines(files, 0)
   writeLines(files, 1, "Command Line Documentation")
   writeLines(files, 3, "API Documentation")
   writeLines(files, 5, "Files")
@@ -43,7 +42,8 @@ function output (files) {
 }
 
 function writeLines (files, sxn, heading) {
-  console.log("# %s\n", heading)
+  if (heading)
+    console.log("# %s\n", heading)
   files.filter(function (f) {
     return f[0] === sxn
   }).forEach(writeLine)
@@ -51,7 +51,7 @@ function writeLines (files, sxn, heading) {
 
 
 function writeLine (sd) {
-  var sxn = sd[0]
+  var sxn = sd[0] || 1
     , doc = sd[1]
     , d = path.basename(doc, ".md")
 

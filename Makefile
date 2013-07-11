@@ -2,6 +2,12 @@ SHELL = bash
 
 markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
+html_docdeps = html/dochead.html \
+							 html/docfoot.html \
+							 html/docfoot-script.html \
+							 scripts/doc-build.sh \
+							 package.json
+
 cli_mandocs = $(shell find doc/cli -name '*.md' \
                |sed 's|.md|.1|g' \
                |sed 's|doc/cli/|man/man1/|g' ) \
@@ -19,8 +25,8 @@ files_mandocs = $(shell find doc/files -name '*.md' \
 
 misc_mandocs = $(shell find doc/misc -name '*.md' \
                |sed 's|.md|.7|g' \
-               |sed 's|doc/misc/|man/man7/|g' )
-
+               |sed 's|doc/misc/|man/man7/|g' ) \
+							 man/man7/index.7
 
 cli_htmldocs = $(shell find doc/cli -name '*.md' \
                 |sed 's|.md|.html|g' \
@@ -39,7 +45,8 @@ files_htmldocs = $(shell find doc/files -name '*.md' \
 
 misc_htmldocs = $(shell find doc/misc -name '*.md' \
                  |sed 's|.md|.html|g' \
-                 |sed 's|doc/misc/|html/doc/misc/|g' )
+                 |sed 's|doc/misc/|html/doc/misc/|g' ) \
+							   html/doc/index.html
 
 mandocs = $(api_mandocs) $(cli_mandocs) $(files_mandocs) $(misc_mandocs)
 
@@ -103,19 +110,26 @@ man/man5/%.5: doc/files/%.md scripts/doc-build.sh package.json
 	@[ -d man/man5 ] || mkdir -p man/man5
 	scripts/doc-build.sh $< $@
 
+doc/misc/index.md: scripts/index-build.js package.json
+	node scripts/index-build.js > $@
+
+html/doc/index.html: doc/misc/index.md $(html_docdeps)
+	@[ -d html/doc ] || mkdir -p html/doc
+	scripts/doc-build.sh $< $@
+
 man/man7/%.7: doc/misc/%.md scripts/doc-build.sh package.json
 	@[ -d man/man7 ] || mkdir -p man/man7
 	scripts/doc-build.sh $< $@
 
-html/doc/README.html: README.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+html/doc/README.html: README.md $(html_docdeps)
 	@[ -d html/doc ] || mkdir -p html/doc
 	scripts/doc-build.sh $< $@
 
-html/doc/cli/%.html: doc/cli/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+html/doc/cli/%.html: doc/cli/%.md $(html_docdeps)
 	@[ -d html/doc/cli ] || mkdir -p html/doc/cli
 	scripts/doc-build.sh $< $@
 
-html/doc/api/%.html: doc/api/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+html/doc/api/%.html: doc/api/%.md $(html_docdeps)
 	@[ -d html/doc/api ] || mkdir -p html/doc/api
 	scripts/doc-build.sh $< $@
 
@@ -124,11 +138,11 @@ html/doc/files/npm-json.html: html/doc/files/package.json.html
 html/doc/files/npm-global.html: html/doc/files/npm-folders.html
 	cp $< $@
 
-html/doc/files/%.html: doc/files/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+html/doc/files/%.html: doc/files/%.md $(html_docdeps)
 	@[ -d html/doc/files ] || mkdir -p html/doc/files
 	scripts/doc-build.sh $< $@
 
-html/doc/misc/%.html: doc/misc/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
+html/doc/misc/%.html: doc/misc/%.md $(html_docdeps)
 	@[ -d html/doc/misc ] || mkdir -p html/doc/misc
 	scripts/doc-build.sh $< $@
 
