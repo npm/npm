@@ -56,7 +56,7 @@
     "uid-number": "0",
     "archy": "0",
     "chownr": "0",
-    "npmlog": "0.0.3",
+    "npmlog": "0.0.4",
     "ansi": "~0.1.2",
     "npm-registry-client": "~0.2.26",
     "read-package-json": "~1.1.0",
