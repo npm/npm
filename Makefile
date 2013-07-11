@@ -13,7 +13,9 @@ api_mandocs = $(shell find doc/api -name '*.md' \
 
 files_mandocs = $(shell find doc/files -name '*.md' \
                |sed 's|.md|.5|g' \
-               |sed 's|doc/files/|man/man5/|g' )
+               |sed 's|doc/files/|man/man5/|g' ) \
+							 man/man5/npm-json.5 \
+							 man/man5/npm-global.5
 
 misc_mandocs = $(shell find doc/misc -name '*.md' \
                |sed 's|.md|.7|g' \
@@ -31,7 +33,9 @@ api_htmldocs = $(shell find doc/api -name '*.md' \
 
 files_htmldocs = $(shell find doc/files -name '*.md' \
                   |sed 's|.md|.html|g' \
-                  |sed 's|doc/files/|html/doc/files/|g' )
+                  |sed 's|doc/files/|html/doc/files/|g' ) \
+									html/doc/files/npm-json.html \
+									html/doc/files/npm-global.html
 
 misc_htmldocs = $(shell find doc/misc -name '*.md' \
                  |sed 's|.md|.html|g' \
@@ -89,6 +93,12 @@ man/man3/%.3: doc/api/%.md scripts/doc-build.sh package.json
 	@[ -d man/man3 ] || mkdir -p man/man3
 	scripts/doc-build.sh $< $@
 
+man/man5/npm-json.5: man/man5/package.json.5
+	cp $< $@
+
+man/man5/npm-global.5: man/man5/npm-folders.5
+	cp $< $@
+
 man/man5/%.5: doc/files/%.md scripts/doc-build.sh package.json
 	@[ -d man/man5 ] || mkdir -p man/man5
 	scripts/doc-build.sh $< $@
@@ -108,6 +118,11 @@ html/doc/cli/%.html: doc/cli/%.md html/dochead.html html/docfoot.html scripts/do
 html/doc/api/%.html: doc/api/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
 	@[ -d html/doc/api ] || mkdir -p html/doc/api
 	scripts/doc-build.sh $< $@
+
+html/doc/files/npm-json.html: html/doc/files/package.json.html
+	cp $< $@
+html/doc/files/npm-global.html: html/doc/files/npm-folders.html
+	cp $< $@
 
 html/doc/files/%.html: doc/files/%.md html/dochead.html html/docfoot.html scripts/doc-build.sh package.json
 	@[ -d html/doc/files ] || mkdir -p html/doc/files
