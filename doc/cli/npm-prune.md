@@ -18,4 +18,4 @@ package's dependencies list.
 
 * npm-rm(1)
 * npm-folders(5)
-* npm-list(1)
+* npm-ls(1)
