@@ -11,7 +11,6 @@ npm-install(1) -- Install a package
     npm install <name>@<tag>
     npm install <name>@<version>
     npm install <name>@<version range>
-    npm install <name>@<version range>
 
 ## DESCRIPTION
 
