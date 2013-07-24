@@ -40,7 +40,7 @@
     "abbrev": "~1.0.4",
     "graceful-fs": "~2.0.0",
     "minimatch": "~0.2.12",
-    "nopt": "~2.1.1",
+    "nopt": "~2.1.2",
     "rimraf": "~2.2.0",
     "request": "~2.21.0",
     "which": "1",
