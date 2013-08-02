@@ -61,7 +61,7 @@
     "read-package-json": "~1.1.0",
     "read-installed": "~0.2.2",
     "glob": "~3.2.3",
-    "init-package-json": "0.0.10",
+    "init-package-json": "0.0.11",
     "osenv": "0",
     "lockfile": "~0.4.0",
     "retry": "~0.6.0",
