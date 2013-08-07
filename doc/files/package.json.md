@@ -576,7 +576,7 @@ overridden.
 
 ## SEE ALSO
 
-* npm-semver(7)
+* semver(7)
 * npm-init(1)
 * npm-version(1)
 * npm-config(1)
