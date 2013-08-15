@@ -19,3 +19,4 @@ npm-debug.log
 /npm-*.tgz
 /node_modules/npm-registry-client/test/fixtures
 *.pyc
+node_modules/github-url-from-git
