@@ -83,7 +83,7 @@ tl;dr
 * Check `node_modules` into git for things you **deploy**, such as
   websites and apps.
 * Do not check `node_modules` into git for libraries and modules
-  intended to be reused.
+  intended to be reused or apps installed using `npm install`.
 * Use npm to manage dependencies in your dev environment, but not in
   your deployment scripts.
 
