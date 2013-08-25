@@ -1,0 +1,9 @@
+{
+  "author": "Milton the Aussie",
+  "name": "ignore-scripts",
+  "version": "0.0.0",
+  "scripts": {
+    "preinstall": "exit 123",
+    "prepublish": "exit 123"
+  }
+}
