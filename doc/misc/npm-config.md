@@ -373,7 +373,7 @@ from packages when building tarballs.
 * Default: false
 * Type: Boolean
 
-If true, `npm install` does not run preinstall and prepublish scripts.
+If true, npm does not run scripts specified in package.json files.
 
 ### init-module
 

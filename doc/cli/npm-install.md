@@ -174,9 +174,6 @@ shrinkwrap file and use the package.json instead.
 The `--nodedir=/path/to/node/source` argument will allow npm to find the
 node source code so that npm can compile native modules.
 
-The `--ignore-scripts` argument will cause npm to not run preinstall and
-prepublish scripts.
-
 See `npm-config(7)`.  Many of the configuration params have some
 effect on installation, since that's most of what npm does.
 
