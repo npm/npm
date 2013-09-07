@@ -36,7 +36,7 @@
   "dependencies": {
     "semver": "~2.1.0",
     "ini": "~1.1.0",
-    "slide": "~1.1.4",
+    "slide": "~1.1.5",
     "abbrev": "~1.0.4",
     "graceful-fs": "~2.0.0",
     "minimatch": "~0.2.12",
