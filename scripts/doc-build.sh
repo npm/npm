@@ -36,7 +36,7 @@ src=$1
 dest=$2
 name=$(basename ${src%.*})
 date=$(date -u +'%Y-%M-%d %H:%m:%S')
-version=$(node cli.js -v)
+version=$(node -e "console.log(require('./package').version)")
 
 mkdir -p $(dirname $dest)
 
