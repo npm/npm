@@ -38,6 +38,14 @@ paths, etc.) then read on.
 There's a pretty robust install script at
 <https://npmjs.org/install.sh>.  You can download that and run it.
 
+Other simple inline install method via curl
+
+    curl https://npmjs.org/install.sh | sudo sh
+
+or via wget
+
+    wget -qO- https://npmjs.org/install.sh | sudo sh
+
 ### Slightly Fancier
 
 You can set any npm configuration params with that script:
