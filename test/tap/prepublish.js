@@ -7,7 +7,6 @@ var tmp = pkg + '/tmp'
 var cache = pkg + '/cache'
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
-var npm = require('npm')
 var path = require('path')
 
 test('setup', function (t) {
