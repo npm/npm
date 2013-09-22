@@ -8,6 +8,7 @@ var cache = pkg + '/cache'
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
 var path = require('path')
+var os = require('os')
 
 test('setup', function (t) {
   var n = 0
@@ -69,10 +70,10 @@ test('test', function (t) {
   function onend () {
     c = c.trim()
     t.equal( c
-           , '> npm-test-prepublish@1.2.5 prepublish .\n'
-           + '> echo ok\n'
-           + '\n'
-           + 'ok\n'
+           , '> npm-test-prepublish@1.2.5 prepublish .' + os.EOL
+           + '> echo ok' + os.EOL
+           + os.EOL
+           + 'ok' + os.EOL
            + 'npm-test-prepublish-1.2.5.tgz')
     t.end()
   }
