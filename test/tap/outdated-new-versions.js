@@ -8,17 +8,23 @@ var port = 1331
 var address = "http://localhost:" + port
 var pkg = __dirname + '/outdated-new-versions'
 
-
 test("dicovers new versions in outdated", function (t) {
   process.chdir(pkg)
-
+  t.plan(2)
   mr(port, function (s) {
     npm.load({registry: address}, function () {
-      npm.outdated(function (er, d) {
-        t.equal("1.5.1", d[0][4]) // dependencies
-        t.equal("2.27.0", d[1][4]) // devDependencies
-        s.close()
-        t.end()
+      // purge old cached data from previous tests
+      npm.commands.cache.clean(["underscore"], function () {
+        npm.outdated(function (er, d) {
+          for (var i = 0; i < d.length; i++) {
+            if (d[i][1] === "underscore")
+              t.equal("1.5.1", d[i][4])
+            if (d[i][1] === "request")
+              t.equal("2.27.0", d[i][4])
+          }
+          s.close()
+          t.end()
+        })
       })
     })
   })
