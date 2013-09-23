@@ -1,0 +1,8 @@
+{
+  "author": "Steve Mason",
+  "name": "url-dependencies",
+  "version": "0.0.0",
+  "dependencies": {
+    "once": "https://registry.npmjs.org/once/-/once-1.2.0.tgz"
+  }
+}
