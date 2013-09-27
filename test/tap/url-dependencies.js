@@ -1,10 +1,18 @@
 var test = require("tap").test
 var rimraf = require("rimraf")
 
+var mr = require("npm-registry-mock")
+
 var spawn = require("child_process").spawn
 var npm = require.resolve("../../bin/npm-cli.js")
 var node = process.execPath
 var pkg = "./url-dependencies"
+
+var mockRoutes = {
+  "get": {
+    "/underscore/-/underscore-1.3.1.tgz": [200]
+  }
+}
 
 test("url-dependencies: download first time", function(t) {
   rimraf.sync(__dirname + "/url-dependencies/node_modules")
@@ -50,29 +58,32 @@ test("url-dependencies: still downloads multiple times when using --force", func
 })
 
 function tarballWasFetched(output){
-  return output.indexOf("http GET https://registry.npmjs.org/once/-/once-1.2.0.tgz") > -1
+  return output.indexOf("http GET http://localhost:1337/underscore/-/underscore-1.3.1.tgz") > -1
 }
 
 function performInstall (force, cb) {
   if(typeof force === "function") cb = force, force = false
-  var output = ""
-    , child = spawn(node, [npm, "install", force ? "--force" : ""], {
-        cwd: pkg,
-        env: {
-          // npm_config_registry: "http://localhost:1337",
-          npm_config_cache_lock_stale: 1000,
-          npm_config_cache_lock_wait: 1000,
-          HOME: process.env.HOME,
-          Path: process.env.PATH,
-          PATH: process.env.PATH
-        }
-      })
 
-  child.stderr.on("data", function(data){
-    output += data.toString()
-  })
-  child.on("close", function () {
-    // process.exit()
-    cb(output)
+  mr({port: 1337, mocks: mockRoutes}, function(s){
+    var output = ""
+      , child = spawn(node, [npm, "install", force ? "--force" : ""], {
+          cwd: pkg,
+          env: {
+            npm_config_registry: "http://localhost:1337",
+            npm_config_cache_lock_stale: 1000,
+            npm_config_cache_lock_wait: 1000,
+            HOME: process.env.HOME,
+            Path: process.env.PATH,
+            PATH: process.env.PATH
+          }
+        })
+
+    child.stderr.on("data", function(data){
+      output += data.toString()
+    })
+    child.on("close", function () {
+      s.close()
+      cb(output)
+    })
   })
 }
