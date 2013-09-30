@@ -1,0 +1,15 @@
+{
+  "author": "Dmitry Shirokov <deadrunk@gmail.com>",
+  "name": "npm-test-shrinkwrap-create",
+  "version": "0.0.1",
+  "dependencies": {
+    "glob": "git://github.com/isaacs/node-glob.git#npm-test",
+    "minimatch": "~0.1.0"
+  },
+  "devDependencies": {
+    "npm-test-peer-deps-file": "https://gist.github.com/domenic/3971128/raw/7472b26a013ceb174c2d726314e9fa97465729bb/index.js"
+  },
+  "scripts": {
+    "test": "node test.js"
+  }
+}
