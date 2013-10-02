@@ -74,7 +74,8 @@
     "editor": "0.0.4",
     "child-process-close": "~0.1.1",
     "npm-user-validate": "0.0.3",
-    "github-url-from-git": "1.1.1"
+    "github-url-from-git": "1.1.1",
+    "github-url-from-username-repo": "0.0.2"
   },
   "bundleDependencies": [
     "semver",
@@ -118,7 +119,8 @@
     "child-process-close",
     "editor",
     "npm-user-validate",
-    "github-url-from-git"
+    "github-url-from-git",
+    "github-url-from-username-repo"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
