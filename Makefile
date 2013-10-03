@@ -71,7 +71,7 @@ link: uninstall
 	node cli.js link -f
 
 clean: ronnclean doc-clean uninstall
-	rm npmrc
+	rm -rf npmrc
 	node cli.js cache clean
 
 uninstall:
@@ -160,7 +160,7 @@ doc: man
 
 man: $(cli_docs) $(api_docs)
 
-test:
+test: doc
 	node cli.js test
 
 publish: link doc
