@@ -154,7 +154,7 @@ html/doc/misc/%.html: doc/misc/%.md $(html_docdeps)
 ronn: node_modules/.bin/ronn
 
 node_modules/.bin/ronn:
-	node cli.js install ronn
+	node cli.js install ronn --no-global
 
 doc: man
 
