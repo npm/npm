@@ -8,11 +8,13 @@ var child
 var spawn = require("child_process").spawn
 var npm = require.resolve("../../bin/npm-cli.js")
 var node = process.execPath
+var path = require('path')
+var mock = path.join(__dirname, 'ignore-shrinkwrap/index.js')
 
 var customMocks = {
   "get": {
-    "/package.js": [200, {"ente" : true}],
-    "/shrinkwrap.js": [200, {"ente" : true}]
+    "/package.js": [200, mock],
+    "/shrinkwrap.js": [200, mock]
   }
 }
 

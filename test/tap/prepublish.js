@@ -43,6 +43,7 @@ test('test', function (t) {
   var node = process.execPath
   var npm = path.resolve(__dirname, '../../cli.js')
   var env = {
+    npm_config_loglevel: 'silent',
     npm_config_cache: cache,
     npm_config_tmp: tmp,
     npm_config_prefix: pkg,
