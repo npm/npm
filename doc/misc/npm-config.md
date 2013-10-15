@@ -58,6 +58,7 @@ The following shorthands are parsed on the command-line:
 * `-desc`: `--description`
 * `-S`: `--save`
 * `-D`: `--save-dev`
+* `-P`: `--save-peer`
 * `-O`: `--save-optional`
 * `-B`: `--save-bundle`
 * `-y`: `--yes`
@@ -614,6 +615,16 @@ bundledDependencies list.
 Save installed packages to a package.json file as devDependencies.
 
 When used with the `npm rm` command, it removes it from the devDependencies
+hash.
+
+### save-peer
+
+* Default: false
+* Type: Boolean
+
+Save installed packages to a package.json file as peerDependencies.
+
+When used with the `npm rm` command, it removes it from the peerDependencies
 hash.
 
 Only works if there is already a package.json file present.
