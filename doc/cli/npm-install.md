@@ -7,7 +7,7 @@ npm-install(1) -- Install a package
     npm install <tarball file>
     npm install <tarball url>
     npm install <folder>
-    npm install <name> [--save|--save-dev|--save-optional]
+    npm install <name> [--save|--save-dev|--save-peer|--save-optional]
     npm install <name>@<tag>
     npm install <name>@<version>
     npm install <name>@<version range>
@@ -67,7 +67,7 @@ after packing it up into a tarball (b).
 
           npm install https://github.com/indexzero/forever/tarball/v0.5.6
 
-* `npm install <name> [--save|--save-dev|--save-optional]`:
+* `npm install <name> [--save|--save-dev|--save-peer|--save-optional]`:
 
     Do a `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
     `npm-config(7)`.)
@@ -85,6 +85,8 @@ after packing it up into a tarball (b).
     * `--save`: Package will appear in your `dependencies`.
 
     * `--save-dev`: Package will appear in your `devDependencies`.
+
+    * `--save-peer`: Package will appear in your `peerDependencies`.
 
     * `--save-optional`: Package will appear in your `optionalDependencies`.
 
