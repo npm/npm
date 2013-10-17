@@ -1,6 +1,5 @@
 var test = require("tap").test
 var npm = require.resolve("../../bin/npm-cli.js")
-var osenv = require("osenv")
 var path = require("path")
 var fs = require("fs")
 var rimraf = require("rimraf")
