@@ -55,6 +55,7 @@ The following shorthands are parsed on the command-line:
 * `-reg`: `--registry`
 * `-v`: `--version`
 * `-f`: `--force`
+* `-fi`: `--force-reinstall`
 * `-desc`: `--description`
 * `-S`: `--save`
 * `-D`: `--save-dev`
@@ -263,6 +264,14 @@ Makes various commands more forceful.
 * publishing clobbers previously published versions.
 * skips cache when requesting from the registry.
 * prevents checks against clobbering non-npm files.
+
+### force-reinstall
+
+* Default: false
+* Type: Boolean
+
+If set to true, then npm will stubbornly download all node modules dependencies
+even if the dependency currently exists in the node_modules directory.
 
 ### fetch-retries
 
