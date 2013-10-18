@@ -55,7 +55,7 @@ The following shorthands are parsed on the command-line:
 * `-reg`: `--registry`
 * `-v`: `--version`
 * `-f`: `--force`
-* `-fi`: `--force-reinstall`
+* `-fr`: `--force-reinstall`
 * `-desc`: `--description`
 * `-S`: `--save`
 * `-D`: `--save-dev`
