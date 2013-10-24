@@ -69,7 +69,7 @@
     "npmconf": "~0.1.2",
     "opener": "~1.3.0",
     "chmodr": "~0.1.0",
-    "cmd-shim": "~1.0.1",
+    "cmd-shim": "~1.1.1",
     "sha": "~1.2.1",
     "editor": "0.0.4",
     "child-process-close": "~0.1.1",
