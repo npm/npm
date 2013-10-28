@@ -34,7 +34,7 @@
   "main": "./lib/npm.js",
   "bin": "./bin/npm-cli.js",
   "dependencies": {
-    "semver": "~2.1.0",
+    "semver": "~2.2.1",
     "ini": "~1.1.0",
     "slide": "~1.1.5",
     "abbrev": "~1.0.4",
