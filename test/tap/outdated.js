@@ -9,11 +9,12 @@ var mr = require("npm-registry-mock")
 var pkg = __dirname + '/outdated'
 
 test("it should not throw", function (t) {
-  rimraf.sync(pkg + "/node_modules")
+  cleanup()
   process.chdir(pkg)
 
   mr(common.port, function (s) {
     npm.load({
+      cache: pkg + "/cache",
       registry: common.registry }
     , function () {
       npm.install(".", function (err) {
@@ -31,3 +32,8 @@ test("cleanup", function (t) {
   cleanup()
   t.end()
 })
+
+function cleanup () {
+  rimraf.sync(pkg + "/node_modules")
+  rimraf.sync(pkg + "/cache")
+}
