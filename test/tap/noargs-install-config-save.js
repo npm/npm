@@ -1,3 +1,4 @@
+var common = require("../common-tap.js")
 var test = require("tap").test
 var npm = require.resolve("../../bin/npm-cli.js")
 var osenv = require("osenv")
@@ -32,7 +33,7 @@ function writePackageJson() {
 function createChild (args) {
   var env = {
     npm_config_save: true,
-    npm_config_registry: "http://localhost:1337",
+    npm_config_registry: common.registry,
     HOME: process.env.HOME,
     Path: process.env.PATH,
     PATH: process.env.PATH
@@ -52,7 +53,7 @@ test("does not update the package.json with empty arguments", function (t) {
   writePackageJson()
   t.plan(1)
 
-  mr(1337, function (s) {
+  mr(common.port, function (s) {
     var child = createChild([npm, "install"])
     child.on("close", function (m) {
       var text = JSON.stringify(fs.readFileSync(pkg + "/package.json", "utf8"))
@@ -67,7 +68,7 @@ test("updates the package.json (adds dependencies) with an argument", function (
   writePackageJson()
   t.plan(1)
 
-  mr(1337, function (s) {
+  mr(common.port, function (s) {
     var child = createChild([npm, "install", "underscore"])
     child.on("close", function (m) {
       var text = JSON.stringify(fs.readFileSync(pkg + "/package.json", "utf8"))

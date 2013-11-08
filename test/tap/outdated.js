@@ -1,3 +1,4 @@
+var common = require("../common-tap.js")
 var fs = require("fs")
 var test = require("tap").test
 var rimraf = require("rimraf")
@@ -5,16 +6,16 @@ var npm = require("../../")
 
 var mr = require("npm-registry-mock")
 // config
-var port = 1331
-var address = "http://localhost:" + port
 var pkg = __dirname + '/outdated'
 
 test("it should not throw", function (t) {
   rimraf.sync(pkg + "/node_modules")
   process.chdir(pkg)
 
-  mr(port, function (s) {
-    npm.load({registry: address}, function () {
+  mr(common.port, function (s) {
+    npm.load({
+      registry: common.registry }
+    , function () {
       npm.install(".", function (err) {
         npm.outdated(function (er, d) {
           console.log(d)
@@ -27,6 +28,6 @@ test("it should not throw", function (t) {
 })
 
 test("cleanup", function (t) {
-  rimraf.sync(pkg + "/node_modules")
+  cleanup()
   t.end()
 })
