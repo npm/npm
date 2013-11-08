@@ -46,7 +46,6 @@ function createChild (args) {
 
   return spawn(node, args, {
     cwd: pkg,
-    stdio: "inherit",
     env: env
   })
 }
