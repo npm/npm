@@ -1,0 +1,9 @@
+{
+  "name": "publish-file-nonprivate",
+  "author": "Rockbert",
+  "description": "fixture",
+  "version": "0.0.0",
+  "dependencies": {
+    "foo": "git+file://"
+  }
+}
