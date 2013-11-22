@@ -75,7 +75,9 @@
     "child-process-close": "~0.1.1",
     "npm-user-validate": "0.0.3",
     "github-url-from-git": "1.1.1",
-    "github-url-from-username-repo": "0.0.2"
+    "github-url-from-username-repo": "0.0.2",
+    "ansicolors": "~0.3.1",
+    "ansistyles": "~0.1.2"
   },
   "bundleDependencies": [
     "semver",
@@ -121,7 +123,10 @@
     "npm-user-validate",
     "github-url-from-git",
     "github-url-from-username-repo",
-    "normalize-package-data"
+    "normalize-package-data",
+    "text-table",
+    "ansicolors",
+    "ansistyles"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
