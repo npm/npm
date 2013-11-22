@@ -75,7 +75,9 @@
     "child-process-close": "~0.1.1",
     "npm-user-validate": "0.0.3",
     "github-url-from-git": "1.1.1",
-    "github-url-from-username-repo": "0.0.2"
+    "github-url-from-username-repo": "0.0.2",
+    "text-table": "~0.2.0",
+    "cli-color": "~0.2.3"
   },
   "bundleDependencies": [
     "semver",
