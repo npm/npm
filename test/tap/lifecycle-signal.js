@@ -6,6 +6,7 @@ var path = require("path")
 var pkg = path.resolve(__dirname, "lifecycle-signal")
 
 test("lifecycle signal abort", function (t) {
+  if (process.platform === "win32") return t.end()
   var child = spawn(node, [npm, "install"], {
     cwd: pkg
   })
