@@ -15,6 +15,20 @@ var common = require("../common-tap.js")
            , '--cache=' + pkg + '/cache'
            ]
 
+var expected = { underscore:
+                 { current: '1.3.3'
+                 , wanted: '1.3.3'
+                 , latest: '1.5.1'
+                 , location: 'node_modules/underscore'
+                 }
+               , request:
+                 { current: '0.9.5'
+                 , wanted: '0.9.5'
+                 , latest: '2.27.0'
+                 , location: 'node_modules/request'
+                 }
+               }
+
 test("it should log json data", function (t) {
   cleanup()
   process.chdir(pkg)
@@ -35,23 +49,10 @@ test("it should log json data", function (t) {
           .pipe(process.stdout)
         child.on('exit', function () {
           out = JSON.parse(out)
-
-          t.ok(out.underscore)
-          t.equal(out.underscore.current, '1.3.3')
-          t.equal(out.underscore.wanted, '1.3.3')
-          t.equal(out.underscore.latest, '1.5.1')
-          t.equal(out.underscore.location, 'node_modules/underscore')
-
-          t.ok(out.request)
-          t.equal(out.request.current, '0.9.5')
-          t.equal(out.request.wanted, '0.9.5')
-          t.equal(out.request.latest, '2.27.0')
-          t.equal(out.request.location, 'node_modules/request')
-
+          t.deepEqual(out, expected)
           s.close()
           t.end()
         })
-        child.unref()
       })
     })
   })
