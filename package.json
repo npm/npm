@@ -76,8 +76,8 @@
     "npm-user-validate": "0.0.3",
     "github-url-from-git": "1.1.1",
     "github-url-from-username-repo": "0.0.2",
-    "text-table": "~0.2.0",
-    "cli-color": "~0.2.3"
+    "ansicolors": "~0.3.1",
+    "ansistyles": "~0.1.2"
   },
   "bundleDependencies": [
     "semver",
@@ -125,7 +125,8 @@
     "github-url-from-username-repo",
     "normalize-package-data",
     "text-table",
-    "cli-color"
+    "ansicolors",
+    "ansistyles"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
