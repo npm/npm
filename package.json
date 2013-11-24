@@ -123,7 +123,9 @@
     "npm-user-validate",
     "github-url-from-git",
     "github-url-from-username-repo",
-    "normalize-package-data"
+    "normalize-package-data",
+    "text-table",
+    "cli-color"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
