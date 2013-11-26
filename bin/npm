@@ -6,8 +6,14 @@ case `uname` in
     *CYGWIN*) basedir=`cygpath -w "$basedir"`;;
 esac
 
-if [ -x "$basedir/node.exe" ]; then
-  "$basedir/node.exe" "$basedir/node_modules/npm/bin/npm-cli.js" "$@"
+if [ -x "$basedir/npm-cli.js" ]; then
+  npm_cli="$basedir/npm-cli.js"
 else
-  node "$basedir/node_modules/npm/bin/npm-cli.js" "$@"
+  npm_cli="$basedir/node_modules/npm/bin/npm-cli.js"
+fi
+
+if [ -x "$basedir/node.exe" ]; then
+  "$basedir/node.exe" "$npm_cli" "$@"
+else
+  node "$npm_cli" "$@"
 fi
