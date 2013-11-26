@@ -70,7 +70,7 @@ test('test', function (t) {
   function onend () {
     c = c.trim()
     var regex = new RegExp("" +
-      "> npm-test-prepublish@1.2.5 prepublish .\\r?\\n" +
+      "> npm-test-prepublish@1.2.5 prepublish [^\\r\\n]+\\r?\\n" +
       "> echo ok\\r?\\n" +
       "\\r?\\n" +
       "ok\\r?\\n" +
