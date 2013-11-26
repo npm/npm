@@ -3,6 +3,7 @@ var common = require("../common-tap.js")
   , rimraf = require("rimraf")
   , npm = require("../../")
   , mr = require("npm-registry-mock")
+  , path = require("path")
   , spawn = require('child_process').spawn
   , node = process.execPath
   , npmc = require.resolve('../../')
@@ -19,13 +20,13 @@ var expected = { underscore:
                  { current: '1.3.3'
                  , wanted: '1.3.3'
                  , latest: '1.5.1'
-                 , location: 'node_modules/underscore'
+                 , location: 'node_modules' + path.sep + 'underscore'
                  }
                , request:
                  { current: '0.9.5'
                  , wanted: '0.9.5'
                  , latest: '2.27.0'
-                 , location: 'node_modules/request'
+                 , location: 'node_modules' + path.sep + 'request'
                  }
                }
 
