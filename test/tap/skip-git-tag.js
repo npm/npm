@@ -10,12 +10,8 @@ var mkdirp = require('mkdirp')
 var which = require('which')
 var util = require('util')
 var spawn = require('child_process').spawn
-var args = [ npmc
-           , 'version'
-           , 'patch'
-           , '--no-git-tag-version'
-           ]
-var pkg = __dirname + '/version-no-tags'
+
+var pkg = __dirname + '/skip-git-tag'
 
 test("npm version <semver> without git tag", function (t) {
   setup()
@@ -25,17 +21,17 @@ test("npm version <semver> without git tag", function (t) {
         var child = spawn(git, ['tag', '-l', tag])
         var out = ''
         child.stdout.on('data', function(d) {
-          out += data.toString()
+          out += d.toString()
         })
         child.on('exit', function() {
           return _cb(null, Boolean(~out.indexOf(tag)))
         })
       }
-      
+
       var child = spawn(git, ['init'])
       child.stdout.pipe(process.stdout)
       child.on('exit', function() {
-        npm.config.set('git-tag-version', false)
+        npm.config.set('skip-git-tag', true)
         npm.commands.version(['patch'], function(err) {
           if (err) return t.fail('Error perform version patch')
           var testPkg = require(pkg+'/package')
@@ -62,9 +58,9 @@ function setup() {
   mkdirp.sync(pkg + '/cache')
   fs.writeFileSync(pkg + '/package.json', JSON.stringify({
     author: "Evan Lucas",
-    name: "version-no-tags-test",
+    name: "skip-git-tag-test",
     version: "0.0.0",
-    description: "Test for git-tag-version flag"
+    description: "Test for skip-git-tag flag"
   }), 'utf8')
   process.chdir(pkg)
 }
