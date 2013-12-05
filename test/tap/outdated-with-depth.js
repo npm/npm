@@ -1,4 +1,5 @@
 var common = require("../common-tap.js")
+var fs = require('fs')
 var test = require("tap").test
 var npm = require("../../")
 var mkdirp = require("mkdirp")
@@ -18,6 +19,8 @@ var expected = [ pkg + '/node_modules/request'
                ]
 
 test("depth option should work for outdated", function (t) {
+
+  prepareFixture()
   process.chdir(pkg)
   t.plan(3)
 
@@ -49,5 +52,16 @@ test("depth option should work for outdated", function (t) {
 
 test("cleanup", function (t) {
   rimraf.sync(pkg + "/cache")
+  revertFixture()
   t.end()
 })
+
+function prepareFixture () {
+  fs.renameSync(pkg + '/node_modules_fixture', pkg + '/node_modules')
+  fs.renameSync(pkg + '/node_modules/request/node_modules_fixture', pkg + '/node_modules/request/node_modules')
+}
+
+function revertFixture () {
+  fs.renameSync(pkg + '/node_modules/request/node_modules', pkg + '/node_modules/request/node_modules_fixture')
+  fs.renameSync(pkg + '/node_modules', pkg + '/node_modules_fixture')
+}

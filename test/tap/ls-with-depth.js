@@ -1,14 +1,17 @@
 var test = require('tap').test
+  , fs = require('fs')
   , spawn = require('child_process').spawn
   , node = process.execPath
   , npm = require.resolve('../../')
   , path = require('path')
-  , opts = { cwd: path.resolve(__dirname, 'ls-with-depth') }
+  , testDir = path.resolve(__dirname, 'ls-with-depth')
+  , opts = { cwd: testDir }
   , entryRE = /(├|└)─/g
   , unmetRE = /UNMET DEPENDENCY/g
   , errRE = /npm ERR!/g
 
 test('ls --depth=0', function (t) {
+  prepareFixture()
   var out = ''
     , err = ''
     , child = spawn(node, [npm, 'ls', '--depth=0'], opts)
@@ -44,6 +47,11 @@ test('ls --depth=1', function (t) {
   })
 })
 
+test('cleanup', function (t) {
+  revertFixture()
+  t.end()
+})
+
 function countEntries (input) {
   var match = input.match(entryRE)
   return match ? match.length : 0
@@ -57,4 +65,15 @@ function countUnmet (input) {
 function countErrors (input) {
   var match = input.match(errRE)
   return match ? match.length : 0
+}
+
+function prepareFixture () {
+  // the fixture has to be named different from "node_modules"
+  // to avoid being deleted by npm's prepublish script
+  fs.renameSync(testDir + '/node_modules_fixture', testDir + '/node_modules')
+}
+
+function revertFixture () {
+  // change the fixture name back
+  fs.renameSync(testDir + '/node_modules', testDir + '/node_modules_fixture')
 }
