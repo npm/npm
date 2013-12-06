@@ -1,0 +1,9 @@
+{
+    "name": "npm-ls-test",
+    "version": "0.0.0",
+    "dependencies": {
+        "ok": "*",
+        "missing-a": "*",
+        "test": "*"
+    }
+}
