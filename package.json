@@ -77,7 +77,7 @@
     "github-url-from-git": "1.1.1",
     "github-url-from-username-repo": "0.0.2",
     "text-table": "~0.2.0",
-    "ansicolors": "~0.3.1",
+    "ansicolors": "~0.3.2",
     "ansistyles": "~0.1.2"
   },
   "bundleDependencies": [
