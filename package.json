@@ -45,7 +45,7 @@
     "request": "~2.27.0",
     "which": "1",
     "tar": "~0.1.18",
-    "fstream": "~0.1.23",
+    "fstream": "~0.1.25",
     "block-stream": "0.0.7",
     "mkdirp": "~0.3.5",
     "read": "~1.0.4",
