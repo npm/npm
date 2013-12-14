@@ -1,0 +1,3 @@
+NAME       | DESCRIPTION                                                  | VERSION
+mod1       | some description which happens to be far larger than the max | 0.0.1  
+module-two | another description larger than the max                      | 0.2.0  
