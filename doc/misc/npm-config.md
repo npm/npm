@@ -368,6 +368,13 @@ Sets a User-Agent to the request header
 A white-space separated list of glob patterns of files to always exclude
 from packages when building tarballs.
 
+### ignore-scripts
+
+* Default: false
+* Type: Boolean
+
+If true, npm does not run scripts specified in package.json files.
+
 ### init-module
 
 * Default: ~/.npm-init.js
