@@ -39,7 +39,7 @@
     "slide": "~1.1.5",
     "abbrev": "~1.0.4",
     "graceful-fs": "~2.0.0",
-    "minimatch": "~0.2.12",
+    "minimatch": "~0.2.14",
     "nopt": "~2.1.2",
     "rimraf": "~2.2.5",
     "request": "~2.30.0",
