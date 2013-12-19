@@ -6,11 +6,11 @@ var path = require('path')
 var fs = require('fs')
 var rimraf = require('rimraf')
 var mkdirp = require('mkdirp')
-var pkg = __dirname + '/404-parent'
+var pkg = path.resolve(__dirname, '404-parent')
 
 test('404-parent: if parent exists, specify parent in error message', function(t) {
   setup()
-  rimraf.sync(pkg+'/node_modules')
+  rimraf.sync(path.resolve(pkg, 'node_modules'))
   performInstall(function(err) {
     t.ok(err instanceof Error)
     t.pass('error was returned')
@@ -27,8 +27,8 @@ test('cleanup', function(t) {
 
 function setup() {
   mkdirp.sync(pkg)
-  mkdirp.sync(pkg + '/cache')
-  fs.writeFileSync(pkg + '/package.json', JSON.stringify({
+  mkdirp.sync(path.resolve(pkg, 'cache'))
+  fs.writeFileSync(path.resolve(pkg, 'package.json'), JSON.stringify({
     author: 'Evan Lucas',
     name: '404-parent-test',
     version: '0.0.0',
