@@ -65,6 +65,28 @@ test("does not update the package.json with empty arguments", function (t) {
   })
 })
 
+test("updates node_modules directory timestamps when no modules changed", function(t) {
+  function modulesDirTimestamp() {
+    return fs.statSync(pkg + "/node_modules").mtime.getTime()
+  }
+  writePackageJson()
+  t.plan(1)
+
+  mr(common.port, function (s) {
+    var child = createChild([npm, "install"])
+    child.on("close", function () {
+      var origTimestamp = modulesDirTimestamp()
+      var child = createChild([npm, "install"])
+      child.on("close", function () {
+        s.close()
+        t.ok(modulesDirTimestamp() > origTimestamp)
+        t.end()
+      })
+    })
+  })
+
+});
+
 test("updates the package.json (adds dependencies) with an argument", function (t) {
   writePackageJson()
   t.plan(1)
