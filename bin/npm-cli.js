@@ -70,6 +70,36 @@ if (reqVer && !semver.satisfies(nodeVer, reqVer)) {
 
 process.on("uncaughtException", errorHandler)
 
+;(function monkeyPatch() {
+  // This module parses json using jju as a fallback.
+  //
+  // The reason to do that is because jju provide an error message
+  // with an exact position of an occured error.
+
+  try {
+    var jju = require('jju')
+
+    var _parse = JSON.parse
+    JSON.parse = function(text, rev) {
+      try {
+        return _parse(text, rev)
+      } catch(err) {
+        // this call is expected to throw always
+        jju.parse(text, {
+          mode: 'json',
+          reviver: rev,
+        })
+
+        // if an alternate parser didn't throw, re-throw original error
+        // this shouldn't normally happen
+        throw err
+      }
+    }
+  } catch(err) {
+    // module is not installed :(
+  }
+})()
+
 if (conf.usage && npm.command !== "help") {
   npm.argv.unshift(npm.command)
   npm.command = "help"
