@@ -81,7 +81,8 @@
     "ansistyles": "~0.1.3",
     "path-is-inside": "~1.0.0",
     "columnify": "0.1.2",
-    "npm-install-checks": "~1.0.0"
+    "npm-install-checks": "~1.0.0",
+    "sorted-object": "~1.0.0"
   },
   "bundleDependencies": [
     "semver",
@@ -133,7 +134,8 @@
     "ansistyles",
     "path-is-inside",
     "columnify",
-    "npm-install-checks"
+    "npm-install-checks",
+    "sorted-object"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
