@@ -88,7 +88,7 @@ column width. Truncation respects word boundaries.  A truncation marker,
 ```js
 var columns = columnify(data, {
   truncate: true,
-  widths: {
+  config: {
     description: {
       maxWidth: 20
     }
@@ -104,6 +104,7 @@ mod1       some description…    0.0.1
 module-two another description… 0.2.0  
 ```
 
+
 ### Custom Truncation Marker
 
 You can change the truncation marker to something other than the default
@@ -111,7 +112,8 @@ You can change the truncation marker to something other than the default
 
 ```js
 var columns = columnify(data, {
-  truncate: '>',
+  truncate: true,
+  truncateMarker: '>',
   widths: {
     description: {
       maxWidth: 20
@@ -153,7 +155,7 @@ By default, all properties are converted into columns, whether or not
 they exist on every object or not.
 
 To explicitly specify which columns to include, and in which order,
-supply a "columns" array:
+supply an "include" array:
 
 ```js
 var data = [{
@@ -167,7 +169,7 @@ var data = [{
 }]
 
 var columns = columnify(data, {
-  columns: ['name', 'version'] // note description not included
+  include: ['name', 'version'] // note description not included
 })
 
 console.log(columns)

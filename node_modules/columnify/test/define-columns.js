@@ -16,7 +16,7 @@ var data = [{
 test('removes description column', function(t) {
   t.plan(1)
   var result = columnify(data, {
-    columns: ['name', 'version'],
+    include: ['name', 'version'],
   })
   t.ok(!(/description/gi.test(result)))
 })

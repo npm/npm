@@ -1,0 +1,10 @@
+NAME      DESCRIPTION          VERSION
+alongname some description     0.0.1  
+shouldbes                             
+plitoverm                             
+ultipleli                             
+nes                                   
+module-tw another description… 0.2.0  
+o                                     
+module-th thisisaverylongword… 0.2.0  
+ree                                   

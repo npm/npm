@@ -131,7 +131,8 @@
     "text-table",
     "ansicolors",
     "ansistyles",
-    "path-is-inside"
+    "path-is-inside",
+    "columnify"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
