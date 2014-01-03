@@ -1,0 +1,8 @@
+NAME                       DESCRIPTION                    VERSION
+mod1                       some description which happens 0.0.1  
+                           to be far larger than the max         
+module-two                 another description larger     0.2.0  
+                           than the max                          
+mod3                       thisisaverylongwordandshouldb… 0.3.0  
+                           ewrapped                              
+module-four-four-four-four                                0.0.4  

@@ -1,0 +1,4 @@
+NAME         DESCRIPTION          VERSION
+mod1         some description     0.0.1  
+module-two   another description… 0.2.0  
+module-three thisisaverylongword… 0.2.0
