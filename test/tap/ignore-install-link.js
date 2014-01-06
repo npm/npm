@@ -1,7 +1,8 @@
 var common = require('../common-tap.js')
 var test = require('tap').test
 var osenv = require('osenv')
-var npm = require('../..')
+var npm = require.resolve("../../bin/npm-cli.js")
+var node = process.execPath
 var path = require('path')
 var fs = require('fs')
 var rimraf = require('rimraf')
@@ -11,12 +12,18 @@ var spawn = require('child_process').spawn
 var linkDir = path.resolve(osenv.tmpdir(), 'npm-link-issue')
 
 test('ignore-install-link: ignore install if a package is linked', function(t) {
-  setup(t, function() {
+  setup(function(err) {
+    if (err) {
+      t.ifError(err)
+      t.end()
+      return
+    }
+
     var p = path.resolve(pkg, 'node_modules', 'npm-link-issue')
     fs.lstat(p, function(err, s) {
-      if (err) t.ok(err === null)
-      t.pass('child is a symlink')
-      t.ok(true === s.isSymbolicLink())
+      t.ifError(err)
+
+      t.ok(true === s.isSymbolicLink(), 'child is a symlink')
       t.end()
     })
   })
@@ -30,7 +37,7 @@ test('cleanup', function(t) {
 })
 
 
-function setup(t, cb) {
+function setup(cb) {
   rimraf.sync(linkDir)
   mkdirp.sync(pkg)
   mkdirp.sync(path.resolve(pkg, 'cache'))
@@ -51,40 +58,51 @@ function setup(t, cb) {
     version: '0.0.1',
     description: 'Sample Dependency'
   }), 'utf8')
-  clone(t, cb)
+
+  clone(cb)
 }
 
-function clone(t, cb) {
-  var child = spawn('git', ['--git-dir', linkDir, 'init'])
-//  var child = spawn('git', ['clone', 'https://github.com/lancefisher/npm-link-issue.git', linkDir])
-  child.on('exit', function(c) {
-    if (c !== 0) t.fail('unable to clone repository')
-    t.pass('successfully cloned repo')
+function clone (cb) {
+  var child = createChild(process.cwd(), 'git', ['--git-dir', linkDir, 'init'])
+  child.on('close', function(c) {
+    if (c !== 0)
+      return cb(new Error('Failed to init the git repository'))
+
+    console.log('Successfully inited the git repository')
     process.chdir(linkDir)
-    performLink(t, cb)
+    performLink(cb)
   })
 }
 
-function performLink(t, cb) {
-  var child = createChild(linkDir, 'npm', ['link', '.'])
-  child.on('close', function() {
-    t.pass('successfully linked '+linkDir+' globally')
-    performLink2(t, cb)
+function performLink (cb) {
+  var child = createChild(linkDir, node, [npm, 'link', '.'])
+  child.on('close', function(c) {
+    if (c !== 0)
+      return cb(new Error('Failed to link ' + linkDir + ' globally'))
+
+    console.log('Successfully linked ' + linkDir + ' globally')
+    performLink2(cb)
   })
 }
 
-function performLink2(t, cb) {
-  var child = createChild (pkg, 'npm', ['link', 'npm-link-issue'])
-  child.on('close', function() {
-    t.pass('successfully linked '+linkDir+' to local node_modules')
-    performInstall(t, cb)
+function performLink2 (cb) {
+  var child = createChild(pkg, node, [npm, 'link', 'npm-link-issue'])
+  child.on('close', function(c) {
+    if (c !== 0)
+      return cb(new Error('Failed to link ' + linkDir + ' to local node_modules'))
+
+    console.log('Successfully linked ' + linkDir + ' to local node_modules')
+    performInstall(cb)
   })
 }
 
-function performInstall(t, cb) {
-  var child = createChild (pkg, 'npm', ['install'])
-  child.on('close', function() {
-    t.pass('successfully installed')
+function performInstall (cb) {
+  var child = createChild(pkg, node, [npm, 'install'])
+  child.on('close', function(c) {
+    if (c !== 0)
+      return cb(new Error('Failed to install'))
+
+    console.log('Successfully installed')
     cb()
   })
 }
