@@ -79,7 +79,8 @@
     "text-table": "~0.2.0",
     "ansicolors": "~0.3.2",
     "ansistyles": "~0.1.3",
-    "path-is-inside": "~1.0.0"
+    "path-is-inside": "~1.0.0",
+    "columnify": "0.1.2"
   },
   "bundleDependencies": [
     "semver",
@@ -129,7 +130,8 @@
     "text-table",
     "ansicolors",
     "ansistyles",
-    "path-is-inside"
+    "path-is-inside",
+    "columnify"
   ],
   "devDependencies": {
     "ronn": "~0.3.6",
