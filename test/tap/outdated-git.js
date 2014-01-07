@@ -18,6 +18,7 @@ test("dicovers new versions in outdated", function (t) {
       t.equal('git', d[0][3])
       t.equal('git', d[0][4])
       t.equal('git://github.com/robertkowalski/foo-private.git', d[0][5])
+      t.equal('git://user:pass@github.com/robertkowalski/foo-private.git', d[1][5])
     })
   })
 })
