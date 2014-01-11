@@ -117,7 +117,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "bin-links" : true
     , browser : null
 
-    , ca: []
+    , ca: null
 
     , cache : cache
 
