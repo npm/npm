@@ -1,5 +1,5 @@
 {
-  "name": "duplicate-sub-deps",
+  "name": "dup",
   "version": "0.0.1",
   "description": "should install async twice even though it is satisfied by top level",
   "dependencies": {

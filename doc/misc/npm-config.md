@@ -317,7 +317,7 @@ the git binary.
 
 Tag the commit when using the `npm version` command.
 
-### duplicate-sub-deps
+### dup
 
 * Default: `false`
 * Type: Boolean
