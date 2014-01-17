@@ -19,6 +19,7 @@ var normalizeData = require("normalize-package-data")
 readJson.extraSet = [
                 gypfile,
                 serverjs,
+                scriptpath,
                 authors,
                 readme,
                 mans,
@@ -123,6 +124,19 @@ function extras (file, data, log_, strict_, cb_) {
                                 if (--n > 0) return;
                                 final(file, data, log, strict, cb);
                 }
+}
+
+function scriptpath (file, data, cb) {
+                if (!data.scripts) return cb(null, data);
+                var k = Object.keys(data.scripts)
+                k.forEach(scriptpath_, data.scripts)
+                cb(null, data);
+}
+function scriptpath_(key) {
+                s = this[key]
+                var spre = /^(\.[\/\\])?node_modules[\/\\].bin[\\\/]/
+                if (s.match(spre))
+                                this[key] = this[key].replace(spre, '')
 }
 
 function gypfile (file, data, cb) {
