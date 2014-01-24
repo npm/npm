@@ -9,6 +9,7 @@
     "preinstall": "exit 123",
     "postinstall": "exit 123",
     "preuninstall": "exit 123",
+    "install": "exit 123",
     "uninstall": "exit 123",
     "postuninstall": "exit 123",
     "preupdate": "exit 123",
