@@ -19,11 +19,11 @@
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/isaacs/npm"
+    "url": "https://github.com/npm/npm"
   },
   "bugs": {
     "email": "npm-@googlegroups.com",
-    "url": "http://github.com/isaacs/npm/issues"
+    "url": "http://github.com/npm/npm/issues"
   },
   "directories": {
     "doc": "./doc",
