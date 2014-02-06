@@ -70,7 +70,7 @@ after packing it up into a tarball (b).
 
           npm install https://github.com/indexzero/forever/tarball/v0.5.6
 
-* `npm install <name> [--save|--save-dev|--save-optional]`:
+* `npm install <name> [--save|--save-dev|--save-optional] [--slow]`:
 
     Do a `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
     `npm-config(7)`.)
@@ -90,6 +90,9 @@ after packing it up into a tarball (b).
     * `--save-dev`: Package will appear in your `devDependencies`.
 
     * `--save-optional`: Package will appear in your `optionalDependencies`.
+
+    * `--slow`: No parallel operations will be performed. Much slower, but lower
+      resource consumption.
 
     Examples:
 
