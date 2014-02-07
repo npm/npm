@@ -401,7 +401,7 @@ The value `npm init` should use by default for the package author's homepage.
 
 ### init.license
 
-* Default: "BSD-2-Clause"
+* Default: "ISC"
 * Type: String
 
 The value `npm init` should use by default for the package license.
