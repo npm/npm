@@ -12,7 +12,7 @@ mkdirp.sync(pkg + "/cache")
 
 test("dicovers new versions in outdated", function (t) {
   process.chdir(pkg)
-  t.plan(4)
+  t.plan(9)
   npm.load({cache: pkg + "/cache", registry: common.registry}, function () {
     npm.outdated(function (er, d) {
       t.equal('git', d[0][3])
