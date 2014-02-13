@@ -23,18 +23,12 @@ test('"npm install ./package@1.2.3" should install local pkg', function(t) {
 function setup() {
   mkdirp.sync(pkg)
   mkdirp.sync(path.resolve(pkg, 'node_modules'))
-  mkdirp.sync(path.resolve(pkg, 'package@1.2.3'))
-  fs.writeFileSync(path.resolve(pkg, 'package@1.2.3/package.json'), JSON.stringify({
-    name: 'install-at-locally',
-    version: '0.0.0',
-    description: 'Test for 404-parent',
-  }), 'utf8')
   process.chdir(pkg)
 }
 
 test('cleanup', function(t) {
   process.chdir(__dirname)
-  rimraf.sync(pkg)
+  rimraf.sync(path.resolve(pkg, 'node_modules'))
   t.end()
 })
 
