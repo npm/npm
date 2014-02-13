@@ -33,6 +33,7 @@ function setup() {
 }
 
 test('cleanup', function(t) {
+  process.chdir(__dirname)
   rimraf.sync(pkg)
   t.end()
 })
