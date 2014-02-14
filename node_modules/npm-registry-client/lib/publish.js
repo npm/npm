@@ -95,7 +95,7 @@ function putFirst (data, tardata, stat, username, email, cb) {
       return cb(er, parsed, json, res)
 
     // let's see what versions are already published.
-    var getUrl = data.name + "?publishing=true"
+    var getUrl = data.name + "?write=true"
     this.request("GET", getUrl, function (er, current) {
       if (er)
         return cb(er)
