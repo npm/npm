@@ -23,13 +23,6 @@ version of the package.
 
 Show information in JSON format.
 
-### long
-
-* Default: false
-* Type: Boolean
-
-Show extended information.
-
 ### parseable
 
 * Default: false
