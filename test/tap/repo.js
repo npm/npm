@@ -22,10 +22,10 @@ test("setup", function (t) {
   t.end()
 })
 
-test("npm repo express", function (t) {
+test("npm repo underscore", function (t) {
   mr(common.port, function (s) {
     var c = spawn(node, [
-      npm, "repo", "express",
+      npm, "repo", "underscore",
       "--registry=" + common.registry,
       "--loglevel=silent",
       "--browser=" + __dirname + "/_script.sh",
@@ -33,14 +33,12 @@ test("npm repo express", function (t) {
     c.stdout.on("data", function(d) {
       t.fail("Should not get data on stdout: " + d)
     })
-    c.stderr.on("data", function(d) {
-      t.fail("Should not get data on stderr: " + d)
-    })
+    c.stderr.pipe(process.stderr)
     c.on("close", function(code) {
-      t.notOk(code, "exit ok")
+      t.equal(code, 0, "exit ok")
       var res = fs.readFileSync(__dirname + "/_output", "ascii")
       s.close()
-      t.equal(res, "https://github.com/visionmedia/express\n")
+      t.equal(res, "https://github.com/jashkenas/underscore\n")
       t.end()
     })
   })
