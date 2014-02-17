@@ -52,7 +52,7 @@
     "lru-cache": "~2.5.0",
     "node-gyp": "~0.12.2",
     "fstream-npm": "~0.1.6",
-    "uid-number": "0",
+    "uid-number": "0.0.4",
     "archy": "0",
     "chownr": "0",
     "npmlog": "0.0.6",
