@@ -8,6 +8,7 @@ var common = require("../common-tap.js")
 var spawn = require("child_process").spawn
 
 var pkg = __dirname + "/prune"
+var cache = pkg + "/cache"
 
 var server
 
@@ -22,6 +23,7 @@ test("reg mock", function (t) {
 test("npm install", function (t) {
   var c = spawn(node, [
     npm, "install",
+    "--cache=" + cache,
     "--registry=" + common.registry,
     "--loglevel=silent",
     "--production=false"
@@ -38,6 +40,7 @@ test("npm install", function (t) {
 test("npm install test-package", function (t) {
   var c = spawn(node, [
     npm, "install", "test-package",
+    "--cache=" + cache,
     "--registry=" + common.registry,
     "--loglevel=silent",
     "--production=false"
@@ -102,6 +105,7 @@ test("verify installs", function (t) {
 test("cleanup", function (t) {
   server.close()
   rimraf.sync(pkg + "/node_modules")
+  rimraf.sync(pkg + "/cache")
   t.pass("cleaned up")
   t.end()
 })
