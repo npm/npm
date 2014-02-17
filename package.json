@@ -60,7 +60,7 @@
     "npm-registry-client": "^0.4.4",
     "read-package-json": "~1.1.7",
     "read-installed": "~1.0.0",
-    "glob": "~3.2.6",
+    "glob": "^3.2.8",
     "init-package-json": "0.0.14",
     "osenv": "0",
     "lockfile": "~0.4.0",

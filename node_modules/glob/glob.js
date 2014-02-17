@@ -214,27 +214,10 @@ Glob.prototype._finish = function () {
     all = all.sort(this.nocase ? alphasorti : alphasort)
   }
 
-  if (this.mark) {
-    // at *some* point we statted all of these
-    all = all.map(function (m) {
-      var sc = this.cache[m]
-      if (!sc)
-        return m
-      var isDir = (Array.isArray(sc) || sc === 2)
-      if (isDir && m.slice(-1) !== "/") {
-        return m + "/"
-      }
-      if (!isDir && m.slice(-1) === "/") {
-        return m.replace(/\/+$/, "")
-      }
-      return m
-    }, this)
-  }
-
   this.log("emitting end", all)
 
   this.EOF = this.found = all
-  this.emitMatch(this.EOF)
+  this.emitMatch(this.EOF, -1)
 }
 
 function alphasorti (a, b) {
@@ -270,16 +253,47 @@ Glob.prototype.resume = function () {
   //process.nextTick(this.emit.bind(this, "resume"))
 }
 
-Glob.prototype.emitMatch = function (m) {
-  if (!this.stat || this.statCache[m] || m === this.EOF) {
-    this._emitQueue.push(m)
-    this._processEmitQueue()
+Glob.prototype._mark = function (p) {
+  var c = this.cache[p]
+  var m = p
+  if (c) {
+    var isDir = c === 2 || Array.isArray(c)
+    var slash = p.slice(-1) === '/'
+
+    if (isDir && !slash)
+      m += '/'
+    else if (!isDir && slash)
+      m = m.slice(0, -1)
+
+    if (m !== p) {
+      this.statCache[m] = this.statCache[p]
+      this.cache[m] = this.cache[p]
+    }
+  }
+
+  return m
+}
+
+Glob.prototype._pushMatch = function(m, index) {
+  if (this.mark && m !== this.EOF)
+    m = this._mark(m)
+
+  if (m !== this.EOF) {
+    this.matches[index] = this.matches[index] || {}
+    this.matches[index][m] = true
+  }
+
+  this._emitQueue.push(m)
+  this._processEmitQueue()
+}
+
+Glob.prototype.emitMatch = function (m, index) {
+  if ((!this.stat && !this.mark) || this.statCache[m] || m === this.EOF) {
+    this._pushMatch(m, index)
   } else {
     this._stat(m, function(exists, isDir) {
-      if (exists) {
-        this._emitQueue.push(m)
-        this._processEmitQueue()
-      }
+      if (exists)
+        this._pushMatch(m, index)
     })
   }
 }
@@ -353,9 +367,7 @@ Glob.prototype._process = function (pattern, depth, index, cb_) {
           if (process.platform === "win32")
             prefix = prefix.replace(/\\/g, "/")
 
-          this.matches[index] = this.matches[index] || {}
-          this.matches[index][prefix] = true
-          this.emitMatch(prefix)
+          this.emitMatch(prefix, index)
         }
         return cb()
       })
@@ -469,9 +481,7 @@ Glob.prototype._process = function (pattern, depth, index, cb_) {
         if (process.platform === "win32")
           e = e.replace(/\\/g, "/")
 
-        this.matches[index] = this.matches[index] || {}
-        this.matches[index][e] = true
-        this.emitMatch(e)
+        this.emitMatch(e, index)
       }, this)
       return cb.call(this)
     }

@@ -18,6 +18,8 @@ test("mark, no / on pattern", function (t) {
 
     t.same(results, expect)
     t.end()
+  }).on('match', function(m) {
+    t.similar(m, /\/$/)
   })
 })
 
@@ -36,6 +38,8 @@ test("mark=false, no / on pattern", function (t) {
       expect.push('a/symlink')
     t.same(results, expect)
     t.end()
+  }).on('match', function(m) {
+    t.similar(m, /[^\/]$/)
   })
 })
 
@@ -53,6 +57,8 @@ test("mark=true, / on pattern", function (t) {
       expect.push('a/symlink/')
     t.same(results, expect)
     t.end()
+  }).on('match', function(m) {
+    t.similar(m, /\/$/)
   })
 })
 
@@ -70,5 +76,7 @@ test("mark=false, / on pattern", function (t) {
       expect.push('a/symlink/')
     t.same(results, expect)
     t.end()
+  }).on('match', function(m) {
+    t.similar(m, /\/$/)
   })
 })
