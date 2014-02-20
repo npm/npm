@@ -43,16 +43,16 @@ test("url-dependencies: do not download subsequent times", function(t) {
 })
 
 function tarballWasFetched(output){
-  return output.indexOf("http GET http://localhost:1337/underscore/-/underscore-1.3.1.tgz") > -1
+  return output.indexOf("http GET " + common.registry + "/underscore/-/underscore-1.3.1.tgz") > -1
 }
 
 function performInstall (cb) {
-  mr({port: 1337, mocks: mockRoutes}, function(s){
+  mr({port: common.port, mocks: mockRoutes}, function(s){
     var output = ""
       , child = spawn(node, [npm, "install"], {
           cwd: pkg,
           env: {
-            npm_config_registry: "http://localhost:1337",
+            npm_config_registry: common.registry,
             npm_config_cache_lock_stale: 1000,
             npm_config_cache_lock_wait: 1000,
             HOME: process.env.HOME,
