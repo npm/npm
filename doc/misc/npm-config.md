@@ -637,6 +637,15 @@ hash.
 
 Only works if there is already a package.json file present.
 
+### exact
+
+* Default: false
+* Type: Boolean
+
+Dependencies saved to package.json using `--save`, `--save-dev` or
+`--save-optional` will be configured with an exact version rather than
+using npm's default semver range operator.
+
 ### searchopts
 
 * Default: ""
