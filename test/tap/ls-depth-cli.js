@@ -1,7 +1,6 @@
 var common = require('../common-tap')
   , test = require('tap').test
   , path = require('path')
-  , spawn = require('child_process').spawn
   , rimraf = require('rimraf')
   , mkdirp = require('mkdirp')
   , pkg = __dirname + '/ls-depth'
@@ -10,24 +9,8 @@ var common = require('../common-tap')
   , node = process.execPath
   , npm = path.resolve(__dirname, '../../cli.js')
   , mr = require('npm-registry-mock')
+  , opts = {cwd: pkg}
 
-function run (command, t, cb) {
-  var c = ''
-    , child = spawn(node, command, {
-      cwd: pkg
-    })
-
-    child.stdout.on('data', function (chunk) {
-      c += chunk
-    })
-
-    child.stdout.on('end', function () {
-      if (test)
-        cb(t, c)
-      else
-        t.end()
-    })
-}
 
 function cleanup () {
   rimraf.sync(pkg + '/cache')
@@ -40,7 +23,12 @@ test('setup', function (t) {
   mkdirp.sync(pkg + '/cache')
   mkdirp.sync(pkg + '/tmp')
   mr(common.port, function (s) {
-    run([npm, 'install', '--registry=' + common.registry], t, function (t, c) {
+    common.run([
+      npm
+    , 'install'
+    , '--registry=' + common.registry
+    ], t, opts
+    , function (t, c) {
       s.close()
       t.end()
     })
@@ -48,7 +36,7 @@ test('setup', function (t) {
 })
 
 test('npm ls --depth=0', function (t) {
-  run([npm, 'ls', '--depth=0'], t, function (t, c) {
+  common.run([npm, 'ls', '--depth=0'], t, opts, function (t, c) {
     t.has(c, /test-package-with-one-dep@0\.0\.0/
       , "output contains test-package-with-one-dep@0.0.0")
     t.doesNotHave(c, /test-package@0\.0\.0/
@@ -58,7 +46,7 @@ test('npm ls --depth=0', function (t) {
 })
 
 test('npm ls --depth=1', function (t) {
-  run([npm, 'ls', '--depth=1'], t, function (t, c) {
+  common.run([npm, 'ls', '--depth=1'], t, opts, function (t, c) {
     t.has(c, /test-package-with-one-dep@0\.0\.0/
       , "output contains test-package-with-one-dep@0.0.0")
     t.has(c, /test-package@0\.0\.0/
@@ -68,7 +56,7 @@ test('npm ls --depth=1', function (t) {
 })
 
 test('npm ls (no depth defined)', function (t) {
-  run([npm, 'ls'], t, function (t, c) {
+  common.run([npm, 'ls'], t, opts, function (t, c) {
     t.has(c, /test-package-with-one-dep@0\.0\.0/
       , "output contains test-package-with-one-dep@0.0.0")
     t.has(c, /test-package@0\.0\.0/
