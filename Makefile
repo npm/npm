@@ -5,7 +5,6 @@ markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
 html_docdeps = html/dochead.html \
                html/docfoot.html \
-               html/docfoot-script.html \
                scripts/doc-build.sh \
                package.json
 
