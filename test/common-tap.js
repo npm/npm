@@ -12,22 +12,22 @@ function run (cmd, t, opts, cb) {
   if (!t || !t.end)
     throw new Error("node-tap instance is missing")
 
-  var c = ""
-    , e = ""
+  var stdout = ""
+    , stderr = ""
     , node = process.execPath
     , child = spawn(node, cmd, opts)
 
   child.stderr.on("data", function (chunk) {
-    e += chunk
+    stderr += chunk
   })
 
   child.stdout.on("data", function (chunk) {
-    c += chunk
+    stdout += chunk
   })
 
-  child.stdout.on("end", function () {
+  child.on("close", function (code) {
     if (cb)
-      cb(t, c, e, { cmd: cmd, opts: opts })
+      cb(t, stdout, stderr, code)
     else
       t.end()
   })
