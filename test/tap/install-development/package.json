@@ -1,0 +1,11 @@
+{
+  "name": "install-development",
+  "version": "0.0.0",
+  "description": "only install dev deps",
+  "dependencies": {
+    "foo": "*"
+  },
+  "devDependencies": {
+    "format-package-json": "*"
+  }
+}
