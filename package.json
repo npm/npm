@@ -50,7 +50,7 @@
     "fstream-npm": "~0.1.6",
     "github-url-from-git": "1.1.1",
     "github-url-from-username-repo": "0.0.2",
-    "glob": "3.2.7",
+    "glob": "~3.2.9",
     "graceful-fs": "^2.0.2",
     "ini": "~1.1.0",
     "init-package-json": "0.0.14",
