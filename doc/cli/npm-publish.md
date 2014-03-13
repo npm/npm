@@ -24,7 +24,11 @@ Publishes a package to the registry so that it can be installed by name.
   and `npm install` installs the `latest` tag.
 
 Fails if the package name and version combination already exists in
-the registry.  Overwrites when the "--force" flag is set.
+the registry.
+
+Once a package is published with a given name and version, that
+specific name and version combination can never be used again, even if
+it is removed with npm-unpublish(1).
 
 ## SEE ALSO
 
