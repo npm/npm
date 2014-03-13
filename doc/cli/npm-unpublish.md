@@ -23,6 +23,9 @@ entry and removing the tarball.
 If no version is specified, or if all versions are removed then
 the root package entry is removed from the registry entirely.
 
+When a version is unpublished, you can't publish it again. You'll have to change
+the version number to make it work.
+
 ## SEE ALSO
 
 * npm-deprecate(1)
