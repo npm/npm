@@ -6,7 +6,8 @@ var rimraf = require("rimraf")
 var mr = require("npm-registry-mock")
 var common = require("../common-tap.js")
 var spawn = require("child_process").spawn
-var env = { PATH: process.env.PATH }
+var env = process.env
+process.env.npm_config_depth = "Infinity"
 
 var pkg = __dirname + "/prune"
 var cache = pkg + "/cache"
