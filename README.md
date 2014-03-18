@@ -37,6 +37,9 @@ paths, etc.) then read on.
 
 There's a pretty robust install script at
 <https://npmjs.org/install.sh>.  You can download that and run it.
+Here's an example using curl:
+
+    curl -L https://npmjs.org/install.sh | sh
 
 ### Slightly Fancier
 
