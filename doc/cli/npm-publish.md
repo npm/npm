@@ -24,7 +24,8 @@ Publishes a package to the registry so that it can be installed by name.
   and `npm install` installs the `latest` tag.
 
 Fails if the package name and version combination already exists in
-the registry.  Overwrites when the "--force" flag is set.
+the registry. The `--force` flag will delete your old copy, but doesnt republish
+it. You'll have to change the version number to make it work.
 
 ## SEE ALSO
 
