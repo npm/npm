@@ -71,7 +71,7 @@
     "path-is-inside": "~1.0.0",
     "read": "~1.0.4",
     "read-installed": "^2.0.0",
-    "read-package-json": "~1.1.7",
+    "read-package-json": "~1.1.8",
     "request": "~2.30.0",
     "retry": "~0.6.0",
     "rimraf": "~2.2.5",
@@ -138,9 +138,9 @@
     "which"
   ],
   "devDependencies": {
+    "npm-registry-mock": "~0.6.1",
     "ronn": "~0.3.6",
-    "tap": "~0.4.0",
-    "npm-registry-mock": "~0.5.9"
+    "tap": "~0.4.0"
   },
   "engines": {
     "node": ">=0.8",
