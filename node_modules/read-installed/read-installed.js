@@ -126,6 +126,7 @@ function readInstalled (folder, opts, cb) {
     // now obj has all the installed things, where they're installed
     // figure out the inheritance links, now that the object is built.
     resolveInheritance(obj, opts)
+    markExtraneous(obj)
     cb(null, obj)
   })
 }
@@ -312,8 +313,6 @@ function findUnmet (obj, opts) {
              +found.path+",\nwhich is version "+found.version
              )
           found.invalid = true
-        } else {
-          found.extraneous = false
         }
         deps[d] = found
       }
@@ -337,14 +336,34 @@ function findUnmet (obj, opts) {
 
     if (!dependency) return
 
-    dependency.extraneous = false
-
     if (!semver.satisfies(dependency.version, peerDeps[d], true)) {
       dependency.peerInvalid = true
     }
   })
 
   return obj
+}
+
+function recursivelyMarkExtraneous (obj, extraneous) {
+  // stop recursion if we're not changing anything
+  if (obj.extraneous === extraneous) return
+
+  obj.extraneous = extraneous
+  var deps = obj.dependencies = obj.dependencies || {}
+  Object.keys(deps).forEach(function(d){
+    recursivelyMarkExtraneous(deps[d], extraneous)
+  });
+}
+
+function markExtraneous (obj) {
+  // start from the root object and mark as non-extraneous all modules that haven't been previously flagged as
+  // extraneous then propagate to all their dependencies
+  var deps = obj.dependencies = obj.dependencies || {}
+  Object.keys(deps).forEach(function(d){
+    if (!deps[d].extraneous){
+      recursivelyMarkExtraneous(deps[d], false);
+    }
+  });
 }
 
 function copy (obj) {
