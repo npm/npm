@@ -3,6 +3,7 @@
   "name": "npm-test-peer-deps-installer",
   "version": "0.0.0",
   "dependencies": {
-    "npm-test-peer-deps": "*"
+    "npm-test-peer-deps": "*",
+    "request": "0.9.x"
   }
 }
