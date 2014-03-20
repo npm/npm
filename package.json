@@ -138,7 +138,7 @@
     "which"
   ],
   "devDependencies": {
-    "npm-registry-mock": "~0.5",
+    "npm-registry-mock": "git://github.com/bcoe/npm-registry-mock#1e43f4d323e78d10e0c86681245009667aac5ad1",
     "ronn": "~0.3.6",
     "tap": "~0.4.0"
   },
@@ -148,7 +148,7 @@
   },
   "scripts": {
     "test": "node ./test/run.js && tap test/tap/*.js",
-    "tap": "tap test/tap/*.js",
+    "tap": "tap --timeout 120 test/tap/*.js",
     "prepublish": "node bin/npm-cli.js prune --prefix=. --no-global && rm -rf test/*/*/node_modules && make -j32 doc",
     "dumpconf": "env | grep npm | sort | uniq",
     "echo": "node bin/npm-cli.js"
