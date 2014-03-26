@@ -138,7 +138,7 @@
     "which"
   ],
   "devDependencies": {
-    "npm-registry-mock": "git://github.com/bcoe/npm-registry-mock#1e43f4d323e78d10e0c86681245009667aac5ad1",
+    "npm-registry-mock": "~0.6.2",
     "ronn": "~0.3.6",
     "tap": "~0.4.0"
   },
