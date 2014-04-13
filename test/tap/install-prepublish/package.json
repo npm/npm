@@ -1,0 +1,4 @@
+{ "name":"install-prepublish",
+  "version":"1.2.5",
+  "scripts": {"prepublish":"node -e 'console.log(\"prepublish ran.\")'"}}
+
