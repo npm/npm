@@ -27,7 +27,7 @@ function run (cmd, t, opts, cb) {
 
   child.on("close", function (code) {
     if (cb)
-      cb(t, stdout, stderr, code)
+      cb(t, stdout, stderr, code, { cmd: cmd, opts: opts })
     else
       t.end()
   })

@@ -11,7 +11,7 @@ var common = require('../common-tap')
   , npm = path.resolve(__dirname, '../../cli.js')
   , opts = { cwd: pkg }
 
-function testOutput (t, c, e, o) {
+function testOutput (t, c, e, code, o) {
   if (e)
     throw new Error('npm ' + command + ' stderr: ' + e.toString())
 
