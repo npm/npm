@@ -57,8 +57,10 @@ test('npm ls --depth=1', function (t) {
   })
 })
 
-test('npm ls (no depth defined)', function (t) {
-  common.run([npm, 'ls'], t, opts, function (t, c) {
+test('npm ls --depth=Infinity', function (t) {
+  // travis has a preconfigured depth=0, in general we can not depend
+  // on the default value in all environments, so explictly set it here
+  common.run([npm, 'ls', '--depth=Infinity'], t, opts, function (t, c) {
     t.has(c, /test-package-with-one-dep@0\.0\.0/
       , "output contains test-package-with-one-dep@0.0.0")
     t.has(c, /test-package@0\.0\.0/
