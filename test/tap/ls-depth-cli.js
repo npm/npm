@@ -2,6 +2,7 @@ var common = require('../common-tap')
   , test = require('tap').test
   , path = require('path')
   , rimraf = require('rimraf')
+  , osenv = require('osenv')
   , mkdirp = require('mkdirp')
   , pkg = __dirname + '/ls-depth'
   , cache = pkg + '/cache'
@@ -13,6 +14,7 @@ var common = require('../common-tap')
 
 
 function cleanup () {
+  process.chdir(osenv.tmpdir())
   rimraf.sync(pkg + '/cache')
   rimraf.sync(pkg + '/tmp')
   rimraf.sync(pkg + '/node_modules')
