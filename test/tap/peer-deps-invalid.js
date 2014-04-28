@@ -26,9 +26,7 @@ test("installing dependencies that have conflicting peerDependencies", function 
       cache: pkg + "/cache",
       registry: common.registry
     }, function () {
-      console.error('back from load')
       npm.commands.install([], function (err) {
-        console.error('back from install')
         if (!err) {
           t.fail("No error!")
         } else {

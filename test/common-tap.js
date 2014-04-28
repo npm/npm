@@ -2,6 +2,7 @@ var spawn = require('child_process').spawn
 
 var port = exports.port = 1337
 exports.registry = "http://localhost:" + port
+process.env.npm_config_loglevel = "error"
 
 exports.run = run
 function run (cmd, t, opts, cb) {

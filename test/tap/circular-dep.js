@@ -38,6 +38,7 @@ function setup (cb) {
   mr(common.port, function (s) {
     server = s
     npm.load({
+      loglevel: "silent",
       registry: common.registry,
       cache: path.resolve(pkg, "cache")
     }, cb)
