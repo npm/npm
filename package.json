@@ -59,7 +59,7 @@
     "minimatch": "~0.2.14",
     "mkdirp": "~0.3.5",
     "node-gyp": "~0.13.0",
-    "nopt": "~2.2.0",
+    "nopt": "~2.2.1",
     "npm-install-checks": "~1.0.0",
     "npm-registry-client": "~0.4.7",
     "npm-user-validate": "0.0.3",
