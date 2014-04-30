@@ -25,12 +25,10 @@ test('setup', function (t) {
   mkdirp.sync(pkg + '/cache')
   mkdirp.sync(pkg + '/tmp')
   mr(common.port, function (s) {
-    common.run([
-      npm
-    , 'install'
-    , '--registry=' + common.registry
-    ], t, opts
-    , function (t, c) {
+    var cmd = ['install', '--registry=' + common.registry]
+    common.npm(cmd, opts, function (er, c) {
+      if (er) throw er
+      t.equal(c, 0)
       s.close()
       t.end()
     })
@@ -38,20 +36,24 @@ test('setup', function (t) {
 })
 
 test('npm ls --depth=0', function (t) {
-  common.run([npm, 'ls', '--depth=0'], t, opts, function (t, c) {
-    t.has(c, /test-package-with-one-dep@0\.0\.0/
+  common.npm(['ls', '--depth=0'], opts, function (er, c, out) {
+    if (er) throw er
+    t.equal(c, 0)
+    t.has(out, /test-package-with-one-dep@0\.0\.0/
       , "output contains test-package-with-one-dep@0.0.0")
-    t.doesNotHave(c, /test-package@0\.0\.0/
+    t.doesNotHave(out, /test-package@0\.0\.0/
       , "output not contains test-package@0.0.0")
     t.end()
   })
 })
 
 test('npm ls --depth=1', function (t) {
-  common.run([npm, 'ls', '--depth=1'], t, opts, function (t, c) {
-    t.has(c, /test-package-with-one-dep@0\.0\.0/
+  common.npm(['ls', '--depth=1'], opts, function (er, c, out) {
+    if (er) throw er
+    t.equal(c, 0)
+    t.has(out, /test-package-with-one-dep@0\.0\.0/
       , "output contains test-package-with-one-dep@0.0.0")
-    t.has(c, /test-package@0\.0\.0/
+    t.has(out, /test-package@0\.0\.0/
       , "output contains test-package@0.0.0")
     t.end()
   })
@@ -60,10 +62,12 @@ test('npm ls --depth=1', function (t) {
 test('npm ls --depth=Infinity', function (t) {
   // travis has a preconfigured depth=0, in general we can not depend
   // on the default value in all environments, so explictly set it here
-  common.run([npm, 'ls', '--depth=Infinity'], t, opts, function (t, c) {
-    t.has(c, /test-package-with-one-dep@0\.0\.0/
+  common.npm(['ls', '--depth=Infinity'], opts, function (er, c, out) {
+    if (er) throw er
+    t.equal(c, 0)
+    t.has(out, /test-package-with-one-dep@0\.0\.0/
       , "output contains test-package-with-one-dep@0.0.0")
-    t.has(c, /test-package@0\.0\.0/
+    t.has(out, /test-package@0\.0\.0/
       , "output contains test-package@0.0.0")
     t.end()
   })

@@ -11,13 +11,16 @@ var common = require('../common-tap')
   , npm = path.resolve(__dirname, '../../cli.js')
   , opts = { cwd: pkg }
 
-function testOutput (t, c, e, code, o) {
-  if (e)
-    throw new Error('npm ' + command + ' stderr: ' + e.toString())
+function testOutput (t, command, er, code, stdout, stderr) {
+  if (er)
+    throw er
 
-  c = c.trim().split('\n')
-  c = c[c.length - 1]
-  t.equal(c, o.cmd[1])
+  if (stderr)
+    throw new Error('npm ' + command + ' stderr: ' + stderr.toString())
+
+  stdout = stdout.trim().split('\n')
+  stdout = stdout[stdout.length - 1]
+  t.equal(stdout, command)
   t.end()
 }
 
@@ -34,19 +37,19 @@ test('setup', function (t) {
 })
 
 test('npm start', function (t) {
-  common.run([npm, 'start'], t, opts, testOutput)
+  common.npm(['start'], opts, testOutput.bind(null, t, "start"))
 })
 
 test('npm stop', function (t) {
-  common.run([npm, 'stop'], t, opts, testOutput)
+  common.npm(['stop'], opts, testOutput.bind(null, t, "stop"))
 })
 
 test('npm restart', function (t) {
-  common.run([npm, 'restart'], t, opts, function (t, c, e) {
-    if (e)
-      throw new Error('npm ' + command + ' stderr: ' + e.toString())
+  common.npm(['restart'], opts, function (er, c, stdout, stderr) {
+    if (er)
+      throw er
 
-    var output = c.split('\n').filter(function (val) {
+    var output = stdout.split('\n').filter(function (val) {
       return val.match(/^s/)
     })
 
