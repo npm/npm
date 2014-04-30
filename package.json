@@ -53,6 +53,7 @@
     "github-url-from-username-repo": "~0.1.0",
     "glob": "~3.2.9",
     "graceful-fs": "~2.0.2",
+    "inflight": "^1.0.1",
     "ini": "~1.1.0",
     "init-package-json": "0.0.16",
     "lockfile": "~0.4.0",
