@@ -254,7 +254,6 @@ affects a real use-case, it will be investigated.
 * npm-config(7)
 * npmrc(5)
 * npm-registry(7)
-* npm-folders(5)
 * npm-tag(1)
 * npm-rm(1)
 * npm-shrinkwrap(1)
