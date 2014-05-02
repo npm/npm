@@ -331,7 +331,11 @@ function findUnmet (obj, opts) {
         obj.dependencies[d] = peerDeps[d]
       }
     } else {
-      dependency = obj.parent.dependencies && obj.parent.dependencies[d]
+      var r = obj.parent
+      while (r && !dependency) {
+        dependency = r.dependencies && r.dependencies[d]
+        r = r.link ? null : r.parent
+      }
     }
 
     if (!dependency) {
