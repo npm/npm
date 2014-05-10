@@ -107,10 +107,7 @@ test("optionalDependencies are merged into dependencies during --save", function
     t.equal(code, 0)
 
     var pkgdata = JSON.parse(fs.readFileSync(PKG, 'utf8'))
-    t.deepEqual(pkgdata.dependencies, {
-      mkdirp: '^0.3.5',
-      underscore: '^1.3.3'
-    }, 'dependencies should be updated with optional dependencies')
+    t.deepEqual(pkgdata.dependencies, {mkdirp: '^0.3.5'}, 'dependencies should not include optional dependencies')
     t.deepEqual(pkgdata.devDependencies, pkg.devDependencies, 'dev dependencies should be untouched')
     t.deepEqual(pkgdata.optionalDependencies, pkg.optionalDependencies, 'optional dependencies should be untouched')
     t.end()
