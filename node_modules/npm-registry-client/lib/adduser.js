@@ -17,10 +17,6 @@ function adduser (username, password, email, cb) {
     return cb(new Error("Please use a real email address."))
   }
 
-  if (password.indexOf(":") !== -1) return cb(new Error(
-    "Sorry, ':' chars are not allowed in passwords.\n"+
-    "See <https://issues.apache.org/jira/browse/COUCHDB-969> for why."))
-
   var salt = crypto.randomBytes(30).toString('hex')
     , userobj =
       { name : username
