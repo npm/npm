@@ -102,7 +102,7 @@ function regRequest (method, where, what, etag, nofollow, cb_) {
         + " at " + (new Date()).toLocaleTimeString())
     makeRequest.call(self, method, remote, where, what, etag, nofollow
                      , function (er, parsed, raw, response) {
-      if (!er || er.message.match(/^SSL Error/)) {
+      if (!er || (er.message && er.message.match(/^SSL Error/))) {
         if (er)
           er.code = 'ESSL'
         return cb(er, parsed, raw, response)

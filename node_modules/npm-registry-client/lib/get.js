@@ -2,6 +2,7 @@
 module.exports = get
 
 var fs = require("graceful-fs")
+  , url = require("url")
   , path = require("path")
   , mkdir = require("mkdirp")
   , chownr = require("chownr")
@@ -32,7 +33,7 @@ function get (uri, timeout, nofollow, staleOk, cb) {
   var cacheUri = uri
   // on windows ":" is not an allowed character in a foldername
   cacheUri = cacheUri.replace(/:/g, '_').replace(/\?write=true$/, '')
-  var cache = path.join(this.conf.get('cache'), cacheUri, ".cache.json")
+  var cache = path.join(this.conf.get('cache'), cacheUri, getCacheFile.call(this))
 
   // If the GET is part of a write operation (PUT or DELETE), then
   // skip past the cache entirely, but still save the results.
@@ -51,8 +52,7 @@ function get (uri, timeout, nofollow, staleOk, cb) {
 }
 
 function requestAll (cb) {
-  var cache = path.join(this.conf.get('cache'), "/-/all", ".cache.json")
-
+  var cache = path.join(this.conf.get('cache'), "/-/all", getCacheFile.call(this))
   mkdir(path.join(this.conf.get('cache'), "-", "all"), function (er) {
     fs.readFile(cache, function (er, data) {
       if (er) return requestAll_.call(this, 0, {}, cb)
@@ -84,7 +84,7 @@ function requestAll_ (c, data, cb) {
     uri = "/-/all"
   }
 
-  var cache = path.join(this.conf.get('cache'), "-/all", ".cache.json")
+  var cache = path.join(this.conf.get('cache'), "-/all", getCacheFile.call(this))
   this.request('GET', uri, function (er, updates, _, res) {
     if (er) return cb(er, data)
     var headers = res.headers
@@ -150,6 +150,13 @@ function get_ (uri, timeout, cache, stat, data, nofollow, staleOk, cb) {
 
     saveToCache.call(this, cache, data, saved)
   }.bind(this))
+}
+
+function getCacheFile() {
+  var registry = this.conf.get('registry') || ''
+  registry = url.parse(registry).host;
+  return !registry || registry === "registry.npmjs.org" ?
+    ".cache.json" : "." + registry + ".cache.json"
 }
 
 function saveToCache (cache, data, saved) {
