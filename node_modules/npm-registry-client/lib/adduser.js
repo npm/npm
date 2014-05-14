@@ -1,11 +1,5 @@
 module.exports = adduser
 
-var crypto = require('crypto')
-
-function sha (s) {
-  return crypto.createHash("sha1").update(s).digest("hex")
-}
-
 function adduser (username, password, email, cb) {
 
   password = ("" + (password || "")).trim()
@@ -17,8 +11,7 @@ function adduser (username, password, email, cb) {
     return cb(new Error("Please use a real email address."))
   }
 
-  var salt = crypto.randomBytes(30).toString('hex')
-    , userobj =
+  var userobj =
       { name : username
       , password : password
       , email : email

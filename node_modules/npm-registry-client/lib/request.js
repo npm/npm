@@ -2,7 +2,6 @@ module.exports = regRequest
 
 var url = require("url")
   , zlib = require("zlib")
-  , fs = require("graceful-fs")
   , rm = require("rimraf")
   , asyncMap = require("slide").asyncMap
   , Stream = require("stream").Stream
@@ -257,7 +256,7 @@ function requestDone (method, where, cb) {
                , null, data, response )
     }
 
-    var er = null
+    er = null
     if (parsed && response.headers.etag) {
       parsed._etag = response.headers.etag
     }

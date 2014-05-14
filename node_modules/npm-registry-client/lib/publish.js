@@ -1,8 +1,7 @@
 
 module.exports = publish
 
-var path = require("path")
-  , url = require("url")
+var url = require("url")
   , semver = require("semver")
   , crypto = require("crypto")
   , fs = require("fs")

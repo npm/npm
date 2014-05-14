@@ -63,7 +63,7 @@
     "node-gyp": "~0.13.0",
     "nopt": "~2.2.1",
     "npm-install-checks": "~1.0.0",
-    "npm-registry-client": "~0.4.11",
+    "npm-registry-client": "~0.4.12",
     "npm-user-validate": "~0.1.0",
     "npmconf": "~1.0.0",
     "npmlog": "0.0.6",
