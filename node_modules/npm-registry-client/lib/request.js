@@ -281,26 +281,7 @@ function requestDone (method, where, cb) {
       // from thinking that it didn't work when it did.
       // Note that failure is an acceptable option here, since the
       // only result will be a stale cache for some helper commands.
-      var path = require("path")
-        , p = url.parse(where).pathname.split("/")
-        , _ = "/"
-        , caches = p.map(function (part) {
-            part = part.replace(/:/g, "_")
-            return _ = path.join(_, part)
-          }).map(function (cache) {
-            return path.join(this.conf.get('cache'), cache, ".cache.json")
-          }, this)
-
-      // if the method is DELETE, then also remove the thing itself.
-      // Note that the search index is probably invalid.  Whatever.
-      // That's what you get for deleting stuff.  Don't do that.
-      if (method === "DELETE") {
-        p = p.slice(0, p.indexOf("-rev"))
-        p = p.join("/").replace(/:/g, "_")
-        caches.push(path.join(this.conf.get('cache'), p))
-      }
-
-      asyncMap(caches, rm, function () {})
+      rm(this.cacheFile(where), function() {})
     }
     return cb(er, parsed, data, response)
   }.bind(this)
