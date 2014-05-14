@@ -1,9 +1,6 @@
 {
   "version": "1.4.10",
   "name": "npm",
-  "publishConfig": {
-    "proprietary-attribs": false
-  },
   "description": "A package manager for node",
   "keywords": [
     "package manager",
