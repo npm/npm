@@ -81,6 +81,7 @@
     "sorted-object": "~1.0.0",
     "tar": "~0.1.19",
     "text-table": "~0.2.0",
+    "uid-number": "0.0.5",
     "which": "1"
   },
   "bundleDependencies": [
@@ -113,6 +114,7 @@
     "node-gyp",
     "nopt",
     "normalize-package-data",
+    "npm-cache-filename",
     "npm-install-checks",
     "npm-registry-client",
     "npm-user-validate",
@@ -135,8 +137,7 @@
     "tar",
     "text-table",
     "uid-number",
-    "which",
-    "npm-cache-filename"
+    "which"
   ],
   "devDependencies": {
     "marked": "~0.3.2",
