@@ -36,6 +36,9 @@ following scripts:
 Additionally, arbitrary scripts can be run by doing
 `npm run-script <pkg> <stage>`.
 
+Arbitrary scripts can also have BEFORE and AFTER behavior,  defined by
+including `pre<stage>` and `post<stage>` scripts in the package.json.
+
 ## NOTE: INSTALL SCRIPTS ARE AN ANTIPATTERN
 
 **tl;dr** Don't use `install`.  Use a `.gyp` file for compilation, and
