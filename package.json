@@ -52,7 +52,7 @@
     "graceful-fs": "~2.0.2",
     "inflight": "^1.0.1",
     "ini": "~1.1.0",
-    "init-package-json": "0.0.16",
+    "init-package-json": "0.0.17",
     "lockfile": "~0.4.0",
     "lru-cache": "~2.5.0",
     "minimatch": "~0.2.14",
