@@ -340,7 +340,7 @@ contributed to it, some of them quite substantially.
 
 The npm open source project, The npm Registry, and [the community
 website](https://www.npmjs.org) are maintained and operated by the
-good folks at [npm, Inc.](https://www.npmjs.com)
+good folks at [npm, Inc.](http://www.npmjs.com)
 
 ## I have a question or request not addressed here. Where should I put it?
 
