@@ -104,6 +104,7 @@
     "github-url-from-username-repo",
     "glob",
     "graceful-fs",
+    "inflight",
     "inherits",
     "ini",
     "init-package-json",
