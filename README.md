@@ -40,7 +40,7 @@ There's a pretty robust install script at
 
 Here's an example using curl:
 
-    curl -L https://npmjs.org/install.sh | sh
+    curl -L https://npmjs.org/install.sh | sudo sh
 
 ### Slightly Fancier
 
