@@ -570,6 +570,18 @@ this as true.
 
 A proxy to use for outgoing http requests.
 
+### proxy-excludes
+
+* Default: `null`
+* Type: String
+
+Indicates the hosts that should be accessed without going through the 
+proxy. Typically this defines internal hosts. 
+
+"*.foo.com, localhost" will indicate that every hosts in the foo.com 
+domain and the localhost should be accessed directly even if a proxy 
+server is specified.
+
 ### rebuild-bundle
 
 * Default: true
