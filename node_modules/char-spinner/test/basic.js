@@ -14,7 +14,7 @@ test('does nothing when not a tty', function(t) {
 test('write spinny stuff', function(t) {
   var output = ''
   var written = 0
-  var expect = "\r \rb\r\r \rc\r\r \rd\r\r \re\r\r \rf\r\r \rg\r\r \rh\r\r \ri\r\r \rj\r\r \rk\r\r \rl\r\r \rm\r\r \rn\r\r \ro\r\r \rp\r\r \ra\r\r \rb\r\r \rc\r\r \rd\r\r \re\r\r \rf\r\r \rg\r\r \rh\r\r \ri\r\r \rj\r\r \rk\r\r \rl\r\r \rm\r\r \rn\r\r \ro\r\r \rp\r\r \ra\r\r \rb\r\r \rc\r\r \rd\r\r \re\r\r \rf\r\r \rg\r\r \rh\r\r \ri\r\r \rj\r\r \rk\r\r \rl\r\r \rm\r\r \rn\r\r \ro\r\r \rp\r\r \ra\r\r \rb\r\r \rc\r"
+  var expect = "b\u001b[0Gc\u001b[0Gd\u001b[0Ge\u001b[0Gf\u001b[0Gg\u001b[0Gh\u001b[0Gi\u001b[0Gj\u001b[0Gk\u001b[0Gl\u001b[0Gm\u001b[0Gn\u001b[0Go\u001b[0Gp\u001b[0Ga\u001b[0Gb\u001b[0Gc\u001b[0Gd\u001b[0Ge\u001b[0Gf\u001b[0Gg\u001b[0Gh\u001b[0Gi\u001b[0Gj\u001b[0Gk\u001b[0Gl\u001b[0Gm\u001b[0Gn\u001b[0Go\u001b[0Gp\u001b[0Ga\u001b[0Gb\u001b[0Gc\u001b[0Gd\u001b[0Ge\u001b[0Gf\u001b[0Gg\u001b[0Gh\u001b[0Gi\u001b[0Gj\u001b[0Gk\u001b[0Gl\u001b[0Gm\u001b[0Gn\u001b[0Go\u001b[0Gp\u001b[0Ga\u001b[0Gb\u001b[0Gc\u001b[0G"
 
   var int = spinner({
     interval: 0,
