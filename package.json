@@ -43,7 +43,7 @@
     "chownr": "0",
     "cmd-shim": "~1.1.1",
     "columnify": "~1.1.0",
-    "editor": "0.0.5",
+    "editor": "~0.1.0",
     "fstream": "~0.1.25",
     "fstream-npm": "~0.1.7",
     "github-url-from-git": "1.1.1",
