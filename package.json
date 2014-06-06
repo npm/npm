@@ -42,7 +42,7 @@
     "chmodr": "~0.1.0",
     "chownr": "0",
     "cmd-shim": "~1.1.1",
-    "columnify": "~0.1.2",
+    "columnify": "~1.1.0",
     "editor": "0.0.5",
     "fstream": "~0.1.25",
     "fstream-npm": "~0.1.7",
