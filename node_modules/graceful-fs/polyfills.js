@@ -1,4 +1,4 @@
-var fs = require('fs')
+var fs = require('./fs.js')
 var constants = require('constants')
 
 var origCwd = process.cwd
