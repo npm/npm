@@ -50,7 +50,7 @@ function nopt (types, shorthands, args, slice) {
 function clean (data, types, typeDefs) {
   typeDefs = typeDefs || exports.typeDefs
   var remove = {}
-    , typeDefault = [false, true, null, String, Number, Array]
+    , typeDefault = [false, true, null, String, Array]
 
   Object.keys(data).forEach(function (k) {
     if (k === "argv") return
