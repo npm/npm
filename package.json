@@ -67,7 +67,7 @@
     "npmlog": "~0.1.0",
     "once": "~1.3.0",
     "opener": "~1.3.0",
-    "osenv": "0",
+    "osenv": "~0.1.0",
     "path-is-inside": "~1.0.0",
     "read": "~1.0.4",
     "read-installed": "~2.0.5",
