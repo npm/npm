@@ -718,8 +718,8 @@ for this to work properly.
 * Default: true
 * Type: Boolean or `"always"`
 
-When set to `true`, npm will display an ascii spinner while it is doing
-things, if `process.stderr` is a TTY.
+When set to `true`, npm will display an ascii spinner while installing
+and/or updating things, if `process.stderr` is a TTY.
 
 Set to `false` to suppress the spinner, or set to `always` to output
 the spinner even for non-TTY outputs.
