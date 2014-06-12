@@ -103,7 +103,7 @@ function load_(builtin, rc, cli, cb) {
   conf.add(cli, 'cli')
   conf.addEnv()
 
-  conf.loadExtras(function(er) {
+  conf.loadPrefix(function(er) {
     if (er)
       return cb(er)
 
@@ -139,10 +139,14 @@ function load_(builtin, rc, cli, cb) {
     conf.root = defaults
     conf.add(rc.shift(), 'builtin')
     conf.once('load', function () {
-      // warn about invalid bits.
-      validate(conf)
-      exports.loaded = conf
-      cb(null, conf)
+      conf.loadExtras(function(er) {
+        if (er)
+          return cb(er)
+        // warn about invalid bits.
+        validate(conf)
+        exports.loaded = conf
+        cb(er, conf)
+      })
     })
   }
 }
@@ -174,13 +178,14 @@ Conf.prototype.setUser = require('./lib/set-user.js')
 Conf.prototype.findPrefix = require('./lib/find-prefix.js')
 
 Conf.prototype.loadExtras = function(cb) {
-  this.loadPrefix(function(er) {
+  this.setUser(function(er) {
     if (er)
       return cb(er)
-    this.setUser(function(er) {
+    this.loadUid(function(er) {
       if (er)
         return cb(er)
-      this.loadUid(cb)
+      // Without prefix, nothing will ever work
+      mkdirp(this.prefix, cb)
     }.bind(this))
   }.bind(this))
 }
