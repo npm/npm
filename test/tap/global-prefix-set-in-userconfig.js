@@ -15,7 +15,7 @@ test("setup", function (t) {
 
 test("run command", function (t) {
   var args = ["prefix", "-g", "--userconfig=" + rcfile]
-  common.npm(args, {}, function (er, code, so, se) {
+  common.npm(args, {env: {}}, function (er, code, so, se) {
     if (er) throw er
     t.equal(code, 0)
     t.equal(so.trim(), prefix)
