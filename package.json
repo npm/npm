@@ -74,7 +74,7 @@
     "read-package-json": "~1.2.2",
     "request": "~2.30.0",
     "retry": "~0.6.0",
-    "rimraf": "~2.2.5",
+    "rimraf": "~2.2.8",
     "semver": "~2.3.0",
     "sha": "~1.2.1",
     "slide": "~1.1.5",
