@@ -34,7 +34,7 @@ test("it should not throw", function (t) {
   mr(common.port, function (s) {
     npm.load({
       cache: pkg + "/cache",
-      loglevel: 'silent',
+      loglevel: 'warn',
       parseable: true,
       registry: common.registry }
     , function () {
