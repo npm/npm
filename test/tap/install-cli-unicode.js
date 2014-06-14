@@ -15,12 +15,15 @@ function hasOnlyAscii (s) {
 test('does not use unicode with --unicode false', function (t) {
   t.plan(3)
   mr(common.port, function (s) {
+    process.env.npm_config_loglevel = ''
     exec('node ' + NPM_BIN + ' install --unicode false read', {
       cwd: pkg
     }, function(err, stdout) {
       t.ifError(err)
       t.ok(stdout, stdout.length)
       t.ok(hasOnlyAscii(stdout))
+
+      process.env.npm_config_loglevel = 'error'
       s.close()
     })
   })
