@@ -99,13 +99,14 @@ function regRequest (method, uri, options, cb_) {
   if (authRequired && !auth) {
     var un = this.conf.get('username')
     var pw = this.conf.get('_password')
-    if (un && pw)
-      auth = new Buffer(un + ':' + pw).toString('base64')
-  }
 
-  if (authRequired && !auth) {
-    return cb(new Error(
-      "This request requires auth credentials. Run `npm login` and repeat the request."))
+    if (!(un && pw)) {
+      return cb(new Error(
+        "This request requires auth credentials. Run `npm login` and repeat the request."
+      ))
+    }
+
+    auth = new Buffer(un + ':' + pw).toString('base64')
   }
 
   if (auth && authRequired) {
@@ -186,6 +187,10 @@ function makeRequest (method, remote, where, what, etag, nofollow, cb_) {
 
   headers["user-agent"] = this.conf.get('user-agent') ||
                           'node/' + process.version
+
+  // TODO: on-prem needs to move to scoped modules / multi-registry
+  var authToken = this.conf.get('_authToken')
+  if (authToken) headers.authorization = "Bearer " + authToken
 
   var p = this.conf.get('proxy')
   var sp = this.conf.get('https-proxy') || p
