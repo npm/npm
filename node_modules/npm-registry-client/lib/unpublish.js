@@ -22,7 +22,7 @@ function unpublish (uri, ver, cb) {
     // remove all if no version specified
     if (!ver) {
       this.log.info("unpublish", "No version specified, removing all")
-      return this.request("DELETE", uri+'/-rev/'+data._rev, cb)
+      return this.request("DELETE", uri+'/-rev/'+data._rev, null, cb)
     }
 
     var versions = data.versions || {}
