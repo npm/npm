@@ -15,7 +15,6 @@ npm-debug.log
 /html/doc/
 /man/
 /doc/*/npm-index.md
-/npmrc
 /release/
 /npm-*.tgz
 /node_modules/npm-registry-client/test/fixtures
