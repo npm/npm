@@ -5,6 +5,11 @@ var url = require("url")
   , semver = require("semver")
   , crypto = require("crypto")
   , fs = require("fs")
+  , fixNameField = require("normalize-package-data/lib/fixer.js").fixNameField
+
+function escaped(name) {
+  return name.replace("/", "%2f")
+}
 
 function publish (uri, data, tarball, cb) {
   var email = this.conf.get('email')
@@ -17,8 +22,12 @@ function publish (uri, data, tarball, cb) {
     return cb(er)
   }
 
-  if (data.name !== encodeURIComponent(data.name))
-    return cb(new Error('invalid name: must be url-safe'))
+  try {
+    fixNameField(data, true)
+  }
+  catch (er) {
+    return cb(er)
+  }
 
   var ver = semver.clean(data.version)
   if (!ver)
@@ -75,7 +84,7 @@ function putFirst (registry, data, tarbuffer, stat, username, email, cb) {
     length: stat.size
   };
 
-  var fixed = url.resolve(registry, data.name)
+  var fixed = url.resolve(registry, escaped(data.name))
   this.request("PUT", fixed, { body : root }, function (er, parsed, json, res) {
     var r409 = "must supply latest _rev to update existing package"
     var r409b = "Document update conflict."
@@ -143,7 +152,8 @@ function putNext(registry, newVersion, root, current, cb) {
   var maint = JSON.parse(JSON.stringify(root.maintainers))
   root.versions[newVersion].maintainers = maint
 
-  this.request("PUT", url.resolve(registry, root.name), { body : current }, cb)
+  var uri = url.resolve(registry, escaped(root.name))
+  this.request("PUT", uri, { body : current }, cb)
 }
 
 function conflictError (pkgid, version) {
