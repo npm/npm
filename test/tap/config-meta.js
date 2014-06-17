@@ -17,6 +17,7 @@ var DOC = {}
 
 var exceptions = [
   path.resolve(lib, "config.js"),
+  path.resolve(lib, "publish.js"),
   path.resolve(lib, "utils", "lifecycle.js"),
   path.resolve(lib, "utils", "map-name-to-registry.js")
 ]
