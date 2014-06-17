@@ -71,7 +71,7 @@
     "path-is-inside": "~1.0.0",
     "read": "~1.0.4",
     "read-installed": "~2.0.5",
-    "read-package-json": "~1.2.2",
+    "read-package-json": "git://github.com/npm/read-package-json.git#othiym23/scoped",
     "request": "~2.30.0",
     "retry": "~0.6.0",
     "rimraf": "~2.2.8",
@@ -141,6 +141,7 @@
   ],
   "devDependencies": {
     "marked": "~0.3.2",
+    "nock": "~0.34.1",
     "npm-registry-couchapp": "~2.3.6",
     "npm-registry-mock": "~0.6.3",
     "ronn": "~0.3.6",
