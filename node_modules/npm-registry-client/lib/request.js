@@ -188,8 +188,9 @@ function makeRequest (method, remote, where, what, etag, nofollow, cb_) {
   headers["user-agent"] = this.conf.get('user-agent') ||
                           'node/' + process.version
 
-  // TODO: on-prem needs to move to scoped modules / multi-registry
-  var authToken = this.conf.get('_authToken')
+  var tokenKey = remote + ":_authToken"
+  this.log.silly("tokenKey", tokenKey)
+  var authToken = this.conf.get(tokenKey)
   if (authToken) headers.authorization = "Bearer " + authToken
 
   var p = this.conf.get('proxy')
