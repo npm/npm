@@ -30,7 +30,7 @@ function isGithub(spec) {
 function mapRegistry(config, spec) {
   var pieces = spec.match(/^(@[^@\/])+\//)
   var org    = pieces[1]
-  return config.get(org + ":registry-base-url")
+  return config.get(org + ":registry")
 }
 
 function splitSpec(spec) {
@@ -48,7 +48,7 @@ function splitSpec(spec) {
 
 test("recognizing organized URLs", function (t) {
   var config = new Config()
-  config.set("@a:registry-base-url", "registry.example.com")
+  config.set("@a:registry", "registry.example.com")
 
   function canonicalize(spec) {
     var expanded = splitSpec(spec)
