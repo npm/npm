@@ -46,7 +46,7 @@ test("npm publish should honor scoping", function (t) {
   function onload (er) {
     t.ifError(er, "npm bootstrapped successfully")
 
-    npm.config.set("@bigco:registry-base-url", common.registry)
+    npm.config.set("@bigco:registry", common.registry)
     npm.commands.publish([], false, function (er) {
       t.ifError(er, "published without error")
 
