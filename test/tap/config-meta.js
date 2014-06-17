@@ -16,10 +16,12 @@ var CONFS = {}
 var DOC = {}
 
 var exceptions = [
+  path.resolve(lib, "adduser.js"),
   path.resolve(lib, "config.js"),
   path.resolve(lib, "publish.js"),
   path.resolve(lib, "utils", "lifecycle.js"),
-  path.resolve(lib, "utils", "map-name-to-registry.js")
+  path.resolve(lib, "utils", "map-name-to-registry.js"),
+  path.resolve(nm, "npm-registry-client", "lib", "request.js")
 ]
 
 test("get files", function (t) {
