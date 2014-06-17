@@ -84,7 +84,7 @@ function regRequest (method, uri, options, cb_) {
       if (p.match(/^org.couchdb.user/)) {
         return p.replace(/\//g, encodeURIComponent("/"))
       }
-      return encodeURIComponent(p)
+      return p
     }).join("/")
     if (q) where += "?" + q
     this.log.verbose("url resolving", [registry, where])
