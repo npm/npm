@@ -663,13 +663,24 @@ Only works if there is already a package.json file present.
 * Default: '^'
 * Type: String
 
-Configure how versions of packages installed to a package.json file via 
+Configure how versions of packages installed to a package.json file via
 `--save` or `--save-dev` get prefixed.
 
 For example if a package has version `1.2.3`, by default it's version is
-set to `^1.2.3` which allows minor upgrades for that package, but after  
+set to `^1.2.3` which allows minor upgrades for that package, but after
 `npm config set save-prefix='~'` it would be set to `~1.2.3` which only allows
 patch upgrades.
+
+### scope
+
+* Default: ""
+* Type: String
+
+Associate an operation with a scope for a scoped registry. Useful when logging
+in to a private registry for the first time:
+`npm login --scope=@organization --registry=registry.organization.com`, which
+will cause `@organization` to be mapped to the registry for future installation
+of packages specified according to the pattern `@organization/package`.
 
 ### searchopts
 
