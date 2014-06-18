@@ -7,14 +7,22 @@ var url = require("url")
   , fs = require("fs")
   , fixNameField = require("normalize-package-data/lib/fixer.js").fixNameField
 
+var toNerfDart = require("./util/nerf-dart.js")
+
 function escaped(name) {
   return name.replace("/", "%2f")
 }
 
 function publish (uri, data, tarball, cb) {
-  var email = this.conf.get('email')
-  var auth = this.conf.get('_auth')
-  var username = this.conf.get('username')
+  var email = this.conf.get('email') ||
+              this.conf.get(toNerfDart(uri) + ':email')
+  var auth = this.conf.get('_auth') ||
+             this.conf.get(toNerfDart(uri) + ':_auth')
+  var username
+  if (auth) {
+    var creds = new Buffer(auth, "base64").toString("utf8")
+    if (creds) username = creds.split(":")[0]
+  }
 
   if (!email || !auth || !username) {
     var er = new Error("auth and email required for publishing")

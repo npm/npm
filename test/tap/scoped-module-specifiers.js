@@ -2,7 +2,7 @@ var util = require("util")
 
 var test = require("tap").test
 
-var isOrganized = require("../../lib/utils/is-organized.js")
+var isScoped = require("../../lib/utils/is-scoped.js")
 
 function Config() {
   this._store = Object.create(null)
@@ -52,7 +52,7 @@ test("recognizing organized URLs", function (t) {
 
   function canonicalize(spec) {
     var expanded = splitSpec(spec)
-    if (isOrganized(expanded.name)) {
+    if (isScoped(expanded.name)) {
       return util.format(
         "npm://%s/%s, v: %s",
         mapRegistry(config, expanded.name),

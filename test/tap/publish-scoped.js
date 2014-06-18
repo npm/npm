@@ -1,4 +1,4 @@
-var fs = require('fs')
+var fs = require("fs")
 var path = require("path")
 
 var test = require("tap").test
@@ -6,8 +6,8 @@ var mkdirp = require("mkdirp")
 var rimraf = require("rimraf")
 var nock = require("nock")
 
-var npm = require('../../')
-var common = require('../common-tap.js')
+var npm = require("../../")
+var common = require("../common-tap.js")
 
 var pkg = path.join(__dirname, "prepublish_package")
 
@@ -15,7 +15,6 @@ test("setup", function (t) {
   mkdirp(path.join(pkg, "cache"), next)
 
   function next () {
-    console.log("in next")
     process.chdir(pkg)
     fs.writeFile(
       path.join(pkg, "package.json"),
@@ -40,8 +39,11 @@ test("npm publish should honor scoping", function (t) {
   var configuration = {
     cache    : path.join(pkg, "cache"),
     loglevel : "silent",
-    registry : "http://nonexistent.lvh.me"
+    registry : "http://nonexistent.lvh.me",
+    "//localhost:1337/:_auth" : new Buffer("testuser:password", "utf8").toString("base64")
   }
+
+  npm.load(configuration, onload)
 
   function onload (er) {
     t.ifError(er, "npm bootstrapped successfully")
@@ -55,8 +57,6 @@ test("npm publish should honor scoping", function (t) {
       t.end()
     })
   }
-
-  npm.load(configuration, onload)
 })
 
 test("cleanup", function(t) {
