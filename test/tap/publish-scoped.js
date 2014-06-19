@@ -1,4 +1,4 @@
-var fs = require('fs')
+var fs = require("fs")
 var path = require("path")
 
 var test = require("tap").test
@@ -6,8 +6,8 @@ var mkdirp = require("mkdirp")
 var rimraf = require("rimraf")
 var nock = require("nock")
 
-var npm = require('../../')
-var common = require('../common-tap.js')
+var npm = require("../../")
+var common = require("../common-tap.js")
 
 var pkg = path.join(__dirname, "prepublish_package")
 
