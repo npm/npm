@@ -21,6 +21,7 @@ var exceptions = [
   path.resolve(lib, "publish.js"),
   path.resolve(lib, "utils", "lifecycle.js"),
   path.resolve(lib, "utils", "map-to-registry.js"),
+  path.resolve(nm, "npm-registry-client", "lib", "publish.js"),
   path.resolve(nm, "npm-registry-client", "lib", "request.js")
 ]
 

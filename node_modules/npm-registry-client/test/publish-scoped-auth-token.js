@@ -9,11 +9,13 @@ var common = require("./lib/common.js")
 var configuration = {"always-auth" : true}
 
 var authKey = toNerfDart(common.registry) + ":_auth"
-var _auth = new Buffer("username:password").toString("base64")
-configuration[authKey] = _auth
+configuration[authKey] = new Buffer("username:password").toString("base64")
 
 var emailKey = toNerfDart(common.registry) + ":email"
 configuration[emailKey] = "ogd@aoaioxxysz.net"
+
+var tokenKey = toNerfDart(common.registry) + ":_authToken"
+configuration[tokenKey] = "of-glad-tidings"
 
 var client = common.freshClient(configuration)
 
@@ -26,7 +28,7 @@ tap.test("publish", function (t) {
 
   server.expect("/@npm%2fnpm-registry-client", function (req, res) {
     t.equal(req.method, "PUT")
-    t.equal(req.headers.authorization, "Basic " + _auth)
+    t.equal(req.headers.authorization, "Bearer of-glad-tidings")
 
     var b = ""
     req.setEncoding("utf8")
