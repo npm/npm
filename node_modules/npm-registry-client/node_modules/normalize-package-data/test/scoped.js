@@ -12,8 +12,7 @@ test("a simple scoped module has a valid name", function (t) {
 
 test("'org@package' is not a valid name", function (t) {
   t.throws(function () {
-    var data = {name : "org@package"}
-    fixNameField(data, false)
+    fixNameField({name : "org@package"}, false)
   }, "blows up as expected")
 
   t.end()
@@ -21,8 +20,7 @@ test("'org@package' is not a valid name", function (t) {
 
 test("'org=package' is not a valid name", function (t) {
   t.throws(function () {
-    var data = {name : "org=package"}
-    fixNameField(data, false)
+    fixNameField({name : "org=package"}, false)
   }, "blows up as expected")
 
   t.end()
@@ -30,8 +28,23 @@ test("'org=package' is not a valid name", function (t) {
 
 test("'@org=sub/package' is not a valid name", function (t) {
   t.throws(function () {
-    var data = {name : "@org=sub/package"}
-    fixNameField(data, false)
+    fixNameField({name : "@org=sub/package"}, false)
+  }, "blows up as expected")
+
+  t.end()
+})
+
+test("'@org/' is not a valid name", function (t) {
+  t.throws(function () {
+    fixNameField({name : "@org/"}, false)
+  }, "blows up as expected")
+
+  t.end()
+})
+
+test("'@/package' is not a valid name", function (t) {
+  t.throws(function () {
+    fixNameField({name : "@/package"}, false)
   }, "blows up as expected")
 
   t.end()
