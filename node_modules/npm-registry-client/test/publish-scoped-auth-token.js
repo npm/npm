@@ -2,20 +2,13 @@ var tap = require("tap")
 var crypto = require("crypto")
 var fs = require("fs")
 
-var toNerfDart = require("../lib/util/nerf-dart.js")
 var server = require("./lib/server.js")
 var common = require("./lib/common.js")
 
-var configuration = {"always-auth" : true}
+var nerfed = "//localhost:" + server.port + "/:"
 
-var authKey = toNerfDart(common.registry) + ":_auth"
-configuration[authKey] = new Buffer("username:password").toString("base64")
-
-var emailKey = toNerfDart(common.registry) + ":email"
-configuration[emailKey] = "ogd@aoaioxxysz.net"
-
-var tokenKey = toNerfDart(common.registry) + ":_authToken"
-configuration[tokenKey] = "of-glad-tidings"
+var configuration = {}
+configuration[nerfed + "_authToken"]  = "of-glad-tidings"
 
 var client = common.freshClient(configuration)
 
@@ -41,7 +34,6 @@ tap.test("publish", function (t) {
       t.equal(o._id, "@npm/npm-registry-client")
       t.equal(o["dist-tags"].latest, pkg.version)
       t.has(o.versions[pkg.version], pkg)
-      t.same(o.maintainers, [ { name: "username", email: "ogd@aoaioxxysz.net" } ])
       t.same(o.maintainers, o.versions[pkg.version].maintainers)
       var att = o._attachments[ pkg.name + "-" + pkg.version + ".tgz" ]
       t.same(att.data, pd)

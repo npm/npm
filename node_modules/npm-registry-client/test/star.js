@@ -2,17 +2,19 @@ var tap = require("tap")
 
 var server = require("./lib/server.js")
 var common = require("./lib/common.js")
-var client = common.freshClient({
-  username      : "othiym23",
-  password      : "password",
-  email         : "ogd@aoaioxxysz.net",
-  _auth         : new Buffer("username  : password").toString("base64"),
-  "always-auth" : true
-})
-
-var cache = require("./fixtures/underscore/cache.json")
 
 var DEP_USER = "othiym23"
+
+var nerfed = "//localhost:" + server.port + "/:"
+
+var configuration = {}
+configuration[nerfed + "username"]  = DEP_USER
+configuration[nerfed + "_password"] = new Buffer("password").toString("base64")
+configuration[nerfed + "email"]     = "i@izs.me"
+
+var client = common.freshClient(configuration)
+
+var cache = require("./fixtures/underscore/cache.json")
 
 tap.test("star a package", function (t) {
   server.expect("GET", "/underscore?write=true", function (req, res) {
@@ -52,7 +54,7 @@ tap.test("star a package", function (t) {
   })
 
   client.star("http://localhost:1337/underscore", true, function (error, data) {
-    t.notOk(error, "no errors")
+    t.ifError(error, "no errors")
     t.ok(data.starred, "was starred")
 
     t.end()

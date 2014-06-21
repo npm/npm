@@ -10,7 +10,6 @@ var url = require("url")
   , crypto = require("crypto")
 
 var pkg = require("../package.json")
-  , toNerfDart = require("./util/nerf-dart.js")
 
 // npm: means
 // 1. https
@@ -72,7 +71,7 @@ function regRequest (method, uri, options, cb_) {
 
   // resolve to a full url on the registry
   if (!where.match(/^https?:\/\//)) {
-    this.log.verbose("url raw", where)
+    this.log.verbose("request", "url raw", where)
 
     var q = where.split("?")
     where = q.shift()
@@ -87,37 +86,40 @@ function regRequest (method, uri, options, cb_) {
       return p
     }).join("/")
     if (q) where += "?" + q
-    this.log.verbose("url resolving", [registry, where])
+    this.log.verbose("request", "url resolving", [registry, where])
     where = url.resolve(registry, where)
-    this.log.verbose("url resolved", where)
+    this.log.verbose("request", "url resolved", where)
   }
   this.log.verbose("request", "where is", where)
 
   var remote = url.parse(where)
   if ((authThis || alwaysAuth || isWrite) && !nu || uc || isDel) {
-    // 1. see if there's multi-registry auth in there
-    var auth = this.conf.get(toNerfDart(where) + ":_auth")
+    this.log.verbose("request", "setting basic auth")
 
-    // 2. check for (deprecated) generic auth
-    if (!auth) auth = this.conf.get("_auth")
-
-    // 3. check to see if npmconf has unbundled the credentials
-    if (!auth) {
-      var un = this.conf.get("username")
-      var pw = this.conf.get("_password")
-
-      if (!(un && pw)) {
-        return cb(new Error(
-          "This request requires auth credentials. Run `npm login` and repeat the request."
-        ))
+    var c = this.conf.getCredentialsByURI(where)
+    if (c) {
+      if (!c.token) {
+        if (c.username && c.password) {
+          remote.auth = c.username + ":" + c.password
+        }
+        else {
+          return cb(new Error(
+            "This request requires auth credentials. Run `npm login` and repeat the request."
+          ))
+        }
       }
-
-      auth = new Buffer(un + ":" + pw).toString("base64")
+      else {
+        this.log.verbose("request", "using bearer token for auth")
+      }
     }
-
-    if (auth) {
-      remote.auth = new Buffer(auth, "base64").toString("utf8")
+    else {
+      return cb(new Error(
+        "This request requires auth credentials. Run `npm login` and repeat the request."
+      ))
     }
+  }
+  else {
+    this.log.verbose("request", "no basic auth needed")
   }
 
   // Tuned to spread 3 attempts over about a minute.
@@ -195,14 +197,8 @@ function makeRequest (method, remote, where, what, etag, nofollow, cb_) {
   headers["user-agent"] = this.conf.get("user-agent") ||
                           "node/" + process.version
 
-  var tokenKey = toNerfDart(url.format(remote)) + ":_authToken"
-  this.log.silly("tokenKey", tokenKey)
-  var authToken = this.conf.get(tokenKey)
-  if (authToken) {
-    // don't send both basic auth and bearer token
-    delete remote.auth
-    headers.authorization = "Bearer " + authToken
-  }
+  var c = this.conf.getCredentialsByURI(url.format(remote))
+  if (c.token) headers.authorization = "Bearer " + c.token
 
   var p = this.conf.get("proxy")
   var sp = this.conf.get("https-proxy") || p

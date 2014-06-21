@@ -1,9 +1,18 @@
+var url = require("url")
 var resolve = require("path").resolve
+
 var server = require("./server.js")
 var RC = require("../../")
 
 var REGISTRY = "http://localhost:" + server.port
 
+function toNerfDart (uri) {
+  var parsed = url.parse(uri)
+  parsed.pathname = "/"
+  delete parsed.protocol
+  delete parsed.auth
+  return url.format(parsed)
+}
 module.exports = {
   port : server.port,
   registry : REGISTRY,
@@ -11,8 +20,62 @@ module.exports = {
     config = config || {}
     config.cache = resolve(__dirname, "../fixtures/cache")
     config.registry = REGISTRY
+    var container = {
+      get: function (k) { return config[k] },
+      set: function (k, v) { config[k] = v },
+      del: function (k) { delete config[k] },
+      getCredentialsByURI: function(uri) {
+        var nerfed = toNerfDart(uri)
+        var c = {scope : nerfed}
 
-    var client = new RC(config)
+        if (this.get(nerfed + ":_authToken")) {
+          c.token = this.get(nerfed + ":_authToken")
+          // the bearer token is enough, don't confuse things
+          return c
+        }
+
+        if (this.get(nerfed + ":_password")) {
+          c.password = new Buffer(this.get(nerfed + ":_password"), "base64").toString("utf8")
+        }
+
+        if (this.get(nerfed + ":username")) {
+          c.username = this.get(nerfed + ":username")
+        }
+
+        if (this.get(nerfed + ":email")) {
+          c.email = this.get(nerfed + ":email")
+        }
+
+        if (c.username && c.password) {
+          c.auth = new Buffer(c.username + ":" + c.password).toString("base64")
+        }
+
+        return c
+      },
+      setCredentialsByURI: function (uri, c) {
+        var nerfed = toNerfDart(uri)
+
+        if (c.token) {
+          this.set(nerfed + ":_authToken", c.token, "user")
+          this.del(nerfed + ":_password", "user")
+          this.del(nerfed + ":username", "user")
+          this.del(nerfed + ":email", "user")
+        }
+        else if (c.username || c.password || c.email) {
+          this.del(nerfed + ":_authToken", "user")
+
+          var encoded = new Buffer(c.password, "utf8").toString("base64")
+          this.set(nerfed + ":_password", encoded, "user")
+          this.set(nerfed + ":username", c.username, "user")
+          this.set(nerfed + ":email", c.email, "user")
+        }
+        else {
+          throw new Error("No credentials to set.")
+        }
+      }
+    }
+
+    var client = new RC(container)
     server.log = client.log
     client.log.level = "silent"
 
