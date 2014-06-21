@@ -2,13 +2,7 @@ var tap = require("tap")
 
 var server = require("./lib/server.js")
 var common = require("./lib/common.js")
-var client = common.freshClient({
-  username      : "username",
-  password      : "password",
-  email         : "ogd@aoaioxxysz.net",
-  _auth         : new Buffer("username  : password").toString("base64"),
-  "always-auth" : true
-})
+var client = common.freshClient()
 
 tap.test("get the URL for the bugs page on a package", function (t) {
   server.expect("GET", "/sample/latest", function (req, res) {
@@ -23,7 +17,8 @@ tap.test("get the URL for the bugs page on a package", function (t) {
   })
 
   client.bugs("http://localhost:1337/sample", function (error, info) {
-    t.notOk(error, "no errors")
+    t.ifError(error)
+
     t.ok(info.url, "got the URL")
     t.ok(info.email, "got the email address")
 
