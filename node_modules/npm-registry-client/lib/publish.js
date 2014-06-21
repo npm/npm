@@ -7,24 +7,13 @@ var url = require("url")
   , fs = require("fs")
   , fixNameField = require("normalize-package-data/lib/fixer.js").fixNameField
 
-var toNerfDart = require("./util/nerf-dart.js")
-
 function escaped(name) {
   return name.replace("/", "%2f")
 }
 
 function publish (uri, data, tarball, cb) {
-  var email = this.conf.get('email') ||
-              this.conf.get(toNerfDart(uri) + ':email')
-  var auth = this.conf.get('_auth') ||
-             this.conf.get(toNerfDart(uri) + ':_auth')
-  var username
-  if (auth) {
-    var creds = new Buffer(auth, "base64").toString("utf8")
-    if (creds) username = creds.split(":")[0]
-  }
-
-  if (!email || !auth || !username) {
+  var c = this.conf.getCredentialsByURI(uri)
+  if (!(c.token || (c.auth && c.username && c.email))) {
     var er = new Error("auth and email required for publishing")
     er.code = 'ENEEDAUTH'
     return cb(er)
@@ -47,12 +36,12 @@ function publish (uri, data, tarball, cb) {
     if (er) return cb(er)
     fs.readFile(tarball, function(er, tarbuffer) {
       if (er) return cb(er)
-      putFirst.call(self, uri, data, tarbuffer, s, username, email, cb)
+      putFirst.call(self, uri, data, tarbuffer, s, c, cb)
     })
   })
 }
 
-function putFirst (registry, data, tarbuffer, stat, username, email, cb) {
+function putFirst (registry, data, tarbuffer, stat, creds, cb) {
   // optimistically try to PUT all in one single atomic thing.
   // If 409, then GET and merge, try again.
   // If other error, then fail.
@@ -64,15 +53,14 @@ function putFirst (registry, data, tarbuffer, stat, username, email, cb) {
     , "dist-tags" : {}
     , versions : {}
     , readme: data.readme || ""
-    , maintainers :
-      [ { name : username
-        , email : email
-        }
-      ]
     }
 
+  if (!creds.token) {
+    root.maintainers = [{name : creds.username, email : creds.email}]
+    data.maintainers = JSON.parse(JSON.stringify(root.maintainers))
+  }
+
   root.versions[ data.version ] = data
-  data.maintainers = JSON.parse(JSON.stringify(root.maintainers))
   var tag = data.tag || this.conf.get('tag') || "latest"
   root["dist-tags"][tag] = data.version
 
@@ -90,7 +78,7 @@ function putFirst (registry, data, tarbuffer, stat, username, email, cb) {
     content_type: 'application/octet-stream',
     data: tarbuffer.toString('base64'),
     length: stat.size
-  };
+  }
 
   var fixed = url.resolve(registry, escaped(data.name))
   this.request("PUT", fixed, { body : root }, function (er, parsed, json, res) {
@@ -150,7 +138,7 @@ function putNext(registry, newVersion, root, current, cb) {
 
       // ignore these
       case 'maintainers':
-        break;
+        break
 
       // copy
       default:
