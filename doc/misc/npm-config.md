@@ -253,12 +253,6 @@ set.
 
 The command to run for `npm edit` or `npm config edit`.
 
-### email
-
-The email of the logged-in user.
-
-Set by the `npm adduser` command.  Should not be set explicitly.
-
 ### engine-strict
 
 * Default: false
@@ -804,13 +798,6 @@ instead of complete help when doing `npm-help(1)`.
 * Type: String or Number
 
 The UID to set to when running package scripts as root.
-
-### username
-
-* Default: null
-* Type: String
-
-The username on the npm registry.  Set with `npm adduser`
 
 ### userconfig
 
