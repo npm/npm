@@ -44,7 +44,7 @@
     "cmd-shim": "~1.1.1",
     "columnify": "~1.1.0",
     "editor": "~0.1.0",
-    "fstream": "~0.1.27",
+    "fstream": "~0.1.28",
     "fstream-npm": "~0.1.7",
     "github-url-from-git": "1.1.1",
     "github-url-from-username-repo": "~0.2.0",
@@ -79,7 +79,7 @@
     "sha": "~1.2.1",
     "slide": "~1.1.5",
     "sorted-object": "~1.0.0",
-    "tar": "~0.1.19",
+    "tar": "~0.1.20",
     "text-table": "~0.2.0",
     "uid-number": "0.0.5",
     "which": "1"

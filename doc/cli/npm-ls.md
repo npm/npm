@@ -29,7 +29,7 @@ in parentheses after the name@version to make it easier for users to
 recognize potential forks of a project.
 
 When run as `ll` or `la`, it shows extended information by default.
-
+ 
 ## CONFIGURATION
 
 ### json
