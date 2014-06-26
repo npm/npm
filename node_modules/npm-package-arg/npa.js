@@ -46,7 +46,8 @@ function npa (arg) {
   if (nameparse && validName(nameparse[3]) &&
       (!nameparse[2] || validName(nameparse[2]))) {
     res.name = (nameparse[1] || "") + nameparse[3]
-    res.scope = nameparse[2] || null
+    if (nameparse[2])
+      res.scope = "@" + nameparse[2]
     arg = arg.substr(nameparse[0].length)
   } else {
     res.name = null
@@ -100,7 +101,8 @@ function npa (arg) {
       res.spec = "*"
       res.rawSpec = ""
       res.name = arg
-      res.scope = p[1] || null
+      if (p[1])
+        res.scope = "@" + p[1]
     } else {
       parseLocal(res, arg)
     }
