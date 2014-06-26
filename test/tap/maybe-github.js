@@ -4,15 +4,15 @@ var npm = require("../../lib/npm.js")
 
 // this is the narrowest way to replace a function in the module cache
 var found = true
-var remoteGitPath = require.resolve('../../lib/cache/add-remote-git.js')
+var remoteGitPath = require.resolve("../../lib/cache/add-remote-git.js")
 require("module")._cache[remoteGitPath] = {
   id: remoteGitPath,
-  exports: function stub(_, error, __, cb) {
+  exports: function stub(_, __, cb) {
     if (found) {
       cb(null, {})
     }
     else {
-      cb(error)
+      cb(new Error())
     }
   }
 }
@@ -24,7 +24,7 @@ test("should throw with no parameters", function (t) {
   t.plan(1)
 
   t.throws(function () {
-    maybeGithub();
+    maybeGithub()
   }, "throws when called without parameters")
 })
 
