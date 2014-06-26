@@ -50,3 +50,6 @@ fields:
 * `raw` - The original un-modified string that was provided.
 * `rawSpec` - The part after the `name@...`, as it was originally
   provided.
+* `scope` - If a name is something like `@org/module` then the `scope`
+  field will be set to `org`.  If it doesn't have a scoped name, then
+  scope is `null`.
