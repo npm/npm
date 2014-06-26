@@ -64,7 +64,7 @@
     "npm-package-arg": "~2.0.0",
     "npm-registry-client": "git://github.com/npm/npm-registry-client#othiym23/multi-registry",
     "npm-user-validate": "~0.1.0",
-    "npmconf": "~1.1.1",
+    "npmconf": "git://github.com/npm/npmconf.git#othiym23/new-credentials",
     "npmlog": "~0.1.1",
     "once": "~1.3.0",
     "opener": "~1.3.0",
