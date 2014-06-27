@@ -115,6 +115,7 @@
     "mkdirp",
     "node-gyp",
     "nopt",
+    "normalize-package-data",
     "npm-cache-filename",
     "npm-install-checks",
     "npm-package-arg",
