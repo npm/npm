@@ -1,22 +1,28 @@
 module.exports = loadPrefix
 
 var findPrefix = require("./find-prefix.js")
-var mkdirp = require("mkdirp")
 var path = require('path')
 
 function loadPrefix (cb) {
   var cli = this.list[0]
 
   Object.defineProperty(this, "prefix",
-    { get : function () {
+    { set : function (prefix) {
+        var g = this.get("global")
+        this[g ? 'globalPrefix' : 'localPrefix'] = prefix
+      }.bind(this)
+    , get : function () {
         var g = this.get("global")
         return g ? this.globalPrefix : this.localPrefix
       }.bind(this)
-    , enmerable : true
+    , enumerable : true
     })
 
   Object.defineProperty(this, "globalPrefix",
-    { get : function () {
+    { set : function (prefix) {
+        this.set('prefix', prefix)
+      }.bind(this)
+    , get : function () {
         return path.resolve(this.get("prefix"))
       }.bind(this)
     , enumerable : true
@@ -24,7 +30,8 @@ function loadPrefix (cb) {
 
   var p
   Object.defineProperty(this, "localPrefix",
-    { get : function () { return p }
+    { set : function (prefix) { p = prefix },
+      get : function () { return p }
     , enumerable: true })
 
   // try to guess at a good node_modules location.
