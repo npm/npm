@@ -12,7 +12,7 @@ function loadPrefix (cb) {
         var g = this.get("global")
         return g ? this.globalPrefix : this.localPrefix
       }.bind(this)
-    , enmerable : true
+    , enumerable : true
     })
 
   Object.defineProperty(this, "globalPrefix",
