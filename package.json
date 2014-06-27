@@ -75,7 +75,7 @@
     "path-is-inside": "~1.0.0",
     "read": "~1.0.4",
     "read-installed": "~2.0.5",
-    "read-package-json": "git://github.com/npm/read-package-json.git#othiym23/scoped",
+    "read-package-json": "~1.2.3",
     "request": "~2.30.0",
     "retry": "~0.6.0",
     "rimraf": "~2.2.8",
