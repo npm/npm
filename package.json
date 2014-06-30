@@ -1,5 +1,5 @@
 {
-  "version": "1.4.16",
+  "version": "1.5.0-pre",
   "name": "npm",
   "description": "A package manager for node",
   "keywords": [
@@ -44,6 +44,7 @@
     "cmd-shim": "~1.1.1",
     "columnify": "~1.1.0",
     "editor": "~0.1.0",
+    "fs-vacuum": "~1.2.1",
     "fstream": "~0.1.28",
     "fstream-npm": "~0.1.7",
     "github-url-from-git": "1.1.1",
@@ -99,6 +100,7 @@
     "cmd-shim",
     "columnify",
     "editor",
+    "fs-vacuum",
     "fstream",
     "fstream-npm",
     "github-url-from-git",
@@ -159,7 +161,7 @@
     "test": "tap --timeout 120 test/tap/*.js",
     "tap": "tap --timeout 120 test/tap/*.js",
     "test-all": "node ./test/run.js && tap test/tap/*.js",
-    "prepublish": "node bin/npm-cli.js prune --prefix=. --no-global && rm -rf test/*/*/node_modules && make -j32 doc",
+    "prepublish": "node bin/npm-cli.js prune --prefix=. --no-global && rm -rf test/*/*/node_modules && make -j8 doc",
     "dumpconf": "env | grep npm | sort | uniq"
   },
   "license": "Artistic-2.0"
