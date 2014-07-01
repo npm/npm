@@ -12,6 +12,9 @@
   "config": {
     "publishtest": false
   },
+  "publishConfig": {
+    "tag": "v1.5rc"
+  },
   "homepage": "https://npmjs.org/doc/",
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
   "repository": {
