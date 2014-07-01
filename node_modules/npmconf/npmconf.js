@@ -429,4 +429,6 @@ function validate (cl) {
   cl.list.forEach(function (conf, level) {
     nopt.clean(conf, configDefs.types)
   })
+
+  nopt.clean(cl.root, configDefs.types)
 }
