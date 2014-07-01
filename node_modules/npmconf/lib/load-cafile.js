@@ -3,6 +3,9 @@ module.exports = loadCAFile
 var fs = require('fs')
 
 function loadCAFile(cafilePath, cb) {
+  if (!cafilePath)
+    return process.nextTick(cb)
+
   fs.readFile(cafilePath, 'utf8', afterCARead.bind(this))
 
   function afterCARead(er, cadata) {
