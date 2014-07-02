@@ -1,18 +1,11 @@
-var url = require("url")
 var resolve = require("path").resolve
 
 var server = require("./server.js")
 var RC = require("../../")
+var toNerfDart = require("../../lib/util/nerf-dart.js")
 
 var REGISTRY = "http://localhost:" + server.port
 
-function toNerfDart (uri) {
-  var parsed = url.parse(uri)
-  parsed.pathname = "/"
-  delete parsed.protocol
-  delete parsed.auth
-  return url.format(parsed)
-}
 module.exports = {
   port : server.port,
   registry : REGISTRY,
