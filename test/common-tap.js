@@ -7,6 +7,10 @@ process.env.npm_config_loglevel = "error"
 var bin = exports.bin = require.resolve("../bin/npm-cli.js")
 var once = require("once")
 exports.npm = function (cmd, opts, cb) {
+  if (typeof cb !== 'function') {
+    throw new Error('must call common.npm(arr, opts, func)')
+  }
+
   cb = once(cb)
   cmd = [bin].concat(cmd)
   opts = opts || {}
