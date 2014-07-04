@@ -1,0 +1,10 @@
+{
+  "name": "package-with-local-paths",
+  "version": "0.0.0",
+  "dependencies": {
+    "package-local-dependency": "../package-local-dependency"
+  },
+  "devDependencies": {
+    "package-local-dev-dependency": "../package-local-dev-dependency"
+  }
+}
