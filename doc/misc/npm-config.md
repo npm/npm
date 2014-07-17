@@ -411,6 +411,13 @@ The value `npm init` should use by default for the package author's homepage.
 
 The value `npm init` should use by default for the package license.
 
+### init.version
+
+* Default: "0.0.0"
+* Type: String
+
+The value `npm init` should use by default for the package start version.
+
 ### json
 
 * Default: false
