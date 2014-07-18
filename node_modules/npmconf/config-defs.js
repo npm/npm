@@ -158,6 +158,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "init.author.name" : ""
     , "init.author.email" : ""
     , "init.author.url" : ""
+    , "init.version": "0.0.0"
     , "init.license": "ISC"
     , json: false
     , key: null
@@ -258,6 +259,7 @@ exports.types =
   , "init.author.email" : String
   , "init.author.url" : ["", url]
   , "init.license": String
+  , "init.version": semver
   , json: Boolean
   , key: [null, String]
   , link: Boolean
