@@ -266,7 +266,7 @@ exports.types =
   // local-address must be listed as an IP for a local network interface
   // must be IPv4 due to node bug
   , "local-address" : getLocalAddresses()
-  , loglevel : ["silent","win","error","warn","http","info","verbose","silly"]
+  , loglevel : ["silent","error","warn","http","info","verbose","silly"]
   , logstream : Stream
   , long : Boolean
   , message: String
