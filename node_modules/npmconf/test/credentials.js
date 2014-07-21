@@ -149,3 +149,18 @@ test("set with old-style credentials", function (t) {
     t.end()
   })
 })
+
+test("get old-style credentials for default registry", function (t) {
+  npmconf.load(common.builtin, function (er, conf) {
+    var actual = conf.getCredentialsByURI(conf.get("registry"))
+    var expected = {
+      scope: '//registry.npmjs.org/',
+      password: 'password',
+      username: 'username',
+      email: 'i@izs.me',
+      auth: 'dXNlcm5hbWU6cGFzc3dvcmQ='
+    }
+    t.same(actual, expected)
+    t.end()
+  })
+})

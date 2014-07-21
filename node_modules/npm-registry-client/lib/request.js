@@ -20,7 +20,7 @@ function regRequest (method, uri, options, cb_) {
   assert(cb_, "must pass callback")
 
   options = options || {}
-  var nofollow = !options.follow
+  var nofollow = (typeof options.follow === 'boolean' ? !options.follow : false)
   var etag = options.etag
   var what = options.body
 

@@ -75,9 +75,9 @@ function putFirst (registry, data, tarbuffer, stat, creds, cb) {
 
   root._attachments = {}
   root._attachments[ tbName ] = {
-    content_type: 'application/octet-stream',
-    data: tarbuffer.toString('base64'),
-    length: stat.size
+    "content_type": "application/octet-stream",
+    "data": tarbuffer.toString("base64"),
+    "length": stat.size
   }
 
   var fixed = url.resolve(registry, escaped(data.name))
@@ -99,8 +99,7 @@ function putFirst (registry, data, tarbuffer, stat, creds, cb) {
       return cb(er, parsed, json, res)
 
     // let's see what versions are already published.
-    var getUrl = url.resolve(registry, data.name + "?write=true")
-    this.request("GET", getUrl, null, function (er, current) {
+    this.request("GET", fixed + "?write=true", null, function (er, current) {
       if (er) return cb(er)
 
       putNext.call(this, registry, data.version, root, current, cb)

@@ -411,6 +411,14 @@ The value `npm init` should use by default for the package author's homepage.
 
 The value `npm init` should use by default for the package license.
 
+### init.version
+
+* Default: "0.0.0"
+* Type: semver
+
+The value that `npm init` should use by default for the package
+version number, if not already set in package.json.
+
 ### json
 
 * Default: false
@@ -457,7 +465,7 @@ to the npm registry.  Must be IPv4 in versions of Node prior to 0.12.
 
 * Default: "http"
 * Type: String
-* Values: "silent", "win", "error", "warn", "http", "info", "verbose", "silly"
+* Values: "silent", "error", "warn", "http", "info", "verbose", "silly"
 
 What level of logs to report.  On failure, *all* logs are written to
 `npm-debug.log` in the current working directory.

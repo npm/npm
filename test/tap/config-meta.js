@@ -105,7 +105,7 @@ test("check configs", function (t) {
   }
 
   for (var c in DOC) {
-    if (c !== "versions" && c !== "version") {
+    if (c !== "versions" && c !== "version" && c !== "init.version") {
       t.ok(CONFS[c], "config in doc should be used somewhere " + c)
       t.ok(types.indexOf(c) !== -1, "should be defined in npmconf " + c)
       t.ok(defaults.indexOf(c) !== -1, "should have default in npmconf " + c)
