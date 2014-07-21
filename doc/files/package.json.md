@@ -320,6 +320,7 @@ See semver(7) for more details about specifying version ranges.
 * `range1 || range2` Passes if either range1 or range2 are satisfied.
 * `git...` See 'Git URLs as Dependencies' below
 * `user/repo` See 'GitHub URLs' below
+* `path/path/path` See Local Paths below
 
 For example, these are all valid:
 
@@ -334,6 +335,7 @@ For example, these are all valid:
       , "elf" : "~1.2.3"
       , "two" : "2.x"
       , "thr" : "3.3.x"
+      , "dyl" : "~/projects/dyl"
       }
     }
 
@@ -368,6 +370,21 @@ As of version 1.1.65, you can refer to GitHub urls as just "foo": "user/foo-proj
         "express": "visionmedia/express"
       }
     }
+    
+## Local Paths
+
+As of version ???, you can provide a path to a local directory that 
+contains a package. Local paths can be in the form:
+
+    ../foo/bar
+    ~/foo/bar
+    ./foo/bar
+    /foo/bar
+
+This feature is helpful for local offline development and creating 
+tests that require npm installing but you don't want to hit an 
+external server, but should not be used when publishing packages
+to the public registry.
 
 ## devDependencies
 
