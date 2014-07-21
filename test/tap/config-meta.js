@@ -51,7 +51,7 @@ test("get files", function (t) {
 
 test("get lines", function (t) {
   FILES.forEach(function (f) {
-    var lines = fs.readFileSync(f, 'utf8').split('\n')
+    var lines = fs.readFileSync(f, 'utf8').split(/\r|\n/)
     lines.forEach(function (l, i) {
       var matches = l.split(/conf(?:ig)?\.get\(/g)
       matches.shift()
@@ -76,7 +76,7 @@ test("get lines", function (t) {
 })
 
 test("get docs", function (t) {
-  var d = fs.readFileSync(doc, "utf8").split("\n")
+  var d = fs.readFileSync(doc, "utf8").split(/\r|\n/)
   // walk down until the "## Config Settings" section
   for (var i = 0; i < d.length && d[i] !== "## Config Settings"; i++);
   i++
