@@ -1,5 +1,5 @@
 {
-  "version": "1.5.0-alpha-4",
+  "version": "2.0.0-alpha-5",
   "name": "npm",
   "description": "A package manager for node",
   "keywords": [
@@ -49,9 +49,9 @@
     "columnify": "~1.1.0",
     "editor": "~0.1.0",
     "fs-vacuum": "~1.2.1",
-    "fstream": "~0.1.28",
+    "fstream": "~0.1.29",
     "fstream-npm": "~0.1.7",
-    "github-url-from-git": "1.1.1",
+    "github-url-from-git": "~1.2.0",
     "github-url-from-username-repo": "~0.2.0",
     "glob": "~4.0.3",
     "graceful-fs": "~3.0.0",
@@ -61,7 +61,7 @@
     "lockfile": "~0.4.0",
     "lru-cache": "~2.5.0",
     "minimatch": "~0.3.0",
-    "mkdirp": "~0.3.5",
+    "mkdirp": "~0.5.0",
     "node-gyp": "~0.13.0",
     "nopt": "~3.0.1",
     "npm-cache-filename": "~1.0.1",
@@ -152,7 +152,7 @@
   "devDependencies": {
     "marked": "~0.3.2",
     "nock": "~0.34.1",
-    "npm-registry-couchapp": "~2.3.6",
+    "npm-registry-couchapp": "~2.4.3",
     "npm-registry-mock": "~0.6.3",
     "ronn": "~0.3.6",
     "tap": "~0.4.9"
