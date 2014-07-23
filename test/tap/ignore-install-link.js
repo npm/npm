@@ -8,6 +8,7 @@ var fs = require('fs')
 var rimraf = require('rimraf')
 var mkdirp = require('mkdirp')
 var pkg = path.resolve(__dirname, 'ignore-install-link')
+var root = path.resolve(__dirname, 'ignore-install-link-root')
 var spawn = require('child_process').spawn
 var linkDir = path.resolve(osenv.tmpdir(), 'npm-link-issue')
 
@@ -32,6 +33,7 @@ test('ignore-install-link: ignore install if a package is linked', function(t) {
 test('cleanup', function(t) {
   process.chdir(osenv.tmpdir())
   rimraf.sync(pkg)
+  rimraf.sync(root)
   rimraf.sync(linkDir)
   t.end()
 })
@@ -39,6 +41,8 @@ test('cleanup', function(t) {
 
 function setup(cb) {
   rimraf.sync(linkDir)
+  rimraf.sync(root)
+  mkdirp.sync(root)
   mkdirp.sync(pkg)
   mkdirp.sync(path.resolve(pkg, 'cache'))
   mkdirp.sync(path.resolve(pkg, 'node_modules'))
@@ -108,15 +112,13 @@ function createChild (cwd, cmd, args) {
     HOME: process.env.HOME,
     Path: process.env.PATH,
     PATH: process.env.PATH,
-    npm_config_loglevel: "silent"
+    npm_config_loglevel: "error",
+    npm_config_prefix: root
   }
-
-  if (process.platform === "win32")
-    env.npm_config_cache = "%APPDATA%\\npm-cache"
 
   return spawn(cmd, args, {
     cwd: cwd,
-    stdio: "pipe",
+    stdio: [0, "ignore", 2],
     env: env
   })
 }
