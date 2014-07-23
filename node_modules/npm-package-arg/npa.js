@@ -6,6 +6,9 @@ var path = require("path")
 
 module.exports = npa
 
+var isWindows = process.platform === "win32" || global.FAKE_WINDOWS
+var slashRe = isWindows ? /\\|\// : /\//
+
 var parseName = /^(?:@([^\/]+?)\/)?([^\/]+?)$/
 var nameAt = /^(@([^\/]+?)\/)?([^\/]+?)@/
 var debug = util.debuglog ? util.debuglog("npa")
@@ -58,6 +61,15 @@ function npa (arg) {
 
   var urlparse = url.parse(arg)
   debug("urlparse", urlparse)
+
+  // windows paths look like urls
+  // don't be fooled!
+  if (isWindows && urlparse && urlparse.protocol &&
+      urlparse.protocol.match(/^[a-zA-Z]:$/)) {
+    debug("windows url-ish local path", urlparse)
+    urlparse = {}
+  }
+
   if (urlparse.protocol) {
     return parseUrl(res, arg, urlparse)
   }
@@ -87,7 +99,7 @@ function npa (arg) {
     } else if (range) {
       res.spec = range
       res.type = "range"
-    } else if (/\//.test(arg)) {
+    } else if (slashRe.test(arg)) {
       parseLocal(res, arg)
     } else {
       res.type = "tag"
