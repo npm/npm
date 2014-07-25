@@ -25,12 +25,9 @@ test('"npm install --save ../local/path" should install local package and save t
 
       var pkgJson = JSON.parse(fs.readFileSync(pkg + '/package.json', 'utf8'))
       t.deepEqual(pkgJson.dependencies, {
-                  'package-local-dependency': '../package-local-dependency'
+                  'package-local-dependency': 'file:///../package-local-dependency'
                 })
       npm.config.set('save', undefined)
-
-      //var devDependencyPackageJson = path.resolve(pkgDir, 'node_modules/package-local-dev-dependency/package.json')
-      //t.ok(JSON.parse(fs.readFileSync(devDependencyPackageJson, 'utf8')))
 
       t.end()
     })
@@ -49,7 +46,7 @@ test('"npm install --save-dev ../local/path" should install local package and sa
 
       var pkgJson = JSON.parse(fs.readFileSync(pkg + '/package.json', 'utf8'))
       t.deepEqual(pkgJson.devDependencies, {
-                  'package-local-dev-dependency': '../package-local-dev-dependency'
+                  'package-local-dev-dependency': 'file:///../package-local-dev-dependency'
                 })
       npm.config.set('save', undefined)
 
