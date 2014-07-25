@@ -330,7 +330,7 @@ function findUnmet (obj, opts) {
     } else if (!semver.satisfies(dependency.version, peerDeps[d], true)) {
       dependency.peerInvalid = true
     } else {
-      dependency.extraneous = false
+      dependency.extraneous = dependency.extraneous || false
     }
   })
 
