@@ -9,7 +9,6 @@ var path = require("path")
 var ca = path.resolve(__dirname, "../../node_modules/npm-registry-couchapp")
 
 var which = require("which")
-var hasCouch = false
 
 which("couchdb", function(er, couch) {
   if (er) {
@@ -35,7 +34,7 @@ function runTests () {
   }).on("close", function (code, sig) {
     if (code || sig) {
       return test("need install to work", function (t) {
-        t.fail("install failed with: " (code || sig))
+        t.fail("install failed with: " + (code || sig))
         t.end()
       })
 
