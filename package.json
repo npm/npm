@@ -46,7 +46,7 @@
     "editor": "~0.1.0",
     "fstream": "~0.1.29",
     "fstream-npm": "~0.1.7",
-    "github-url-from-git": "1.1.1",
+    "github-url-from-git": "~1.2.0",
     "github-url-from-username-repo": "~0.2.0",
     "glob": "~4.0.5",
     "graceful-fs": "~3.0.0",
