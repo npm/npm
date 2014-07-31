@@ -3,7 +3,7 @@
 // https://github.com/bcoe/foo.
 function githubUrlFromGit(url, opts){
   try {
-    var m = re(opts).exec(url.replace(/\.git$/, ''));
+    var m = re(opts).exec(url.replace(/\.git(#.*)?$/, ''));
     var host = m[1];
     var path = m[2];
     return 'https://' + host + '/' + path;
