@@ -1,0 +1,17 @@
+Test noproxy configuration.
+
+
+We create a server and a proxy.
+Server listens on localhost:80.
+Proxy listens on localhost:8080.
+The proxy redirects all requests to /proxy on the server.
+On the server, /proxy sends back proxy.tar.gz .
+When server is directly requested, it answers with noproxy.tar.gz .
+
+
+So we perform 2 tests, both with proxy equal to "http://localhost:8080".
+-A test is performed with noproxy equal to "null". In this case, npm
+  installs the package named "proxy.tar.gz" because the proxy is used.
+-In the other test, noproxy equal "localhost, example.com".
+  Since localhost is part of noproxy, request is made directly 
+  to the server and proxy is ignored.
