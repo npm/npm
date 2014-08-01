@@ -77,7 +77,7 @@
     "osenv": "~0.1.0",
     "path-is-inside": "~1.0.0",
     "read": "~1.0.4",
-    "read-installed": "~2.0.7",
+    "read-installed": "~3.0.0",
     "read-package-json": "~1.2.6",
     "request": "~2.30.0",
     "retry": "~0.6.0",
