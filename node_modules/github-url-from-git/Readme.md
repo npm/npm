@@ -28,6 +28,21 @@ describe('parse(url)', function(){
     assert(null == parse(url));
   })
 
+  it('should parse git@github.com:bcoe/thumbd.git', function() {
+    var url = 'git@github.com:bcoe/thumbd.git';
+    parse(url).should.eql('https://github.com/bcoe/thumbd');
+  })
+
+  it('should parse git@github.com:bcoe/thumbd.git#2.7.0', function() {
+    var url = 'git@github.com:bcoe/thumbd.git#2.7.0';
+    parse(url).should.eql('https://github.com/bcoe/thumbd');
+  })
+
+  it('should parse https://EastCloud@github.com/EastCloud/node-websockets.git', function() {
+    var url = 'https://EastCloud@github.com/EastCloud/node-websockets.git';
+    parse(url).should.eql('https://github.com/EastCloud/node-websockets');
+  })
+
   // gist urls.
 
   it('should parse git@gist urls', function() {
