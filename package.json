@@ -153,7 +153,7 @@
   "devDependencies": {
     "marked": "~0.3.2",
     "nock": "~0.34.1",
-    "npm-registry-couchapp": "~2.4.3",
+    "npm-registry-couchapp": "~2.5.0",
     "npm-registry-mock": "~0.6.3",
     "ronn": "~0.3.6",
     "tap": "~0.4.12"
