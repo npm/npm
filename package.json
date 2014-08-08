@@ -159,8 +159,7 @@
     "tap": "~0.4.12"
   },
   "engines": {
-    "node": ">=0.8",
-    "npm": "1"
+    "node": ">=0.8"
   },
   "scripts": {
     "test-legacy": "node ./test/run.js",
