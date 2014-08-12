@@ -103,6 +103,8 @@ var extend = require("util-extend")
 
 var debug = require("debuglog")("read-installed")
 
+var readdir = require("readdir-scoped-modules")
+
 module.exports = readInstalled
 
 function readInstalled (folder, opts, cb) {
@@ -143,7 +145,7 @@ function readInstalled_ (folder, parent, name, reqver, depth, opts, cb) {
     , link
     , realpathSeen = opts.realpathSeen
 
-  fs.readdir(path.resolve(folder, "node_modules"), function (er, i) {
+  readdir(path.resolve(folder, "node_modules"), function (er, i) {
     // error indicates that nothing is installed here
     if (er) i = []
     installed = i.filter(function (f) { return f.charAt(0) !== "." })
