@@ -320,6 +320,7 @@ See semver(7) for more details about specifying version ranges.
 * `range1 || range2` Passes if either range1 or range2 are satisfied.
 * `git...` See 'Git URLs as Dependencies' below
 * `user/repo` See 'GitHub URLs' below
+* `tag` A specific version tagged and published as `tag`  See `npm-tag(1)`
 
 For example, these are all valid:
 
@@ -334,6 +335,7 @@ For example, these are all valid:
       , "elf" : "~1.2.3"
       , "two" : "2.x"
       , "thr" : "3.3.x"
+      , "lat" : "latest"
       }
     }
 
