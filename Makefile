@@ -172,6 +172,9 @@ man: $(cli_docs) $(api_docs)
 test: doc
 	node cli.js test
 
+tag:
+	npm tag npm@$(PUBLISHTAG) latest
+
 publish: link doc
 	@git push origin :v$(shell npm -v) 2>&1 || true
 	git clean -fd &&\
