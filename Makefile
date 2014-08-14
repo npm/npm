@@ -175,38 +175,7 @@ publish: link doc
 	git clean -fd &&\
 	git push origin &&\
 	git push origin --tags &&\
-	npm publish &&\
-	make doc-publish
-
-docpublish: doc-publish
-doc-publish: doc
-	# legacy urls
-	for f in $$(find html/doc/{cli,files,misc}/ -name '*.html'); do \
-    j=$$(basename $$f | sed 's|^npm-||g'); \
-    if ! [ -f html/doc/$$j ] && [ $$j != README.html ] && [ $$j != index.html ]; then \
-      perl -pi -e 's/ href="\.\.\// href="/g' <$$f >html/doc/$$j; \
-    fi; \
-  done
-	mkdir -p html/api
-	for f in $$(find html/doc/api/ -name '*.html'); do \
-    j=$$(basename $$f | sed 's|^npm-||g'); \
-    perl -pi -e 's/ href="\.\.\// href="/g' <$$f >html/api/$$j; \
-  done
-	rsync -vazu --stats --no-implied-dirs --delete \
-    html/doc/* \
-    ../npm-www/doc
-	rsync -vazu --stats --no-implied-dirs --delete \
-    html/static/style.css \
-    ../npm-www/static/
-	#cleanup
-	rm -rf html/api
-	for f in html/doc/*.html; do \
-    case $$f in \
-      html/doc/README.html) continue ;; \
-      html/doc/index.html) continue ;; \
-      *) rm $$f ;; \
-    esac; \
-  done
+	npm publish
 
 release:
 	@bash scripts/release.sh
@@ -214,4 +183,4 @@ release:
 sandwich:
 	@[ $$(whoami) = "root" ] && (echo "ok"; echo "ham" > sandwich) || (echo "make it yourself" && exit 13)
 
-.PHONY: all latest install dev link doc clean uninstall test man doc-publish doc-clean docclean docpublish release
+.PHONY: all latest install dev link doc clean uninstall test man doc-clean docclean release
