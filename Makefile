@@ -1,6 +1,8 @@
 # vim: set softtabstop=2 shiftwidth=2:
 SHELL = bash
 
+PUBLISHTAG = $(shell node scripts/publish-tag.js)
+
 markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
 html_docdeps = html/dochead.html \
@@ -175,7 +177,7 @@ publish: link doc
 	git clean -fd &&\
 	git push origin &&\
 	git push origin --tags &&\
-	npm publish
+	npm publish --tag=$(PUBLISHTAG)
 
 release:
 	@bash scripts/release.sh
