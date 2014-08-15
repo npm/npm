@@ -23,7 +23,7 @@
   lifecycle: test lifecycle path modification
   ([@isaacs](https://github.com/isaacs))
 * [`021770b`](https://github.com/npm/npm/commit/021770b9cb07451509f0a44afff6c106311d8cf6)
-  lifecycle: do not add the directory containing node executable
+  lifecycle: BREAKING CHANGE do not add the directory containing node executable
   ([@chulkilee](https://github.com/chulkilee))
 * [`1d5c41d`](https://github.com/npm/npm/commit/1d5c41dd0d757bce8b87f10c4135f04ece55aeb9)
   install: rename .gitignore when unpacking foreign tarballs
@@ -249,7 +249,7 @@ Other changes:
   ([@othiym23](https://github.com/othiym23))
 * Allow to build all the docs OOTB. ([@GeJ](https://github.com/GeJ))
 * Use core.longpaths on win32 git - fixes
-  [#5525](https://github.com/npm/npm/issues/5525) (Bradley Meck)
+  [#5525](https://github.com/npm/npm/issues/5525) ([@bmeck](https://github.com/bmeck))
 * `npmconf@1.1.2` ([@isaacs](https://github.com/isaacs))
 * Consolidate color sniffing in config/log loading process
   ([@isaacs](https://github.com/isaacs))
