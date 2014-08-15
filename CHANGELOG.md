@@ -1,3 +1,31 @@
+### v1.4.24 (2014-08-14):
+
+* [`9344bd9`](https://github.com/npm/npm/commit/9344bd9b2929b5c399a0e0e0b34d45bce7bc24bb)
+  doc: add new changelog ([@othiym23](https://github.com/othiym23))
+* [`4be76fd`](https://github.com/npm/npm/commit/4be76fd65e895883c337a99f275ccc8c801adda3)
+  doc: update version doc to include `pre-*` increment args
+  ([@isaacs](https://github.com/isaacs))
+* [`e4f2620`](https://github.com/npm/npm/commit/e4f262036080a282ad60e236a9aeebd39fde9fe4)
+  build: add `make tag` to tag current release as `latest`
+  ([@isaacs](https://github.com/isaacs))
+* [`ec2596a`](https://github.com/npm/npm/commit/ec2596a7cb626772780b25b0a94a7e547a812bd5)
+  build: publish with `--tag=v1.4-next` ([@isaacs](https://github.com/isaacs))
+* [`9ee55f8`](https://github.com/npm/npm/commit/9ee55f892b8b473032a43c59912c5684fd1b39e6)
+  build: add script to output `v1.4-next` publish tag
+  ([@isaacs](https://github.com/isaacs))
+* [`aecb56f`](https://github.com/npm/npm/commit/aecb56f95a84687ea46920a0b98aaa587fee1568)
+  build: remove outdated `docpublish` make target
+  ([@isaacs](https://github.com/isaacs))
+* [`b57a9b7`](https://github.com/npm/npm/commit/b57a9b7ccd13e6b38831ed63595c8ea5763da247)
+  build: remove unpublish step from `make publish`
+  ([@isaacs](https://github.com/isaacs))
+* [`2c6acb9`](https://github.com/npm/npm/commit/2c6acb96c71c16106965d5cd829b67195dd673c7)
+  install: rename `.gitignore` when unpacking foreign tarballs
+  ([@isaacs](https://github.com/isaacs))
+* [`22f3681`](https://github.com/npm/npm/commit/22f3681923e993a47fc1769ba735bfa3dd138082)
+  cache: detect non-gzipped tar files more reliably
+  ([@isaacs](https://github.com/isaacs))
+
 ### v2.0.0-alpha-6 (2014-07-31):
 
 * [`d987707`](https://github.com/npm/npm/commit/d987707) move fetch into
