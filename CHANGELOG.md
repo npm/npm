@@ -1,3 +1,45 @@
+### v2.0.0-alpha.7 (2014-08-14):
+
+* [`f23f1d8`](https://github.com/npm/npm/commit/f23f1d8e8f86ec1b7ab8dad68250bccaa67d61b1)
+  doc: update version doc to include `pre-*` increment args
+  ([@isaacs](https://github.com/isaacs))
+* [`b6bb746`](https://github.com/npm/npm/commit/b6bb7461824d4dc1c0936f46bd7929b5cd597986)
+  build: add 'make tag' to tag current release as latest
+  ([@isaacs](https://github.com/isaacs))
+* [`27c4bb6`](https://github.com/npm/npm/commit/27c4bb606e46e5eaf604b19fe8477bc6567f8b2e)
+  build: publish with `--tag=v1.4-next` ([@isaacs](https://github.com/isaacs))
+* [`cff66c3`](https://github.com/npm/npm/commit/cff66c3bf2850880058ebe2a26655dafd002495e)
+  build: add script to output `v1.4-next` publish tag
+  ([@isaacs](https://github.com/isaacs))
+* [`22abec8`](https://github.com/npm/npm/commit/22abec8833474879ac49b9604c103bc845dad779)
+  build: remove outdated `docpublish` make target
+  ([@isaacs](https://github.com/isaacs))
+* [`1be4de5`](https://github.com/npm/npm/commit/1be4de51c3976db8564f72b00d50384c921f0917)
+  build: remove `unpublish` step from `make publish`
+  ([@isaacs](https://github.com/isaacs))
+* [`e429e20`](https://github.com/npm/npm/commit/e429e2011f4d78e398f2461bca3e5a9a146fbd0c)
+  doc: add new changelog ([@othiym23](https://github.com/othiym23))
+* [`9243d20`](https://github.com/npm/npm/commit/9243d207896ea307082256604c10817f7c318d68)
+  lifecycle: test lifecycle path modification
+  ([@isaacs](https://github.com/isaacs))
+* [`021770b`](https://github.com/npm/npm/commit/021770b9cb07451509f0a44afff6c106311d8cf6)
+  lifecycle: do not add the directory containing node executable
+  ([@chulkilee](https://github.com/chulkilee))
+* [`1d5c41d`](https://github.com/npm/npm/commit/1d5c41dd0d757bce8b87f10c4135f04ece55aeb9)
+  install: rename .gitignore when unpacking foreign tarballs
+  ([@isaacs](https://github.com/isaacs))
+* [`9aac267`](https://github.com/npm/npm/commit/9aac2670a73423544d92b27cc301990a16a9563b)
+  cache: detect non-gzipped tar files more reliably
+  ([@isaacs](https://github.com/isaacs))
+* [`3f24755`](https://github.com/npm/npm/commit/3f24755c8fce3c7ab11ed1dc632cc40d7ef42f62)
+  `readdir-scoped-modules@1.0.0` ([@isaacs](https://github.com/isaacs))
+* [`151cd2f`](https://github.com/npm/npm/commit/151cd2ff87b8ac2fc9ea366bc9b7f766dc5b9684)
+  `read-installed@3.1.0` ([@isaacs](https://github.com/isaacs))
+* [`f5a9434`](https://github.com/npm/npm/commit/f5a94343a8ebe4a8cd987320b55137aef53fb3fd)
+  test: fix Travis timeouts ([@dylang](https://github.com/dylang))
+* [`126cafc`](https://github.com/npm/npm/commit/126cafcc6706814c88af3042f2ffff408747bff4)
+  `npm-registry-couchapp@2.5.0` ([@othiym23](https://github.com/othiym23))
+
 ### v1.4.24 (2014-08-14):
 
 * [`9344bd9`](https://github.com/npm/npm/commit/9344bd9b2929b5c399a0e0e0b34d45bce7bc24bb)
@@ -26,7 +68,7 @@
   cache: detect non-gzipped tar files more reliably
   ([@isaacs](https://github.com/isaacs))
 
-### v2.0.0-alpha-6 (2014-07-31):
+### v2.0.0-alpha.6 (2014-08-07):
 
 * [`d987707`](https://github.com/npm/npm/commit/d987707) move fetch into
   npm-registry-client ([@othiym23](https://github.com/othiym23))
