@@ -2,6 +2,7 @@
 SHELL = bash
 
 PUBLISHTAG = $(shell node scripts/publish-tag.js)
+BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
 markdowns = $(shell find doc -name '*.md' | grep -v 'index') README.md
 
@@ -178,7 +179,7 @@ tag:
 publish: link doc
 	@git push origin :v$(shell npm -v) 2>&1 || true
 	git clean -fd &&\
-	git push origin &&\
+	git push origin $(BRANCH) &&\
 	git push origin --tags &&\
 	npm publish --tag=$(PUBLISHTAG)
 
