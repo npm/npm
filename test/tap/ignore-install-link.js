@@ -1,3 +1,7 @@
+if (process.platform === "win32") {
+  console.log("ok - symlinks are weird on windows, skip this test")
+  return
+}
 var common = require("../common-tap.js")
 var test = require("tap").test
 var npm = require.resolve("../../bin/npm-cli.js")
