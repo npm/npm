@@ -1,3 +1,16 @@
+* [`a8ed12b`](https://github.com/npm/npm/commit/a8ed12b) tar@1.0.1 -
+  Add test for removing an extract target immediately after unpacking.
+* [`70fd11d`](https://github.com/npm/npm/commit/70fd11d)
+  lockfile@1.0.0 - Fix incorrect interaction between `wait`, `stale`,
+  and `retries` options.  Part 2 of race condition leading to `ENOENT`
+  errors.
+* [`0072c4d`](https://github.com/npm/npm/commit/0072c4d)
+  fstream@1.0.2 - Fix a double-finish call which can result in excess
+  FS operations after the `close` event.  Part 2 of race condition
+  leading to `ENOENT` errors.
+* [`39a7c5b`](https://github.com/npm/npm/commit/39a7c5b)
+  (origin/v1.4) build: explicitly push to a branch (Forrest L Norvell)
+
 ### v1.4.24 (2014-08-14):
 
 * [`9344bd9`](https://github.com/npm/npm/commit/9344bd9b2929b5c399a0e0e0b34d45bce7bc24bb)
