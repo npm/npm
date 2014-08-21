@@ -79,7 +79,7 @@
     "read": "~1.0.4",
     "read-installed": "~3.1.0",
     "read-package-json": "~1.2.6",
-    "request": "~2.30.0",
+    "request": "~2.39.0",
     "retry": "~0.6.0",
     "rimraf": "~2.2.8",
     "semver": "~3.0.0",
