@@ -143,8 +143,12 @@ function regRequest (method, uri, options, cb_) {
         self.log.info("retry", "will retry, error on last attempt: " + er)
         return
       }
-      if (response)
+      if (response) {
         this.log.verbose("headers", response.headers)
+        if (response.headers["npm-notice"]) {
+          this.log.warn("notice", response.headers["npm-notice"])
+        }
+      }
       cb.apply(null, arguments)
     }.bind(this))
   }.bind(this))
