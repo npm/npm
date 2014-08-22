@@ -3,13 +3,13 @@ var tap = require("tap")
 var server = require("./lib/server.js")
 var common = require("./lib/common.js")
 
-var DEP_USER = "othiym23"
+var DEP_USER = "username"
 
 var nerfed = "//localhost:" + server.port + "/:"
 
 var configuration = {}
 configuration[nerfed + "username"]  = DEP_USER
-configuration[nerfed + "_password"] = new Buffer("password").toString("base64")
+configuration[nerfed + "_password"] = new Buffer("%1234@asdf%").toString("base64")
 configuration[nerfed + "email"]     = "i@izs.me"
 
 var client = common.freshClient(configuration)

@@ -7,7 +7,7 @@ var nerfed = "//localhost:" + server.port + "/:"
 
 var configuration = {}
 configuration[nerfed + "username"]  = "username"
-configuration[nerfed + "_password"] = new Buffer("password").toString("base64")
+configuration[nerfed + "_password"] = new Buffer("%1234@asdf%").toString("base64")
 configuration[nerfed + "email"]     = "i@izs.me"
 
 var client = common.freshClient(configuration)

@@ -9,12 +9,12 @@ var nerfed = "//localhost:" + server.port + "/:"
 
 var configuration = {}
 configuration[nerfed + "username"]  = "username"
-configuration[nerfed + "_password"] = new Buffer("password").toString("base64")
+configuration[nerfed + "_password"] = new Buffer("%1234@asdf%").toString("base64")
 configuration[nerfed + "email"]     = "ogd@aoaioxxysz.net"
 
 var client = common.freshClient(configuration)
 
-var _auth = new Buffer("username:password").toString("base64")
+var _auth = new Buffer("username:%1234@asdf%").toString("base64")
 
 tap.test("publish", function (t) {
   // not really a tarball, but doesn't matter

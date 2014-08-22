@@ -14,7 +14,9 @@ function authify (authed, parsed, headers) {
 
   if (authed) {
     if (c && c.username && c.password) {
-      parsed.auth = c.username + ":" + c.password
+      var username = encodeURIComponent(c.username)
+      var password = encodeURIComponent(c.password)
+      parsed.auth = username + ":" + password
     }
     else {
       return new Error(
