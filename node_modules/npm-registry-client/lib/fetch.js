@@ -26,7 +26,7 @@ function fetch (uri, headers, cb) {
       })
 
       req.on("response", function (res) {
-        client.log.http("fetch", res.statusCode, uri)
+        client.log.http("fetch", "" + res.statusCode, uri)
 
         // Only retry on 408, 5xx or no `response`.
         var statusCode = res && res.statusCode
