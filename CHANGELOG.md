@@ -1,3 +1,48 @@
+### v2.0.0-beta.0 (2014-08-21):
+
+* [`685f8be`](https://github.com/npm/npm/commit/685f8be1f2770cc75fd0e519a8d7aac72735a270)
+  `npm-registry-client@3.1.3`: Print the notification header returned by the
+  registry, and make sure status codes are printed without gratuitous quotes
+  around them. ([@isaacs](https://github.com/isaacs) /
+  [@othiym23](https://github.com/othiym23))
+* [`a8cb676`](https://github.com/npm/npm/commit/a8cb676aef0561eaf04487d2719672b097392c85)
+  [#5900](https://github.com/npm/npm/issues/5900) remove `npm` from its own
+  `engines` field in `package.json`. None of us remember why it was there.
+  ([@timoxley](https://github.com/timoxley))
+* [`6c47201`](https://github.com/npm/npm/commit/6c47201a7d071e8bf091b36933daf4199cc98e80)
+  [#5752](https://github.com/npm/npm/issues/5752),
+  [#6013](https://github.com/npm/npm/issues/6013) save git URLs correctly in
+  `_resolved` fields ([@isaacs](https://github.com/isaacs))
+* [`e4e1223`](https://github.com/npm/npm/commit/e4e1223a91c37688ba3378e1fc9d5ae045654d00)
+  [#5936](https://github.com/npm/npm/issues/5936) document the use of tags in
+  `package.json` ([@KenanY](https://github.com/KenanY))
+* [`c92b8d4`](https://github.com/npm/npm/commit/c92b8d4db7bde2a501da5b7d612684de1d629a42)
+  [#6004](https://github.com/npm/npm/issues/6004) manually installed scoped
+  packages are tracked correctly ([@dead](https://github.com/dead)-horse)
+* [`21ca0aa`](https://github.com/npm/npm/commit/21ca0aaacbcfe2b89b0a439d914da0cae62de550)
+  [#5945](https://github.com/npm/npm/issues/5945) link scoped packages
+  correctly ([@dead](https://github.com/dead)-horse)
+* [`16bead7`](https://github.com/npm/npm/commit/16bead7f2c82aec35b83ff0ec04df051ba456764)
+  [#5958](https://github.com/npm/npm/issues/5958) ensure that file streams work
+  in all versions of node ([@dead](https://github.com/dead)-horse)
+* [`dbf0cab`](https://github.com/npm/npm/commit/dbf0cab29d0db43ac95e4b5a1fbdea1e0af75f10)
+  you can now pass quoted args to `npm run-script`
+  ([@bcoe](https://github.com/bcoe))
+* [`0583874`](https://github.com/npm/npm/commit/05838743f01ccb8d2432b3858d66847002fb62df)
+  `tar@1.0.1`: Add test for removing an extract target immediately after
+  unpacking.
+  ([@isaacs](https://github.com/isaacs))
+* [`cdf3b04`](https://github.com/npm/npm/commit/cdf3b0428bc0b0183fb41dcde9e34e8f42c5e3a7)
+  `lockfile@1.0.0`: Fix incorrect interaction between `wait`, `stale`, and
+  `retries` options. Part 2 of race condition leading to `ENOENT`
+  ([@isaacs](https://github.com/isaacs))
+  errors.
+* [`22d72a8`](https://github.com/npm/npm/commit/22d72a87a9e1a9ab56d9585397f63551887d9125)
+  `fstream@1.0.2`: Fix a double-finish call which can result in excess FS
+  operations after the `close` event. Part 1 of race condition leading to
+  `ENOENT` errors.
+  ([@isaacs](https://github.com/isaacs))
+
 ### v2.0.0-alpha.7 (2014-08-14):
 
 * [`f23f1d8`](https://github.com/npm/npm/commit/f23f1d8e8f86ec1b7ab8dad68250bccaa67d61b1)
