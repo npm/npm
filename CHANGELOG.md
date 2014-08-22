@@ -1,15 +1,23 @@
-* [`a8ed12b`](https://github.com/npm/npm/commit/a8ed12b) tar@1.0.1 -
+### v1.4.25 (2014-08-21):
+
+* [`64c0ec2`](https://github.com/npm/npm/commit/64c0ec241ef5d83761ca8de54acb3c41b079956e)
+  `npm-registry-client@2.0.6`: Print the notification header returned by the
+  registry, and make sure status codes are printed without gratuitous quotes
+  around them.
+  ([@othiym23](https://github.com/othiym23))
+* [`a8ed12b`](https://github.com/npm/npm/commit/a8ed12b) `tar@1.0.1`:
   Add test for removing an extract target immediately after unpacking.
+  ([@isaacs](https://github.com/isaacs))
 * [`70fd11d`](https://github.com/npm/npm/commit/70fd11d)
-  lockfile@1.0.0 - Fix incorrect interaction between `wait`, `stale`,
+  `lockfile@1.0.0`: Fix incorrect interaction between `wait`, `stale`,
   and `retries` options.  Part 2 of race condition leading to `ENOENT`
   errors.
+  ([@isaacs](https://github.com/isaacs))
 * [`0072c4d`](https://github.com/npm/npm/commit/0072c4d)
-  fstream@1.0.2 - Fix a double-finish call which can result in excess
+  `fstream@1.0.2`: Fix a double-finish call which can result in excess
   FS operations after the `close` event.  Part 2 of race condition
   leading to `ENOENT` errors.
-* [`39a7c5b`](https://github.com/npm/npm/commit/39a7c5b)
-  (origin/v1.4) build: explicitly push to a branch (Forrest L Norvell)
+  ([@isaacs](https://github.com/isaacs))
 
 ### v1.4.24 (2014-08-14):
 
