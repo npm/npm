@@ -109,7 +109,11 @@ function regRequest (method, uri, options, cb_) {
   }
 
   if (auth && authRequired) {
-    remote.auth = new Buffer(auth, "base64").toString("utf8")
+    // Escape any weird characters that might be in the auth string
+    // TODO(isaacs) Clean up this awful back and forth mess.
+    var remoteAuth = new Buffer(auth, "base64").toString("utf8")
+    remoteAuth = encodeURIComponent(remoteAuth).replace(/%3A/, ":")
+    remote.auth = remoteAuth
   }
 
   // Tuned to spread 3 attempts over about a minute.
