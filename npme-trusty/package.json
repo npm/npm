@@ -1,0 +1,19 @@
+{
+  "name": "npme-trusty",
+  "version": "1.0.0",
+  "description": "npmE one-step-install for Ubuntu Trusty.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "lab -c --timeout=8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:npm/npme-trusty.git"
+  },
+  "author": "Ben Coe <ben@npmjs.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/npm/npme-trusty/issues"
+  },
+  "homepage": "https://github.com/npm/npme-trusty"
+}
