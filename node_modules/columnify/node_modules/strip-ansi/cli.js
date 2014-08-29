@@ -1,18 +1,30 @@
 #!/usr/bin/env node
 'use strict';
 var fs = require('fs');
-var strip = require('./index');
+var pkg = require('./package.json');
+var strip = require('./');
 var input = process.argv[2];
 
-if (process.argv.indexOf('-h') !== -1 || process.argv.indexOf('--help') !== -1) {
-	console.log('strip-ansi <input file> > <output file>');
-	console.log('or');
-	console.log('cat <input file> | strip-ansi > <output file>');
+function help() {
+	console.log([
+		pkg.description,
+		'',
+		'Usage',
+		'  $ strip-ansi <input-file> > <output-file>',
+		'  $ cat <input-file> | strip-ansi > <output-file>',
+		'',
+		'Example',
+		'  $ strip-ansi unicorn.txt > unicorn-stripped.txt'
+	].join('\n'));
+}
+
+if (process.argv.indexOf('--help') !== -1) {
+	help();
 	return;
 }
 
-if (process.argv.indexOf('-v') !== -1 || process.argv.indexOf('--version') !== -1) {
-	console.log(require('./package').version);
+if (process.argv.indexOf('--version') !== -1) {
+	console.log(pkg.version);
 	return;
 }
 

@@ -1,13 +1,11 @@
 # strip-ansi [![Build Status](https://travis-ci.org/sindresorhus/strip-ansi.svg?branch=master)](https://travis-ci.org/sindresorhus/strip-ansi)
 
-> Strip [ANSI escape codes](http://en.wikipedia.org/wiki/ANSI_escape_code#Colors_and_Styles) (used for colorizing strings in the terminal)
-
-Used in the terminal color module [chalk](https://github.com/sindresorhus/chalk).
+> Strip [ANSI escape codes](http://en.wikipedia.org/wiki/ANSI_escape_code)
 
 
 ## Install
 
-```bash
+```sh
 $ npm install --save strip-ansi
 ```
 
@@ -24,23 +22,22 @@ stripAnsi('\x1b[4mcake\x1b[0m');
 
 ## CLI
 
-You can also use it as a CLI app by installing it globally:
-
-```bash
+```sh
 $ npm install --global strip-ansi
 ```
 
-#### Usage
-
-```bash
+```sh
 $ strip-ansi --help
 
-strip-ansi <input-file>
-or
-cat <input-file> | strip-ansi
+Usage
+  $ strip-ansi <input-file> > <output-file>
+  $ cat <input-file> | strip-ansi > <output-file>
+
+Example
+  $ strip-ansi unicorn.txt > unicorn-stripped.txt
 ```
 
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)
