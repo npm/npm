@@ -1,3 +1,36 @@
+### v2.0.0-beta.1 (2014-08-28):
+
+* [`78a1fc1`](https://github.com/npm/npm/commit/78a1fc12307a0cbdbc944775ed831b876ee65855)
+  `github-url-from-git@1.4.0`: add support for git+https and git+ssh
+  ([@stefanbuck](https://github.com/stefanbuck))
+* [`bf247ed`](https://github.com/npm/npm/commit/bf247edf5429c6b3ec4d4cb798fa0eb0a9c19fc1)
+  `columnify@1.2.1` ([@othiym23](https://github.com/othiym23))
+* [`4bbe682`](https://github.com/npm/npm/commit/4bbe682a6d4eabcd23f892932308c9f228bf4de3)
+  `cmd-shim@2.0.0`: upgrade to graceful-fs 3
+  ([@ForbesLindesay](https://github.com/ForbesLindesay))
+* [`ae1d590`](https://github.com/npm/npm/commit/ae1d590bdfc2476a4ed446e760fea88686e3ae05)
+  `npm-package-arg@2.0.4`: accept slashes in branch names
+  ([@thealphanerd](https://github.com/thealphanerd))
+* [`b2f51ae`](https://github.com/npm/npm/commit/b2f51aecadf585711e145b6516f99e7c05f53614)
+  `semver@3.0.1`: semver.clean() is cleaner
+  ([@isaacs](https://github.com/isaacs))
+* [`1d041a8`](https://github.com/npm/npm/commit/1d041a8a5ebd5bf6cecafab2072d4ec07823adab)
+  `github-url-from-username-repo@1.0.0`: accept slashes in branch names
+  ([@robertkowalski](https://github.com/robertkowalski))
+* [`02c85d5`](https://github.com/npm/npm/commit/02c85d592c4058e5d9eafb0be36b6743ae631998)
+  `async-some@1.0.1` ([@othiym23](https://github.com/othiym23))
+* [`5af493e`](https://github.com/npm/npm/commit/5af493efa8a463cd1acc4a9a394699e2c0793b9c)
+  ensure lifecycle spawn errors caught properly
+  ([@isaacs](https://github.com/isaacs))
+* [`60fe012`](https://github.com/npm/npm/commit/60fe012fac9570d6c72554cdf34a6fa95bf0f0a6)
+  `npmconf@2.0.6`: init.version defaults to 1.0.0
+  ([@isaacs](https://github.com/isaacs))
+* [`b4c717b`](https://github.com/npm/npm/commit/b4c717bbf58fb6a0d64ad229036c79a184297ee2)
+  `npm-registry-client@3.1.4`: properly encode % in passwords
+  ([@isaacs](https://github.com/isaacs))
+* [`7b55f44`](https://github.com/npm/npm/commit/7b55f44420252baeb3f30da437d22956315c31c9)
+  doc: Fix 'npm help index' ([@isaacs](https://github.com/isaacs))
+
 ### v2.0.0-beta.0 (2014-08-21):
 
 * [`685f8be`](https://github.com/npm/npm/commit/685f8be1f2770cc75fd0e519a8d7aac72735a270)
