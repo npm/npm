@@ -18,7 +18,7 @@ browser-safe, and pretty efficient.
 var some = require("async-some");
 var resolve = require("path").resolve;
 var stat = require("fs").stat;
-var readFileSync
+var readFileSync = require("fs").readFileSync;
 
 some(["apple", "seaweed", "ham", "quince"], porkDetector, function (error, match) {
   if (error) return console.error(error);
