@@ -39,6 +39,13 @@ describe("github url from username/repo", function () {
     assert.equal("https://github.com/component/entejs#1c3e1fe71640b" +
       "4b477f04d947bd53c473799b277", url)
   })
+  
+  it("can handle branches with slashes", function () {
+    var url = getUrl(
+      "component/entejs#some/branch/name")
+
+    assert.equal("https://github.com/component/entejs#some/branch/name", url)
+  })
 
   describe("browser mode", function () {
     it("is able to return urls for branches", function () {
