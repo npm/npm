@@ -81,7 +81,10 @@ function exec (cmd, cwd, shouldFail, cb) {
   cmd = cmd.replace(/^npm /, npmReplace + " ")
   cmd = cmd.replace(/^node /, nodeReplace + " ")
 
+  console.error("$$$$$$ cd %s; PATH=%s %s", cwd, env.PATH, cmd)
+
   child_process.exec(cmd, {cwd: cwd, env: env}, function (er, stdout, stderr) {
+    console.error("$$$$$$ after command", cmd, cwd)
     if (stdout) {
       console.error(prefix(stdout, " 1> "))
     }
@@ -155,7 +158,7 @@ function main (cb) {
               return [ "npm install packages/"+p, testdir ]
             }) ]
         , [ execChain, packages.map(function (p) {
-              return [ "npm test", path.resolve(base, p) ]
+              return [ "npm test -ddd", path.resolve(base, p) ]
             }) ]
         , [ execChain, packagesToRm.map(function (p) {
               return [ "npm rm "+p, root ]
