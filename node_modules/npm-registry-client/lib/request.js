@@ -25,12 +25,6 @@ function regRequest (method, uri, options, cb_) {
   var follow = (typeof options.follow === "boolean" ? options.follow : true)
   this.log.verbose("request", "on initialization, where is", where)
 
-  var authThis = false
-  if (parsed.protocol === "npm") {
-    parsed.protocol = "https"
-    authThis = true
-  }
-
   if (parsed.search) {
     where = where + parsed.search
     parsed.search = ""
@@ -79,7 +73,7 @@ function regRequest (method, uri, options, cb_) {
     this.log.verbose("request", "after pass 2, where is", where)
   }
 
-  var authed = (authThis || alwaysAuth || isWrite) && !nu || uc || isDel
+  var authed = (alwaysAuth || isWrite) && !nu || uc || isDel
   if (!authed) this.log.verbose("request", "no auth needed")
 
   var self = this
