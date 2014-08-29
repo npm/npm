@@ -133,6 +133,7 @@ function readInstalled (folder, opts, cb) {
     // now obj has all the installed things, where they're installed
     // figure out the inheritance links, now that the object is built.
     resolveInheritance(obj, opts)
+    obj.root = true
     unmarkExtraneous(obj, opts)
     cb(null, obj)
   })
@@ -344,7 +345,7 @@ function unmarkExtraneous (obj, opts) {
 
   obj.extraneous = false
   var deps = obj._dependencies
-  if (opts.dev && obj.devDependencies) {
+  if (opts.dev && obj.devDependencies && obj.root) {
     Object.keys(obj.devDependencies).forEach(function (k) {
       deps[k] = obj.devDependencies[k]
     })
@@ -356,6 +357,7 @@ function unmarkExtraneous (obj, opts) {
     })
   }
 
+  debug("not extraneous", obj._id, deps)
   Object.keys(deps).forEach(function (d) {
     var dep = findDep(obj, d)
     if (dep && dep.extraneous) {

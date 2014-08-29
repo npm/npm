@@ -17,7 +17,7 @@ test("make sure that it works without dev deps", function (t) {
     var deps = Object.keys(map.dependencies).sort()
     t.equal(deps.length, known.length, "array lengths are equal")
     t.deepEqual(deps, known, "arrays should be equal")
-    t.ok(map.dependencies.tap.extraneous, 'extraneous is set on devDep')
+    t.ok(map.dependencies.tap.extraneous, "extraneous is set on devDep")
     t.end()
   })
 })
