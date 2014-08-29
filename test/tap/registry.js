@@ -23,6 +23,10 @@ which("couchdb", function(er, couch) {
 })
 
 function runTests () {
+  var env = {}
+  for (var i in process.env) env[i] = process.env[i]
+  env.npm = npmExec
+
   spawn(process.execPath, [
     npmExec, "install"
   ], {
@@ -36,9 +40,6 @@ function runTests () {
       })
 
     } else {
-      var env = {}
-      for (var i in process.env) env[i] = process.env[i]
-      env.npm = npmExec
 
       spawn(process.execPath, [
         npmExec, "test"
@@ -47,7 +48,15 @@ function runTests () {
         env: env,
         stdio: "inherit"
       }).on("close", function (code, sig) {
-        process.exit(code || sig)
+        spawn(process.execPath, [
+          npmExec, "prune", "--production"
+        ], {
+          cwd: ca,
+          env: env,
+          stdio: "inherit"
+        }).on("close", function (code2, sig2) {
+          process.exit(code || code2 || 0)
+        })
       })
     }
 
