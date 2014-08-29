@@ -31,6 +31,28 @@
 * [`7b55f44`](https://github.com/npm/npm/commit/7b55f44420252baeb3f30da437d22956315c31c9)
   doc: Fix 'npm help index' ([@isaacs](https://github.com/isaacs))
 
+### v1.4.26 (2014-08-28):
+
+* [`eceea95`](https://github.com/npm/npm/commit/eceea95c804fa15b18e91c52c0beb08d42a3e77d)
+  `github-url-from-git@1.4.0`: add support for git+https and git+ssh
+  ([@stefanbuck](https://github.com/stefanbuck))
+* [`e561758`](https://github.com/npm/npm/commit/e5617587e7d7ab686192391ce55357dbc7fed0a3)
+  `columnify@1.2.1` ([@othiym23](https://github.com/othiym23))
+* [`0c4fab3`](https://github.com/npm/npm/commit/0c4fab372ee76eab01dda83b6749429a8564902e)
+  `cmd-shim@2.0.0`: upgrade to graceful-fs 3
+  ([@ForbesLindesay](https://github.com/ForbesLindesay))
+* [`2d69e4d`](https://github.com/npm/npm/commit/2d69e4d95777671958b5e08d3b2f5844109d73e4)
+  `github-url-from-username-repo@1.0.0`: accept slashes in branch names
+  ([@robertkowalski](https://github.com/robertkowalski))
+* [`81f9b2b`](https://github.com/npm/npm/commit/81f9b2bac9d34c223ea093281ba3c495f23f10d1)
+  ensure lifecycle spawn errors caught properly
+  ([@isaacs](https://github.com/isaacs))
+* [`bfaab8c`](https://github.com/npm/npm/commit/bfaab8c6e0942382a96b250634ded22454c36b5a)
+  `npm-registry-client@2.0.7`: properly encode % in passwords
+  ([@isaacs](https://github.com/isaacs))
+* [`91cfb58`](https://github.com/npm/npm/commit/91cfb58dda851377ec604782263519f01fd96ad8)
+  doc: Fix 'npm help index' ([@isaacs](https://github.com/isaacs))
+
 ### v2.0.0-beta.0 (2014-08-21):
 
 * [`685f8be`](https://github.com/npm/npm/commit/685f8be1f2770cc75fd0e519a8d7aac72735a270)
