@@ -1,3 +1,28 @@
+### v2.0.0-beta.2 (2014-08-29):
+
+SPECIAL LABOR DAY WEEKEND RELEASE PARTY WOOO
+
+* [`ed207e8`](https://github.com/npm/npm/commit/ed207e88019de3150037048df6267024566e1093)
+  npm-registry-client@3.1.7: Clean up auth logic and improve logging around
+  auth decisions. Also error on trying to change a user document without
+  writing to it. ([@othiym23](https://github.com/othiym23))
+* [`66c7423`](https://github.com/npm/npm/commit/66c7423b7fb07a326b83c83727879410d43c439f)
+  npmconf@2.0.7: support -C as an alias for --prefix
+  ([@isaacs](https://github.com/isaacs))
+* [`0dc6a07`](https://github.com/npm/npm/commit/0dc6a07c778071c94c2251429c7d107e88a45095)
+  [#6059](https://github.com/npm/npm/issues/6059) run commands in prefix, not
+  cwd ([@isaacs](https://github.com/isaacs))
+* [`65d2179`](https://github.com/npm/npm/commit/65d2179af96737eb9038eaa24a293a62184aaa13)
+  github-url-from-username-repo@1.0.1: part 3 handle slashes in branch names
+  ([@robertkowalski](https://github.com/robertkowalski))
+* [`e8d75d0`](https://github.com/npm/npm/commit/e8d75d0d9f148ce2b3e8f7671fa281945bac363d)
+  [#6057](https://github.com/npm/npm/issues/6057) read-installed@3.1.1:
+  properly handle extraneous dev dependencies of required dependencies
+  ([@othiym23](https://github.com/othiym23))
+* [`0602f70`](https://github.com/npm/npm/commit/0602f708f070d524ad41573afd4c57171cab21ad)
+  [#6064](https://github.com/npm/npm/issues/6064) ls: do not show deps of
+  extraneous deps ([@isaacs](https://github.com/isaacs))
+
 ### v2.0.0-beta.1 (2014-08-28):
 
 * [`78a1fc1`](https://github.com/npm/npm/commit/78a1fc12307a0cbdbc944775ed831b876ee65855)
