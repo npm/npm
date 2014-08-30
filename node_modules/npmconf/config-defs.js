@@ -364,4 +364,5 @@ exports.shorthands =
   , y : ["--yes"]
   , n : ["--no-yes"]
   , B : ["--save-bundle"]
+  , C : ["--prefix"]
   }

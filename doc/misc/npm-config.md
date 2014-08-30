@@ -50,6 +50,7 @@ The following shorthands are parsed on the command-line:
 * `-dd`, `--verbose`: `--loglevel verbose`
 * `-ddd`: `--loglevel silly`
 * `-g`: `--global`
+* `-C`: `--prefix`
 * `-l`: `--long`
 * `-m`: `--message`
 * `-p`, `--porcelain`: `--parseable`
