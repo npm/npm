@@ -216,14 +216,20 @@ SPECIAL LABOR DAY WEEKEND RELEASE PARTY WOOO
 
 ### v2.0.0-alpha.6 (2014-08-07):
 
+BREAKING CHANGE:
+
+* [`ea547e2`](https://github.com/npm/npm/commit/ea547e2) Bump semver to
+  version 3: `^0.x.y` is now functionally the same as `=0.x.y`.
+  ([@isaacs](https://github.com/isaacs))
+
+Other changes:
+
 * [`d987707`](https://github.com/npm/npm/commit/d987707) move fetch into
   npm-registry-client ([@othiym23](https://github.com/othiym23))
 * [`9b318e2`](https://github.com/npm/npm/commit/9b318e2) `read-installed@3.0.0`
   ([@isaacs](https://github.com/isaacs))
 * [`9d73de7`](https://github.com/npm/npm/commit/9d73de7) remove unnecessary
   mkdirps ([@isaacs](https://github.com/isaacs))
-* [`ea547e2`](https://github.com/npm/npm/commit/ea547e2) Bump semver to version 3
-  ([@isaacs](https://github.com/isaacs))
 * [`33ccd13`](https://github.com/npm/npm/commit/33ccd13) Don't squash execute
   perms in `_git-remotes/` dir ([@adammeadows](https://github.com/adammeadows))
 * [`48fd233`](https://github.com/npm/npm/commit/48fd233) `npm-package-arg@2.0.1`
