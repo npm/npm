@@ -16,7 +16,7 @@ try {
 } catch (er) {
   var util = require("util")
   log = { warn: function (m) {
-    console.warn(m + util.format.apply(util, [].slice.call(arguments, 1)))
+    console.warn(m + ' ' + util.format.apply(util, [].slice.call(arguments, 1)))
   } }
 }
 
@@ -40,6 +40,12 @@ function validateSemver (data, k, val) {
   data[k] = semver.valid(val)
 }
 
+function validateTag (data, k, val) {
+  val = val.trim()
+  if (!val || semver.validRange(val)) return false
+  data[k] = val
+}
+
 function validateStream (data, k, val) {
   if (!(val instanceof Stream)) return false
   data[k] = val
@@ -48,6 +54,10 @@ function validateStream (data, k, val) {
 nopt.typeDefs.semver = { type: semver, validate: validateSemver }
 nopt.typeDefs.Octal = { type: Octal, validate: validateOctal }
 nopt.typeDefs.Stream = { type: Stream, validate: validateStream }
+
+// Don't let --tag=1.2.3 ever be a thing
+var tag = {}
+nopt.typeDefs.tag = { type: tag, validate: validateTag }
 
 nopt.invalidHandler = function (k, val, type) {
   log.warn("invalid config", k + "=" + JSON.stringify(val))
@@ -58,6 +68,9 @@ nopt.invalidHandler = function (k, val, type) {
   }
 
   switch (type) {
+    case tag:
+      log.warn("invalid config", "Tag must not be a SemVer range")
+      break
     case Octal:
       log.warn("invalid config", "Must be octal number, starting with 0")
       break
@@ -301,7 +314,7 @@ exports.types =
   , "sign-git-tag": Boolean
   , spin: ["always", Boolean]
   , "strict-ssl": Boolean
-  , tag : String
+  , tag : tag
   , tmp : path
   , unicode : Boolean
   , "unsafe-perm" : Boolean
