@@ -137,7 +137,7 @@ Configuration parameters are put in the environment with the
 `npm_config_` prefix. For instance, you can view the effective `root`
 config by checking the `npm_config_root` environment variable.
 
-### Special: package.json "config" hash
+### Special: package.json "config" object
 
 The package.json "config" keys are overwritten in the environment if
 there is a config param of `<name>[@<version>]:<key>`.  For example,

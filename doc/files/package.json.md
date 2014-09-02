@@ -219,7 +219,7 @@ will create entries for `man foo` and `man 2 foo`
 
 The CommonJS [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec details a
 few ways that you can indicate the structure of your package using a `directories`
-hash. If you look at [npm's package.json](http://registry.npmjs.org/npm/latest),
+object. If you look at [npm's package.json](http://registry.npmjs.org/npm/latest),
 you'll see that it has directories for doc, lib, and man.
 
 In the future, this information may be used in other creative ways.
@@ -232,9 +232,9 @@ with the lib folder in any way, but it's useful meta info.
 ### directories.bin
 
 If you specify a "bin" directory, then all the files in that folder will
-be used as the "bin" hash.
+be used as the "bin" object.
 
-If you have a "bin" hash already, then this has no effect.
+If you have a "bin" object already, then this has no effect.
 
 ### directories.man
 
@@ -274,7 +274,7 @@ html project page that you put in your browser.  It's for computers.
 
 ## scripts
 
-The "scripts" member is an object hash of script commands that are run
+The "scripts" member is an object containing script commands that are run
 at various times in the lifecycle of your package.  The key is the lifecycle
 event, and the value is the command to run at that point.
 
@@ -282,7 +282,7 @@ See `npm-scripts(7)` to find out more about writing package scripts.
 
 ## config
 
-A "config" hash can be used to set configuration
+A "config" object can be used to set configuration
 parameters used in package scripts that persist across upgrades.  For
 instance, if a package had the following:
 
@@ -298,13 +298,13 @@ configs.
 
 ## dependencies
 
-Dependencies are specified with a simple hash of package name to
+Dependencies are specified with a simple object that maps package name to
 version range. The version range is a string which has one or more
 space-separated descriptors.  Dependencies can also be identified with
 a tarball or git URL.
 
 **Please do not put test harnesses or transpilers in your
-`dependencies` hash.**  See `devDependencies`, below.
+`dependencies` object.**  See `devDependencies`, below.
 
 See semver(7) for more details about specifying version ranges.
 
@@ -409,7 +409,7 @@ program, then they probably don't want or need to download and build
 the external test or documentation framework that you use.
 
 In this case, it's best to list these additional items in a
-`devDependencies` hash.
+`devDependencies` object.
 
 These things will be installed when doing `npm link` or `npm install`
 from the root of a package, and can be managed like any other npm
@@ -482,8 +482,8 @@ If this is spelled `"bundleDependencies"`, then that is also honorable.
 
 If a dependency can be used, but you would like npm to proceed if it
 cannot be found or fails to install, then you may put it in the
-`optionalDependencies` hash.  This is a map of package name to version
-or url, just like the `dependencies` hash.  The difference is that
+`optionalDependencies` object.  This is a map of package name to version
+or url, just like the `dependencies` object.  The difference is that
 failure is tolerated.
 
 It is still your program's responsibility to handle the lack of the
@@ -532,12 +532,12 @@ field is advisory only.
 ## engineStrict
 
 If you are sure that your module will *definitely not* run properly on
-versions of Node/npm other than those specified in the `engines` hash,
+versions of Node/npm other than those specified in the `engines` object,
 then you can set `"engineStrict": true` in your package.json file.
 This will override the user's `engine-strict` config setting.
 
 Please do not do this unless you are really very very sure.  If your
-engines hash is something overly restrictive, you can quite easily and
+engines object is something overly restrictive, you can quite easily and
 inadvertently lock yourself into obscurity and prevent your users from
 updating to new versions of Node.  Consider this choice carefully.  If
 people abuse it, it will be removed in a future version of npm.
@@ -589,7 +589,7 @@ to publish it.
 This is a way to prevent accidental publication of private repositories.
 If you would like to ensure that a given package is only ever published
 to a specific registry (for example, an internal registry),
-then use the `publishConfig` hash described below
+then use the `publishConfig` object described below
 to override the `registry` config param at publish-time.
 
 ## publishConfig
