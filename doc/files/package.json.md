@@ -30,6 +30,9 @@ The name is what your thing is called.  Some tips:
 * You may want to check the npm registry to see if there's something by that name
   already, before you get too attached to it.  http://registry.npmjs.org/
 
+A name can be optionally prefixed by a scope, e.g. `@myorg/mypackage`. See
+`npm-scope(7)` for more detail.
+
 ## version
 
 The *most* important things in your package.json are the name and version fields.
