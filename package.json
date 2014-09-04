@@ -155,7 +155,8 @@
     "npm-registry-mock": "~0.6.3",
     "require-inject": "~1.0.0",
     "ronn": "~0.3.6",
-    "tap": "~0.4.12"
+    "tap": "~0.4.12",
+    "require-inject": "^1.0.0"
   },
   "engines": {
     "node": ">=0.8"
