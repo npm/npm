@@ -12,6 +12,7 @@ npm-debug.log
 /node_modules/.bin
 /node_modules/npm-registry-mock
 /node_modules/marked
+/node_modules/require-inject
 /html/api/
 /html/doc/
 /man/
