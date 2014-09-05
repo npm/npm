@@ -1,9 +1,13 @@
+var path = require("path")
 var test = require("tap").test
 var npm = require("../../lib/npm.js")
 var requireInject = require('require-inject');
 
 npm.load({}, function () {
-  var cache = requireInject("../../lib/cache.js",{
+  var resolved = path.resolve(".", "dir-with-package")
+  var resolvedPackage = path.join(resolved, "package.json")
+
+  var cache = requireInject("../../lib/cache.js", {
     "graceful-fs": {
       stat: function (file, cb) {
         process.nextTick(function() {
@@ -24,7 +28,13 @@ npm.load({}, function () {
             cb(null,{isDirectory:function(){return true}})
             break
           case "dir-with-package/package.json":
-            cb(null,{})
+            cb(null, {})
+            break
+          case resolved:
+            cb(null, { isDirectory: function () { return true } })
+            break
+          case resolvedPackage:
+            cb(null, {})
             break
           default:
             console.error("Unknown test file passed to stat:",file)
@@ -51,5 +61,9 @@ npm.load({}, function () {
       t.is(which, "addNamed", "local directory w/o package.json") })
     cache.add("dir-with-package", null, false, function (er,which){
       t.is(which,"addLocal", "local directory w/ package.json") })
+    cache.add("file:./dir-with-package", null, false, function (er, which) {
+      t.ifError(er, "local directory (as URI) with package was cached")
+      t.is(which, "addLocal", "file: URI to local directory with package.json")
+    })
   })
 })
