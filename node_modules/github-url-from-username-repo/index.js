@@ -11,7 +11,7 @@ function getUrl (r, forBrowser) {
   // we don't want to do that. Just let git fail if it turns
   // out that the commit-ish is invalid.
   // GH usernames cannot start with . or -
-  if (/^[^@%\/\s\.-][^@%\/\s]*\/[^@\s\/%]+(?:#.*)?$/.test(r)) {
+  if (/^[^@%\/\s\.-][^:@%\/\s]*\/[^@\s\/%]+(?:#.*)?$/.test(r)) {
     if (forBrowser)
       r = r.replace("#", "/tree/")
     return "https://github.com/" + r
