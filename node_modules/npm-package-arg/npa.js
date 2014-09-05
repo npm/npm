@@ -163,6 +163,11 @@ function parseUrl (res, arg, urlparse) {
       res.spec = arg
       break
 
+    case 'file:':
+      res.type = 'local'
+      res.spec = urlparse.pathname
+      break;
+
     default:
       throw new Error('Unsupported URL Type: ' + arg)
       break
