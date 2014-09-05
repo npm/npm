@@ -1,8 +1,8 @@
 ### v2.0.0-beta.3 (2014-09-04):
 
 * [`fa79413`](https://github.com/npm/npm/commit/fa794138bec8edb7b88639db25ee9c010d2f4c2b)
-  [#6119](https://github.com/npm/npm/issues/6119) fallback to module installs
-  if package.json is missing in a local ([@iarna](https://github.com/iarna))
+  [#6119](https://github.com/npm/npm/issues/6119) fall back to registry installs
+  if package.json is missing in a local directory ([@iarna](https://github.com/iarna))
 * [`16073e2`](https://github.com/npm/npm/commit/16073e2d8ae035961c4c189b602d4aacc6d6b387)
   `npm-package-arg@2.1.0`: support file URIs as local specs
   ([@othiym23](https://github.com/othiym23))
@@ -10,8 +10,8 @@
   `github-url-from-username-repo@1.0.2`: don't match strings that are already
   URIs ([@othiym23](https://github.com/othiym23))
 * [`4067d6b`](https://github.com/npm/npm/commit/4067d6bf303a69be13f3af4b19cf4fee1b0d3e12)
-  [#5629](https://github.com/npm/npm/issues/5629) support saving of local paths
-  in package.json ([@dylang](https://github.com/dylang))
+  [#5629](https://github.com/npm/npm/issues/5629) support saving of local packages
+  in `package.json` ([@dylang](https://github.com/dylang))
 * [`1b2ffdf`](https://github.com/npm/npm/commit/1b2ffdf359a8c897a78f91fc5a5d535c97aaec97)
   [#6097](https://github.com/npm/npm/issues/6097) document scoped packages
   ([@seldo](https://github.com/seldo))
