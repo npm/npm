@@ -1,3 +1,40 @@
+### v2.0.0-beta.3 (2014-09-04):
+
+* [`fa79413`](https://github.com/npm/npm/commit/fa794138bec8edb7b88639db25ee9c010d2f4c2b)
+  [#6119](https://github.com/npm/npm/issues/6119) fallback to module installs
+  if package.json is missing in a local ([@iarna](https://github.com/iarna))
+* [`16073e2`](https://github.com/npm/npm/commit/16073e2d8ae035961c4c189b602d4aacc6d6b387)
+  `npm-package-arg@2.1.0`: support file URIs as local specs
+  ([@othiym23](https://github.com/othiym23))
+* [`9164acb`](https://github.com/npm/npm/commit/9164acbdee28956fa816ce5e473c559395ae4ec2)
+  `github-url-from-username-repo@1.0.2`: don't match strings that are already
+  URIs ([@othiym23](https://github.com/othiym23))
+* [`4067d6b`](https://github.com/npm/npm/commit/4067d6bf303a69be13f3af4b19cf4fee1b0d3e12)
+  [#5629](https://github.com/npm/npm/issues/5629) support saving of local paths
+  in package.json ([@dylang](https://github.com/dylang))
+* [`1b2ffdf`](https://github.com/npm/npm/commit/1b2ffdf359a8c897a78f91fc5a5d535c97aaec97)
+  [#6097](https://github.com/npm/npm/issues/6097) document scoped packages
+  ([@seldo](https://github.com/seldo))
+* [`0a67d53`](https://github.com/npm/npm/commit/0a67d536067c4808a594d81288d34c0f7e97e105)
+  [#6007](https://github.com/npm/npm/issues/6007) `request@2.42.0`: properly
+  set headers on proxy requests ([@isaacs](https://github.com/isaacs))
+* [`9bac6b8`](https://github.com/npm/npm/commit/9bac6b860b674d24251bb7b8ba412fdb26cbc836)
+  `npmconf@2.0.8`: disallow semver ranges in tag configuration
+  ([@isaacs](https://github.com/isaacs))
+* [`d2d4d7c`](https://github.com/npm/npm/commit/d2d4d7cd3c32f91a87ffa11fe464d524029011c3)
+  [#6082](https://github.com/npm/npm/issues/6082) don't allow tagging with a
+  semver range as the tag name ([@isaacs](https://github.com/isaacs))
+
+### v1.4.27 (2014-09-04):
+
+* [`4cf3c8f`](https://github.com/npm/npm/commit/4cf3c8fd78c9e2693a5f899f50c28f4823c88e2e)
+  [#6007](https://github.com/npm/npm/issues/6007) request@2.42.0: properly set
+  headers on proxy requests ([@isaacs](https://github.com/isaacs))
+* [`403cb52`](https://github.com/npm/npm/commit/403cb526be1472bb7545fa8e62d4976382cdbbe5)
+  [#6055](https://github.com/npm/npm/issues/6055) npmconf@1.1.8: restore
+  case-insensitivity of environmental config
+  ([@iarna](https://github.com/iarna))
+
 ### v2.0.0-beta.2 (2014-08-29):
 
 SPECIAL LABOR DAY WEEKEND RELEASE PARTY WOOO
