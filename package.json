@@ -42,7 +42,7 @@
     "child-process-close": "~0.1.1",
     "chmodr": "~0.1.0",
     "chownr": "0",
-    "cmd-shim": "~2.0.0",
+    "cmd-shim": "~2.0.1",
     "columnify": "~1.2.1",
     "editor": "~0.1.0",
     "fs-vacuum": "~1.2.1",
