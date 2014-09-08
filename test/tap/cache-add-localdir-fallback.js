@@ -51,7 +51,7 @@ npm.load({loglevel : "silent"}, function () {
   })
 
   test("npm install localdir fallback", function (t) {
-    t.plan(4)
+    t.plan(10)
     cache.add("named", null, false, function (er, which) {
       t.ifError(er, "named was cached")
       t.is(which, "addNamed", "registry package name")
