@@ -344,8 +344,9 @@ function unmarkExtraneous (obj, opts) {
   // to all their dependencies
 
   obj.extraneous = false
+
   var deps = obj._dependencies
-  if (opts.dev && obj.devDependencies && obj.root) {
+  if (opts.dev && obj.devDependencies && (obj.root || obj.link)) {
     Object.keys(obj.devDependencies).forEach(function (k) {
       deps[k] = obj.devDependencies[k]
     })
