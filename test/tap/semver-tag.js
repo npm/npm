@@ -8,7 +8,7 @@ test("try to tag with semver range as tag name", function (t) {
     stdio: "pipe",
   }, function (er, code, so, se) {
     if (er) throw er
-    t.similar(se, /^npm ERR! Error: Tag name must not be a valid SemVer range/)
+    t.similar(se, /Tag name must not be a valid SemVer range: v2.x\n/)
     t.equal(code, 1)
     t.end()
   })
