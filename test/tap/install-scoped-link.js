@@ -47,7 +47,6 @@ test("installing package with links", function (t) {
 
 test("cleanup", function(t) {
   process.chdir(__dirname)
-  rimraf.sync(modules)
-
+  rimraf.sync(work)
   t.end()
 })
