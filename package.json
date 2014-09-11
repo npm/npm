@@ -150,11 +150,11 @@
   ],
   "devDependencies": {
     "marked": "~0.3.2",
+    "marked-man": "~0.1.3",
     "nock": "~0.34.1",
     "npm-registry-couchapp": "~2.5.3",
     "npm-registry-mock": "~0.6.3",
     "require-inject": "~1.0.0",
-    "ronn": "~0.3.6",
     "tap": "~0.4.12"
   },
   "engines": {
