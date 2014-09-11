@@ -157,9 +157,6 @@
     "require-inject": "~1.0.0",
     "tap": "~0.4.12"
   },
-  "engines": {
-    "node": ">=0.8"
-  },
   "scripts": {
     "test-legacy": "node ./test/run.js",
     "test": "tap --timeout 120 test/tap/*.js",
