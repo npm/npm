@@ -14,7 +14,7 @@ function attempt(cb) {
 
   var client = this
   operation.attempt(function (currentAttempt) {
-    client.log.info("retrier", "registry request attempt "+currentAttempt+
+    client.log.info("attempt", "registry request try #"+currentAttempt+
                     " at "+(new Date()).toLocaleTimeString())
 
     cb(operation)

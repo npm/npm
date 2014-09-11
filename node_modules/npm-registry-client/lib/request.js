@@ -250,16 +250,21 @@ function requestDone (method, where, cb) {
     if (parsed && parsed.error && response.statusCode >= 400) {
       var w = url.parse(where).pathname.substr(1)
       var name
-      if (!w.match(/^-/) && parsed.error === "not_found") {
+      if (!w.match(/^-/)) {
         w = w.split("/")
         name = w[w.indexOf("_rewrite") + 1]
+      }
+
+      if (name && parsed.error === "not_found") {
         er = new Error("404 Not Found: " + name)
-        er.code = "E404"
-        er.pkgid = name
       } else {
         er = new Error(
           parsed.error + " " + (parsed.reason || "") + ": " + w)
       }
+      if (name) er.pkgid = name
+      er.statusCode = response.statusCode
+      er.code = "E" + er.statusCode
+
     } else if (method !== "HEAD" && method !== "GET") {
       // invalidate cache
       // This is irrelevant for commands that do etag caching, but
