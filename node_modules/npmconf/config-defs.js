@@ -41,7 +41,7 @@ function validateSemver (data, k, val) {
 }
 
 function validateTag (data, k, val) {
-  val = val.trim()
+  val = ('' + val).trim()
   if (!val || semver.validRange(val)) return false
   data[k] = val
 }
