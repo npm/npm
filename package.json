@@ -86,7 +86,8 @@
     "tar": "~1.0.1",
     "text-table": "~0.2.0",
     "uid-number": "0.0.5",
-    "which": "1"
+    "which": "1",
+    "write-file-atomic": "~1.0.3"
   },
   "bundleDependencies": [
     "abbrev",
@@ -146,7 +147,8 @@
     "tar",
     "text-table",
     "uid-number",
-    "which"
+    "which",
+    "write-file-atomic"
   ],
   "devDependencies": {
     "marked": "~0.3.2",
