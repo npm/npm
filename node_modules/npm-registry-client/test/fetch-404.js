@@ -10,14 +10,7 @@ var common = require("./lib/common.js")
 
 var tgz = resolve(__dirname, "./fixtures/underscore/1.3.3/package.tgz")
 
-tap.test("fetch with timeout", function (t) {
-  server.expect("/underscore/-/underscore-1.3.3.tgz", function (req, res) {
-    t.equal(req.method, "GET", "got expected method")
-
-    res.writeHead(408)
-    res.end()
-  })
-
+tap.test("basic fetch", function (t) {
   server.expect("/underscore/-/underscore-1.3.3.tgz", function (req, res) {
     t.equal(req.method, "GET", "got expected method")
 
@@ -30,10 +23,9 @@ tap.test("fetch with timeout", function (t) {
   })
 
   var client = common.freshClient()
-  client.conf.set("fetch-retry-mintimeout", 100)
   client.fetch(
     "http://localhost:1337/underscore/-/underscore-1.3.3.tgz",
-    {},
+    null,
     function (er, res) {
       t.ifError(er, "loaded successfully")
 

@@ -19,35 +19,39 @@ function fetch (uri, headers, cb) {
     makeRequest.call(client, uri, headers, function (er, req) {
       if (er) return cb(er)
 
-      req.on("error", function (err) {
-        if (operation.retry(err)) {
-          client.log.info("retry", "will retry, error on last attempt: " + err)
+      req.on("error", function (er) {
+        if (operation.retry(er)) {
+          client.log.info("retry", "will retry, error on last attempt: " + er)
         }
       })
 
       req.on("response", function (res) {
         client.log.http("fetch", "" + res.statusCode, uri)
 
-        // Only retry on 408, 5xx or no `response`.
+        var er
         var statusCode = res && res.statusCode
+        if (statusCode === 200) {
+          // Work around bug in node v0.10.0 where the CryptoStream
+          // gets stuck and never starts reading again.
+          res.resume()
+          if (process.version === "v0.10.0") unstick(res)
 
-        var timeout = statusCode === 408
-        if (timeout) er = new Error("request timed out")
-
-        var serverError = statusCode >= 500
-        if (serverError) er = new Error("server error " + statusCode)
+          return cb(null, res)
+        }
+        // Only retry on 408, 5xx or no `response`.
+        else if (statusCode === 408) {
+          er = new Error("request timed out")
+        }
+        else if (statusCode >= 500) {
+          er = new Error("server error " + statusCode)
+        }
 
         if (er && operation.retry(er)) {
           client.log.info("retry", "will retry, error on last attempt: " + er)
-          return
         }
-
-        // Work around bug in node v0.10.0 where the CryptoStream
-        // gets stuck and never starts reading again.
-        res.resume()
-        if (process.version === "v0.10.0") unstick(res)
-
-        cb(null, res)
+        else {
+          cb(new Error("fetch failed with status code " + statusCode))
+        }
       })
     })
   })
