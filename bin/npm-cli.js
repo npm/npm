@@ -19,8 +19,7 @@ var log = require("npmlog")
 log.pause() // will be unpaused when config is loaded.
 log.info("it worked if it ends with", "ok")
 
-var fs = require("graceful-fs")
-  , path = require("path")
+var path = require("path")
   , npm = require("../lib/npm.js")
   , npmconf = require("npmconf")
   , errorHandler = require("../lib/utils/error-handler.js")
@@ -57,10 +56,6 @@ if (conf.versions) {
 
 log.info("using", "npm@%s", npm.version)
 log.info("using", "node@%s", process.version)
-
-// make sure that this version of node works with this version of npm.
-var semver = require("semver")
-  , nodeVer = process.version
 
 process.on("uncaughtException", errorHandler)
 
