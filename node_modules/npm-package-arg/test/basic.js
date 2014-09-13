@@ -67,7 +67,14 @@ require("tap").test("basic", function (t) {
       name: null,
       type: "git",
       spec: "ssh://git@github.com/user/foo#1.2.3",
-      raw: "git+ssh://git@github.com/user/foo#1.2.3",
+      raw: "git+ssh://git@github.com/user/foo#1.2.3"
+    },
+
+    "git+file://path/to/repo#1.2.3": {
+      name: null,
+      type: "git",
+      spec: "file://path/to/repo#1.2.3",
+      raw: "git+file://path/to/repo#1.2.3"
     },
 
     "git://github.com/user/foo": {

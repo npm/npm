@@ -153,6 +153,7 @@ function parseUrl (res, arg, urlparse) {
     case "git+rsync:":
     case "git+ftp:":
     case "git+ssh:":
+    case "git+file:":
       res.type = 'git'
       res.spec = arg.replace(/^git\+/, '')
       break
