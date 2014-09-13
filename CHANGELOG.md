@@ -1,10 +1,20 @@
+### v1.4.28 (2014-09-12):
+
+* [`f4540b6`](https://github.com/npm/npm/commit/f4540b6537a87e653d7495a9ddcf72949fdd4d14)
+  [#6043](https://github.com/npm/npm/issues/6043) defer rollbacks until just
+  before the CLI exits ([@isaacs](https://github.com/isaacs))
+* [`1eabfd5`](https://github.com/npm/npm/commit/1eabfd5c03f33c2bd28823714ff02059eeee3899)
+  [#6043](https://github.com/npm/npm/issues/6043) `slide@1.1.6`: wait until all
+  callbacks have finished before proceeding
+  ([@othiym23](https://github.com/othiym23))
+
 ### v1.4.27 (2014-09-04):
 
 * [`4cf3c8f`](https://github.com/npm/npm/commit/4cf3c8fd78c9e2693a5f899f50c28f4823c88e2e)
-  [#6007](https://github.com/npm/npm/issues/6007) request@2.42.0: properly set
+  [#6007](https://github.com/npm/npm/issues/6007) `request@2.42.0`: properly set
   headers on proxy requests ([@isaacs](https://github.com/isaacs))
 * [`403cb52`](https://github.com/npm/npm/commit/403cb526be1472bb7545fa8e62d4976382cdbbe5)
-  [#6055](https://github.com/npm/npm/issues/6055) npmconf@1.1.8: restore
+  [#6055](https://github.com/npm/npm/issues/6055) `npmconf@1.1.8`: restore
   case-insensitivity of environmental config
   ([@iarna](https://github.com/iarna))
 
