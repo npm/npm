@@ -576,6 +576,13 @@ stderr.
 If the `color` config is set to true, then this stream will receive
 colored output if it is a TTY.
 
+### logs-max
+
+* Default: 10
+* Type: Number
+
+The maximum number of log files to store.
+
 ### long
 
 * Default: false
