@@ -4,7 +4,7 @@ var npm = require("../../lib/npm.js")
 var requireInject = require("require-inject")
 
 npm.load({loglevel : "silent"}, function () {
-  var resolved = path.resolve(".", "dir-with-package")
+  var resolved = path.resolve(__dirname, "dir-with-package")
   var resolvedPackage = path.join(resolved, "package.json")
 
   var cache = requireInject("../../lib/cache.js", {
@@ -52,23 +52,23 @@ npm.load({loglevel : "silent"}, function () {
 
   test("npm install localdir fallback", function (t) {
     t.plan(10)
-    cache.add("named", null, false, function (er, which) {
+    cache.add("named", null, null, false, function (er, which) {
       t.ifError(er, "named was cached")
       t.is(which, "addNamed", "registry package name")
     })
-    cache.add("file.tgz", null, false, function (er, which) {
+    cache.add("file.tgz", null, null, false, function (er, which) {
       t.ifError(er, "file.tgz was cached")
       t.is(which, "addLocal", "local file")
     })
-    cache.add("dir-no-package", null, false, function (er, which) {
+    cache.add("dir-no-package", null, null, false, function (er, which) {
       t.ifError(er, "local directory was cached")
       t.is(which, "addNamed", "local directory w/o package.json")
     })
-    cache.add("dir-with-package", null, false, function (er, which) {
+    cache.add("dir-with-package", null, null, false, function (er, which) {
       t.ifError(er, "local directory with package was cached")
       t.is(which,"addLocal", "local directory with package.json")
     })
-    cache.add("file:./dir-with-package", null, false, function (er, which) {
+    cache.add("file:./dir-with-package", null, __dirname, false, function (er, which) {
       t.ifError(er, "local directory (as URI) with package was cached")
       t.is(which, "addLocal", "file: URI to local directory with package.json")
     })

@@ -7,8 +7,8 @@
     "preinstall": "node bad-server.js"
   },
   "dependencies": {
-    "d1": "file:./deps/d1",
-    "d2": "file:./deps/d2"
+    "d1": "file:../d1",
+    "d2": "file:../d2"
   },
   "author": "Forrest L Norvell <ogd@aoaioxxysz.net>",
   "license": "ISC"
