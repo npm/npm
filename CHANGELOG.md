@@ -1,3 +1,79 @@
+### v2.0.0 (2014-09-12):
+
+BREAKING CHANGES:
+
+* [`4378a17`](https://github.com/npm/npm/commit/4378a17db340404a725ffe2eb75c9936f1612670)
+  `semver@4.0.0`: prerelease versions no longer show up in ranges; `^0.x.y`
+  behaves the way it did in `semver@2` rather than `semver@3`; docs have been
+  reorganized for comprehensibility ([@isaacs](https://github.com/isaacs))
+* [`c6ddb64`](https://github.com/npm/npm/commit/c6ddb6462fe32bf3a27b2c4a62a032a92e982429)
+  npm now assumes that node is newer than 0.6
+  ([@isaacs](https://github.com/isaacs))
+
+Other changes:
+
+* [`ea515c3`](https://github.com/npm/npm/commit/ea515c3b858bf493a7b87fa4cdc2110a0d9cef7f)
+  [#6043](https://github.com/npm/npm/issues/6043) `slide@1.1.6`: wait until all
+  callbacks have finished before proceeding
+  ([@othiym23](https://github.com/othiym23))
+* [`0b0a59d`](https://github.com/npm/npm/commit/0b0a59d504f20f424294b1590ace73a7464f0378)
+  [#6043](https://github.com/npm/npm/issues/6043) defer rollbacks until just
+  before the CLI exits ([@isaacs](https://github.com/isaacs))
+* [`a11c88b`](https://github.com/npm/npm/commit/a11c88bdb1488b87d8dcac69df9a55a7a91184b6)
+  [#6175](https://github.com/npm/npm/issues/6175) pack scoped packages
+  correctly ([@othiym23](https://github.com/othiym23))
+* [`e4e48e0`](https://github.com/npm/npm/commit/e4e48e037d4e95fdb6acec80b04c5c6eaee59970)
+  [#6121](https://github.com/npm/npm/issues/6121) `read-installed@3.1.2`: don't
+  mark linked dev dependencies as extraneous
+  ([@isaacs](https://github.com/isaacs))
+* [`d673e41`](https://github.com/npm/npm/commit/d673e4185d43362c2b2a91acbca8c057e7303c7b)
+  `cmd-shim@2.0.1`: depend on `graceful-fs` directly
+  ([@ForbesLindesay](https://github.com/ForbesLindesay))
+* [`9d54d45`](https://github.com/npm/npm/commit/9d54d45e602d595bdab7eae09b9fa1dc46370147)
+  `npm-registry-couchapp@2.5.3`: make tests more reliable on Travis
+  ([@iarna](https://github.com/iarna))
+* [`673d738`](https://github.com/npm/npm/commit/673d738c6142c3d043dcee0b7aa02c9831a2e0ca)
+  ensure permissions are set correctly in cache when running as root
+  ([@isaacs](https://github.com/isaacs))
+* [`6e6a5fb`](https://github.com/npm/npm/commit/6e6a5fb74af10fd345411df4e121e554e2e3f33e)
+  prepare for upgrade to `node-semver@4.0.0`
+  ([@isaacs](https://github.com/isaacs))
+* [`ab8dd87`](https://github.com/npm/npm/commit/ab8dd87b943262f5996744e8d4cc30cc9358b7d7)
+  swap out `ronn` for `marked-man@0.1.3` ([@isaacs](https://github.com/isaacs))
+* [`803da54`](https://github.com/npm/npm/commit/803da5404d5a0b7c9defa3fe7fa0f2d16a2b19d3)
+  `npm-registry-client@3.2.0`: prepare for `node-semver@4.0.0` and include more
+  error information ([@isaacs](https://github.com/isaacs))
+* [`4af0e71`](https://github.com/npm/npm/commit/4af0e7134f5757c3d456d83e8349224a4ba12660)
+  make default error display less scary ([@isaacs](https://github.com/isaacs))
+* [`4fd9e79`](https://github.com/npm/npm/commit/4fd9e7901a15abff7a3dd478d99ce239b9580bca)
+  `npm-registry-client@3.2.1`: handle errors returned by the registry much,
+  much better ([@othiym23](https://github.com/othiym23))
+* [`ca791e2`](https://github.com/npm/npm/commit/ca791e27e97e51c1dd491bff6622ac90b54c3e23)
+  restore a long (always?) missing pass for deduping
+  ([@othiym23](https://github.com/othiym23))
+* [`ca0ef0e`](https://github.com/npm/npm/commit/ca0ef0e99bbdeccf28d550d0296baa4cb5e7ece2)
+  correctly interpret relative paths for local dependencies
+  ([@othiym23](https://github.com/othiym23))
+* [`5eb8db2`](https://github.com/npm/npm/commit/5eb8db2c370eeb4cd34f6e8dc6a935e4ea325621)
+  `npm-package-arg@2.1.2`: support git+file:// URLs for local bare repos
+  ([@othiym23](https://github.com/othiym23))
+* [`860a185`](https://github.com/npm/npm/commit/860a185c43646aca84cb93d1c05e2266045c316b)
+  tweak docs to no longer advocate checking in `node_modules`
+  ([@hunterloftis](https://github.com/hunterloftis))
+* [`80e9033`](https://github.com/npm/npm/commit/80e9033c40e373775e35c674faa6c1948661782b)
+  add links to nodejs.org downloads to docs
+  ([@meetar](https://github.com/meetar))
+
+### v1.4.28 (2014-09-12):
+
+* [`f4540b6`](https://github.com/npm/npm/commit/f4540b6537a87e653d7495a9ddcf72949fdd4d14)
+  [#6043](https://github.com/npm/npm/issues/6043) defer rollbacks until just
+  before the CLI exits ([@isaacs](https://github.com/isaacs))
+* [`1eabfd5`](https://github.com/npm/npm/commit/1eabfd5c03f33c2bd28823714ff02059eeee3899)
+  [#6043](https://github.com/npm/npm/issues/6043) `slide@1.1.6`: wait until all
+  callbacks have finished before proceeding
+  ([@othiym23](https://github.com/othiym23))
+
 ### v2.0.0-beta.3 (2014-09-04):
 
 * [`fa79413`](https://github.com/npm/npm/commit/fa794138bec8edb7b88639db25ee9c010d2f4c2b)
