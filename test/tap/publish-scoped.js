@@ -34,7 +34,9 @@ test("setup", function (t) {
 })
 
 test("npm publish should honor scoping", function (t) {
-  var put = nock(common.registry).put("/@bigco%2fpublish-organized").reply(201, {ok: true})
+  var put = nock(common.registry)
+              .put("/@bigco%2fpublish-organized")
+              .reply(201, verify)
 
   var configuration = {
     cache    : path.join(pkg, "cache"),
@@ -58,6 +60,26 @@ test("npm publish should honor scoping", function (t) {
 
       t.end()
     })
+  }
+
+  function verify (_, body) {
+    t.doesNotThrow(function () {
+      var parsed = JSON.parse(body)
+      var current = parsed.versions["1.2.5"]
+      t.equal(
+        current._npmVersion,
+        require(path.resolve(__dirname, "../../package.json")).version,
+        "npm version is correct"
+      )
+
+      t.equal(
+        current._nodeVersion,
+        process.versions.node,
+        "node version is correct"
+      )
+    }, "converted body back into object")
+
+    return {ok: true}
   }
 })
 
