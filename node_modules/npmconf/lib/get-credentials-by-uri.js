@@ -9,7 +9,16 @@ function getCredentialsByURI (uri) {
   var nerfed = toNerfDart(uri)
   var defnerf = toNerfDart(this.get("registry"))
 
-  var c = {scope : nerfed}
+  // hidden class micro-optimization
+  var c = {
+    scope      : nerfed,
+    token      : undefined,
+    password   : undefined,
+    username   : undefined,
+    email      : undefined,
+    auth       : undefined,
+    alwaysAuth : undefined
+  }
 
   if (this.get(nerfed + ":_authToken")) {
     c.token = this.get(nerfed + ":_authToken")
@@ -47,6 +56,13 @@ function getCredentialsByURI (uri) {
     c.email = this.get(nerfed + ":email")
   } else if (this.get("email")) {
     c.email = this.get("email")
+  }
+
+  if (this.get(nerfed + ":always-auth") !== undefined) {
+    var val = this.get(nerfed + ":always-auth")
+    c.alwaysAuth = val === "false" ? false : !!val
+  } else if (this.get("always-auth") !== undefined) {
+    c.alwaysAuth = this.get("always-auth")
   }
 
   if (c.username && c.password) {

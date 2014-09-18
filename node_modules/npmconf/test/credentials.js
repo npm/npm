@@ -61,8 +61,13 @@ test("set with token", function (t) {
     }, "needs only token")
 
     var expected = {
-      scope : "//registry.lvh.me:8661/",
-      token : "simple-token"
+      scope      : "//registry.lvh.me:8661/",
+      token      : "simple-token",
+      username   : undefined,
+      password   : undefined,
+      email      : undefined,
+      auth       : undefined,
+      alwaysAuth : undefined
     }
 
     t.same(conf.getCredentialsByURI(URI), expected, "got bearer token and scope")
@@ -137,11 +142,13 @@ test("set with old-style credentials", function (t) {
     }, "requires all of username, password, and email")
 
     var expected = {
-      scope : "//registry.lvh.me:8661/",
-      username : "username",
-      password : "password",
-      email : "ogd@aoaioxxysz.net",
-      auth : "dXNlcm5hbWU6cGFzc3dvcmQ="
+      scope      : "//registry.lvh.me:8661/",
+      token      : undefined,
+      username   : "username",
+      password   : "password",
+      email      : "ogd@aoaioxxysz.net",
+      auth       : "dXNlcm5hbWU6cGFzc3dvcmQ=",
+      alwaysAuth : false
     }
 
     t.same(conf.getCredentialsByURI(URI), expected, "got credentials")
@@ -154,13 +161,135 @@ test("get old-style credentials for default registry", function (t) {
   npmconf.load(common.builtin, function (er, conf) {
     var actual = conf.getCredentialsByURI(conf.get("registry"))
     var expected = {
-      scope: '//registry.npmjs.org/',
-      password: 'password',
-      username: 'username',
-      email: 'i@izs.me',
-      auth: 'dXNlcm5hbWU6cGFzc3dvcmQ='
+      scope      : '//registry.npmjs.org/',
+      token      : undefined,
+      password   : 'password',
+      username   : 'username',
+      email      : 'i@izs.me',
+      auth       : 'dXNlcm5hbWU6cGFzc3dvcmQ=',
+      alwaysAuth : false
     }
     t.same(actual, expected)
+    t.end()
+  })
+})
+
+test("set with always-auth enabled", function (t) {
+  npmconf.load(common.builtin, function (er, conf) {
+    t.ifError(er, "configuration loaded")
+
+    var credentials = {
+      username   : "username",
+      password   : "password",
+      email      : "ogd@aoaioxxysz.net",
+      alwaysAuth : true
+    }
+
+    conf.setCredentialsByURI(URI, credentials)
+
+    var expected = {
+      scope      : "//registry.lvh.me:8661/",
+      token      : undefined,
+      username   : "username",
+      password   : "password",
+      email      : "ogd@aoaioxxysz.net",
+      auth       : "dXNlcm5hbWU6cGFzc3dvcmQ=",
+      alwaysAuth : true
+    }
+
+    t.same(conf.getCredentialsByURI(URI), expected, "got credentials")
+
+    t.end()
+  })
+})
+
+test("set with always-auth disabled", function (t) {
+  npmconf.load(common.builtin, function (er, conf) {
+    t.ifError(er, "configuration loaded")
+
+    var credentials = {
+      username   : "username",
+      password   : "password",
+      email      : "ogd@aoaioxxysz.net",
+      alwaysAuth : false
+    }
+
+    conf.setCredentialsByURI(URI, credentials)
+
+    var expected = {
+      scope      : "//registry.lvh.me:8661/",
+      token      : undefined,
+      username   : "username",
+      password   : "password",
+      email      : "ogd@aoaioxxysz.net",
+      auth       : "dXNlcm5hbWU6cGFzc3dvcmQ=",
+      alwaysAuth : false
+    }
+
+    t.same(conf.getCredentialsByURI(URI), expected, "got credentials")
+
+    t.end()
+  })
+})
+
+test("set with global always-auth enabled", function (t) {
+  npmconf.load(common.builtin, function (er, conf) {
+    t.ifError(er, "configuration loaded")
+    var original = conf.get("always-auth")
+    conf.set("always-auth", true)
+
+    var credentials = {
+      username   : "username",
+      password   : "password",
+      email      : "ogd@aoaioxxysz.net"
+    }
+
+    conf.setCredentialsByURI(URI, credentials)
+
+    var expected = {
+      scope      : "//registry.lvh.me:8661/",
+      token      : undefined,
+      username   : "username",
+      password   : "password",
+      email      : "ogd@aoaioxxysz.net",
+      auth       : "dXNlcm5hbWU6cGFzc3dvcmQ=",
+      alwaysAuth : true
+    }
+
+    t.same(conf.getCredentialsByURI(URI), expected, "got credentials")
+
+    conf.set("always-auth", original)
+    t.end()
+  })
+})
+
+test("set with global always-auth disabled", function (t) {
+  npmconf.load(common.builtin, function (er, conf) {
+    t.ifError(er, "configuration loaded")
+    var original = conf.get("always-auth")
+    conf.set("always-auth", false)
+
+    var credentials = {
+      username   : "username",
+      password   : "password",
+      email      : "ogd@aoaioxxysz.net"
+    }
+
+    conf.setCredentialsByURI(URI, credentials)
+
+    var expected = {
+      scope      : "//registry.lvh.me:8661/",
+      token      : undefined,
+      username   : "username",
+      password   : "password",
+      email      : "ogd@aoaioxxysz.net",
+      auth       : "dXNlcm5hbWU6cGFzc3dvcmQ=",
+      alwaysAuth : false
+    }
+
+    t.same(conf.getCredentialsByURI(URI), expected, "got credentials")
+
+    conf.set("always-auth", original)
     t.end()
   })
 })
