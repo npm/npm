@@ -88,7 +88,7 @@
     "text-table": "~0.2.0",
     "uid-number": "0.0.5",
     "which": "1",
-    "write-file-atomic": "~1.0.3"
+    "write-file-atomic": "~1.1.0"
   },
   "bundleDependencies": [
     "abbrev",

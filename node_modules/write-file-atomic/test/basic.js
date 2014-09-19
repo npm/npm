@@ -2,7 +2,7 @@
 var test = require('tap').test;
 var requireInject = require('require-inject');
 var writeFileAtomic = requireInject('../index', {
-    fs: {
+    'graceful-fs': {
         writeFile: function (tmpfile, data, options, cb) {
             if (/nowrite/.test(tmpfile)) return cb('ENOWRITE');
             cb();

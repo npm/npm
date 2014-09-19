@@ -1,5 +1,5 @@
 'use strict'
-var fs = require('fs');
+var fs = require('graceful-fs');
 var chain = require('slide').chain;
 var crypto = require('crypto');
 
