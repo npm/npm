@@ -1,3 +1,34 @@
+### v2.0.1 (2014-09-18):
+
+* [`74c5ab0`](https://github.com/npm/npm/commit/74c5ab0a676793c6dc19a3fd5fe149f85fecb261)
+  [#6201](https://github.com/npm/npm/issues/6201) `npmconf@2.1.0`: scope
+  always-auth to registry URI ([@othiym23](https://github.com/othiym23))
+* [`774b127`](https://github.com/npm/npm/commit/774b127da1dd6fefe2f1299e73505d9146f00294)
+  [#6201](https://github.com/npm/npm/issues/6201) `npm-registry-client@3.2.2`:
+  use scoped always-auth settings ([@othiym23](https://github.com/othiym23))
+* [`f2d2190`](https://github.com/npm/npm/commit/f2d2190aa365d22378d03afab0da13f95614a583)
+  [#6201](https://github.com/npm/npm/issues/6201) support saving
+  `--always-auth` when logging in ([@othiym23](https://github.com/othiym23))
+* [`17c941a`](https://github.com/npm/npm/commit/17c941a2d583210fe97ed47e2968d94ce9f774ba)
+  [#6163](https://github.com/npm/npm/issues/6163) use `write-file-atomic`
+  instead of `fs.writeFile()` ([@fiws](https://github.com/fiws))
+* [`fb5724f`](https://github.com/npm/npm/commit/fb5724fd98e1509c939693568df83d11417ea337)
+  [#5925](https://github.com/npm/npm/issues/5925) `npm init -f`: allow `npm
+  init` to run without prompting
+  ([@michaelnisi](https://github.com/michaelnisi))
+* [`b706d63`](https://github.com/npm/npm/commit/b706d637d5965dbf8f7ce07dc5c4bc80887f30d8)
+  [#3059](https://github.com/npm/npm/issues/3059) disable prepublish when
+  running `npm install --production`
+  ([@jussi](https://github.com/jussi)-kalliokoski)
+* [`119f068`](https://github.com/npm/npm/commit/119f068eae2a36fa8b9c9ca557c70377792243a4)
+  attach the node version used when publishing a package to its registry
+  metadata ([@othiym23](https://github.com/othiym23))
+* [`8fe0081`](https://github.com/npm/npm/commit/8fe008181665519c2ac201ee432a3ece9798c31f)
+  seriously, don't use `npm -g update npm`
+  ([@thomblake](https://github.com/thomblake))
+* [`ea5b3d4`](https://github.com/npm/npm/commit/ea5b3d446b86dcabb0dbc6dba374d3039342ecb3)
+  `request@2.44.0` ([@othiym23](https://github.com/othiym23))
+
 ### v2.0.0 (2014-09-12):
 
 BREAKING CHANGES:
