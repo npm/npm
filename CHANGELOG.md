@@ -1,3 +1,18 @@
+### v2.0.2 (2014-09-19):
+
+* [`42c872b`](https://github.com/npm/npm/commit/42c872b32cadc0e555638fc78eab3a38a04401d8)
+  [#5920](https://github.com/npm/npm/issues/5920)
+  `fs-write-stream-atomic@1.0.0` ([@isaacs](https://github.com/isaacs))
+* [`6784767`](https://github.com/npm/npm/commit/6784767fe15e28b44c81a1d4bb1738c642a65d78)
+  [#5920](https://github.com/npm/npm/issues/5920) make all write streams atomic
+  ([@isaacs](https://github.com/isaacs))
+* [`f6fac00`](https://github.com/npm/npm/commit/f6fac000dd98ebdd5ea1d5921175735d463d328b)
+  [#5920](https://github.com/npm/npm/issues/5920) barf on 0-length cached
+  tarballs ([@isaacs](https://github.com/isaacs))
+* [`3b37592`](https://github.com/npm/npm/commit/3b37592a92ea98336505189ae8ca29248b0589f4)
+  `write-file-atomic@1.1.0`: use graceful-fs
+  ([@iarna](https://github.com/iarna))
+
 ### v2.0.1 (2014-09-18):
 
 * [`74c5ab0`](https://github.com/npm/npm/commit/74c5ab0a676793c6dc19a3fd5fe149f85fecb261)
