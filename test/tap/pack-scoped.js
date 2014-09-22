@@ -26,7 +26,7 @@ test("setup", function (t) {
   function then () {
     n++
     return function (er) {
-      if (er) throw er
+      t.ifError(er)
       if (--n === 0) next()
     }
   }
@@ -36,7 +36,7 @@ test("setup", function (t) {
   }
 
   function done (er) {
-    if (er) throw er
+    t.ifError(er)
 
     t.pass("setup done")
     t.end()
@@ -71,7 +71,7 @@ test("test", function (t) {
 
   function onend () {
     if (e) {
-      throw new Error("got stderr data: " + JSON.stringify("" + e))
+      t.fail("got stderr data: " + JSON.stringify("" + e))
     }
     c = c.trim()
     var regex = new RegExp("scope-generic-package-90000.100001.5.tgz", "ig")
@@ -83,7 +83,7 @@ test("test", function (t) {
 
 test("cleanup", function (t) {
   rimraf(pkg, function (er) {
-    if (er) throw er
+    t.ifError(er)
 
     t.pass("cleaned up")
     t.end()
