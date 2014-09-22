@@ -31,7 +31,7 @@ test('setup', function (t) {
 
   child.stdout.setEncoding('utf8')
   child.stderr.on('data', function(chunk) {
-    throw new Error('got stderr data: ' + JSON.stringify('' + chunk))
+    t.fail('got stderr data: ' + JSON.stringify('' + chunk))
   })
   child.on('close', function () {
     t.end()
@@ -47,7 +47,7 @@ test('test', function (t) {
 
   child.stdout.setEncoding('utf8')
   child.stderr.on('data', function(chunk) {
-    throw new Error('got stderr data: ' + JSON.stringify('' + chunk))
+    t.fail('got stderr data: ' + JSON.stringify('' + chunk))
   })
   child.stdout.on('data', ondata)
   child.on('close', onend)
