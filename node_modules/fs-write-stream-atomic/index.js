@@ -33,17 +33,37 @@ function WriteStream (path, options) {
   fs.WriteStream.call(this, this.__atomicTmp, options)
 }
 
+function cleanup (er) {
+  fs.unlink(this.__atomicTmp, function () {
+    fs.WriteStream.prototype.emit.call(this, 'error', er)
+  }.bind(this))
+}
+
+function cleanupSync (er) {
+  try {
+    fs.unlinkSync(this.__atomicTmp)
+  } finally {
+    return fs.WriteStream.prototype.emit.call(this, 'error', er)
+  }
+}
+
 // When we *would* emit 'close' or 'finish', instead do our stuff
 WriteStream.prototype.emit = function (ev) {
-  if (this.__atomicDidStuff || (ev !== 'close' && ev !== 'finish'))
+  if (ev === 'error')
+    return cleanupSync(this)
+
+  if (ev !== 'close' && ev !== 'finish')
     return fs.WriteStream.prototype.emit.apply(this, arguments)
 
-  atomicDoStuff.call(this, function (er) {
-    if (er)
-      this.emit('error', er)
-    else
-      this.emit(ev)
-  }.bind(this))
+  if (ev === 'finish') {
+    atomicDoStuff.call(this, function (er) {
+      if (er)
+        cleanup.call(this, er)
+      else
+        fs.WriteStream.prototype.emit.call(this, 'finish')
+    }.bind(this))
+  }
+  // close will be emitted later, once we do the rename
 }
 
 function atomicDoStuff(cb) {
@@ -64,5 +84,8 @@ function atomicDoStuff(cb) {
 }
 
 function moveIntoPlace (cb) {
-  fs.rename(this.__atomicTmp, this.__atomicTarget, cb)
+  fs.rename(this.__atomicTmp, this.__atomicTarget, function (er) {
+    cb(er)
+    fs.WriteStream.prototype.emit.call(this, 'close')
+  }.bind(this))
 }

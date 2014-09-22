@@ -5,7 +5,7 @@ Like `fs.createWriteStream(...)`, but atomic.
 Writes to a tmp file and does an atomic `fs.rename` to move it into
 place when it's done.
 
-First rule of debugging: **It's always a write condition.**
+First rule of debugging: **It's always a race condition.**
 
 ## USAGE
 

@@ -13,13 +13,20 @@ test('basic', function (t) {
   var streams = []
   for (var i = 0; i < n; i++) {
     var s = writeStream(target)
-    s.on('finish', verifier)
+    s.on('finish', verifier('finish'))
+    s.on('close', verifier('close'))
     streams.push(s)
   }
 
   var verifierCalled = 0
-  function verifier () {
-    if (++verifierCalled < n) return
+  function verifier (ev) { return function () {
+    if (ev === 'close')
+      t.equal(this.__emittedFinish, true)
+    else {
+      this.__emittedFinish = true
+      t.equal(ev, 'finish')
+    }
+
     // make sure that one of the atomic streams won.
     var res = fs.readFileSync(target, 'utf8')
     var lines = res.trim().split(/\n/)
@@ -31,8 +38,12 @@ test('basic', function (t) {
 
     var resExpr = /^first write \d+\nsecond write \d+\nthird write \d+\nfinal write \d+\n$/
     t.similar(res, resExpr)
-    t.end()
-  }
+
+    // should be called once for each close, and each finish
+    if (++verifierCalled === n * 2) {
+      t.end()
+    }
+  }}
 
   // now write something to each stream.
   streams.forEach(function (stream, i) {
