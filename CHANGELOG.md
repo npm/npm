@@ -1,3 +1,53 @@
+### v2.1.0 (2014-09-25):
+
+NEW FEATURE:
+
+* [`3635601`](https://github.com/npm/npm/commit/36356011b6f2e6a5a81490e85a0a44eb27199dd7)
+  [#5520](https://github.com/npm/npm/issues/5520) Add `'npm view .'`.
+  ([@evanlucas](https://github.com/evanlucas))
+
+Other changes:
+
+* [`f24b552`](https://github.com/npm/npm/commit/f24b552b596d0627549cdd7c2d68fcf9006ea50a)
+  [#6294](https://github.com/npm/npm/issues/6294) Lock cache → lock cache
+  target. ([@othiym23](https://github.com/othiym23))
+* [`ad54450`](https://github.com/npm/npm/commit/ad54450104f94c82c501138b4eee488ce3a4555e)
+  [#6296](https://github.com/npm/npm/issues/6296) Ensure that npm-debug.log
+  file is created when rollbacks are done.
+  ([@isaacs](https://github.com/isaacs))
+* [`6810071`](https://github.com/npm/npm/commit/681007155a40ac9d165293bd6ec5d8a1423ccfca)
+  docs: Default loglevel "http" → "warn".
+  ([@othiym23](https://github.com/othiym23))
+* [`35ac89a`](https://github.com/npm/npm/commit/35ac89a940f23db875e882ce2888208395130336)
+  Skip installation of installed scoped packages.
+  ([@timoxley](https://github.com/timoxley))
+* [`e468527`](https://github.com/npm/npm/commit/e468527256ec599892b9b88d61205e061d1ab735)
+  Ensure cleanup executes for scripts-whitespace-windows test.
+  ([@timoxley](https://github.com/timoxley))
+* [`ef9101b`](https://github.com/npm/npm/commit/ef9101b7f346797749415086956a0394528a12c4)
+  Ensure cleanup executes for packed-scope test.
+  ([@timoxley](https://github.com/timoxley))
+* [`69b4d18`](https://github.com/npm/npm/commit/69b4d18cdbc2ae04c9afaffbd273b436a394f398)
+  `fs-write-stream-atomic@1.0.1`: Fix a race condition in our race-condition
+  fixer. ([@isaacs](https://github.com/isaacs))
+* [`26b17ff`](https://github.com/npm/npm/commit/26b17ff2e3b21ee26c6fdbecc8273520cff45718)
+  [#6272](https://github.com/npm/npm/issues/6272) `npmconf` decides what the
+  default prefix is. ([@othiym23](https://github.com/othiym23))
+* [`846faca`](https://github.com/npm/npm/commit/846facacc6427dafcf5756dcd36d9036539938de)
+  Fix development dependency is preferred over dependency.
+  ([@andersjanmyr](https://github.com/andersjanmyr))
+* [`9d1a9db`](https://github.com/npm/npm/commit/9d1a9db3af5adc48a7158a5a053eeb89ee41a0e7)
+  [#3265](https://github.com/npm/npm/issues/3265) Re-apply a71615a. Fixes
+  [#3265](https://github.com/npm/npm/issues/3265) again, with a test!
+  ([@glasser](https://github.com/glasser))
+* [`1d41db0`](https://github.com/npm/npm/commit/1d41db0b2744a7bd50971c35cc060ea0600fb4bf)
+  `marked-man@0.1.4`: Fixes formatting of synopsis blocks in man docs.
+  ([@kapouer](https://github.com/kapouer))
+* [`a623da0`](https://github.com/npm/npm/commit/a623da01bea1b2d3f3a18b9117cfd2d8e3cbdd77)
+  [#5867](https://github.com/npm/npm/issues/5867) Specify dummy git template
+  dir when cloning to prevent copying hooks.
+  ([@boneskull](https://github.com/boneskull))
+
 ### v2.0.2 (2014-09-19):
 
 * [`42c872b`](https://github.com/npm/npm/commit/42c872b32cadc0e555638fc78eab3a38a04401d8)
