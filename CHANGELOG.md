@@ -1,3 +1,12 @@
+### v2.1.1 (2014-09-26):
+
+* [`563225d`](https://github.com/npm/npm/commit/563225d813ea4c12f46d4f7821ac7f76ba8ee2d6)
+  [#6318](https://github.com/npm/npm/issues/6318) clean up locking; prefix
+  lockfile with "." ([@othiym23](https://github.com/othiym23))
+* [`c7f30e4`](https://github.com/npm/npm/commit/c7f30e4550fea882d31fcd4a55b681cd30713c44)
+  [#6318](https://github.com/npm/npm/issues/6318) remove locking code around
+  tarball packing and unpacking ([@othiym23](https://github.com/othiym23))
+
 ### v2.1.0 (2014-09-25):
 
 NEW FEATURE:
