@@ -7,12 +7,14 @@ var test = require("tap").test
   , mr = require("npm-registry-mock")
   , common = require('../common-tap.js')
 
+var EXEC_OPTS = { }
+
 test("dedupe finds the common module and moves it up one level", function (t) {
   setup(function (s) {
-    npm.install(".", function (err) {
-      if (err) return t.fail(err)
-      npm.dedupe(function(err) {
-        if (err) return t.fail(err)
+    common.npm(['install', '.', '--registry', common.registry], EXEC_OPTS, function(err, code) {
+      t.equal(code, 0)
+      common.npm(['dedupe'], EXEC_OPTS, function(err, code) {
+      	t.equal(code, 0)
         t.ok(existsSync(path.join(__dirname, "dedupe", "node_modules", "minimist")))
         t.ok(!existsSync(path.join(__dirname, "dedupe", "node_modules", "checker")))
         s.close() // shutdown mock registry.
@@ -25,10 +27,8 @@ test("dedupe finds the common module and moves it up one level", function (t) {
 function setup (cb) {
   process.chdir(path.join(__dirname, "dedupe"))
   mr(common.port, function (s) { // create mock registry.
-    npm.load({registry: common.registry}, function() {
-      rimraf.sync(path.join(__dirname, "dedupe", "node_modules"))
-      fs.mkdirSync(path.join(__dirname, "dedupe", "node_modules"))
-      cb(s)
-    })
+    rimraf.sync(path.join(__dirname, "dedupe", "node_modules"))
+    fs.mkdirSync(path.join(__dirname, "dedupe", "node_modules"))
+    cb(s)
   })
 }

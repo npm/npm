@@ -1,3 +1,4 @@
+var common = require("../common-tap")
 var existsSync = require("fs").existsSync
 var join = require("path").join
 
@@ -10,6 +11,10 @@ var npm = require("../../")
 var pkg = join(__dirname, "install-from-local", "package-with-scoped-paths")
 var modules = join(pkg, "node_modules")
 
+var EXEC_OPTS = {
+  cwd : pkg
+}
+
 test("setup", function (t) {
   rimraf.sync(modules)
   rimraf.sync(join(pkg, "cache"))
@@ -19,29 +24,31 @@ test("setup", function (t) {
 })
 
 test("installing already installed local scoped package", function (t) {
-  npm.load({loglevel: "silent"}, function() {
-    npm.commands.install(function (err, arr, installed) {
+  common.npm(['install', '--loglevel', 'silent'], EXEC_OPTS, function(err, code, stdout, stderr) {
+    var installed = parseNpmInstallOutput(stdout)
+    t.equal(code, 0)
+    t.ifError(err, "install ran to completion without error")
+    t.ok(
+      existsSync(join(modules, "@scoped", "package", "package.json")),
+      "package installed"
+    )
+    t.ok(contains(installed, "node_modules/@scoped/package"), "installed @scoped/package")
+    t.ok(contains(installed, "node_modules/package-local-dependency"), "installed package-local-dependency")
+
+    common.npm(['install', '--loglevel', 'silent'], EXEC_OPTS, function(err, code, stdout, stderr) {
+      installed = parseNpmInstallOutput(stdout)
+      t.equal(code, 0)
+
       t.ifError(err, "install ran to completion without error")
+
       t.ok(
         existsSync(join(modules, "@scoped", "package", "package.json")),
         "package installed"
       )
-      t.ok(installed["node_modules/@scoped/package"], "installed @scoped/package")
-      t.ok(installed["node_modules/package-local-dependency"], "installed package-local-dependency")
 
-      npm.commands.install(function (err, arr, installed) {
-
-        t.ifError(err, "install ran to completion without error")
-
-        t.ok(
-          existsSync(join(modules, "@scoped", "package", "package.json")),
-          "package installed"
-        )
-
-        t.notOk(installed["node_modules/@scoped/package"], "did not reinstall @scoped/package")
-        t.notOk(installed["node_modules/package-local-dependency"], "did not reinstall package-local-dependency")
-        t.end()
-      })
+      t.notOk(contains(installed, "node_modules/@scoped/package"), "did not reinstall @scoped/package")
+      t.notOk(contains(installed, "node_modules/package-local-dependency"), "did not reinstall package-local-dependency")
+      t.end()
     })
   })
 })
@@ -52,3 +59,16 @@ test("cleanup", function(t) {
   rimraf.sync(join(pkg, "cache"))
   t.end()
 })
+
+function contains(list, element) {
+  for (var i=0; i < list.length; ++i) {
+    if (list[i] === element) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function parseNpmInstallOutput(stdout) {
+  return stdout.split(/\n|\s+/)
+}
