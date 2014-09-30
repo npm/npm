@@ -1,3 +1,24 @@
+### v2.1.2 (2014-09-29):
+
+* [`a1aa20e`](https://github.com/npm/npm/commit/a1aa20e44bb8285c6be1e7fa63b9da920e3a70ed)
+  [#6282](https://github.com/npm/npm/issues/6282)
+  `normalize-package-data@1.0.3`: don't prune bundledDependencies
+  ([@isaacs](https://github.com/isaacs))
+* [`a1f5fe1`](https://github.com/npm/npm/commit/a1f5fe1005043ce20a06e8b17a3e201aa3215357)
+  move locks back into cache, now path-aware
+  ([@othiym23](https://github.com/othiym23))
+* [`a432c4b`](https://github.com/npm/npm/commit/a432c4b48c881294d6d79b5f41c2e1c16ad15a8a)
+  convert lib/utils/tar.js to use atomic streams
+  ([@othiym23](https://github.com/othiym23))
+* [`b8c3c74`](https://github.com/npm/npm/commit/b8c3c74a3c963564233204161cc263e0912c930b)
+  `fs-write-stream-atomic@1.0.2`: Now works with streams1 fs.WriteStreams.
+  ([@isaacs](https://github.com/isaacs))
+* [`c7ab76f`](https://github.com/npm/npm/commit/c7ab76f44cce5f42add5e3ba879bd10e7e00c3e6)
+  logging cleanup ([@othiym23](https://github.com/othiym23))
+* [`4b2d95d`](https://github.com/npm/npm/commit/4b2d95d0641435b09d047ae5cb2226f292bf38f0)
+  [#6329](https://github.com/npm/npm/issues/6329) efficiently validate tmp
+  tarballs safely ([@othiym23](https://github.com/othiym23))
+
 ### v2.1.1 (2014-09-26):
 
 * [`563225d`](https://github.com/npm/npm/commit/563225d813ea4c12f46d4f7821ac7f76ba8ee2d6)
