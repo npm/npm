@@ -29,31 +29,7 @@ function mocks(server) {
 
 test("npm login", function (t) {
   mr({port : common.port, mocks : mocks}, function (s) {
-    var runner = spawn(
-      node,
-      [
-        npm,
-        "login",
-        "--registry=" + common.registry,
-        "--loglevel=silent",
-        "--userconfig=" + outfile
-      ],
-      opts
-    )
-
-    var o = "", e = "", remaining = Object.keys(responses).length
-    runner.stdout.on("data", function (chunk) {
-      remaining--
-      o += chunk
-
-      var label = chunk.toString("utf8").split(":")[0]
-      runner.stdin.write(responses[label])
-
-      if (remaining === 0) runner.stdin.end()
-    })
-    runner.stderr.on("data", function (chunk) { e += chunk })
-
-    runner.on("close", function (code) {
+    var runner = common.npm(['login', '--registry', common.registry, '--loglevel', 'silent', '--userconfig', outfile], opts, function(err, code, stdout, stderr) {
       t.notOk(code, "exited OK")
       t.notOk(e, "no error output")
       var config = fs.readFileSync(outfile, "utf8")
@@ -63,24 +39,8 @@ test("npm login", function (t) {
         t.ifError(err, "removed config file OK")
         t.end()
       })
-    })
-  })
-})
 
-test("npm login --always-auth", function (t) {
-  mr({port : common.port, mocks : mocks}, function (s) {
-    var runner = spawn(
-      node,
-      [
-        npm,
-        "login",
-        "--registry=" + common.registry,
-        "--loglevel=silent",
-        "--userconfig=" + outfile,
-        "--always-auth"
-      ],
-      opts
-    )
+    })
 
     var o = "", e = "", remaining = Object.keys(responses).length
     runner.stdout.on("data", function (chunk) {
@@ -93,8 +53,12 @@ test("npm login --always-auth", function (t) {
       if (remaining === 0) runner.stdin.end()
     })
     runner.stderr.on("data", function (chunk) { e += chunk })
+  })
+})
 
-    runner.on("close", function (code) {
+test("npm login --always-auth", function (t) {
+  mr({port : common.port, mocks : mocks}, function (s) {
+    var runner = common.npm(["login", "--registry", common.registry, "--loglevel", "silent", "--userconfig", outfile, "--always-auth"], opts, function(err, code, stdout, stderr) {
       t.notOk(code, "exited OK")
       t.notOk(e, "no error output")
       var config = fs.readFileSync(outfile, "utf8")
@@ -105,23 +69,6 @@ test("npm login --always-auth", function (t) {
         t.end()
       })
     })
-  })
-})
-
-test("npm login --no-always-auth", function (t) {
-  mr({port : common.port, mocks : mocks}, function (s) {
-    var runner = spawn(
-      node,
-      [
-        npm,
-        "login",
-        "--registry=" + common.registry,
-        "--loglevel=silent",
-        "--userconfig=" + outfile,
-        "--no-always-auth"
-      ],
-      opts
-    )
 
     var o = "", e = "", remaining = Object.keys(responses).length
     runner.stdout.on("data", function (chunk) {
@@ -134,8 +81,12 @@ test("npm login --no-always-auth", function (t) {
       if (remaining === 0) runner.stdin.end()
     })
     runner.stderr.on("data", function (chunk) { e += chunk })
+  })
+})
 
-    runner.on("close", function (code) {
+test("npm login --no-always-auth", function (t) {
+  mr({port : common.port, mocks : mocks}, function (s) {
+    var runner = common.npm(["login", "--registry", common.registry, "--loglevel", "silent", "--userconfig", outfile, "--no-always-auth"], opts, function(err, code, stdout, stderr) {
       t.notOk(code, "exited OK")
       t.notOk(e, "no error output")
       var config = fs.readFileSync(outfile, "utf8")
@@ -146,6 +97,18 @@ test("npm login --no-always-auth", function (t) {
         t.end()
       })
     })
+
+    var o = "", e = "", remaining = Object.keys(responses).length
+    runner.stdout.on("data", function (chunk) {
+      remaining--
+      o += chunk
+
+      var label = chunk.toString("utf8").split(":")[0]
+      runner.stdin.write(responses[label])
+
+      if (remaining === 0) runner.stdin.end()
+    })
+    runner.stderr.on("data", function (chunk) { e += chunk })
   })
 })
 

@@ -14,7 +14,7 @@ var pkg = join(__dirname, "install-scoped")
 var work = join(__dirname, "install-scoped-TEST")
 var modules = join(work, "node_modules")
 
-var EXEC_OPTS = { }
+var EXEC_OPTS = {}
 
 test("setup", function (t) {
   mkdirp.sync(modules)

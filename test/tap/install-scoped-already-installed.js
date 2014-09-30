@@ -70,5 +70,5 @@ function contains(list, element) {
 }
 
 function parseNpmInstallOutput(stdout) {
-  return stdout.split(/\n|\s+/)
+  return stdout.trim().split(/\n\n|\s+/)
 }
