@@ -15,6 +15,7 @@ npm-debug.log
 /node_modules/marked
 /node_modules/require-inject
 /html/api/
+/html/partial/
 /html/doc/
 /man/
 /doc/*/npm-index.md

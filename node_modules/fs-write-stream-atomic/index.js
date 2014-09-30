@@ -55,15 +55,15 @@ WriteStream.prototype.emit = function (ev) {
   if (ev !== 'close' && ev !== 'finish')
     return fs.WriteStream.prototype.emit.apply(this, arguments)
 
-  if (ev === 'finish') {
-    atomicDoStuff.call(this, function (er) {
-      if (er)
-        cleanup.call(this, er)
-      else
-        fs.WriteStream.prototype.emit.call(this, 'finish')
-    }.bind(this))
+  // We handle emitting finish and close after the rename.
+  if (ev === 'close' || ev === 'finish') {
+    if (!this.__atomicDidStuff) {
+      atomicDoStuff.call(this, function (er) {
+        if (er)
+          cleanup.call(this, er)
+      }.bind(this))
+    }
   }
-  // close will be emitted later, once we do the rename
 }
 
 function atomicDoStuff(cb) {
@@ -86,6 +86,11 @@ function atomicDoStuff(cb) {
 function moveIntoPlace (cb) {
   fs.rename(this.__atomicTmp, this.__atomicTarget, function (er) {
     cb(er)
-    fs.WriteStream.prototype.emit.call(this, 'close')
+    // emit finish, and then close on the next tick
+    // This makes finish/close consistent across Node versions also.
+    fs.WriteStream.prototype.emit.call(this, 'finish')
+    process.nextTick(function() {
+      fs.WriteStream.prototype.emit.call(this, 'close')
+    }.bind(this))
   }.bind(this))
 }
