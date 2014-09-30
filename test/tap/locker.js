@@ -28,7 +28,7 @@ test("setup", function (t) {
 })
 
 test("locking file puts lock in correct place", function (t) {
-  npm.load({cache: cache, tmpdir: tmp, loglevel: "silly"}, function (er) {
+  npm.load({cache: cache, tmpdir: tmp}, function (er) {
     t.ifError(er, "npm bootstrapped OK")
 
     var n = "correct"
