@@ -42,7 +42,8 @@ test(function (t) {
     // itself functions normally.
     //
     // Make sure that we don't sit around waiting for lock files
-    child = spawn(node, [npm, "publish", "--userconfig=" + pkg + "/fixture_npmrc"], {
+    
+    child = common.npm(["publish", "--userconfig=" + pkg + "/fixture_npmrc"], {
       cwd: pkg,
       stdio: "inherit",
       env: {
@@ -53,6 +54,6 @@ test(function (t) {
         PATH: process.env.PATH,
         USERPROFILE: osenv.home()
       }
-    })
+    }, function(err, code, stdout, stderr) { })
   })
 })

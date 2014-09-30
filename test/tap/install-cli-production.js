@@ -7,6 +7,10 @@ var rimraf = require('rimraf')
 var mkdirp = require('mkdirp')
 var pkg = path.join(__dirname, 'install-cli-production')
 
+var EXEC_OPTS = {
+  cwd: pkg
+}
+
 test("setup", function(t) {
   mkdirp.sync(pkg)
   mkdirp.sync(path.resolve(pkg, 'node_modules'))
@@ -15,26 +19,20 @@ test("setup", function(t) {
 })
 
 test('"npm install --production" should install dependencies', function(t) {
-  npm.load(function() {
-    npm.config.set('production', true)
-    npm.commands.install([], function(err) {
-      if (err) return t.fail(err)
-      var p = path.resolve(pkg, 'node_modules/dependency/package.json')
-      t.ok(JSON.parse(fs.readFileSync(p, 'utf8')))
-      t.end()
-    })
+  common.npm(['install', '--production'], EXEC_OPTS, function(err, code) {
+    t.equal(code, 0)
+    var p = path.resolve(pkg, 'node_modules/dependency/package.json')
+    t.ok(JSON.parse(fs.readFileSync(p, 'utf8')))
+    t.end()
   })
 })
 
 test('"npm install --production" should not install dev dependencies', function(t) {
-  npm.load(function() {
-    npm.config.set('production', true)
-    npm.commands.install([], function(err) {
-      if (err) return t.fail(err)
-      var p = path.resolve(pkg, 'node_modules/dev-dependency/package.json')
-      t.ok(!fs.existsSync(p), '')
-      t.end()
-    })
+  common.npm(['install', '--production'], EXEC_OPTS, function(err, code) {
+    t.equal(code, 0)
+    var p = path.resolve(pkg, 'node_modules/dev-dependency/package.json')
+    t.ok(!fs.existsSync(p), '')
+    t.end()
   })
 })
 

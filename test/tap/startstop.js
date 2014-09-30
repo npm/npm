@@ -12,8 +12,7 @@ var common = require('../common-tap')
   , opts = { cwd: pkg }
 
 function testOutput (t, command, er, code, stdout, stderr) {
-  if (er)
-    throw er
+  t.equal(code, 0)
 
   if (stderr)
     throw new Error('npm ' + command + ' stderr: ' + stderr.toString())

@@ -49,26 +49,21 @@ function tarballWasFetched(output){
 
 function performInstall (cb) {
   mr({port: common.port, mocks: mockRoutes}, function(s){
-    var output = ""
-      , child = spawn(node, [npm, "install"], {
-          cwd: pkg,
-          env: {
-            "npm_config_registry": common.registry,
-            "npm_config_cache_lock_stale": 1000,
-            "npm_config_cache_lock_wait": 1000,
-            "npm_config_loglevel": "http",
-            HOME: process.env.HOME,
-            Path: process.env.PATH,
-            PATH: process.env.PATH
-          }
-        })
-
-    child.stderr.on("data", function(data){
-      output += data.toString()
-    })
-    child.on("close", function () {
-      s.close()
-      cb(output)
+    var opts = {
+      cwd : pkg,
+      env: {
+        "npm_config_registry": common.registry,
+        "npm_config_cache_lock_stale": 1000,
+        "npm_config_cache_lock_wait": 1000,
+        "npm_config_loglevel": "http",
+        HOME: process.env.HOME,
+        Path: process.env.PATH,
+        PATH: process.env.PATH
+      }
+    }
+    common.npm(["install"], opts, function(err, code, stdout, stderr) {
+      s.close();
+      cb(stderr);
     })
   })
 }

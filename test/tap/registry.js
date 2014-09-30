@@ -1,6 +1,7 @@
 // Run all the tests in the `npm-registry-couchapp` suite
 // This verifies that the server-side stuff still works.
 
+var common = require("../common-tap")
 var test = require("tap").test
 
 var spawn = require("child_process").spawn
@@ -34,38 +35,33 @@ function runTests () {
   for (var i in process.env) env[i] = process.env[i]
   env.npm = npmExec
 
-  spawn(process.execPath, [
-    npmExec, "install"
-  ], {
+  var opts = {
     cwd: ca,
     stdio: "inherit"
-  }).on("close", function (code, sig) {
-    if (code || sig) {
+  }
+  common.npm(['install'], opts, function(err, code) {
+    if (code) {
       return test("need install to work", function (t) {
         t.fail("install failed with: " + (code || sig))
         t.end()
       })
 
     } else {
-
-      spawn(process.execPath, [
-        npmExec, "test"
-      ], {
+      opts = {
         cwd: ca,
         env: env,
         stdio: "inherit"
-      }).on("close", function (code) {
-        spawn(process.execPath, [
-          npmExec, "prune", "--production"
-        ], {
+      }
+      common.npm(['test'], opts, function(err, code) {
+        opts = {
           cwd: ca,
           env: env,
           stdio: "inherit"
-        }).on("close", function (code2) {
-          process.exit(code || code2 || 0)
+        }
+        common.npm(['prune', '--production'], opts, function(err, code) {
+          process.exit(code || 0)
         })
       })
     }
-
   })
 }

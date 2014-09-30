@@ -10,8 +10,8 @@ test("should send referer http header", function (t) {
     s.end(JSON.stringify({error: "whatever"}))
     this.close()
   }).listen(common.port, function () {
-    var reg = "--registry=http://localhost:" + common.port
-    var args = [ "install", "foo", reg ]
+    var reg = "http://localhost:" + common.port
+    var args = [ "install", "foo", "--registry", reg ]
     common.npm(args, {}, function (er, code, so, se) {
       if (er) {
         throw er

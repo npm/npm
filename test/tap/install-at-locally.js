@@ -7,6 +7,8 @@ var rimraf = require('rimraf')
 var mkdirp = require('mkdirp')
 var pkg = path.join(__dirname, 'install-at-locally')
 
+var EXEC_OPTS = { }
+
 test("setup", function (t) {
   mkdirp.sync(pkg)
   mkdirp.sync(path.resolve(pkg, 'node_modules'))
@@ -15,22 +17,20 @@ test("setup", function (t) {
 })
 
 test('"npm install ./package@1.2.3" should install local pkg', function(t) {
-  npm.load(function() {
-    npm.commands.install(['./package@1.2.3'], function(err) {
-      var p = path.resolve(pkg, 'node_modules/install-at-locally/package.json')
-      t.ok(JSON.parse(fs.readFileSync(p, 'utf8')))
-      t.end()
-    })
+  common.npm(['install', './package@1.2.3'], EXEC_OPTS, function(err, code) {
+    var p = path.resolve(pkg, 'node_modules/install-at-locally/package.json')
+    t.equal(code, 0);
+    t.ok(JSON.parse(fs.readFileSync(p, 'utf8')))
+    t.end()
   })
 })
 
 test('"npm install install/at/locally@./package@1.2.3" should install local pkg', function(t) {
-  npm.load(function() {
-    npm.commands.install(['./package@1.2.3'], function(err) {
-      var p = path.resolve(pkg, 'node_modules/install-at-locally/package.json')
-      t.ok(JSON.parse(fs.readFileSync(p, 'utf8')))
-      t.end()
-    })
+  common.npm(['install', './package@1.2.3'], EXEC_OPTS, function(err, code) {
+    var p = path.resolve(pkg, 'node_modules/install-at-locally/package.json')
+    t.equal(code, 0);
+    t.ok(JSON.parse(fs.readFileSync(p, 'utf8')))
+    t.end()
   })
 })
 
