@@ -1,3 +1,4 @@
+var common = require("../common-tap")
 var test = require("tap").test
 var node = process.execPath
 var path = require("path")
@@ -7,8 +8,7 @@ var spawn = require("child_process").spawn
 
 test("npm ls in npm", function (t) {
   var opt = { cwd: cwd, stdio: [ "ignore", "ignore", 2 ] }
-  var child = spawn(node, [npm, "ls"], opt)
-  child.on("close", function (code) {
+  common.npm(['ls'], opt, function(err, code) {
     t.notOk(code)
     t.end()
   })

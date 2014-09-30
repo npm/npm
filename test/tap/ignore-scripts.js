@@ -1,7 +1,7 @@
+var common = require("../common-tap")
 var test = require("tap").test
 var npm = require.resolve("../../bin/npm-cli.js")
 
-var spawn = require("child_process").spawn
 var node = process.execPath
 
 // ignore-scripts/package.json has scripts that always exit with non-zero error
@@ -10,14 +10,14 @@ var node = process.execPath
 var pkg = __dirname + "/ignore-scripts"
 
 test("ignore-scripts: install using the option", function(t) {
-  createChild([npm, "install", "--ignore-scripts"]).on("close", function(code) {
+  createChild(["install", "--ignore-scripts"], function(err, code) {
     t.equal(code, 0)
     t.end()
   })
 })
 
 test("ignore-scripts: install NOT using the option", function(t) {
-  createChild([npm, "install"]).on("close", function(code) {
+  createChild(["install"], function(err, code) {
     t.notEqual(code, 0)
     t.end()
   })
@@ -36,24 +36,23 @@ var scripts = [
 
 scripts.forEach(function(script) {
   test("ignore-scripts: run-script "+script+" using the option", function(t) {
-    createChild([npm, "--ignore-scripts", "run-script", script])
-      .on("close", function(code) {
-        t.equal(code, 0)
-        t.end()
-      })
+    createChild(["--ignore-scripts", "run-script", script], function(err, code) {
+      t.equal(code, 0)
+      t.end()
+    })
   })
 })
 
 scripts.forEach(function(script) {
   test("ignore-scripts: run-script "+script+" NOT using the option", function(t) {
-    createChild([npm, "run-script", script]).on("close", function(code) {
+    createChild(["run-script", script], function(err, code) {
       t.notEqual(code, 0)
       t.end()
     })
   })
 })
 
-function createChild (args) {
+function createChild (args, cb) {
   var env = {
     HOME: process.env.HOME,
     Path: process.env.PATH,
@@ -64,9 +63,9 @@ function createChild (args) {
   if (process.platform === "win32")
     env.npm_config_cache = "%APPDATA%\\npm-cache"
 
-  return spawn(node, args, {
+  return common.npm(args, {
     cwd: pkg,
     stdio: "inherit",
     env: env
-  })
+  }, cb)
 }
