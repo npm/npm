@@ -10,16 +10,24 @@ var ca = path.resolve(__dirname, "../../node_modules/npm-registry-couchapp")
 
 var which = require("which")
 
-which("couchdb", function(er, couch) {
-  if (er) {
-    return test("need couchdb", function (t) {
-      t.fail("need couch to run test: " + er.message)
-      t.end()
-    })
-  } else {
-    runTests()
-  }
-})
+var v = process.versions.node.split(".").map(function (n) { return parseInt(n, 10) })
+if (v[0] === 0 && v[1] < 10) {
+  console.error(
+    "WARNING: need a recent Node for npm-registry-couchapp tests to run, have",
+    process.versions.node
+  )
+}
+else {
+  which("couchdb", function(er) {
+    if (er) {
+      console.error("WARNING: need couch to run test: " + er.message)
+    }
+    else {
+      runTests()
+    }
+  })
+}
+
 
 function runTests () {
   var env = {}
@@ -46,14 +54,14 @@ function runTests () {
         cwd: ca,
         env: env,
         stdio: "inherit"
-      }).on("close", function (code, sig) {
+      }).on("close", function (code) {
         spawn(process.execPath, [
           npmExec, "prune", "--production"
         ], {
           cwd: ca,
           env: env,
           stdio: "inherit"
-        }).on("close", function (code2, sig2) {
+        }).on("close", function (code2) {
           process.exit(code || code2 || 0)
         })
       })
