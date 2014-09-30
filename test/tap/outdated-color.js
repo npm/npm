@@ -8,8 +8,11 @@ var exec = require('child_process').exec
 var mr = require("npm-registry-mock")
 
 var pkg = __dirname + '/outdated'
-var NPM_BIN = __dirname + '/../../bin/npm-cli.js'
 mkdirp.sync(pkg + "/cache")
+
+var EXEC_OPTS = {
+  cwd: pkg,
+}
 
 function hasControlCodes(str) {
   return str.length !== ansiTrim(str).length
@@ -25,12 +28,12 @@ function ansiTrim (str) {
 // as npm kills the color config when it detects
 // it's not running in a tty
 test("does not use ansi styling", function (t) {
-  t.plan(3)
+  t.plan(4)
   mr(common.port, function (s) { // create mock registry.
-    exec('node ' + NPM_BIN + ' outdated --registry ' + common.registry + ' --color false underscore', {
-      cwd: pkg
-    }, function(err, stdout) {
+    common.npm(['outdated', '--registry', common.registry, 'underscore'], EXEC_OPTS, function(err, code, stdout, stderr) {
+	console.error(stderr);
       t.ifError(err)
+      t.equal(code, 0)
       t.ok(stdout, stdout.length)
       t.ok(!hasControlCodes(stdout))
       s.close()
