@@ -1,14 +1,12 @@
-var common = require('../common-tap.js')
+var common = require("../common-tap.js")
 var existsSync = require("fs").existsSync
 var join = require("path").join
 // var resolve = require("path").resolve
-var exec = require('child_process').exec
+var exec = require("child_process").exec
 
 var test = require("tap").test
 var rimraf = require("rimraf")
 var mkdirp = require("mkdirp")
-
-var npm = require("../../")
 
 var pkg = join(__dirname, "install-scoped")
 var work = join(__dirname, "install-scoped-TEST")
@@ -24,9 +22,9 @@ test("setup", function (t) {
 })
 
 test("installing package with links", function (t) {
-  common.npm(['install', pkg], EXEC_OPTS, function(err, code, stdout, stderr) {
+  common.npm(["install", pkg], EXEC_OPTS, function(err, code) {
     t.ifError(err, "install ran to completion without error")
-    t.equal(code, 0)
+    t.notOk(code, "npm install exited with code 0")
 
     t.ok(
       existsSync(join(modules, "@scoped", "package", "package.json")),

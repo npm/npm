@@ -6,8 +6,6 @@ var test = require("tap").test
 var rimraf = require("rimraf")
 var mkdirp = require("mkdirp")
 
-var npm = require("../../")
-
 var pkg = join(__dirname, "install-from-local", "package-with-scoped-paths")
 var modules = join(pkg, "node_modules")
 
@@ -24,9 +22,10 @@ test("setup", function (t) {
 })
 
 test("installing already installed local scoped package", function (t) {
-  common.npm(['install', '--loglevel', 'silent'], EXEC_OPTS, function(err, code, stdout, stderr) {
+  common.npm(["install", "--loglevel", "silent"], EXEC_OPTS, function(err, code, stdout) {
     var installed = parseNpmInstallOutput(stdout)
-    t.equal(code, 0)
+    t.ifError(err, "error should not exist")
+    t.notOk(code, "npm install exited with code 0")
     t.ifError(err, "install ran to completion without error")
     t.ok(
       existsSync(join(modules, "@scoped", "package", "package.json")),
@@ -35,9 +34,10 @@ test("installing already installed local scoped package", function (t) {
     t.ok(contains(installed, "node_modules/@scoped/package"), "installed @scoped/package")
     t.ok(contains(installed, "node_modules/package-local-dependency"), "installed package-local-dependency")
 
-    common.npm(['install', '--loglevel', 'silent'], EXEC_OPTS, function(err, code, stdout, stderr) {
+    common.npm(["install", "--loglevel", "silent"], EXEC_OPTS, function(err, code, stdout) {
       installed = parseNpmInstallOutput(stdout)
-      t.equal(code, 0)
+      t.ifError(err, "error should not exist")
+      t.notOk(code, "npm install exited with code 0")
 
       t.ifError(err, "install ran to completion without error")
 
@@ -63,10 +63,10 @@ test("cleanup", function(t) {
 function contains(list, element) {
   for (var i=0; i < list.length; ++i) {
     if (list[i] === element) {
-      return true;
+      return true
     }
   }
-  return false;
+  return false
 }
 
 function parseNpmInstallOutput(stdout) {

@@ -7,10 +7,12 @@ var mr = require("npm-registry-mock")
 var common = require("../common-tap.js")
 var spawn = require("child_process").spawn
 var env = process.env
+var path = require("path")
+
 process.env.npm_config_depth = "Infinity"
 
-var pkg = __dirname + "/prune"
-var cache = pkg + "/cache"
+var pkg = path.resolve(__dirname, "prune")
+var cache = path.resolve(pkg, "cache")
 
 var server
 
