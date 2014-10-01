@@ -12,7 +12,7 @@ test("npm ls in npm", function (t) {
   var opt = { cwd: cwd, stdio: [ "ignore", "ignore", 2 ] }
   common.npm(["ls"], opt, function(err, code) {
     t.ifError(err, "error should not exist")
-    t.notEqual(code, 0, "npm ls exited with code")
+    t.equal(code, 0, "npm ls exited with code")
     t.end()
   })
 })
