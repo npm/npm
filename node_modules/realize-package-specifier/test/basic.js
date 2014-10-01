@@ -9,7 +9,10 @@ var re = {
   packagejson: /[\/\\]b[\/\\]package.json$/,
   nonpackagedir: /[\/\\]c$/,
   nopackagejson: /[\/\\]c[\/\\]package.json$/,
-  remotename: /[\/\\]d$/
+  remotename: /[\/\\]d$/,
+  packagedirlikegithub: /[\/\\]e[\/\\]1$/,
+  packagejsonlikegithub: /[\/\\]e[\/\\]1[\/\\]package.json$/,
+  github: /[\/\\]e[\/\\]2$/
 }
 
 var rps = requireInject("../index", {
@@ -33,6 +36,15 @@ var rps = requireInject("../index", {
       else if (re.remotename.test(path)) {
         callback(new Error("EFILENOTFOUND"))
       }
+      else if (re.packagedirlikegithub.test(path)) {
+        callback(null,{isDirectory:function(){ return true }})
+      }
+      else if (re.packagejsonlikegithub.test(path)) {
+        callback(null,{})
+      }
+      else if (re.github.test(path)) {
+        callback(new Error("EFILENOTFOUND"))
+      }
       else {
         throw new Error("Unknown stat fixture path: "+path)
       }
@@ -41,7 +53,7 @@ var rps = requireInject("../index", {
 })
 
 test("realize-package-specifier", function (t) {
-  t.plan(8)
+  t.plan(10)
   rps("a.tar.gz", function (err, result) {
     t.is(result.type, "local", "local tarball")
   })
@@ -65,5 +77,11 @@ test("realize-package-specifier", function (t) {
   })
   rps("file:./d", function (err, result) {
     t.is(result.type, "local", "no local directory, specified with a file URL")
+  })
+  rps("e/1", function (err, result) {
+    t.is(result.type, "directory", "local package directory")
+  })
+  rps("e/2", function (err, result) {
+    t.is(result.type, "github", "github package dependency")
   })
 })

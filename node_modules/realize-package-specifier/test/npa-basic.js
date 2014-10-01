@@ -1,5 +1,5 @@
-var test = require('tap').test;
-var rps = require('../index.js')
+var test = require("tap").test;
+var rps = require("../index.js")
 var path = require("path")
 
 test("npa-basic", function (t) {
@@ -103,21 +103,21 @@ test("npa-basic", function (t) {
     "file:path/to/foo": {
       name: null,
       type: "local",
-      spec: "path/to/foo",
+      spec: path.resolve(__dirname,"..","path/to/foo"),
       raw: "file:path/to/foo"
     },
 
     "file:~/path/to/foo": {
       name: null,
       type: "local",
-      spec: "~/path/to/foo",
+      spec: path.resolve(__dirname,"..","~/path/to/foo"),
       raw: "file:~/path/to/foo"
     },
 
     "file:../path/to/foo": {
       name: null,
       type: "local",
-      spec: "../path/to/foo",
+      spec: path.resolve(__dirname,"..","../path/to/foo"),
       raw: "file:../path/to/foo"
     },
 
@@ -188,7 +188,7 @@ test("npa-basic", function (t) {
   t.plan( 2 + Object.keys(tests).length * 3 )
 
   Object.keys(tests).forEach(function (arg) {
-    rps(arg, function(err, res) {
+    rps(arg, path.resolve(__dirname,'..'), function(err, res) {
       t.notOk(err, "No error")
       t.type(res, "Result")
       t.has(res, tests[arg])
@@ -196,11 +196,11 @@ test("npa-basic", function (t) {
   })
 
   // Completely unreasonable invalid garbage throws an error
-  rps("this is not a \0 valid package name or url", function (err) {
+  rps("this is not a \0 valid package name or url", path.resolve(__dirname,'..'), function (err) {
     t.ok(err, "error")
   })
 
-  rps("gopher://yea right", function (err) {
+  rps("gopher://yea right", path.resolve(__dirname,'..'), function (err) {
     t.ok(err, "Unsupported URL Type: gopher://yea right")
   })
 
