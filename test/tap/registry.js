@@ -67,9 +67,7 @@ function runTests () {
         }
         common.npm(["prune", "--production"], opts, function(err, code) {
           if (err) { throw err }
-          /*eslint-disable */
           process.exit(code || 0)
-          /*eslint-enable */
         })
       })
     }

@@ -9,9 +9,7 @@ var spawn = require("child_process").spawn
 var env = process.env
 var path = require("path")
 
-/*eslint-disable */
 process.env.npm_config_depth = "Infinity"
-/*eslint-enable */
 
 var pkg = path.resolve(__dirname, "prune")
 var cache = path.resolve(pkg, "cache")

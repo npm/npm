@@ -4,9 +4,7 @@ process.on("uncaughtException", function(er) {
   if (er) { throw er }
   console.log("not ok - Failed checking mock registry dep. Expect much fail!")
   console.log("1..1")
-  /*eslint-disable */
   process.exit(1)
-  /*eslint-enable */
 })
 
 var assert = require("assert")

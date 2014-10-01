@@ -1,0 +1,12 @@
+{
+  "name": "npm-4503-b",
+  "version": "0.0.0",
+  "description": "npm test support",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nigelzor/npm-4503-b.git"
+  },
+  "dependencies": {
+    "npm-4503-a": "git://github.com/nigelzor/npm-4503-a.git#master"
+  }
+}

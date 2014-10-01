@@ -63,9 +63,7 @@ function createChild (args, cb) {
   }
 
   if (process.platform === "win32")
-    /*eslint-disable */
     env.npm_config_cache = "%APPDATA%\\npm-cache"
-    /*eslint-enable */
 
   return common.npm(args, {
     cwd: pkg,

@@ -11,10 +11,8 @@ var mr = require("npm-registry-mock")
 var spawn = require("child_process").spawn
 var node = process.execPath
 
-/*eslint-disable */
 var pkg = path.resolve(process.env.npm_config_tmp || "/tmp",
   "noargs-install-config-save")
-/*eslint-enable */
 
 function writePackageJson() {
   rimraf.sync(pkg)
@@ -42,9 +40,7 @@ function createChild (args) {
   }
 
   if (process.platform === "win32")
-    /*eslint-disable */
     env.npm_config_cache = "%APPDATA%\\npm-cache"
-    /*eslint-enable */
 
   return spawn(node, args, {
     cwd: pkg,

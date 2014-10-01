@@ -78,9 +78,7 @@ test("get lines", function (t) {
 test("get docs", function (t) {
   var d = fs.readFileSync(doc, "utf8").split(/\r|\n/)
   // walk down until the "## Config Settings" section
-  /*eslint-disable */
   for (var i = 0; i < d.length && d[i] !== "## Config Settings"; i++);
-  /*eslint-enable */
   i++
   // now gather up all the ^###\s lines until the next ^##\s
   for (; i < d.length && !d[i].match(/^## /); i++) {
