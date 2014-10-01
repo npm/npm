@@ -93,21 +93,20 @@ test("check configs", function (t) {
   var defs = require("npmconf/config-defs.js")
   var types = Object.keys(defs.types)
   var defaults = Object.keys(defs.defaults)
-  var c
-  for (c in CONFS) {
-    if (CONFS[c].file.indexOf(lib) === 0) {
-      t.ok(DOC[c], "should be documented " + c + " "
-          + CONFS[c].file + ":" + CONFS[c].line)
-      t.ok(types.indexOf(c) !== -1, "should be defined in npmconf " + c)
-      t.ok(defaults.indexOf(c) !== -1, "should have default in npmconf " + c)
+  for (var c1 in CONFS) {
+    if (CONFS[c1].file.indexOf(lib) === 0) {
+      t.ok(DOC[c1], "should be documented " + c1 + " "
+          + CONFS[c1].file + ":" + CONFS[c1].line)
+      t.ok(types.indexOf(c1) !== -1, "should be defined in npmconf " + c1)
+      t.ok(defaults.indexOf(c1) !== -1, "should have default in npmconf " + c1)
     }
   }
 
-  for (c in DOC) {
-    if (c !== "versions" && c !== "version" && c !== "init.version") {
-      t.ok(CONFS[c], "config in doc should be used somewhere " + c)
-      t.ok(types.indexOf(c) !== -1, "should be defined in npmconf " + c)
-      t.ok(defaults.indexOf(c) !== -1, "should have default in npmconf " + c)
+  for (var c2 in DOC) {
+    if (c2 !== "versions" && c2 !== "version" && c2 !== "init.version") {
+      t.ok(CONFS[c2], "config in doc should be used somewhere " + c2)
+      t.ok(types.indexOf(c2) !== -1, "should be defined in npmconf " + c2)
+      t.ok(defaults.indexOf(c2) !== -1, "should have default in npmconf " + c2)
     }
   }
 
