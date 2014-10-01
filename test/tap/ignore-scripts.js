@@ -1,24 +1,24 @@
 var common = require("../common-tap")
 var test = require("tap").test
-var npm = require.resolve("../../bin/npm-cli.js")
-
-var node = process.execPath
+var path = require("path")
 
 // ignore-scripts/package.json has scripts that always exit with non-zero error
 // codes. The "install" script is omitted so that npm tries to run node-gyp,
 // which should also fail.
-var pkg = __dirname + "/ignore-scripts"
+var pkg = path.resolve(__dirname, "ignore-scripts")
 
 test("ignore-scripts: install using the option", function(t) {
   createChild(["install", "--ignore-scripts"], function(err, code) {
-    t.equal(code, 0)
+    t.ifError(err, "error should not exist")
+    t.equal(code, 0, "npm install exited with code")
     t.end()
   })
 })
 
 test("ignore-scripts: install NOT using the option", function(t) {
   createChild(["install"], function(err, code) {
-    t.notEqual(code, 0)
+    t.ifError(err, "error should not exist")
+    t.notEqual(code, 0, "npm install exited with code")
     t.end()
   })
 })
@@ -37,7 +37,8 @@ var scripts = [
 scripts.forEach(function(script) {
   test("ignore-scripts: run-script "+script+" using the option", function(t) {
     createChild(["--ignore-scripts", "run-script", script], function(err, code) {
-      t.equal(code, 0)
+      t.ifError(err, "error should not exist")
+      t.equal(code, 0, "npm run-script exited with code")
       t.end()
     })
   })
@@ -46,7 +47,8 @@ scripts.forEach(function(script) {
 scripts.forEach(function(script) {
   test("ignore-scripts: run-script "+script+" NOT using the option", function(t) {
     createChild(["run-script", script], function(err, code) {
-      t.notEqual(code, 0)
+      t.ifError(err, "error should not exist")
+      t.notEqual(code, 0, "npm run-script exited with code")
       t.end()
     })
   })
@@ -57,11 +59,13 @@ function createChild (args, cb) {
     HOME: process.env.HOME,
     Path: process.env.PATH,
     PATH: process.env.PATH,
-    npm_config_loglevel: "silent"
+    "npm_config_loglevel": "silent"
   }
 
   if (process.platform === "win32")
+    /*eslint-disable */
     env.npm_config_cache = "%APPDATA%\\npm-cache"
+    /*eslint-enable */
 
   return common.npm(args, {
     cwd: pkg,

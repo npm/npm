@@ -9,7 +9,7 @@ npm.load({loglevel : "silent"}, function () {
 
   var cache = requireInject("../../lib/cache.js", {
     "graceful-fs": {
-      WriteStream: require('graceful-fs').WriteStream,
+      WriteStream: require("graceful-fs").WriteStream,
       stat: function (file, cb) {
         process.nextTick(function () {
           switch (file) {

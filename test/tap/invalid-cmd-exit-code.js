@@ -1,5 +1,4 @@
 var test = require("tap").test
-var node = process.execPath
 var common = require("../common-tap.js")
 
 var opts = { cwd: process.cwd() }

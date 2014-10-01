@@ -15,7 +15,7 @@ test("setup", function (t) {
   mkdirp.sync(pkg)
   mkdirp.sync(cache)
   mkdirp.sync(tmp)
-  mkdirp.sync(path.resolve(pkg, 'node_modules'))
+  mkdirp.sync(path.resolve(pkg, "node_modules"))
   t.end()
 })
 
@@ -29,10 +29,10 @@ test("git-cache-locking: install a git dependency", function (t) {
   var child = spawn(node, [npm, "install", "git://github.com/nigelzor/npm-4503-c.git"], {
     cwd: pkg,
     env: {
-      npm_config_cache: cache,
-      npm_config_tmp: tmp,
-      npm_config_prefix: pkg,
-      npm_config_global: "false",
+      "npm_config_cache": cache,
+      "npm_config_tmp": tmp,
+      "npm_config_prefix": pkg,
+      "npm_config_global": "false",
       HOME: process.env.HOME,
       Path: process.env.PATH,
       PATH: process.env.PATH
@@ -46,7 +46,7 @@ test("git-cache-locking: install a git dependency", function (t) {
   })
 })
 
-test('cleanup', function(t) {
+test("cleanup", function(t) {
   rimraf.sync(pkg)
   t.end()
 })
