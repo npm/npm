@@ -16,7 +16,7 @@ test("npm version <semver> without git tag", function (t) {
   setup()
   npm.load({ cache: cache, registry: common.registry}, function () {
     which("git", function(err, git) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "git found on system")
       function tagExists(tag, _cb) {
         var child1 = spawn(git, ["tag", "-l", tag])
         var out = ""
@@ -39,7 +39,7 @@ test("npm version <semver> without git tag", function (t) {
           if (testPkg.version !== "0.0.1") t.fail(testPkg.version+" !== \"0.0.1\"")
           t.equal("0.0.1", testPkg.version)
           tagExists("v0.0.1", function(err, exists) {
-            t.ifError(err, "error should not exist")
+            t.ifError(err, "tag found to exist")
             t.equal(exists, false, "git tag DOES exist")
             t.pass("git tag does not exist")
             t.end()

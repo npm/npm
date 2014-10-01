@@ -6,7 +6,6 @@ npm-debug.log
 /test/packages/npm-test-depends-on-spark/which-spark.log
 /test/packages/test-package/random-data.txt
 /test/root
-/test/npm_cache
 /node_modules/marked-man
 /node_modules/tap
 /node_modules/nock

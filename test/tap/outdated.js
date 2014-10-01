@@ -39,9 +39,9 @@ test("it should not throw", function (t) {
       registry: common.registry }
     , function () {
       npm.install(".", function (err) {
-        t.ifError(err, "error should not exist")
+        t.ifError(err, "install success")
         npm.outdated(function (er, d) {
-          t.ifError(er, "error should not exist")
+          t.ifError(er, "outdated success")
           console.log = originalLog
           t.same(output, expOut)
           t.same(d, expData)

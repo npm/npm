@@ -19,7 +19,7 @@ test("setup", function(t) {
 
 test("\"npm install --production\" should install dependencies", function(t) {
   common.npm(["install", "--production"], EXEC_OPTS, function(err, code) {
-    t.ifError(err, "error should not exist")
+    t.ifError(err, "install production successful")
     t.equal(code, 0, "npm install exited with code")
     var p = path.resolve(pkg, "node_modules/dependency/package.json")
     t.ok(JSON.parse(fs.readFileSync(p, "utf8")))
@@ -29,7 +29,7 @@ test("\"npm install --production\" should install dependencies", function(t) {
 
 test("\"npm install --production\" should not install dev dependencies", function(t) {
   common.npm(["install", "--production"], EXEC_OPTS, function(err, code) {
-    t.ifError(err, "error should not exist")
+    t.ifError(err, "install production successful")
     t.equal(code, 0, "npm install exited with code")
     var p = path.resolve(pkg, "node_modules/dev-dependency/package.json")
     t.ok(!fs.existsSync(p), "")

@@ -59,7 +59,7 @@ function performInstall (t, cb) {
       }
     }
     common.npm(["install"], opts, function(err, code, stdout, stderr) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "install success")
       t.notOk(code, "npm install exited with code 0")
       s.close()
       cb(stderr)

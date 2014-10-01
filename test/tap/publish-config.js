@@ -52,7 +52,7 @@ test(function (t) {
         USERPROFILE: osenv.home()
       }
     }, function(err, code) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "publish command finished successfully")
       t.notOk(code, "npm install exited with code 0")
     })
   })
