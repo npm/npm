@@ -31,3 +31,45 @@ test('basic', function (t) {
 
   t.notOk(b, 'second should get falsey inflight response')
 })
+
+test('timing', function (t) {
+  var expect = [
+    'method one',
+    'start one',
+    'end one',
+    'two',
+    'tick',
+    'three'
+  ]
+  var i = 0
+
+  function log (m) {
+    t.equal(m, expect[i], m + ' === ' + expect[i])
+    ++i
+    if (i === expect.length)
+      t.end()
+  }
+
+  function method (name, cb) {
+    log('method ' + name)
+    process.nextTick(cb)
+  }
+
+  var one = inf('foo', function () {
+    log('start one')
+    var three = inf('foo', function () {
+      log('three')
+    })
+    if (three) method('three', three)
+    log('end one')
+  })
+
+  method('one', one)
+
+  var two = inf('foo', function () {
+    log('two')
+  })
+  if (two) method('one', two)
+
+  process.nextTick(log.bind(null, 'tick'))
+})
