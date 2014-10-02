@@ -54,7 +54,7 @@
     "github-url-from-username-repo": "~1.0.2",
     "glob": "~4.0.5",
     "graceful-fs": "~3.0.0",
-    "inflight": "~1.0.1",
+    "inflight": "~1.0.3",
     "inherits": "~2.0.1",
     "ini": "~1.2.0",
     "init-package-json": "~1.1.0",
@@ -92,6 +92,7 @@
     "text-table": "~0.2.0",
     "uid-number": "0.0.5",
     "which": "1",
+    "wrappy": "~1.0.1",
     "write-file-atomic": "~1.1.0"
   },
   "bundleDependencies": [
@@ -156,6 +157,7 @@
     "text-table",
     "uid-number",
     "which",
+    "wrappy",
     "write-file-atomic"
   ],
   "devDependencies": {
