@@ -92,6 +92,7 @@
     "text-table": "~0.2.0",
     "uid-number": "0.0.5",
     "which": "1",
+    "wrappy": "~1.0.1",
     "write-file-atomic": "~1.1.0"
   },
   "bundleDependencies": [
@@ -156,6 +157,7 @@
     "text-table",
     "uid-number",
     "which",
+    "wrappy",
     "write-file-atomic"
   ],
   "devDependencies": {
