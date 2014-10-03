@@ -1,14 +1,11 @@
 var fs = require("fs")
 var path = require("path")
-var spawn = require("child_process").spawn
 var rimraf = require("rimraf")
 var mr = require("npm-registry-mock")
 
 var test = require("tap").test
 var common = require("../common-tap.js")
 
-var node = process.execPath
-var npm = require.resolve("../../bin/npm-cli.js")
 var opts = {cwd : __dirname}
 var outfile = path.resolve(__dirname, "_npmrc")
 var responses = {
@@ -29,33 +26,20 @@ function mocks(server) {
 
 test("npm login", function (t) {
   mr({port : common.port, mocks : mocks}, function (s) {
-    var runner = spawn(
-      node,
-      [
-        npm,
-        "login",
-        "--registry=" + common.registry,
-        "--loglevel=silent",
-        "--userconfig=" + outfile
-      ],
-      opts
-    )
-
-    var o = "", e = "", remaining = Object.keys(responses).length
-    runner.stdout.on("data", function (chunk) {
-      remaining--
-      o += chunk
-
-      var label = chunk.toString("utf8").split(":")[0]
-      runner.stdin.write(responses[label])
-
-      if (remaining === 0) runner.stdin.end()
-    })
-    runner.stderr.on("data", function (chunk) { e += chunk })
-
-    runner.on("close", function (code) {
+    var runner = common.npm(
+    [
+      "login",
+      "--registry",
+      common.registry,
+      "--loglevel",
+      "silent",
+      "--userconfig",
+      outfile
+    ],
+    opts,
+    function(err, code) {
       t.notOk(code, "exited OK")
-      t.notOk(e, "no error output")
+      t.notOk(err, "no error output")
       var config = fs.readFileSync(outfile, "utf8")
       t.like(config, /:always-auth=false/, "always-auth is scoped and false (by default)")
       s.close()
@@ -63,24 +47,8 @@ test("npm login", function (t) {
         t.ifError(err, "removed config file OK")
         t.end()
       })
-    })
-  })
-})
 
-test("npm login --always-auth", function (t) {
-  mr({port : common.port, mocks : mocks}, function (s) {
-    var runner = spawn(
-      node,
-      [
-        npm,
-        "login",
-        "--registry=" + common.registry,
-        "--loglevel=silent",
-        "--userconfig=" + outfile,
-        "--always-auth"
-      ],
-      opts
-    )
+    })
 
     var o = "", e = "", remaining = Object.keys(responses).length
     runner.stdout.on("data", function (chunk) {
@@ -93,10 +61,26 @@ test("npm login --always-auth", function (t) {
       if (remaining === 0) runner.stdin.end()
     })
     runner.stderr.on("data", function (chunk) { e += chunk })
+  })
+})
 
-    runner.on("close", function (code) {
+test("npm login --always-auth", function (t) {
+  mr({port : common.port, mocks : mocks}, function (s) {
+    var runner = common.npm(
+    [
+      "login",
+      "--registry",
+      common.registry,
+      "--loglevel",
+      "silent",
+      "--userconfig",
+      outfile,
+      "--always-auth"
+    ],
+    opts,
+    function(err, code) {
       t.notOk(code, "exited OK")
-      t.notOk(e, "no error output")
+      t.notOk(err, "no error output")
       var config = fs.readFileSync(outfile, "utf8")
       t.like(config, /:always-auth=true/, "always-auth is scoped and true")
       s.close()
@@ -105,23 +89,6 @@ test("npm login --always-auth", function (t) {
         t.end()
       })
     })
-  })
-})
-
-test("npm login --no-always-auth", function (t) {
-  mr({port : common.port, mocks : mocks}, function (s) {
-    var runner = spawn(
-      node,
-      [
-        npm,
-        "login",
-        "--registry=" + common.registry,
-        "--loglevel=silent",
-        "--userconfig=" + outfile,
-        "--no-always-auth"
-      ],
-      opts
-    )
 
     var o = "", e = "", remaining = Object.keys(responses).length
     runner.stdout.on("data", function (chunk) {
@@ -134,10 +101,26 @@ test("npm login --no-always-auth", function (t) {
       if (remaining === 0) runner.stdin.end()
     })
     runner.stderr.on("data", function (chunk) { e += chunk })
+  })
+})
 
-    runner.on("close", function (code) {
+test("npm login --no-always-auth", function (t) {
+  mr({port : common.port, mocks : mocks}, function (s) {
+    var runner = common.npm(
+    [
+      "login",
+      "--registry",
+      common.registry,
+      "--loglevel",
+      "silent",
+      "--userconfig",
+      outfile,
+      "--no-always-auth"
+    ],
+    opts,
+    function(err, code) {
       t.notOk(code, "exited OK")
-      t.notOk(e, "no error output")
+      t.notOk(err, "no error output")
       var config = fs.readFileSync(outfile, "utf8")
       t.like(config, /:always-auth=false/, "always-auth is scoped and false")
       s.close()
@@ -146,6 +129,18 @@ test("npm login --no-always-auth", function (t) {
         t.end()
       })
     })
+
+    var o = "", e = "", remaining = Object.keys(responses).length
+    runner.stdout.on("data", function (chunk) {
+      remaining--
+      o += chunk
+
+      var label = chunk.toString("utf8").split(":")[0]
+      runner.stdin.write(responses[label])
+
+      if (remaining === 0) runner.stdin.end()
+    })
+    runner.stderr.on("data", function (chunk) { e += chunk })
   })
 })
 

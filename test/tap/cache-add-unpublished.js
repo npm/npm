@@ -1,5 +1,5 @@
-var common = require('../common-tap.js')
-var test = require('tap').test
+var common = require("../common-tap.js")
+var test = require("tap").test
 
 var server
 
