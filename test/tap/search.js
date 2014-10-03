@@ -14,12 +14,14 @@ function mocks(server) {
 
 var searches = [
   {
-    term: "FrontCow is a Yeoman generator that",
-    description: "non-regex"
+    term: "f36b6a6123da50959741e2ce4d634f96ec668c56",
+    description: "non-regex",
+    location: 241
   },
   {
-    term: "/FrontCow is a Yeoman generator that/",
-    description: "regex"
+    term: "/f36b6a6123da50959741e2ce4d634f96ec668c56/",
+    description: "regex",
+    location: 241
   }
 ]
 searches.forEach(function(search) {
@@ -30,6 +32,8 @@ searches.forEach(function(search) {
         search.term,
         "--registry",
         common.registry,
+	"--loglevel",
+	"silent",
         "--color", "always"
       ],
       EXEC_OPTS,
@@ -44,7 +48,7 @@ searches.forEach(function(search) {
         var re = new RegExp(markStart + ".*?" + markEnd)
 
         var cnt = stdout.search(re)
-        t.equal(cnt, 237, search.description + " search for " + search.term)
+        t.equal(cnt, search.location, search.description + " search for " + search.term)
         t.end()
       })
     })
@@ -55,7 +59,7 @@ var allSinceMock = {
   "_updated": 1412309425420,
   "generator-frontcow": {
       "name": "generator-frontcow",
-      "description": "FrontCow is a Yeoman generator that initialize your front-end workflow in a minute. FrontCow use the amazing Foundation 5 front-end framework.",
+      "description": "f36b6a6123da50959741e2ce4d634f96ec668c56 This is a fake description to ensure we do not accidentally search the real npm registry or use some kind of cache",
       "dist-tags": {
           "latest": "0.1.19"
       },
