@@ -20,6 +20,9 @@ Possible values in the 'packages' array are:
 If the package array is empty, npm will try to publish something in the
 current working directory.
 
+Also note that this may follow a `.gitignore` file. If you wish to change
+this behaviour, you can see `npm-developers(7)`.
+
 This command could fails if one of the packages specified already exists in
 the registry.  Overwrites when the "force" environment variable is set.
 
