@@ -1,3 +1,52 @@
+### v2.1.3 (2014-10-02):
+
+BREAKING CHANGE FOR THE SQRT(i) PEOPLE ACTUALLY USING `npm submodule`:
+
+* [`1e64473`](https://github.com/npm/npm/commit/1e6447360207f45ad6188e5780fdf4517de6e23d)
+  `rm -rf npm submodule` command, which has been broken since the Carter
+  Administration ([@isaacs](https://github.com/isaacs))
+
+BREAKING CHANGE IF YOU ARE FOR SOME REASON STILL USING NODE 0.6 AND YOU SHOULD
+NOT BE DOING THAT CAN YOU NOT:
+
+* [`3e431f9`](https://github.com/npm/npm/commit/3e431f9d6884acb4cde8bcb8a0b122a76b33ee1d)
+  [joyent/node#8492](https://github.com/joyent/node/issues/8492) bye bye
+  customFds, hello stdio ([@othiym23](https://github.com/othiym23))
+
+Other changes:
+
+* [`ea607a8`](https://github.com/npm/npm/commit/ea607a8a20e891ad38eed11b5ce2c3c0a65484b9)
+  [#6372](https://github.com/npm/npm/issues/6372) noisily error (without
+  aborting) on multi-{install,build} ([@othiym23](https://github.com/othiym23))
+* [`3ee2799`](https://github.com/npm/npm/commit/3ee2799b629fd079d2db21d7e8f25fa7fa1660d0)
+  [#6372](https://github.com/npm/npm/issues/6372) only make cache creation
+  requests in flight ([@othiym23](https://github.com/othiym23))
+* [`1a90ec2`](https://github.com/npm/npm/commit/1a90ec2f2cfbefc8becc6ef0c480e5edacc8a4cb)
+  [#6372](https://github.com/npm/npm/issues/6372) wait to put Git URLs in
+  flight until normalized ([@othiym23](https://github.com/othiym23))
+* [`664795b`](https://github.com/npm/npm/commit/664795bb7d8da7142417b3f4ef5986db3a394071)
+  [#6372](https://github.com/npm/npm/issues/6372) log what is and isn't in
+  flight ([@othiym23](https://github.com/othiym23))
+* [`00ef580`](https://github.com/npm/npm/commit/00ef58025a1f52dfabf2c4dc3898621d16a6e062)
+  `inflight@1.0.3`: fix largely theoretical race condition, because we really
+  really hate race conditions ([@isaacs](https://github.com/isaacs))
+* [`1cde465`](https://github.com/npm/npm/commit/1cde4658d897ae0f93ff1d65b258e1571b391182)
+  [#6363](https://github.com/npm/npm/issues/6363)
+  `realize-package-specifier@1.1.0`: handle local dependencies better
+  ([@iarna](https://github.com/iarna))
+* [`86f084c`](https://github.com/npm/npm/commit/86f084c6c6d7935cd85d72d9d94b8784c914d51e)
+  `realize-package-specifier@1.0.2`: dependency realization! in its own module!
+  ([@iarna](https://github.com/iarna))
+* [`553d830`](https://github.com/npm/npm/commit/553d830334552b83606b6bebefd821c9ea71e964)
+  `npm-package-arg@2.1.3`: simplified semver, better tests
+  ([@iarna](https://github.com/iarna))
+* [`bec9b61`](https://github.com/npm/npm/commit/bec9b61a316c19f5240657594f0905a92a474352)
+  `readable-stream@1.0.32`: for some reason
+  ([@rvagg](https://github.com/rvagg))
+* [`ff08ec5`](https://github.com/npm/npm/commit/ff08ec5f6d717bdbd559de0b2ede769306a9a763)
+  `dezalgo@1.0.1`: use wrappy for instrumentability
+  ([@isaacs](https://github.com/isaacs))
+
 ### v2.1.2 (2014-09-29):
 
 * [`a1aa20e`](https://github.com/npm/npm/commit/a1aa20e44bb8285c6be1e7fa63b9da920e3a70ed)
