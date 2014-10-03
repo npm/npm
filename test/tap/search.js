@@ -1,15 +1,23 @@
 var common = require("../common-tap.js")
 var test = require("tap").test
+var rimraf = require('rimraf')
 var mr = require("npm-registry-mock")
+var path = require("path")
+var pkg = path.resolve(__dirname, "search")
+var cache = path.resolve(pkg, "cache")
 
 var EXEC_OPTS = {}
+
+function cleanup () {
+  rimraf.sync(cache)
+}
 
 function mocks(server) {
   server.filteringPathRegEx(/startkey=[^&]*/g, "startkey=123")
   server.get("/-/all")
-    .reply(200, {})
+    .reply(200, allMock)
   server.get("/-/all/since?stale=update_after&startkey=123")
-    .reply(200, allSinceMock)
+    .reply(200, allMock)
 }
 
 var searches = [
@@ -32,6 +40,8 @@ searches.forEach(function(search) {
         search.term,
         "--registry",
         common.registry,
+        "--cache",
+        cache,
 	"--loglevel",
 	"silent",
         "--color", "always"
@@ -55,7 +65,12 @@ searches.forEach(function(search) {
   })
 })
 
-var allSinceMock = {
+test('cleanup', function (t) {
+  cleanup()
+  t.end()
+})
+
+var allMock = {
   "_updated": 1412309425420,
   "generator-frontcow": {
       "name": "generator-frontcow",
