@@ -73,3 +73,25 @@ test('timing', function (t) {
 
   process.nextTick(log.bind(null, 'tick'))
 })
+
+test('parameters', function (t) {
+  t.plan(8)
+
+  var a = inf('key', function (first, second, third) {
+    t.equal(first, 1)
+    t.equal(second, 2)
+    t.equal(third, 3)
+  })
+  t.ok(a, 'first returned cb function')
+
+  var b = inf('key', function (first, second, third) {
+    t.equal(first, 1)
+    t.equal(second, 2)
+    t.equal(third, 3)
+  })
+  t.notOk(b, 'second should get falsey inflight response')
+
+  setTimeout(function () {
+    a(1, 2, 3)
+  })
+})

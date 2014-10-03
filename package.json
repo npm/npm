@@ -54,7 +54,7 @@
     "github-url-from-username-repo": "~1.0.2",
     "glob": "~4.0.5",
     "graceful-fs": "~3.0.0",
-    "inflight": "~1.0.3",
+    "inflight": "~1.0.4",
     "inherits": "~2.0.1",
     "ini": "~1.2.0",
     "init-package-json": "~1.1.0",
