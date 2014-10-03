@@ -6,7 +6,7 @@ var EXEC_OPTS = {}
 
 function mocks(server) {
   server.filteringPathRegEx(/startkey=[^&]*/g, "startkey=123")
-  server.get("/-/all/")
+  server.get("/-/all")
     .reply(200, {})
   server.get("/-/all/since?stale=update_after&startkey=123")
     .reply(200, allSinceMock)
@@ -28,8 +28,6 @@ searches.forEach(function(search) {
       common.npm([
         "search",
         search.term,
-        "--loglevel",
-        "silly",
         "--registry",
         common.registry,
         "--color", "always"
@@ -39,8 +37,9 @@ searches.forEach(function(search) {
         s.close()
         t.equal(code, 0, "search finished successfully")
         t.ifErr(err, "search finished successfully")
-        var markStart = "\033\\[[0-9][0-9]m"
-        var markEnd = "\033\\[0m"
+	// \033 == \u001B
+        var markStart = "\u001B\\[[0-9][0-9]m"
+        var markEnd = "\u001B\\[0m"
 
         var re = new RegExp(markStart + ".*?" + markEnd)
 
