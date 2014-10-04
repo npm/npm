@@ -40,7 +40,7 @@ test("npm view . in global mode", function(t) {
   , "--registry=" + common.registry
   , "--global"
   ], { cwd: t1dir }, function(err, code, stdout, stderr) {
-    t.ifError(err, "error should not exist")
+    t.ifError(err, "view command finished successfully")
     t.equal(code, 1, "exit not ok")
     t.similar(stderr, /Cannot use view command in global mode./m)
     t.end()
@@ -54,7 +54,7 @@ test("npm view . with no package.json", function(t) {
   , "."
   , "--registry=" + common.registry
   ], { cwd: t1dir }, function(err, code, stdout, stderr) {
-    t.ifError(err, "error should not exist")
+    t.ifError(err, "view command finished successfully")
     t.equal(code, 1, "exit not ok")
     t.similar(stderr, /Invalid package.json/m)
     t.end()
@@ -69,7 +69,7 @@ test("npm view . with no published package", function(t) {
     , "."
     , "--registry=" + common.registry
     ], { cwd: t3dir }, function(err, code, stdout, stderr) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "view command finished successfully")
       t.equal(code, 1, "exit not ok")
       t.similar(stderr, /version not found/m)
       s.close()
@@ -86,7 +86,7 @@ test("npm view .", function(t) {
     , "."
     , "--registry=" + common.registry
     ], { cwd: t2dir }, function(err, code, stdout) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       var re = new RegExp("name: 'test-repo-url-https'")
       t.similar(stdout, re)
@@ -105,7 +105,7 @@ test("npm view . select fields", function(t) {
     , "main"
     , "--registry=" + common.registry
     ], { cwd: t2dir }, function(err, code, stdout) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       t.equal(stdout.trim(), "index.js", "should print `index.js`")
       s.close()
@@ -123,7 +123,7 @@ test("npm view .@<version>", function(t) {
     , "version"
     , "--registry=" + common.registry
     ], { cwd: t2dir }, function(err, code, stdout) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       t.equal(stdout.trim(), "0.0.0", "should print `0.0.0`")
       s.close()
@@ -142,7 +142,7 @@ test("npm view .@<version> --json", function(t) {
     , "--json"
     , "--registry=" + common.registry
     ], { cwd: t2dir }, function(err, code, stdout) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       t.equal(stdout.trim(), "\"0.0.0\"", "should print `\"0.0.0\"`")
       s.close()
@@ -158,7 +158,7 @@ test("npm view <package name>", function(t) {
     , "underscore"
     , "--registry=" + common.registry
     ], { cwd: t2dir }, function(err, code, stdout) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       var re = new RegExp("name: 'underscore'")
       t.similar(stdout, re, "should have name `underscore`")
@@ -177,9 +177,9 @@ test("npm view <package name> --json", function(t) {
     , "--json"
     , "--registry=" + common.registry
     ], { cwd: t2dir }, function(err, code, stdout) {
-      s.close()
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
+      s.close()
       try {
         var out = JSON.parse(stdout.trim())
         t.similar(out, {
@@ -201,7 +201,7 @@ test("npm view <package name> <field>", function(t) {
     , "homepage"
     , "--registry=" + common.registry
     ], { cwd: t2dir }, function(err, code, stdout) {
-      t.ifError(err, "error should not exist")
+      t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       t.equal(stdout.trim(), "http://underscorejs.org",
         "homepage should equal `http://underscorejs.org`")
