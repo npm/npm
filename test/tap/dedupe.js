@@ -10,10 +10,16 @@ var EXEC_OPTS = {}
 
 test("dedupe finds the common module and moves it up one level", function (t) {
   setup(function (s) {
-    common.npm(["install", ".", "--registry", common.registry], EXEC_OPTS, function(err, code) {
+    common.npm(
+    [
+      "install", ".",
+      "--registry", common.registry
+    ],
+    EXEC_OPTS,
+    function (err, code) {
       t.ifError(err, "successfully installed directory")
       t.equal(code, 0, "npm install exited with code")
-      common.npm(["dedupe"], {}, function(err, code) {
+      common.npm(["dedupe"], {}, function (err, code) {
         t.ifError(err, "successfully deduped against previous install")
         t.notOk(code, "npm dedupe exited with code")
         t.ok(existsSync(path.join(__dirname, "dedupe", "node_modules", "minimist")))

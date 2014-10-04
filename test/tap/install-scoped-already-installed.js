@@ -22,7 +22,7 @@ test("setup", function (t) {
 })
 
 test("installing already installed local scoped package", function (t) {
-  common.npm(["install", "--loglevel", "silent"], EXEC_OPTS, function(err, code, stdout) {
+  common.npm(["install", "--loglevel", "silent"], EXEC_OPTS, function (err, code, stdout) {
     var installed = parseNpmInstallOutput(stdout)
     t.ifError(err, "error should not exist")
     t.notOk(code, "npm install exited with code 0")
@@ -31,10 +31,16 @@ test("installing already installed local scoped package", function (t) {
       existsSync(join(modules, "@scoped", "package", "package.json")),
       "package installed"
     )
-    t.ok(contains(installed, "node_modules/@scoped/package"), "installed @scoped/package")
-    t.ok(contains(installed, "node_modules/package-local-dependency"), "installed package-local-dependency")
+    t.ok(
+      contains(installed, "node_modules/@scoped/package"),
+      "installed @scoped/package"
+    )
+    t.ok(
+      contains(installed, "node_modules/package-local-dependency"),
+      "installed package-local-dependency"
+    )
 
-    common.npm(["install", "--loglevel", "silent"], EXEC_OPTS, function(err, code, stdout) {
+    common.npm(["install", "--loglevel", "silent"], EXEC_OPTS, function (err, code, stdout) {
       installed = parseNpmInstallOutput(stdout)
       t.ifError(err, "error should not exist")
       t.notOk(code, "npm install exited with code 0")
@@ -46,14 +52,20 @@ test("installing already installed local scoped package", function (t) {
         "package installed"
       )
 
-      t.notOk(contains(installed, "node_modules/@scoped/package"), "did not reinstall @scoped/package")
-      t.notOk(contains(installed, "node_modules/package-local-dependency"), "did not reinstall package-local-dependency")
+      t.notOk(
+        contains(installed, "node_modules/@scoped/package"),
+        "did not reinstall @scoped/package"
+      )
+      t.notOk(
+        contains(installed, "node_modules/package-local-dependency"),
+        "did not reinstall package-local-dependency"
+      )
       t.end()
     })
   })
 })
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   process.chdir(__dirname)
   rimraf.sync(join(modules))
   rimraf.sync(join(pkg, "cache"))

@@ -29,7 +29,14 @@ function ansiTrim (str) {
 test("does not use ansi styling", function (t) {
   t.plan(4)
   mr(common.port, function (s) { // create mock registry.
-    common.npm(["outdated", "--registry", common.registry, "underscore"], EXEC_OPTS, function(err, code, stdout) {
+    common.npm(
+    [
+      "outdated",
+      "--registry", common.registry,
+      "underscore"
+    ],
+    EXEC_OPTS,
+    function (err, code, stdout) {
       t.ifError(err)
       t.notOk(code, "npm outdated exited with code 0")
       t.ok(stdout, stdout.length)

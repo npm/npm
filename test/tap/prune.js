@@ -34,10 +34,10 @@ test("npm install", function (t) {
     "--loglevel=silent",
     "--production=false"
   ], { cwd: pkg, env: env })
-  c.stderr.on("data", function(d) {
+  c.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
-  c.on("close", function(code) {
+  c.on("close", function (code) {
     t.notOk(code, "exit ok")
     t.end()
   })
@@ -51,10 +51,10 @@ test("npm install test-package", function (t) {
     "--loglevel=silent",
     "--production=false"
   ], { cwd: pkg, env: env })
-  c.stderr.on("data", function(d) {
+  c.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
-  c.on("close", function(code) {
+  c.on("close", function (code) {
     t.notOk(code, "exit ok")
     t.end()
   })
@@ -72,10 +72,10 @@ test("npm prune", function (t) {
     "--loglevel=silent",
     "--production=false"
   ], { cwd: pkg, env: env })
-  c.stderr.on("data", function(d) {
+  c.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
-  c.on("close", function(code) {
+  c.on("close", function (code) {
     t.notOk(code, "exit ok")
     t.end()
   })
@@ -93,10 +93,10 @@ test("npm prune", function (t) {
     "--loglevel=silent",
     "--production"
   ], { cwd: pkg, env: env })
-  c.stderr.on("data", function(d) {
+  c.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
-  c.on("close", function(code) {
+  c.on("close", function (code) {
     t.notOk(code, "exit ok")
     t.end()
   })

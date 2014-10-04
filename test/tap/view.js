@@ -11,7 +11,7 @@ var t2dir = path.resolve(tmp, "view-local-notmine")
 var t3dir = path.resolve(tmp, "view-local-mine")
 var mr = require("npm-registry-mock")
 
-test("setup", function(t) {
+test("setup", function (t) {
   mkdirp.sync(t1dir)
   mkdirp.sync(t2dir)
   mkdirp.sync(t3dir)
@@ -32,14 +32,14 @@ test("setup", function(t) {
   t.end()
 })
 
-test("npm view . in global mode", function(t) {
+test("npm view . in global mode", function (t) {
   process.chdir(t1dir)
   common.npm([
     "view"
   , "."
   , "--registry=" + common.registry
   , "--global"
-  ], { cwd: t1dir }, function(err, code, stdout, stderr) {
+  ], { cwd: t1dir }, function (err, code, stdout, stderr) {
     t.ifError(err, "view command finished successfully")
     t.equal(code, 1, "exit not ok")
     t.similar(stderr, /Cannot use view command in global mode./m)
@@ -47,13 +47,13 @@ test("npm view . in global mode", function(t) {
   })
 })
 
-test("npm view . with no package.json", function(t) {
+test("npm view . with no package.json", function (t) {
   process.chdir(t1dir)
   common.npm([
     "view"
   , "."
   , "--registry=" + common.registry
-  ], { cwd: t1dir }, function(err, code, stdout, stderr) {
+  ], { cwd: t1dir }, function (err, code, stdout, stderr) {
     t.ifError(err, "view command finished successfully")
     t.equal(code, 1, "exit not ok")
     t.similar(stderr, /Invalid package.json/m)
@@ -61,14 +61,14 @@ test("npm view . with no package.json", function(t) {
   })
 })
 
-test("npm view . with no published package", function(t) {
+test("npm view . with no published package", function (t) {
   process.chdir(t3dir)
-  mr(common.port, function(s) {
+  mr(common.port, function (s) {
     common.npm([
       "view"
     , "."
     , "--registry=" + common.registry
-    ], { cwd: t3dir }, function(err, code, stdout, stderr) {
+    ], { cwd: t3dir }, function (err, code, stdout, stderr) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 1, "exit not ok")
       t.similar(stderr, /version not found/m)
@@ -78,14 +78,14 @@ test("npm view . with no published package", function(t) {
   })
 })
 
-test("npm view .", function(t) {
+test("npm view .", function (t) {
   process.chdir(t2dir)
-  mr(common.port, function(s) {
+  mr(common.port, function (s) {
     common.npm([
       "view"
     , "."
     , "--registry=" + common.registry
-    ], { cwd: t2dir }, function(err, code, stdout) {
+    ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       var re = new RegExp("name: 'test-repo-url-https'")
@@ -96,15 +96,15 @@ test("npm view .", function(t) {
   })
 })
 
-test("npm view . select fields", function(t) {
+test("npm view . select fields", function (t) {
   process.chdir(t2dir)
-  mr(common.port, function(s) {
+  mr(common.port, function (s) {
     common.npm([
       "view"
     , "."
     , "main"
     , "--registry=" + common.registry
-    ], { cwd: t2dir }, function(err, code, stdout) {
+    ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       t.equal(stdout.trim(), "index.js", "should print `index.js`")
@@ -114,15 +114,15 @@ test("npm view . select fields", function(t) {
   })
 })
 
-test("npm view .@<version>", function(t) {
+test("npm view .@<version>", function (t) {
   process.chdir(t2dir)
-  mr(common.port, function(s) {
+  mr(common.port, function (s) {
     common.npm([
       "view"
     , ".@0.0.0"
     , "version"
     , "--registry=" + common.registry
-    ], { cwd: t2dir }, function(err, code, stdout) {
+    ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       t.equal(stdout.trim(), "0.0.0", "should print `0.0.0`")
@@ -132,16 +132,16 @@ test("npm view .@<version>", function(t) {
   })
 })
 
-test("npm view .@<version> --json", function(t) {
+test("npm view .@<version> --json", function (t) {
   process.chdir(t2dir)
-  mr(common.port, function(s) {
+  mr(common.port, function (s) {
     common.npm([
       "view"
     , ".@0.0.0"
     , "version"
     , "--json"
     , "--registry=" + common.registry
-    ], { cwd: t2dir }, function(err, code, stdout) {
+    ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       t.equal(stdout.trim(), "\"0.0.0\"", "should print `\"0.0.0\"`")
@@ -151,13 +151,13 @@ test("npm view .@<version> --json", function(t) {
   })
 })
 
-test("npm view <package name>", function(t) {
-  mr(common.port, function(s) {
+test("npm view <package name>", function (t) {
+  mr(common.port, function (s) {
     common.npm([
       "view"
     , "underscore"
     , "--registry=" + common.registry
-    ], { cwd: t2dir }, function(err, code, stdout) {
+    ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       var re = new RegExp("name: 'underscore'")
@@ -168,15 +168,15 @@ test("npm view <package name>", function(t) {
   })
 })
 
-test("npm view <package name> --json", function(t) {
+test("npm view <package name> --json", function (t) {
   t.plan(3)
-  mr(common.port, function(s) {
+  mr(common.port, function (s) {
     common.npm([
       "view"
     , "underscore"
     , "--json"
     , "--registry=" + common.registry
-    ], { cwd: t2dir }, function(err, code, stdout) {
+    ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       s.close()
@@ -193,14 +193,14 @@ test("npm view <package name> --json", function(t) {
   })
 })
 
-test("npm view <package name> <field>", function(t) {
-  mr(common.port, function(s) {
+test("npm view <package name> <field>", function (t) {
+  mr(common.port, function (s) {
     common.npm([
       "view"
     , "underscore"
     , "homepage"
     , "--registry=" + common.registry
-    ], { cwd: t2dir }, function(err, code, stdout) {
+    ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 0, "exit ok")
       t.equal(stdout.trim(), "http://underscorejs.org",
@@ -211,7 +211,7 @@ test("npm view <package name> <field>", function(t) {
   })
 })
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   process.chdir(osenv.tmpdir())
   rimraf.sync(t1dir)
   rimraf.sync(t2dir)

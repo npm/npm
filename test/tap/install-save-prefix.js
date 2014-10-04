@@ -15,17 +15,17 @@ test("setup", function (t) {
   t.end()
 })
 
-test("npm install --save with default save-prefix should install local pkg versioned to allow minor updates", function(t) {
+test("npm install --save with default save-prefix should install local pkg versioned to allow minor updates", function (t) {
   resetPackageJSON(pkg)
   mr(common.port, function (s) {
     npm.load({
       cache: pkg + "/cache",
       loglevel: "silent",
       "save-prefix": "^",
-      registry: common.registry }, function(err) {
+      registry: common.registry }, function (err) {
         t.ifError(err)
         npm.config.set("save", true)
-        npm.commands.install(["underscore@latest"], function(err) {
+        npm.commands.install(["underscore@latest"], function (err) {
           t.ifError(err)
           var p = path.resolve(pkg, "node_modules/underscore/package.json")
           t.ok(JSON.parse(fs.readFileSync(p)))
@@ -41,17 +41,17 @@ test("npm install --save with default save-prefix should install local pkg versi
   })
 })
 
-test("npm install --save-dev with default save-prefix should install local pkg to dev dependencies versioned to allow minor updates", function(t) {
+test("npm install --save-dev with default save-prefix should install local pkg to dev dependencies versioned to allow minor updates", function (t) {
   resetPackageJSON(pkg)
   mr(common.port, function (s) {
     npm.load({
       cache: pkg + "/cache",
       loglevel: "silent",
       "save-prefix": "^",
-      registry: common.registry }, function(err) {
+      registry: common.registry }, function (err) {
         t.ifError(err)
         npm.config.set("save-dev", true)
-        npm.commands.install(["underscore@1.3.1"], function(err) {
+        npm.commands.install(["underscore@1.3.1"], function (err) {
           t.ifError(err)
           var p = path.resolve(pkg, "node_modules/underscore/package.json")
           t.ok(JSON.parse(fs.readFileSync(p)))
@@ -67,17 +67,17 @@ test("npm install --save-dev with default save-prefix should install local pkg t
   })
 })
 
-test("npm install --save with \"~\" save-prefix should install local pkg versioned to allow patch updates", function(t) {
+test("npm install --save with \"~\" save-prefix should install local pkg versioned to allow patch updates", function (t) {
   resetPackageJSON(pkg)
   mr(common.port, function (s) {
     npm.load({
       cache: pkg + "/cache",
       loglevel: "silent",
-      registry: common.registry }, function(err) {
+      registry: common.registry }, function (err) {
         t.ifError(err)
         npm.config.set("save", true)
         npm.config.set("save-prefix", "~")
-        npm.commands.install(["underscore@1.3.1"], function(err) {
+        npm.commands.install(["underscore@1.3.1"], function (err) {
           t.ifError(err)
           var p = path.resolve(pkg, "node_modules/underscore/package.json")
           t.ok(JSON.parse(fs.readFileSync(p)))
@@ -94,17 +94,17 @@ test("npm install --save with \"~\" save-prefix should install local pkg version
   })
 })
 
-test("npm install --save-dev with \"~\" save-prefix should install local pkg to dev dependencies versioned to allow patch updates", function(t) {
+test("npm install --save-dev with \"~\" save-prefix should install local pkg to dev dependencies versioned to allow patch updates", function (t) {
   resetPackageJSON(pkg)
   mr(common.port, function (s) {
     npm.load({
       cache: pkg + "/cache",
       loglevel: "silent",
-      registry: common.registry }, function(err) {
+      registry: common.registry }, function (err) {
         t.ifError(err)
         npm.config.set("save-dev", true)
         npm.config.set("save-prefix", "~")
-        npm.commands.install(["underscore@1.3.1"], function(err) {
+        npm.commands.install(["underscore@1.3.1"], function (err) {
           t.ifError(err)
           var p = path.resolve(pkg, "node_modules/underscore/package.json")
           t.ok(JSON.parse(fs.readFileSync(p)))
@@ -121,7 +121,7 @@ test("npm install --save-dev with \"~\" save-prefix should install local pkg to 
   })
 })
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   process.chdir(__dirname)
   rimraf.sync(path.resolve(pkg, "node_modules"))
   rimraf.sync(path.resolve(pkg, "cache"))

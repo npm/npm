@@ -12,10 +12,10 @@ var mockRoutes = {
   }
 }
 
-test("url-dependencies: download first time", function(t) {
+test("url-dependencies: download first time", function (t) {
   cleanup()
 
-  performInstall(t, function(output){
+  performInstall(t, function (output){
     if (!tarballWasFetched(output)){
       t.fail("Tarball was not fetched")
     } else {
@@ -25,11 +25,11 @@ test("url-dependencies: download first time", function(t) {
   })
 })
 
-test("url-dependencies: do not download subsequent times", function(t) {
+test("url-dependencies: do not download subsequent times", function (t) {
   cleanup()
 
-  performInstall(t, function(){
-    performInstall(t, function(output){
+  performInstall(t, function () {
+    performInstall(t, function (output) {
       if (tarballWasFetched(output)){
         t.fail("Tarball was fetched second time around")
       } else {
@@ -45,7 +45,7 @@ function tarballWasFetched(output){
 }
 
 function performInstall (t, cb) {
-  mr({port: common.port, mocks: mockRoutes}, function(s){
+  mr({port: common.port, mocks: mockRoutes}, function (s) {
     var opts = {
       cwd : pkg,
       env: {
@@ -58,7 +58,7 @@ function performInstall (t, cb) {
         PATH: process.env.PATH
       }
     }
-    common.npm(["install"], opts, function(err, code, stdout, stderr) {
+    common.npm(["install"], opts, function (err, code, stdout, stderr) {
       t.ifError(err, "install success")
       t.notOk(code, "npm install exited with code 0")
       s.close()

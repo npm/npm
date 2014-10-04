@@ -13,7 +13,7 @@ var server
 
 // Test for https://github.com/npm/npm/issues/3265
 
-test("mock reg", function(t) {
+test("mock reg", function (t) {
   rimraf.sync(cache)
   mkdirp.sync(cache)
   rimraf.sync(cwd)
@@ -25,7 +25,7 @@ test("mock reg", function(t) {
   })
 })
 
-test("npm cache - install from fork", function(t) {
+test("npm cache - install from fork", function (t) {
   // Install from a tarball that thinks it is underscore@1.5.1
   // (but is actually a fork)
   var forkPath = path.resolve(
@@ -40,15 +40,15 @@ test("npm cache - install from fork", function(t) {
       }
     })
 
-  child.stderr.on("data", function(d) {
+  child.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
 
-  child.stdout.on("data", function(d) {
+  child.stdout.on("data", function (d) {
     output += d.toString()
   })
 
-  child.on("close", function(code) {
+  child.on("close", function (code) {
     t.equal(code, 0, "exit ok")
     t.equal(output, "underscore@1.5.1 node_modules/underscore\n")
     var index = fs.readFileSync(
@@ -60,7 +60,7 @@ test("npm cache - install from fork", function(t) {
   })
 })
 
-test("npm cache - install from origin", function(t) {
+test("npm cache - install from origin", function (t) {
   // Now install the real 1.5.1.
   rimraf.sync(path.join(cwd, "node_modules"))
   mkdirp.sync(path.join(cwd, "node_modules"))
@@ -74,15 +74,15 @@ test("npm cache - install from origin", function(t) {
       }
     })
 
-  child.stderr.on("data", function(d) {
+  child.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
 
-  child.stdout.on("data", function(d) {
+  child.stdout.on("data", function (d) {
     output += d.toString()
   })
 
-  child.on("close", function(code) {
+  child.on("close", function (code) {
     t.equal(code, 0, "exit ok")
     t.equal(output, "underscore@1.5.1 node_modules/underscore\n")
     var index = fs.readFileSync(
@@ -94,7 +94,7 @@ test("npm cache - install from origin", function(t) {
   })
 })
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   server.close()
   rimraf.sync(cache)
   rimraf.sync(cwd)

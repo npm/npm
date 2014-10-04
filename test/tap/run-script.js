@@ -41,15 +41,15 @@ test("npm run-script with args", function (t) {
   common.npm(["run-script", "start", "--", "stop"], opts, testOutput.bind(null, t, "stop"))
 })
 
-test("npm run-script with args that contain spaces", function(t) {
+test("npm run-script with args that contain spaces", function (t) {
   common.npm(["run-script", "start", "--", "hello world"], opts, testOutput.bind(null, t, "hello world"))
 })
 
-test("npm run-script with args that contain single quotes", function(t) {
+test("npm run-script with args that contain single quotes", function (t) {
   common.npm(["run-script", "start", "--", "they're awesome"], opts, testOutput.bind(null, t, "they're awesome"))
 })
 
-test("npm run-script with args that contain double quotes", function(t) {
+test("npm run-script with args that contain double quotes", function (t) {
   common.npm(["run-script", "start", "--", "what's \"up\"?"], opts, testOutput.bind(null, t, "what's \"up\"?"))
 })
 

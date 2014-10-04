@@ -9,9 +9,9 @@ var common = require("../common-tap.js")
 var opts = {cwd : __dirname}
 var outfile = path.resolve(__dirname, "_npmrc")
 var responses = {
-  "Username": "u\n",
-  "Password": "p\n",
-  "Email": "u@p.me\n"
+  "Username" : "u\n",
+  "Password" : "p\n",
+  "Email"    : "u@p.me\n"
 }
 
 function mocks(server) {
@@ -29,15 +29,12 @@ test("npm login", function (t) {
     var runner = common.npm(
     [
       "login",
-      "--registry",
-      common.registry,
-      "--loglevel",
-      "silent",
-      "--userconfig",
-      outfile
+      "--registry", common.registry,
+      "--loglevel", "silent",
+      "--userconfig", outfile
     ],
     opts,
-    function(err, code) {
+    function (err, code) {
       t.notOk(code, "exited OK")
       t.notOk(err, "no error output")
       var config = fs.readFileSync(outfile, "utf8")
@@ -47,7 +44,6 @@ test("npm login", function (t) {
         t.ifError(err, "removed config file OK")
         t.end()
       })
-
     })
 
     var o = "", e = "", remaining = Object.keys(responses).length
@@ -69,16 +65,13 @@ test("npm login --always-auth", function (t) {
     var runner = common.npm(
     [
       "login",
-      "--registry",
-      common.registry,
-      "--loglevel",
-      "silent",
-      "--userconfig",
-      outfile,
+      "--registry", common.registry,
+      "--loglevel", "silent",
+      "--userconfig", outfile,
       "--always-auth"
     ],
     opts,
-    function(err, code) {
+    function (err, code) {
       t.notOk(code, "exited OK")
       t.notOk(err, "no error output")
       var config = fs.readFileSync(outfile, "utf8")
@@ -109,16 +102,13 @@ test("npm login --no-always-auth", function (t) {
     var runner = common.npm(
     [
       "login",
-      "--registry",
-      common.registry,
-      "--loglevel",
-      "silent",
-      "--userconfig",
-      outfile,
+      "--registry", common.registry,
+      "--loglevel", "silent",
+      "--userconfig", outfile,
       "--no-always-auth"
     ],
     opts,
-    function(err, code) {
+    function (err, code) {
       t.notOk(code, "exited OK")
       t.notOk(err, "no error output")
       var config = fs.readFileSync(outfile, "utf8")

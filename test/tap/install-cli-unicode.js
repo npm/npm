@@ -16,7 +16,7 @@ var EXEC_OPTS = {
 test("does not use unicode with --unicode false", function (t) {
   t.plan(5)
   mr(common.port, function (s) {
-    common.npm(["install", "--unicode", "false", "read"], EXEC_OPTS, function(err, code, stdout) {
+    common.npm(["install", "--unicode", "false", "read"], EXEC_OPTS, function (err, code, stdout) {
       t.ifError(err, "install package read without unicode success")
       t.notOk(code, "npm install exited with code 0")
       t.ifError(err)
@@ -29,7 +29,7 @@ test("does not use unicode with --unicode false", function (t) {
 
 test("cleanup", function (t) {
   mr(common.port, function (s) {
-    common.npm(["uninstall", "read"], EXEC_OPTS, function(err, code) {
+    common.npm(["uninstall", "read"], EXEC_OPTS, function (err, code) {
       t.ifError(err, "uninstall read package success")
       t.notOk(code, "npm uninstall exited with code 0")
       s.close()

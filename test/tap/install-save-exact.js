@@ -15,17 +15,17 @@ test("setup", function (t) {
   t.end()
 })
 
-test("\"npm install --save --save-exact\" should install local pkg", function(t) {
+test("\"npm install --save --save-exact\" should install local pkg", function (t) {
   resetPackageJSON(pkg)
   mr(common.port, function (s) {
     npm.load({
       cache: pkg + "/cache",
       loglevel: "silent",
-      registry: common.registry }, function(err) {
+      registry: common.registry }, function (err) {
         t.ifError(err)
         npm.config.set("save", true)
         npm.config.set("save-exact", true)
-        npm.commands.install(["underscore@1.3.1"], function(err) {
+        npm.commands.install(["underscore@1.3.1"], function (err) {
           t.ifError(err)
           var p = path.resolve(pkg, "node_modules/underscore/package.json")
           t.ok(JSON.parse(fs.readFileSync(p)))
@@ -43,18 +43,18 @@ test("\"npm install --save --save-exact\" should install local pkg", function(t)
   })
 })
 
-test("\"npm install --save-dev --save-exact\" should install local pkg", function(t) {
+test("\"npm install --save-dev --save-exact\" should install local pkg", function (t) {
   resetPackageJSON(pkg)
 
   mr(common.port, function (s) {
     npm.load({
       cache: pkg + "/cache",
       loglevel: "silent",
-      registry: common.registry }, function(err) {
+      registry: common.registry }, function (err) {
         t.ifError(err)
         npm.config.set("save-dev", true)
         npm.config.set("save-exact", true)
-        npm.commands.install(["underscore@1.3.1"], function(err) {
+        npm.commands.install(["underscore@1.3.1"], function (err) {
           t.ifError(err)
           var p = path.resolve(pkg, "node_modules/underscore/package.json")
           t.ok(JSON.parse(fs.readFileSync(p)))
@@ -73,7 +73,7 @@ test("\"npm install --save-dev --save-exact\" should install local pkg", functio
   })
 })
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   process.chdir(__dirname)
   rimraf.sync(path.resolve(pkg, "node_modules"))
   rimraf.sync(path.resolve(pkg, "cache"))

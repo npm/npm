@@ -7,7 +7,7 @@ test("cleanup", function (t) {
   t.equal(res, 0, "Deleted test npm cache successfully")
 
   // ensure cache is clean
-  fs.readdir(common.npm_config_cache, function(err) {
+  fs.readdir(common.npm_config_cache, function (err) {
     t.ok(err, "error expected")
     t.equal(err.code, "ENOENT", "npm cache directory no longer exists")
     t.end()

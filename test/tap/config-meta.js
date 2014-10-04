@@ -110,14 +110,14 @@ test("check configs", function (t) {
     }
   }
 
-  types.forEach(function(c) {
+  types.forEach(function (c) {
     if (!c.match(/^\_/) && c !== "argv" && !c.match(/^versions?$/)) {
       t.ok(DOC[c], "defined type should be documented " + c)
       t.ok(CONFS[c], "defined type should be used " + c)
     }
   })
 
-  defaults.forEach(function(c) {
+  defaults.forEach(function (c) {
     if (!c.match(/^\_/) && c !== "argv" && !c.match(/^versions?$/)) {
       t.ok(DOC[c], "defaulted type should be documented " + c)
       t.ok(CONFS[c], "defaulted type should be used " + c)

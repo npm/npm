@@ -51,7 +51,7 @@ test(function (t) {
         PATH: process.env.PATH,
         USERPROFILE: osenv.home()
       }
-    }, function(err, code) {
+    }, function (err, code) {
       t.ifError(err, "publish command finished successfully")
       t.notOk(code, "npm install exited with code 0")
     })

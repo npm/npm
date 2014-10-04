@@ -72,5 +72,4 @@ function createChild (ignoreShrinkwrap) {
       PATH: process.env.PATH
     }
   })
-
 }

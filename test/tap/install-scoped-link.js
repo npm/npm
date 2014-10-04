@@ -1,7 +1,6 @@
 var common = require("../common-tap.js")
 var existsSync = require("fs").existsSync
 var join = require("path").join
-// var resolve = require("path").resolve
 var exec = require("child_process").exec
 
 var test = require("tap").test
@@ -22,7 +21,7 @@ test("setup", function (t) {
 })
 
 test("installing package with links", function (t) {
-  common.npm(["install", pkg], EXEC_OPTS, function(err, code) {
+  common.npm(["install", pkg], EXEC_OPTS, function (err, code) {
     t.ifError(err, "install ran to completion without error")
     t.notOk(code, "npm install exited with code 0")
 
@@ -45,7 +44,7 @@ test("installing package with links", function (t) {
   })
 })
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   process.chdir(__dirname)
   rimraf.sync(work)
   t.end()

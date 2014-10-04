@@ -10,7 +10,7 @@ test("npm ls in npm", function (t) {
   t.notEqual(files.length, 0, "ensure there are files in the directory we are to ls")
 
   var opt = { cwd: cwd, stdio: [ "ignore", "ignore", 2 ] }
-  common.npm(["ls"], opt, function(err, code) {
+  common.npm(["ls"], opt, function (err, code) {
     t.ifError(err, "error should not exist")
     t.equal(code, 0, "npm ls exited with code")
     t.end()

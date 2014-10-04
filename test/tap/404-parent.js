@@ -9,18 +9,17 @@ var mkdirp = require("mkdirp")
 var pkg = path.resolve(__dirname, "404-parent")
 var mr = require("npm-registry-mock")
 
-test("404-parent: if parent exists, specify parent in error message", function(t) {
+test("404-parent: if parent exists, specify parent in error message", function (t) {
   setup()
   rimraf.sync(path.resolve(pkg, "node_modules"))
-  performInstall(function(err) {
-    t.ok(err instanceof Error)
-    t.pass("error was returned")
-    t.ok(err.parent === "404-parent-test")
+  performInstall(function (err) {
+    t.ok(err instanceof Error, "error was returned")
+    t.ok(err.parent === "404-parent-test", "error's parent set")
     t.end()
   })
 })
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   process.chdir(osenv.tmpdir())
   rimraf.sync(pkg)
   t.end()
@@ -43,8 +42,8 @@ function setup() {
 
 function performInstall(cb) {
   mr(common.port, function (s) { // create mock registry.
-    npm.load({registry: common.registry}, function() {
-      npm.commands.install(pkg, [], function(err) {
+    npm.load({registry: common.registry}, function () {
+      npm.commands.install(pkg, [], function (err) {
         cb(err)
         s.close() // shutdown mock npm server.
       })

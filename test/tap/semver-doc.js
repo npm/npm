@@ -1,6 +1,6 @@
 var test = require("tap").test
 
-test("semver doc is up to date", function(t) {
+test("semver doc is up to date", function (t) {
   var path = require("path")
   var moddoc = path.join(__dirname, "../../node_modules/semver/README.md")
   var mydoc = path.join(__dirname, "../../doc/misc/semver.md")
