@@ -9,14 +9,19 @@ var common = require("../common-tap")
   , opts = { cwd: pkg }
 
 function testOutput (t, command, er, code, stdout, stderr) {
+  var lines
+
   if (er)
     throw er
 
   if (stderr)
     throw new Error("npm " + command + " stderr: " + stderr.toString())
 
-  stdout = stdout.trim().split("\n")
-  stdout = stdout[stdout.length - 1]
+  lines = stdout.trim().split("\n")
+  stdout = lines.filter(function(line) {
+    return line.trim() !== "" && line[0] !== '>'
+  }).join(';')
+
   t.equal(stdout, command)
   t.end()
 }
@@ -51,6 +56,26 @@ test("npm run-script with args that contain single quotes", function (t) {
 
 test("npm run-script with args that contain double quotes", function (t) {
   common.npm(["run-script", "start", "--", "what's \"up\"?"], opts, testOutput.bind(null, t, "what's \"up\"?"))
+})
+
+test("npm run-script with pre script", function (t) {
+  common.npm(["run-script", "with-post"], opts, testOutput.bind(null, t, "main;post"))
+})
+
+test("npm run-script with post script", function (t) {
+  common.npm(["run-script", "with-pre"], opts, testOutput.bind(null, t, "pre;main"))
+})
+
+test("npm run-script with both pre and post script", function (t) {
+  common.npm(["run-script", "with-both"], opts, testOutput.bind(null, t, "pre;main;post"))
+})
+
+test("npm run-script with both pre and post script and with args", function (t) {
+  common.npm(["run-script", "with-both", "--", "an arg"], opts, testOutput.bind(null, t, "pre;an arg;post"))
+})
+
+test("npm run-script explicitly call pre script with arg", function (t) {
+  common.npm(["run-script", "prewith-pre", "--", "an arg"], opts, testOutput.bind(null, t, "an arg"))
 })
 
 test("cleanup", function (t) {

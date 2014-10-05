@@ -23,6 +23,9 @@ all the arguments after the `--` directly to your script:
 
     npm run test -- --grep="pattern"
 
+The arguments will only be passed to the script specified after ```npm run```
+and not to any pre or post script.
+
 ## SEE ALSO
 
 * npm-scripts(7)
