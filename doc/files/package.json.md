@@ -32,6 +32,7 @@ The name is what your thing is called.  Some tips:
 
 A name can be optionally prefixed by a scope, e.g. `@myorg/mypackage`. See
 `npm-scope(7)` for more detail.
+**NOTE**: As of 2014-09-03, scoped packages are not supported by the public npm registry.
 
 ## version
 
