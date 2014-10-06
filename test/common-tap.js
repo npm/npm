@@ -3,8 +3,16 @@ var path = require("path")
 var fs = require("fs")
 
 var port = exports.port = 1337
-exports.registry = "http://localhost:" + port
-process.env.npm_config_loglevel = "error"
+exports.registry = "http://localhost:" + port;
+process.env.npm_config_loglevel = "error";
+
+var npm_config_cache = __dirname + '/npm_cache';
+exports.child_env = {
+  npm_config_cache: npm_config_cache,
+};
+
+var bin = exports.bin = require.resolve("../bin/npm-cli.js");
+var once = require("once");
 
 var npm_config_cache = path.resolve(__dirname, "npm_cache")
 exports.npm_config_cache = npm_config_cache
@@ -13,9 +21,14 @@ var bin = exports.bin = require.resolve("../bin/npm-cli.js")
 var once = require("once")
 
 exports.npm = function (cmd, opts, cb) {
-  cb = once(cb)
-  cmd = [bin].concat(cmd)
-  opts = opts || {}
+  cb = once(cb);
+  cmd = [bin].concat(cmd);
+  opts = opts || {};
+
+  opts.env = opts.env ? opts.env : process.env;
+  if (!opts.env.npm_config_cache) {
+    opts.env.npm_config_cache = __dirname + "/npm_cache";
+  }
 
   opts.env = opts.env ? opts.env : process.env
   if (!opts.env.npm_config_cache) {
@@ -25,7 +38,7 @@ exports.npm = function (cmd, opts, cb) {
   var stdout = ""
     , stderr = ""
     , node = process.execPath
-    , child = spawn(node, cmd, opts)
+    , child = spawn(node, cmd, opts);
 
   if (child.stderr) child.stderr.on("data", function (chunk) {
     stderr += chunk

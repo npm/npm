@@ -10,6 +10,10 @@ var EXEC_OPTS = {
   cwd: pkg
 }
 
+var EXEC_OPTS = {
+  cwd: pkg
+}
+
 test("setup", function(t) {
   mkdirp.sync(pkg)
   mkdirp.sync(path.resolve(pkg, "node_modules"))

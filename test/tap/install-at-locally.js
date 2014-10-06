@@ -8,6 +8,8 @@ var pkg = path.join(__dirname, "install-at-locally")
 
 var EXEC_OPTS = { }
 
+var EXEC_OPTS = { }
+
 test("setup", function (t) {
   mkdirp.sync(pkg)
   mkdirp.sync(path.resolve(pkg, "node_modules"))

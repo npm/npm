@@ -13,6 +13,10 @@ var EXEC_OPTS = {
   cwd: pkg
 }
 
+var EXEC_OPTS = {
+  cwd: pkg,
+}
+
 function hasControlCodes(str) {
   return str.length !== ansiTrim(str).length
 }

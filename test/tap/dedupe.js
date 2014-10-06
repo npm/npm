@@ -8,6 +8,8 @@ var test = require("tap").test
 
 var EXEC_OPTS = {}
 
+var EXEC_OPTS = { }
+
 test("dedupe finds the common module and moves it up one level", function (t) {
   setup(function (s) {
     common.npm(
