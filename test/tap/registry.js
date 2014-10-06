@@ -4,7 +4,6 @@
 var common = require("../common-tap")
 var test = require("tap").test
 
-var spawn = require("child_process").spawn
 var npmExec = require.resolve("../../bin/npm-cli.js")
 var path = require("path")
 var ca = path.resolve(__dirname, "../../node_modules/npm-registry-couchapp")
@@ -19,7 +18,7 @@ if (v[0] === 0 && v[1] < 10) {
   )
 }
 else {
-  which("couchdb", function(er) {
+  which("couchdb", function (er) {
     if (er) {
       console.error("WARNING: need couch to run test: " + er.message)
     }
@@ -39,10 +38,11 @@ function runTests () {
     cwd: ca,
     stdio: "inherit"
   }
-  common.npm(['install'], opts, function(err, code) {
+  common.npm(["install"], opts, function (err, code) {
+    if (err) { throw err }
     if (code) {
       return test("need install to work", function (t) {
-        t.fail("install failed with: " + (code || sig))
+        t.fail("install failed with: " + code)
         t.end()
       })
 
@@ -52,13 +52,21 @@ function runTests () {
         env: env,
         stdio: "inherit"
       }
-      common.npm(['test'], opts, function(err, code) {
+      common.npm(["test"], opts, function (err, code) {
+        if (err) { throw err }
+        if (code) {
+          return test("need test to work", function (t) {
+            t.fail("test failed with: " + code)
+            t.end()
+          })
+        }
         opts = {
           cwd: ca,
           env: env,
           stdio: "inherit"
         }
-        common.npm(['prune', '--production'], opts, function(err, code) {
+        common.npm(["prune", "--production"], opts, function (err, code) {
+          if (err) { throw err }
           process.exit(code || 0)
         })
       })

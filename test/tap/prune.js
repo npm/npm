@@ -7,10 +7,12 @@ var mr = require("npm-registry-mock")
 var common = require("../common-tap.js")
 var spawn = require("child_process").spawn
 var env = process.env
+var path = require("path")
+
 process.env.npm_config_depth = "Infinity"
 
-var pkg = __dirname + "/prune"
-var cache = pkg + "/cache"
+var pkg = path.resolve(__dirname, "prune")
+var cache = path.resolve(pkg, "cache")
 
 var server
 
@@ -32,10 +34,10 @@ test("npm install", function (t) {
     "--loglevel=silent",
     "--production=false"
   ], { cwd: pkg, env: env })
-  c.stderr.on("data", function(d) {
+  c.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
-  c.on("close", function(code) {
+  c.on("close", function (code) {
     t.notOk(code, "exit ok")
     t.end()
   })
@@ -49,10 +51,10 @@ test("npm install test-package", function (t) {
     "--loglevel=silent",
     "--production=false"
   ], { cwd: pkg, env: env })
-  c.stderr.on("data", function(d) {
+  c.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
-  c.on("close", function(code) {
+  c.on("close", function (code) {
     t.notOk(code, "exit ok")
     t.end()
   })
@@ -70,10 +72,10 @@ test("npm prune", function (t) {
     "--loglevel=silent",
     "--production=false"
   ], { cwd: pkg, env: env })
-  c.stderr.on("data", function(d) {
+  c.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
-  c.on("close", function(code) {
+  c.on("close", function (code) {
     t.notOk(code, "exit ok")
     t.end()
   })
@@ -91,10 +93,10 @@ test("npm prune", function (t) {
     "--loglevel=silent",
     "--production"
   ], { cwd: pkg, env: env })
-  c.stderr.on("data", function(d) {
+  c.stderr.on("data", function (d) {
     t.fail("Should not get data on stderr: " + d)
   })
-  c.on("close", function(code) {
+  c.on("close", function (code) {
     t.notOk(code, "exit ok")
     t.end()
   })

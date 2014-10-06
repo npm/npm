@@ -57,7 +57,7 @@ test("git-cache-no-hooks: install a git dependency", function (t) {
   })
 })
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   rimraf.sync(pkg)
   t.end()
 })

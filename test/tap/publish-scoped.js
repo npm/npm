@@ -91,7 +91,7 @@ test("npm publish should honor scoping", function (t) {
   }
 })
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   process.chdir(__dirname)
   rimraf(pkg, function (er) {
     t.ifError(er)

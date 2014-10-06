@@ -1,6 +1,5 @@
-var common = require('../common-tap.js')
+var common = require("../common-tap.js")
 var test = require("tap").test
-var npm = require("../../")
 var path = require("path")
 var fs = require("fs")
 var rimraf = require("rimraf")
@@ -13,11 +12,12 @@ test("setup", function (t) {
   process.chdir(pkg)
   t.end()
 })
-test('"npm install --save ../local/path" should install local package and save to package.json', function(t) {
+
+test('"npm install --save ../local/path" should install local package and save to package.json', function (t) {
   resetPackageJSON(pkg)
-  common.npm(["install", "--save", "../package-local-dependency"], EXEC_OPTS, function(err, code) {
+  common.npm(["install", "--save", "../package-local-dependency"], EXEC_OPTS, function (err, code) {
     t.ifError(err)
-    t.equal(code, 0)
+    t.notOk(code, "npm install exited with code 0")
 
     var dependencyPackageJson = path.resolve(pkg, "node_modules/package-local-dependency/package.json")
     t.ok(JSON.parse(fs.readFileSync(dependencyPackageJson, "utf8")))
@@ -30,11 +30,11 @@ test('"npm install --save ../local/path" should install local package and save t
   })
 })
 
-test('"npm install --save-dev ../local/path" should install local package and save to package.json', function(t) {
+test('"npm install --save-dev ../local/path" should install local package and save to package.json', function (t) {
   resetPackageJSON(pkg)
-  common.npm(["install", "--save-dev", "../package-local-dev-dependency"], EXEC_OPTS, function(err, code) {
+  common.npm(["install", "--save-dev", "../package-local-dev-dependency"], EXEC_OPTS, function (err, code) {
     t.ifError(err)
-    t.equal(code, 0)
+    t.notOk(code, "npm install exited with code 0")
 
     var dependencyPackageJson = path.resolve(pkg, "node_modules/package-local-dev-dependency/package.json")
     t.ok(JSON.parse(fs.readFileSync(dependencyPackageJson, "utf8")))
@@ -49,7 +49,7 @@ test('"npm install --save-dev ../local/path" should install local package and sa
 })
 
 
-test("cleanup", function(t) {
+test("cleanup", function (t) {
   resetPackageJSON(pkg)
   process.chdir(__dirname)
   rimraf.sync(path.resolve(pkg, "node_modules"))

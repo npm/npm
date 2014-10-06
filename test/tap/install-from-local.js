@@ -1,6 +1,5 @@
 var common = require("../common-tap")
 var test = require("tap").test
-var npm = require("../../")
 var path = require("path")
 var fs = require("fs")
 var rimraf = require("rimraf")
@@ -15,7 +14,8 @@ test("setup", function (t) {
 
 test('"npm install" should install local packages', function (t) {
   common.npm(["install", "."], EXEC_OPTS, function (err, code) {
-    t.equal(code, 0)
+    t.ifError(err, "error should not exist")
+    t.notOk(code, "npm install exited with code 0")
     var dependencyPackageJson = path.resolve(pkg, "node_modules/package-local-dependency/package.json")
     t.ok(
       JSON.parse(fs.readFileSync(dependencyPackageJson, "utf8")),
