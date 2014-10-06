@@ -11,12 +11,13 @@ var test = require("tap").test
   , fs = require("fs")
   , path = require("path")
   , existsSync = fs.existsSync || path.existsSync
-  , spawn = require("child_process").spawn
   , npm = require("../../")
   , rimraf = require("rimraf")
   , common = require("../common-tap.js")
   , mr = require("npm-registry-mock")
-  , pkg = __dirname + "/false_name"
+  , pkg = path.resolve(__dirname, "false_name")
+  , cache = path.resolve(pkg, "cache")
+  , nodeModules = path.resolve(pkg, "node_modules")
 
 test("not every pkg.name can be required", function (t) {
   rimraf.sync(pkg + "/cache")
@@ -35,17 +36,17 @@ test("not every pkg.name can be required", function (t) {
 })
 
 test("cleanup", function (t) {
-  rimraf.sync(pkg + "/cache")
-  rimraf.sync(pkg + "/node_modules")
+  rimraf.sync(cache)
+  rimraf.sync(nodeModules)
   t.end()
 })
 
 function setup (cb) {
   process.chdir(pkg)
-  npm.load({cache: pkg + "/cache", registry: common.registry},
+  npm.load({cache: cache, registry: common.registry},
     function () {
-      rimraf.sync(pkg + "/node_modules")
-      fs.mkdirSync(pkg + "/node_modules")
+      rimraf.sync(nodeModules)
+      fs.mkdirSync(nodeModules)
       cb()
     })
 }

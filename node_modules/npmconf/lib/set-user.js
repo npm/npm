@@ -4,6 +4,7 @@ var Conf = require('../npmconf.js').Conf
 var assert = require('assert')
 var path = require('path')
 var fs = require('fs')
+var mkdirp = require('mkdirp')
 
 function setUser (cb) {
   var defaultConf = this.root
@@ -19,8 +20,11 @@ function setUser (cb) {
   }
 
   var prefix = path.resolve(this.get("prefix"))
-  fs.stat(prefix, function (er, st) {
-    defaultConf.user = st && st.uid
-    return cb(er)
+  mkdirp(prefix, function (er) {
+    if (er) return cb(er)
+    fs.stat(prefix, function (er, st) {
+      defaultConf.user = st && st.uid
+      return cb(er)
+    })
   })
 }

@@ -464,7 +464,7 @@ to the npm registry.  Must be IPv4 in versions of Node prior to 0.12.
 
 ### loglevel
 
-* Default: "http"
+* Default: "warn"
 * Type: String
 * Values: "silent", "error", "warn", "http", "info", "verbose", "silly"
 

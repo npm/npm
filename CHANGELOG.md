@@ -1,3 +1,178 @@
+### v2.1.3 (2014-10-02):
+
+BREAKING CHANGE FOR THE SQRT(i) PEOPLE ACTUALLY USING `npm submodule`:
+
+* [`1e64473`](https://github.com/npm/npm/commit/1e6447360207f45ad6188e5780fdf4517de6e23d)
+  `rm -rf npm submodule` command, which has been broken since the Carter
+  Administration ([@isaacs](https://github.com/isaacs))
+
+BREAKING CHANGE IF YOU ARE FOR SOME REASON STILL USING NODE 0.6 AND YOU SHOULD
+NOT BE DOING THAT CAN YOU NOT:
+
+* [`3e431f9`](https://github.com/npm/npm/commit/3e431f9d6884acb4cde8bcb8a0b122a76b33ee1d)
+  [joyent/node#8492](https://github.com/joyent/node/issues/8492) bye bye
+  customFds, hello stdio ([@othiym23](https://github.com/othiym23))
+
+Other changes:
+
+* [`ea607a8`](https://github.com/npm/npm/commit/ea607a8a20e891ad38eed11b5ce2c3c0a65484b9)
+  [#6372](https://github.com/npm/npm/issues/6372) noisily error (without
+  aborting) on multi-{install,build} ([@othiym23](https://github.com/othiym23))
+* [`3ee2799`](https://github.com/npm/npm/commit/3ee2799b629fd079d2db21d7e8f25fa7fa1660d0)
+  [#6372](https://github.com/npm/npm/issues/6372) only make cache creation
+  requests in flight ([@othiym23](https://github.com/othiym23))
+* [`1a90ec2`](https://github.com/npm/npm/commit/1a90ec2f2cfbefc8becc6ef0c480e5edacc8a4cb)
+  [#6372](https://github.com/npm/npm/issues/6372) wait to put Git URLs in
+  flight until normalized ([@othiym23](https://github.com/othiym23))
+* [`664795b`](https://github.com/npm/npm/commit/664795bb7d8da7142417b3f4ef5986db3a394071)
+  [#6372](https://github.com/npm/npm/issues/6372) log what is and isn't in
+  flight ([@othiym23](https://github.com/othiym23))
+* [`00ef580`](https://github.com/npm/npm/commit/00ef58025a1f52dfabf2c4dc3898621d16a6e062)
+  `inflight@1.0.3`: fix largely theoretical race condition, because we really
+  really hate race conditions ([@isaacs](https://github.com/isaacs))
+* [`1cde465`](https://github.com/npm/npm/commit/1cde4658d897ae0f93ff1d65b258e1571b391182)
+  [#6363](https://github.com/npm/npm/issues/6363)
+  `realize-package-specifier@1.1.0`: handle local dependencies better
+  ([@iarna](https://github.com/iarna))
+* [`86f084c`](https://github.com/npm/npm/commit/86f084c6c6d7935cd85d72d9d94b8784c914d51e)
+  `realize-package-specifier@1.0.2`: dependency realization! in its own module!
+  ([@iarna](https://github.com/iarna))
+* [`553d830`](https://github.com/npm/npm/commit/553d830334552b83606b6bebefd821c9ea71e964)
+  `npm-package-arg@2.1.3`: simplified semver, better tests
+  ([@iarna](https://github.com/iarna))
+* [`bec9b61`](https://github.com/npm/npm/commit/bec9b61a316c19f5240657594f0905a92a474352)
+  `readable-stream@1.0.32`: for some reason
+  ([@rvagg](https://github.com/rvagg))
+* [`ff08ec5`](https://github.com/npm/npm/commit/ff08ec5f6d717bdbd559de0b2ede769306a9a763)
+  `dezalgo@1.0.1`: use wrappy for instrumentability
+  ([@isaacs](https://github.com/isaacs))
+
+### v2.1.2 (2014-09-29):
+
+* [`a1aa20e`](https://github.com/npm/npm/commit/a1aa20e44bb8285c6be1e7fa63b9da920e3a70ed)
+  [#6282](https://github.com/npm/npm/issues/6282)
+  `normalize-package-data@1.0.3`: don't prune bundledDependencies
+  ([@isaacs](https://github.com/isaacs))
+* [`a1f5fe1`](https://github.com/npm/npm/commit/a1f5fe1005043ce20a06e8b17a3e201aa3215357)
+  move locks back into cache, now path-aware
+  ([@othiym23](https://github.com/othiym23))
+* [`a432c4b`](https://github.com/npm/npm/commit/a432c4b48c881294d6d79b5f41c2e1c16ad15a8a)
+  convert lib/utils/tar.js to use atomic streams
+  ([@othiym23](https://github.com/othiym23))
+* [`b8c3c74`](https://github.com/npm/npm/commit/b8c3c74a3c963564233204161cc263e0912c930b)
+  `fs-write-stream-atomic@1.0.2`: Now works with streams1 fs.WriteStreams.
+  ([@isaacs](https://github.com/isaacs))
+* [`c7ab76f`](https://github.com/npm/npm/commit/c7ab76f44cce5f42add5e3ba879bd10e7e00c3e6)
+  logging cleanup ([@othiym23](https://github.com/othiym23))
+* [`4b2d95d`](https://github.com/npm/npm/commit/4b2d95d0641435b09d047ae5cb2226f292bf38f0)
+  [#6329](https://github.com/npm/npm/issues/6329) efficiently validate tmp
+  tarballs safely ([@othiym23](https://github.com/othiym23))
+
+### v2.1.1 (2014-09-26):
+
+* [`563225d`](https://github.com/npm/npm/commit/563225d813ea4c12f46d4f7821ac7f76ba8ee2d6)
+  [#6318](https://github.com/npm/npm/issues/6318) clean up locking; prefix
+  lockfile with "." ([@othiym23](https://github.com/othiym23))
+* [`c7f30e4`](https://github.com/npm/npm/commit/c7f30e4550fea882d31fcd4a55b681cd30713c44)
+  [#6318](https://github.com/npm/npm/issues/6318) remove locking code around
+  tarball packing and unpacking ([@othiym23](https://github.com/othiym23))
+
+### v2.1.0 (2014-09-25):
+
+NEW FEATURE:
+
+* [`3635601`](https://github.com/npm/npm/commit/36356011b6f2e6a5a81490e85a0a44eb27199dd7)
+  [#5520](https://github.com/npm/npm/issues/5520) Add `'npm view .'`.
+  ([@evanlucas](https://github.com/evanlucas))
+
+Other changes:
+
+* [`f24b552`](https://github.com/npm/npm/commit/f24b552b596d0627549cdd7c2d68fcf9006ea50a)
+  [#6294](https://github.com/npm/npm/issues/6294) Lock cache → lock cache
+  target. ([@othiym23](https://github.com/othiym23))
+* [`ad54450`](https://github.com/npm/npm/commit/ad54450104f94c82c501138b4eee488ce3a4555e)
+  [#6296](https://github.com/npm/npm/issues/6296) Ensure that npm-debug.log
+  file is created when rollbacks are done.
+  ([@isaacs](https://github.com/isaacs))
+* [`6810071`](https://github.com/npm/npm/commit/681007155a40ac9d165293bd6ec5d8a1423ccfca)
+  docs: Default loglevel "http" → "warn".
+  ([@othiym23](https://github.com/othiym23))
+* [`35ac89a`](https://github.com/npm/npm/commit/35ac89a940f23db875e882ce2888208395130336)
+  Skip installation of installed scoped packages.
+  ([@timoxley](https://github.com/timoxley))
+* [`e468527`](https://github.com/npm/npm/commit/e468527256ec599892b9b88d61205e061d1ab735)
+  Ensure cleanup executes for scripts-whitespace-windows test.
+  ([@timoxley](https://github.com/timoxley))
+* [`ef9101b`](https://github.com/npm/npm/commit/ef9101b7f346797749415086956a0394528a12c4)
+  Ensure cleanup executes for packed-scope test.
+  ([@timoxley](https://github.com/timoxley))
+* [`69b4d18`](https://github.com/npm/npm/commit/69b4d18cdbc2ae04c9afaffbd273b436a394f398)
+  `fs-write-stream-atomic@1.0.1`: Fix a race condition in our race-condition
+  fixer. ([@isaacs](https://github.com/isaacs))
+* [`26b17ff`](https://github.com/npm/npm/commit/26b17ff2e3b21ee26c6fdbecc8273520cff45718)
+  [#6272](https://github.com/npm/npm/issues/6272) `npmconf` decides what the
+  default prefix is. ([@othiym23](https://github.com/othiym23))
+* [`846faca`](https://github.com/npm/npm/commit/846facacc6427dafcf5756dcd36d9036539938de)
+  Fix development dependency is preferred over dependency.
+  ([@andersjanmyr](https://github.com/andersjanmyr))
+* [`9d1a9db`](https://github.com/npm/npm/commit/9d1a9db3af5adc48a7158a5a053eeb89ee41a0e7)
+  [#3265](https://github.com/npm/npm/issues/3265) Re-apply a71615a. Fixes
+  [#3265](https://github.com/npm/npm/issues/3265) again, with a test!
+  ([@glasser](https://github.com/glasser))
+* [`1d41db0`](https://github.com/npm/npm/commit/1d41db0b2744a7bd50971c35cc060ea0600fb4bf)
+  `marked-man@0.1.4`: Fixes formatting of synopsis blocks in man docs.
+  ([@kapouer](https://github.com/kapouer))
+* [`a623da0`](https://github.com/npm/npm/commit/a623da01bea1b2d3f3a18b9117cfd2d8e3cbdd77)
+  [#5867](https://github.com/npm/npm/issues/5867) Specify dummy git template
+  dir when cloning to prevent copying hooks.
+  ([@boneskull](https://github.com/boneskull))
+
+### v2.0.2 (2014-09-19):
+
+* [`42c872b`](https://github.com/npm/npm/commit/42c872b32cadc0e555638fc78eab3a38a04401d8)
+  [#5920](https://github.com/npm/npm/issues/5920)
+  `fs-write-stream-atomic@1.0.0` ([@isaacs](https://github.com/isaacs))
+* [`6784767`](https://github.com/npm/npm/commit/6784767fe15e28b44c81a1d4bb1738c642a65d78)
+  [#5920](https://github.com/npm/npm/issues/5920) make all write streams atomic
+  ([@isaacs](https://github.com/isaacs))
+* [`f6fac00`](https://github.com/npm/npm/commit/f6fac000dd98ebdd5ea1d5921175735d463d328b)
+  [#5920](https://github.com/npm/npm/issues/5920) barf on 0-length cached
+  tarballs ([@isaacs](https://github.com/isaacs))
+* [`3b37592`](https://github.com/npm/npm/commit/3b37592a92ea98336505189ae8ca29248b0589f4)
+  `write-file-atomic@1.1.0`: use graceful-fs
+  ([@iarna](https://github.com/iarna))
+
+### v2.0.1 (2014-09-18):
+
+* [`74c5ab0`](https://github.com/npm/npm/commit/74c5ab0a676793c6dc19a3fd5fe149f85fecb261)
+  [#6201](https://github.com/npm/npm/issues/6201) `npmconf@2.1.0`: scope
+  always-auth to registry URI ([@othiym23](https://github.com/othiym23))
+* [`774b127`](https://github.com/npm/npm/commit/774b127da1dd6fefe2f1299e73505d9146f00294)
+  [#6201](https://github.com/npm/npm/issues/6201) `npm-registry-client@3.2.2`:
+  use scoped always-auth settings ([@othiym23](https://github.com/othiym23))
+* [`f2d2190`](https://github.com/npm/npm/commit/f2d2190aa365d22378d03afab0da13f95614a583)
+  [#6201](https://github.com/npm/npm/issues/6201) support saving
+  `--always-auth` when logging in ([@othiym23](https://github.com/othiym23))
+* [`17c941a`](https://github.com/npm/npm/commit/17c941a2d583210fe97ed47e2968d94ce9f774ba)
+  [#6163](https://github.com/npm/npm/issues/6163) use `write-file-atomic`
+  instead of `fs.writeFile()` ([@fiws](https://github.com/fiws))
+* [`fb5724f`](https://github.com/npm/npm/commit/fb5724fd98e1509c939693568df83d11417ea337)
+  [#5925](https://github.com/npm/npm/issues/5925) `npm init -f`: allow `npm
+  init` to run without prompting
+  ([@michaelnisi](https://github.com/michaelnisi))
+* [`b706d63`](https://github.com/npm/npm/commit/b706d637d5965dbf8f7ce07dc5c4bc80887f30d8)
+  [#3059](https://github.com/npm/npm/issues/3059) disable prepublish when
+  running `npm install --production`
+  ([@jussi](https://github.com/jussi)-kalliokoski)
+* [`119f068`](https://github.com/npm/npm/commit/119f068eae2a36fa8b9c9ca557c70377792243a4)
+  attach the node version used when publishing a package to its registry
+  metadata ([@othiym23](https://github.com/othiym23))
+* [`8fe0081`](https://github.com/npm/npm/commit/8fe008181665519c2ac201ee432a3ece9798c31f)
+  seriously, don't use `npm -g update npm`
+  ([@thomblake](https://github.com/thomblake))
+* [`ea5b3d4`](https://github.com/npm/npm/commit/ea5b3d446b86dcabb0dbc6dba374d3039342ecb3)
+  `request@2.44.0` ([@othiym23](https://github.com/othiym23))
+
 ### v2.0.0 (2014-09-12):
 
 BREAKING CHANGES:
