@@ -10,12 +10,9 @@ var pkg = join(__dirname, "prepublish_package")
 var tmp = join(pkg, "tmp")
 var cache = join(pkg, "cache")
 
-function cleanup() {
-  rimraf.sync(pkg)
-}
-
 test("setup", function (t) {
   var n = 0
+  cleanup()
   mkdirp(pkg, then())
   mkdirp(cache, then())
   mkdirp(tmp, then())
@@ -54,7 +51,7 @@ test("test", function (t) {
       execOpts.env[i] = process.env[i]
   }
 
-  var child = common.npm(["pack"], execOpts, function(err, code, stdout, stderr) {
+  common.npm(["pack"], execOpts, function(err, code, stdout, stderr) {
     t.equal(code, 0, "pack finished successfully")
     t.ifErr(err, "pack finished successfully")
 
@@ -66,10 +63,10 @@ test("test", function (t) {
       "\\r?\\n" +
       "ok\\r?\\n" +
       "npm-test-prepublish-1.2.5.tgz", "ig")
+
     t.ok(c.match(regex))
     t.end()
   })
-  child.stdout.setEncoding("utf8")
 })
 
 test("cleanup", function (t) {
@@ -77,3 +74,7 @@ test("cleanup", function (t) {
   t.pass("cleaned up")
   t.end()
 })
+
+function cleanup() {
+  rimraf.sync(pkg)
+}
