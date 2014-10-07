@@ -37,6 +37,9 @@ Additionally, arbitrary scripts can be executed by running `npm run-script
 <pkg> <stage>`. *Pre* and *post* commands with matching names will be run for
 those as well (e.g. `premyscript`, `myscript`, `postmyscript`).
 
+Arbitrary scripts can also have BEFORE and AFTER behavior,  defined by
+including `pre<stage>` and `post<stage>` scripts in the package.json.
+
 ## NOTE: INSTALL SCRIPTS ARE AN ANTIPATTERN
 
 **tl;dr** Don't use `install`.  Use a `.gyp` file for compilation, and
