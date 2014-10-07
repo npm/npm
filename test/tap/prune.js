@@ -1,12 +1,8 @@
 var test = require("tap").test
 var common = require("../common-tap")
 var fs = require("fs")
-var node = process.execPath
-var npm = require.resolve("../../bin/npm-cli.js")
 var rimraf = require("rimraf")
 var mr = require("npm-registry-mock")
-var common = require("../common-tap.js")
-var spawn = require("child_process").spawn
 var env = process.env
 var path = require("path")
 
@@ -47,6 +43,7 @@ test("npm install", function (t) {
     "--loglevel", "silent",
     "--production", "false"
   ], EXEC_OPTS, function(err, code, stdout, stderr) {
+    t.ifErr(err, "install finished successfully")
     t.notOk(code, "exit ok")
     t.notOk(stderr, "Should not get data on stderr: " + stderr)
     t.end()
@@ -61,6 +58,7 @@ test("npm install test-package", function (t) {
     "--loglevel", "silent",
     "--production", "false"
   ], EXEC_OPTS, function(err, code, stdout, stderr) {
+    t.ifErr(err, "install finished successfully")
     t.notOk(code, "exit ok")
     t.notOk(stderr, "Should not get data on stderr: " + stderr)
     t.end()
@@ -79,6 +77,7 @@ test("npm prune", function (t) {
     "--loglevel", "silent",
     "--production", "false"
   ], EXEC_OPTS, function(err, code, stdout, stderr) {
+    t.ifErr(err, "prune finished successfully")
     t.notOk(code, "exit ok")
     t.notOk(stderr, "Should not get data on stderr: " + stderr)
     t.end()
@@ -96,7 +95,8 @@ test("npm prune", function (t) {
     "prune",
     "--loglevel", "silent",
     "--production"
-  ], EXEC_OPTS, function(err, code, stderr, stdout) {
+  ], EXEC_OPTS, function(err, code, stderr) {
+    t.ifErr(err, "prune finished successfully")
     t.notOk(code, "exit ok")
     t.notOk(stderr, "Should not get data on stderr: " + stderr)
     t.end()
@@ -111,6 +111,7 @@ test("verify installs", function (t) {
 
 test("cleanup", function (t) {
   server.close()
+  cleanup()
   t.pass("cleaned up")
   t.end()
 })
