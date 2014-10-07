@@ -87,7 +87,7 @@ latest:
 	@echo "in this folder that you're looking at right now."
 	node cli.js install -g -f npm
 
-install: docclean all
+install: all
 	node cli.js install -g -f
 
 # backwards compat
