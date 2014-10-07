@@ -6,13 +6,13 @@ var mr = require("npm-registry-mock")
 var env = process.env
 var path = require("path")
 
-process.env.npm_config_depth = "Infinity"
-
 var pkg = path.resolve(__dirname, "prune")
 var cache = path.resolve(pkg, "cache")
 var nodeModules = path.resolve(pkg, "node_modules")
 
 var EXEC_OPTS = { cwd: pkg, env: env }
+EXEC_OPTS.env.npm_config_depth = "Infinity"
+
 var server
 
 test("reg mock", function (t) {
@@ -98,7 +98,7 @@ test("npm prune", function (t) {
   ], EXEC_OPTS, function(err, code, stderr) {
     t.ifErr(err, "prune finished successfully")
     t.notOk(code, "exit ok")
-    t.notOk(stderr, "Should not get data on stderr: " + stderr)
+    t.equal(stderr, "unbuild mkdirp@0.3.5\n")
     t.end()
   })
 })
