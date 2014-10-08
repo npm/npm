@@ -39,8 +39,8 @@ test("setup", function (t) {
 })
 
 test("test", function (t) {
-  var execOpts = { cwd: pkg }
-  execOpts.env = {
+  var env
+  env = {
     "npm_config_cache"  : cache,
     "npm_config_tmp"    : tmp,
     "npm_config_prefix" : pkg,
@@ -48,10 +48,10 @@ test("test", function (t) {
   }
   for (var i in process.env) {
     if (!/^npm_config_/.test(i))
-      execOpts.env[i] = process.env[i]
+      env[i] = process.env[i]
   }
 
-  common.npm(["pack"], execOpts, function(err, code, stdout, stderr) {
+  common.npm(["pack"], { cwd: pkg, env: env }, function(err, code, stdout, stderr) {
     t.equal(code, 0, "pack finished successfully")
     t.ifErr(err, "pack finished successfully")
 
