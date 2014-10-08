@@ -51,7 +51,10 @@ test("test", function (t) {
       env[i] = process.env[i]
   }
 
-  common.npm(["pack"], { cwd: pkg, env: env }, function(err, code, stdout, stderr) {
+  common.npm([
+      "pack",
+      "--loglevel", "warn"
+    ], { cwd: pkg, env: env }, function(err, code, stdout, stderr) {
     t.equal(code, 0, "pack finished successfully")
     t.ifErr(err, "pack finished successfully")
 
