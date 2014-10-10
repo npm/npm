@@ -1,3 +1,61 @@
+### v2.1.4 (2014-10-09):
+
+* [`3aeb440`](https://github.com/npm/npm/commit/3aeb4401444fad83cc7a8d11bf2507658afa5248)
+  [#6442](https://github.com/npm/npm/issues/6442) proxying git needs `GIT_SSL_CAINFO`
+  ([@wmertens](https://github.com/wmertens))
+* [`a8da8d6`](https://github.com/npm/npm/commit/a8da8d6e0cd56d97728c0b76b51604ee06ef6264)
+  [#6413](https://github.com/npm/npm/issues/6413) write builtin config on any
+  global npm install ([@isaacs](https://github.com/isaacs))
+* [`9e4d632`](https://github.com/npm/npm/commit/9e4d632c0142ba55df07d624667738b8727336fc)
+  [#6343](https://github.com/npm/npm/issues/6343) don't pass run arguments to
+  pre & post scripts ([@TheLudd](https://github.com/TheLudd))
+* [`d831b1f`](https://github.com/npm/npm/commit/d831b1f7ca1a9921ea5b394e39b7130ecbc6d7b4)
+  [#6399](https://github.com/npm/npm/issues/6399) race condition: inflight
+  installs, prevent `peerDependency` problems
+  ([@othiym23](https://github.com/othiym23))
+* [`82b775d`](https://github.com/npm/npm/commit/82b775d6ff34c4beb6c70b2344d491a9f2026577)
+  [#6384](https://github.com/npm/npm/issues/6384) race condition: inflight
+  caching by URL rather than semver range
+  ([@othiym23](https://github.com/othiym23))
+* [`7bee042`](https://github.com/npm/npm/commit/7bee0429066fedcc9e6e962c043eb740b3792809)
+  `inflight@1.0.4`: callback can take arbitrary number of parameters
+  ([@othiym23](https://github.com/othiym23))
+* [`3bff494`](https://github.com/npm/npm/commit/3bff494f4abf17d6d7e0e4a3a76cf7421ecec35a)
+  [#5195](https://github.com/npm/npm/issues/5195) fixed regex color regression
+  for `npm search` ([@chrismeyersfsu](https://github.com/chrismeyersfsu))
+* [`33ba2d5`](https://github.com/npm/npm/commit/33ba2d585160a0a2a322cb76c4cd989acadcc984)
+  [#6387](https://github.com/npm/npm/issues/6387) allow `npm view global` if
+  package is specified ([@evanlucas](https://github.com/evanlucas))
+* [`99c4cfc`](https://github.com/npm/npm/commit/99c4cfceed413396d952cf05f4e3c710f9682c23)
+  [#6388](https://github.com/npm/npm/issues/6388) npm-publish →
+  npm-developers(7) ([@kennydude](https://github.com/kennydude))
+
+TEST CLEANUP EXTRAVAGANZA:
+
+* [`8d6bfcb`](https://github.com/npm/npm/commit/8d6bfcb88408f5885a2a67409854c43e5c3a23f6)
+  tap tests run with no system-wide side effects
+  ([@chrismeyersfsu](https://github.com/chrismeyersfsu))
+* [`7a1472f`](https://github.com/npm/npm/commit/7a1472fbdbe99956ad19f629e7eb1cc07ba026ef)
+  added npm cache cleanup script
+  ([@chrismeyersfsu](https://github.com/chrismeyersfsu))
+* [`0ce6a37`](https://github.com/npm/npm/commit/0ce6a3752fa9119298df15671254db6bc1d8e64c)
+  stripped out dead test code (othiym23)
+* replace spawn with common.npm (@chrismeyersfsu):
+    * [`0dcd614`](https://github.com/npm/npm/commit/0dcd61446335eaf541bf5f2d5186ec1419f86a42)
+      test/tap/cache-shasum-fork.js
+    * [`97f861c`](https://github.com/npm/npm/commit/97f861c967606a7e51e3d5047cf805d9d1adea5a)
+      test/tap/false_name.js
+    * [`d01b3de`](https://github.com/npm/npm/commit/d01b3de6ce03f25bbf3db97bfcd3cc85830d6801)
+      test/tap/git-cache-locking.js
+    * [`7b63016`](https://github.com/npm/npm/commit/7b63016778124c6728d6bd89a045c841ae3900b6)
+      test/tap/pack-scoped.js
+    * [`c877553`](https://github.com/npm/npm/commit/c877553265c39673e03f0a97972f692af81a595d)
+      test/tap/scripts-whitespace-windows.js
+    * [`df98525`](https://github.com/npm/npm/commit/df98525331e964131299d457173c697cfb3d95b9)
+      test/tap/prepublish.js
+    * [`99c4cfc`](https://github.com/npm/npm/commit/99c4cfceed413396d952cf05f4e3c710f9682c23)
+      test/tap/prune.js
+
 ### v2.1.3 (2014-10-02):
 
 BREAKING CHANGE FOR THE SQRT(i) PEOPLE ACTUALLY USING `npm submodule`:
