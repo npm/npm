@@ -231,10 +231,10 @@ with the lib folder in any way, but it's useful meta info.
 
 ### directories.bin
 
-If you specify a "bin" directory, then all the files in that folder will
-be used as the "bin" object.
+If you specify a `bin` directory, then all the files in that folder will
+be added as children of the `bin` path.
 
-If you have a "bin" object already, then this has no effect.
+If you have a `bin` path already, then this has no effect.
 
 ### directories.man
 
@@ -274,7 +274,7 @@ html project page that you put in your browser.  It's for computers.
 
 ## scripts
 
-The "scripts" member is an object containing script commands that are run
+The "scripts" property is a dictionary containing script commands that are run
 at various times in the lifecycle of your package.  The key is the lifecycle
 event, and the value is the command to run at that point.
 
@@ -282,9 +282,9 @@ See `npm-scripts(7)` to find out more about writing package scripts.
 
 ## config
 
-A "config" object can be used to set configuration
-parameters used in package scripts that persist across upgrades.  For
-instance, if a package had the following:
+A "config" object can be used to set configuration parameters used in package
+scripts that persist across upgrades.  For instance, if a package had the
+following:
 
     { "name" : "foo"
     , "config" : { "port" : "8080" } }
@@ -298,10 +298,10 @@ configs.
 
 ## dependencies
 
-Dependencies are specified with a simple object that maps package name to
+Dependencies are specified in a simple object that maps a package name to a
 version range. The version range is a string which has one or more
-space-separated descriptors.  Dependencies can also be identified with
-a tarball or git URL.
+space-separated descriptors.  Dependencies can also be identified with a
+tarball or git URL.
 
 **Please do not put test harnesses or transpilers in your
 `dependencies` object.**  See `devDependencies`, below.
@@ -408,8 +408,8 @@ If someone is planning on downloading and using your module in their
 program, then they probably don't want or need to download and build
 the external test or documentation framework that you use.
 
-In this case, it's best to list these additional items in a
-`devDependencies` object.
+In this case, it's best to map these additional items in a `devDependencies`
+object.
 
 These things will be installed when doing `npm link` or `npm install`
 from the root of a package, and can be managed like any other npm
@@ -480,11 +480,11 @@ If this is spelled `"bundleDependencies"`, then that is also honorable.
 
 ## optionalDependencies
 
-If a dependency can be used, but you would like npm to proceed if it
-cannot be found or fails to install, then you may put it in the
-`optionalDependencies` object.  This is a map of package name to version
-or url, just like the `dependencies` object.  The difference is that
-failure is tolerated.
+If a dependency can be used, but you would like npm to proceed if it cannot be
+found or fails to install, then you may put it in the `optionalDependencies`
+object.  This is a map of package name to version or url, just like the
+`dependencies` object.  The difference is that build failures do not cause
+installation to fail.
 
 It is still your program's responsibility to handle the lack of the
 dependency.  For example, something like this:
@@ -586,11 +586,11 @@ does help prevent some confusion if it doesn't work as expected.
 If you set `"private": true` in your package.json, then npm will refuse
 to publish it.
 
-This is a way to prevent accidental publication of private repositories.
-If you would like to ensure that a given package is only ever published
-to a specific registry (for example, an internal registry),
-then use the `publishConfig` object described below
-to override the `registry` config param at publish-time.
+This is a way to prevent accidental publication of private repositories.  If
+you would like to ensure that a given package is only ever published to a
+specific registry (for example, an internal registry), then use the
+`publishConfig` dictionary described below to override the `registry` config
+param at publish-time.
 
 ## publishConfig
 

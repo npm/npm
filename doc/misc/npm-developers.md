@@ -86,8 +86,8 @@ least, you need:
   then you need to specify that in the "main" field.
 
 * directories:
-  This is an object of folders.  The best ones to include are "lib" and
-  "doc", but if you specify a folder full of man pages in "man", then
+  This is an object mapping names to folders.  The best ones to include are
+  "lib" and "doc", but if you use "man" to specify a folder full of man pages,
   they'll get installed just like these ones.
 
 You can use `npm init` in the root of your package in order to get you
