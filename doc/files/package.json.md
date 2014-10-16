@@ -379,8 +379,8 @@ As of version 1.1.65, you can refer to GitHub urls as just "foo": "user/foo-proj
 ## Local Paths
 
 As of version 2.0.0 you can provide a path to a local directory that contains a
-package. Local paths can saved using `npm install --save`, using any of these
-forms:
+package. Local paths can be saved using `npm install --save`, using any of
+these forms:
 
     ../foo/bar
     ~/foo/bar
