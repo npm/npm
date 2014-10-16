@@ -340,7 +340,7 @@ For example, these are all valid:
       , "two" : "2.x"
       , "thr" : "3.3.x"
       , "lat" : "latest"
-      , "dyl" : "~/projects/dyl"
+      , "dyl" : "file:../dyl"
       }
     }
 
@@ -378,13 +378,24 @@ As of version 1.1.65, you can refer to GitHub urls as just "foo": "user/foo-proj
 
 ## Local Paths
 
-As of version 2.0.0 you can provide a path to a local directory that
-contains a package. Local paths can be in the form:
+As of version 2.0.0 you can provide a path to a local directory that contains a
+package. Local paths can saved using `npm install --save`, using any of these
+forms:
 
     ../foo/bar
     ~/foo/bar
     ./foo/bar
     /foo/bar
+
+in which case they will be normalized to a relative path and added to your
+`package.json`. For example:
+
+    {
+      "name": "baz",
+      "dependencies": {
+        "bar": "file:../foo/bar"
+      }
+    }
 
 This feature is helpful for local offline development and creating
 tests that require npm installing where you don't want to hit an
