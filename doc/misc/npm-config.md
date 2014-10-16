@@ -323,6 +323,13 @@ the git binary.
 
 Tag the commit when using the `npm version` command.
 
+### dup
+
+* Default: `false`
+* Type: Boolean
+
+npm will install all dependencies even if they are already installed on higher levels.
+
 ### global
 
 * Default: false
