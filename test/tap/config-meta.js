@@ -90,7 +90,7 @@ test("get docs", function (t) {
 })
 
 test("check configs", function (t) {
-  var defs = require("npmconf/config-defs.js")
+  var defs = require("../../lib/config/defaults.js")
   var types = Object.keys(defs.types)
   var defaults = Object.keys(defs.defaults)
   for (var c1 in CONFS) {

@@ -1,7 +1,7 @@
 var test = require("tap").test
 
-var npmconf = require("../npmconf.js")
-var common = require("./00-setup.js")
+var npmconf = require("../../lib/config/core.js")
+var common = require("./00-config-setup.js")
 
 var URI = "https://registry.lvh.me:8661/"
 
@@ -161,12 +161,12 @@ test("get old-style credentials for default registry", function (t) {
   npmconf.load(common.builtin, function (er, conf) {
     var actual = conf.getCredentialsByURI(conf.get("registry"))
     var expected = {
-      scope      : '//registry.npmjs.org/',
+      scope      : "//registry.npmjs.org/",
       token      : undefined,
-      password   : 'password',
-      username   : 'username',
-      email      : 'i@izs.me',
-      auth       : 'dXNlcm5hbWU6cGFzc3dvcmQ=',
+      password   : "password",
+      username   : "username",
+      email      : "i@izs.me",
+      auth       : "dXNlcm5hbWU6cGFzc3dvcmQ=",
       alwaysAuth : false
     }
     t.same(actual, expected)
