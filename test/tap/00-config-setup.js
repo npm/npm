@@ -3,6 +3,7 @@ var userconfigSrc = path.resolve(__dirname, "..", "fixtures", "config", "usercon
 exports.userconfig = userconfigSrc + "-with-gc"
 exports.globalconfig = path.resolve(__dirname, "..", "fixtures", "config", "globalconfig")
 exports.builtin = path.resolve(__dirname, "..", "fixtures", "config", "builtin")
+exports.malformed = path.resolve(__dirname, "..", "fixtures", "config", "malformed")
 exports.ucData =
   { globalconfig: exports.globalconfig,
     email: "i@izs.me",
