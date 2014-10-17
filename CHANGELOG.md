@@ -1,3 +1,62 @@
+### v2.1.5 (2014-10-16):
+
+* [`6a14b23`](https://github.com/npm/npm/commit/6a14b232a0e34158bd95bb25c607167be995c204)
+  [#6397](https://github.com/npm/npm/issues/6397) Defactor npmconf back into
+  npm. ([@othiym23](https://github.com/othiym23))
+* [`4000e33`](https://github.com/npm/npm/commit/4000e3333a76ca4844681efa8737cfac24b7c2c8)
+  [#6323](https://github.com/npm/npm/issues/6323) Install `peerDependencies`
+  from top. ([@othiym23](https://github.com/othiym23))
+* [`5d119ae`](https://github.com/npm/npm/commit/5d119ae246f27353b14ff063559d1ba8c616bb89)
+  [#6498](https://github.com/npm/npm/issues/6498) Better error messages on
+  malformed `.npmrc` properties. ([@nicks](https://github.com/nicks))
+* [`ae18efb`](https://github.com/npm/npm/commit/ae18efb65fed427b1ef18e4862885bf60b87b92e)
+  [#6093](https://github.com/npm/npm/issues/6093) Replace instances of 'hash'
+  with 'object' in documentation. ([@zeke](https://github.com/zeke))
+* [`53108b2`](https://github.com/npm/npm/commit/53108b276fec5f97a38250933a2768d58b6928da)
+  [#1558](https://github.com/npm/npm/issues/1558) Clarify how local paths
+  should be used. ([@KenanY](https://github.com/KenanY))
+* [`344fa1a`](https://github.com/npm/npm/commit/344fa1a219ac8867022df3dc58a47636dde8a242)
+  [#6488](https://github.com/npm/npm/issues/6488) Work around bug in marked.
+  ([@othiym23](https://github.com/othiym23))
+
+OUTDATED DEPENDENCY CLEANUP JAMBOREE
+
+* [`60c2942`](https://github.com/npm/npm/commit/60c2942e13655d9ecdf6e0f1f97f10cb71a75255)
+  `realize-package-specifier@1.2.0`: Handle names and rawSpecs more
+  consistently. ([@iarna](https://github.com/iarna))
+* [`1b5c95f`](https://github.com/npm/npm/commit/1b5c95fbda77b87342bd48c5ecac5b1fd571ccfe)
+  `sha@1.3.0`: Change line endings?
+  ([@ForbesLindesay](https://github.com/ForbesLindesay))
+* [`d7dee3f`](https://github.com/npm/npm/commit/d7dee3f3f7d9e7c2061a4ecb4dd93e3e4bfe4f2e)
+  `request@2.45.0`: Dependency updates, better proxy support, better compressed
+  response handling, lots of 'use strict'.
+  ([@mikeal](https://github.com/mikeal))
+* [`3d75180`](https://github.com/npm/npm/commit/3d75180c2cc79fa3adfa0e4cb783a27192189a65)
+  `opener@1.4.0`: Added gratuitous return.
+  ([@Domenic](https://github.com/Domenic))
+* [`8e2703f`](https://github.com/npm/npm/commit/8e2703f78d280d1edeb749e257dda1f288bad6e3)
+  `retry@0.6.1` / `npm-registry-client@3.2.4`: Change of ownership.
+  ([@tim-kos](https://github.com/tim-kos))
+* [`c87b00f`](https://github.com/npm/npm/commit/c87b00f82f92434ee77831915012c77a6c244c39)
+  `once@1.3.1`: Wrap once with wrappy. ([@isaacs](https://github.com/isaacs))
+* [`01ec790`](https://github.com/npm/npm/commit/01ec790fd47def56eda6abb3b8d809093e8f493f)
+  `npm-user-validate@0.1.1`: Correct repository URL.
+  ([@robertkowalski](https://github.com/robertkowalski))
+* [`389e52c`](https://github.com/npm/npm/commit/389e52c2d94c818ca8935ccdcf392994fec564a2)
+  `glob@4.0.6`: Now absolutely requires `graceful-fs`.
+  ([@isaacs](https://github.com/isaacs))
+* [`e15ab15`](https://github.com/npm/npm/commit/e15ab15a27a8f14cf0d9dc6f11dee452080378a0)
+  `ini@1.3.0`: Tighten up whitespace handling.
+  ([@isaacs](https://github.com/isaacs))
+* [`7610f3e`](https://github.com/npm/npm/commit/7610f3e62e699292ece081bfd33084d436e3246d)
+  `archy@1.0.0` ([@substack](https://github.com/substack))
+* [`9c13149`](https://github.com/npm/npm/commit/9c1314985e513e20ffa3ea0ca333ba2ab78299c9)
+  `semver@4.1.0`: Add support for prerelease identifiers.
+  ([@bromanko](https://github.com/bromanko))
+* [`f096c25`](https://github.com/npm/npm/commit/f096c250441b031d758f03afbe8d2321f94c7703)
+  `graceful-fs@3.0.4`: Add a bunch of additional tests, skip the unfortunate
+  complications of `graceful-fs@3.0.3`. ([@isaacs](https://github.com/isaacs))
+
 ### v2.1.4 (2014-10-09):
 
 * [`3aeb440`](https://github.com/npm/npm/commit/3aeb4401444fad83cc7a8d11bf2507658afa5248)
