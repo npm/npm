@@ -163,10 +163,10 @@
   "devDependencies": {
     "marked": "~0.3.2",
     "marked-man": "~0.1.4",
-    "nock": "~0.34.1",
+    "nock": "~0.48.1",
     "npm-registry-couchapp": "~2.6.2",
     "npm-registry-mock": "~0.6.3",
-    "require-inject": "~1.0.0",
+    "require-inject": "~1.1.0",
     "tap": "~0.4.12"
   },
   "scripts": {
