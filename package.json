@@ -80,7 +80,7 @@
     "read-installed": "~3.1.2",
     "read-package-json": "~1.2.7",
     "readable-stream": "~1.0.32",
-    "realize-package-specifier": "~1.1.0",
+    "realize-package-specifier": "~1.2.0",
     "request": "~2.45.0",
     "retry": "~0.6.1",
     "rimraf": "~2.2.8",

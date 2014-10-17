@@ -85,3 +85,37 @@ test("realize-package-specifier", function (t) {
     t.is(result.type, "github", "github package dependency")
   })
 })
+test("named realize-package-specifier", function (t) {
+  t.plan(10)
+
+  rps("a@a.tar.gz", function (err, result) {
+    t.is(result.type, "local", "named local tarball")
+  })
+  rps("b@b", function (err, result) {
+    t.is(result.type, "directory", "named local package directory")
+  })
+  rps("c@c", function (err, result) {
+    t.is(result.type, "tag", "remote package, non-package local directory")
+  })
+  rps("d@d", function (err, result) {
+    t.is(result.type, "tag", "remote package, no local directory")
+  })
+  rps("a@file:./a.tar.gz", function (err, result) {
+    t.is(result.type, "local", "local tarball")
+  })
+  rps("b@file:./b", function (err, result) {
+    t.is(result.type, "directory", "local package directory")
+  })
+  rps("c@file:./c", function (err, result) {
+    t.is(result.type, "local", "non-package local directory, specified with a file URL")
+  })
+  rps("d@file:./d", function (err, result) {
+    t.is(result.type, "local", "no local directory, specified with a file URL")
+  })
+  rps("e@e/1", function (err, result) {
+    t.is(result.type, "directory", "local package directory")
+  })
+  rps("e@e/2", function (err, result) {
+    t.is(result.type, "github", "github package dependency")
+  })
+})
