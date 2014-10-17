@@ -7,24 +7,24 @@ var rimraf = require("rimraf")
 var mr = require("npm-registry-mock")
 var common = require("../common-tap.js")
 
-var pkg = path.resolve(__dirname, "peer-deps")
+var pkg = path.resolve(__dirname, "peer-deps-toplevel")
 var desiredResultsPath = path.resolve(pkg, "desired-ls-results.json")
 
 test("installs the peer dependency directory structure", function (t) {
   mr(common.port, function (s) {
     setup(function (err) {
-      if (err) return t.fail(err)
+      t.ifError(err, "setup ran successfully")
 
       npm.install(".", function (err) {
-        if (err) return t.fail(err)
+        t.ifError(err, "packages were installed")
 
         npm.commands.ls([], true, function (err, _, results) {
-          if (err) return t.fail(err)
+          t.ifError(err, "listed tree without problems")
 
           fs.readFile(desiredResultsPath, function (err, desired) {
-            if (err) return t.fail(err)
+            t.ifError(err, "read desired results")
 
-            t.deepEqual(results, JSON.parse(desired))
+            t.deepEqual(results, JSON.parse(desired), "got expected output from ls")
             s.close()
             t.end()
           })
