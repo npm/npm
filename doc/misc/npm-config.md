@@ -472,7 +472,7 @@ What level of logs to report.  On failure, *all* logs are written to
 `npm-debug.log` in the current working directory.
 
 Any logs of a higher level than the setting are shown.
-The default is "http", which shows http, warn, and error output.
+The default is "warn", which shows warn and error output.
 
 ### logstream
 
