@@ -216,6 +216,11 @@ above.
 * Don't prefix your script commands with "sudo".  If root permissions
   are required for some reason, then it'll fail with that error, and
   the user will sudo the npm command in question.
+* Don't use `install`. Use a `.gyp` file for compilation, and `prepublish`
+  for anything else. You should almost never have to explicitly set a
+  preinstall or install script. If you are doing this, please consider if
+  there is another option. The only valid use of `install` or `preinstall`
+  scripts is for compilation which must be done on the target architecture.
 
 ## SEE ALSO
 
