@@ -58,7 +58,7 @@
     "inflight": "~1.0.4",
     "inherits": "~2.0.1",
     "ini": "~1.3.0",
-    "init-package-json": "~1.1.0",
+    "init-package-json": "~1.1.1",
     "lockfile": "~1.0.0",
     "lru-cache": "~2.5.0",
     "minimatch": "~1.0.0",
