@@ -1,3 +1,26 @@
+### v2.1.6 (2014-10-23):
+
+* [`681b398`](https://github.com/npm/npm/commit/681b3987a18e7aba0aaf78c91a23c7cc0ab82ce8)
+  [#6523](https://github.com/npm/npm/issues/6523) fix default `logelevel` doc
+  ([@KenanY](https://github.com/KenanY))
+* [`80b368f`](https://github.com/npm/npm/commit/80b368ffd786d4d008734b56c4a6fe12d2cb2926)
+  [#6528](https://github.com/npm/npm/issues/6528) `npm version` should work in
+  a git directory without git ([@terinjokes](https://github.com/terinjokes))
+* [`5f5f9e4`](https://github.com/npm/npm/commit/5f5f9e4ddf544c2da6adf3f8c885238b0e745076)
+  [#6483](https://github.com/npm/npm/issues/6483) `init-package-json@1.1.1`:
+  Properly pick up default values from environment variables.
+  ([@othiym23](https://github.com/othiym23))
+* [`a114870`](https://github.com/npm/npm/commit/a1148702f53f82d49606b2e4dac7581261fff442)
+  perl 5.18.x doesn't like -pi without filenames
+  ([@othiym23](https://github.com/othiym23))
+* [`de5ba00`](https://github.com/npm/npm/commit/de5ba007a48db876eb5bfb6156435f3512d58977)
+  `request@2.46.0`: Tests and cleanup.
+  ([@othiym23](https://github.com/othiym23))
+* [`76933f1`](https://github.com/npm/npm/commit/76933f169f17b5273b32e924a7b392d5729931a7)
+  `fstream-npm@1.0.1`: Always include `LICENSE[.*]`, `LICENCE[.*]`,
+  `CHANGES[.*]`, `CHANGELOG[.*]`, and `HISTORY[.*]`.
+  ([@jonathanong](https://github.com/jonathanong))
+
 ### v2.1.5 (2014-10-16):
 
 * [`6a14b23`](https://github.com/npm/npm/commit/6a14b232a0e34158bd95bb25c607167be995c204)
