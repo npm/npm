@@ -384,35 +384,35 @@ documentation for the
 [init-package-json](https://github.com/isaacs/init-package-json) module
 for more information, or npm-init(1).
 
-### init.author.name
+### init-author-name
 
 * Default: ""
 * Type: String
 
 The value `npm init` should use by default for the package author's name.
 
-### init.author.email
+### init-author-email
 
 * Default: ""
 * Type: String
 
 The value `npm init` should use by default for the package author's email.
 
-### init.author.url
+### init-author-url
 
 * Default: ""
 * Type: String
 
 The value `npm init` should use by default for the package author's homepage.
 
-### init.license
+### init-license
 
 * Default: "ISC"
 * Type: String
 
 The value `npm init` should use by default for the package license.
 
-### init.version
+### init-version
 
 * Default: "0.0.0"
 * Type: semver
