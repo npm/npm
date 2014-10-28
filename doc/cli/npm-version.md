@@ -38,6 +38,9 @@ in your git config for this to work properly.  For example:
 
     Enter passphrase:
 
+If the `version-shrinkwrap` config is set, then the version attribute
+will be updated in `npm-shrinkwrap.json` before the commit.
+
 ## SEE ALSO
 
 * npm-init(1)

@@ -8,4 +8,6 @@ before_install:
   - "npm config set spin false"
   - "npm install -g npm@^2"
   - "sudo mkdir -p /var/run/couchdb"
+  - git config --global user.email "travis@npmjs.org"
+  - git config --global user.name "NPM Travis-CI"
 script: "npm run-script tap"
