@@ -8,7 +8,7 @@ npm-version(1) -- Bump a package version
 ## DESCRIPTION
 
 Run this in a package directory to bump the version and write the new
-data back to the package.json file.
+data back to the package.json file and (if availible) the npm-shrinkwrap.json file. 
 
 The `newversion` argument should be a valid semver string, *or* a
 valid second argument to semver.inc (one of "patch", "minor", "major",
@@ -38,8 +38,6 @@ in your git config for this to work properly.  For example:
 
     Enter passphrase:
 
-If the `version-shrinkwrap` config is set, then the version attribute
-will be updated in `npm-shrinkwrap.json` before the commit.
 
 ## SEE ALSO
 
