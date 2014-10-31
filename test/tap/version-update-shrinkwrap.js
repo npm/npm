@@ -37,7 +37,17 @@ test("npm version <semver> updates shrinkwrap and updates git", function (t) {
         var init = spawn(git, ["init"])
         init.stdout.pipe(process.stdout)
         init.on("exit", function (code) {
-          t.notOk(code, "init exited without issue")
+          t.notOk(code, "git init exited without issue")
+
+          configName()
+        })
+      }
+
+      function configName () {
+        var namer = spawn(git, ["config", "user.name", "Phantom Faker"])
+        namer.stdout.pipe(process.stdout)
+        namer.on("exit", function (code) {
+          t.notOk(code, "git config user.name exited without issue")
 
           configEmail()
         })
@@ -47,7 +57,7 @@ test("npm version <semver> updates shrinkwrap and updates git", function (t) {
         var emailer = spawn(git, ["config", "user.email", "nope@not.real"])
         emailer.stdout.pipe(process.stdout)
         emailer.on("exit", function (code) {
-          t.notOk(code, "setting email exited without issue")
+          t.notOk(code, "git config user.email exited without issue")
 
           configKey()
         })
@@ -57,7 +67,7 @@ test("npm version <semver> updates shrinkwrap and updates git", function (t) {
         var faker = spawn(git, ["config", "user.signingkey", "xxxxxxxx"])
         faker.stdout.pipe(process.stdout)
         faker.on("exit", function (code) {
-          t.notOk(code, "setting email exited without issue")
+          t.notOk(code, "git config user.signingkey exited without issue")
 
           version()
         })
@@ -77,12 +87,12 @@ test("npm version <semver> updates shrinkwrap and updates git", function (t) {
           eout += d.toString()
         })
         shower.on("exit", function (code) {
-          t.notOk(code, "process exited without issue")
-          t.notOk(err, "git show ran without error output")
+          t.notOk(code, "git show HEAD exited without issue")
+          t.notOk(err, "git show produced no error output")
 
           var lines = out.split("\n")
-          t.notEqual(lines.indexOf("package.json"), -1, "package.json not commited")
-          t.notEqual(lines.indexOf("npm-shrinkwrap.json"), -1, "npm-shrinkwrap.json not commited")
+          t.notEqual(lines.indexOf("package.json"), -1, "package.json commited")
+          t.notEqual(lines.indexOf("npm-shrinkwrap.json"), -1, "npm-shrinkwrap.json commited")
           t.pass("npm-shrinkwrap updated and commited")
 
           t.end()
