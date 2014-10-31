@@ -5,7 +5,7 @@ var url = require("url")
   , crypto = require("crypto")
   , Stream = require("stream").Stream
   , assert = require("assert")
-  , fixNameField = require("normalize-package-data/lib/fixer.js").fixNameField
+  , fixer = require("normalize-package-data/lib/fixer.js")
   , concat = require("concat-stream")
 
 function escaped (name) {
@@ -32,7 +32,7 @@ function publish (uri, params, cb) {
     "must pass package metadata to publish"
   )
   try {
-    fixNameField(metadata, true)
+    fixer.fixNameField(metadata, true)
   }
   catch (er) {
     return cb(er)
