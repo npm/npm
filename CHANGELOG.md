@@ -1,3 +1,30 @@
+### v2.1.7 (2014-10-30):
+
+* [`6750b05`](https://github.com/npm/npm/commit/6750b05dcba20d8990a672957ec56c48f97e241a)
+  [#6398](https://github.com/npm/npm/issues/6398) `npm-registry-client@4.0.0`:
+  consistent API, handle relative registry paths, use auth more consistently
+  ([@othiym23](https://github.com/othiym23))
+* [`7719cfd`](https://github.com/npm/npm/commit/7719cfdd8b204dfeccc41289707ea58b4d608905)
+  [#6560](https://github.com/npm/npm/issues/6560) use new npm-registry-client
+  API ([@othiym23](https://github.com/othiym23))
+* [`ed61971`](https://github.com/npm/npm/commit/ed619714c93718b6c1922b8c286f4b6cd2b97c80)
+  move caching of search metadata from `npm-registry-client` to npm itself
+  ([@othiym23](https://github.com/othiym23))
+* [`3457041`](https://github.com/npm/npm/commit/34570414cd528debeb22943873440594d7f47abf)
+  handle caching of metadata independently from `npm-registry-client`
+  ([@othiym23](https://github.com/othiym23))
+* [`20a331c`](https://github.com/npm/npm/commit/20a331ced6a52faac6ec242e3ffdf28bcd447c40)
+  [#6538](https://github.com/npm/npm/issues/6538) map registry URLs to
+  credentials more safely ([@indexzero](https://github.com/indexzero))
+* [`4072e97`](https://github.com/npm/npm/commit/4072e97856bf1e7affb38333d080c172767eea27)
+  [#6589](https://github.com/npm/npm/issues/6589) `npm-registry-client@4.0.1`:
+  allow publishing of packages with names identical to built-in Node modules
+  ([@feross](https://github.com/feross))
+* [`254f0e4`](https://github.com/npm/npm/commit/254f0e4adaf2c56e9df25c7343c43b0b0804a3b5)
+  `tar@1.0.2`: better error-handling ([@runk](https://github.com/runk))
+* [`73ee2aa`](https://github.com/npm/npm/commit/73ee2aa4f1a47e43fe7cf4317a5446875f7521fa)
+  `request@2.47.0` ([@mikeal](https://github.com/mikeal))
+
 ### v2.1.6 (2014-10-23):
 
 * [`681b398`](https://github.com/npm/npm/commit/681b3987a18e7aba0aaf78c91a23c7cc0ab82ce8)
