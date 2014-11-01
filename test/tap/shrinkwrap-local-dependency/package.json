@@ -1,0 +1,8 @@
+{
+  "author": "Thomas Torp",
+  "name": "npm-test-shrinkwrap-local-dependency",
+  "version": "0.0.0",
+  "dependencies": {
+    "npm-test-shrinkwrap-local-dependency-dep": "./dep"
+  }
+}

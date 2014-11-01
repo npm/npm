@@ -1,0 +1,11 @@
+{
+  "name": "npm-test-shrinkwrap-local-dependency",
+  "version": "0.0.0",
+  "dependencies": {
+    "npm-test-shrinkwrap-local-dependency-dep": {
+      "version": "0.0.0",
+      "from": "dep",
+      "resolved": "file:dep"
+    }
+  }
+}
