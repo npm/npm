@@ -1,4 +1,4 @@
-;(function () {
+window.onload = function () {
 var wrapper = document.getElementById("wrapper")
 var els = Array.prototype.slice.call(wrapper.getElementsByTagName("*"), 0)
   .filter(function (el) {
@@ -26,4 +26,4 @@ toc.innerHTML = els.map(function (el) {
 }).join("\n")
 toc.id = "toc"
 document.body.appendChild(toc)
-})();
+};
