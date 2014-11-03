@@ -80,6 +80,23 @@ stream.
 
 Disable colors on all messages.
 
+## log.enableProgress()
+
+Enable the display of log activity spinner and progress bar
+
+## log.disableProgress()
+
+Disable the display of a progress bar
+
+## log.startSpinner()
+
+If the progress indicators are enabled then this will start showing a
+spinner for log lines (including suppressed log lines)
+
+## log.stopSpinner()
+
+Stop showing a spinner for log lines
+
 ## log.pause()
 
 Stop emitting messages to the stream, but do not drop them.
@@ -122,6 +139,28 @@ Sets up a new level with a shorthand function and so forth.
 Note that if the number is `Infinity`, then setting the level to that
 will cause all log messages to be suppressed.  If the number is
 `-Infinity`, then the only way to show it is to enable all log messages.
+
+## log.newItem(name, todo, weight)
+
+* `name` {String} Optional; progress item name.
+* `todo` {Number} Optional; total amount of work to be done. Default 0.
+* `weight` {Number} Optional; the weight of this item relative to others. Default 1.
+
+This adds a new `are-we-there-yet` item tracker to the progress tracker. The
+object returned has the `log[level]` methods but is otherwise an
+`are-we-there-yet` `Tracker` object.
+
+## log.newStream(name, todo, weight)
+
+This adds a new `are-we-there-yet` stream tracker to the progress tracker. The
+object returned has the `log[level]` methods but is otherwise an
+`are-we-there-yet` `TrackerStream` object.
+
+## log.newGroup(name, weight)
+
+This adds a new `are-we-there-yet` tracker group to the progress tracker. The
+object returned has the `log[level]` methods but is otherwise an
+`are-we-there-yet` `TrackerGroup` object.
 
 # Events
 
