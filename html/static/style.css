@@ -111,7 +111,7 @@ h1, h2 {
 i, em, cite {
     font-style:italic;
 }
-b, strong { 
+b, strong {
     font-weight:bold;
 }
 i, em, cite, b, strong, small {
@@ -285,13 +285,13 @@ input.submit, input#submit, input.button, button, input[type=submit] {
 }
 
 #toc {
-  position:absolute;
+  position:fixed;
   top:0;
   right:0;
   padding:40px 0 40px 20px;
   margin:0;
   width:200px;
-  opacity:0.2;
+  opacity:0.5;
   z-index:-1;
 }
 #toc:hover {
