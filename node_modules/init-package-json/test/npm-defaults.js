@@ -42,6 +42,58 @@ test("npm configuration values pulled from environment", function (t) {
   })
 })
 
+test("npm configuration values pulled from dotted config", function (t) {
+  /*eslint camelcase:0 */
+  var config = {
+    yes : "yes",
+
+    "init.author.name"  : "npmbot",
+    "init.author.email" : "n@p.m",
+    "init.author.url"   : "http://npm.im",
+
+    "init.license" : EXPECTED.license,
+    "init.version" : EXPECTED.version
+  }
+
+  npm.load(config, function (err) {
+    t.ifError(err, "npm loaded successfully")
+
+    process.chdir(resolve(__dirname))
+    init(__dirname, __dirname, npm.config, function (er, data) {
+      t.ifError(err, "init ran successfully")
+
+      t.same(data, EXPECTED, "got the package data from the config")
+      t.end()
+    })
+  })
+})
+
+test("npm configuration values pulled from dashed config", function (t) {
+  /*eslint camelcase:0 */
+  var config = {
+    yes : "yes",
+
+    "init-author-name"  : "npmbot",
+    "init-author-email" : "n@p.m",
+    "init-author-url"   : "http://npm.im",
+
+    "init-license" : EXPECTED.license,
+    "init-version" : EXPECTED.version
+  }
+
+  npm.load(config, function (err) {
+    t.ifError(err, "npm loaded successfully")
+
+    process.chdir(resolve(__dirname))
+    init(__dirname, __dirname, npm.config, function (er, data) {
+      t.ifError(err, "init ran successfully")
+
+      t.same(data, EXPECTED, "got the package data from the config")
+      t.end()
+    })
+  })
+})
+
 test("cleanup", function (t) {
   rimraf.sync(resolve(__dirname, "package.json"))
   t.pass("cleaned up")
