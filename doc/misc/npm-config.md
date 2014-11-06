@@ -361,11 +361,12 @@ The string that starts all the debugging log output.
 
 ### https-proxy
 
-* Default: the `HTTPS_PROXY` or `https_proxy` or `HTTP_PROXY` or
-  `http_proxy` environment variables.
+* Default: null
 * Type: url
 
-A proxy to use for outgoing https requests.
+A proxy to use for outgoing https requests. If the `HTTPS_PROXY` or
+`https_proxy` or `HTTP_PROXY` or `http_proxy` environment variables are set,
+proxy settings will be honored by the underlying `request` library.
 
 ### ignore-scripts
 
@@ -577,10 +578,12 @@ this as true.
 
 ### proxy
 
-* Default: `HTTP_PROXY` or `http_proxy` environment variable, or null
+* Default: null
 * Type: url
 
-A proxy to use for outgoing http requests.
+A proxy to use for outgoing http requests. If the `HTTP_PROXY` or
+`http_proxy` environment variables are set, proxy settings will be
+honored by the underlying `request` library.
 
 ### rebuild-bundle
 
