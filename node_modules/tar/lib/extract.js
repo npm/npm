@@ -57,6 +57,10 @@ function Extract (opts) {
     me.resume()
   })
 
+  this._fst.on('error', function(err) {
+    me.emit('error', err)
+  })
+
   // this._fst.on("end", function () {
   //   console.error("\nEEEE Extract End", me._fst.path)
   // })
