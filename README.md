@@ -62,10 +62,14 @@ arbitrary config keys using the `./configure --key=val ...`, and then
 run npm commands by doing `node cli.js <cmd> <args>`.  (This is helpful
 for testing, or running stuff without actually installing npm itself.)
 
-## Fancy Windows Install
+## Windows Install or Upgrade
 
 You can download a zip file from <https://npmjs.org/dist/>, and unpack it
 in the same folder where node.exe lives.
+
+The latest available zip is 1.4.12.  To upgrade to a current (2.x.x) npm,
+follow the Windows Upgrade instructions:
+<https://github.com/npm/npm/wiki/Troubleshooting#upgrading-on-windows>
 
 If that's not fancy enough for you, then you can fetch the code with
 git, and mess with it directly.
