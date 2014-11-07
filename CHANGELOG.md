@@ -1,3 +1,28 @@
+### v2.1.8 (2014-11-06):
+
+* [`063d843`](https://github.com/npm/npm/commit/063d843965f9f0bfa5732d7c2d6f5aa37a8260a2)
+  npm version now updates version in npm-shrinkwrap.json
+  ([@faiq](https://github.com/faiq))
+* [`3f53cd7`](https://github.com/npm/npm/commit/3f53cd795f8a600e904a97f215ba5b5a9989d9dd)
+  [#6559](https://github.com/npm/npm/issues/6559) save local dependencies in
+  npm-shrinkwrap.json ([@Torsph](https://github.com/Torsph))
+* [`e249262`](https://github.com/npm/npm/commit/e24926268b2d2220910bc81cce6d3b2e08d94eb1)
+  npm-faq.md: mention scoped pkgs in namespace Q
+  ([@smikes](https://github.com/smikes))
+* [`6b06ec4`](https://github.com/npm/npm/commit/6b06ec4ef5da490bdca1512fa7f12490245c192b)
+  [#6642](https://github.com/npm/npm/issues/6642) `init-package-json@1.1.2`:
+  Handle both `init-author-name` and `init.author.name`.
+  ([@othiym23](https://github.com/othiym23))
+* [`9cb334c`](https://github.com/npm/npm/commit/9cb334c8a895a55461aac18791babae779309a0e)
+  [#6409](https://github.com/npm/npm/issues/6409) document commit-ish with
+  GitHub URLs ([@smikes](https://github.com/smikes))
+* [`0aefae9`](https://github.com/npm/npm/commit/0aefae9bc2598a4b7a3ee7bb2306b42e3e12bb28)
+  [#2959](https://github.com/npm/npm/issues/2959) npm run no longer fails
+  silently ([@flipside](https://github.com/flipside))
+* [`e007a2c`](https://github.com/npm/npm/commit/e007a2c1e4fac1759fa61ac6e78c6b83b2417d11)
+  [#3908](https://github.com/npm/npm/issues/3908) include command in spawn
+  errors ([@smikes](https://github.com/smikes))
+
 ### v2.1.7 (2014-10-30):
 
 * [`6750b05`](https://github.com/npm/npm/commit/6750b05dcba20d8990a672957ec56c48f97e241a)
