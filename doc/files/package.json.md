@@ -366,13 +366,15 @@ an argument to `git checkout`.  The default is `master`.
 
 ## GitHub URLs
 
-As of version 1.1.65, you can refer to GitHub urls as just "foo": "user/foo-project". For example:
+As of version 1.1.65, you can refer to GitHub urls as just "foo": "user/foo-project". 
+Just as with git URLs, a `commit-ish` suffix can be included.  For example:
 
     {
       "name": "foo",
       "version": "0.0.0",
       "dependencies": {
-        "express": "visionmedia/express"
+        "express": "visionmedia/express",
+        "mocha": "visionmedia/mocha#4727d357ea"
       }
     }
 
