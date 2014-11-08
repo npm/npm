@@ -14,14 +14,23 @@ function initialize (uri, method, accept, headers) {
     url          : uri,
     method       : method,
     headers      : headers,
-    proxy        : uri.protocol === "https:" ? this.config.proxy.https
-                                             : this.config.proxy.http,
     localAddress : this.config.proxy.localAddress,
     strictSSL    : this.config.ssl.strict,
     cert         : this.config.ssl.certificate,
     key          : this.config.ssl.key,
     ca           : this.config.ssl.ca
   }
+
+  // request will not pay attention to the NOPROXY environment variable if a
+  // config value named proxy is passed in, even if it's set to null.
+  var proxy
+  if (uri.protocol === "https") {
+    proxy = this.config.proxy.https
+  }
+  else {
+    proxy = this.config.proxy.http
+  }
+  if (typeof proxy === "string") opts.proxy = proxy
 
   headers.version = this.version || pkg.version
   headers.accept = accept
