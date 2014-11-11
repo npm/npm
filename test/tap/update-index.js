@@ -13,34 +13,78 @@ var CACHE_DIR = path.resolve(PKG_DIR, "cache")
 
 var server
 
-test("setup", function (t) {
+function setup (t, mock) {
   mkdirp.sync(CACHE_DIR)
-  mr({ port: common.port, mocks: mocks.all }, function (s) {
+  mr({ port: common.port, mocks: mock }, function (s) {
     npm.load({cache: CACHE_DIR, registry: common.registry}, function (err) {
-      t.ifError(err)
+      t.ifError(err, "no error")
       server = s
       t.end()
     })
   })
+}
+
+function cleanup (t) {
+  server.close()
+  rimraf.sync(PKG_DIR)
+
+  t.end()
+}
+
+test("setup basic", function (t) {
+  setup(t, mocks.basic)
 })
 
-test("basic request", function (t) {
+test("request basic", function (t) {
   updateIndex("http://localhost:1337/-/all", {}, function (er) {
     t.ifError(er, "no error")
     t.end()
   })
 })
 
-test("cleanup", function (t) {
-  server.close()
-  rimraf.sync(PKG_DIR)
+test("cleanup basic", cleanup)
 
-  t.end()
+test("setup auth", function (t) {
+  setup(t, mocks.auth)
 })
 
+test("request auth failure", function (t) {
+  updateIndex("http://localhost:1337/-/all", {}, function (er) {
+    t.ok(er.code, "E401")
+    t.ok(/^unauthorized/.test(er.message), "unauthorized message")
+    t.end()
+  })
+})
+
+test("request auth success", function (t) {
+  // mimic as if alwaysAuth had been set
+  var params = {
+    auth: {
+      username: "bobby",
+      password: "tables",
+      alwaysAuth: true
+    }
+  }
+
+  updateIndex("http://localhost:1337/-/all", params, function (er) {
+    t.ifError(er, "no error")
+    t.end()
+  })
+})
+
+test("cleanup auth", cleanup)
+
 var mocks = {
-  all: function(server) {
+  basic: function(server) {
     server.get("/-/all").reply(200, allMock)
+  },
+  auth: function(server) {
+    var littleBobbyTablesAuth = new Buffer('bobby:tables').toString('base64')
+    server.get("/-/all", {authorization: "Basic " + littleBobbyTablesAuth}).reply(200, allMock)
+    server.get("/-/all").reply(401, {
+      error: "unauthorized",
+      reason: "You are not authorized to access this db."
+    })
   }
 }
 
