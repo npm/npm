@@ -90,7 +90,14 @@ function vacuum(leaf, options, cb) {
         var remove = stat.isDirectory() ? rmdir : unlink
         remove(branch, function (error) {
           if (error) {
-            if (error.code === "ENOENT") return cb(null)
+            if (error.code === "ENOENT") {
+              log("quitting because lost the race to remove", branch)
+              return cb(null)
+            }
+            if (error.code === "ENOTEMPTY") {
+              log("quitting because new (racy) entries in", branch)
+              return cb(null)
+            }
 
             log("unable to remove", branch, "due to", error.message)
             return cb(error)
