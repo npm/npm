@@ -90,7 +90,7 @@
     "sorted-object": "~1.0.0",
     "tar": "~1.0.2",
     "text-table": "~0.2.0",
-    "uid-number": "0.0.5",
+    "uid-number": "0.0.6",
     "which": "1",
     "wrappy": "~1.0.1",
     "write-file-atomic": "~1.1.0"
