@@ -16,7 +16,7 @@ var server
 function setup (t, mock) {
   mkdirp.sync(CACHE_DIR)
   mr({ port: common.port, mocks: mock }, function (s) {
-    npm.load({cache: CACHE_DIR, registry: common.registry}, function (err) {
+    npm.load({ cache: CACHE_DIR, registry: common.registry }, function (err) {
       t.ifError(err, "no error")
       server = s
       t.end()
@@ -79,8 +79,9 @@ var mocks = {
     server.get("/-/all").reply(200, allMock)
   },
   auth: function(server) {
-    var littleBobbyTablesAuth = new Buffer('bobby:tables').toString('base64')
-    server.get("/-/all", {authorization: "Basic " + littleBobbyTablesAuth}).reply(200, allMock)
+    var littleBobbyTablesAuth = new Buffer("bobby:tables").toString("base64")
+    var auth = "Basic " + littleBobbyTablesAuth
+    server.get("/-/all", { authorization: auth }).reply(200, allMock)
     server.get("/-/all").reply(401, {
       error: "unauthorized",
       reason: "You are not authorized to access this db."
