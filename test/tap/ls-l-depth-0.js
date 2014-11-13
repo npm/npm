@@ -41,6 +41,7 @@ test("#6311: npm ll --depth=0 duplicates listing", function (t) {
   common.npm(
     [
       "--loglevel", "silent",
+      "--registry", common.registry,
       "install", dep
     ],
     EXEC_OPTS,
@@ -50,7 +51,7 @@ test("#6311: npm ll --depth=0 duplicates listing", function (t) {
       t.notOk(stderr, "npm install ran silently")
       t.equal(
         stdout.trim(),
-        "glock@1.8.7 node_modules/glock\n└── underscore@1.7.0",
+        "glock@1.8.7 node_modules/glock\n└── underscore@1.5.1",
         "got expected install output"
       )
 
@@ -93,7 +94,7 @@ var fixture = {
   "homepage" : "https://glo.ck",
   "repository" : "https://github.com/npm/glo.ck",
   "dependencies" : {
-    "underscore" : "^1.3.1"
+    "underscore" : "1.5.1"
   }
 }
 
