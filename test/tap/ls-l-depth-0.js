@@ -14,7 +14,8 @@ var dep = resolve(pkg, "deps", "glock")
 var modules = resolve(pkg, "node_modules")
 
 var expected =
-  "\n│ /Users/ogd/Documents/projects/npm/npm/test/tap/ls-l-depth-0\n" +
+  "\n" +
+  "│ " + pkg + "\n" +
   "│ \n" +
   "└── glock@1.8.7\n" +
   "    an inexplicably hostile sample package\n" +
