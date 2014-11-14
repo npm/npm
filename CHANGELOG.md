@@ -1,3 +1,63 @@
+### v2.1.9 (2014-11-13):
+
+* [`eed9f61`](https://github.com/npm/npm/commit/eed9f6101963364acffc59d7194fc1655180e80c)
+  [#6542](https://github.com/npm/npm/issues/6542) `npm owner add / remove` now
+  works properly with scoped packages
+  ([@othiym23](https://github.com/othiym23))
+* [`cd25973`](https://github.com/npm/npm/commit/cd25973825aa5315b7ebf26227bd32bd6be5533f)
+  [#6548](https://github.com/npm/npm/issues/6548) using sudo won't leave the
+  cache's git directories with bad permissions
+  ([@othiym23](https://github.com/othiym23))
+* [`56930ab`](https://github.com/npm/npm/commit/56930abcae6a6ea41f1b75e23765c61259cef2dd)
+  fixed irregular `npm cache ls` output (yes, that's a thing)
+  ([@othiym23](https://github.com/othiym23))
+* [`740f483`](https://github.com/npm/npm/commit/740f483db6ec872b453065842da080a646c3600a)
+  legacy tests no longer poison user's own cache
+  ([@othiym23](https://github.com/othiym23))
+* [`ce37f14`](https://github.com/npm/npm/commit/ce37f142a487023747a9086335618638ebca4372)
+  [#6169](https://github.com/npm/npm/issues/6169) add terse output similar to
+  `npm publish / unpublish` for `npm owner add / remove`
+  ([@KenanY](https://github.com/KenanY))
+* [`bf2b8a6`](https://github.com/npm/npm/commit/bf2b8a66d7188900bf1e957c052b893948b67e0e)
+  [#6680](https://github.com/npm/npm/issues/6680) pass auth credentials to
+  registry when downloading search index
+  ([@terinjokes](https://github.com/terinjokes))
+* [`00ecb61`](https://github.com/npm/npm/commit/00ecb6101422984696929f602e14da186f9f669c)
+  [#6400](https://github.com/npm/npm/issues/6400) `.npmignore` is respected for
+  git repos on cache / pack / publish
+  ([@othiym23](https://github.com/othiym23))
+* [`d1b3a9e`](https://github.com/npm/npm/commit/d1b3a9ec5e2b6d52765ba5da5afb08dba41c49c1)
+  [#6311](https://github.com/npm/npm/issues/6311) `npm ls -l --depth=0` no
+  longer prints phantom duplicate children
+  ([@othiym23](https://github.com/othiym23))
+* [`07c5f34`](https://github.com/npm/npm/commit/07c5f34e45c9b18c348ed53b5763b1c5d4325740)
+  [#6690](https://github.com/npm/npm/issues/6690) `uid-number@0.0.6`: clarify
+  confusing names in error-handling code ([@isaacs](https://github.com/isaacs))
+* [`1ac9be9`](https://github.com/npm/npm/commit/1ac9be9f3bab816211d72d13cb05b5587878a586)
+  [#6684](https://github.com/npm/npm/issues/6684) `npm init`: don't report
+  write if canceled ([@smikes](https://github.com/smikes))
+* [`7bb207d`](https://github.com/npm/npm/commit/7bb207d1d6592a9cffc986871e4b671575363c2f)
+  [#5754](https://github.com/npm/npm/issues/5754) never remove app directories
+  on failed install ([@othiym23](https://github.com/othiym23))
+* [`705ce60`](https://github.com/npm/npm/commit/705ce601e7b9c5428353e02ebb30cb76c1991fdd)
+  [#5754](https://github.com/npm/npm/issues/5754) `fs-vacuum@1.2.2`: don't
+  throw when another fs task writes to a directory being vacuumed
+  ([@othiym23](https://github.com/othiym23))
+* [`1b650f4`](https://github.com/npm/npm/commit/1b650f4f217c413a2ffb96e1701beb5aa67a0de2)
+  [#6255](https://github.com/npm/npm/issues/6255) ensure that order credentials
+  are used from `.npmrc` doesn't regress
+  ([@othiym23](https://github.com/othiym23))
+* [`9bb2c34`](https://github.com/npm/npm/commit/9bb2c3435cedef40b45d3e9bd7a8edfb8cbe7209)
+  [#6644](https://github.com/npm/npm/issues/6644) `warn` rather than `info` on
+  fetch failure ([@othiym23](https://github.com/othiym23))
+* [`e34a7b6`](https://github.com/npm/npm/commit/e34a7b6b7371b1893a062f627ae8e168546d7264)
+  [#6524](https://github.com/npm/npm/issues/6524) `npm-registry-client@4.0.2`:
+  proxy via `request` more transparently
+  ([@othiym23](https://github.com/othiym23))
+* [`40afd6a`](https://github.com/npm/npm/commit/40afd6aaf34c11a10e80ec87b115fb2bb907e3bd)
+  [#6524](https://github.com/npm/npm/issues/6524) push proxy settings into
+  `request` ([@tauren](https://github.com/tauren))
+
 ### v2.1.8 (2014-11-06):
 
 * [`063d843`](https://github.com/npm/npm/commit/063d843965f9f0bfa5732d7c2d6f5aa37a8260a2)
