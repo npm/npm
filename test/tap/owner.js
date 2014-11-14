@@ -17,32 +17,47 @@ var othiym23 = {
   email : "forrest@npmjs.com"
 }
 
+var bcoe = {
+  name  : "bcoe",
+  email : "ben@npmjs.com"
+}
+
 function shrt (user) {
   return user.name+" <"+user.email+">\n"
 }
 
 function mocks (server) {
-  // test 1
   server.get("/-/user/org.couchdb.user:othiym23")
-    .reply(200, othiym23)
+    .many().reply(200, othiym23)
+
+  // test 1
   server.get("/underscore")
-    .reply(200, {_id:1,_rev:1,maintainers:[jashkenas]})
+    .reply(200, {_id:"underscore",_rev:1,maintainers:[jashkenas]})
   server.put(
     "/underscore/-rev/1",
-    {_id: 1,_rev:1,maintainers:[jashkenas,othiym23]},
+    {_id:"underscore",_rev:1,maintainers:[jashkenas,othiym23]},
     {}
-  ).reply(200, {_id:1,_rev:2,maintainers:[jashkenas,othiym23]})
+  ).reply(200, {_id:"underscore",_rev:2,maintainers:[jashkenas,othiym23]})
 
   // test 2
-  server.get("/underscore")
-    .reply(200, {_id:1,_rev:2,maintainers:[jashkenas,othiym23]})
+  server.get("/@xxx%2fscoped")
+    .reply(200, {_id:"@xxx/scoped",_rev:1,maintainers:[bcoe]})
+  server.put(
+    "/@xxx%2fscoped/-rev/1",
+    {_id:"@xxx/scoped",_rev:1,maintainers:[bcoe,othiym23]},
+    {}
+  ).reply(200, {_id:"@xxx/scoped",_rev:2,maintainers:[bcoe,othiym23]})
 
   // test 3
+  server.get("/underscore")
+    .reply(200, {_id:"underscore",_rev:2,maintainers:[jashkenas,othiym23]})
+
+  // test 4
   server.put(
     "/underscore/-rev/2",
-    {_id:1,_rev:2,maintainers:[jashkenas]},
+    {_id:"underscore",_rev:2,maintainers:[jashkenas]},
     {}
-  ).reply(200, {_id:1,_rev:3,maintainers:[jashkenas]})
+  ).reply(200, {_id:"underscore",_rev:3,maintainers:[jashkenas]})
 }
 
 test("setup", function (t) {
@@ -77,6 +92,25 @@ test("npm owner add", function (t) {
       t.notOk(code,   "npm owner add exited cleanly")
       t.notOk(stderr, "npm owner add ran silently")
       t.equal(stdout, "+ othiym23 (underscore)\n", "got expected add output")
+
+      t.end()
+    }
+  )
+})
+
+test("npm owner add (scoped)", function (t) {
+  common.npm(
+    [
+      "--loglevel", "silent",
+      "--registry", common.registry,
+      "owner", "add", "othiym23", "@xxx/scoped"
+    ],
+    EXEC_OPTS,
+    function (err, code, stdout, stderr) {
+      t.ifError(err,  "npm owner add (scoped) ran without error")
+      t.notOk(code,   "npm owner add (scoped) exited cleanly")
+      t.notOk(stderr, "npm owner add (scoped) ran silently")
+      t.equal(stdout, "+ othiym23 (@xxx/scoped)\n", "got expected scoped add output")
 
       t.end()
     }
