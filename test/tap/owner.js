@@ -114,7 +114,7 @@ test("npm owner rm", function (t) {
       t.ifError(err,  "npm owner rm ran without error")
       t.notOk(code,   "npm owner rm exited cleanly")
       t.notOk(stderr, "npm owner rm ran silently")
-      t.equal(stdout, "- othiym23 (underscore)\n", "got expected add output")
+      t.equal(stdout, "- othiym23 (underscore)\n", "got expected rm output")
 
       t.end()
     }
