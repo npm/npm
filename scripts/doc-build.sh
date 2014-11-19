@@ -63,6 +63,8 @@ dest=$2
 name=$(basename ${src%.*})
 date=$(date -u +'%Y-%M-%d %H:%m:%S')
 version=$(node cli.js -v)
+issues=$(node cli.js config get bugs)
+man_issues=$(echo $issues | sed -e 's|\.|\\\\.|')
 
 mkdir -p $(dirname $dest)
 
@@ -72,6 +74,7 @@ html_replace_tokens () {
 	| sed "s|@DATE@|$date|g" \
 	| sed "s|@URL@|$url|g" \
 	| sed "s|@VERSION@|$version|g" \
+        | sed "s|@ISSUES@|$issues|g" \
 	| perl -p -e 's/<h1([^>]*)>([^\(]*\([0-9]\)) -- (.*?)<\/h1>/<h1>\2<\/h1> <p>\3<\/p>/g' \
 	| perl -p -e 's/npm-npm/npm/g' \
 	| perl -p -e 's/([^"-])(npm-)?README(?!\.html)(\(1\))?/\1<a href="..\/..\/doc\/README.html">README<\/a>/g' \
@@ -90,6 +93,7 @@ html_replace_tokens () {
 
 man_replace_tokens () {
 	sed "s|@VERSION@|$version|g" \
+        | sed "s|@ISSUES@|$man_issues|g" \
 	| perl -p -e 's/(npm\\-)?([a-zA-Z\\\.\-]*)\(1\)/npm help \2/g' \
 	| perl -p -e 's/(npm\\-)?([a-zA-Z\\\.\-]*)\(([57])\)/npm help \3 \2/g' \
 	| perl -p -e 's/(npm\\-)?([a-zA-Z\\\.\-]*)\(3\)/npm apihelp \2/g' \

@@ -130,7 +130,7 @@ easily by doing `npm view npm contributors`.
 If you would like to contribute, but don't know what to work on, check
 the issues list or ask on the mailing list.
 
-* <http://github.com/npm/npm/issues>
+* <@ISSUES@>
 * <npm-@googlegroups.com>
 
 ## BUGS
@@ -138,7 +138,7 @@ the issues list or ask on the mailing list.
 When you find issues, please report them:
 
 * web:
-  <http://github.com/npm/npm/issues>
+  <@ISSUES@>
 * email:
   <npm-@googlegroups.com>
 

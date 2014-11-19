@@ -318,7 +318,7 @@ To check if the registry is down, open up
 you if you are just unable to access the internet for some reason.
 
 If the registry IS down, let us know by emailing <support@npmjs.com>
-or posting an issue at <https://github.com/npm/npm/issues>.  If it's
+or posting an issue at <@ISSUES@>.  If it's
 down for the world (and not just on your local network) then we're
 probably already being pinged about it.
 
@@ -373,7 +373,7 @@ good folks at [npm, Inc.](http://www.npmjs.com)
 
 Post an issue on the github project:
 
-* <https://github.com/npm/npm/issues>
+* <@ISSUES@>
 
 ## Why does npm hate me?
 
