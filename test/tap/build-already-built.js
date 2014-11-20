@@ -1,4 +1,4 @@
-;// if "npm rebuild" is run with bundled dependencies,
+// if "npm rebuild" is run with bundled dependencies,
 // message "already built" should not be error
 var test = require("tap").test
 var path = require("path")
@@ -20,26 +20,24 @@ test("setup", function (t) {
 })
 
 test("issue #6735 build 'already built' message", function (t) {
-
   npm.load({loglevel : "warn"}, function () {
-
     // capture log messages with level
-    log = ""
+    var log = ""
     npmlog.on("log", function (chunk) {
       log += chunk.level + " " + chunk.message + "\n"
     })
 
     mkdirp.sync(fakePkg)
-    folder = path.resolve(fakePkg)
+    var folder = path.resolve(fakePkg)
 
-    global = npm.config.get("global")
+    var global = npm.config.get("global")
 
     var build = requireInject("../../lib/build", {
     })
 
     t.test("pin previous behavior", function (t) {
 
-      build([fakePkg], global, false, false, function (err, code) {
+      build([fakePkg], global, false, false, function (err) {
         t.ok(err, "build failed as expected")
         t.similar(err.message, /package.json/, "missing package.json as expected")
         t.notSimilar(log, /already built/, "no already built message written")
@@ -54,7 +52,7 @@ test("issue #6735 build 'already built' message", function (t) {
 
       build._didBuild[folder] = true
 
-      build([fakePkg], global, false, false, function (err, code) {
+      build([fakePkg], global, false, false, function (err) {
         t.ok(err, "build failed as expected")
         t.similar(err.message, /package.json/, "missing package.json as expected")
 
@@ -67,7 +65,7 @@ test("issue #6735 build 'already built' message", function (t) {
     })
 
     t.end()
-  })      
+  })
 })
 
 
