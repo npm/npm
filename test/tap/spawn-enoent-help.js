@@ -23,6 +23,7 @@ test("enoent help", function (t) {
     }
   }, function (er, code, sout, serr) {
     t.similar(serr, /Check if the file 'emacsclient' is present./)
+    t.equal(global.cooked, undefined, "Don't leak into global scope")
     t.end()
   })
 })
