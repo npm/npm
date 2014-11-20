@@ -80,7 +80,7 @@ function makeRequest (remote, params, cb) {
   var opts = this.initialize(
     parsed,
     "GET",
-    "application/x-tar",
+    "application/x-tar, application/vnd.github+json; q=0.1",
     headers
   )
   // always want to follow redirects for fetch
