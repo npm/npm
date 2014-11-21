@@ -1,3 +1,30 @@
+### v2.1.10 (2014-11-20):
+
+* [`756f3d4`](https://github.com/npm/npm/commit/756f3d40fe18bc02bc93afe17016dfcc266c4b6b)
+  [#6735](https://github.com/npm/npm/issues/6735) Log "already built" messages
+  at info, not error. ([@smikes](https://github.com/smikes))
+* [`1b7330d`](https://github.com/npm/npm/commit/1b7330dafba3bbba171f74f1e58b261cb1b9301e)
+  [#6729](https://github.com/npm/npm/issues/6729) `npm-registry-client@4.0.3`:
+  GitHub won't redirect you through an HTML page to a compressed tarball if you
+  don't tell it you accept JSON responses.
+  ([@KenanY](https://github.com/KenanY))
+* [`d9c7857`](https://github.com/npm/npm/commit/d9c7857be02dacd274e55bf6d430d90d91509d53)
+  [#6506](https://github.com/npm/npm/issues/6506)
+  `readdir-scoped-modules@1.0.1`: Use `graceful-fs` so the whole dependency
+  tree gets read,  even in case of `EMFILE`.
+  ([@sakana](https://github.com/sakana))
+* [`3a085be`](https://github.com/npm/npm/commit/3a085be158ace8f1e4395e69f8c102d3dea00c5f)
+  Grammar fix in docs. ([@icylace](https://github.com/icylace))
+* [`3f8e2ff`](https://github.com/npm/npm/commit/3f8e2ff8342d327d6f1375437ecf4bd945dc360f)
+  Did you know that npm has a Code of Conduct? Add a link to it to
+  CONTRIBUTING.md. ([@isaacs](https://github.com/isaacs))
+* [`319ccf6`](https://github.com/npm/npm/commit/319ccf633289e06e57a80d74c39706899348674c)
+  `glob@4.2.1`: Performance tuning. ([@isaacs](https://github.com/isaacs))
+* [`835f046`](https://github.com/npm/npm/commit/835f046e7568c33e81a0b48c84cff965024d8b8a)
+  `readable-stream@1.0.33`: Bug fixes. ([@rvagg](https://github.com/rvagg))
+* [`a34c38d`](https://github.com/npm/npm/commit/a34c38d0732fb246d11f2a776d2ad0d8db654338)
+  `request@2.48.0`: Bug fixes. ([@nylen](https://github.com/nylen))
+
 ### v2.1.9 (2014-11-13):
 
 * [`eed9f61`](https://github.com/npm/npm/commit/eed9f6101963364acffc59d7194fc1655180e80c)
