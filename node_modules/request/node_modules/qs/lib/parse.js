@@ -62,6 +62,7 @@ internals.parseObject = function (chain, val, options) {
         if (!isNaN(index) &&
             root !== cleanRoot &&
             indexString === cleanRoot &&
+            index >= 0 &&
             index <= options.arrayLimit) {
 
             obj = [];

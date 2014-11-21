@@ -1,4 +1,11 @@
 
+## [**2.3.3**](https://github.com/hapijs/qs/issues?milestone=18&state=open)
+- [**#59**](https://github.com/hapijs/qs/issues/59) make sure array indexes are &gt;= 0, closes #57
+- [**#58**](https://github.com/hapijs/qs/issues/58) make qs usable for browser loader
+
+## [**2.3.2**](https://github.com/hapijs/qs/issues?milestone=17&state=closed)
+- [**#55**](https://github.com/hapijs/qs/issues/55) allow merging a string into an object
+
 ## [**2.3.1**](https://github.com/hapijs/qs/issues?milestone=16&state=closed)
 - [**#52**](https://github.com/hapijs/qs/issues/52) Return &quot;undefined&quot; and &quot;false&quot; instead of throwing &quot;TypeError&quot;.
 

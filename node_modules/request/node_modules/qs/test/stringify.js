@@ -1,5 +1,7 @@
+/* eslint no-extend-native:0 */
 // Load modules
 
+var Code = require('code');
 var Lab = require('lab');
 var Qs = require('../');
 
@@ -12,7 +14,7 @@ var internals = {};
 // Test shortcuts
 
 var lab = exports.lab = Lab.script();
-var expect = Lab.expect;
+var expect = Code.expect;
 var describe = lab.experiment;
 var it = lab.test;
 

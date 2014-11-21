@@ -94,7 +94,7 @@ exports.compact = function (obj, refs) {
     if (Array.isArray(obj)) {
         var compacted = [];
 
-        for (var i = 0, l = obj.length; i < l; ++i) {
+        for (var i = 0, il = obj.length; i < il; ++i) {
             if (typeof obj[i] !== 'undefined') {
                 compacted.push(obj[i]);
             }
@@ -104,7 +104,7 @@ exports.compact = function (obj, refs) {
     }
 
     var keys = Object.keys(obj);
-    for (var i = 0, il = keys.length; i < il; ++i) {
+    for (i = 0, il = keys.length; i < il; ++i) {
         var key = keys[i];
         obj[key] = exports.compact(obj[key], refs);
     }
