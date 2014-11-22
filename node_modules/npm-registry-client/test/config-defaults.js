@@ -18,7 +18,7 @@ test("config defaults", function (t) {
   t.equal(ssl.strict, true, "SSL is strict by default")
 
   var retry = client.config.retry
-  t.equal(retry.count, 2, "default retry count is 2")
+  t.equal(retry.retries, 2, "default retry count is 2")
   t.equal(retry.factor, 10, "default retry factor is 10")
   t.equal(retry.minTimeout, 10000, "retry minimum timeout is 10000 (10 seconds)")
   t.equal(retry.maxTimeout, 60000, "retry maximum timeout is 60000 (60 seconds)")
