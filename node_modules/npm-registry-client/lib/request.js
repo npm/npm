@@ -220,7 +220,7 @@ function requestDone (method, where, cb) {
       parsed._etag = response.headers.etag
     }
 
-    if (parsed && parsed.error && response.statusCode >= 400) {
+    if (parsed && parsed.error || response.statusCode >= 400) {
       var w = url.parse(where).pathname.substr(1)
       var name
       if (!w.match(/^-/)) {
@@ -228,16 +228,24 @@ function requestDone (method, where, cb) {
         name = w[w.indexOf("_rewrite") + 1]
       }
 
-      if (name && parsed.error === "not_found") {
-        er = new Error("404 Not Found: " + name)
-      } else {
+      if (!parsed.error) {
         er = new Error(
-          parsed.error + " " + (parsed.reason || "") + ": " + w)
+          "Registry returned " + response.statusCode +
+          " for " + method +
+          " on " + where
+        )
+      }
+      else if (name && parsed.error === "not_found") {
+        er = new Error("404 Not Found: " + name)
+      }
+      else {
+        er = new Error(
+          parsed.error + " " + (parsed.reason || "") + ": " + w
+        )
       }
       if (name) er.pkgid = name
       er.statusCode = response.statusCode
       er.code = "E" + er.statusCode
-
     }
     return cb(er, parsed, data, response)
   }.bind(this)

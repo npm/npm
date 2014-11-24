@@ -4,7 +4,7 @@ var server = require("./lib/server.js")
 var common = require("./lib/common.js")
 var client = common.freshClient({
   retry : {
-    count      : 6,
+    retries    : 6,
     minTimeout : 10,
     maxTimeout : 100
   }
