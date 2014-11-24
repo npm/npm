@@ -9,9 +9,9 @@ var fs = require("graceful-fs")
 var common = require("../common-tap.js")
 
 var npm = require("../../lib/npm.js")
+var linkGetTypes = require("../../lib/utils/link").getTypes
 
 var pkg = path.resolve(__dirname, "bin-link-type")
-var savedPlatform = process.platform
 
 test("setup", function (t) {
   cleanup()
@@ -24,7 +24,11 @@ test("install with unix", function (t) {
            , { cwd: pkg
                , env: { npm_config_bin_link_type: "unix" } },
              function () {
-               t.ok(fs.existsSync("./node_modules/.bin/pack"), "expected unix-style link")
+               // windows is weird with symlinks, so just skip this
+               if(process.platform !== 'win32') {
+                t.ok(fs.existsSync("./node_modules/.bin/pack"), "expected unix-style link")  
+               }
+               
                var st = fs.lstatSync("./node_modules/.bin/pack")
                t.equal(st.isSymbolicLink(), true, "expected symbolic link")
 
@@ -55,7 +59,9 @@ test("install with both", function (t) {
            , env: { npm_config_bin_link_type: "both" } },
              function () {
                t.ok(fs.existsSync("./node_modules/.bin/pack.cmd"), "expected win-style shim")
-               t.ok(fs.existsSync("./node_modules/.bin/pack"), "expected unix-style link")
+               if(process.platform !== 'win32') {
+                 t.ok(fs.existsSync("./node_modules/.bin/pack"), "expected unix-style link")
+               }
 
                var st = fs.lstatSync("./node_modules/.bin/pack")
                t.equal(st.isSymbolicLink(), true, "expected symbolic link")
@@ -63,36 +69,18 @@ test("install with both", function (t) {
   })
 })
 
-test("install with auto (force unix behavior)", function (t) {
+test("detect link type", function ( t ) { 
   setup()
-  process.platform = "linux"
-  common.npm(["install", "--prefix=" + pkg, "./pack"]
-           , { cwd: pkg
-           , env: { npm_config_bin_link_type: "auto" } },
-             function () {
-               t.ok(!fs.existsSync("./node_modules/.bin/pack.cmd"), "expected NO win-style shim")
-               t.ok(fs.existsSync("./node_modules/.bin/pack"), "expected unix-style link")
-
-               var st = fs.lstatSync("./node_modules/.bin/pack")
-               t.equal(st.isSymbolicLink(), true, "expected symbolic link")
-               t.end()
-  })
-})
-
-test("install with auto (force win32 behavior)", function (t) {
-  setup()
-  process.platform = "win32"
-  common.npm(["install", "--prefix=" + pkg, "./pack"]
-           , { cwd: pkg
-           , env: { npm_config_bin_link_type: "auto" } },
-             function () {
-               t.ok(fs.existsSync("./node_modules/.bin/pack.cmd"), "expected win-style shim")
-               t.ok(fs.existsSync("./node_modules/.bin/pack"), "expected bash shim")
-
-               var st = fs.lstatSync("./node_modules/.bin/pack")
-               t.equal(st.isSymbolicLink(), false, "expected plain file")
-               t.end()
-  })
+    
+  t.deepEqual(linkGetTypes('win32', 'both'), { link: true, shim: true }, "expected both link and shim")
+  t.deepEqual(linkGetTypes('linux', 'both'), { link: true, shim: true }, "expected both link and shim")
+  t.deepEqual(linkGetTypes('win32', 'auto'), { link: false, shim: true }, "expected only shim")
+  t.deepEqual(linkGetTypes('linux', 'auto'), { link: true, shim: false }, "expected only link")
+  t.deepEqual(linkGetTypes('win32', 'unix'), { link: true, shim: false }, "expected only link")
+  t.deepEqual(linkGetTypes('linux', 'win'), { link: false, shim: true }, "expected only shim")
+  
+  t.end()
+    
 })
 
 
@@ -121,6 +109,5 @@ function setup() {
 
 test("clean", function (t) {
   cleanup()
-  process.platform = savedPlatform
   t.end()
 })
