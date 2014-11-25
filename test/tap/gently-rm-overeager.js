@@ -14,8 +14,9 @@ var EXEC_OPTS = {
 }
 
 test("setup", function (t) {
-  nuke()
-  bootstrap()
+  cleanup()
+  setup()
+
   t.end()
 })
 
@@ -33,7 +34,7 @@ test("cache add", function (t) {
 })
 
 test("cleanup", function (t) {
-  nuke()
+  cleanup()
 
   t.end()
 })
@@ -47,12 +48,12 @@ var fixture = {
   }
 }
 
-function nuke () {
+function cleanup () {
   rimraf.sync(pkg)
   rimraf.sync(dep)
 }
 
-function bootstrap () {
+function setup () {
   mkdirp.sync(pkg)
   // so it doesn't try to install into npm's own node_modules
   mkdirp.sync(resolve(pkg, "node_modules"))
