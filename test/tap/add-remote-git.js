@@ -52,31 +52,37 @@ function setup (git, cb)
 }
 
 test("install from repo", function (t) {
-  npm.load({loglevel: "silent"}, function () {
+  npm.load({loglevel: "warn"}, function () {
     var git = require("../../lib/utils/git")
 
     setup(git, function () {
 
       process.chdir(pkg)
 
+      fs.writeFileSync(path.resolve(pkgChild, "git-daemon-export-ok"), "")
+
       // start git server
       var d = git.spawn(["daemon", "--listen=localhost", "--export-all",
-                      "--base-path=.", "--port=1234"], {cwd: pkg})
+                         "--base-path=.", "--port=1234", "--verbose"]
+                        , {cwd: pkg, stdio: ['pipe', 'pipe', 'pipe'] })
 
-      npm.install(".", function (er) {
-        t.notOk(er, "Expected npm install to succeed")
+        setTimeout(function () {
 
-        // kill git server
-//        d.kill()
-        t.end()
-      })
+        npm.install(".", function (er) {
+          t.notOk(er, "Expected npm install to succeed")
+
+          // kill git server
+          d.kill('SIGINT')
+          t.end()
+        })
+        }, 400)
     })
   })
 })
 
 function cleanup () {
   process.chdir(osenv.tmpdir())
-//  rimraf.sync(pkg)
+  rimraf.sync(pkg)
 }
 
 test("clean", function (t) {
