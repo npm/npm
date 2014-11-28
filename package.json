@@ -91,7 +91,7 @@
     "tar": "~1.0.3",
     "text-table": "~0.2.0",
     "uid-number": "0.0.6",
-    "which": "1",
+    "which": "~1.0.7",
     "wrappy": "~1.0.1",
     "write-file-atomic": "~1.1.0"
   },
