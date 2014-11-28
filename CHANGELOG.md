@@ -1,3 +1,31 @@
+### v2.1.11 (2014-11-27):
+
+* [`4861d28`](https://github.com/npm/npm/commit/4861d28ad0ebd959fe6bc15b9c9a50fcabe57f55)
+  `which@1.0.7`: License update. ([@isaacs](https://github.com/isaacs))
+* [`30a2ea8`](https://github.com/npm/npm/commit/30a2ea80c891d384b31a1cf28665bba4271915bd)
+  `ini@1.3.2`: License update. ([@isaacs](https://github.com/isaacs))
+* [`6a4ea05`](https://github.com/npm/npm/commit/6a4ea054f6ddf52fc58842ba2046564b04c5c0e2)
+  `fstream@1.0.3`: Propagate error events to downstream streams.
+  ([@gfxmonk](https://github.com/gfxmonk))
+* [`a558695`](https://github.com/npm/npm/commit/a5586954f1c18df7c96137e0a79f41a69e7a884e)
+  `tar@1.0.3`: Don't extract broken files, propagate `drain` event.
+  ([@gfxmonk](https://github.com/gfxmonk))
+* [`989624e`](https://github.com/npm/npm/commit/989624e8321f87734c1b1272fc2f646e7af1f81c)
+  [#6767](https://github.com/npm/npm/issues/6767) Actually pass parameters when
+  adding git repo to cach under Windows.
+  ([@othiym23](https://github.com/othiym23))
+* [`657af73`](https://github.com/npm/npm/commit/657af7308f7d6cd2f81389fcf0d762252acaf1ce)
+  [#6774](https://github.com/npm/npm/issues/6774) When verifying paths on
+  unbuild, resolve both source and target as symlinks.
+  ([@hokaccha](https://github.com/hokaccha))
+* [`fd19c40`](https://github.com/npm/npm/commit/fd19c4046414494f9647a6991c00f8406a939929)
+  [#6713](https://github.com/npm/npm/issues/6713)
+  `realize-package-specifier@1.3.0`: Make it so that `npm install foo@1` work
+  when a file named `1` exists. ([@iarna](https://github.com/iarna))
+* [`c8ac37a`](https://github.com/npm/npm/commit/c8ac37a470491b2ed28514536e2e198494638c79)
+  `npm-registry-client@4.0.4`: Fix regression in failed fetch retries.
+  ([@othiym23](https://github.com/othiym23))
+
 ### v2.1.10 (2014-11-20):
 
 * [`756f3d4`](https://github.com/npm/npm/commit/756f3d40fe18bc02bc93afe17016dfcc266c4b6b)
