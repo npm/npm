@@ -45,7 +45,9 @@ after packing it up into a tarball (b).
 
     By default, `npm install` will install all modules listed as
     dependencies. With the `--production` flag,
-    npm will not install modules listed in `devDependencies`.
+    npm will not install modules listed in `devDependencies`. Note that 
+    exporting the `NODE_ENV` environment variable with the value `production` 
+    is equivalent to passing the `--production` flag.
 
 * `npm install <folder>`:
 
