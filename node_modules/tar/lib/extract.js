@@ -61,6 +61,10 @@ function Extract (opts) {
     me.emit('error', err)
   })
 
+  this._fst.on('drain', function() {
+    me.emit('drain')
+  })
+
   // this._fst.on("end", function () {
   //   console.error("\nEEEE Extract End", me._fst.path)
   // })
