@@ -37,7 +37,7 @@ commands object: `npm.commands.<cmd>`.  See `npm-index(7)` for a list of
 all possible commands.
 
 All commands on the command object take an **array** of positional argument
-**strings**. The last argument to any function is a callback. Some
+**strings**. The last argument to any function is a callback whose first parameter is `error`. Some
 commands take other optional arguments.
 
 Configs cannot currently be set on a per function basis, as each call to
