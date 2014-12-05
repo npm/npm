@@ -26,7 +26,7 @@ Caseless.prototype.has = function (name) {
 }
 Caseless.prototype.get = function (name) {
   name = name.toLowerCase()
-  var result, key
+  var result, _key
   var headers = this.dict
   Object.keys(headers).forEach(function (key) {
     _key = key.toLowerCase()
