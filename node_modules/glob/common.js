@@ -34,13 +34,11 @@ function absUnix (p) {
 }
 
 function alphasorti (a, b) {
-  a = a.toLowerCase()
-  b = b.toLowerCase()
-  return alphasort(a, b)
+  return a.toLowerCase().localeCompare(b.toLowerCase())
 }
 
 function alphasort (a, b) {
-  return a > b ? 1 : a < b ? -1 : 0
+  return a.localeCompare(b)
 }
 
 

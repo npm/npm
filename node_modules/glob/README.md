@@ -31,12 +31,12 @@ the command line, or put `build/*` in a `.gitignore` file.
 Before parsing the path part patterns, braced sections are expanded
 into a set.  Braced sections start with `{` and end with `}`, with any
 number of comma-delimited sections within.  Braced sections may contain
-slash characters, so `a{/b/c,bcd}` would expand into `a/b/c` and `abc`.
+slash characters, so `a{/b/c,bcd}` would expand into `a/b/c` and `abcd`.
 
 The following characters have special magic meaning when used in a
 path portion:
 
-* `*` Matches 0 or more characters in a sinle path portion
+* `*` Matches 0 or more characters in a single path portion
 * `?` Matches 1 character
 * `[...]` Matches a range of characters, similar to a RegExp range.
   If the first character of the range is `!` or `^` then it matches
@@ -100,7 +100,7 @@ To get the bash-style behavior, set the `nonull:true` in the options.
 * `man 5 gitignore`
 * [minimatch documentation](https://github.com/isaacs/minimatch)
 
-## glob.hasMagic(patter, [options])
+## glob.hasMagic(pattern, [options])
 
 Returns `true` if there are any special characters in the pattern, and
 `false` otherwise.
@@ -131,7 +131,7 @@ Perform a synchronous glob search.
 
 ## Class: glob.Glob
 
-Create a Glob object by instanting the `glob.Glob` class.
+Create a Glob object by instantiating the `glob.Glob` class.
 
 ```javascript
 var Glob = require("glob").Glob
