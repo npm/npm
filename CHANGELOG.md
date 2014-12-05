@@ -1,3 +1,14 @@
+### v2.1.12 (2014-12-04):
+
+* [`e5b1e44`](https://github.com/npm/npm/commit/e5b1e448bb4a9d6eae4ba0f67b1d3c2cea8ed383)
+  add alias verison=version ([@isaacs](https://github.com/isaacs))
+* [`5eed7bd`](https://github.com/npm/npm/commit/5eed7bddbd7bb92a44c4193c93e8529500c558e6)
+  `request@2.49.0` ([@nylen](https://github.com/nylen))
+* [`e72f81d`](https://github.com/npm/npm/commit/e72f81d8412540ae7d1e0edcc37c11bcb8169051)
+  `glob@4.3.1` / `minimatch@2.0.1` ([@isaacs](https://github.com/isaacs))
+* [`b8dcc36`](https://github.com/npm/npm/commit/b8dcc3637b5b71933b97162b7aff1b1a622c13e2)
+  `graceful-fs@3.0.5` ([@isaacs](https://github.com/isaacs))
+
 ### v2.1.11 (2014-11-27):
 
 * [`4861d28`](https://github.com/npm/npm/commit/4861d28ad0ebd959fe6bc15b9c9a50fcabe57f55)
