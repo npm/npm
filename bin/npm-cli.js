@@ -17,6 +17,8 @@ process.title = "npm"
 
 var log = require("npmlog")
 log.pause() // will be unpaused when config is loaded.
+log.enableProgress()
+
 log.info("it worked if it ends with", "ok")
 
 var path = require("path")
