@@ -3,7 +3,7 @@ npm-faq(7) -- Frequently Asked Questions
 
 ## Where can I find these docs in HTML?
 
-<https://www.npmjs.org/doc/>, or run:
+<https://docs.npmjs.com/>, or run:
 
     npm config set viewer browser
 
@@ -80,7 +80,7 @@ Usually, no. Allow npm to resolve dependencies for your packages.
 For packages you **deploy**, such as websites and apps,
 you should use npm shrinkwrap to lock down your full dependency tree:
 
-<https://www.npmjs.org/doc/cli/npm-shrinkwrap.html>
+<https://docs.npmjs.com/cli/shrinkwrap>
 
 If you are paranoid about depending on the npm ecosystem,
 you should run a private npm mirror or a private cache.
@@ -147,7 +147,7 @@ command.)
 
 In those cases, you can do this:
 
-    curl https://www.npmjs.org/install.sh | sh
+    curl https://www.npmjs.com/install.sh | sh
 
 ## What is a `package`?
 
@@ -307,7 +307,7 @@ See `npm-registry(7)`.
 
 ## I forgot my password, and can't publish.  How do I reset it?
 
-Go to <https://npmjs.org/forgot>.
+Go to <https://npmjs.com/forgot>.
 
 ## I get ECONNREFUSED a lot.  What's up?
 
@@ -366,7 +366,7 @@ npm was originally written by Isaac Z. Schlueter, and many others have
 contributed to it, some of them quite substantially.
 
 The npm open source project, The npm Registry, and [the community
-website](https://www.npmjs.org) are maintained and operated by the
+website](https://www.npmjs.com) are maintained and operated by the
 good folks at [npm, Inc.](http://www.npmjs.com)
 
 ## I have a question or request not addressed here. Where should I put it?

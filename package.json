@@ -12,7 +12,7 @@
   "config": {
     "publishtest": false
   },
-  "homepage": "https://npmjs.org/doc/",
+  "homepage": "https://docs.npmjs.com/",
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
   "repository": {
     "type": "git",
