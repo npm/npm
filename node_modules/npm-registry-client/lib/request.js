@@ -220,7 +220,8 @@ function requestDone (method, where, cb) {
       parsed._etag = response.headers.etag
     }
 
-    if (parsed && parsed.error || response.statusCode >= 400) {
+    // Is there ever a case where an error occurred and parsed.error is an object?
+    if (parsed && parsed.error && typeof parsed.error !== 'object' || response.statusCode >= 400) {
       var w = url.parse(where).pathname.substr(1)
       var name
       if (!w.match(/^-/)) {
