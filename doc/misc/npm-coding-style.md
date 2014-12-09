@@ -10,7 +10,7 @@ designed to reduce visual clutter and make bugs more apparent.
 If you want to contribute to npm (which is very encouraged), you should
 make your code conform to npm's style.
 
-Note: this concerns npm's code not the specific packages at npmjs.org
+Note: this concerns npm's code not the specific packages that you can download from the npm registry.
 
 ## Line Length
 
