@@ -36,11 +36,11 @@ paths, etc.) then read on.
 ## Fancy Install (Unix)
 
 There's a pretty robust install script at
-<https://www.npmjs.org/install.sh>.  You can download that and run it.
+<https://www.npmjs.com/install.sh>.  You can download that and run it.
 
 Here's an example using curl:
 
-    curl -L https://npmjs.org/install.sh | sh
+    curl -L https://www.npmjs.com/install.sh | sh
 
 ### Slightly Fancier
 
@@ -178,13 +178,13 @@ help config` to learn about all the options you can set there.
 
 ## More Docs
 
-Check out the [docs](https://www.npmjs.org/doc/),
-especially the [faq](https://www.npmjs.org/doc/faq.html).
+Check out the [docs](https://docs.npmjs.com/),
+especially the [faq](https://docs.npmjs.com/faq).
 
 You can use the `npm help` command to read any of them.
 
 If you're a developer, and you want to use npm to publish your program,
-you should [read this](https://www.npmjs.org/doc/developers.html)
+you should [read this](https://docs.npmjs.com/developers)
 
 ## Legal Stuff
 
@@ -204,7 +204,7 @@ specific purpose, or lack of malice in any given npm package.
 
 If you have a complaint about a package in the public npm registry,
 and cannot [resolve it with the package
-owner](https://www.npmjs.org/doc/misc/npm-disputes.html), please email
+owner](https://docs.npmjs.com/misc/disputes), please email
 <support@npmjs.com> and explain the situation.
 
 Any data published to The npm Registry (including user account
