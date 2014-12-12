@@ -161,7 +161,8 @@ comparator.  Allows minor-level changes if not.
   `1.2.4-beta.2` would not, because it is a prerelease of a
   different `[major, minor, patch]` tuple.
 
-Note: this is the same as the `~>` operator in rubygems.
+Note: this differs from the `~>` operator in rubygems which behaves
+more like the caret ranges described in the next section.
 
 #### Caret Ranges `^1.2.3` `^0.2.5` `^0.0.4`
 
