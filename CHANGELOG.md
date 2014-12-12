@@ -1,3 +1,47 @@
+### v2.1.13 (2014-12-11):
+
+* [`cbb890e`](https://github.com/npm/npm/commit/cbb890eeacc0501ba1b8c6955f1c829c8af9f486)
+  [#6897](https://github.com/npm/npm/issues/6897) npm is a nice package manager
+  that runs server-side JavaScript. ([@othiym23](https://github.com/othiym23))
+* [`d9043c3`](https://github.com/npm/npm/commit/d9043c3b8d7450c3cb9ca795028c0e1c05377820)
+  [#6893](https://github.com/npm/npm/issues/6893) Remove erroneous docs about
+  preupdate / update / postupdate lifecycle scripts, which have never existed.
+  ([@devTristan](https://github.com/devTristan))
+* [`c5df4d0`](https://github.com/npm/npm/commit/c5df4d0d683cd3506808d1cd1acebff02a8b82db)
+  [#6884](https://github.com/npm/npm/issues/6884) Update npmjs.org to npmjs.com
+  in docs. ([@linclark](https://github.com/linclark))
+* [`cb6ff8d`](https://github.com/npm/npm/commit/cb6ff8dace1b439851701d4784d2d719c22ca7a7)
+  [#6879](https://github.com/npm/npm/issues/6879) npm version: Update
+  shrinkwrap post-check. ([@othiym23](https://github.com/othiym23))
+* [`2a340bd`](https://github.com/npm/npm/commit/2a340bdd548c6449468281e1444a032812bff677)
+  [#6868](https://github.com/npm/npm/issues/6868) Use magic numbers instead of
+  regexps to distinguish tarballs from other things.
+  ([@daxxog](https://github.com/daxxog))
+* [`f1c8bdb`](https://github.com/npm/npm/commit/f1c8bdb3f6b753d0600597e12346bdc3a34cb9c1)
+  [#6861](https://github.com/npm/npm/issues/6861) `npm-registry-client@4.0.5`:
+  Distinguish between error properties that are part of the response and error
+  strings that should be returned to the user.
+  ([@disrvptor](https://github.com/disrvptor))
+* [`d3a1b63`](https://github.com/npm/npm/commit/d3a1b6397fddef04b5198ca89d36d720aeb05eb6)
+  [#6762](https://github.com/npm/npm/issues/6762) Make `npm outdated` ignore
+  private packages. ([@KenanY](https://github.com/KenanY))
+* [`16d8542`](https://github.com/npm/npm/commit/16d854283ca5bcdb0cb2812fc5745d841652b952)
+  install.sh: Drop support for node < 0.8, remove engines bits.
+  ([@isaacs](https://github.com/isaacs))
+* [`b9c6046`](https://github.com/npm/npm/commit/b9c60466d5b713b1dc2947da14a5dfe42352e029)
+  `init-package-json@1.1.3`: ([@terinstock](https://github.com/terinstock))
+  noticed that `init.license` configuration doesn't stick. Make sure that
+  dashed defaults don't trump dotted parameters.
+  ([@othiym23](https://github.com/othiym23))
+* [`b6d6acf`](https://github.com/npm/npm/commit/b6d6acfc02c8887f78067931babab8f7c5180fed)
+  `which@1.0.8`: No longer use graceful-fs for some reason.
+  ([@isaacs](https://github.com/isaacs))
+* [`d39f673`](https://github.com/npm/npm/commit/d39f673caf08a90fb2bb001d79c98062d2cd05f4)
+  `request@2.51.0`: Incorporate bug fixes. ([@nylen](https://github.com/nylen))
+* [`c7ad727`](https://github.com/npm/npm/commit/c7ad7279cc879930ec58ccc62fa642e621ecb65c)
+  `columnify@1.3.2`: Incorporate bug fixes.
+  ([@timoxley](https://github.com/timoxley))
+
 ### v2.1.12 (2014-12-04):
 
 * [`e5b1e44`](https://github.com/npm/npm/commit/e5b1e448bb4a9d6eae4ba0f67b1d3c2cea8ed383)
