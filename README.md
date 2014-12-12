@@ -1,4 +1,4 @@
-npm(1) -- node package manager
+npm(1) -- a JavaScript package manager
 ==============================
 [![Build Status](https://img.shields.io/travis/npm/npm/master.svg)](https://travis-ci.org/npm/npm)
 ## SYNOPSIS
