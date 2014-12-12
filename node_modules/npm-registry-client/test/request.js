@@ -81,7 +81,7 @@ test("request call contract", function (t) {
 })
 
 test("run request through its paces", function (t) {
-  t.plan(22)
+  t.plan(24)
 
   server.expect("/request-defaults", function (req, res) {
     t.equal(req.method, "GET", "uses GET by default")
@@ -144,6 +144,20 @@ test("run request through its paces", function (t) {
     }))
   })
 
+  server.expect("GET", "/body-error-string", function (req, res) {
+    req.pipe(concat(function () {
+      res.statusCode = 200
+      res.json({ "error" : "not really an error", "reason" : "unknown" })
+    }))
+  })
+
+  server.expect("GET", "/body-error-object", function (req, res) {
+    req.pipe(concat(function () {
+      res.statusCode = 200
+      res.json({ "error" : {} })
+    }))
+  })
+
   var defaults = {}
   client.request(common.registry+"/request-defaults", defaults, function (er, data) {
     t.ifError(er, "call worked")
@@ -203,5 +217,17 @@ test("run request through its paces", function (t) {
   client.request(common.registry+"/body-object", putObject, function (er, data) {
     t.ifError(er, "call worked")
     t.deepEquals(data, { put : "object" }, "PUT request with object sent")
+  })
+
+  client.request(common.registry+"/body-error-string", defaults, function (er) {
+    t.equal(
+      er && er.message,
+      "not really an error unknown: body-error-string",
+      "call worked"
+    )
+  })
+
+  client.request(common.registry+"/body-error-object", defaults, function (er) {
+    t.ifError(er, "call worked")
   })
 })
