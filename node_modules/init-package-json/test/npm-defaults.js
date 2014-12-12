@@ -32,6 +32,14 @@ test("npm configuration values pulled from environment", function (t) {
   npm.load({}, function (err) {
     t.ifError(err, "npm loaded successfully")
 
+    // clear out dotted names from test environment
+    npm.config.del("init.author.name")
+    npm.config.del("init.author.email")
+    npm.config.del("init.author.url")
+    // the following have npm defaults, and need to be explicitly overridden
+    npm.config.set("init.license", "")
+    npm.config.set("init.version", "")
+
     process.chdir(resolve(__dirname))
     init(__dirname, __dirname, npm.config, function (er, data) {
       t.ifError(err, "init ran successfully")
