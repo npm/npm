@@ -17,9 +17,8 @@ test("npm version <semver> updates shrinkwrap - no git", function (t) {
   npm.load({ cache: pkg + "/cache", registry: common.registry}, function () {
     npm.commands.version(["patch"], function(err) {
       if (err) return t.fail("Error perform version patch")
-      var shrinkwrap = require(pkg+"/npm-shrinkwrap")
-      if (shrinkwrap.version !== "0.0.1") t.fail(shrinkwrap.version+" !== \'0.0.1\'")
-      t.ok(shrinkwrap.version === "0.0.1")
+      var shrinkwrap = require(path.resolve(pkg, "npm-shrinkwrap.json"))
+      t.equal(shrinkwrap.version, "0.0.1", "got expected version")
       t.end()
     })
   })
@@ -30,7 +29,12 @@ test("npm version <semver> updates git works with no shrinkwrap", function (t) {
 
   rimraf.sync(path.resolve(pkg, "npm-shrinkwrap.json"))
 
-  npm.load({ cache: cache, registry: common.registry}, function () {
+  var opts = {
+    cache : cache,
+    registry : common.registry
+  }
+  npm.load(opts, function () {
+    npm.config.set("sign-git-tag", false)
     which("git", function (err, git) {
       if (err) t.fail("Git not installed, or which git command error")
 
@@ -62,25 +66,42 @@ test("npm version <semver> updates git works with no shrinkwrap", function (t) {
         emailer.on("exit", function (code) {
           t.notOk(code, "git config user.email exited without issue")
 
-          configKey()
+          addAll()
         })
       }
 
-      function configKey () {
-        var faker = spawn(git, ["config", "user.signingkey", "xxxxxxxx"])
-        faker.stdout.pipe(process.stdout)
-        faker.on("exit", function (code) {
-          t.notOk(code, "git config user.signingkey exited without issue")
+      function addAll () {
+        var emailer = spawn(git, ["add", "package.json"])
+        emailer.stdout.pipe(process.stdout)
+        emailer.on("exit", function (code) {
+          t.notOk(code, "git add package.json exited without issue")
+
+          commit()
+        })
+
+      }
+
+      function commit () {
+        var emailer = spawn(git, ["commit", "-m", "test setup"])
+        emailer.stdout.pipe(process.stdout)
+        emailer.on("exit", function (code) {
+          t.notOk(code, "git commit -m 'test setup' exited without issue")
 
           version()
         })
+
       }
 
       function version () {
         npm.commands.version(["patch"], checkCommit)
       }
 
-      function checkCommit () {
+      function checkCommit (er) {
+        t.ifError(er, "version command ran without error")
+
+        var shrinkwrap = require(path.resolve(pkg, "npm-shrinkwrap.json"))
+        t.equal(shrinkwrap.version, "0.0.1", "got expected version")
+
         var shower = spawn(git, ["show", "HEAD", "--name-only"])
         var out = "", eout = ""
         shower.stdout.on("data", function (d) {
@@ -106,7 +127,13 @@ test("npm version <semver> updates git works with no shrinkwrap", function (t) {
 
 test("npm version <semver> updates shrinkwrap and updates git", function (t) {
   setup()
-  npm.load({ cache: cache, registry: common.registry}, function () {
+
+  var opts = {
+    cache : cache,
+    registry : common.registry
+  }
+  npm.load(opts, function () {
+    npm.config.set("sign-git-tag", false)
     which("git", function (err, git) {
       if (err) t.fail("Git not installed, or which git command error")
 
@@ -138,25 +165,42 @@ test("npm version <semver> updates shrinkwrap and updates git", function (t) {
         emailer.on("exit", function (code) {
           t.notOk(code, "git config user.email exited without issue")
 
-          configKey()
+          addAll()
         })
       }
 
-      function configKey () {
-        var faker = spawn(git, ["config", "user.signingkey", "xxxxxxxx"])
-        faker.stdout.pipe(process.stdout)
-        faker.on("exit", function (code) {
-          t.notOk(code, "git config user.signingkey exited without issue")
+      function addAll () {
+        var emailer = spawn(git, ["add", "package.json", "npm-shrinkwrap.json"])
+        emailer.stdout.pipe(process.stdout)
+        emailer.on("exit", function (code) {
+          t.notOk(code, "git add package.json npm-shrinkwrap.json exited without issue")
+
+          commit()
+        })
+
+      }
+
+      function commit () {
+        var emailer = spawn(git, ["commit", "-m", "test setup"])
+        emailer.stdout.pipe(process.stdout)
+        emailer.on("exit", function (code) {
+          t.notOk(code, "git commit -m 'test setup' exited without issue")
 
           version()
         })
+
       }
 
       function version () {
         npm.commands.version(["patch"], checkCommit)
       }
 
-      function checkCommit () {
+      function checkCommit (er) {
+        t.ifError(er, "version command ran without error")
+
+        var shrinkwrap = require(path.resolve(pkg, "npm-shrinkwrap.json"))
+        t.equal(shrinkwrap.version, "0.0.1", "got expected version")
+
         var shower = spawn(git, ["show", "HEAD", "--name-only"])
         var out = "", eout = ""
         shower.stdout.on("data", function (d) {
