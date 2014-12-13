@@ -79,31 +79,6 @@ git, and mess with it directly.
 
 No.
 
-## Permissions when Using npm to Install Other Stuff
-
-**tl;dr**
-
-* Use `sudo` for greater safety.  Or don't, if you prefer not to.
-* npm will downgrade permissions if it's root before running any build
-  scripts that package authors specified.
-
-### More details...
-
-As of version 0.3, it is recommended to run npm as root.
-This allows npm to change the user identifier to the `nobody` user prior
-to running any package build or test commands.
-
-If you are not the root user, or if you are on a platform that does not
-support uid switching, then npm will not attempt to change the userid.
-
-If you would like to ensure that npm **always** runs scripts as the
-"nobody" user, and have it fail if it cannot downgrade permissions, then
-set the following configuration param:
-
-    npm config set unsafe-perm false
-
-This will prevent running in unsafe mode, even as non-root users.
-
 ## Uninstalling
 
 So sad to see you go.
