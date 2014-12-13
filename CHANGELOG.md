@@ -1,3 +1,9 @@
+### v2.1.14 (2014-12-13):
+
+* [`cf7aeae`](https://github.com/npm/npm/commit/cf7aeae3c3a24e48d3de4006fa082f0c6040922a)
+  [#6923](https://github.com/npm/npm/issues/6923) Overaggressive link update
+  for new website broke node-gyp. ([@othiym23](https://github.com/othiym23))
+
 ### v2.1.13 (2014-12-11):
 
 * [`cbb890e`](https://github.com/npm/npm/commit/cbb890eeacc0501ba1b8c6955f1c829c8af9f486)
