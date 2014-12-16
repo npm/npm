@@ -445,7 +445,7 @@ run this script as well, so that you can test it easily.
 
 In some cases, you want to express the compatibility of your package with an
 host tool or library, while not necessarily doing a `require` of this host.
-This is usually refered to as a *plugin*. Notably, your module may be exposing
+This is usually referred to as a *plugin*. Notably, your module may be exposing
 a specific interface, expected and specified by the host documentation.
 
 For example:
