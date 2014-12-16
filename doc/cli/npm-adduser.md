@@ -58,7 +58,7 @@ registries. Can be used with `--registry` and / or `--scope`, e.g.
 
 This will ensure that all requests to that registry (including for tarballs)
 include an authorization header. See `always-auth` in `npm-config(7)` for more
-details on always-auth. Registry-specific configuaration of `always-auth` takes
+details on always-auth. Registry-specific configuration of `always-auth` takes
 precedence over any global configuration.
 
 ## SEE ALSO
