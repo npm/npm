@@ -21,7 +21,7 @@ statements onto multiple lines.
 ## Indentation
 
 Two-spaces.  Tabs are better, but they look like hell in web browsers
-(and on github), and node uses 2 spaces, so that's that.
+(and on GitHub), and node uses 2 spaces, so that's that.
 
 Configure your editor appropriately.
 
