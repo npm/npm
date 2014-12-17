@@ -20,13 +20,15 @@ test("it should not throw", function (t) {
                , path.resolve(__dirname, "outdated/node_modules/underscore")
                + ":underscore@1.3.1"
                + ":underscore@1.3.1"
-               + ":underscore@1.5.1" ]
+               + ":underscore@1.5.1"
+               + ":dependencies" ]
   var expData = [ [ path.resolve(__dirname, "outdated")
                   , "underscore"
                   , "1.3.1"
                   , "1.3.1"
                   , "1.5.1"
-                  , "1.3.1" ] ]
+                  , "1.3.1"
+                  , "dependencies" ] ]
 
   console.log = function () {
     output.push.apply(output, arguments)
