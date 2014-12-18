@@ -137,13 +137,21 @@ The browser that is called by the `npm docs` command to open websites.
 ### ca
 
 * Default: The npm CA certificate
-* Type: String or null
+* Type: String, Array or null
 
 The Certificate Authority signing certificate that is trusted for SSL
-connections to the registry.
+connections to the registry. Values should be in PEM format with newlines
+replaced by the string "\n". For example:
+
+    ca="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 
 Set to `null` to only allow "known" registrars, or to a specific CA cert
 to trust only that specific signing authority.
+
+Multiple CAs can be trusted by specifying an array of certificates:
+
+    ca[]="..."
+    ca[]="..."
 
 See also the `strict-ssl` config.
 
