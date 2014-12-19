@@ -359,7 +359,7 @@ function unmarkExtraneous (obj, opts) {
   }
 
   debug("not extraneous", obj._id, deps)
-  Object.keys(deps).forEach(function (d) {
+  Object.keys(deps || []).forEach(function (d) {
     var dep = findDep(obj, d)
     if (dep && dep.extraneous) {
       unmarkExtraneous(dep, opts)
