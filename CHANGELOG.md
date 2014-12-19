@@ -1,3 +1,38 @@
+### v2.1.15 (2014-12-18):
+
+* [`e5a2dee`](https://github.com/npm/npm/commit/e5a2dee47c74f26c56fee5998545b97497e830c8)
+  [#6951](https://github.com/npm/npm/issues/6951) `fs-vacuum@1.2.5`: Use
+  `path-is-inside` for better Windows normalization.
+  ([@othiym23](https://github.com/othiym23))
+* [`ac6167c`](https://github.com/npm/npm/commit/ac6167c2b9432939c57296f7ddd11ad5f8f918b2)
+  [#6955](https://github.com/npm/npm/issues/6955) Call `path.normalize` in
+  `lib/utils/gently-rm.js` for better Windows normalization.
+  ([@ben-page](https://github.com/ben-page))
+* [`c625d71`](https://github.com/npm/npm/commit/c625d714795e3b5badd847945e2401adfad5a196)
+  [#6964](https://github.com/npm/npm/issues/6964) Clarify CA configuration
+  docs. ([@jeffjo](https://github.com/jeffjo))
+* [`58b8cb5`](https://github.com/npm/npm/commit/58b8cb5cdf26a854358b7c2ab636572dba9bac16)
+  [#6950](https://github.com/npm/npm/issues/6950) Fix documentation typos.
+  ([@martinvd](https://github.com/martinvd))
+* [`7c1299d`](https://github.com/npm/npm/commit/7c1299d00538ea998684a1903a4091eafc63b7f1)
+  [#6909](https://github.com/npm/npm/issues/6909) Remove confusing mention of
+  rubygems `~>` semver operator. ([@mjtko](https://github.com/mjtko))
+* [`7dfdcc6`](https://github.com/npm/npm/commit/7dfdcc6debd8ef1fc52a2b508997d15887aad824)
+  [#6909](https://github.com/npm/npm/issues/6909) `semver@4.1.1`: Synchronize
+  documentation with PR [#6909](https://github.com/npm/npm/issues/6909)
+  ([@othiym23](https://github.com/othiym23))
+* [`adfddf3`](https://github.com/npm/npm/commit/adfddf3b682e0ae08e4b59d87c1b380dd651c572)
+  [#6925](https://github.com/npm/npm/issues/6925) Correct typo in
+  `doc/api/npm-ls.md` ([@oddurs](https://github.com/oddurs))
+* [`f5c534b`](https://github.com/npm/npm/commit/f5c534b711ab173129baf366c4f08d68f6117333)
+  [#6920](https://github.com/npm/npm/issues/6920) Remove recommendation to run
+  as root from `README.md`.
+  ([@robertkowalski](https://github.com/robertkowalski))
+* [`3ef4459`](https://github.com/npm/npm/commit/3ef445922cd39f25b992d91bd22c4d367882ea22)
+  [#6920](https://github.com/npm/npm/issues/6920) `npm-@googlegroups.com` has
+  gone the way of all things. That means it's gone.
+  ([@robertkowalski](https://github.com/robertkowalski))
+
 ### v2.1.14 (2014-12-13):
 
 * [`cf7aeae`](https://github.com/npm/npm/commit/cf7aeae3c3a24e48d3de4006fa082f0c6040922a)
