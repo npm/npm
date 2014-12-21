@@ -19,7 +19,7 @@ test("dicovers new versions in outdated", function (t) {
   mr(common.port, function (s) {
     npm.load({cache: cache, registry: common.registry}, function () {
       npm.outdated(function (er, d) {
-        for (var i = 0; i < d.length; i++) {
+        for (var i = 0, l=d.length ; i < l; i++) {
           if (d[i][1] === "underscore")
             t.equal("1.5.1", d[i][4])
           if (d[i][1] === "request")

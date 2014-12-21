@@ -73,7 +73,7 @@ test("cleanup", function (t) {
 })
 
 function contains(list, element) {
-  for (var i=0; i < list.length; ++i) {
+  for (var i=0, l = list.length; i < l; ++i) {
     if (list[i] === element) {
       return true
     }
