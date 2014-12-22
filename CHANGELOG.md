@@ -1,3 +1,11 @@
+### v2.1.15 (2014-12-22):
+
+* [`a4e4e33`](https://github.com/npm/npm/commit/a4e4e33edb35c68813f04bf42bdf933a6f727bcd)
+  [#6987](https://github.com/npm/npm/issues/6987) `read-installed@3.1.5`: fixed
+  a regression where a new / empty package would cause read-installed to throw.
+  ([@othiym23](https://github.com/othiym23) /
+  [@pgilad](https://github.com/pgilad))
+
 ### v2.1.15 (2014-12-18):
 
 * [`e5a2dee`](https://github.com/npm/npm/commit/e5a2dee47c74f26c56fee5998545b97497e830c8)
