@@ -14,7 +14,7 @@ var cache = path.resolve(pkg, "cache")
 
 test("npm version <semver> updates shrinkwrap - no git", function (t) {
   setup()
-  npm.load({ cache: pkg + "/cache", registry: common.registry}, function () {
+  npm.load({ cache: pkg + "/cache", registry: common.registry }, function () {
     npm.commands.version(["patch"], function(err) {
       if (err) return t.fail("Error perform version patch")
       var shrinkwrap = require(path.resolve(pkg, "npm-shrinkwrap.json"))
@@ -135,7 +135,7 @@ test("npm version <semver> updates shrinkwrap and updates git", function (t) {
   npm.load(opts, function () {
     npm.config.set("sign-git-tag", false)
     which("git", function (err, git) {
-      if (err) t.fail("Git not installed, or which git command error")
+      t.ifError(err, "git found")
 
       initRepo()
 
