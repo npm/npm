@@ -1,4 +1,4 @@
-### v2.1.15 (2014-12-22):
+### v2.1.16 (2014-12-22):
 
 * [`a4e4e33`](https://github.com/npm/npm/commit/a4e4e33edb35c68813f04bf42bdf933a6f727bcd)
   [#6987](https://github.com/npm/npm/issues/6987) `read-installed@3.1.5`: fixed
