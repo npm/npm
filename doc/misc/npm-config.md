@@ -134,6 +134,14 @@ ostensibly Unix systems.
 
 The browser that is called by the `npm docs` command to open websites.
 
+### bugs
+
+* Default: `@ISSUES@`
+* Type: String
+
+The URL for the npm package issue-tracker.  This is where you go to
+report bugs in npm itself.
+
 ### ca
 
 * Default: The npm CA certificate
