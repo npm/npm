@@ -16,7 +16,7 @@ test("setup", function (t) {
 })
 
 test("mapRegistryToURI", function (t) {
-  t.plan(12)
+  t.plan(16)
 
   mapRegistry("basic", npm.config, function (er, uri, auth, registry) {
     t.ifError(er, "mapRegistryToURI worked")
@@ -67,5 +67,23 @@ test("mapRegistryToURI", function (t) {
       alwaysAuth : undefined
     })
     t.equal(registry, "http://reg.npm/-/rewrite/")
+  })
+
+  npm.config.set("scope", "test")
+  npm.config.set("@test3:registry", "http://reg.npm/design/-/rewrite/relative")
+  npm.config.set("//reg.npm/design/-/rewrite/:_authToken", "c-token")
+  mapRegistry("@test3/basic", npm.config, function (er, uri, auth, registry) {
+    t.ifError(er, "mapRegistryToURI worked")
+    t.equal(uri, "http://reg.npm/design/-/rewrite/relative/@test3%2fbasic")
+    t.deepEqual(auth, {
+      scope : "//reg.npm/design/-/rewrite/",
+      token : "c-token",
+      username : undefined,
+      password : undefined,
+      email : undefined,
+      auth : undefined,
+      alwaysAuth : undefined
+    })
+    t.equal(registry, "http://reg.npm/design/-/rewrite/relative/")
   })
 })
