@@ -91,7 +91,7 @@ test("basic request", function (t) {
 
   var versioned = common.registry + "/underscore/1.3.3"
   npm.registry.get(versioned, PARAMS, function (er, data) {
-    t.ifError(er, "loaded specifid version underscore data")
+    t.ifError(er, "loaded specified version underscore data")
     t.equal(data.version, "1.3.3")
     fs.stat(getCachePath(versioned), function (er) {
       t.ifError(er, "underscore 1.3.3 cache data written")
