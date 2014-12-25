@@ -1,3 +1,59 @@
+### v2.1.17 (2014-12-25):
+
+merry npm xmas
+
+Working with [@phated](https://github.com/phated), I discovered that npm still
+had some lingering race conditions around how it handles Git dependencies. The
+following changes were intended to remedy to these issues. Thanks to
+[@phated](https://github.com/phated) for all his help getting to the bottom of
+these.
+
+* [`bdf1c84`](https://github.com/npm/npm/commit/bdf1c8483f5c4ad79b712db12d73276e15883923)
+  [#7006](https://github.com/npm/npm/issues/7006) Only `chown` template and
+  top-level Git cache directories. ([@othiym23](https://github.com/othiym23))
+* [`581a72d`](https://github.com/npm/npm/commit/581a72da18f35ec87edef6255adf4ef4714a478c)
+  [#7006](https://github.com/npm/npm/issues/7006) Map Git remote inflighting to
+  clone paths rather than Git URLs. ([@othiym23](https://github.com/othiym23))
+* [`1c48d08`](https://github.com/npm/npm/commit/1c48d08dea31a11ac11a285cac598a482481cade)
+  [#7009](https://github.com/npm/npm/issues/7009) `normalize-git-url@1.0.0`:
+  Normalize Git URLs while caching. ([@othiym23](https://github.com/othiym23))
+* [`5423cf0`](https://github.com/npm/npm/commit/5423cf0be8ff2b76bfff7c8e780e5f261235a86a)
+  [#7009](https://github.com/npm/npm/issues/7009) Pack tarballs to their final
+  locations atomically. ([@othiym23](https://github.com/othiym23))
+* [`7f6557f`](https://github.com/npm/npm/commit/7f6557ff317469ee4a87c542ff9a991e74ce9f38)
+  [#7009](https://github.com/npm/npm/issues/7009) Inflight local directory
+  packing, just to be safe. ([@othiym23](https://github.com/othiym23))
+
+Other changes:
+
+* [`1c491e6`](https://github.com/npm/npm/commit/1c491e65d70af013e8d5ac008d6d9762d6d91793)
+  [#6991](https://github.com/npm/npm/issues/6991) `npm version`: fix regression
+  in dirty-checking behavior ([@rlidwka](https://github.com/rlidwka))
+* [`55ceb2b`](https://github.com/npm/npm/commit/55ceb2b08ff8a0f56b94cc972ca15d7862e8733c)
+  [#1991](https://github.com/npm/npm/issues/1991) modify docs to reflect actual
+  `npm restart` behavior ([@smikes](https://github.com/smikes))
+* [`fb8e31b`](https://github.com/npm/npm/commit/fb8e31b95476a50bda35a665a99eec8a5d25a4db)
+  [#6982](https://github.com/npm/npm/issues/6982) when doing registry
+  operations, ensure registry URL always ends with `/`
+  ([@othiym23](https://github.com/othiym23))
+* [`5bcba65`](https://github.com/npm/npm/commit/5bcba65bed2678ffe80fb596f72abe9871d131c8)
+  pull whitelisted Git environment variables out into a named constant
+  ([@othiym23](https://github.com/othiym23))
+* [`be04bbd`](https://github.com/npm/npm/commit/be04bbdc52ebfc820cd939df2f7d79fe87067747)
+  [#7000](https://github.com/npm/npm/issues/7000) No longer install badly-named
+  manpage files, and log an error when trying to uninstall them.
+  ([@othiym23](https://github.com/othiym23))
+* [`6b7c5ec`](https://github.com/npm/npm/commit/6b7c5eca6b65e1247d0e51f6400cf2637ac880ce)
+  [#7011](https://github.com/npm/npm/issues/7011) Send auth for tarball fetches
+  for packages in `npm-shrinkwrap.json` from private registries.
+    ([@othiym23](https://github.com/othiym23))
+* [`9b9de06`](https://github.com/npm/npm/commit/9b9de06a99893b40aa23f0335726dec6df7979db)
+  `glob@4.3.2`: Better handling of trailing slashes.
+  ([@isaacs](https://github.com/isaacs))
+* [`030f3c7`](https://github.com/npm/npm/commit/030f3c7450b8ce124a19073bfbae0948a0a1a02c)
+  `semver@4.2.0`: Diffing between version strings.
+  ([@isaacs](https://github.com/isaacs))
+
 ### v2.1.16 (2014-12-22):
 
 * [`a4e4e33`](https://github.com/npm/npm/commit/a4e4e33edb35c68813f04bf42bdf933a6f727bcd)
