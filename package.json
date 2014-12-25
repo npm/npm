@@ -165,7 +165,7 @@
   "devDependencies": {
     "marked": "~0.3.2",
     "marked-man": "~0.1.4",
-    "nock": "~0.51.0",
+    "nock": "~0.52.4",
     "npm-registry-couchapp": "~2.6.2",
     "npm-registry-mock": "~0.6.3",
     "require-inject": "~1.1.0",
