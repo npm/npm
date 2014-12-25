@@ -20,7 +20,7 @@ var responses = {
   "Email"    : "u@p.me\n"
 }
 
-function mocks(server) {
+function mocks (server) {
   server.filteringRequestBody(function (r) {
     if (r.match(/\"_id\":\"org\.couchdb\.user:u\"/)) {
       return "auth"
