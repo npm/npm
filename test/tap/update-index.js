@@ -75,10 +75,10 @@ test("request auth success", function (t) {
 test("cleanup auth", cleanup)
 
 var mocks = {
-  basic: function(server) {
+  basic: function (server) {
     server.get("/-/all").reply(200, allMock)
   },
-  auth: function(server) {
+  auth: function (server) {
     var littleBobbyTablesAuth = new Buffer("bobby:tables").toString("base64")
     var auth = "Basic " + littleBobbyTablesAuth
     server.get("/-/all", { authorization: auth }).reply(200, allMock)
