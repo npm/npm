@@ -267,6 +267,9 @@ strings that they parse.
   `v2` is greater.  Sorts in ascending order if passed to `Array.sort()`.
 * `rcompare(v1, v2)`: The reverse of compare.  Sorts an array of versions
   in descending order when passed to `Array.sort()`.
+* `diff(v1, v2)`: Returns difference between two versions by the release type
+  (`major`, `premajor`, `minor`, `preminor`, `patch`, `prepatch`, or `prerelease`),
+  or null if the versions are the same.
 
 
 ### Ranges
