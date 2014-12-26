@@ -21,7 +21,7 @@ If the package array is empty, npm will try to publish something in the
 current working directory.
 
 This command could fails if one of the packages specified already exists in
-the registry.  Overwrites when the "force" environment variable is set.
+the registry.
 
 ## SEE ALSO
 
