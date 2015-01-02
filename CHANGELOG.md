@@ -1,3 +1,9 @@
+### v2.1.18 (2015-01-01):
+
+* [`bf8640b`](https://github.com/npm/npm/commit/bf8640b0395b5dff71260a0cede7efc699a7bcf5)
+  [#7044](https://github.com/npm/npm/issues/7044) Document `.npmignore` syntax.
+  ([@zeke](https://github.com/zeke))
+
 ### v2.1.17 (2014-12-25):
 
 merry npm xmas
