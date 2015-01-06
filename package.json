@@ -92,6 +92,7 @@
     "tar": "~1.0.3",
     "text-table": "~0.2.0",
     "uid-number": "0.0.6",
+    "umask": "~1.1.0",
     "which": "~1.0.8",
     "wrappy": "~1.0.1",
     "write-file-atomic": "~1.1.0"
@@ -158,6 +159,7 @@
     "tar",
     "text-table",
     "uid-number",
+    "umask",
     "which",
     "wrappy",
     "write-file-atomic"
