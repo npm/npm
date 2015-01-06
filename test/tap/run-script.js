@@ -89,9 +89,9 @@ test('npm run-script test', function (t) {
 
 test('npm run-script env', function (t) {
   common.npm(['run-script', 'env'], opts, function (er, code, stdout, stderr) {
-    if (er)
-      throw er
+    t.ifError(er, 'failed to find default env script');
     t.notOk(stderr, 'should not generate errors')
+    t.ok( stdout.indexOf('npm_config_init_version') > 0, 'expected values in var list' )
     t.end()
   })
 })
