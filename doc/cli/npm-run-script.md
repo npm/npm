@@ -13,8 +13,8 @@ If no package name is provided, it will search for a `package.json`
 in the current folder and use its `"scripts"` object. If no `"command"`
 is provided, it will list the available top level scripts. The `env` command
 can be used to list environment variables that will be available to the script
-at runtime. The `env` command can be overridden in your package but it is
-not recommended.
+at runtime. If an "env" command is defined in your package it will have
+precedence instead.
 
 `run[-script]` is used by the test, start, restart, and stop commands, but can
 be called directly, as well.
