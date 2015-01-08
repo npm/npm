@@ -20,6 +20,15 @@ packages.
 If no package name is specified, all packages in the specified location (global
 or local) will be updated.
 
+## WARNING
+
+By design, this command does **NOT** respect semantic versioning.  Running
+`npm update` may break the current package by upgrading to incompatible newer
+versions of dependencies.
+
+Running `npm update -g` may break all globally installed packages, including
+npm itself.
+
 ## SEE ALSO
 
 * npm-install(1)
