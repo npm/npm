@@ -5,7 +5,9 @@ var test = require('tap').test
 test('github-shortcut', function (t) {
   var cloneUrls = [
     ['git://github.com/foo/private.git', 'github shortcuts try git:// first'],
-    ['ssh://git@github.com/foo/private.git', 'github shortcuts try ssh:// urls second']
+    ['ssh://git@github.com/foo/private.git', 'github shortcuts try ssh:// urls second'],
+    ['https://bitbucket.org/foo/private.git', 'bitbucket shortcuts try https:// first'],
+    ['ssh://git@bitbucket.org/foo/private.git', 'bitbucket shortcuts try ssh:// second']
   ]
   var npm = requireInject.installGlobally('../../lib/npm.js', {
     'child_process': {
@@ -26,7 +28,9 @@ test('github-shortcut', function (t) {
 
   npm.load({loglevel: 'silent'}, function () {
     npm.commands.install(['foo/private'], function (er, result) {
-      t.end()
+      npm.commands.install(['bitbucket:foo/private'], function (er, result) {
+        t.end()
+      })
     })
   })
 })

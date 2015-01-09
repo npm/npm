@@ -48,7 +48,10 @@ function plugin (server) {
 function performInstall (cb) {
   mr({port : common.port, plugin : plugin}, function (er, s) { // create mock registry.
     npm.load({registry: common.registry}, function () {
-      npm.commands.install(pkg, [], function (err) {
+      var pwd = process.cwd()
+      process.chdir(pkg)
+      npm.commands.install([], function (err) {
+        process.chdir(pwd)
         cb(err)
         s.close() // shutdown mock npm server.
       })

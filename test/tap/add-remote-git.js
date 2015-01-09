@@ -33,7 +33,7 @@ test("setup", function (t) {
 
 test("install from repo", function (t) {
   process.chdir(pkg)
-  npm.commands.install(".", [], function (er) {
+  npm.commands.install([], function (er) {
     t.ifError(er, "npm installed via git")
 
     t.end()
