@@ -50,9 +50,8 @@ test('dedupe finds the common module and moves it up one level', function (t) {
         t.ifError(err, 'successfully deduped against previous install')
         t.notOk(code, 'npm dedupe exited with code')
 
-        t.ok(existsSync(path.join(pkg, 'node_modules', 'minimist')))
-        t.notOk(existsSync(path.join(pkg, 'node_modules', 'checker')))
-
+        t.ok(existsSync(path.join(pkg, 'node_modules', 'minimist')), 'minimist module exists')
+        t.notOk(existsSync(path.join(pkg, 'node_modules', 'checker')), 'checker module does not')
         t.end()
       }
     )
