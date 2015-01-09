@@ -1,0 +1,21 @@
+{
+  "env" : {
+    "node" : true
+  },
+  "rules" : {
+    "max-len": 80,
+    "semi": [2, "never"],
+    "comma-style": [2, "last"],
+    "strict": 0,
+    "quotes": [1, "double", "avoid-escape"],
+    "no-use-before-define": 0,
+    "curly": 0,
+    "no-underscore-dangle": 0,
+    "no-lonely-if": 1,
+    "no-unused-vars": [2, {"vars" : "all", "args" : "after-used"}],
+    "no-mixed-requires": 0,
+    "no-shadow": 0,
+    "space-infix-ops": 0,
+    "key-spacing": [1, {"beforeColon" : true, "afterColon" : true}]
+  }
+}

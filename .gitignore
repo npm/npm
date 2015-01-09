@@ -26,4 +26,3 @@ npm-debug.log
 /node_modules/npm-registry-couchapp
 *.pyc
 .jshintrc
-.eslintrc
