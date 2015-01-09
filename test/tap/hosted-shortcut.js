@@ -25,8 +25,10 @@ test('setup', function (t) {
 test('github-shortcut', function (t) {
   var cloneUrls = [
     ['git://github.com/foo/private.git', 'GitHub shortcuts try git URLs first'],
-    ['https://github.com/foo/private.git', 'GitHub shortcuts try HTTPS URLs third'],
-    ['git@github.com:foo/private.git', 'GitHub shortcuts try SSH second']
+    ['https://github.com/foo/private.git', 'GitHub shortcuts try HTTPS URLs second'],
+    ['git@github.com:foo/private.git', 'GitHub shortcuts try SSH third'],
+    ['https://bitbucket.org/foo/private.git', 'bitbucket shortcuts try HTTPS URLs first'],
+    ['git@bitbucket.org:foo/private.git', 'bitbucket shortcuts try SSH second']
   ]
   var npm = requireInject.installGlobally('../../lib/npm.js', {
     'child_process': {
@@ -51,11 +53,13 @@ test('github-shortcut', function (t) {
     registry: common.registry,
     loglevel: 'silent'
   }
+  t.plan(1 + cloneUrls.length)
   npm.load(opts, function (er) {
     t.ifError(er, 'npm loaded without error')
     npm.commands.install(['foo/private'], function (er, result) {
-      t.ok(er, 'mocked install failed as expected')
-      t.end()
+      npm.commands.install(['bitbucket:foo/private'], function (er, result) {
+        t.end()
+      })
     })
   })
 })
