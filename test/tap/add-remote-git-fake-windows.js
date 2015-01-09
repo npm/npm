@@ -39,7 +39,7 @@ test("install from repo on 'Windows'", function (t) {
   require("../../lib/unbuild.js")
   process.platform = "win32"
   process.chdir(pkg)
-  npm.commands.install(".", [], function (er) {
+  npm.commands.install([], function (er) {
     t.ifError(er, "npm installed via git")
 
     t.end()
