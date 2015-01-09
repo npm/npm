@@ -52,7 +52,7 @@ test("#6311: npm ll --depth=0 duplicates listing", function (t) {
       t.notOk(stderr, "npm install ran silently")
       t.equal(
         stdout.trim(),
-        "glock@1.8.7 node_modules/glock\n└── underscore@1.5.1",
+        "+ underscore@1.5.1 node_modules/underscore\n+ glock@1.8.7 node_modules/glock",
         "got expected install output"
       )
 
