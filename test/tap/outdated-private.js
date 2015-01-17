@@ -39,7 +39,8 @@ test("outdated ignores private modules", function (t) {
               "1.3.1",
               "1.3.1",
               "1.5.1",
-              "file:underscore"
+              "file:underscore",
+              "dependencies"
             ]])
             s.close()
           })
