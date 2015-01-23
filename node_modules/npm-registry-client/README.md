@@ -290,7 +290,7 @@ any):
 * `proxy.https` {URL} The URL to proxy HTTPS requests through. Defaults to be
   the same as `proxy.http` if unset.
 * `proxy.localAddress` {IP} The local address to use on multi-homed systems.
-* `ssl.ca` {String} Cerficate signing authority certificates to trust.
+* `ssl.ca` {String} Certificate signing authority certificates to trust.
 * `ssl.certificate` {String} Client certificate (PEM encoded). Enable access
   to servers that require client certificates.
 * `ssl.key` {String} Private key (PEM encoded) for client certificate.
