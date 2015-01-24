@@ -1,3 +1,14 @@
+### v2.4.1 (2015-01-23):
+
+![bridge that doesn't meet in the middle](http://www.static-18.themodernnomad.com/wp-content/uploads/2011/08/bridge-fail.jpg)
+
+Let's accentuate the positive: the `dist-tag` endpoints for `npm dist-tag
+{add,rm,ls}` are now live on the public npm registry.
+
+* [`f70272b`](https://github.com/npm/npm/commit/f70272bed7d77032d1e21553371dd5662fef32f2)
+  `npm-registry-client@6.0.3`: Properly escape JSON tag version strings and
+  filter `_etag` from CouchDB docs. ([@othiym23](https://github.com/othiym23))
+
 ### v2.4.0 (2015-01-22):
 
 #### REGISTRY 2: ACCESS AND DIST-TAGS
