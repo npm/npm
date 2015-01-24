@@ -85,13 +85,13 @@ test("fetch dist-tags for a package", function (t) {
       t.notOk(b, "no request body")
 
       res.statusCode = 200
-      res.json({ a : "1.0.0", b : "2.0.0" })
+      res.json({ a : "1.0.0", b : "2.0.0", _etag : "xxx" })
     })
   })
 
   client.distTags.fetch(BASE_URL, PARAMS, function (error, data) {
     t.ifError(error, "no errors")
-    t.notOk(data.test, "dist-tag removed")
+    t.same(data, { a : "1.0.0", b : "2.0.0" }, "etag filtered from response")
 
     t.end()
   })

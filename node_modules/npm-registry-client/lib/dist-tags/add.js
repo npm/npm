@@ -36,7 +36,7 @@ function add (uri, params, cb) {
 
   var options = {
     method : "PUT",
-    body : params.version,
+    body : JSON.stringify(params.version),
     auth : params.auth
   }
   this.request(url.resolve(uri, rest), options, cb)

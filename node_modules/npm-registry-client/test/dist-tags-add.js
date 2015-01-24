@@ -122,10 +122,13 @@ test("add a new dist-tag to a package", function (t) {
     })
 
     req.on("end", function () {
-      t.deepEqual(b, VERSION)
+      t.doesNotThrow(function () {
+        var parsed = JSON.parse(b)
+        t.deepEqual(parsed, VERSION)
 
-      res.statusCode = 200
-      res.json({ "test" : VERSION })
+        res.statusCode = 200
+        res.json({ "test" : VERSION })
+      }, "got valid JSON from client")
     })
   })
 

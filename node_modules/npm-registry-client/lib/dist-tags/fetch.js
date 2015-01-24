@@ -30,5 +30,8 @@ function fetch (uri, params, cb) {
     method : "GET",
     auth : params.auth
   }
-  this.request(url.resolve(uri, rest), options, cb)
+  this.request(url.resolve(uri, rest), options, function (er, data) {
+    if (data && typeof data === "object") delete data._etag
+    cb(er, data)
+  })
 }

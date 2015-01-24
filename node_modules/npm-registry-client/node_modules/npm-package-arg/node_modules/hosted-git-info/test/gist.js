@@ -23,6 +23,10 @@ test("fromUrl(gist url)", function (t) {
   }
 
   verify("git@gist.github.com:222.git", "git@")
+  var hostinfo = HostedGit.fromUrl("git@gist.github.com:/ef860c7z5e0de3179341.git")
+  if (t.ok(hostinfo, "git@hex")) {
+    t.is( hostinfo.https(), "https://gist.github.com/ef860c7z5e0de3179341.git", "git@hex -> https" )
+  }
   verify("git@gist.github.com:/222.git", "git@/")
   verify("git://gist.github.com/222", "git")
   verify("git://gist.github.com/222.git", "git.git")
