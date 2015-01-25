@@ -85,10 +85,10 @@ latest:
 	@echo "Installing latest published npm"
 	@echo "Use 'make install' or 'make link' to install the code"
 	@echo "in this folder that you're looking at right now."
-	node cli.js install -g -f npm
+	node cli.js install -g -f npm ${NPMOPTS}
 
 install: all
-	node cli.js install -g -f
+	node cli.js install -g -f ${NPMOPTS}
 
 # backwards compat
 dev: install
