@@ -1,7 +1,7 @@
 {
   "version": "2.2.0",
   "name": "npm",
-  "description": "A package manager for node",
+  "description": "A package manager for JavaScript",
   "keywords": [
     "package manager",
     "modules",
