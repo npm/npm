@@ -4,7 +4,6 @@ var path = require("path")
 var test = require("tap").test
 var mkdirp = require("mkdirp")
 var rimraf = require("rimraf")
-var nock = require("nock")
 
 var npm = require("../../")
 var common = require("../common-tap.js")
@@ -51,27 +50,14 @@ test("setup", function (t) {
   }
 })
 
-test("unscoped packages can be explicitly set as public", function (t) {
-  var put = nock(common.registry)
-              .put("/publish-access")
-              .reply(201, verify)
-
-  npm.config.set("access", "public")
+test("unscoped packages cannot be restricted", function (t) {
+  npm.config.set("access", "restricted")
   npm.commands.publish([], false, function (er) {
-    t.ifError(er, "published without error")
+    t.ok(er, "got an error back")
+    t.equal(er.message, "Can't restrict access to unscoped packages.")
 
-    put.done()
     t.end()
   })
-
-  function verify (_, body) {
-    t.doesNotThrow(function () {
-      var parsed = JSON.parse(body)
-      t.equal(parsed.access, "public", "access level is correct")
-    }, "converted body back into object")
-
-    return {ok: true}
-  }
 })
 
 test("cleanup", function (t) {
