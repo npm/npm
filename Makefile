@@ -233,7 +233,7 @@ tag:
 authors:
 	@bash scripts/update-authors.sh &&\
 	git add AUTHORS &&\
-	git commit -m "update AUTHORS"
+	git commit -m "update AUTHORS" || true
 
 publish: link doc authors
 	@git push origin :v$(shell npm -v) 2>&1 || true
