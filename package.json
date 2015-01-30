@@ -165,9 +165,9 @@
     "write-file-atomic"
   ],
   "devDependencies": {
-    "marked": "~0.3.2",
+    "marked": "~0.3.3",
     "marked-man": "~0.1.4",
-    "nock": "~0.57.0",
+    "nock": "~0.59.0",
     "npm-registry-couchapp": "~2.6.2",
     "npm-registry-mock": "~0.6.3",
     "require-inject": "~1.1.0",
