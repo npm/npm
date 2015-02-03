@@ -17,7 +17,8 @@ var EXEC_OPTS = {
   stdio: "ignore",
   env: {
     "npm_config_registry": common.registry,
-    "npm_config_loglevel": "verbose"
+    "npm_config_loglevel": "verbose",
+    "npm_config_save_prefix": "^"
   }
 }
 
