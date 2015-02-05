@@ -23,7 +23,7 @@ test("installing dependencies that have conflicting peerDependencies", function 
       "/invalid.js": [200, failFile]
     }
   }
-  mr({port: common.port, mocks: customMocks}, function (s) { // create mock registry.
+  mr({port: common.port, mocks: customMocks}, function (err, s) { // create mock registry.
     npm.load({
       cache: cache,
       registry: common.registry

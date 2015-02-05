@@ -23,7 +23,7 @@ test("installing a peerDependencies-using package without a package.json present
       "/ok.js": [200, js]
     }
   }
-  mr({port: common.port, mocks: customMocks}, function (s) { // create mock registry.
+  mr({port: common.port, mocks: customMocks}, function (err, s) { // create mock registry.
     npm.load({
       registry: common.registry,
       cache: cache
