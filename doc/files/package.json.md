@@ -272,6 +272,10 @@ The URL should be a publicly available (perhaps read-only) url that can be hande
 directly to a VCS program without any modification.  It should not be a url to an
 html project page that you put in your browser.  It's for computers.
 
+For github repositories you can use shortcut syntax:
+
+    "repository": "npm/npm"
+
 ## scripts
 
 The "scripts" property is a dictionary containing script commands that are run
