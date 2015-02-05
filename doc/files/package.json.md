@@ -75,7 +75,7 @@ with your package.
 
 It should look like this:
 
-    { "url" : "http://github.com/owner/project/issues"
+    { "url" : "https://github.com/owner/project/issues"
     , "email" : "project@hostname.com"
     }
 
@@ -219,7 +219,7 @@ will create entries for `man foo` and `man 2 foo`
 
 The CommonJS [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec details a
 few ways that you can indicate the structure of your package using a `directories`
-object. If you look at [npm's package.json](http://registry.npmjs.org/npm/latest),
+object. If you look at [npm's package.json](https://registry.npmjs.org/npm/latest),
 you'll see that it has directories for doc, lib, and man.
 
 In the future, this information may be used in other creative ways.
@@ -260,12 +260,12 @@ Do it like this:
 
     "repository" :
       { "type" : "git"
-      , "url" : "http://github.com/npm/npm.git"
+      , "url" : "https://github.com/npm/npm.git"
       }
 
     "repository" :
       { "type" : "svn"
-      , "url" : "http://v8.googlecode.com/svn/trunk/"
+      , "url" : "https://v8.googlecode.com/svn/trunk/"
       }
 
 The URL should be a publicly available (perhaps read-only) url that can be handed
