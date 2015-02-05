@@ -49,7 +49,7 @@ function getCachePath (uri) {
 test("setup", function (t) {
   mkdirp.sync(CACHE_DIR)
 
-  mr({port: common.port, mocks: mocks}, function (s) {
+  mr({port: common.port, mocks: mocks}, function (err, s) {
     npm.load({cache: CACHE_DIR, registry: common.registry}, function (err) {
       t.ifError(err)
       server = s

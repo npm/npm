@@ -32,6 +32,13 @@ test("setup", function (t) {
   t.end()
 })
 
+function plugin (server) {
+  server
+    .get("/biscuits")
+    .many()
+    .reply(404, {"error": "version not found"})
+}
+
 test("npm view . in global mode", function (t) {
   process.chdir(t1dir)
   common.npm([
@@ -42,6 +49,7 @@ test("npm view . in global mode", function (t) {
   ], { cwd: t1dir }, function (err, code, stdout, stderr) {
     t.ifError(err, "view command finished successfully")
     t.equal(code, 1, "exit not ok")
+    console.log(stderr)
     t.similar(stderr, /Cannot use view command in global mode./m)
     t.end()
   })
@@ -77,7 +85,7 @@ test("npm view . with no package.json", function(t) {
 
 test("npm view . with no published package", function (t) {
   process.chdir(t3dir)
-  mr(common.port, function (s) {
+  mr({port : common.port, plugin : plugin}, function (er, s) {
     common.npm([
       "view"
     , "."
@@ -85,6 +93,7 @@ test("npm view . with no published package", function (t) {
     ], { cwd: t3dir }, function (err, code, stdout, stderr) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 1, "exit not ok")
+      console.error("foo")
       t.similar(stderr, /version not found/m)
       s.close()
       t.end()
@@ -94,7 +103,7 @@ test("npm view . with no published package", function (t) {
 
 test("npm view .", function (t) {
   process.chdir(t2dir)
-  mr(common.port, function (s) {
+  mr({port : common.port, plugin : plugin}, function (er, s) {
     common.npm([
       "view"
     , "."
@@ -112,7 +121,7 @@ test("npm view .", function (t) {
 
 test("npm view . select fields", function (t) {
   process.chdir(t2dir)
-  mr(common.port, function (s) {
+  mr({port : common.port, plugin : plugin}, function (er, s) {
     common.npm([
       "view"
     , "."
@@ -130,7 +139,7 @@ test("npm view . select fields", function (t) {
 
 test("npm view .@<version>", function (t) {
   process.chdir(t2dir)
-  mr(common.port, function (s) {
+  mr({port : common.port, plugin : plugin}, function (er, s) {
     common.npm([
       "view"
     , ".@0.0.0"
@@ -148,7 +157,7 @@ test("npm view .@<version>", function (t) {
 
 test("npm view .@<version> --json", function (t) {
   process.chdir(t2dir)
-  mr(common.port, function (s) {
+  mr({port : common.port, plugin : plugin}, function (er, s) {
     common.npm([
       "view"
     , ".@0.0.0"
@@ -166,7 +175,7 @@ test("npm view .@<version> --json", function (t) {
 })
 
 test("npm view <package name>", function (t) {
-  mr(common.port, function (s) {
+  mr({port : common.port, plugin : plugin}, function (er, s) {
     common.npm([
       "view"
     , "underscore"
@@ -183,7 +192,7 @@ test("npm view <package name>", function (t) {
 })
 
 test("npm view <package name> --global", function(t) {
-  mr(common.port, function(s) {
+  mr({port : common.port, plugin : plugin}, function (er, s) {
     common.npm([
       "view"
     , "underscore"
@@ -202,7 +211,7 @@ test("npm view <package name> --global", function(t) {
 
 test("npm view <package name> --json", function(t) {
   t.plan(3)
-  mr(common.port, function (s) {
+  mr({port : common.port, plugin : plugin}, function (er, s) {
     common.npm([
       "view"
     , "underscore"
@@ -226,7 +235,7 @@ test("npm view <package name> --json", function(t) {
 })
 
 test("npm view <package name> <field>", function (t) {
-  mr(common.port, function (s) {
+  mr({port : common.port, plugin : plugin}, function (er, s) {
     common.npm([
       "view"
     , "underscore"

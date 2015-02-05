@@ -169,7 +169,7 @@
     "marked-man": "~0.1.4",
     "nock": "~0.59.0",
     "npm-registry-couchapp": "~2.6.2",
-    "npm-registry-mock": "~0.6.3",
+    "npm-registry-mock": "1.0.0",
     "require-inject": "~1.1.0",
     "tap": "~0.5.0"
   },

@@ -15,7 +15,7 @@ var server
 
 function setup (t, mock) {
   mkdirp.sync(CACHE_DIR)
-  mr({ port: common.port, mocks: mock }, function (s) {
+  mr({ port: common.port, plugin: mock }, function (er, s) {
     npm.load({ cache: CACHE_DIR, registry: common.registry }, function (err) {
       t.ifError(err, "no error")
       server = s
