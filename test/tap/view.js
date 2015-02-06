@@ -49,7 +49,6 @@ test("npm view . in global mode", function (t) {
   ], { cwd: t1dir }, function (err, code, stdout, stderr) {
     t.ifError(err, "view command finished successfully")
     t.equal(code, 1, "exit not ok")
-    console.log(stderr)
     t.similar(stderr, /Cannot use view command in global mode./m)
     t.end()
   })
@@ -93,7 +92,6 @@ test("npm view . with no published package", function (t) {
     ], { cwd: t3dir }, function (err, code, stdout, stderr) {
       t.ifError(err, "view command finished successfully")
       t.equal(code, 1, "exit not ok")
-      console.error("foo")
       t.similar(stderr, /version not found/m)
       s.close()
       t.end()

@@ -25,10 +25,11 @@ function setup (t, mock) {
 }
 
 function cleanup (t) {
-  server.close()
-  rimraf.sync(PKG_DIR)
+  server.close(function () {
+    rimraf.sync(PKG_DIR)
 
-  t.end()
+    t.end()
+  })
 }
 
 test("setup basic", function (t) {
@@ -75,14 +76,14 @@ test("request auth success", function (t) {
 test("cleanup auth", cleanup)
 
 var mocks = {
-  basic: function (server) {
-    server.get("/-/all").reply(200, allMock)
+  basic: function (mock) {
+    mock.get("/-/all").reply(200, allMock)
   },
-  auth: function (server) {
+  auth: function (mock) {
     var littleBobbyTablesAuth = new Buffer("bobby:tables").toString("base64")
     var auth = "Basic " + littleBobbyTablesAuth
-    server.get("/-/all", { authorization: auth }).reply(200, allMock)
-    server.get("/-/all").reply(401, {
+    mock.get("/-/all", { authorization: auth }).reply(200, allMock)
+    mock.get("/-/all").reply(401, {
       error: "unauthorized",
       reason: "You are not authorized to access this db."
     })
