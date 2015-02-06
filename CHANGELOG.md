@@ -1,3 +1,31 @@
+### v2.5.1 (2015-02-06):
+
+This release doesn't look like much, but considerable effort went into ensuring
+that npm's tests will pass on io.js 1.1.0 and Node 0.11.16 / 0.12.0 on both OS
+X and Linux.
+
+**NOTE:** there are no actual changes to npm's code in `npm@2.5.1`. Only test
+code (and the upgrade of `request` to the latest version) has changed.
+
+#### `npm-registry-mock@1.0.0`:
+
+* [`0e8d473`](https://github.com/npm/npm/commit/0e8d4736a1cbdda41ae8eba8a02c7ff7ce80c2ff)
+  [#7281](https://github.com/npm/npm/issues/7281) `npm-registry-mock@1.0.0`:
+  Clean up API, set `connection: close`.
+  ([@robertkowalski](https://github.com/robertkowalski))
+* [`4707bba`](https://github.com/npm/npm/commit/4707bba7d44dfab85cc45c2ecafa9c1601ba2e9a)
+  Further update tests to work with `npm-registry-mock@1.0.0`.
+  ([@othiym23](https://github.com/othiym23))
+* [`41a0f89`](https://github.com/npm/npm/commit/41a0f8959d4e02af9661588afa7d2b4543cc21b6)
+  Got rid of completely gratuitous global config manipulation in tests.
+  ([@othiym23](https://github.com/othiym23))
+
+#### MINOR DEPENDENCY TWEAK
+
+* [`a4c7af9`](https://github.com/npm/npm/commit/a4c7af9c692f250c0fd017397ed9514fc263b752)
+  `request@2.53.0`: Tweaks to tunneling proxy behavior.
+  ([@nylen](https://github.com/nylen))
+
 ### v2.5.0 (2015-01-29):
 
 #### SMALL FEATURE I HAVE ALREADY USED TO MAINTAIN NPM ITSELF
