@@ -9,3 +9,5 @@ before_install:
   - "npm install -g npm@^2"
   - "sudo mkdir -p /var/run/couchdb"
 script: "npm run-script test-all"
+notifications:
+    slack: npm-inc:kRqQjto7YbINqHPb1X6nS3g8
