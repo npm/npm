@@ -1,40 +1,69 @@
 var fs = require("fs")
-var os = require("os")
-var mkdirp = require("mkdirp")
 var path = require("path")
-var child_process = require("child_process")
-var ini = require("ini")
+
+var mkdirp = require("mkdirp")
+var rimraf = require("rimraf")
 var test = require("tap").test
-var npmconf = require("../../lib/config/core.js")
-var common = require("./00-config-setup.js")
-var npm = require("../common-tap.js").npm
+var common = require("../common-tap.js")
 
-test("saving configs", function (t) {
-  var tmp = '~/tmp/'//os.tmpdir()
-  var dirName = 'npm-global-edit-prefix-test-' + Date.now()
-  var prefixPath = path.join(tmp, dirName)
-  mkdirp(prefixPath, "0777", function (er, prefixPath) {
-    if (er)
-      throw er
-    var editorPath = path.resolve("../editor.js")
-    var command = "npm config --prefix=\"" + prefixPath + "\" edit --global"
-    var opts = { cwd: __dirname, env: { EDITOR: editorPath } }
-    npm(
-      [
-        "config",
-        "--prefix=\"" + prefixPath + "\"",
-        "--global",
-        "edit"
-      ],
-      opts,
-      function (err, code, stdout, stderr) {
-        t.ifError(err)
+var pkg = path.resolve(__dirname, "npm-global-edit")
 
-        t.equal(stderr, "", "got nothing on stderr")
-        t.equal(code, 0, "exit ok")
-        t.equal(stdout, "success\n", "got success message")
-        t.end()
-      }
-    )
+var editorSrc = function () { /*
+#!/usr/bin/env node
+var fs = require("fs")
+if (fs.existsSync(process.argv[2])) {
+  console.log("success")
+} else {
+  console.log("error")
+  process.exit(1)
+}
+*/}.toString().split("\n").slice(1, -1).join("\n")
+var editorPath = path.resolve(pkg, "editor")
+
+test("setup", function (t) {
+  cleanup(function (er) {
+    t.ifError(er, "old directory removed")
+
+    mkdirp(pkg, "0777", function (er) {
+      fs.writeFileSync(editorPath, editorSrc)
+      fs.chmodSync(editorPath, "0777")
+      t.ifError(er, "created package directory correctly")
+      t.end()
+    })
   })
 })
+
+test("saving configs", function (t) {
+  process.env.EDITOR = editorPath
+  var opts = {
+    cwd: pkg
+  }
+  common.npm(
+    [
+      "config",
+      "--prefix", pkg,
+      "--global",
+      "edit"
+    ],
+    opts,
+    function (err, code, stdout, stderr) {
+      t.ifError(err, "command ran without issue")
+
+      t.equal(stderr, "", "got nothing on stderr")
+      t.equal(code, 0, "exit ok")
+      t.equal(stdout, "success\n", "got success message")
+      t.end()
+    }
+  )
+})
+
+test("cleanup", function (t) {
+  cleanup(function (er) {
+    t.ifError(er, "test directory removed OK")
+    t.end()
+  })
+})
+
+function cleanup (cb) {
+  rimraf(pkg, cb)
+}
