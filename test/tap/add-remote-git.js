@@ -36,6 +36,8 @@ test("install from repo", function (t) {
   npm.commands.install(".", [], function (er) {
     t.ifError(er, "npm installed via git")
 
+    t.deepEqual([], fs.readdirSync(resolve(pkg, "tmp")), "tmp directory cleaned")
+
     t.end()
   })
 })
@@ -63,13 +65,17 @@ var pjChild = JSON.stringify({
 
 function bootstrap () {
   mkdirp.sync(pkg)
+  mkdirp.sync(resolve(pkg, "tmp"))
   fs.writeFileSync(resolve(pkg, "package.json"), pjParent)
 }
 
 function setup (cb) {
   mkdirp.sync(repo)
   fs.writeFileSync(resolve(repo, "package.json"), pjChild)
-  npm.load({ registry : common.registry, loglevel : "silent" }, function () {
+  npm.load({ registry : common.registry,
+             loglevel : "silent",
+             tmp: resolve(pkg, "tmp")
+           }, function () {
     git = require("../../lib/utils/git.js")
 
     function startDaemon (cb) {
