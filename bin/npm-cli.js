@@ -28,11 +28,19 @@ var path = require("path")
   , shorthands = configDefs.shorthands
   , types = configDefs.types
   , nopt = require("nopt")
+  , engine
 
 // if npm is called as "npmg" or "npm_g", then
 // run in global mode.
 if (path.basename(process.argv[1]).slice(-1)  === "g") {
   process.argv.splice(1, 1, "npm", "-g")
+}
+
+// figure out runtime
+if (process.platform === "win32") {
+  engine = path.basename(process.execPath).replace(/\.exe$/i,"").toLowerCase()
+} else {
+  engine = path.basename(process.execPath).toLowerCase()
 }
 
 log.verbose("cli", process.argv)
@@ -55,7 +63,7 @@ if (conf.versions) {
 }
 
 log.info("using", "npm@%s", npm.version)
-log.info("using", "node@%s", process.version)
+log.info("using", "%s@%s", engine, process.version.replace("v", ""))
 
 process.on("uncaughtException", errorHandler)
 
