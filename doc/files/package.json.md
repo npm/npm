@@ -464,12 +464,18 @@ For example:
     }
 
 This ensures your package `tea-latte` can be installed *along* with the second
-major version of the host package `tea` only. The host package is automatically
-installed if needed. `npm install tea-latte` could possibly yield the following
-dependency graph:
+major version of the host package `tea` only. `npm install tea-latte` could
+possibly yield the following dependency graph:
 
     ├── tea-latte@1.3.5
     └── tea@2.2.0
+
+**NOTE: npm versions 1 and 2 will automatically install `peerDependencies` if
+they are not explicitly depended upon higher in the dependency tree. In the
+next major version of npm (npm@3), this will no longer be the case. You will
+receive a warning that the peerDependency is not installed instead.** The
+behavior in npms 1 & 2 was frequently confusing and could easily put you into
+dependency hell, a situation that npm is designed to avoid as much as possible.
 
 Trying to install another plugin with a conflicting requirement will cause an
 error. For this reason, make sure your plugin requirement is as broad as
