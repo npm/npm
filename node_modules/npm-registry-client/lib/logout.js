@@ -18,6 +18,6 @@ function logout (uri, params, cb) {
     auth: auth
   }
 
-  this.log.verbose("logout", "invalidating session tokken for user")
+  this.log.verbose("logout", "invalidating session token for user")
   this.request(uri, options, cb)
 }
