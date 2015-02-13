@@ -26,6 +26,7 @@
 * [`add5890`](https://github.com/npm/npm/commit/add5890ce447dabf120b907a85f715df1e065f44)
   [#4668](https://github.com/npm/npm/issues/4668) `read-package-json@1.3.1`:
   Warn when a `bin` symbolic link is a dangling reference.
+  ([@nicks](https://github.com/nicks))
 * [`4b42071`](https://github.com/npm/npm/commit/4b420714dfb84338d85def78c30bd665e32d72c1)
   `semver@4.3.0`: Add functions to extract parts of the version triple, fix a
   typo. ([@isaacs](https://github.com/isaacs))
