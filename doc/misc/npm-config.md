@@ -240,11 +240,16 @@ If true, then only prints color codes for tty file descriptors.
 
 ### depth
 
-* Default: Infinity
+* Default: -1
 * Type: Number
 
-The depth to go when recursing directories for `npm ls` and
-`npm cache ls`.
+The depth to go when recursing directories for `npm ls`, 
+`npm cache ls`, and `npm outdated`.
+
+If `depth` is the default (-1), the search depth will be `Infinity`
+for `npm ls` and `npm cache ls`; but for `npm outdated`, a
+setting of `-1` will be treated as `0` since that gives more
+useful information.
 
 ### description
 
