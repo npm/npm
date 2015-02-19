@@ -385,6 +385,16 @@ A proxy to use for outgoing https requests. If the `HTTPS_PROXY` or
 `https_proxy` or `HTTP_PROXY` or `http_proxy` environment variables are set,
 proxy settings will be honored by the underlying `request` library.
 
+### if-present
+
+* Default: false
+* Type: Boolean
+
+If true, npm does not exit with non-zero when `run-script` is used for a script
+that is not defined in the `scripts` list of the package.json. This option can be
+used when it's desirable to optionally run a script when it's present and fail if
+the script fails, for example to provide a generic CI setup.
+
 ### ignore-scripts
 
 * Default: false
