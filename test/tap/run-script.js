@@ -156,8 +156,16 @@ test('npm run-script nonexistent-script', function (t) {
   })
 })
 
-test('npm run-script restart when there isn"t restart', function (t) {
+test('npm run-script restart when there isn\'t restart', function (t) {
   common.npm(['run-script', 'restart'], opts, testOutput.bind(null, t, 'stop;start'))
+})
+
+test('npm run-script nonexistent-script with --if-present flag', function (t) {
+  common.npm(['run-script', '--if-present', 'nonexistent-script'], opts, function (er, code, stdout, stderr) {
+    t.ifError(er, 'npm run-script --if-present non-existent-script ran without issue')
+    t.notOk(stderr, 'should not generate errors')
+    t.end()
+  })
 })
 
 test('npm run-script no-params (lifecycle only)', function (t) {
