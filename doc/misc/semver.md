@@ -106,24 +106,18 @@ similar risk on the *next* set of prerelease versions.
 The method `.inc` takes an additional `identifier` string argument that
 will append the value of the string as a prerelease identifier:
 
-```javascript
-> semver.inc('1.2.3', 'pre', 'beta')
-'1.2.4-beta.0'
-```
+    > semver.inc('1.2.3', 'pre', 'beta')
+    '1.2.4-beta.0'
 
 command-line example:
 
-```shell
-$ semver 1.2.3 -i prerelease --preid beta
-1.2.4-beta.0
-```
+    $ semver 1.2.3 -i prerelease --preid beta
+    1.2.4-beta.0
 
 Which then can be used to increment further:
 
-```shell
-$ semver 1.2.4-beta.0 -i prerelease
-1.2.4-beta.1
-```
+    $ semver 1.2.4-beta.0 -i prerelease
+    1.2.4-beta.1
 
 ### Advanced Range Syntax
 
