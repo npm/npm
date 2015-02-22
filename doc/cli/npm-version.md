@@ -16,7 +16,9 @@ valid second argument to semver.inc (one of "patch", "minor", "major",
 the existing version will be incremented by 1 in the specified field.
 
 If run in a git repo, it will also create a version commit and tag, and
-fail if the repo is not clean.
+fail if the repo is not clean.  This behavior is controlled by the
+`git-tag-version` config option, and can be disabled on the command-line
+by running `npm --no-git-tag-version version`
 
 If supplied with `--message` (shorthand: `-m`) config option, npm will
 use it as a commit message when creating a version commit.  If the
@@ -44,3 +46,4 @@ in your git config for this to work properly.  For example:
 * npm-init(1)
 * package.json(5)
 * semver(7)
+* config(7)
