@@ -27,7 +27,7 @@ test('setup', function (t) {
 })
 
 test('npm repo underscore', function (t) {
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     common.npm([
       'repo', 'underscore',
       '--registry=' + common.registry,
@@ -45,7 +45,7 @@ test('npm repo underscore', function (t) {
 })
 
 test('npm repo optimist - github (https://)', function (t) {
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     common.npm([
       'repo', 'optimist',
       '--registry=' + common.registry,
@@ -63,7 +63,7 @@ test('npm repo optimist - github (https://)', function (t) {
 })
 
 test('npm repo npm-test-peer-deps - no repo', function (t) {
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     common.npm([
       'repo', 'npm-test-peer-deps',
       '--registry=' + common.registry,
@@ -78,7 +78,7 @@ test('npm repo npm-test-peer-deps - no repo', function (t) {
 })
 
 test('npm repo test-repo-url-http - non-github (http://)', function (t) {
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     common.npm([
       'repo', 'test-repo-url-http',
       '--registry=' + common.registry,
@@ -96,7 +96,7 @@ test('npm repo test-repo-url-http - non-github (http://)', function (t) {
 })
 
 test('npm repo test-repo-url-https - non-github (https://)', function (t) {
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     common.npm([
       'repo', 'test-repo-url-https',
       '--registry=' + common.registry,
@@ -114,7 +114,7 @@ test('npm repo test-repo-url-https - non-github (https://)', function (t) {
 })
 
 test('npm repo test-repo-url-ssh - non-github (ssh://)', function (t) {
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     common.npm([
       'repo', 'test-repo-url-ssh',
       '--registry=' + common.registry,

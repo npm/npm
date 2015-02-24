@@ -55,16 +55,16 @@ test('clean', function (t) {
 })
 
 var pjParent = JSON.stringify({
-  name : 'parent',
-  version : '1.2.3',
-  dependencies : {
-    'child' : 'git://localhost:1234/child.git'
+  name: 'parent',
+  version: '1.2.3',
+  dependencies: {
+    'child': 'git://localhost:1234/child.git'
   }
 }, null, 2) + '\n'
 
 var pjChild = JSON.stringify({
-  name : 'child',
-  version : '1.0.3'
+  name: 'child',
+  version: '1.0.3'
 }, null, 2) + '\n'
 
 function bootstrap () {
@@ -77,10 +77,10 @@ function setup (cb) {
   rimraf.sync(repo)
   mkdirp.sync(repo)
   fs.writeFileSync(resolve(repo, 'package.json'), pjChild)
-  npm.load({ registry : common.registry, loglevel : 'silent' }, function () {
+  npm.load({ registry: common.registry, loglevel: 'silent' }, function () {
     // some really cheesy monkeypatching
     require('module')._cache[require.resolve('which')] = {
-      exports : function (_, cb) { cb() }
+      exports: function (_, cb) { cb() }
     }
     git = require('../../lib/utils/git.js')
 
@@ -96,9 +96,9 @@ function setup (cb) {
           '--port=1234'
         ],
         {
-          cwd : pkg,
-          env : process.env,
-          stdio : ['pipe', 'pipe', 'pipe']
+          cwd: pkg,
+          env: process.env,
+          stdio: ['pipe', 'pipe', 'pipe']
         }
       )
       d.stderr.on('data', childFinder)
@@ -113,8 +113,8 @@ function setup (cb) {
     }
 
     var opts = {
-      cwd : repo,
-      env : process.env
+      cwd: repo,
+      env: process.env
     }
 
     chain(
@@ -126,7 +126,7 @@ function setup (cb) {
         git.chainableExec(['commit', '-m', 'stub package'], opts),
         git.chainableExec(
           ['clone', '--bare', repo, 'child.git'],
-          { cwd : pkg, env : process.env }
+          { cwd: pkg, env: process.env }
         ),
         startDaemon
       ],

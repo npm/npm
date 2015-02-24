@@ -69,17 +69,17 @@ test('set with token', function (t) {
     t.ifError(er, 'configuration loaded')
 
     t.doesNotThrow(function () {
-      conf.setCredentialsByURI(URI, {token : 'simple-token'})
+      conf.setCredentialsByURI(URI, {token: 'simple-token'})
     }, 'needs only token')
 
     var expected = {
-      scope      : '//registry.lvh.me:8661/',
-      token      : 'simple-token',
-      username   : undefined,
-      password   : undefined,
-      email      : undefined,
-      auth       : undefined,
-      alwaysAuth : undefined
+      scope: '//registry.lvh.me:8661/',
+      token: 'simple-token',
+      username: undefined,
+      password: undefined,
+      email: undefined,
+      auth: undefined,
+      alwaysAuth: undefined
     }
 
     t.same(conf.getCredentialsByURI(URI), expected, 'got bearer token and scope')
@@ -93,7 +93,7 @@ test('clear with token', function (t) {
     t.ifError(er, 'configuration loaded')
 
     t.doesNotThrow(function () {
-      conf.setCredentialsByURI(URI, {token : 'simple-token'})
+      conf.setCredentialsByURI(URI, {token: 'simple-token'})
     }, 'needs only token')
 
     t.doesNotThrow(function () {
@@ -111,8 +111,8 @@ test('set with missing username', function (t) {
     t.ifError(er, 'configuration loaded')
 
     var credentials = {
-      password : 'password',
-      email    : 'ogd@aoaioxxysz.net'
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net'
     }
 
     t.throws(function () {
@@ -128,8 +128,8 @@ test('set with missing password', function (t) {
     t.ifError(er, 'configuration loaded')
 
     var credentials = {
-      username : 'username',
-      email    : 'ogd@aoaioxxysz.net'
+      username: 'username',
+      email: 'ogd@aoaioxxysz.net'
     }
 
     t.throws(function () {
@@ -145,8 +145,8 @@ test('set with missing email', function (t) {
     t.ifError(er, 'configuration loaded')
 
     var credentials = {
-      username : 'username',
-      password : 'password'
+      username: 'username',
+      password: 'password'
     }
 
     t.throws(function () {
@@ -162,9 +162,9 @@ test('set with old-style credentials', function (t) {
     t.ifError(er, 'configuration loaded')
 
     var credentials = {
-      username : 'username',
-      password : 'password',
-      email    : 'ogd@aoaioxxysz.net'
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net'
     }
 
     t.doesNotThrow(function () {
@@ -172,13 +172,13 @@ test('set with old-style credentials', function (t) {
     }, 'requires all of username, password, and email')
 
     var expected = {
-      scope      : '//registry.lvh.me:8661/',
-      token      : undefined,
-      username   : 'username',
-      password   : 'password',
-      email      : 'ogd@aoaioxxysz.net',
-      auth       : 'dXNlcm5hbWU6cGFzc3dvcmQ=',
-      alwaysAuth : false
+      scope: '//registry.lvh.me:8661/',
+      token: undefined,
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net',
+      auth: 'dXNlcm5hbWU6cGFzc3dvcmQ=',
+      alwaysAuth: false
     }
 
     t.same(conf.getCredentialsByURI(URI), expected, 'got credentials')
@@ -192,9 +192,9 @@ test('clear with old-style credentials', function (t) {
     t.ifError(er, 'configuration loaded')
 
     var credentials = {
-      username : 'username',
-      password : 'password',
-      email    : 'ogd@aoaioxxysz.net'
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net'
     }
 
     t.doesNotThrow(function () {
@@ -216,13 +216,13 @@ test('get old-style credentials for default registry', function (t) {
   npmconf.load(common.builtin, function (er, conf) {
     var actual = conf.getCredentialsByURI(conf.get('registry'))
     var expected = {
-      scope      : '//registry.npmjs.org/',
-      token      : undefined,
-      password   : 'password',
-      username   : 'username',
-      email      : 'i@izs.me',
-      auth       : 'dXNlcm5hbWU6cGFzc3dvcmQ=',
-      alwaysAuth : false
+      scope: '//registry.npmjs.org/',
+      token: undefined,
+      password: 'password',
+      username: 'username',
+      email: 'i@izs.me',
+      auth: 'dXNlcm5hbWU6cGFzc3dvcmQ=',
+      alwaysAuth: false
     }
     t.same(actual, expected)
     t.end()
@@ -234,22 +234,22 @@ test('set with always-auth enabled', function (t) {
     t.ifError(er, 'configuration loaded')
 
     var credentials = {
-      username   : 'username',
-      password   : 'password',
-      email      : 'ogd@aoaioxxysz.net',
-      alwaysAuth : true
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net',
+      alwaysAuth: true
     }
 
     conf.setCredentialsByURI(URI, credentials)
 
     var expected = {
-      scope      : '//registry.lvh.me:8661/',
-      token      : undefined,
-      username   : 'username',
-      password   : 'password',
-      email      : 'ogd@aoaioxxysz.net',
-      auth       : 'dXNlcm5hbWU6cGFzc3dvcmQ=',
-      alwaysAuth : true
+      scope: '//registry.lvh.me:8661/',
+      token: undefined,
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net',
+      auth: 'dXNlcm5hbWU6cGFzc3dvcmQ=',
+      alwaysAuth: true
     }
 
     t.same(conf.getCredentialsByURI(URI), expected, 'got credentials')
@@ -263,22 +263,22 @@ test('set with always-auth disabled', function (t) {
     t.ifError(er, 'configuration loaded')
 
     var credentials = {
-      username   : 'username',
-      password   : 'password',
-      email      : 'ogd@aoaioxxysz.net',
-      alwaysAuth : false
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net',
+      alwaysAuth: false
     }
 
     conf.setCredentialsByURI(URI, credentials)
 
     var expected = {
-      scope      : '//registry.lvh.me:8661/',
-      token      : undefined,
-      username   : 'username',
-      password   : 'password',
-      email      : 'ogd@aoaioxxysz.net',
-      auth       : 'dXNlcm5hbWU6cGFzc3dvcmQ=',
-      alwaysAuth : false
+      scope: '//registry.lvh.me:8661/',
+      token: undefined,
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net',
+      auth: 'dXNlcm5hbWU6cGFzc3dvcmQ=',
+      alwaysAuth: false
     }
 
     t.same(conf.getCredentialsByURI(URI), expected, 'got credentials')
@@ -294,21 +294,21 @@ test('set with global always-auth enabled', function (t) {
     conf.set('always-auth', true)
 
     var credentials = {
-      username   : 'username',
-      password   : 'password',
-      email      : 'ogd@aoaioxxysz.net'
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net'
     }
 
     conf.setCredentialsByURI(URI, credentials)
 
     var expected = {
-      scope      : '//registry.lvh.me:8661/',
-      token      : undefined,
-      username   : 'username',
-      password   : 'password',
-      email      : 'ogd@aoaioxxysz.net',
-      auth       : 'dXNlcm5hbWU6cGFzc3dvcmQ=',
-      alwaysAuth : true
+      scope: '//registry.lvh.me:8661/',
+      token: undefined,
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net',
+      auth: 'dXNlcm5hbWU6cGFzc3dvcmQ=',
+      alwaysAuth: true
     }
 
     t.same(conf.getCredentialsByURI(URI), expected, 'got credentials')
@@ -325,21 +325,21 @@ test('set with global always-auth disabled', function (t) {
     conf.set('always-auth', false)
 
     var credentials = {
-      username   : 'username',
-      password   : 'password',
-      email      : 'ogd@aoaioxxysz.net'
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net'
     }
 
     conf.setCredentialsByURI(URI, credentials)
 
     var expected = {
-      scope      : '//registry.lvh.me:8661/',
-      token      : undefined,
-      username   : 'username',
-      password   : 'password',
-      email      : 'ogd@aoaioxxysz.net',
-      auth       : 'dXNlcm5hbWU6cGFzc3dvcmQ=',
-      alwaysAuth : false
+      scope: '//registry.lvh.me:8661/',
+      token: undefined,
+      username: 'username',
+      password: 'password',
+      email: 'ogd@aoaioxxysz.net',
+      auth: 'dXNlcm5hbWU6cGFzc3dvcmQ=',
+      alwaysAuth: false
     }
 
     t.same(conf.getCredentialsByURI(URI), expected, 'got credentials')

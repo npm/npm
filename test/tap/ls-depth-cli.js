@@ -19,7 +19,7 @@ test('setup', function (t) {
   cleanup()
   mkdirp.sync(pkg + '/cache')
   mkdirp.sync(pkg + '/tmp')
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     var cmd = ['install', '--registry=' + common.registry]
     common.npm(cmd, opts, function (er, c) {
       if (er) throw er

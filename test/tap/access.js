@@ -11,26 +11,26 @@ var pkg = path.resolve(__dirname, 'access')
 var server
 
 var scoped = {
-  name : '@scoped/pkg',
-  version : '1.1.1'
+  name: '@scoped/pkg',
+  version: '1.1.1'
 }
 
 var body = {
-  access : 'public'
+  access: 'public'
 }
 
 function mocks (server) {
   server.post('/-/package/@scoped%2fpkg/access', JSON.stringify(body))
-    .reply(200, { 'access' : 'public' })
+    .reply(200, { 'access': 'public' })
   server.post('/-/package/@scoped%2fanother/access', JSON.stringify(body))
-    .reply(200, { 'access' : 'public' })
+    .reply(200, { 'access': 'public' })
 }
 
 test('setup', function (t) {
   mkdirp(pkg, function (er) {
     t.ifError(er, pkg + ' made successfully')
 
-    mr({port : common.port, plugin : mocks}, function (err, s) {
+    mr({port: common.port, plugin: mocks}, function (err, s) {
       server = s
 
       fs.writeFile(
@@ -53,7 +53,7 @@ test('npm access on current package', function (t) {
       '--registry', common.registry,
       '--loglevel', 'silent'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm access')
       t.notOk(code, 'exited OK')
@@ -72,7 +72,7 @@ test('npm access on named package', function (t) {
       '--registry', common.registry,
       '--loglevel', 'silent'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm access')
       t.notOk(code, 'exited OK')

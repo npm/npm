@@ -13,7 +13,7 @@ var server
 test('mock reg', function (t) {
   rimraf.sync(cache)
   mkdirp.sync(cache)
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     server = s
     t.pass('ok')
     t.end()

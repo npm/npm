@@ -49,7 +49,7 @@ test('outdated depth deep (9999)', function (t) {
 
   process.chdir(pkg)
 
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     npm.load({
       cache: cache
     , loglevel: 'silent'

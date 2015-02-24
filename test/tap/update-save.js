@@ -38,7 +38,7 @@ var s // mock server reference
 test('setup', function (t) {
   resetPackage()
 
-  mr({port : common.port}, function (er, server) {
+  mr({port: common.port}, function (er, server) {
     npm.load({cache: CACHE_DIR, registry: common.registry}, function (err) {
       t.ifError(err)
       s = server

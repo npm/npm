@@ -47,7 +47,7 @@ function tarballWasFetched (output){
 function performInstall (t, cb) {
   mr({port: common.port, mocks: mockRoutes}, function (er, s) {
     var opts = {
-      cwd : pkg,
+      cwd: pkg,
       env: {
         'npm_config_registry': common.registry,
         'npm_config_cache_lock_stale': 1000,

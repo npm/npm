@@ -6,12 +6,12 @@ var mr = require('npm-registry-mock')
 var test = require('tap').test
 var common = require('../common-tap.js')
 
-var opts = {cwd : __dirname}
+var opts = {cwd: __dirname}
 var outfile = path.resolve(__dirname, '_npmrc')
 var responses = {
-  'Username' : 'u\n',
-  'Password' : 'p\n',
-  'Email'    : 'u@p.me\n'
+  'Username': 'u\n',
+  'Password': 'p\n',
+  'Email': 'u@p.me\n'
 }
 
 function mocks (server) {
@@ -21,11 +21,11 @@ function mocks (server) {
     }
   })
   server.put('/-/user/org.couchdb.user:u', 'auth')
-    .reply(201, {username : 'u', password : 'p', email : 'u@p.me'})
+    .reply(201, {username: 'u', password: 'p', email: 'u@p.me'})
 }
 
 test('npm login', function (t) {
-  mr({port : common.port, plugin : mocks}, function (er, s) {
+  mr({port: common.port, plugin: mocks}, function (er, s) {
     var runner = common.npm(
     [
       'login',
@@ -63,7 +63,7 @@ test('npm login', function (t) {
 })
 
 test('npm login --always-auth', function (t) {
-  mr({port : common.port, plugin : mocks}, function (er, s) {
+  mr({port: common.port, plugin: mocks}, function (er, s) {
     var runner = common.npm(
     [
       'login',
@@ -102,7 +102,7 @@ test('npm login --always-auth', function (t) {
 })
 
 test('npm login --no-always-auth', function (t) {
-  mr({port : common.port, plugin : mocks}, function (er, s) {
+  mr({port: common.port, plugin: mocks}, function (er, s) {
     var runner = common.npm(
     [
       'login',

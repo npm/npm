@@ -161,7 +161,7 @@ test('cleanup', function (t) {
 })
 
 function stringifyUpdated (time) {
-  return JSON.stringify({ _updated : String(time) })
+  return JSON.stringify({ _updated: String(time) })
 }
 
 var allMock = {

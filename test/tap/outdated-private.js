@@ -21,12 +21,12 @@ test('setup', function (t) {
 test('outdated ignores private modules', function (t) {
   t.plan(3)
   process.chdir(pkg)
-  mr({ port : common.port }, function (err, s) {
+  mr({ port: common.port }, function (err, s) {
     npm.load(
       {
-        loglevel  : 'silent',
-        parseable : true,
-        registry  : common.registry
+        loglevel: 'silent',
+        parseable: true,
+        registry: common.registry
       },
       function () {
         npm.install('.', function (err) {
@@ -55,30 +55,30 @@ test('cleanup', function (t) {
 })
 
 var pjParent = JSON.stringify({
-  name         : 'outdated-private',
-  version      : '1.0.0',
-  dependencies : {
-    'local-private' : 'file:local-private',
-    '@scoped/another-local-private' : 'file:another-local-private',
-    'underscore' : 'file:underscore'
+  name: 'outdated-private',
+  version: '1.0.0',
+  dependencies: {
+    'local-private': 'file:local-private',
+    '@scoped/another-local-private': 'file:another-local-private',
+    'underscore': 'file:underscore'
   }
 }, null, 2) + '\n'
 
 var pjLocalPrivate = JSON.stringify({
-  name         : 'local-private',
-  version      : '1.0.0',
-  private      : true
+  name: 'local-private',
+  version: '1.0.0',
+  private: true
 }, null, 2) + '\n'
 
 var pjScopedLocalPrivate = JSON.stringify({
-  name         : '@scoped/another-local-private',
-  version      : '1.0.0',
-  private      : true
+  name: '@scoped/another-local-private',
+  version: '1.0.0',
+  private: true
 }, null, 2) + '\n'
 
 var pjLocalUnderscore = JSON.stringify({
-  name         : 'underscore',
-  version      : '1.3.1'
+  name: 'underscore',
+  version: '1.3.1'
 }, null, 2) + '\n'
 
 function bootstrap () {

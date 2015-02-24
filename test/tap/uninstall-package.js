@@ -8,7 +8,7 @@ var pkg = path.join(__dirname, 'uninstall-package')
 
 test('returns a list of removed items', function (t) {
   t.plan(1)
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     setup(function () {
       npm.install('.', function (err) {
         if (err) return t.fail(err)

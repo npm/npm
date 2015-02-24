@@ -12,7 +12,7 @@ var glb = resolve(__dirname, 'test-global')
 var lnk = resolve(__dirname, 'test-global-link')
 
 var EXEC_OPTS = {
-  cwd : pkg
+  cwd: pkg
 }
 
 test('setup', function (t) {

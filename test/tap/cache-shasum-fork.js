@@ -16,7 +16,7 @@ test('mock reg', function (t) {
   mkdirp.sync(cache)
   rimraf.sync(cwd)
   mkdirp.sync(path.join(cwd, 'node_modules'))
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     server = s
     t.pass('ok')
     t.end()
@@ -31,9 +31,9 @@ test('npm cache - install from fork', function (t) {
   common.npm(['install', forkPath], {
       cwd: cwd,
       env: {
-        'npm_config_cache'    : cache,
-        'npm_config_registry' : common.registry,
-        'npm_config_loglevel' : 'silent'
+        'npm_config_cache': cache,
+        'npm_config_registry': common.registry,
+        'npm_config_loglevel': 'silent'
       }
   }, function (err, code, stdout, stderr) {
     t.ifErr(err, 'install finished without error')
@@ -57,9 +57,9 @@ test('npm cache - install from origin', function (t) {
   common.npm(['install', 'underscore'], {
       cwd: cwd,
       env: {
-        'npm_config_cache'    : cache,
-        'npm_config_registry' : common.registry,
-        'npm_config_loglevel' : 'silent'
+        'npm_config_cache': cache,
+        'npm_config_registry': common.registry,
+        'npm_config_loglevel': 'silent'
       }
   }, function (err, code, stdout, stderr) {
     t.ifErr(err, 'install finished without error')

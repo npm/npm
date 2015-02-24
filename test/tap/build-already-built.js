@@ -20,7 +20,7 @@ test('setup', function (t) {
 })
 
 test('issue #6735 build "already built" message', function (t) {
-  npm.load({loglevel : 'warn'}, function () {
+  npm.load({loglevel: 'warn'}, function () {
     // capture log messages with level
     var log = ''
     npmlog.on('log', function (chunk) {

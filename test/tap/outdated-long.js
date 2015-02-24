@@ -35,12 +35,12 @@ test('it should not throw', function (t) {
   console.log = function () {
     output.push.apply(output, arguments)
   }
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     npm.load({
-      cache : 'cache',
-      loglevel : 'silent',
-      parseable : true,
-      registry : common.registry
+      cache: 'cache',
+      loglevel: 'silent',
+      parseable: true,
+      registry: common.registry
     },
     function () {
       npm.install('.', function (err) {

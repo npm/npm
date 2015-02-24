@@ -10,7 +10,7 @@ var pkg = join(__dirname, 'install-from-local', 'package-with-scoped-paths')
 var modules = join(pkg, 'node_modules')
 
 var EXEC_OPTS = {
-  cwd : pkg
+  cwd: pkg
 }
 
 test('setup', function (t) {

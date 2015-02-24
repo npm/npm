@@ -43,9 +43,9 @@ var realizePackageSpecifier = requireInject('realize-package-specifier', {
   }
 })
 
-npm.load({loglevel : 'silent'}, function () {
+npm.load({loglevel: 'silent'}, function () {
   var cache = requireInject('../../lib/cache.js', {
-    'realize-package-specifier':  realizePackageSpecifier,
+    'realize-package-specifier': realizePackageSpecifier,
     '../../lib/cache/add-named.js': function addNamed (name, version, data, cb) {
       cb(null, 'addNamed')
     },

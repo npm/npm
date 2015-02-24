@@ -51,9 +51,9 @@ test('clean', function (t) {
 })
 
 var json = {
-  name    : 'install-man',
-  version : '1.2.3',
-  man     : [ './install-man.1' ]
+  name: 'install-man',
+  version: '1.2.3',
+  man: [ './install-man.1' ]
 }
 
 function setup () {

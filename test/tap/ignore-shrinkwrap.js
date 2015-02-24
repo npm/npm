@@ -10,8 +10,8 @@ var node = process.execPath
 
 var customMocks = {
   'get': {
-    '/package.js': [200, {'ente' : true}],
-    '/shrinkwrap.js': [200, {'ente' : true}]
+    '/package.js': [200, {'ente': true}],
+    '/shrinkwrap.js': [200, {'ente': true}]
   }
 }
 

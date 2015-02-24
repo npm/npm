@@ -21,12 +21,12 @@ test('issue #6684 remove confusing message', function (t) {
 
   var initJsonMock = function (dir, input, config, cb) {
     process.nextTick(function () {
-      cb({message : 'canceled'})
+      cb({message: 'canceled'})
     })
   }
   initJsonMock.yes = function () { return true }
 
-  npm.load({loglevel : 'silent'}, function () {
+  npm.load({loglevel: 'silent'}, function () {
     var log = ''
     var init = requireInject('../../lib/init', {
       'init-package-json': initJsonMock

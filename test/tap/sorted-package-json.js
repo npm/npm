@@ -23,7 +23,7 @@ test('sorting dependencies', function (t) {
 
   var before = JSON.parse(fs.readFileSync(packageJson).toString())
 
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     // underscore is already in the package.json,
     // but --save will trigger a rewrite with sort
     var child = spawn(node, [npm, 'install', '--save', 'underscore@1.3.3'], {

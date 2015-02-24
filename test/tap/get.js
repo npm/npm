@@ -16,19 +16,19 @@ var FOLLOW   = false
 var STALE_OK = true
 var TOKEN    = 'lolbutts'
 var AUTH     = {
-  token   : TOKEN
+  token: TOKEN
 }
 var PARAMS   = {
-  timeout : TIMEOUT,
-  follow  : FOLLOW,
-  staleOk : STALE_OK,
-  auth    : AUTH
+  timeout: TIMEOUT,
+  follow: FOLLOW,
+  staleOk: STALE_OK,
+  auth: AUTH
 }
 var PKG_DIR = path.resolve(__dirname, 'get-basic')
 var CACHE_DIR = path.resolve(PKG_DIR, 'cache')
 var BIGCO_SAMPLE = {
-  name : '@bigco/sample',
-  version : '1.2.3'
+  name: '@bigco/sample',
+  version: '1.2.3'
 }
 
 // mock server reference
@@ -36,7 +36,7 @@ var server
 
 var mocks = {
   'get': {
-    '/@bigco%2fsample/1.2.3' : [200, BIGCO_SAMPLE]
+    '/@bigco%2fsample/1.2.3': [200, BIGCO_SAMPLE]
   }
 }
 

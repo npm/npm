@@ -30,8 +30,8 @@ test('npm version <semver> updates git works with no shrinkwrap', function (t) {
   rimraf.sync(path.resolve(pkg, 'npm-shrinkwrap.json'))
 
   var opts = {
-    cache : cache,
-    registry : common.registry
+    cache: cache,
+    registry: common.registry
   }
   npm.load(opts, function () {
     npm.config.set('sign-git-tag', false)
@@ -128,8 +128,8 @@ test('npm version <semver> updates shrinkwrap and updates git', function (t) {
   setup()
 
   var opts = {
-    cache : cache,
-    registry : common.registry
+    cache: cache,
+    registry: common.registry
   }
   npm.load(opts, function () {
     npm.config.set('sign-git-tag', false)

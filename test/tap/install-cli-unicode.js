@@ -10,12 +10,12 @@ function hasOnlyAscii (s) {
 }
 
 var EXEC_OPTS = {
-  cwd : pkg
+  cwd: pkg
 }
 
 test('does not use unicode with --unicode false', function (t) {
   t.plan(5)
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     common.npm(['install', '--unicode', 'false', 'read'], EXEC_OPTS, function (err, code, stdout) {
       t.ifError(err, 'install package read without unicode success')
       t.notOk(code, 'npm install exited with code 0')
@@ -28,7 +28,7 @@ test('does not use unicode with --unicode false', function (t) {
 })
 
 test('cleanup', function (t) {
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     common.npm(['uninstall', 'read'], EXEC_OPTS, function (err, code) {
       t.ifError(err, 'uninstall read package success')
       t.notOk(code, 'npm uninstall exited with code 0')

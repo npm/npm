@@ -26,12 +26,12 @@ var expected =
 var server
 
 var EXEC_OPTS = {
-  cwd : pkg
+  cwd: pkg
 }
 
 test('setup', function (t) {
   setup()
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     server = s
 
     t.end()
@@ -88,14 +88,14 @@ test('cleanup', function (t) {
 })
 
 var fixture = {
-  'name' : 'glock',
-  'version' : '1.8.7',
-  'private' : true,
-  'description' : 'an inexplicably hostile sample package',
-  'homepage' : 'https://glo.ck',
-  'repository' : 'https://github.com/npm/glo.ck',
-  'dependencies' : {
-    'underscore' : '1.5.1'
+  'name': 'glock',
+  'version': '1.8.7',
+  'private': true,
+  'description': 'an inexplicably hostile sample package',
+  'homepage': 'https://glo.ck',
+  'repository': 'https://github.com/npm/glo.ck',
+  'dependencies': {
+    'underscore': '1.5.1'
   }
 }
 
