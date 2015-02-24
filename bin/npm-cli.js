@@ -1,47 +1,49 @@
 #!/usr/bin/env node
+/*eslint-disable no-extra-semi */
 ;(function () { // wrapper in case we're in module_context mode
+/*eslint-enable no-extra-semi */
 
 // windows: running "npm blah" in this folder will invoke WSH, not node.
-if (typeof WScript !== "undefined") {
-  WScript.echo("npm does not work when run\n"
-              +"with the Windows Scripting Host\n\n"
-              +"'cd' to a different directory,\n"
-              +"or type 'npm.cmd <args>',\n"
-              +"or type 'node npm <args>'.")
+if (typeof WScript !== 'undefined') {
+  WScript.echo('npm does not work when run\n'
+              +'with the Windows Scripting Host\n\n'
+              +'\'cd\' to a different directory,\n'
+              +'or type \'npm.cmd <args>\',\n'
+              +'or type \'node npm <args>\'.')
   WScript.quit(1)
   return
 }
 
+process.title = 'npm'
 
-process.title = "npm"
-
-var log = require("npmlog")
+var log = require('npmlog')
 log.pause() // will be unpaused when config is loaded.
-log.info("it worked if it ends with", "ok")
+log.enableProgress()
 
-var path = require("path")
-  , npm = require("../lib/npm.js")
-  , npmconf = require("../lib/config/core.js")
-  , errorHandler = require("../lib/utils/error-handler.js")
+log.info('it worked if it ends with', 'ok')
 
-  , configDefs = npmconf.defs
-  , shorthands = configDefs.shorthands
-  , types = configDefs.types
-  , nopt = require("nopt")
+var path = require('path')
+var npm = require('../lib/npm.js')
+var npmconf = require('../lib/config/core.js')
+var errorHandler = require('../lib/utils/error-handler.js')
+
+var configDefs = npmconf.defs
+var shorthands = configDefs.shorthands
+var types = configDefs.types
+var nopt = require('nopt')
 
 // if npm is called as "npmg" or "npm_g", then
 // run in global mode.
-if (path.basename(process.argv[1]).slice(-1)  === "g") {
-  process.argv.splice(1, 1, "npm", "-g")
+if (path.basename(process.argv[1]).slice(-1)  === 'g') {
+  process.argv.splice(1, 1, 'npm', '-g')
 }
 
-log.verbose("cli", process.argv)
+log.verbose('cli', process.argv)
 
 var conf = nopt(types, shorthands)
 npm.argv = conf.argv.remain
 if (npm.deref(npm.argv[0])) npm.command = npm.argv.shift()
 else conf.usage = true
-
 
 if (conf.version) {
   console.log(npm.version)
@@ -49,19 +51,19 @@ if (conf.version) {
 }
 
 if (conf.versions) {
-  npm.command = "version"
+  npm.command = 'version'
   conf.usage = false
   npm.argv = []
 }
 
-log.info("using", "npm@%s", npm.version)
-log.info("using", "node@%s", process.version)
+log.info('using', 'npm@%s', npm.version)
+log.info('using', 'node@%s', process.version)
 
-process.on("uncaughtException", errorHandler)
+process.on('uncaughtException', errorHandler)
 
-if (conf.usage && npm.command !== "help") {
+if (conf.usage && npm.command !== 'help') {
   npm.argv.unshift(npm.command)
-  npm.command = "help"
+  npm.command = 'help'
 }
 
 // now actually fire up npm and run the command.
@@ -71,5 +73,4 @@ npm.load(conf, function (er) {
   if (er) return errorHandler(er)
   npm.commands[npm.command](npm.argv, errorHandler)
 })
-
 })()

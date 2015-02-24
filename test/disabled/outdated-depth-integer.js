@@ -1,9 +1,9 @@
 var common = require('../common-tap')
-  , test = require('tap').test
-  , rimraf = require('rimraf')
-  , npm = require('../../')
-  , mr = require('npm-registry-mock')
-  , pkg = __dirname + '/outdated-depth'
+var test = require('tap').test
+var rimraf = require('rimraf')
+var npm = require('../../')
+var mr = require('npm-registry-mock')
+var pkg = __dirname + '/outdated-depth'
 
 function cleanup () {
   rimraf.sync(pkg + '/node_modules')
@@ -24,7 +24,7 @@ test('outdated depth integer', function (t) {
 
   process.chdir(pkg)
 
-  mr({port : common.port}, function (s) {
+  mr({port: common.port}, function (s) {
     npm.load({
       cache: pkg + '/cache'
     , loglevel: 'silent'
@@ -46,7 +46,7 @@ test('outdated depth integer', function (t) {
   })
 })
 
-test("cleanup", function (t) {
+test('cleanup', function (t) {
   cleanup()
   t.end()
 })
