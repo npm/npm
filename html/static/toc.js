@@ -1,4 +1,6 @@
+/*eslint-disable no-extra-semi */
 ;(function () {
+/*eslint-enable no-extra-semi */
 var wrapper = document.getElementById('wrapper')
 var els = Array.prototype.slice.call(wrapper.getElementsByTagName('*'), 0)
   .filter(function (el) {

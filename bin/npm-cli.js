@@ -1,5 +1,7 @@
 #!/usr/bin/env node
+/*eslint-disable no-extra-semi */
 ;(function () { // wrapper in case we're in module_context mode
+/*eslint-enable no-extra-semi */
 
 // windows: running "npm blah" in this folder will invoke WSH, not node.
 if (typeof WScript !== 'undefined') {
