@@ -7,10 +7,7 @@ var common = require('../common-tap.js')
 var mr = require('npm-registry-mock')
 
 var test = require('tap').test
-var npm = require.resolve('../../bin/npm-cli.js')
-var node = process.execPath
 var rimraf = require('rimraf')
-var spawn = require('child_process').spawn
 var fs = require('fs')
 var path = require('path')
 var outFile = path.join(__dirname, '/_output')

@@ -6,7 +6,6 @@ if (process.argv[2] === 'write-builtin') {
   return
 }
 
-var rcdata = 'foo=bar\npid=' + process.pid + '\n'
 var common = require('../common-tap.js')
 var path = require('path')
 var rimraf = require('rimraf')

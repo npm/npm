@@ -4,7 +4,6 @@ if (argv.length < 3) {
   process.exit(1)
 }
 
-var fs = require('fs')
 var file = argv[2]
 var readJson = require('read-package-json')
 
