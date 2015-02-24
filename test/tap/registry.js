@@ -44,7 +44,6 @@ function runTests () {
         t.fail('install failed with: ' + code)
         t.end()
       })
-
     } else {
       opts = {
         cwd: ca,

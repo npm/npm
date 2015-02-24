@@ -78,7 +78,6 @@ test('npm version <semver> updates git works with no shrinkwrap', function (t) {
 
           commit()
         })
-
       }
 
       function commit () {
@@ -89,7 +88,6 @@ test('npm version <semver> updates git works with no shrinkwrap', function (t) {
 
           version()
         })
-
       }
 
       function version () {
@@ -178,7 +176,6 @@ test('npm version <semver> updates shrinkwrap and updates git', function (t) {
 
           commit()
         })
-
       }
 
       function commit () {
@@ -189,7 +186,6 @@ test('npm version <semver> updates shrinkwrap and updates git', function (t) {
 
           version()
         })
-
       }
 
       function version () {

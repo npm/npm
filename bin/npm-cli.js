@@ -73,5 +73,4 @@ npm.load(conf, function (er) {
   if (er) return errorHandler(er)
   npm.commands[npm.command](npm.argv, errorHandler)
 })
-
 })()
