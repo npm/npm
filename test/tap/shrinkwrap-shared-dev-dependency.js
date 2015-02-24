@@ -1,23 +1,23 @@
-var npm = npm = require("../../")
-var test = require("tap").test
-var path = require("path")
-var fs = require("fs")
-var osenv = require("osenv")
-var rimraf = require("rimraf")
-var mr = require("npm-registry-mock")
-var common = require("../common-tap.js")
+var npm = npm = require('../../')
+var test = require('tap').test
+var path = require('path')
+var fs = require('fs')
+var osenv = require('osenv')
+var rimraf = require('rimraf')
+var mr = require('npm-registry-mock')
+var common = require('../common-tap.js')
 
-var pkg = path.resolve(__dirname, "shrinkwrap-shared-dev-dependency")
-var desiredResultsPath = path.resolve(pkg, "desired-shrinkwrap-results.json")
+var pkg = path.resolve(__dirname, 'shrinkwrap-shared-dev-dependency')
+var desiredResultsPath = path.resolve(pkg, 'desired-shrinkwrap-results.json')
 
-test("shrinkwrap doesn't strip out the shared dependency", function (t) {
+test('shrinkwrap doesn\'t strip out the shared dependency', function (t) {
   t.plan(1)
 
   mr({port : common.port}, function (er, s) {
     setup(function (err) {
       if (err) return t.fail(err)
 
-      npm.install(".", function (err) {
+      npm.install('.', function (err) {
         if (err) return t.fail(err)
 
         npm.commands.shrinkwrap([], true, function (err, results) {
@@ -36,7 +36,7 @@ test("shrinkwrap doesn't strip out the shared dependency", function (t) {
   })
 })
 
-test("cleanup", function (t) {
+test('cleanup', function (t) {
   cleanup()
   t.end()
 })
@@ -46,13 +46,13 @@ function setup (cb) {
   cleanup()
   process.chdir(pkg)
 
-  var opts = { cache: path.resolve(pkg, "cache"), registry: common.registry }
+  var opts = { cache: path.resolve(pkg, 'cache'), registry: common.registry }
   npm.load(opts, cb)
 }
 
 function cleanup () {
   process.chdir(osenv.tmpdir())
-  rimraf.sync(path.resolve(pkg, "node_modules"))
-  rimraf.sync(path.resolve(pkg, "cache"))
-  rimraf.sync(path.resolve(pkg, "npm-shrinkwrap.json"))
+  rimraf.sync(path.resolve(pkg, 'node_modules'))
+  rimraf.sync(path.resolve(pkg, 'cache'))
+  rimraf.sync(path.resolve(pkg, 'npm-shrinkwrap.json'))
 }

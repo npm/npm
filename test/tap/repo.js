@@ -1,32 +1,32 @@
-if (process.platform === "win32") {
-  console.error("skipping test, because windows and shebangs")
+if (process.platform === 'win32') {
+  console.error('skipping test, because windows and shebangs')
   return
 }
 
-var common = require("../common-tap.js")
-var mr = require("npm-registry-mock")
+var common = require('../common-tap.js')
+var mr = require('npm-registry-mock')
 
-var test = require("tap").test
-var npm = require.resolve("../../bin/npm-cli.js")
+var test = require('tap').test
+var npm = require.resolve('../../bin/npm-cli.js')
 var node = process.execPath
-var rimraf = require("rimraf")
-var spawn = require("child_process").spawn
-var fs = require("fs")
+var rimraf = require('rimraf')
+var spawn = require('child_process').spawn
+var fs = require('fs')
 var path = require('path')
 var outFile = path.join(__dirname, '/_output')
 
 var opts = { cwd: __dirname }
 
-test("setup", function (t) {
-  var s = "#!/usr/bin/env bash\n" +
-          "echo \"$@\" > " + JSON.stringify(__dirname) + "/_output\n"
-  fs.writeFileSync(__dirname + "/_script.sh", s, "ascii")
-  fs.chmodSync(__dirname + "/_script.sh", "0755")
-  t.pass("made script")
+test('setup', function (t) {
+  var s = '#!/usr/bin/env bash\n' +
+          'echo \"$@\" > ' + JSON.stringify(__dirname) + '/_output\n'
+  fs.writeFileSync(__dirname + '/_script.sh', s, 'ascii')
+  fs.chmodSync(__dirname + '/_script.sh', '0755')
+  t.pass('made script')
   t.end()
 })
 
-test("npm repo underscore", function (t) {
+test('npm repo underscore', function (t) {
   mr({port : common.port}, function (er, s) {
     common.npm([
       'repo', 'underscore',
@@ -37,7 +37,7 @@ test("npm repo underscore", function (t) {
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
-      t.equal(res, "https://github.com/jashkenas/underscore\n")
+      t.equal(res, 'https://github.com/jashkenas/underscore\n')
       rimraf.sync(outFile)
       t.end()
     })
@@ -56,14 +56,14 @@ test('npm repo optimist - github (https://)', function (t) {
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
-      t.equal(res, "https://github.com/substack/node-optimist\n")
+      t.equal(res, 'https://github.com/substack/node-optimist\n')
       rimraf.sync(outFile)
       t.end()
     })
   })
 })
 
-test("npm repo npm-test-peer-deps - no repo", function (t) {
+test('npm repo npm-test-peer-deps - no repo', function (t) {
   mr({port : common.port}, function (er, s) {
     common.npm([
       'repo', 'npm-test-peer-deps',
@@ -78,7 +78,7 @@ test("npm repo npm-test-peer-deps - no repo", function (t) {
   })
 })
 
-test("npm repo test-repo-url-http - non-github (http://)", function (t) {
+test('npm repo test-repo-url-http - non-github (http://)', function (t) {
   mr({port : common.port}, function (er, s) {
     common.npm([
       'repo', 'test-repo-url-http',
@@ -89,14 +89,14 @@ test("npm repo test-repo-url-http - non-github (http://)", function (t) {
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
-      t.equal(res, "http://gitlab.com/evanlucas/test-repo-url-http\n")
+      t.equal(res, 'http://gitlab.com/evanlucas/test-repo-url-http\n')
       rimraf.sync(outFile)
       t.end()
     })
   })
 })
 
-test("npm repo test-repo-url-https - non-github (https://)", function (t) {
+test('npm repo test-repo-url-https - non-github (https://)', function (t) {
   mr({port : common.port}, function (er, s) {
     common.npm([
       'repo', 'test-repo-url-https',
@@ -107,14 +107,14 @@ test("npm repo test-repo-url-https - non-github (https://)", function (t) {
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
-      t.equal(res, "https://gitlab.com/evanlucas/test-repo-url-https\n")
+      t.equal(res, 'https://gitlab.com/evanlucas/test-repo-url-https\n')
       rimraf.sync(outFile)
       t.end()
     })
   })
 })
 
-test("npm repo test-repo-url-ssh - non-github (ssh://)", function (t) {
+test('npm repo test-repo-url-ssh - non-github (ssh://)', function (t) {
   mr({port : common.port}, function (er, s) {
     common.npm([
       'repo', 'test-repo-url-ssh',
@@ -125,15 +125,15 @@ test("npm repo test-repo-url-ssh - non-github (ssh://)", function (t) {
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
-      t.equal(res, "http://gitlab.com/evanlucas/test-repo-url-ssh\n")
+      t.equal(res, 'http://gitlab.com/evanlucas/test-repo-url-ssh\n')
       rimraf.sync(outFile)
       t.end()
     })
   })
 })
 
-test("cleanup", function (t) {
-  fs.unlinkSync(__dirname + "/_script.sh")
-  t.pass("cleaned up")
+test('cleanup', function (t) {
+  fs.unlinkSync(__dirname + '/_script.sh')
+  t.pass('cleaned up')
   t.end()
 })

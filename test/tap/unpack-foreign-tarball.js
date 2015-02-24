@@ -1,69 +1,69 @@
-var test = require("tap").test
-var rimraf = require("rimraf")
-var mkdirp = require("mkdirp")
-var common = require("../common-tap.js")
-var path = require("path")
-var fs = require("fs")
-var dir = path.resolve(__dirname, "unpack-foreign-tarball")
-var root = path.resolve(dir, "root")
-var nm = path.resolve(root, "node_modules")
-var cache = path.resolve(dir, "cache")
-var tmp = path.resolve(dir, "tmp")
-var pkg = path.resolve(nm, "npm-test-gitignore")
+var test = require('tap').test
+var rimraf = require('rimraf')
+var mkdirp = require('mkdirp')
+var common = require('../common-tap.js')
+var path = require('path')
+var fs = require('fs')
+var dir = path.resolve(__dirname, 'unpack-foreign-tarball')
+var root = path.resolve(dir, 'root')
+var nm = path.resolve(root, 'node_modules')
+var cache = path.resolve(dir, 'cache')
+var tmp = path.resolve(dir, 'tmp')
+var pkg = path.resolve(nm, 'npm-test-gitignore')
 
 var env = {
-  "npm_config_cache": cache,
-  "npm_config_tmp": tmp
+  'npm_config_cache': cache,
+  'npm_config_tmp': tmp
 }
 
 var conf = {
   env: env,
   cwd: root,
-  stdio: [ "pipe", "pipe", 2 ]
+  stdio: [ 'pipe', 'pipe', 2 ]
 }
 
 function verify (t, files, err, code) {
   if (code) {
-    t.fail("exited with failure: " + code)
+    t.fail('exited with failure: ' + code)
     return t.end()
   }
   var actual = fs.readdirSync(pkg).sort()
-  var expect = files.concat([".npmignore", "package.json"]).sort()
+  var expect = files.concat(['.npmignore', 'package.json']).sort()
   t.same(actual, expect)
   t.end()
 }
 
-test("npmignore only", function (t) {
+test('npmignore only', function (t) {
   setup()
-  var file = path.resolve(dir, "npmignore.tgz")
-  common.npm(["install", file], conf, verify.bind(null, t, ["foo"]))
+  var file = path.resolve(dir, 'npmignore.tgz')
+  common.npm(['install', file], conf, verify.bind(null, t, ['foo']))
 })
 
-test("gitignore only", function (t) {
+test('gitignore only', function (t) {
   setup()
-  var file = path.resolve(dir, "gitignore.tgz")
-  common.npm(["install", file], conf, verify.bind(null, t, ["foo"]))
+  var file = path.resolve(dir, 'gitignore.tgz')
+  common.npm(['install', file], conf, verify.bind(null, t, ['foo']))
 })
 
-test("gitignore and npmignore", function (t) {
+test('gitignore and npmignore', function (t) {
   setup()
-  var file = path.resolve(dir, "gitignore-and-npmignore.tgz")
-  common.npm(["install", file], conf, verify.bind(null, t, ["foo", "bar"]))
+  var file = path.resolve(dir, 'gitignore-and-npmignore.tgz')
+  common.npm(['install', file], conf, verify.bind(null, t, ['foo', 'bar']))
 })
 
-test("gitignore and npmignore, not gzipped 1/2", function (t) {
+test('gitignore and npmignore, not gzipped 1/2', function (t) {
   setup()
-  var file = path.resolve(dir, "gitignore-and-npmignore.tar")
-  common.npm(["install", file], conf, verify.bind(null, t, ["foo", "bar"]))
+  var file = path.resolve(dir, 'gitignore-and-npmignore.tar')
+  common.npm(['install', file], conf, verify.bind(null, t, ['foo', 'bar']))
 })
 
-test("gitignore and npmignore, not gzipped 2/2", function (t) {
+test('gitignore and npmignore, not gzipped 2/2', function (t) {
   setup()
-  var file = path.resolve(dir, "gitignore-and-npmignore-2.tar")
-  common.npm(["install", file], conf, verify.bind(null, t, ["foo", "bar"]))
+  var file = path.resolve(dir, 'gitignore-and-npmignore-2.tar')
+  common.npm(['install', file], conf, verify.bind(null, t, ['foo', 'bar']))
 })
 
-test("clean", function (t) {
+test('clean', function (t) {
   clean()
   t.end()
 })

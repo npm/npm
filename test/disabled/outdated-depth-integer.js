@@ -46,7 +46,7 @@ test('outdated depth integer', function (t) {
   })
 })
 
-test("cleanup", function (t) {
+test('cleanup', function (t) {
   cleanup()
   t.end()
 })

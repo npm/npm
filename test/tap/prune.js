@@ -1,24 +1,24 @@
-var test = require("tap").test
-var common = require("../common-tap")
-var fs = require("fs")
-var rimraf = require("rimraf")
-var mr = require("npm-registry-mock")
+var test = require('tap').test
+var common = require('../common-tap')
+var fs = require('fs')
+var rimraf = require('rimraf')
+var mr = require('npm-registry-mock')
 var env = process.env
-var path = require("path")
+var path = require('path')
 
-var pkg = path.resolve(__dirname, "prune")
-var cache = path.resolve(pkg, "cache")
-var nodeModules = path.resolve(pkg, "node_modules")
+var pkg = path.resolve(__dirname, 'prune')
+var cache = path.resolve(pkg, 'cache')
+var nodeModules = path.resolve(pkg, 'node_modules')
 
 var EXEC_OPTS = { cwd: pkg, env: env }
-EXEC_OPTS.env.npm_config_depth = "Infinity"
+EXEC_OPTS.env.npm_config_depth = 'Infinity'
 
 var server
 
-test("reg mock", function (t) {
+test('reg mock', function (t) {
   mr({port : common.port}, function (er, s) {
     server = s
-    t.pass("registry mock started")
+    t.pass('registry mock started')
     t.end()
   })
 })
@@ -28,89 +28,89 @@ function cleanup () {
   rimraf.sync(nodeModules)
 }
 
-test("setup", function (t) {
+test('setup', function (t) {
   cleanup()
-  t.pass("setup")
+  t.pass('setup')
   t.end()
 })
 
-test("npm install", function (t) {
+test('npm install', function (t) {
   common.npm([
-    "install",
-    "--cache", cache,
-    "--registry", common.registry,
-    "--loglevel", "silent",
-    "--production", "false"
+    'install',
+    '--cache', cache,
+    '--registry', common.registry,
+    '--loglevel', 'silent',
+    '--production', 'false'
   ], EXEC_OPTS, function (err, code, stdout, stderr) {
-    t.ifErr(err, "install finished successfully")
-    t.notOk(code, "exit ok")
-    t.notOk(stderr, "Should not get data on stderr: " + stderr)
+    t.ifErr(err, 'install finished successfully')
+    t.notOk(code, 'exit ok')
+    t.notOk(stderr, 'Should not get data on stderr: ' + stderr)
     t.end()
   })
 })
 
-test("npm install test-package", function (t) {
+test('npm install test-package', function (t) {
   common.npm([
-    "install", "test-package",
-    "--cache", cache,
-    "--registry", common.registry,
-    "--loglevel", "silent",
-    "--production", "false"
+    'install', 'test-package',
+    '--cache', cache,
+    '--registry', common.registry,
+    '--loglevel', 'silent',
+    '--production', 'false'
   ], EXEC_OPTS, function (err, code, stdout, stderr) {
-    t.ifErr(err, "install finished successfully")
-    t.notOk(code, "exit ok")
-    t.notOk(stderr, "Should not get data on stderr: " + stderr)
+    t.ifErr(err, 'install finished successfully')
+    t.notOk(code, 'exit ok')
+    t.notOk(stderr, 'Should not get data on stderr: ' + stderr)
     t.end()
   })
 })
 
-test("verify installs", function (t) {
-  var dirs = fs.readdirSync(pkg + "/node_modules").sort()
-  t.same(dirs, [ "test-package", "mkdirp", "underscore" ].sort())
+test('verify installs', function (t) {
+  var dirs = fs.readdirSync(pkg + '/node_modules').sort()
+  t.same(dirs, [ 'test-package', 'mkdirp', 'underscore' ].sort())
   t.end()
 })
 
-test("npm prune", function (t) {
+test('npm prune', function (t) {
   common.npm([
-    "prune",
-    "--loglevel", "silent",
-    "--production", "false"
+    'prune',
+    '--loglevel', 'silent',
+    '--production', 'false'
   ], EXEC_OPTS, function (err, code, stdout, stderr) {
-    t.ifErr(err, "prune finished successfully")
-    t.notOk(code, "exit ok")
-    t.notOk(stderr, "Should not get data on stderr: " + stderr)
+    t.ifErr(err, 'prune finished successfully')
+    t.notOk(code, 'exit ok')
+    t.notOk(stderr, 'Should not get data on stderr: ' + stderr)
     t.end()
   })
 })
 
-test("verify installs", function (t) {
-  var dirs = fs.readdirSync(pkg + "/node_modules").sort()
-  t.same(dirs, [ "mkdirp", "underscore" ])
+test('verify installs', function (t) {
+  var dirs = fs.readdirSync(pkg + '/node_modules').sort()
+  t.same(dirs, [ 'mkdirp', 'underscore' ])
   t.end()
 })
 
-test("npm prune", function (t) {
+test('npm prune', function (t) {
   common.npm([
-    "prune",
-    "--loglevel", "silent",
-    "--production"
+    'prune',
+    '--loglevel', 'silent',
+    '--production'
   ], EXEC_OPTS, function (err, code, stderr) {
-    t.ifErr(err, "prune finished successfully")
-    t.notOk(code, "exit ok")
-    t.equal(stderr, "unbuild mkdirp@0.3.5\n")
+    t.ifErr(err, 'prune finished successfully')
+    t.notOk(code, 'exit ok')
+    t.equal(stderr, 'unbuild mkdirp@0.3.5\n')
     t.end()
   })
 })
 
-test("verify installs", function (t) {
-  var dirs = fs.readdirSync(pkg + "/node_modules").sort()
-  t.same(dirs, [ "underscore" ])
+test('verify installs', function (t) {
+  var dirs = fs.readdirSync(pkg + '/node_modules').sort()
+  t.same(dirs, [ 'underscore' ])
   t.end()
 })
 
-test("cleanup", function (t) {
+test('cleanup', function (t) {
   server.close()
   cleanup()
-  t.pass("cleaned up")
+  t.pass('cleaned up')
   t.end()
 })

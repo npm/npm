@@ -1,21 +1,21 @@
-var npm = npm = require("../../")
-var test = require("tap").test
-var path = require("path")
-var fs = require("fs")
-var osenv = require("osenv")
-var rimraf = require("rimraf")
-var mr = require("npm-registry-mock")
-var common = require("../common-tap.js")
+var npm = npm = require('../../')
+var test = require('tap').test
+var path = require('path')
+var fs = require('fs')
+var osenv = require('osenv')
+var rimraf = require('rimraf')
+var mr = require('npm-registry-mock')
+var common = require('../common-tap.js')
 
-var pkg = path.resolve(__dirname, "peer-deps")
-var desiredResultsPath = path.resolve(pkg, "desired-ls-results.json")
+var pkg = path.resolve(__dirname, 'peer-deps')
+var desiredResultsPath = path.resolve(pkg, 'desired-ls-results.json')
 
-test("installs the peer dependency directory structure", function (t) {
+test('installs the peer dependency directory structure', function (t) {
   mr({port : common.port}, function (er, s) {
     setup(function (err) {
       if (err) return t.fail(err)
 
-      npm.install(".", function (err) {
+      npm.install('.', function (err) {
         if (err) return t.fail(err)
 
         npm.commands.ls([], true, function (err, _, results) {
@@ -34,7 +34,7 @@ test("installs the peer dependency directory structure", function (t) {
   })
 })
 
-test("cleanup", function (t) {
+test('cleanup', function (t) {
   cleanup()
   t.end()
 })
@@ -44,12 +44,12 @@ function setup (cb) {
   cleanup()
   process.chdir(pkg)
 
-  var opts = { cache: path.resolve(pkg, "cache"), registry: common.registry}
+  var opts = { cache: path.resolve(pkg, 'cache'), registry: common.registry}
   npm.load(opts, cb)
 }
 
 function cleanup () {
   process.chdir(osenv.tmpdir())
-  rimraf.sync(path.resolve(pkg, "node_modules"))
-  rimraf.sync(path.resolve(pkg, "cache"))
+  rimraf.sync(path.resolve(pkg, 'node_modules'))
+  rimraf.sync(path.resolve(pkg, 'cache'))
 }

@@ -1,22 +1,22 @@
-var test = require("tap").test
-var npmconf = require("../../lib/config/core.js")
-var common = require("./00-config-setup.js")
-var path = require("path")
+var test = require('tap').test
+var npmconf = require('../../lib/config/core.js')
+var common = require('./00-config-setup.js')
+var path = require('path')
 
 var projectData = {
-  "save-prefix": "~",
-  "proprietary-attribs": false
+  'save-prefix': '~',
+  'proprietary-attribs': false
 }
 
 var ucData = common.ucData
 var envData = common.envData
 var envDataFix = common.envDataFix
 
-var gcData = { "package-config:foo": "boo" }
+var gcData = { 'package-config:foo': 'boo' }
 
 var biData = {}
 
-var cli = { foo: "bar", umask: 022 }
+var cli = { foo: 'bar', umask: 022 }
 
 var expectList =
 [ cli,
@@ -31,27 +31,27 @@ var expectSources = {
   env: {
     data: envDataFix,
     source: envData,
-    prefix: ""
+    prefix: ''
   },
   project: {
-    path: path.resolve(__dirname, "..", "..", ".npmrc"),
-    type: "ini",
+    path: path.resolve(__dirname, '..', '..', '.npmrc'),
+    type: 'ini',
     data: projectData
   },
   user: {
     path: common.userconfig,
-    type: "ini",
+    type: 'ini',
     data: ucData
   },
   global: {
     path: common.globalconfig,
-    type: "ini",
+    type: 'ini',
     data: gcData
   },
   builtin: { data: biData }
 }
 
-test("no builtin", function (t) {
+test('no builtin', function (t) {
   npmconf.load(cli, function (er, conf) {
     if (er) throw er
     t.same(conf.list, expectList)
@@ -59,8 +59,8 @@ test("no builtin", function (t) {
     t.same(npmconf.rootConf.list, [])
     t.equal(npmconf.rootConf.root, npmconf.defs.defaults)
     t.equal(conf.root, npmconf.defs.defaults)
-    t.equal(conf.get("umask"), 022)
-    t.equal(conf.get("heading"), "npm")
+    t.equal(conf.get('umask'), 022)
+    t.equal(conf.get('heading'), 'npm')
     t.end()
   })
 })
