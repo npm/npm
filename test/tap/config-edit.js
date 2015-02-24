@@ -8,6 +8,8 @@ var common = require('../common-tap.js')
 
 var pkg = path.resolve(__dirname, 'npm-global-edit')
 
+// this trips up jscs for some reason
+// jscs:disable validateIndentation
 var editorSrc = function () {/*
 #!/usr/bin/env node
 var fs = require('fs')
