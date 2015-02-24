@@ -51,23 +51,21 @@ test('outdated depth deep (9999)', function (t) {
 
   mr({port: common.port}, function (er, s) {
     npm.load({
-      cache: cache
-    , loglevel: 'silent'
-    , registry: common.registry
-    , depth: 9999
-    }
-    , function () {
-        npm.install('.', function (er) {
-          if (er) throw new Error(er)
-          npm.outdated(function (err, d) {
-            if (err) throw new Error(err)
-            t.deepEqual(d, expected)
-            s.close()
-            t.end()
-          })
+      cache: cache,
+      loglevel: 'silent',
+      registry: common.registry,
+      depth: 9999
+    }, function () {
+      npm.install('.', function (er) {
+        if (er) throw new Error(er)
+        npm.outdated(function (err, d) {
+          if (err) throw new Error(err)
+          t.deepEqual(d, expected)
+          s.close()
+          t.end()
         })
-      }
-    )
+      })
+    })
   })
 })
 

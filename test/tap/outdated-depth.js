@@ -27,22 +27,20 @@ test('outdated depth zero', function (t) {
 
   mr({port: common.port}, function (er, s) {
     npm.load({
-      cache: cache
-    , loglevel: 'silent'
-    , registry: common.registry
-    }
-    , function () {
-        npm.install('.', function (er) {
-          if (er) throw new Error(er)
-          npm.outdated(function (err, d) {
-            if (err) throw new Error(err)
-            t.deepEqual(d[0], expected)
-            s.close()
-            t.end()
-          })
+      cache: cache,
+      loglevel: 'silent',
+      registry: common.registry
+    }, function () {
+      npm.install('.', function (er) {
+        if (er) throw new Error(er)
+        npm.outdated(function (err, d) {
+          if (err) throw new Error(err)
+          t.deepEqual(d[0], expected)
+          s.close()
+          t.end()
         })
-      }
-    )
+      })
+    })
   })
 })
 

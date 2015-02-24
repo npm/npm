@@ -26,23 +26,21 @@ test('outdated depth integer', function (t) {
 
   mr({port: common.port}, function (s) {
     npm.load({
-      cache: pkg + '/cache'
-    , loglevel: 'silent'
-    , registry: common.registry
-    , depth: 5
-    }
-    , function () {
-        npm.install('request@0.9.0', function (er) {
-          if (er) throw new Error(er)
-          npm.outdated(function (err, d) {
-            if (err) throw new Error(err)
-            t.deepEqual(d[0], expected)
-            s.close()
-            t.end()
-          })
+      cache: pkg + '/cache',
+      loglevel: 'silent',
+      registry: common.registry,
+      depth: 5
+    }, function () {
+      npm.install('request@0.9.0', function (er) {
+        if (er) throw new Error(er)
+        npm.outdated(function (err, d) {
+          if (err) throw new Error(err)
+          t.deepEqual(d[0], expected)
+          s.close()
+          t.end()
         })
-      }
-    )
+      })
+    })
   })
 })
 

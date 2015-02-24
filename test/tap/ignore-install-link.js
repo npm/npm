@@ -16,9 +16,17 @@ var target = path.resolve(pkg, 'node_modules', 'dep')
 var cache = path.resolve(root, 'cache')
 var globalPath = path.resolve(root, 'global')
 
-var pkgj = { 'name':'pkg', 'version': '1.2.3'
-           , 'dependencies': { 'dep': '1.2.3' } }
-var depj = { 'name': 'dep', 'version': '1.2.3' }
+var pkgj = {
+  'name': 'pkg',
+  'version': '1.2.3',
+  'dependencies': {
+    'dep': '1.2.3'
+  }
+}
+var depj = {
+  'name': 'dep',
+  'version': '1.2.3'
+}
 
 var myreg = require('http').createServer(function (q, s) {
   s.statusCode = 403

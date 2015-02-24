@@ -17,15 +17,15 @@ test('setup', function (t) {
   mkdirp.sync(t3dir)
 
   fs.writeFileSync(t2dir + '/package.json', JSON.stringify({
-    author: 'Evan Lucas'
-  , name: 'test-repo-url-https'
-  , version: '0.0.1'
+    author: 'Evan Lucas',
+    name: 'test-repo-url-https',
+    version: '0.0.1'
   }), 'utf8')
 
   fs.writeFileSync(t3dir + '/package.json', JSON.stringify({
-    author: 'Evan Lucas'
-  , name: 'biscuits'
-  , version: '0.0.1'
+    author: 'Evan Lucas',
+    name: 'biscuits',
+    version: '0.0.1'
   }), 'utf8')
 
   t.pass('created fixtures')
@@ -42,10 +42,9 @@ function plugin (server) {
 test('npm view . in global mode', function (t) {
   process.chdir(t1dir)
   common.npm([
-    'view'
-  , '.'
-  , '--registry=' + common.registry
-  , '--global'
+    'view', '.',
+    '--registry=' + common.registry,
+    '--global'
   ], { cwd: t1dir }, function (err, code, stdout, stderr) {
     t.ifError(err, 'view command finished successfully')
     t.equal(code, 1, 'exit not ok')
@@ -57,9 +56,9 @@ test('npm view . in global mode', function (t) {
 test('npm view --global', function (t) {
   process.chdir(t1dir)
   common.npm([
-    'view'
-  , '--registry=' + common.registry
-  , '--global'
+    'view',
+    '--registry=' + common.registry,
+    '--global'
   ], { cwd: t1dir }, function (err, code, stdout, stderr) {
     t.ifError(err, 'view command finished successfully')
     t.equal(code, 1, 'exit not ok')
@@ -71,9 +70,8 @@ test('npm view --global', function (t) {
 test('npm view . with no package.json', function (t) {
   process.chdir(t1dir)
   common.npm([
-    'view'
-  , '.'
-  , '--registry=' + common.registry
+    'view', '.',
+    '--registry=' + common.registry
   ], { cwd: t1dir }, function (err, code, stdout, stderr) {
     t.ifError(err, 'view command finished successfully')
     t.equal(code, 1, 'exit not ok')
@@ -86,9 +84,8 @@ test('npm view . with no published package', function (t) {
   process.chdir(t3dir)
   mr({port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
-      'view'
-    , '.'
-    , '--registry=' + common.registry
+      'view', '.',
+      '--registry=' + common.registry
     ], { cwd: t3dir }, function (err, code, stdout, stderr) {
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 1, 'exit not ok')
@@ -103,9 +100,8 @@ test('npm view .', function (t) {
   process.chdir(t2dir)
   mr({port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
-      'view'
-    , '.'
-    , '--registry=' + common.registry
+      'view', '.',
+      '--registry=' + common.registry
     ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')
@@ -121,10 +117,9 @@ test('npm view . select fields', function (t) {
   process.chdir(t2dir)
   mr({port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
-      'view'
-    , '.'
-    , 'main'
-    , '--registry=' + common.registry
+      'view', '.',
+      'main',
+      '--registry=' + common.registry
     ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')
@@ -139,10 +134,8 @@ test('npm view .@<version>', function (t) {
   process.chdir(t2dir)
   mr({port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
-      'view'
-    , '.@0.0.0'
-    , 'version'
-    , '--registry=' + common.registry
+      'view', '.@0.0.0', 'version',
+      '--registry=' + common.registry
     ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')
@@ -157,11 +150,9 @@ test('npm view .@<version> --json', function (t) {
   process.chdir(t2dir)
   mr({port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
-      'view'
-    , '.@0.0.0'
-    , 'version'
-    , '--json'
-    , '--registry=' + common.registry
+      'view', '.@0.0.0', 'version',
+      '--json',
+      '--registry=' + common.registry
     ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')
@@ -175,9 +166,8 @@ test('npm view .@<version> --json', function (t) {
 test('npm view <package name>', function (t) {
   mr({port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
-      'view'
-    , 'underscore'
-    , '--registry=' + common.registry
+      'view', 'underscore',
+      '--registry=' + common.registry
     ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')
@@ -192,10 +182,9 @@ test('npm view <package name>', function (t) {
 test('npm view <package name> --global', function (t) {
   mr({port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
-      'view'
-    , 'underscore'
-    , '--global'
-    , '--registry=' + common.registry
+      'view', 'underscore',
+      '--global',
+      '--registry=' + common.registry
     ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')
@@ -211,10 +200,9 @@ test('npm view <package name> --json', function (t) {
   t.plan(3)
   mr({port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
-      'view'
-    , 'underscore'
-    , '--json'
-    , '--registry=' + common.registry
+      'view', 'underscore',
+      '--json',
+      '--registry=' + common.registry
     ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')
@@ -235,10 +223,8 @@ test('npm view <package name> --json', function (t) {
 test('npm view <package name> <field>', function (t) {
   mr({port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
-      'view'
-    , 'underscore'
-    , 'homepage'
-    , '--registry=' + common.registry
+      'view', 'underscore', 'homepage',
+      '--registry=' + common.registry
     ], { cwd: t2dir }, function (err, code, stdout) {
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')

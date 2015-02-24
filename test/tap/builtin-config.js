@@ -72,15 +72,18 @@ test('use first npm to install second npm', function (t) {
     t.ok(fs.statSync(root).isDirectory())
 
     var bin = path.resolve(root, 'npm/bin/npm-cli.js')
-    spawn( node
-         , [ bin
-           , 'install', npm
-           , '-g'
-           , '--prefix=' + folder + '/second'
-           , '--cache=' + folder + '/cache'
-           , '--tmp=' + folder + '/tmp'
-           , '--no-spin'
-           ])
+    spawn(
+      node,
+      [
+        bin,
+        'install', npm,
+        '-g',
+        '--prefix=' + folder + '/second',
+        '--cache=' + folder + '/cache',
+        '--tmp=' + folder + '/tmp',
+        '--no-spin'
+      ]
+    )
     .on('error', function (er) { throw er })
     .on('close', function (code) {
       t.equal(code, 0, 'code is zero')

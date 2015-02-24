@@ -9,27 +9,29 @@ var spawn = require('child_process').spawn
 var node = process.execPath
 var npmc = require.resolve('../../')
 var pkg = path.resolve(__dirname, 'outdated-new-versions')
-var args = [ npmc
-           , 'outdated'
-           , '--json'
-           , '--silent'
-           , '--registry=' + common.registry
-           , '--cache=' + pkg + '/cache'
-           ]
+var args = [
+  npmc,
+  'outdated',
+  '--json',
+  '--silent',
+  '--registry=' + common.registry,
+  '--cache=' + pkg + '/cache'
+]
 
-var expected = { underscore:
-                 { current: '1.3.3'
-                 , wanted: '1.3.3'
-                 , latest: '1.5.1'
-                 , location: 'node_modules' + path.sep + 'underscore'
-                 }
-               , request:
-                 { current: '0.9.5'
-                 , wanted: '0.9.5'
-                 , latest: '2.27.0'
-                 , location: 'node_modules' + path.sep + 'request'
-                 }
-               }
+var expected = {
+  underscore: {
+    current: '1.3.3',
+    wanted: '1.3.3',
+    latest: '1.5.1',
+    location: 'node_modules' + path.sep + 'underscore'
+  },
+  request: {
+    current: '0.9.5',
+    wanted: '0.9.5',
+    latest: '2.27.0',
+    location: 'node_modules' + path.sep + 'request'
+  }
+}
 
 test('it should log json data', function (t) {
   cleanup()
