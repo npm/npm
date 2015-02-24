@@ -28,7 +28,6 @@ test('setup', function (t) {
   t.end()
 })
 
-
 test('install npm into first folder', function (t) {
   var args = ['install', npm, '-g',
               '--prefix=' + folder + '/first',
@@ -117,7 +116,6 @@ test('verify that the builtin config matches', function (t) {
     })
   })
 })
-
 
 test('clean', function (t) {
   rimraf.sync(folder)

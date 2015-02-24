@@ -14,7 +14,6 @@ if (typeof WScript !== 'undefined') {
   return
 }
 
-
 process.title = 'npm'
 
 var log = require('npmlog')
@@ -45,7 +44,6 @@ var conf = nopt(types, shorthands)
 npm.argv = conf.argv.remain
 if (npm.deref(npm.argv[0])) npm.command = npm.argv.shift()
 else conf.usage = true
-
 
 if (conf.version) {
   console.log(npm.version)

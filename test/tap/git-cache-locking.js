@@ -7,7 +7,6 @@ var pkg = path.resolve(__dirname, 'git-cache-locking')
 var tmp = path.join(pkg, 'tmp')
 var cache = path.join(pkg, 'cache')
 
-
 test('setup', function (t) {
   rimraf.sync(pkg)
   mkdirp.sync(path.resolve(pkg, 'node_modules'))

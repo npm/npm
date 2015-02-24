@@ -28,7 +28,6 @@ else {
   })
 }
 
-
 function runTests () {
   var env = {}
   for (var i in process.env) env[i] = process.env[i]

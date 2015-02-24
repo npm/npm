@@ -50,7 +50,6 @@ function writeLines (files, sxn, heading, desc) {
   }).forEach(writeLine)
 }
 
-
 function writeLine (sd) {
   var sxn = sd[0] || 1
   var doc = sd[1]

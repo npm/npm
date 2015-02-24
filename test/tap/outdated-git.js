@@ -10,7 +10,6 @@ var pkg = path.resolve(__dirname, 'outdated-git')
 var cache = path.resolve(pkg, 'cache')
 mkdirp.sync(cache)
 
-
 test('dicovers new versions in outdated', function (t) {
   process.chdir(pkg)
   t.plan(5)

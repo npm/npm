@@ -41,7 +41,6 @@ test('cleanup', function (t) {
   t.end()
 })
 
-
 function setup (cb) {
   cleanup()
   process.chdir(pkg)

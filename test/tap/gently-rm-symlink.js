@@ -72,7 +72,6 @@ test('cleanup', function (t) {
   t.end()
 })
 
-
 var index = 'module.exports = function () { console.log("whoop whoop") }'
 
 var fixture = {

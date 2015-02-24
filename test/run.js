@@ -50,8 +50,6 @@ env.PATH = pathEnv.join(pathEnvSplit)
 env.NODE_PATH = path.join(root, 'node_modules')
 env.npm_config_cache = cache
 
-
-
 function cleanup (cb) {
   if (failures !== 0) return
   rimraf(root, function (er) {
@@ -128,8 +126,6 @@ function setup (cb) {
 function main (cb) {
   console.log('# testing in %s', temp)
   console.log('# global prefix = %s', root)
-
-
 
   failures = 0
 

@@ -44,7 +44,6 @@ test('npm repo underscore', function (t) {
   })
 })
 
-
 test('npm repo optimist - github (https://)', function (t) {
   mr({port : common.port}, function (er, s) {
     common.npm([

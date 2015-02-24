@@ -12,7 +12,6 @@ var pj = JSON.stringify({
   scripts: { start: 'wharble-garble-blorst' }
 }, null, 2) + '\n'
 
-
 test('setup', function (t) {
   rimraf.sync(pkg)
   mkdirp.sync(pkg)

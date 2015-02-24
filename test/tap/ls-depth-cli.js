@@ -8,7 +8,6 @@ var pkg = path.resolve(__dirname, 'ls-depth')
 var mr = require('npm-registry-mock')
 var opts = {cwd: pkg}
 
-
 function cleanup () {
   process.chdir(osenv.tmpdir())
   rimraf.sync(pkg + '/cache')

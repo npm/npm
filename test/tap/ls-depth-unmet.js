@@ -11,7 +11,6 @@ var cache = path.resolve(pkg, 'cache')
 var tmp = path.resolve(pkg, 'tmp')
 var nodeModules = path.resolve(pkg, 'node_modules')
 
-
 function cleanup () {
   process.chdir(osenv.tmpdir())
   rimraf.sync(cache)

@@ -39,7 +39,6 @@ test('cleanup', function (t) {
   t.end()
 })
 
-
 var fixture = {
   name: '@test/whoops',
   version: '1.0.0',

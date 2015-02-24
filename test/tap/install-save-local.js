@@ -48,7 +48,6 @@ test('"npm install --save-dev ../local/path" should install local package and sa
   })
 })
 
-
 test('cleanup', function (t) {
   resetPackageJSON(pkg)
   process.chdir(__dirname)

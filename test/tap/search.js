@@ -52,7 +52,6 @@ var mocks = {
   }
 }
 
-
 test('No previous cache, init cache triggered by first search', function(t) {
   cleanupCache()
 
@@ -111,7 +110,6 @@ test('previous cache, _updated set, should trigger since request', function(t) {
     })
   })
 })
-
 
 var searches = [
   {

@@ -55,7 +55,6 @@ exports.envDataFix = {
   'other-env-thing': 1000
 }
 
-
 if (module === require.main) {
   // set the globalconfig in the userconfig
   var fs = require('fs')

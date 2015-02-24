@@ -68,7 +68,6 @@ test('issue #6735 build "already built" message', function (t) {
   })
 })
 
-
 test('cleanup', function (t) {
   cleanup()
 
