@@ -40,6 +40,14 @@ in your git config for this to work properly.  For example:
 
     Enter passphrase:
 
+## CONFIGURATION
+
+### git-tag-version
+
+* Default: true
+* Type: Boolean
+
+Commit and tag the version change.
 
 ## SEE ALSO
 
