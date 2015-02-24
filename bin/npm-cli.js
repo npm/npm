@@ -4,6 +4,7 @@
 /*eslint-enable no-extra-semi */
 
   // windows: running "npm blah" in this folder will invoke WSH, not node.
+  /*global WScript*/
   if (typeof WScript !== 'undefined') {
     WScript.echo('npm does not work when run\n'
                 +'with the Windows Scripting Host\n\n'
