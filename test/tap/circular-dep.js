@@ -1,13 +1,13 @@
 var test = require('tap').test
-  , fs = require('fs')
-  , path = require('path')
-  , existsSync = fs.existsSync || path.existsSync
-  , npm = require('../../')
-  , rimraf = require('rimraf')
-  , osenv = require('osenv')
-  , mr = require('npm-registry-mock')
-  , common = require('../common-tap.js')
-  , server
+var fs = require('fs')
+var path = require('path')
+var existsSync = fs.existsSync || path.existsSync
+var npm = require('../../')
+var rimraf = require('rimraf')
+var osenv = require('osenv')
+var mr = require('npm-registry-mock')
+var common = require('../common-tap.js')
+var server
 
 var pkg = path.resolve(__dirname, 'circular-dep')
 

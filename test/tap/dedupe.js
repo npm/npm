@@ -1,10 +1,10 @@
 var test = require('tap').test
-  , fs = require('fs')
-  , path = require('path')
-  , existsSync = fs.existsSync || path.existsSync
-  , rimraf = require('rimraf')
-  , mr = require('npm-registry-mock')
-  , common = require('../common-tap.js')
+var fs = require('fs')
+var path = require('path')
+var existsSync = fs.existsSync || path.existsSync
+var rimraf = require('rimraf')
+var mr = require('npm-registry-mock')
+var common = require('../common-tap.js')
 
 var EXEC_OPTS = {}
 

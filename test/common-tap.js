@@ -24,9 +24,9 @@ exports.npm = function (cmd, opts, cb) {
   }
 
   var stdout = ''
-    , stderr = ''
-    , node = process.execPath
-    , child = spawn(node, cmd, opts)
+  var stderr = ''
+  var node = process.execPath
+  var child = spawn(node, cmd, opts)
 
   if (child.stderr) child.stderr.on('data', function (chunk) {
     stderr += chunk

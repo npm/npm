@@ -1,15 +1,15 @@
 var common = require('../common-tap')
-  , test = require('tap').test
-  , path = require('path')
-  , rimraf = require('rimraf')
-  , osenv = require('osenv')
-  , mkdirp = require('mkdirp')
-  , pkg = path.resolve(__dirname, 'ls-depth-unmet')
-  , mr = require('npm-registry-mock')
-  , opts = {cwd: pkg}
-  , cache = path.resolve(pkg, 'cache')
-  , tmp = path.resolve(pkg, 'tmp')
-  , nodeModules = path.resolve(pkg, 'node_modules')
+var test = require('tap').test
+var path = require('path')
+var rimraf = require('rimraf')
+var osenv = require('osenv')
+var mkdirp = require('mkdirp')
+var pkg = path.resolve(__dirname, 'ls-depth-unmet')
+var mr = require('npm-registry-mock')
+var opts = {cwd: pkg}
+var cache = path.resolve(pkg, 'cache')
+var tmp = path.resolve(pkg, 'tmp')
+var nodeModules = path.resolve(pkg, 'node_modules')
 
 
 function cleanup () {

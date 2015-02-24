@@ -8,15 +8,15 @@
 // by this test
 
 var test = require('tap').test
-  , fs = require('fs')
-  , path = require('path')
-  , existsSync = fs.existsSync || path.existsSync
-  , rimraf = require('rimraf')
-  , common = require('../common-tap.js')
-  , mr = require('npm-registry-mock')
-  , pkg = path.resolve(__dirname, 'false_name')
-  , cache = path.resolve(pkg, 'cache')
-  , nodeModules = path.resolve(pkg, 'node_modules')
+var fs = require('fs')
+var path = require('path')
+var existsSync = fs.existsSync || path.existsSync
+var rimraf = require('rimraf')
+var common = require('../common-tap.js')
+var mr = require('npm-registry-mock')
+var pkg = path.resolve(__dirname, 'false_name')
+var cache = path.resolve(pkg, 'cache')
+var nodeModules = path.resolve(pkg, 'node_modules')
 
 var EXEC_OPTS = { cwd: pkg }
 

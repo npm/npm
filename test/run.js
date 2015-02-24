@@ -4,10 +4,10 @@
 var chain = require('slide').chain
 var child_process = require('child_process')
 var path = require('path')
-  , testdir = __dirname
-  , fs = require('graceful-fs')
-  , npmpkg = path.dirname(testdir)
-  , npmcli = path.resolve(npmpkg, 'bin', 'npm-cli.js')
+var testdir = __dirname
+var fs = require('graceful-fs')
+var npmpkg = path.dirname(testdir)
+var npmcli = path.resolve(npmpkg, 'bin', 'npm-cli.js')
 
 var temp = process.env.TMPDIR
          || process.env.TMP
@@ -19,15 +19,15 @@ var temp = process.env.TMPDIR
 temp = path.resolve(temp, 'npm-test-' + process.pid)
 
 var root = path.resolve(temp, 'root')
-  , cache = path.resolve(temp, 'npm_cache')
+var cache = path.resolve(temp, 'npm_cache')
 
 var failures = 0
-  , mkdir = require('mkdirp')
-  , rimraf = require('rimraf')
+var mkdir = require('mkdirp')
+var rimraf = require('rimraf')
 
 var pathEnvSplit = process.platform === 'win32' ? ';' : ':'
-  , pathEnv = process.env.PATH.split(pathEnvSplit)
-  , npmPath = process.platform === 'win32' ? root : path.join(root, 'bin')
+var pathEnv = process.env.PATH.split(pathEnvSplit)
+var npmPath = process.platform === 'win32' ? root : path.join(root, 'bin')
 
 pathEnv.unshift(npmPath, path.join(root, 'node_modules', '.bin'))
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 var env = process.env
-  , orig = require(process.env.npm_package_name+'/package.json').config
-  , assert = require('assert')
+var orig = require(process.env.npm_package_name+'/package.json').config
+var assert = require('assert')
 
 console.log('Before running this test, do:\n'
            +'  npm config set package-config:foo boo\n'

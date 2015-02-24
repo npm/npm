@@ -1,12 +1,12 @@
 var common = require('../common-tap')
-  , test = require('tap').test
-  , path = require('path')
-  , rimraf = require('rimraf')
-  , mkdirp = require('mkdirp')
-  , pkg = path.resolve(__dirname, 'run-script')
-  , cache = path.resolve(pkg, 'cache')
-  , tmp = path.resolve(pkg, 'tmp')
-  , opts = { cwd: pkg }
+var test = require('tap').test
+var path = require('path')
+var rimraf = require('rimraf')
+var mkdirp = require('mkdirp')
+var pkg = path.resolve(__dirname, 'run-script')
+var cache = path.resolve(pkg, 'cache')
+var tmp = path.resolve(pkg, 'tmp')
+var opts = { cwd: pkg }
 
 function testOutput (t, command, er, code, stdout, stderr) {
   var lines

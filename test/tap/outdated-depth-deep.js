@@ -1,11 +1,11 @@
 var common = require('../common-tap')
-  , path = require('path')
-  , test = require('tap').test
-  , rimraf = require('rimraf')
-  , npm = require('../../')
-  , mr = require('npm-registry-mock')
-  , pkg = path.resolve(__dirname, 'outdated-depth-deep')
-  , cache = path.resolve(pkg, 'cache')
+var path = require('path')
+var test = require('tap').test
+var rimraf = require('rimraf')
+var npm = require('../../')
+var mr = require('npm-registry-mock')
+var pkg = path.resolve(__dirname, 'outdated-depth-deep')
+var cache = path.resolve(pkg, 'cache')
 
 var osenv = require('osenv')
 var mkdirp = require('mkdirp')

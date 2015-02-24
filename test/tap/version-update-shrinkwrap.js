@@ -103,7 +103,8 @@ test('npm version <semver> updates git works with no shrinkwrap', function (t) {
         t.equal(shrinkwrap.version, '0.0.1', 'got expected version')
 
         var shower = spawn(git, ['show', 'HEAD', '--name-only'])
-        var out = '', eout = ''
+        var out = ''
+        var eout = ''
         shower.stdout.on('data', function (d) {
           out += d.toString()
         })
@@ -202,7 +203,8 @@ test('npm version <semver> updates shrinkwrap and updates git', function (t) {
         t.equal(shrinkwrap.version, '0.0.1', 'got expected version')
 
         var shower = spawn(git, ['show', 'HEAD', '--name-only'])
-        var out = '', eout = ''
+        var out = ''
+        var eout = ''
         shower.stdout.on('data', function (d) {
           out += d.toString()
         })

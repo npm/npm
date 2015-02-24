@@ -1,11 +1,11 @@
 var test = require('tap').test
-  , common = require('../common-tap')
-  , path = require('path')
-  , rimraf = require('rimraf')
-  , mkdirp = require('mkdirp')
-  , pkg = path.resolve(__dirname, 'git-cache-locking')
-  , tmp = path.join(pkg, 'tmp')
-  , cache = path.join(pkg, 'cache')
+var common = require('../common-tap')
+var path = require('path')
+var rimraf = require('rimraf')
+var mkdirp = require('mkdirp')
+var pkg = path.resolve(__dirname, 'git-cache-locking')
+var tmp = path.join(pkg, 'tmp')
+var cache = path.join(pkg, 'cache')
 
 
 test('setup', function (t) {

@@ -1,13 +1,13 @@
 var test = require('tap').test
-  , npm = require('../../')
-  , mr = require('npm-registry-mock')
-  , common = require('../common-tap.js')
-  , path = require('path')
-  , fs = require('fs')
-  , osenv = require('osenv')
-  , rimraf = require('rimraf')
-  , pkg = path.resolve(__dirname, 'shrinkwrap-empty-deps')
-  , cache = path.resolve(pkg, 'cache')
+var npm = require('../../')
+var mr = require('npm-registry-mock')
+var common = require('../common-tap.js')
+var path = require('path')
+var fs = require('fs')
+var osenv = require('osenv')
+var rimraf = require('rimraf')
+var pkg = path.resolve(__dirname, 'shrinkwrap-empty-deps')
+var cache = path.resolve(pkg, 'cache')
 
 test('returns a list of removed items', function (t) {
   var desiredResultsPath = path.resolve(pkg, 'npm-shrinkwrap.json')

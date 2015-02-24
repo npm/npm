@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 var fs = require('fs')
-  , path = require('path')
-  , root = path.resolve(__dirname, '..')
-  , glob = require('glob')
-  , conversion = { 'cli': 1, 'api': 3, 'files': 5, 'misc': 7 }
+var path = require('path')
+var root = path.resolve(__dirname, '..')
+var glob = require('glob')
+var conversion = { 'cli': 1, 'api': 3, 'files': 5, 'misc': 7 }
 
 glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
   if (er)
@@ -53,8 +53,8 @@ function writeLines (files, sxn, heading, desc) {
 
 function writeLine (sd) {
   var sxn = sd[0] || 1
-    , doc = sd[1]
-    , d = path.basename(doc, '.md')
+  var doc = sd[1]
+  var d = path.basename(doc, '.md')
 
   var content = fs.readFileSync(doc, 'utf8').split('\n')[0].split('-- ')[1]
 

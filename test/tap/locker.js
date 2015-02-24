@@ -1,19 +1,19 @@
 var test = require('tap').test
-  , path = require('path')
-  , fs = require('graceful-fs')
-  , crypto = require('crypto')
-  , rimraf = require('rimraf')
-  , osenv = require('osenv')
-  , mkdirp = require('mkdirp')
-  , npm = require('../../')
-  , locker = require('../../lib/utils/locker.js')
-  , lock = locker.lock
-  , unlock = locker.unlock
+var path = require('path')
+var fs = require('graceful-fs')
+var crypto = require('crypto')
+var rimraf = require('rimraf')
+var osenv = require('osenv')
+var mkdirp = require('mkdirp')
+var npm = require('../../')
+var locker = require('../../lib/utils/locker.js')
+var lock = locker.lock
+var unlock = locker.unlock
 
 var pkg = path.join(__dirname, '/locker')
-  , cache = path.join(pkg, '/cache')
-  , tmp = path.join(pkg, '/tmp')
-  , nm = path.join(pkg, '/node_modules')
+var cache = path.join(pkg, '/cache')
+var tmp = path.join(pkg, '/tmp')
+var nm = path.join(pkg, '/node_modules')
 
 function cleanup () {
   process.chdir(osenv.tmpdir())
@@ -32,11 +32,11 @@ test('locking file puts lock in correct place', function (t) {
     t.ifError(er, 'npm bootstrapped OK')
 
     var n = 'correct'
-      , c = n.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')
-      , p = path.resolve(nm, n)
-      , h = crypto.createHash('sha1').update(p).digest('hex')
-      , l = c.substr(0, 24)+'-'+h.substr(0, 16)+'.lock'
-      , v = path.join(cache, '_locks',  l)
+    var c = n.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+    var p = path.resolve(nm, n)
+    var h = crypto.createHash('sha1').update(p).digest('hex')
+    var l = c.substr(0, 24)+'-'+h.substr(0, 16)+'.lock'
+    var v = path.join(cache, '_locks',  l)
 
     lock(nm, n, function (er) {
       t.ifError(er, 'locked path')
@@ -62,11 +62,11 @@ test('unlocking out of order errors out', function (t) {
     t.ifError(er, 'npm bootstrapped OK')
 
     var n = 'busted'
-      , c = n.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')
-      , p = path.resolve(nm, n)
-      , h = crypto.createHash('sha1').update(p).digest('hex')
-      , l = c.substr(0, 24)+'-'+h.substr(0, 16)+'.lock'
-      , v = path.join(cache, '_locks',  l)
+    var c = n.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+    var p = path.resolve(nm, n)
+    var h = crypto.createHash('sha1').update(p).digest('hex')
+    var l = c.substr(0, 24)+'-'+h.substr(0, 16)+'.lock'
+    var v = path.join(cache, '_locks',  l)
 
     fs.exists(v, function (found) {
       t.notOk(found, 'no lock to unlock')

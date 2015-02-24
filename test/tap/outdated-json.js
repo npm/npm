@@ -1,15 +1,15 @@
 var common = require('../common-tap.js')
-  , test = require('tap').test
-  , rimraf = require('rimraf')
-  , npm = require('../../')
-  , mr = require('npm-registry-mock')
-  , path = require('path')
-  , osenv = require('osenv')
-  , spawn = require('child_process').spawn
-  , node = process.execPath
-  , npmc = require.resolve('../../')
-  , pkg = path.resolve(__dirname, 'outdated-new-versions')
-  , args = [ npmc
+var test = require('tap').test
+var rimraf = require('rimraf')
+var npm = require('../../')
+var mr = require('npm-registry-mock')
+var path = require('path')
+var osenv = require('osenv')
+var spawn = require('child_process').spawn
+var node = process.execPath
+var npmc = require.resolve('../../')
+var pkg = path.resolve(__dirname, 'outdated-new-versions')
+var args = [ npmc
            , 'outdated'
            , '--json'
            , '--silent'
@@ -44,7 +44,7 @@ test('it should log json data', function (t) {
       npm.install('.', function (err) {
         t.ifError(err, 'error should not exist')
         var child = spawn(node, args)
-          , out = ''
+        var out = ''
         child.stdout
           .on('data', function (buf) {
             out += buf.toString()
