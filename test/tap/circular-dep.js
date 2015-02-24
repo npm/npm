@@ -45,7 +45,7 @@ function setup (cb) {
   })
 }
 
-function cleanup() {
+function cleanup () {
   process.chdir(osenv.tmpdir())
   rimraf.sync(path.resolve(pkg, 'minimist/node_modules'))
   rimraf.sync(path.resolve(pkg, 'cache'))

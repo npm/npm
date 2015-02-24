@@ -14,7 +14,7 @@ var node = process.execPath
 var pkg = path.resolve(process.env.npm_config_tmp || '/tmp',
   'noargs-install-config-save')
 
-function writePackageJson() {
+function writePackageJson () {
   rimraf.sync(pkg)
   mkdirp.sync(pkg)
   mkdirp.sync(pkg + '/cache')

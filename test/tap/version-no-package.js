@@ -12,7 +12,7 @@ test('setup', function (t) {
   t.end()
 })
 
-test('npm version in a prefix with no package.json', function(t) {
+test('npm version in a prefix with no package.json', function (t) {
   setup()
   common.npm(
     ['version', '--json', '--prefix', pkg],
@@ -32,14 +32,14 @@ test('npm version in a prefix with no package.json', function(t) {
   )
 })
 
-test('cleanup', function(t) {
+test('cleanup', function (t) {
   process.chdir(osenv.tmpdir())
 
   rimraf.sync(pkg)
   t.end()
 })
 
-function setup() {
+function setup () {
   mkdirp.sync(pkg)
   process.chdir(pkg)
 }

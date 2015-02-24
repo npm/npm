@@ -53,7 +53,7 @@ test('test', function (t) {
   common.npm([
       'pack',
       '--loglevel', 'warn'
-    ], { cwd: pkg, env: env }, function(err, code, stdout, stderr) {
+    ], { cwd: pkg, env: env }, function (err, code, stdout, stderr) {
     t.equal(code, 0, 'pack finished successfully')
     t.ifErr(err, 'pack finished successfully')
 
@@ -77,6 +77,6 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function cleanup() {
+function cleanup () {
   rimraf.sync(pkg)
 }

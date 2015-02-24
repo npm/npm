@@ -40,7 +40,7 @@ test('url-dependencies: do not download subsequent times', function (t) {
   })
 })
 
-function tarballWasFetched(output){
+function tarballWasFetched (output){
   return output.indexOf('http fetch GET ' + common.registry + '/underscore/-/underscore-1.3.1.tgz') > -1
 }
 
@@ -67,7 +67,7 @@ function performInstall (t, cb) {
   })
 }
 
-function cleanup() {
+function cleanup () {
   // windows fix for locked files
   process.chdir(osenv.tmpdir())
   rimraf.sync(path.resolve(pkg, 'node_modules'))

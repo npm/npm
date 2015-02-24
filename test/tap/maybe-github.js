@@ -7,7 +7,7 @@ var found = true
 var remoteGitPath = require.resolve('../../lib/cache/add-remote-git.js')
 require('module')._cache[remoteGitPath] = {
   id: remoteGitPath,
-  exports: function stub(_, __, cb) {
+  exports: function stub (_, __, cb) {
     if (found) {
       cb(null, {})
     }

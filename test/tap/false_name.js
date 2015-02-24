@@ -20,7 +20,7 @@ var nodeModules = path.resolve(pkg, 'node_modules')
 
 var EXEC_OPTS = { cwd: pkg }
 
-test('setup', function(t) {
+test('setup', function (t) {
   cleanup()
   fs.mkdirSync(nodeModules)
   t.end()
@@ -44,7 +44,7 @@ test('not every pkg.name can be required', function (t) {
   })
 })
 
-function cleanup() {
+function cleanup () {
   rimraf.sync(cache)
   rimraf.sync(nodeModules)
 }

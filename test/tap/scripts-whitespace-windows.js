@@ -47,7 +47,7 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function cleanup() {
+function cleanup () {
   rimraf.sync(cache)
   rimraf.sync(tmp)
   rimraf.sync(modules)

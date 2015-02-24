@@ -132,7 +132,7 @@ test('semver prefix is replaced with configured save-prefix', function (t) {
   })
 })
 
-function resetPackage(extendWith) {
+function resetPackage (extendWith) {
   rimraf.sync(CACHE_DIR)
   rimraf.sync(MODULES_DIR)
   mkdirp.sync(CACHE_DIR)
@@ -151,11 +151,11 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function clone(a) {
+function clone (a) {
   return extend({}, a)
 }
 
-function extend(a, b) {
+function extend (a, b) {
   for (var key in b) { a[key] = b[key]}
   return a
 }

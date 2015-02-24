@@ -25,7 +25,7 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function setup() {
+function setup () {
   mkdirp.sync(pkg)
   mkdirp.sync(path.resolve(pkg, 'cache'))
   fs.writeFileSync(path.resolve(pkg, 'package.json'), JSON.stringify({

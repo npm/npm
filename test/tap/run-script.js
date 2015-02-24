@@ -18,7 +18,7 @@ function testOutput (t, command, er, code, stdout, stderr) {
     throw new Error('npm ' + command + ' stderr: ' + stderr.toString())
 
   lines = stdout.trim().split('\n')
-  stdout = lines.filter(function(line) {
+  stdout = lines.filter(function (line) {
     return line.trim() !== '' && line[0] !== '>'
   }).join(';')
 

@@ -81,7 +81,7 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function resetPackageJSON(pkg) {
+function resetPackageJSON (pkg) {
   var pkgJson = JSON.parse(fs.readFileSync(pkg + '/package.json', 'utf8'))
   delete pkgJson.dependencies
   delete pkgJson.devDependencies

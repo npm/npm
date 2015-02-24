@@ -66,7 +66,7 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function setup() {
+function setup () {
   mkdirp.sync(pkg)
 
   fs.writeFileSync(path.resolve(pkg, 'package.json'), JSON.stringify({
@@ -86,7 +86,7 @@ function setup() {
   }, null, 2), 'utf8')
 }
 
-function cleanup() {
+function cleanup () {
   process.chdir(osenv.tmpdir())
   rimraf.sync(cache)
   rimraf.sync(pkg)

@@ -15,7 +15,7 @@ var cache = path.resolve(pkg, 'cache')
 test('npm version <semver> updates shrinkwrap - no git', function (t) {
   setup()
   npm.load({ cache: pkg + '/cache', registry: common.registry }, function () {
-    npm.commands.version(['patch'], function(err) {
+    npm.commands.version(['patch'], function (err) {
       if (err) return t.fail('Error perform version patch')
       var shrinkwrap = require(path.resolve(pkg, 'npm-shrinkwrap.json'))
       t.equal(shrinkwrap.version, '0.0.1', 'got expected version')
@@ -226,7 +226,7 @@ test('npm version <semver> updates shrinkwrap and updates git', function (t) {
   })
 })
 
-test('cleanup', function(t) {
+test('cleanup', function (t) {
   // windows fix for locked files
   process.chdir(osenv.tmpdir())
 
@@ -234,7 +234,7 @@ test('cleanup', function(t) {
   t.end()
 })
 
-function setup() {
+function setup () {
   rimraf.sync(pkg)
   mkdirp.sync(pkg)
   mkdirp.sync(cache)

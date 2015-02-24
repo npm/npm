@@ -15,8 +15,8 @@ test('setup', function (t) {
   t.end()
 })
 
-test('\'npm install ./package@1.2.3\' should install local pkg', function(t) {
-  common.npm(['install', './package@1.2.3'], EXEC_OPTS, function(err, code) {
+test('\'npm install ./package@1.2.3\' should install local pkg', function (t) {
+  common.npm(['install', './package@1.2.3'], EXEC_OPTS, function (err, code) {
     var p = path.resolve(pkg, 'node_modules/install-at-locally/package.json')
     t.ifError(err, 'install local package successful')
     t.equal(code, 0, 'npm install exited with code')
@@ -25,8 +25,8 @@ test('\'npm install ./package@1.2.3\' should install local pkg', function(t) {
   })
 })
 
-test('\'npm install install/at/locally@./package@1.2.3\' should install local pkg', function(t) {
-  common.npm(['install', './package@1.2.3'], EXEC_OPTS, function(err, code) {
+test('\'npm install install/at/locally@./package@1.2.3\' should install local pkg', function (t) {
+  common.npm(['install', './package@1.2.3'], EXEC_OPTS, function (err, code) {
     var p = path.resolve(pkg, 'node_modules/install-at-locally/package.json')
     t.ifError(err, 'install local package in explicit directory successful')
     t.equal(code, 0, 'npm install exited with code')
@@ -35,7 +35,7 @@ test('\'npm install install/at/locally@./package@1.2.3\' should install local pk
   })
 })
 
-test('cleanup', function(t) {
+test('cleanup', function (t) {
   process.chdir(__dirname)
   rimraf.sync(path.resolve(pkg, 'node_modules'))
   t.end()

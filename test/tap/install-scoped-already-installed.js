@@ -72,7 +72,7 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function contains(list, element) {
+function contains (list, element) {
   for (var i=0; i < list.length; ++i) {
     if (list[i] === element) {
       return true
@@ -81,6 +81,6 @@ function contains(list, element) {
   return false
 }
 
-function parseNpmInstallOutput(stdout) {
+function parseNpmInstallOutput (stdout) {
   return stdout.trim().split(/\n\n|\s+/)
 }

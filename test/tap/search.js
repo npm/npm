@@ -19,12 +19,12 @@ var timeMock = {
 
 var EXEC_OPTS = {}
 
-function cleanupCache() {
+function cleanupCache () {
   rimraf.sync(cache)
 }
 function cleanup () { cleanupCache() }
 
-function setupCache() {
+function setupCache () {
   mkdirp.sync(cache)
   mkdirp.sync(registryCache)
   var res = fs.writeFileSync(cacheJsonFile, stringifyUpdated(timeMock.epoch))
@@ -33,8 +33,8 @@ function setupCache() {
 
 var mocks = {
   /* Since request, always response with an _update time > the time requested */
-  sinceFuture: function(server) {
-    server.filteringPathRegEx(/startkey=[^&]*/g, function(s) {
+  sinceFuture: function (server) {
+    server.filteringPathRegEx(/startkey=[^&]*/g, function (s) {
       var _allMock = JSON.parse(JSON.stringify(allMock))
       timeMock.since = _allMock._updated = s.replace('startkey=', '')
       server.get('/-/all/since?stale=update_after&' + s)
@@ -42,17 +42,17 @@ var mocks = {
       return s
     })
   },
-  allFutureUpdatedOnly: function(server) {
+  allFutureUpdatedOnly: function (server) {
     server.get('/-/all')
       .reply(200, stringifyUpdated(timeMock.future))
   },
-  all: function(server) {
+  all: function (server) {
     server.get('/-/all')
       .reply(200, allMock)
   }
 }
 
-test('No previous cache, init cache triggered by first search', function(t) {
+test('No previous cache, init cache triggered by first search', function (t) {
   cleanupCache()
 
   mr({ port: common.port, plugin: mocks.allFutureUpdatedOnly }, function (err, s) {
@@ -64,7 +64,7 @@ test('No previous cache, init cache triggered by first search', function(t) {
       '--color', 'always'
     ],
     EXEC_OPTS,
-    function(err, code) {
+    function (err, code) {
       s.close()
       t.equal(code, 0, 'search finished successfully')
       t.ifErr(err, 'search finished successfully')
@@ -78,12 +78,12 @@ test('No previous cache, init cache triggered by first search', function(t) {
   })
 })
 
-test('previous cache, _updated set, should trigger since request', function(t) {
+test('previous cache, _updated set, should trigger since request', function (t) {
   cleanupCache()
   setupCache()
 
-  function m(server) {
-    [ mocks.all, mocks.sinceFuture ].forEach(function(m) {
+  function m (server) {
+    [ mocks.all, mocks.sinceFuture ].forEach(function (m) {
       m(server)
     })
   }
@@ -96,7 +96,7 @@ test('previous cache, _updated set, should trigger since request', function(t) {
       '--color', 'always'
     ],
     EXEC_OPTS,
-    function(err, code) {
+    function (err, code) {
       s.close()
       t.equal(code, 0, 'search finished successfully')
       t.ifErr(err, 'search finished successfully')
@@ -124,8 +124,8 @@ var searches = [
   }
 ]
 
-searches.forEach(function(search) {
-  test(search.description + ' search in color', function(t) {
+searches.forEach(function (search) {
+  test(search.description + ' search in color', function (t) {
     cleanupCache()
     mr({ port: common.port, plugin: mocks.all }, function (er, s) {
       common.npm([
@@ -136,7 +136,7 @@ searches.forEach(function(search) {
         '--color', 'always'
       ],
       EXEC_OPTS,
-      function(err, code, stdout) {
+      function (err, code, stdout) {
         s.close()
         t.equal(code, 0, 'search finished successfully')
         t.ifErr(err, 'search finished successfully')
@@ -160,7 +160,7 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function stringifyUpdated(time) {
+function stringifyUpdated (time) {
   return JSON.stringify({ _updated : String(time) })
 }
 

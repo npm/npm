@@ -10,15 +10,15 @@ var EXEC_OPTS = {
   cwd: pkg
 }
 
-test('setup', function(t) {
+test('setup', function (t) {
   mkdirp.sync(pkg)
   mkdirp.sync(path.resolve(pkg, 'node_modules'))
   process.chdir(pkg)
   t.end()
 })
 
-test('\'npm install --production\' should install dependencies', function(t) {
-  common.npm(['install', '--production'], EXEC_OPTS, function(err, code) {
+test('\'npm install --production\' should install dependencies', function (t) {
+  common.npm(['install', '--production'], EXEC_OPTS, function (err, code) {
     t.ifError(err, 'install production successful')
     t.equal(code, 0, 'npm install exited with code')
     var p = path.resolve(pkg, 'node_modules/dependency/package.json')
@@ -27,8 +27,8 @@ test('\'npm install --production\' should install dependencies', function(t) {
   })
 })
 
-test('\'npm install --production\' should not install dev dependencies', function(t) {
-  common.npm(['install', '--production'], EXEC_OPTS, function(err, code) {
+test('\'npm install --production\' should not install dev dependencies', function (t) {
+  common.npm(['install', '--production'], EXEC_OPTS, function (err, code) {
     t.ifError(err, 'install production successful')
     t.equal(code, 0, 'npm install exited with code')
     var p = path.resolve(pkg, 'node_modules/dev-dependency/package.json')
@@ -37,7 +37,7 @@ test('\'npm install --production\' should not install dev dependencies', functio
   })
 })
 
-test('cleanup', function(t) {
+test('cleanup', function (t) {
   process.chdir(__dirname)
   rimraf.sync(path.resolve(pkg, 'node_modules'))
   t.end()

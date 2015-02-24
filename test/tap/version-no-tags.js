@@ -17,7 +17,7 @@ test('npm version <semver> without git tag', function (t) {
   npm.load({ cache: cache, registry: common.registry}, function () {
     which('git', function (err, git) {
       t.ifError(err, 'git found on system')
-      function tagExists(tag, _cb) {
+      function tagExists (tag, _cb) {
         var child1 = spawn(git, ['tag', '-l', tag])
         var out = ''
         child1.stdout.on('data', function (d) {
@@ -58,7 +58,7 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function setup() {
+function setup () {
   mkdirp.sync(pkg)
   mkdirp.sync(cache)
   fs.writeFileSync(path.resolve(pkg, 'package.json'), JSON.stringify({
