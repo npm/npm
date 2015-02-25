@@ -14,7 +14,6 @@ test('setup', function (t) {
 })
 
 test('git-cache-locking: install a git dependency', function (t) {
-
   // disable git integration tests on Travis.
   if (process.env.TRAVIS) return t.end()
 

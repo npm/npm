@@ -10,7 +10,6 @@ var cache = path.resolve(pkg, 'cache')
 var nodeModules = path.resolve(pkg, 'node_modules')
 
 test('installing a peerDependencies-using package without a package.json present (GH-3049)', function (t) {
-
   rimraf.sync(nodeModules)
   rimraf.sync(cache)
 
