@@ -16,7 +16,7 @@ var gcData = { 'package-config:foo': 'boo' }
 
 var biData = {}
 
-var cli = { foo: 'bar', umask: 022 }
+var cli = { foo: 'bar', umask: parseInt('022', 8) }
 
 var expectList =
 [ cli,
@@ -59,7 +59,7 @@ test('no builtin', function (t) {
     t.same(npmconf.rootConf.list, [])
     t.equal(npmconf.rootConf.root, npmconf.defs.defaults)
     t.equal(conf.root, npmconf.defs.defaults)
-    t.equal(conf.get('umask'), 022)
+    t.equal(conf.get('umask'), parseInt('022', 8))
     t.equal(conf.get('heading'), 'npm')
     t.end()
   })

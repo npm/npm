@@ -52,7 +52,7 @@ function cleanup (cb) {
   if (failures !== 0) return
   rimraf(root, function (er) {
     if (er) cb(er)
-    mkdir(root, 0755, cb)
+    mkdir(root, parseInt('0755', 8), cb)
   })
 }
 
