@@ -15,8 +15,8 @@ var mockRoutes = {
 test('url-dependencies: download first time', function (t) {
   cleanup()
 
-  performInstall(t, function (output){
-    if (!tarballWasFetched(output)){
+  performInstall(t, function (output) {
+    if (!tarballWasFetched(output)) {
       t.fail('Tarball was not fetched')
     } else {
       t.pass('Tarball was fetched')
@@ -30,7 +30,7 @@ test('url-dependencies: do not download subsequent times', function (t) {
 
   performInstall(t, function () {
     performInstall(t, function (output) {
-      if (tarballWasFetched(output)){
+      if (tarballWasFetched(output)) {
         t.fail('Tarball was fetched second time around')
       } else {
         t.pass('Tarball was not fetched')
@@ -40,7 +40,7 @@ test('url-dependencies: do not download subsequent times', function (t) {
   })
 })
 
-function tarballWasFetched (output){
+function tarballWasFetched (output) {
   return output.indexOf('http fetch GET ' + common.registry + '/underscore/-/underscore-1.3.1.tgz') > -1
 }
 
