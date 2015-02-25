@@ -22,10 +22,11 @@
       l--
     }
     out += '<li><a href=\'#' + el.id + '\'>' +
-      ( el.innerText || el.text || el.innerHTML)
-      + '</a>'
+      (el.innerText || el.text || el.innerHTML) +
+      '</a>'
     return out
   }).join('\n')
   toc.id = 'toc'
   document.body.appendChild(toc)
+/*eslint-disable semi */
 })();

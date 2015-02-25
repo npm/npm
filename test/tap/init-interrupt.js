@@ -33,7 +33,7 @@ test('issue #6684 remove confusing message', function (t) {
     })
 
     // capture log messages
-    npmlog.on('log', function (chunk) { log += chunk.message + '\n' } )
+    npmlog.on('log', function (chunk) { log += chunk.message + '\n' })
 
     init([], function (err, code) {
       t.ifError(err, 'init ran successfully')

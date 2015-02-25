@@ -12,9 +12,7 @@ var npmcli = path.resolve(npmpkg, 'bin', 'npm-cli.js')
 var temp = process.env.TMPDIR
          || process.env.TMP
          || process.env.TEMP
-         || ( process.platform === 'win32'
-            ? 'c:\\windows\\temp'
-            : '/tmp' )
+         || (process.platform === 'win32' ? 'c:\\windows\\temp' : '/tmp')
 
 temp = path.resolve(temp, 'npm-test-' + process.pid)
 
