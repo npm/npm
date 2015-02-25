@@ -31,6 +31,7 @@ test('setup', function (t) {
     t.ifError(er, pkg + ' made successfully')
 
     mr({port: common.port, plugin: mocks}, function (err, s) {
+      t.ifError(err, 'started mock registry')
       server = s
 
       fs.writeFile(

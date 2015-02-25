@@ -74,6 +74,7 @@ test('setup', function (t) {
       t.notOk(code, 'npm cache clean exited cleanly')
 
       mr({ port: common.port, plugin: mocks }, function (err, s) {
+        t.ifError(err, 'mock registry started')
         server = s
         t.end()
       })

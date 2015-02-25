@@ -17,6 +17,7 @@ var customMocks = {
 
 test('ignore-shrinkwrap: using the option', function (t) {
   mr({port: common.port, mocks: customMocks}, function (err, s) {
+    t.ifError(err, 'mock registry started')
     s._server.on('request', function (req) {
       switch (req.url) {
         case '/shrinkwrap.js':
@@ -36,6 +37,7 @@ test('ignore-shrinkwrap: using the option', function (t) {
 
 test('ignore-shrinkwrap: NOT using the option', function (t) {
   mr({port: common.port, mocks: customMocks}, function (err, s) {
+    t.ifError(err, 'mock registry started')
     s._server.on('request', function (req) {
       switch (req.url) {
         case '/shrinkwrap.js':

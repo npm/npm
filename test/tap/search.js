@@ -56,6 +56,7 @@ test('No previous cache, init cache triggered by first search', function (t) {
   cleanupCache()
 
   mr({ port: common.port, plugin: mocks.allFutureUpdatedOnly }, function (err, s) {
+    t.ifError(err, 'mock registry started')
     common.npm([
       'search', 'do not do extra search work on my behalf',
       '--registry', common.registry,
@@ -88,6 +89,7 @@ test('previous cache, _updated set, should trigger since request', function (t) 
     })
   }
   mr({ port: common.port, plugin: m }, function (err, s) {
+    t.ifError(err, 'mock registry started')
     common.npm([
       'search', 'do not do extra search work on my behalf',
       '--registry', common.registry,

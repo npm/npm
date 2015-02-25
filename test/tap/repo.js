@@ -31,6 +31,7 @@ test('npm repo underscore', function (t) {
       '--loglevel=silent',
       '--browser=' + __dirname + '/_script.sh'
     ], opts, function (err, code, stdout, stderr) {
+      t.ifError(err, 'npm repo completed without error')
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
@@ -49,6 +50,7 @@ test('npm repo optimist - github (https://)', function (t) {
       '--loglevel=silent',
       '--browser=' + __dirname + '/_script.sh'
     ], opts, function (err, code, stdout, stderr) {
+      t.ifError(err, 'npm repo completed without error')
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
@@ -67,6 +69,7 @@ test('npm repo npm-test-peer-deps - no repo', function (t) {
       '--loglevel=silent',
       '--browser=' + __dirname + '/_script.sh'
     ], opts, function (err, code, stdout, stderr) {
+      t.ifError(err, 'npm repo completed without error')
       t.equal(code, 1, 'exit not ok')
       s.close()
       t.end()
@@ -82,6 +85,7 @@ test('npm repo test-repo-url-http - non-github (http://)', function (t) {
       '--loglevel=silent',
       '--browser=' + __dirname + '/_script.sh'
     ], opts, function (err, code, stdout, stderr) {
+      t.ifError(err, 'npm repo completed without error')
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
@@ -100,6 +104,7 @@ test('npm repo test-repo-url-https - non-github (https://)', function (t) {
       '--loglevel=silent',
       '--browser=' + __dirname + '/_script.sh'
     ], opts, function (err, code, stdout, stderr) {
+      t.ifError(err, 'npm repo completed without error')
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
@@ -118,6 +123,7 @@ test('npm repo test-repo-url-ssh - non-github (ssh://)', function (t) {
       '--loglevel=silent',
       '--browser=' + __dirname + '/_script.sh'
     ], opts, function (err, code, stdout, stderr) {
+      t.ifError(err, 'npm repo completed without error')
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()

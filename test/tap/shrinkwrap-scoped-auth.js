@@ -34,6 +34,7 @@ function mocks (server) {
 
 test('setup', function (t) {
   mr({ port: common.port, plugin: mocks }, function (err, s) {
+    t.ifError(err, 'mock registry started')
     server = s
     t.ok(s, 'set up mock registry')
     setup()
