@@ -12,6 +12,8 @@ var pkg = path.resolve(__dirname, 'logout')
 var outfile = path.join(pkg, '_npmrc')
 var opts = { cwd: pkg }
 
+// this trips up jscs for some reason
+// jscs:disable validateIndentation
 var contents = function () {/*
 foo=boo
 //localhost:1337/:_authToken=glarb
