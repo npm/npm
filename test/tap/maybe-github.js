@@ -10,8 +10,7 @@ require('module')._cache[remoteGitPath] = {
   exports: function stub (_, __, cb) {
     if (found) {
       cb(null, {})
-    }
-    else {
+    } else {
       cb(new Error('not on filesystem'))
     }
   }

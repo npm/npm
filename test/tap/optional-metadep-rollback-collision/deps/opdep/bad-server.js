@@ -13,8 +13,7 @@ if (process.argv[2]) {
     }, 1000)
     this.close()
   }).listen(8080)
-}
-else {
+} else {
   var child = spawn(
     process.execPath,
     [__filename, 'whatever'],

@@ -212,8 +212,7 @@ test('npm view <package name> --json', function (t) {
         t.similar(out, {
           maintainers: 'jashkenas <jashkenas@gmail.com>'
         }, 'should have the same maintainer')
-      }
-      catch (er) {
+      } catch (er) {
         t.fail('Unable to parse JSON')
       }
     })

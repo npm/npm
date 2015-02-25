@@ -53,8 +53,7 @@ test('npm version <semver> with working directory not clean', function (t) {
             npm.commands.version(['patch'], function (err) {
               if (!err) {
                 t.fail('should fail on non-clean working directory')
-              }
-              else {
+              } else {
                 t.ok(err.message.match(/Git working directory not clean./))
                 t.ok(err.message.match(/M package.json/))
               }

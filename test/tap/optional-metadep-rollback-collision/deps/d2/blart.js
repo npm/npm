@@ -17,8 +17,7 @@ function writeAlmostForever (filename) {
   if (!keepItGoingLouder[filename]) {
     writers--
     if (writers < 1) return done()
-  }
-  else {
+  } else {
     writeFile(filename, keepItGoingLouder[filename], function (err) {
       if (err) errors++
 
