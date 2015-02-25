@@ -70,7 +70,7 @@ npm.load({loglevel: 'silent'}, function () {
     })
     cache.add('dir-with-package', null, null, false, function (er, which) {
       t.ifError(er, 'local directory with package was cached')
-      t.is(which,'addLocal', 'local directory with package.json')
+      t.is(which, 'addLocal', 'local directory with package.json')
     })
     cache.add('file:./dir-with-package', null, __dirname, false, function (er, which) {
       t.ifError(er, 'local directory (as URI) with package was cached')
