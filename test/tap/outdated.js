@@ -18,10 +18,10 @@ test('it should not throw', function (t) {
   var output = []
   var expOut = [
     path.resolve(__dirname, 'outdated/node_modules/underscore'),
-    path.resolve(__dirname, 'outdated/node_modules/underscore')
-       + ':underscore@1.3.1'
-       + ':underscore@1.3.1'
-       + ':underscore@1.5.1' ]
+    path.resolve(__dirname, 'outdated/node_modules/underscore') +
+      ':underscore@1.3.1' +
+      ':underscore@1.3.1' +
+      ':underscore@1.5.1' ]
   var expData = [
     [
       path.resolve(__dirname, 'outdated'),

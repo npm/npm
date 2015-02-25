@@ -97,8 +97,10 @@ test('check configs', function (t) {
   var defaults = Object.keys(defs.defaults)
   for (var c1 in CONFS) {
     if (CONFS[c1].file.indexOf(lib) === 0) {
-      t.ok(DOC[c1], 'should be documented ' + c1 + ' '
-          + CONFS[c1].file + ':' + CONFS[c1].line)
+      t.ok(
+        DOC[c1],
+        'should be documented ' + c1 + ' ' + CONFS[c1].file + ':' + CONFS[c1].line
+      )
       t.ok(types.indexOf(c1) !== -1, 'should be defined in npmconf ' + c1)
       t.ok(defaults.indexOf(c1) !== -1, 'should have default in npmconf ' + c1)
     }
