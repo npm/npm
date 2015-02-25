@@ -34,7 +34,7 @@ var scripts = [
 ]
 
 scripts.forEach(function (script) {
-  test('ignore-scripts: run-script '+script+' using the option', function (t) {
+  test('ignore-scripts: run-script ' + script + ' using the option', function (t) {
     createChild(['--ignore-scripts', 'run-script', script], function (err, code) {
       t.ifError(err, 'run-script ' + script + ' with ignore-scripts successful')
       t.equal(code, 0, 'npm run-script exited with code')
@@ -44,7 +44,7 @@ scripts.forEach(function (script) {
 })
 
 scripts.forEach(function (script) {
-  test('ignore-scripts: run-script '+script+' NOT using the option', function (t) {
+  test('ignore-scripts: run-script ' + script + ' NOT using the option', function (t) {
     createChild(['run-script', script], function (err, code) {
       t.ifError(err, 'run-script ' + script + ' finished successfully')
       t.notEqual(code, 0, 'npm run-script exited with code')

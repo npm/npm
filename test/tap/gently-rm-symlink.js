@@ -88,7 +88,7 @@ function verify (t, stdout) {
   var trgPath = resolve(pkgPath, 'index.js')
   t.equal(
     stdout,
-    binPath+' -> '+trgPath+'\n@test/linked@1.0.0 '+pkgPath+'\n',
+    binPath + ' -> ' + trgPath + '\n@test/linked@1.0.0 ' + pkgPath + '\n',
     'got expected install output'
   )
 }

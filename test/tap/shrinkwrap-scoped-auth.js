@@ -71,8 +71,8 @@ test('cleanup', function (t) {
   t.end()
 })
 
-var contents = '@scoped:registry='+common.registry+'\n' +
-               toNerfDart(common.registry)+':_authToken=0xabad1dea\n'
+var contents = '@scoped:registry=' + common.registry + '\n' +
+               toNerfDart(common.registry) + ':_authToken=0xabad1dea\n'
 
 var json = {
   name: 'test-package-install',
@@ -94,11 +94,11 @@ var shrinkwrap = {
 function setup () {
   cleanup()
   mkdirp.sync(modules)
-  writeFileSync(resolve(pkg, 'package.json'), JSON.stringify(json, null, 2)+'\n')
+  writeFileSync(resolve(pkg, 'package.json'), JSON.stringify(json, null, 2) + '\n')
   writeFileSync(outfile, contents)
   writeFileSync(
     resolve(pkg, 'npm-shrinkwrap.json'),
-    JSON.stringify(shrinkwrap, null, 2)+'\n'
+    JSON.stringify(shrinkwrap, null, 2) + '\n'
   )
 }
 

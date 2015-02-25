@@ -16,7 +16,7 @@ var pj = JSON.stringify({
 var umask = process.umask()
 var expected = [
   '',
-  '> x@1.2.3 umask '+path.join(__dirname, 'umask-lifecycle'),
+  '> x@1.2.3 umask ' + path.join(__dirname, 'umask-lifecycle'),
   '> $npm_execpath config get umask && echo "$npm_config_umask" && node -p \'process.umask()\'',
   '',
   sprintf('%04o', umask),

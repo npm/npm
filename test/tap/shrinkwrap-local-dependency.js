@@ -14,14 +14,22 @@ test('shrinkwrap uses resolved with file: on local deps', function (t) {
   setup()
 
   common.npm(
-    ['--cache='+CACHE_DIR, '--loglevel=silent', 'install', '.'],
+    [
+      'install', '.',
+      '--cache', CACHE_DIR,
+      '--loglevel', 'silent'
+    ],
     {},
     function (err, code) {
       t.ifError(err, 'npm install worked')
       t.equal(code, 0, 'npm exited normally')
 
       common.npm(
-        ['--cache='+CACHE_DIR, '--loglevel=silent', 'shrinkwrap'],
+        [
+          'shrinkwrap',
+          '--cache', CACHE_DIR,
+          '--loglevel', 'silent'
+        ],
         {},
         function (err, code) {
           t.ifError(err, 'npm shrinkwrap worked')
@@ -43,7 +51,11 @@ test('"npm install" should install local packages from shrinkwrap', function (t)
   cleanNodeModules()
 
   common.npm(
-    ['--cache='+CACHE_DIR, '--loglevel=silent', 'install', '.'],
+    [
+      'install', '.',
+      '--cache', CACHE_DIR,
+      '--loglevel', 'silent'
+    ],
     {},
     function (err, code) {
       t.ifError(err, 'install ran correctly')

@@ -23,7 +23,7 @@ var bcoe = {
 }
 
 function shrt (user) {
-  return user.name+' <'+user.email+'>\n'
+  return user.name + ' <' + user.email + '>\n'
 }
 
 function mocks (server) {
@@ -131,7 +131,7 @@ test('npm owner ls', function (t) {
       t.ifError(err,  'npm owner ls ran without error')
       t.notOk(code,   'npm owner ls exited cleanly')
       t.notOk(stderr, 'npm owner ls ran silently')
-      t.equal(stdout, shrt(jashkenas)+shrt(othiym23), 'got expected ls output')
+      t.equal(stdout, shrt(jashkenas) + shrt(othiym23), 'got expected ls output')
 
       t.end()
     }

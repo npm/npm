@@ -12,8 +12,8 @@ var mkdirp = require('mkdirp')
 
 var timeMock = {
   epoch: 1411727900,
-  future: 1411727900+100,
-  all: 1411727900+25,
+  future: 1411727900 + 100,
+  all: 1411727900 + 25,
   since: 0  // filled by since server callback
 }
 

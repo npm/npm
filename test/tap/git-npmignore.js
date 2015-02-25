@@ -40,7 +40,7 @@ test('npm pack directly from directory', function (t) {
 })
 
 test('npm pack via git', function (t) {
-  packInstallTest('git+file://'+dep, t)
+  packInstallTest('git+file://' + dep, t)
 })
 
 test('cleanup', function (t) {
@@ -124,45 +124,45 @@ function setup (cb) {
     EXEC_OPTS,
     function (er, code, _, stderr) {
       if (er) return cb(er)
-      if (code) return cb(new Error('npm cache nonzero exit: '+code))
-      if (stderr) return cb(new Error('npm cache clean error: '+stderr))
+      if (code) return cb(new Error('npm cache nonzero exit: ' + code))
+      if (stderr) return cb(new Error('npm cache clean error: ' + stderr))
 
       which('git', function found (er, git) {
         if (er) return cb(er)
 
-        exec(git+' init', init)
+        exec(git + ' init', init)
 
         function init (er, _, stderr) {
           if (er) return cb(er)
-          if (stderr) return cb(new Error('git init error: '+stderr))
+          if (stderr) return cb(new Error('git init error: ' + stderr))
 
-          exec(git+' config user.name "Phantom Faker"', user)
+          exec(git + ' config user.name "Phantom Faker"', user)
         }
 
         function user (er, _, stderr) {
           if (er) return cb(er)
-          if (stderr) return cb(new Error('git config error: '+stderr))
+          if (stderr) return cb(new Error('git config error: ' + stderr))
 
-          exec(git+' config user.email nope@not.real', email)
+          exec(git + ' config user.email nope@not.real', email)
         }
 
         function email (er, _, stderr) {
           if (er) return cb(er)
-          if (stderr) return cb(new Error('git config error: '+stderr))
+          if (stderr) return cb(new Error('git config error: ' + stderr))
 
-          exec(git+' add .', addAll)
+          exec(git + ' add .', addAll)
         }
 
         function addAll (er, _, stderr) {
           if (er) return cb(er)
-          if (stderr) return cb(new Error('git add . error: '+stderr))
+          if (stderr) return cb(new Error('git add . error: ' + stderr))
 
-          exec(git+' commit -m boot', commit)
+          exec(git + ' commit -m boot', commit)
         }
 
         function commit (er, _, stderr) {
           if (er) return cb(er)
-          if (stderr) return cb(new Error('git commit error: '+stderr))
+          if (stderr) return cb(new Error('git commit error: ' + stderr))
 
           cb()
         }

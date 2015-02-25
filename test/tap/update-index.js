@@ -91,7 +91,7 @@ var mocks = {
 }
 
 var allMock = {
-  '_updated': 1411727900+25,
+  '_updated': 1411727900 + 25,
   'generator-frontcow': {
       'name': 'generator-frontcow',
       'description': 'f36b6a6123da50959741e2ce4d634f96ec668c56 This is a fake description to ensure we do not accidentally search the real npm registry or use some kind of cache',

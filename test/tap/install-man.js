@@ -63,7 +63,7 @@ function setup () {
   mkdirp.sync(resolve(target, 'node_modules'))
   fs.writeFileSync(
     resolve(pkg, 'package.json'),
-    JSON.stringify(json, null, 2)+'\n'
+    JSON.stringify(json, null, 2) + '\n'
   )
   fs.writeFileSync(resolve(pkg, 'install-man.1'), 'THIS IS A MANPAGE\n')
 }

@@ -67,7 +67,7 @@ function exec (cmd, cwd, shouldFail, cb) {
   if (typeof shouldFail === 'function') {
     cb = shouldFail, shouldFail = false
   }
-  console.error('\n+'+cmd + (shouldFail ? ' (expect failure)' : ''))
+  console.error('\n+' + cmd + (shouldFail ? ' (expect failure)' : ''))
 
   // special: replace 'node' with the current execPath,
   // and 'npm' with the thing we installed.
@@ -99,7 +99,7 @@ function exec (cmd, cwd, shouldFail, cb) {
       return cb()
     } else {
       console.log('not ok ' + execCount + ' ' + cmdShow)
-      cb(new Error('failed '+cmdShow))
+      cb(new Error('failed ' + cmdShow))
     }
   })
 }
@@ -119,7 +119,7 @@ function flatten (arr) {
 function setup (cb) {
   cleanup(function (er) {
     if (er) return cb(er)
-    exec('node \''+npmcli+'\' install \''+npmpkg+'\'', root, false, cb)
+    exec('node \'' + npmcli + '\' install \'' + npmpkg + '\'', root, false, cb)
   })
 }
 
@@ -150,15 +150,15 @@ function main (cb) {
     chain(
       [
         setup,
-        [ exec, 'npm install '+npmpkg, testdir ],
+        [ exec, 'npm install ' + npmpkg, testdir ],
         [ execChain, packages.map(function (p) {
-          return [ 'npm install packages/'+p, testdir ]
+          return [ 'npm install packages/' + p, testdir ]
         }) ],
         [ execChain, packages.map(function (p) {
           return [ 'npm test -ddd', path.resolve(base, p) ]
         }) ],
         [ execChain, packagesToRm.map(function (p) {
-          return [ 'npm rm '+p, root ]
+          return [ 'npm rm ' + p, root ]
         }) ],
         installAndTestEach
       ],
@@ -171,9 +171,9 @@ function main (cb) {
         setup,
         [ execChain, flatten(packages.map(function (p) {
           return [
-            [ 'npm install packages/'+p, testdir ],
+            [ 'npm install packages/' + p, testdir ],
             [ 'npm test', path.resolve(base, p) ],
-            [ 'npm rm '+p, root ] ]
+            [ 'npm rm ' + p, root ] ]
         })) ]
       ]
 
