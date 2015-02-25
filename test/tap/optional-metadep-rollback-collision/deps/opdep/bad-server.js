@@ -1,11 +1,11 @@
-var createServer = require("http").createServer
-var spawn = require("child_process").spawn
-var fs = require("fs")
-var path = require("path")
-var pidfile = path.resolve(__dirname, "..", "..", "child.pid")
+var createServer = require('http').createServer
+var spawn = require('child_process').spawn
+var fs = require('fs')
+var path = require('path')
+var pidfile = path.resolve(__dirname, '..', '..', 'child.pid')
 
 if (process.argv[2]) {
-  console.log("ok")
+  console.log('ok')
   createServer(function (req, res) {
     setTimeout(function () {
       res.writeHead(404)
@@ -13,11 +13,10 @@ if (process.argv[2]) {
     }, 1000)
     this.close()
   }).listen(8080)
-}
-else {
+} else {
   var child = spawn(
     process.execPath,
-    [__filename, "whatever"],
+    [__filename, 'whatever'],
     {
       stdio: [0, 1, 2],
       detached: true
@@ -28,8 +27,8 @@ else {
   // kill any prior children, if existing.
   try {
     var pid = +fs.readFileSync(pidfile)
-    process.kill(pid, "SIGKILL")
+    process.kill(pid, 'SIGKILL')
   } catch (er) {}
 
-  fs.writeFileSync(pidfile, child.pid + "\n")
+  fs.writeFileSync(pidfile, child.pid + '\n')
 }

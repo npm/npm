@@ -1,9 +1,9 @@
 var common = require('../common-tap')
-  , test = require('tap').test
-  , rimraf = require('rimraf')
-  , npm = require('../../')
-  , mr = require('npm-registry-mock')
-  , pkg = __dirname + '/outdated-depth'
+var test = require('tap').test
+var rimraf = require('rimraf')
+var npm = require('../../')
+var mr = require('npm-registry-mock')
+var pkg = __dirname + '/outdated-depth'
 
 function cleanup () {
   rimraf.sync(pkg + '/node_modules')
@@ -24,29 +24,27 @@ test('outdated depth integer', function (t) {
 
   process.chdir(pkg)
 
-  mr({port : common.port}, function (s) {
+  mr({port: common.port}, function (s) {
     npm.load({
-      cache: pkg + '/cache'
-    , loglevel: 'silent'
-    , registry: common.registry
-    , depth: 5
-    }
-    , function () {
-        npm.install('request@0.9.0', function (er) {
-          if (er) throw new Error(er)
-          npm.outdated(function (err, d) {
-            if (err) throw new Error(err)
-            t.deepEqual(d[0], expected)
-            s.close()
-            t.end()
-          })
+      cache: pkg + '/cache',
+      loglevel: 'silent',
+      registry: common.registry,
+      depth: 5
+    }, function () {
+      npm.install('request@0.9.0', function (er) {
+        if (er) throw new Error(er)
+        npm.outdated(function (err, d) {
+          if (err) throw new Error(err)
+          t.deepEqual(d[0], expected)
+          s.close()
+          t.end()
         })
-      }
-    )
+      })
+    })
   })
 })
 
-test("cleanup", function (t) {
+test('cleanup', function (t) {
   cleanup()
   t.end()
 })

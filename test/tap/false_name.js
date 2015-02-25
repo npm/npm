@@ -7,49 +7,49 @@
 // this leads to a conflict during installation and the fix is covered
 // by this test
 
-var test = require("tap").test
-  , fs = require("fs")
-  , path = require("path")
-  , existsSync = fs.existsSync || path.existsSync
-  , rimraf = require("rimraf")
-  , common = require("../common-tap.js")
-  , mr = require("npm-registry-mock")
-  , pkg = path.resolve(__dirname, "false_name")
-  , cache = path.resolve(pkg, "cache")
-  , nodeModules = path.resolve(pkg, "node_modules")
+var test = require('tap').test
+var fs = require('fs')
+var path = require('path')
+var existsSync = fs.existsSync || path.existsSync
+var rimraf = require('rimraf')
+var common = require('../common-tap.js')
+var mr = require('npm-registry-mock')
+var pkg = path.resolve(__dirname, 'false_name')
+var cache = path.resolve(pkg, 'cache')
+var nodeModules = path.resolve(pkg, 'node_modules')
 
 var EXEC_OPTS = { cwd: pkg }
 
-test("setup", function(t) {
+test('setup', function (t) {
   cleanup()
   fs.mkdirSync(nodeModules)
   t.end()
 })
 
-test("not every pkg.name can be required", function (t) {
+test('not every pkg.name can be required', function (t) {
   t.plan(3)
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     common.npm([
-      "install", ".",
-      "--cache", cache,
-      "--registry", common.registry
+      'install', '.',
+      '--cache', cache,
+      '--registry', common.registry
     ], EXEC_OPTS, function (err, code) {
       s.close()
-      t.ifErr(err, "install finished without error")
-      t.equal(code, 0, "install exited ok")
+      t.ifErr(err, 'install finished without error')
+      t.equal(code, 0, 'install exited ok')
       t.ok(existsSync(path.resolve(pkg,
-        "node_modules/test-package-with-one-dep",
-        "node_modules/test-package")))
+        'node_modules/test-package-with-one-dep',
+        'node_modules/test-package')))
     })
   })
 })
 
-function cleanup() {
+function cleanup () {
   rimraf.sync(cache)
   rimraf.sync(nodeModules)
 }
 
-test("cleanup", function (t) {
+test('cleanup', function (t) {
   cleanup()
   t.end()
 })

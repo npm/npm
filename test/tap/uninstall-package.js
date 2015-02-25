@@ -1,20 +1,20 @@
-var test = require("tap").test
-  , npm = require("../../")
-  , rimraf = require("rimraf")
-  , mr = require("npm-registry-mock")
-  , common = require("../common-tap.js")
-  , path = require("path")
-  , pkg = path.join(__dirname, "uninstall-package")
+var test = require('tap').test
+var npm = require('../../')
+var rimraf = require('rimraf')
+var mr = require('npm-registry-mock')
+var common = require('../common-tap.js')
+var path = require('path')
+var pkg = path.join(__dirname, 'uninstall-package')
 
-test("returns a list of removed items", function (t) {
+test('returns a list of removed items', function (t) {
   t.plan(1)
-  mr({port : common.port}, function (er, s) {
+  mr({port: common.port}, function (er, s) {
     setup(function () {
-      npm.install(".", function (err) {
+      npm.install('.', function (err) {
         if (err) return t.fail(err)
-        npm.uninstall("underscore", "request", "lala", function (err, d) {
+        npm.uninstall('underscore', 'request', 'lala', function (err, d) {
           if (err) return t.fail(err)
-          t.same(d.sort(), ["underscore", "request"].sort())
+          t.same(d.sort(), ['underscore', 'request'].sort())
           s.close()
           t.end()
         })
@@ -23,7 +23,7 @@ test("returns a list of removed items", function (t) {
   })
 })
 
-test("cleanup", function (t) {
+test('cleanup', function (t) {
   cleanup()
   t.end()
 })
@@ -31,12 +31,12 @@ test("cleanup", function (t) {
 function setup (cb) {
   cleanup()
   process.chdir(pkg)
-  npm.load({cache: pkg + "/cache", registry: common.registry}, function () {
+  npm.load({cache: pkg + '/cache', registry: common.registry}, function () {
     cb()
   })
 }
 
 function cleanup () {
-  rimraf.sync(pkg + "/node_modules")
-  rimraf.sync(pkg + "/cache")
+  rimraf.sync(pkg + '/node_modules')
+  rimraf.sync(pkg + '/cache')
 }
