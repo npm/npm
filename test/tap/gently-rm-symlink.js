@@ -26,9 +26,9 @@ test('install and link', function (t) {
   common.npm(
     [
       '--global',
-      '--prefix',   lnk,
+      '--prefix', lnk,
       '--loglevel', 'silent',
-      'install',    '../test-linked'
+      'install', '../test-linked'
     ],
     EXEC_OPTS,
     function (er, code, stdout, stderr) {

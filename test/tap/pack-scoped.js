@@ -6,10 +6,10 @@ var join = require('path').join
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
 
-var pkg      = join(__dirname, 'scoped_package')
+var pkg = join(__dirname, 'scoped_package')
 var manifest = join(pkg, 'package.json')
-var tmp      = join(pkg, 'tmp')
-var cache    = join(pkg, 'cache')
+var tmp = join(pkg, 'tmp')
+var cache = join(pkg, 'cache')
 
 var data = {
   name: '@scope/generic-package',
@@ -21,9 +21,9 @@ test('setup', function (t) {
 
   rimraf.sync(pkg)
 
-  mkdirp(pkg,   then())
+  mkdirp(pkg, then())
   mkdirp(cache, then())
-  mkdirp(tmp,   then())
+  mkdirp(tmp, then())
 
   function then () {
     n++

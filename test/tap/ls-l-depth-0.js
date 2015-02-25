@@ -47,8 +47,8 @@ test('#6311: npm ll --depth=0 duplicates listing', function (t) {
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
-      t.ifError(err,  'npm install ran without error')
-      t.notOk(code,   'npm install exited cleanly')
+      t.ifError(err, 'npm install ran without error')
+      t.notOk(code, 'npm install exited cleanly')
       t.notOk(stderr, 'npm install ran silently')
       t.equal(
         stdout.trim(),
@@ -64,8 +64,8 @@ test('#6311: npm ll --depth=0 duplicates listing', function (t) {
         ],
         EXEC_OPTS,
         function (err, code, stdout, stderr) {
-          t.ifError(err,  'npm ll ran without error')
-          t.notOk(code,   'npm ll exited cleanly')
+          t.ifError(err, 'npm ll ran without error')
+          t.notOk(code, 'npm ll exited cleanly')
           t.notOk(stderr, 'npm ll ran silently')
           t.equal(
             stdout,
