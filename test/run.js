@@ -63,7 +63,8 @@ function prefix (content, pref) {
 var execCount = 0
 function exec (cmd, cwd, shouldFail, cb) {
   if (typeof shouldFail === 'function') {
-    cb = shouldFail, shouldFail = false
+    cb = shouldFail
+    shouldFail = false
   }
   console.error('\n+' + cmd + (shouldFail ? ' (expect failure)' : ''))
 
