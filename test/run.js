@@ -92,7 +92,7 @@ function exec (cmd, cwd, shouldFail, cb) {
       console.error(prefix(stderr, ' 2> '))
     }
 
-    execCount ++
+    execCount++
     if (!shouldFail && !er || shouldFail && er) {
       // stdout = (''+stdout).trim()
       console.log('ok ' + execCount + ' ' + cmdShow)

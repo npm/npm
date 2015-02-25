@@ -15,11 +15,11 @@
     var out = ''
     while (i > l) {
       out += '<ul>'
-      l ++
+      l++
     }
     while (i < l) {
       out += '</ul>'
-      l --
+      l--
     }
     out += '<li><a href=\'#' + el.id + '\'>' +
       ( el.innerText || el.text || el.innerHTML)
