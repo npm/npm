@@ -30,7 +30,7 @@ var depj = {
 
 var myreg = require('http').createServer(function (q, s) {
   s.statusCode = 403
-  s.end(JSON.stringify({'error':'forbidden'}) + '\n')
+  s.end(JSON.stringify({'error': 'forbidden'}) + '\n')
 }).listen(common.port)
 
 test('setup', function (t) {

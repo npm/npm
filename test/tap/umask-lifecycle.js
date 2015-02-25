@@ -8,7 +8,7 @@ var common = require('../common-tap.js')
 
 var pkg = path.resolve(__dirname, 'umask-lifecycle')
 var pj = JSON.stringify({
-  name:'x',
+  name: 'x',
   version: '1.2.3',
   scripts: { umask: '$npm_execpath config get umask && echo "$npm_config_umask" && node -p \'process.umask()\'' }
 }, null, 2) + '\n'
