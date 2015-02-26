@@ -136,11 +136,12 @@ if it installs a new package.
 
 ### Updating Globally-Installed Packages
 
-`npm update -g` will apply the `update` action to each globally-
-installed package that is `outdated` -- that is, has a version
-that is different from `latest`.
+`npm update -g` will apply the `update` action to each globally- installed
+package that is `outdated` -- that is, has a version that is different from
+`latest`.
 
-
+NOTE: If a package has been upgraded to a version newer than `latest`, it will
+be _downgraded_.
 
 
 ## SEE ALSO
