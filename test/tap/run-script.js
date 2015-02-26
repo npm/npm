@@ -103,6 +103,10 @@ test("npm run-script nonexistent-script", function (t) {
   })
 })
 
+test("npm run-script restart when there isn't restart", function (t) {
+  common.npm(["run-script", "restart"], opts, testOutput.bind(null, t, "stop;start"))
+})
+
 test("cleanup", function (t) {
   cleanup()
   t.end()

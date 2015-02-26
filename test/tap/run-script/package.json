@@ -8,6 +8,7 @@
   "postwith-post":"node -e \"console.log(process.argv[1] || 'post')\"",
   "prewith-both":"node -e \"console.log(process.argv[1] || 'pre')\"",
   "with-both":"node -e \"console.log(process.argv[1] || 'main')\"",
-  "postwith-both":"node -e \"console.log(process.argv[1] || 'post')\""
+  "postwith-both":"node -e \"console.log(process.argv[1] || 'post')\"",
+  "stop":"node -e \"console.log(process.argv[1] || 'stop')\""
   }
 }
