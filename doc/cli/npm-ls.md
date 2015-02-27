@@ -67,6 +67,20 @@ project.
 
 Max display depth of the dependency tree.
 
+### production
+
+* Type: Boolean
+* Default: false
+
+Display only the dependency type is dependency tree.
+
+### dev
+
+* Type: Boolean
+* Default: false
+
+Display only the dependency type is devDependency tree.
+
 ## SEE ALSO
 
 * npm-config(1)
