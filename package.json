@@ -164,6 +164,9 @@
     "wrappy",
     "write-file-atomic"
   ],
+  "optionalDependencies": {
+    "jju": "~0.4.1"
+  },
   "devDependencies": {
     "marked": "~0.3.3",
     "marked-man": "~0.1.4",
