@@ -9,9 +9,10 @@ npm-run-script(1) -- Run arbitrary package scripts
 ## DESCRIPTION
 
 This runs an arbitrary command from a package's `"scripts"` object.  If no
-`"command"` is provided, it will list the available top level scripts.
-`run[-script]` is used by the test, start, restart, and stop commands, but can
-be called directly, as well.
+`"command"` is provided, it will list the available scripts.  `run[-script]` is
+used by the test, start, restart, and stop commands, but can be called
+directly, as well. When the scripts in the package are printed out, they're
+separated into lifecycle (test, start, restart) and directly-run scripts.
 
 As of [`npm@2.0.0`](http://blog.npmjs.org/post/98131109725/npm-2-0-0), you can
 use custom arguments when executing scripts. The special option `--` is used by
