@@ -24,7 +24,7 @@ if type complete &>/dev/null; then
   complete -o default -F _npm_completion npm
 elif type compdef &>/dev/null; then
   _npm_completion() {
-    si=$IFS
+    local si=$IFS
     compadd -- $(COMP_CWORD=$((CURRENT-1)) \
                  COMP_LINE=$BUFFER \
                  COMP_POINT=0 \
