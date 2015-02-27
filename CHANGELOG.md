@@ -65,7 +65,7 @@ tracker, and they included some nice small features and fixes:
   [#7354](https://github.com/npm/npm/issues/7354) Add `--if-present` flag to
   allow e.g. CI systems to call (semi-) standard build tasks defined in
   `package.json`, but don't raise an error if no such script is defined.
-  ([@jussi](https://github.com/jussi)-kalliokoski)
+  ([@jussi-kalliokoski](https://github.com/jussi-kalliokoski))
 * [`7bf85cc`](https://github.com/npm/npm/commit/7bf85cc372ab5698593b01e139c383fa62c92516)
   [#4005](https://github.com/npm/npm/issues/4005)
   [#6248](https://github.com/npm/npm/issues/6248) Globally unlink a package
@@ -1077,7 +1077,7 @@ Other changes:
 * [`b706d63`](https://github.com/npm/npm/commit/b706d637d5965dbf8f7ce07dc5c4bc80887f30d8)
   [#3059](https://github.com/npm/npm/issues/3059) disable prepublish when
   running `npm install --production`
-  ([@jussi](https://github.com/jussi)-kalliokoski)
+  ([@jussi-kalliokoski](https://github.com/jussi-kalliokoski))
 * [`119f068`](https://github.com/npm/npm/commit/119f068eae2a36fa8b9c9ca557c70377792243a4)
   attach the node version used when publishing a package to its registry
   metadata ([@othiym23](https://github.com/othiym23))
