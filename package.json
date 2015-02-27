@@ -172,7 +172,7 @@
     "npm-registry-mock": "~1.0.0",
     "require-inject": "~1.1.0",
     "sprintf-js": "~1.0.2",
-    "tap": "~0.6.0"
+    "tap": "~0.7.1"
   },
   "scripts": {
     "test-legacy": "node ./test/run.js",
