@@ -15,6 +15,8 @@ valid second argument to semver.inc (one of "patch", "minor", "major",
 "prepatch", "preminor", "premajor", "prerelease"). In the second case,
 the existing version will be incremented by 1 in the specified field.
 
+### IN A GIT REPOSITORY
+
 If run in a git repo, it will also create a version commit and tag, and
 fail if the repo is not clean.
 
