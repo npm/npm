@@ -26,8 +26,7 @@ test("cache add", function (t) {
     t.ok(c, "test-whoops install also failed")
     fs.readdir(pkg, function (er, files) {
       t.ifError(er, "package directory is still there")
-      t.deepEqual(files, ["npm-debug.log"], "only debug log remains")
-
+      t.same(files, [], "only debug log remains")
       t.end()
     })
   })
