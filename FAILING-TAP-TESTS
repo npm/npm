@@ -1,0 +1,46 @@
+node test/run.js -- still fails to even start =/
+
+# npm-registry-couchapp
+  test/02-publish.js (33/35) - due to output format changes
+  test/03-star.js (5/10) - due to unicode detection
+
+# general
+test/tap/add-remote-git-fake-windows.js  -- hangs
+test/tap/add-remote-git.js -- hangs
+test/tap/builtin-config.js -- catches fire, falls over
+test/tap/cache-shasum-fork.js (9/11)
+test/tap/circular-dep.js (1/1)
+test/tap/config-meta.js (796/814)
+test/tap/dedupe.js (5/6)
+test/tap/false_name.js (2/3)
+test/tap/gently-rm-overeager.js (3/4)
+test/tap/gently-rm-symlink.js (6/4)
+test/tap/ignore-install-link.js (1/2)
+test/tap/ignore-shrinkwrap.js (1/2)
+test/tap/install-bad-man.js (5/7)
+test/tap/install-man.js (3/6)
+test/tap/install-save-local.js (6/8)
+test/tap/install-save-prefix.js (12/16)
+test/tap/install-with-dev-dep-duplicate.js (1/1)
+test/tap/optional-metadep-rollback-collision.js (2/4)
+test/tap/repo.js (12/13)
+test/tap/shrinkwrap-dev-dependency.js (0/1)
+test/tap/shrinkwrap-local-dependency.js (8/9) _from looks different now, possibly bogus
+test/tap/shrinkwrap-scoped-auth.js (4/5)
+test/tap/uninstall-package.js (0/1) seems like an api change?
+test/tap/unpack-foreign-tarball.js (3/5)
+test/tap/update-save.js (16/26)
+test/tap/url-dependencies.js (7/8)
+test/tap/shrinkwrap-shared-dev-dependency.js (0/1) legit broken
+test/tap/logout.js -- (1/3) I have no idea how this is related?
+
+# api change that probably should be paved over
+test/tap/outdated-depth-integer.js (0/1)
+test/tap/outdated-long.js (2/4)
+test/tap/outdated.js (2/4)
+
+# peer deps were broken on purpose
+test/tap/peer-deps-invalid.js (1/2)
+test/tap/peer-deps-toplevel.js (4/5)
+test/tap/peer-deps-without-package-json.js (1/4)
+test/tap/peer-deps.js (0/1)
