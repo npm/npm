@@ -3,15 +3,17 @@ npm-install(1) -- Install a package
 
 ## SYNOPSIS
 
-    npm install (with no args in a package dir)
+    npm install (with no args, in package dir)
+    npm install [<@scope>/]<name>
+    npm install [<@scope>/]<name>@<tag>
+    npm install [<@scope>/]<name>@<version>
+    npm install [<@scope>/]<name>@<version range>
     npm install <tarball file>
     npm install <tarball url>
     npm install <folder>
-    npm install [@<scope>/]<name> [--save|--save-dev|--save-optional] [--save-exact]
-    npm install [@<scope>/]<name>@<tag>
-    npm install [@<scope>/]<name>@<version>
-    npm install [@<scope>/]<name>@<version range>
-    npm i (with any of the previous argument usage)
+
+    alias: npm i
+    common options: [--save|--save-dev|--save-optional] [--save-exact]
 
 ## DESCRIPTION
 
@@ -71,7 +73,7 @@ after packing it up into a tarball (b).
 
           npm install https://github.com/indexzero/forever/tarball/v0.5.6
 
-* `npm install [@<scope>/]<name> [--save|--save-dev|--save-optional]`:
+* `npm install [<@scope>/]<name> [--save|--save-dev|--save-optional]`:
 
     Do a `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
     `npm-config(7)`.)
@@ -124,7 +126,7 @@ after packing it up into a tarball (b).
     working directory, then it will try to install that, and only try to
     fetch the package by name if it is not valid.
 
-* `npm install [@<scope>/]<name>@<tag>`:
+* `npm install [<@scope>/]<name>@<tag>`:
 
     Install the version of the package that is referenced by the specified tag.
     If the tag does not exist in the registry data for that package, then this
@@ -135,7 +137,7 @@ after packing it up into a tarball (b).
           npm install sax@latest
           npm install @myorg/mypackage@latest
 
-* `npm install [@<scope>/]<name>@<version>`:
+* `npm install [<@scope>/]<name>@<version>`:
 
     Install the specified version of the package.  This will fail if the
     version has not been published to the registry.
@@ -145,7 +147,7 @@ after packing it up into a tarball (b).
           npm install sax@0.1.1
           npm install @myorg/privatepackage@1.5.0
 
-* `npm install [@<scope>/]<name>@<version range>`:
+* `npm install [<@scope>/]<name>@<version range>`:
 
     Install a version of the package matching the specified version range.  This
     will follow the same rules for resolving dependencies described in `package.json(5)`.
