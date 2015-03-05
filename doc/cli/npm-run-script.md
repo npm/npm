@@ -29,6 +29,10 @@ environment variables that will be available to the script at runtime. If an
 "env" command is defined in your package it will take precedence over the
 built-in.
 
+In addition to your system ```PATH```, ```npm run``` looks for executables in
+```node_modules/.bin```. This includes scripts exported by locally installed
+modules.
+
 ## SEE ALSO
 
 * npm-scripts(7)
