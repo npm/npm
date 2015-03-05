@@ -1,71 +1,146 @@
-var test = require("tap").test
-  , fs = require("fs")
-  , path = require("path")
-  , existsSync = fs.existsSync || path.existsSync
-  , rimraf = require("rimraf")
-  , mr = require("npm-registry-mock")
-  , common = require("../common-tap.js")
+var fs = require('fs')
+var join = require('path').join
 
-var EXEC_OPTS = {}
+var mkdirp = require('mkdirp')
+var rimraf = require('rimraf')
+var test = require('tap').test
 
-test("dedupe finds the common scoped modules and moves it up one level", function (t) {
-  setup(function (s) {
-    common.npm(
-    [
-      "install", ".",
-      "--registry", common.registry
-    ],
-    EXEC_OPTS,
-    function (err, code) {
-      scopePackages(function () {
-        t.ifError(err, "successfully installed directory")
-        t.equal(code, 0, "npm install exited with code")
-        common.npm(["dedupe"], {}, function (err, code) {
-          t.ifError(err, "successfully deduped against previous install")
-          t.notOk(code, "npm dedupe exited with code")
-          t.ok(existsSync(path.join(__dirname, "dedupe-scoped", "node_modules", "minimist")))
-          t.ok(!existsSync(path.join(__dirname, "dedupe-scoped", "node_modules", "checker")))
-          s.close() // shutdown mock registry.
-          t.end()
-        })
-      })
-    })
-  })
+var common = require('../common-tap.js')
+var pkg = join(__dirname, 'dedupe-scoped')
+var modules = join(pkg, 'node_modules')
+
+var EXEC_OPTS = { cwd: pkg }
+
+test('setup', function (t) {
+  setup()
+  t.end()
 })
 
+// we like the cars
+function ltrimm (l) { return l.trim() }
+
+test('dedupe finds the common scoped modules and moves it up one level', function (t) {
+  common.npm(
+    [
+      'find-dupes' // I actually found a use for this command!
+    ],
+    EXEC_OPTS,
+    function (err, code, stdout, stderr) {
+      t.ifError(err, 'successful dry run against fake install')
+      t.notOk(code, 'npm ran without issue')
+      t.notOk(stderr, 'npm printed no errors')
+      t.same(
+        stdout.trim().split('\n').map(ltrimm),
+        [prolog].concat(body).map(ltrimm),
+        'got expected output'
+      )
+
+      t.end()
+    }
+  )
+})
+
+test('cleanup', function (t) {
+  cleanup()
+  t.end()
+})
+
+var prolog = 'dedupe@0.0.0 ' + pkg
+var body = function () {/*
+├─┬ first@1.0.0
+│ └── @scope/shared@2.1.6
+└─┬ second@2.0.0
+  └── @scope/shared@2.1.6
+*/}.toString().split('\n').slice(1, -1)
+
+var deduper = {
+  'name': 'dedupe',
+  'version': '0.0.0',
+  'dependencies': {
+    'first': '1.0.0',
+    'second': '2.0.0'
+  }
+}
+
+var first = {
+  'name': 'first',
+  'version': '1.0.0',
+  'dependencies': {
+    'firstUnique': '0.6.0',
+    '@scope/shared': '2.1.6'
+  }
+}
+
+var second = {
+  'name': 'second',
+  'version': '2.0.0',
+  'dependencies': {
+    'secondUnique': '1.2.0',
+    '@scope/shared': '2.1.6'
+  }
+}
+
+var shared = {
+  'name': '@scope/shared',
+  'version': '2.1.6'
+}
+
+var firstUnique = {
+  'name': 'firstUnique',
+  'version': '0.6.0'
+}
+
+var secondUnique = {
+  'name': 'secondUnique',
+  'version': '1.2.0'
+}
+
 function setup (cb) {
-  process.chdir(path.join(__dirname, "dedupe-scoped"))
-  mr({port : common.port}, function (er, s) { // create mock registry.
-    rimraf.sync(path.join(__dirname, "dedupe-scoped", "node_modules"))
-    fs.mkdirSync(path.join(__dirname, "dedupe-scoped", "node_modules"))
-    cb(s)
-  })
+  cleanup()
+
+  mkdirp.sync(pkg)
+  fs.writeFileSync(
+    join(pkg, 'package.json'),
+    JSON.stringify(deduper, null, 2)
+  )
+
+  mkdirp.sync(join(modules, 'first'))
+  fs.writeFileSync(
+    join(modules, 'first', 'package.json'),
+    JSON.stringify(first, null, 2)
+  )
+
+  mkdirp.sync(join(modules, 'first', 'node_modules', 'firstUnique'))
+  fs.writeFileSync(
+    join(modules, 'first', 'node_modules', 'firstUnique', 'package.json'),
+    JSON.stringify(firstUnique, null, 2)
+  )
+
+  mkdirp.sync(join(modules, 'first', 'node_modules', '@scope', 'shared'))
+  fs.writeFileSync(
+    join(modules, 'first', 'node_modules', '@scope', 'shared', 'package.json'),
+    JSON.stringify(shared, null, 2)
+  )
+
+  mkdirp.sync(join(modules, 'second'))
+  fs.writeFileSync(
+    join(modules, 'second', 'package.json'),
+    JSON.stringify(second, null, 2)
+  )
+
+  mkdirp.sync(join(modules, 'second', 'node_modules', 'secondUnique'))
+  fs.writeFileSync(
+    join(modules, 'second', 'node_modules', 'secondUnique', 'package.json'),
+    JSON.stringify(secondUnique, null, 2)
+  )
+
+  mkdirp.sync(join(modules, 'second', 'node_modules', '@scope', 'shared'))
+  fs.writeFileSync(
+    join(modules, 'second', 'node_modules', '@scope', 'shared', 'package.json'),
+    JSON.stringify(shared, null, 2)
+  )
 }
 
-function scopePackages (cb) {
-  scopeAt("minimist", path.join(__dirname, "dedupe-scoped", "node_modules", "optimist"));
-  scopeAt("minimist", path.join(__dirname, "dedupe-scoped", "node_modules", "clean"));
-  cb();
-}
-
-function scopeAt(pkgName, targetPath) {
-  var pkg, p, p2;
-
-  p = path.join(targetPath, "package.json")
-  pkg = JSON.parse(fs.readFileSync(p).toString())
-  pkg.dependencies["@scoped/" + pkgName] = pkg.dependencies[pkgName]
-  delete pkg.dependencies[pkgName]
-  fs.writeFileSync(p, JSON.stringify(pkg, null, 2))
-
-  p = path.join(targetPath, "node_modules", pkgName, "package.json")
-  pkg = JSON.parse(fs.readFileSync(p).toString())
-  pkg.name = "@scoped/" + pkgName
-  fs.writeFileSync(p, JSON.stringify(pkg, null, 2))
-
-  p = path.join(targetPath, "node_modules", "@scoped")
-  fs.mkdirSync(p)
-
-  p = path.join(targetPath, "node_modules", pkgName)
-  p2 = path.join(targetPath, "node_modules", "@scoped", pkgName)
-  fs.renameSync(p, p2)
+function cleanup () {
+  rimraf.sync(pkg)
 }
