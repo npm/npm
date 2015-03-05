@@ -136,6 +136,19 @@ Set to false to have it not do this.  This can be used to work around
 the fact that some file systems don't support symlinks, even on
 ostensibly Unix systems.
 
+### bin-link-type
+
+* Default: `auto`
+* Type: String
+
+Tells npm what kind of bin links should be created. It defaults to 
+`auto`, which means it is based on the environment. If set to `win`,
+`.cmd` shims will be created. If it's `unix`, only symlinks will be used.
+If it's `both`, well, both will be created. This is useful when you have
+a VM setup with a Windows host and a Unix guest, and want to run `npm 
+install` on your guest and still have the `.cmd` shims available on your
+Windows host.
+
 ### browser
 
 * Default: OS X: `"open"`, Windows: `"start"`, Others: `"xdg-open"`
