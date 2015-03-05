@@ -14,7 +14,7 @@ If the patch below were landed on its own, free of context, it would be a
 breaking change. But, since the "new" behavior is how the documentation claims
 this feature has always worked, I'm classifying it as a patch-level bug fix. I
 apologize in advance if this breaks anybody's deployment scripts, and if it
-turns out to be a significant regression in practics, we can revert this change
+turns out to be a significant regression in practice, we can revert this change
 and move it to `npm@3`, which is allowed to make breaking changes due to being
 a new major version of semver.
 
