@@ -10,9 +10,9 @@ var test = require('tap').test
 var npm = npm = require('../../')
 
 var common = require('../common-tap.js')
-var pkg = path.resolve(__dirname, 'shrinkwrap-dev-dependency')
+var pkg = path.resolve(__dirname, 'shrinkwrap-prod-dependency')
 
-test("shrinkwrap doesn't strip out the dependency", function (t) {
+test("shrinkwrap --dev doesn't strip out prod dependencies", function (t) {
   t.plan(1)
 
   mr({port: common.port}, function (er, s) {
@@ -22,6 +22,7 @@ test("shrinkwrap doesn't strip out the dependency", function (t) {
       npm.install('.', function (err) {
         if (err) return t.fail(err)
 
+        npm.config.set('dev', true)
         npm.commands.shrinkwrap([], true, function (err, results) {
           if (err) return t.fail(err)
 
@@ -40,25 +41,24 @@ test('cleanup', function (t) {
 })
 
 var desired = {
-  name: 'npm-test-shrinkwrap-dev-dependency',
+  name: 'npm-test-shrinkwrap-prod-dependency',
   version: '0.0.0',
   dependencies: {
     request: {
       version: '0.9.0'
     },
     underscore: {
-      version: '1.3.1'
+      version: '1.5.1'
     }
   }
 }
 
 var json = {
   author: 'Domenic Denicola',
-  name: 'npm-test-shrinkwrap-dev-dependency',
+  name: 'npm-test-shrinkwrap-prod-dependency',
   version: '0.0.0',
   dependencies: {
-    request: '0.9.0',
-    underscore: '1.3.1'
+    request: '0.9.0'
   },
   devDependencies: {
     underscore: '1.5.1'
