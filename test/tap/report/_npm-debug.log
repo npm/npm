@@ -1,0 +1,12 @@
+npm ERR! Darwin x.x.x
+npm ERR! argv "/path/to/node/x.x.x/bin/node" "/path/to/npm" "xxx"
+npm ERR! node x.x.x
+npm ERR! npm  x.x.x
+
+npm ERR! Invalid package.json
+npm ERR!
+npm ERR! If you need help, you may report this error at:
+npm ERR!     <http://github.com/npm/npm/issues>
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /path/to/npm-debug.log
