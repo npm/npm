@@ -1,3 +1,12 @@
+### v2.7.3 (2015-03-16):
+
+#### HAHA WHOOPS LIL SHINKWRAP ISSUE THERE LOL
+
+* [`1549106`](https://github.com/npm/npm/commit/1549106f518000633915686f5f1ccc6afcf77f8f)
+  [#7641](https://github.com/npm/npm/issues/7641) Due to 448efd0, running `npm
+  shrinkwrap --dev` caused production dependencies to no longer be included in
+  `npm-shrinkwrap.json`. Whoopsie! ([@othiym23](https://github.com/othiym23))
+
 ### v2.7.2 (2015-03-12):
 
 #### NPM GASTROENTEROLOGY
