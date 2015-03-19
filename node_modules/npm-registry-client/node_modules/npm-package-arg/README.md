@@ -23,7 +23,7 @@ var parsed = npa("@bar/foo@1.2")
 // Returns an object like:
 {
   raw: '@bar/foo@1.2',   // what was passed in
-  name: "foo",           // the name of the package
+  name: "@bar/foo",      // the name of the package
   scope: "@bar",         // the private scope of the package, or null
   type: "range",         // the type of specifier this is
   spec: ">=1.2.0 <1.3.0" // the expanded specifier
