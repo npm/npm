@@ -27,7 +27,7 @@ A `package` is:
 * d) a `<name>@<version>` that is published on the registry (see `npm-registry(7)`) with (c)
 * e) a `<name>@<tag>` that points to (d)
 * f) a `<name>` that has a "latest" tag satisfying (e)
-* g) a `<git remote url>` that resolves to (b)
+* g) a `<git remote url>` that resolves to (a)
 
 Even if you never publish your package, you can still get a lot of
 benefits of using npm if you just want to write a node program (a), and
@@ -99,6 +99,9 @@ after packing it up into a tarball (b).
       exact version rather than using npm's default semver range
       operator.
 
+    Further, if you have an `npm-shrinkwrap.json` then it will be updated as
+    well.
+
     `<scope>` is optional. The package will be downloaded from the registry
     associated with the specified scope. If no registry is associated with
     the given scope the default registry is assumed. See `npm-scope(7)`.
@@ -155,17 +158,20 @@ after packing it up into a tarball (b).
           npm install sax@">=0.1.0 <0.2.0"
           npm install @myorg/privatepackage@">=0.1.0 <0.2.0"
 
-* `npm install <githubname>/<githubrepo>`:
+* `npm install [github:]<githubname>/<githubrepo>`:
+* `npm install gist:<githubname>/<gistid>`:
+* `npm install bitbucket:<bitbucketname>/<bitbucketrepo>`:
+* `npm install gitlab:<gitlabname>/<gitlabrepo>`:
 
-    Install the package at `https://github.com/githubname/githubrepo` by
-    attempting to clone it using `git`.
+    Installs the package from the hosted git provider, cloning it with
+    `git`. First it tries via the https (git with github) and if that fails, via ssh.
 
     Example:
 
-          npm install mygithubuser/myproject
+          npm install github:mygithubuser/myproject
 
-   To reference a package in a git repo that is not on GitHub, see git
-   remote urls below.
+   To reference a package in a git repo that is not one of the supported
+   hosted providers, see git remote urls below.
 
 * `npm install <git remote url>`:
 
@@ -223,26 +229,39 @@ effect on installation, since that's most of what npm does.
 
 To install a package, npm uses the following algorithm:
 
-    install(where, what, family, ancestors)
-    fetch what, unpack to <where>/node_modules/<what>
-    for each dep in what.dependencies
-      resolve dep to precise version
-    for each dep@version in what.dependencies
-        not in <where>/node_modules/<what>/node_modules/*
-        and not in <family>
-      add precise version deps to <family>
-      install(<where>/node_modules/<what>, dep, family)
+    load the existing node_modules tree from disk
+    clone the tree
+    fetch the package.json and assorted metadata and add it to the clone
+    walk the clone and add any missing dependencies
+      dependencies will be added as close to the top as is possible
+      without breaking any other modules
+    compare the original tree with the cloned tree and make a list of
+    actions to take to convert one to the other
+    execute all of the actions, deepest first
+      kinds of actions are install, update, remove and move
 
 For this `package{dep}` structure: `A{B,C}, B{C}, C{D}`,
 this algorithm produces:
 
     A
     +-- B
-    `-- C
-        `-- D
+    +-- C
+    +-- D
 
 That is, the dependency from B to C is satisfied by the fact that A
-already caused C to be installed at a higher level.
+already caused C to be installed at a higher level. D is still installed
+at the top level because nothing conflicts with it.
+
+For `A{B,C}, B{C,D@1}, C{D@2}`, this algorithm produces:
+
+    A
+    +-- B
+    +-- C
+       `-- D@2
+    +-- D@1
+
+Because B's D@1 will be installed in the top leve, C now has to install D@2
+privately for itself.
 
 See npm-folders(5) for a more detailed description of the specific
 folder structures that npm creates.
