@@ -27,6 +27,9 @@ the package version in your main package.json:
 
 * `--save-optional`: Package will be removed from your `optionalDependencies`.
 
+Further, if you have an `npm-shrinkwrap.json` then it will be updated as
+well.
+
 Scope is optional and follows the usual rules for `npm-scope(7)`.
 
 Examples:
