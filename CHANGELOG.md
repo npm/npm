@@ -105,7 +105,7 @@
 * [`6823807`](https://github.com/npm/npm/commit/6823807bba6c00228a724e1205ae90d67df0adad)
   [#7121](https://github.com/npm/npm/issues/7121) `npm install --save` for Git
   dependencies saves the URL passed in, instead of the temporary directory used
-  to clone the remote repo. Fixes using Git dependencies when shrinkwwapping.
+  to clone the remote repo. Fixes using Git dependencies when shrinkwapping.
   In the process, rewrote the Git dependency caching code. Again. No more
   single-letter variable names, and a much clearer workflow.
   ([@othiym23](https://github.com/othiym23))
