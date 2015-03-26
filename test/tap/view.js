@@ -222,7 +222,7 @@ test("npm view <package name> --json", function(t) {
       try {
         var out = JSON.parse(stdout.trim())
         t.similar(out, {
-          maintainers: "jashkenas <jashkenas@gmail.com>"
+          maintainers: ["jashkenas <jashkenas@gmail.com>"]
         }, "should have the same maintainer")
       }
       catch (er) {
