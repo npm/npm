@@ -4,7 +4,7 @@
 
 * [`5811468`](https://github.com/npm/npm/commit/5811468e104ccb6b26b8715dff390d68daa10066)
   [#7713](https://github.com/npm/npm/issues/7713) Add a test for `npm link` and
-  `npm link <package>`. ([@w](https://github.com/w)atilde)
+  `npm link <package>`. ([@watilde](https://github.com/watilde))
 * [`3cf3b0c`](https://github.com/npm/npm/commit/3cf3b0c8fddb6b66f969969feebea85fabd0360b)
   [#7713](https://github.com/npm/npm/issues/7713) Only use absolute symbolic
   links when `npm link`ing. ([@hokaccha](https://github.com/hokaccha))
