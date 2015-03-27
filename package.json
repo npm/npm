@@ -172,7 +172,7 @@
     "nock": "~1.2.0",
     "npm-registry-couchapp": "~2.6.7",
     "npm-registry-mock": "~1.0.0",
-    "require-inject": "~1.1.0",
+    "require-inject": "~1.2.0",
     "sprintf-js": "~1.0.2",
     "tap": "~0.7.1"
   },
