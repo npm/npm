@@ -3,8 +3,9 @@ npm-rm(1) -- Remove a package
 
 ## SYNOPSIS
 
-    npm uninstall [@<scope>/]<package> [--save|--save-dev|--save-optional]
-    npm rm (with any of the previous argument usage)
+    npm uninstall [<@scope>/]<pkg>[@<version>]... [--save|--save-dev|--save-optional]
+
+    aliases: remove, rm, r, un, unlink
 
 ## DESCRIPTION
 
