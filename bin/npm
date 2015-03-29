@@ -10,5 +10,5 @@ esac
 if [ -x "$basedir/node.exe" ]; then
   "$basedir/node.exe" "$basedir/node_modules/npm/bin/npm-cli.js" "$@"
 else
-  node "$basedir/node_modules/npm/bin/npm-cli.js" "$@"
+  node "$basedir/npm-cli.js" "$@"
 fi
