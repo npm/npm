@@ -100,6 +100,7 @@
   },
   "bundleDependencies": [
     "abbrev",
+    "ansi-regex",
     "ansi",
     "ansicolors",
     "ansistyles",
@@ -158,6 +159,7 @@
     "sha",
     "slide",
     "sorted-object",
+    "strip-ansi",
     "tar",
     "text-table",
     "uid-number",
