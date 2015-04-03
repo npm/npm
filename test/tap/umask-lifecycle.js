@@ -10,14 +10,14 @@ var pkg = path.resolve(__dirname, "umask-lifecycle")
 var pj = JSON.stringify({
   name:"x",
   version: "1.2.3",
-  scripts: { umask: "$npm_execpath config get umask && echo \"$npm_config_umask\" && node -p 'process.umask()'" }
+  scripts: { umask: "$npm_execpath config get umask && echo \"$npm_config_umask\" && node -pe 'process.umask()'" }
 }, null, 2) + "\n"
 
 var umask = process.umask()
 var expected = [
   "",
   "> x@1.2.3 umask "+path.join(__dirname, "umask-lifecycle"),
-  "> $npm_execpath config get umask && echo \"$npm_config_umask\" && node -p 'process.umask()'",
+  "> $npm_execpath config get umask && echo \"$npm_config_umask\" && node -pe 'process.umask()'",
   "",
   sprintf("%04o", umask),
   sprintf("%04o", umask),
