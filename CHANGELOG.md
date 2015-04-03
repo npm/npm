@@ -1,5 +1,21 @@
 ### v2.7.5 (2015-03-26):
 
+#### SECURITY FIXES
+
+* [`300834e`](https://github.com/npm/npm/commit/300834e91a4e2a95fb7fb59c309e7c3fc91d2312)
+  `tar@2.0.0`: Normalize symbolic links that point to targets outside the
+  extraction root. This prevents packages containing symbolic links from
+  overwriting targets outside the expected paths for a package. Thanks to [Tim
+  Cuthbertson](http://gfxmonk.net/) and the team at [Lift
+  Security](https://liftsecurity.io/) for working with the npm team to identify
+  this issue. ([@othiym23](https://github.com/othiym23))
+* [`0dc6875`](https://github.com/npm/npm/commit/0dc68757cffd5397c280bc71365d106523a5a052)
+  `semver@4.3.2`: Package versions can be no more than 256 characters long.
+  This prevents a situation in which parsing the version number can use
+  exponentially more time and memory to parse, leading to a potential denial of
+  service. Thanks to Adam Baldwin at Lift Security for bringing this to our
+  attention.  ([@isaacs](https://github.com/isaacs))
+
 #### BUG FIXES
 
 * [`5811468`](https://github.com/npm/npm/commit/5811468e104ccb6b26b8715dff390d68daa10066)
@@ -25,12 +41,6 @@
 
 #### DEPENDENCY UPDATES
 
-* [`300834e`](https://github.com/npm/npm/commit/300834e91a4e2a95fb7fb59c309e7c3fc91d2312)
-  `tar@2.0.0`: Normalize symbolic links that point to targets outside the
-  extraction root. ([@othiym23](https://github.com/othiym23))
-* [`0dc6875`](https://github.com/npm/npm/commit/0dc68757cffd5397c280bc71365d106523a5a052)
-  `semver@4.3.2`: Package versions can be no more than 256 characters long.
-  ([@isaacs](https://github.com/isaacs))
 * [`94df809`](https://github.com/npm/npm/commit/94df8095985bf5ba9d8db99dc445d05dac136aaf)
   `request@2.54.0`: Fixes for Node.js 0.12 and io.js.
   ([@simov](https://github.com/simov))
