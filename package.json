@@ -80,7 +80,7 @@
     "osenv": "~0.1.0",
     "path-is-inside": "~1.0.0",
     "read": "~1.0.4",
-    "read-installed": "~3.1.5",
+    "read-installed": "~4.0.0",
     "read-package-json": "~2.0.0",
     "readable-stream": "~1.0.33",
     "realize-package-specifier": "~2.2.0",
