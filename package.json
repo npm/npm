@@ -182,9 +182,9 @@
   },
   "scripts": {
     "test-legacy": "node ./test/run.js",
-    "test": "tap --timeout 120 test/tap/*.js",
+    "test": "tap --timeout 120 test/tap/*.js && tap --timeout 600 test/tap-slow/*.js",
     "tap": "tap --timeout 120 test/tap/*.js",
-    "test-all": "node ./test/run.js && tap test/tap/*.js",
+    "test-all": "node ./test/run.js && tap test/tap/*.js && tap --timeout 600 test/tap-slow/*.js",
     "prepublish": "node bin/npm-cli.js prune --prefix=. --no-global && rimraf test/*/*/node_modules && make -j8 doc",
     "dumpconf": "env | grep npm | sort | uniq"
   },
