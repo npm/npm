@@ -2,7 +2,6 @@ var fs = require('fs')
 var resolve = require('path').resolve
 var url = require('url')
 
-var chain = require('slide').chain
 var osenv = require('osenv')
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
@@ -62,25 +61,13 @@ function setup (cb) {
   npm.load({ registry: common.registry, loglevel: 'silent' }, function () {
     git = require('../../lib/utils/git.js')
 
-    var opts = {
-      cwd: repo,
-      env: process.env
-    }
-
-    chain(
-      [
-        git.chainableExec(['init'], opts),
-        git.chainableExec(['config', 'user.name', 'PhantomFaker'], opts),
-        git.chainableExec(['config', 'user.email', 'nope@not.real'], opts),
-        git.chainableExec(['add', 'package.json'], opts),
-        git.chainableExec(['commit', '-m', 'stub package'], opts),
-        git.chainableExec(
-          ['clone', '--bare', repo, 'child.git'],
-          { cwd: pkg, env: process.env }
-        )
-      ],
-      cb
-    )
+    common.makeGitRepo({
+      path: repo,
+      commands: [git.chainableExec(
+        ['clone', '--bare', repo, 'child.git'],
+        { cwd: pkg, env: process.env }
+      )]
+    }, cb)
   })
 }
 
