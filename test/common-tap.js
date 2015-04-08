@@ -1,3 +1,11 @@
+// cheesy hackaround for test deps (read: nock) that rely on setImmediate
+if (!global.setImmediate || !require('timers').setImmediate) {
+  require('timers').setImmediate = global.setImmediate = function () {
+    var args = [arguments[0], 0].concat([].slice.call(arguments, 1))
+    setTimeout.apply(this, args)
+  }
+}
+
 var spawn = require("child_process").spawn
 var path = require("path")
 
