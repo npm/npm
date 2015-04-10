@@ -23,7 +23,9 @@ var authProtocols = {
 
 module.exports.fromUrl = function (giturl) {
   if (giturl == null || giturl === '') return
-  var url = isGitHubShorthand(giturl) ? 'github:' + giturl : giturl
+  var url = fixupUnqualifiedGist(
+    isGitHubShorthand(giturl) ? 'github:' + giturl : giturl
+  )
   var parsed = parseGitUrl(url)
   var matches = Object.keys(gitHosts).map(function (gitHostName) {
     var gitHostInfo = gitHosts[gitHostName]
@@ -65,6 +67,16 @@ function isGitHubShorthand (arg) {
   // out that the commit-ish is invalid.
   // GH usernames cannot start with . or -
   return /^[^:@%/\s.-][^:@%/\s]*[/][^:@\s/%]+(?:#.*)?$/.test(arg)
+}
+
+function fixupUnqualifiedGist (giturl) {
+  // necessary for round-tripping gists
+  var parsed = url.parse(giturl)
+  if (parsed.protocol === 'gist:' && parsed.host && !parsed.path) {
+    return parsed.protocol + '/' + parsed.host
+  } else {
+    return giturl
+  }
 }
 
 function parseGitUrl (giturl) {

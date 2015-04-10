@@ -34,5 +34,8 @@ test('fromUrl(gist url)', function (t) {
 
   require('./lib/standard-tests')(verify, 'gist.github.com', 'gist')
 
+  verify(HostedGit.fromUrl('gist:111/222').toString(), 'round-tripped shortcut')
+  verify('gist:222', 'shortened shortcut')
+
   t.end()
 })
