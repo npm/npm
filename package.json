@@ -54,7 +54,7 @@
     "fstream-npm": "~1.0.2",
     "github-url-from-git": "~1.4.0",
     "github-url-from-username-repo": "~1.0.2",
-    "glob": "~5.0.3",
+    "glob": "~5.0.5",
     "graceful-fs": "~3.0.6",
     "hosted-git-info": "~2.1.1",
     "inflight": "~1.0.4",
