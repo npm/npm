@@ -9,8 +9,9 @@ a specifer as passed to `npm install` et al, eg `npm@next` or `npm@^2.0.3`
 
 ## fetchPackageMetadata(*spec*, *contextdir*, *tracker*, *callback*)
 
-* *spec* **string** -- The package specifier, can be anything npm can
-  understand (see [realize-package-specifier]).
+* *spec* **string** | **object** -- The package specifier, can be anything npm can
+  understand (see [realize-package-specifier]), or it can be the result from
+  realize-package-specifier or npm-package-arg (for non-local deps).
 
 * *contextdir* **string** -- The directory from which relative paths to
   local packages should be resolved.
