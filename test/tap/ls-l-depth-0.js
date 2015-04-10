@@ -19,7 +19,7 @@ var expected =
   '│ \n' +
   '└── glock@1.8.7\n' +
   '    an inexplicably hostile sample package\n' +
-  '    https://github.com/npm/glo.ck\n' +
+  '    git+https://github.com/npm/glo.ck.git\n' +
   '    https://glo.ck\n' +
   '\n'
 

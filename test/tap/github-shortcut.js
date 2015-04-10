@@ -4,8 +4,9 @@ var test = require('tap').test
 
 test('github-shortcut', function (t) {
   var cloneUrls = [
-    ['git://github.com/foo/private.git', 'github shortcuts try git:// first'],
-    ['ssh://git@github.com/foo/private.git', 'github shortcuts try ssh:// urls second']
+    ['git://github.com/foo/private.git', 'github shortcuts try git URLs first'],
+    ['git@github.com:foo/private.git', 'github shortcuts try SSH second'],
+    ['https://github.com/foo/private.git', 'github shortcuts try HTTPS URLs third']
   ]
   var npm = requireInject.installGlobally('../../lib/npm.js', {
     'child_process': {
