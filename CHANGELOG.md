@@ -1,3 +1,146 @@
+### v2.8.0 (2015-04-09):
+
+#### WE WILL NEVER BE DONE FIXING NPM'S GIT SUPPORT
+
+If you look at [the last release's release
+notes](https://github.com/npm/npm/blob/master/CHANGELOG.md#git-mean-git-tuff-git-all-the-way-away-from-my-stuff),
+you will note that they confidently assert that it's perfectly OK to force all
+GitHub URLs through the same `git:` -> `git+ssh:` fallback flow for cloning. It
+turns out that many users depend on `git+https:` URLs in their build
+environments because they use GitHub auth tokens instead of SSH keys. Also, in
+some cases you just want to be able to explicitly say how a given dependency
+should be cloned from GitHub.
+
+Because of the way we resolved the inconsistency in GitHub shorthand handling
+[before](https://github.com/npm/npm/blob/master/CHANGELOG.md#bug-fixes-1), this
+turned out to be difficult to work around. So instead of hacking around it, we
+completely redid how git is handled within npm and its attendant packages.
+Again. This time, we changed things so that `normalize-package-data` and
+`read-package-json` leave more of the git logic to npm itself, which makes
+handling shorthand syntax consistently much easier, and also allows users to
+resume using explicit, fully-qualified git URLs without npm messing with them.
+
+Here's a summary of what's changed:
+
+* Instead of converting the GitHub shorthand syntax to a `git+ssh:`, `git:`, or
+  `git+https:` URL and saving that, save the shorthand itself to
+  `package.json`.
+* If presented with shortcuts, try cloning via the git protocol, SSH, and HTTPS
+  (in that order).
+* No longer prompt for credentials -- it didn't work right with the spinner,
+  and wasn't guaranteed to work anyway. We may experiment with doing this a
+  better way in the future. Users can override this by setting `GIT_ASKPASS` in
+  their environment if they want to experiment with interactive cloning, but
+  should also set `--no-spin` on the npm command line (or run `npm config set
+  spin=false`).
+* **EXPERIMENTAL FEATURE**: Add support for `github:`, `gist:`, `bitbucket:`,
+  and `gitlab:` shorthand prefixes. GitHub shortcuts will continue to be
+  normalized to `org/repo` instead of being saved as `github:org/repo`, but
+  `gitlab:`, `gist:`, and `bitbucket:` prefixes will be used on the command
+  line and from `package.json`. BE CAREFUL WITH THIS. `package.json` files
+  published with the new shorthand syntax can _only_ be read by `npm@2.8.0` and
+  later, and this feature is mostly meant for playing around with it. If you
+  want to save git dependencies in a form that older versions of npm can read,
+  use `--save-exact`, which will save the git URL and resolved commit hash of
+  the head of the branch in a manner simiilar to the way that `--save-exact`
+  pins versions for registry dependencies.  This is documented (so check `npm
+  help install` for details), but we're not going to make a lot of noise about
+  it until it has a chance to bake in a little more.
+
+It is [@othiym23](https://github.com/othiym23)'s sincere hope that this will
+resolve all of the inconsistencies users were seeing with GitHub and git-hosted
+packages, but given the level of change here, that may just be a fond wish.
+Extra testing of this change is requested.
+
+* [`6b0f588`](https://github.com/npm/npm/commit/6b0f58877f37df9904490ffbaaad33862bd36dce)
+  [#7867](https://github.com/npm/npm/issues/7867) Use git shorthand and git
+  URLs as presented by user. Support new `hosted-git-info` shortcut syntax.
+  Save shorthand in `package.json`. Try cloning via `git:`, `git+ssh:`, and
+  `git+https:`, in that order, when supported by the underlying hosting
+  provider. ([@othiym23](https://github.com/othiym23))
+* [`75d4267`](https://github.com/npm/npm/commit/75d426787869d54ca7400408f562f971b34649ef)
+  [#7867](https://github.com/npm/npm/issues/7867) Document new GitHub, GitHub
+  gist, Bitbucket, and GitLab shorthand syntax.
+  ([@othiym23](https://github.com/othiym23))
+* [`7d92c75`](https://github.com/npm/npm/commit/7d92c7592998d90ec883fa989ca74f04ec1b93de)
+  [#7867](https://github.com/npm/npm/issues/7867) When `--save-exact` is used
+  with git shorthand or URLs, save the fully-resolved URL, with branch name
+  resolved to the exact hash for the commit checked out.
+  ([@othiym23](https://github.com/othiym23))
+* [`9220e59`](https://github.com/npm/npm/commit/9220e59f8def8c82c6d331a39ba29ad4c44e3a9b)
+  [#7867](https://github.com/npm/npm/issues/7867) Ensure that non-prefixed and
+  non-normalized GitHub shortcuts are saved to `package.json`.
+  ([@othiym23](https://github.com/othiym23))
+* [`dd398e9`](https://github.com/npm/npm/commit/dd398e98a8eba27eeba84378200da3d078fdf980)
+  [#7867](https://github.com/npm/npm/issues/7867) `hosted-git-info@2.1.1`:
+  Ensure that `gist:` shorthand survives being round-tripped through
+  `package.json`. ([@othiym23](https://github.com/othiym23))
+* [`33d1420`](https://github.com/npm/npm/commit/33d1420bf2f629332fceb2ac7e174e63ac48f96a)
+  [#7867](https://github.com/npm/npm/issues/7867) `hosted-git-info@2.1.0`: Add
+  support for auth embedded directly in git URLs.
+  ([@othiym23](https://github.com/othiym23))
+* [`23a1d5a`](https://github.com/npm/npm/commit/23a1d5a540e8db27f5cd0245de7c3694e2bddad1)
+  [#7867](https://github.com/npm/npm/issues/7867) `hosted-git-info@2.0.2`: Make
+  it possible to determine in which form a hosted git URL was passed.
+  ([@iarna](https://github.com/iarna))
+* [`eaf75ac`](https://github.com/npm/npm/commit/eaf75acb718611ad5cfb360084ec86938d9c66c5)
+  [#7867](https://github.com/npm/npm/issues/7867)
+  `normalize-package-data@2.0.0`: Normalize GitHub specifiers so they pass
+  through shortcut syntax and preserve explicit URLs.
+  ([@iarna](https://github.com/iarna))
+* [`95e0535`](https://github.com/npm/npm/commit/95e0535e365e0aca49c634dd2061a0369b0475f1)
+  [#7867](https://github.com/npm/npm/issues/7867) `npm-package-arg@4.0.0`: Add
+  git URL and shortcut to hosted git spec and use `hosted-git-info@2.0.2`.
+  ([@iarna](https://github.com/iarna))
+* [`a808926`](https://github.com/npm/npm/commit/a8089268d5f3d57f42dbaba02ff6437da5121191)
+  [#7867](https://github.com/npm/npm/issues/7867)
+  `realize-package-specifier@3.0.0`: Use `npm-package-arg@4.0.0` and test
+  shortcut specifier behavior. ([@iarna](https://github.com/iarna))
+* [`6dd1e03`](https://github.com/npm/npm/commit/6dd1e039bddf8cf5383343f91d84bc5d78acd083)
+  [#7867](https://github.com/npm/npm/issues/7867) `init-package-json@1.4.0`:
+  Allow dependency on `read-package-json@2.0.0`.
+  ([@iarna](https://github.com/iarna))
+* [`63254bb`](https://github.com/npm/npm/commit/63254bb6358f66752aca6aa1a275271b3ae03f7c)
+  [#7867](https://github.com/npm/npm/issues/7867) `read-installed@4.0.0`: Use
+  `read-package-json@2.0.0`. ([@iarna](https://github.com/iarna))
+* [`254b887`](https://github.com/npm/npm/commit/254b8871f5a173bb464cc5b0ace460c7878b8097)
+  [#7867](https://github.com/npm/npm/issues/7867) `read-package-json@2.0.0`:
+  Use `normalize-package-data@2.0.0`. ([@iarna](https://github.com/iarna))
+* [`0b9f8be`](https://github.com/npm/npm/commit/0b9f8be62fe5252abe54d49e36a696f4816c2eca)
+  [#7867](https://github.com/npm/npm/issues/7867) `npm-registry-client@6.3.0`:
+  Mark compatibility with `normalize-package-data@2.0.0` and
+  `npm-package-arg@4.0.0`. ([@iarna](https://github.com/iarna))
+* [`f40ecaa`](https://github.com/npm/npm/commit/f40ecaad68f77abc50eb6f5b224e31dec3d250fc)
+  [#7867](https://github.com/npm/npm/issues/7867) Extract a common method to
+  use when cloning git repos for testing.
+  ([@othiym23](https://github.com/othiym23))
+
+#### TEST FIXES FOR NODE 0.8
+
+npm continues to [get closer](https://github.com/npm/npm/issues/7842) to being
+completely green on Travis for Node 0.8.
+
+* [`26d36e9`](https://github.com/npm/npm/commit/26d36e9cf0eca69fe1863d2ea536c28555b9e8de)
+  [#7842](https://github.com/npm/npm/issues/7842) When spawning child
+  processes, map exit code 127 to ENOENT so Node 0.8 handles child process
+  failures the same as later versions.
+  ([@SonicHedgehog](https://github.com/SonicHedgehog))
+* [`54cd895`](https://github.com/npm/npm/commit/54cd8956ea783f96749e46597d8c2cb9397c5d5f)
+  [#7842](https://github.com/npm/npm/issues/7842) Node 0.8 requires -e with -p
+  when evaluating snippets; fix test.
+  ([@SonicHedgehog](https://github.com/SonicHedgehog))
+
+#### SMALL FIX AND DOC TWEAK
+
+* [`20e9003`](https://github.com/npm/npm/commit/20e90031b847e9f7c7168f3dad8b1e526f9a2586)
+  `tar@2.0.1`: Fix regression where relative symbolic links within an
+  extraction root that pointed within an extraction root would get normalized
+  to absolute symbolic links. ([@isaacs](https://github.com/isaacs))
+* [`2ef8898`](https://github.com/npm/npm/commit/2ef88989c41bee1578570bb2172c90ede129dbd1)
+  [#7879](https://github.com/npm/npm/issues/7879) Better document that `npm
+  publish --tag=foo` will not set `latest` to that version.
+  ([@linclark](https://github.com/linclark))
+
 ### v2.7.6 (2015-04-02):
 
 #### GIT MEAN, GIT TUFF, GIT ALL THE WAY AWAY FROM MY STUFF
