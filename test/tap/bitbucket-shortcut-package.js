@@ -10,11 +10,14 @@ var test = require('tap').test
 
 var common = require('../common-tap.js')
 
-var pkg = path.resolve(__dirname, 'github-shortcut')
+var pkg = path.resolve(__dirname, 'bitbucket-shortcut-package')
 
 var json = {
-  name: 'github-shortcut',
-  version: '0.0.0'
+  name: 'bitbucket-shortcut-package',
+  version: '0.0.0',
+  dependencies: {
+    'private': 'bitbucket:foo/private'
+  }
 }
 
 test('setup', function (t) {
@@ -22,12 +25,12 @@ test('setup', function (t) {
   t.end()
 })
 
-test('github-shortcut', function (t) {
+test('bitbucket-shortcut', function (t) {
   var cloneUrls = [
-    ['git://github.com/foo/private.git', 'GitHub shortcuts try git URLs first'],
-    ['git@github.com:foo/private.git', 'GitHub shortcuts try SSH second'],
-    ['https://github.com/foo/private.git', 'GitHub shortcuts try HTTPS URLs third']
+    ['git@bitbucket.org:foo/private.git', 'Bitbucket shortcuts try SSH first'],
+    ['https://bitbucket.org/foo/private.git', 'Bitbucket shortcuts try HTTPS URLs second']
   ]
+
   var npm = requireInject.installGlobally('../../lib/npm.js', {
     'child_process': {
       'execFile': function (cmd, args, options, cb) {
@@ -53,7 +56,7 @@ test('github-shortcut', function (t) {
   }
   npm.load(opts, function (er) {
     t.ifError(er, 'npm loaded without error')
-    npm.commands.install(['foo/private'], function (er, result) {
+    npm.commands.install([], function (er) {
       t.ok(er, 'mocked install failed as expected')
       t.end()
     })

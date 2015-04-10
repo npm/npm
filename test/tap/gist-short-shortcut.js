@@ -10,10 +10,10 @@ var test = require('tap').test
 
 var common = require('../common-tap.js')
 
-var pkg = path.resolve(__dirname, 'github-shortcut')
+var pkg = path.resolve(__dirname, 'gist-short-shortcut')
 
 var json = {
-  name: 'github-shortcut',
+  name: 'gist-short-shortcut',
   version: '0.0.0'
 }
 
@@ -22,11 +22,11 @@ test('setup', function (t) {
   t.end()
 })
 
-test('github-shortcut', function (t) {
+test('gist-shortcut', function (t) {
   var cloneUrls = [
-    ['git://github.com/foo/private.git', 'GitHub shortcuts try git URLs first'],
-    ['git@github.com:foo/private.git', 'GitHub shortcuts try SSH second'],
-    ['https://github.com/foo/private.git', 'GitHub shortcuts try HTTPS URLs third']
+    ['git://gist.github.com/deadbeef.git', 'GitHub gist shortcuts try git URLs first'],
+    ['git@gist.github.com:/deadbeef.git', 'GitHub gist shortcuts try SSH second'],
+    ['https://gist.github.com/deadbeef.git', 'GitHub gist shortcuts try HTTPS URLs third']
   ]
   var npm = requireInject.installGlobally('../../lib/npm.js', {
     'child_process': {
@@ -53,7 +53,7 @@ test('github-shortcut', function (t) {
   }
   npm.load(opts, function (er) {
     t.ifError(er, 'npm loaded without error')
-    npm.commands.install(['foo/private'], function (er, result) {
+    npm.commands.install(['gist:deadbeef'], function (er, result) {
       t.ok(er, 'mocked install failed as expected')
       t.end()
     })

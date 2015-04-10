@@ -10,11 +10,14 @@ var test = require('tap').test
 
 var common = require('../common-tap.js')
 
-var pkg = path.resolve(__dirname, 'github-shortcut')
+var pkg = path.resolve(__dirname, 'github-shortcut-package')
 
 var json = {
-  name: 'github-shortcut',
-  version: '0.0.0'
+  name: 'github-shortcut-package',
+  version: '0.0.0',
+  dependencies: {
+    'private': 'foo/private'
+  }
 }
 
 test('setup', function (t) {
@@ -22,7 +25,7 @@ test('setup', function (t) {
   t.end()
 })
 
-test('github-shortcut', function (t) {
+test('github-shortcut-package', function (t) {
   var cloneUrls = [
     ['git://github.com/foo/private.git', 'GitHub shortcuts try git URLs first'],
     ['git@github.com:foo/private.git', 'GitHub shortcuts try SSH second'],
@@ -53,7 +56,7 @@ test('github-shortcut', function (t) {
   }
   npm.load(opts, function (er) {
     t.ifError(er, 'npm loaded without error')
-    npm.commands.install(['foo/private'], function (er, result) {
+    npm.commands.install([], function (er, result) {
       t.ok(er, 'mocked install failed as expected')
       t.end()
     })
