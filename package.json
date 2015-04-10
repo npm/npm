@@ -44,7 +44,7 @@
     "chmodr": "~0.1.0",
     "chownr": "0",
     "cmd-shim": "~2.0.1",
-    "columnify": "~1.4.1",
+    "columnify": "~1.5.1",
     "config-chain": "~1.1.8",
     "dezalgo": "~1.0.1",
     "editor": "~0.1.0",
