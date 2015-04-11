@@ -11,7 +11,9 @@ var common = require("../common-tap.js")
 var path = require("path")
 var rimraf = require("rimraf")
 var mkdirp = require("mkdirp")
-var folder = path.resolve(__dirname, "builtin-config")
+var osenv = require("osenv")
+
+var folder = path.resolve(osenv.tmpdir(), "builtin-config")
 var test = require("tap").test
 var npm = path.resolve(__dirname, "../..")
 var spawn = require("child_process").spawn
