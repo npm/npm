@@ -1,7 +1,0 @@
-{
-  "name": "@scope/package",
-  "version": "0.0.0",
-  "peerDependencies": {
-    "underscore": "*"
-  }
-}
