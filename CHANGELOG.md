@@ -1,3 +1,139 @@
+### v2.8.1 (2015-04-12):
+
+#### CORRECTION: NPM'S GIT INTEGRATION IS DOING OKAY
+
+A [helpful bug report](https://github.com/npm/npm/issues/7872#issuecomment-91809553)
+led to another round of changes to
+[`hosted-git-info`](https://github.com/npm/hosted-git-info/commit/827163c74531b69985d1ede7abced4861e7b0cd4),
+some additional test-writing, and a bunch of hands-on testing against actual
+private repositories. While the complexity of npm's git dependency handling is
+nearly fractal (because npm is very complex, and git is even more complex),
+it's feeling way more solid than it has for a while. We think this is a
+substantial improvement over what we had before, so give `npm@2.8.1` a shot if
+you have particularly complex git use cases and
+[let us know](https://github.com/npm/npm/issues/new) how it goes.
+
+(NOTE: These changes mostly affect cloning and saving references to packages
+hosted in git repositories, and don't address some known issues with things
+like lifecycle scripts not being run on npm dependencies. Work continues on
+other issues that affect parity between git and npm registry packages.)
+
+* [`66377c6`](https://github.com/npm/npm/commit/66377c6ece2cf4d53d9a618b7d9824e1452bc293)
+  [#7872](https://github.com/npm/npm/issues/7872) `hosted-git-info@2.1.2`: Pass
+  through credentials embedded in SSH and HTTPs git URLs.
+  ([@othiym23](https://github.com/othiym23))
+* [`15efe12`](https://github.com/npm/npm/commit/15efe124753257728a0ddc64074fa5a4b9c2eb30)
+  [#7872](https://github.com/npm/npm/issues/7872) Use the new version of
+  `hosted-git-info` to pass along credentials embedded in git URLs. Test it.
+  Test it a lot. ([@othiym23](https://github.com/othiym23))
+
+#### SCOPED DEPENDENCIES AND PEER DEPENDENCIES: NOT QUITE REESE'S
+
+Big thanks to [@ewie](https://github.com/ewie) for identifying an issue with
+how npm was handling `peerDependencies` that were implicitly installed from the
+`package.json` files of scoped dependencies. This
+[will be a moot point](https://github.com/npm/npm/issues/6565#issuecomment-74971689)
+with the release of `npm@3`, but until then, it's important that
+`peerDependency` auto-installation work as expected.
+
+* [`b027319`](https://github.com/npm/npm/commit/b0273190c71eba14395ddfdd1d9f7ba625297523)
+  [#7920](https://github.com/npm/npm/issues/7920) Scoped packages with
+  `peerDependencies` were installing the `peerDependencies` into the wrong
+  directory. ([@ewie](https://github.com/ewie))
+* [`649e31a`](https://github.com/npm/npm/commit/649e31ae4fd02568bae5dc6b4ea783431ce3d63e)
+  [#7920](https://github.com/npm/npm/issues/7920) Test `peerDependency`
+  installs involving scoped packages using `npm-package-arg` instead of simple
+  path tests, for consistency. ([@othiym23](https://github.com/othiym23))
+
+#### MAKING IT EASIER TO WRITE NPM TESTS, VERSION 0.0.1
+
+[@iarna](https://github.com/iarna) and I
+([@othiym23](https://github.com/othiym23)) have been discussing a
+[candidate plan](https://github.com/npm/npm/wiki/rewriting-npm's-tests:-a-plan-maybe)
+for improving npm's test suite, with the goal of making it easier for new
+contributors to get involved with npm by reducing the learning curve
+necessary to be able to write good tests for proposed changes. This is the
+first substantial piece of that effort. Here's what the commit message for
+[`ed7e249`](https://github.com/npm/npm/commit/ed7e249d50444312cd266942ce3b89e1ca049bdf)
+had to say about this work:
+
+> It's too difficult for npm contributors to figure out what the conventional
+> style is for tests. Part of the problem is that the documentation in
+> CONTRIBUTING.md is inadequate, but another important factor is that the tests
+> themselves are written in a variety of styles.  One of the most notable
+> examples of this is the fact that many tests use fixture directories to store
+> precooked test scenarios and package.json files.
+>
+> This had some negative consequences:
+>
+>   * tests weren't idempotent
+>   * subtle dependencies between tests existed
+>   * new tests get written in this deprecated style because it's not
+>     obvious that the style is out of favor
+>   * it's hard to figure out why a lot of those directories existed,
+>     because they served a variety of purposes, so it was difficult to
+>     tell when it was safe to remove them
+>
+> All in all, the fixture directories were a major source of technical debt, and
+> cleaning them up, while time-consuming, makes the whole test suite much more
+> approachable, and makes it more likely that new tests written by outside
+> contributors will follow a conventional style. To support that, all of the
+> tests touched by this changed were cleaned up to pass the `standard` style
+> checker.
+
+And here's a little extra context from a comment I left on [#7929](https://github.com/npm/npm/issues/7929):
+
+> One of the other things that encouraged me was looking at this
+> [presentation on technical debt](http://www.slideshare.net/nnja/pycon-2015-technical-debt-the-monster-in-your-closet)
+> from Pycon 2015, especially slide 53, which I interpreted in terms of
+> difficulty getting new contributors to submit patches to an OSS project like
+> npm. npm has a long ways to go, but I feel good about this change.
+
+* [`ed7e249`](https://github.com/npm/npm/commit/ed7e249d50444312cd266942ce3b89e1ca049bdf)
+  [#7929](https://github.com/npm/npm/issues/7929) Eliminate fixture directories
+  from `test/tap`, leaving each test self-contained.
+  ([@othiym23](https://github.com/othiym23))
+* [`4928d30`](https://github.com/npm/npm/commit/4928d30140821c63e03fffed73f8d88ebdc43710)
+  [#7929](https://github.com/npm/npm/issues/7929) Move fixture files from
+  `test/tap/*` to `test/fixtures`. ([@othiym23](https://github.com/othiym23))
+* [`e925deb`](https://github.com/npm/npm/commit/e925debca91092a814c1a00933babc3a8cf975be)
+  [#7929](https://github.com/npm/npm/issues/7929) Tweak the run scripts to stop
+  slaughtering the CPU on doc rebuild.
+  ([@othiym23](https://github.com/othiym23))
+* [`65bf7cf`](https://github.com/npm/npm/commit/65bf7cffaf91c426b676c47529eee796f8b8b75c)
+  [#7923](https://github.com/npm/npm/issues/7923) Use an alias of scripts and
+  run-scripts in `npm run test-all` ([@watilde](https://github.com/watilde))
+* [`756a3fb`](https://github.com/npm/npm/commit/756a3fbb852a2469afe706635ed88d22c37743e5)
+  [#7923](https://github.com/npm/npm/issues/7923) Sync timeout time of `npm
+  run-script test-all` to be the same as `test` and `tap` scripts.
+  ([@watilde](https://github.com/watilde))
+* [`8299b5f`](https://github.com/npm/npm/commit/8299b5fb6373354a7fbaab6f333863758812ae90)
+  Set a timeout for tap tests for `npm run-script test-all`.
+  ([@othiym23](https://github.com/othiym23))
+
+#### THE EVER-BEATING DRUM OF DEPENDENCY UPDATES
+
+* [`d90d0b9`](https://github.com/npm/npm/commit/d90d0b992acbf62fd5d68debf9d1dbd6cfa20804)
+  [#7924](https://github.com/npm/npm/issues/7924) Remove `child-process-close`,
+  as it was included for Node 0.6 compatibility, and npm no longer supports
+  0.6. ([@robertkowalski](https://github.com/robertkowalski))
+* [`16427c1`](https://github.com/npm/npm/commit/16427c1f3ea3d71ee753c62eb4c2663c7b32b84f)
+  `lru-cache@2.5.2`: More accurate updating of expiry times when `maxAge` is
+  set. ([@isaacs](https://github.com/isaacs))
+* [`03cce83`](https://github.com/npm/npm/commit/03cce83b64344a9e0fe036dce214f4d68cfcc9e7)
+  `nock@1.6.0`: Mocked network error handling.
+  ([@pgte](https://github.com/pgte))
+* [`f93b1f0`](https://github.com/npm/npm/commit/f93b1f0b7eb5d1b8a7967e837bbd756db1091d00)
+  `glob@5.0.5`: Use `path-is-absolute` polyfill, allowing newer Node.js and
+  io.js versions to use `path.isAbsolute()`.
+  ([@sindresorhus](https://github.com/sindresorhus))
+* [`a70d694`](https://github.com/npm/npm/commit/a70d69495a6e96997e64855d9e749d943ee6d64f)
+  `request@2.55.0`: Bug fixes and simplification.
+  ([@simov](https://github.com/simov))
+* [`2aecc6f`](https://github.com/npm/npm/commit/2aecc6f4083526feeb14615b4e5484edc66175b5)
+  `columnify@1.5.1`: Switch to using babel from 6to5.
+  ([@timoxley](https://github.com/timoxley))
+
 ### v2.8.0 (2015-04-09):
 
 #### WE WILL NEVER BE DONE FIXING NPM'S GIT SUPPORT
@@ -42,7 +178,7 @@ Here's a summary of what's changed:
   later, and this feature is mostly meant for playing around with it. If you
   want to save git dependencies in a form that older versions of npm can read,
   use `--save-exact`, which will save the git URL and resolved commit hash of
-  the head of the branch in a manner simiilar to the way that `--save-exact`
+  the head of the branch in a manner similar to the way that `--save-exact`
   pins versions for registry dependencies.  This is documented (so check `npm
   help install` for details), but we're not going to make a lot of noise about
   it until it has a chance to bake in a little more.
