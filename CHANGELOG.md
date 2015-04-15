@@ -1,5 +1,30 @@
 ### v2.8.1 (2015-04-12):
 
+#### PEACE IN OUR TIME
+
+npm has been having an issue with CouchDB's web server since the release
+of io.js and Node.js 0.12.0 that has consumed a huge amount of my time
+to little visible effect. Sam Mikes picked up the thread from me, and
+after a [_lot_ of effort](https://github.com/npm/npm/issues/7699#issuecomment-93091111)
+figured out that ultimately there are probably a couple problems with
+the new HTTP Agent keep-alive handling in new versions of Node. In
+addition, `npm-registry-client` was gratuitously sending a body along
+with a GET request which was triggering the bugs. Sam removed about 10 bytes from
+one file in `npm-registry-client`, and this problem, which has been bugging us for months,
+completely went away.
+
+In conclusion, Sam Mikes is great, and anybody using a private registry
+hosted on CouchDB should thank him for his hard work. Also, thanks to
+the community at large for pitching in on this bug, which has been
+around for months now.
+
+* [`431c3bf`](https://github.com/npm/npm/commit/431c3bf6cdec50f9f0c735f478cb2f3f337d3313)
+  [#7699](https://github.com/npm/npm/issues/7699) `npm-registry-client@6.3.2`:
+  Don't send body with HTTP GET requests when logging in.
+  ([@smikes](https://github.com/smikes))
+
+### v2.8.1 (2015-04-12):
+
 #### CORRECTION: NPM'S GIT INTEGRATION IS DOING OKAY
 
 A [helpful bug report](https://github.com/npm/npm/issues/7872#issuecomment-91809553)
