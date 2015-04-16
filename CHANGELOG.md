@@ -1,3 +1,22 @@
+### v2.8.3 (2015-04-15):
+
+#### TWO SMALL GIT TWEAKS
+
+This is the last of a set of releases intended to ensure npm's git support is
+robust enough that we can stop working on it for a while. These fixes are
+small, but prevent a common crasher and clear up one of the more confusing
+error messages coming out of npm when working with repositories hosted on git.
+
+* [`387f889`](https://github.com/npm/npm/commit/387f889c0e8fb617d9cc9a42ed0a3ec49424ab5d)
+  [#7961](https://github.com/npm/npm/issues/7961) Ensure that hosted git SSH
+  URLs always have a valid protocol when stored in `resolved` fields in
+  `npm-shrinkwrap.json`. ([@othiym23](https://github.com/othiym23))
+* [`394c2f5`](https://github.com/npm/npm/commit/394c2f5a1227232c0baf42fbba1402aafe0d6ffb)
+  Switch the order in which hosted Git providers are checked to `git:`,
+  `git+https:`, then `git+ssh:` (from `git:`, `git+ssh:`, then `git+https:`) in
+  an effort to go from most to least likely to succeed, to make for less
+  confusing error message. ([@othiym23](https://github.com/othiym23))
+
 ### v2.8.2 (2015-04-14):
 
 #### PEACE IN OUR TIME
