@@ -28,8 +28,8 @@ test('setup', function (t) {
 test('gist-short-shortcut-package', function (t) {
   var cloneUrls = [
     ['git://gist.github.com/deadbeef.git', 'GitHub gist shortcuts try git URLs first'],
-    ['git@gist.github.com:/deadbeef.git', 'GitHub gist shortcuts try SSH second'],
-    ['https://gist.github.com/deadbeef.git', 'GitHub gist shortcuts try HTTPS URLs third']
+    ['https://gist.github.com/deadbeef.git', 'GitHub gist shortcuts try HTTPS URLs second'],
+    ['git@gist.github.com:/deadbeef.git', 'GitHub gist shortcuts try SSH third']
   ]
   var npm = requireInject.installGlobally('../../lib/npm.js', {
     'child_process': {

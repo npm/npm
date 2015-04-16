@@ -25,8 +25,8 @@ test('setup', function (t) {
 test('github-shortcut', function (t) {
   var cloneUrls = [
     ['git://github.com/foo/private.git', 'GitHub shortcuts try git URLs first'],
-    ['git@github.com:foo/private.git', 'GitHub shortcuts try SSH second'],
-    ['https://github.com/foo/private.git', 'GitHub shortcuts try HTTPS URLs third']
+    ['https://github.com/foo/private.git', 'GitHub shortcuts try HTTPS URLs third'],
+    ['git@github.com:foo/private.git', 'GitHub shortcuts try SSH second']
   ]
   var npm = requireInject.installGlobally('../../lib/npm.js', {
     'child_process': {
