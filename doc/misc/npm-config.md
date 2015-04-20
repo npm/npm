@@ -804,6 +804,17 @@ it will install the specified tag.
 Also the tag that is added to the package@version specified by the `npm
 tag` command, if no explicit tag is given.
 
+### tag-version-prefix
+
+* Default: `"v"`
+* Type: string
+
+If set, alters the prefix used when tagging a new version when performing a
+version increment using  `npm-version`.
+
+Only use this property if it is absolutely necessary.  Use of this property
+can break unrelated features, and should be avoided if possible.
+
 ### tmp
 
 * Default: TMPDIR environment variable, or "/tmp"
