@@ -22,6 +22,7 @@ log.enableProgress()
 log.info("it worked if it ends with", "ok")
 
 var path = require("path")
+  , log = require("npmlog")
   , npm = require("../lib/npm.js")
   , npmconf = require("../lib/config/core.js")
   , errorHandler = require("../lib/utils/error-handler.js")
@@ -71,6 +72,7 @@ if (conf.usage && npm.command !== "help") {
 conf._exit = true
 npm.load(conf, function (er) {
   if (er) return errorHandler(er)
+  log.enableProgress()
   npm.commands[npm.command](npm.argv, errorHandler)
 })
 
