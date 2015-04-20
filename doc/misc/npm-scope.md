@@ -56,7 +56,7 @@ the public npm registry.
 
 (As of 2015-04-19, the public npm registry **does** support scoped packages)
 
-If you wish, you may associate a scope with a registry, see below.
+If you wish, you may associate a scope with a registry; see below.
 
 ### Publishing public scoped packages to the public npm registry
 
