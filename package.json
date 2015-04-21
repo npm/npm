@@ -46,7 +46,7 @@
     "columnify": "~1.5.1",
     "config-chain": "~1.1.8",
     "dezalgo": "~1.0.1",
-    "editor": "~0.1.0",
+    "editor": "~1.0.0",
     "fs-vacuum": "~1.2.5",
     "fs-write-stream-atomic": "~1.0.2",
     "fstream": "~1.0.4",
