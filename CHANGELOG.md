@@ -1,3 +1,55 @@
+### v2.9.0 (2015-04-23):
+
+This week was kind of a breather to concentrate on fixing up the tests on the
+`multi-stage` branch, and not mess with git issues for a little while.
+Unfortunately, There are now enough severe git issues that we'll probably have
+to spend another couple weeks tackling them. In the meantime, enjoy these two
+small features. They're just enough to qualify for a semver-minor bump:
+
+#### NANOFEATURES
+
+* [`2799322`](https://github.com/npm/npm/commit/279932298ce5b589c5eea9439ac40b88b99c6a4a)
+  [#7426](https://github.com/npm/npm/issues/7426) Include local modules in `npm
+  outdated` and `npm update`.  ([@ArnaudRinquin](https://github.com/ArnaudRinquin))
+* [`2114862`](https://github.com/npm/npm/commit/21148620fa03a582f4ec436bb16bd472664f2737)
+  [#8014](https://github.com/npm/npm/issues/8014) The prefix used before the
+  version on version tags is now configurable via `tag-version-prefix`. Be
+  careful with this one and read the docs before using it.
+  ([@kkragenbrink](https://github.com/kkragenbrink))
+
+#### OTHER MINOR TWEAKS
+
+* [`18ce0ec`](https://github.com/npm/npm/commit/18ce0ecd2d94ad3af01e997f1396515892dd363c)
+  [#3032](https://github.com/npm/npm/issues/3032) `npm unpublish` will now use
+  the registry set in `package.json`, just like `npm publish`. This only
+  applies, for now, when unpublishing the entire package, as unpublishing a
+  single version requires the name be included on the command line and
+  therefore doesn't read from `package.json`. ([@watilde](https://github.com/watilde))
+* [`9ad2100`](https://github.com/npm/npm/commit/9ad210042242e51d52b2a8b633d8e59248f5faa4)
+  [#8008](https://github.com/npm/npm/issues/8008) Once again, when considering
+  what to install on `npm install`, include `devDependencies`.
+  ([@smikes](https://github.com/smikes))
+* [`5466260`](https://github.com/npm/npm/commit/546626059909dca1906454e820ca4e315c1795bd)
+  [#8003](https://github.com/npm/npm/issues/8003) Clarify the documentation
+  around scopes to make it easier to understand how they support private
+  packages. ([@smikes](https://github.com/smikes))
+
+#### DEPENDENCIES WILL NOT STOP UNTIL YOU ARE VERY SLEEPY
+
+* [`faf65a7`](https://github.com/npm/npm/commit/faf65a7bbb2fad13216f64ed8f1243bafe743f97)
+  `init-package-json@1.4.2`: If there are multiple validation errors and
+  warnings, ensure they all get displayed (includes a rad new way of testing
+  `init-package-json` contributed by
+  [@michaelnisi](https://github.com/michaelnisi)).
+  ([@MisumiRize](https://github.com/MisumiRize))
+* [`7f10f38`](https://github.com/npm/npm/commit/7f10f38d29a8423d7cde8103fa7b64ac728da1e0)
+  `editor@1.0.0`: `1.0.0` is literally more than `0.1.0` (no change aside from
+  version number). ([@substack](https://github.com/substack))
+* [`4979af3`](https://github.com/npm/npm/commit/4979af3fcae5a3962383b7fdad3162381e62eefe)
+  [#6805](https://github.com/npm/npm/issues/6805) `npm-registry-client@6.3.3`:
+  Decode scoped package names sent by the registry so they look nicer.
+  ([@mmalecki](https://github.com/mmalecki))
+
 ### v2.8.4 (2015-04-16):
 
 This is the fourth release of npm this week, so it's mostly just landing a few
