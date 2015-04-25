@@ -19,7 +19,6 @@
     "url": "https://github.com/npm/npm"
   },
   "bugs": {
-    "email": "npm-@googlegroups.com",
     "url": "http://github.com/npm/npm/issues"
   },
   "directories": {
