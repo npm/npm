@@ -161,8 +161,8 @@ test('setup', function (t) {
   })
 })
 
-// there are three valid trees that can result, and
-// we don't care which one we get
+// there are two (sic) valid trees that can result we don't care which one we
+// get in npm@2
 var oneTree = [
   'npm-git-test@1.0.0', [
     ['dummy-npm-bar@4.0.0', [
@@ -186,17 +186,6 @@ var otherTree = [
     ]]
   ]
 ]
-var grippingTree = [
-  'npm-git-test@1.0.0', [
-    ['dummy-npm-bar@4.0.0', [
-      ['dummy-npm-buzz@3.0.0', []],
-      ['dummy-npm-foo@3.0.0', []]
-    ]],
-    ['dummy-npm-foo@4.0.0', [
-      ['dummy-npm-buzz@2.0.0', []]
-    ]]
-  ]
-]
 
 test('correct versions are installed for git dependency', function (t) {
   t.plan(4)
@@ -207,9 +196,7 @@ test('correct versions are installed for git dependency', function (t) {
       t.ifError(er, 'ls OK')
       var simplified = toSimple(result)
       t.ok(
-        deepEqual(simplified, oneTree) ||
-          deepEqual(simplified, otherTree) ||
-          deepEqual(simplified, grippingTree),
+        deepEqual(simplified, oneTree) || deepEqual(simplified, otherTree),
         'install tree is correct'
       )
     })
