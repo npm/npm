@@ -1,17 +1,18 @@
+var execFile = require('child_process').execFile
 var path = require('path')
 var zlib = require('zlib')
-var execFile = require('child_process').execFile
 
+var asyncMap = require('slide').asyncMap
+var deepEqual = require('deep-equal')
 var fs = require('graceful-fs')
-var test = require('tap').test
-var tmpdir = require('osenv').tmpdir
 var mkdirp = require('mkdirp')
+var once = require('once')
+var requireInject = require('require-inject')
 var rimraf = require('rimraf')
 var tar = require('tar')
-var once = require('once')
+var test = require('tap').test
+var tmpdir = require('osenv').tmpdir
 var which = require('which')
-var requireInject = require('require-inject')
-var asyncMap = require('slide').asyncMap
 
 var wd = path.resolve(tmpdir(), 'git-races')
 var fixtures = path.resolve(__dirname, '../fixtures')
@@ -160,6 +161,43 @@ test('setup', function (t) {
   })
 })
 
+// there are three valid trees that can result, and
+// we don't care which one we get
+var oneTree = [
+  'npm-git-test@1.0.0', [
+    ['dummy-npm-bar@4.0.0', [
+      ['dummy-npm-foo@3.0.0', []]
+    ]],
+    ['dummy-npm-buzz@3.0.0', []],
+    ['dummy-npm-foo@4.0.0', [
+      ['dummy-npm-buzz@2.0.0', []]
+    ]]
+  ]
+]
+var otherTree = [
+  'npm-git-test@1.0.0', [
+    ['dummy-npm-bar@4.0.0', [
+      ['dummy-npm-buzz@3.0.0', []],
+      ['dummy-npm-foo@3.0.0', []]
+    ]],
+    ['dummy-npm-buzz@3.0.0', []],
+    ['dummy-npm-foo@4.0.0', [
+      ['dummy-npm-buzz@2.0.0', []]
+    ]]
+  ]
+]
+var grippingTree = [
+  'npm-git-test@1.0.0', [
+    ['dummy-npm-bar@4.0.0', [
+      ['dummy-npm-buzz@3.0.0', []],
+      ['dummy-npm-foo@3.0.0', []]
+    ]],
+    ['dummy-npm-foo@4.0.0', [
+      ['dummy-npm-buzz@2.0.0', []]
+    ]]
+  ]
+]
+
 test('correct versions are installed for git dependency', function (t) {
   t.plan(4)
   t.comment('test for https://github.com/npm/npm/issues/7202')
@@ -167,16 +205,13 @@ test('correct versions are installed for git dependency', function (t) {
     t.ifError(er, 'installed OK')
     npm.commands.ls([], true, function (er, result) {
       t.ifError(er, 'ls OK')
-      t.deepEqual(toSimple(result), [
-        'npm-git-test@1.0.0', [
-          ['dummy-npm-bar@4.0.0', [
-            ['dummy-npm-foo@3.0.0', []]
-          ]],
-          ['dummy-npm-buzz@3.0.0', []],
-          ['dummy-npm-foo@4.0.0', [
-            ['dummy-npm-buzz@2.0.0', []]
-          ]]
-        ]], 'install tree is correct')
+      var simplified = toSimple(result)
+      t.ok(
+        deepEqual(simplified, oneTree) ||
+          deepEqual(simplified, otherTree) ||
+          deepEqual(simplified, grippingTree),
+        'install tree is correct'
+      )
     })
   })
 })

@@ -14,6 +14,7 @@ npm-debug.log
 /node_modules/marked
 /node_modules/require-inject
 /node_modules/sprintf-js
+/node_modules/deep-equal
 /html/api/
 /html/partial/
 /html/doc/
