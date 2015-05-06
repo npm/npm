@@ -120,23 +120,30 @@ idea to include a LICENSE file at the top level of the package.
 Some old packages used license objects or a "licenses" property containing an
 array of license objects:
 
+    // Not valid metadata
     { "license" :
-      { "type" : "MIT"
-      , "url" : "http://opensource.org/licenses/MIT"
+      { "type" : "ISC"
+      , "url" : "http://opensource.org/licenses/ISC"
       }
-	}
+    }
 
+    // Not valid metadata
     { "licenses" :
       [
-        { "type" : "MIT"
-        , "url" : "http://opensource.org/licenses/MIT"
+        { "type": "MIT"
+        , "url": "http://www.opensource.org/licenses/mit-license.php"
+        }
+      , { "type": "Apache-2.0"
+        , "url": "http://opensource.org/licenses/apache2.0.php"
         }
       ]
     }
 
-Those styles are now deprecated. Instead, use an SPDX expression, like this:
+Those styles are now deprecated. Instead, use SPDX expressions, like this:
 
-    { "license": "MIT" }
+    { "license": "ISC" }
+
+    { "license": "(MIT OR Apache-2.0)" }
 
 ## people fields: author, contributors
 
