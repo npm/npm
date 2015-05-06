@@ -25,7 +25,8 @@ var json = {
   },
   dependencies: {
     'scripts-whitespace-windows-dep': '0.0.1'
-  }
+  },
+  license: 'WTFPL'
 }
 
 var dependency = {
