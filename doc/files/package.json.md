@@ -134,7 +134,9 @@ array of license objects:
       ]
     }
 
-Those styles are now deprecated.
+Those styles are now deprecated. Instead, use an SPDX expression, like this:
+
+    { "license": "MIT" }
 
 ## people fields: author, contributors
 
