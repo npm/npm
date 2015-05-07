@@ -113,9 +113,11 @@ expression syntax version 2.0 string](http://npmjs.com/package/spdx), like this:
     { "license" : "(ISC OR GPL-3.0)" }
 
 If you are using a license that hasn't been assigned an SPDX identifier, or if
-you are using an uncommon or custom license, do not include a "license" string
-in package.json. In those cases especially, but also more generally, it's a good
-idea to include a LICENSE file at the top level of the package.
+you are using a custom license, use the following valid SPDX expression:
+
+    { "license" : "LicenseRef-LICENSE" }
+
+Then include a LICENSE file at the top level of the package. 
 
 Some old packages used license objects or a "licenses" property containing an
 array of license objects:
