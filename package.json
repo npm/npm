@@ -103,6 +103,7 @@
     "uid-number": "0.0.6",
     "umask": "~1.1.0",
     "validate-npm-package-name": "2.2.0",
+    "unique-filename": "~1.0.0",
     "which": "~1.1.1",
     "wrappy": "~1.0.1",
     "write-file-atomic": "~1.1.2"
@@ -180,6 +181,7 @@
     "text-table",
     "uid-number",
     "umask",
+    "unique-filename",
     "validate-npm-package-license",
     "validate-npm-package-name",
     "which",
