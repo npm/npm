@@ -91,7 +91,7 @@
     "sorted-object": "~1.0.0",
     "spdx": "~0.4.0",
     "strip-ansi": "~2.0.1",
-    "tar": "~2.1.0",
+    "tar": "~2.1.1",
     "text-table": "~0.2.0",
     "uid-number": "0.0.6",
     "umask": "~1.1.0",
