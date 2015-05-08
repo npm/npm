@@ -4,8 +4,8 @@ npm-publish(1) -- Publish a package
 
 ## SYNOPSIS
 
-    npm publish <tarball> [--tag <tag>] [--access <public|restricted>]
-    npm publish <folder> [--tag <tag>] [--access <public|restricted>]
+    npm publish <tarball> [--tag <tag>] [--access <public|restricted>] [--registry <registry-url>]
+    npm publish <folder> [--tag <tag>] [--access <public|restricted>] [--registry <registry-url>]
 
 ## DESCRIPTION
 
@@ -14,8 +14,8 @@ Publishes a package to the registry so that it can be installed by name. See
 well as details on how the package is built.
 
 By default npm will publish to the public registry. This can be overridden by
-specifying a different default registry or using a `npm-scope(7)` in the name
-(see `package.json(5)`).
+specifying a different default registry (see `npm-config(1)`), using `npm-scope(7)` in the name
+(see `package.json(5)`), or by specifying a custom registry via the `--registry` option (see `npm-registry(7)`).
 
 * `<folder>`:
   A folder containing a package.json file
@@ -35,6 +35,9 @@ specifying a different default registry or using a `npm-scope(7)` in the name
   If you don't have a paid account, you must publish with `--access public`
   to publish scoped packages.
 
+* `[--registry <registry-url>]`
+  Publish to a custom registry URL.
+
 Fails if the package name and version combination already exists in
 the specified registry.
 
@@ -50,3 +53,4 @@ it is removed with npm-unpublish(1).
 * npm-owner(1)
 * npm-deprecate(1)
 * npm-tag(1)
+* npm-config(1)
