@@ -95,7 +95,7 @@
     "text-table": "~0.2.0",
     "uid-number": "0.0.6",
     "umask": "~1.1.0",
-    "which": "~1.0.9",
+    "which": "~1.1.1",
     "wrappy": "~1.0.1",
     "write-file-atomic": "~1.1.0"
   },
