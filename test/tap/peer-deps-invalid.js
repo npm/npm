@@ -77,12 +77,11 @@ test('installing dependencies that have conflicting peerDependencies', function 
         registry: common.registry
       },
       function () {
-        npm.commands.install([], function (err) {
-          if (!err) {
-            t.fail('No error!')
-          } else {
-            t.equal(err.code, 'EPEERINVALID')
-          }
+        npm.commands.install([], function (err, tree) {
+          t.error(err)
+          t.is(tree.warnings.length, 2)
+          t.is(tree.warnings[0].code, 'EPEERINVALID')
+          t.is(tree.warnings[1].code, 'EPEERINVALID')
           s.close()
           t.end()
         })

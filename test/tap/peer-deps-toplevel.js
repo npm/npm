@@ -15,28 +15,45 @@ var pkg = path.resolve(__dirname, 'peer-deps-toplevel')
 var expected = {
   name: 'npm-test-peer-deps-toplevel',
   version: '0.0.0',
+  problems: [
+    'peer dep missing: mkdirp@*, required by npm-test-peer-deps-toplevel@0.0.0',
+    'peer dep missing: request@0.9.x, required by npm-test-peer-deps@0.0.0'
+  ],
   dependencies: {
     'npm-test-peer-deps': {
       version: '0.0.0',
       from: 'npm-test-peer-deps@*',
       resolved: common.registry + '/npm-test-peer-deps/-/npm-test-peer-deps-0.0.0.tgz',
+      problems: [
+        'peer dep missing: request@0.9.x, required by npm-test-peer-deps@0.0.0'
+      ],
       dependencies: {
         underscore: {
           version: '1.3.1',
           from: 'underscore@1.3.1',
           resolved: common.registry + '/underscore/-/underscore-1.3.1.tgz'
+        },
+        request: {
+          required: {
+            _id: 'request@0.9.x',
+            name: 'request',
+            version: '0.9.x',
+            peerMissing: true,
+            dependencies: {}
+          },
+          peerMissing: true
         }
       }
     },
     mkdirp: {
-      version: '0.3.5',
-      from: 'mkdirp@*',
-      resolved: common.registry + '/mkdirp/-/mkdirp-0.3.5.tgz'
-    },
-    request: {
-      version: '0.9.5',
-      from: 'request@>=0.9.0 <0.10.0',
-      resolved: common.registry + '/request/-/request-0.9.5.tgz'
+      peerMissing: true,
+      required: {
+        _id: 'mkdirp@*',
+        name: 'mkdirp',
+        version: '*',
+        peerMissing: true,
+        dependencies: {}
+      },
     }
   }
 }
