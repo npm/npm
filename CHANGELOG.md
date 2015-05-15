@@ -1,3 +1,44 @@
+### v2.10.1 (2015-05-14):
+
+#### BUG FIXES & DOCUMENTATION TWEAKS
+
+* [`dc77520`](https://github.com/npm/npm/commit/dc7752013ffce13a3d3f13e518a0052c22fc1158)
+  When getting back a 404 from a request to a private registry that uses a
+  registry path that extends past the root
+  (`http://registry.enterprise.co/path/to/registry`), display the name of the
+  nonexistent package, rather than the first element in the registry API path.
+  Sorry, Artifactory users! ([@hayes](https://github.com/hayes))
+* [`f70dea9`](https://github.com/npm/npm/commit/f70dea9b4766f6eaa55012c3e8087e9cb04fd4ce)
+  Make clearer that `--registry` can be used on a per-publish basis to push a
+  package to a non-default registry. ([@mischkl](https://github.com/mischkl))
+* [`a3e26f5`](https://github.com/npm/npm/commit/a3e26f5b4465991a941a325468ab7725670d2a94)
+  Did you know that GitHub shortcuts can have commit-ishes included
+  (`org/repo#branch`)? They can! ([@iarna](https://github.com/iarna))
+* [`0e2c091`](https://github.com/npm/npm/commit/0e2c091a539b61fdc60423b6bbaaf30c24e4b1b8)
+  Some errors from `readPackage` were being swallowed, potentially leading to
+  invalid package trees on disk. ([@smikes](https://github.com/smikes))
+
+#### DEPENDENCY UPDATES! STILL! MORE! AGAIN!
+
+* [`0b901ad`](https://github.com/npm/npm/commit/0b901ad0811d84dda6ca0755a9adc8d47825edd0)
+  `lru-cache@2.6.3`: Removed some cruft from the published package.
+  ([@isaacs](https://github.com/isaacs))
+* [`d713e0b`](https://github.com/npm/npm/commit/d713e0b14930c563e3fdb6ac6323bae2a8924652)
+  `mkdirp@0.5.1`: Made compliant with `standard`, dropped support for Node 0.6,
+  added (Travis) support for Node 0.12 and io.js.
+  ([@isaacs](https://github.com/isaacs))
+* [`a2d6578`](https://github.com/npm/npm/commit/a2d6578b6554c5c9d48fe2006751759f4da57520)
+  `glob@1.0.3`: Updated to use `tap@1`. ([@isaacs](https://github.com/isaacs))
+* [`64cd1a5`](https://github.com/npm/npm/commit/64cd1a570aaa5f24ccba190948ec9456297c97f5)
+  `fstream@ 1.0.6`: Made compliant with [`standard`](http://npm.im/standard)
+  (done by [@othiym23](https://github.com/othiym23), and then debugged and
+  fixed by [@iarna](https://github.com/iarna)), and license changed to ISC.
+  ([@othiym23](https://github.com/othiym23) /
+  [@iarna](https://github.com/iarna))
+* [`b527a7c`](https://github.com/npm/npm/commit/b527a7c2ba3c4002f443dd2c536ff4ff41a38b86)
+  `which@1.1.1`: Callers can pass in their own `PATH` instead of relying on
+  `process.env`. ([@isaacs](https://github.com/isaacs))
+
 ### v2.10.0 (2015-05-8):
 
 #### THE IMPLICATIONS ARE MORE PROFOUND THAN THEY APPEAR
