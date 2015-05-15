@@ -95,6 +95,7 @@
     "text-table": "~0.2.0",
     "uid-number": "0.0.6",
     "umask": "~1.1.0",
+    "validate-npm-package-name": "2.2.0",
     "which": "~1.1.1",
     "wrappy": "~1.0.1",
     "write-file-atomic": "~1.1.0"
@@ -165,6 +166,7 @@
     "text-table",
     "uid-number",
     "umask",
+    "validate-npm-package-name",
     "which",
     "wrappy",
     "write-file-atomic"
