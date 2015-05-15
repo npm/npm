@@ -173,12 +173,12 @@
     "deep-equal": "~1.0.0",
     "marked": "~0.3.3",
     "marked-man": "~0.1.4",
-    "nock": "~1.9.0",
+    "nock": "~2.0.1",
     "npm-registry-couchapp": "~2.6.7",
     "npm-registry-mock": "~1.0.0",
     "require-inject": "~1.2.0",
     "sprintf-js": "~1.0.2",
-    "tap": "^1.0.0-beta.3"
+    "tap": "~1.0.4"
   },
   "scripts": {
     "test-legacy": "node ./test/run.js",
