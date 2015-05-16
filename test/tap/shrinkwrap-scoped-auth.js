@@ -46,19 +46,31 @@ test("authed npm install with shrinkwrapped scoped package", function (t) {
     [
       "install",
       "--loglevel", "silent",
+      "--json",
       "--fetch-retries", 0,
       "--userconfig", outfile
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
+      console.error(stderr)
       t.ifError(err, "test runner executed without error")
       t.equal(code, 0, "npm install exited OK")
       t.notOk(stderr, "no output on stderr")
-      t.equal(
-        stdout,
-        "@scoped/underscore@1.3.1 node_modules/@scoped/underscore\n",
-        "module installed where expected"
-      )
+      try {
+        var results = JSON.parse(stdout)
+      }
+      catch (ex) {
+        console.error('#', ex)
+        t.ifError(ex, "stdout was valid JSON")
+      }
+      if (results) {
+        var installedversion = {
+          'version': '1.3.1',
+          'from': '>=1.3.1 <2',
+          'resolved': 'http://localhost:1337/scoped-underscore/-/scoped-underscore-1.3.1.tgz'
+        }
+        t.isDeeply(results.dependencies['@scoped/underscore'], installedversion, '@scoped/underscore installed')
+      }
 
       t.end()
     }
