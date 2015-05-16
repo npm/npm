@@ -125,7 +125,7 @@ test("npm repo test-repo-url-ssh - non-github (ssh://)", function (t) {
       t.equal(code, 0, 'exit ok')
       var res = fs.readFileSync(outFile, 'ascii')
       s.close()
-      t.equal(res, "http://gitlab.com/evanlucas/test-repo-url-ssh\n")
+      t.equal(res, "https://gitlab.com/evanlucas/test-repo-url-ssh\n")
       rimraf.sync(outFile)
       t.end()
     })
