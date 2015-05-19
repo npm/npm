@@ -61,7 +61,7 @@
     "init-package-json": "~1.5.0",
     "lockfile": "~1.0.0",
     "lru-cache": "~2.6.4",
-    "minimatch": "~2.0.7",
+    "minimatch": "~2.0.8",
     "mkdirp": "~0.5.1",
     "node-gyp": "~1.0.3",
     "nopt": "~3.0.1",
