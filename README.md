@@ -40,17 +40,23 @@ There's a pretty robust install script at
 
 Here's an example using curl:
 
-    curl -L https://www.npmjs.com/install.sh | sh
+```sh
+curl -L https://www.npmjs.com/install.sh | sh
+```
 
 ### Slightly Fancier
 
 You can set any npm configuration params with that script:
 
-    npm_config_prefix=/some/path sh install.sh
+```sh
+npm_config_prefix=/some/path sh install.sh
+```
 
 Or, you can run it in uber-debuggery mode:
 
-    npm_debug=1 sh install.sh
+```sh
+npm_debug=1 sh install.sh
+```
 
 ### Even Fancier
 
@@ -83,11 +89,14 @@ No.
 
 So sad to see you go.
 
-    sudo npm uninstall npm -g
-
+```sh
+sudo npm uninstall npm -g
+```
 Or, if that fails,
 
-    sudo make uninstall
+```sh
+sudo make uninstall
+```
 
 ## More Severe Uninstalling
 
@@ -101,13 +110,17 @@ remove them.
 To remove cruft left behind by npm 0.x, you can use the included
 `clean-old.sh` script file.  You can run it conveniently like this:
 
-    npm explore npm -g -- sh scripts/clean-old.sh
+```sh
+npm explore npm -g -- sh scripts/clean-old.sh
+```
 
 npm uses two configuration files, one for per-user configs, and another
 for global (every-user) configs.  You can view them by doing:
 
-    npm config get userconfig   # defaults to ~/.npmrc
-    npm config get globalconfig # defaults to /usr/local/etc/npmrc
+```sh
+npm config get userconfig   # defaults to ~/.npmrc
+npm config get globalconfig # defaults to /usr/local/etc/npmrc
+```
 
 Uninstalling npm does not remove configuration files by default.  You
 must remove them yourself manually if you want them gone.  Note that
@@ -127,15 +140,17 @@ Eventually, npm will be just a thin cli wrapper around the modules
 that it depends on, but for now, there are some things that you must
 use npm itself to do.
 
-    var npm = require("npm")
-    npm.load(myConfigObject, function (er) {
-      if (er) return handlError(er)
-      npm.commands.install(["some", "args"], function (er, data) {
-        if (er) return commandFailed(er)
-        // command succeeded, and data might have some info
-      })
-      npm.registry.log.on("log", function (message) { .... })
-    })
+```javascript
+var npm = require("npm")
+npm.load(myConfigObject, function (er) {
+  if (er) return handlError(er)
+  npm.commands.install(["some", "args"], function (er, data) {
+    if (er) return commandFailed(er)
+    // command succeeded, and data might have some info
+  })
+  npm.registry.log.on("log", function (message) { .... })
+})
+```
 
 The `load` function takes an object hash of the command-line configs.
 The various `npm.commands.<cmd>` functions take an **array** of
