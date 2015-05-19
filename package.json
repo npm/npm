@@ -64,7 +64,7 @@
     "minimatch": "~2.0.8",
     "mkdirp": "~0.5.1",
     "node-gyp": "~1.0.3",
-    "nopt": "~3.0.1",
+    "nopt": "~3.0.2",
     "normalize-git-url": "~1.0.0",
     "normalize-package-data": "~2.1.0",
     "npm-cache-filename": "~1.0.1",
