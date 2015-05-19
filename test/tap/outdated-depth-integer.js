@@ -46,7 +46,8 @@ test('outdated depth integer', function (t) {
     undefined, // no version installed
     '1.3.1',   // wanted
     '1.5.1',   // latest
-    '1.3.1'
+    '1.3.1',
+    null
   ]]
 
   mr({port : common.port}, function (er, s) {
