@@ -48,7 +48,7 @@ package B:
 and package C:
 
     {
-      "name": "C,
+      "name": "C",
       "version": "0.0.1"
     }
 
@@ -97,7 +97,7 @@ This generates npm-shrinkwrap.json, which will look something like this:
 
 The shrinkwrap command has locked down the dependencies based on
 what's currently installed in node_modules.  When `npm install`
-installs a package with a npm-shrinkwrap.json file in the package
+installs a package with an npm-shrinkwrap.json file in the package
 root, the shrinkwrap file (rather than package.json files) completely
 drives the installation of that package and all of its dependencies
 (recursively).  So now the author publishes A@0.1.0, and subsequent
