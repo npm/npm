@@ -77,7 +77,7 @@
     "opener": "~1.4.1",
     "osenv": "~0.1.0",
     "path-is-inside": "~1.0.0",
-    "read": "~1.0.4",
+    "read": "~1.0.6",
     "read-installed": "~4.0.0",
     "read-package-json": "~2.0.0",
     "readable-stream": "~1.0.33",
