@@ -129,8 +129,11 @@ you have chosen.
 
 ## Using npm Programmatically
 
-If you would like to use npm programmatically, you can do that.
-It's not very well documented, but it *is* rather simple.
+Although npm can be used programmatically, the CLI's API is meant for use by the CLI *only*, and no guarantees are made regarding its fitness for any other purpose. The semantic version of npm refers the the CLI itself, rather than the underlying API. The CLI API will not necessarily remain stable even though the NPM semver indicates no breaking changes have been made.
+
+If you want to use npm to reliably perform some task, the safest thing to do is to invoke the `npm` command with appropriate arguments.
+
+If you still would like to use npm programmatically, it is possible. The API is neither very well documented nor guaranteed to be stable, but it *is* rather simple.
 
 Most of the time, unless you actually want to do all the things that
 npm does, you should try using one of npm's dependencies rather than
