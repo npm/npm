@@ -59,7 +59,7 @@
     "inherits": "~2.0.1",
     "ini": "~1.3.3",
     "init-package-json": "~1.5.0",
-    "lockfile": "~1.0.0",
+    "lockfile": "~1.0.1",
     "lru-cache": "~2.6.4",
     "minimatch": "~2.0.8",
     "mkdirp": "~0.5.1",
