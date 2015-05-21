@@ -180,7 +180,7 @@
     "npm-registry-mock": "~1.0.0",
     "require-inject": "~1.2.0",
     "sprintf-js": "~1.0.2",
-    "tap": "~1.0.4"
+    "tap": "~1.1.0"
   },
   "scripts": {
     "test-legacy": "node ./test/run.js",
