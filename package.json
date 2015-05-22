@@ -187,7 +187,7 @@
     "test": "tap --timeout 240 test/tap/*.js",
     "tap": "tap --timeout 240 test/tap/*.js",
     "test-all": "npm run test-legacy && npm test",
-    "preversion": "bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
+    "preversion": "cd .. && bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
     "prepublish": "node bin/npm-cli.js prune --prefix=. --no-global && rimraf test/*/*/node_modules && make -j4 doc",
     "dumpconf": "env | grep npm | sort | uniq"
   },
