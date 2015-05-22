@@ -98,7 +98,7 @@
     "validate-npm-package-name": "2.2.0",
     "which": "~1.1.1",
     "wrappy": "~1.0.1",
-    "write-file-atomic": "~1.1.0"
+    "write-file-atomic": "~1.1.2"
   },
   "bundleDependencies": [
     "abbrev",
