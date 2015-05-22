@@ -129,19 +129,23 @@ you have chosen.
 
 ## Using npm Programmatically
 
-Although npm can be used programmatically, the CLI's API is meant for use by the CLI *only*, and no guarantees are made regarding its fitness for any other purpose. The semantic version of npm refers the the CLI itself, rather than the underlying API. The CLI API will not necessarily remain stable even though the NPM semver indicates no breaking changes have been made.
+Although npm can be used programmatically, its API is meant for use by the CLI
+*only*, and no guarantees are made regarding its fitness for any other purpose.
+If you want to use npm to reliably perform some task, the safest thing to do is
+to invoke the desired `npm` command with appropriate arguments.
 
-If you want to use npm to reliably perform some task, the safest thing to do is to invoke the `npm` command with appropriate arguments.
+The semantic version of npm refers to the CLI itself, rather than the
+underlying API. _The internal API is not guaranteed to remain stable even when
+npm's version indicates no breaking changes have been made according to
+semver._
 
-If you still would like to use npm programmatically, it is possible. The API is neither very well documented nor guaranteed to be stable, but it *is* rather simple.
+If you _still_ would like to use npm programmatically, it's _possible_. The API
+isn't very well documented, but it _is_ rather simple.
 
-Most of the time, unless you actually want to do all the things that
-npm does, you should try using one of npm's dependencies rather than
-using npm itself, if possible.
-
-Eventually, npm will be just a thin cli wrapper around the modules
-that it depends on, but for now, there are some things that you must
-use npm itself to do.
+Eventually, npm will be just a thin CLI wrapper around the modules that it
+depends on, but for now, there are some things that only the CLI can do. You
+should try using one of npm's dependencies first, and only use the API if what
+you're trying to do is only supported by npm itself.
 
 ```javascript
 var npm = require("npm")
