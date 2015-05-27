@@ -20,6 +20,8 @@ The four relevant files are:
 * global config file ($PREFIX/etc/npmrc)
 * npm builtin config file (/path/to/npm/npmrc)
 
+**NOTE:** The per-project or per-user config files need to have a **chmod of 600**, otherwise they _will be ignored by npm!_
+
 All npm config files are an ini-formatted list of `key = value`
 parameters.  Environment variables can be replaced using
 `${VARIABLE_NAME}`. For example:
