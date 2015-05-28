@@ -20,8 +20,6 @@ The four relevant files are:
 * global config file ($PREFIX/etc/npmrc)
 * npm builtin config file (/path/to/npm/npmrc)
 
-**NOTE:** The per-project or per-user config files need to have a **chmod of 600**, otherwise they _will be ignored by npm!_
-
 All npm config files are an ini-formatted list of `key = value`
 parameters.  Environment variables can be replaced using
 `${VARIABLE_NAME}`. For example:
@@ -37,6 +35,11 @@ example:
 
     key[] = "first value"
     key[] = "second value"
+
+**NOTE:** Because local (per-project or per-user) `.npmrc` files can contain
+sensitive credentials, they must be readable and writable _only_ by your user
+accoung (i.e. must have a mode of `0600`), otherwise they _will be ignored by
+npm!_
 
 ### Per-project config file
 
