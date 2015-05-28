@@ -63,7 +63,7 @@
     "lru-cache": "~2.6.4",
     "minimatch": "~2.0.8",
     "mkdirp": "~0.5.1",
-    "node-gyp": "~1.0.3",
+    "node-gyp": "~2.0.0",
     "nopt": "~3.0.2",
     "normalize-git-url": "~1.0.1",
     "normalize-package-data": "~2.2.0",
