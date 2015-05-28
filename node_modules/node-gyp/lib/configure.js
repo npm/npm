@@ -96,7 +96,13 @@ function configure (gyp, argv, callback) {
         version = version.replace(/rc(.*)$/ig, '')
       }
       var range = semver.Range('>=2.5.0 <3.0.0')
-      if (range.test(version)) {
+      var valid = false
+      try {
+        valid = range.test(version)
+      } catch (e) {
+        log.silly('range.test() error', e)
+      }
+      if (valid) {
         getNodeDir()
       } else {
         failPythonVersion(version)

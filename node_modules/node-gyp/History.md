@@ -1,4 +1,10 @@
 
+2.0.1 / 2015-05-28
+==================
+
+  * configure: try/catcht the semver range.test() call
+  * README: update for visual studio 2013 (#510, @samccone)
+
 2.0.0 / 2015-05-24
 ==================
 

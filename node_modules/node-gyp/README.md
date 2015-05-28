@@ -40,12 +40,11 @@ You will also need to install:
     * [Python][windows-python] ([`v2.7.3`][windows-python-v2.7.3] recommended, `v3.x.x` is __*not*__ supported)
       * Make sure that you have a PYTHON environment variable, and it is set to drive:\path\to\python.exe not to a folder.
     * Windows XP/Vista/7:
-      * Microsoft Visual Studio C++ 2010 ([Express][msvc2010] version works well)
+      * Microsoft Visual Studio C++ 2013 ([Express][msvc2013] version works well)
         * If the install fails, try uninstalling any C++ 2010 x64&x86 Redistributable that you have installed first.
         * If you get errors that the 64-bit compilers are not installed you may also need the [compiler update for the Windows SDK 7.1]
     * Windows 7/8:
-      * Microsoft Visual Studio C++ 2012 for Windows Desktop ([Express][msvc2012] version works well)
-      * Microsoft Visual Studio C++ 2013 will also work.
+      * Microsoft Visual Studio C++ 2013 for Windows Desktop ([Express][msvc2013] version works well)
     * All Windows Versions
       * For 64-bit builds of node and native modules you will _**also**_ need the [Windows 7 64-bit SDK][win7sdk]
       * You may need to run one of the following commands if your build complains about WindowsSDKDir not being set, and you are sure you have already installed the SDK:
@@ -183,7 +182,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [windows-python]: http://www.python.org/getit/windows
 [windows-python-v2.7.3]: http://www.python.org/download/releases/2.7.3#download
-[msvc2010]: http://go.microsoft.com/?linkid=9709949
-[msvc2012]: http://go.microsoft.com/?linkid=9816758
+[msvc2013]: http://www.visualstudio.com/en-us/downloads/download-visual-studio-vs
 [win7sdk]: http://www.microsoft.com/en-us/download/details.aspx?id=8279
 [compiler update for the Windows SDK 7.1]: http://www.microsoft.com/en-us/download/details.aspx?id=4422
