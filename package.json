@@ -30,7 +30,7 @@
   "main": "./lib/npm.js",
   "bin": "./bin/npm-cli.js",
   "dependencies": {
-    "abbrev": "~1.0.6",
+    "abbrev": "~1.0.7",
     "ansi": "~0.3.0",
     "ansi-regex": "~1.1.1",
     "ansicolors": "~0.3.2",
