@@ -82,7 +82,7 @@
     "read-package-json": "~2.0.0",
     "readable-stream": "~1.1.13",
     "realize-package-specifier": "~3.0.1",
-    "request": "~2.56.0",
+    "request": "~2.57.0",
     "retry": "~0.6.1",
     "rimraf": "~2.3.4",
     "semver": "~4.3.4",
