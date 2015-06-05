@@ -14,7 +14,7 @@ while it lasts. :3
 * [`31aada4`](https://github.com/npm/npm/commit/31aada4ccc369c0903ff7f233f464955d12c6fe2)
   [#8401](https://github.com/npm/npm/issues/8401) `npm outdated` output is just
   that much nicer to consume now, due to sorting by name.
-  [@watilde](https://github.com/watilde)
+  ([@watilde](https://github.com/watilde))
 * [`458a919`](https://github.com/npm/npm/commit/458a91925d8b20c5e672ba71a86745aad654abaf)
   [#8469](https://github.com/npm/npm/pull/8469) Explicitly set `cwd` for
   `preversion`, `version`, and `postversion` scripts. This makes the scripts
