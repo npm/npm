@@ -42,10 +42,11 @@ while it lasts. :3
 #### VERSION NUMBERS HAVE NEVER BEEN BIGGER
 
 * [`c929fd1`](https://github.com/npm/npm/commit/c929fd1d0604b5878ed05706447e078d3e41f5b3)
-  `readable-steam@1.1.13`: Manually installed `v1.1.13` (steams3) to make deduping more reliable on `npm@<3`.
-  ([@othiym23](https://github.com/othiym23))
+  `readable-stream@1.1.13`: Manually deduped `v1.1.13` (streams3) to make
+  deduping more reliable on `npm@<3`. ([@othiym23](https://github.com/othiym23))
 * [`a9b4b78`](https://github.com/npm/npm/commit/a9b4b78dcc85571fd1cdd737903f7f37a5e6a755)
-  `request@2.57.0`: Replace dependency on IncomingMessage's `.client` with `.socket` as the former was deprecated in 2.2.0.
+  `request@2.57.0`: Replace dependency on IncomingMessage's `.client` with
+  `.socket` as the former was deprecated in io.js 2.2.0.
   ([@othiym23](https://github.com/othiym23))
 * [`4b5e557`](https://github.com/npm/npm/commit/4b5e557a23cdefd521ad154111e3d4dcc81f1cdb)
   `abbrev@1.0.7`: Better testing, with coverage.
