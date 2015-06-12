@@ -1,3 +1,34 @@
+### v2.11.3 (2015-06-11):
+
+This was a very quiet week. This release was done by
+[@iarna](https://github.com/iarna), while the rest of the team hangs out at
+NodeConf Adventure!
+
+#### TESTS IN 0.8 FAIL LESS
+
+* [`5b3b3c2`](https://github.com/npm/npm/commit/5b3b3c2)
+  [#8491](//github.com/npm/npm/pull/8491)
+  Updates a test to use only 0.8 compatible features
+  ([@watilde](https://github.com/watilde))
+
+#### THE TREADMILL OF UPDATES NEVER CEASES
+
+* [`9f439da`](https://github.com/npm/npm/commit/9f439da)
+  `spdx@0.4.1`: License range updates
+  (@kemitchell)[https://github.com/kemitchell]
+* [`2dd055b`](https://github.com/npm/npm/commit/2dd055b)
+  `normalize-package-data@2.2.1`: Fixes a crashing bug when the package.json
+  `scripts` property is not an object.
+  (@iarna)[https://github.com/iarna]
+* [`e02e85d`](https://github.com/npm/npm/commit/e02e85d)
+  `osenv@0.1.2`: Switches to using the `os-tmpdir` module instead of
+  `os.tmpdir()` for greate consistency in behavior between node versions.
+  (@iarna)[https://github.com/iarna]
+* [`a6f0265`](https://github.com/npm/npm/commit/a6f0265)
+  `ini@1.3.4` (@isaacs)[https://github.com/isaacs]
+* [`7395977`](https://github.com/npm/npm/commit/7395977)
+  `rimraf@2.4.0` (@isaacs)[https://github.com/isaacs]
+
 ### v2.11.2 (2015-06-04):
 
 Another small release this week, brought to you by the latest addition to the
