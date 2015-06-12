@@ -42,7 +42,7 @@ in your git config for this to work properly.  For example:
 
 If "preversion", "version", "postversion" in the "scripts" property of
 the package.json, it will execute by running `npm version`. preversion
-and version ware executed before bump the package version, postversion
+and version are executed before bump the package version, postversion
 was executed after bump the package version. For example to run `npm version`
 after passed all test:
 
