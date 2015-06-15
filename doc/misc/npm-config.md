@@ -268,6 +268,17 @@ Install `dev-dependencies` along with packages.
 Note that `dev-dependencies` are also installed if the `npat` flag is
 set.
 
+### dry-run
+
+* Default: false
+* Type: Boolean
+
+Indicates that you don't want npm to make any changes and that it should
+only report what it would have done.  This can be passed into any of the
+commands that modify your local installation, eg, `install`, `update`,
+`dedupe`, `uninstall`.  This is NOT currently honored by network related
+commands, eg `dist-tags`, `owner`, `publish`, etc.
+
 ### editor
 
 * Default: `EDITOR` environment variable if set, or `"vi"` on Posix,
