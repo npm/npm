@@ -56,9 +56,12 @@ test('not every pkg.name can be required', function (t) {
       t.equal(code, 0, 'install exited ok')
       t.ok(existsSync(path.join(
         pkg,
-        'node_modules/test-package-with-one-dep',
-        'node_modules/test-package'
-      )), 'package installed OK')
+        'node_modules','test-package-with-one-dep'
+      )), 'test-package-with-one-dep installed OK')
+      t.ok(existsSync(path.join(
+        pkg,
+        'node_modules','test-package'
+      )), 'test-pacakge subdep installed OK')
       t.end()
     }
   )
