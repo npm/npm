@@ -15,19 +15,19 @@ NodeConf Adventure!
 
 * [`9f439da`](https://github.com/npm/npm/commit/9f439da)
   `spdx@0.4.1`: License range updates
-  (@kemitchell)[https://github.com/kemitchell]
+  ([@kemitchell](https://github.com/kemitchell))
 * [`2dd055b`](https://github.com/npm/npm/commit/2dd055b)
   `normalize-package-data@2.2.1`: Fixes a crashing bug when the package.json
   `scripts` property is not an object.
-  (@iarna)[https://github.com/iarna]
+  ([@iarna](https://github.com/iarna))
 * [`e02e85d`](https://github.com/npm/npm/commit/e02e85d)
   `osenv@0.1.2`: Switches to using the `os-tmpdir` module instead of
   `os.tmpdir()` for greate consistency in behavior between node versions.
-  (@iarna)[https://github.com/iarna]
+  ([@iarna](https://github.com/iarna))
 * [`a6f0265`](https://github.com/npm/npm/commit/a6f0265)
-  `ini@1.3.4` (@isaacs)[https://github.com/isaacs]
+  `ini@1.3.4` ([@isaacs](https://github.com/isaacs))
 * [`7395977`](https://github.com/npm/npm/commit/7395977)
-  `rimraf@2.4.0` (@isaacs)[https://github.com/isaacs]
+  `rimraf@2.4.0` ([@isaacs](https://github.com/isaacs))
 
 ### v2.11.2 (2015-06-04):
 
