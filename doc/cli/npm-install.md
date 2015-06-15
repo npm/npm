@@ -13,7 +13,7 @@ npm-install(1) -- Install a package
     npm install <folder>
 
     alias: npm i
-    common options: [--save|--save-dev|--save-optional] [--save-exact]
+    common options: [--save|--save-dev|--save-optional] [--save-exact] [--dry-run]
 
 ## DESCRIPTION
 
@@ -245,6 +245,9 @@ For example:
 The `--tag` argument will apply to all of the specified install targets. If a
 tag with the given name exists, the tagged version is preferred over newer
 versions.
+
+The `--dry-run` argument will report in the usual way what the install would
+have done without actually installing anything.
 
 The `--force` argument will force npm to fetch remote resources even if a
 local copy exists on disk.
