@@ -36,7 +36,6 @@ test("install npm into first folder", function (t) {
               "--prefix=" + folder + "/first",
               "--ignore-scripts",
               "--cache=" + folder + "/cache",
-              "--no-spin",
               "--loglevel=silent",
               "--tmp=" + folder + "/tmp"]
   common.npm(args, {stdio: "inherit"}, function (er, code) {
@@ -52,7 +51,6 @@ test("write npmrc file", function (t) {
               "--prefix=" + folder + "/first",
               "--cache=" + folder + "/cache",
               "--tmp=" + folder + "/tmp",
-              "--no-spin",
               "--",
               node, __filename, "write-builtin", process.pid
              ],
@@ -71,7 +69,6 @@ test("use first npm to install second npm", function (t) {
                "--prefix=" + folder + "/first",
                "--cache=" + folder + "/cache",
                "--tmp=" + folder + "/tmp",
-               "--no-spin"
              ], {}, function (er, code, so) {
     if (er) throw er
     t.equal(code, 0)
@@ -86,7 +83,6 @@ test("use first npm to install second npm", function (t) {
            , "--prefix=" + folder + "/second"
            , "--cache=" + folder + "/cache"
            , "--tmp=" + folder + "/tmp"
-           , "--no-spin"
            ])
     .on("error", function (er) { throw er })
     .on("close", function (code) {
