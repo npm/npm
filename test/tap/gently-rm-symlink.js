@@ -83,13 +83,20 @@ test("cleanup", function (t) {
   t.end()
 })
 
+function removeBlank (line) {
+  return line !== ''
+}
+
 function verify (t, stdout) {
   var binPath = resolve(lnk, "bin", "linked")
   var pkgPath = resolve(lnk, "lib", "node_modules", "@test", "linked")
   var trgPath = resolve(pkgPath, "index.js")
-  t.equal(
-    stdout,
-    binPath+" -> "+trgPath+"\n@test/linked@1.0.0 "+pkgPath+"\n",
+  t.deepEqual(
+    stdout.split('\n').filter(removeBlank),
+    [ binPath+" -> "+trgPath,
+      resolve(lnk, 'lib'),
+      '└── @test/linked@1.0.0 '
+    ],
     "got expected install output"
   )
 }
