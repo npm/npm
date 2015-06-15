@@ -18,6 +18,7 @@ var spawn = require("child_process").spawn
 var node = process.execPath
 
 test("setup", function (t) {
+  t.plan(1)
   rimraf.sync(folder)
   mkdirp.sync(folder + "/first")
   mkdirp.sync(folder + "/second")
@@ -30,6 +31,7 @@ test("setup", function (t) {
 
 
 test("install npm into first folder", function (t) {
+  t.plan(1)
   var args = ["install", npm, "-g",
               "--prefix=" + folder + "/first",
               "--ignore-scripts",
@@ -45,6 +47,7 @@ test("install npm into first folder", function (t) {
 })
 
 test("write npmrc file", function (t) {
+  t.plan(1)
   common.npm(["explore", "npm", "-g",
               "--prefix=" + folder + "/first",
               "--cache=" + folder + "/cache",
@@ -62,6 +65,7 @@ test("write npmrc file", function (t) {
 })
 
 test("use first npm to install second npm", function (t) {
+  t.plan(3)
   // get the root location
   common.npm([ "root", "-g",
                "--prefix=" + folder + "/first",
@@ -93,6 +97,7 @@ test("use first npm to install second npm", function (t) {
 })
 
 test("verify that the builtin config matches", function (t) {
+  t.plan(3)
   common.npm([ "root", "-g",
                "--prefix=" + folder + "/first",
                "--cache=" + folder + "/cache",
