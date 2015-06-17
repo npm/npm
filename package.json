@@ -168,7 +168,7 @@
     "marked": "~0.3.3",
     "marked-man": "~0.1.4",
     "nock": "~2.6.0",
-    "npm-registry-couchapp": "~2.6.7",
+    "npm-registry-couchapp": "~2.6.11",
     "npm-registry-mock": "~1.0.0",
     "require-inject": "~1.2.0",
     "sprintf-js": "~1.0.2",
