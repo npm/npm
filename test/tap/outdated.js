@@ -64,7 +64,8 @@ test('it should not throw', function (t) {
       '0.2.9',
       '0.2.9',
       '0.2.10',
-      '0.2.9'
+      '0.2.9',
+      null
     ],
     [
       pkg,
@@ -72,7 +73,8 @@ test('it should not throw', function (t) {
       '0.5.1',
       '0.5.1',
       '0.5.2',
-      '0.5.1'
+      '0.5.1',
+      null
     ],
     [
       pkg,
