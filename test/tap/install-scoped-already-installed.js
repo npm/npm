@@ -31,7 +31,7 @@ var localDependency = {
 }
 
 var scopedDependency = {
-  name: '@scoped/package',
+  name: '@scoped/package-scoped-dependency',
   version: '0.0.0',
   description: 'Test for local installs'
 }
@@ -72,14 +72,13 @@ test('installing already installed local scoped package', function (t) {
       var installed = parseNpmInstallOutput(stdout)
       t.ifError(err, 'install ran to completion without error')
       t.notOk(code, 'npm install exited with code 0')
-
       t.ok(
-        existsSync(path.join(modules, '@scoped', 'package', 'package.json')),
+        existsSync(path.join(modules, '@scoped', 'package-scoped-dependency', 'package.json')),
         'package installed'
       )
       t.ok(
-        contains(installed, 'node_modules/@scoped/package'),
-        'installed @scoped/package'
+        contains(installed, 'node_modules/@scoped/package-scoped-dependency'),
+        'installed @scoped/package-scoped-dependency'
       )
       t.ok(
         contains(installed, 'node_modules/package-local-dependency'),
@@ -100,13 +99,13 @@ test('installing already installed local scoped package', function (t) {
           installed = parseNpmInstallOutput(stdout)
 
           t.ok(
-            existsSync(path.join(modules, '@scoped', 'package', 'package.json')),
+            existsSync(path.join(modules, '@scoped', 'package-scoped-dependency', 'package.json')),
             'package installed'
           )
 
           t.notOk(
-            contains(installed, 'node_modules/@scoped/package'),
-            'did not reinstall @scoped/package'
+            contains(installed, 'node_modules/@scoped/package-scoped-dependency'),
+            'did not reinstall @scoped/package-scoped-dependency'
           )
           t.notOk(
             contains(installed, 'node_modules/package-local-dependency'),
