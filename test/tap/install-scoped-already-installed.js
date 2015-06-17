@@ -64,6 +64,7 @@ test('installing already installed local scoped package', function (t) {
   common.npm(
     [
       '--loglevel', 'silent',
+      '--parseable',
       'install'
     ],
     EXEC_OPTS,
@@ -88,6 +89,7 @@ test('installing already installed local scoped package', function (t) {
       common.npm(
         [
           '--loglevel', 'silent',
+          '--parseable',
           'install'
         ],
         EXEC_OPTS,
@@ -124,8 +126,9 @@ test('cleanup', function (t) {
 })
 
 function contains (list, element) {
+  var matcher = new RegExp(element+'$')
   for (var i = 0; i < list.length; ++i) {
-    if (list[i] === element) {
+    if (matcher.test(list[i])) {
       return true
     }
   }
