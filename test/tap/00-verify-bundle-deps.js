@@ -15,13 +15,5 @@ test("all deps are bundled deps or dev deps", function (t) {
     )
   })
 
-  t.same(
-    fs.readdirSync(path.resolve(__dirname, "../../node_modules")).filter(function (name) {
-      return (dev.indexOf(name) === -1) && (name !== ".bin")
-    }).sort(),
-    bundled.sort(),
-    "bundleDependencies matches what's in node_modules"
-  )
-
   t.end()
 })
