@@ -44,8 +44,8 @@ test("outdated depth deep (9999)", function (t) {
   var underscoreOutdated = ["underscore", "1.3.1", "1.3.1", "1.5.1", "1.3.1"]
   var childPkg = path.resolve(pkg, "node_modules", "npm-test-peer-deps")
 
-  var expected = [ [pkg].concat(underscoreOutdated),
-                   [childPkg].concat(underscoreOutdated) ]
+  var expected = [ [childPkg].concat(underscoreOutdated).concat([null]),
+                   [pkg].concat(underscoreOutdated).concat([null]) ]
 
   process.chdir(pkg)
 
@@ -59,11 +59,14 @@ test("outdated depth deep (9999)", function (t) {
     , function () {
         npm.install(".", function (er) {
           if (er) throw new Error(er)
-          npm.outdated(function (err, d) {
-            if (err) throw new Error(err)
-            t.deepEqual(d, expected)
-            s.close()
-            t.end()
+          npm.explore("npm-test-peer-deps", "npm", "install", "underscore", function (er) {
+            if (er) throw new Error(er)
+            npm.outdated(function (err, d) {
+              if (err) throw new Error(err)
+              t.deepEqual(d, expected)
+              s.close()
+              t.end()
+            })
           })
         })
       }
