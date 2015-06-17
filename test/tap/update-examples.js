@@ -110,18 +110,23 @@ function mockCommand (npm, name, fn) {
 }
 
 test('setup', function (t) {
+  t.plan(5)
   process.chdir(osenv.tmpdir())
   mkdirp.sync(PKG_DIR)
   process.chdir(PKG_DIR)
+  t.pass('made '+PKG_DIR)
 
   resetPackage({})
 
   mr({ port: common.port, mocks: registryMocks }, function (er, server) {
+    t.pass('mock registry active')
     npm.load({ cache: CACHE_DIR,
       registry: common.registry,
     cwd: PKG_DIR }, function (err) {
         t.ifError(err, 'started server')
         mockServer = server
+
+        t.pass('npm.load complete')
 
         mockCommand(npm, 'install', function mockInstall (where, what, cb) {
           installAskedFor = what
@@ -133,6 +138,7 @@ test('setup', function (t) {
           'read-package-json': mockReadJson
         }))
 
+        t.pass('mocks configured')
         t.end()
       })
   })
