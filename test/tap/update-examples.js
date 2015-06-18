@@ -1,6 +1,5 @@
 var common = require('../common-tap.js')
 var test = require('tap').test
-var npm = require('../../lib/npm.js')
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
 var path = require('path')
@@ -29,9 +28,19 @@ var DEP_PKG = {
 }
 
 var INSTALLED = {
-  dependencies: {
-    'dep1': '1.1.1'
-  }
+  path: '/mock/root',
+  realpath: '/mock/root',
+  isLink: false,
+  package: DEFAULT_PKG,
+  children: [
+    {
+      path: '/mock/root/node_modules/dep1',
+      realpath: '/mock/root/node_modules/dep1',
+      isLink: false,
+      package: DEP_PKG,
+      children: []
+    }
+  ]
 }
 
 var DEP1_REGISTRY = { name: 'dep1',
@@ -87,16 +96,18 @@ function resetPackage (options) {
 
   if (options.wanted) {
     mockParentJson.dependencies.dep1 = options.wanted
+    mockInstalled.package.dependencies.dep1 = options.wanted
     mockDepJson._from = options.wanted
   }
 
   if (options.installed) {
-    mockInstalled.dependencies.dep1 = options.installed
+    mockInstalled.package.dependencies.dep1 = options.installed
+    mockInstalled.children[0].package.version = options.installed
     mockDepJson.version = options.installed
   }
 }
 
-function mockReadInstalled (dir, opts, cb) {
+function mockReadPackageTree (dir, cb) {
   cb(null, mockInstalled)
 }
 
@@ -108,6 +119,22 @@ function mockCommand (npm, name, fn) {
   delete npm.commands[name]
   npm.commands[name] = fn
 }
+
+function mockInstaller (where, dryrun, what) {
+  installAskedFor = what[0]
+}
+mockInstaller.prototype = {}
+mockInstaller.prototype.run = function (cb) {
+  cb()
+}
+
+var npm = requireInject.installGlobally('../../lib/npm.js', {
+  'read-package-tree': mockReadPackageTree,
+  'read-package-json': mockReadJson,
+  '../../lib/install': {
+    Installer: mockInstaller
+  }
+})
 
 test('setup', function (t) {
   t.plan(5)
@@ -133,11 +160,6 @@ test('setup', function (t) {
           cb(null)
         })
 
-        mockCommand(npm, 'outdated', requireInject('../../lib/outdated', {
-          'read-installed': mockReadInstalled,
-          'read-package-json': mockReadJson
-        }))
-
         t.pass('mocks configured')
         t.end()
       })
@@ -147,9 +169,10 @@ test('setup', function (t) {
 test('update caret dependency to latest', function (t) {
   resetPackage({ wanted: '^1.1.1' })
 
+  npm.config.set('loglevel', 'silly')
   npm.commands.update([], function (err) {
     t.ifError(err)
-    t.equal('dep1@1.2.2', installAskedFor, 'should want to install dep@1.2.2')
+    t.equal(installAskedFor, 'dep1@1.2.2', 'should want to install dep@1.2.2')
     t.end()
   })
 })
@@ -159,7 +182,7 @@ test('update tilde dependency to latest', function (t) {
 
   npm.commands.update([], function (err) {
     t.ifError(err)
-    t.equal('dep1@1.1.2', installAskedFor, 'should want to install dep@1.1.2')
+    t.equal(installAskedFor, 'dep1@1.1.2', 'should want to install dep@1.1.2')
     t.end()
   })
 })
@@ -179,7 +202,7 @@ test('update old caret dependency with no newer', function (t) {
 
   npm.commands.update([], function (err) {
     t.ifError(err)
-    t.equal('dep1@0.2.0', installAskedFor, 'should want to install dep@0.2.0')
+    t.equal(installAskedFor, 'dep1@0.2.0', 'should want to install dep@0.2.0')
     t.end()
   })
 })
@@ -189,7 +212,7 @@ test('update old caret dependency with newer', function (t) {
 
   npm.commands.update([], function (err) {
     t.ifError(err)
-    t.equal('dep1@0.4.1', installAskedFor, 'should want to install dep@0.4.1')
+    t.equal(installAskedFor, 'dep1@0.4.1', 'should want to install dep@0.4.1')
     t.end()
   })
 })
