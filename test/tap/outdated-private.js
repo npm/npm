@@ -73,7 +73,8 @@ test("outdated ignores private modules", function (t) {
               "1.3.1",
               "1.5.1",
               "1.5.1",
-              "underscore@1.5.1"
+              "underscore@1.5.1",
+              null
             ]])
             s.close()
           })
