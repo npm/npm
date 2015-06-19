@@ -48,7 +48,7 @@
     "editor": "~1.0.0",
     "fs-vacuum": "~1.2.6",
     "fs-write-stream-atomic": "~1.0.3",
-    "fstream": "~1.0.6",
+    "fstream": "~1.0.7",
     "fstream-npm": "~1.0.2",
     "github-url-from-git": "~1.4.0",
     "github-url-from-username-repo": "~1.0.2",
