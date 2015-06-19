@@ -11,8 +11,8 @@ have to deal with this again!"
 Well, uh, if you run npm with root the first time you run npm on a machine, it
 turns out that the directory npm uses to store lockfiles ends up being owned by
 the wrong user (almost always root), and that can, well, it can cause problems
-sometimes. By which I mean every time you run npm as root it'll barf with
-`EACCES` errors. Whoops!
+sometimes. By which I mean every time you run npm without being root it'll barf
+with `EACCES` errors. Whoops!
 
 This is an obnoxious regression, and to prevent it from recurring, we've made
 it so that the cache, cached git remotes, and the lockfile directories are all
@@ -87,7 +87,7 @@ file actually exists, but for now you're all on the honor system.
 
 * [`5018335`](https://github.com/npm/npm/commit/5018335ce1754a9f771954ecbc1a93acde9b8c0a)
   [#8365](https://github.com/npm/npm/issues/8365) Add details about which git
-  enviroment variables are whitelisted by npm.
+  environment variables are whitelisted by npm.
   ([@nmalaguti](https://github.com/nmalaguti))
 * [`bed9edd`](https://github.com/npm/npm/commit/bed9edddfdcc6d22a80feab33b53e4ef9172ec72)
   [#8554](https://github.com/npm/npm/issues/8554) Fix typo in version docs.
