@@ -1,3 +1,117 @@
+### v2.12.0 (2015-06-18):
+
+#### REMEMBER WHEN I SAID THAT THING ABOUT PERMISSIONS?
+
+About [a million people](https://github.com/npm/npm/issues?utf8=%E2%9C%93&q=is%3Aissue+EACCES+_locks)
+have filed issues related to having a tough time using npm after they've run
+npm once or twice with sudo. "Don't worry about it!" I said. "We've fixed all
+those permissions problems ages ago! Use this one weird trick and you'll never
+have to deal with this again!"
+
+Well, uh, if you run npm with root the first time you run npm on a machine, it
+turns out that the directory npm uses to store lockfiles ends up being owned by
+the wrong user (almost always root), and that can, well, it can cause problems
+sometimes. By which I mean every time you run npm as root it'll barf with
+`EACCES` errors. Whoops!
+
+This is an obnoxious regression, and to prevent it from recurring, we've made
+it so that the cache, cached git remotes, and the lockfile directories are all
+created and maintained using the same utilty module, which not only creates the
+relevant paths with the correct permissions, but will fix the permissions on
+those directories (if it can) when it notices that they're broken. An `npm
+install` run as root ought to be sufficient to fix things up (and if that
+doesn't work, first tell us about it, and then run `sudo chown -R $(whoami)
+$HOME/.npm`)
+
+Also, I apologize for inadvertently gaslighting any of you by claiming this bug
+wasn't actually a bug. I do think we've got this permanently dealt with now,
+but I'll be paying extra-close attention to permissions issues related to the
+cache for a while.
+
+* [`85d1a53`](https://github.com/npm/npm/commit/85d1a53d7b5e0fc04823187e522ae3711ede61fa)
+  Set permissions on lock directory to the owner of the process.
+  ([@othiym23](https://github.com/othiym23))
+
+#### I WENT TO NODECONF AND ALL I GOT WAS THIS LOUSY SPDX T-SHIRT
+
+That's not literally true. We spent very little time discussing SPDX,
+[@kemitchell](https://github.com/kemitchell) is a champ, and I had a lot of fun
+playing drum & bass to a mostly empty Boogie Barn and only ended up with one
+moderately severe cold for my pains. Another winner of a NodeConf! (I would
+probably wear a SPDX T-shirt if somebody gave me one, though.)
+
+A bunch of us did have a spirited discussion of the basics of open-source
+intellectual property, and the convergence of me,
+[@kemitchell](https://github.com/kemitchell), and
+[@jandrieu](https://github.com/jandrieu) in one place allowed us to hammmer out
+a small but significant issue that had been bedeviling early adopters of the
+new SPDX expression syntax in `package.json` license fields: how to deal with
+packages that are left without a license on purpose.
+
+Refer to [the docs](https://github.com/npm/npm/blob/16a3dd545b10f8a2464e2037506ce39124739b41/doc/files/package.json.md#license)
+for the specifics, but the short version is that instead of using
+`LicenseRef-LICENSE` for proprietary licenses, you can now use either
+`UNLICENSED` if you want to make it clear that you don't _want_ your software
+to be licensed (and want npm to stop warning you about this), or `SEE LICENSE
+IN <filename>` if there's a license with custom text you want to use. At some
+point in the near term, we'll be updating npm to verify that the mentioned
+file actually exists, but for now you're all on the honor system.
+
+* [`4827fc7`](https://github.com/npm/npm/commit/4827fc784117c17f35dd9b51b21d1eff6094f661)
+  [#8557](https://github.com/npm/npm/issues/8557)
+  `normalize-package-data@2.2.1`: Allow `UNLICENSED` and `SEE LICENSE IN
+  <filename>` in "license" field of `package.json`.
+  ([@kemitchell](https://github.com/kemitchell))
+* [`16a3dd5`](https://github.com/npm/npm/commit/16a3dd545b10f8a2464e2037506ce39124739b41)
+  [#8557](https://github.com/npm/npm/issues/8557) Document the new accepted
+  values for the "license" field.
+  ([@kemitchell](https://github.com/kemitchell))
+* [`8155311`](https://github.com/npm/npm/commit/81553119350deaf199e79e38e35b52a5c8ad206c)
+  [#8557](https://github.com/npm/npm/issues/8557) `init-package-json@1.7.0`:
+  Support new "license" field values at init time.
+  ([@kemitchell](https://github.com/kemitchell))
+
+#### SMALLISH BUG FIXES
+
+* [`9d8cac9`](https://github.com/npm/npm/commit/9d8cac94a258db648a2b1069b1c8c6529c79d013)
+  [#8548](https://github.com/npm/npm/issues/8548) Remove extraneous newline
+  from `npm view` output, making it easier to use in shell scripts.
+  ([@eush77](https://github.com/eush77))
+* [`765fd4b`](https://github.com/npm/npm/commit/765fd4bfca8ea3e2a4a399765b17eec40a3d893d)
+  [#8521](https://github.com/npm/npm/issues/8521) When checking for outdated
+  packages, or updating packages, raise an error when the registry is
+  unreachable instead of silently "succeeding".
+  ([@ryantemple](https://github.com/ryantemple))
+
+#### SMALLERISH DOCUMENTATION TWEAKS
+
+* [`5018335`](https://github.com/npm/npm/commit/5018335ce1754a9f771954ecbc1a93acde9b8c0a)
+  [#8365](https://github.com/npm/npm/issues/8365) Add details about which git
+  enviroment variables are whitelisted by npm.
+  ([@nmalaguti](https://github.com/nmalaguti))
+* [`bed9edd`](https://github.com/npm/npm/commit/bed9edddfdcc6d22a80feab33b53e4ef9172ec72)
+  [#8554](https://github.com/npm/npm/issues/8554) Fix typo in version docs.
+  ([@rainyday](https://github.com/rainyday))
+
+#### WELL, I GUESS THERE ARE MORE DEPENDENCY UPGRADES
+
+* [`7ce2f06`](https://github.com/npm/npm/commit/7ce2f06f6f34d469b1d2e248084d4f3fef10c05e)
+  `request@2.58.0`: Refactor tunneling logic, and use `extend` instead of
+  abusing `util._extend`. ([@simov](https://github.com/simov))
+* [`e6c6195`](https://github.com/npm/npm/commit/e6c61954aad42e20eec49745615c7640b2026a6c)
+  `nock@2.6.0`: Refined interception behavior.
+  ([@pgte](https://github.com/pgte))
+* [`9583cc3`](https://github.com/npm/npm/commit/9583cc3cb192c2fced006927cfba7cd37b588605)
+  `fstream-npm@1.0.3`: Ensure that `main` entry in `package.json` is always
+  included in the bundled package tarball.
+  ([@coderhaoxin](https://github.com/coderhaoxin))
+* [`df89493`](https://github.com/npm/npm/commit/df894930f2716adac28740b29b2e863170919990)
+  `fstream@1.0.7` ([@isaacs](https://github.com/isaacs))
+* [`9744049`](https://github.com/npm/npm/commit/974404934758124aa8ae5b54f7d5257c3bd6b588)
+  `dezalgo@1.0.3`: `dezalgo` should be usable in the browser, and can be now
+  that `asap` has been upgraded to be browserifiable.
+  ([@mvayngrib](https://github.com/mvayngrib))
+
 ### v2.11.3 (2015-06-11):
 
 This was a very quiet week. This release was done by
