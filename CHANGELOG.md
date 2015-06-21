@@ -1,3 +1,286 @@
+### v3.0.0 (2015-06-25):
+
+Wow, it's finally here!  This has been a long time coming.
+[@othiym23](https://github.com/othiym23) and [@izs](https://github.com/izs)
+have been talking about the changes in this release for well over a year,
+and it's been the primary focus of [@iarna](https://github.com/iarna) since
+she joined npm.
+
+It consitutes a rewrite of the npm installer to be easier to maintain and to
+bring a bunch of valuable new changes to you all.
+
+npm@3 is going to be in beta until we're comfortable with its stability and
+the effect of the breaking changes on the community. During that time we
+will still be doing npm@2 releases and npm@2 will be tagged latest & next.
+Meanwhile there will be npm@3.0-next and npm@3.0-latest avaliable for your
+use.
+
+Due to the nature of the rewrite, all changes listed here are
+[@iarna](https://github.com/iarna)'s work unless otherwise specified.
+
+#### KNOWN BUGS
+
+This is a beta release and there are some known issues we're entering into
+it with.
+
+  * [#8575](https://github.com/npm/npm/issues/8575)
+    Circular deps will never be removed by the prune-on-uninstall code.
+  * [#8588](https://github.com/npm/npm/issues/8588)
+    Local deps where the dep name and the name in the package.json differ
+    don't result in an error
+
+#### OTHER CONTRIBUTIONS
+
+  * [`6401643`](https://github.com/npm/npm/commit/6401643)
+    Fixed a bug with npm@3 and global installs
+    ([@thefourtheye](https://github.com/thefourtheye))
+
+#### FIXES FOR LONGSTANDING ISSUES
+
+  * [#6158](https://github.com/npm/npm/issues/6158)
+    When we remove modules we do so inside-out running unbuild for each one.
+
+#### THE AGE OF PROGRESS (BARS)
+
+  * [#6911](https://github.com/npm/npm/issues/6911)
+    ([#1257](https://github.com/npm/npm/issues/1257)
+    [#5340](https://github.com/npm/npm/issues/5340)
+    [#6420](https://github.com/npm/npm/issues/6420))
+    The spinner is gone and now we have progress bars so you actually have
+    some sense of how long installs will take.  It's provided in unicode and
+    non-unicode variants and unicode support is now detected from your
+    environment.
+
+#### TARBALL TEMP FOLDER CRUFT
+
+  * [`9ebe312`](https://github.com/npm/npm/commit/9ebe312)
+    We now clean up after ourselves in your tempfolder better.
+
+#### MULTI-STAGE INSTALLER
+
+  * [#5919](https://github.com/npm/npm/issues/5919)
+    Previously the installer had a set of steps it executed for each package
+    and it would immediately start executing them as soon as it decided to
+    act on a package.
+
+But now it executes each of those steps at the same time for all packages,
+waiting for all of one stage to complete before moving on.  This eliminates
+many race conditions and makes the code easier to reason about.
+
+This fixes, for instance:
+
+  * [#6926](https://github.com/npm/npm/issues/6926)
+    ([#5001](https://github.com/npm/npm/issues/5001)
+    [#6170](https://github.com/npm/npm/issues/6170))
+    Install/postinstall lifecycles only execute now AFTER all the modules we
+    depend on are installed.
+
+#### HOSTED GIT SERVICES
+
+  * [`81b46fb`](https://github.com/npm/npm/commit/81b46fb)
+    Extend the support for hosted git repositories other than github beyond
+    just installation.  Specifically, this means that we can now intuit the
+    correctly urls for bugs & repo commands for bitbucket and gitlab the same
+    way it does for github.
+
+#### FLAT, FLAT, FLAT
+
+Your dependencies will now be installed *maximally flat*.  That is to say,
+in so far as is possible, all of your dependencies and their dependencies
+and THEIR dependencies will be installed in your project's `node_modules`
+folder with no nesting.  You'll only see modules nested underneither one
+another when there are conflicts.
+
+  * [#3697](https://github.com/npm/npm/issues/3697)
+    This will hopefully eliminate most cases where windows users ended up
+    with paths that were too long for Explorer and other standard tools to
+    deal with.
+  * [#6912](https://github.com/npm/npm/issues/6912)
+    ([#4761](https://github.com/npm/npm/issues/4761)
+    [#4037](https://github.com/npm/npm/issues/4037))
+    This also means that your installs will be deduped from the start.
+  * [#5827](https://github.com/npm/npm/issues/5827)
+    This deduping even extends to git deps.
+  * [#6936](https://github.com/npm/npm/issues/6936)
+    ([#5698](https://github.com/npm/npm/issues/5698))
+    Various commands are dedupe aware now.
+
+This has some implications on the behavior of other commands:
+
+  * `npm uninstall` removes any dependencies of the module that you
+    specified that aren't required by any other module.  Previously it would
+    only remove those that happened to be installed under it, resulting in
+    left over cruft if you'd ever deduped.
+  * `npm ls` now shows you your dependency tree organized around what
+    requires what, rather than where those modules are on disk.
+  * [#6937](https://github.com/npm/npm/issues/6937)
+    `npm dedupe` now flattens the tree in addition to deduping.
+
+And bundling of dependencies when packing or publishing changes too:
+
+  * [#2442](https://github.com/npm/npm/issues/2442)
+    bundledDependencies no longer requires that you specify deduped sub
+    deps.  npm can now see that a dependency is required by something
+    bundled and automaticlaly include it.  To put that another way,
+    bundledDependencies should ONLY include things that you included in
+    dependencies, optionalDependencies or devDependencies.
+  * [#5437](https://github.com/npm/npm/issues/5437)
+    When bundling a dep that's both a dev dep and the subdep of a regular
+    dep we now correctly include the subdep.
+
+#### DRY AS A DESERT, RUN AS A...
+
+  * [#3505](https://github.com/npm/npm/issues/3505)
+    You can now ask that npm not make any changes and instead only report
+    what it would have done with the new `--dry-run` flag.  This can be
+    passed to any of the commands that change your `node_modules` folder:
+    `install`, `uninstall`, `update` and `dedupe`.
+
+#### INSTALL, IT LOOKS DIFFERENT
+
+You'll now get a tree a la `npm ls` that highlights in orange the packages
+that were installed. Similarly, if it removed any packages you'll get those
+package names prefixed by a `-`.
+
+#### INSTALL, IT WORKS DIFFERENT
+
+  * [#6928](https://github.com/npm/npm/issues/6928)
+    ([#2931](https://github.com/npm/npm/issues/2931)
+    [#2950](https://github.com/npm/npm/issues/2950))
+    `npm install` when you have an `npm-shrinkwrap.json` will ensure you
+    have the modules specified in it are installed in exactly the shape
+    specified no matter what you had when you started.
+  * [#6913](https://github.com/npm/npm/issues/6913)
+    ([#1341](https://github.com/npm/npm/issues/1341)
+    [#3124](https://github.com/npm/npm/issues/3124)
+    [#4956](https://github.com/npm/npm/issues/4956)
+    [#6349](https://github.com/npm/npm/issues/6349)
+    [#5465](https://github.com/npm/npm/issues/5465))
+    `npm install` when some of your dependencies are missing
+    sub-dependencies will result in those sub-dependencies being installed.
+    That is, `npm install` now knows how to fix broken installs, most of the
+    time.
+  * [#5465](https://github.com/npm/npm/issues/5465)
+    If you directly `npm install` a module that's already a subdep of something
+    else and your new version is incompatible, it will now install the previous
+    version nested in the things that need it.
+  * [`a2b50cf`](https://github.com/npm/npm/commit/a2b50cf)
+    [#5693](https://github.com/npm/npm/issues/5693)
+    When installing a new module, if it's mentioned in your
+    `npm-shrinkwrap.json` or your `package.json` use the version specifier
+    from there if you didn't specify one yourself.
+
+#### IDEMPOTENT SHRINKWRAPS
+
+  * [#5779](https://github.com/npm/npm/issues/5779)
+    Yup, they should be exactly the same every time now, including
+    normalized `_from` fields.
+
+#### SHRINKWRAPS, THEY ARE A CHANGIN'
+
+First of all, they should be idempotent now.  No more differences because
+the first time you installed w/o an npm-shrinkwrap.json and the second time
+you did.
+
+  * [#6781](https://github.com/npm/npm/issues/6781)
+    Second, if you save your changes to the `package.json` and you have an
+    `npm-shrinkwrap.json` then it will be updated as well.  This applies
+    to all of the commands that update your tree:
+    * `npm install --save`
+    * `npm update --save`
+    * `npm dedupe --save` ([#6410](https://github.com/npm/npm/issues/6410))
+    * `npm uninstall --save`
+  * [#4944](https://github.com/npm/npm/issues/4944)
+    ([#5161](https://github.com/npm/npm/issues/5161)
+    [#5448](https://github.com/npm/npm/issues/5448))
+    Third, because `node_modules` folders are now deduped and flat,
+    shrinkwrap has to also be smart enough to handle this.
+
+And finally, we get a shrinkwrap bug fix:
+
+  * [#3675](https://github.com/npm/npm/issues/3675)
+    When shrinkwraping a dep that's both a dev dep and the subdep of a
+    regular dep we now correctly include the subdep.
+
+#### OUTDATED OUTPUT DIFFERENCES
+
+Previously `npm outdated` would include the name
+of the module in the Location field:
+
+```
+Package                Current  Wanted  Latest  Location
+deep-equal             MISSING   1.0.0   1.0.0  deep-equal
+glob                     4.5.3   4.5.3  5.0.10  rimraf > glob
+```
+
+Now it will show the module that required it as the final
+point in the Location field:
+
+```
+Package                Current  Wanted  Latest  Location
+deep-equal             MISSING   1.0.0   1.0.0  npm
+glob                     4.5.3   4.5.3  5.0.10  npm > rimraf
+```
+
+Previously the Location field was telling you where
+the module was on disk. Now it tells you what requires
+the module. When more than one thing requires the module
+you'll see it listed once for each thing requiring it.
+
+#### EARLIER WARNINGS
+
+  * [#6942](https://github.com/npm/npm/issues/6942)
+    Check for permissions issues prior to actually trying to install
+    anything.
+
+Emit warnings at the end of the installation when possible, so that they'll
+be on your screen when npm stops.
+
+#### DOCUMENTATION IMPROVEMENTS
+
+  * [960a765](https://github.com/npm/npm/commit/960a765)
+    Update usage documentation for all commands
+    ([@smikes](https://github.com/smikes))
+
+#### BREAKING: PEER DEPENDENCIES
+
+  * [#6930](https://github.com/npm/npm/issues/6930)
+    ([#6565](https://github.com/npm/npm/issues/6565))
+    Declaring peerDependencies will no longer result in the specified
+    modules being installed if they're otherwise missing.  Instead, it will
+    now warn if they're missing, but it's up to the consumer of the module
+    to provide the modules.
+
+This is about shifting the responsibility for fulfilling peer dependencies
+from the module authors to the application authors.
+
+  * [#3803](https://github.com/npm/npm/issues/3803)
+    We also no longer check peer dependencies until after we've fully
+    resolved the tree.
+
+#### BREAKING: ENGINE STRICT
+
+  * [#6931](https://github.com/npm/npm/issues/6931)
+    The rarely used `package.json` option engineStrict has been deprecated
+    for several months, producing warnings when it was used.  Starting with
+    `npm@3` it will now be ignored and engine violations will result in only
+    warnings.  If you need the engineStrict style of behavior you can opt in
+    to it by adding it to your config.
+
+As with the peer dependencies change, this is about shifting control from
+module authors to application authors.
+
+#### BREAKING: VIEW
+
+  * [`77f1aec`](https://github.com/npm/npm/commit/77f1aec)
+    With `npm view` always return arrays for versions, maintiners, etc. Previously we would
+    return return a plain value if there was only one, multiple values if there was more than one.
+    ([@KenanY](https://github.com/KenanY))
+
+#### DEPENDENCIES ARE ALL DIFFERENT
+
+The npm dependencies are flattened and deduped in the npm@3 style.
+
 ### v2.12.0 (2015-06-18):
 
 #### REMEMBER WHEN I SAID THAT THING ABOUT PERMISSIONS?
