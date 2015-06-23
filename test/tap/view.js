@@ -252,7 +252,7 @@ test("npm view <package name> <field>", function (t) {
 
 test("npm view with invalid package name", function (t) {
   var invalidName = "InvalidPackage"
-      obj = {}
+  var obj = {}
   obj["/" + invalidName] = [404, {"error": "not found"}]
 
   mr({port : common.port, mocks: {"get": obj}}, function (er, s) {
