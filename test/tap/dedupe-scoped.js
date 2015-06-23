@@ -60,7 +60,6 @@ var secondUnique = {
   'version': '1.2.0'
 }
 
-
 test('setup', function (t) {
   setup()
   t.end()

@@ -25,31 +25,30 @@ var json = {
 }
 
 var shrinkwrap = {
-  name: "dedupe",
-  version: "0.0.0",
+  name: 'dedupe',
+  version: '0.0.0',
   dependencies: {
     clean: {
-      version: "2.1.6",
+      version: '2.1.6',
       dependencies: {
         checker: {
-          version: "0.5.2",
+          version: '0.5.2',
           dependencies: {
-            async: { version: "0.2.10" }
+            async: { version: '0.2.10' }
           }
         },
-        minimist: { version: "0.0.5" }
+        minimist: { version: '0.0.5' }
       }
     },
     optimist: {
-      version: "0.6.0",
+      version: '0.6.0',
       dependencies: {
-        wordwrap: { version: "0.0.2" },
-        minimist: { version: "0.0.5" }
+        wordwrap: { version: '0.0.2' },
+        minimist: { version: '0.0.5' }
       }
     }
   }
 }
-
 
 test('setup', function (t) {
   t.comment('test for https://github.com/npm/npm/issues/4675')
@@ -78,8 +77,14 @@ test('dedupe finds the common module and moves it up one level', function (t) {
         t.notOk(code, 'npm dedupe exited with code')
 
         t.ok(existsSync(path.join(pkg, 'node_modules', 'minimist')), 'minimist module exists')
-        t.notOk(existsSync(path.join(pkg, 'node_modules', 'clean','node_modules','minimist')), 'no clean/minimist')
-        t.notOk(existsSync(path.join(pkg, 'node_modules', 'optimist','node_modules','minimist')), 'no optmist/minimist')
+        t.notOk(
+          existsSync(path.join(pkg, 'node_modules', 'clean', 'node_modules', 'minimist')),
+          'no clean/minimist'
+        )
+        t.notOk(
+          existsSync(path.join(pkg, 'node_modules', 'optimist', 'node_modules', 'minimist')),
+          'no optmist/minimist'
+        )
         t.end()
       }
     )
