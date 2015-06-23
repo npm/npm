@@ -1,43 +1,43 @@
-var fs = require("fs")
-var path = require("path")
-var mkdirp = require("mkdirp")
-var rimraf = require("rimraf")
-var mr = require("npm-registry-mock")
+var fs = require('fs')
+var path = require('path')
+var mkdirp = require('mkdirp')
+var rimraf = require('rimraf')
+var mr = require('npm-registry-mock')
 
-var test = require("tap").test
-var common = require("../common-tap.js")
+var test = require('tap').test
+var common = require('../common-tap.js')
 
-var pkg = path.resolve(__dirname, "access")
+var pkg = path.resolve(__dirname, 'access')
 var server
 
 var scoped = {
-  name : "@scoped/pkg",
-  version : "1.1.1"
+  name: '@scoped/pkg',
+  version: '1.1.1'
 }
 
 var body = {
-  access : "public"
+  access: 'public'
 }
 
 function mocks (server) {
-  server.post("/-/package/@scoped%2fpkg/access", JSON.stringify(body))
-    .reply(200, { "access" : "public" })
-  server.post("/-/package/@scoped%2fanother/access", JSON.stringify(body))
-    .reply(200, { "access" : "public" })
+  server.post('/-/package/@scoped%2fpkg/access', JSON.stringify(body))
+    .reply(200, { 'access': 'public' })
+  server.post('/-/package/@scoped%2fanother/access', JSON.stringify(body))
+    .reply(200, { 'access': 'public' })
 }
 
-test("setup", function (t) {
+test('setup', function (t) {
   mkdirp(pkg, function (er) {
-    t.ifError(er, pkg + " made successfully")
+    t.ifError(er, pkg + ' made successfully')
 
-    mr({port : common.port, plugin : mocks}, function (err, s) {
+    mr({port: common.port, plugin: mocks}, function (er, s) {
       server = s
 
       fs.writeFile(
-        path.join(pkg, "package.json"),
+        path.join(pkg, 'package.json'),
         JSON.stringify(scoped),
         function (er) {
-          t.ifError(er, "wrote package.json")
+          t.ifError(er, 'wrote package.json')
           t.end()
         }
       )
@@ -45,52 +45,52 @@ test("setup", function (t) {
   })
 })
 
-test("npm access on current package", function (t) {
+test('npm access on current package', function (t) {
   common.npm(
     [
-      "access",
-      "public",
-      "--registry", common.registry,
-      "--loglevel", "silent"
+      'access',
+      'public',
+      '--registry', common.registry,
+      '--loglevel', 'silent'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
-      t.ifError(er, "npm access")
-      t.notOk(code, "exited OK")
-      t.notOk(stderr, "no error output")
+      t.ifError(er, 'npm access')
+      t.notOk(code, 'exited OK')
+      t.notOk(stderr, 'no error output')
 
       t.end()
     }
   )
 })
 
-test("npm access on named package", function (t) {
+test('npm access on named package', function (t) {
   common.npm(
     [
-      "access",
-      "public", "@scoped/another",
-      "--registry", common.registry,
-      "--loglevel", "silent"
+      'access',
+      'public', '@scoped/another',
+      '--registry', common.registry,
+      '--loglevel', 'silent'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
-      t.ifError(er, "npm access")
-      t.notOk(code, "exited OK")
-      t.notOk(stderr, "no error output")
+      t.ifError(er, 'npm access')
+      t.notOk(code, 'exited OK')
+      t.notOk(stderr, 'no error output')
 
       t.end()
     }
   )
 })
 
-test("npm change access on unscoped package", function (t) {
+test('npm change access on unscoped package', function (t) {
   common.npm(
     [
-      "access",
-      "restricted", "yargs",
-      "--registry", common.registry
+      'access',
+      'restricted', 'yargs',
+      '--registry', common.registry
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ok(code, 'exited with Error')
       t.ok(stderr.match(/you can't change the access level of unscoped packages/))
@@ -102,11 +102,11 @@ test("npm change access on unscoped package", function (t) {
 test('npm access add', function (t) {
   common.npm(
     [
-      "access",
-      "add", "@scoped/another",
-      "--registry", common.registry
+      'access',
+      'add', '@scoped/another',
+      '--registry', common.registry
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ok(code, 'exited with Error')
       t.ok(stderr.match(/npm access add isn't implemented yet!/))
@@ -118,11 +118,11 @@ test('npm access add', function (t) {
 test('npm access rm', function (t) {
   common.npm(
     [
-      "access",
-      "rm", "@scoped/another",
-      "--registry", common.registry
+      'access',
+      'rm', '@scoped/another',
+      '--registry', common.registry
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ok(code, 'exited with Error')
       t.ok(stderr.match(/npm access rm isn't implemented yet!/))
@@ -134,11 +134,11 @@ test('npm access rm', function (t) {
 test('npm access ls', function (t) {
   common.npm(
     [
-      "access",
-      "ls", "@scoped/another",
-      "--registry", common.registry
+      'access',
+      'ls', '@scoped/another',
+      '--registry', common.registry
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ok(code, 'exited with Error')
       t.ok(stderr.match(/npm access ls isn't implemented yet!/))
@@ -150,11 +150,11 @@ test('npm access ls', function (t) {
 test('npm access edit', function (t) {
   common.npm(
     [
-      "access",
-      "edit", "@scoped/another",
-      "--registry", common.registry
+      'access',
+      'edit', '@scoped/another',
+      '--registry', common.registry
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ok(code, 'exited with Error')
       t.ok(stderr.match(/npm access edit isn't implemented yet!/))
@@ -166,11 +166,11 @@ test('npm access edit', function (t) {
 test('npm access blerg', function (t) {
   common.npm(
     [
-      "access",
-      "blerg", "@scoped/another",
-      "--registry", common.registry
+      'access',
+      'blerg', '@scoped/another',
+      '--registry', common.registry
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ok(code, 'exited with Error')
       t.ok(stderr.match(/Usage:/))
@@ -179,8 +179,8 @@ test('npm access blerg', function (t) {
   )
 })
 
-test("cleanup", function (t) {
-  t.pass("cleaned up")
+test('cleanup', function (t) {
+  t.pass('cleaned up')
   rimraf.sync(pkg)
   server.close()
   t.end()
