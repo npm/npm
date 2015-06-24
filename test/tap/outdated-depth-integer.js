@@ -52,10 +52,10 @@ test('outdated depth integer', function (t) {
 
   mr({port : common.port}, function (er, s) {
     npm.load({
-      cache: pkg + '/cache'
-    , loglevel: 'silent'
-    , registry: common.registry
-    , depth: 5
+      cache: pkg + '/cache',
+      loglevel: 'silent',
+      registry: common.registry,
+      depth: 5
     }
     , function () {
         npm.install('request@0.9.0', function (er) {

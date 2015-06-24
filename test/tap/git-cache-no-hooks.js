@@ -25,10 +25,11 @@ test('git-cache-no-hooks: install a git dependency', function (t) {
   // disable git integration tests on Travis.
   if (process.env.TRAVIS) return t.end()
 
-  var command = [ npmCli
-                , 'install'
-                , 'git://github.com/nigelzor/npm-4503-a.git'
-                ]
+  var command = [
+    npmCli,
+    'install',
+    'git://github.com/nigelzor/npm-4503-a.git'
+  ]
   var child = spawn(node, command, {
     cwd: pkg,
     env: {

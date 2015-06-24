@@ -11,7 +11,8 @@ assert.equal(env.npm_package_config_foo, 'boo', 'foo != boo')
 assert.equal(orig.foo, 'bar', 'original foo != bar')
 assert.equal(env['npm_config_package-config:foo'], 'boo',
              'package-config:foo != boo')
-console.log({ foo: env.npm_package_config_foo
-            , orig_foo: orig.foo
-            , 'package-config:foo': env['npm_config_package-config:foo']
-            })
+console.log({
+  foo: env.npm_package_config_foo,
+  orig_foo: orig.foo,
+  'package-config:foo': env['npm_config_package-config:foo']
+})
