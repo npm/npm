@@ -1,29 +1,29 @@
 ;(function () {
-  var wrapper = document.getElementById("wrapper")
-  var els = Array.prototype.slice.call(wrapper.getElementsByTagName("*"), 0)
+  var wrapper = document.getElementById('wrapper')
+  var els = Array.prototype.slice.call(wrapper.getElementsByTagName('*'), 0)
     .filter(function (el) {
       return el.parentNode === wrapper
           && el.tagName.match(/H[1-6]/)
           && el.id
     })
   var l = 2
-    , toc = document.createElement("ul")
+    , toc = document.createElement('ul')
   toc.innerHTML = els.map(function (el) {
     var i = el.tagName.charAt(1)
-      , out = ""
+      , out = ''
     while (i > l) {
-      out += "<ul>"
+      out += '<ul>'
       l ++
     }
     while (i < l) {
-      out += "</ul>"
+      out += '</ul>'
       l --
     }
-    out += "<li><a href='#" + el.id + "'>" +
+    out += '<li><a href=\'#' + el.id + '\'>' +
       ( el.innerText || el.text || el.innerHTML)
-      + "</a>"
+      + '</a>'
     return out
-  }).join("\n")
-  toc.id = "toc"
+  }).join('\n')
+  toc.id = 'toc'
   document.body.appendChild(toc)
 })();

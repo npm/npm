@@ -25,26 +25,26 @@ var json = {
 }
 
 var shrinkwrap = {
-  name: "dedupe",
-  version: "0.0.0",
+  name: 'dedupe',
+  version: '0.0.0',
   dependencies: {
     clean: {
-      version: "2.1.6",
+      version: '2.1.6',
       dependencies: {
         checker: {
-          version: "0.5.2",
+          version: '0.5.2',
           dependencies: {
-            async: { version: "0.2.10" }
+            async: { version: '0.2.10' }
           }
         },
-        minimist: { version: "0.0.5" }
+        minimist: { version: '0.0.5' }
       }
     },
     optimist: {
-      version: "0.6.0",
+      version: '0.6.0',
       dependencies: {
-        wordwrap: { version: "0.0.2" },
-        minimist: { version: "0.0.5" }
+        wordwrap: { version: '0.0.2' },
+        minimist: { version: '0.0.5' }
       }
     }
   }

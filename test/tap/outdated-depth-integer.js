@@ -5,19 +5,19 @@ var common = require('../common-tap')
   , mr = require('npm-registry-mock')
   , pkg = __dirname + '/outdated-depth-integer'
 
-var osenv = require("osenv")
-var mkdirp = require("mkdirp")
-var fs = require("fs")
+var osenv = require('osenv')
+var mkdirp = require('mkdirp')
+var fs = require('fs')
 
 var pj = JSON.stringify({
-  "name": "whatever",
-  "description": "yeah idk",
-  "version": "1.2.3",
-  "main": "index.js",
-  "dependencies": {
-    "underscore": "1.3.1"
+  'name': 'whatever',
+  'description': 'yeah idk',
+  'version': '1.2.3',
+  'main': 'index.js',
+  'dependencies': {
+    'underscore': '1.3.1'
   },
-  "repository": "git://github.com/luk-/whatever"
+  'repository': 'git://github.com/luk-/whatever'
 }, null, 2);
 
 function cleanup () {
@@ -28,10 +28,10 @@ function cleanup () {
 function setup () {
   mkdirp.sync(pkg)
   process.chdir(pkg)
-  fs.writeFileSync("package.json", pj)
+  fs.writeFileSync('package.json', pj)
 }
 
-test("setup", function (t) {
+test('setup', function (t) {
   cleanup()
   setup()
   t.end()
@@ -72,7 +72,7 @@ test('outdated depth integer', function (t) {
   })
 })
 
-test("cleanup", function (t) {
+test('cleanup', function (t) {
   cleanup()
   t.end()
 })
