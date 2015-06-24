@@ -1,17 +1,17 @@
 var test = require('tap').test
-  , path = require('path')
-  , rimraf = require('rimraf')
-  , mkdirp = require('mkdirp')
-  , spawn = require('child_process').spawn
-  , npm = require.resolve('../../bin/npm-cli.js')
-  , node = process.execPath
-  , pkg = path.resolve(__dirname, 'sorted-package-json')
-  , tmp = path.join(pkg, 'tmp')
-  , cache = path.join(pkg, 'cache')
-  , fs = require('fs')
-  , common = require('../common-tap.js')
-  , mr = require('npm-registry-mock')
-  , osenv = require('osenv')
+var path = require('path')
+var rimraf = require('rimraf')
+var mkdirp = require('mkdirp')
+var spawn = require('child_process').spawn
+var npm = require.resolve('../../bin/npm-cli.js')
+var node = process.execPath
+var pkg = path.resolve(__dirname, 'sorted-package-json')
+var tmp = path.join(pkg, 'tmp')
+var cache = path.join(pkg, 'cache')
+var fs = require('fs')
+var common = require('../common-tap.js')
+var mr = require('npm-registry-mock')
+var osenv = require('osenv')
 
 
 test('sorting dependencies', function (t) {
@@ -44,7 +44,7 @@ test('sorting dependencies', function (t) {
     child.on('close', function (code) {
       t.equal(code, 0, 'npm install exited with code')
       var result = fs.readFileSync(packageJson).toString()
-        , resultAsJson = JSON.parse(result)
+      var resultAsJson = JSON.parse(result)
 
       s.close()
 

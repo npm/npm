@@ -46,7 +46,9 @@ test('npm login', function (t) {
       })
     })
 
-    var o = '', e = '', remaining = Object.keys(responses).length
+    var o = ''
+    var e = ''
+    var remaining = Object.keys(responses).length
     runner.stdout.on('data', function (chunk) {
       remaining--
       o += chunk
@@ -83,7 +85,9 @@ test('npm login --always-auth', function (t) {
       })
     })
 
-    var o = '', e = '', remaining = Object.keys(responses).length
+    var o = ''
+    var e = ''
+    var remaining = Object.keys(responses).length
     runner.stdout.on('data', function (chunk) {
       remaining--
       o += chunk
@@ -120,7 +124,9 @@ test('npm login --no-always-auth', function (t) {
       })
     })
 
-    var o = '', e = '', remaining = Object.keys(responses).length
+    var o = ''
+    var e = ''
+    var remaining = Object.keys(responses).length
     runner.stdout.on('data', function (chunk) {
       remaining--
       o += chunk

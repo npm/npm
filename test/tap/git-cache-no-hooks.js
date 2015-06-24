@@ -1,14 +1,14 @@
 var test = require('tap').test
-  , fs = require('fs')
-  , path = require('path')
-  , rimraf = require('rimraf')
-  , mkdirp = require('mkdirp')
-  , spawn = require('child_process').spawn
-  , npmCli = require.resolve('../../bin/npm-cli.js')
-  , node = process.execPath
-  , pkg = path.resolve(__dirname, 'git-cache-no-hooks')
-  , tmp = path.join(pkg, 'tmp')
-  , cache = path.join(pkg, 'cache')
+var fs = require('fs')
+var path = require('path')
+var rimraf = require('rimraf')
+var mkdirp = require('mkdirp')
+var spawn = require('child_process').spawn
+var npmCli = require.resolve('../../bin/npm-cli.js')
+var node = process.execPath
+var pkg = path.resolve(__dirname, 'git-cache-no-hooks')
+var tmp = path.join(pkg, 'tmp')
+var cache = path.join(pkg, 'cache')
 
 
 test('setup', function (t) {

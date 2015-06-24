@@ -7,10 +7,10 @@
           && el.id
     })
   var l = 2
-    , toc = document.createElement('ul')
+  var toc = document.createElement('ul')
   toc.innerHTML = els.map(function (el) {
     var i = el.tagName.charAt(1)
-      , out = ''
+    var out = ''
     while (i > l) {
       out += '<ul>'
       l ++

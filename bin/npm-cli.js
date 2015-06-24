@@ -22,15 +22,15 @@
   log.info('it worked if it ends with', 'ok')
 
   var path = require('path')
-    , log = require('npmlog')
-    , npm = require('../lib/npm.js')
-    , npmconf = require('../lib/config/core.js')
-    , errorHandler = require('../lib/utils/error-handler.js')
+  var log = require('npmlog')
+  var npm = require('../lib/npm.js')
+  var npmconf = require('../lib/config/core.js')
+  var errorHandler = require('../lib/utils/error-handler.js')
 
-    , configDefs = npmconf.defs
-    , shorthands = configDefs.shorthands
-    , types = configDefs.types
-    , nopt = require('nopt')
+  var configDefs = npmconf.defs
+  var shorthands = configDefs.shorthands
+  var types = configDefs.types
+  var nopt = require('nopt')
 
   // if npm is called as "npmg" or "npm_g", then
   // run in global mode.
