@@ -18,7 +18,7 @@ var pkg = path.resolve(__dirname, 'cache-shasum-fork')
 var cache = path.join(pkg, 'cache')
 var server
 
-var installed_output = path.join(__dirname,'cache-shasum-fork') +
+var installed_output = path.join(__dirname, 'cache-shasum-fork') +
   '\n`-- underscore@1.5.1 \n\n'
 
 test('setup', function (t) {
