@@ -3,9 +3,9 @@
   "name": "npm",
   "description": "a package manager for JavaScript",
   "keywords": [
-    "package manager",
-    "modules",
     "install",
+    "modules",
+    "package manager",
     "package.json"
   ],
   "preferGlobal": true,
@@ -22,10 +22,10 @@
     "url": "http://github.com/npm/npm/issues"
   },
   "directories": {
+    "bin": "./bin",
     "doc": "./doc",
-    "man": "./man",
     "lib": "./lib",
-    "bin": "./bin"
+    "man": "./man"
   },
   "main": "./lib/npm.js",
   "bin": "./bin/npm-cli.js",
@@ -172,16 +172,17 @@
     "npm-registry-mock": "~1.0.0",
     "require-inject": "~1.2.0",
     "sprintf-js": "~1.0.2",
+    "standard": "~4.3.2",
     "tap": "~1.2.0"
   },
   "scripts": {
-    "test-legacy": "node ./test/run.js",
-    "test": "tap --timeout 240 test/tap/*.js",
-    "tap": "tap --timeout 240 test/tap/*.js",
-    "test-all": "npm run test-legacy && npm test",
-    "preversion": "bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
+    "dumpconf": "env | grep npm | sort | uniq",
     "prepublish": "bash scripts/installable.sh && node bin/npm-cli.js prune --prefix=. --no-global && rimraf test/*/*/node_modules && make -j4 doc",
-    "dumpconf": "env | grep npm | sort | uniq"
+    "preversion": "bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
+    "tap": "tap --timeout 240 test/tap/*.js",
+    "test": "standard && tap --timeout 240 test/tap/*.js",
+    "test-all": "standard && npm run test-legacy && npm test",
+    "test-legacy": "node ./test/run.js"
   },
   "license": "Artistic-2.0"
 }
