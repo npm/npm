@@ -1,4 +1,3 @@
-var path = require('path')
 var assert = require('assert')
 
 process.env.npm_config_prefix = process.cwd()

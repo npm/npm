@@ -1,10 +1,7 @@
-var fs = require('fs')
-var path = require('path')
 var test = require('tap').test
 
 var manifest = require('../../package.json')
 var deps = Object.keys(manifest.dependencies)
-var dev = Object.keys(manifest.devDependencies)
 var bundled = manifest.bundleDependencies
 
 test('all deps are bundled deps or dev deps', function (t) {

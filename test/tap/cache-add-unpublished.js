@@ -1,6 +1,5 @@
 var common = require('../common-tap.js')
 var test = require('tap').test
-var mr = require('npm-registry-mock')
 
 test('cache add', function (t) {
   setup(function (er, s) {
