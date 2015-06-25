@@ -24,7 +24,7 @@ test('npm version <semver> in a git repo without the git binary', function (t) {
     })
 
     version(['patch'], function (err) {
-      if (! t.error(err)) return t.end()
+      if (!t.error(err)) return t.end()
       var p = path.resolve(pkg, 'package')
       var testPkg = require(p)
       t.equal('0.0.1', testPkg.version, '\'' + testPkg.version + '\' === \'0.0.1\'')
