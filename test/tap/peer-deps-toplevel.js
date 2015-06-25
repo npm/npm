@@ -53,7 +53,7 @@ var expected = {
         version: '*',
         peerMissing: true,
         dependencies: {}
-      },
+      }
     }
   }
 }
