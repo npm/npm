@@ -70,7 +70,7 @@ test('installing dependencies that have conflicting peerDependencies', function 
     }
   }
   mr({port: common.port, mocks: customMocks}, function (err, s) { // create mock registry.
-    t.ifError(err, 'mock registry started'_)
+    t.ifError(err, 'mock registry started')
     npm.load({
       cache: pkg + "/cache",
       registry: common.registry
