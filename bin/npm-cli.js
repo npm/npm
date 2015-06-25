@@ -23,7 +23,6 @@
   log.info('it worked if it ends with', 'ok')
 
   var path = require('path')
-  var log = require('npmlog')
   var npm = require('../lib/npm.js')
   var npmconf = require('../lib/config/core.js')
   var errorHandler = require('../lib/utils/error-handler.js')
