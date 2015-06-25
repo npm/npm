@@ -26,4 +26,4 @@
   }).join('\n')
   toc.id = 'toc'
   document.body.appendChild(toc)
-})();
+})()

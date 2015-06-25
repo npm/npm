@@ -18,7 +18,7 @@ var pj = JSON.stringify({
     'underscore': '1.3.1'
   },
   'repository': 'git://github.com/luk-/whatever'
-}, null, 2);
+}, null, 2)
 
 function cleanup () {
   process.chdir(osenv.tmpdir())
