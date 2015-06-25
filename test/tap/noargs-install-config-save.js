@@ -58,7 +58,7 @@ test('does not update the package.json with empty arguments', function (t) {
     child.on('close', function () {
       var text = JSON.stringify(fs.readFileSync(pkg + '/package.json', 'utf8'))
       s.close()
-      t.ok(text.indexOf('"dependencies') === -1)
+      t.equal(text.indexOf('"dependencies'), -1, 'dependencies do not exist in file')
     })
   })
 })
@@ -71,8 +71,8 @@ test('updates the package.json (adds dependencies) with an argument', function (
     var child = createChild([npm, 'install', 'underscore'])
     child.on('close', function () {
       s.close()
-      var text = JSON.stringify(fs.readFileSync(pkg + '/package.json', 'utf8'))
-      t.ok(text.indexOf('"dependencies') !== -1)
+      var text = JSON.stringify(fs.readFileSync(pkg + "/package.json", "utf8"))
+      t.notEqual(text.indexOf('"dependencies'), -1, 'dependencies exist in file')
     })
   })
 })
