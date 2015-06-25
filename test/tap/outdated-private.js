@@ -54,7 +54,7 @@ test('setup', function (t) {
 test('outdated ignores private modules', function (t) {
   t.plan(3)
   process.chdir(pkg)
-  mr({ port: common.port }, function (err, s) {
+  mr({ port: common.port }, function (er, s) {
     npm.load(
       {
         loglevel: 'silent',
