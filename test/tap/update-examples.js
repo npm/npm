@@ -141,7 +141,7 @@ test('setup', function (t) {
   process.chdir(osenv.tmpdir())
   mkdirp.sync(PKG_DIR)
   process.chdir(PKG_DIR)
-  t.pass('made '+PKG_DIR)
+  t.pass('made ' + PKG_DIR)
 
   resetPackage({})
 

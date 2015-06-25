@@ -36,7 +36,7 @@ test('npm version <semver> without git tag', function (t) {
           if (err) return t.fail('Error perform version patch')
           var p = path.resolve(pkg, 'package')
           var testPkg = require(p)
-          if (testPkg.version !== '0.0.1') t.fail(testPkg.version+' !== \'0.0.1\'')
+          if (testPkg.version !== '0.0.1') t.fail(testPkg.version + ' !== \'0.0.1\'')
           t.equal('0.0.1', testPkg.version)
           tagExists('v0.0.1', function (err, exists) {
             t.ifError(err, 'tag found to exist')

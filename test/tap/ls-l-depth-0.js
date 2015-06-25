@@ -62,7 +62,9 @@ test('#6311: npm ll --depth=0 duplicates listing', function (t) {
       t.notOk(stderr, 'npm install ran silently')
       t.equal(
         stdout.trim(),
-        resolve(__dirname,'ls-l-depth-0')+'\n└─┬ glock@1.8.7 \n  └── underscore@1.5.1',
+        resolve(__dirname,'ls-l-depth-0') +
+          '\n└─┬ glock@1.8.7 ' +
+          '\n  └── underscore@1.5.1',
         'got expected install output'
       )
 

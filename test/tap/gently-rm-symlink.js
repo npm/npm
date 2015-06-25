@@ -93,7 +93,7 @@ function verify (t, stdout) {
   var trgPath = resolve(pkgPath, 'index.js')
   t.deepEqual(
     stdout.split('\n').filter(removeBlank),
-    [ binPath+' -> '+trgPath,
+    [ binPath + ' -> ' + trgPath,
       resolve(lnk, 'lib'),
       '└── @test/linked@1.0.0 '
     ],

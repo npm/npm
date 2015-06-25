@@ -35,7 +35,7 @@ test('locking file puts lock in correct place', function (t) {
     var c = n.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')
     var p = path.resolve(nm, n)
     var h = crypto.createHash('sha1').update(p).digest('hex')
-    var l = c.substr(0, 24)+'-'+h.substr(0, 16)+'.lock'
+    var l = c.substr(0, 24) + '-' + h.substr(0, 16) + '.lock'
     var v = path.join(cache, '_locks',  l)
 
     lock(nm, n, function (er) {
@@ -65,7 +65,7 @@ test('unlocking out of order errors out', function (t) {
     var c = n.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '')
     var p = path.resolve(nm, n)
     var h = crypto.createHash('sha1').update(p).digest('hex')
-    var l = c.substr(0, 24)+'-'+h.substr(0, 16)+'.lock'
+    var l = c.substr(0, 24) + '-' + h.substr(0, 16) + '.lock'
     var v = path.join(cache, '_locks',  l)
 
     fs.exists(v, function (found) {
