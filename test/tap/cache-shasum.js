@@ -45,8 +45,7 @@ test('compare', function (t) {
   var r = require('./cache-shasum/localhost_1337/request/.cache.json')
   var rshasum = r.versions['2.27.0'].dist.shasum
   sha.get(p, function (er, pshasum) {
-    if (er)
-      throw er
+    if (er) throw er
     t.equal(pshasum, rshasum)
     t.end()
   })

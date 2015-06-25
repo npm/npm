@@ -32,8 +32,8 @@ test('calling set/get on config pre-load should throw', function (t) {
   }
 
   npm.load({ userconfig: npmrc }, function (er) {
-    if (er)
-      throw er
+    if (er) throw er
+
     t.equal(npm.config.get('foo'), 'bar')
     npm.config.set('foo', 'baz')
     t.equal(npm.config.get('foo'), 'baz')

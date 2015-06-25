@@ -58,8 +58,8 @@ var expectFile = [
 
 test('saving configs', function (t) {
   npmconf.load(function (er, conf) {
-    if (er)
-      throw er
+    if (er) throw er
+
     conf.set('sign-git-tag', false, 'user')
     conf.del('nodedir')
     conf.del('tmp')
@@ -67,8 +67,8 @@ test('saving configs', function (t) {
     t.same(ini.parse(foundConf), ini.parse(expectConf))
     fs.unlinkSync(common.userconfig)
     conf.save('user', function (er) {
-      if (er)
-        throw er
+      if (er) throw er
+
       var uc = fs.readFileSync(conf.get('userconfig'), 'utf8')
       t.same(ini.parse(uc), ini.parse(expectFile))
       t.end()
@@ -78,8 +78,7 @@ test('saving configs', function (t) {
 
 test('setting prefix', function (t) {
   npmconf.load(function (er, conf) {
-    if (er)
-      throw er
+    if (er) throw er
 
     conf.prefix = 'newvalue'
     t.same(conf.prefix, 'newvalue')

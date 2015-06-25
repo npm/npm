@@ -45,9 +45,11 @@ test('test', function (t) {
     'npm_config_prefix': pkg,
     'npm_config_global': 'false'
   }
+
   for (var i in process.env) {
-    if (!/^npm_config_/.test(i))
+    if (!/^npm_config_/.test(i)) {
       env[i] = process.env[i]
+    }
   }
 
   common.npm([

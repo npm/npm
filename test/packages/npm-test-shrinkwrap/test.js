@@ -26,10 +26,12 @@ require('child_process').execFile(process.execPath, [npm, 'ls', '--json'], {
 
 function rmFrom (obj) {
   for (var i in obj) {
-    if (i === 'from')
+    if (i === 'from') {
       delete obj[i]
-    else if (i === 'dependencies')
-      for (var j in obj[i])
+    } else if (i === 'dependencies') {
+      for (var j in obj[i]) {
         rmFrom(obj[i][j])
+      }
+    }
   }
 }

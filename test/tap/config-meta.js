@@ -41,10 +41,11 @@ test('get files', function (t) {
       } catch (er) {
         return
       }
-      if (s.isDirectory())
+      if (s.isDirectory()) {
         walk(f)
-      else if (f.match(/\.js$/))
+      } else if (f.match(/\.js$/)) {
         FILES.push(f)
+      }
     })
   }
 })
@@ -60,11 +61,12 @@ test('get lines', function (t) {
         var literal = m.match(/^[''].+?['']/)
         if (literal) {
           m = literal[0].slice(1, -1)
-          if (!m.match(/^\_/) && m !== 'argv')
+          if (!m.match(/^\_/) && m !== 'argv') {
             CONFS[m] = {
               file: f,
               line: i
             }
+          }
         } else if (exceptions.indexOf(f) === -1) {
           t.fail('non-string-literal config used in ' + f + ':' + i)
         }
@@ -82,8 +84,9 @@ test('get docs', function (t) {
   i++
   // now gather up all the ^###\s lines until the next ^##\s
   for (; i < d.length && !d[i].match(/^## /); i++) {
-    if (d[i].match(/^### /))
+    if (d[i].match(/^### /)) {
       DOC[ d[i].replace(/^### /, '').trim() ] = true
+    }
   }
   t.pass('read the docs')
   t.end()
