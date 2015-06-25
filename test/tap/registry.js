@@ -16,13 +16,11 @@ if (v[0] === 0 && v[1] < 10) {
     'WARNING: need a recent Node for npm-registry-couchapp tests to run, have',
     process.versions.node
   )
-}
-else {
+} else {
   which('couchdb', function (er) {
     if (er) {
       console.error('WARNING: need couch to run test: ' + er.message)
-    }
-    else {
+    } else {
       runTests()
     }
   })

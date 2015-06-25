@@ -56,11 +56,11 @@ test('authed npm install with shrinkwrapped scoped package', function (t) {
       t.notOk(stderr, 'no output on stderr')
       try {
         var results = JSON.parse(stdout)
-      }
-      catch (ex) {
+      } catch (ex) {
         console.error('#', ex)
         t.ifError(ex, 'stdout was valid JSON')
       }
+
       if (results) {
         var installedversion = {
           'version': '1.3.1',
