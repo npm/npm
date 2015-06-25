@@ -20,7 +20,7 @@
       l --
     }
     out += '<li><a href=\'#' + el.id + '\'>' +
-      ( el.innerText || el.text || el.innerHTML) +
+      (el.innerText || el.text || el.innerHTML) +
       '</a>'
     return out
   }).join('\n')
