@@ -2,9 +2,9 @@
   var wrapper = document.getElementById('wrapper')
   var els = Array.prototype.slice.call(wrapper.getElementsByTagName('*'), 0)
     .filter(function (el) {
-      return el.parentNode === wrapper
-          && el.tagName.match(/H[1-6]/)
-          && el.id
+      return el.parentNode === wrapper &&
+        el.tagName.match(/H[1-6]/) &&
+        el.id
     })
   var l = 2
   var toc = document.createElement('ul')
@@ -20,8 +20,8 @@
       l --
     }
     out += '<li><a href=\'#' + el.id + '\'>' +
-      ( el.innerText || el.text || el.innerHTML)
-      + '</a>'
+      ( el.innerText || el.text || el.innerHTML) +
+      '</a>'
     return out
   }).join('\n')
   toc.id = 'toc'
