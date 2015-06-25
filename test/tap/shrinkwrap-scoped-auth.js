@@ -112,7 +112,7 @@ function setup () {
   )
 }
 
-function cleanup() {
+function cleanup () {
   process.chdir(osenv.tmpdir())
   rimraf.sync(pkg)
 }

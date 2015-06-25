@@ -63,7 +63,7 @@ test('test', function (t) {
   ], {
     cwd: pkg,
     env: env
-  }, function(err, code, stdout, stderr) {
+  }, function (err, code, stdout, stderr) {
     t.ifErr(err, 'npm pack finished without error')
     t.equal(code, 0, 'npm pack exited ok')
     t.notOk(stderr, 'got stderr data: ' + JSON.stringify('' + stderr))

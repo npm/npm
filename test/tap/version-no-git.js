@@ -12,18 +12,18 @@ var pkg = path.resolve(__dirname, 'version-no-git')
 var cache = path.resolve(pkg, 'cache')
 var gitDir = path.resolve(pkg, '.git')
 
-test('npm version <semver> in a git repo without the git binary', function(t) {
+test('npm version <semver> in a git repo without the git binary', function (t) {
   setup()
-  npm.load({cache: cache, registry: common.registry}, function() {
+  npm.load({cache: cache, registry: common.registry}, function () {
     var version = requireInject('../../lib/version', {
-      which: function(cmd, cb) {
-        process.nextTick(function() {
+      which: function (cmd, cb) {
+        process.nextTick(function () {
           cb(new Error('ENOGIT!'))
         })
       }
     })
 
-    version(['patch'], function(err) {
+    version(['patch'], function (err) {
       if (! t.error(err)) return t.end()
       var p = path.resolve(pkg, 'package')
       var testPkg = require(p)
@@ -33,14 +33,14 @@ test('npm version <semver> in a git repo without the git binary', function(t) {
   })
 })
 
-test('cleanup', function(t) {
+test('cleanup', function (t) {
   process.chdir(osenv.tmpdir())
 
   rimraf.sync(pkg)
   t.end()
 })
 
-function setup() {
+function setup () {
   mkdirp.sync(pkg)
   mkdirp.sync(cache)
   mkdirp.sync(gitDir)

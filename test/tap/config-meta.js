@@ -31,7 +31,7 @@ test('get files', function (t) {
   t.pass('got files')
   t.end()
 
-  function walk(lib) {
+  function walk (lib) {
     var files = fs.readdirSync(lib).map(function (f) {
       return path.resolve(lib, f)
     })

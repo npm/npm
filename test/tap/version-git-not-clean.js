@@ -18,7 +18,7 @@ test('npm version <semver> with working directory not clean', function (t) {
     which('git', function (err, git) {
       t.ifError(err, 'git found')
 
-      function gitInit(_cb) {
+      function gitInit (_cb) {
         var child = spawn(git, ['init'])
         var out = ''
         child.stdout.on('data', function (d) {
@@ -29,9 +29,9 @@ test('npm version <semver> with working directory not clean', function (t) {
         })
       }
 
-      function addPackageJSON(_cb) {
+      function addPackageJSON (_cb) {
         var data = JSON.stringify({ name: 'blah', version: '0.1.2' })
-        fs.writeFile('package.json', data, function() {
+        fs.writeFile('package.json', data, function () {
           var child = spawn(git, ['add', 'package.json'])
           child.on('exit', function () {
             var child2 = spawn(git, ['commit', 'package.json', '-m', 'init'])
@@ -46,10 +46,10 @@ test('npm version <semver> with working directory not clean', function (t) {
         })
       }
 
-      gitInit(function() {
-        addPackageJSON(function() {
+      gitInit(function () {
+        addPackageJSON(function () {
           var data = JSON.stringify({ name: 'blah', version: '0.1.3' })
-          fs.writeFile('package.json', data, function() {
+          fs.writeFile('package.json', data, function () {
             npm.commands.version(['patch'], function (err) {
               if (!err) {
                 t.fail('should fail on non-clean working directory')
@@ -75,7 +75,7 @@ test('cleanup', function (t) {
   t.end()
 })
 
-function setup() {
+function setup () {
   mkdirp.sync(pkg)
   mkdirp.sync(cache)
   process.chdir(pkg)

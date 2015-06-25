@@ -43,7 +43,7 @@ test('npm whoami with bearer auth', { timeout: 2 * 1000 }, function (t) {
   fs.writeFileSync(FIXTURE_PATH, s, 'ascii')
   fs.chmodSync(FIXTURE_PATH, '0444')
 
-  function verify(req, res) {
+  function verify (req, res) {
     t.equal(req.method, 'GET')
     t.equal(req.url, '/-/whoami')
 

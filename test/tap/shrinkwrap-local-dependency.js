@@ -38,7 +38,7 @@ var dependency = {
 }
 
 
-test('shrinkwrap uses resolved with file: on local deps', function(t) {
+test('shrinkwrap uses resolved with file: on local deps', function (t) {
   setup()
 
   common.npm(
@@ -90,12 +90,12 @@ test("'npm install' should install local packages from shrinkwrap", function (t)
   )
 })
 
-test('cleanup', function(t) {
+test('cleanup', function (t) {
   cleanup()
   t.end()
 })
 
-function setup() {
+function setup () {
   cleanup()
   mkdirp.sync(PKG_DIR)
   mkdirp.sync(CACHE_DIR)
@@ -111,11 +111,11 @@ function setup() {
   process.chdir(PKG_DIR)
 }
 
-function cleanNodeModules() {
+function cleanNodeModules () {
   rimraf.sync(path.resolve(PKG_DIR, 'node_modules'))
 }
 
-function cleanup() {
+function cleanup () {
   process.chdir(osenv.tmpdir())
   cleanNodeModules()
   rimraf.sync(PKG_DIR)
