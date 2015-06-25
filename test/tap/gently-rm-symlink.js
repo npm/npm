@@ -11,9 +11,7 @@ var dep = resolve(__dirname, 'test-linked')
 var glb = resolve(__dirname, 'test-global')
 var lnk = resolve(__dirname, 'test-global-link')
 
-var EXEC_OPTS = {
-  cwd : pkg
-}
+var EXEC_OPTS = { cwd: pkg }
 
 
 var index = "module.exports = function () { console.log('whoop whoop') }"

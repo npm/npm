@@ -21,9 +21,9 @@ if (!global.setImmediate) {
 test('setup', function (t) {
   mkdirp(path.join(pkg, 'cache'), function () {
     var configuration = {
-      cache    : path.join(pkg, 'cache'),
-      loglevel : 'silent',
-      registry : common.registry
+      cache: path.join(pkg, 'cache'),
+      loglevel: 'silent',
+      registry: common.registry
     }
 
     npm.load(configuration, next)

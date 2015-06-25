@@ -12,8 +12,8 @@ var tmp      = join(pkg, 'tmp')
 var cache    = join(pkg, 'cache')
 
 var data = {
-  name    : '@scope/generic-package',
-  version : '90000.100001.5'
+  name: '@scope/generic-package',
+  version: '90000.100001.5'
 }
 
 test('setup', function (t) {
@@ -47,10 +47,10 @@ test('setup', function (t) {
 
 test('test', function (t) {
   var env = {
-    'npm_config_cache'  : cache,
-    'npm_config_tmp'    : tmp,
-    'npm_config_prefix' : pkg,
-    'npm_config_global' : 'false'
+    'npm_config_cache': cache,
+    'npm_config_tmp': tmp,
+    'npm_config_prefix': pkg,
+    'npm_config_global': 'false'
   }
 
   for (var i in process.env) {

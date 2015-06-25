@@ -52,7 +52,7 @@ test('does not update the package.json with empty arguments', function (t) {
   writePackageJson()
   t.plan(1)
 
-  mr({port : common.port}, function (er, s) {
+  mr({ port: common.port }, function (er, s) {
     var child = createChild([npm, 'install'])
     child.on('close', function () {
       var text = JSON.stringify(fs.readFileSync(pkg + '/package.json', 'utf8'))
@@ -66,7 +66,7 @@ test('updates the package.json (adds dependencies) with an argument', function (
   writePackageJson()
   t.plan(1)
 
-  mr({port : common.port}, function (er, s) {
+  mr({ port: common.port }, function (er, s) {
     var child = createChild([npm, 'install', 'underscore'])
     child.on('close', function () {
       s.close()

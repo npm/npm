@@ -19,21 +19,19 @@ var tarball = resolve(__dirname, '../fixtures/scoped-underscore-1.3.1.tgz')
 
 var server
 
-var EXEC_OPTS = {
-  cwd : pkg
-}
+var EXEC_OPTS = { cwd: pkg }
 
 function mocks (server) {
   var auth = 'Bearer 0xabad1dea'
-  server.get(tarballPath, { authorization : auth }).replyWithFile(200, tarball)
+  server.get(tarballPath, { authorization: auth }).replyWithFile(200, tarball)
   server.get(tarballPath).reply(401, {
-    error  : 'unauthorized',
-    reason : 'You are not authorized to access this db.'
+    error: 'unauthorized',
+    reason: 'You are not authorized to access this db.'
   })
 }
 
 test('setup', function (t) {
-  mr({ port : common.port, plugin : mocks }, function (err, s) {
+  mr({ port: common.port, plugin: mocks }, function (err, s) {
     server = s
     t.ok(s, 'set up mock registry')
     setup()
@@ -87,18 +85,18 @@ var contents = '@scoped:registry=' + common.registry + '\n' +
                toNerfDart(common.registry) + ':_authToken=0xabad1dea\n'
 
 var json = {
-  name : 'test-package-install',
-  version : '1.0.0'
+  name: 'test-package-install',
+  version: '1.0.0'
 }
 
 var shrinkwrap = {
-  name : 'test-package-install',
-  version : '1.0.0',
-  dependencies : {
-    '@scoped/underscore' : {
-      resolved : tarballURL,
-      from     : '>=1.3.1 <2',
-      version  : '1.3.1'
+  name: 'test-package-install',
+  version: '1.0.0',
+  dependencies: {
+    '@scoped/underscore': {
+      resolved: tarballURL,
+      from: '>=1.3.1 <2',
+      version: '1.3.1'
     }
   }
 }

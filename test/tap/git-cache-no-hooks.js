@@ -33,14 +33,14 @@ test('git-cache-no-hooks: install a git dependency', function (t) {
   var child = spawn(node, command, {
     cwd: pkg,
     env: {
-      'npm_config_cache'  : cache,
-      'npm_config_tmp'    : tmp,
-      'npm_config_prefix' : pkg,
-      'npm_config_global' : 'false',
-      'npm_config_umask'  : '00',
-      HOME                : process.env.HOME,
-      Path                : process.env.PATH,
-      PATH                : process.env.PATH
+      'npm_config_cache': cache,
+      'npm_config_tmp': tmp,
+      'npm_config_prefix': pkg,
+      'npm_config_global': 'false',
+      'npm_config_umask': '00',
+      HOME: process.env.HOME,
+      Path: process.env.PATH,
+      PATH: process.env.PATH
     },
     stdio: 'inherit'
   })

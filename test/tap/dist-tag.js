@@ -11,45 +11,45 @@ var pkg = path.resolve(__dirname, 'dist-tag')
 var server
 
 var scoped = {
-  name : '@scoped/pkg',
-  version : '1.1.1'
+  name: '@scoped/pkg',
+  version: '1.1.1'
 }
 
 function mocks (server) {
   // ls current package
   server.get('/-/package/@scoped%2fpkg/dist-tags')
-    .reply(200, { latest : '1.0.0', a : '0.0.1', b : '0.5.0' })
+    .reply(200, { latest: '1.0.0', a: '0.0.1', b: '0.5.0' })
 
   // ls named package
   server.get('/-/package/@scoped%2fanother/dist-tags')
-    .reply(200, { latest : '2.0.0', a : '0.0.2', b : '0.6.0' })
+    .reply(200, { latest: '2.0.0', a: '0.0.2', b: '0.6.0' })
 
   // add c
   server.get('/-/package/@scoped%2fanother/dist-tags')
-    .reply(200, { latest : '2.0.0', a : '0.0.2', b : '0.6.0' })
+    .reply(200, { latest: '2.0.0', a: '0.0.2', b: '0.6.0' })
   server.put('/-/package/@scoped%2fanother/dist-tags/c', '\"7.7.7\"')
-    .reply(200, { latest : '7.7.7', a : '0.0.2', b : '0.6.0', c : '7.7.7' })
+    .reply(200, { latest: '7.7.7', a: '0.0.2', b: '0.6.0', c: '7.7.7' })
 
   // set same version
   server.get('/-/package/@scoped%2fanother/dist-tags')
-    .reply(200, { latest : '2.0.0', b : '0.6.0' })
+    .reply(200, { latest: '2.0.0', b: '0.6.0' })
 
   // rm
   server.get('/-/package/@scoped%2fanother/dist-tags')
-    .reply(200, { latest : '2.0.0', a : '0.0.2', b : '0.6.0', c : '7.7.7' })
+    .reply(200, { latest: '2.0.0', a: '0.0.2', b: '0.6.0', c: '7.7.7' })
   server.delete('/-/package/@scoped%2fanother/dist-tags/c')
-    .reply(200, { c : '7.7.7' })
+    .reply(200, { c: '7.7.7' })
 
   // rm
   server.get('/-/package/@scoped%2fanother/dist-tags')
-    .reply(200, { latest : '4.0.0' })
+    .reply(200, { latest: '4.0.0' })
 }
 
 test('setup', function (t) {
   mkdirp(pkg, function (er) {
     t.ifError(er, pkg + ' made successfully')
 
-    mr({port : common.port, plugin : mocks}, function (er, s) {
+    mr({ port: common.port, plugin: mocks }, function (er, s) {
       server = s
 
       fs.writeFile(
@@ -71,7 +71,7 @@ test('npm dist-tags ls in current package', function (t) {
       '--registry', common.registry,
       '--loglevel', 'silent'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm access')
       t.notOk(code, 'exited OK')
@@ -91,7 +91,7 @@ test('npm dist-tags ls on named package', function (t) {
       '--registry', common.registry,
       '--loglevel', 'silent'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm access')
       t.notOk(code, 'exited OK')
@@ -111,7 +111,7 @@ test('npm dist-tags add @scoped/another@7.7.7 c', function (t) {
       '--registry', common.registry,
       '--loglevel', 'silent'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm access')
       t.notOk(code, 'exited OK')
@@ -131,7 +131,7 @@ test('npm dist-tags set same version', function (t) {
       '--registry', common.registry,
       '--loglevel', 'warn'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm access')
       t.notOk(code, 'exited OK')
@@ -155,7 +155,7 @@ test('npm dist-tags rm @scoped/another c', function (t) {
       '--registry', common.registry,
       '--loglevel', 'silent'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm access')
       t.notOk(code, 'exited OK')
@@ -175,7 +175,7 @@ test('npm dist-tags rm @scoped/another nonexistent', function (t) {
       '--registry', common.registry,
       '--loglevel', 'silent'
     ],
-    { cwd : pkg },
+    { cwd: pkg },
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm dist-tag')
       t.ok(code, 'expecting nonzero exit code')

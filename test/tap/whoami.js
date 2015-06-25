@@ -37,7 +37,7 @@ test('npm whoami with basic auth', function (t) {
   )
 })
 
-test('npm whoami with bearer auth', {timeout : 2 * 1000}, function (t) {
+test('npm whoami with bearer auth', { timeout: 2 * 1000 }, function (t) {
   var s = '//localhost:' + common.port +
           '/:_authToken = wombat-developers-union\n'
   fs.writeFileSync(FIXTURE_PATH, s, 'ascii')
@@ -49,7 +49,7 @@ test('npm whoami with bearer auth', {timeout : 2 * 1000}, function (t) {
 
     res.setHeader('content-type', 'application/json')
     res.writeHeader(200)
-    res.end(JSON.stringify({username : 'wombat'}), 'utf8')
+    res.end(JSON.stringify({ username: 'wombat' }), 'utf8')
   }
 
   var server = createServer(verify)

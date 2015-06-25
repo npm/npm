@@ -40,10 +40,10 @@ test('setup', function (t) {
 
 test('test', function (t) {
   var env = {
-    'npm_config_cache'  : cache,
-    'npm_config_tmp'    : tmp,
-    'npm_config_prefix' : pkg,
-    'npm_config_global' : 'false'
+    'npm_config_cache': cache,
+    'npm_config_tmp': tmp,
+    'npm_config_prefix': pkg,
+    'npm_config_global': 'false'
   }
   for (var i in process.env) {
     if (!/^npm_config_/.test(i))

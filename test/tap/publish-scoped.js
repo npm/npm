@@ -39,12 +39,12 @@ test('npm publish should honor scoping', function (t) {
               .reply(201, verify)
 
   var configuration = {
-    cache    : path.join(pkg, 'cache'),
-    loglevel : 'silent',
-    registry : 'http://nonexistent.lvh.me',
-    '//localhost:1337/:username' : 'username',
-    '//localhost:1337/:_password' : new Buffer('password').toString('base64'),
-    '//localhost:1337/:email' : 'ogd@aoaioxxysz.net'
+    cache: path.join(pkg, 'cache'),
+    loglevel: 'silent',
+    registry: 'http://nonexistent.lvh.me',
+    '//localhost:1337/:username': 'username',
+    '//localhost:1337/:_password': new Buffer('password').toString('base64'),
+    '//localhost:1337/:email': 'ogd@aoaioxxysz.net'
   }
 
   npm.load(configuration, onload)

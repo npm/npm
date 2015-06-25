@@ -8,18 +8,18 @@ var server
 var EXEC_OPTS = {}
 
 var jashkenas = {
-  name  : 'jashkenas',
-  email : 'jashkenas@gmail.com'
+  name: 'jashkenas',
+  email: 'jashkenas@gmail.com'
 }
 
 var othiym23 = {
-  name  : 'othiym23',
-  email : 'forrest@npmjs.com'
+  name: 'othiym23',
+  email: 'forrest@npmjs.com'
 }
 
 var bcoe = {
-  name  : 'bcoe',
-  email : 'ben@npmjs.com'
+  name: 'bcoe',
+  email: 'ben@npmjs.com'
 }
 
 function shrt (user) {
@@ -32,34 +32,34 @@ function mocks (server) {
 
   // test 1
   server.get('/underscore')
-    .reply(200, {_id:'underscore',_rev:1,maintainers:[jashkenas]})
+    .reply(200, { _id: 'underscore', _rev: 1, maintainers: [jashkenas] })
   server.put(
     '/underscore/-rev/1',
-    {_id:'underscore',_rev:1,maintainers:[jashkenas,othiym23]},
+    { _id: 'underscore', _rev: 1, maintainers: [jashkenas, othiym23] },
     {}
-  ).reply(200, {_id:'underscore',_rev:2,maintainers:[jashkenas,othiym23]})
+  ).reply(200, { _id: 'underscore', _rev: 2, maintainers: [jashkenas, othiym23] })
 
   // test 2
   server.get('/@xxx%2fscoped')
-    .reply(200, {_id:'@xxx/scoped',_rev:1,maintainers:[bcoe]})
+    .reply(200, { _id: '@xxx/scoped', _rev: 1, maintainers: [bcoe] })
   server.put(
     '/@xxx%2fscoped/-rev/1',
-    {_id:'@xxx/scoped',_rev:1,maintainers:[bcoe,othiym23]},
+    { _id: '@xxx/scoped', _rev: 1, maintainers: [bcoe, othiym23] },
     {}
-  ).reply(200, {_id:'@xxx/scoped',_rev:2,maintainers:[bcoe,othiym23]})
+  ).reply(200, { _id: '@xxx/scoped', _rev: 2, maintainers: [bcoe, othiym23] })
 
   // test 3
   server.get('/underscore')
-    .reply(200, {_id:'underscore',_rev:2,maintainers:[jashkenas,othiym23]})
+    .reply(200, { _id: 'underscore', _rev: 2, maintainers: [jashkenas, othiym23] })
 
   // test 4
   server.get('/underscore')
-    .reply(200, {_id:'underscore',_rev:2,maintainers:[jashkenas,othiym23]})
+    .reply(200, { _id: 'underscore', _rev: 2, maintainers: [jashkenas, othiym23] })
   server.put(
     '/underscore/-rev/2',
-    {_id:'underscore',_rev:2,maintainers:[jashkenas]},
+    { _id: 'underscore', _rev: 2, maintainers: [jashkenas] },
     {}
-  ).reply(200, {_id:'underscore',_rev:3,maintainers:[jashkenas]})
+  ).reply(200, { _id: 'underscore', _rev: 3, maintainers: [jashkenas] })
 }
 
 test('setup', function (t) {
@@ -73,7 +73,7 @@ test('setup', function (t) {
       t.ifError(err,  'npm cache clean ran without error')
       t.notOk(code,   'npm cache clean exited cleanly')
 
-      mr({ port : common.port, plugin : mocks }, function (err, s) {
+      mr({ port: common.port, plugin: mocks }, function (err, s) {
         server = s
         t.end()
       })

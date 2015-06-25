@@ -23,9 +23,7 @@ var expected = [
   '.npmignore'
 ].sort()
 
-var EXEC_OPTS = {
-  cwd : pkg
-}
+var EXEC_OPTS = { cwd: pkg }
 
 var gitignore = 'node_modules/\n'
 var npmignore = 't.js\n'
@@ -33,10 +31,10 @@ var npmignore = 't.js\n'
 var a = "console.log('hi');"
 var t = "require('tap').test(function (t) { t.pass('I am a test!'); t.end(); });"
 var fixture = {
-  'name' : 'gitch',
-  'version' : '1.0.0',
-  'private' : true,
-  'main' : 'a.js'
+  'name': 'gitch',
+  'version': '1.0.0',
+  'private': true,
+  'main': 'a.js'
 }
 
 

@@ -50,7 +50,7 @@ test('outdated depth integer', function (t) {
     null
   ]]
 
-  mr({port : common.port}, function (er, s) {
+  mr({ port: common.port }, function (er, s) {
     npm.load({
       cache: pkg + '/cache',
       loglevel: 'silent',

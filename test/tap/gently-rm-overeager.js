@@ -9,9 +9,7 @@ var common = require('../common-tap.js')
 var pkg = resolve(__dirname, 'gently-rm-overeager')
 var dep = resolve(__dirname, 'test-whoops')
 
-var EXEC_OPTS = {
-  cwd : pkg
-}
+var EXEC_OPTS = { cwd: pkg }
 
 var fixture = {
   name: '@test/whoops',

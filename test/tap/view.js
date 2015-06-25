@@ -84,7 +84,7 @@ test('npm view . with no package.json', function(t) {
 
 test('npm view . with no published package', function (t) {
   process.chdir(t3dir)
-  mr({port : common.port, plugin : plugin}, function (er, s) {
+  mr({ port: common.port, plugin: plugin}, function (er, s) {
     common.npm([
       'view',
       '.',
@@ -101,7 +101,7 @@ test('npm view . with no published package', function (t) {
 
 test('npm view .', function (t) {
   process.chdir(t2dir)
-  mr({port : common.port, plugin : plugin}, function (er, s) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
     common.npm([
       'view',
       '.',
@@ -119,7 +119,7 @@ test('npm view .', function (t) {
 
 test('npm view . select fields', function (t) {
   process.chdir(t2dir)
-  mr({port : common.port, plugin : plugin}, function (er, s) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
     common.npm([
       'view',
       '.',
@@ -137,7 +137,7 @@ test('npm view . select fields', function (t) {
 
 test('npm view .@<version>', function (t) {
   process.chdir(t2dir)
-  mr({port : common.port, plugin : plugin}, function (er, s) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
     common.npm([
       'view',
       '.@0.0.0',
@@ -155,7 +155,7 @@ test('npm view .@<version>', function (t) {
 
 test('npm view .@<version> --json', function (t) {
   process.chdir(t2dir)
-  mr({port : common.port, plugin : plugin}, function (er, s) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
     common.npm([
       'view',
       '.@0.0.0',
@@ -173,7 +173,7 @@ test('npm view .@<version> --json', function (t) {
 })
 
 test('npm view <package name>', function (t) {
-  mr({port : common.port, plugin : plugin}, function (er, s) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
     common.npm([
       'view',
       'underscore',
@@ -190,7 +190,7 @@ test('npm view <package name>', function (t) {
 })
 
 test('npm view <package name> --global', function(t) {
-  mr({port : common.port, plugin : plugin}, function (er, s) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
     common.npm([
       'view',
       'underscore',
@@ -209,7 +209,7 @@ test('npm view <package name> --global', function(t) {
 
 test('npm view <package name> --json', function(t) {
   t.plan(3)
-  mr({port : common.port, plugin : plugin}, function (er, s) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
     common.npm([
       'view',
       'underscore',
@@ -233,7 +233,7 @@ test('npm view <package name> --json', function(t) {
 })
 
 test('npm view <package name> <field>', function (t) {
-  mr({port : common.port, plugin : plugin}, function (er, s) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
     common.npm([
       'view',
       'underscore',
@@ -255,7 +255,7 @@ test('npm view with invalid package name', function (t) {
   var obj = {}
   obj['/' + invalidName] = [404, {'error': 'not found'}]
 
-  mr({port : common.port, mocks: {'get': obj}}, function (er, s) {
+  mr({ port: common.port, mocks: { 'get': obj } }, function (er, s) {
     common.npm([
       'view',
       invalidName,
@@ -281,9 +281,9 @@ test('npm view with invalid package name', function (t) {
 
 
 test('npm view with valid but non existent package name', function (t) {
-  mr({port : common.port, mocks: {
+  mr({ port: common.port, mocks: {
       'get': {
-          '/valid-but-non-existent-package' : [404, {'error': 'not found'}]
+          '/valid-but-non-existent-package': [404, {'error': 'not found'}]
       }
   }}, function (er, s) {
     common.npm([
