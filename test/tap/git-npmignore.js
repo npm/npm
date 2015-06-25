@@ -68,8 +68,8 @@ function packInstallTest (spec, t) {
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
-      t.ifError(err,  'npm pack ran without error')
-      t.notOk(code,   'npm pack exited cleanly')
+      t.ifError(err, 'npm pack ran without error')
+      t.notOk(code, 'npm pack exited cleanly')
       t.notOk(stderr, 'npm pack ran silently')
       t.equal(stdout.trim(), packname, 'got expected package name')
 
@@ -80,8 +80,8 @@ function packInstallTest (spec, t) {
         ],
         EXEC_OPTS,
         function (err, code, stdout, stderr) {
-          t.ifError(err,  'npm install ran without error')
-          t.notOk(code,   'npm install exited cleanly')
+          t.ifError(err, 'npm install ran without error')
+          t.notOk(code, 'npm install exited cleanly')
           t.notOk(stderr, 'npm install ran silently')
 
           var actual = readdir(installed).sort()

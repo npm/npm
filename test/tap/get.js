@@ -10,15 +10,13 @@ var fs = require('graceful-fs')
 
 function nop () {}
 
-var URI      = 'https://npm.registry:8043/rewrite'
-var TIMEOUT  = 3600
-var FOLLOW   = false
+var URI = 'https://npm.registry:8043/rewrite'
+var TIMEOUT = 3600
+var FOLLOW = false
 var STALE_OK = true
-var TOKEN    = 'lolbutts'
-var AUTH     = {
-  token: TOKEN
-}
-var PARAMS   = {
+var TOKEN = 'lolbutts'
+var AUTH = { token: TOKEN }
+var PARAMS = {
   timeout: TIMEOUT,
   follow: FOLLOW,
   staleOk: STALE_OK,

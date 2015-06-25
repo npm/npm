@@ -36,7 +36,7 @@
 
   // if npm is called as "npmg" or "npm_g", then
   // run in global mode.
-  if (path.basename(process.argv[1]).slice(-1)  === 'g') {
+  if (path.basename(process.argv[1]).slice(-1) === 'g') {
     process.argv.splice(1, 1, 'npm', '-g')
   }
 

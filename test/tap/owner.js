@@ -70,8 +70,8 @@ test('setup', function (t) {
     ],
     EXEC_OPTS,
     function (err, code) {
-      t.ifError(err,  'npm cache clean ran without error')
-      t.notOk(code,   'npm cache clean exited cleanly')
+      t.ifError(err, 'npm cache clean ran without error')
+      t.notOk(code, 'npm cache clean exited cleanly')
 
       mr({ port: common.port, plugin: mocks }, function (err, s) {
         server = s
@@ -90,8 +90,8 @@ test('npm owner add', function (t) {
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
-      t.ifError(err,  'npm owner add ran without error')
-      t.notOk(code,   'npm owner add exited cleanly')
+      t.ifError(err, 'npm owner add ran without error')
+      t.notOk(code, 'npm owner add exited cleanly')
       t.notOk(stderr, 'npm owner add ran silently')
       t.equal(stdout, '+ othiym23 (underscore)\n', 'got expected add output')
 
@@ -109,8 +109,8 @@ test('npm owner add (scoped)', function (t) {
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
-      t.ifError(err,  'npm owner add (scoped) ran without error')
-      t.notOk(code,   'npm owner add (scoped) exited cleanly')
+      t.ifError(err, 'npm owner add (scoped) ran without error')
+      t.notOk(code, 'npm owner add (scoped) exited cleanly')
       t.notOk(stderr, 'npm owner add (scoped) ran silently')
       t.equal(stdout, '+ othiym23 (@xxx/scoped)\n', 'got expected scoped add output')
 
@@ -128,8 +128,8 @@ test('npm owner ls', function (t) {
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
-      t.ifError(err,  'npm owner ls ran without error')
-      t.notOk(code,   'npm owner ls exited cleanly')
+      t.ifError(err, 'npm owner ls ran without error')
+      t.notOk(code, 'npm owner ls exited cleanly')
       t.notOk(stderr, 'npm owner ls ran silently')
       t.equal(stdout, shrt(jashkenas) + shrt(othiym23), 'got expected ls output')
 
@@ -147,8 +147,8 @@ test('npm owner rm', function (t) {
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
-      t.ifError(err,  'npm owner rm ran without error')
-      t.notOk(code,   'npm owner rm exited cleanly')
+      t.ifError(err, 'npm owner rm ran without error')
+      t.notOk(code, 'npm owner rm exited cleanly')
       t.notOk(stderr, 'npm owner rm ran silently')
       t.equal(stdout, '- othiym23 (underscore)\n', 'got expected rm output')
 
