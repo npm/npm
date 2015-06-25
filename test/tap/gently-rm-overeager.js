@@ -45,7 +45,6 @@ test('cleanup', function (t) {
   t.end()
 })
 
-
 function cleanup () {
   rimraf.sync(pkg)
   rimraf.sync(dep)

@@ -54,7 +54,6 @@ var both = {
   }
 }
 
-
 function testOutput (t, command, er, code, stdout, stderr) {
   var lines
 

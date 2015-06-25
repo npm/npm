@@ -21,7 +21,6 @@ var json = {
   man: [ './install-bad-man.1.lol' ]
 }
 
-
 test('setup', function (t) {
   setup()
   t.pass('setup ran')

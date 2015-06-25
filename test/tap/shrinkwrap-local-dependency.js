@@ -37,7 +37,6 @@ var dependency = {
   'version': '0.0.0'
 }
 
-
 test('shrinkwrap uses resolved with file: on local deps', function (t) {
   setup()
 

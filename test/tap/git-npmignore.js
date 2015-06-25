@@ -37,7 +37,6 @@ var fixture = {
   'main': 'a.js'
 }
 
-
 test('setup', function (t) {
   setup(function (er) {
     t.ifError(er, 'setup ran OK')

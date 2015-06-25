@@ -73,7 +73,6 @@ test('outdated depth deep (9999)', function (t) {
   })
 })
 
-
 test('cleanup', function (t) {
   cleanup()
   t.end()

@@ -278,7 +278,6 @@ test('npm view with invalid package name', function (t) {
   })
 })
 
-
 test('npm view with valid but non existent package name', function (t) {
   mr({ port: common.port, mocks: {
       'get': {

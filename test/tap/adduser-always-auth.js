@@ -140,7 +140,6 @@ test('npm login --no-always-auth', function (t) {
   })
 })
 
-
 test('cleanup', function (t) {
   rimraf.sync(outfile)
   t.pass('cleaned up')

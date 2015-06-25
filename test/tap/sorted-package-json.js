@@ -13,7 +13,6 @@ var common = require('../common-tap.js')
 var mr = require('npm-registry-mock')
 var osenv = require('osenv')
 
-
 test('sorting dependencies', function (t) {
   var packageJson = path.resolve(pkg, 'package.json')
 

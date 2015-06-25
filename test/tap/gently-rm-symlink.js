@@ -13,7 +13,6 @@ var lnk = resolve(__dirname, 'test-global-link')
 
 var EXEC_OPTS = { cwd: pkg }
 
-
 var index = "module.exports = function () { console.log('whoop whoop') }"
 
 var fixture = {

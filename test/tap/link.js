@@ -44,7 +44,6 @@ var installJSON = {
   license: 'ISC'
 }
 
-
 test('setup', function (t) {
   setup()
   common.npm(['ls', '-g', '--depth=0'], OPTS, function (err, c, out) {

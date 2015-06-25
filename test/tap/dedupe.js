@@ -50,7 +50,6 @@ var shrinkwrap = {
   }
 }
 
-
 test('setup', function (t) {
   t.comment('test for https://github.com/npm/npm/issues/4675')
   setup(function () {
