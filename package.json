@@ -180,8 +180,8 @@
     "prepublish": "bash scripts/installable.sh && node bin/npm-cli.js prune --prefix=. --no-global && rimraf test/*/*/node_modules && make -j4 doc",
     "preversion": "bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
     "tap": "tap --timeout 240 test/tap/*.js",
-    "test": "standard && tap --timeout 240 test/tap/*.js",
-    "test-all": "standard && npm run test-legacy && npm test",
+    "test": "standard && npm run tap",
+    "test-all": "standard && npm run test-legacy && npm run tap",
     "test-legacy": "node ./test/run.js"
   },
   "license": "Artistic-2.0"
