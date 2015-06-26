@@ -1,3 +1,63 @@
+### v2.12.1 (2015-06-25):
+
+#### HEY WHERE DID EVERYBODY GO
+
+I keep [hearing some commotion](https://github.com/npm/npm/releases/tag/v3.0.0).
+Is there something going on? Like, a party or something? Anyway, here's a small
+release with at least two significant bug fixes, at least one of which some of
+you have been waiting for for quite a while.
+
+#### REMEMBER WHEN I SAID "REMEMBER WHEN I SAID THAT THING ABOUT PERMISSIONS?"?
+
+`npm@2.12.0` has a change that introduces a fix for a permissions problem
+whereby the `_locks` directory in the cache directory can up being owned by
+root. The fix in 2.12.0 takes care of that problem, but introduces a new
+problem for Windows users where npm tries to call `process.getuid()`, which
+doesn't exist on Windows. It was easy enough to fix (but more or less
+impossible to test, thanks to all the external dependencies involved with
+permissions and platforms and whatnot), but as a result, Windows users might
+want to skip `npm@2.12.0` and go straight to `npm@2.12.1`. Sorry about that!
+
+* [`7e5da23`](https://github.com/npm/npm/commit/7e5da238ee869201fdb9027c27b79b0f76b440a8)
+  When using the new, "fixed" cache directory creator, be extra-careful to not
+  call `process.getuid()` on platforms that lack it.
+  ([@othiym23](https://github.com/othiym23))
+
+#### WHEW! ALL DONE FIXING GIT FOREVER!
+
+New npm CLI team hero [@zkat](https://github.com/zkat) has finally (FINALLY)
+fixed the regression somebody (hi!) introduced a couple months ago whereby git
+URLs of the format `git+ssh://user@githost.com:org/repo.git` suddenly stopped
+working, and also started being saved (and cached) incorrectly. I am 100% sure
+there are absolutely no more bugs in the git caching code at all ever. Mm hm.
+Yep. Pretty sure. Maybe. Hmm... I hope.
+
+*Sighs audibly.*
+
+[Let us know](http://github.com/npm/npm/issues/new) if we broke something else
+with this fix.
+
+* [`94ca4a7`](https://github.com/npm/npm/commit/94ca4a711619ba8e40ce3d20bc42b13cdb7611b7)
+  [#8031](https://github.com/npm/npm/issues/8031) Even though
+  `git+ssh://user@githost.com:org/repo.git` isn't a URL, treat it like one for
+  the purposes of npm. ([@zkat](https://github.com/zkat))
+* [`e7f56e5`](https://github.com/npm/npm/commit/e7f56e5a97fcf1c52d5c5bee71303b0126129815)
+  [#8031](https://github.com/npm/npm/issues/8031) `normalize-git-url@2.0.0`:
+  Handle git URLs (and URL-like remote refs) in a manner consistent with npm's
+  docs. ([@zkat](https://github.com/zkat))
+
+#### YEP, THERE ARE STILL DEPENDENCY UPGRADES
+
+* [`679bf47`](https://github.com/npm/npm/commit/679bf4745ac2cfbb01c9ce273e189807fd04fa33)
+  [#40](http://github.com/npm/read-installed/issues/40) `read-installed@4.0.1`:
+  Handle prerelease versions in top-level dependencies not in `package.json`
+  without marking those packages as invalid.
+  ([@benjamn](https://github.com/benjamn))
+* [`3a67410`](https://github.com/npm/npm/commit/3a6741068c9119174c920496778aeee870ebdac0)
+  `tap@1.3.1` ([@isaacs](https://github.com/isaacs))
+* [`151904a`](https://github.com/npm/npm/commit/151904af39dc24567f8c98529a2a64a4dbcc960a)
+  `nopt@3.0.3` ([@isaacs](https://github.com/isaacs))
+
 ### v2.12.0 (2015-06-18):
 
 #### REMEMBER WHEN I SAID THAT THING ABOUT PERMISSIONS?
