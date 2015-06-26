@@ -89,6 +89,12 @@ that isn't on this list,
 * [#8588](https://github.com/npm/npm/issues/8588)
   Local deps where the dep name and the name in the package.json differ
   don't result in an error.
+* [#8637](https://github.com/npm/npm/issues/8637)
+  Modules can install themselves as direct dependencies. npm@2 declined to
+  do this.
+* [#8660](https://github.com/npm/npm/issues/8660)
+  Dependencies of failed optional dependencies aren't rolled back when the
+  optional dependency is, and then are reported as extraneous thereafter.
 
 #### NEW FEATURES
 
