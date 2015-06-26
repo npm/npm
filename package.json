@@ -76,7 +76,7 @@
     "osenv": "~0.1.2",
     "path-is-inside": "~1.0.0",
     "read": "~1.0.6",
-    "read-installed": "~4.0.0",
+    "read-installed": "~4.0.1",
     "read-package-json": "~2.0.0",
     "read-package-tree": "~4.1.0",
     "realize-package-specifier": "~3.0.1",
