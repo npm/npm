@@ -211,12 +211,12 @@ And bundling of dependencies when packing or publishing changes too:
 * [#2442](https://github.com/npm/npm/issues/2442)
   bundledDependencies no longer requires that you specify deduped sub deps.
   npm can now see that a dependency is required by something bundled and
-  automaticlaly include it. To put that another way, bundledDependencies
+  automatically include it. To put that another way, bundledDependencies
   should ONLY include things that you included in dependencies,
   optionalDependencies or devDependencies.
 * [#5437](https://github.com/npm/npm/issues/5437)
   When bundling a dependency that's both a `devDependency` and the child of
-  a regular `dependency`, npm bundles the child depdency.
+  a regular `dependency`, npm bundles the child dependency.
 
 As a demonstration of our confidence in our own work, npm's own
 dependencies are now flattened, deduped, and bundled in the `npm@3` style.
