@@ -158,7 +158,7 @@ requires the module you'll see it listed once for each thing requiring it.
   will result in those sub-dependencies being installed. That is, `npm
   install` now knows how to fix broken installs, most of the time.
 * [#5465](https://github.com/npm/npm/issues/5465)
-   If you directly `npm install` a module that's already a subdep of
+  If you directly `npm install` a module that's already a subdep of
   something else and your new version is incompatible, it will now install
   the previous version nested in the things that need it.
 * [`a2b50cf`](https://github.com/npm/npm/commit/a2b50cf)
@@ -215,7 +215,7 @@ And bundling of dependencies when packing or publishing changes too:
 As a demonstration of our confidence in our own work, npm's own
 dependencies are now flattened, deduped, and bundled in the `npm@3` style.
 This means that `npm@3` can't be packed or published by `npm@2`, which is
-something to be aware of if you're hacking on npm. Nathan.
+something to be aware of if you're hacking on npm.
 
 ##### Shrinkwraps: they are a-changin'!
 
