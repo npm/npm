@@ -71,7 +71,7 @@ test('updates the package.json (adds dependencies) with an argument', function (
     var child = createChild([npm, 'install', 'underscore'])
     child.on('close', function () {
       s.close()
-      var text = JSON.stringify(fs.readFileSync(pkg + "/package.json", "utf8"))
+      var text = JSON.stringify(fs.readFileSync(pkg + '/package.json', 'utf8'))
       t.notEqual(text.indexOf('"dependencies'), -1, 'dependencies exist in file')
     })
   })
