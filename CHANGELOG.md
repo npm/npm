@@ -276,7 +276,7 @@ release, and very much worth checking out:
 * Emit warnings at the end of the installation when possible, so that
   they'll be on your screen when npm stops.
 * [#3505](https://github.com/npm/npm/issues/3505)
-  `npm --dry-run`: You can now ask that npm only report what it _would have
+  `npm --dry-run`: You can now ask that npm only reports what it _would have
   done_ with the new `--dry-run` flag. This can be passed to any of the
   commands that change your `node_modules` folder: `install`, `uninstall`,
   `update` and `dedupe`.
