@@ -68,7 +68,6 @@ npm-debug.log
 /node_modules/url/
 /node_modules/utils-merge/
 /node_modules/watch/
-/node_modules/unpipe/
 
 # tap
 /node_modules/align-text/
