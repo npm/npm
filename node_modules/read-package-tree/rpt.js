@@ -20,11 +20,11 @@ rpt.Node = Node
 rpt.Link = Link
 
 var ID = 0
-function Node (pkg, logical, physical, cache) {
+function Node (pkg, logical, physical, er, cache) {
   if (cache[physical]) return cache[physical]
 
   if (!(this instanceof Node)) {
-    return new Node(pkg, logical, physical, cache)
+    return new Node(pkg, logical, physical, er, cache)
   }
 
   cache[physical] = this
@@ -32,24 +32,27 @@ function Node (pkg, logical, physical, cache) {
   debug(this.constructor.name, dpath(physical), pkg && pkg._id)
 
   this.id = ID++
-  this.package = pkg
+  this.package = pkg || {}
+  if (!this.package.name) this.package.name = path.basename(logical)
   this.path = logical
   this.realpath = physical
   this.parent = null
   this.isLink = false
   this.children = []
+  this.error = er
 }
 
 Node.prototype.package = null
 Node.prototype.path = ''
 Node.prototype.realpath = ''
 Node.prototype.children = null
+Node.prototype.error = null
 
-function Link (pkg, logical, physical, realpath, cache) {
+function Link (pkg, logical, physical, realpath, er, cache) {
   if (cache[physical]) return cache[physical]
 
   if (!(this instanceof Link)) {
-    return new Link(pkg, logical, physical, realpath, cache)
+    return new Link(pkg, logical, physical, realpath, er, cache)
   }
 
   cache[physical] = this
@@ -59,11 +62,13 @@ function Link (pkg, logical, physical, realpath, cache) {
   this.id = ID++
   this.path = logical
   this.realpath = realpath
-  this.package = pkg
+  this.package = pkg || {}
+  if (!this.package.name) this.package.name = path.basename(logical)
   this.parent = null
-  this.target = new Node(pkg, logical, realpath, cache)
+  this.target = new Node(this.package, logical, realpath, er, cache)
   this.isLink = true
   this.children = this.target.children
+  this.error = er
 }
 
 Link.prototype = Object.create(Node.prototype, {
@@ -82,12 +87,12 @@ function loadNode (logical, physical, cache, cb) {
       pkg = pkg || null
       var node
       if (physical === real) {
-        node = new Node(pkg, logical, physical, cache)
+        node = new Node(pkg, logical, physical, er, cache)
       } else {
-        node = new Link(pkg, logical, physical, real, cache)
+        node = new Link(pkg, logical, physical, real, er, cache)
       }
 
-      cb(er, node)
+      cb(null, node)
     })
   })
 }
