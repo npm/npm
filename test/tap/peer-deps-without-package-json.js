@@ -58,9 +58,8 @@ test('installing a peerDeps-using package without package.json', function (t) {
           fs.existsSync(path.join(nodeModules, 'npm-test-peer-deps-file')),
           'passive peer dep installed'
         )
-
-        t.is(result.warnings.length, 1, 'got a warning from the peer dep')
-        t.is(result.warnings[0].code, 'EPEERINVALID', 'warning is for a missing/invalid peer')
+        var invalid = result.warnings.filter(function (warning) { return warning.code === 'EPEERINVALID' })
+        t.is(invalid.length, 1, 'got a warning for a missing/invalid peer dep')
 
         t.end()
         s.close() // shutdown mock registry.
