@@ -91,8 +91,8 @@ test('deeproot', function (t) {
 
 test('broken json', function (t) {
   rpt(path.resolve(fixtures, 'bad'), function (er, d) {
-    t.ok(er, 'Got an error object')
-    t.equal(er && er.code, 'EJSONPARSE')
+    t.ok(d.error, 'Got an error object')
+    t.equal(d.error && d.error.code, 'EJSONPARSE')
     t.ok(d, 'Got a tree')
     t.end()
   })
@@ -100,12 +100,24 @@ test('broken json', function (t) {
 
 test('missing json does not obscure deeper errors', function (t) {
   rpt(path.resolve(fixtures, 'empty'), function (er, d) {
-    t.ok(er, 'Got an error object')
-    t.equal(er && er.code, 'EJSONPARSE')
-    t.ok(!d, 'No tree on internal error')
+    var error = d.error
+    t.ok(error, 'Error reading json of top level')
+    t.equal(error && error.code, 'ENOENT')
+    var childError = d.children.length===1 && d.children[0].error
+    t.ok(childError, 'Error parsing JSON of child node')
+    t.equal(childError && childError.code, 'EJSONPARSE')
     t.end()
   })
 })
+test('missing folder', function (t) {
+  rpt(path.resolve(fixtures, 'does-not-exist'), function (er, d) {
+    t.ok(er, 'Got an error object')
+    t.equal(er && er.code, 'ENOENT')
+    t.ok(!d, 'No tree on top level error')
+    t.end()
+  })
+})
+
 
 function archyize (d, seen) {
   seen = seen || {}
@@ -114,7 +126,7 @@ function archyize (d, seen) {
     path = d.target.path
   }
 
-  var label = d.package ? d.package._id + ' ' : ''
+  var label = d.package._id ? d.package._id + ' ' : ''
   label += path.substr(cwd.length + 1)
 
   if (d . target) {
