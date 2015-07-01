@@ -18,17 +18,6 @@ test('npm version <semver> with working directory not clean', function (t) {
     which('git', function (err, git) {
       t.ifError(err, 'git found')
 
-      function gitInit (_cb) {
-        var child = spawn(git, ['init'])
-        var out = ''
-        child.stdout.on('data', function (d) {
-          out += d.toString()
-        })
-        child.on('exit', function () {
-          return _cb(out)
-        })
-      }
-
       function addPackageJSON (_cb) {
         var data = JSON.stringify({ name: 'blah', version: '0.1.2' })
         fs.writeFile('package.json', data, function () {
@@ -46,7 +35,7 @@ test('npm version <semver> with working directory not clean', function (t) {
         })
       }
 
-      gitInit(function () {
+      common.makeGitRepo({path: pkg}, function () {
         addPackageJSON(function () {
           var data = JSON.stringify({ name: 'blah', version: '0.1.3' })
           fs.writeFile('package.json', data, function () {
@@ -63,6 +52,31 @@ test('npm version <semver> with working directory not clean', function (t) {
         })
       })
     })
+  })
+})
+
+test('npm version <semver> --force with working directory not clean', function (t) {
+  npm.load({ cache: cache, registry: common.registry, prefix: pkg }, function () {
+    common.npm(
+      [
+        '--force',
+        'version',
+        'patch'
+      ],
+      {cwd: pkg, env: {PATH: process.env.PATH}},
+      function (err, code, stdout, stderr) {
+        t.ifError(err, 'npm version ran without issue')
+        t.notOk(code, 'exited with a non-error code')
+        var errorLines = stderr.trim().split('\n')
+          .map(function (line) {
+            return line.trim()
+          })
+          .filter(function (line) {
+            return !line.indexOf('using --force')
+          })
+        t.notOk(errorLines.length, 'no error output')
+        t.end()
+      })
   })
 })
 
