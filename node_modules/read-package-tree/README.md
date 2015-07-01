@@ -10,12 +10,15 @@ rpt('/path/to/pkg/root', function (er, data) {
   // er means that something didn't work.
   // data is a structure like:
   // {
-  //   package: <package.json data, or null>
+  //   package: <package.json data, or an empty object>
+  //   package.name: defaults to `basename(path)`
   //   children: [ <more things like this> ]
   //   parent: <thing that has this in its children property, or null>
   //   path: <path loaded>
   //   realpath: <the real path on disk>
+  //   isLink: <set if this is a Link>
   //   target: <if a Link, then this is the actual Node>
+  //   error: <if set, the error we got loading/parsing the package.json>
   // }
 })
 ```
@@ -48,9 +51,12 @@ may contain cycles.
 
 ## Errors
 
-Errors parsing or finding a package.json in node_modules will call back with
-an error object and no tree.
+Errors parsing or finding a package.json in node_modules will result in a
+node with the error property set.  We will still find deeper node_modules
+if any exist. *Prior to `5.0.0` these aborted tree reading with an error
+callback.*
 
-A missing or invalid top level package.json will call back with an error
-object AND a tree, so that you may, at your discretion, choose to ignore
-the error.
+Only a few classes of errors are fatal (result in an error callback):
+
+* If the top level location is entirely missing, that will error.
+* if `fs.realpath` returns an error for any path its trying to resolve.
