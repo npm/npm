@@ -51,7 +51,7 @@ test('installing a peerDeps-using package without package.json', function (t) {
       registry: common.registry,
       cache: cache
     }, function () {
-      npm.install(common.registry + '/ok.js', function (err, result) {
+      npm.install(common.registry + '/ok.js', function (err, additions, result) {
         t.ifError(err, 'installed ok.js')
 
         t.ok(
