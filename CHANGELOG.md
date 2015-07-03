@@ -1,3 +1,117 @@
+### v3.1.0 (2015-07-02):
+
+This has been a brief week of bug fixes, plus some fun stuff merged forward
+from this weeks 2.x release. See the
+[2.13.0 release notes](https://github.com/npm/npm/releases/tag/v2.13.0)
+for details on that.
+
+You all have been AWESOME with
+[all](https://github.com/npm/npm/milestones/3.x)
+[the](https://github.com/npm/npm/milestones/3.2.0)
+npm@3 bug reports! Thank you and keep up the great work!
+
+#### NEW PLACE, SAME CODE
+
+Remember how last week we said `npm@3` would go to `3.0-next` and latest
+tags? Yeaaah, no, please use `npm@3.x-next` and `npm@3.x-latest` going forward.
+
+I dunno why we said "suuure, we'll never do a feature release till we're out
+of beta" when we're still forward porting `npm@2.x` features. `¯\_(ツ)_/¯`
+
+If you do accidentally use the old tag names, I'll be maintaining them
+for a few releases, but they won't be around forever.
+
+#### YUP STILL BETA, PLEASE PAY ATTENTION
+
+**_THIS IS BETA SOFTWARE_**. `npm@3` will remain in beta until we're
+confident that it's stable and have assessed the effect of the breaking
+changes on the community. During that time we will still be doing `npm@2`
+releases, with `npm@2` tagged as `latest` and `next`. We'll _also_ be
+publishing new releases of `npm@3` as `npm@3.x-next` and `npm@3.x-latest`
+alongside those versions until we're ready to switch everyone over to
+`npm@3`. We need your help to find and fix its remaining bugs. It's a
+significant rewrite, so we are _sure_ there still significant bugs
+remaining. So do us a solid and deploy it in non-critical CI environments
+and for day-to-day use, but maybe don't use it for production maintenance
+or frontline continuous deployment just yet.
+
+#### BUGS ON THE WINDOWS
+
+  * [`0030ade`](https://github.com/npm/npm/commit/0030ade)
+    [#8685](https://github.com/npm/npm/issues/8685)
+    Windows would hang when trying to clone git repos
+    ([@euprogramador](https://github.com/npm/npm/pull/8777))
+  * [`b259bcc`](https://github.com/npm/npm/commit/b259bcc)
+    [#8786](https://github.com/npm/npm/pull/8786)
+    Windows permissions checks would cause installations to fail under some
+    circumstances. We're disabling the checks entirely for this release.
+    I'm hoping to check back with this next week to get a Windows friendly
+    fix in.
+    ([@iarna](https://github.com/iarna))
+
+#### SO MANY BUGS SQUASHED, JUST CALL US RAID
+
+  * [`0848698`](https://github.com/npm/npm/commit/0848698)
+    [#8686](https://github.com/npm/npm/pull/8686)
+    Stop leaving progress bar cruft on the screen during publication
+    ([@ajcrites](https://github.com/ajcrites))
+  * [`57c3cea`](https://github.com/npm/npm/commit/57c3cea)
+    [#8695](https://github.com/npm/npm/pull/8695)
+    Remote packages with shrinkwraps made npm cause node + iojs to explode
+    and catch fire. NO MORE.
+    ([@iarna](https://github.com/iarna))
+  * [`2875ba3`](https://github.com/npm/npm/commit/2875ba3)
+    [#8723](https://github.com/npm/npm/pull/8723)
+    I uh, told you that engineStrict checking had gone away last week.
+    TURNS OUT I LIED. So this is making that actually be true.
+    ([@iarna](https://github.com/iarna))
+  * [`28064e5`](https://github.com/npm/npm/commit/28064e5)
+    [#3358](https://github.com/npm/npm/issues/3358)
+    Consistently allow Unicode BOMs at the start of package.json files.
+    Previously this was allowed some of time, like when you were installing
+    modules, but not others, like running npm version or installing w/
+    `--save`.
+    ([@iarna](https://github.com/iarna))
+  * [`3cb6ad2`](https://github.com/npm/npm/commit/3cb6ad2)
+    [#8736](https://github.com/npm/npm/issues/8766)
+    npm@3 wasn't running the "install" lifecycle in your current (toplevel)
+    module. This broke modules that relied on C compilation. BOO.
+    ([@iarna](https://github.com/iarna))
+  * [`68da583`](https://github.com/npm/npm/commit/68da583)
+    [#8766](https://github.com/npm/npm/issues/8766)
+    To my great shame, `npm link package` wasn't working AT ALL if you
+    didn't have `package` already installed.
+    ([@iarna](https://github.com/iarna))
+  * [`edd7448`](https://github.com/npm/npm/commit/edd7448)
+    read-package-tree@5.0.0: This update makes read-package-tree not explode
+    when there's bad data in your node_modules folder. npm@2 silently
+    ignores this sort of thing.
+    ([@iarna](https://github.com/iarna))
+  * [`0bb08c8`](https://github.com/npm/npm/commit/0bb08c8)
+    [#8778](https://github.com/npm/npm/pull/8778)
+    RELATEDLY, we now show any errors from your node_modules folder after
+    your installation completes as warnings. We're also reporting these in
+    `npm ls` now.
+    ([@iarna](https://github.com/iarna))
+  * [`6c248ff`](https://github.com/npm/npm/commit/6c248ff)
+    [#8779](https://github.com/npm/npm/pull/8779)
+    Hey, you know how we used to complain if your `package.json` was
+    missing stuff? Well guess what, we are again. I know, I know, you can
+    thank me later.
+    ([@iarna](https://github.com/iarna))
+  * [`d6f7c98`](https://github.com/npm/npm/commit/d6f7c98)
+    So, when we were rolling back after errors we had untested code that
+    tried to undo moves. Being untested it turns out it was very broken.
+    I've removed it until we have time to do this right.
+    ([@iarna](https://github.com/iarna))
+
+#### NEW VERSION
+
+Just the one. Others came in via the 2.x release. Do check out its
+changelog, immediately following this message.
+
+  * [`4e602c5`](https://github.com/npm/npm/commit/4e602c5) lodash@3.2.2
+
 ### v2.13.0 (2015-07-02):
 
 #### FORREST IS OUT! LET'S SNEAK IN ALL THE THINGS!
