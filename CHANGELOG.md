@@ -27,7 +27,7 @@ for a few releases, but they won't be around forever.
 confident that it's stable and have assessed the effect of the breaking
 changes on the community. During that time we will still be doing `npm@2`
 releases, with `npm@2` tagged as `latest` and `next`. We'll _also_ be
-publishing new releases of `npm@3` as `npm@3.x-next` and `npm@3.x-latest`
+publishing new releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest`
 alongside those versions until we're ready to switch everyone over to
 `npm@3`. We need your help to find and fix its remaining bugs. It's a
 significant rewrite, so we are _sure_ there still significant bugs
