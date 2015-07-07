@@ -117,7 +117,7 @@ will be turned into the gauge line.  The default template is:
 
 ```javascript
 [
-    {type: "name", separated: true, maxLength: 25, minWidth: 25, align: "left"},
+    {type: "name", separated: true, maxLength: 25, minLength: 25, align: "left"},
     {type: "spinner", separated: true},
     {type: "startgroup"},
     {type: "completionbar"},
@@ -131,7 +131,7 @@ be be included verbatum in the output.
 If the template element is an object, it can have the following keys:
 
 * *type* can be:
-  * `name` – The most recent name passed to `show`; if this is in response to a 
+  * `name` – The most recent name passed to `show`; if this is in response to a
     `pulse` then the name passed to `pulse` will be appended along with the
     subsection property from the theme.
   * `spinner` – If you've ever called `pulse` this will be one of the characters
@@ -148,7 +148,7 @@ If the template element is an object, it can have the following keys:
   will be padded according to the *align* value.
 * *align* – (Default: left) Possible values "left", "right" and "center". Works
   as you'd expect from word processors.
-* *length* – Provides a single value for both *minLength* and *maxLength*. If both 
+* *length* – Provides a single value for both *minLength* and *maxLength*. If both
   *length* and *minLength or *maxLength* are specifed then the latter take precedence.
 
 ### Tracking Completion
