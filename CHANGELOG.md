@@ -13,7 +13,7 @@ npm@3 bug reports! Thank you and keep up the great work!
 #### NEW PLACE, SAME CODE
 
 Remember how last week we said `npm@3` would go to `3.0-next` and latest
-tags? Yeaaah, no, please use `npm@3.x-next` and `npm@3.x-latest` going forward.
+tags? Yeaaah, no, please use `npm@v3.x-next` and `npm@v3.x-latest` going forward.
 
 I dunno why we said "suuure, we'll never do a feature release till we're out
 of beta" when we're still forward porting `npm@2.x` features. `¯\_(ツ)_/¯`
