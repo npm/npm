@@ -32,7 +32,6 @@
   "dependencies": {
     "abbrev": "~1.0.7",
     "ansi": "~0.3.0",
-    "ansi-regex": "~1.1.1",
     "ansicolors": "~0.3.2",
     "ansistyles": "~0.1.3",
     "archy": "~1.0.0",
@@ -101,7 +100,6 @@
   },
   "bundleDependencies": [
     "abbrev",
-    "ansi-regex",
     "ansi",
     "ansicolors",
     "ansistyles",
