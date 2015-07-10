@@ -1,3 +1,55 @@
+### v3.1.1
+
+#### RED EYE RELEASE
+
+Rebecca's up too late writing tests, so you can have npm@3 bug fixes!  Lots
+of great new issues from you all! ❤️️  Keep it up!
+
+#### YUP STILL BETA, PLEASE PAY ATTENTION
+
+**_THIS IS BETA SOFTWARE_**.  Yes, we're still reminding you of this.  No,
+you can't be excused.  `npm@3` will remain in beta until we're confident
+that it's stable and have assessed the effect of the breaking changes on the
+community.  During that time we will still be doing `npm@2` releases, with
+`npm@2` tagged as `latest` and `next`.  We'll _also_ be publishing new
+releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest` alongside those
+versions until we're ready to switch everyone over to `npm@3`.  We need your
+help to find and fix its remaining bugs.  It's a significant rewrite, so we
+are _sure_ there still significant bugs remaining.  So do us a solid and
+deploy it in non-critical CI environments and for day-to-day use, but maybe
+don't use it for production maintenance or frontline continuous deployment
+just yet.
+
+#### BOOGS
+
+* [`9badfd6`](https://github.com/npm/npm/commit/9babfd63f19f2d80b2d2624e0963b0bdb0d76ef4)
+  [#8608](https://github.com/npm/npm/issues/8608)
+  Make global installs and uninstalls MUCH faster by only reading the directories of
+  modules referred to by arguments.
+  ([@iarna](https://github.com/iarna)
+* [`075a5f0`](https://github.com/npm/npm/commit/075a5f046ab6837f489b08d44cb601e9fdb369b7)
+  [#8660](https://github.com/npm/npm/issues/8660)
+  Failed optional deps would still result in the optional deps own
+  dependencies being installed. We now find them and fail them out of the
+  tree.
+  ([@iarna](https://github.com/iarna)
+* [`c9fbbb5`](https://github.com/npm/npm/commit/c9fbbb540083396ea58fd179d81131d959d8e049)
+  [#8863](https://github.com/npm/npm/issues/8863)
+  The "no compatible version found" error message was including only the
+  version requested, not the name of the package we wanted. Ooops!
+  ([@iarna](https://github.com/iarna)
+* [`32e6bbd`](https://github.com/npm/npm/commit/32e6bbd21744dcbe8c0720ab53f60caa7f2a0588)
+  [#8806](https://github.com/npm/npm/issues/8806)
+  The "uninstall" lifecycle was being run after all of a module's dependencies has been
+  removed. This reverses that order-- this means "uninstall" lifecycles can make use
+  of the package's dependencies.
+  ([@iarna](https://github.com/iarna)
+
+#### MERGED FORWARD
+
+* Check out the [v2.13.1 release notes](https://github.com/npm/npm/releases/tag/v2.13.1)
+  and see all the changes we ported from npm@2.
+
 ### v2.13.1 (2015-07-09):
 
 #### KAUAI WAS NICE. I MISS IT.
