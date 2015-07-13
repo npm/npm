@@ -2,7 +2,6 @@
 var test = require('tap').test
 var requireInject = require('require-inject')
 var path = require('path')
-var log = require('npmlog')
 var inherits = require('inherits')
 
 var packages = {
@@ -12,7 +11,7 @@ var packages = {
   jkl: {package: {name: 'jkl'}, path: path.join(__dirname, 'node_modules', 'jkl')}
 }
 var dir = {}
-dir[__dirname] ={ children: [ packages.abc, packages.def, packages.ghi, packages.jkl ] }
+dir[__dirname] = { children: [ packages.abc, packages.def, packages.ghi, packages.jkl ] }
 dir[packages.abc.path] = packages.abc
 dir[packages.def.path] = packages.def
 dir[packages.ghi.path] = packages.ghi
