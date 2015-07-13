@@ -38,7 +38,7 @@ test('gitlab-shortcut', function (t) {
           } else {
             t.fail('too many attempts to clone')
           }
-          cb(new Error())
+          cb(new Error('execFile mock fails on purpose'))
         })
       }
     }
