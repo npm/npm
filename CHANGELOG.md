@@ -1,3 +1,37 @@
+### v3.1.2
+
+#### SO VERY BETA RELEASE
+
+So, `v3.1.1` managed to actually break installing local modules.  And then
+immediately after I drove to an island for the weekend. 😁  So let's get
+this fixed outside the usual release train!
+
+Fortunately it didn't break installing _global_ modules and so you could
+swap it out for another version at least.
+
+#### DISCLAIMER MEANS WHAT IT SAYS
+
+**_THIS IS BETA SOFTWARE_**.  Yes, we're still reminding you of this.  No,
+you can't be excused.  `npm@3` will remain in beta until we're confident
+that it's stable and have assessed the effect of the breaking changes on the
+community.  During that time we will still be doing `npm@2` releases, with
+`npm@2` tagged as `latest` and `next`.  We'll _also_ be publishing new
+releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest` alongside those
+versions until we're ready to switch everyone over to `npm@3`.  We need your
+help to find and fix its remaining bugs.  It's a significant rewrite, so we
+are _sure_ there still significant bugs remaining.  So do us a solid and
+deploy it in non-critical CI environments and for day-to-day use, but maybe
+don't use it for production maintenance or frontline continuous deployment
+just yet.
+
+#### THIS IS IT, THE REASON
+
+* [`f5e19df`](https://github.com/npm/npm/commit/f5e19df)
+  [#8893](https://github.com/npm/npm/issues/8893)
+  Fix crash when installing local modules introduced by the fix for
+  [#8608](https://github.com/npm/npm/issues/8608)
+  ([@iarna](https://github.com/iarna)
+
 ### v3.1.1
 
 #### RED EYE RELEASE
