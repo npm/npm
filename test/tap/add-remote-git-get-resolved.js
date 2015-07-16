@@ -4,6 +4,17 @@ var test = require('tap').test
 var npm = require('../../lib/npm.js')
 var common = require('../common-tap.js')
 
+var normalizeGitUrl = require('normalize-git-url')
+var getResolved = null
+
+/**
+ * Note: This is here because `normalizeGitUrl` is usually called
+ * before getResolved is, and receives *that* URL.
+ */
+function tryGetResolved(uri, treeish) {
+  return getResolved(normalizeGitUrl(uri).url, treeish)
+}
+
 test('setup', function (t) {
   var opts = {
     registry: common.registry,
@@ -11,14 +22,12 @@ test('setup', function (t) {
   }
   npm.load(opts, function (er) {
     t.ifError(er, 'npm loaded without error')
-
+    getResolved = require('../../lib/cache/add-remote-git.js').getResolved
     t.end()
   })
 })
 
 test('add-remote-git#get-resolved git: passthru', function (t) {
-  var getResolved = require('../../lib/cache/add-remote-git.js').getResolved
-
   verify('git:github.com/foo/repo')
   verify('git:github.com/foo/repo.git')
   verify('git://github.com/foo/repo#decadacefadabade')
@@ -26,7 +35,7 @@ test('add-remote-git#get-resolved git: passthru', function (t) {
 
   function verify (uri) {
     t.equal(
-      getResolved(uri, 'decadacefadabade'),
+      tryGetResolved(uri, 'decadacefadabade'),
       'git://github.com/foo/repo.git#decadacefadabade',
       uri + ' normalized to canonical form git://github.com/foo/repo.git#decadacefadabade'
     )
@@ -35,8 +44,6 @@ test('add-remote-git#get-resolved git: passthru', function (t) {
 })
 
 test('add-remote-git#get-resolved SSH', function (t) {
-  var getResolved = require('../../lib/cache/add-remote-git.js').getResolved
-
   t.comment('tests for https://github.com/npm/npm/issues/7961')
   verify('git@github.com:foo/repo')
   verify('git@github.com:foo/repo#master')
@@ -45,7 +52,7 @@ test('add-remote-git#get-resolved SSH', function (t) {
 
   function verify (uri) {
     t.equal(
-      getResolved(uri, 'decadacefadabade'),
+      tryGetResolved(uri, 'decadacefadabade'),
       'git+ssh://git@github.com/foo/repo.git#decadacefadabade',
       uri + ' normalized to canonical form git+ssh://git@github.com/foo/repo.git#decadacefadabade'
     )
@@ -54,8 +61,6 @@ test('add-remote-git#get-resolved SSH', function (t) {
 })
 
 test('add-remote-git#get-resolved HTTPS', function (t) {
-  var getResolved = require('../../lib/cache/add-remote-git.js').getResolved
-
   verify('https://github.com/foo/repo')
   verify('https://github.com/foo/repo#master')
   verify('git+https://github.com/foo/repo.git#master')
@@ -63,7 +68,7 @@ test('add-remote-git#get-resolved HTTPS', function (t) {
 
   function verify (uri) {
     t.equal(
-      getResolved(uri, 'decadacefadabade'),
+      tryGetResolved(uri, 'decadacefadabade'),
       'git+https://github.com/foo/repo.git#decadacefadabade',
       uri + ' normalized to canonical form git+https://github.com/foo/repo.git#decadacefadabade'
     )
@@ -72,34 +77,39 @@ test('add-remote-git#get-resolved HTTPS', function (t) {
 })
 
 test('add-remote-git#get-resolved edge cases', function (t) {
-  var getResolved = require('../../lib/cache/add-remote-git.js').getResolved
 
   t.equal(
-    getResolved('git+ssh://user@bananaboat.com:galbi/blah.git', 'decadacefadabade'),
+    tryGetResolved('git+ssh://user@bananaboat.com:galbi/blah.git', 'decadacefadabade'),
     'git+ssh://user@bananaboat.com:galbi/blah.git#decadacefadabade',
     'don\'t break non-hosted scp-style locations'
   )
 
   t.equal(
-    getResolved('git+ssh://bananaboat:galbi/blah', 'decadacefadabade'),
+    tryGetResolved('git+ssh://bananaboat:galbi/blah', 'decadacefadabade'),
     'git+ssh://bananaboat:galbi/blah#decadacefadabade',
     'don\'t break non-hosted scp-style locations'
   )
 
   t.equal(
-    getResolved('git+ssh://git.bananaboat.net/foo', 'decadacefadabade'),
+    tryGetResolved('git+https://bananaboat:galbi/blah', 'decadacefadabade'),
+    'git+https://bananaboat/galbi/blah#decadacefadabade',
+    'don\'t break non-hosted scp-style locations'
+  )
+
+  t.equal(
+    tryGetResolved('git+ssh://git.bananaboat.net/foo', 'decadacefadabade'),
     'git+ssh://git.bananaboat.net/foo#decadacefadabade',
     'don\'t break non-hosted SSH URLs'
   )
 
   t.equal(
-    getResolved('git+ssh://git.bananaboat.net:/foo', 'decadacefadabade'),
+    tryGetResolved('git+ssh://git.bananaboat.net:/foo', 'decadacefadabade'),
     'git+ssh://git.bananaboat.net:/foo#decadacefadabade',
     'don\'t break non-hosted SSH URLs'
   )
 
   t.equal(
-    getResolved('git://gitbub.com/foo/bar.git', 'decadacefadabade'),
+    tryGetResolved('git://gitbub.com/foo/bar.git', 'decadacefadabade'),
     'git://gitbub.com/foo/bar.git#decadacefadabade',
     'don\'t break non-hosted git: URLs'
   )
