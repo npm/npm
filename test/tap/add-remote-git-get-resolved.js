@@ -65,6 +65,12 @@ test('add-remote-git#get-resolved HTTPS', function (t) {
   verify('https://github.com/foo/repo#master')
   verify('git+https://github.com/foo/repo.git#master')
   verify('git+https://github.com/foo/repo#decadacefadabade')
+  // DEPRECATED
+  // this is an invalid URL but we normalize it
+  // anyway. Users shouldn't use this in the future. See note
+  // below for how this affected non-hosted URLs.
+  // See https://github.com/npm/npm/issues/8881
+  verify('git+https://github.com:foo/repo.git#master')
 
   function verify (uri) {
     t.equal(
@@ -90,6 +96,12 @@ test('add-remote-git#get-resolved edge cases', function (t) {
     'don\'t break non-hosted scp-style locations'
   )
 
+  // DEPRECATED
+  // When we were normalizing all git URIs, git+https: was being
+  // automatically converted to ssh:. Some users were relying
+  // on this funky behavior, so after removing the aggressive
+  // normalization from non-hosted URIs, we brought this back.
+  // See https://github.com/npm/npm/issues/8881
   t.equal(
     tryGetResolved('git+https://bananaboat:galbi/blah', 'decadacefadabade'),
     'git+https://bananaboat/galbi/blah#decadacefadabade',
