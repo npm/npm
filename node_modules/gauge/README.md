@@ -30,6 +30,11 @@ gauge.hide()
 Constructs a new gauge. Gauges are drawn on a single line, and are not drawn
 if the current terminal isn't a tty.
 
+If you resize your terminal in a way that can be detected then the gauge
+will be drawn at the new size. As a general rule, growing your terminal will
+be clean, but shrinking your terminal will result in cruft as we don't have
+enough information to know where what we wrote previously is now located.
+
 The **options** object can have the following properties, all of which are
 optional:
 

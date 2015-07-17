@@ -41,6 +41,13 @@ var ProgressBar = module.exports = function (options, cursor) {
   this.lastCompleted = 0
   this.spun = 0
   this.last = new Date(0)
+
+  var self = this
+  this._handleSizeChange = function () {
+    if (!self.showing) return
+    self.hide()
+    self.show()
+  }
 }
 ProgressBar.prototype = {}
 
@@ -68,6 +75,14 @@ ProgressBar.prototype.setTheme = function(theme) {
 
 ProgressBar.prototype.setTemplate = function(template) {
   this.template = template
+}
+
+ProgressBar.prototype._enableResizeEvents = function() {
+  process.stdout.on('resize', this._handleSizeChange)
+}
+
+ProgressBar.prototype._disableResizeEvents = function() {
+  process.stdout.removeListener('resize', this._handleSizeChange)
 }
 
 ProgressBar.prototype.disable = function() {
