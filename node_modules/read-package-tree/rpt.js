@@ -97,7 +97,7 @@ function loadNode (logical, physical, cache, cb) {
   })
 }
 
-function loadChildren (node, cache, cb) {
+function loadChildren (node, cache, filterWith, cb) {
   debug('loadChildren', dpath(node.path))
   // don't let it be called more than once
   cb = once(cb)
@@ -107,7 +107,7 @@ function loadChildren (node, cache, cb) {
     if (er) return cb(null, node)
 
     kids = kids.filter(function (kid) {
-      return kid[0] !== '.'
+      return kid[0] !== '.' && (!filterWith || filterWith(node, kid))
     })
 
     var l = kids . length
@@ -140,7 +140,7 @@ function sortChildren (node) {
   })
 }
 
-function loadTree (node, did, cache, cb) {
+function loadTree (node, did, cache, filterWith, cb) {
   debug('loadTree', dpath(node.path), !!cache[node.path])
 
   if (did[node.realpath]) {
@@ -150,7 +150,7 @@ function loadTree (node, did, cache, cb) {
   did[node.realpath] = true
 
   cb = once(cb)
-  loadChildren(node, cache, function (er, node) {
+  loadChildren(node, cache, filterWith, function (er, node) {
     if (er) return cb(er)
 
     var kids = node.children.filter(function (kid) {
@@ -161,7 +161,7 @@ function loadTree (node, did, cache, cb) {
     if (l === 0) return cb(null, node)
 
     kids.forEach(function (kid, index) {
-      loadTree(kid, did, cache, then)
+      loadTree(kid, did, cache, filterWith, then)
     })
 
     function then (er, kid) {
@@ -172,7 +172,11 @@ function loadTree (node, did, cache, cb) {
   })
 }
 
-function rpt (root, cb) {
+function rpt (root, filterWith, cb) {
+  if (!cb) {
+    cb = filterWith
+    filterWith = null
+  }
   fs.realpath(root, function (er, realRoot) {
     if (er) return cb(er)
     debug('rpt', dpath(realRoot))
@@ -180,7 +184,7 @@ function rpt (root, cb) {
     loadNode(root, realRoot, cache, function (er, node) {
       // if there's an error, it's fine, as long as we got a node
       if (!node) return cb(er)
-      loadTree(node, {}, cache, function (lter, tree) {
+      loadTree(node, {}, cache, filterWith, function (lter, tree) {
         cb(er && er.code !== 'ENOENT' ? er : lter, tree)
       })
     })

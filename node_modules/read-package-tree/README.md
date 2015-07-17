@@ -6,7 +6,13 @@ Read the contents of node_modules.
 
 ```javascript
 var rpt = require ('read-package-tree')
-rpt('/path/to/pkg/root', function (er, data) {
+rpt('/path/to/pkg/root', function (node, kidName) {
+  // optional filter function– if included, each package folder found is passed to
+  // it to see if it should be included in the final tree
+  // node is what we're adding children to
+  // kidName is the directory name of the module we're considering adding
+  // return true -> include, false -> skip
+}, function (er, data) {
   // er means that something didn't work.
   // data is a structure like:
   // {
