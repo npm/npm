@@ -66,7 +66,7 @@
     "normalize-git-url": "~3.0.1",
     "normalize-package-data": "~2.3.0",
     "npm-cache-filename": "~1.0.2",
-    "npm-install-checks": "~1.0.5",
+    "npm-install-checks": "~1.0.6",
     "npm-package-arg": "~4.0.2",
     "npm-registry-client": "~6.5.1",
     "npm-user-validate": "~0.1.2",
