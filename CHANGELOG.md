@@ -1,3 +1,76 @@
+### v3.1.3 (2015-07-17):
+
+Rebecca: So Kat, I hear this week's other release uses a dialog between us to
+explain what changed?
+
+Kat: Well, you could say that…
+
+Rebecca: I would! This week I fixed more npm@3 bugs!
+
+Kat: That sounds familiar.
+
+Rebecca: Eheheheh, well, before we look at those, a word from our sponsor…
+
+#### BETA IS AS BETA DOES
+
+**_THIS IS BETA SOFTWARE_**.  Yes, we're still reminding you of this.  No,
+you can't be excused.  `npm@3` will remain in beta until we're confident
+that it's stable and have assessed the effect of the breaking changes on the
+community.  During that time we will still be doing `npm@2` releases, with
+`npm@2` tagged as `latest` and `next`.  We'll _also_ be publishing new
+releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest` alongside those
+versions until we're ready to switch everyone over to `npm@3`.  We need your
+help to find and fix its remaining bugs.  It's a significant rewrite, so we
+are _sure_ there still significant bugs remaining.  So do us a solid and
+deploy it in non-critical CI environments and for day-to-day use, but maybe
+don't use it for production maintenance or frontline continuous deployment
+just yet.
+
+Rebecca: Ok, enough of the dialoguing, that's Kat's schtick.  But do remember
+kids, betas hide in dark hallways waiting to break your stuff, stuff like…
+
+#### SO MANY LINKS YOU COULD MAKE A CHAIN
+
+* [`6d69ec9`](https://github.com/npm/npm/6d69ec9)
+  [#8967](https://github.com/npm/npm/issues/8967)
+  Removing a module linked into your globals would result in having
+  all of its subdeps removed. Since the npm release process does
+  exactly this, it burned me -every- -single- -week-. =D
+  While we're here, we also removed extraneous warns that used to
+  spill out when you'd remove a symlink.
+  ([@iarna](https://github.com/iarna))
+
+* [`fdb360f`](https://github.com/npm/npm/fdb360f)
+  [#8874](https://github.com/npm/npm/issues/8874)
+  Linking scoped modules was failing outright, but this fixes that
+  and updates our tests so we don't do it again.
+  ([@iarna](https://github.com/iarna))
+
+#### WE'LL TRY NOT TO CRACK YOUR WINDOWS
+
+* [`9fafb18`](https://github.com/npm/npm/9fafb18)
+  [#8701](https://github.com/npm/npm/issues/8701)
+  npm@3 introduced permissions checks that run before it actually tries to
+  do something. This saves you from having an install fail half way
+  through. We did this using the shiny new `fs.access` function available
+  in `node 0.12` and `io.js`, with fallback options for older nodes. Unfortunately
+  the way we implemented the fallback caused racey problems for Windows systems.
+  This fixes that by ensuring we only ever run any one check on a directory once.
+  BUT it turns out there are bugs in `fs.access` on Windows. So this ALSO just disables
+  the use of `fs.access` on Windows entirely until that settles out.
+  ([@iarna](https://github.com/iarna))
+
+#### ZOOM ZOOM, DEP UPDATES
+
+* [`5656baa`](https://github.com/npm/npm/5656baa)
+  `gauge@1.2.2`: Better handle terminal resizes while printing the progress bar
+  ([@iarna](https://github.com/iarna))
+
+#### MERGED FORWARD
+
+* Check out Kat's [super-fresh release notes for v2.13.2](https://github.com/npm/npm/releases/tag/v2.13.2)
+  and see all the changes we ported from npm@2.
+
 ### v2.13.2 (2015-07-16):
 
 #### HOLD ON TO YOUR TENTACLES... IT'S NPM RELEASE TIME!
