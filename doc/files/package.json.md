@@ -183,6 +183,10 @@ which will keep files from being included, even if they would be picked
 up by the files array.  The ".npmignore" file works just like a
 ".gitignore".
 
+Certain files like `package.json`, `readme` `changes|changelog|history` and
+`license` are always included, while things like `.git`, `.DS_Store`,
+`npm-debug.log` are excluded.
+
 ## main
 
 The main field is a module ID that is the primary entry point to your program.
