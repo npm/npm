@@ -411,7 +411,7 @@ right back. This should help out folks dealing with things like proxy issues or
 other registry-access debugging issues. Give it a shot!
 
 This addresses [#5750](https://github.com/npm/npm/issues/5750), and will help
-with the `npm doctor` stuff descripbed in
+with the `npm doctor` stuff described in
 [#6756](https://github.com/npm/npm/issues/6756).
 
 * [`f1f7a85`](https://github.com/npm/npm/commit/f1f7a85)
