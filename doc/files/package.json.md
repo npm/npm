@@ -670,13 +670,13 @@ param at publish-time.
 
 ## publishConfig
 
-This is a set of config values that will be used at publish-time.  It's
-especially handy if you want to set the tag or registry, so that you can
-ensure that a given package is not tagged with "latest" or published to
-the global public registry by default.
+This is a set of config values that will be used at publish-time. It's
+especially handy if you want to set the tag, registry or access, so that
+you can ensure that a given package is not tagged with "latest", published
+to the global public registry or that a scoped module is private by default.
 
-Any config values can be overridden, but of course only "tag" and
-"registry" probably matter for the purposes of publishing.
+Any config values can be overridden, but of course only "tag", "registry" and
+"access" probably matter for the purposes of publishing.
 
 See `npm-config(7)` to see the list of config options that can be
 overridden.
