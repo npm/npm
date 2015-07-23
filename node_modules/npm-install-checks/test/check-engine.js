@@ -26,8 +26,8 @@ test("npm version too old", function (t) {
     })
 })
 
-test("strict=false does not return an error", function (t) {
-  var target = { engines: { npm: "1.3.6" }}
+test("strict=false w/engineStrict json does not return an error", function (t) {
+  var target = { engines: { npm: "1.3.6" }, engineStrict: true }
   c(target, "1.4.2", "0.2.1", false, false, function (err) {
     t.notOk(err, "returns no error")
     t.end()
