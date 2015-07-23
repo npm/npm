@@ -19,7 +19,6 @@
 
   var log = require('npmlog')
   log.pause() // will be unpaused when config is loaded.
-  log.enableProgress()
 
   log.info('it worked if it ends with', 'ok')
 
@@ -72,7 +71,6 @@
   conf._exit = true
   npm.load(conf, function (er) {
     if (er) return errorHandler(er)
-    log.enableProgress()
     npm.commands[npm.command](npm.argv, errorHandler)
   })
 

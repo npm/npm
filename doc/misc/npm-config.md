@@ -608,6 +608,16 @@ Set to true to run in "production" mode.
    local `npm install` without any arguments.
 2. Set the NODE_ENV="production" for lifecycle scripts.
 
+### progress
+
+* Default: true
+* Type: Boolean
+
+When set to `true`, npm will display a progress bar during time intensive
+operations, if `process.stderr` is a TTY.
+
+Set to `false` to suppress the progress bar.
+
 ### proprietary-attribs
 
 * Default: true
