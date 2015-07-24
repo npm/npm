@@ -272,6 +272,9 @@ shrinkwrap file and use the package.json instead.
 The `--nodedir=/path/to/node/source` argument will allow npm to find the
 node source code so that npm can compile native modules.
 
+The `--only={prod[uction]|dev[elopment]}` argument will cause either only
+`devDependencies` or only non-`devDependencies` to be installed.
+
 See `npm-config(7)`.  Many of the configuration params have some
 effect on installation, since that's most of what npm does.
 

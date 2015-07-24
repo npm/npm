@@ -572,6 +572,18 @@ Run tests on installation.
 A node module to `require()` when npm loads.  Useful for programmatic
 usage.
 
+### only
+
+* Default: null
+* Type: String
+
+When "dev" or "development" and running local `npm install` without any
+arguments, only devDependencies (and their dependencies) are installed.
+
+When "prod" or "production" and running local `npm install` without any
+arguments, only non-devDependencies (and their dependencies) are
+installed.
+
 ### optional
 
 * Default: true
