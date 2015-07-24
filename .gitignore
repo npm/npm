@@ -127,6 +127,7 @@ npm-debug.log
 /node_modules/cli-width/
 /node_modules/d/
 /node_modules/debug-log/
+/node_modules/deglob
 /node_modules/disparity/
 /node_modules/doctrine/
 /node_modules/es5-ext/
@@ -142,6 +143,7 @@ npm-debug.log
 /node_modules/esformatter-semicolon-first/
 /node_modules/esformatter-spaced-lined-comment/
 /node_modules/esformatter/
+/node_modules/esformatter-jsx/
 /node_modules/eslint-config-standard-react/
 /node_modules/eslint-config-standard/
 /node_modules/eslint-plugin-react/
@@ -150,15 +152,19 @@ npm-debug.log
 /node_modules/esrecurse/
 /node_modules/estraverse-fb/
 /node_modules/event-emitter/
+/node_modules/falafel-espree
 /node_modules/figures/
 /node_modules/find-root/
+/node_modules/get-stdin/
 /node_modules/globals/
 /node_modules/ignore/
 /node_modules/inquirer/
+/node_modules/js-beautify/
 /node_modules/mout/
 /node_modules/npm-path/
 /node_modules/npm-run/
 /node_modules/object-assign/
+/node_modules/path/
 /node_modules/pkg-config/
 /node_modules/protochain/
 /node_modules/readline2/
@@ -171,6 +177,7 @@ npm-debug.log
 /node_modules/run-parallel/
 /node_modules/rx/
 /node_modules/serializerr/
+/node_modules/standard/
 /node_modules/standard-format/
 /node_modules/stdin/
 /node_modules/string.prototype.endswith/

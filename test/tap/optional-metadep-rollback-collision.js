@@ -49,7 +49,7 @@ var d2 = {
   }
 }
 
-var opdep = {
+var opdep_json = {
   name: 'opdep',
   version: '1.0.0',
   description: 'To explode, of course!',
@@ -178,7 +178,7 @@ test('setup', function (t) {
   mkdirp.sync(path.join(deps, 'opdep'))
   fs.writeFileSync(
     path.join(deps, 'opdep', 'package.json'),
-    JSON.stringify(opdep, null, 2)
+    JSON.stringify(opdep_json, null, 2)
   )
   fs.writeFileSync(path.join(deps, 'opdep', 'bad-server.js'), badServer)
 
