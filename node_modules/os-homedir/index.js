@@ -15,7 +15,7 @@ function homedir() {
 	}
 
 	if (process.platform === 'linux') {
-		return home || (user ? (process.getuid() === 0 ? '/root' : '/home/' + user) : null);
+		return home || (process.getuid() === 0 ? '/root' : (user ? '/home/' + user : null));
 	}
 
 	return home || null;
