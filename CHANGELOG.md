@@ -1,3 +1,100 @@
+### v3.2.0 (2015-07-24):
+
+#### MORE CONFIG, BETTER WINDOWS AND A BUG FIX
+
+This is a smallish release with a new config option and some bug fixes.  And
+lots of module updates.
+
+#### BETA BETAS ON
+
+**_THIS IS BETA SOFTWARE_**.  Yes, we're still reminding you of this.  No,
+you can't be excused.  `npm@3` will remain in beta until we're confident
+that it's stable and have assessed the effect of the breaking changes on the
+community.  During that time we will still be doing `npm@2` releases, with
+`npm@2` tagged as `latest` and `next`.  We'll _also_ be publishing new
+releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest` alongside those
+versions until we're ready to switch everyone over to `npm@3`.  We need your
+help to find and fix its remaining bugs.  It's a significant rewrite, so we
+are _sure_ there still significant bugs remaining.  So do us a solid and
+deploy it in non-critical CI environments and for day-to-day use, but maybe
+don't use it for production maintenance or frontline continuous deployment
+just yet.
+
+
+#### NEW CONFIGS, LESS PROGRESS
+
+* [`423d8f7`](https://github.com/npm/npm/commit/423d8f7)
+  [#8704](https://github.com/npm/npm/issues/8704)
+  Add the ability to disable the new progress bar with `--no-progress`
+  ([@iarna](https://github.com/iarna))
+
+#### AND BUG FIXES
+
+* [`b3ee452`](https://github.com/npm/npm/commit/b3ee452)
+  [#9038](https://github.com/npm/npm/pull/9038)
+  We previously disabled the use of the new `fs.access` API on Windows, but
+  the bug we were seeing is fixed in io.js@1.5.0 so we now use `fs.access`
+  if you're using that version or greater.
+  ([@iarna](https://github.com/iarna))
+
+* [`b181fa3`](https://github.com/npm/npm/commit/b181fa3)
+  [#8921](https://github.com/npm/npm/issues/8921)
+  [#8637](https://github.com/npm/npm/issues/8637)
+  Rejigger how we validate modules for install. This allow is to fix
+  a problem where arch/os checking wasn't being done at all.
+  It also made it easy to add back in a check that declines to
+  install a module in itself unless you force it.
+  ([@iarna](https://github.com/iarna))
+
+#### AND A WHOLE BUNCH OF SUBDEP VERSIONS
+
+These are all development dependencies and semver-compatible subdep
+upgrades, so they should have visible impact on users.
+
+* [`6b3f6d9`](https://github.com/npm/npm/commit/6b3f6d9) standard@4.3.3
+* [`f4e22e5`](https://github.com/npm/npm/commit/f4e22e5) readable-stream@2.0.2 (inside concat-stream)
+* [`f130bfc`](https://github.com/npm/npm/commit/f130bfc) minimatch@2.0.10 (inside node-gyp's copy of glob)
+* [`36c6a0d`](https://github.com/npm/npm/commit/36c6a0d) caseless@0.11.0
+* [`80df59c`](https://github.com/npm/npm/commit/80df59c) chalk@1.1.0
+* [`ea935d9`](https://github.com/npm/npm/commit/ea935d9) bluebird@2.9.34
+* [`3588a0c`](https://github.com/npm/npm/commit/3588a0c) extend@3.0.0
+* [`c6a8450`](https://github.com/npm/npm/commit/c6a8450) form-data@1.0.0-rc2
+* [`a04925b`](https://github.com/npm/npm/commit/a04925b) har-validator@1.8.0
+* [`ee7c095`](https://github.com/npm/npm/commit/ee7c095) has-ansi@2.0.0
+* [`944fc34`](https://github.com/npm/npm/commit/944fc34) hawk@3.1.0
+* [`783dc7b`](https://github.com/npm/npm/commit/783dc7b) lodash._basecallback@3.3.1
+* [`acef0fe`](https://github.com/npm/npm/commit/acef0fe) lodash._baseclone@3.3.0
+* [`dfe959a`](https://github.com/npm/npm/commit/dfe959a) lodash._basedifference@3.0.3
+* [`a03bc76`](https://github.com/npm/npm/commit/a03bc76) lodash._baseflatten@3.1.4
+* [`8a07d50`](https://github.com/npm/npm/commit/8a07d50) lodash._basetostring@3.0.1
+* [`7785e3f`](https://github.com/npm/npm/commit/7785e3f) lodash._baseuniq@3.0.3
+* [`826fb35`](https://github.com/npm/npm/commit/826fb35) lodash._createcache@3.1.2
+* [`76030b3`](https://github.com/npm/npm/commit/76030b3) lodash._createpadding@3.6.1
+* [`1a49ec6`](https://github.com/npm/npm/commit/1a49ec6) lodash._getnative@3.9.1
+* [`eebe47f`](https://github.com/npm/npm/commit/eebe47f) lodash.isarguments@3.0.4
+* [`09994d4`](https://github.com/npm/npm/commit/09994d4) lodash.isarray@3.0.4
+* [`b6f8dbf`](https://github.com/npm/npm/commit/b6f8dbf) lodash.keys@3.1.2
+* [`c67dd6b`](https://github.com/npm/npm/commit/c67dd6b) lodash.pad@3.1.1
+* [`4add042`](https://github.com/npm/npm/commit/4add042) lodash.repeat@3.0.1
+* [`e04993c`](https://github.com/npm/npm/commit/e04993c) lru-cache@2.6.5
+* [`2ed7da4`](https://github.com/npm/npm/commit/2ed7da4) mime-db@1.15.0
+* [`ae08244`](https://github.com/npm/npm/commit/ae08244) mime-types@2.1.3
+* [`e71410e`](https://github.com/npm/npm/commit/e71410e) os-homedir@1.0.1
+* [`67c13e0`](https://github.com/npm/npm/commit/67c13e0) process-nextick-args@1.0.2
+* [`12ee041`](https://github.com/npm/npm/commit/12ee041) qs@4.0.0
+* [`15564a6`](https://github.com/npm/npm/commit/15564a6) spdx-license-ids@1.0.2
+* [`8733bff`](https://github.com/npm/npm/commit/8733bff) supports-color@2.0.0
+* [`230943c`](https://github.com/npm/npm/commit/230943c) tunnel-agent@0.4.1
+* [`26a4653`](https://github.com/npm/npm/commit/26a4653) ansi-styles@2.1.0
+* [`3d27081`](https://github.com/npm/npm/commit/3d27081) bl@1.0.0
+* [`9efa110`](https://github.com/npm/npm/commit/9efa110) async@1.4.0
+
+#### MERGED FORWARD
+
+* As usual, we've ported all the npm@2 goodies in this week's
+  [v2.13.3](https://github.com/npm/npm/releases/tag/v2.13.3)
+  release.
+
 ### v2.13.3 (2015-07-23):
 
 #### I'M SAVING THE GOOD JOKES FOR MORE INTERESTING RELEASES
