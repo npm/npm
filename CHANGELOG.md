@@ -1,3 +1,51 @@
+### v2.13.3 (2015-07-23):
+
+#### I'M SAVING THE GOOD JOKES FOR MORE INTERESTING RELEASES
+
+That means it's a pretty low-key release this week. We got some nice
+documentation contribs, a few bugfixes, and other such things, though!
+
+#### IT'S THE LITTLE THINGS THAT MATTER
+
+* [`d891168`](https://github.com/npm/npm/commit/d89116806eb9ab3e332df38c9569285a1ca72651)
+  Use the local `npm` install when building releases. This is a fairly nice
+  thing to have for the person writing this doc ;)
+  ([@zkat](https://github.com/zkat))
+
+#### WHAT DOES THIS BUTTON DO?
+
+There's a couple of doc updates!
+
+* [](https://github.com/npm/npm/commit/)
+  [#9013](https://github.com/npm/npm/pull/9013) Fix typo in changelog
+  ([@radarhere](https://github.com/radarhere))
+* [](https://github.com/npm/npm/commit/)
+  [#9022](https://github.com/npm/npm/pull/9022)
+  Document the `"access"` field in `"publicConfig"`
+  ([@boennemann](https://github.com/boennemann))
+* [](https://github.com/npm/npm/commit/)
+
+#### \*BUMP\*
+
+* [](https://github.com/npm/npm/commit/)
+  [#8984](https://github.co/npm/npm/issues/8984)
+  `marked-man@0.1.5`: Fixes issue with backticks in second-level headings
+  causing rendering weirdness.
+  ([@steveklabnik](https://github.com/steveklabnik))
+* [](https://github.com/npm/npm/commit/)
+  `rimraf@2.4.2`: Minor doc and dep updates
+  ([@isaacs](https://github.com/isaacs))
+* [](https://github.com/npm/npm/commit/)
+  `request@2.60.0`: Various fixes and doc updates
+  ([@simov](https://github.com/simov))
+* [](https://github.com/npm/npm/commit/)
+  `nock@2.9.1`
+  ([@pgte](https://github.com/pgte))
+* [](https://github.com/npm/npm/commit/)
+  `minimatch@2.0.10`: A pattern like `'*.!(x).!(y)'` should not match a name
+  like `'a.xyz.yab'`.
+  ([@isaacs](https://github.com/isaacs))
+
 ### v2.13.2 (2015-07-16):
 
 #### HOLD ON TO YOUR TENTACLES... IT'S NPM RELEASE TIME!
