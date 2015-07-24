@@ -29,12 +29,10 @@ There's a couple of doc updates! The last one might be interesting.
   settings.
   ([@SimenB](https://github.com/SimenB))
 * [`cf09e75`](https://github.com/npm/npm/commit/cf09e754931739af32647d667b671e72a4c79081)
-
   [#9022](https://github.com/npm/npm/issues/9022) Document the `"access"` field
   in `"publishConfig"`. Did you know you don't need to use `--access=public`
   when publishing scoped packages?! Just put it in your `package.json`!
   Go refresh yourself on scopes packages by [checking our docs](https://docs.npmjs.com/getting-started/scoped-packages) on them.
-
   ([@boennemann](https://github.com/boennemann))
 * [`bfd73da`](https://github.com/npm/npm/commit/bfd73da33349cc2afb8278953b2ae16ea95023de)
   [#9013](https://github.com/npm/npm/issues/9013) fixed typo in changelog
