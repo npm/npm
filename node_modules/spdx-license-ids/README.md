@@ -1,6 +1,6 @@
 # spdx-license-ids
 
-A list of [SPDX license](http://spdx.org/licenses/) identifiers
+A list of [SPDX license](https://spdx.org/licenses/) identifiers
 
 [**Download JSON**](https://raw.githubusercontent.com/shinnn/spdx-license-ids/master/spdx-license-ids.json)
 
@@ -31,7 +31,7 @@ bower install spdx-license-ids
 ##### [Duo](http://duojs.org/)
 
 ```javascript
-var spdxLicenseIds = require('shinnn/spdx-license-ids');
+const spdxLicenseIds = require('shinnn/spdx-license-ids');
 ```
 
 #### Standalone
@@ -47,7 +47,7 @@ Type: `Array` of `String`
 It returns an array of SPDX license identifiers.
 
 ```javascript
-var spdxLicenseIds = require('spdx-license-ids'); //=> ['Glide', 'Abstyles', 'AFL-1.1', ... ]
+const spdxLicenseIds = require('spdx-license-ids'); //=> ['Glide', 'Abstyles', 'AFL-1.1', ... ]
 ```
 
 ## License
