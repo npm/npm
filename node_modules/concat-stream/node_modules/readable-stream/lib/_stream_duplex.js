@@ -5,19 +5,19 @@
 
 'use strict';
 
-module.exports = Duplex;
-
-/*<replacement>*/
-var processNextTick = require('process-nextick-args');
-/*</replacement>*/
-
-
 /*<replacement>*/
 var objectKeys = Object.keys || function (obj) {
   var keys = [];
   for (var key in obj) keys.push(key);
   return keys;
 }
+/*</replacement>*/
+
+
+module.exports = Duplex;
+
+/*<replacement>*/
+var processNextTick = require('process-nextick-args');
 /*</replacement>*/
 
 
