@@ -49,7 +49,7 @@ just yet.
 #### AND A WHOLE BUNCH OF SUBDEP VERSIONS
 
 These are all development dependencies and semver-compatible subdep
-upgrades, so they should have visible impact on users.
+upgrades, so they should not have visible impact on users.
 
 * [`6b3f6d9`](https://github.com/npm/npm/commit/6b3f6d9) standard@4.3.3
 * [`f4e22e5`](https://github.com/npm/npm/commit/f4e22e5) readable-stream@2.0.2 (inside concat-stream)
