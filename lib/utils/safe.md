@@ -84,3 +84,58 @@ An additional call results in an error being thrown with a code of
 
 A very minimal once implementation that ignores additional calls. This also
 dezalgos the callback.
+
+### safe.recurseLimit(maxDepth, maxCalls, func)
+
+Restricts a recursive function `func` to a maximum recursion depth of
+`maxDepth` and a maximum total number of iterations of `maxCalls`.
+
+
+```
+function fibR (n,a,b,cb) {
+  process.nextTick(function () {
+    if (n<=0) return cb(null, a)
+    fibR(n-1,b,a+b, cb)
+  })
+}
+function fib (n,cb) {
+  fibR(n,0,1,cb)
+}
+```
+
+```
+var fibR = safe.recurseLimit(10,10, function fibR (n,a,b,$recurse$,cb) {
+  process.nextTick(function () {
+    if (n<=0) return cb(null, a)
+    $recurse$(n-1,b,a+b, cb)
+  })
+}
+function fib (n,cb) {
+  fibR(n,0,1,cb)
+}
+```
+
+
+### safe.recurseLimitSync(maxDepth, maxCalls, func)
+
+```
+function fibR (n,a,b) {
+  return n>0 ? fibR(n-1,b,a+b) : a;
+}
+function fib (n) {
+  return fibR(n,0,1)
+}
+```
+
+would be rewritten as
+
+```
+var fibR = safe.recurseLimitSync(10, 10, function (n,a,b,$recurse$) {
+  if (a==null) a = 0
+  if (b==null) b = 1
+  return n>0 ? $recurse$(n-1,b,a+b) : a;
+})
+function fib (n) {
+  return fibR(n,0,1)
+}
+```
