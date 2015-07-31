@@ -1,5 +1,7 @@
 npm(1) -- a JavaScript package manager
 ==============================
+
+[![Join the chat at https://gitter.im/npm/npm](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/npm/npm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://img.shields.io/travis/npm/npm/master.svg)](https://travis-ci.org/npm/npm)
 ## SYNOPSIS
 
