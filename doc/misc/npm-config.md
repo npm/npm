@@ -124,6 +124,14 @@ you want your scoped package to be publicly viewable (and installable) set
 Force npm to always require authentication when accessing the registry,
 even for `GET` requests.
 
+### also
+
+* Default: null
+* Type: String
+
+When "dev" or "development" and running local `npm shrinkwrap`,
+`npm outdated`, or `npm update`, is an alias for `--dev`.
+
 ### bin-links
 
 * Default: `true`
@@ -580,9 +588,15 @@ usage.
 When "dev" or "development" and running local `npm install` without any
 arguments, only devDependencies (and their dependencies) are installed.
 
+When "dev" or "development" and running local `npm ls`, `npm outdated`, or
+`npm update`, is an alias for `--dev`.
+
 When "prod" or "production" and running local `npm install` without any
 arguments, only non-devDependencies (and their dependencies) are
 installed.
+
+When "prod" or "production" and running local `npm ls`, `npm outdated`, or
+`npm update`, is an alias for `--production`.
 
 ### optional
 
