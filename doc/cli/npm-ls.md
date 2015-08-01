@@ -83,6 +83,14 @@ Display only the dependency tree for packages in `dependencies`.
 
 Display only the dependency tree for packages in `devDependencies`.
 
+### only
+
+* Type: String
+
+When "dev" or "development", is an alias to `dev`.
+
+When "prod" or "production", is an alias to `production`.`
+
 ## SEE ALSO
 
 * npm-config(1)
