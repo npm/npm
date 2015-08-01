@@ -1,3 +1,48 @@
+### v3.2.1 (2015-07-31):
+
+#### AN EXTRA QUIET RELEASE
+
+A bunch of stuff got deferred for various reasons, which just means more
+branches to land next week!
+
+Don't forget to check out [Kat's 2.x release](https://github.com/npm/npm/releases/tag/v2.13.4) for other quiet goodies.
+
+#### AS ALWAYS STILL BETA
+
+**_THIS IS BETA SOFTWARE_**.  Yes, we're still reminding you of this.  No,
+you can't be excused.  `npm@3` will remain in beta until we're confident
+that it's stable and have assessed the effect of the breaking changes on the
+community.  During that time we will still be doing `npm@2` releases, with
+`npm@2` tagged as `latest` and `next`.  We'll _also_ be publishing new
+releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest` alongside those
+versions until we're ready to switch everyone over to `npm@3`.  We need your
+help to find and fix its remaining bugs.  It's a significant rewrite, so we
+are _sure_ there still significant bugs remaining.  So do us a solid and
+deploy it in non-critical CI environments and for day-to-day use, but maybe
+don't use it for production maintenance or frontline continuous deployment
+just yet.
+
+
+#### MAKING OUR TESTS TEST THE THING THEY TEST
+
+* [`6e53c3d`](https://github.com/npm/npm/commit/6e53c3d)
+  [#8985](https://github.com/npm/npm/pull/8985)
+  Many thanks to @bengl for noticing that one of our tests wasn't testing
+  what it claimed it was testing! ([@bengl](https://github.com/bengl))
+
+#### MY PACKAGE.JSON WAS ALREADY IN THE RIGHT ORDER
+
+* [`eb2c7aa`](https://github.com/npm/npm/commit/d00d0f)
+  [#9068](https://github.com/npm/npm/pull/9079)
+  Stop sorting keys in the `package.json` that we haven't edited.  Many
+  thanks to [@Qix-](https://github.com/Qix-) for bringing this up and
+  providing a first pass at a patch for this.
+  ([@iarna](https://github.com/iarna))
+
+#### DEV DEP UPDATE
+
+* [`555f60c`](https://github.com/npm/npm/commit/555f60c) marked@0.3.4
+
 ### v2.13.4 (2015-07-30):
 
 #### JULY ENDS ON A FAIRLY QUIET NOTE
