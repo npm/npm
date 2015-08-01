@@ -122,6 +122,7 @@ npm-debug.log
 /node_modules/window-size/
 /node_modules/wordwrap/
 /node_modules/yargs/
+/node_modules/y18n/
 
 # standard
 /node_modules/cli-width/
