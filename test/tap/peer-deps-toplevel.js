@@ -24,24 +24,11 @@ var expected = {
       version: '0.0.0',
       from: 'npm-test-peer-deps@*',
       resolved: common.registry + '/npm-test-peer-deps/-/npm-test-peer-deps-0.0.0.tgz',
-      problems: [
-        'peer dep missing: request@0.9.x, required by npm-test-peer-deps@0.0.0'
-      ],
       dependencies: {
         underscore: {
           version: '1.3.1',
           from: 'underscore@1.3.1',
           resolved: common.registry + '/underscore/-/underscore-1.3.1.tgz'
-        },
-        request: {
-          required: {
-            _id: 'request@0.9.x',
-            name: 'request',
-            version: '0.9.x',
-            peerMissing: true,
-            dependencies: {}
-          },
-          peerMissing: true
         }
       }
     },
@@ -51,8 +38,22 @@ var expected = {
         _id: 'mkdirp@*',
         name: 'mkdirp',
         version: '*',
-        peerMissing: true,
+        peerMissing: [
+          {requiredBy: 'npm-test-peer-deps-toplevel@0.0.0', requires: 'mkdirp@*'}
+        ],
         dependencies: {}
+      }
+    },
+    request: {
+      peerMissing: true,
+      required: {
+        _id: 'request@0.9.x',
+        dependencies: {},
+        name: 'request',
+        peerMissing: [
+          {requiredBy: 'npm-test-peer-deps@0.0.0', requires: 'request@0.9.x'}
+        ],
+        version: '0.9.x'
       }
     }
   }
