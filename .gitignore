@@ -8,7 +8,6 @@ npm-debug.log
 /test/root
 /node_modules/.bin
 /html/api/
-/html/partial/
 /html/doc/
 /man/
 /doc/*/npm-index.md
