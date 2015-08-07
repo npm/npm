@@ -1,3 +1,53 @@
+### v2.13.5 (2015-08-07):
+
+This is another quiet week for the `npm@2` release.
+[@zkat](https://github.com/zkat) has been working hard on polishing the CLI
+bits of the registry's new feature to support direct management of teams and
+organizations, and [@iarna](https://github.com/iarna) continues to work through
+the list of issues blocking the general release of `npm@3`, which is looking
+more and more solid all the time.
+
+[@othiym23](https://github.com/othiym23) and [@zkat](https://github.com/zkat)
+have also been at this week's Node.js / io.js [collaborator
+summit](https://github.com/nodejs/summit/tree/master), both as facilitators and
+participants. This is a valuable opportunity to get some face time with other
+contributors and to work through a bunch of important discussions, but it does
+leave us feeling kind of sleepy. Running meetings is hard!
+
+What does that leave for this release? A few of the more tricky bug fixes that
+have been sitting around for a little while now, and a couple dependency
+upgrades. Nothing too fancy, but most of these were contributed by developers
+like _you_, which we think is swell. Thanks!
+
+#### BUG FIXES
+
+* [`d7271b8`](https://github.com/npm/npm/commit/d7271b8226712479cdd339bf85faf7e394923e0d)
+  [#4530](https://github.com/npm/npm/issues/4530) The bash completion script
+  for npm no longer alters global completion behavior around word breaks.
+  ([@whitty](https://github.com/whitty))
+* [`c9ce294`](https://github.com/npm/npm/commit/c9ce29415a0a8fc610690b6e9d91b64d6e36cfcc)
+  [#7198](https://github.com/npm/npm/issues/7198) When setting up dependencies
+  to be shared via `npm link <package>`, only run the lifecycle scripts during
+  the original link, not when running `npm link <package>` or `npm install
+  --link` against them. ([@murgatroid99](https://github.com/murgatroid99))
+* [`422da66`](https://github.com/npm/npm/commit/422da664bd3ce71313da447f170507faf5aac46a)
+  [#9108](https://github.com/npm/npm/issues/9108) Clear up minor confusion
+  around wording in `bundledDependencies` section of `package.json` docs.
+  ([@derekpeterson](https://github.com/derekpeterson))
+* [`6b42d99`](https://github.com/npm/npm/commit/6b42d99460885e715772d3487b1c548d2bc8a738)
+  [#9146](https://github.com/npm/npm/issues/9146) Include scripts that run for
+  `preversion`, `version`, and `postversion` in the section for lifecycle
+  scripts rather than the generic `npm run-script` output.
+  ([@othiym23](https://github.com/othiym23))
+
+#### NOPE, NOT DONE WITH DEPENDENCY UPDATES
+
+* [`91a48bb`](https://github.com/npm/npm/commit/91a48bb5ef5a990781c86f8b69b8a32cf4fac2d9)
+  `chmodr@1.0.1`: Ignore symbolic links when recursively changing mode, just
+  like the Unix command. ([@isaacs](https://github.com/isaacs))
+* [`4bbc86e`](https://github.com/npm/npm/commit/4bbc86e3825e2eee9a8758ba26bdea0cb6a2581e)
+  `nock@2.10.0` ([@pgte](https://github.com/pgte))
+
 ### v3.2.1 (2015-07-31):
 
 #### AN EXTRA QUIET RELEASE
