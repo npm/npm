@@ -30,21 +30,21 @@ maintenance or frontline continuous deployment just yet.
 * [`a8c8a13`](https://github.com/npm/npm/commit/a8c8a13)
   [#9050](https://github.com/npm/npm/issues/9050)
   Resolve peer deps relative to the parent of the requirer
-  ([@iarna](http://github.com/iarna)
+  ([@iarna](http://github.com/iarna))
 * [`05f0226`](https://github.com/npm/npm/commit/05f0226)
   [#9077](https://github.com/npm/npm/issues/9077)
   Fix crash when saving `git+ssh` urls
-  ([@iarna](http://github.com/iarna)
+  ([@iarna](http://github.com/iarna))
 * [`e4a3808`](https://github.com/npm/npm/commit/e4a3808)
   [#8951](https://github.com/npm/npm/issues/8951)
   Extend our patch to allow `*` to match something when a package only has
   prerelease versions to everything and not just the cache.
-  ([@iarna](http://github.com/iarna)
+  ([@iarna](http://github.com/iarna))
 * [`d135abf`](https://github.com/npm/npm/commit/d135abf)
   [#8871](https://github.com/npm/npm/issues/8871)
   Don't warn about a missing `package.json` or missing fields in the global
   install directory.
-  ([@iarna](http://github.com/iarna)
+  ([@iarna](http://github.com/iarna))
 
 #### DEP VERSION BUMPS
 
