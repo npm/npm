@@ -172,7 +172,7 @@
     "marked-man": "~0.1.5",
     "nock": "~2.9.1",
     "npm-registry-couchapp": "~2.6.11",
-    "npm-registry-mock": "~1.0.0",
+    "npm-registry-mock": "~1.0.1",
     "require-inject": "~1.2.0",
     "sprintf-js": "~1.0.2",
     "standard": "~4.5.4",
