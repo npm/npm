@@ -1,3 +1,66 @@
+### v3.2.2 (2015-08-08):
+
+Lot's of lovely bug fixes for `npm@3`.  I'm also suuuuper excited that I
+think we have a handle on stack explosions that effect a small portion of
+our users.  We also have some tantalizing clues as to where some low hanging
+fruit may be for performance issues.
+
+And of course, in addition to the npm@3 specific bug fixes, there are some
+great one's coming in from npm@2!  [@othiym23](https://github.com/othiym23)
+put together that release this week– check out its
+[release notes](https://github.com/npm/npm/releases/tag/v2.13.4) for the deets.
+
+#### AS ALWAYS STILL BETA
+
+**_THIS IS BETA SOFTWARE_**.  Just like the airline safety announcements,
+we're not taking this plane off till we finish telling you: `npm@3` will
+remain in beta until we're confident that it's stable and have assessed the
+effect of the breaking changes on the community.  During that time we will
+still be doing `npm@2` releases, with `npm@2` tagged as `latest` and `next`. 
+We'll _also_ be publishing new releases of `npm@3` as `npm@v3.x-next` and
+`npm@v3.x-latest` alongside those versions until we're ready to switch
+everyone over to `npm@3`.  We need your help to find and fix its remaining
+bugs.  It's a significant rewrite, so we are _sure_ there still significant
+bugs remaining.  So do us a solid and deploy it in non-critical CI
+environments and for day-to-day use, but maybe don't use it for production
+maintenance or frontline continuous deployment just yet.
+
+#### BUG FIXES
+
+* [`a8c8a13`](https://github.com/npm/npm/commit/a8c8a13)
+  [#9050](https://github.com/npm/npm/issues/9050)
+  Resolve peer deps relative to the parent of the requirer
+  ([@iarna](http://github.com/iarna)
+* [`05f0226`](https://github.com/npm/npm/commit/05f0226)
+  [#9077](https://github.com/npm/npm/issues/9077)
+  Fix crash when saving `git+ssh` urls
+  ([@iarna](http://github.com/iarna)
+* [`e4a3808`](https://github.com/npm/npm/commit/e4a3808)
+  [#8951](https://github.com/npm/npm/issues/8951)
+  Extend our patch to allow `*` to match something when a package only has
+  prerelease versions to everything and not just the cache.
+  ([@iarna](http://github.com/iarna)
+* [`d135abf`](https://github.com/npm/npm/commit/d135abf)
+  [#8871](https://github.com/npm/npm/issues/8871)
+  Don't warn about a missing `package.json` or missing fields in the global
+  install directory.
+  ([@iarna](http://github.com/iarna)
+
+#### DEP VERSION BUMPS
+
+* [`990ee4f`](https://github.com/npm/npm/commit/990ee4f)
+  path-is-inside@1.0.1 ([@domenic](https://github.com/domenic))
+* [`1f71ec0`](https://github.com/npm/npm/commit/1f71ec0)
+  lodash.clonedeep@3.0.2 ([@jdalton](https://github.com/jdalton))
+* [`a091354`](https://github.com/npm/npm/commit/a091354)
+  marked@0.3.5 ([@chjj](https://github.com/chjj))
+* [`fc51f28`](https://github.com/npm/npm/commit/fc51f28)
+  tap@1.3.2 ([@isaacs](https://github.com/isaacs))
+* [`3569ec0`](https://github.com/npm/npm/commit/3569ec0)
+  nock@2.10.0 ([@pgte](https://github.com/pgte))
+* [`ad5f6fd`](https://github.com/npm/npm/commit/ad5f6fd)
+  npm-registry-mock@1.0.1 ([@isaacs](https://github.com/isaacs))
+
 ### v2.13.5 (2015-08-07):
 
 This is another quiet week for the `npm@2` release.
