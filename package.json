@@ -167,7 +167,6 @@
   ],
   "devDependencies": {
     "deep-equal": "~1.0.0",
-    "eslint": "~0.24.1",
     "estraverse": "~4.1.0",
     "marked": "~0.3.4",
     "marked-man": "~0.1.5",
