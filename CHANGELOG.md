@@ -174,7 +174,7 @@ of you there. :)
 So here it is. The patch. Hope it helps. (Thanks,
 [@ktarplee](https://github.com/ktarplee)!)
 
-* [`3e58c48`](https://github.com/npm/npm/commit/3e58c4819e3cafe4ae23ab7f4a520fe09258cfd7)
+* [`2e58c48`](https://github.com/npm/npm/commit/2e58c4819e3cafe4ae23ab7f4a520fe09258cfd7)
   [#9033](https://github.com/npm/npm/pull/9033) `npm version` now works on git
   submodules
   ([@ktarplee](https://github.com/ktarplee))
