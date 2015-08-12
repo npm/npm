@@ -1,3 +1,104 @@
+### v3.3.0 (2015-08-13):
+
+This is a pretty EXCITING week.  But I may be a little excitable– or
+possibly sleep deprived, it's sometimes hard to tell them apart. =D So
+[Kat](https://github.com/zkat) really went the extra mile this week and got
+the client side support for teams and orgs out in this week's 2.x release. 
+You can't use that just yet, 'cause we have to turn on some server side
+stuff too, but this way it'll be there for you all the moment we do!  Check
+out the details over in the [2.14.0 release
+notes](https://github.com/npm/npm/releases/tag/v2.14.0)!
+
+But we over here in 3.x ALSO got a new feature this week, check out the new
+`--only` and `--also` flags for better control over when dev and production
+dependencies are used by various npm commands.
+
+That, and some important bug fixes round out this week. Enjoy everyone!
+
+#### NEVER SHALL NOT BETA THE BETA
+
+**_THIS IS BETA SOFTWARE_**.  EXCITING NEW BETA WARNING!!!  Ok, I fibbed,
+EXACTLY THE SAME BETA WARNINGS: `npm@3` will remain in beta until we're
+confident that it's stable and have assessed the effect of the breaking
+changes on the community.  During that time we will still be doing `npm@2`
+releases, with `npm@2` tagged as `latest` and `next`.  We'll _also_ be
+publishing new releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest`
+alongside those versions until we're ready to switch everyone over to
+`npm@3`.  We need your help to find and fix its remaining bugs.  It's a
+significant rewrite, so we are _sure_ there still significant bugs
+remaining.  So do us a solid and deploy it in non-critical CI environments
+and for day-to-day use, but maybe don't use it for production maintenance or
+frontline continuous deployment just yet.
+
+
+#### ONLY ALSO DEV
+
+Hey we've got a SUPER cool new feature for you all, thanks to the fantastic
+work of [@davglass](https://github.com/davglass) and
+[@bengl](https://github.com/bengl) we have `--only=prod`,
+`--only=dev`, `--also=prod` and `--also=dev` options. These apply in
+various ways to: `npm install`, `npm ls`, `npm outdated` and `npm update`.
+
+So for instance:
+
+```
+npm install --only=dev
+```
+
+Only installs dev dependencies. By contrast:
+
+```
+npm install --only=prod
+```
+
+Will only install prod dependencies and is very similar to `--production`
+but differs in that it doesn't set the environment variables that
+`--production` does.
+
+The related new flag, `--also` is most useful with things like:
+
+```
+npm shrinkwrap --also=dev
+```
+
+As shrinkwraps don't include dev deps by default.  This replaces passing in
+`--dev` in that scenario.
+
+And that leads into the fact that this deprecates `--dev` as its semantics
+across commands were inconsistent and confusing.
+
+* [`3ab1eea`](https://github.com/npm/npm/commit/3ab1eea)
+  [#9024](https://github.com/npm/npm/pull/9024)
+  Add support for `--only`, `--also` and deprecate `--dev`
+  ([@bengl](https://github.com/bengl))
+
+#### DON'T TOUCH! THAT'S NOT YOUR BIN
+
+* [`b31812e`](https://github.com/npm/npm/commit/b31812e)
+  [#8996](https://github.com/npm/npm/pull/8996)
+  When removing a module that has bin files, if one that we're going to
+  remove is a symlink to a DIFFERENT module, leave it alone. This only happens
+  when you have two modules that try to provide the same bin.
+  ([@iarna](https://github.com/iarna))
+
+#### THERE'S AN END IN SIGHT
+
+* [`d2178a9`](https://github.com/npm/npm/commit/d2178a9)
+  [#9223](https://github.com/npm/npm/pull/9223)
+  Close a bunch of infinite loops that could show up with symlink cycles in your dependencies.
+  ([@iarna](https://github.com/iarna))
+
+#### OOPS DIDN'T MEAN TO FIX THAT
+
+Well, not _just_ yet.  This was scheduled for next week, but it snuck into
+2.x this week.
+
+* [`139dd92`](https://github.com/npm/npm/commit/139dd92)
+  [#8716](https://github.com/npm/npm/pull/8716)
+  `npm init` will now only pick up the modules you install, not everything
+  else that got flattened with them.
+  ([@iarna](https://github.com/iarna))
+
 ### v2.14.0 (2015-08-13):
 
 #### IT'S HERE! KINDA!
