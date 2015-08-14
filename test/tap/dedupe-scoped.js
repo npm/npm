@@ -12,10 +12,10 @@ var modules = join(pkg, 'node_modules')
 var EXEC_OPTS = { cwd: pkg }
 
 var body = function () {/*
-- @scope/shared@2.1.6 node_modules/second/node_modules/@scope/shared
 @scope/shared@2.1.6 node_modules/first/node_modules/@scope/shared -> node_modules/@scope/shared
-secondUnique@1.2.0 node_modules/second/node_modules/secondUnique -> node_modules/secondUnique
 firstUnique@0.6.0 node_modules/first/node_modules/firstUnique -> node_modules/firstUnique
+secondUnique@1.2.0 node_modules/second/node_modules/secondUnique -> node_modules/secondUnique
+- @scope/shared@2.1.6 node_modules/second/node_modules/@scope/shared
 */}.toString().split('\n').slice(1, -1)
 
 var deduper = {
