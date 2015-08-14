@@ -54,7 +54,7 @@
     "inflight": "~1.0.4",
     "inherits": "~2.0.1",
     "ini": "~1.3.4",
-    "init-package-json": "~1.7.1",
+    "init-package-json": "~1.8.0",
     "lockfile": "~1.0.1",
     "lodash.clonedeep": "~3.0.2",
     "lodash.union": "~3.1.0",
