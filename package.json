@@ -38,7 +38,7 @@
     "async-some": "~1.0.2",
     "chownr": "0.0.2",
     "cmd-shim": "~2.0.1",
-    "columnify": "~1.5.1",
+    "columnify": "~1.5.2",
     "config-chain": "~1.1.9",
     "dezalgo": "~1.0.3",
     "editor": "~1.0.0",
