@@ -1,3 +1,61 @@
+### v2.14.0 (2015-08-13):
+
+#### IT'S HERE! KINDA!
+
+This release adds support for Teens and Orcs (err, Teams and Organizations) to
+the npm cli! Note that the website and registry side features of this are still
+not ready for public consumption.
+
+A beta should be starting in the next couple of weeks, and the big feature will
+become public once all that's done. Keep an eye out for more news!
+
+All of these changes were done under [`#9011`](https://github.com/npm/npm/pull/9011).
+
+* [`f29c931`](https://github.com/npm/npm/commit/f29c931012ce5ccd69c29d83548f27e443bf7e62)
+  `npm-registry-client@7.0.1`: Upgrades client API to support team and access
+  commands
+  ([@zkat](https://github.com/zkat))
+* [`52220d1`](https://github.com/npm/npm/commit/52220d146d474ec29b683bd99c06f75cbd46a9f4)
+  docs: Added manpage for `npm team`
+  ([@zkat](https://github.com/zkat))
+* [`ea3eb87`](https://github.com/npm/npm/commit/ea3eb8733d9fa09ce34106b1b19fb1a8f95844a5)
+  docs: Gussied up manpage for `npm access` with new commands
+  ([@zkat](https://github.com/zkat))
+* [`4e66830`](https://github.com/npm/npm/commit/4e668304850d02df8eb27a779fda76fe5de645e7)
+  access: updated to support teams and orgs features
+  ([@zkat](https://github.com/zkat))
+* [`6e0b431`](https://github.com/npm/npm/commit/6e0b431c1de5e329c86e57d097aa88ebfedea864)
+  whoami: Supporting change to make `npm whoami` usable elsewhere
+  ([@zkat](https://github.com/zkat))
+* [`8391d28`](https://github.com/npm/npm/commit/8391d28321e838ae42ab03a1b0d1e83293fa3405)
+  access: standardified lib/access.js
+  ([@zkat](https://github.com/zkat))
+* [`6424170`](https://github.com/npm/npm/commit/6424170fc17c666a6efc090370ec691e0cab1792)
+  team: Implemented `npm team` command and subcommands
+  ([@zkat](https://github.com/zkat))
+
+#### A FEW EXTRA VERSION BUMPS
+
+* [`c977e12`](https://github.com/npm/npm/commit/c977e12cbfa50c2f52fc807f5cc19ba1cc1b39bf)
+  `init-package-json@1.8.0`: Checks for some `npm@3` metadata.
+  ([@iarna](https://github.com/iarna))
+* [`5c8c9e5`](https://github.com/npm/npm/commit/5c8c9e5ae177ba7d0d298cfa42f3fc7f0271e4ec)
+  `columnify@1.5.2`: Updated some dependencies
+  ([@timoxley](https://github.com/timoxley))
+* [`5d56742`](https://github.com/npm/npm/commit/5d567425768b75aeab402c817a53d8b2bc60d8de)
+  `chownr@1.0.1`: tests, docs, and minor style nits.
+  ([@isaacs](https://github.com/isaacs))
+
+#### ALSO A DOC FIX
+
+* [`846fcc7`](https://github.com/npm/npm/commit/846fcc79b86984b109a97366b0422f995a45f8bf)
+  [`#9200`](https://github.com/npm/npm/pull/9200) docs: remove single quotes
+  around semver range
+  ([@KenanY](https://github.com/KenanY))
+* [`c794c9f`](https://github.com/npm/npm/commit/c794c9f39612a8e34b4a0e5a8f2eb7c01815afd6)
+  docs: fixed hash in changelog
+  ([@zkat](https://github.com/zkat))
+
 ### v3.2.2 (2015-08-08):
 
 Lot's of lovely bug fixes for `npm@3`.  I'm also suuuuper excited that I
