@@ -8,6 +8,9 @@ var log = require('npmlog')
 // these various tests.
 var requireInject = require('require-inject')
 
+// Make sure existing environment vars don't muck up the test
+process.env = {}
+
 test('disabled', function (t) {
   t.plan(1)
   var npm = requireInject('../../lib/npm.js', {})
@@ -29,5 +32,25 @@ test('default', function (t) {
   var npm = requireInject('../../lib/npm.js', {})
   npm.load({}, function () {
     t.is(log.progressEnabled, true, 'should be enabled')
+  })
+})
+
+test('default-travis', function (t) {
+  t.plan(1)
+  global.process.env.TRAVIS = 'true'
+  var npm = requireInject('../../lib/npm.js', {})
+  npm.load({}, function () {
+    t.is(log.progressEnabled, false, 'should be disabled')
+    delete global.process.env.TRAVIS
+  })
+})
+
+test('default-ci', function (t) {
+  t.plan(1)
+  global.process.env.CI = 'true'
+  var npm = requireInject('../../lib/npm.js', {})
+  npm.load({}, function () {
+    t.is(log.progressEnabled, false, 'should be disabled')
+    delete global.process.env.CI
   })
 })
