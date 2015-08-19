@@ -77,7 +77,7 @@ test('#6311: npm ll --depth=0 duplicates listing', function (t) {
         EXEC_OPTS,
         function (err, code, stdout, stderr) {
           t.ifError(err, 'npm ll ran without error')
-          t.is(code, 1, 'npm ll complained about there being no package.json')
+          t.is(code, 0, 'npm ll exited cleanly')
           t.notOk(stderr, 'npm ll ran silently')
           t.equal(
             stdout,
