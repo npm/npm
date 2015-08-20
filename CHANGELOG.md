@@ -1,4 +1,206 @@
+### v3.3.1 (2015-08-27):
+
+Hi all, this `npm@3` update brings you another round of bug fixes.  The
+headliner here is that `npm update` works again.  We're running down the
+clock on blocker 3.x issues!  Shortly after that hits zero we'll be
+promoting 3.x to latest!!
+
+And of course, we have changes that were brought forward from 2.x. Check out
+the release notes for
+[2.14.1](https://github.com/npm/npm/releases/tag/v2.14.1) and
+[2.14.2](https://github.com/npm/npm/releases/tag/v2.14.2).
+
+#### BETA WARNINGS FOR FUN AND PROFIT
+
+**_THIS IS BETA SOFTWARE_**. `npm@3` will remain in beta until we're
+confident that it's stable and have assessed the effect of the breaking
+changes on the community.  During that time we will still be doing `npm@2`
+releases, with `npm@2` tagged as `latest` and `next`.  We'll _also_ be
+publishing new releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest`
+alongside those versions until we're ready to switch everyone over to
+`npm@3`.  We need your help to find and fix its remaining bugs.  It's a
+significant rewrite, so we are _sure_ there still significant bugs
+remaining.  So do us a solid and deploy it in non-critical CI environments
+and for day-to-day use, but maybe don't use it for production maintenance or
+frontline continuous deployment just yet.
+
+#### NPM UPDATE, NOW AGAIN YOUR FRIEND
+
+* [`f130a00`](https://github.com/npm/npm/commit/f130a00)
+  [#9095](https://github.com/npm/npm/issues/9095)
+  `npm update` once again works! Previously, after selecting packages
+  to update, it would then pick the wrong location to run the install
+  from. ([@iarna](https://github.com/iarna))
+
+#### MORE VERBOSING FOR YOUR VERBOSE LIFECYCLES
+
+* [`d088b7d`](https://github.com/npm/npm/commit/d088b7d)
+  [#9227](https://github.com/npm/npm/pull/9227)
+  Add some additional logging at the verbose and silly levels
+  when running lifecycle scripts. Hopefully this will make
+  debugging issues with them a bit easier!
+  ([@saper](https://github.com/saper))
+
+#### AND SOME OTHER BUG FIXES…
+
+* [`f4a5784`](https://github.com/npm/npm/commit/f4a5784)
+  [#9308](https://github.com/npm/npm/issues/9308)
+  Make fetching metadata for local modules faster! This ALSO means
+  that doing things like running `npm repo` won't build your
+  module and maybe run `prepublish`.
+  ([@iarna](https://github.com/iarna))
+
+* [`4468c92`](https://github.com/npm/npm/commit/4468c92)
+  [#9205](https://github.com/npm/npm/issues/9205)
+  Fix a bug where local modules would sometimes not resolve relative
+  links using the correct base path.
+  ([@iarna](https://github.com/iarna))
+
+* [`d395a6b`](https://github.com/npm/npm/commit/d395a6b)
+  [#8995](https://github.com/npm/npm/issues/8995)
+  Certain combinations of packages could result in different install orders for their
+  initial installation than for reinstalls run on the same folder.
+  ([@iarna](https://github.com/iarna))
+
+* [`d119ea6`](https://github.com/npm/npm/commit/d119ea6)
+  [#9113](https://github.com/npm/npm/issues/9113)
+  Make extraneous packages _always_ up in `npm ls`. Previously, if an
+  extraneous package had a dependency that depended back on the original
+  package this would result in the package not showing up in `ls`.
+  ([@iarna](https://github.com/iarna))
+
+* [`02420dc`](https://github.com/npm/npm/commit/02420dc)
+  [#9113](https://github.com/npm/npm/issues/9113)
+  Stop warning about missing top level package.json files. Errors in said
+  files will still be reported.
+  ([@iarna](https://github.com/iarna))
+
+#### SOME DEP UPDATES
+
+* [`1ed1364`](https://github.com/npm/npm/commit/1ed1364) rimraf@2.4.3
+  ([@isaacs](https://github.com/isaacs)) Added EPERM to delay/retry loop
+* [`e7b8315`](https://github.com/npm/npm/commit/e7b8315) read@1.0.7
+  Smaller distribution package, better metadata
+  ([@isaacs](https://github.com/isaacs))
+
+#### SOME DEPS OF DEPS UPDATES
+
+* [`b273bcc`](https://github.com/npm/npm/commit/b273bcc) mime-types@2.1.5
+* [`df6e225`](https://github.com/npm/npm/commit/df6e225) mime-db@1.17.0
+* [`785f2ad`](https://github.com/npm/npm/commit/785f2ad) is-my-json-valid@2.12.1
+* [`88170dd`](https://github.com/npm/npm/commit/88170dd) form-data@1.0.0-rc3
+* [`af5357b`](https://github.com/npm/npm/commit/af5357b) request@2.61.0
+* [`337f96a`](https://github.com/npm/npm/commit/337f96a) chalk@1.1.1
+* [`3dfd74d`](https://github.com/npm/npm/commit/3dfd74d) async@1.4.2
+
+### v2.14.2 (2015-08-27):
+
+#### GETTING THAT PESKY `preferGlobal` WARNING RIGHT
+
+So apparently the `preferGlobal` option hasn't quite been warning correctly for
+some time. But now it should be all better! tl;dr: if you try and install a
+dependency with `preferGlobal: true`, and it's _not already_ in your
+`package.json`, you'll get a warning that the author would really rather you
+install it with `--global`. :)
+
+* [`bbb25f3`](https://github.com/npm/npm/commit/bbb25f30d582f8979168c79233a9f8f840974f90)
+  [#8841](https://github.com/npm/npm/issues/8841)
+  [#9409](https://github.com/npm/npm/issues/9409) The `preferGlobal`
+  warning shouldn't happen if the dependency being installed is listed in
+  `devDependencies`. ([@saper](https://github.com/saper))
+* [`222fcec`](https://github.com/npm/npm/commit/222fcec85ccd30d35899e5037079fb14625af4e2)
+  [#9409](https://github.com/npm/npm/issues/9409) `preferGlobal` now prints a
+  warning when there are no dependencies for the current package.
+  ([@zkat](https://github.com/zkat))
+* [`5cfed6d`](https://github.com/npm/npm/commit/5cfed6d7a1a5f2731688cfc8293b5e43a6355393)
+  [#9409](https://github.com/npm/npm/issues/9409) Verify that
+  `preferGlobal` is warning as expected (when a `preferGlobal` dependency is
+  installed, but isn't listed in either `dependencies` or `devDependencies`).
+  ([@zkat](https://github.com/zkat))
+
+#### BUMP +1
+
+* [`eeafce2`](https://github.com/npm/npm/commit/eeafce2d06883c0f51bf403415b6bc5f2647eba3)
+  `validate-npm-package-license@3.0.1`: Include additional metadata in parsed license object,
+  useful for license checkers. ([@kemitchell](https://github.com/kemitchell))
+* [`1502a28`](https://github.com/npm/npm/commit/1502a285f84aa548806b3eafc8889e6288e810f3)
+  `normalise-package-data@2.3.2`: Updated to use `validate-npm-package-license@3.0.1`.
+  ([@othiym23](https://github.com/othiym23))
+* [`cbde823`](https://github.com/npm/npm/commit/cbde8233436bf0ea62a4740869b4990322c20659)
+  `init-package-json@1.9.1`: Add a `silent` option to suppress output on writing the
+  generated `package.json`. Also, updated to use `validate-npm-package-license@3.0.1`.
+  ([@zkat](https://github.com/zkat))
+* [`08fda46`](https://github.com/npm/npm/commit/08fda465452b4d77f1ced8050ee3a35a77fc30a5)
+  `tar@2.2.0`: Minor improvements. ([@othiym23](https://github.com/othiym23))
+* [`dc2f20b`](https://github.com/npm/npm/commit/dc2f20b53fff77203139c863b48da0e959df2ac9)
+  `rimraf@2.4.3`: `EPERM` now triggers a delay / retry loop (since Windows throws
+  this when things still hold a handle). ([@isaacs](https://github.com/isaacs))
+* [`e8acb27`](https://github.com/npm/npm/commit/e8acb273aa67ee0394d0431650e1b2a7d09c8554)
+  `read@1.0.7`: Fix licensing ambiguity. ([@isaacs](https://github.com/isaacs))
+
+#### OTHER STUFF THAT'S RELEVANT
+
+* [`73a1ee0`](https://github.com/npm/npm/commit/73a1ee0be90fa1928521b63f28bef83b8ffab61d)
+  [#9386](https://github.com/npm/npm/issues/9386) Include additional unignorable files in
+  documentation.
+  ([@mjhasbach](https://github.com/mjhasbach))
+* [`0313e40`](https://github.com/npm/npm/commit/0313e40ee0f757fce8861be590ad668c23d7be53)
+  [#9396](https://github.com/npm/npm/issues/9396) Improve the `EISDIR` error
+  message returned by npm's error-handling code to give users a better hint of
+  what's most likely going on.  Usually, error reports with this error code are
+  about people trying to install things without a `package.json`.
+  ([@KenanY](https://github.com/KenanY))
+* [`2677457`](https://github.com/npm/npm/commit/26774579c739c5951351e58263cf4d6ea3d66ec8)
+  [#9360](https://github.com/npm/npm/issues/9360) Make it easier to run
+  only _some_ of npm tests with lifecycle scripts via `npm tap test/tap/testname.js`.
+  ([@iarna](https://github.com/iarna))
+
 ### v2.14.1 (2015-08-20):
+
+#### SECURITY FIX
+
+There are patches for two information leaks of moderate severity in `npm@2.14.1`:
+
+1. In some cases, npm was leaking sensitive credential information into the
+   child environment when running package and lifecycle scripts. This could
+   lead to packages being published with files (most notably `config.gypi`, a
+   file created by `node-gyp` that is a cache of environmental information
+   regenerated on every run) containing the bearer tokens used to authenticate
+   users to the registry. Users with affected packages have been notified (and
+   the affected tokens invalidated), and now npm has been modified to not
+   upload files that could contain this information, as well as scrubbing the
+   sensitive information out of the environment passed to child scripts.
+2. Per-package `.npmrc` files are used by some maintainers as a way to scope
+   those packages to a specific registry and its credentials. This is a
+   reasonable use case, but by default `.npmrc` was packed into packages,
+   leaking those credentials.  npm will no longer include `.npmrc` when packing
+   tarballs.
+
+If you maintain packages and believe you may be affected by either
+of the above scenarios (especially if you've received a security
+notification from npm recently), please upgrade to `npm@2.14.1` as
+soon as possible. If you believe you may have inadvertently leaked
+your credentials, upgrade to `npm@2.14.1` on the affected machine,
+and run `npm logout` and then `npm login`. Your access tokens will be
+invalidated, which will eliminate any risk posed by tokens inadvertently
+included in published packages. We apologize for the inconvenience this
+causes, as well as the oversight that led to the existence of this issue
+in the first place.
+
+Huge thanks to [@ChALkeR](https://github.com/ChALkeR) for bringing these
+issues to our attention, and for helping us identify affected packages
+and maintainers. Thanks also to the Node.js security working group for
+their coördination with the team in our response to this issue. We
+appreciate everybody's patience and understanding tremendously.
+
+* [`b9474a8`](https://github.com/npm/npm/commit/b9474a843ca55b7c5fac6da33989e8eb39aff8b1)
+  `fstream-npm@1.0.5`: Stop publishing build cruft (`config.gypi`) and per-project
+  `.npmrc` files to keep local configuration out of published packages.
+  ([@othiym23](https://github.com/othiym23))
+* [`13c286d`](https://github.com/npm/npm/commit/13c286dbdc3fa8fec4cb79fc4d1ee505c8a41b2e)
+  [#9348](https://github.com/npm/npm/issues/9348) Filter "private"
+  (underscore-prefixed, even when scoped to a registry) configuration values
+  out of child environments. ([@othiym23](https://github.com/othiym23))
 
 #### BETTER WINDOWS INTEGRATION, ONE STEP AT A TIME
 
@@ -25,17 +227,6 @@
   test suite and installation process around a third faster.
   ([@isaacs](https://github.com/isaacs))
 
-#### LESS CRUFTY ENVIRONMENTS
-
-* [`b9474a8`](https://github.com/npm/npm/commit/b9474a843ca55b7c5fac6da33989e8eb39aff8b1)
-  `fstream-npm@1.0.5`: Stop publishing build cruft (`config.gypi`) and per-project
-  `.npmrc` files to keep local configuration out of published packages.
-  ([@othiym23](https://github.com/othiym23))
-* [`13c286d`](https://github.com/npm/npm/commit/13c286dbdc3fa8fec4cb79fc4d1ee505c8a41b2e)
-  [#9348](https://github.com/npm/npm/issues/9348) Filter "private"
-  (underscore-prefixed, even when scoped to a registry) configuration values
-  out of child environments. ([@othiym23](https://github.com/othiym23))
-
 #### A SINGLE LONELY DEPENDENCY UPGRADE
 
 * [`b343b95`](https://github.com/npm/npm/commit/b343b956ef777e321e4251ddc96ec6d80827d9e2)
@@ -47,7 +238,7 @@
 This is a pretty EXCITING week.  But I may be a little excitable– or
 possibly sleep deprived, it's sometimes hard to tell them apart. =D So
 [Kat](https://github.com/zkat) really went the extra mile this week and got
-the client side support for teams and orgs out in this week's 2.x release. 
+the client side support for teams and orgs out in this week's 2.x release.
 You can't use that just yet, 'cause we have to turn on some server side
 stuff too, but this way it'll be there for you all the moment we do!  Check
 out the details over in the [2.14.0 release
@@ -73,7 +264,6 @@ significant rewrite, so we are _sure_ there still significant bugs
 remaining.  So do us a solid and deploy it in non-critical CI environments
 and for day-to-day use, but maybe don't use it for production maintenance or
 frontline continuous deployment just yet.
-
 
 #### ONLY ALSO DEV
 
@@ -214,7 +404,7 @@ put together that release this week– check out its
 we're not taking this plane off till we finish telling you: `npm@3` will
 remain in beta until we're confident that it's stable and have assessed the
 effect of the breaking changes on the community.  During that time we will
-still be doing `npm@2` releases, with `npm@2` tagged as `latest` and `next`. 
+still be doing `npm@2` releases, with `npm@2` tagged as `latest` and `next`.
 We'll _also_ be publishing new releases of `npm@3` as `npm@v3.x-next` and
 `npm@v3.x-latest` alongside those versions until we're ready to switch
 everyone over to `npm@3`.  We need your help to find and fix its remaining
