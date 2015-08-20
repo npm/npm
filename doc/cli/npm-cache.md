@@ -16,20 +16,20 @@ npm-cache(1) -- Manipulates packages cache
 
 Used to add, list, or clear the npm cache folder.
 
-* add:
+* **add:**
   Add the specified package to the local cache.  This command is primarily
   intended to be used internally by npm, but it can provide a way to
   add data to the local installation cache explicitly.
 
-* ls:
+* **ls:**
   Show the data in the cache.  Argument is a path to show in the cache
   folder.  Works a bit like the `find` program, but limited by the
-  `depth` config.
+  `depth` config. *Aliases: 'list', 'sl'*
 
-* clean:
+* **clean:**
   Delete data out of the cache folder.  If an argument is provided, then
   it specifies a subpath to delete.  If no argument is provided, then
-  the entire cache is cleared.
+  the entire cache is cleared. *Aliases: 'clear'*
 
 ## DETAILS
 
