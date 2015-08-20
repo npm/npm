@@ -1,3 +1,47 @@
+### v2.14.1 (2015-08-20):
+
+#### BETTER WINDOWS INTEGRATION, ONE STEP AT A TIME
+
+* [`e40e71f`](https://github.com/npm/npm/commit/e40e71f2f838a8a42392f44e3eeec04e323ab743)
+  [#6412](https://github.com/npm/npm/issues/6412) Improve the search strategy
+  used by the npm shims for Windows to prioritize your own local npm installs.
+  npm has really needed this tweak for a long time, so hammer on it and let us
+  know if you run into issues, but with luck it will Just Work.
+  ([@joaocgreis](https://github.com/joaocgreis))
+* [`204ebbb`](https://github.com/npm/npm/commit/204ebbb3e0cab696a429a878ceeb4a7e78ec2b94)
+  [#8751](https://github.com/npm/npm/issues/8751)
+  [#7333](https://github.com/npm/npm/issues/7333) Keep [autorun
+  scripts](https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx) from
+  interfering with npm package and lifecycle script execution on Windows by
+  adding `/d` and `/s` when invoking `cmd.exe`.
+  ([@saper](https://github.com/saper))
+
+#### IT SEEMED LIKE AN IDEA AT THE TIME
+
+* [`286f3d9`](https://github.com/npm/npm/commit/286f3d97103812f0fd84b70352addbe899e258f9)
+  [#9201](https://github.com/npm/npm/pull/9201) For a while npm was building
+  HTML partials for use on [`docs.npmjs.com`](https://docs.npmjs.com), but we
+  weren't actually using them. Stop building them, which makes running the full
+  test suite and installation process around a third faster.
+  ([@isaacs](https://github.com/isaacs))
+
+#### LESS CRUFTY ENVIRONMENTS
+
+* [`b9474a8`](https://github.com/npm/npm/commit/b9474a843ca55b7c5fac6da33989e8eb39aff8b1)
+  `fstream-npm@1.0.5`: Stop publishing build cruft (`config.gypi`) and per-project
+  `.npmrc` files to keep local configuration out of published packages.
+  ([@othiym23](https://github.com/othiym23))
+* [`13c286d`](https://github.com/npm/npm/commit/13c286dbdc3fa8fec4cb79fc4d1ee505c8a41b2e)
+  [#9348](https://github.com/npm/npm/issues/9348) Filter "private"
+  (underscore-prefixed, even when scoped to a registry) configuration values
+  out of child environments. ([@othiym23](https://github.com/othiym23))
+
+#### A SINGLE LONELY DEPENDENCY UPGRADE
+
+* [`b343b95`](https://github.com/npm/npm/commit/b343b956ef777e321e4251ddc96ec6d80827d9e2)
+  `request@2.61.0`: Bug fixes and keep-alive tweaks.
+  ([@simov](https://github.com/simov))
+
 ### v2.14.0 (2015-08-13):
 
 #### IT'S HERE! KINDA!
