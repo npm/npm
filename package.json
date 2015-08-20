@@ -45,7 +45,7 @@
     "fs-vacuum": "~1.2.6",
     "fs-write-stream-atomic": "~1.0.3",
     "fstream": "~1.0.7",
-    "fstream-npm": "~1.0.4",
+    "fstream-npm": "~1.0.5",
     "glob": "~5.0.14",
     "graceful-fs": "~4.1.2",
     "has-unicode": "~1.0.0",
