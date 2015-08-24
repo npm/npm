@@ -132,7 +132,9 @@ The following paths and files are never ignored, so adding them to
 `.npmignore` is pointless:
 
 * `package.json`
-* `README.*`
+* `README` (and its variants)
+* `CHANGELOG` (and its variants)
+* `LICENSE` / `LICENCE`
 
 ## Link Packages
 
