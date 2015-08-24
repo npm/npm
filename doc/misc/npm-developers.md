@@ -123,6 +123,7 @@ need to add them to `.npmignore` explicitly:
 * `.wafpickle-*`
 * `CVS`
 * `npm-debug.log`
+* `.npmrc`
 
 Additionally, everything in `node_modules` is ignored, except for
 bundled dependencies. npm automatically handles this for you, so don't
