@@ -93,6 +93,7 @@ npm-debug.log
 /node_modules/foreground-child/
 /node_modules/handlebars/
 /node_modules/invert-kv/
+/node_modules/is-buffer/
 /node_modules/is-obj/
 /node_modules/is-utf8/
 /node_modules/istanbul/
