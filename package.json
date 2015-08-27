@@ -93,6 +93,7 @@
     "text-table": "~0.2.0",
     "uid-number": "0.0.6",
     "umask": "~1.1.0",
+    "validate-npm-package-license": "~3.0.1",
     "validate-npm-package-name": "~2.2.2",
     "which": "~1.1.1",
     "wrappy": "~1.0.1",

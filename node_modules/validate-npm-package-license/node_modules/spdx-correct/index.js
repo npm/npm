@@ -1,6 +1,8 @@
-var spdx = require('spdx');
+var licenseIDs = require('spdx-license-ids');
 
-var valid = spdx.valid.bind(spdx);
+function valid(string) {
+  return licenseIDs.indexOf(string) > -1;
+}
 
 // Common transpositions of license identifier acronyms
 var transpositions = [
