@@ -62,6 +62,51 @@ install it with `--global`. :)
 
 ### v2.14.1 (2015-08-20):
 
+#### SECURITY FIX
+
+There are patches for two information leaks of moderate severity in `npm@2.14.1`:
+
+1. In some cases, npm was leaking sensitive credential information into the
+   child environment when running package and lifecycle scripts. This could
+   lead to packages being published with files (most notably `config.gypi`, a
+   file created by `node-gyp` that is a cache of environmental information
+   regenerated on every run) containing the bearer tokens used to authenticate
+   users to the registry. Users with affected packages have been notified (and
+   the affected tokens invalidated), and now npm has been modified to not
+   upload files that could contain this information, as well as scrubbing the
+   sensitive information out of the environment passed to child scripts.
+2. Per-package `.npmrc` files are used by some maintainers as a way to scope
+   those packages to a specific registry and its credentials. This is a
+   reasonable use case, but by default `.npmrc` was packed into packages,
+   leaking those credentials.  npm will no longer include `.npmrc` when packing
+   tarballs.
+
+If you maintain packages and believe you may be affected by either
+of the above scenarios (especially if you've received a security
+notification from npm recently), please upgrade to `npm@2.14.1` as
+soon as possible. If you believe you may have inadvertently leaked
+your credentials, upgrade to `npm@2.14.1` on the affected machine,
+and run `npm logout` and then `npm login`. Your access tokens will be
+invalidated, which will eliminate any risk posed by tokens inadvertently
+included in published packages. We apologize for the inconvenience this
+causes, as well as the oversight that led to the existence of this issue
+in the first place.
+
+Huge thanks to [@ChALkeR](https://github.com/ChALkeR) for bringing these
+issues to our attention, and for helping us identify affected packages
+and maintainers. Thanks also to the Node.js security working group for
+their coördination with the team in our response to this issue. We
+appreciate everybody's patience and understanding tremendously.
+
+* [`b9474a8`](https://github.com/npm/npm/commit/b9474a843ca55b7c5fac6da33989e8eb39aff8b1)
+  `fstream-npm@1.0.5`: Stop publishing build cruft (`config.gypi`) and per-project
+  `.npmrc` files to keep local configuration out of published packages.
+  ([@othiym23](https://github.com/othiym23))
+* [`13c286d`](https://github.com/npm/npm/commit/13c286dbdc3fa8fec4cb79fc4d1ee505c8a41b2e)
+  [#9348](https://github.com/npm/npm/issues/9348) Filter "private"
+  (underscore-prefixed, even when scoped to a registry) configuration values
+  out of child environments. ([@othiym23](https://github.com/othiym23))
+
 #### BETTER WINDOWS INTEGRATION, ONE STEP AT A TIME
 
 * [`e40e71f`](https://github.com/npm/npm/commit/e40e71f2f838a8a42392f44e3eeec04e323ab743)
@@ -86,17 +131,6 @@ install it with `--global`. :)
   weren't actually using them. Stop building them, which makes running the full
   test suite and installation process around a third faster.
   ([@isaacs](https://github.com/isaacs))
-
-#### LESS CRUFTY ENVIRONMENTS
-
-* [`b9474a8`](https://github.com/npm/npm/commit/b9474a843ca55b7c5fac6da33989e8eb39aff8b1)
-  `fstream-npm@1.0.5`: Stop publishing build cruft (`config.gypi`) and per-project
-  `.npmrc` files to keep local configuration out of published packages.
-  ([@othiym23](https://github.com/othiym23))
-* [`13c286d`](https://github.com/npm/npm/commit/13c286dbdc3fa8fec4cb79fc4d1ee505c8a41b2e)
-  [#9348](https://github.com/npm/npm/issues/9348) Filter "private"
-  (underscore-prefixed, even when scoped to a registry) configuration values
-  out of child environments. ([@othiym23](https://github.com/othiym23))
 
 #### A SINGLE LONELY DEPENDENCY UPGRADE
 
