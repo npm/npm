@@ -1,3 +1,65 @@
+### v2.14.2 (2015-08-27):
+
+#### GETTING THAT PESKY `preferGlobal` WARNING RIGHT
+
+So apparently the `preferGlobal` option hasn't quite been warning correctly for
+some time. But now it should be all better! tl;dr: if you try and install a
+dependency with `preferGlobal: true`, and it's _not already_ in your
+`package.json`, you'll get a warning that the author would really rather you
+install it with `--global`. :)
+
+* [`bbb25f3`](https://github.com/npm/npm/commit/bbb25f30d582f8979168c79233a9f8f840974f90)
+  [#8841](https://github.com/npm/npm/issues/8841)
+  [#9409](https://github.com/npm/npm/issues/9409) The `preferGlobal`
+  warning shouldn't happen if the dependency being installed is listed in
+  `devDependencies`. ([@saper](https://github.com/saper))
+* [`222fcec`](https://github.com/npm/npm/commit/222fcec85ccd30d35899e5037079fb14625af4e2)
+  [#9409](https://github.com/npm/npm/issues/9409) `preferGlobal` now prints a
+  warning when there are no dependencies for the current package.
+  ([@zkat](https://github.com/zkat))
+* [`5cfed6d`](https://github.com/npm/npm/commit/5cfed6d7a1a5f2731688cfc8293b5e43a6355393)
+  [#9409](https://github.com/npm/npm/issues/9409) Verify that
+  `preferGlobal` is warning as expected (when a `preferGlobal` dependency is
+  installed, but isn't listed in either `dependencies` or `devDependencies`).
+  ([@zkat](https://github.com/zkat))
+
+#### BUMP +1
+
+* [`eeafce2`](https://github.com/npm/npm/commit/eeafce2d06883c0f51bf403415b6bc5f2647eba3)
+  `validate-npm-package-license@3.0.1`: Include additional metadata in parsed license object,
+  useful for license checkers. ([@kemitchell](https://github.com/kemitchell))
+* [`1502a28`](https://github.com/npm/npm/commit/1502a285f84aa548806b3eafc8889e6288e810f3)
+  `normalise-package-data@2.3.2`: Updated to use `validate-npm-package-license@3.0.1`.
+  ([@othiym23](https://github.com/othiym23))
+* [`cbde823`](https://github.com/npm/npm/commit/cbde8233436bf0ea62a4740869b4990322c20659)
+  `init-package-json@1.9.1`: Add a `silent` option to suppress output on writing the
+  generated `package.json`. Also, updated to use `validate-npm-package-license@3.0.1`.
+  ([@zkat](https://github.com/zkat))
+* [`08fda46`](https://github.com/npm/npm/commit/08fda465452b4d77f1ced8050ee3a35a77fc30a5)
+  `tar@2.2.0`: Minor improvements. ([@othiym23](https://github.com/othiym23))
+* [`dc2f20b`](https://github.com/npm/npm/commit/dc2f20b53fff77203139c863b48da0e959df2ac9)
+  `rimraf@2.4.3`: `EPERM` now triggers a delay / retry loop (since Windows throws
+  this when things still hold a handle). ([@isaacs](https://github.com/isaacs))
+* [`e8acb27`](https://github.com/npm/npm/commit/e8acb273aa67ee0394d0431650e1b2a7d09c8554)
+  `read@1.0.7`: Fix licensing ambiguity. ([@isaacs](https://github.com/isaacs))
+
+#### OTHER STUFF THAT'S RELEVANT
+
+* [`73a1ee0`](https://github.com/npm/npm/commit/73a1ee0be90fa1928521b63f28bef83b8ffab61d)
+  [#9386](https://github.com/npm/npm/issues/9386) Include additional unignorable files in
+  documentation.
+  ([@mjhasbach](https://github.com/mjhasbach))
+* [`0313e40`](https://github.com/npm/npm/commit/0313e40ee0f757fce8861be590ad668c23d7be53)
+  [#9396](https://github.com/npm/npm/issues/9396) Improve the `EISDIR` error
+  message returned by npm's error-handling code to give users a better hint of
+  what's most likely going on.  Usually, error reports with this error code are
+  about people trying to install things without a `package.json`.
+  ([@KenanY](https://github.com/KenanY))
+* [`2677457`](https://github.com/npm/npm/commit/26774579c739c5951351e58263cf4d6ea3d66ec8)
+  [#9360](https://github.com/npm/npm/issues/9360) Make it easier to run
+  only _some_ of npm tests with lifecycle scripts via `npm tap test/tap/testname.js`.
+  ([@iarna](https://github.com/iarna))
+
 ### v2.14.1 (2015-08-20):
 
 #### BETTER WINDOWS INTEGRATION, ONE STEP AT A TIME
