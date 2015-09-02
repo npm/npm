@@ -1,4 +1,4 @@
-var Readable = require('stream').Readable
+var Readable = require('readable-stream').Readable
 var inherits = require('util').inherits
 
 var test = require('tap').test
@@ -275,4 +275,9 @@ test('run request through its paces', function (t) {
     t.notOk(er.pkgid, "no package name returned when there's no body on response")
     t.ok(typeof er !== 'string', "Error shouldn't be returned as string.")
   })
+})
+
+test('cleanup', function (t) {
+  server.close()
+  t.end()
 })
