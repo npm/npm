@@ -170,7 +170,7 @@
     "write-file-atomic"
   ],
   "devDependencies": {
-    "deep-equal": "~1.0.0",
+    "deep-equal": "~1.0.1",
     "marked": "~0.3.3",
     "marked-man": "~0.1.5",
     "nock": "~2.10.0",
