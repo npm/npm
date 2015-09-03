@@ -1,3 +1,38 @@
+### v3.3.2 (2015-09-04):
+
+#### PLEASE HOLD FOR THE NEXT AVAILABLE MAINTAINER
+
+This is a tiny little maintenance release, both to update dependencies and to
+keep `npm@3` up to date with changes made to `npm@2`.
+[@othiym23](https://github.com/othiym23) is putting out this release (again) as
+his esteemed colleague [@iarna](https://github.com/iarna) finishes relocating
+herself, her family, and her sizable anime collection all the way across North
+America. It contains [all the goodies in
+`npm@2.14.3`](https://github.com/npm/npm/releases/tag/v2.14.3) and one other
+dependency update.
+
+#### BETA WARNINGS FOR FUN AND PROFIT
+
+**_THIS IS BETA SOFTWARE_**. `npm@3` will remain in beta until we're
+confident that it's stable and have assessed the effect of the breaking
+changes on the community.  During that time we will still be doing `npm@2`
+releases, with `npm@2` tagged as `latest` and `next`.  We'll _also_ be
+publishing new releases of `npm@3` as `npm@v3.x-next` and `npm@v3.x-latest`
+alongside those versions until we're ready to switch everyone over to
+`npm@3`.  We need your help to find and fix its remaining bugs.  It's a
+significant rewrite, so we are _sure_ there still significant bugs
+remaining.  So do us a solid and deploy it in non-critical CI environments
+and for day-to-day use, but maybe don't use it for production maintenance or
+frontline continuous deployment just yet.
+
+That said, it's getting there! It will be leaving beta very soon!
+
+#### ONE OTHER DEPENDENCY UPDATE
+
+* [`bb5de34`](https://github.com/npm/npm/commit/bb5de3493531228df0bd3f0742d5493c826be6dd)
+  `is-my-json-valid@2.12.2`: Upgrade to a new, modernized version of
+  `json-pointer`. ([@mafintosh](https://github.com/mafintosh))
+
 ### v2.14.3 (2015-09-03):
 
 #### TEAMS AND ORGS STILL BETA. CLI CODE STILL SOLID.
