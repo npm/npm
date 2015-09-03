@@ -3,7 +3,7 @@ npm-pack(3) -- Create a tarball from a package
 
 ## SYNOPSIS
 
-    npm.commands.pack([packages,] callback)
+    npm.commands.pack([packages,] [silent,] callback)
 
 ## DESCRIPTION
 
