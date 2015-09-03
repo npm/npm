@@ -6,7 +6,8 @@ So apparently the `preferGlobal` option hasn't quite been warning correctly for
 some time. But now it should be all better! tl;dr: if you try and install a
 dependency with `preferGlobal: true`, and it's _not already_ in your
 `package.json`, you'll get a warning that the author would really rather you
-install it with `--global`. :)
+install it with `--global`. This should prevent Windows PowerShell from thinking
+npm has failed just because of a benign warning.
 
 * [`bbb25f3`](https://github.com/npm/npm/commit/bbb25f30d582f8979168c79233a9f8f840974f90)
   [#8841](https://github.com/npm/npm/issues/8841)
