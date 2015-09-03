@@ -23,11 +23,13 @@ npm-debug.log
 
 # dev dependencies
 /node_modules/deep-equal/
+/node_modules/deeper/
 /node_modules/marked-man/
 /node_modules/marked/
 /node_modules/nock/
 /node_modules/npm-registry-couchapp/
 /node_modules/npm-registry-mock/
+/node_modules/only-shallow/
 /node_modules/require-inject/
 /node_modules/sprintf-js/
 /node_modules/tap/
