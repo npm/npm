@@ -177,7 +177,7 @@
     "npm-registry-mock": "~1.0.1",
     "require-inject": "~1.2.0",
     "standard": "~4.5.4",
-    "tap": "~1.4.0"
+    "tap": "~1.4.1"
   },
   "scripts": {
     "dumpconf": "env | grep npm | sort | uniq",
