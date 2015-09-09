@@ -7,7 +7,6 @@ npm-debug.log
 /test/packages/test-package/random-data.txt
 /test/root
 /node_modules/.bin
-/html/api/
 /html/doc/
 /man/
 /doc/*/npm-index.md
