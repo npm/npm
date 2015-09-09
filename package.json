@@ -168,7 +168,7 @@
     "write-file-atomic"
   ],
   "devDependencies": {
-    "deep-equal": "~1.0.0",
+    "deep-equal": "~1.0.1",
     "estraverse": "~4.1.0",
     "marked": "~0.3.5",
     "marked-man": "~0.1.5",
