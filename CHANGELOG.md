@@ -1,3 +1,138 @@
+### v3.3.3 (2015-09-10):
+
+This short week brought us brings us a few small bug fixes, a
+doc change and a whole lotta dependency updates.
+
+Plus, as usual, this includes a forward port of everything in
+[`npm@2.14.4`](https://github.com/npm/npm/releases/tag/v2.14.4).
+
+#### BETA BUT NOT FOREVER
+
+**_THIS IS BETA SOFTWARE_**. `npm@3` will remain in beta until
+we're confident that it's stable and have assessed the effect of
+the breaking changes on the community. During that time we will
+still be doing `npm@2` releases, with `npm@2` tagged as `latest`
+and `next`. We'll _also_ be publishing new releases of `npm@3`
+as `npm@v3.x-next` and `npm@v3.x-latest` alongside those
+versions until we're ready to switch everyone over to `npm@3`.
+We need your help to find and fix its remaining bugs. It's a
+significant rewrite, so we are _sure_ there still significant
+bugs remaining. So do us a solid and deploy it in non-critical
+CI environments and for day-to-day use, but maybe don't use it
+for production maintenance or frontline continuous deployment
+just yet.
+
+#### REMOVE INSTALLED BINARIES ON WINDOWS
+
+So waaaay back at the start of August, I fixed a bug with
+[#9198](https://github.com/npm/npm/pull/9198). That fix made it
+so that if you had two modules installed that both installed the
+same binary (eg `gulp` & `gulp-cli`), that removing one wouldn't
+remove the binary if it was owned by the other.
+
+It did this by doing some hocus-pocus that, turns out, was
+Unix-specific, so on Windows it just threw up its hands and
+stopped removing installed binaries at all. Not great.
+
+So today we're fixing that– it let us maintain the same safety
+that we added in #9198, but ALSO works with windows.
+
+* [`25fbaed`](https://github.com/npm/npm/commit/25fbaed)
+  [#9394](https://github.com/npm/npm/issues/9394)
+  Treat cmd-shims the same way we treat symlinks
+  ([@iarna](https://github.com/iarna))
+
+#### API DOCUMENTATION HAS BEEN SACRIFICED THE API GOD
+
+The documentation of the internal APIs of npm is going away,
+because it would lead people into thinking they should integrate
+with npm by using it. Please don't do that! In the future, we'd
+like to give you a suite of stand alone modules that provide
+better, more stand alone APIs for your applications to build on.
+But for now, call the npm binary with `process.exec` or
+`process.spawn` instead.
+
+* [`2fb60bf`](https://github.com/npm/npm/commit/2fb60bf)
+  Remove misleading API documentation
+  ([@othiym23](https://github.com/othiym23))
+
+#### ALLOW `npm link` ON WINDOWS W/ PRERELEASE VERSIONS OF NODE
+
+We never meant to have this be a restriction in the first place
+and it was only just discovered with the recent node 4.0.0
+release candidate.
+
+* [`6665e54`](https://github.com/npm/npm/commit/6665e54)
+  [#9505](https://github.com/npm/npm/pull/9505)
+  Allow npm link to run on windows with prerelease versions of
+  node
+  ([@jon-hall](https://github.com/jon-hall))
+
+#### graceful-fs update
+
+We're updating all of npm's deps to use the most recent
+`graceful-fs`. This turns out to be important for future not yet
+released versions of node, because older versions monkey-patch
+`fs` in ways that will break in the future. Plus it ALSO makes
+use of `process.binding` which is an internal API that npm
+definitely shouldn't have been using. We're not done yet, but
+this is the bulk of them.
+
+* [`e7bc98e`](https://github.com/npm/npm/commit/e7bc98e)
+  write-file-atomic@1.1.3
+  ([@iarna](https://github.com/iarna))
+* [`7417600`](https://github.com/npm/npm/commit/7417600)
+  tar@2.2.1
+  ([@zkat](https://github.com/zkat))
+* [`e4e9d40`](https://github.com/npm/npm/commit/e4e9d40)
+  read-package-json@2.0.1
+  ([@zkat](https://github.com/zkat))
+* [`481611d`](https://github.com/npm/npm/commit/481611d)
+  read-installed@4.0.3
+  ([@zkat](https://github.com/zkat))
+* [`0dabbda`](https://github.com/npm/npm/commit/0dabbda)
+  npm-registry-client@7.0.4
+  ([@zkat](https://github.com/zkat))
+* [`c075a91`](https://github.com/npm/npm/commit/c075a91)
+  fstream@1.0.8
+  ([@zkat](https://github.com/zkat))
+* [`2e4341a`](https://github.com/npm/npm/commit/2e4341a)
+  fs-write-stream-atomic@1.0.4
+  ([@zkat](https://github.com/zkat))
+* [`18ad16e`](https://github.com/npm/npm/commit/18ad16e)
+  fs-vacuum@1.2.7
+  ([@zkat](https://github.com/zkat))
+
+#### DEPENDENCY UPDATES
+
+* [`9d6666b`](https://github.com/npm/npm/commit/9d6666b)
+  node-gyp@3.0.1
+  ([@rvagg](https://github.com/rvagg))
+* [`349c4df`](https://github.com/npm/npm/commit/349c4df)
+  retry@0.7.0
+  ([@tim-kos](https://github.com/tim-kos))
+* [`f507551`](https://github.com/npm/npm/commit/f507551)
+  which@1.1.2
+  ([@isaacs](https://github.com/isaacs))
+* [`e5b6743`](https://github.com/npm/npm/commit/e5b6743)
+  nopt@3.0.4
+  ([@zkat](https://github.com/zkat))
+
+#### THE DEPENDENCIES OF OUR DEPENDENCIES ARE OUR DEPENDENCIES UPDATES
+
+* [`316382d`](https://github.com/npm/npm/commit/316382d)
+  mime-types@2.1.6 & mime-db@1.18.0
+* [`64b741e`](https://github.com/npm/npm/commit/64b741e)
+  spdx-correct@1.0.1
+* [`fff62ac`](https://github.com/npm/npm/commit/fff62ac)
+  process-nextick-args@1.0.3
+* [`9d6488c`](https://github.com/npm/npm/commit/9d6488c)
+  cryptiles@2.0.5
+* [`1912012`](https://github.com/npm/npm/commit/1912012)
+  bluebird@2.10.0
+* [`4d09402`](https://github.com/npm/npm/commit/4d09402)
+  readdir-scoped-modules@1.0.2
+
 ### v2.14.4 (2015-09-10):
 
 #### THE GREAT NODEv4 SAGA
