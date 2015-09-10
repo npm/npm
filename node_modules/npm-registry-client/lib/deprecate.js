@@ -1,7 +1,6 @@
 module.exports = deprecate
 
 var assert = require('assert')
-var url = require('url')
 var semver = require('semver')
 
 function deprecate (uri, params, cb) {
