@@ -119,7 +119,7 @@ acronym for anything, it was `node pm` or maybe `new pm`.
 So, in all seriousness, the "npm" project is named after its command-line
 utility, which was organically selected to be easily typed by a right-handed
 programmer using a US QWERTY keyboard layout, ending with the
-right-ring-finger in a postition to type the `-` key for flags and
+right-ring-finger in a position to type the `-` key for flags and
 other command-line arguments.  That command-line utility is always
 lower-case, though it starts most sentences it is a part of.
 
