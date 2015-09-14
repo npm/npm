@@ -1,3 +1,60 @@
+### v3.3.4 (2015-09-17):
+
+This is a relatively quiet release, bringing a few bug fixes and
+some module updates, plus via the
+[2.14.5 release](https://github.com/npm/npm/releases/tag/v2.14.5)
+some forward compatibility fixes with versions of Node that
+aren't yet released.
+
+#### NO BETA NOTICE THIS TIME!!
+
+But, EXCITING NEWS FRIENDS, this week marks the exit of npm@3
+from beta. This means that the week of this release,
+[v3.3.3](https://github.com/npm/npm/releases/tag/v3.3.3) will
+become `latest` and this version (v3.3.4) will become `next`!!
+
+#### CRUFT FOR THE CRUFT GODS
+
+What I call "cruft", by which I mean, files sitting around in
+your `node_modules` folder, will no longer produce warnings in
+`npm ls` nor during `npm install`. This brings npm@3's behavior
+in line with npm@2.
+
+* [`a127801`](https://github.com/npm/npm/commit/a127801)
+  [#9285](https://github.com/npm/npm/pull/9586)
+  Stop warning about cruft in module directories.
+  ([@iarna](https://github.com/iarna))
+
+#### BETTER ERROR MESSAGE
+
+* [`95ee92c`](https://github.com/npm/npm/commit/95ee92c)
+  [#9433](https://github.com/npm/npm/issues/9433)
+  Give better error messages for invalid urls in the dependecy
+  list.
+  ([@jamietre](https://github.com/jamietre))
+
+#### MODULE UPDATES
+
+* [`ebb92ca`](https://github.com/npm/npm/commit/ebb92ca)
+  retry@0.8.0 [(@tim-kos](https://github.com/tim-kos))
+* [`55f1285`](https://github.com/npm/npm/commit/55f1285)
+  normalize-package-data@2.3.4 [(@zkat](https://github.com/zkat))
+* [`6d4ebff`](https://github.com/npm/npm/commit/6d4ebff)
+  sha@2.0.1 [(@ForbesLindesay](https://github.com/ForbesLindesay))
+* [`09a9c7a`](https://github.com/npm/npm/commit/09a9c7a)
+  semver@5.0.3 [(@isaacs](https://github.com/isaacs))
+* [`745000f`](https://github.com/npm/npm/commit/745000f)
+  node-gyp@3.0.3 [(@rvagg](https://github.com/rvagg))
+
+#### SUB DEP MODULE UPDATES
+
+* [`578ca25`](https://github.com/npm/npm/commit/578ca25)
+  request@2.62.0 [(@simov](https://github.com/simov))
+* [`1d8996e`](https://github.com/npm/npm/commit/1d8996e)
+  jju@1.2.1 [(@rlidwka](https://github.com/rlidwka))
+* [`6da1ba4`](https://github.com/npm/npm/commit/6da1ba4)
+  hoek@2.16.2 [(@nlf](https://github.com/nlf))
+
 ### v2.14.5 (2015-09-17):
 
 #### NPM IS DEAD. LONG LIVE NPM
