@@ -59,7 +59,7 @@
     "ini": "~1.3.4",
     "init-package-json": "~1.9.1",
     "lockfile": "~1.0.1",
-    "lru-cache": "~2.6.5",
+    "lru-cache": "~2.7.0",
     "minimatch": "~2.0.10",
     "mkdirp": "~0.5.1",
     "node-gyp": "~3.0.3",
