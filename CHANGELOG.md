@@ -1,3 +1,77 @@
+### v2.14.5 (2015-09-17):
+
+#### NPM IS DEAD. LONG LIVE NPM
+
+That's right folks. As of this week, `npm@next` is `npm@3`, which means it'll be
+`npm@latest` next week! There's some really great shiny new things over there,
+and you should really take a look.
+
+Many kudos to [@iarna](https://github.com/iarna) for her hard work on `npm@3`!
+
+Don't worry, we'll keep `2.x` around for a while (as LTS), but you won't see
+many, if any, new features on this end. From now on, we're going to use
+`latest-2` and `next-2` as the dist tags for the `npm@2` branch.
+
+#### OKAY THAT'S FINE CAN I DEPRECATE THINGS NOW?
+
+Yes! Specially if you're using scoped packages. Apparently, deprecating them
+never worked, but that should be better now. :)
+
+* [`eca7b24`](https://github.com/npm/npm/commit/eca7b24de9a0090da02a93a69726f5e70ab80543)
+  [#9558](https://github.com/npm/npm/issues/9558) Add tests for npm deprecate.
+  ([@zkat](https://github.com/zkat))
+* [`648fe16`](https://github.com/npm/npm/commit/648fe16157ef0db22395ae056d1dd4b4c1605bf4)
+  [#9558](https://github.com/npm/npm/issues/9558) `npm-registry-client@7.0.7`:
+  Fixes `npm deprecate` so you can actually deprecate scoped modules now (it
+  never worked).
+  ([@zkat](https://github.com/zkat))
+
+#### WTF IS `node-waf`
+
+idk. Some old thing. We don't talk about it anymore.
+
+* [`cf1b39f`](https://github.com/npm/npm/commit/cf1b39fc95a9ffad7fba4c2fee705c53b19d1d16)
+  [#9584](https://github.com/npm/npm/issues/9584) Fix ancient references to
+  `node-waf` in the docs to refer to the `node-gyp` version of things.
+  ([@KenanY](https://github.com/KenanY))
+
+#### THE `graceful-fs` AND `node-gyp` SAGA CONTINUES
+
+Last week had some sweeping `graceful-fs` upgrades, and this takes care of one
+of the stragglers, as well as bumping `node-gyp`. `node@4` users might be
+excited about this, or even `node@<4` users who previously had to cherry-pick a
+bunch of patches to get the latest npm working.
+
+* [`e07354f`](https://github.com/npm/npm/commit/e07354f3ff3a6be568fe950f1f825897f72912d8)
+  `sha@2.0.1`: Upgraded graceful-fs!
+  ([@ForbesLindesay](https://github.com/ForbesLindesay))
+* [`83cb6ee`](https://github.com/npm/npm/commit/83cb6ee4045b85e565e9678ca1878877e1dc75bd)
+  `node-gyp@3.0.3`
+  ([@rvagg](https://github.com/rvagg))
+
+#### DEPS! DEPS! MORE DEPS! OK STOP DEPS
+
+* [`0d60888`](https://github.com/npm/npm/commit/0d608889615a1cb63f5f852337e955053f201aeb)
+  `normalize-package-data@2.3.4`: Use an external package to check for built-in
+  node modules.
+  ([@sindresorhus](https://github.com/sindresorhus))
+* [`79b4dac`](https://github.com/npm/npm/commit/79b4dac11f1c2d8ad5489fc3104734e1c10d4793)
+  `retry@0.8.0`
+  ([@tim-kos](https://github.com/tim-kos))
+* [`c164941`](https://github.com/npm/npm/commit/c164941d3c792904d5b126a4fd36eefbe0699f52)
+  `request@2.62.0`: node 4 added to build targets. Option initialization issues
+  fixed.
+  ([@simov](https://github.com/simov))
+* [`0fd878a`](https://github.com/npm/npm/commit/0fd878a44d5ae303325808d1f00df4dce7549d50)
+  `lru-cache@2.7.0`: Cache serialization support and fixes a cache length bug.
+  ([@isaacs](https://github.com/isaacs))
+* [`6a7a114`](https://github.com/npm/npm/commit/6a7a114a45b4699995d6e09164fdfd0fa1274591)
+  `nock@2.12.0`
+  ([@pgte](https://github.com/pgte))
+* [`6b25e6d`](https://github.com/npm/npm/commit/6b25e6d2235c11f4444104db4545cb42a0267666)
+  `semver@5.0.3`: Removed uglify-js dead code.
+  ([@isaacs](https://github.com/isaacs))
+
 ### v3.3.3 (2015-09-10):
 
 This short week brought us brings us a few small bug fixes, a
