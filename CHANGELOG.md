@@ -2,9 +2,8 @@
 
 #### NPM IS DEAD. LONG LIVE NPM
 
-That's right folks. As of this week, `npm@next` is `npm@3`, which means it'll be
-`npm@latest` next week! There's some really great shiny new things over there,
-and you should really take a look.
+That's right folks. As of this week, `npm@latest` is `npm@3`! There's some
+really great shiny new things over there, and you should really take a look.
 
 Many kudos to [@iarna](https://github.com/iarna) for her hard work on `npm@3`!
 
