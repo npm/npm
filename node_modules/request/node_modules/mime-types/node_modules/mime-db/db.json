@@ -768,6 +768,9 @@
     "source": "iana",
     "extensions": ["p10"]
   },
+  "application/pkcs12": {
+    "source": "iana"
+  },
   "application/pkcs7-mime": {
     "source": "iana",
     "extensions": ["p7m","p7c"]
@@ -1148,7 +1151,13 @@
   "application/vividence.scriptfile": {
     "source": "apache"
   },
+  "application/vnd.3gpp-prose+xml": {
+    "source": "iana"
+  },
   "application/vnd.3gpp.bsf+xml": {
+    "source": "iana"
+  },
+  "application/vnd.3gpp.mid-call+xml": {
     "source": "iana"
   },
   "application/vnd.3gpp.pic-bw-large": {
@@ -1164,6 +1173,9 @@
     "extensions": ["pvb"]
   },
   "application/vnd.3gpp.sms": {
+    "source": "iana"
+  },
+  "application/vnd.3gpp.state-and-event-info+xml": {
     "source": "iana"
   },
   "application/vnd.3gpp.ussd+xml": {
@@ -1262,6 +1274,9 @@
     "source": "apache",
     "compressible": false,
     "extensions": ["apk"]
+  },
+  "application/vnd.anki": {
+    "source": "iana"
   },
   "application/vnd.anser-web-certificate-issue-initiation": {
     "source": "iana",
@@ -1814,6 +1829,9 @@
     "source": "iana"
   },
   "application/vnd.fints": {
+    "source": "iana"
+  },
+  "application/vnd.firemonkeys.cloudcell": {
     "source": "iana"
   },
   "application/vnd.flographit": {
@@ -3026,6 +3044,12 @@
     "source": "iana"
   },
   "application/vnd.omaloc-supl-init": {
+    "source": "iana"
+  },
+  "application/vnd.openblox.game+xml": {
+    "source": "iana"
+  },
+  "application/vnd.openblox.game-binary": {
     "source": "iana"
   },
   "application/vnd.openeye.oeb": {
