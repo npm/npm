@@ -147,7 +147,7 @@ depends on, but for now, there are some things that only the CLI can do. You
 should try using one of npm's dependencies first, and only use the API if what
 you're trying to do is only supported by npm itself.
 
-```javascript
+```js
 var npm = require("npm")
 npm.load(myConfigObject, function (er) {
   if (er) return handlError(er)
