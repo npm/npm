@@ -313,7 +313,7 @@ For `A{B,C}, B{C,D@1}, C{D@2}`, this algorithm produces:
        `-- D@2
     +-- D@1
 
-Because B's D@1 will be installed in the top leve, C now has to install D@2
+Because B's D@1 will be installed in the top level, C now has to install D@2
 privately for itself.
 
 See npm-folders(5) for a more detailed description of the specific
