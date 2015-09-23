@@ -127,6 +127,7 @@ npm-debug.log
 /node_modules/underscore.string/
 /node_modules/underscore/
 /node_modules/unicode-length/
+/node_modules/win-spawn/
 /node_modules/window-size/
 /node_modules/wordwrap/
 /node_modules/yargs/
