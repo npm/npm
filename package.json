@@ -79,7 +79,7 @@
     "read-cmd-shim": "~1.0.1",
     "read-installed": "~4.0.3",
     "read-package-json": "~2.0.1",
-    "read-package-tree": "~5.1.0",
+    "read-package-tree": "~5.1.1",
     "realize-package-specifier": "~3.0.1",
     "retry": "~0.8.0",
     "rimraf": "~2.4.3",
