@@ -367,6 +367,21 @@ describe('clone()', function () {
         expect(copy._test).to.equal(4);
         done();
     });
+
+    it('clones an object where getOwnPropertyDescriptor returns undefined', function (done) {
+
+        var oldGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+        var obj = { a: 'b' };
+        Object.getOwnPropertyDescriptor = function () {
+
+            return undefined;
+        };
+
+        var copy = Hoek.clone(obj);
+        Object.getOwnPropertyDescriptor = oldGetOwnPropertyDescriptor;
+        expect(copy).to.deep.equal(obj);
+        done();
+    });
 });
 
 describe('merge()', function () {
