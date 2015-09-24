@@ -33,7 +33,6 @@ function Node (pkg, logical, physical, er, cache) {
 
   this.id = ID++
   this.package = pkg || {}
-  if (!this.package.name) this.package.name = path.basename(logical)
   this.path = logical
   this.realpath = physical
   this.parent = null
