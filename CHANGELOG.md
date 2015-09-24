@@ -1,3 +1,23 @@
+### v2.14.6 (2015-09-24):
+
+#### `¯\_(ツ)_/¯`
+
+Since `2.x` is LTS now, you can expect a slowdown in overall release sizes. On
+top of that, we had our all-company-npm-internal-conf thing on Monday and
+Tuesday so there wasn't really time to do much at all.
+
+Still, we're bringing you a couple of tiny little changes this week!
+
+* [`7b7da13`](https://github.com/npm/npm/commit/7b7da13c6cdf5eae53c20d5c69afc4c16e6f715d)
+  [#9471](https://github.com/npm/npm/pull/9471) When the port for a tarball is
+  different than the registry it's in, but the hostname is the same, the
+  protocol is now allowed to change, too.
+  ([@fastest963](https://github.com/fastest963))
+* [`6643ada`](https://github.com/npm/npm/commit/6643adaf9f37f08893e3ad28b797c55a36b2a152)
+  `request@2.63.0`: Use `application/json` as the default content type when
+  making `json` requests.
+  ([@simov](https://github.com/simov))
+
 ### v3.3.4 (2015-09-17):
 
 This is a relatively quiet release, bringing a few bug fixes and
