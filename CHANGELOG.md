@@ -1,3 +1,63 @@
+### v3.3.5 (2015-09-24):
+
+Some of you all may not be aware, but npm is ALSO a company. I tell you this
+'cause npm-the-company had an all-staff get together this week, flying in
+our remote folks from around the world. That was great, but it also
+basically eliminated normal work on Monday and Tuesday.
+
+Still, we've got a couple of really important bug fixes this week.  Plus a
+lil bit from the [now LTS 2.x branch](https://github.com/npm/npm/releases/tag/v2.14.6).
+
+#### ATTENTION WINDOWS USERS
+
+If you previously updated to npm 3 and you try to update again, you may get
+an error messaging telling you that npm won't install npm into itself. Until you
+are at 3.3.5 or greater, you can get around this with `npm install -f -g npm`.
+
+* [`bef06f5`](https://github.com/npm/npm/commit/bef06f5)
+  [#9741](https://github.com/npm/npm/pull/9741) Uh...  so...  er...  it
+  seems that since npm@3.2.0 on Windows with a default configuration, it's
+  been impossible to update npm.  Well, that's not actually true, there's a
+  work around (see above), but it shouldn't be complaining in the first
+  place.
+  ([@iarna](https://github.com/iarna))
+
+#### STACK OVERFLOWS ON PUBLISH
+
+* [`330b496`](https://github.com/npm/npm/commit/330b496)
+  [#9667](https://github.com/npm/npm/pull/9667)
+  We were keeping track of metadata about your project while packing the
+  tree in a way that resulted in this data being written to packed tar files
+  headers. When this metadata included cycles, it resulted in the the tar
+  file entering an infinite recursive loop and eventually crashing with a
+  stack overflow.
+
+  I've patched this by keeping track of your metadata by closing over the
+  variables in question instead, and I've further restricted gathering and
+  tracking the metadata to times when it's actually needed. (Which is only
+  if you need bundled modules.)
+  ([@iarna](https://github.com/iarna))
+
+#### LESS CRASHY ERROR MESSAGES ON BAD PACKAGES
+
+* [`829921f`](https://github.com/npm/npm/commit/829921f)
+  [#9741](https://github.com/npm/npm/pull/9741)
+  Packages with invalid names or versions were crashing the installer. These
+  are now captured and warned as was originally intended.
+  ([@iarna](https://github.com/iarna))
+
+#### ONE DEPENDENCY UPDATE
+
+* [`963295c`](https://github.com/npm/npm/commit/963295c)
+  npm-install-checks@2.0.1
+  ([@iarna](https://github.com/iarna))
+
+#### AND ONE SUBDEPENDENCY
+
+* [`448737d`](https://github.com/npm/npm/commit/448737d)
+  request@2.63.0
+  ([@simov](https://github.com/simov))
+
 ### v2.14.6 (2015-09-24):
 
 #### `¯\_(ツ)_/¯`
