@@ -52,4 +52,4 @@ use the `npm access` command to grant or revoke the appropriate permissions.
 ## SEE ALSO
 
 * npm-access(1)
-* npm-registr(7)
+* npm-registry(7)
