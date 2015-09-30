@@ -1,3 +1,59 @@
+### v3.3.6 (2015-09-30):
+
+I have the most exciting news for you this week.  YOU HAVE NO IDEA.  Well,
+ok, maybe you do if you follow my twitter.
+
+Performance just got 5 bazillion times better (under some circumstances,
+ymmv, etc).  So– my test scenario is our very own website.  In npm@2, on my
+macbook running `npm ls` takes about 5 seconds. Personally it's more than
+I'd like, but it's entire workable. In npm@3 it has been taking _50_ seconds,
+which is appalling. But after doing some work on Monday isolating the performance
+issues I've been able to reduce npm@3's run time back down to 5 seconds.
+
+Other scenarios were even worse, there was one that until now in npm@3 that
+took almost 6 minutes, and has been reduced to 14 seconds.
+
+* [`7bc0d4c`](https:github.com/npm/npm/commit/7bc0d4c)
+  [`cf42217`](https:github.com/npm/npm/commit/cf42217)
+  [#8826](https://github.com/npm/npm/issues/8826)
+  Stop using deepclone on super big datastructures. Avoid cloning
+  all-together even when that means mutating things, when possible.
+  Otherwise use a custom written tree-copying function that understands
+  the underlying datastructure well enough to only copy what we absolutely
+  need to.
+  ([@iarna](https://github.com/iarna))
+
+In other news, look for us this Friday and Saturday at the amazing
+[Open Source and Feelings](https://osfeels.com) conference, where something like a
+third of the company will be attending.
+
+#### And finally a dependency update
+
+* [`a6a4437`](https:github.com/npm/npm/commit/a6a4437)
+  glob@5.0.15
+  ([@isaacs](https://github.com/isaacs))
+
+#### And some subdep updates
+
+* [`cc5e6a0`](https:github.com/npm/npm/commit/cc5e6a0)
+  hoek@2.16.3
+  ([@nlf](https://github.com/nlf))
+* [`912a516`](https:github.com/npm/npm/commit/912a516)
+  boom@2.9.0
+  ([@arb](https://github.com/arb))
+* [`63944e9`](https:github.com/npm/npm/commit/63944e9)
+  bluebird@2.10.1
+  ([@petkaantonov](https://github.com/petkaantonov))
+* [`ef16003`](https:github.com/npm/npm/commit/ef16003)
+  mime-types@2.1.7 & mime-db@1.19.0
+  ([@dougwilson](https://github.com/dougwilson))
+* [`2b8c0dd`](https:github.com/npm/npm/commit/2b8c0dd)
+  request@2.64.0
+  ([@simov](https://github.com/simov))
+* [`8139124`](https:github.com/npm/npm/commit/8139124)
+  brace-expansion@1.1.1
+  ([@juliangruber](https://github.com/juliangruber))
+
 ### v3.3.5 (2015-09-24):
 
 Some of you all may not be aware, but npm is ALSO a company. I tell you this
