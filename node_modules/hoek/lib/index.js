@@ -67,8 +67,9 @@ exports.clone = function (obj, seen) {
         for (var i = 0, il = keys.length; i < il; ++i) {
             var key = keys[i];
             var descriptor = Object.getOwnPropertyDescriptor(obj, key);
-            if (descriptor.get ||
-                descriptor.set) {
+            if (descriptor &&
+                (descriptor.get ||
+                 descriptor.set)) {
 
                 Object.defineProperty(newObj, key, descriptor);
             }
