@@ -172,7 +172,7 @@
     "estraverse": "~4.1.0",
     "marked": "~0.3.5",
     "marked-man": "~0.1.5",
-    "nock": "~2.12.0",
+    "nock": "~2.13.0",
     "npm-registry-couchapp": "~2.6.11",
     "npm-registry-mock": "~1.0.1",
     "require-inject": "~1.2.1",
