@@ -1,3 +1,50 @@
+### v2.14.7 (2015-10-01):
+
+#### MORE RELEASE STAGGERING?!
+
+Hi all, and greetings from [Open Source & Feelings](http://osfeels.com)!
+
+So we're switching gears a little with how we handle our weekly releases: from
+now on, we're going to stagger release weeks between dependency bumps and
+regular patches. So, this week, aside from a doc change, we'll be doing only
+version bumps. Expect actual patches next week!
+
+#### TOTALLY FOLLOWING THE RULES ALREADY
+
+So I snuck this in, because it's our own [@snopeks](https://github.com/snopeks)'
+first contribution to the main `npm` repo. She's been helping with building
+support documents for Orgs, and contributed her general intro guide to the new
+feature so you can read it with `npm help orgs` right in your terminal!
+
+* [`8324ea0`](https://github.com/npm/npm/commit/8324ea023ace4e08b6b8959ad199e2457af9f9cf)
+  [#9761](https://github.com/npm/npm/pull/9761) Added general user guide for
+  Orgs.
+  ([@snopeks](https://github.com/snopeks))
+
+#### JUST. ONE. MORE.
+
+* [`9a502ca`](https://github.com/npm/npm/commit/9a502ca96e2d43ec75a8f684c9ca33af7e910f0a)
+  Use unique package name in tests to work around weird test-state-based
+  failures.
+  ([@iarna](https://github.com/iarna))
+
+#### OKAY ACTUALLY THE THING I WAS SUPPOSED TO DO
+
+Anyway -- here's your version bump! :)
+
+* [`4aeb94c`](https://github.com/npm/npm/commit/4aeb94c9f0df3f41802cf2e0397a998f3b527c25)
+  `request@2.64.0`: No longer defaulting to `application/json` for `json`
+  requests. Also some minor doc and packaging patches.
+  ([@simov](https://github.com/simov))
+  `minimatch@3.0.0`: No longer packaging browser modules.
+  ([@isaacs](https://github.com/isaacs))
+* [`a18b213`](https://github.com/npm/npm/commit/a18b213e6945a8f5faf882927829ac95f844e2aa)
+  `glob@5.0.15`: Upgraded `minimatch` dependency.
+  ([@isaacs](https://github.com/isaacs))
+* [`9eb64d4`](https://github.com/npm/npm/commit/9eb64e44509519ca9d788502edb2eba4cea5c86b)
+  `nock@2.13.0`
+  ([@pgte](https://github.com/pgte))
+
 ### v2.14.6 (2015-09-24):
 
 #### `¯\_(ツ)_/¯`
