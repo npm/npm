@@ -242,10 +242,6 @@ For example:
 
     npm install sax@">=0.1.0 <0.2.0" bench supervisor
 
-The `--tag` argument will apply to all of the specified install targets. If a
-tag with the given name exists, the tagged version is preferred over newer
-versions.
-
 The `--dry-run` argument will report in the usual way what the install would
 have done without actually installing anything.
 
