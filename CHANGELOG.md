@@ -1,3 +1,87 @@
+### v3.3.7 (2015-10-08):
+
+So, as Kat mentioned in last week's 2.x release, we're now swapping weeks
+between accepting PRs and doing dependency updates, in an effort to keep
+release management work from taking over our lives.  This week is a PR week,
+so we've got a bunch of goodies for you.
+
+Relatedly, this week means 3.3.6 is now `latest` and it is WAY faster than
+previous 3.x releases. Give it or this a look!
+
+#### OPTIONAL DEPS, MORE OPTIONAL
+
+* [`2289234`](https://github.com/npm/npm/commit/2289234)
+  [#9643](https://github.com/npm/npm/issues/9643)
+  [#9664](https://github.com/npm/npm/issues/9664)
+  `npm@3` was triggering `npm@2`'s build mechanics when it was linking bin files
+  into the tree.  This was originally intended to trigger rebuilds of
+  bundled modules, but `npm@3`'s flat module structure confused it.  This
+  caused two seemingly unrelated issues.  First, failing optional
+  dependencies could under some circumstances (if they were built during
+  this phase) trigger a full build failure.  And second, rebuilds were being
+  triggered of already installed modules, again, in some circumstances. 
+  Both of these are fixed by disabling the `npm@2` mechanics and adding a
+  special rebuild phase for the initial installation of bundled modules.
+  ([@iarna](https://github.com/iarna))
+
+#### BAD NAME, NO CRASH
+
+* [`b78fec9`](https://github.com/npm/npm/commit/b78fec9)
+  [#9766](https://github.com/npm/npm/issues/9766)
+  Refactor all attempts to read the module name or package name to go via a
+  single function, with appropriate guards unusual circumstances where they
+  aren't where we expect them.  This ultimately will ensure we don't see any
+  more recurrences of the `localeCompare` error and related crashers.
+  ([@iarna](https://github.com/iarna))
+
+#### MISCELLANEOUS BUG FIXES
+
+* [`22a3af0`](https://github.com/npm/npm/commit/22a3af0)
+  [#9553](https://github.com/npm/npm/pull/9553)
+  Factor the lifecycle code to manage paths out into its own module and use that.
+  ([@kentcdodds](https://github.com/kentcdodds))
+* [`6a29fe3`](https://github.com/npm/npm/commit/6a29fe3)
+  [#9677](https://github.com/npm/npm/pull/9677)
+  Start testing our stuff in node 4 on travis
+  ([@fscherwi](https://github.com/fscherwi))
+* [`508c6a4`](https://github.com/npm/npm/commit/508c6a4)
+  [#9669](https://github.com/npm/npm/issues/9669)
+  Make `recalculateMetadata` more resilient to unexpectedly bogus dependency specifiers.
+  ([@tmct](https://github.com/tmct))
+* [`3c44763`](https://github.com/npm/npm/commit/3c44763)
+  [#9643](https://github.com/npm/npm/issues/9463)
+  Update `install --only` to ignore the `NODE_ENV` var and _just_ use the only
+  value, if specified.
+  ([@watilde](https://github.com/watilde))
+* [`87336c3`](https://github.com/npm/npm/commit/87336c3)
+  [#9879](https://github.com/npm/npm/pull/9879)
+  `npm@3`'s shrinkwrap was refusing to shrinkwrap if an optional dependency
+  was missing– patch it to allow this.
+  ([@mantoni](https://github.com/mantoni))
+
+#### DOCUMENTATION UPDATES
+
+* [`82659fd`](https://github.com/npm/npm/commit/82659fd)
+  [#9208](https://github.com/npm/npm/issues/9208)
+  Correct the npm style guide around quote usage
+  ([@aaroncrows](https://github.com/aaroncrows))
+* [`a69c83a`](https://github.com/npm/npm/commit/a69c83a)
+  [#9645](https://github.com/npm/npm/pull/9645)
+  Fix spelling error in README
+  ([@dkoleary88](https://github.com/dkoleary88))
+* [`f2cf054`](https://github.com/npm/npm/commit/f2cf054)
+  [#9714](https://github.com/npm/npm/pull/9714)
+  Fix typos in our documentation
+  ([@reggi](https://github.com/reggi))
+* [`7224bef`](https://github.com/npm/npm/commit/7224bef)
+  [#9759](https://github.com/npm/npm/pull/9759)
+  Fix typo in npm-team docs
+  ([@zkat](https://github.com/zkat))
+* [`7e6e007`](https://github.com/npm/npm/commit/7e6e007)
+  [#9820](https://github.com/npm/npm/pull/9820)
+  Correct documentation as to `binding.gyp`
+  ([@KenanY](https://github.com/KenanY))
+
 ### v2.14.8 (2015-10-08):
 
 #### SLOWLY RECOVERING FROM FEELINGS
@@ -92,13 +176,13 @@ I have the most exciting news for you this week.  YOU HAVE NO IDEA.  Well,
 ok, maybe you do if you follow my twitter.
 
 Performance just got 5 bazillion times better (under some circumstances,
-ymmv, etc).  So– my test scenario is our very own website.  In npm@2, on my
+ymmv, etc).  So– my test scenario is our very own website.  In `npm@2`, on my
 macbook running `npm ls` takes about 5 seconds. Personally it's more than
-I'd like, but it's entire workable. In npm@3 it has been taking _50_ seconds,
+I'd like, but it's entire workable. In `npm@3` it has been taking _50_ seconds,
 which is appalling. But after doing some work on Monday isolating the performance
-issues I've been able to reduce npm@3's run time back down to 5 seconds.
+issues I've been able to reduce `npm@3`'s run time back down to 5 seconds.
 
-Other scenarios were even worse, there was one that until now in npm@3 that
+Other scenarios were even worse, there was one that until now in `npm@3` that
 took almost 6 minutes, and has been reduced to 14 seconds.
 
 * [`7bc0d4c`](https://github.com/npm/npm/commit/7bc0d4c)
@@ -160,7 +244,7 @@ are at 3.3.5 or greater, you can get around this with `npm install -f -g npm`.
 
 * [`bef06f5`](https://github.com/npm/npm/commit/bef06f5)
   [#9741](https://github.com/npm/npm/pull/9741) Uh...  so...  er...  it
-  seems that since npm@3.2.0 on Windows with a default configuration, it's
+  seems that since `npm@3.2.0` on Windows with a default configuration, it's
   been impossible to update npm.  Well, that's not actually true, there's a
   work around (see above), but it shouldn't be complaining in the first
   place.
@@ -232,7 +316,7 @@ aren't yet released.
 
 #### NO BETA NOTICE THIS TIME!!
 
-But, EXCITING NEWS FRIENDS, this week marks the exit of npm@3
+But, EXCITING NEWS FRIENDS, this week marks the exit of `npm@3`
 from beta. This means that the week of this release,
 [v3.3.3](https://github.com/npm/npm/releases/tag/v3.3.3) will
 become `latest` and this version (v3.3.4) will become `next`!!
@@ -241,8 +325,8 @@ become `latest` and this version (v3.3.4) will become `next`!!
 
 What I call "cruft", by which I mean, files sitting around in
 your `node_modules` folder, will no longer produce warnings in
-`npm ls` nor during `npm install`. This brings npm@3's behavior
-in line with npm@2.
+`npm ls` nor during `npm install`. This brings `npm@3`'s behavior
+in line with `npm@2`.
 
 * [`a127801`](https://github.com/npm/npm/commit/a127801)
   [#9285](https://github.com/npm/npm/pull/9586)
@@ -260,24 +344,24 @@ in line with npm@2.
 #### MODULE UPDATES
 
 * [`ebb92ca`](https://github.com/npm/npm/commit/ebb92ca)
-  retry@0.8.0 [(@tim-kos](https://github.com/tim-kos))
+  retry@0.8.0 ([@tim-kos](https://github.com/tim-kos))
 * [`55f1285`](https://github.com/npm/npm/commit/55f1285)
-  normalize-package-data@2.3.4 [(@zkat](https://github.com/zkat))
+  normalize-package-data@2.3.4 ([@zkat](https://github.com/zkat))
 * [`6d4ebff`](https://github.com/npm/npm/commit/6d4ebff)
-  sha@2.0.1 [(@ForbesLindesay](https://github.com/ForbesLindesay))
+  sha@2.0.1 ([@ForbesLindesay](https://github.com/ForbesLindesay))
 * [`09a9c7a`](https://github.com/npm/npm/commit/09a9c7a)
-  semver@5.0.3 [(@isaacs](https://github.com/isaacs))
+  semver@5.0.3 ([@isaacs](https://github.com/isaacs))
 * [`745000f`](https://github.com/npm/npm/commit/745000f)
-  node-gyp@3.0.3 [(@rvagg](https://github.com/rvagg))
+  node-gyp@3.0.3 ([@rvagg](https://github.com/rvagg))
 
 #### SUB DEP MODULE UPDATES
 
 * [`578ca25`](https://github.com/npm/npm/commit/578ca25)
-  request@2.62.0 [(@simov](https://github.com/simov))
+  request@2.62.0 ([@simov](https://github.com/simov))
 * [`1d8996e`](https://github.com/npm/npm/commit/1d8996e)
-  jju@1.2.1 [(@rlidwka](https://github.com/rlidwka))
+  jju@1.2.1 ([@rlidwka](https://github.com/rlidwka))
 * [`6da1ba4`](https://github.com/npm/npm/commit/6da1ba4)
-  hoek@2.16.2 [(@nlf](https://github.com/nlf))
+  hoek@2.16.2 ([@nlf](https://github.com/nlf))
 
 ### v2.14.5 (2015-09-17):
 
