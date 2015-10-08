@@ -1,3 +1,44 @@
+### v2.14.8 (2015-10-08):
+
+#### SLOWLY RECOVERING FROM FEELINGS
+
+OS&F is definitely my favorite convention I've gone to. Y'all should check it
+out next year! Rebecca and Kat are back, although Forrest is out at
+[&yet conf](http://andyetconf.com/).
+
+This week sees another tiny LTS release with non-code-related patches -- just
+CI/release things.
+
+Meanwhile, have you heard? `npm@3` is much faster now! Go upgrade with `npm
+install -g npm@latest` and give it a whirl if you haven't already!
+
+#### IF YOU CHANGE CASING ON A FILE, YOU ARE NOT MY FRIEND
+
+Seriously. I love me some case-sensitive filesystems, but a lot of us have to
+deal with `git` and its funky support for case normalizing systems. Have mercy
+and just don't bother if all you're changing is casing, please? Otherwise, I
+have to do this little dance to prevent horrible conflicts.
+
+* [`c3a7b61`](https://github.com/npm/npm/commit/c3a7b619786650a45653c8b55b8741fc7bb5cfda)
+  [#9804](https://github.com/npm/npm/pulls/9804) Remove the readme file with
+  weird casing.
+  ([@zkat](https://github.com/zkat))
+* [`f3f619e`](https://github.com/npm/npm/commit/f3f619e06e4be1378dbf286f897b50e9c69c9557)
+  [#9804](https://github.com/npm/npm/pulls/9804) Add the readme file back in,
+  with desired casing.
+  ([@zkat](https://github.com/zkat))
+
+#### IDK. OUR CI DOESN'T EVEN FULLY WORK YET BUT SURE
+
+Either way, it's nice to make sure we're running stuff on the latest Node. `4.2`
+is getting released very soon, though (this week?), and that'll be the first
+official LTS release!
+
+* [`bd0b9ab`](https://github.com/npm/npm/commit/bd0b9ab6e60a31448794bbd88f94672572c3cb55)
+  [#9827](https://github.com/npm/npm/pulls/9827) Add node `4.0` and `4.1` to
+  TravisCI
+  ([@JaKXz](https://github.com/JaKXz))
+
 ### v2.14.7 (2015-10-01):
 
 #### MORE RELEASE STAGGERING?!
