@@ -30,6 +30,7 @@
   "main": "./lib/npm.js",
   "bin": "./bin/npm-cli.js",
   "dependencies": {
+    "add-to-path": "~1.1.2",
     "abbrev": "~1.0.7",
     "add-to-path": "~1.1.2",
     "ansicolors": "~0.3.2",
