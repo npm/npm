@@ -77,8 +77,6 @@ Anyway -- here's your version bump! :)
   `request@2.64.0`: No longer defaulting to `application/json` for `json`
   requests. Also some minor doc and packaging patches.
   ([@simov](https://github.com/simov))
-  `minimatch@3.0.0`: No longer packaging browser modules.
-  ([@isaacs](https://github.com/isaacs))
 * [`a18b213`](https://github.com/npm/npm/commit/a18b213e6945a8f5faf882927829ac95f844e2aa)
   `glob@5.0.15`: Upgraded `minimatch` dependency.
   ([@isaacs](https://github.com/isaacs))
