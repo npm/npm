@@ -31,7 +31,6 @@
   "bin": "./bin/npm-cli.js",
   "dependencies": {
     "abbrev": "~1.0.7",
-    "add-to-path": "~1.1.2",
     "ansicolors": "~0.3.2",
     "ansistyles": "~0.1.3",
     "aproba": "~1.0.1",
@@ -101,7 +100,6 @@
   },
   "bundleDependencies": [
     "abbrev",
-    "add-to-path",
     "ansicolors",
     "ansistyles",
     "aproba",
