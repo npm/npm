@@ -1,3 +1,12 @@
+### v3.3.8 (2015-10-12):
+
+This is a small update release, we're reverting `22a3af0` from last week's
+release, as it is resulting in crashes.  We'll revisit this PR during this
+week.
+
+* [`ddde1d5`] Revert "lifecycle: Swap out custom logic with add-to-path module"
+  ([@iarna](https://github.com/iarna))
+
 ### v3.3.7 (2015-10-08):
 
 So, as Kat mentioned in last week's 2.x release, we're now swapping weeks
