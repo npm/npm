@@ -22,7 +22,6 @@ test('shrinkwrap does not fail on missing optional dependency', function (t) {
   }
 
   mr({port: common.port, mocks: mocks}, function (er, s) {
-
     function fail (err) {
       s.close() // Close on failure to allow node to exit
       t.fail(err)

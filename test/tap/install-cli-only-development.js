@@ -62,7 +62,6 @@ test('\'npm install --only=development\' should only install devDependencies', f
 })
 
 test('\'npm install --only=development\' should only install devDependencies regardless of npm.config.get(\'production\')', function (t) {
-
   cleanup()
   setup()
 
