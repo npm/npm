@@ -62,6 +62,18 @@ var preversionOnly = {
   }
 }
 
+var nested = {
+  name: 'scripted',
+  version: '1.2.3',
+  scripts: {
+    whoa: 'echo whoa',
+    deep: {
+      one: 'echo one',
+      two: 'echo two'
+    }
+  }
+}
+
 function testOutput (t, command, er, code, stdout, stderr) {
   var lines
 
@@ -258,6 +270,10 @@ test('npm run-script no-params (direct only)', function (t) {
     t.equal(stdout, expected, 'got expected output')
     t.end()
   })
+
+test('npm run-script nested', function (t) {
+  writeMetadata(nested)
+  common.npm(['run-script', 'deep.one'], opts, testOutput.bind(null, t, 'one'))
 })
 
 test('cleanup', function (t) {
