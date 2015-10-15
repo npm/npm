@@ -1,3 +1,38 @@
+### v3.3.9 (2015-10-15):
+
+This week sees a few small changes ready to land:
+
+#### TRAVIS NODE 0.8 BUILDS REJOICE
+
+* [`25a234b`](https://github.com/npm/npm/commit/25a234b)
+  [#9668](https://github.com/npm/npm/issues/9668)
+  Install `npm@3`'s bundled dependencies with `npm@2`, so that the ancient npm
+  that ships with node 0.8 can install `npm@3` directly.
+  ([@othiym23](https://github.com/othiym23))
+
+#### SMALL ERROR MESSAGE IMPROVEMENT
+
+* [`a332f61`](https://github.com/npm/npm/commit/a332f61)
+  [#9927](https://github.com/npm/npm/pull/9927)
+  Update error messages where we report a list of versions that you could
+  have installed to show this as a comma separated list instead of as JSON.
+  ([@iarna](https://github.com/iarna))
+
+#### DEPENDENCY UPDATES
+
+* [`4cd74b0`](https://github.com/npm/npm/commit/4cd74b0)
+  `nock@2.15.0`
+  ([@pgte](https://github.com/pgte))
+* [`9360976`](https://github.com/npm/npm/commit/9360976)
+  `tap@2.1.1`
+  ([@isaacs](https://github.com/isaacs))
+* [`1ead0a4`](https://github.com/npm/npm/commit/1ead0a4)
+  `which@1.2.0`
+  ([@isaacs](https://github.com/isaacs))
+* [`759f88a`](https://github.com/npm/npm/commit/759f88a)
+  `has-unicode@1.0.1`
+  ([@iarna](https://github.com/iarna))
+
 ### v3.3.8 (2015-10-12):
 
 This is a small update release, we're reverting
