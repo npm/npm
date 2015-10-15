@@ -49,6 +49,7 @@ env.npm_config_npat = 'false'
 env.PATH = pathEnv.join(pathEnvSplit)
 env.NODE_PATH = path.join(root, 'node_modules')
 env.npm_config_cache = cache
+env.npm_config_user_agent = ''
 
 function cleanup (cb) {
   if (failures !== 0) return
