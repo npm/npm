@@ -13,7 +13,10 @@ npm-install(1) -- Install a package
     npm install <folder>
 
     alias: npm i
-    common options: [--save|--save-dev|--save-optional] [--save-exact] [--dry-run]
+    common options: [--save|--save-dev|--save-optional]
+                    [--save-exact]
+                    [--dry-run]
+                    [--prefix]
 
 ## DESCRIPTION
 
@@ -248,6 +251,11 @@ versions.
 
 The `--dry-run` argument will report in the usual way what the install would
 have done without actually installing anything.
+
+The `--prefix` option lets you specify where to install the package. For
+example, to install `sax` in the current directory, you could do:
+
+    npm install sax --prefix=.
 
 The `--force` argument will force npm to fetch remote resources even if a
 local copy exists on disk.
