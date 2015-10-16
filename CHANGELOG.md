@@ -65,7 +65,7 @@ previous 3.x releases. Give it or this a look!
   caused two seemingly unrelated issues.  First, failing optional
   dependencies could under some circumstances (if they were built during
   this phase) trigger a full build failure.  And second, rebuilds were being
-  triggered of already installed modules, again, in some circumstances. 
+  triggered of already installed modules, again, in some circumstances.
   Both of these are fixed by disabling the `npm@2` mechanics and adding a
   special rebuild phase for the initial installation of bundled modules.
   ([@iarna](https://github.com/iarna))
@@ -248,28 +248,28 @@ third of the company will be attending.
 #### And finally a dependency update
 
 * [`a6a4437`](https://github.com/npm/npm/commit/a6a4437)
-  glob@5.0.15
+  `glob@5.0.15`
   ([@isaacs](https://github.com/isaacs))
 
 #### And some subdep updates
 
 * [`cc5e6a0`](https://github.com/npm/npm/commit/cc5e6a0)
-  hoek@2.16.3
+  `hoek@2.16.3`
   ([@nlf](https://github.com/nlf))
 * [`912a516`](https://github.com/npm/npm/commit/912a516)
-  boom@2.9.0
+  `boom@2.9.0`
   ([@arb](https://github.com/arb))
 * [`63944e9`](https://github.com/npm/npm/commit/63944e9)
-  bluebird@2.10.1
+  `bluebird@2.10.1`
   ([@petkaantonov](https://github.com/petkaantonov))
 * [`ef16003`](https://github.com/npm/npm/commit/ef16003)
-  mime-types@2.1.7 & mime-db@1.19.0
+  `mime-types@2.1.7` & `mime-db@1.19.0`
   ([@dougwilson](https://github.com/dougwilson))
 * [`2b8c0dd`](https://github.com/npm/npm/commit/2b8c0dd)
-  request@2.64.0
+  `request@2.64.0`
   ([@simov](https://github.com/simov))
 * [`8139124`](https://github.com/npm/npm/commit/8139124)
-  brace-expansion@1.1.1
+  `brace-expansion@1.1.1`
   ([@juliangruber](https://github.com/juliangruber))
 
 ### v3.3.5 (2015-09-24):
@@ -323,13 +323,13 @@ are at 3.3.5 or greater, you can get around this with `npm install -f -g npm`.
 #### ONE DEPENDENCY UPDATE
 
 * [`963295c`](https://github.com/npm/npm/commit/963295c)
-  npm-install-checks@2.0.1
+  `npm-install-checks@2.0.1`
   ([@iarna](https://github.com/iarna))
 
 #### AND ONE SUBDEPENDENCY
 
 * [`448737d`](https://github.com/npm/npm/commit/448737d)
-  request@2.63.0
+  `request@2.63.0`
   ([@simov](https://github.com/simov))
 
 ### v2.14.6 (2015-09-24):
@@ -390,24 +390,24 @@ in line with `npm@2`.
 #### MODULE UPDATES
 
 * [`ebb92ca`](https://github.com/npm/npm/commit/ebb92ca)
-  retry@0.8.0 ([@tim-kos](https://github.com/tim-kos))
+  `retry@0.8.0` ([@tim-kos](https://github.com/tim-kos))
 * [`55f1285`](https://github.com/npm/npm/commit/55f1285)
-  normalize-package-data@2.3.4 ([@zkat](https://github.com/zkat))
+  `normalize-package-data@2.3.4` ([@zkat](https://github.com/zkat))
 * [`6d4ebff`](https://github.com/npm/npm/commit/6d4ebff)
-  sha@2.0.1 ([@ForbesLindesay](https://github.com/ForbesLindesay))
+  `sha@2.0.1` ([@ForbesLindesay](https://github.com/ForbesLindesay))
 * [`09a9c7a`](https://github.com/npm/npm/commit/09a9c7a)
-  semver@5.0.3 ([@isaacs](https://github.com/isaacs))
+  `semver@5.0.3` ([@isaacs](https://github.com/isaacs))
 * [`745000f`](https://github.com/npm/npm/commit/745000f)
-  node-gyp@3.0.3 ([@rvagg](https://github.com/rvagg))
+  `node-gyp@3.0.3` ([@rvagg](https://github.com/rvagg))
 
 #### SUB DEP MODULE UPDATES
 
 * [`578ca25`](https://github.com/npm/npm/commit/578ca25)
-  request@2.62.0 ([@simov](https://github.com/simov))
+  `request@2.62.0` ([@simov](https://github.com/simov))
 * [`1d8996e`](https://github.com/npm/npm/commit/1d8996e)
-  jju@1.2.1 ([@rlidwka](https://github.com/rlidwka))
+  `jju@1.2.1` ([@rlidwka](https://github.com/rlidwka))
 * [`6da1ba4`](https://github.com/npm/npm/commit/6da1ba4)
-  hoek@2.16.2 ([@nlf](https://github.com/nlf))
+  `hoek@2.16.2` ([@nlf](https://github.com/nlf))
 
 ### v2.14.5 (2015-09-17):
 
@@ -564,59 +564,59 @@ definitely shouldn't have been using. We're not done yet, but
 this is the bulk of them.
 
 * [`e7bc98e`](https://github.com/npm/npm/commit/e7bc98e)
-  write-file-atomic@1.1.3
+  `write-file-atomic@1.1.3`
   ([@iarna](https://github.com/iarna))
 * [`7417600`](https://github.com/npm/npm/commit/7417600)
-  tar@2.2.1
+  `tar@2.2.1`
   ([@zkat](https://github.com/zkat))
 * [`e4e9d40`](https://github.com/npm/npm/commit/e4e9d40)
-  read-package-json@2.0.1
+  `read-package-json@2.0.1`
   ([@zkat](https://github.com/zkat))
 * [`481611d`](https://github.com/npm/npm/commit/481611d)
-  read-installed@4.0.3
+  `read-installed@4.0.3`
   ([@zkat](https://github.com/zkat))
 * [`0dabbda`](https://github.com/npm/npm/commit/0dabbda)
-  npm-registry-client@7.0.4
+  `npm-registry-client@7.0.4`
   ([@zkat](https://github.com/zkat))
 * [`c075a91`](https://github.com/npm/npm/commit/c075a91)
-  fstream@1.0.8
+  `fstream@1.0.8`
   ([@zkat](https://github.com/zkat))
 * [`2e4341a`](https://github.com/npm/npm/commit/2e4341a)
-  fs-write-stream-atomic@1.0.4
+  `fs-write-stream-atomic@1.0.4`
   ([@zkat](https://github.com/zkat))
 * [`18ad16e`](https://github.com/npm/npm/commit/18ad16e)
-  fs-vacuum@1.2.7
+  `fs-vacuum@1.2.7`
   ([@zkat](https://github.com/zkat))
 
 #### DEPENDENCY UPDATES
 
 * [`9d6666b`](https://github.com/npm/npm/commit/9d6666b)
-  node-gyp@3.0.1
+  `node-gyp@3.0.1`
   ([@rvagg](https://github.com/rvagg))
 * [`349c4df`](https://github.com/npm/npm/commit/349c4df)
-  retry@0.7.0
+  `retry@0.7.0`
   ([@tim-kos](https://github.com/tim-kos))
 * [`f507551`](https://github.com/npm/npm/commit/f507551)
-  which@1.1.2
+  `which@1.1.2`
   ([@isaacs](https://github.com/isaacs))
 * [`e5b6743`](https://github.com/npm/npm/commit/e5b6743)
-  nopt@3.0.4
+  `nopt@3.0.4`
   ([@zkat](https://github.com/zkat))
 
 #### THE DEPENDENCIES OF OUR DEPENDENCIES ARE OUR DEPENDENCIES UPDATES
 
 * [`316382d`](https://github.com/npm/npm/commit/316382d)
-  mime-types@2.1.6 & mime-db@1.18.0
+  `mime-types@2.1.6` & `mime-db@1.18.0`
 * [`64b741e`](https://github.com/npm/npm/commit/64b741e)
-  spdx-correct@1.0.1
+  `spdx-correct@1.0.1`
 * [`fff62ac`](https://github.com/npm/npm/commit/fff62ac)
-  process-nextick-args@1.0.3
+  `process-nextick-args@1.0.3`
 * [`9d6488c`](https://github.com/npm/npm/commit/9d6488c)
-  cryptiles@2.0.5
+  `cryptiles@2.0.5`
 * [`1912012`](https://github.com/npm/npm/commit/1912012)
-  bluebird@2.10.0
+  `bluebird@2.10.0`
 * [`4d09402`](https://github.com/npm/npm/commit/4d09402)
-  readdir-scoped-modules@1.0.2
+  `readdir-scoped-modules@1.0.2`
 
 ### v2.14.4 (2015-09-10):
 
@@ -855,21 +855,21 @@ frontline continuous deployment just yet.
 
 #### SOME DEP UPDATES
 
-* [`1ed1364`](https://github.com/npm/npm/commit/1ed1364) rimraf@2.4.3
+* [`1ed1364`](https://github.com/npm/npm/commit/1ed1364) `rimraf@2.4.3`
   ([@isaacs](https://github.com/isaacs)) Added EPERM to delay/retry loop
-* [`e7b8315`](https://github.com/npm/npm/commit/e7b8315) read@1.0.7
+* [`e7b8315`](https://github.com/npm/npm/commit/e7b8315) `read@1.0.7`
   Smaller distribution package, better metadata
   ([@isaacs](https://github.com/isaacs))
 
 #### SOME DEPS OF DEPS UPDATES
 
-* [`b273bcc`](https://github.com/npm/npm/commit/b273bcc) mime-types@2.1.5
-* [`df6e225`](https://github.com/npm/npm/commit/df6e225) mime-db@1.17.0
-* [`785f2ad`](https://github.com/npm/npm/commit/785f2ad) is-my-json-valid@2.12.1
-* [`88170dd`](https://github.com/npm/npm/commit/88170dd) form-data@1.0.0-rc3
-* [`af5357b`](https://github.com/npm/npm/commit/af5357b) request@2.61.0
-* [`337f96a`](https://github.com/npm/npm/commit/337f96a) chalk@1.1.1
-* [`3dfd74d`](https://github.com/npm/npm/commit/3dfd74d) async@1.4.2
+* [`b273bcc`](https://github.com/npm/npm/commit/b273bcc) `mime-types@2.1.5`
+* [`df6e225`](https://github.com/npm/npm/commit/df6e225) `mime-db@1.17.0`
+* [`785f2ad`](https://github.com/npm/npm/commit/785f2ad) `is-my-json-valid@2.12.1`
+* [`88170dd`](https://github.com/npm/npm/commit/88170dd) `form-data@1.0.0-rc3`
+* [`af5357b`](https://github.com/npm/npm/commit/af5357b) `request@2.61.0`
+* [`337f96a`](https://github.com/npm/npm/commit/337f96a) `chalk@1.1.1`
+* [`3dfd74d`](https://github.com/npm/npm/commit/3dfd74d) `async@1.4.2`
 
 ### v2.14.2 (2015-08-27):
 
@@ -1172,8 +1172,8 @@ think we have a handle on stack explosions that effect a small portion of
 our users.  We also have some tantalizing clues as to where some low hanging
 fruit may be for performance issues.
 
-And of course, in addition to the npm@3 specific bug fixes, there are some
-great one's coming in from npm@2!  [@othiym23](https://github.com/othiym23)
+And of course, in addition to the `npm@3` specific bug fixes, there are some
+great one's coming in from `npm@2`!  [@othiym23](https://github.com/othiym23)
 put together that release this week– check out its
 [release notes](https://github.com/npm/npm/releases/tag/v2.13.4) for the deets.
 
@@ -1216,17 +1216,17 @@ maintenance or frontline continuous deployment just yet.
 #### DEP VERSION BUMPS
 
 * [`990ee4f`](https://github.com/npm/npm/commit/990ee4f)
-  path-is-inside@1.0.1 ([@domenic](https://github.com/domenic))
+  `path-is-inside@1.0.1` ([@domenic](https://github.com/domenic))
 * [`1f71ec0`](https://github.com/npm/npm/commit/1f71ec0)
-  lodash.clonedeep@3.0.2 ([@jdalton](https://github.com/jdalton))
+  `lodash.clonedeep@3.0.2` ([@jdalton](https://github.com/jdalton))
 * [`a091354`](https://github.com/npm/npm/commit/a091354)
-  marked@0.3.5 ([@chjj](https://github.com/chjj))
+  `marked@0.3.5` ([@chjj](https://github.com/chjj))
 * [`fc51f28`](https://github.com/npm/npm/commit/fc51f28)
-  tap@1.3.2 ([@isaacs](https://github.com/isaacs))
+  `tap@1.3.2` ([@isaacs](https://github.com/isaacs))
 * [`3569ec0`](https://github.com/npm/npm/commit/3569ec0)
-  nock@2.10.0 ([@pgte](https://github.com/pgte))
+  `nock@2.10.0` ([@pgte](https://github.com/pgte))
 * [`ad5f6fd`](https://github.com/npm/npm/commit/ad5f6fd)
-  npm-registry-mock@1.0.1 ([@isaacs](https://github.com/isaacs))
+  `npm-registry-mock@1.0.1` ([@isaacs](https://github.com/isaacs))
 
 ### v2.13.5 (2015-08-07):
 
@@ -1321,7 +1321,7 @@ just yet.
 
 #### DEV DEP UPDATE
 
-* [`555f60c`](https://github.com/npm/npm/commit/555f60c) marked@0.3.4
+* [`555f60c`](https://github.com/npm/npm/commit/555f60c) `marked@0.3.4`
 
 ### v2.13.4 (2015-07-30):
 
@@ -1351,7 +1351,7 @@ So here it is. The patch. Hope it helps. (Thanks,
 Hooray.
 
 * [`d204683`](https://github.com/npm/npm/commit/d2046839d471322e61e3ceb0f00e78e5c481f967)
-  nock@2.9.1
+  `nock@2.9.1`
   ([@pgte](https://github.com/pgte))
 
 ### v3.2.0 (2015-07-24):
@@ -1389,7 +1389,7 @@ just yet.
 * [`b3ee452`](https://github.com/npm/npm/commit/b3ee452)
   [#9038](https://github.com/npm/npm/pull/9038)
   We previously disabled the use of the new `fs.access` API on Windows, but
-  the bug we were seeing is fixed in io.js@1.5.0 so we now use `fs.access`
+  the bug we were seeing is fixed in `io.js@1.5.0` so we now use `fs.access`
   if you're using that version or greater.
   ([@iarna](https://github.com/iarna))
 
@@ -1407,47 +1407,47 @@ just yet.
 These are all development dependencies and semver-compatible subdep
 upgrades, so they should not have visible impact on users.
 
-* [`6b3f6d9`](https://github.com/npm/npm/commit/6b3f6d9) standard@4.3.3
-* [`f4e22e5`](https://github.com/npm/npm/commit/f4e22e5) readable-stream@2.0.2 (inside concat-stream)
-* [`f130bfc`](https://github.com/npm/npm/commit/f130bfc) minimatch@2.0.10 (inside node-gyp's copy of glob)
-* [`36c6a0d`](https://github.com/npm/npm/commit/36c6a0d) caseless@0.11.0
-* [`80df59c`](https://github.com/npm/npm/commit/80df59c) chalk@1.1.0
-* [`ea935d9`](https://github.com/npm/npm/commit/ea935d9) bluebird@2.9.34
-* [`3588a0c`](https://github.com/npm/npm/commit/3588a0c) extend@3.0.0
-* [`c6a8450`](https://github.com/npm/npm/commit/c6a8450) form-data@1.0.0-rc2
-* [`a04925b`](https://github.com/npm/npm/commit/a04925b) har-validator@1.8.0
-* [`ee7c095`](https://github.com/npm/npm/commit/ee7c095) has-ansi@2.0.0
-* [`944fc34`](https://github.com/npm/npm/commit/944fc34) hawk@3.1.0
-* [`783dc7b`](https://github.com/npm/npm/commit/783dc7b) lodash._basecallback@3.3.1
-* [`acef0fe`](https://github.com/npm/npm/commit/acef0fe) lodash._baseclone@3.3.0
-* [`dfe959a`](https://github.com/npm/npm/commit/dfe959a) lodash._basedifference@3.0.3
-* [`a03bc76`](https://github.com/npm/npm/commit/a03bc76) lodash._baseflatten@3.1.4
-* [`8a07d50`](https://github.com/npm/npm/commit/8a07d50) lodash._basetostring@3.0.1
-* [`7785e3f`](https://github.com/npm/npm/commit/7785e3f) lodash._baseuniq@3.0.3
-* [`826fb35`](https://github.com/npm/npm/commit/826fb35) lodash._createcache@3.1.2
-* [`76030b3`](https://github.com/npm/npm/commit/76030b3) lodash._createpadding@3.6.1
-* [`1a49ec6`](https://github.com/npm/npm/commit/1a49ec6) lodash._getnative@3.9.1
-* [`eebe47f`](https://github.com/npm/npm/commit/eebe47f) lodash.isarguments@3.0.4
-* [`09994d4`](https://github.com/npm/npm/commit/09994d4) lodash.isarray@3.0.4
-* [`b6f8dbf`](https://github.com/npm/npm/commit/b6f8dbf) lodash.keys@3.1.2
-* [`c67dd6b`](https://github.com/npm/npm/commit/c67dd6b) lodash.pad@3.1.1
-* [`4add042`](https://github.com/npm/npm/commit/4add042) lodash.repeat@3.0.1
-* [`e04993c`](https://github.com/npm/npm/commit/e04993c) lru-cache@2.6.5
-* [`2ed7da4`](https://github.com/npm/npm/commit/2ed7da4) mime-db@1.15.0
-* [`ae08244`](https://github.com/npm/npm/commit/ae08244) mime-types@2.1.3
-* [`e71410e`](https://github.com/npm/npm/commit/e71410e) os-homedir@1.0.1
-* [`67c13e0`](https://github.com/npm/npm/commit/67c13e0) process-nextick-args@1.0.2
-* [`12ee041`](https://github.com/npm/npm/commit/12ee041) qs@4.0.0
-* [`15564a6`](https://github.com/npm/npm/commit/15564a6) spdx-license-ids@1.0.2
-* [`8733bff`](https://github.com/npm/npm/commit/8733bff) supports-color@2.0.0
-* [`230943c`](https://github.com/npm/npm/commit/230943c) tunnel-agent@0.4.1
-* [`26a4653`](https://github.com/npm/npm/commit/26a4653) ansi-styles@2.1.0
-* [`3d27081`](https://github.com/npm/npm/commit/3d27081) bl@1.0.0
-* [`9efa110`](https://github.com/npm/npm/commit/9efa110) async@1.4.0
+* [`6b3f6d9`](https://github.com/npm/npm/commit/6b3f6d9) `standard@4.3.3`
+* [`f4e22e5`](https://github.com/npm/npm/commit/f4e22e5) `readable-stream@2.0.2` (inside concat-stream)
+* [`f130bfc`](https://github.com/npm/npm/commit/f130bfc) `minimatch@2.0.10` (inside node-gyp's copy of glob)
+* [`36c6a0d`](https://github.com/npm/npm/commit/36c6a0d) `caseless@0.11.0`
+* [`80df59c`](https://github.com/npm/npm/commit/80df59c) `chalk@1.1.0`
+* [`ea935d9`](https://github.com/npm/npm/commit/ea935d9) `bluebird@2.9.34`
+* [`3588a0c`](https://github.com/npm/npm/commit/3588a0c) `extend@3.0.0`
+* [`c6a8450`](https://github.com/npm/npm/commit/c6a8450) `form-data@1.0.0-rc2`
+* [`a04925b`](https://github.com/npm/npm/commit/a04925b) `har-validator@1.8.0`
+* [`ee7c095`](https://github.com/npm/npm/commit/ee7c095) `has-ansi@2.0.0`
+* [`944fc34`](https://github.com/npm/npm/commit/944fc34) `hawk@3.1.0`
+* [`783dc7b`](https://github.com/npm/npm/commit/783dc7b) `lodash._basecallback@3.3.1`
+* [`acef0fe`](https://github.com/npm/npm/commit/acef0fe) `lodash._baseclone@3.3.0`
+* [`dfe959a`](https://github.com/npm/npm/commit/dfe959a) `lodash._basedifference@3.0.3`
+* [`a03bc76`](https://github.com/npm/npm/commit/a03bc76) `lodash._baseflatten@3.1.4`
+* [`8a07d50`](https://github.com/npm/npm/commit/8a07d50) `lodash._basetostring@3.0.1`
+* [`7785e3f`](https://github.com/npm/npm/commit/7785e3f) `lodash._baseuniq@3.0.3`
+* [`826fb35`](https://github.com/npm/npm/commit/826fb35) `lodash._createcache@3.1.2`
+* [`76030b3`](https://github.com/npm/npm/commit/76030b3) `lodash._createpadding@3.6.1`
+* [`1a49ec6`](https://github.com/npm/npm/commit/1a49ec6) `lodash._getnative@3.9.1`
+* [`eebe47f`](https://github.com/npm/npm/commit/eebe47f) `lodash.isarguments@3.0.4`
+* [`09994d4`](https://github.com/npm/npm/commit/09994d4) `lodash.isarray@3.0.4`
+* [`b6f8dbf`](https://github.com/npm/npm/commit/b6f8dbf) `lodash.keys@3.1.2`
+* [`c67dd6b`](https://github.com/npm/npm/commit/c67dd6b) `lodash.pad@3.1.1`
+* [`4add042`](https://github.com/npm/npm/commit/4add042) `lodash.repeat@3.0.1`
+* [`e04993c`](https://github.com/npm/npm/commit/e04993c) `lru-cache@2.6.5`
+* [`2ed7da4`](https://github.com/npm/npm/commit/2ed7da4) `mime-db@1.15.0`
+* [`ae08244`](https://github.com/npm/npm/commit/ae08244) `mime-types@2.1.3`
+* [`e71410e`](https://github.com/npm/npm/commit/e71410e) `os-homedir@1.0.1`
+* [`67c13e0`](https://github.com/npm/npm/commit/67c13e0) `process-nextick-args@1.0.2`
+* [`12ee041`](https://github.com/npm/npm/commit/12ee041) `qs@4.0.0`
+* [`15564a6`](https://github.com/npm/npm/commit/15564a6) `spdx-license-ids@1.0.2`
+* [`8733bff`](https://github.com/npm/npm/commit/8733bff) `supports-color@2.0.0`
+* [`230943c`](https://github.com/npm/npm/commit/230943c) `tunnel-agent@0.4.1`
+* [`26a4653`](https://github.com/npm/npm/commit/26a4653) `ansi-styles@2.1.0`
+* [`3d27081`](https://github.com/npm/npm/commit/3d27081) `bl@1.0.0`
+* [`9efa110`](https://github.com/npm/npm/commit/9efa110) `async@1.4.0`
 
 #### MERGED FORWARD
 
-* As usual, we've ported all the npm@2 goodies in this week's
+* As usual, we've ported all the `npm@2` goodies in this week's
   [v2.13.3](https://github.com/npm/npm/releases/tag/v2.13.3)
   release.
 
@@ -1557,7 +1557,7 @@ explain what changed?
 
 Kat: Well, you could say that…
 
-Rebecca: I would! This week I fixed more npm@3 bugs!
+Rebecca: I would! This week I fixed more `npm@3` bugs!
 
 Kat: That sounds familiar.
 
@@ -1602,7 +1602,7 @@ kids, betas hide in dark hallways waiting to break your stuff, stuff like…
 
 * [`9fafb18`](https://github.com/npm/npm/9fafb18)
   [#8701](https://github.com/npm/npm/issues/8701)
-  npm@3 introduced permissions checks that run before it actually tries to
+  `npm@3` introduced permissions checks that run before it actually tries to
   do something. This saves you from having an install fail half way
   through. We did this using the shiny new `fs.access` function available
   in `node 0.12` and `io.js`, with fallback options for older nodes. Unfortunately
@@ -1621,7 +1621,7 @@ kids, betas hide in dark hallways waiting to break your stuff, stuff like…
 #### MERGED FORWARD
 
 * Check out Kat's [super-fresh release notes for v2.13.2](https://github.com/npm/npm/releases/tag/v2.13.2)
-  and see all the changes we ported from npm@2.
+  and see all the changes we ported from `npm@2`.
 
 ### v2.13.2 (2015-07-16):
 
@@ -1734,7 +1734,7 @@ just yet.
 
 #### RED EYE RELEASE
 
-Rebecca's up too late writing tests, so you can have npm@3 bug fixes!  Lots
+Rebecca's up too late writing tests, so you can have `npm@3` bug fixes!  Lots
 of great new issues from you all! ❤️️  Keep it up!
 
 #### YUP STILL BETA, PLEASE PAY ATTENTION
@@ -1780,7 +1780,7 @@ just yet.
 #### MERGED FORWARD
 
 * Check out the [v2.13.1 release notes](https://github.com/npm/npm/releases/tag/v2.13.1)
-  and see all the changes we ported from npm@2.
+  and see all the changes we ported from `npm@2`.
 
 ### v2.13.1 (2015-07-09):
 
@@ -1842,7 +1842,7 @@ for details on that.
 You all have been AWESOME with
 [all](https://github.com/npm/npm/milestones/3.x)
 [the](https://github.com/npm/npm/milestones/3.2.0)
-npm@3 bug reports! Thank you and keep up the great work!
+`npm@3` bug reports! Thank you and keep up the great work!
 
 #### NEW PLACE, SAME CODE
 
@@ -1908,7 +1908,7 @@ or frontline continuous deployment just yet.
     ([@iarna](https://github.com/iarna))
   * [`3cb6ad2`](https://github.com/npm/npm/commit/3cb6ad2)
     [#8736](https://github.com/npm/npm/issues/8766)
-    npm@3 wasn't running the "install" lifecycle in your current (toplevel)
+    `npm@3` wasn't running the "install" lifecycle in your current (toplevel)
     module. This broke modules that relied on C compilation. BOO.
     ([@iarna](https://github.com/iarna))
   * [`68da583`](https://github.com/npm/npm/commit/68da583)
@@ -1917,8 +1917,8 @@ or frontline continuous deployment just yet.
     didn't have `package` already installed.
     ([@iarna](https://github.com/iarna))
   * [`edd7448`](https://github.com/npm/npm/commit/edd7448)
-    read-package-tree@5.0.0: This update makes read-package-tree not explode
-    when there's bad data in your node_modules folder. npm@2 silently
+    `read-package-tree@5.0.0`: This update makes read-package-tree not explode
+    when there's bad data in your node_modules folder. `npm@2` silently
     ignores this sort of thing.
     ([@iarna](https://github.com/iarna))
   * [`0bb08c8`](https://github.com/npm/npm/commit/0bb08c8)
@@ -1944,7 +1944,7 @@ or frontline continuous deployment just yet.
 Just the one. Others came in via the 2.x release. Do check out its
 changelog, immediately following this message.
 
-  * [`4e602c5`](https://github.com/npm/npm/commit/4e602c5) lodash@3.2.2
+  * [`4e602c5`](https://github.com/npm/npm/commit/4e602c5) `lodash@3.2.2`
 
 ### v2.13.0 (2015-07-02):
 
@@ -2198,7 +2198,7 @@ that isn't on this list,
   Local deps where the dep name and the name in the package.json differ
   don't result in an error.
 * [#8637](https://github.com/npm/npm/issues/8637)
-  Modules can install themselves as direct dependencies. npm@2 declined to
+  Modules can install themselves as direct dependencies. `npm@2` declined to
   do this.
 * [#8660](https://github.com/npm/npm/issues/8660)
   Dependencies of failed optional dependencies aren't rolled back when the
