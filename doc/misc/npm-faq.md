@@ -19,7 +19,7 @@ I don't know yet.
 
 Try reading the error output first, ensure this is a true npm issue and not a package issue. If you are having an issue with a package dependency, please submit your error to that particular package maintainer. 
 
-For any npm issues, try following the instructions, or even retracing your steps.  If the issue continues to persist, submit a bug with the steps to reproduce, please include the operating system you are working on, along with the error you recieve.  
+For any npm issues, try following the instructions, or even retracing your steps. If the issue continues to persist, submit a bug with the steps to reproduce, please include the operating system you are working on, along with the error you recieve.  
 
 ## Where does npm put stuff?
 
@@ -29,7 +29,7 @@ tl;dr:
 
 * Use the `npm root` command to see where modules go, and the `npm bin`
   command to see where executables go
-* Global installs are different from local installs.  If you install
+* Global installs are different from local installs. If you install
   something with the `-g` flag, then its executables go in `npm bin -g`
   and its modules go in `npm root -g`.
 
