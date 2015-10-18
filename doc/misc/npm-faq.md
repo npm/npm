@@ -7,18 +7,19 @@ npm-faq(7) -- Frequently Asked Questions
 
     npm config set viewer browser
 
-to open these documents in your default web browser rather than `man`.
+Open the following documents in your default web browser rather than `man`.
 
 ## It didn't work.
 
-That's not really a question.
+Please provide a little more detail, search for the error via [Google](https://google.com) or [StackOverflow npm](http://stackoverflow.com/search?q=npm) to see if another developer has encountered a similar problem.
 
 ## Why didn't it work?
 
 I don't know yet.
 
-Read the error output, and if you can't figure out what it means,
-do what it says and post a bug with all the information it asks for.
+Try reading the error output first, ensure this is a true npm issue and not a package issue. If you are having an issue with a package dependency, please submit your error to that particular package maintainer. 
+
+For any npm issues, try following the instructions, or even retracing your steps.  If the issue continues to persist, submit a bug with the steps to reproduce, please include the operating system you are working on, along with the error you recieve.  
 
 ## Where does npm put stuff?
 
