@@ -7,7 +7,7 @@ npm-faq(7) -- Frequently Asked Questions
 
     npm config set viewer browser
 
-Open the following documents in your default web browser rather than `man`.
+This command will set the npm docs to open in your default web browser rather than `man`.
 
 ## It didn't work.
 
