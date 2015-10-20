@@ -369,3 +369,12 @@ npm-debug.log
 /node_modules/watch/
 /node_modules/wordwrap/
 /node_modules/xtend/
+
+# required by npm-registry-mock
+/node_modules/core-util-is/
+/node_modules/hock/
+/node_modules/isarray/
+/node_modules/process-nextick-args/
+/node_modules/string_decoder/
+/node_modules/util-deprecate/
+/node_modules/util-extend/
