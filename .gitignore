@@ -279,3 +279,18 @@ npm-debug.log
 /node_modules/xtend/
 /node_modules/y18n/
 /node_modules/yargs/
+
+# required by nock
+/node_modules/assertion-error/
+/node_modules/chai/
+/node_modules/core-util-is/
+/node_modules/debug/
+/node_modules/deep-eql/
+/node_modules/isarray/
+/node_modules/lodash/
+/node_modules/ms/
+/node_modules/process-nextick-args/
+/node_modules/propagate/
+/node_modules/string_decoder/
+/node_modules/type-detect/
+/node_modules/util-deprecate/
