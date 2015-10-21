@@ -193,7 +193,7 @@
     "readable-stream": "~2.0.2",
     "require-inject": "~1.2.1",
     "sprintf-js": "~1.0.3",
-    "standard": "~4.5.4",
+    "standard": "~5.3.1",
     "tap": "~2.1.1"
   },
   "scripts": {
