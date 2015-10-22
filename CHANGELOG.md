@@ -1,3 +1,57 @@
+### v3.3.10 (2015-10-22):
+
+Hey you all!  Welcome to a busy bug fix and PR week.  We've got changes
+to how `npm install` replaces dependencies during updates, improvements
+to shrinkwrap behavior, and all sorts of doc updates.
+
+In other news, `npm@3` landed in node master in preparation for `node@5`
+with [`41923c0`](https://github.com/nodejs/node/commit/41923c0).
+
+#### UPDATED DEPS NOW MAKE MORE SENSE
+
+* [`971fd47`](https://github.com/npm/npm/commit/971fd47)
+  [#9929](https://github.com/npm/npm/pull/9929)
+  Make the tree more consistent by doing updates in place. This means
+  that trees after a dependency version update will more often look
+  the same as after a fresh install.
+  ([@iarna](https://github.com/iarna))
+
+#### SHRINKWRAP + DEV DEPS NOW RESPECTED
+
+* [`eb28a8c`](https://github.com/npm/npm/commit/eb28a8c)
+  [#9647](https://github.com/npm/npm/issues/9647)
+  If a shrinkwrap already has dev deps, don't throw them away when
+  someone later runs `npm install --save`.
+  ([@iarna](https://github.com/iarna))
+
+#### FANTASTIC DOCUMENTATION UPDATES
+
+* [`291162c`](https://github.com/npm/npm/commit/291162c)
+  [#10021](https://github.com/npm/npm/pull/10021)
+  Improve wording in the FAQ to be more empathetic and less jokey.
+  ([@TaMe3971](https://github.com/TaMe3971))
+* [`9a28c54`](https://github.com/npm/npm/commit/9a28c54)
+  [#10020](https://github.com/npm/npm/pull/10020)
+  Document the command to see the list of config defaults in the section
+  on config defaults.
+  ([@lady3bean](https://github.com/lady3bean))
+* [`8770b0a`](https://github.com/npm/npm/commit/8770b0a)
+  [#7600](https://github.com/npm/npm/issues/7600)
+  Add shortcuts to all command documentation.
+  ([@RichardLitt](https://github.com/RichardLitt))
+* [`e9b7d0d`](https://github.com/npm/npm/commit/e9b7d0d)
+  [#9950](https://github.com/npm/npm/pull/9950)
+  On errors that can be caused by outdated node & npm, suggest updating
+  as a part of the error message.
+  ([@ForbesLindesay](https://github.com/ForbesLindesay))
+
+#### NEW STANDARD HAS ALWAYS BEEN STANDARD
+
+* [`40c1b0f`](https://github.com/npm/npm/commit/40c1b0f)
+  [#9954](https://github.com/npm/npm/pull/9954)
+  Update to `standard@5` and reformat the source to work with it.
+  ([@cbas](https://github.com/cbas))
+
 ### v3.3.9 (2015-10-15):
 
 This week sees a few small changes ready to land:
