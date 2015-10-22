@@ -395,6 +395,7 @@ npm-debug.log
 /node_modules/center-align/
 /node_modules/chalk/
 /node_modules/cliui/
+/node_modules/code-point-at/
 /node_modules/combined-stream/
 /node_modules/concat-map/
 /node_modules/core-util-is/
@@ -426,6 +427,7 @@ npm-debug.log
 /node_modules/http-signature/
 /node_modules/invert-kv/
 /node_modules/is-buffer/
+/node_modules/is-fullwidth-code-point/
 /node_modules/is-utf8/
 /node_modules/isarray/
 /node_modules/istanbul/
@@ -460,6 +462,7 @@ npm-debug.log
 /node_modules/signal-exit/
 /node_modules/sntp/
 /node_modules/source-map/
+/node_modules/string-width/
 /node_modules/string_decoder/
 /node_modules/stringstream/
 /node_modules/strip-bom/
@@ -476,6 +479,7 @@ npm-debug.log
 /node_modules/underscore/
 /node_modules/unicode-length/
 /node_modules/util-deprecate/
+/node_modules/wrap-ansi/
 /node_modules/win-spawn/
 /node_modules/window-size/
 /node_modules/wordwrap/
