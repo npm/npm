@@ -194,7 +194,7 @@
     "require-inject": "~1.2.1",
     "sprintf-js": "~1.0.3",
     "standard": "~5.3.1",
-    "tap": "~2.1.1"
+    "tap": "~2.2.0"
   },
   "scripts": {
     "dumpconf": "env | grep npm | sort | uniq",
