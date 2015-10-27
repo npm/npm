@@ -144,7 +144,7 @@ test('npm bugs test-repo-url-https - non-github (https://)', function (t) {
   })
 })
 
-test('npm bugs test-repo-url-ssh - non-github (ssh://)', function (t) {
+test('npm bugs test-repo-url-ssh - gitlab (ssh://)', function (t) {
   mr({ port: common.port }, function (er, s) {
     common.npm(
       [
@@ -160,7 +160,7 @@ test('npm bugs test-repo-url-ssh - non-github (ssh://)', function (t) {
         t.equal(code, 0, 'exit ok')
         var res = fs.readFileSync(outFile, 'ascii')
         s.close()
-        t.equal(res, 'https://www.npmjs.org/package/test-repo-url-ssh\n')
+        t.equal(res, 'https://gitlab.com/evanlucas/test-repo-url-ssh/issues\n')
         rimraf.sync(outFile)
         t.end()
       }
