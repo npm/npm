@@ -178,7 +178,7 @@
     "npm-registry-mock": "~1.0.0",
     "require-inject": "~1.2.0",
     "sprintf-js": "~1.0.2",
-    "tap": "~1.4.1"
+    "tap": "~2.2.0"
   },
   "scripts": {
     "dumpconf": "env | grep npm | sort | uniq",
