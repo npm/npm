@@ -147,6 +147,7 @@
     "opener",
     "osenv",
     "path-is-inside",
+    "pretty-bytes",
     "read",
     "read-cmd-shim",
     "read-installed",
