@@ -395,6 +395,7 @@ npm-debug.log
 /node_modules/center-align/
 /node_modules/chalk/
 /node_modules/cliui/
+/node_modules/codecov.io/
 /node_modules/code-point-at/
 /node_modules/combined-stream/
 /node_modules/concat-map/
@@ -406,8 +407,10 @@ npm-debug.log
 /node_modules/decamelize/
 /node_modules/deep-is/
 /node_modules/deeper/
+/node_modules/defined/
 /node_modules/delayed-stream/
 /node_modules/diff/
+/node_modules/duplexer/
 /node_modules/escape-string-regexp/
 /node_modules/escodegen/
 /node_modules/esprima/
@@ -458,10 +461,13 @@ npm-debug.log
 /node_modules/qs/
 /node_modules/repeat-string/
 /node_modules/resolve/
+/node_modules/resumer/
 /node_modules/right-align/
 /node_modules/signal-exit/
 /node_modules/sntp/
 /node_modules/source-map/
+/node_modules/split/
+/node_modules/stream-combiner/
 /node_modules/string-width/
 /node_modules/string_decoder/
 /node_modules/stringstream/
@@ -469,6 +475,7 @@ npm-debug.log
 /node_modules/supports-color/
 /node_modules/tap-mocha-reporter/
 /node_modules/tap-parser/
+/node_modules/tape/
 /node_modules/tmatch/
 /node_modules/tough-cookie/
 /node_modules/tunnel-agent/
@@ -478,6 +485,7 @@ npm-debug.log
 /node_modules/underscore.string/
 /node_modules/underscore/
 /node_modules/unicode-length/
+/node_modules/urlgrey/
 /node_modules/util-deprecate/
 /node_modules/wrap-ansi/
 /node_modules/win-spawn/
