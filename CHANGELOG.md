@@ -27,7 +27,7 @@ important, the bug where `hapi` would install w/ a dep missing? Squashed!
 
 * [`f0e2088`](https://github.com/npm/npm/commit/f0e2088)
   [#10026](https://github.com/npm/npm/issues/10026)
-  Eliminate some, if not many, of the EONENT errors `npm@3` has seen over
+  Eliminate some, if not many, of the `ENOENT` errors `npm@3` has seen over
   the past few months.  This was happening when npm would, in its own mind,
   correct a bundled dependency, due to a `package.json` specifying an
   incompatible version.  Then, when npm extracted the bundled version, what
