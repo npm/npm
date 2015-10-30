@@ -18,10 +18,10 @@ test("node version too old", function (t) {
 })
 
 test("npm version too old", function (t) {
-  var target = { engines: { npm: "1.3.6" }}
-    c(target, "1.4.2", "0.2.1", false, true, function (err) {
+  var target = { engines: { npm: "^1.4.6" }}
+    c(target, "1.3.2", "0.2.1", false, true, function (err) {
       t.ok(err, "returns an error")
-      t.equals(err.required.npm, "1.3.6")
+      t.equals(err.required.npm, "^1.4.6")
       t.end()
     })
 })

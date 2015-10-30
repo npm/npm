@@ -28,15 +28,15 @@ The four relevant files are:
 
 * per-project config file (/path/to/my/project/.npmrc)
 * per-user config file (~/.npmrc)
-* global config file ($PREFIX/npmrc)
+* global config file ($PREFIX/etc/npmrc)
 * npm builtin config file (/path/to/npm/npmrc)
 
 See npmrc(5) for more details.
 
 ### Default Configs
 
-A set of configuration parameters that are internal to npm, and are
-defaults if nothing else is specified.
+Run `npm config ls -l` to see a set of configuration parameters that are
+internal to npm, and are defaults if nothing else is specified.
 
 ## Shorthands and Other CLI Niceties
 
