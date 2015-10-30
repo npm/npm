@@ -205,7 +205,7 @@
     "test-all": "standard && npm run test-legacy && npm run test-tap",
     "test-legacy": "node ./test/run.js",
     "test-tap": "npm run tap -- \"test/tap/*.js\"",
-    "test-node": "\"$NODE\" ./test/run.js && \"$NODE\" \"$(which tap)\" --timeout 240 \"test/tap/*.js\""
+    "test-node": "\"$NODE\" ./test/run.js && \"$NODE\" \"node_modules/.bin/tap\" --timeout 240 \"test/tap/*.js\""
   },
   "license": "Artistic-2.0"
 }
