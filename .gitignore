@@ -161,6 +161,7 @@ npm-debug.log
 /node_modules/jsonify/
 /node_modules/jsonpointer/
 /node_modules/kind-of/
+/node_modules/lazy-cache/
 /node_modules/lcid/
 /node_modules/left-pad/
 /node_modules/leven/
