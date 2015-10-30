@@ -13,9 +13,10 @@ followed by a slash, e.g.
 Scopes are a way of grouping related packages together, and also affect a few
 things about the way npm treats the package.
 
-Scoped packages are supported by the public npm registry.  The npm
-client is backwards-compatible with un-scoped registries, so it can be
-used to work with scoped and un-scoped registries at the same time.
+Scoped packages can be published and installed as of `npm@2` and are supported
+by the public npm registry. The npm client is backwards-compatible with
+un-scoped registries, so it can be used to work with scoped and un-scoped
+registries at the same time.
 
 ## Installing scoped packages
 
@@ -51,8 +52,9 @@ just specifying to require the module `mypackage` in the folder called `@myorg`.
 
 ## Publishing scoped packages
 
-Scoped packages can be published to any registry that supports them, including
-the public npm registry.
+Scoped packages can be published from the cli as of `npm@2` and can be
+published to any registry that supports them, including the public npm
+registry.
 
 (As of 2015-04-19, the public npm registry **does** support scoped packages)
 
