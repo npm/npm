@@ -1,3 +1,17 @@
+### v3.3.12 (2015-11-02):
+
+Hi, a little hot-fix release for a bug introduced in 3.3.11.  The ENOENT fix
+last week ([`f0e2088`](https://github.com/npm/npm/commit/f0e2088)) broke
+upgrades of modules that have bundled dependencies (like `npm`, augh!)
+
+* [`aedf7cf`](https://github.com/npm/npm/commit/aedf7cf)
+  [#10192](//github.com/npm/npm/pull/10192)
+  If a bundled module is going to be replacing a module that's currently on
+  disk (for instance, when you upgrade a module that includes bundled
+  dependencies) we want to select the version from the bundle in preference
+  over the one that was there previously.
+  ([@iarna](https://github.com/iarna))
+
 ### v3.3.11 (2015-10-29):
 
 This is a dependency update week, so that means no PRs from our lovely
