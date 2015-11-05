@@ -118,7 +118,8 @@ Packer.prototype.applyIgnores = function (entry, partial, entryObj) {
       entry === '.hg' ||
       entry === '.lock-wscript' ||
       entry.match(/^\.wafpickle-[0-9]+$/) ||
-      entry === 'config.gypi' ||
+      (this.parent && this.parent.packageRoot && this.basename === 'build' &&
+       entry === 'config.gypi') ||
       entry === 'npm-debug.log' ||
       entry === '.npmrc' ||
       entry.match(/^\..*\.swp$/) ||
