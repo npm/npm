@@ -9,8 +9,6 @@ var Packer = require('..')
 
 var pkg = join(__dirname, 'test-package')
 
-var gitDir = join(pkg, '.git')
-
 var elfJS = function () {/*
 module.exports = function () {
   console.log("i'm a elf")
@@ -35,6 +33,7 @@ var included = [
 
 test('follows npm package ignoring rules', function (t) {
   var subject = new Packer({ path: pkg, type: 'Directory', isDirectory: true })
+  var seen = {}
   subject.on('entry', function (entry) {
     t.equal(entry.type, 'File', 'only files in this package')
     var filename = entry.basename
@@ -42,19 +41,28 @@ test('follows npm package ignoring rules', function (t) {
       included.indexOf(filename) > -1,
       filename + ' is included'
     )
+    seen[filename] = true
   })
   // need to do this so fstream doesn't explode when files are removed from
   // under it
-  subject.on('end', function () { t.end() })
+  subject.on('end', function () {
+    included.forEach(function (filename) {
+      t.ok(
+        seen[filename],
+        filename + ' was not excluded'
+      )
+    })
+    t.end()
+  })
 })
 
 test('cleanup', function (t) {
-  cleanup()
-  t.end()
+  // rimraf.sync chokes here for some reason
+  rimraf(pkg, function () { t.end() })
 })
 
 function setup () {
-  cleanup()
+  rimraf.sync(pkg)
   mkdirp.sync(pkg)
   fs.writeFileSync(
     join(pkg, 'package.json'),
@@ -71,25 +79,39 @@ function setup () {
     'packaged=false'
   )
 
-  var build = join(pkg, 'build')
-  mkdirp.sync(build)
   fs.writeFileSync(
-    join(build, 'config.gypi'),
+    join(pkg, '.npmignore'),
+    '.npmignore\ndummy\npackage.json'
+  )
+
+  fs.writeFileSync(
+    join(pkg, 'dummy'),
+    'foo'
+  )
+
+  var buildDir = join(pkg, 'build')
+  mkdirp.sync(buildDir)
+  fs.writeFileSync(
+    join(buildDir, 'config.gypi'),
     "i_wont_be_included_by_fstream='with any luck'"
   )
 
   fs.writeFileSync(
-    join(build, 'npm-debug.log'),
+    join(buildDir, 'npm-debug.log'),
     '0 lol\n'
   )
 
+  var gitDir = join(pkg, '.git')
   mkdirp.sync(gitDir)
   fs.writeFileSync(
     join(gitDir, 'gitstub'),
     "won't fool git, also won't be included by fstream"
   )
-}
 
-function cleanup () {
-  rimraf.sync(pkg)
+  var historyDir = join(pkg, 'node_modules/history')
+  mkdirp.sync(historyDir)
+  fs.writeFileSync(
+    join(historyDir, 'README.md'),
+    "please don't include me"
+  )
 }
