@@ -102,6 +102,7 @@
   "bundleDependencies": [
     "abbrev",
     "ansi",
+    "ansi-regex",
     "ansicolors",
     "ansistyles",
     "archy",
@@ -159,6 +160,8 @@
     "slide",
     "sorted-object",
     "spdx",
+    "spdx-license-ids",
+    "strip-ansi",
     "tar",
     "text-table",
     "uid-number",
