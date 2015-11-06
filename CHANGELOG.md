@@ -1,3 +1,87 @@
+### v3.4.0 (2015-11-05):
+
+#### A NEW FEATURE
+
+This was a group effort, with [@isaacs](https://github.com/isaacs)
+dropping the implementation in back in August. Then, a few days ago,
+[@ashleygwilliams](https://github.com/ashleygwilliams) wrote up docs and
+just today [@othiym23](https://github.com/othiym23) wrote a test.
+
+It's a handy shortcut to update a dependency and then make sure tests
+still pass.
+
+This new command:
+
+```
+npm install-test x
+```
+
+is the equivalent of running:
+
+```
+npm install x && npm test
+```
+
+* [`1ac3e08`](https://github.com/npm/npm/commit/1ac3e08)
+  [`bcb04f6`](https://github.com/npm/npm/commit/bcb04f6)
+  [`b6c17dd`](https://github.com/npm/npm/commit/b6c17dd)
+  [#9443](https://github.com/npm/npm/pull/9443)
+  Add `npm install-test` command, alias `npm it`.
+  ([@isaacs](https://github.com/isaacs),
+  [@ashleygwilliams](https://github.com/ashleygwilliams),
+  [@othiym23](https://github.com/othiym23))
+
+#### BUG FIXES VIA DEPENDENCY UPDATES
+
+* [`31c0080`](https://github.com/npm/npm/commit/31c0080)
+  [#8640](https://github.com/npm/npm/issues/8640)
+  [npm/normalize-package-data#69](https://github.com/npm/normalize-package-data/pull/69)
+  `normalize-package-data@2.3.5`:
+  Fix a bug where if you didn't specify the name of a scoped module's 
+  binary, it would install it such that it was impossible to call it. 
+  ([@iarna](https://github.com/iarna))
+* [`02b37bc`](https://github.com/npm/npm/commit/02b37bc)
+  [npm/fstream-npm#14](https://github.com/npm/fstream-npm/pull/14)
+  `fstream-npm@1.0.7`:
+  Only filter `config.gypi` when it's in the build directory.
+  ([@mscdex](https://github.com/mscdex))
+* [`accb9d2`](https://github.com/npm/npm/commit/accb9d2)
+  [npm/fstream-npm#15](https://github.com/npm/fstream-npm/pull/15)
+  `fstream-npm@1.0.6`:
+  Stop including directories that happened to have names matching whitelisted
+  npm files in npm module tarballs. The most common cause was that if you had
+  a README directory then everything in it would be included if wanted it
+  or not.
+  ([@taion](https://github.com/taion))
+
+#### DOCUMENTATION FIXES
+
+* [`7cf6366`](https://github.com/npm/npm/commit/7cf6366)
+  [#10036](https://github.com/npm/npm/pull/10036)
+  Fix typo / over-abbreviation.
+  ([@ifdattic](https://github.com/ifdattic))
+* [`d0ad8f4`](https://github.com/npm/npm/commit/d0ad8f4)
+  [#10176](https://github.com/npm/npm/pull/10176)
+  Fix broken link, scopes => scope.
+  ([@ashleygwilliams](https://github.com/ashleygwilliams))
+* [`d623783`](https://github.com/npm/npm/commit/d623783)
+  [#9460](https://github.com/npm/npm/issue/9460)
+  Specifying the default command run by "npm start" and the
+  fact that you can pass it arguments.
+  ([@JuanCaicedo ](https://github.com/JuanCaicedo ))
+
+#### DEPENDENCY UPDATES FOR THEIR OWN SAKE
+
+* [`0a4c29e`](https://github.com/npm/npm/commit/0a4c29e)
+  [npm/npmlog#19](https://github.com/npm/npmlog/pull/19)
+  `npmlog@2.0.0`: Make it possible to emit log messages with `error` as the
+  prefix.
+  ([@bengl](https://github.com/bengl))
+* [`9463ce9`](https://github.com/npm/npm/commit/9463ce9)
+  `read-package-json@2.0.2`:
+  Minor cleanups.
+  ([@KenanY](https://github.com/KenanY))
+
 ### v3.3.12 (2015-11-02):
 
 Hi, a little hot-fix release for a bug introduced in 3.3.11.  The ENOENT fix
