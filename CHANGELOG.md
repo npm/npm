@@ -68,7 +68,7 @@ npm install x && npm test
   [#9460](https://github.com/npm/npm/issue/9460)
   Specifying the default command run by "npm start" and the
   fact that you can pass it arguments.
-  ([@JuanCaicedo ](https://github.com/JuanCaicedo ))
+  ([@JuanCaicedo](https://github.com/JuanCaicedo))
 
 #### DEPENDENCY UPDATES FOR THEIR OWN SAKE
 
