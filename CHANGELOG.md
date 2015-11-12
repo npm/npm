@@ -69,6 +69,61 @@ it would just refuse to install anything. (We fixed that in
   that more of our tests can pass in 0.8.
   ([@iarna](https://github.com/iarna))
 
+### v2.14.11 (2015-11-12):
+
+#### ASK FOR NOTHING, GET LATEST
+
+When you run `npm install foo`, you probably expect that you'll get the
+`latest` version of `foo`, whatever that is. And good news! That's what this
+change makes it do.
+
+We _think_ this is what everyone wants, but if this causes problems for you, we
+want to know! If it proves problematic for people we will consider reverting it
+(preferrably before this becomes `npm@latest`).
+
+Previously, when you ran `npm install foo` we would act as if you typed `npm
+install foo@*`. Now, like any range-type specifier, in addition to matching the
+range, it would also have to be `<=` the value of the `latest` dist-tag.
+Further, it would exclude prerelease versions from the list of versions
+considered for a match.
+
+This worked as expected most of the time, unless your `latest` was a prerelease
+version, in which case that version wouldn't be used, to everyone's surprise.
+
+* [`6f0a646`](https://github.com/npm/npm/commit/6f0a646cd865b24fe3ff25365bf5421780e63e01)
+  [#10189](https://github.com/npm/npm/issues/10189) `npm-package-arg@4.1.0`:
+  Change the default version from `*` to `latest`.
+  ([@zkat](https://github.com/zkat))
+
+#### LICENSE CLARIFICATION
+
+* [`54a9046`](https://github.com/npm/npm/commit/54a90461f068ea89baa5d70248cdf1581897936d)
+  [#10326](https://github.com/npm/npm/issues/10326) Clarify what-all is covered
+  by npm's license and point to the registry's terms of use.
+  ([@kemitchell](https://github.com/kemitchell))
+
+#### CLOSER TO GREEN TRAVIS
+
+* [`28efd3d`](https://github.com/npm/npm/commit/28efd3d7dfb2fa3755076ae706ea4d38c6ee6900)
+  [#10232](https://github.com/npm/npm/issues/10232) `nock@1.9.0`: Downgrade
+  nock to a version that doesn't depend on streams2 in core so that more of our
+  tests can pass in 0.8. ([@iarna](https://github.com/iarna))
+
+#### A BUG FIX
+
+* [`eacac8f`](https://github.com/npm/npm/commit/eacac8f05014d15217c3d8264d0b00a72eafe2d2)
+  [#9965](https://github.com/npm/npm/issues/9965) Fix a corrupt `package.json`
+  file introduced by a merge conflict in
+  [`022691a`](https://github.com/npm/npm/commit/022691a).
+  ([@waynebloss](https://github.com/waynebloss))
+
+#### A DEPENDENCY UPGRADE
+
+* [`ea7d8e0`](https://github.com/npm/npm/commit/ea7d8e00a67a3d5877ed72c9728909c848468a9b)
+  [npm/nopt#51](https://github.com/npm/nopt/pull/51) `nopt@3.0.6`: Allow
+  types checked to be validated by passed-in name in addition to the JS name of
+  the type / class. ([@wbecker](https://github.com/wbecker))
+
 ### v2.14.10 (2015-11-05):
 
 There's nothing in here that that isn't in the `npm@3.4.0` release notes, but
@@ -156,8 +211,8 @@ npm install x && npm test
   [#8640](https://github.com/npm/npm/issues/8640)
   [npm/normalize-package-data#69](https://github.com/npm/normalize-package-data/pull/69)
   `normalize-package-data@2.3.5`:
-  Fix a bug where if you didn't specify the name of a scoped module's 
-  binary, it would install it such that it was impossible to call it. 
+  Fix a bug where if you didn't specify the name of a scoped module's
+  binary, it would install it such that it was impossible to call it.
   ([@iarna](https://github.com/iarna))
 * [`02b37bc`](https://github.com/npm/npm/commit/02b37bc)
   [npm/fstream-npm#14](https://github.com/npm/fstream-npm/pull/14)
