@@ -63,7 +63,7 @@
     "minimatch": "~3.0.0",
     "mkdirp": "~0.5.1",
     "node-gyp": "~3.0.3",
-    "nopt": "~3.0.4",
+    "nopt": "~3.0.6",
     "normalize-git-url": "~3.0.1",
     "normalize-package-data": "~2.3.5",
     "npm-cache-filename": "~1.0.2",
