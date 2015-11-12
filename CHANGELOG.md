@@ -1,3 +1,74 @@
+### v3.4.1 (2015-11-12):
+
+#### ASK FOR NOTHING, GET LATEST
+
+When you run `npm install foo`, you probably expect that you'll get the
+`latest` version of `foo`, whatever that is. And good news! That's what
+this change makes it do.
+
+We _think_ this is what everyone wants, but if this causes problems for
+you, we want to know! If it proves problematic for people we will consider
+reverting it (preferrably before this becomes `npm@latest`).
+
+Previously, when you ran `npm install foo` we would act as if you typed
+`npm install foo@*`. Now, like any range-type specifier, in addition to
+matching the range, it would also have to be `<=` the value of the
+`latest` dist-tag. Further, it would exclude prerelease versions from the
+list of versions considered for a match.
+
+This worked as expected most of the time, unless your `latest` was a
+prerelease version, in which case that version wouldn't be used, to
+everyone's surprise. Worse, if all your versions were prerelease versions
+it would just refuse to install anything. (We fixed that in
+[`npm@3.2.2`](https://github.com/npm/npm/releases/tag/v3.2.2) with
+[`e4a38080`](https://github.com/npm/npm/commit/e4a38080).)
+
+* [`1e834c2`](https://github.com/npm/npm/commit/1e834c2)
+  [#10189](https://github.com/npm/npm/issues/10189)
+  `npm-package-arg@4.1.0` Change the default version from `*` to `latest`.
+  ([@zkat](https://github.com/zkat))
+
+#### BUGS
+
+* [`bec4a84`](https://github.com/npm/npm/commit/bec4a84)
+  [#10338](https://github.com/npm/npm/pull/10338)
+  Failed installs could result in more rollback (removal of just installed
+  packages) than we intended. This bug was first introduced by
+  [`83975520`](https://github.com/npm/npm/commit/83975520).
+  ([@iarna](https://github.com/iarna))
+* [`06c732f`](https://github.com/npm/npm/commit/06c732f)
+  [#10338](https://github.com/npm/npm/pull/10338)
+  Updating a module could result in the module stealing some of its
+  dependencies from the top level, potentially breaking other modules or
+  resulting in many redundent installations. This bug was first introduced
+  by [`971fd47a`](https://github.com/npm/npm/commit/971fd47a).
+  ([@iarna](https://github.com/iarna))
+* [`5653366`](https://github.com/npm/npm/commit/5653366)
+  [#9980](https://github.com/npm/npm/issues/9980)
+  npm, when removing a module, would refuse to remove the symlinked
+  binaries if the module itself was symlinked as well. npm goes to some
+  effort to ensure that it doesn't remove things that aren't is, and this
+  code was being too conservative. This code has been rewritten to be
+  easier to follow and to be unit-testable.
+  ([@iarna](https://github.com/iarna))
+
+#### LICENSE CLARIFICATION
+
+* [`80acf20`](https://github.com/npm/npm/commit/80acf20)
+  [#10326](https://github.com/npm/npm/pull/10326)
+  Update npm's licensing to more completely cover all of the various
+  things that are npm.
+  ([@kemitchell](https://github.com/kemitchell))
+
+#### CLOSER TO GREEN TRAVIS
+
+* [`fc12da9`](https://github.com/npm/npm/commit/fc12da9)
+  [#10232](https://github.com/npm/npm/pull/10232)
+  `nock@1.9.0`
+  Downgrade nock to a version that doesn't depend on streams2 in core so
+  that more of our tests can pass in 0.8.
+  ([@iarna](https://github.com/iarna))
+
 ### v2.14.10 (2015-11-05):
 
 There's nothing in here that that isn't in the `npm@3.4.0` release notes, but
