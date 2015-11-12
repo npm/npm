@@ -1,3 +1,122 @@
+### v3.4.1 (2015-11-12):
+
+#### ASK FOR NOTHING, GET LATEST
+
+When you run `npm install foo`, you probably expect that you'll get the
+`latest` version of `foo`, whatever that is. And good news! That's what
+this change makes it do.
+
+We _think_ this is what everyone wants, but if this causes problems for
+you, we want to know! If it proves problematic for people we will consider
+reverting it (preferrably before this becomes `npm@latest`).
+
+Previously, when you ran `npm install foo` we would act as if you typed
+`npm install foo@*`. Now, like any range-type specifier, in addition to
+matching the range, it would also have to be `<=` the value of the
+`latest` dist-tag. Further, it would exclude prerelease versions from the
+list of versions considered for a match.
+
+This worked as expected most of the time, unless your `latest` was a
+prerelease version, in which case that version wouldn't be used, to
+everyone's surprise. Worse, if all your versions were prerelease versions
+it would just refuse to install anything. (We fixed that in
+[`npm@3.2.2`](https://github.com/npm/npm/releases/tag/v3.2.2) with
+[`e4a38080`](https://github.com/npm/npm/commit/e4a38080).)
+
+* [`1e834c2`](https://github.com/npm/npm/commit/1e834c2)
+  [#10189](https://github.com/npm/npm/issues/10189)
+  `npm-package-arg@4.1.0` Change the default version from `*` to `latest`.
+  ([@zkat](https://github.com/zkat))
+
+#### BUGS
+
+* [`bec4a84`](https://github.com/npm/npm/commit/bec4a84)
+  [#10338](https://github.com/npm/npm/pull/10338)
+  Failed installs could result in more rollback (removal of just installed
+  packages) than we intended. This bug was first introduced by
+  [`83975520`](https://github.com/npm/npm/commit/83975520).
+  ([@iarna](https://github.com/iarna))
+* [`06c732f`](https://github.com/npm/npm/commit/06c732f)
+  [#10338](https://github.com/npm/npm/pull/10338)
+  Updating a module could result in the module stealing some of its
+  dependencies from the top level, potentially breaking other modules or
+  resulting in many redundent installations. This bug was first introduced
+  by [`971fd47a`](https://github.com/npm/npm/commit/971fd47a).
+  ([@iarna](https://github.com/iarna))
+* [`5653366`](https://github.com/npm/npm/commit/5653366)
+  [#9980](https://github.com/npm/npm/issues/9980)
+  npm, when removing a module, would refuse to remove the symlinked
+  binaries if the module itself was symlinked as well. npm goes to some
+  effort to ensure that it doesn't remove things that aren't is, and this
+  code was being too conservative. This code has been rewritten to be
+  easier to follow and to be unit-testable.
+  ([@iarna](https://github.com/iarna))
+
+#### LICENSE CLARIFICATION
+
+* [`80acf20`](https://github.com/npm/npm/commit/80acf20)
+  [#10326](https://github.com/npm/npm/pull/10326)
+  Update npm's licensing to more completely cover all of the various
+  things that are npm.
+  ([@kemitchell](https://github.com/kemitchell))
+
+#### CLOSER TO GREEN TRAVIS
+
+* [`fc12da9`](https://github.com/npm/npm/commit/fc12da9)
+  [#10232](https://github.com/npm/npm/pull/10232)
+  `nock@1.9.0`
+  Downgrade nock to a version that doesn't depend on streams2 in core so
+  that more of our tests can pass in 0.8.
+  ([@iarna](https://github.com/iarna))
+
+### v2.14.10 (2015-11-05):
+
+There's nothing in here that that isn't in the `npm@3.4.0` release notes, but
+all of the commit shasums have been adjusted to be correct. Enjoy!
+
+#### BUG FIXES VIA DEPENDENCY UPDATES
+
+* [`204c558`](https://github.com/npm/npm/commit/204c558c06637a753c0b41d0cf19f564a1ac3715)
+  [#8640](https://github.com/npm/npm/issues/8640)
+  [npm/normalize-package-data#69](https://github.com/npm/normalize-package-data/pull/69)
+  `normalize-package-data@2.3.5`: Fix a bug where if you didn't specify the
+  name of a scoped module's binary, it would install it such that it was
+  impossible to call it.  ([@iarna](https://github.com/iarna))
+* [`bbdf4ee`](https://github.com/npm/npm/commit/bbdf4ee0a3cd12be6a2ace255b67d573a72f1f8f)
+  [npm/fstream-npm#14](https://github.com/npm/fstream-npm/pull/14)
+  `fstream-npm@1.0.7`: Only filter `config.gypi` when it's in the build
+  directory.  ([@mscdex](https://github.com/mscdex))
+* [`d82ff81`](https://github.com/npm/npm/commit/d82ff81403e906931fac701775723626dcb443b3)
+  [npm/fstream-npm#15](https://github.com/npm/fstream-npm/pull/15)
+  `fstream-npm@1.0.6`: Stop including directories that happened to have names
+  matching whitelisted npm files in npm module tarballs. The most common cause
+  was that if you had a README directory then everything in it would be
+  included if wanted it or not. ([@taion](https://github.com/taion))
+
+#### DOCUMENTATION FIXES
+
+* [`16361d1`](https://github.com/npm/npm/commit/16361d122f2ff6d1a4729c66153b7c24c698fd19)
+  [#10036](https://github.com/npm/npm/pull/10036) Fix typo / over-abbreviation.
+  ([@ifdattic](https://github.com/ifdattic))
+* [`d1343dd`](https://github.com/npm/npm/commit/d1343dda42f113dc322f95687f5a8c7d71a97c35)
+  [#10176](https://github.com/npm/npm/pull/10176) Fix broken link, scopes =>
+  scope.  ([@ashleygwilliams](https://github.com/ashleygwilliams))
+* [`110663d`](https://github.com/npm/npm/commit/110663d000a3908a4853393d9abae481700cf4dc)
+  [#9460](https://github.com/npm/npm/issue/9460) Specifying the default command
+  run by "npm start" and the fact that you can pass it arguments.
+  ([@JuanCaicedo](https://github.com/JuanCaicedo))
+
+#### DEPENDENCY UPDATES FOR THEIR OWN SAKE
+
+* [`7476d2d`](https://github.com/npm/npm/commit/7476d2d31552a41671c425aa7fcc2844e0381008)
+  [npm/npmlog#19](https://github.com/npm/npmlog/pull/19)
+  `npmlog@2.0.0`: Make it possible to emit log messages with `error` as the
+  prefix.
+  ([@bengl](https://github.com/bengl))
+* [`6ca7888`](https://github.com/npm/npm/commit/6ca7888862cfe8bf802dc7c66632c102acd94cf5)
+  `read-package-json@2.0.2`: Minor cleanups.
+  ([@KenanY](https://github.com/KenanY))
+
 ### v3.4.0 (2015-11-05):
 
 #### A NEW FEATURE
