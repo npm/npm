@@ -15,10 +15,6 @@ var scoped = {
   version: '1.1.1'
 }
 
-var body = {
-  access: 'public'
-}
-
 test('setup', function (t) {
   mkdirp(pkg, function (er) {
     t.ifError(er, pkg + ' made successfully')
@@ -301,6 +297,28 @@ test('npm access ls-packages on user', function (t) {
   )
 })
 
+test('npm access ls-packages with no package specified or package.json', function (t) {
+  // need to simulate a missing package.json
+  var missing = path.join(__dirname, 'access-missing-guard')
+  mkdirp.sync(path.join(missing, 'node_modules'))
+  common.npm(
+    [
+      'access',
+      'ls-packages',
+      'myorg',
+      '--registry', common.registry
+    ],
+    { cwd: missing },
+    function (er, code, stdout, stderr) {
+      t.ifError(er, 'npm access ls-packages')
+      t.same(stdout, '')
+      t.match(stderr, /no name provided and no package.json available/)
+      rimraf.sync(missing)
+      t.end()
+    }
+  )
+})
+
 test('npm access ls-collaborators on current', function (t) {
   var serverCollaborators = {
     'myorg:myteam': 'write',
@@ -384,7 +402,6 @@ test('npm access ls-collaborators on current w/user filter', function (t) {
     }
   )
 })
-
 
 test('npm access edit', function (t) {
   common.npm(
