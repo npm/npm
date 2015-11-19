@@ -357,3 +357,4 @@ affects a real use-case, it will be investigated.
 * npm-tag(1)
 * npm-rm(1)
 * npm-shrinkwrap(1)
+* package.json(5)
