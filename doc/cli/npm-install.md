@@ -23,7 +23,7 @@ by that. See npm-shrinkwrap(1).
 
 A `package` is:
 
-* a) a folder containing a program described by a package.json file
+* a) a folder containing a program described by a `package.json(5)` file
 * b) a gzipped tarball containing (a)
 * c) a url that resolves to (b)
 * d) a `<name>@<version>` that is published on the registry (see `npm-registry(7)`) with (c)
@@ -46,7 +46,7 @@ after packing it up into a tarball (b).
     directory) as a global package.
 
     By default, `npm install` will install all modules listed as dependencies
-    in package.json.
+    in `package.json(5)`.
     
     With the `--production` flag (or when the `NODE_ENV` environment variable
     is set to `production`), npm will not install modules listed in
