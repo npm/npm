@@ -1,3 +1,65 @@
+### v2.14.12 (2015-11-19):
+
+#### TEEN ORCS AT THE GATES
+
+This week heralds the general release of the primary npm registry's [new
+support for private packages for
+organizations](http://blog.npmjs.org/post/133542170540/private-packages-for-organizations).
+For many potential users, it's the missing piece needed to make it easy for you
+to move your organization's private work onto npm. And now it's here! The
+functionality to support it has been in place in the CLI for a while now,
+thanks to [@zkat](https://github.com/zkat)'s hard work.
+
+During our final testing before the release, our ace support team member
+[@snopeks](https://github.com/snopeks) noticed that there had been some drift
+between the CLI team's implementation and what npm was actually preparing to
+ship. In the interests of everyone having a smooth experience with this
+_extremely useful_ new feature, we quickly made a few changes to square up the
+CLI and the web site experiences.
+
+* [`0e8b15e`](https://github.com/npm/npm/commit/0e8b15e9fbc89e31bd00e573b648846beddfb835)
+  [#9327](https://github.com/npm/npm/issues/9327) `npm access` no longer has
+  problems when run in a directory that doesn't contain a `package.json`.
+  ([@othiym23](https://github.com/othiym23))
+* [`c4e939c`](https://github.com/npm/npm/commit/c4e939c1d493601d25dcb88e6ffcca73076fd3fd)
+  [npm/npm-registry-client#126](https://github.com/npm/npm-registry-client/issues/126)
+  `npm-registry-client@7.0.8`: Allow the CLI to grant, revoke, and list
+  permissions on unscoped (public) packages on the primary registry.
+  ([@othiym23](https://github.com/othiym23))
+
+#### A BRIEF NOTE ON NPM'S BACKWARDS COMPATIBILITY
+
+We don't often have much to say about the changes we make to our internal
+testing and tooling, but I'm going to take this opportunity to reiterate that
+npm tries hard to maintain compatibility with a wide variety of Node versions.
+As this change shows, we want to ensure that npm works the same across:
+
+* Node.js 0.8
+* Node.js 0.10
+* Node.js 0.12
+* the latest io.js release
+* Node.js 4 LTS
+* Node.js 5
+
+Contributors who send us pull requests often notice that it's very rare that
+our tests pass across all of those versions (ironically, almost entirely due to
+the packages we use for testing instead of any issues within npm itself). We're
+currently beginning an effort, lasting the rest of 2015, to clean up our test
+suite, and not only get it passing on all of the above versions of Node.js, but
+working solidly on Windows as well. This is a compounding form of technical
+debt that we're finally paying down, and our hope is that cleaning up the tests
+will produce a more robust CLI that's a lot easier to write patches for.
+
+* [`d743620`](https://github.com/npm/npm/commit/d743620a0005213a65d25de771661b4d48a09717)
+  [#10233](https://github.com/npm/npm/issues/10233) Update Node.js versions
+  that Travis uses to test npm. ([@iarna](https://github.com/iarna))
+
+#### TYPOS IN THE LICENSE, OH MY
+
+* [`58ac241`](https://github.com/npm/npm/commit/58ac241f556b2c202a8ee33321965e2540361ca7)
+  [#10478](https://github.com/npm/npm/issues/10478) Correct two typos in npm's
+  LICENSE. ([@jorrit](https://github.com/jorrit))
+
 ### v2.14.11 (2015-11-12):
 
 #### ASK FOR NOTHING, GET LATEST
