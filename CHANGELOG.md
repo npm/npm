@@ -29,7 +29,7 @@ CLI and the web site experiences.
 
 #### NON-OPTIONAL INSTALLS, DEFINITELY NON-OPTIONAL
 
-* [`91f202d`](https://github.com/npm/npm/commit/91f202d)
+* [`180263b`](https://github.com/npm/npm/commit/180263b)
   [#10465](https://github.com/npm/npm/pull/10465)
   When a non-optional dep fails, we check to see if it's only required by
   ONLY optional dependencies.  If it is, we make it fail all the deps in
@@ -47,7 +47,7 @@ CLI and the web site experiences.
   requested by the user will trigger the error message.
   ([@iarna](https://github.com/iarna))
 
-* [`645730a`](https://github.com/npm/npm/commit/645730a)
+* [`b726a0e`](https://github.com/npm/npm/commit/b726a0e)
   [#9204](https://github.com/npm/npm/issues/9204)
   Ideally we would like warnings about your install to come AFTER the
   output from your compile steps or the giant tree of installed modules.
@@ -58,7 +58,7 @@ CLI and the web site experiences.
 
 #### OVERRIDING BUNDLING
 
-* [`4869248`](https://github.com/npm/npm/commit/4869248)
+* [`aed71fb`](https://github.com/npm/npm/commit/aed71fb)
   [#10482](https://github.com/npm/npm/issues/10482)
   We've been in our bundled modules code a lot lately, and our last go at
   this introduced a new bug, where if you had a module `a` that bundled
@@ -103,7 +103,7 @@ will produce a more robust CLI that's a lot easier to write patches for.
 
 Hey, you found the feature we added!
 
-* [`d7a0783`](https://github.com/npm/npm/commit/d7a0783)
+* [`231c58a`](https://github.com/npm/npm/commit/231c58a)
   [#10337](https://github.com/npm/npm/pull/10337)
   Add two new flags, first `--legacy-bundling` which installs your
   dependencies such that if you bundle those dependencies, npm versions
