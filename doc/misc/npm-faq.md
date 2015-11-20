@@ -151,7 +151,7 @@ In those cases, you can do this:
 
 ## What is a `package`?
 
-A package is:
+A package is any of:
 
 * a) a folder containing a program described by a package.json file
 * b) a gzipped tarball containing (a)
