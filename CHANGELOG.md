@@ -1,4 +1,4 @@
-### v3.4.2 (2015-11-19):
+### v3.5.0 (2015-11-19):
 
 #### TEEN ORCS AT THE GATES
 
@@ -27,6 +27,51 @@ CLI and the web site experiences.
   permissions on unscoped (public) packages on the primary registry.
   ([@othiym23](https://github.com/othiym23))
 
+#### NON-OPTIONAL INSTALLS, DEFINITELY NON-OPTIONAL
+
+* [`91f202d`](https://github.com/npm/npm/commit/91f202d)
+  [#10465](https://github.com/npm/npm/pull/10465)
+  When a non-optional dep fails, we check to see if it's only required by
+  ONLY optional dependencies.  If it is, we make it fail all the deps in
+  that chain (and roll them back).  If it isn't then we give an error.
+
+  We do this by walking up through all of our ancestors until we either hit an
+  optional dependency or the top of the tree. If we hit the top, we know to
+  give the error.
+
+  If you installed a module by hand but didn't `--save` it, your module
+  won't have the top of the tree as an anscestor and so this code was
+  failing to abort the install with an error
+
+  This updates the logic so that hitting the top OR a module that was
+  requested by the user will trigger the error message.
+  ([@iarna](https://github.com/iarna))
+
+* [`645730a`](https://github.com/npm/npm/commit/645730a)
+  [#9204](https://github.com/npm/npm/issues/9204)
+  Ideally we would like warnings about your install to come AFTER the
+  output from your compile steps or the giant tree of installed modules.
+
+  To that end, we've moved warnings about failed optional deps to the show
+  after your install completes.
+  ([@iarna](https://github.com/iarna))
+
+#### OVERRIDING BUNDLING
+
+* [`4869248`](https://github.com/npm/npm/commit/4869248)
+  [#10482](https://github.com/npm/npm/issues/10482)
+  We've been in our bundled modules code a lot lately, and our last go at
+  this introduced a new bug, where if you had a module `a` that bundled
+  a module `b`, which in turn required `c`, and the version of `c` that
+  got bundled wasn't compatible with `b`'s `package.json`, we would then
+  install a compatible version of `c`, but also erase `b` at the same time.
+
+  This fixes that. It also reworks our bundled module support to be much
+  closer to being in line with how we handle non-bundled modules and we're
+  hopeful this will reduce any future errors around them. The new structure
+  is hopefully much easier to reason about anyway.
+  ([@iarna](https://github.com/iarna))
+
 #### A BRIEF NOTE ON NPM'S BACKWARDS COMPATIBILITY
 
 We don't often have much to say about the changes we make to our internal
@@ -53,6 +98,24 @@ will produce a more robust CLI that's a lot easier to write patches for.
 * [`791ec6b`](https://github.com/npm/npm/commit/791ec6b1bac0d1df59f5ebb4ccd16a29a5dc73f0)
   [#10233](https://github.com/npm/npm/issues/10233) Update Node.js versions
   that Travis uses to test npm. ([@iarna](https://github.com/iarna))
+
+#### 0.8 + npm <1.4 COMPATIBLE? SURE WHY NOT
+
+Hey, you found the feature we added!
+
+* [`d7a0783`](https://github.com/npm/npm/commit/d7a0783)
+  [#10337](https://github.com/npm/npm/pull/10337)
+  Add two new flags, first `--legacy-bundling` which installs your
+  dependencies such that if you bundle those dependencies, npm versions
+  prior to `1.4` can still install them. This eliminates all automatic
+  deduping.
+
+  Second, `--global-style` which will install modules in your `node_modules`
+  folder with the same layout as global modules.  Only your direct
+  dependencies will show in `node_modules` and everything they depend on
+  will be flattened in their `node_modules` folders.  This obviously will
+  elminate some deduping.
+  ([@iarna](https://github.com/iarna))
 
 #### TYPOS IN THE LICENSE, OH MY
 
