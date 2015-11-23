@@ -14,6 +14,17 @@ Much more info available via `npm help` once it's installed.
 To install an old **and unsupported** version of npm that works on node 0.3
 and prior, clone the git repo and dig through the old tags and branches.
 
+**npm is configured to use npm, Inc.'s public package registry at
+<https://registry.npmjs.org> by default.**
+
+You can configure npm to use any compatible registry you
+like, and even run your own registry. Check out the [doc on
+registries](https://docs.npmjs.com/misc/registry).
+
+Use of someone else's registry may be governed by terms of use. The
+terms of use for the default public registry are available at
+<https://www.npmjs.com>.
+
 ## Super Easy Install
 
 npm is bundled with [node](http://nodejs.org/download/).
