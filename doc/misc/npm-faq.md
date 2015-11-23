@@ -1,7 +1,7 @@
 npm-faq(7) -- Frequently Asked Questions
 ========================================
 
-## Where can I find these docs in HTML?
+## How can I view these docs in my browser?
 
 <https://docs.npmjs.com/>, or run:
 
@@ -9,17 +9,13 @@ npm-faq(7) -- Frequently Asked Questions
 
 This command will set the npm docs to open in your default web browser rather than `man`.
 
-## It didn't work.
+## Help! I'm having trouble despite following the instructions above.
 
-Please provide a little more detail, search for the error via [Google](https://google.com) or [StackOverflow npm](http://stackoverflow.com/search?q=npm) to see if another developer has encountered a similar problem.
+A great place to start is to search for the error via [Google](https://google.com) or [StackOverflow npm](http://stackoverflow.com/search?q=npm) to see if another developer has encountered a similar problem.
 
-## Why didn't it work?
+If that doesn't work, read the error output and try to ascertain if it's actually an npm issue rather than an issue with one of the packages you're using. If you are having an issue with a package dependency, please submit your error to that respective package's maintainer.
 
-I don't know yet.
-
-Try reading the error output first, ensure this is a true npm issue and not a package issue. If you are having an issue with a package dependency, please submit your error to that particular package maintainer.
-
-For any npm issues, try following the instructions, or even retracing your steps. If the issue continues to persist, submit a bug with the steps to reproduce, please include the operating system you are working on, along with the error you recieve.
+Finally, if you've ruled out user error and determined that it is indeed an npm issue, please submit a bug report that includes the steps to reproduce, the operating system you are working on, and the error message you are receiving.
 
 ## Where does npm put stuff?
 
@@ -33,7 +29,7 @@ tl;dr:
   something with the `-g` flag, then its executables go in `npm bin -g`
   and its modules go in `npm root -g`.
 
-## How do I install something on my computer in a central location?
+## How do I install packages in a central location?
 
 Install it globally by tacking `-g` or `--global` to the command.  (This
 is especially important for command line utilities that need to add
@@ -48,14 +44,9 @@ to put their bins in the system `PATH`.  It's not for use with `require()`.
 
 If you `require()` a module in your code, then that means it's a
 dependency, and a part of your program.  You need to install it locally
-in your program.
+to make it available to your program.
 
 ## Why can't npm just put everything in one place, like other package managers?
-
-Not every change is an improvement, but every improvement is a change.
-This would be like asking git to do network IO for every commit.  It's
-not going to happen, because it's a terrible idea that causes more
-problems than it solves.
 
 It is much harder to avoid dependency conflicts without nesting
 dependencies.  This is fundamental to the way that npm works, and has
@@ -67,16 +58,9 @@ programs reference the same copy of it, then use the `npm link` command.
 That's what it's for.  Install it globally, then link it into each
 program that uses it.
 
-## Whatever, I really want the old style 'everything global' style.
-
-Write your own package manager.  You could probably even wrap up `npm`
-in a shell script if you really wanted to.
-
-npm will not help you do something that is known to be a bad idea.
-
 ## Should I check my `node_modules` folder into git?
 
-Usually, no. Allow npm to resolve dependencies for your packages.
+Generally speaking, no. Allow npm to resolve dependencies for your packages.
 
 For packages you **deploy**, such as websites and apps,
 you should use npm shrinkwrap to lock down your full dependency tree:
@@ -163,9 +147,9 @@ A package is:
 * g) a `git` url that, when cloned, results in (a).
 
 Even if you never publish your package, you can still get a lot of
-benefits of using npm if you just want to write a node program (a), and
-perhaps if you also want to be able to easily install it elsewhere
-after packing it up into a tarball (b).
+benefits of using npm if (a) you just want to write a node program, and
+(b) you want to be able to easily install it elsewhere
+after packing it up into a tarball.
 
 Git urls can be of the form:
 
@@ -223,7 +207,7 @@ an argument to `require()`.
 
 ## `"node_modules"` is the name of my deity's arch-rival, and a Forbidden Word in my religion.  Can I configure npm to use a different folder?
 
-No.  This will never happen.  This question comes up sometimes,
+No, unfortunately.  This question comes up sometimes,
 because it seems silly from the outside that npm couldn't just be
 configured to put stuff somewhere else, and then npm could load them
 from there.  It's an arbitrary spelling choice, right?  What's the big
@@ -254,22 +238,22 @@ different spelling for `node_modules`?  npm would have to rename the
 folder at publish time, and then be smart enough to unpack it using
 your locally configured name.  Complexity hurdle #3.
 
-Furthermore, what happens when you *change* this name?  Fine, it's
-easy enough the first time, just rename the `node_modules` folders to
+Furthermore, what happens when you *change* this name?  Sure, it's
+easy enough the first time--just rename the `node_modules` folders to
 `./blergyblerp/` or whatever name you choose.  But what about when you
-change it again?  npm doesn't currently track any state about past
+change it *again*?  npm doesn't currently track any state about past
 configuration settings, so this would be rather difficult to do
 properly.  It would have to track every previous value for this
 config, and always accept any of them, or else yesterday's install may
 be broken tomorrow.  Complexity hurdle #4.
 
-Never going to happen.  The folder is named `node_modules`.  It is
+Hopefully this convinces you!  The folder is and will be named `node_modules`.  It is
 written indelibly in the Node Way, handed down from the ancient times
 of Node 0.3.
 
 ## How do I install node with npm?
 
-You don't.  Try one of these node version managers:
+You can't! Check out these links if you'd like to use a version manager for node:
 
 Unix:
 
@@ -288,8 +272,8 @@ Windows:
 
 See `npm-developers(7)` and `package.json(5)`.
 
-You'll most likely want to `npm link` your development folder.  That's
-awesomely handy.
+You'll most likely want to `npm link` your development folder. Trust us-–it's
+super handy!
 
 To set up your own private registry, check out `npm-registry(7)`.
 
@@ -319,7 +303,7 @@ To check if the registry is down, open up
 <https://registry.npmjs.org/> in a web browser.  This will also tell
 you if you are just unable to access the internet for some reason.
 
-If the registry IS down, let us know by emailing <support@npmjs.com>
+If the registry IS down, please let us know by emailing <support@npmjs.com>
 or posting an issue at <https://github.com/npm/npm/issues>.  If it's
 down for the world (and not just on your local network) then we're
 probably already being pinged about it.
@@ -371,15 +355,11 @@ The npm open source project, The npm Registry, and [the community
 website](https://www.npmjs.com) are maintained and operated by the
 good folks at [npm, Inc.](http://www.npmjs.com)
 
-## I have a question or request not addressed here. Where should I put it?
+## I have a question or request not addressed here!
 
-Post an issue on the github project:
+Please post an issue on GitHub:
 
 * <https://github.com/npm/npm/issues>
-
-## Why does npm hate me?
-
-npm is not capable of hatred.  It loves everyone, especially you.
 
 ## SEE ALSO
 
