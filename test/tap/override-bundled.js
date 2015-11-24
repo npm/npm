@@ -132,9 +132,9 @@ test('bundled', function (t) {
     // metadata) installed in that location and will go off and try to do
     // _things_ to it.  Things like chmod in particular, which in turn results
     // in the dreaded ENOENT errors.
-    t.like(stderr, new RegExp('EPACKAGEJSON ' + testname), "didn't stomp on other warnings")
-    t.like(stderr, /EBUNDLEOVERRIDE.*bundle-update/, 'included update warning about bundled dep')
-    t.like(stderr, /EBUNDLEOVERRIDE.*bundle-deep-update/, 'included update warning about deeply bundled dep')
+    t.like(stderr, new RegExp('npm WARN ' + testname), "didn't stomp on other warnings")
+    t.like(stderr, /npm WARN.*bundle-update/, 'included update warning about bundled dep')
+    t.like(stderr, /npm WARN.*bundle-deep-update/, 'included update warning about deeply bundled dep')
     fs.stat(bundleupdateNEWpostinstall, function (missing) {
       t.ok(!missing, 'package.json overrode bundle')
     })
