@@ -191,7 +191,7 @@ This is documented better in npm-adduser(1).
 
 ## Publish your package
 
-This part's easy.  IN the root of your folder, do this:
+This part's easy. In the root of your folder, do this:
 
     npm publish
 
