@@ -13,6 +13,14 @@ test('dump', function (t) {
     { k: "a", v: "A", e: 0 }
   ])
 
+  cache.set(123, 456)
+  t.deepEqual(cache.dump(), [
+    { k: 123, v: 456, e: 0 },
+    { k: "b", v: "B", e: 0 },
+    { k: "a", v: "A", e: 0 },
+  ])
+  cache.del(123)
+
   cache.set("a", "A");
   t.deepEqual(cache.dump(), [
     { k: "a", v: "A", e: 0 },
@@ -88,6 +96,7 @@ test("load basic cache", function(t) {
 
   cache.set("a", "A")
   cache.set("b", "B")
+  cache.set(123, 456)
 
   copy.load(cache.dump())
   t.deepEquals(cache.dump(), copy.dump())
@@ -214,3 +223,24 @@ test("load to other age cache", function(t) {
 
 })
 
+test("type checking of keys during load", function(t) {
+  var cache = new LRU()
+
+  t.throws(function() {
+    cache.load([{
+      k: { someObjectKey: true },
+      v: "B",
+      e: 0
+    }])
+  }, "load should not accept objects as keys")
+
+  t.throws(function() {
+    cache.load([{
+      k: [1,2,3],
+      v: "C",
+      e: 0
+    }])
+  }, "load should not accept arrays as keys")
+
+  t.end()
+})

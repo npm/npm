@@ -229,7 +229,7 @@ test("drop the old items", function(t) {
   }, 155)
 })
 
-test("individual item can have it's own maxAge", function(t) {
+test("individual item can have its own maxAge", function(t) {
   var cache = new LRU({
     max: 5,
     maxAge: 50
@@ -242,7 +242,7 @@ test("individual item can have it's own maxAge", function(t) {
   }, 25)
 })
 
-test("individual item can have it's own maxAge > cache's", function(t) {
+test("individual item can have its own maxAge > cache's", function(t) {
   var cache = new LRU({
     max: 5,
     maxAge: 20
@@ -391,6 +391,66 @@ test("pop the least used item", function (t) {
   t.equal(last, null)
   t.equal(cache.length, 0)
   t.equal(cache.max, 3)
+
+  t.end()
+})
+
+test("get and set only accepts strings and numbers as keys", function(t) {
+  var cache = new LRU()
+
+  cache.set("key", "value")
+  cache.set(123, 456)
+
+  t.equal(cache.get("key"), "value")
+  t.equal(cache.get(123), 456)
+
+  t.throws(function() {
+    cache.set({ someObjectKey: true }, "a")
+  }, "set should not accept objects as keys")
+
+  t.throws(function() {
+    cache.set([1,2,3], "b")
+  }, "set should not accept arrays as keys")
+
+  t.end()
+})
+
+test("peek only accepts strings and numbers as keys", function(t) {
+  var cache = new LRU()
+
+  cache.set("key", "value")
+  cache.set(123, 456)
+
+  t.equal(cache.peek("key"), "value")
+  t.equal(cache.peek(123), 456)
+  t.end()
+})
+
+test("del only accepts strings and numbers as keys", function(t) {
+  var cache = new LRU()
+
+  cache.set("key", "value")
+  cache.set(123, 456)
+
+  cache.del("key")
+  cache.del(123)
+
+  t.assertNot(cache.has("key"))
+  t.assertNot(cache.has(123))
+
+  cache.set('[object Object]', 123)
+  t.assertNot(cache.has({}))
+  t.assert(cache.has(String({})))
+
+  t.end()
+})
+
+
+test("has only accepts strings and numbers as keys", function(t) {
+  var cache = new LRU()
+
+  cache.has("key")
+  cache.has(123)
 
   t.end()
 })
