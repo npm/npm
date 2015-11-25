@@ -1,3 +1,87 @@
+### v2.14.13 (2015-11-25):
+
+#### THE npm CLI !== THE npm REGISTRY !== npm, INC.
+
+npm-the-CLI is licensed under the terms of the [Artistic License
+2.0](https://github.com/npm/npm/blob/8d79c1a39dae908f27eaa37ff6b23515d505ef29/LICENSE),
+which is a liberal open-source license that allows you to take this code and do
+pretty much whatever you like with it (that is, of course, not legal language,
+and if you're doing anything with npm that leaves you in doubt about your legal
+rights, please seek the review of qualified counsel, which is to say, not
+members of the CLI team, none of whom have passed the bar, to my knowledge). At
+the same time the primary registry the CLI uses when looking up and downloading
+packages is a commercial service run by npm, Inc., and it has its own [Terms of
+Use](https://www.npmjs.com/policies/terms).
+
+Aside from clarifying the terms of use (and trying to make sure they're more
+widely known), the only recent changes to npm's licenses have been making the
+split between the CLI and registry clearer. You are still free to do whatever
+you like with the CLI's source, and you are free to view, download, and publish
+packages to and from `registry.npmjs.org`, but now the existing terms under
+which you can do so are more clearly documented. Aside from the two commits
+below, see also [the release notes for
+`npm@2.14.11`](https://github.com/npm/npm/releases/tag/v2.14.11), which is where
+the split between the CLI's code and the terms of use for the registry was
+first made more clear.
+
+* [`1f3e936`](https://github.com/npm/npm/commit/1f3e936aab6840667948ef281e0c3621df365131)
+  [#10532](https://github.com/npm/npm/issues/10532) Clarify that
+  `registry.npmjs.org` is the default, but that you're free to use the npm CLI
+  with whatever registry you wish. ([@kemitchell](https://github.com/kemitchell))
+* [`6733539`](https://github.com/npm/npm/commit/6733539eeb9b32a5f2d1a6aa797987e2252fa760)
+  [#10532](https://github.com/npm/npm/issues/10532) Having semi-duplicate
+  release information in `README.md` was confusing and potentially inaccurate,
+  so remove it. ([@kemitchell](https://github.com/kemitchell))
+
+#### EASE UP ON WINDOWS BASH USERS
+
+It turns out that a fair number of us use bash on Windows (through MINGW or
+bundled with Git, plz – Cygwin is still a bridge too far, for both npm and
+Node.js). [@jakub-g](https://github.com/jakub-g) did us all a favor and relaxed
+the check for npm completion to support MINGW bash. Thanks, Jakub!
+
+* [`460cc09`](https://github.com/npm/npm/commit/460cc0950fd6a005c4e5c4f85af807814209b2bb)
+  [#10156](https://github.com/npm/npm/issues/10156) completion: enable on
+  Windows in git bash ([@jakub-g](https://github.com/jakub-g))
+
+#### MAKE NODE-GYP A LITTLE BLUER
+
+* [`333e118`](https://github.com/npm/npm/commit/333e1181082842c21edc62f0ce515928424dff1f)
+  `node-gyp@3.2.0`: Support AIX, use `which` to find Python, updated to a newer
+  version of `gyp`, and more! ([@bnoordhuis](https://github.com/bnoordhuis))
+
+#### WE LIKE SPDX AND ALL BUT IT'S NOT ACTUALLY A DIRECT DEP, SORRY
+
+* [`1f4b4bb`](https://github.com/npm/npm/commit/1f4b4bbdf8758281beecb7eaf75d05a6c4a77c15)
+  Removed `spdx` as a direct npm dependency, since we don't actually need it at
+  that level, and updated subdeps for `validate-npm-package-license`
+  ([@othiym23](https://github.com/othiym23))
+
+#### A BOUNTEOUS THANKSGIVING CORNUCOPIA OF DOC TWEAKS
+
+These are great! Keep them coming! Sorry for letting them pile up so deep,
+everybody. Also, a belated Thanksgiving to our Canadian friends, and a happy
+Thanksgiving to all our friends in the USA.
+
+* [`6101f44`](https://github.com/npm/npm/commit/6101f44737645d9379c3396fae81bbc4d94e1f7e)
+  [#10250](https://github.com/npm/npm/issues/10250) Correct order of `org:team`
+  in `npm team` documentation. ([@louislarry](https://github.com/louislarry))
+* [`e8769f9`](https://github.com/npm/npm/commit/e8769f9807b91582c15ef130733e2e72b6c7bda4)
+  [#10371](https://github.com/npm/npm/issues/10371) Remove broken / duplicate
+  link to tag. ([@WickyNilliams](https://github.com/WickyNilliams))
+* [`1ae2dbe`](https://github.com/npm/npm/commit/1ae2dbe759feb80d8634569221ec6ee2c6d1d1ff)
+  [#10419](https://github.com/npm/npm/issues/10419) Remove references to
+  nonexistent `npm-rm(1)` documentation. ([@KenanY](https://github.com/KenanY))
+* [`777a271`](https://github.com/npm/npm/commit/777a271830a42d4ee62540a89f764a6e7d62de19)
+  [#10474](https://github.com/npm/npm/issues/10474) Clarify that install finds
+  dependencies in `package.json`. ([@sleekweasel](https://github.com/sleekweasel))
+* [`dcf4b5c`](https://github.com/npm/npm/commit/dcf4b5cbece1b0ef55ab7665d9acacc0b6b7cd6e)
+  [#10497](https://github.com/npm/npm/issues/10497) Clarify what a package is
+  slightly. ([@aredridel](https://github.com/aredridel))
+* [`447b3d6`](https://github.com/npm/npm/commit/447b3d669b2b6c483b8203754ac0a002c67bf015)
+  [#10539](https://github.com/npm/npm/issues/10539) Remove an extra, spuriously
+  capitalized letter. ([@alexlukin-softgrad](https://github.com/alexlukin-softgrad))
+
 ### v2.14.12 (2015-11-19):
 
 #### TEEN ORCS AT THE GATES
