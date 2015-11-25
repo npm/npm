@@ -1,3 +1,103 @@
+### v3.5.1 (2015-11-25):
+
+#### THE npm CLI !== THE npm REGISTRY !== npm, INC.
+
+npm-the-CLI is licensed under the terms of the [Artistic License
+2.0](https://github.com/npm/npm/blob/8d79c1a39dae908f27eaa37ff6b23515d505ef29/LICENSE),
+which is a liberal open-source license that allows you to take this code and do
+pretty much whatever you like with it (that is, of course, not legal language,
+and if you're doing anything with npm that leaves you in doubt about your legal
+rights, please seek the review of qualified counsel, which is to say, not
+members of the CLI team, none of whom have passed the bar, to my knowledge). At
+the same time the primary registry the CLI uses when looking up and downloading
+packages is a commercial service run by npm, Inc., and it has its own [Terms of
+Use](https://www.npmjs.com/policies/terms).
+
+Aside from clarifying the terms of use (and trying to make sure they're more
+widely known), the only recent changes to npm's licenses have been making the
+split between the CLI and registry clearer. You are still free to do whatever
+you like with the CLI's source, and you are free to view, download, and publish
+packages to and from `registry.npmjs.org`, but now the existing terms under
+which you can do so are more clearly documented. Aside from the two commits
+below, see also [the release notes for
+`npm@3.4.1`](https://github.com/npm/npm/releases/tag/v3.4.1), which is where
+the split between the CLI's code and the terms of use for the registry was
+first made more clear.
+
+* [`35a5dd5`](https://github.com/npm/npm/commit/35a5dd5abbfeec4f98a2b4534ec4ef5d16760581)
+  [#10532](https://github.com/npm/npm/issues/10532) Clarify that
+  `registry.npmjs.org` is the default, but that you're free to use the npm CLI
+  with whatever registry you wish. ([@kemitchell](https://github.com/kemitchell))
+* [`fa6b013`](https://github.com/npm/npm/commit/fa6b0136a0e4a19d8979b2013622e5ff3f0446f8)
+  [#10532](https://github.com/npm/npm/issues/10532) Having semi-duplicate
+  release information in `README.md` was confusing and potentially inaccurate,
+  so remove it. ([@kemitchell](https://github.com/kemitchell))
+
+#### EASE UP ON WINDOWS BASH USERS
+
+It turns out that a fair number of us use bash on Windows (through MINGW or
+bundled with Git, plz – Cygwin is still a bridge too far, for both npm and
+Node.js). [@jakub-g](https://github.com/jakub-g) did us all a favor and relaxed
+the check for npm completion to support MINGW bash. Thanks, Jakub!
+
+* [`09498e4`](https://github.com/npm/npm/commit/09498e45c5c9e683f092ab1372670f81db4762b6)
+  [#10156](https://github.com/npm/npm/issues/10156) completion: enable on
+  Windows in git bash ([@jakub-g](https://github.com/jakub-g))
+
+#### THE ONGOING SAGA OF BUNDLED DEPENDENCIES
+
+`npm@3.5.0` fixed up a serious issue with how `npm@3.4.1` (and potentially
+`npm@3.4.0` and `npm@3.3.12`) handled the case in which dependencies bundled
+into a package tarball are handled improperly when one or more of their own
+dependencies are older than what's latest on the registry. Unfortunately, in
+fixing that (quite severe) regression (see [`npm@3.5.0`'s release notes' for
+details](https://github.com/npm/npm/releases/tag/v3.5.0)), we introduced a new
+(small, and fortunately cosmetic) issue where npm superfluously warns you about
+bundled dependencies being stale. We have now fixed that, and hope that we
+haven't introduced any _other_ regressions in the process. :D
+
+* [`20824a7`](https://github.com/npm/npm/commit/20824a75bf7639fb0951a588e3c017a370ae6ec2)
+  [#10501](https://github.com/npm/npm/issues/10501) Only warn about replacing
+  bundled dependencies when actually doing so. ([@iarna](https://github.com/iarna))
+
+#### MAKE NODE-GYP A LITTLE BLUER
+
+* [`1d14d88`](https://github.com/npm/npm/commit/1d14d882c3b5af0a7fee46e8e0e343d07e4c38cb)
+  `node-gyp@3.2.0`: Support AIX, use `which` to find Python, updated to a newer
+  version of `gyp`, and more! ([@bnoordhuis](https://github.com/bnoordhuis))
+
+#### A BOUNTEOUS THANKSGIVING CORNUCOPIA OF DOC TWEAKS
+
+These are great! Keep them coming! Sorry for letting them pile up so deep,
+everybody. Also, a belated Thanksgiving to our Canadian friends, and a happy
+Thanksgiving to all our friends in the USA.
+
+* [`4659f1c`](https://github.com/npm/npm/commit/4659f1c5ad617c46a5e89b48abf0b1c4e6f04307)
+  [#10244](https://github.com/npm/npm/issues/10244) In `npm@3`, `npm dedupe`
+  doesn't take any arguments, so update documentation to reflect that.
+  ([@bengotow](https://github.com/bengotow))
+* [`625a7ee`](https://github.com/npm/npm/commit/625a7ee6b4391e90cb28a95f20a73fd794e1eebe)
+  [#10250](https://github.com/npm/npm/issues/10250) Correct order of `org:team`
+  in `npm team` documentation. ([@louislarry](https://github.com/louislarry))
+* [`bea7f87`](https://github.com/npm/npm/commit/bea7f87399d784e3a6d3393afcca658a61a40d77)
+  [#10371](https://github.com/npm/npm/issues/10371) Remove broken / duplicate
+  link to tag. ([@WickyNilliams](https://github.com/WickyNilliams))
+* [`0a25e29`](https://github.com/npm/npm/commit/0a25e2956e9ddd4065d6bd929559321afc512fde)
+  [#10419](https://github.com/npm/npm/issues/10419) Remove references to
+  nonexistent `npm-rm(1)` documentation. ([@KenanY](https://github.com/KenanY))
+* [`19b94e1`](https://github.com/npm/npm/commit/19b94e1e6781fe2f98ada0a3f49a1bda25e3e32d)
+  [#10474](https://github.com/npm/npm/issues/10474) Clarify that install finds
+  dependencies in `package.json`. ([@sleekweasel](https://github.com/sleekweasel))
+* [`b25efc8`](https://github.com/npm/npm/commit/b25efc88067c843ffdda86ea0f50f95d136a638e)
+  [#9948](https://github.com/npm/npm/issues/9948) Encourage users to file an
+  issue, rather than emailing authors. ([@trodrigues](https://github.com/trodrigues))
+* [`24f4ced`](https://github.com/npm/npm/commit/24f4cedc83b10061f26362bf2f005ab935e0cbfe)
+  [#10497](https://github.com/npm/npm/issues/10497) Clarify what a package is
+  slightly. ([@aredridel](https://github.com/aredridel))
+* [`e8168d4`](https://github.com/npm/npm/commit/e8168d40caae00b2914ea09dbe4bd1b09ba3dcd5)
+  [#10539](https://github.com/npm/npm/issues/10539) Remove an extra, spuriously
+  capitalized letter. ([@alexlukin-softgrad](https://github.com/alexlukin-softgrad))
+
 ### v3.5.0 (2015-11-19):
 
 #### TEEN ORCS AT THE GATES
