@@ -11,7 +11,7 @@ This command will set the npm docs to open in your default web browser rather th
 
 ## It didn't work.
 
-Please provide a little more detail, search for the error via [Google](https://google.com) or [StackOverflow npm](http://stackoverflow.com/search?q=npm) to see if another developer has encountered a similar problem.
+Please provide a little more detail, search for the error via [Google](https://google.com) or [StackOverflow npm](https://stackoverflow.com/search?q=npm) to see if another developer has encountered a similar problem.
 
 ## Why didn't it work?
 
@@ -273,13 +273,13 @@ You don't.  Try one of these node version managers:
 
 Unix:
 
-* <http://github.com/isaacs/nave>
-* <http://github.com/visionmedia/n>
-* <http://github.com/creationix/nvm>
+* <https://github.com/isaacs/nave>
+* <https://github.com/visionmedia/n>
+* <https://github.com/creationix/nvm>
 
 Windows:
 
-* <http://github.com/marcelklehr/nodist>
+* <https://github.com/marcelklehr/nodist>
 * <https://github.com/coreybutler/nvm-windows>
 * <https://github.com/hakobera/nvmw>
 * <https://github.com/nanjingboy/nvmw>
@@ -369,7 +369,7 @@ contributed to it, some of them quite substantially.
 
 The npm open source project, The npm Registry, and [the community
 website](https://www.npmjs.com) are maintained and operated by the
-good folks at [npm, Inc.](http://www.npmjs.com)
+good folks at [npm, Inc.](https://www.npmjs.com)
 
 ## I have a question or request not addressed here. Where should I put it?
 
