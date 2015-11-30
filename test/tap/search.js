@@ -12,7 +12,7 @@ var common = require('../common-tap.js')
 var pkg = path.resolve(__dirname, 'search')
 var cache = path.resolve(pkg, 'cache')
 var registryCache = path.resolve(cache, 'localhost_1337', '-', 'all')
-var cacheJsonFile = path.resolve(registryCache, '.cache.json')
+var searchDir = path.resolve(registryCache, '_search')
 
 var timeMock = {
   epoch: 1411727900,
@@ -53,14 +53,17 @@ test('No previous cache, init cache triggered by first search', function (t) {
       'search', 'do not do extra search work on my behalf',
       '--registry', common.registry,
       '--cache', cache,
-      '--loglevel', 'silent',
-      '--color', 'always'
+      '--loglevel', 'error',
+      '--color', 'never'
     ],
     EXEC_OPTS,
-    function (err, code) {
+    function (err, code, stdout, stderr) {
       s.close()
+      t.equal(stderr, '', 'had no error output')
       t.equal(code, 0, 'search finished successfully')
       t.ifErr(err, 'search finished successfully')
+
+      var cacheJsonFile = path.resolve(searchDir, '0-' + timeMock.future + '.json')
 
       t.ok(
         fs.existsSync(cacheJsonFile),
@@ -102,14 +105,17 @@ test('previous cache, _updated set, should trigger since request', function (t) 
       'search', 'do not do extra search work on my behalf',
       '--registry', common.registry,
       '--cache', cache,
-      '--loglevel', 'silly',
+      '--loglevel', 'error',
       '--color', 'always'
     ],
     EXEC_OPTS,
-    function (err, code) {
+    function (err, code, stdout, stderr) {
       s.close()
+      t.equal(stderr, '', 'no error output')
       t.equal(code, 0, 'search finished successfully')
       t.ifErr(err, 'search finished successfully')
+
+      var cacheJsonFile = path.resolve(searchDir, '0-' + timeMock.epoch + '.json')
 
       var cacheData = JSON.parse(fs.readFileSync(cacheJsonFile, 'utf8'))
       t.equal(
@@ -143,12 +149,14 @@ searches.forEach(function (search) {
         'search', search.term,
         '--registry', common.registry,
         '--cache', cache,
-        '--loglevel', 'silent',
+        '--loglevel', 'error',
         '--color', 'always'
       ],
       EXEC_OPTS,
-      function (err, code, stdout) {
+      function (err, code, stdout, stderr) {
         s.close()
+        t.equal(stderr, '', 'no error output')
+        t.notEqual(stdout, '', 'got output')
         t.equal(code, 0, 'search finished successfully')
         t.ifErr(err, 'search finished successfully')
         // \033 == \u001B
@@ -183,6 +191,8 @@ function setupCache () {
   cleanup()
   mkdirp.sync(cache)
   mkdirp.sync(registryCache)
+  mkdirp.sync(searchDir)
+  var cacheJsonFile = path.resolve(searchDir, '0-' + timeMock.epoch + '.json')
   var res = fs.writeFileSync(cacheJsonFile, stringifyUpdated(timeMock.epoch))
   if (res) throw new Error('Creating cache file failed')
 }
