@@ -28,6 +28,10 @@ var mocks = {
   }
 }
 
+function noFilter () {
+  return true
+}
+
 var allMock = {
   '_updated': 1411727900 + 25,
   'generator-frontcow': {
@@ -155,7 +159,7 @@ test('setup basic', function (t) {
 })
 
 test('request basic', function (t) {
-  updateIndex(0, function (er) {
+  updateIndex(0, null, null, noFilter, function (er) {
     t.ifError(er, 'no error')
     t.end()
   })
@@ -168,7 +172,8 @@ test('setup auth', function (t) {
 })
 
 test('request auth failure', function (t) {
-  updateIndex(0, function (er) {
+  updateIndex(0, null, null, noFilter, function (er) {
+    t.ok(er, 'got an error')
     t.equals(er.code, 'E401', 'gotta get that auth')
     t.ok(/^unauthorized/.test(er.message), 'unauthorized message')
     t.end()
@@ -186,7 +191,7 @@ test('setup auth', function (t) {
 })
 
 test('request auth success', function (t) {
-  updateIndex(0, function (er) {
+  updateIndex(0, null, null, noFilter, function (er) {
     t.ifError(er, 'no error')
     t.end()
   })
