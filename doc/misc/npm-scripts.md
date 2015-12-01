@@ -160,7 +160,7 @@ For example, if your package.json contains this:
 then the `scripts/install.js` will be called for the install,
 post-install, stages of the lifecycle, and the `scripts/uninstall.js`
 would be called when the package is uninstalled.  Since
-`scripts/install.js` is running for three different phases, it would
+`scripts/install.js` is running for two different phases, it would
 be wise in this case to look at the `npm_lifecycle_event` environment
 variable.
 
