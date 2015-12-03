@@ -639,7 +639,7 @@ standard output.
 
 ### prefix
 
-* Default: see npm-folders(5)
+* Default: see `npm-folders(5)`
 * Type: path
 
 The location to install global items.  If set on the command line, then

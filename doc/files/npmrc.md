@@ -9,7 +9,7 @@ variables, and `npmrc` files.
 The `npm config` command can be used to update and edit the contents
 of the user and global npmrc files.
 
-For a list of available configuration options, see npm-config(7).
+For a list of available configuration options, see `npm-config(7)`.
 
 ## FILES
 

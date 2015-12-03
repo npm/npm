@@ -19,7 +19,7 @@ npm-install(1) -- Install a package
 
 This command installs a package, and any packages that it depends on. If the
 package has a shrinkwrap file, the installation of dependencies will be driven
-by that. See npm-shrinkwrap(1).
+by that. See `npm-shrinkwrap(1)`.
 
 A `package` is:
 
@@ -328,7 +328,7 @@ For `A{B,C}, B{C,D@1}, C{D@2}`, this algorithm produces:
 Because B's D@1 will be installed in the top level, C now has to install D@2
 privately for itself.
 
-See npm-folders(5) for a more detailed description of the specific
+See `npm-folders(5)` for a more detailed description of the specific
 folder structures that npm creates.
 
 ### Limitations of npm’s Install Algorithm

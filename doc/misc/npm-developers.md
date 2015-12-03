@@ -78,7 +78,7 @@ least, you need:
   If you have a special compilation or installation script, then you
   should put it in the `scripts` object.  You should definitely have at
   least a basic smoke-test command as the "scripts.test" field.
-  See npm-scripts(7).
+  See `npm-scripts(7)`.
 
 * main:
   If you have a single module that serves as the entry point to your
