@@ -27,7 +27,7 @@ In this case, `npm-dedupe(1)` will transform the tree to:
     +-- d
     `-- c@1.0.10
 
-Because of the hierarchical nature of node’s module lookup, b and d
+Because of the hierarchical nature of Node’s module lookup, b and d
 will both get their dependency met by the single c package at the root
 level of the tree.
 

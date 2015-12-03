@@ -21,7 +21,7 @@ This document will tell you what it puts where.
 
 The `prefix` config defaults to the location where node is installed.
 On most systems, this is `/usr/local`, and most of the time is the same
-as node’s `process.installPrefix`.
+as Node’s `process.installPrefix`.
 
 On windows, this is the exact location of the node.exe binary.  On Unix
 systems, it’s one level up, since node is typically installed at
@@ -118,7 +118,7 @@ but using the folders described above.
 
 ### Cycles, Conflicts, and Folder Parsimony
 
-Cycles are handled using the property of node’s module system that it
+Cycles are handled using the property of Node’s module system that it
 walks up the directories looking for `node_modules` folders.  So, at every
 stage, if a package is already installed in an ancestor `node_modules`
 folder, then it is not installed at the current location.
