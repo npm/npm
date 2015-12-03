@@ -425,6 +425,8 @@ def GetFlavor(params):
     return 'freebsd'
   if sys.platform.startswith('openbsd'):
     return 'openbsd'
+  if sys.platform.startswith('netbsd'):
+    return 'netbsd'
   if sys.platform.startswith('aix'):
     return 'aix'
 

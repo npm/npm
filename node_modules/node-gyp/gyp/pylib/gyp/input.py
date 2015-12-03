@@ -28,7 +28,12 @@ from gyp.common import OrderedSet
 
 
 # A list of types that are treated as linkable.
-linkable_types = ['executable', 'shared_library', 'loadable_module']
+linkable_types = [
+  'executable',
+  'shared_library',
+  'loadable_module',
+  'mac_kernel_extension',
+]
 
 # A list of sections that contain links to other targets.
 dependency_sections = ['dependencies', 'export_dependent_settings']
@@ -1724,11 +1729,12 @@ class DependencyGraphNode(object):
       dependencies.add(self.ref)
       return dependencies
 
-    # Executables and loadable modules are already fully and finally linked.
-    # Nothing else can be a link dependency of them, there can only be
-    # dependencies in the sense that a dependent target might run an
-    # executable or load the loadable_module.
-    if not initial and target_type in ('executable', 'loadable_module'):
+    # Executables, mac kernel extensions and loadable modules are already fully
+    # and finally linked. Nothing else can be a link dependency of them, there
+    # can only be dependencies in the sense that a dependent target might run
+    # an executable or load the loadable_module.
+    if not initial and target_type in ('executable', 'loadable_module',
+                                       'mac_kernel_extension'):
       return dependencies
 
     # Shared libraries are already fully linked.  They should only be included
@@ -2479,7 +2485,7 @@ def ValidateTargetType(target, target_dict):
   """
   VALID_TARGET_TYPES = ('executable', 'loadable_module',
                         'static_library', 'shared_library',
-                        'none')
+                        'mac_kernel_extension', 'none')
   target_type = target_dict.get('type', None)
   if target_type not in VALID_TARGET_TYPES:
     raise GypError("Target %s has an invalid target type '%s'.  "

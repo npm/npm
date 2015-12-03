@@ -1452,6 +1452,7 @@ def _GetXcodeEnv(xcode_settings, built_products_dir, srcroot, configuration,
 
   # These are filled in on a as-needed basis.
   env = {
+    'BUILT_FRAMEWORKS_DIR' : built_products_dir,
     'BUILT_PRODUCTS_DIR' : built_products_dir,
     'CONFIGURATION' : configuration,
     'PRODUCT_NAME' : xcode_settings.GetProductName(),
