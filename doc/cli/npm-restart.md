@@ -9,7 +9,7 @@ npm-restart(1) -- Restart a package
 
 This restarts a package.
 
-This runs a package's "stop", "restart", and "start" scripts, and associated
+This runs a package’s "stop", "restart", and "start" scripts, and associated
 pre- and post- scripts, in the order given below:
 
 1. prerestart

@@ -10,7 +10,7 @@ npm-docs(1) -- Docs for a package in a web browser maybe
 
 ## DESCRIPTION
 
-This command tries to guess at the likely location of a package's
+This command tries to guess at the likely location of a package’s
 documentation URL, and then tries to open it using the `--browser`
 config param. You can pass multiple package names at once. If no
 package name is provided, it will search for a `package.json` in

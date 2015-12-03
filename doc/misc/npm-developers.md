@@ -3,7 +3,7 @@ npm-developers(7) -- Developer Guide
 
 ## DESCRIPTION
 
-So, you've decided to use npm to develop (and maybe publish/deploy)
+So, you’ve decided to use npm to develop (and maybe publish/deploy)
 your project.
 
 Fantastic!
@@ -56,8 +56,8 @@ least, you need:
   This should be a string that identifies your project.  Please do not
   use the name to specify that it runs on node, or is in JavaScript.
   You can use the "engines" field to explicitly state the versions of
-  node (or whatever else) that your program requires, and it's pretty
-  well assumed that it's javascript.
+  node (or whatever else) that your program requires, and it’s pretty
+  well assumed that it’s javascript.
 
   It does not necessarily need to match your github repository name.
 
@@ -88,7 +88,7 @@ least, you need:
 * directories:
   This is an object mapping names to folders.  The best ones to include are
   "lib" and "doc", but if you use "man" to specify a folder full of man pages,
-  they'll get installed just like these ones.
+  they’ll get installed just like these ones.
 
 You can use `npm init` in the root of your package in order to get you
 started with a pretty basic package.json file.  See `npm-init(1)` for
@@ -96,7 +96,7 @@ more info.
 
 ## Keeping files *out* of your package
 
-Use a `.npmignore` file to keep stuff out of your package.  If there's
+Use a `.npmignore` file to keep stuff out of your package.  If there’s
 no `.npmignore` file, but there *is* a `.gitignore` file, then npm will
 ignore the stuff matched by the `.gitignore` file.  If you *want* to
 include something that is excluded by your `.gitignore` file, you can
@@ -112,7 +112,7 @@ as `.gitignore` files:
 * You can end patterns with a forward slash `/` to specify a directory.
 * You can negate a pattern by starting it with an exclamation point `!`.
 
-By default, the following paths and files are ignored, so there's no
+By default, the following paths and files are ignored, so there’s no
 need to add them to `.npmignore` explicitly:
 
 * `.*.swp`
@@ -129,7 +129,7 @@ need to add them to `.npmignore` explicitly:
 * `npm-debug.log`
 
 Additionally, everything in `node_modules` is ignored, except for
-bundled dependencies. npm automatically handles this for you, so don't
+bundled dependencies. npm automatically handles this for you, so don’t
 bother adding `node_modules` to `.npmignore`.
 
 The following paths and files are never ignored, so adding them to
@@ -153,21 +153,21 @@ More info at `npm-link(1)`.
 
 **This is important.**
 
-If you can not install it locally, you'll have
-problems trying to publish it.  Or, worse yet, you'll be able to
-publish it, but you'll be publishing a broken or pointless package.
-So don't do that.
+If you can not install it locally, you’ll have
+problems trying to publish it.  Or, worse yet, you’ll be able to
+publish it, but you’ll be publishing a broken or pointless package.
+So don’t do that.
 
 In the root of your package, do this:
 
     npm install . -g
 
-That'll show you that it's working.  If you'd rather just create a symlink
+That’ll show you that it’s working.  If you’d rather just create a symlink
 package that points to your working directory, then do this:
 
     npm link
 
-Use `npm ls -g` to see if it's there.
+Use `npm ls -g` to see if it’s there.
 
 To test a local install, go into some other folder, and then do:
 
@@ -177,7 +177,7 @@ To test a local install, go into some other folder, and then do:
 to install it locally into the node_modules folder in that other place.
 
 Then go into the node-repl, and try using require("my-thing") to
-bring in your module's main module.
+bring in your module’s main module.
 
 ## Create a User Account
 
@@ -191,7 +191,7 @@ This is documented better in npm-adduser(1).
 
 ## Publish your package
 
-This part's easy.  In the root of your folder, do this:
+This part’s easy.  In the root of your folder, do this:
 
     npm publish
 

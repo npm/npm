@@ -15,7 +15,7 @@ installed, as well as their dependencies, in a tree-structure.
 Positional arguments are `name@version-range` identifiers, which will
 limit the results to only the paths to the packages named.  Note that
 nested packages will *also* show the paths to the specified packages.
-For example, running `npm ls promzard` in npm's source tree will show:
+For example, running `npm ls promzard` in npm’s source tree will show:
 
     npm@@VERSION@ /path/to/npm
     └─┬ init-package-json@0.0.4

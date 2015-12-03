@@ -141,7 +141,7 @@ Tells npm to create symlinks (or `.cmd` shims on Windows) for package
 executables.
 
 Set to false to have it not do this.  This can be used to work around
-the fact that some file systems don't support symlinks, even on
+the fact that some file systems don’t support symlinks, even on
 ostensibly Unix systems.
 
 ### browser
@@ -178,7 +178,7 @@ See also the `strict-ssl` config.
 * Type: path
 
 A path to a file containing one or multiple Certificate Authority signing
-certificates. Similar to the `ca` setting, but allows for multiple CA's, as
+certificates. Similar to the `ca` setting, but allows for multiple CA’s, as
 well as for the CA information to be stored in a file on disk.
 
 ### cache
@@ -186,7 +186,7 @@ well as for the CA information to be stored in a file on disk.
 * Default: Windows: `%AppData%\npm-cache`, Posix: `~/.npm`
 * Type: path
 
-The location of npm's cache directory.  See `npm-cache(1)`
+The location of npm’s cache directory.  See `npm-cache(1)`
 
 ### cache-lock-stale
 
@@ -281,7 +281,7 @@ set.
 * Default: false
 * Type: Boolean
 
-Indicates that you don't want npm to make any changes and that it should
+Indicates that you don’t want npm to make any changes and that it should
 only report what it would have done.  This can be passed into any of the
 commands that modify your local installation, eg, `install`, `update`,
 `dedupe`, `uninstall`.  This is NOT currently honored by network related
@@ -427,8 +427,8 @@ proxy settings will be honored by the underlying `request` library.
 * Type: Boolean
 
 If true, npm will not exit with an error code when `run-script` is invoked for
-a script that isn't defined in the `scripts` section of `package.json`. This
-option can be used when it's desirable to optionally run a script when it's
+a script that isn’t defined in the `scripts` section of `package.json`. This
+option can be used when it’s desirable to optionally run a script when it’s
 present and fail if the script fails. This is useful, for example, when running
 scripts that may only apply for some builds in an otherwise generic CI setup.
 
@@ -454,21 +454,21 @@ for more information, or npm-init(1).
 * Default: ""
 * Type: String
 
-The value `npm init` should use by default for the package author's name.
+The value `npm init` should use by default for the package author’s name.
 
 ### init-author-email
 
 * Default: ""
 * Type: String
 
-The value `npm init` should use by default for the package author's email.
+The value `npm init` should use by default for the package author’s email.
 
 ### init-author-url
 
 * Default: ""
 * Type: String
 
-The value `npm init` should use by default for the package author's homepage.
+The value `npm init` should use by default for the package author’s homepage.
 
 ### init-license
 
@@ -585,7 +585,7 @@ Any "%s" in the message will be replaced with the version number.
 * Default: process.version
 * Type: semver or false
 
-The node version to use when checking a package's `engines` map.
+The node version to use when checking a package’s `engines` map.
 
 ### npat
 
@@ -751,7 +751,7 @@ Only works if there is already a package.json file present.
 
 Dependencies saved to package.json using `--save`, `--save-dev` or
 `--save-optional` will be configured with an exact version rather than
-using npm's default semver range operator.
+using npm’s default semver range operator.
 
 ### save-optional
 
@@ -856,7 +856,7 @@ See also the `ca` config.
 * Default: latest
 * Type: String
 
-If you ask npm to install a package and don't tell it a specific version, then
+If you ask npm to install a package and don’t tell it a specific version, then
 it will install the specified tag.
 
 Also the tag that is added to the package@version specified by the `npm
@@ -955,7 +955,7 @@ Only relevant when specified explicitly on the command line.
 * Default: false
 * Type: boolean
 
-If true, output the npm version as well as node's `process.versions` map, and
+If true, output the npm version as well as Node’s `process.versions` map, and
 exit successfully.
 
 Only relevant when specified explicitly on the command line.

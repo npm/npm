@@ -7,7 +7,7 @@ npm-pack(1) -- Create a tarball from a package
 
 ## DESCRIPTION
 
-For anything that's installable (that is, a package folder, tarball,
+For anything that’s installable (that is, a package folder, tarball,
 tarball url, name@tag, name@version, name, or scoped name), this
 command will fetch it to the cache, and then copy the tarball to the
 current working directory as `<name>-<version>.tgz`, and then write

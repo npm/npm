@@ -47,7 +47,7 @@ after packing it up into a tarball (b).
 
     By default, `npm install` will install all modules listed as dependencies
     in `package.json(5)`.
-    
+
     With the `--production` flag (or when the `NODE_ENV` environment variable
     is set to `production`), npm will not install modules listed in
     `devDependencies`.
@@ -100,7 +100,7 @@ after packing it up into a tarball (b).
     package.json, there is an additional, optional flag:
 
     * `-E, --save-exact`: Saved dependencies will be configured with an
-      exact version rather than using npm's default semver range
+      exact version rather than using npm’s default semver range
       operator.
 
     Further, if you have an `npm-shrinkwrap.json` then it will be updated as
@@ -198,7 +198,7 @@ after packing it up into a tarball (b).
     Install the package at `https://github.com/githubname/githubrepo` by
     attempting to clone it using `git`.
 
-    If you don't specify a *commit-ish* then `master` will be used.
+    If you don’t specify a *commit-ish* then `master` will be used.
 
     Examples:
 
@@ -211,7 +211,7 @@ after packing it up into a tarball (b).
     clone it using `git`. The GitHub username associated with the gist is
     optional and will not be saved in `package.json` if `-S` or `--save` is used.
 
-    If you don't specify a *commit-ish* then `master` will be used.
+    If you don’t specify a *commit-ish* then `master` will be used.
 
     Example:
 
@@ -222,7 +222,7 @@ after packing it up into a tarball (b).
     Install the package at `https://bitbucket.org/bitbucketname/bitbucketrepo`
     by attempting to clone it using `git`.
 
-    If you don't specify a *commit-ish* then `master` will be used.
+    If you don’t specify a *commit-ish* then `master` will be used.
 
     Example:
 
@@ -233,7 +233,7 @@ after packing it up into a tarball (b).
     Install the package at `https://gitlab.com/gitlabname/gitlabrepo`
     by attempting to clone it using `git`.
 
-    If you don't specify a *commit-ish* then `master` will be used.
+    If you don’t specify a *commit-ish* then `master` will be used.
 
     Example:
 
@@ -288,7 +288,7 @@ The `--only={prod[uction]|dev[elopment]}` argument will cause either only
 `devDependencies` or only non-`devDependencies` to be installed regardless of the `NODE_ENV`.
 
 See `npm-config(7)`.  Many of the configuration params have some
-effect on installation, since that's most of what npm does.
+effect on installation, since that’s most of what npm does.
 
 ## ALGORITHM
 
@@ -331,7 +331,7 @@ privately for itself.
 See npm-folders(5) for a more detailed description of the specific
 folder structures that npm creates.
 
-### Limitations of npm's Install Algorithm
+### Limitations of npm’s Install Algorithm
 
 There are some very rare and pathological edge-cases where a cycle can
 cause npm to try to install a never-ending tree of packages.  Here is

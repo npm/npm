@@ -7,7 +7,7 @@ npm-start(1) -- Start a package
 
 ## DESCRIPTION
 
-This runs an arbitrary command specified in the package's `"start"` property of
+This runs an arbitrary command specified in the package’s `"start"` property of
 its `"scripts"` object. If no `"start"` property is specified on the
 `"scripts"` object, it will run `node server.js`.
 

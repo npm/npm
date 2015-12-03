@@ -90,7 +90,7 @@ prerelease flag, and `3.4.5` is greater than `1.2.3-alpha.7`.
 
 The purpose for this behavior is twofold.  First, prerelease versions
 frequently are updated very quickly, and contain many breaking changes
-that are (by the author's design) not yet fit for public consumption.
+that are (by the author’s design) not yet fit for public consumption.
 Therefore, by default, they are excluded from range matching
 semantics.
 
@@ -261,10 +261,10 @@ The resulting output will always be 100% strict, of course.
 Strict-mode Comparators and Ranges will be strict about the SemVer
 strings that they parse.
 
-* `valid(v)`: Return the parsed version, or null if it's not valid.
+* `valid(v)`: Return the parsed version, or null if it’s not valid.
 * `inc(v, release)`: Return the version incremented by the release
   type (`major`,   `premajor`, `minor`, `preminor`, `patch`,
-  `prepatch`, or `prerelease`), or null if it's not valid
+  `prepatch`, or `prerelease`), or null if it’s not valid
   * `premajor` in one call will bump the version up to the next major
     version and down to a prerelease of that major version.
     `preminor`, and `prepatch` work the same way.
@@ -282,11 +282,11 @@ strings that they parse.
 * `gte(v1, v2)`: `v1 >= v2`
 * `lt(v1, v2)`: `v1 < v2`
 * `lte(v1, v2)`: `v1 <= v2`
-* `eq(v1, v2)`: `v1 == v2` This is true if they're logically equivalent,
-  even if they're not the exact same string.  You already know how to
+* `eq(v1, v2)`: `v1 == v2` This is true if they’re logically equivalent,
+  even if they’re not the exact same string.  You already know how to
   compare strings.
 * `neq(v1, v2)`: `v1 != v2` The opposite of `eq`.
-* `cmp(v1, comparator, v2)`: Pass in a comparison string, and it'll call
+* `cmp(v1, comparator, v2)`: Pass in a comparison string, and it’ll call
   the corresponding function above.  `"==="` and `"!=="` do simple
   string comparison, but are included for completeness.  Throws if an
   invalid comparison string is provided.
@@ -301,7 +301,7 @@ strings that they parse.
 
 ### Ranges
 
-* `validRange(range)`: Return the valid range or null if it's not valid
+* `validRange(range)`: Return the valid range or null if it’s not valid
 * `satisfies(version, range)`: Return true if the version satisfies the
   range.
 * `maxSatisfying(versions, range)`: Return the highest version in the list

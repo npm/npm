@@ -7,7 +7,7 @@ npm-bugs(1) -- Bugs for a package in a web browser maybe
 
 ## DESCRIPTION
 
-This command tries to guess at the likely location of a package's
+This command tries to guess at the likely location of a package’s
 bug tracker URL, and then tries to open it using the `--browser`
 config param. If no package name is provided, it will search for
 a `package.json` in the current folder and use the `name` property.

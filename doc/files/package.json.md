@@ -1,9 +1,9 @@
-package.json(5) -- Specifics of npm's package.json handling
+package.json(5) -- Specifics of npm’s package.json handling
 ===========================================================
 
 ## DESCRIPTION
 
-This document is all you need to know about what's required in your package.json
+This document is all you need to know about what’s required in your package.json
 file.  It must be actual JSON, not just a JavaScript object literal.
 
 A lot of the behavior described in this document is affected by the config
@@ -12,7 +12,7 @@ settings described in `npm-config(7)`.
 ## name
 
 The *most* important things in your package.json are the name and version fields.
-Those are actually required, and your package won't install without
+Those are actually required, and your package won’t install without
 them.  The name and version together form an identifier that is assumed
 to be completely unique.  Changes to the package should come along with
 changes to the version.
@@ -23,20 +23,20 @@ Some rules:
 
 * The name must be shorter than 214 characters. This includes the scope for
   scoped packages.
-* The name can't start with a dot or an underscore.
+* The name can’t start with a dot or an underscore.
 * New packages must not have uppercase letters in the name.
 * The name ends up being part of a URL, an argument on the command line, and a
-  folder name. Therefore, the name can't contain any non-URL-safe characters.
+  folder name. Therefore, the name can’t contain any non-URL-safe characters.
 
 Some tips:
 
-* Don't use the same name as a core Node module.
-* Don't put "js" or "node" in the name.  It's assumed that it's js, since you're
+* Don’t use the same name as a core Node module.
+* Don’t put "js" or "node" in the name.  It’s assumed that it’s js, since you’re
   writing a package.json file, and you can specify the engine using the "engines"
   field.  (See below.)
 * The name will probably be passed as an argument to require(), so it should
   be something short, but also reasonably descriptive.
-* You may want to check the npm registry to see if there's something by that name
+* You may want to check the npm registry to see if there’s something by that name
   already, before you get too attached to it. <https://www.npmjs.com/>
 
 A name can be optionally prefixed by a scope, e.g. `@myorg/mypackage`. See
@@ -45,7 +45,7 @@ A name can be optionally prefixed by a scope, e.g. `@myorg/mypackage`. See
 ## version
 
 The *most* important things in your package.json are the name and version fields.
-Those are actually required, and your package won't install without
+Those are actually required, and your package won’t install without
 them.  The name and version together form an identifier that is assumed
 to be completely unique.  Changes to the package should come along with
 changes to the version.
@@ -58,27 +58,27 @@ More on version numbers and ranges at semver(7).
 
 ## description
 
-Put a description in it.  It's a string.  This helps people discover your
-package, as it's listed in `npm search`.
+Put a description in it.  It’s a string.  This helps people discover your
+package, as it’s listed in `npm search`.
 
 ## keywords
 
-Put keywords in it.  It's an array of strings.  This helps people
-discover your package as it's listed in `npm search`.
+Put keywords in it.  It’s an array of strings.  This helps people
+discover your package as it’s listed in `npm search`.
 
 ## homepage
 
 The url to the project homepage.
 
 **NOTE**: This is *not* the same as "url".  If you put a "url" field,
-then the registry will think it's a redirection to your package that has
+then the registry will think it’s a redirection to your package that has
 been published somewhere else, and spit at you.
 
-Literally.  Spit.  I'm so not kidding.
+Literally.  Spit.  I’m so not kidding.
 
 ## bugs
 
-The url to your project's issue tracker and / or the email address to which
+The url to your project’s issue tracker and / or the email address to which
 issues should be reported. These are helpful for people who encounter issues
 with your package.
 
@@ -96,10 +96,10 @@ If a url is provided, it will be used by the `npm bugs` command.
 ## license
 
 You should specify a license for your package so that people know how they are
-permitted to use it, and any restrictions you're placing on it.
+permitted to use it, and any restrictions you’re placing on it.
 
-If you're using a common license such as BSD-2-Clause or MIT, add a
-current SPDX license identifier for the license you're using, like this:
+If you’re using a common license such as BSD-2-Clause or MIT, add a
+current SPDX license identifier for the license you’re using, like this:
 
     { "license" : "BSD-3-Clause" }
 
@@ -112,7 +112,7 @@ expression syntax version 2.0 string](https://npmjs.com/package/spdx), like this
 
     { "license" : "(ISC OR GPL-3.0)" }
 
-If you are using a license that hasn't been assigned an SPDX identifier, or if
+If you are using a license that hasn’t been assigned an SPDX identifier, or if
 you are using a custom license, use the following valid SPDX expression:
 
     { "license" : "SEE LICENSE IN <filename>" }
@@ -207,7 +207,7 @@ Conversely, some files are always ignored:
 
 The main field is a module ID that is the primary entry point to your program.
 That is, if your package is named `foo`, and a user installs it, and then does
-`require("foo")`, then your main module's exports object will be returned.
+`require("foo")`, then your main module’s exports object will be returned.
 
 This should be a module ID relative to the root of your package folder.
 
@@ -216,7 +216,7 @@ much else.
 
 ## bin
 
-A lot of packages have one or more executable files that they'd like to
+A lot of packages have one or more executable files that they’d like to
 install into the PATH. npm makes this pretty easy (in fact, it uses this
 feature to install the "npm" executable.)
 
@@ -230,7 +230,7 @@ For example, myapp could have this:
 
     { "bin" : { "myapp" : "./cli.js" } }
 
-So, when you install myapp, it'll create a symlink from the `cli.js` script to
+So, when you install myapp, it’ll create a symlink from the `cli.js` script to
 `/usr/local/bin/myapp`.
 
 If you have a single executable, and its name should be the name
@@ -251,7 +251,7 @@ would be the same as this:
 Specify either a single file or an array of filenames to put in place for the
 `man` program to find.
 
-If only a single file is provided, then it's installed such that it is the
+If only a single file is provided, then it’s installed such that it is the
 result from `man <pkgname>`, regardless of its actual filename.  For example:
 
     { "name" : "foo"
@@ -263,7 +263,7 @@ result from `man <pkgname>`, regardless of its actual filename.  For example:
 
 would link the `./man/doc.1` file in such that it is the target for `man foo`
 
-If the filename doesn't start with the package name, then it's prefixed.
+If the filename doesn’t start with the package name, then it’s prefixed.
 So, this:
 
     { "name" : "foo"
@@ -291,15 +291,15 @@ will create entries for `man foo` and `man 2 foo`
 
 The CommonJS [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec details a
 few ways that you can indicate the structure of your package using a `directories`
-object. If you look at [npm's package.json](https://registry.npmjs.org/npm/latest),
-you'll see that it has directories for doc, lib, and man.
+object. If you look at [npm’s package.json](https://registry.npmjs.org/npm/latest),
+you’ll see that it has directories for doc, lib, and man.
 
 In the future, this information may be used in other creative ways.
 
 ### directories.lib
 
 Tell people where the bulk of your library is.  Nothing special is done
-with the lib folder in any way, but it's useful meta info.
+with the lib folder in any way, but it’s useful meta info.
 
 ### directories.bin
 
@@ -345,7 +345,7 @@ Do it like this:
 
 The URL should be a publicly available (perhaps read-only) url that can be handed
 directly to a VCS program without any modification.  It should not be a url to an
-html project page that you put in your browser.  It's for computers.
+html project page that you put in your browser.  It’s for computers.
 
 For GitHub, GitHub gist, Bitbucket, or GitLab repositories you can use the same
 shortcut syntax you use for `npm install`:
@@ -487,17 +487,17 @@ in which case they will be normalized to a relative path and added to your
     }
 
 This feature is helpful for local offline development and creating
-tests that require npm installing where you don't want to hit an
+tests that require npm installing where you don’t want to hit an
 external server, but should not be used when publishing packages
 to the public registry.
 
 ## devDependencies
 
 If someone is planning on downloading and using your module in their
-program, then they probably don't want or need to download and build
+program, then they probably don’t want or need to download and build
 the external test or documentation framework that you use.
 
-In this case, it's best to map these additional items in a `devDependencies`
+In this case, it’s best to map these additional items in a `devDependencies`
 object.
 
 These things will be installed when doing `npm link` or `npm install`
@@ -524,7 +524,7 @@ For example:
 
 The `prepublish` script will be run before publishing, so that users
 can consume the functionality without requiring them to compile it
-themselves.  In dev mode (ie, locally running `npm install`), it'll
+themselves.  In dev mode (ie, locally running `npm install`), it’ll
 run this script as well, so that you can test it easily.
 
 ## peerDependencies
@@ -563,7 +563,7 @@ error. For this reason, make sure your plugin requirement is as broad as
 possible, and not to lock it down to specific patch versions.
 
 Assuming the host complies with [semver](http://semver.org/), only changes in
-the host package's major version will break your plugin. Thus, if you've worked
+the host package’s major version will break your plugin. Thus, if you’ve worked
 with every 1.x version of the host package, use `"^1.0"` or `"1.x"` to express
 this. If you depend on features introduced in 1.5.2, use `">= 1.5.2 < 2"`.
 
@@ -581,7 +581,7 @@ object.  This is a map of package name to version or url, just like the
 `dependencies` object.  The difference is that build failures do not cause
 installation to fail.
 
-It is still your program's responsibility to handle the lack of the
+It is still your program’s responsibility to handle the lack of the
 dependency.  For example, something like this:
 
     try {
@@ -601,7 +601,7 @@ dependency.  For example, something like this:
     }
 
 Entries in `optionalDependencies` will override entries of the same name in
-`dependencies`, so it's usually best to only put in one place.
+`dependencies`, so it’s usually best to only put in one place.
 
 ## engines
 
@@ -609,7 +609,7 @@ You can specify the version of node that your stuff works on:
 
     { "engines" : { "node" : ">=0.10.3 <0.12" } }
 
-And, like with dependencies, if you don't specify the version (or if you
+And, like with dependencies, if you don’t specify the version (or if you
 specify "\*" as the version), then any version of node will do.
 
 If you specify an "engines" field, then npm will require that "node" be
@@ -645,7 +645,7 @@ just prepend the blacklisted os with a '!':
 
 The host operating system is determined by `process.platform`
 
-It is allowed to both blacklist, and whitelist, although there isn't any
+It is allowed to both blacklist, and whitelist, although there isn’t any
 good reason to do this.
 
 ## cpu
@@ -667,8 +667,8 @@ If your package is primarily a command-line application that should be
 installed globally, then set this value to `true` to provide a warning
 if it is installed locally.
 
-It doesn't actually prevent users from installing it locally, but it
-does help prevent some confusion if it doesn't work as expected.
+It doesn’t actually prevent users from installing it locally, but it
+does help prevent some confusion if it doesn’t work as expected.
 
 ## private
 
@@ -683,7 +683,7 @@ param at publish-time.
 
 ## publishConfig
 
-This is a set of config values that will be used at publish-time. It's
+This is a set of config values that will be used at publish-time. It’s
 especially handy if you want to set the tag, registry or access, so that
 you can ensure that a given package is not tagged with "latest", published
 to the global public registry or that a scoped module is private by default.

@@ -31,7 +31,7 @@ subcommand.
 * ls-packages:
 
   Show all of the packages a user or a team is able to access, along with the
-  access level, except for read-only public packages (it won't print the whole
+  access level, except for read-only public packages (it won’t print the whole
   registry listing)
 
 * ls-collaborators:
