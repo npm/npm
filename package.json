@@ -96,7 +96,7 @@
     "validate-npm-package-name": "~2.2.2",
     "which": "~1.2.0",
     "wrappy": "~1.0.1",
-    "write-file-atomic": "~1.1.3"
+    "write-file-atomic": "~1.1.4"
   },
   "bundleDependencies": [
     "abbrev",
@@ -124,6 +124,7 @@
     "glob",
     "graceful-fs",
     "hosted-git-info",
+    "imurmurhash",
     "inflight",
     "inherits",
     "ini",
