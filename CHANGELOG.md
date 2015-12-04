@@ -1,3 +1,121 @@
+### v3.5.2 (2015-12-03):
+
+Weeeelcome to another npm release! The short version is that we fixed
+some `ENOENT` and some modules that resulted in modules going missing. We
+also eliminated the use of MD5 in our code base to help folks using
+Node.js in FIPS mode. And we fixed a bad URL in our license file.
+
+#### FIX URL IN LICENSE
+
+The license incorrectly identified the registry URL as
+`registry.npmjs.com` and this has been corrected to `registry.npmjs.org`.
+
+* [`cb6d81b`](https://github.com/npm/npm/commit/cb6d81bd611f68c6126a90127a9dfe5604d46c8c)
+  [#10685](https://github.com/npm/npm/pull/10685)
+  Fix npm public registry URL in notices.
+  ([@kemitchell](https://github.com/kemitchell))
+
+#### ENOENT? MORE LIKE ENOMOREBUGS
+
+The headliner this week was uncovered by the fixes to bundled dependency
+handling over the past few releases. What had been a frustratingly
+intermittent and hard to reproduce bug became something that happened
+every time in Travis. This fixes another whole bunch of errors where you
+would, while running an install have it crash with an `ENOENT` on
+`rename`, or the install would finish but some modules would be
+mysteriously missing and you'd have to install a second time.
+
+What's going on was a bit involved, so bear with me:
+
+`npm@3` generates a list of actions to take against the tree on disk.
+With the exception of lifecycle scripts, it expects these all to be able
+to act independently without interfering with each other.
+
+This means, for instance, that one should be able to upgrade `b` in
+`a→b→c` without having npm reinstall `c`.
+
+That works fine by the way.
+
+But it also means that the move action should be able to move `b` in
+`a→b→c@1.0.1` to `a→d→b→c@1.0.2` without moving or removing `c@1.0.1` and
+while leaving `c@1.0.2` in place if it was already installed.
+
+That is, the `move` action moves an individual node, replacing itself
+with an empty spot if it had children. This is not, as it might first
+appear, something where you move an entire branch to another location on
+the tree.
+
+When moving `b` we already took care to leave `c@1.0.1` in place so that
+other moves (or removes) could handle it, but we were stomping on the
+destination and so `c@1.0.2` was being removed.
+
+* [`f4385d8`](https://github.com/npm/npm/commit/f4385d8e7678349e75c80fae8a1f8f366f197937)
+  [#10655](https://github.com/npm/npm/pull/10655)
+  Preserve destination `node_modules` when moving.
+  ([@iarna](https://github.com/iarna))
+
+There was also a bug with `remove` where it was pruning the entire tree
+at the remove point, prior to running moves and adds.
+
+This was fine most of the time, but if we were moving one of the deps out
+from inside it, kaboom.
+
+* [`19c626d`](https://github.com/npm/npm/commit/19c626d69888f0cdc6e960254b3fdf523ec4b52c)
+  [#10655](https://github.com/npm/npm/pull/10655)
+  Get rid of the remove commit phase– we could have it prune _just_ the
+  module being removed, but that isn't gaining us anything.
+  ([@iarna](https://github.com/iarna))
+
+After all that, we shouldn't be upgrading the `add` of a bundled package
+to a `move`. Moves save us from having to extract the package, but with a
+bundled dependency it's included in another package already so that
+doesn't gain us anything.
+
+* [`641a93b`](https://github.com/npm/npm/commit/641a93bd66a6aa4edf2d6167344b50d1a2afb593)
+  [#10655](https://github.com/npm/npm/pull/10655)
+  Don't convert adds to moves with bundled deps.
+  ([@iarna](https://github.com/iarna))
+
+While I was in there, I also took some time to improve diagnostics to
+make this sort of thing easier to track down in the future:
+
+* [`a04ec04`](https://github.com/npm/npm/commit/a04ec04804e562b511cd31afe89c8ba94aa37ff2)
+  [#10655](https://github.com/npm/ npm/pull/10655)
+  Wrap rename so errors have stack traces.
+  ([@iarna](https://github.com/iarna))
+* [`8ea142f`](https://github.com/npm/npm/commit/8ea142f896a2764290ca5472442b27b047ab7a1a)
+  [#10655](https://github.com/npm/npm/pull/10655)
+  Add silly logging so function is debuggable
+  ([@iarna](https://github.com/iarna))
+
+#### NO MORE MD5
+
+We updated modules that had been using MD5 for non-security purposes.
+While this is perfectly safe, if you compile Node in FIPS-compliance mode
+it will explode if you try to use MD5. We've replaced MD5 with Murmur,
+which conveys our intent better and is faster to boot.
+
+* [`f068b26`](https://github.com/npm/npm/commit/f068b2661a8d0269c184867e003cd08cb6c56cf2)
+  [#10629](https://github.com/npm/npm/issues/10629)
+  `unique-filename@1.1.0`
+  ([@iarna](https://github.com/iarna))
+* [`dba1b24`](https://github.com/npm/npm/commit/dba1b2402aaa2beceec798d3bd22d00650e01069)
+  [#10629](https://github.com/npm/npm/issues/10629)
+  `write-file-atomic@1.1.4`
+  ([@othiym23](https://github.com/othiym23))
+* [`8347a30`](https://github.com/npm/npm/commit/8347a308ef0d2cf0f58f96bba3635af642ec611f)
+  [#10629](https://github.com/npm/npm/issues/10629)
+  `fs-write-stream-atomic@1.0.5`
+  ([@othiym23](https://github.com/othiym23))
+
+#### DEPENDENCY UPDATES
+
+* [`9e2a2bb`](https://github.com/npm/npm/commit/9e2a2bb5bc71a0ab3b3637e8eec212aa22d5c99f)
+  [nodejs/node-gyp#831](https://github.com/nodejs/node-gyp/pull/831)
+  `node-gyp@3.2.1`:
+  Improved \*BSD support.
+  ([@bnoordhuis](https://github.com/bnoordhuis))
+
 ### v3.5.1 (2015-11-25):
 
 #### THE npm CLI !== THE npm REGISTRY !== npm, INC.
