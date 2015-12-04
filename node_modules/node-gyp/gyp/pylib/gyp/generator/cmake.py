@@ -55,7 +55,7 @@ generator_default_variables = {
   'CONFIGURATION_NAME': '${configuration}',
 }
 
-FULL_PATH_VARS = ('${CMAKE_SOURCE_DIR}', '${builddir}', '${obj}')
+FULL_PATH_VARS = ('${CMAKE_CURRENT_LIST_DIR}', '${builddir}', '${obj}')
 
 generator_supports_multiple_toolsets = True
 generator_wants_static_library_dependencies_adjusted = True
@@ -103,7 +103,7 @@ def NormjoinPathForceCMakeSource(base_path, rel_path):
   if any([rel_path.startswith(var) for var in FULL_PATH_VARS]):
     return rel_path
   # TODO: do we need to check base_path for absolute variables as well?
-  return os.path.join('${CMAKE_SOURCE_DIR}',
+  return os.path.join('${CMAKE_CURRENT_LIST_DIR}',
                       os.path.normpath(os.path.join(base_path, rel_path)))
 
 
@@ -293,7 +293,7 @@ def WriteActions(target_name, actions, extra_sources, extra_deps,
     WriteVariable(output, inputs_name)
     output.write('\n')
 
-    output.write('  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/')
+    output.write('  WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/')
     output.write(path_to_gyp)
     output.write('\n')
 
@@ -398,9 +398,9 @@ def WriteRules(target_name, rules, extra_sources, extra_deps,
       output.write(NormjoinPath(path_to_gyp, rule_source))
       output.write('\n')
 
-      # CMAKE_SOURCE_DIR is where the CMakeLists.txt lives.
+      # CMAKE_CURRENT_LIST_DIR is where the CMakeLists.txt lives.
       # The cwd is the current build directory.
-      output.write('  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/')
+      output.write('  WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/')
       output.write(path_to_gyp)
       output.write('\n')
 
@@ -522,7 +522,7 @@ def WriteCopies(target_name, copies, extra_deps, path_to_gyp, output):
       WriteVariable(output, copy.inputs_name, ' ')
   output.write('\n')
 
-  output.write('WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/')
+  output.write('WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/')
   output.write(path_to_gyp)
   output.write('\n')
 
@@ -1126,7 +1126,7 @@ def GenerateOutputForConfig(target_list, target_dicts, data,
   if cc:
     SetVariable(output, 'CMAKE_ASM_COMPILER', cc)
 
-  SetVariable(output, 'builddir', '${CMAKE_BINARY_DIR}')
+  SetVariable(output, 'builddir', '${CMAKE_CURRENT_BINARY_DIR}')
   SetVariable(output, 'obj', '${builddir}/obj')
   output.write('\n')
 
