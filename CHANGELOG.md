@@ -1,3 +1,38 @@
+### v2.14.14 (2015-12-03):
+
+#### FIX URL IN LICENSE
+
+The license incorrectly identified the registry URL as `registry.npmjs.com` and
+this has been corrected to `registry.npmjs.org`.
+
+* [`6051a69`](https://github.com/npm/npm/commit/6051a69b1adc80f5f200077067e831643f655bd4)
+  [#10685](https://github.com/npm/npm/pull/10685)
+  Fix npm public registry URL in notices.
+  ([@kemitchell](https://github.com/kemitchell))
+
+#### NO MORE MD5
+
+We updated modules that had been using MD5 for non-security purposes.  While
+this is perfectly safe, if you compile Node in FIPS-compliance mode it will
+explode if you try to use MD5. We've replaced MD5 with Murmur, which conveys
+our intent better and is faster to boot.
+
+* [`30b5994`](https://github.com/npm/npm/commit/30b599496a9762482e1cef945a378e3a534fd366)
+  [#10629](https://github.com/npm/npm/issues/10629)
+  `write-file-atomic@1.1.4`
+  ([@othiym23](https://github.com/othiym23))
+* [`68c63ff`](https://github.com/npm/npm/commit/68c63ff1279d3d5ea7b2c970ab5562a8e0536f27)
+  [#10629](https://github.com/npm/npm/issues/10629)
+  `fs-write-stream-atomic@1.0.5`
+  ([@othiym23](https://github.com/othiym23))
+
+#### DEPENDENCY UPDATES
+
+* [`e48e5a9`](https://github.com/npm/npm/commit/e48e5a90b4dcf76124b7e9ea3b295c1383e7f0c8)
+  [nodejs/node-gyp#831](https://github.com/nodejs/node-gyp/pull/831)
+  `node-gyp@3.2.1`: Improved \*BSD support.
+  ([@bnoordhuis](https://github.com/bnoordhuis))
+
 ### v2.14.13 (2015-11-25):
 
 #### THE npm CLI !== THE npm REGISTRY !== npm, INC.
