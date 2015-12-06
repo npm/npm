@@ -166,4 +166,3 @@ will no doubt tell you to put the output in a gist or email.
 * npm-config(7)
 * npmrc(5)
 * npm-index(7)
-* npm(3)
