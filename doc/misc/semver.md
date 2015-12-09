@@ -4,6 +4,8 @@ semver(7) -- The semantic versioner for npm
 ## Usage
 
     $ npm install semver
+    $ node
+    var semver = require('semver')
 
     semver.valid('1.2.3') // '1.2.3'
     semver.valid('a.b.c') // null
