@@ -67,15 +67,12 @@ test('outdated ignores private modules', function (t) {
           bumpLocalPrivate()
           npm.outdated(function (er, d) {
             t.ifError(er, 'outdated success')
-            t.deepEqual(d, [[
-              path.resolve(__dirname, 'outdated-private'),
-              'underscore',
+            t.deepEqual(d, [
+              path.resolve(__dirname, 'outdated-private/node_modules/underscore'),
+              '1.5.1',
               '1.3.1',
-              '1.5.1',
-              '1.5.1',
-              'underscore@1.5.1',
-              null
-            ]])
+              '1.5.1'
+            ].join(':underscore@'))
             s.close()
           })
         })
