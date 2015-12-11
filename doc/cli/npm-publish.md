@@ -29,7 +29,8 @@ specifying a different default registry or using a `npm-scope(7)` in the name
 * `[--tag <tag>]`
   Registers the published package with the given tag, such that `npm install
   <name>@<tag>` will install this version.  By default, `npm publish` updates
-  and `npm install` installs the `latest` tag.
+  and `npm install` installs the `latest` tag. See `npm-dist-tag(1)` for
+  details about tags.
 
 * `[--access <public|restricted>]`
   Tells the registry whether this package should be published as public or
