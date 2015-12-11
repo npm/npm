@@ -1,3 +1,65 @@
+### v3.5.3 (2015-12-10):
+
+Did you know that Bob Ross reached the rank of master sergeant in the US Air
+Force before becoming perhaps the most soothing painter of all time?
+
+#### TWO HAPPY LITTLE BUG FIXES
+
+* [`71c9590`](https://github.com/npm/npm/commit/71c9590be61b6a7b7fa8b6dc19baa588cda26a27)
+  [#10505](https://github.com/npm/npm/issues/10505) `npm ls --json --depth=0`
+  now respects the depth parameter, when it is zero and when it is not zero.
+  ([@MarkReeder](https://github.com/MarkReeder))
+* [`954fa67`](https://github.com/npm/npm/commit/954fa67f1ca3739992abd244e217a0aaf8465660)
+  [#9099](https://github.com/npm/npm/issues/9099) I had always thought you
+  could run `npm version` from subdirectories in your project, which is great,
+  because now you can. I guess I was just ahead of my time.
+  ([@ekmartin](https://github.com/ekmartin))
+
+#### NOW PAINT IN SOME NICE DOCS CHANGES
+
+* [`b88c37c`](https://github.com/npm/npm/commit/b88c37c1cced40e9e41402cc54a5efc3c33cd13e)
+  [#10546](https://github.com/npm/npm/issues/10546) Goodbye, FAQ! You were
+  cheeky and fun until you weren't! Don't worry: npm still loves everyone,
+  especially you! ([@ashleygwilliams](https://github.com/ashleygwilliams))
+* [`2d3afe9`](https://github.com/npm/npm/commit/2d3afe9644ba69681a36721e79c45d27def71939)
+  [#10570](https://github.com/npm/npm/issues/10570) Update documentation URLs
+  to be HTTPS everywhere sensible. No HTTP shall be spared!
+  ([@rsp](https://github.com/rsp))
+* [`6abd0e0`](https://github.com/npm/npm/commit/6abd0e0626d0f642ce0dae0e128ced80433f15a1)
+  [#10650](https://github.com/npm/npm/issues/10650) Correctly note that there
+  are two lifecycle scripts run by an install phase in an example, instead of
+  three. ([@eymengunay](https://github.com/eymengunay))
+* [`a5e8df5`](https://github.com/npm/npm/commit/a5e8df53b8d6d75398cb6a55a44dcf374b0f1661)
+  [#10687](https://github.com/npm/npm/issues/10687) `npm outdated`'s output can
+  be a little puzzling sometimes. I've attempted to make it clearer, with some
+  examples, of what's going on with "wanted" and "latest" in more cases.
+  ([@othiym23](https://github.com/othiym23))
+* [`8f52833`](https://github.com/npm/npm/commit/8f52833f5d15c4f94467234607d40e75198af1aa)
+  [#10700](https://github.com/npm/npm/issues/10700) Hey, do you remember when
+  `search.npmjs.org` was a thing? I think I do? The last time I used it was in
+  like 2012, and it's gone now, so remove it from the docs.
+  ([@gagern](https://github.com/gagern))
+* [`b6a53b8`](https://github.com/npm/npm/commit/b6a53b889c948053dcbf6d7aab9ad1cd4226dc32)
+  [npm/docs#477](https://github.com/npm/docs/issues/477) Continue to airbrush
+  the CLI API docs out of history. ([@verpixelt](https://github.com/verpixelt))
+* [`b835b72`](https://github.com/npm/npm/commit/b835b72d1dd23b0a17321a85d8d395322d18005d)
+  `semver@5.1.0`: Include BNF for SemVer expression grammar (which is also now
+  included in `npm help semver`). ([@isaacs](https://github.com/isaacs))
+
+#### LAND YOUR DEPENDENCY UPGRADES IN PAIRS SO EVERYONE HAS A FRIEND
+
+* [`95e99fa`](https://github.com/npm/npm/commit/95e99faadcdc85a16210dd79c0e7d83add1b9f3e)
+  `request@2.67.0` ([@simov](https://github.com/simov))
+* [`b49199a`](https://github.com/npm/npm/commit/b49199ac96dfb1afe5719286621a318576dd69ae)
+  [isaacs/rimraf#89](https://github.com/isaacs/rimraf/pull/89) `rimraf@2.4.4`
+  ([@zerok](https://github.com/zerok))
+* [`6632418`](https://github.com/npm/npm/commit/66324189a734a1665e1b78a06ba44089d9c3a11c)
+  [npm/nopt#51](https://github.com/npm/nopt/pull/51) `nopt@3.0.6`
+  ([@wbecker](https://github.com/wbecker))
+* [`f0a3b3e`](https://github.com/npm/npm/commit/f0a3b3e0dbbdaf11ec55dccd59cc21bfa05f9240)
+  [isaacs/once#7](https://github.com/isaacs/once/pull/7) `once@1.3.3`
+  ([@floatdrop](https://github.com/floatdrop))
+
 ### v3.5.2 (2015-12-03):
 
 Weeeelcome to another npm release! The short version is that we fixed
