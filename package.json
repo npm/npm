@@ -72,7 +72,7 @@
     "npm-registry-client": "~7.0.8",
     "npm-user-validate": "~0.1.2",
     "npmlog": "~2.0.0",
-    "once": "~1.3.2",
+    "once": "~1.3.3",
     "opener": "~1.4.1",
     "osenv": "~0.1.3",
     "path-is-inside": "~1.0.0",
