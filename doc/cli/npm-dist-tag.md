@@ -33,17 +33,17 @@ When installing dependencies, a preferred tagged version may be specified:
 
 This also applies to `npm dedupe`.
 
-Publishing a package sets the "latest" tag to the published version unless the
+Publishing a package sets the `latest` tag to the published version unless the
 `--tag` option is used. For example, `npm publish --tag=beta`.
 
 ## PURPOSE
 
 Tags can be used to provide an alias instead of version numbers.  For
-example, `npm` currently uses the tag "next" to identify the upcoming
-version, and the tag "latest" to identify the current version.
+example, `npm` currently uses the tag `next` to identify the upcoming
+version, and the tag `latest` to identify the current version.
 
 A project might choose to have multiple streams of development, e.g.,
-"stable", "canary".
+`stable`, `canary`.
 
 ## CAVEATS
 
