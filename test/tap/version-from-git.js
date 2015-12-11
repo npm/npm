@@ -15,11 +15,10 @@ var cache = path.resolve(pkg, 'cache')
 
 var json = { name: 'cat', version: '0.1.2' }
 
-test('npm version from-git with a valid tag creates new commit', function (t) {
+test('npm version from-git with a valid tag creates a new commit', function (t) {
   var version = '1.2.3'
-  var tag = 'v' + version
   setup()
-  createTag(t, tag, runVersion)
+  createTag(t, version, runVersion)
 
   function runVersion (er) {
     t.ifError(er, 'git tag ran without error')
@@ -40,16 +39,15 @@ test('npm version from-git with a valid tag creates new commit', function (t) {
   function checkCommit (er, log, stderr) {
     t.ifError(er, 'git log ran without issue')
     t.notOk(stderr, 'no error output')
-    t.ok(log.indexOf(version) !== -1, 'commited from subdirectory')
+    t.ok(log.indexOf(version) !== -1, 'commit was created')
     t.end()
   }
 })
 
 test('npm version from-git with a valid tag updates the package.json version', function (t) {
   var version = '1.2.3'
-  var tag = 'v' + version
   setup()
-  createTag(t, tag, runVersion)
+  createTag(t, version, runVersion)
 
   function runVersion (er) {
     t.ifError(er, 'git tag ran without error')
@@ -65,6 +63,70 @@ test('npm version from-git with a valid tag updates the package.json version', f
       t.equal(manifest.version, version, 'updated the package.json version')
       t.done()
     })
+  }
+})
+
+test('npm version from-git strips tag-version-prefix', function (t) {
+  var version = '1.2.3'
+  var prefix = 'custom-'
+  var tag = prefix + version
+  setup()
+  createTag(t, tag, runVersion)
+
+  function runVersion (er) {
+    t.ifError(er, 'git tag ran without error')
+    npm.config.set('sign-git-tag', false)
+    npm.config.set('tag-version-prefix', prefix)
+    npm.commands.version(['from-git'], checkVersion)
+  }
+
+  function checkVersion (er) {
+    var git = require('../../lib/utils/git.js')
+    t.ifError(er, 'version command ran without error')
+    git.whichAndExec(
+      ['log', '--pretty=medium'],
+      { cwd: pkg, env: process.env },
+      checkCommit
+    )
+  }
+
+  function checkCommit (er, log, stderr) {
+    t.ifError(er, 'git log ran without issue')
+    t.notOk(stderr, 'no error output')
+    t.ok(log.indexOf(tag) === -1, 'commit should not include prefix')
+    t.ok(log.indexOf(version) !== -1, 'commit should include version')
+    t.end()
+  }
+})
+
+test('npm version from-git only strips tag-version-prefix if it is a prefix', function (t) {
+  var prefix = 'test'
+  var version = '1.2.3-' + prefix
+  setup()
+  createTag(t, version, runVersion)
+
+  function runVersion (er) {
+    t.ifError(er, 'git tag ran without error')
+    npm.config.set('sign-git-tag', false)
+    npm.config.set('tag-version-prefix', prefix)
+    npm.commands.version(['from-git'], checkVersion)
+  }
+
+  function checkVersion (er) {
+    var git = require('../../lib/utils/git.js')
+    t.ifError(er, 'version command ran without error')
+    git.whichAndExec(
+      ['log'],
+      { cwd: pkg, env: process.env },
+      checkCommit
+    )
+  }
+
+  function checkCommit (er, log, stderr) {
+    t.ifError(er, 'git log ran without issue')
+    t.notOk(stderr, 'no error output')
+    t.ok(log.indexOf(version) !== -1, 'commit should include the full version')
+    t.end()
   }
 })
 
