@@ -76,7 +76,7 @@ after packing it up into a tarball (b).
 * `npm install [@<scope>/]<name> [--save|--save-dev|--save-optional]`:
 
     Do a `<name>@<tag>` install, where `<tag>` is the "tag" config. (See
-    `npm-config(7)`.)
+    `npm-config(7)`. The config's default value is `latest`.)
 
     In most cases, this will install the latest version
     of the module published on npm.
