@@ -27,7 +27,6 @@ npm-debug.log
 /node_modules/nock/
 /node_modules/npm-registry-couchapp/
 /node_modules/npm-registry-mock/
-/node_modules/readable-stream/
 /node_modules/require-inject/
 /node_modules/sprintf-js/
 /node_modules/standard/
