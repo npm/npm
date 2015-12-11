@@ -172,7 +172,7 @@
     "slide",
     "sorted-object",
     "strip-ansi",
-	"strip-bom",
+    "strip-bom",
     "tar",
     "text-table",
     "uid-number",
