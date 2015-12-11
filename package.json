@@ -82,7 +82,7 @@
     "read-package-tree": "~5.1.2",
     "realize-package-specifier": "~3.0.1",
     "retry": "~0.8.0",
-    "rimraf": "~2.4.3",
+    "rimraf": "~2.4.4",
     "semver": "~5.0.3",
     "sha": "~2.0.1",
     "slide": "~1.1.6",
