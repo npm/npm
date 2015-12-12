@@ -12,6 +12,7 @@ var path = require('path')
 var port = exports.port = 1337
 exports.registry = 'http://localhost:' + port
 process.env.npm_config_loglevel = 'error'
+process.env.npm_config_progress = 'false'
 
 var npm_config_cache = path.resolve(__dirname, 'npm_cache')
 process.env.npm_config_cache = exports.npm_config_cache = npm_config_cache
