@@ -59,33 +59,24 @@ test('it should not throw', function (t) {
 
   var expData = [
     [
-      pkg,
-      'async',
+      [pkg, 'node_modules', 'async'].join('/'),
       '0.2.9',
       '0.2.9',
-      '0.2.10',
-      '0.2.9',
-      null
-    ],
+      '0.2.10'
+    ].join(':async@'),
     [
-      pkg,
-      'checker',
+      [pkg, 'node_modules', 'checker'].join('/'),
       '0.5.1',
       '0.5.1',
-      '0.5.2',
-      '0.5.1',
-      null
-    ],
+      '0.5.2'
+    ].join(':checker@'),
     [
-      pkg,
-      'underscore',
+      [pkg, 'node_modules', 'underscore'].join('/'),
       '1.3.1',
       '1.3.1',
-      '1.5.1',
-      '1.3.1',
-      null
-    ]
-  ]
+      '1.5.1'
+    ].join(':underscore@')
+  ].join('\n')
 
   console.log = function () {}
   mr({ port: common.port }, function (er, s) {

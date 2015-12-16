@@ -117,39 +117,11 @@ test('outdated support local modules', function (t) {
           npm.outdated(function (er, d) {
             t.ifError(er, 'outdated success')
             t.ok(verify(d, [
-              [
-                path.resolve(__dirname, 'outdated-local'),
-                'local-module',
-                '1.0.0',
-                '1.1.0',
-                '1.1.0',
-                'file:local-module'
-              ],
-              [
-                path.resolve(__dirname, 'outdated-local'),
-                '@scoped/another-local-module',
-                '1.0.0',
-                '1.2.0',
-                '1.2.0',
-                'file:another-local-module'
-              ],
-              [
-                path.resolve(__dirname, 'outdated-local'),
-                'underscore',
-                '1.3.1',
-                '1.6.1',
-                '1.5.1',
-                'file:underscore'
-              ],
-              [
-                path.resolve(__dirname, 'outdated-local'),
-                'optimist',
-                '0.4.0',
-                '0.6.0',
-                '0.6.0',
-                'optimist@0.6.0'
-              ]
-            ]), 'got expected outdated output')
+              path.resolve(__dirname, '/outdated-local/node_modules/@scoped/another-local-module:@scoped/another-local-module@1.2.0:@scoped/another-local-module@1.0.0:@scoped/another-local-module@1.2.0'),
+              path.resolve(__dirname, '/outdated-local/node_modules/local-module:local-module@1.1.0:local-module@1.0.0:local-module@1.1.0'),
+              path.resolve(__dirname, '/outdated-local/node_modules/optimist:optimist@0.6.0:optimist@0.4.0:optimist@0.6.0'),
+              path.resolve(__dirname, '/outdated-local/node_modules/underscore:underscore@1.6.1:underscore@1.3.1:underscore@1.5.1')
+            ].join('\n')), 'got expected outdated output')
             s.close()
           })
         })

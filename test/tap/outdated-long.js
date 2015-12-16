@@ -48,16 +48,11 @@ test('it should not throw', function (t) {
   ]
 
   var expData = [
-    [
-      pkg,
-      'underscore',
-      '1.3.1',
-      '1.3.1',
-      '1.5.1',
-      '1.3.1',
-      'dependencies'
-    ]
-  ]
+    [pkg, 'node_modules', 'underscore'].join('/'),
+    '1.3.1',
+    '1.3.1',
+    '1.5.1:dependencies'
+  ].join(':underscore@')
 
   console.log = function () {
     output.push.apply(output, arguments)
