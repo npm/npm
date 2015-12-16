@@ -8,12 +8,12 @@ npm-star(1) -- Mark your favorite packages
 
 ## DESCRIPTION
 
-"Starring" a package means that you have some interest in it.  It's
+"Starring" a package means that you have some interest in it.  It’s
 a vaguely positive way to show that you care.
 
 "Unstarring" is the same thing, but in reverse.
 
-It's a boolean thing.  Starring repeatedly has no additional effect.
+It’s a boolean thing.  Starring repeatedly has no additional effect.
 
 ## SEE ALSO
 

@@ -9,10 +9,10 @@ npm-run-script(1) -- Run arbitrary package scripts
 
 ## DESCRIPTION
 
-This runs an arbitrary command from a package's `"scripts"` object.  If no
+This runs an arbitrary command from a package’s `"scripts"` object.  If no
 `"command"` is provided, it will list the available scripts.  `run[-script]` is
 used by the test, start, restart, and stop commands, but can be called
-directly, as well. When the scripts in the package are printed out, they're
+directly, as well. When the scripts in the package are printed out, they’re
 separated into lifecycle (test, start, restart) and directly-run scripts.
 
 As of [`npm@2.0.0`](http://blog.npmjs.org/post/98131109725/npm-2-0-0), you can
@@ -30,7 +30,7 @@ environment variables that will be available to the script at runtime. If an
 "env" command is defined in your package it will take precedence over the
 built-in.
 
-In addition to the shell's pre-existing `PATH`, `npm run` adds
+In addition to the shell’s pre-existing `PATH`, `npm run` adds
 `node_modules/.bin` to the `PATH` provided to scripts. Any binaries provided by
 locally-installed dependencies can be used without the `node_modules/.bin`
 prefix. For example, if there is a `devDependency` on `tap` in your package,

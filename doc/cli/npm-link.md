@@ -54,7 +54,7 @@ The second line is the equivalent of doing:
     npm link node-redis
 
 That is, it first creates a global link, and then links the global
-installation target into your project's `node_modules` folder.
+installation target into your project’s `node_modules` folder.
 
 If your linked package is scoped (see `npm-scope(7)`) your link command must
 include that scope, e.g.

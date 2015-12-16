@@ -60,7 +60,7 @@ on dependencies, `dep1` (`dep2`, .. etc.).  The published versions of `dep1` are
 
 ### Caret Dependencies
 
-If `app`'s `package.json` contains:
+If `app`’s `package.json` contains:
 
 ```
 dependencies: {
@@ -73,7 +73,7 @@ Then `npm update` will install `dep1@1.2.2`, because `1.2.2` is `latest` and
 
 ### Tilde Dependencies
 
-However, if `app`'s `package.json` contains:
+However, if `app`’s `package.json` contains:
 
 ```
 dependencies: {

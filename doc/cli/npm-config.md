@@ -16,7 +16,7 @@ npm-config(1) -- Manage the npm configuration files
 npm gets its config settings from the command line, environment
 variables, `npmrc` files, and in some cases, the `package.json` file.
 
-See npmrc(5) for more information about the npmrc files.
+See `npmrc(5)` for more information about the npmrc files.
 
 See `npm-config(7)` for a more thorough discussion of the mechanisms
 involved.

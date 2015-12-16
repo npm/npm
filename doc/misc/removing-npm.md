@@ -14,14 +14,14 @@ Or, if that fails, get the npm source code, and do:
 ## More Severe Uninstalling
 
 Usually, the above instructions are sufficient.  That will remove
-npm, but leave behind anything you've installed.
+npm, but leave behind anything you’ve installed.
 
-If that doesn't work, or if you require more drastic measures,
+If that doesn’t work, or if you require more drastic measures,
 continue reading.
 
 Note that this is only necessary for globally-installed packages.  Local
-installs are completely contained within a project's `node_modules`
-folder.  Delete that folder, and everything is gone (unless a package's
+installs are completely contained within a project’s `node_modules`
+folder.  Delete that folder, and everything is gone (unless a package’s
 install script is particularly ill-behaved).
 
 This assumes that you installed node and npm in the default place.  If

@@ -11,7 +11,7 @@ Enables tab-completion in all npm commands.
 
 The synopsis above
 loads the completions into your current shell.  Adding it to
-your ~/.bashrc or ~/.zshrc will make the completions available
+your `~/.bashrc` or `~/.zshrc` will make the completions available
 everywhere:
 
     npm completion >> ~/.bashrc

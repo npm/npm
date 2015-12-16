@@ -9,7 +9,7 @@ variables, and `npmrc` files.
 The `npm config` command can be used to update and edit the contents
 of the user and global npmrc files.
 
-For a list of available configuration options, see npm-config(7).
+For a list of available configuration options, see `npm-config(7)`.
 
 ## FILES
 
@@ -47,9 +47,9 @@ When working locally in a project, a `.npmrc` file in the root of the
 project (ie, a sibling of `node_modules` and `package.json`) will set
 config values specific to this project.
 
-Note that this only applies to the root of the project that you're
+Note that this only applies to the root of the project that you’re
 running npm in.  It has no effect when your module is published.  For
-example, you can't publish a module that forces itself to install
+example, you can’t publish a module that forces itself to install
 globally, or in a different location.
 
 Additionally, this file is not read in global mode, such as when running

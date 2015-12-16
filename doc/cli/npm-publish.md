@@ -12,7 +12,7 @@ npm-publish(1) -- Publish a package
 ## DESCRIPTION
 
 Publishes a package to the registry so that it can be installed by name. See
-`npm-developers(7)` for details on what's included in the published package, as
+`npm-developers(7)` for details on what’s included in the published package, as
 well as details on how the package is built.
 
 By default npm will publish to the public registry. This can be overridden by
@@ -34,7 +34,7 @@ specifying a different default registry or using a `npm-scope(7)` in the name
 * `[--access <public|restricted>]`
   Tells the registry whether this package should be published as public or
   restricted. Only applies to scoped packages, which default to `restricted`.
-  If you don't have a paid account, you must publish with `--access public`
+  If you don’t have a paid account, you must publish with `--access public`
   to publish scoped packages.
 
 Fails if the package name and version combination already exists in

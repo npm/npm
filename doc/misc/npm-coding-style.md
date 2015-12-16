@@ -1,27 +1,27 @@
-npm-coding-style(7) -- npm's "funny" coding style
+npm-coding-style(7) -- npm’s "funny" coding style
 =================================================
 
 ## DESCRIPTION
 
-npm's coding style is a bit unconventional.  It is not different for
-difference's sake, but rather a carefully crafted style that is
+npm’s coding style is a bit unconventional.  It is not different for
+difference’s sake, but rather a carefully crafted style that is
 designed to reduce visual clutter and make bugs more apparent.
 
 If you want to contribute to npm (which is very encouraged), you should
-make your code conform to npm's style.
+make your code conform to npm’s style.
 
-Note: this concerns npm's code not the specific packages that you can download from the npm registry.
+Note: this concerns npm’s code not the specific packages that you can download from the npm registry.
 
 ## Line Length
 
-Keep lines shorter than 80 characters.  It's better for lines to be
+Keep lines shorter than 80 characters.  It’s better for lines to be
 too short than to be too long.  Break up long lists, objects, and other
 statements onto multiple lines.
 
 ## Indentation
 
 Two-spaces.  Tabs are better, but they look like hell in web browsers
-(and on GitHub), and node uses 2 spaces, so that's that.
+(and on GitHub), and node uses 2 spaces, so that’s that.
 
 Configure your editor appropriately.
 
@@ -38,8 +38,8 @@ Good:
 
     function () {
 
-If a block needs to wrap to the next line, use a curly brace.  Don't
-use it if it doesn't.
+If a block needs to wrap to the next line, use a curly brace.  Don’t
+use it if it doesn’t.
 
 Bad:
 
@@ -56,10 +56,10 @@ Good:
 
 ## Semicolons
 
-Don't use them except in four situations:
+Don’t use them except in four situations:
 
-* `for (;;)` loops.  They're actually required.
-* null loops like: `while (something) ;` (But you'd better have a good
+* `for (;;)` loops.  They’re actually required.
+* null loops like: `while (something) ;` (But you’d better have a good
   reason for doing that.)
 * `case 'foo': doSomething(); break`
 * In front of a leading `(` or `[` at the start of the line.
@@ -118,8 +118,8 @@ Good:
 Put a single space in front of ( for anything other than a function call.
 Also use a single space wherever it makes things more readable.
 
-Don't leave trailing whitespace at the end of lines.  Don't indent empty
-lines.  Don't use more spaces than are helpful.
+Don’t leave trailing whitespace at the end of lines.  Don’t indent empty
+lines.  Don’t use more spaces than are helpful.
 
 ## Functions
 
@@ -135,12 +135,12 @@ methodology.
 The callback should always be the last argument in the list.  Its first
 argument is the Error or null.
 
-Be very careful never to ever ever throw anything.  It's worse than useless.
+Be very careful never to ever ever throw anything.  It’s worse than useless.
 Just send the error message back as the first argument to the callback.
 
 ## Errors
 
-Always create a new Error object with your message.  Don't just return a
+Always create a new Error object with your message.  Don’t just return a
 string message to the callback.  Stack traces are handy.
 
 ## Logging
@@ -150,7 +150,7 @@ utility.
 
 Please clean up logs when they are no longer helpful.  In particular,
 logging the same object over and over again is not helpful.  Logs should
-report what's happening so that it's easier to track down where a fault
+report what’s happening so that it’s easier to track down where a fault
 occurs.
 
 Use appropriate log levels.  See `npm-config(7)` and search for
@@ -161,7 +161,7 @@ Use appropriate log levels.  See `npm-config(7)` and search for
 Use `lowerCamelCase` for multiword identifiers when they refer to objects,
 functions, methods, properties, or anything not specified in this section.
 
-Use `UpperCamelCase` for class names (things that you'd pass to "new").
+Use `UpperCamelCase` for class names (things that you’d pass to "new").
 
 Use `all-lower-hyphen-css-case` for multiword filenames and config keys.
 
@@ -172,16 +172,16 @@ and are rarely used.
 
 Use a single uppercase letter for function names where the function
 would normally be anonymous, but needs to call itself recursively.  It
-makes it clear that it's a "throwaway" function.
+makes it clear that it’s a "throwaway" function.
 
 ## null, undefined, false, 0
 
 Boolean variables and functions should always be either `true` or
-`false`.  Don't set it to 0 unless it's supposed to be a number.
+`false`.  Don’t set it to 0 unless it’s supposed to be a number.
 
 When something is intentionally missing or removed, set it to `null`.
 
-Don't set things to `undefined`.  Reserve that value to mean "not yet
+Don’t set things to `undefined`.  Reserve that value to mean "not yet
 set to anything."
 
 Boolean objects are verboten.

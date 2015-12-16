@@ -22,7 +22,7 @@ Manage ownership of published packages.
   privileges.
 
 Note that there is only one level of access.  Either you can modify a package,
-or you can't.  Future versions may contain more fine-grained access levels, but
+or you can’t.  Future versions may contain more fine-grained access levels, but
 that is not implemented at this time.
 
 ## SEE ALSO

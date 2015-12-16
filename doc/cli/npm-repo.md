@@ -7,7 +7,7 @@ npm-repo(1) -- Open package repository page in the browser
 
 ## DESCRIPTION
 
-This command tries to guess at the likely location of a package's
+This command tries to guess at the likely location of a package’s
 repository URL, and then tries to open it using the `--browser`
 config param. If no package name is provided, it will search for
 a `package.json` in the current folder and use the `name` property.
