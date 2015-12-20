@@ -14,7 +14,24 @@ var responses = {
   "Email"    : "u@p.me\n"
 }
 
-function mocks(server) {
+function verifyStdout (runner, successMessage, t) {
+  var remaining = Object.keys(responses).length
+  return function (chunk) {
+    if (remaining > 0) {
+      remaining--
+
+      var label = chunk.toString('utf8').split(':')[0]
+      runner.stdin.write(responses[label])
+
+      if (remaining === 0) runner.stdin.end()
+    } else {
+      var message = chunk.toString('utf8').trim()
+      t.equal(message, successMessage)
+    }
+  }
+}
+
+function mocks (server) {
   server.filteringRequestBody(function (r) {
     if (r.match(/\"_id\":\"org\.couchdb\.user:u\"/)) {
       return "auth"
@@ -46,17 +63,37 @@ test("npm login", function (t) {
       })
     })
 
-    var o = "", e = "", remaining = Object.keys(responses).length
-    runner.stdout.on("data", function (chunk) {
-      remaining--
-      o += chunk
+    var message = 'Logged in as u on ' + common.registry + '/.'
+    runner.stdout.on('data', verifyStdout(runner, message, t))
+  })
+})
 
-      var label = chunk.toString("utf8").split(":")[0]
-      runner.stdin.write(responses[label])
-
-      if (remaining === 0) runner.stdin.end()
+test('npm login --scope', function (t) {
+  mr({ port: common.port, plugin: mocks }, function (er, s) {
+    var scope = '@myco'
+    var runner = common.npm(
+      [
+        'login',
+        '--registry', common.registry,
+        '--loglevel', 'silent',
+        '--userconfig', outfile,
+        '--scope', scope
+      ],
+    opts,
+    function (err, code) {
+      t.notOk(code, 'exited OK')
+      t.notOk(err, 'no error output')
+      var config = fs.readFileSync(outfile, 'utf8')
+      t.like(config, /:always-auth=false/, 'always-auth is scoped and false (by default)')
+      s.close()
+      rimraf(outfile, function (err) {
+        t.ifError(err, 'removed config file OK')
+        t.end()
+      })
     })
-    runner.stderr.on("data", function (chunk) { e += chunk })
+
+    var message = 'Logged in as u to scope ' + scope + ' on ' + common.registry + '/.'
+    runner.stdout.on('data', verifyStdout(runner, message, t))
   })
 })
 
@@ -83,17 +120,8 @@ test("npm login --always-auth", function (t) {
       })
     })
 
-    var o = "", e = "", remaining = Object.keys(responses).length
-    runner.stdout.on("data", function (chunk) {
-      remaining--
-      o += chunk
-
-      var label = chunk.toString("utf8").split(":")[0]
-      runner.stdin.write(responses[label])
-
-      if (remaining === 0) runner.stdin.end()
-    })
-    runner.stderr.on("data", function (chunk) { e += chunk })
+    var message = 'Logged in as u on ' + common.registry + '/.'
+    runner.stdout.on('data', verifyStdout(runner, message, t))
   })
 })
 
@@ -120,17 +148,8 @@ test("npm login --no-always-auth", function (t) {
       })
     })
 
-    var o = "", e = "", remaining = Object.keys(responses).length
-    runner.stdout.on("data", function (chunk) {
-      remaining--
-      o += chunk
-
-      var label = chunk.toString("utf8").split(":")[0]
-      runner.stdin.write(responses[label])
-
-      if (remaining === 0) runner.stdin.end()
-    })
-    runner.stderr.on("data", function (chunk) { e += chunk })
+    var message = 'Logged in as u on ' + common.registry + '/.'
+    runner.stdout.on('data', verifyStdout(runner, message, t))
   })
 })
 
