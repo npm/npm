@@ -30,6 +30,21 @@ environment variables that will be available to the script at runtime. If an
 "env" command is defined in your package it will take precedence over the
 built-in.
 
+It is also possible to run certain scripts in other working directories. This is
+enabled by `node`s `child_process` `cwd`-option. For that you need specify a
+run-script in the `scripts` objects as follows:
+
+```
+{
+  "scripts": {
+    "change-cwd": {
+      "cwd": "test/fixtures/",
+      "run": "node -e \"console.log(process.cwd())\""
+      }
+  }
+}
+```
+
 In addition to the shell's pre-existing `PATH`, `npm run` adds
 `node_modules/.bin` to the `PATH` provided to scripts. Any binaries provided by
 locally-installed dependencies can be used without the `node_modules/.bin`

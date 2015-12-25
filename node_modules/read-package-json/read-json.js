@@ -122,7 +122,29 @@ function scriptpath (file, data, cb) {
 }
 
 function scriptpath_ (key) {
+  // `This` passed through forEach [this_args]
   var s = this[key]
+  // Check for string was here before. Hence check twice if new applies.
+  // ONLY then return `cwd` props - and try to hide it
+  if (s !== null && typeof s === 'object') {
+    if (s.cwd && s.run && typeof s.cwd === 'string' && typeof s.run === 'string') {
+      this[key] = s.run
+      s.cmd = key
+
+      if (this.hasOwnProperty('_cwdChanges')) {
+        this._cwdChanges.push(s)
+      } else {
+        Object.defineProperty(this, '_cwdChanges', {
+          enumerable: false, // Dont break downstream for...in's, if any...
+          configurable: true,
+          writable: true, // Don't be too hard here. REVIEW: more security here?
+          value: [s] // Initialize w/ first property
+        })
+      }
+      // Jump into or over the following hard test here
+      s = s.run
+    }
+  }
   // This is never allowed, and only causes problems
   if (typeof s !== 'string') return delete this[key]
 

@@ -62,6 +62,17 @@ var preversionOnly = {
   }
 }
 
+var cwdChange = {
+  name: 'scripted',
+  version: '1.2.3',
+  scripts: {
+    'change-cwd': {
+      'cwd': '..',
+      'run': 'node -e "console.log(process.cwd())"'
+    }
+  }
+}
+
 function testOutput (t, command, er, code, stdout, stderr) {
   var lines
 
@@ -252,6 +263,47 @@ test('npm run-script no-params (direct only)', function (t) {
   writeMetadata(both)
 
   common.npm(['run-script'], opts, function (err, code, stdout, stderr) {
+    t.ifError(err, 'ran run-script without parameters without crashing')
+    t.notOk(code, 'npm exited without error code')
+    t.notOk(stderr, 'npm printed nothing to stderr')
+    t.equal(stdout, expected, 'got expected output')
+    t.end()
+  })
+})
+
+test('npm run-script change-cwd', function (t) {
+  var expected = [
+    'Scripts available in scripted via `npm run-script`:',
+    '  change-cwd',
+    '    node -e "console.log(process.cwd())"',
+    ''
+  ].join('\n')
+
+  writeMetadata(cwdChange)
+
+  common.npm(['run-script'], opts, function (err, code, stdout, stderr) {
+    t.ifError(err, 'ran run-script without parameters without crashing')
+    t.notOk(code, 'npm exited without error code')
+    t.notOk(stderr, 'npm printed nothing to stderr')
+    t.equal(stdout, expected, 'got expected output')
+    t.comment(stdout)
+    t.end()
+  })
+})
+
+test('npm run-script change-cwd and expect to have cahnged cwd to test/tap', function (t) {
+  var expected = [
+    '',
+    '> scripted@1.2.3 change-cwd ' + __dirname,
+    '> node -e "console.log(process.cwd())"',
+    '',
+    '' + __dirname,
+    ''
+  ].join('\n')
+
+  writeMetadata(cwdChange)
+
+  common.npm(['run-script', 'change-cwd'], opts, function (err, code, stdout, stderr) {
     t.ifError(err, 'ran run-script without parameters without crashing')
     t.notOk(code, 'npm exited without error code')
     t.notOk(stderr, 'npm printed nothing to stderr')
