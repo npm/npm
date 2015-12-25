@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "change-cwd-test": {
+      "cwd": "test/fixtures/",
+      "run": "node -e \"console.log(process.cwd())\""
+      }
+  }
+}
