@@ -21,7 +21,7 @@ The name is what your thing is called.
 
 Some rules:
 
-* The name must be shorter than 214 characters. This includes the scope for
+* The name must be less than or equal to 214 characters. This includes the scope for
   scoped packages.
 * The name can't start with a dot or an underscore.
 * New packages must not have uppercase letters in the name.
