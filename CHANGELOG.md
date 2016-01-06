@@ -1,3 +1,108 @@
+### v3.5.4 (2015-12-10):
+
+I hope you all had fantastic winter holidays, if it's winter where you are
+and if there are holidays‼ We went a few weeks without releases because
+staff was taking time away from work here and there.  A new year has come
+and we're back now, and refreshed and ready to dig in!
+
+This week brings us a bunch of documentation improvements and some module
+updates.  The core team's focus continues to be on improving tests,
+particularly with Windows, so there's not too much to call out here.
+
+#### DOCUMENTATION IMPROVEMENTS
+
+* [`6b0031e`](https://github.com/npm/npm/commit/6b0031e28c0b10fb2622fdadde41f5cd294348e8)
+  [#11044](https://github.com/npm/npm/pull/11044)
+  Correct documentation regarding the defaults for the `color` config option.
+  ([@scottaddie](https://github.com/scottaddie))
+* [`c6ce69e`](https://github.com/npm/npm/commit/c6ce69eaed7f17b5f1876ac13ecfae3d14a72f24)
+  [#10990](https://github.com/npm/npm/pull/10990)
+  Drop mentions in documentation of `process.installPrefix`, as it hasn't
+  been a thing since Node.js 0.6 and we don't support that.
+  ([@jeffmcmahan](https://github.com/jeffmcmahan))
+* [`dee92d1`](https://github.com/npm/npm/commit/dee92d1f78608a10becf57aae86d5d495f2272bd)
+  [#11037](https://github.com/npm/npm/pull/11037)
+  Clarify the documentation on the max length of the `name` property in
+  `package.json` files.
+  ([@scottaddie](https://github.com/scottaddie))
+* [`4b9d7bb`](https://github.com/npm/npm/commit/4b9d7bb1a4fc3f1edcf563379abfd2273af10881)
+  [#10787](https://github.com/npm/npm/pull/10787)
+  Make the formatting in the documentation for `npm dist-tag` more
+  consistent with other docs.
+  ([@cvrebert](https://github.com/cvrebert))
+* [`7f77a80`](https://github.com/npm/npm/commit/7f77a80d561ee4b2b8c0aba1226fe89dfe339bcd)
+  [#10787](https://github.com/npm/npm/pull/10787)
+  Add documentation to the `npm dist-tag` docs that explains in greater
+  detail how `latest` is different than other tags.  Further, improve the
+  documentation with better examples.  Add a discussion of common practice
+  for using dist tags to manage alpha's and beta's.
+  ([@cvrebert](https://github.com/cvrebert))
+* [`6db58dd`](https://github.com/npm/npm/commit/6db58dd0d7719c4675a239d43164edc066842b14)
+  [`2ee6371`](https://github.com/npm/npm/commit/2ee6371911bd3a4d566c5d7bc8734facc60cb27c)
+  [#10788](https://github.com/npm/npm/pull/10788)
+  [#10789](https://github.com/npm/npm/pull/10789)
+  Improve documentation cross referencing.
+  ([@cvrebert](https://github.com/cvrebert))
+* [`7ba629a`](https://github.com/npm/npm/commit/7ba629a2ad3eaf736529e053b533cabe3a0d7123)
+  [#10790](https://github.com/npm/npm/pull/10790)
+  Document more clearly that `npm install foo` means `npm install
+  foo@latest`.
+  ([@cvrebert](https://github.com/cvrebert))
+
+#### A FEW MODULE UPDATES
+
+* [`fc2e8d5`](https://github.com/npm/npm/commit/fc2e8d58a91728cb06936eea686efaa4fdec3f06)
+  `glob@6.0.3`: Remove deprecated features and fix a bunch of bugs.
+  ([@isaacs](https://github.com/isaacs))
+* [`5b820c4`](https://github.com/npm/npm/commit/5b820c4e17c907fa8c23771c0cd8e74dd5fdaa51)
+  `has-unicode@2.0.0`: Change the default on windows to be false, as
+  international windows installs often install to non-unicode codepages and
+  there's no way to detect this short of a system call or a call to a
+  command line program.
+  ([@iarna](https://github.com/iarna))
+* [`238fe84`](https://github.com/npm/npm/commit/238fe84ac61297f1d71701d80368afaa40463305)
+  `which@1.2.1`: Fixed bugs with uid/gid checks and with quoted windows PATH
+  parts.
+  ([@isaacs](https://github.com/isaacs))
+* [`5e510e1`](https://github.com/npm/npm/commit/5e510e13d022a22d58742b126482d3b38a14cc83)
+  `rimraf@2.5.0`: Add ability to disable glob support / pass in options.
+  ([@isaacs](https://github.com/isaacs))
+* [`7558215`](https://github.com/npm/npm/commit/755821569466b7be0883f4b0573eeb83c24109eb)
+  `readable-stream@2.0.5`: Minor performance improvements.
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+* [`64e8499`](https://github.com/npm/npm/commit/64e84992c812a73d590be443c09a6977d0ae9040)
+  `fs-write-stream-atomic@1.0.8`: Rewrite to use modern streams even on 0.8
+  plus a bunch of tests.
+  ([@iarna](https://github.com/iarna))
+* [`74d92a0`](https://github.com/npm/npm/commit/74d92a08d72ce3603244de4bb3e3706d2b928cef)
+  `columnify@1.5.4`: Some bug fixes around large inputs.
+  ([@timoxley](https://github.com/timoxley))
+
+#### FIX NPM'S TESTS ON 0.8
+
+This doesn't impact you as a user of npm, and ordinarily that means we
+wouldn't call it out here, but if you've ever wanted to contribute, having
+that green travis badge makes it a lot easier to do so with confidence!
+
+* [`b14cdbb`](https://github.com/npm/npm/commit/b14cdbb6002b04bfbefaff70cc45810c20d5a366)
+  [#10872](https://github.com/npm/npm/pull/10872)
+  Rewrite tests using nock to use other alternatives.
+  ([@zkat](https://github.com/zkat))
+* [`59ed01a`](https://github.com/npm/npm/commit/59ed01a8ea7960b1467aed52164fc36a03c77770)
+  [#10872](https://github.com/npm/npm/pull/10872)
+  Work around Node.js 0.8 http back-pressure bug.
+
+  0.8 http streams have a bug, where if they're paused with data in their
+  buffers when the socket closes, they call `end` before emptying those
+  buffers, which results in the entire pipeline ending and thus the point
+  that applied backpressure never being able to trigger a `resume`.
+
+  We work around this by piping into a pass through stream that has
+  unlimited buffering.  The pass through stream is from readable-stream and
+  is thus a current streams3 implementation that is free of these bugs even
+  on 0.8.
+  ([@iarna](https://github.com/iarna))
+
 ### v3.5.3 (2015-12-10):
 
 Did you know that Bob Ross reached the rank of master sergeant in the US Air
