@@ -885,7 +885,7 @@ on success, but left behind on failure for forensic purposes.
 
 ### unicode
 
-* Default: true on windows and mac/unix systems with a unicode locale
+* Default: false on windows, true on mac/unix systems with a unicode locale
 * Type: Boolean
 
 When set to true, npm uses unicode characters in the tree output.  When
