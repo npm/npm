@@ -1,4 +1,4 @@
-### v3.5.4 (2015-12-10):
+### v3.5.4 (2016-01-07):
 
 I hope you all had fantastic winter holidays, if it's winter where you are
 and if there are holidays‼ We went a few weeks without releases because
