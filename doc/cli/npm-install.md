@@ -164,14 +164,24 @@ after packing it up into a tarball (b).
 
 * `npm install <git remote url>`:
 
-    Installs the package from the hosted git provider, cloning it with
-    `git`. First it tries via the https (git with github) and if that fails, via ssh.
+    Installs the package from the given git repository, cloning it with
+    `git`. The format of the `<git remote url>` is
 
           <protocol>://[<user>[:<password>]@]<hostname>[:<port>][:][/]<path>[#<commit-ish>]
 
     `<protocol>` is one of `git`, `git+ssh`, `git+http`, or
     `git+https`.  If no `<commit-ish>` is specified, then `master` is
     used.
+
+    If the url describes a git hosting provider known to support
+    multiple protocols, then the protocol actually specified is ignored,
+    and the protocols are tried in the order
+    `git+https` then `git+ssh` then `git`,
+    skipping protocols not supported by the provider
+    and trying the next supported protocol if one of them fails.
+    If this order causes problems, the `url.<base>.insteadOf` configuration
+    of `git` can be used; see the `git-config` man page.
+    Currently known providers include Github, Bitbucket and Gitlab.
 
     The following git environment variables are recognized by npm and will be added
     to the environment when running git:
@@ -183,7 +193,7 @@ after packing it up into a tarball (b).
     * `GIT_SSL_CAINFO`
     * `GIT_SSL_NO_VERIFY`
 
-    See the git man page for details.
+    See the `git` man page for details.
 
     Examples:
 
