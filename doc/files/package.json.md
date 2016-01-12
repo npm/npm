@@ -410,7 +410,7 @@ See semver(7) for more details about specifying version ranges.
 * `git...` See 'Git URLs as Dependencies' below
 * `user/repo` See 'GitHub URLs' below
 * `tag` A specific version tagged and published as `tag`  See `npm-tag(1)`
-* `path/path/path` See Local Paths below
+* `path/path/path` See [Local Paths](#local-paths) below
 
 For example, these are all valid:
 
