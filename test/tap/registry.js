@@ -27,8 +27,7 @@ if (v[0] === 0 && v[1] < 10) {
 }
 
 function runTests () {
-  var env = { TAP: 1 }
-  for (var i in process.env) env[i] = process.env[i]
+  var env = Object.assign({ TAP: 1 }, process.env)
   env.npm = npmExec
 
   var opts = {
