@@ -63,12 +63,12 @@ test('setup', function (t) {
 
   common.npm(['i', dep], {
     cwd: pkg,
-    env: {
+    env: Object.assign({
       npm_config_cache: cache,
       npm_config_tmp: tmp,
       npm_config_prefix: pkg,
       npm_config_global: 'false'
-    }
+    }, process.env)
   }, function (err, code, stdout, stderr) {
     t.ifErr(err, 'npm i ' + dep + ' finished without error')
     t.equal(code, 0, 'npm i ' + dep + ' exited ok')

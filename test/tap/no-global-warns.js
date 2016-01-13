@@ -15,9 +15,9 @@ var config = 'prefix = ' + base
 var configPath = path.join(base, '_npmrc')
 
 var OPTS = {
-  env: {
+  env: Object.assign({
     'npm_config_userconfig': configPath
-  }
+  }, process.env)
 }
 
 var installJSON = {
