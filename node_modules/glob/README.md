@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/isaacs/node-glob.svg?branch=master)](https://travis-ci.org/isaacs/node-glob/) [![Dependency Status](https://david-dm.org/isaacs/node-glob.svg)](https://david-dm.org/isaacs/node-glob) [![devDependency Status](https://david-dm.org/isaacs/node-glob/dev-status.svg)](https://david-dm.org/isaacs/node-glob#info=devDependencies) [![optionalDependency Status](https://david-dm.org/isaacs/node-glob/optional-status.svg)](https://david-dm.org/isaacs/node-glob#info=optionalDependencies)
-
 # Glob
 
 Match files using the patterns the shell uses, like stars and stuff.
+
+[![Build Status](https://travis-ci.org/isaacs/node-glob.svg?branch=master)](https://travis-ci.org/isaacs/node-glob/) [![Build Status](https://ci.appveyor.com/api/projects/status/kd7f3yftf7unxlsx?svg=true)](https://ci.appveyor.com/project/isaacs/node-glob) [![Coverage Status](https://coveralls.io/repos/isaacs/node-glob/badge.svg?branch=master&service=github)](https://coveralls.io/github/isaacs/node-glob?branch=master)
 
 This is a glob implementation in JavaScript.  It uses the `minimatch`
 library to do its matching.
