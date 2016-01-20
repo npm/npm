@@ -57,6 +57,7 @@
     "init-package-json": "~1.9.3",
     "lockfile": "~1.0.1",
     "lodash.clonedeep": "~4.0.1",
+    "lodash.isarguments": "~3.0.5",
     "lodash.union": "~3.1.0",
     "lodash.uniq": "~3.2.2",
     "lodash.without": "~3.2.1",
