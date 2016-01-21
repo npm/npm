@@ -35,6 +35,8 @@ var dependency = {
   bin: [ 'bin/foo' ]
 }
 
+var extend = Object.assign || require('util')._extend
+
 var foo = function () {/*
 #!/usr/bin/env node
 
@@ -63,7 +65,7 @@ test('setup', function (t) {
 
   common.npm(['i', dep], {
     cwd: pkg,
-    env: Object.assign({
+    env: extend({
       npm_config_cache: cache,
       npm_config_tmp: tmp,
       npm_config_prefix: pkg,

@@ -14,8 +14,10 @@ var toInstall = path.join(base, 'to-install')
 var config = 'prefix = ' + base
 var configPath = path.join(base, '_npmrc')
 
+var extend = Object.assign || require('util')._extend
+
 var OPTS = {
-  env: Object.assign({
+  env: extend({
     'npm_config_userconfig': configPath
   }, process.env)
 }

@@ -26,8 +26,10 @@ if (v[0] === 0 && v[1] < 10) {
   })
 }
 
+var extend = Object.assign || require('util')._extend
+
 function runTests () {
-  var env = Object.assign({ TAP: 1 }, process.env)
+  var env = extend({ TAP: 1 }, process.env)
   env.npm = npmExec
 
   var opts = {
