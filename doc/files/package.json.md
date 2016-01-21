@@ -186,9 +186,10 @@ works just like a `.gitignore`.
 Certain files are always included, regardless of settings:
 
 * `package.json`
-* `README` (and its variants)
-* `CHANGELOG` (and its variants)
+* `README`
+* `CHANGES` / `CHANGELOG` / `HISTORY` (any casing and file extension)
 * `LICENSE` / `LICENCE`
+* The file in the "main" field
 
 Conversely, some files are always ignored:
 
@@ -198,10 +199,11 @@ Conversely, some files are always ignored:
 * `.hg`
 * `.lock-wscript`
 * `.wafpickle-N`
-* `*.swp`
+* `.*.swp`
 * `.DS_Store`
 * `._*`
 * `npm-debug.log`
+* `.npmrc`
 
 ## main
 
