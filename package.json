@@ -194,7 +194,7 @@
     "deep-equal": "~1.0.1",
     "marked": "~0.3.5",
     "marked-man": "~0.1.5",
-    "npm-registry-couchapp": "~2.6.11",
+    "npm-registry-couchapp": "~2.6.12",
     "npm-registry-mock": "~1.0.1",
     "require-inject": "~1.3.0",
     "sprintf-js": "~1.0.3",
