@@ -138,7 +138,7 @@ if it installs a new package.
 
 ### Updating Globally-Installed Packages
 
-`npm update -g` will apply the `update` action to each globally- installed
+`npm update -g` will apply the `update` action to each globally installed
 package that is `outdated` -- that is, has a version that is different from
 `latest`.
 
