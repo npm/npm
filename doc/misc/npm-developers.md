@@ -104,7 +104,7 @@ create an empty `.npmignore` file to override it. Like `git`, `npm` looks
 for `.npmignore` and `.gitignore` files in all subdirectories of your
 package, not only the root directory.
 
-`.npmignore` files follow the [same pattern rules](http://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#Ignoring-Files)
+`.npmignore` files follow the [same pattern rules](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#Ignoring-Files)
 as `.gitignore` files:
 
 * Blank lines or lines starting with `#` are ignored.

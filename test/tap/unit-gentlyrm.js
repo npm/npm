@@ -222,7 +222,7 @@ test('areAnyInsideAny', function (t) {
 })
 
 test('isEverInside', function (t) {
-  t.plan(13)
+  t.plan(15)
 
   var mocks = mockWith({
     '/path/other/link': { type: 'symlink', dest: '../to/file' },
@@ -234,6 +234,11 @@ test('isEverInside', function (t) {
 
   var gentlyRm = requireInject('../../lib/utils/gently-rm.js', mocks)
   var isEverInside = gentlyRm._isEverInside
+
+  isEverInside('/path/to/file', ['/path/to', '/path/to/invalid'], function (er, inside) {
+    t.ifError(er)
+    t.isDeeply(inside, {target: '/path/to/file', path: '/path/to'}, 'bad paths are ignored if something matches')
+  })
 
   isEverInside('/path/to/invalid', ['/path/to/invalid'], function (er, inside) {
     t.is(er && er.code, 'EINVAL', 'errors bubble out')

@@ -13,9 +13,12 @@ function hOP (obj, key) {
 
 function naiveLength () { return 1 }
 
+var didTypeWarning = false
 function typeCheckKey(key) {
-  if (typeof key !== 'string' && typeof key !== 'number')
-    throw new TypeError("key must be a string or number. " + typeof key)
+  if (!didTypeWarning && typeof key !== 'string' && typeof key !== 'number') {
+    didTypeWarning = true
+    console.error(new TypeError("LRU: key must be a string or number. Almost certainly a bug! " + typeof key).stack)
+  }
 }
 
 function LRUCache (options) {
@@ -214,9 +217,7 @@ LRUCache.prototype.set = function (key, value, maxAge) {
 }
 
 LRUCache.prototype.has = function (key) {
-  if (typeof key !== 'string' && typeof key !== 'number')
-    return false
-
+  typeCheckKey(key)
   if (!hOP(this._cache, key)) return false
   var hit = this._cache[key]
   if (isStale(this, hit)) {
@@ -226,14 +227,12 @@ LRUCache.prototype.has = function (key) {
 }
 
 LRUCache.prototype.get = function (key) {
-  if (typeof key !== 'string' && typeof key !== 'number')
-    return
+  typeCheckKey(key)
   return get(this, key, true)
 }
 
 LRUCache.prototype.peek = function (key) {
-  if (typeof key !== 'string' && typeof key !== 'number')
-    return
+  typeCheckKey(key)
   return get(this, key, false)
 }
 
@@ -244,8 +243,7 @@ LRUCache.prototype.pop = function () {
 }
 
 LRUCache.prototype.del = function (key) {
-  if (typeof key !== 'string' && typeof key !== 'number')
-    return
+  typeCheckKey(key)
   del(this, this._cache[key])
 }
 

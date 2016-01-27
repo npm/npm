@@ -1,3 +1,100 @@
+### v2.14.15 (2015-12-10):
+
+Did you know that Bob Ross reached the rank of master sergeant in the US Air
+Force before becoming perhaps the most soothing painter of all time?
+
+#### TWO HAPPY LITTLE BUG FIXES
+
+* [`f482664`](https://github.com/npm/npm/commit/f4826645dc6b5c0f05c5f9187efb28c1a293554f)
+  [#10505](https://github.com/npm/npm/issues/10505) `npm ls --json --depth=0`
+  now respects the depth parameter, when it is zero and when it is not zero.
+  ([@MarkReeder](https://github.com/MarkReeder))
+* [`529fa1f`](https://github.com/npm/npm/commit/529fa1ff2c6432a773af99a1c5209c0865f7a19c)
+  [#9099](https://github.com/npm/npm/issues/9099) I had always thought you
+  could run `npm version` from subdirectories in your project, which is great,
+  because now you can. I guess I was just ahead of my time.
+  ([@ekmartin](https://github.com/ekmartin))
+
+#### NOW PAINT IN SOME NICE DOCS CHANGES
+
+* [`1fc7f2b`](https://github.com/npm/npm/commit/1fc7f2b523ea760e08adb9b861b28e3ba450e565)
+  [#10546](https://github.com/npm/npm/issues/10546) Goodbye, FAQ! You were
+  cheeky and fun until you weren't! Don't worry: npm still loves everyone,
+  especially you! ([@ashleygwilliams](https://github.com/ashleygwilliams))
+* [`7fe6950`](https://github.com/npm/npm/commit/7fe6950b44d241bb4d90857a44d89d750af1e2b3)
+  [#10570](https://github.com/npm/npm/issues/10570) Update documentation URLs
+  to be HTTPS everywhere sensible. No HTTP shall be spared!
+  ([@rsp](https://github.com/rsp))
+* [`96ebb90`](https://github.com/npm/npm/commit/96ebb902439e4f6f37f8beffb589769146fecf24)
+  [#10650](https://github.com/npm/npm/issues/10650) Correctly note that there
+  are two lifecycle scripts run by an install phase in an example, instead of
+  three. ([@eymengunay](https://github.com/eymengunay))
+* [`5196893`](https://github.com/npm/npm/commit/5196893a7496f68a514b83641ff6b72f14d664dd)
+  [#10687](https://github.com/npm/npm/issues/10687) `npm outdated`'s output can
+  be a little puzzling sometimes. I've attempted to make it clearer, with some
+  examples, of what's going on with "wanted" and "latest" in more cases.
+  ([@othiym23](https://github.com/othiym23))
+* [`8e6712d`](https://github.com/npm/npm/commit/8e6712d4ee128858cab36c77723e35bddbb977ba)
+  [#10700](https://github.com/npm/npm/issues/10700) Hey, do you remember when
+  `search.npmjs.org` was a thing? I think I do? The last time I used it was in
+  like 2012, and it's gone now, so remove it from the docs.
+  ([@gagern](https://github.com/gagern))
+* [`27d2612`](https://github.com/npm/npm/commit/27d2612b3f5aa88b12c943d04e162ce4c3a350ae)
+  `semver@5.1.0`: Include BNF for SemVer expression grammar (which is also now
+  included in `npm help semver`). ([@isaacs](https://github.com/isaacs))
+
+#### LAND YOUR DEPENDENCY UPGRADES IN PAIRS SO EVERYONE HAS A FRIEND
+
+* [`fc6c3c5`](https://github.com/npm/npm/commit/fc6c3c53a31e9e11c2616fcd378202e5b80bf286)
+  `request@2.67.0` ([@simov](https://github.com/simov))
+* [`07013fd`](https://github.com/npm/npm/commit/07013fd0fd55a2eb31fb9334631ee5d0dd5c41bb)
+  [isaacs/rimraf#89](https://github.com/isaacs/rimraf/pull/89) `rimraf@2.4.4`
+  ([@zerok](https://github.com/zerok))
+* [`bc149be`](https://github.com/npm/npm/commit/bc149bef871f0f00639509898cece531af3aa8b3)
+  [isaacs/once#7](https://github.com/isaacs/once/pull/7) `once@1.3.3`
+  ([@floatdrop](https://github.com/floatdrop))
+* [`ac598d3`](https://github.com/npm/npm/commit/ac598d36e1ad207bc0d8a7eadfd84b26146aec1f)
+  `lru-cache@3.2.0` ([@isaacs](https://github.com/isaacs))
+* [`1b915ce`](https://github.com/npm/npm/commit/1b915ce1e0787ccb6d8aa235d002d66565f2175d)
+  `npm-registry-client@7.0.9` ([@othiym23](https://github.com/othiym23))
+* [`df7dd78`](https://github.com/npm/npm/commit/df7dd78b8fe3cc58202996fa6c994fc55419bfa5)
+  `tap@2.3.1` ([@isaacs](https://github.com/isaacs))
+
+### v2.14.14 (2015-12-03):
+
+#### FIX URL IN LICENSE
+
+The license incorrectly identified the registry URL as `registry.npmjs.com` and
+this has been corrected to `registry.npmjs.org`.
+
+* [`6051a69`](https://github.com/npm/npm/commit/6051a69b1adc80f5f200077067e831643f655bd4)
+  [#10685](https://github.com/npm/npm/pull/10685)
+  Fix npm public registry URL in notices.
+  ([@kemitchell](https://github.com/kemitchell))
+
+#### NO MORE MD5
+
+We updated modules that had been using MD5 for non-security purposes.  While
+this is perfectly safe, if you compile Node in FIPS-compliance mode it will
+explode if you try to use MD5. We've replaced MD5 with Murmur, which conveys
+our intent better and is faster to boot.
+
+* [`30b5994`](https://github.com/npm/npm/commit/30b599496a9762482e1cef945a378e3a534fd366)
+  [#10629](https://github.com/npm/npm/issues/10629)
+  `write-file-atomic@1.1.4`
+  ([@othiym23](https://github.com/othiym23))
+* [`68c63ff`](https://github.com/npm/npm/commit/68c63ff1279d3d5ea7b2c970ab5562a8e0536f27)
+  [#10629](https://github.com/npm/npm/issues/10629)
+  `fs-write-stream-atomic@1.0.5`
+  ([@othiym23](https://github.com/othiym23))
+
+#### DEPENDENCY UPDATES
+
+* [`e48e5a9`](https://github.com/npm/npm/commit/e48e5a90b4dcf76124b7e9ea3b295c1383e7f0c8)
+  [nodejs/node-gyp#831](https://github.com/nodejs/node-gyp/pull/831)
+  `node-gyp@3.2.1`: Improved \*BSD support.
+  ([@bnoordhuis](https://github.com/bnoordhuis))
+
 ### v2.14.13 (2015-11-25):
 
 #### THE npm CLI !== THE npm REGISTRY !== npm, INC.
