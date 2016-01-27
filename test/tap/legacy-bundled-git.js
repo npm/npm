@@ -72,7 +72,7 @@ test('setup', function (t) {
   t.done()
 })
 test('bundled-git', function (t) {
-  common.npm(['install', fixturepath], {cwd: basepath}, installCheckAndTest)
+  common.npm(['install', '--global-style', fixturepath], {cwd: basepath}, installCheckAndTest)
   function installCheckAndTest (err, code, stdout, stderr) {
     if (err) throw err
     console.error(stderr)
