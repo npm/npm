@@ -208,8 +208,6 @@
     "preversion": "bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
     "tap": "tap --timeout 240",
     "test": "standard && npm run test-tap",
-    "test-all": "standard && npm run test-legacy && npm run test-tap",
-    "test-legacy": "node ./test/run.js",
     "test-tap": "npm run tap -- \"test/tap/*.js\"",
     "test-node": "\"$NODE\" ./test/run.js && \"$NODE\" \"node_modules/.bin/tap\" --timeout 240 \"test/tap/*.js\""
   },
