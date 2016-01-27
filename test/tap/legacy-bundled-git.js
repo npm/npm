@@ -11,39 +11,41 @@ var installedpath = path.resolve(modulepath, 'npm-test-bundled-git')
 var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
+
+var minimatchExpected = {
+  name: 'minimatch',
+  description: 'a glob matcher in javascript',
+  version: '0.2.1',
+  repository: {
+    type: 'git',
+    url: 'git://github.com/isaacs/minimatch.git'
+  },
+  main: 'minimatch.js',
+  scripts: {
+    test: 'tap test'
+  },
+  engines: {
+    node: '*'
+  },
+  dependencies: {
+    'lru-cache': '~1.0.5'
+  },
+  devDependencies: {
+    tap: '~0.1.3'
+  },
+  licenses: [
+    {
+      type: 'MIT',
+      url: 'http://github.com/isaacs/minimatch/raw/master/LICENSE'
+    }
+  ]
+}
+
 var fixture = new Tacks(
   Dir({
     README: File(
       'just an npm test\n'
     ),
-    'minimatch-expected.json': File({
-      name: 'minimatch',
-      description: 'a glob matcher in javascript',
-      version: '0.2.1',
-      repository: {
-        type: 'git',
-        url: 'git://github.com/isaacs/minimatch.git'
-      },
-      main: 'minimatch.js',
-      scripts: {
-        test: 'tap test'
-      },
-      engines: {
-        node: '*'
-      },
-      dependencies: {
-        'lru-cache': '~1.0.5'
-      },
-      devDependencies: {
-        tap: '~0.1.3'
-      },
-      licenses: [
-        {
-          type: 'MIT',
-          url: 'http://github.com/isaacs/minimatch/raw/master/LICENSE'
-        }
-      ]
-    }),
     'package.json': File({
       name: 'npm-test-bundled-git',
       scripts: {
@@ -56,15 +58,7 @@ var fixture = new Tacks(
       bundledDependencies: [
         'glob'
       ]
-    }),
-    'test.js': File(
-      "var a = require('./node_modules/glob/node_modules/minimatch/package.json')\n" +
-      "var e = require('./minimatch-expected.json')\n" +
-      "var assert = require('assert')\n" +
-      'Object.keys(e).forEach(function (key) {\n' +
-      '  assert.deepEqual(a[key], e[key], "didn\'t get expected minimatch/package.json")\n' +
-      '})\n'
-    )
+    })
   })
 )
 test('setup', function (t) {
@@ -78,13 +72,12 @@ test('bundled-git', function (t) {
     console.error(stderr)
     console.log(stdout)
     t.is(code, 0, 'install went ok')
-    common.npm(['test'], {cwd: installedpath}, testCheckAndRemove)
-  }
-  function testCheckAndRemove (err, code, stdout, stderr) {
-    if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'test went ok')
+
+    var actual = require(path.resolve(installedpath, 'node_modules/glob/node_modules/minimatch/package.json'))
+    Object.keys(minimatchExpected).forEach(function (key) {
+      t.isDeeply(actual[key], minimatchExpected[key], key + ' set to the right value')
+    })
+
     common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
   }
   function removeCheckAndDone (err, code, stdout, stderr) {
