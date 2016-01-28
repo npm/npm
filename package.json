@@ -87,7 +87,7 @@
     "realize-package-specifier": "~3.0.1",
     "request": "~2.67.0",
     "retry": "~0.8.0",
-    "rimraf": "~2.5.0",
+    "rimraf": "~2.5.1",
     "semver": "~5.1.0",
     "sha": "~2.0.1",
     "slide": "~1.1.6",
