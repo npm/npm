@@ -1,4 +1,4 @@
-### v3.7.0 (2016-01-20):
+### v3.7.0 (2016-01-29):
 
 Hi all! This week brings us some important performance improvements,
 support for git submodules(!) and a bunch of bug fixes.
