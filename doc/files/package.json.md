@@ -430,6 +430,12 @@ For example, these are all valid:
       }
     }
 
+The `dependencies` list can also be specified in the following ways, but these are **not** recommended:
+
+* As a list, eg. `{ "dependencies": ["foo-bar@^6.0.0", "dyl-thr@2.1.5"] }`
+* As a single comma-separated string, eg. `{ "dependencies": "foo-bar@^6.0.0,dyl-thr@2.1.5" }`
+
+
 ### URLs as Dependencies
 
 You may specify a tarball URL in place of a version range.
