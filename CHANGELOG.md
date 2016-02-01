@@ -1,3 +1,17 @@
+### v3.7.1 (2016-02-01):
+
+Super quick Monday patch on last week's release.
+
+If you ever wondered why we release things to the `npm@next` tag for a week
+before promoting them to `npm@latest`, this is it!
+
+#### RELEASE TRAIN VINDICATED (again)
+
+* [`adcaf04`](adcaf047811dcc475ab1984fc93fe34540fc03d7)
+  [#11349](https://github.com/npm/npm/issues/11349)
+  Revert last weeks change to use JSON clone instead of `lodash.cloneDeep`.
+  ([@iarna](https://github.com/iarna))
+
 ### v3.7.0 (2016-01-20):
 
 Hi all! This week brings us some important performance improvements,
