@@ -2,15 +2,11 @@
 var test = require('tap').test
 var common = require('../common-tap.js')
 var path = require('path')
-var rimraf = require('rimraf')
-var mkdirp = require('mkdirp')
 var basepath = path.resolve(__dirname, path.basename(__filename, '.js'))
-var fixturepath = path.resolve(basepath, 'npm-test-shrinkwrap')
-var modulepath = path.resolve(basepath, 'node_modules')
-var installedpath = path.resolve(modulepath, 'npm-test-shrinkwrap')
 var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
+
 var fixture = new Tacks(
   Dir({
     README: File(
@@ -77,86 +73,60 @@ var fixture = new Tacks(
       scripts: {
         test: 'node test.js'
       }
-    }),
-    'test.js': File(
-      "var assert = require('assert')\n" +
-      '\n' +
-      'process.env.npm_config_prefix = process.cwd()\n' +
-      'delete process.env.npm_config_global\n' +
-      'delete process.env.npm_config_depth\n' +
-      '\n' +
-      'var npm = process.env.npm_execpath\n' +
-      '\n' +
-      "require('child_process').execFile(process.execPath, [npm, 'ls', '--json'],\n" +
-      "  { stdio: 'pipe', env: process.env, cwd: process.cwd() },\n" +
-      '  function (err, stdout, stderr) {\n' +
-      '    if (err) throw err\n' +
-      '\n' +
-      '    var actual = JSON.parse(stdout)\n' +
-      "    var expected = require('./npm-shrinkwrap.json')\n" +
-      '    rmFrom(actual)\n' +
-      '    actual = actual.dependencies\n' +
-      '    rmFrom(expected)\n' +
-      '    expected = expected.dependencies\n' +
-      '    console.error(JSON.stringify(actual, null, 2))\n' +
-      '    console.error(JSON.stringify(expected, null, 2))\n' +
-      '\n' +
-      '    assert.deepEqual(actual, expected)\n' +
-      '  }\n' +
-      ')\n' +
-      '\n' +
-      'function rmFrom (obj) {\n' +
-      '  for (var i in obj) {\n' +
-      "    if (i === 'from') {\n" +
-      '      delete obj[i]\n' +
-      "    } else if (i === 'dependencies') {\n" +
-      '      for (var j in obj[i]) {\n' +
-      '        rmFrom(obj[i][j])\n' +
-      '      }\n' +
-      '    }\n' +
-      '  }\n' +
-      '}\n'
-    )
+    })
   })
 )
+
 test('setup', function (t) {
   setup()
   t.done()
 })
+
 test('shrinkwrap', function (t) {
-  common.npm(['install', fixturepath], {cwd: basepath}, installCheckAndTest)
+  common.npm(['install'], {cwd: basepath}, installCheckAndTest)
+
   function installCheckAndTest (err, code, stdout, stderr) {
     if (err) throw err
     console.error(stderr)
-    console.log(stdout)
     t.is(code, 0, 'install went ok')
-    common.npm(['test'], {cwd: installedpath}, testCheckAndRemove)
+
+    common.npm(['ls', '--json'], {cwd: basepath}, verifyLsMatchesShrinkwrap)
   }
-  function testCheckAndRemove (err, code, stdout, stderr) {
+
+  function verifyLsMatchesShrinkwrap (err, code, stdout, stderr) {
     if (err) throw err
     console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'test went ok')
-    common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
-  }
-  function removeCheckAndDone (err, code, stdout, stderr) {
-    if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'remove went ok')
+    t.is(code, 0, 'ls went ok')
+    var actual = JSON.parse(stdout)
+    var expected = require(path.resolve(basepath, 'npm-shrinkwrap.json'))
+    // from is expected to vary
+    t.isDeeply(rmFrom(actual), rmFrom(expected))
     t.done()
   }
+
+  function rmFrom (obj) {
+    for (var i in obj) {
+      if (i === 'from') {
+        delete obj[i]
+      } else if (i === 'dependencies') {
+        for (var j in obj[i]) {
+          rmFrom(obj[i][j])
+        }
+      }
+    }
+  }
 })
+
 test('cleanup', function (t) {
   cleanup()
   t.done()
 })
+
 function setup () {
   cleanup()
-  fixture.create(fixturepath)
-  mkdirp.sync(modulepath)
+  fixture.create(basepath)
 }
+
 function cleanup () {
-  fixture.remove(fixturepath)
-  rimraf.sync(basepath)
+  fixture.remove(basepath)
 }
