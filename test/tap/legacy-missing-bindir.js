@@ -1,7 +1,8 @@
 'use strict'
+var path = require('path')
+var fs = require('fs')
 var test = require('tap').test
 var common = require('../common-tap.js')
-var path = require('path')
 var rimraf = require('rimraf')
 var mkdirp = require('mkdirp')
 var basepath = path.resolve(__dirname, path.basename(__filename, '.js'))
@@ -11,6 +12,7 @@ var installedpath = path.resolve(modulepath, 'npm-test-missing-bindir')
 var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
+
 var fixture = new Tacks(
   Dir({
     README: File(
@@ -19,41 +21,41 @@ var fixture = new Tacks(
     'package.json': File({
       name: 'npm-test-missing-bindir',
       version: '0.0.0',
-      scripts: {
-        test: 'node test.js'
-      },
       directories: {
         bin: './not-found'
       }
-    }),
-    'test.js': File(
-      "var assert = require('assert')\n" +
-      "assert.equal(undefined, process.env.npm_config__password, 'password exposed!')\n" +
-      "assert.equal(undefined, process.env.npm_config__auth, 'auth exposed!')\n" +
-      "assert.equal(undefined, process.env.npm_config__authCrypt, 'authCrypt exposed!')\n"
-    )
+    })
   })
 )
+
 test('setup', function (t) {
   setup()
   t.done()
 })
+
+function installedExists (filename) {
+  try {
+    fs.statSync(path.resolve(installedpath, filename))
+    return true
+  } catch (ex) {
+    console.log(ex)
+    return false
+  }
+}
+
 test('missing-bindir', function (t) {
   common.npm(['install', fixturepath], {cwd: basepath}, installCheckAndTest)
+
   function installCheckAndTest (err, code, stdout, stderr) {
     if (err) throw err
-    console.error(stderr)
+    if (stderr) console.error(stderr)
     console.log(stdout)
     t.is(code, 0, 'install went ok')
-    common.npm(['test'], {cwd: installedpath}, testCheckAndRemove)
-  }
-  function testCheckAndRemove (err, code, stdout, stderr) {
-    if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'test went ok')
+    t.is(installedExists('README'), true, 'README')
+    t.is(installedExists('package.json'), true, 'package.json')
     common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
   }
+
   function removeCheckAndDone (err, code, stdout, stderr) {
     if (err) throw err
     console.error(stderr)
@@ -62,15 +64,18 @@ test('missing-bindir', function (t) {
     t.done()
   }
 })
+
 test('cleanup', function (t) {
   cleanup()
   t.done()
 })
+
 function setup () {
   cleanup()
   fixture.create(fixturepath)
   mkdirp.sync(modulepath)
 }
+
 function cleanup () {
   fixture.remove(fixturepath)
   rimraf.sync(basepath)
