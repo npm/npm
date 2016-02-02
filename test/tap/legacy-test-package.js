@@ -11,6 +11,7 @@ var installedpath = path.resolve(modulepath, 'npm-test-test-package')
 var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
+
 var fixture = new Tacks(
   Dir({
     README: File(
@@ -24,12 +25,15 @@ var fixture = new Tacks(
     })
   })
 )
+
 test('setup', function (t) {
   setup()
   t.done()
 })
+
 test('test-package', function (t) {
   common.npm(['install', fixturepath], {cwd: basepath}, installCheckAndTest)
+
   function installCheckAndTest (err, code, stdout, stderr) {
     if (err) throw err
     console.error(stderr)
@@ -37,13 +41,15 @@ test('test-package', function (t) {
     t.is(code, 0, 'install went ok')
     common.npm(['test'], {cwd: installedpath}, testCheckAndRemove)
   }
+
   function testCheckAndRemove (err, code, stdout, stderr) {
     if (err) throw err
     console.error(stderr)
     console.log(stdout)
-    t.is(code, 0, 'test went ok')
+    t.is(code, 0, 'npm test w/o test is ok')
     common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
   }
+
   function removeCheckAndDone (err, code, stdout, stderr) {
     if (err) throw err
     console.error(stderr)
@@ -52,15 +58,18 @@ test('test-package', function (t) {
     t.done()
   }
 })
+
 test('cleanup', function (t) {
   cleanup()
   t.done()
 })
+
 function setup () {
   cleanup()
   fixture.create(fixturepath)
   mkdirp.sync(modulepath)
 }
+
 function cleanup () {
   fixture.remove(fixturepath)
   rimraf.sync(basepath)
