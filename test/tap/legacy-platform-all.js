@@ -7,10 +7,10 @@ var mkdirp = require('mkdirp')
 var basepath = path.resolve(__dirname, path.basename(__filename, '.js'))
 var fixturepath = path.resolve(basepath, 'npm-test-platform-all')
 var modulepath = path.resolve(basepath, 'node_modules')
-var installedpath = path.resolve(modulepath, 'npm-test-platform-all')
 var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
+
 var fixture = new Tacks(
   Dir({
     README: File(
@@ -41,38 +41,27 @@ var fixture = new Tacks(
     })
   })
 )
+
 test('setup', function (t) {
   setup()
   t.done()
 })
+
 test('platform-all', function (t) {
   common.npm(['install', fixturepath], {cwd: basepath}, installCheckAndTest)
   function installCheckAndTest (err, code, stdout, stderr) {
     if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
+    t.is(stderr, '', 'no error messages')
     t.is(code, 0, 'install went ok')
-    common.npm(['test'], {cwd: installedpath}, testCheckAndRemove)
-  }
-  function testCheckAndRemove (err, code, stdout, stderr) {
-    if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'test went ok')
-    common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
-  }
-  function removeCheckAndDone (err, code, stdout, stderr) {
-    if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'remove went ok')
     t.done()
   }
 })
+
 test('cleanup', function (t) {
   cleanup()
   t.done()
 })
+
 function setup () {
   cleanup()
   fixture.create(fixturepath)
