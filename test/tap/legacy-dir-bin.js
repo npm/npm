@@ -13,13 +13,10 @@ var File = Tacks.File
 var Dir = Tacks.Dir
 var fixture = new Tacks(
   Dir({
-    README: File(
-      'just an npm test\n'
-    ),
     bin: Dir({
       'dir-bin': File(
         '#!/usr/bin/env node\n' +
-        "console.log('ok')\n"
+        "console.log('test ran ok')\n"
       )
     }),
     'package.json': File({
@@ -33,9 +30,11 @@ var fixture = new Tacks(
       }
     }),
     'test.js': File(
-      "require('child_process').exec('dir-bin', { stdio: 'pipe', env: process.env },\n" +
-      '  function (err) {\n' +
+      "require('child_process').exec('dir-bin', { env: process.env },\n" +
+      '  function (err, stdout, stderr) {\n' +
       "    if (err && err.code) throw new Error('exited badly with code = ' + err.code)\n" +
+      '    console.log(stdout)\n' +
+      '    console.error(stderr)\n' +
       '  }\n' +
       ')\n'
     )
@@ -49,22 +48,18 @@ test('dir-bin', function (t) {
   common.npm(['install', fixturepath], {cwd: basepath}, installCheckAndTest)
   function installCheckAndTest (err, code, stdout, stderr) {
     if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
     t.is(code, 0, 'install went ok')
     common.npm(['test'], {cwd: installedpath}, testCheckAndRemove)
   }
   function testCheckAndRemove (err, code, stdout, stderr) {
-    if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'test went ok')
+    t.ifError(err, 'npm test on array bin')
+    t.equal(code, 0, 'exited OK')
+    t.equal(stderr.trim(), '', 'no error output')
+    t.match(stdout, /test ran ok/, 'child script ran properly')
     common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
   }
   function removeCheckAndDone (err, code, stdout, stderr) {
     if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
     t.is(code, 0, 'remove went ok')
     t.done()
   }
