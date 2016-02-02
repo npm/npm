@@ -1,16 +1,18 @@
 'use strict'
+var path = require('path')
+var fs = require('fs')
 var test = require('tap').test
 var common = require('../common-tap.js')
-var path = require('path')
 var rimraf = require('rimraf')
 var mkdirp = require('mkdirp')
+var mr = require('npm-registry-mock')
 var basepath = path.resolve(__dirname, path.basename(__filename, '.js'))
 var fixturepath = path.resolve(basepath, 'npm-test-optional-deps')
 var modulepath = path.resolve(basepath, 'node_modules')
-var installedpath = path.resolve(modulepath, 'npm-test-optional-deps')
 var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
+
 var fixture = new Tacks(
   Dir({
     README: File(
@@ -19,67 +21,58 @@ var fixture = new Tacks(
     'package.json': File({
       name: 'npm-test-optional-deps',
       version: '1.2.5',
-      scripts: {
-        test: 'node test.js'
-      },
       optionalDependencies: {
         'npm-test-foobarzaaakakaka': 'http://example.com/',
-        dnode: '10.999.14234',
-        sax: '0.3.5',
-        glob: 'some invalid version 99 #! $$ x y z',
+        async: '10.999.14234',
+        mkdirp: '0.3.5',
+        optimist: 'some invalid version 99 #! $$ x y z',
         'npm-test-failer': '*'
       }
-    }),
-    'test.js': File(
-      "var fs = require('fs')\n" +
-      "var assert = require('assert')\n" +
-      "var path = require('path')\n" +
-      '\n' +
-      '// sax should be the only dep that ends up installed\n' +
-      '\n' +
-      "var dir = path.resolve(__dirname, 'node_modules')\n" +
-      "assert.deepEqual(fs.readdirSync(dir), ['sax'])\n" +
-      "assert.equal(require('sax/package.json').version, '0.3.5')\n"
-    )
+    })
   })
 )
+
+var server
+
 test('setup', function (t) {
   setup()
-  t.done()
+  mr({port: common.port}, function (err, s) {
+    if (err) throw err
+    server = s
+    t.done()
+  })
 })
+
 test('optional-deps', function (t) {
-  common.npm(['install', '--global-style', fixturepath], {cwd: basepath}, installCheckAndTest)
+  server.get('/npm-test-failer').reply(404, {error: 'nope'})
+
+  var opts = ['--registry=' + common.registry, '--timeout=100']
+  common.npm(opts.concat(['install', fixturepath]), {cwd: basepath}, installCheckAndTest)
+
   function installCheckAndTest (err, code, stdout, stderr) {
     if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
+    if (stderr) console.error(stderr)
+    server.done()
     t.is(code, 0, 'install went ok')
-    common.npm(['test'], {cwd: installedpath}, testCheckAndRemove)
-  }
-  function testCheckAndRemove (err, code, stdout, stderr) {
-    if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'test went ok')
-    common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
-  }
-  function removeCheckAndDone (err, code, stdout, stderr) {
-    if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'remove went ok')
+    var dir = fs.readdirSync(modulepath).sort()
+    t.isDeeply(dir, ['mkdirp', 'npm-test-optional-deps'], 'only one optional dep should be there')
+    t.is(require(path.resolve(modulepath, 'mkdirp', 'package.json')).version, '0.3.5', 'mkdirp version right')
     t.done()
   }
 })
+
 test('cleanup', function (t) {
   cleanup()
+  server.close()
   t.done()
 })
+
 function setup () {
   cleanup()
   fixture.create(fixturepath)
   mkdirp.sync(modulepath)
 }
+
 function cleanup () {
   fixture.remove(fixturepath)
   rimraf.sync(basepath)
