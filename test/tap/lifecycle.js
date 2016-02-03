@@ -42,3 +42,21 @@ test('lifecycle : rejects wd for ', function (t) {
     t.end()
   })
 })
+
+test('lifecycle : nameless pkg is invalid', function (t) {
+  npm.load({}, function () {
+    var pkg = {}
+
+    t.equal(lifecycle._validPackage(pkg), false)
+    t.end()
+  })
+})
+
+test('lifecycle : named pkg is ok', function (t) {
+  npm.load({}, function () {
+    var pkg = { name: 'such-good-name' }
+
+    t.equal(lifecycle._validPackage(pkg), true)
+    t.end()
+  })
+})
