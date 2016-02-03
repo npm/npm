@@ -8,32 +8,23 @@ var basepath = path.resolve(__dirname, path.basename(__filename, '.js'))
 var fixturepath = path.resolve(basepath, 'npm-test-ignore-nested-nm')
 var modulepath = path.resolve(basepath, 'node_modules')
 var installedpath = path.resolve(modulepath, 'npm-test-ignore-nested-nm')
+var fs = require('graceful-fs')
 var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
+
+var fileData = 'I WILL NOT BE IGNORED!\n'
 var fixture = new Tacks(
   Dir({
-    README: File(
-      'just an npm test\n'
-    ),
     lib: Dir({
       node_modules: Dir({
-        foo: File(
-          'I WILL NOT BE IGNORED!\n'
-        )
+        foo: File(fileData)
       })
     }),
     'package.json': File({
       name: 'npm-test-ignore-nested-nm',
-      version: '1.2.5',
-      scripts: {
-        test: 'node test.js'
-      }
-    }),
-    'test.js': File(
-      "var fs = require('fs')\n" +
-      "fs.statSync(__dirname + '/lib/node_modules/foo')\n"
-    )
+      version: '1.2.5'
+    })
   })
 )
 test('setup', function (t) {
@@ -44,22 +35,16 @@ test('ignore-nested-nm', function (t) {
   common.npm(['install', fixturepath], {cwd: basepath}, installCheckAndTest)
   function installCheckAndTest (err, code, stdout, stderr) {
     if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
     t.is(code, 0, 'install went ok')
-    common.npm(['test'], {cwd: installedpath}, testCheckAndRemove)
-  }
-  function testCheckAndRemove (err, code, stdout, stderr) {
-    if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
-    t.is(code, 0, 'test went ok')
-    common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
+    var foopath = path.resolve(installedpath, 'lib/node_modules/foo')
+    fs.readFile(foopath, function (err, data) {
+      t.ifError(err, 'file read successfully')
+      t.equal(data.toString(), fileData)
+      common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
+    })
   }
   function removeCheckAndDone (err, code, stdout, stderr) {
     if (err) throw err
-    console.error(stderr)
-    console.log(stdout)
     t.is(code, 0, 'remove went ok')
     t.done()
   }
