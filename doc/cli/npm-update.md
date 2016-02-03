@@ -22,16 +22,7 @@ or local) will be updated.
 
 As of `npm@2.6.1`, the `npm update` will only inspect top-level packages.
 Prior versions of `npm` would also recursively inspect all dependencies.
-To get the old behavior, use `npm --depth Infinity update`, but be warned that
-simultaneous asynchronous update of all packages, including `npm` itself
-and packages that `npm` depends on, often causes problems up to and including
-the uninstallation of `npm` itself.
-
-To restore a missing `npm`, use the command:
-
-```
-curl -L https://npmjs.com/install.sh | sh
-```
+To get the old behavior, use `npm --depth Infinity update`.
 
 ## EXAMPLES
 
