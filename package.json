@@ -62,7 +62,7 @@
     "lodash.keys": "~4.0.2",
     "lodash.union": "~4.0.2",
     "lodash.uniq": "~4.0.2",
-    "lodash.without": "~4.0.1",
+    "lodash.without": "~4.0.2",
     "mkdirp": "~0.5.1",
     "node-gyp": "~3.2.1",
     "nopt": "~3.0.6",
