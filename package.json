@@ -78,7 +78,7 @@
     "path-is-inside": "~1.0.0",
     "read": "~1.0.7",
     "read-installed": "~4.0.3",
-    "read-package-json": "~2.0.2",
+    "read-package-json": "~2.0.3",
     "readable-stream": "~1.1.13",
     "realize-package-specifier": "~3.0.1",
     "request": "~2.67.0",
