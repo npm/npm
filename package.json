@@ -46,7 +46,7 @@
     "dezalgo": "~1.0.3",
     "editor": "~1.0.0",
     "fs-vacuum": "~1.2.7",
-    "fs-write-stream-atomic": "~1.0.5",
+    "fs-write-stream-atomic": "~1.0.8",
     "fstream": "~1.0.8",
     "fstream-npm": "~1.0.7",
     "github-url-from-git": "~1.4.0",
