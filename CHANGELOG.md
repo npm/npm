@@ -1,3 +1,65 @@
+### v3.7.2 (2016-02-04):
+
+This week, the CLI team has been busy working on rewriting tests to support
+getting coverage reports going and running all of our tests on Windows.
+Meanwhile, we've got a bunch of dependency updates and one or two other
+things.
+
+#### TESTS WENT INTO HIDING
+
+Last week we took a patch from [@substack](https://github.com/substack) to
+stop the installer from reordering arrays in an installed module's
+`package.json`...  but somehow I dropped the test when I was rebasing.
+
+* [`21b9271`](https://github.com/npm/npm/commit/21b927182514a0ff6d9f34480bfc39f72e3e9f8c)
+  [#10063](https://github.com/npm/npm/issues/10063)
+  Restore test that verifies that we don't re-order arrays in a module's
+  `package.json` on install.
+  ([@substack](https://github.com/substack))
+
+#### DOCUMENTATION FIXES
+
+* [`c67521d`](https://github.com/npm/npm/commit/c67521dc6c1e41d39d02c74105e41442851d23bb)
+  [#11348](https://github.com/npm/npm/pull/11348)
+  Improve the documentation around which files are ALWAYS included in published packages
+  and which are ALWAYS excluded.
+  ([@jscissr](https://github.com/jscissr))
+* [`7ef6793`](https://github.com/npm/npm/commit/7ef6793cd191cc8d88340f7e1ce9c9e3d6f0b2f4)
+  [#11348](https://github.com/npm/npm/pull/11348)
+  The release date on the 3.7.0 changelog entry was wrong.  I honestly don't
+  know how I keep doing this. =D
+  ([@rafek](https://github.com/rafek))
+
+#### DEPENDENCY UPDATES
+
+* [`8a3c80c`](https://github.com/npm/npm/commit/8a3c80c4fd3d82fe937f30bc7cbd3dee51a8a893)
+  `graceful-fs@4.1.3`:
+  Fix a bug where close wasn't getting made graceful.
+  ([@isaacs](https://github.com/isaacs))
+
+`lodash` saw updates across most of its modules this week with browser
+campatibility fixes that don't really impact us.
+
+* [`2df342b`](https://github.com/npm/npm/commit/2df342bf30efa99b98016acc8a5dc03e00b58b9c)
+  `lodash.without@4.0.2`
+  ([@jdalton](https://github.com/jdalton))
+* [`86aa91d`](https://github.com/npm/npm/commit/86aa91dce60f6b6a92bb3ba2bf6e6be1f6afc750)
+  `lodash.uniq@4.0.2`
+  ([@jdalton](https://github.com/jdalton))
+* [`0a94bf6`](https://github.com/npm/npm/commit/0a94bf6af0ebd38d080f92257e0cd9bae40b31ff)
+  `lodash.union@4.0.2`
+  ([@jdalton](https://github.com/jdalton))
+* [`b4c9582`](https://github.com/npm/npm/commit/b4c9582b4ef5991f3d155e0c6142ed1c631860af)
+  `lodash.isarguments@3.0.6`
+  ([@jdalton](https://github.com/jdalton))
+* [`efe766c`](https://github.com/npm/npm/commit/efe766c63c0948a4ae4c0d12f2b834629ab86e92)
+  `lodash.keys@4.0.2`: Minor code cleanup and the above.
+  ([@jdalton](https://github.com/jdalton))
+* [`36abb24`](https://github.com/npm/npm/commit/36abb24ef31017adbf325e7f833d5d4b0f03f5d4)
+  `lodash.clonedeep@4.0.4`:
+  Add support for cloning prototype objects and the above.
+  ([@jdalton](https://github.com/jdalton))
+
 ### v3.7.1 (2016-02-01):
 
 Super quick Monday patch on last week's release.
