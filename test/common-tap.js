@@ -48,8 +48,7 @@ exports.npm = function (cmd, opts, cb) {
 
   var stdout = ''
   var stderr = ''
-  var node = process.execPath
-  var child = spawn(node, cmd, opts)
+  var child = spawn(nodeBin, cmd, opts)
 
   if (child.stderr) {
     child.stderr.on('data', function (chunk) {
@@ -97,6 +96,26 @@ exports.makeGitRepo = function (params, cb) {
   chain(commands, cb)
 }
 
-var isWindows = exports.isWindows = process.platform === 'win32'
-// Differentiate cmd/powershell from gitbash (mintty & mingw)
-exports.isWindowsShell = isWindows && process.env.TERM !== 'xterm'
+exports.readBinLink = function (path) {
+  if (isWindows) {
+    return readCmdShim.sync(path)
+  } else {
+    return fs.readlinkSync(path)
+  }
+}
+
+exports.skipIfWindows = function (why) {
+  if (!isWindows) return
+  console.log('1..1')
+  if (!why) why = 'this test not available on windows'
+  console.log('ok 1 # skip ' + why)
+  process.exit(0)
+}
+
+exports.pendIfWindows = function (why) {
+  if (!isWindows) return
+  console.log('1..1')
+  if (!why) why = 'this test is pending further changes on windows'
+  console.log('not ok 1 # todo ' + why)
+  process.exit(0)
+}
