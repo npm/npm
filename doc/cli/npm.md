@@ -127,9 +127,10 @@ Patches welcome!
 Contributors are listed in npm's `package.json` file.  You can view them
 easily by doing `npm view npm contributors`.
 
-If you would like to contribute, but don't know what to work on, check
-the issues list.
+If you would like to contribute, but don't know what to work on, read
+the contributing guidelines and check the issues list.
 
+* https://github.com/npm/npm/wiki/Contributing-Guidelines
 * <https://github.com/npm/npm/issues>
 
 ## BUGS
