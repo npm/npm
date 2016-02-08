@@ -36,7 +36,7 @@ on dependencies, `dep1` (`dep2`, .. etc.).  The published versions of `dep1` are
 ```
 {
   "dist-tags": { "latest": "1.2.2" },
-  "versions": {
+  "versions": [
     "1.2.2",
     "1.2.1",
     "1.2.0",
@@ -46,7 +46,7 @@ on dependencies, `dep1` (`dep2`, .. etc.).  The published versions of `dep1` are
     "0.4.1",
     "0.4.0",
     "0.2.0"
-  }
+  ]
 }
 ```
 
