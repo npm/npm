@@ -1,3 +1,51 @@
+### v3.7.3 (2016-02-11):
+
+Hey all! We've got a pretty small release this week -- just documentation
+updates and a couple of dependencies. This release also includes a particular
+dependency upgrade that makes it so we're exclusively using the latest version
+of `graceful-fs`, which'll make it so things keep working with future Node.js
+releases.
+
+A certain internal Node.js API was deprecated and slated for future removal from
+Node Core. This API was critical for versions of `graceful-fs@<4`, before a
+different approach was used to achieve similar ends. By upgrading this library,
+and making sure all our dependencies are also updated, we've ensured npm will
+continue to work once the API is finally removed. Older versions of npm, on the
+other hand, will simply not work on future versions of Node.js.
+
+#### DEPENDENCY UPGRADES
+
+* [`29536f4`](https://github.com/npm/npm/commit/29536f42da6c06091c9acbc8952f72daa8a9412c)
+  `cmd-shim@2.0.2`:
+  Final straggler using `graceful-fs@<4`.
+  ([@ForbesLindesay](https://github.com/ForbesLindesay))
+* [`5f59e74`](https://github.com/npm/npm/commit/5f59e748ef4c066756bb204a452cecd0543c7a2f)
+  `lodash.uniq@4.1.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`987cabe`](https://github.com/npm/npm/commit/987cabe8a18abcb5a685685958bf74c7258a979c)
+  `lodash.union@4.1.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`5c641f0`](https://github.com/npm/npm/commit/5c641f05fdc153c6bb06a89c46fe2a345ce413db)
+  `lodash.clonedeep@4.1.0`
+  ([@jdalton](https://github.com/jdalton))
+
+#### EVERYONE GETTING SOCKS LIKE IT'S OPRAH'S SHOW
+
+* [`9ea5658`](https://github.com/npm/npm/commit/9ea56582ca4d0991dbed44f992c88f08a643cb4b)
+  [#11410](https://github.com/npm/npm/pull/11410)
+  Fixed a small spelling error in `npm-config.md`.
+  ([@pra85](https://github.com/pra85))
+* [`2a11e56`](https://github.com/npm/npm/commit/2a11e562a14bce18b6ddca6c20d17f97b6a8ec2f)
+  [#11403](https://github.com/npm/npm/pull/11403)
+  Removes `--depth Infinity` warning from documentation -- this operation should
+  actually be totally safe as of `npm@3`. (The warning remains for `npm@2`.)
+  ([@Aourin](https://github.com/Aourin))
+* [`42a4727`](https://github.com/npm/npm/commit/42a4727bfb1e21c890b8e2babda55e06ac2bda29)
+  [#11391](https://github.com/npm/npm/pull/11391)
+  Fixed versions of `shrinkwrap.json` in examples in documentation for `npm
+  shrinkwrap`, which did not quite match up.
+  ([@xcatliu](https://github.com/xcatliu))
+
 ### v3.7.2 (2016-02-04):
 
 This week, the CLI team has been busy working on rewriting tests to support
@@ -269,7 +317,7 @@ more, and so they needed their own copies.
 This went undetected because the actions necessary to run the tests (which
 check for this sort of thing) resolved the missing modules.
 
-Further, it didn't have symptoms when upgrading from _most_ versions of npm. 
+Further, it didn't have symptoms when upgrading from _most_ versions of npm.
 Unfortunately, some versions had bugs that were tickled by this and resulted
 in broken upgrades, most notably, `npm@3.3.12`, the version that's been in
 Node.js 5.
