@@ -92,6 +92,7 @@ test('toplevel-only and blanket ignores', function (t) {
   )
   withFixture(t, fixture, function (done) {
     t.notOk(fileExists('shallow2'), '/ file excluded')
+    t.notOk(fileExists('shallow1'), './ file excluded')
     t.ok(fileExists('sub/shallow1'), 'nested ./ file included')
     t.ok(fileExists('sub/shallow2'), 'nested / file included')
     t.ok(fileExists('sub/sub/onelevel'), 'double-nested file included')
@@ -99,8 +100,6 @@ test('toplevel-only and blanket ignores', function (t) {
     t.notOk(fileExists('deep'), 'deep file excluded')
     t.notOk(fileExists('sub/deep'), 'nested deep file excluded')
     t.notOk(fileExists('sub/sub/deep'), 'double-nested deep file excluded')
-    // This one should change. ./ should be valid syntax
-    t.ok(fileExists('shallow1'), './ file included')
     done()
   })
 })
@@ -179,6 +178,7 @@ test('.gitignore should have identical semantics', function (t) {
   )
   withFixture(t, fixture, function (done) {
     t.notOk(fileExists('shallow2'), '/ file excluded')
+    t.notOk(fileExists('shallow1'), './ file excluded')
     t.ok(fileExists('sub/shallow1'), 'nested ./ file included')
     t.ok(fileExists('sub/shallow2'), 'nested / file included')
     t.ok(fileExists('sub/sub/onelevel'), 'double-nested file included')
@@ -186,8 +186,6 @@ test('.gitignore should have identical semantics', function (t) {
     t.notOk(fileExists('deep'), 'deep file excluded')
     t.notOk(fileExists('sub/deep'), 'nested deep file excluded')
     t.notOk(fileExists('sub/sub/deep'), 'double-nested deep file excluded')
-    // This one should change. ./ should be valid syntax
-    t.ok(fileExists('shallow1'), './ file included')
     done()
   })
 })
