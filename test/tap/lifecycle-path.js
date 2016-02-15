@@ -44,7 +44,7 @@ test('setup', function (t) {
 })
 
 test('make sure the path is correct', function (t) {
-  common.npm(['run-script', 'path'], {
+  common.npm(['run-script', 'path', '--shell', 'sh'], {
     cwd: pkg,
     env: {
       PATH: PATH,
