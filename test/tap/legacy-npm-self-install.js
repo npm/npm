@@ -19,7 +19,7 @@ test('setup', function (t) {
 var tarball
 
 test('build-tarball', function (t) {
-  common.npm(['pack'], {cwd: npmpath, stdio: ['ignore', 'pipe', 'inherit']}, function (err, code, stdout) {
+  common.npm(['pack'], {cwd: npmpath, stdio: ['ignore', 'pipe', process.stderr]}, function (err, code, stdout) {
     if (err) throw err
     t.is(code, 0, 'pack went ok')
     tarball = path.resolve(npmpath, stdout.trim().replace(/^(?:.|\n)*(?:^|\n)(.*?[.]tgz)$/, '$1'))
@@ -55,7 +55,7 @@ test('npm-self-install', function (t) {
   PATH.unshift(binpath)
   env.PATH = PATH.join(pathsep)
 
-  var opts = {cwd: basepath, env: env, stdio: ['ignore', 'ignore', 'inherit']}
+  var opts = {cwd: basepath, env: env, stdio: ['ignore', 'ignore', process.stderr]}
 
   common.npm(['install', '--ignore-scripts', tarball], opts, installCheckAndTest)
   function installCheckAndTest (err, code) {
