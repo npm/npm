@@ -195,22 +195,21 @@ test('.gitignore should have identical semantics', function (t) {
 // test('.npmignore should have semantics identical to git\'s .gitignore')
 // test('figure out how .npmignore and files interact with bundledDeps')
 
-// This should be the opposite -- .npmignore should trump files array
-test('.npmignore should always be overridden by files array', function (t) {
+test('.npmignore should always override files array', function (t) {
   var fixture = new Tacks(
     Dir({
       'package.json': File({
         name: 'npm-test-files',
         version: '1.2.5',
         files: [
-          'include',
+          'other',
           'sub'
         ]
       }),
       '.npmignore': File(
-        'include\n' +
+        'other\n' +
         'ignore\n' +
-        'sub/included\n'
+        'sub/other\n'
       ),
       include: File(''),
       ignore: File(''),
@@ -221,8 +220,8 @@ test('.npmignore should always be overridden by files array', function (t) {
   )
   withFixture(t, fixture, function (done) {
     t.notOk(fileExists('ignore'), 'toplevel file excluded')
-    t.ok(fileExists('include'), 'unignored file included')
-    t.ok(fileExists('sub/include'), 'nested file included')
+    t.notOk(fileExists('other'), 'file included in `files` excluded')
+    t.notOk(fileExists('sub/other'), 'nested file excluded')
     done()
   })
 })
