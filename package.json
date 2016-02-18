@@ -58,7 +58,7 @@
     "lockfile": "~1.0.1",
     "lodash._baseuniq": "~4.4.0",
     "lodash.clonedeep": "~4.3.0",
-    "lodash.isarguments": "~3.0.6",
+    "lodash.isarguments": "~3.0.7",
     "lodash.isarray": "~4.0.0",
     "lodash.keys": "~4.0.2",
     "lodash.union": "~4.1.0",
