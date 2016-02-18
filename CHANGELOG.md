@@ -1,3 +1,140 @@
+### v3.7.4 (2016-02-18):
+
+I'm ([@iarna](https://github.com/iarna)) back from vacation in the frozen
+wastes of Maine!  This release sees a couple of bug fixes, some
+documentation updates, a bunch of dependency updates and improvements to our
+test suite.
+
+#### FIXES FOR `update`, FIXES FOR `ls`
+
+* [`53cdb96`](https://github.com/npm/npm/commit/53cdb96634fc329378b4ea4e767ba9987986a76e)
+  [#11362](https://github.com/npm/npm/issues/11362)
+  Make `npm update` stop trying to update linked packages.
+  ([@rhendric](https://github.com/rhendric))
+* [`8d90d25`](https://github.com/npm/npm/commit/8d90d25b3da086843ce43911329c9572bd109078)
+  [#11559](https://github.com/npm/npm/issues/11559)
+  Only list runtime dependencies when doing `npm ls --production`.
+  ([@yibn2008](https://github.com/yibn2008))
+
+#### @wyze, DOCUMENTATION HERO OF THE PEOPLE, GETS THEIR OWN HEADER
+
+* [`b78b301`](https://github.com/npm/npm/commit/b78b30171038ab737eff0b070281277e35af25b4)
+  [#11416](https://github.com/npm/npm/pull/11416)
+  Logout docs were using a section copy-pasted from the adduser docs.
+  ([@wyze](https://github.com/wyze))
+* [`649e28f`](https://github.com/npm/npm/commit/649e28f50aa323e75202eeedb824434535a0a4a0)
+  [#11414](https://github.com/npm/npm/pull/11414)
+  Add colon for consistency.
+  ([@wyze](https://github.com/wyze))
+
+#### WHITTLING AWAY AT PATH LENGTHS
+
+So for all of you who don't know -- Node.js does, in fact, support long Windows
+paths. Unfortunately, depending on the tool and the Windows version, a lot of
+external tooling does not. This means, for example, that some (all?) versions of
+Windows Explorer *can literally never delete npm from their system entirely
+because of deeply-nested npm dependencies*. Which is pretty gnarly.
+
+Incidentally, if you run into that in particularly, you can use
+[rimraf](npm.im/rimraf) to remove such files 💁.
+
+The latest victim of this issue was the Node.js CI setup for testing on Windows,
+which uses some tooling or another that croaks on the usual path length limit
+for that OS: 255 characters.
+
+This isn't ordinarily an issue with `npm@3` as it produces mostly flat
+trees, but you may be surprised to learn that `npm`'s own distribution isn't
+flat, due to needing to be compatible with `npm@1.2`, which ships with
+`node@0.8`!
+
+We've taken another baby step towards alleviating this in this release by
+updating a couple of dependencies that were preventing `npmlog` from deduping,
+and then doing a dedupe on that and `gauge`. Hopefully it helps.
+
+* [`f3c32bc`](https://github.com/npm/npm/commit/f3c32bc3127301741d2fa3a26be6f5f127a35908)
+  [#11528](https://github.com/npm/npm/pull/11528)
+  `node-gyp@3.3.0`:
+  Update to a more recent version that uses a version of npmlog compatible
+  with npm itself.  Also adds: AIX support, new `gyp`, `--cafile` command
+  line option, and allows configuration of Node.js and io.js mirrors.
+  ([@rvagg](https://github.com/rvagg))
+
+#### INTERNAL TEST IMPROVEMENTS
+
+The `npm` core team's time recently has been sunk into `npm`'s many years of
+tech debt. Specifically, we've been working on improving the test suite. 
+This isn't user visible, but in future should mean a more stable, easier to
+contribute to `npm`. Ordinarily we don't report these kinds of changes in
+the change log, but I thought I might share this week as this chunk is
+bigger than usual.
+
+* [`07f020a`](https://github.com/npm/npm/commit/07f020a09e94ae393c67526985444e128ef6f83c)
+  [#11292](https://github.com/npm/npm/pull/11292)
+  `tacks@1.0.9`:
+  Add a package that provides a tool to generate fixtures from folders and, relatedly,
+  a module that an create and tear down filesystem fixtures easily.
+  ([@iarna](https://github.com/iarna))
+* [`0837346`](https://github.com/npm/npm/commit/083734631f9b11b17c08bca8ba8cb736a7b1e3fb)
+  [#11292](https://github.com/npm/npm/pull/11292)
+  Remove all the relatively cryptic legacy tests and creates new tap tests
+  that check the same functionality.  The *legacy* tests were tests that
+  were originally a shell script that was ported to javascript early in
+  `npm`'s history.
+  ([@iarna](https://github.com/iarna))
+  ([@zkat](https://github.com/zkat))
+* [`5a701e7`](https://github.com/npm/npm/commit/5a701e71a0130787fb98450f9de92117b4ef88e1)
+  [#11292](https://github.com/npm/npm/pull/11292)
+  Test that we don't leak auth info into the environment.
+  ([@zkat](https://github.com/zkat))
+* [`502d7d0`](https://github.com/npm/npm/commit/502d7d0628f08b09d8d13538ebccc63de8b3edf5)
+  [#11292](https://github.com/npm/npm/pull/11292)
+  Test that env vars properly passed into scripts.
+  ([@zkat](https://github.com/zkat))
+* [`420f267`](https://github.com/npm/npm/commit/420f2672ee8c909f18bee10b1fc7d4ad91cf328b)
+  [#11292](https://github.com/npm/npm/pull/11292)
+  Test that npm's distribution binary is complete and can be installed and used.
+  ([@iarna](https://github.com/iarna))
+* [`b7e99be`](https://github.com/npm/npm/commit/b7e99be1b1086f2d6098c653c1e20791269c9177)
+  [#11292](https://github.com/npm/npm/pull/11292)
+  Test that the `package.json` `files` section and `.npmignore` do what
+  they're supposed to.
+  ([@zkat](https://github.com/zkat))
+
+#### DEPENDENCY UPDATES
+
+* [`4611098`](https://github.com/npm/npm/commit/4611098fd8c65d61a0645deb05bf38c81300ffca)
+  `rimraf@2.5.2`:
+  Use `glob@7.0.0`.
+  ([@isaacs](https://github.com/isaacs))
+* [`41b2772`](https://github.com/npm/npm/commit/41b2772cb83627f3b5b926cf81e150e7148cb124)
+  `glob@7.0.0`:
+  Raise error if `options.cwd` is specified, and not a directory.
+  ([@isaacs](https://github.com/isaacs))
+* [`c14e74a`](https://github.com/npm/npm/commit/c14e74ab5d17c764f3aa37123a9632fa965f8760)
+  `gauge@1.2.7`: Update to newer lodash versions, for a smaller tree.
+  ([@iarna](https://github.com/iarna))
+* [`d629363`](https://github.com/npm/npm/commit/d6293630ddc25bfa26d19b6be4fd2685976d7358)
+  `lodash.without@4.1.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`3ea4c80`](https://github.com/npm/npm/commit/3ea4c8049ca8df9f64426b1db8a29b9579950134)
+  `lodash.uniq@4.2.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`8ddcc8d`](https://github.com/npm/npm/commit/8ddcc8deb554660a3f7f474fae9758c967d94552)
+  `lodash.union@4.2.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`2b656a6`](https://github.com/npm/npm/commit/2b656a672d351f32ee2af24dcee528356dcd64f4)
+  `lodash.keys@4.0.3`
+  ([@jdalton](https://github.com/jdalton))
+* [`ac171f8`](https://github.com/npm/npm/commit/ac171f8f0318a7dd3c515f3b83502dfa9e87adb8)
+  `lodash.isarguments@3.0.7`
+  ([@jdalton](https://github.com/jdalton))
+* [`bcccd90`](https://github.com/npm/npm/commit/bcccd9057b75d800c799ab15f00924f700415d3e)
+  `lodash.clonedeep@4.3.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`8165bca`](https://github.com/npm/npm/commit/8165bca537d86305a3d08f080f86223a26615aa8)
+  `lodash._baseuniq@4.4.0`
+  ([@jdalton](https://github.com/jdalton))
+
 ### v3.7.3 (2016-02-11):
 
 Hey all! We've got a pretty small release this week -- just documentation
