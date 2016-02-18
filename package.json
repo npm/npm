@@ -60,7 +60,7 @@
     "lodash.clonedeep": "~4.3.0",
     "lodash.isarguments": "~3.0.7",
     "lodash.isarray": "~4.0.0",
-    "lodash.keys": "~4.0.2",
+    "lodash.keys": "~4.0.3",
     "lodash.union": "~4.1.0",
     "lodash.uniq": "~4.1.0",
     "lodash.without": "~4.0.2",
