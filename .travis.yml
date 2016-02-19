@@ -6,6 +6,9 @@ node_js:
   - "0.12"
   - "0.10"
   - "0.8"
+cache:
+  directories:
+  - test/npm_cache
 env:
   - DEPLOY_VERSION=testing
 before_install:
