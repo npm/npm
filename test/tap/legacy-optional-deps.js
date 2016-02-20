@@ -54,9 +54,10 @@ test('optional-deps', function (t) {
     if (stderr) console.error(stderr)
     server.done()
     t.is(code, 0, 'install went ok')
-    var dir = fs.readdirSync(modulepath).sort()
-    t.isDeeply(dir, ['mkdirp', 'npm-test-optional-deps'], 'only one optional dep should be there')
-    t.is(require(path.resolve(modulepath, 'mkdirp', 'package.json')).version, '0.3.5', 'mkdirp version right')
+    var subpath = modulepath + '/npm-test-optional-deps/node_modules/'
+    var dir = fs.readdirSync(subpath)
+    t.isDeeply(dir, ['mkdirp'], 'only one optional dep should be there')
+    t.is(require(path.resolve(subpath, 'mkdirp', 'package.json')).version, '0.3.5', 'mkdirp version right')
     t.done()
   }
 })
