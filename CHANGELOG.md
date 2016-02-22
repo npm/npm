@@ -1,3 +1,20 @@
+### v3.7.5 (2016-02-22):
+
+A quick fixup release because when I updated glob, I missed the subdep copies of itself
+that it installed deeper in the tree. =/
+
+This only effected people trying to update to `3.7.4` from `npm@2` or `npm@1`. Updates from
+`npm@3` worked fine (as it fixes up the missing subdeps during installation).
+
+#### OH MY GLOB
+
+* [`63fa704`](https://github.com/npm/npm/commit/63fa7044569127e6e29510dc499a865189806076)
+  [#11633](https://github.com/npm/npm/issues/11633)
+  When updating the top level `npm` to `glob@7`, the subdeps that
+  still depended on `glob@6` got new versions installed but they
+  weren't added to the commit. This adds them back in.
+  ([@iarna](https://github.com/iarna))
+
 ### v3.7.4 (2016-02-18):
 
 I'm ([@iarna](https://github.com/iarna)) back from vacation in the frozen
