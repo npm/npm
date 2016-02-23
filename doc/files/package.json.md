@@ -327,6 +327,11 @@ maybe, someday.
 
 Put example scripts in here.  Someday, it might be exposed in some clever way.
 
+### directories.test
+
+Put your tests in here. It is currently not exposed, but it might be in the
+future.
+
 ## repository
 
 Specify the place where your code lives. This is helpful for people who
