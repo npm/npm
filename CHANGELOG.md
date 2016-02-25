@@ -1,3 +1,82 @@
+### v3.8.0 (2016-02-25):
+
+This week brings a quality of life improvement for some windows users, and
+an important knob to be tuned for folks experiencing network problems.
+
+#### LIMIT CONCURRENT REQUESTS
+
+We've long known that `npm`'s tendency to try to request all your
+dependencies simultaneously upset some network hardware (particular,
+consumer grade routers & proxies of all sorts). One of the reasons that we're
+planning to write our own npm specific version of `request` is to be able to
+more easily control this sort of thing.
+
+But fortunately, you don't have to wait for that.
+[@misterbyrne](https://github.com/misterbyrne) took a look at our existing
+code and realized it could be added painlessly TODAY.  The new default
+maximum is `50`, instead of `Infinity`.  If you're having network issues you
+can try setting that value down to something lower (if you do, please let us
+know...  the default is subject to tuning).
+
+* [`910f9ac`](https://github.com/npm/npm/commit/910f9accf398466b8497952bee9f566ab50ade8c)
+  [`f7be667`](https://github.com/npm/npm/commit/f7be667548a132ec190ac9d60a31885a7b4fe2b3)
+  Add a new config option, `maxsockets` and `npm-registry-client@7.1.0` to
+  take advantage of it.
+  ([@misterbyrne](https://github.com/misterbyrne))
+
+#### WINDOWS GIT BASH
+
+We think it's pretty keen too, we were making it really hard to actually
+upgrade if you were using it. NO MORE!
+
+* [`d60351c`](https://github.com/npm/npm/commit/d60351ccae87d71a5f5eac73e3085c6290b52a69)
+  [#11524](https://github.com/npm/npm/issues/11524)
+  Prefer locally installed npm in Git Bash -- previous behavior was to use
+  the global one.  This was done previously for other shells, but not for Git
+  Bash.
+  ([@destroyerofbuilds](https://github.com/destroyerofbuilds))
+
+#### DOCUMENTATION IMPROVEMENTS
+
+* [`b63de3c`](https://github.com/npm/npm/commit/b63de3c97c4c27078944249a4d5bbe1c502c23bc)
+  [#11636](https://github.com/npm/npm/issues/11636)
+  Document `--save-bundle` option in main install page.
+  ([@datyayu](https://github.com/datyayu))
+* [`3d26453`](https://github.com/npm/npm/commit/3d264532d6d9df60420e985334aebb53c668d32b)
+  [#11644](https://github.com/npm/npm/pull/11644)
+  Add `directories.test` to the `package.json` documentation.
+  ([@lewiscowper](https://github.com/lewiscowper))
+* [`b64d124`](https://github.com/npm/npm/commit/b64d12432fdad344199b678d700306340d3607eb)
+  [#11441](https://github.com/npm/npm/pull/11441)
+  Add a link in documentation to the contribution guidelines.
+  ([@watilde](https://github.com/watilde))
+* [`82fc548`](https://github.com/npm/npm/commit/82fc548b0e2abbdc4f7968c20b118c30cca79a24)
+  [#11441](https://github.com/npm/npm/pull/11441/commits)
+  Remove mentions of the long defunct Google group.
+  ([@watilde](https://github.com/watilde))
+* [`c6ad091`](https://github.com/npm/npm/commit/c6ad09131af2e2766d6034257a8fcaa294184121)
+  [#11474](https://github.com/npm/npm/pull/11474)
+  Correct invalid JSON in npm-update docs.
+  ([@robludwig](https://github.com/robludwig))
+* [`4906c90`](https://github.com/npm/npm/commit/4906c90ed2668adf59ebee759c7ebb811aa46e57)
+  Expand on the documentation for `bundlededDependencies`, explaining what they are
+  and when you might want to use them.
+  ([@gnerkus](https://github.com/gnerkus))
+
+#### DEPENDENCY UPDATES
+
+* [`93cdc25`](https://github.com/npm/npm/commit/93cdc25432b71cbc9c25c54ae316770e18f4b01e)
+  `strip-ansi@3.0.1`:
+  Non-user visible tests & maintainer doc updates.
+  ([@jbnicolai](https://github.com/jbnicolai))
+* [`3b2ccef`](https://github.com/npm/npm/commit/3b2ccef30dc2038b99ba93cd1404a1d01dac8790)
+  `lodash.keys@4.0.4`
+  ([@jdalton](https://github.com/jdalton))
+* [`30e9eb9`](https://github.com/npm/npm/commit/30e9eb97397a8f85081d328ea9aa54c2a7852613)
+  `lodash._baseuniq@4.5.0`
+  ([@jdalton](https://github.com/jdalton))
+
+
 ### v3.7.5 (2016-02-22):
 
 A quick fixup release because when I updated glob, I missed the subdep copies of itself
