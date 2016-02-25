@@ -1,3 +1,68 @@
+### v3.7.6 (2016-02-25):
+
+* [`b64d124`](https://github.com/npm/npm/commit/b64d12432fdad344199b678d700306340d3607eb)
+  [#11441](https://github.com/npm/npm/pull/11441)
+  add the contributing guidelines link
+  ([@watilde](https://github.com/watilde))
+* [`82fc548`](https://github.com/npm/npm/commit/82fc548b0e2abbdc4f7968c20b118c30cca79a24)
+  [#11441](https://github.com/npm/npm/pull/11441/commits)
+  remove google usergroup
+  ([@watilde](https://github.com/watilde))
+* [`c6ad091`](https://github.com/npm/npm/commit/c6ad09131af2e2766d6034257a8fcaa294184121)
+  [#11474](https://github.com/npm/npm/pull/11474)
+  Correct invalid JSON in npm-update docs
+  ([@robludwig](https://github.com/robludwig))
+* [`4906c90`](https://github.com/npm/npm/commit/4906c90ed2668adf59ebee759c7ebb811aa46e57)
+  update documentation for bundledDependencies
+  ([@gnerkus](https://github.com/gnerkus))
+* [`910f9ac`](https://github.com/npm/npm/commit/910f9accf398466b8497952bee9f566ab50ade8c)
+  [#11666](https://github.com/npm/npm/pull/11666)
+  `npm-registry-client@7.1.0`
+  ([@misterbyrne](https://github.com/misterbyrne))
+* [`f7be667`](https://github.com/npm/npm/commit/f7be667548a132ec190ac9d60a31885a7b4fe2b3)
+  [#11666](https://github.com/npm/npm/pull/11666)
+  Add maxsockets config setting for registry client
+  ([@misterbyrne](https://github.com/misterbyrne))
+* [`3d26453`](https://github.com/npm/npm/commit/3d264532d6d9df60420e985334aebb53c668d32b)
+  [#11644](https://github.com/npm/npm/pull/11644)
+  Add directories.test doc
+  ([@lewiscowper](https://github.com/lewiscowper))
+* [`d60351c`](https://github.com/npm/npm/commit/d60351ccae87d71a5f5eac73e3085c6290b52a69)
+  [#11524](https://github.com/npm/npm/issues/11524)
+  Prefer locally installed npm in Git Bash.
+  Existing behavior invoking npm within a Git Bash session is to prefer
+  the globally installed instance of `npm`; the instance of npm installed
+  alongside Node when using the Node installer.
+  The cmd script, and the shell script, have been modified in the past to
+  pull a `prefix` setting from the global `npmrc` file, and invoke the
+  `npm` instance located at the `prefix` location. Because the value of
+  `prefix` is the user's AppData directory where npm installs new copies
+  of itself, the user gets the latest installed npm.
+  However, the setup was not extended to support Git Bash. Therefore Git
+  Bash users still get the version of npm installed beside Node.
+  Add support for using the same prefix for invoking the user installed
+  npm in Git Bash sessions.
+  ([@destroyerofbuilds](https://github.com/destroyerofbuilds))
+* [`b63de3c`](https://github.com/npm/npm/commit/b63de3c97c4c27078944249a4d5bbe1c502c23bc)
+  [#11645](https://github.com/npm/npm/pull/11645)
+  Document `--save-bundle` option in main install page.
+  Fixes #11636.
+  ([@datyayu](https://github.com/datyayu))
+
+#### DEPENDENCY UPDATES
+
+* [`93cdc25`](https://github.com/npm/npm/commit/93cdc25432b71cbc9c25c54ae316770e18f4b01e)
+  `strip-ansi@3.0.1`:
+  Non-user visible tests & maintainer doc updates.
+  ([@jbnicolai](https://github.com/jbnicolai))
+* [`3b2ccef`](https://github.com/npm/npm/commit/3b2ccef30dc2038b99ba93cd1404a1d01dac8790)
+  `lodash.keys@4.0.4`
+  ([@jdalton](https://github.com/jdalton))
+* [`30e9eb9`](https://github.com/npm/npm/commit/30e9eb97397a8f85081d328ea9aa54c2a7852613)
+  `lodash._baseuniq@4.5.0`
+  ([@jdalton](https://github.com/jdalton))
+
+
 ### v3.7.5 (2016-02-22):
 
 A quick fixup release because when I updated glob, I missed the subdep copies of itself
