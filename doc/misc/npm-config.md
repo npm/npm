@@ -977,6 +977,14 @@ The program to use to view help content.
 
 Set to `"browser"` to view html help content in the default web browser.
 
+### with-sizes
+
+* Default: false
+* Type: Boolean
+
+Prints the size ( in a human readable format ) when installing a package.
+For formats, see [`pretty-bytes`](https://www.npmjs.com/package/pretty-bytes)
+
 ## SEE ALSO
 
 * npm-config(1)
