@@ -74,8 +74,8 @@ test('installing dependencies that have conflicting peerDependencies', function 
         } else {
           t.equal(err.code, "EPEERINVALID")
           t.equal(err.packageName, "underscore")
-          t.equal(err.packageVersion, "1.3.3")
-          t.equal(err.message, "The package underscore@1.3.3 does not satisfy its siblings' peerDependencies requirements!")
+          t.match(err.packageVersion, /^1\.3\.[13]$/)
+          t.match(err.message, /^The package underscore@1\.3\.[13] does not satisfy its siblings' peerDependencies requirements!$/)
         }
         s.close() // shutdown mock registry.
         t.end()
