@@ -1,5 +1,5 @@
-var cat = require('graceful-fs').writeFileSync
-var exec = require('child_process').exec
+var writeFileSync = require('graceful-fs').writeFileSync
+var child_process = require('child_process')
 var readdir = require('graceful-fs').readdirSync
 var resolve = require('path').resolve
 
@@ -37,6 +37,11 @@ var fixture = {
   'main': 'a.js'
 }
 
+function exec (todo, cb) {
+  console.log('    # EXEC:', todo)
+  child_process.exec(todo, cb)
+}
+
 test('setup', function (t) {
   setup(function (er) {
     t.ifError(er, 'setup ran OK')
@@ -50,7 +55,10 @@ test('npm pack directly from directory', function (t) {
 })
 
 test('npm pack via git', function (t) {
-  packInstallTest('git+file://' + dep, t)
+  var urlPath = dep
+    .replace(/\\/g, '/') // fixup slashes for Windows
+    .replace(/^\/+/, '') // remove any leading slashes
+  packInstallTest('git+file:///' + urlPath, t)
 })
 
 test('cleanup', function (t) {
@@ -60,6 +68,7 @@ test('cleanup', function (t) {
 })
 
 function packInstallTest (spec, t) {
+  console.log('    # pack', spec)
   common.npm(
     [
       '--loglevel', 'silent',
@@ -67,10 +76,10 @@ function packInstallTest (spec, t) {
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
-      t.ifError(err, 'npm pack ran without error')
-      t.notOk(code, 'npm pack exited cleanly')
-      t.notOk(stderr, 'npm pack ran silently')
-      t.equal(stdout.trim(), packname, 'got expected package name')
+      if (err) throw err
+      t.is(code, 0, 'npm pack exited cleanly')
+      t.is(stderr, '', 'npm pack ran silently')
+      t.is(stdout.trim(), packname, 'got expected package name')
 
       common.npm(
         [
@@ -79,12 +88,12 @@ function packInstallTest (spec, t) {
         ],
         EXEC_OPTS,
         function (err, code, stdout, stderr) {
-          t.ifError(err, 'npm install ran without error')
-          t.notOk(code, 'npm install exited cleanly')
-          t.notOk(stderr, 'npm install ran silently')
+          if (err) throw err
+          t.is(code, 0, 'npm install exited cleanly')
+          t.is(stderr, '', 'npm install ran silently')
 
           var actual = readdir(installed).sort()
-          t.same(actual, expected, 'no unexpected files in packed directory')
+          t.isDeeply(actual, expected, 'no unexpected files in packed directory')
 
           rimraf(packed, function () {
             t.end()
@@ -108,11 +117,11 @@ function setup (cb) {
 
   process.chdir(dep)
 
-  cat(resolve(dep, '.npmignore'), npmignore)
-  cat(resolve(dep, '.gitignore'), gitignore)
-  cat(resolve(dep, 'a.js'), a)
-  cat(resolve(dep, 't.js'), t)
-  cat(resolve(dep, 'package.json'), JSON.stringify(fixture))
+  writeFileSync(resolve(dep, '.npmignore'), npmignore)
+  writeFileSync(resolve(dep, '.gitignore'), gitignore)
+  writeFileSync(resolve(dep, 'a.js'), a)
+  writeFileSync(resolve(dep, 't.js'), t)
+  writeFileSync(resolve(dep, 'package.json'), JSON.stringify(fixture))
 
   common.npm(
     [
@@ -145,6 +154,13 @@ function setup (cb) {
         }
 
         function email (er, _, stderr) {
+          if (er) return cb(er)
+          if (stderr) return cb(new Error('git config error: ' + stderr))
+
+          exec(git + ' config core.autocrlf input', autocrlf)
+        }
+
+        function autocrlf (er, _, stderr) {
           if (er) return cb(er)
           if (stderr) return cb(new Error('git config error: ' + stderr))
 
