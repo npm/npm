@@ -141,6 +141,7 @@
     "lodash._cacheindexof",
     "lodash._createcache",
     "lodash._getnative",
+    "lodash.assign",
     "lodash.clonedeep",
     "lodash.isarray",
     "lodash.keys",
