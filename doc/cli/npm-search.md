@@ -5,7 +5,7 @@ npm-search(1) -- Search for packages
 
     npm search [-l|--long] [search terms ...]
 
-    aliases: s, se
+    aliases: s, se, find
 
 ## DESCRIPTION
 
