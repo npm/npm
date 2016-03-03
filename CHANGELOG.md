@@ -1,3 +1,36 @@
+### v2.14.22 (2016-03-03):
+
+This week is all documentation improvements. In case you hadn't noticed, we
+*love* doc patches. We love them so much, we give socks away if you submit
+documentation PRs!
+
+These folks are all getting socks if they ask for them. The socks are
+super-sweet. Do you have yours yet? 👣
+
+* [`3f3c7d0`](https://github.com/npm/npm/commit/3f3c7d080f052a5db91ff6091f8b1b13f26b53d6)
+  [#11441](https://github.com/npm/npm/pull/11441)
+  Add a link to the [Contribution
+  Guidelines](https://github.com/npm/npm/wiki/Contributing-Guidelines) to the
+  main npm docs.
+  ([@watilde](https://github.com/watilde))
+* [`9f87bb1`](https://github.com/npm/npm/commit/9f87bb1934acb33b678c17b7827165b17c071a82)
+  [#11441](https://github.com/npm/npm/pull/11441)
+  Remove Google Group email from npm docs about contributing.
+  ([@watilde](https://github.com/watilde))
+* [`93eaab3`](https://github.com/npm/npm/commit/93eaab3ee5ad16c7d90d1a4b38a95403fcf3f0f6)
+  [#11474](https://github.com/npm/npm/pull/11474)
+  Fix an invalid JSON error overlooked in
+  [#11196](https://github.com/npm/npm/pull/11196).
+  ([@robludwig](https://github.com/robludwig))
+* [`a407ca2`](https://github.com/npm/npm/commit/a407ca2bcf6a05117e55cf2ab69376e09094995e)
+  [#11483](https://github.com/npm/npm/pull/11483)
+  Add more details and an example to the documentation for bundledDependencies.
+  ([@gnerkus](https://github.com/gnerkus))
+* [`2c851a2`](https://github.com/npm/npm/commit/2c851a231afd874baa77c42ea5ba539c454ac79c)
+  [#11490](https://github.com/npm/npm/pull/11490)
+  Document the `--registry` flag for `npm search`.
+  ([@plumlee](https://github.com/plumlee))
+
 ### v2.14.21 (2016-02-25):
 
 Good news, everyone! There's a new LTS release with a few shinies here and there!
