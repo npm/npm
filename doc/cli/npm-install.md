@@ -47,7 +47,7 @@ after packing it up into a tarball (b).
 
     By default, `npm install` will install all modules listed as dependencies
     in `package.json(5)`.
-    
+
     With the `--production` flag (or when the `NODE_ENV` environment variable
     is set to `production`), npm will not install modules listed in
     `devDependencies`.
@@ -124,7 +124,7 @@ after packing it up into a tarball (b).
           npm install node-tap --save-dev
           npm install dtrace-provider --save-optional
           npm install readable-stream --save --save-exact
-          npm install ansi-regex --save --save-bundle 
+          npm install ansi-regex --save --save-bundle
 
 
     **Note**: If there is a file or folder named `<name>` in the current
