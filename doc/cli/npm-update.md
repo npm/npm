@@ -22,7 +22,7 @@ or local) will be updated.
 
 As of `npm@2.6.1`, the `npm update` will only inspect top-level packages.
 Prior versions of `npm` would also recursively inspect all dependencies.
-To get the old behavior, use `npm --depth Infinity update`.
+To get the old behavior, use `npm --depth 9999 update`.
 
 ## EXAMPLES
 
