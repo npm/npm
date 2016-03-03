@@ -3,9 +3,9 @@ npm-search(1) -- Search for packages
 
 ## SYNOPSIS
 
-    npm search [--long] [search terms ...]
-    npm s [search terms ...]
-    npm se [search terms ...]
+    npm search [-l|--long] [search terms ...]
+
+    aliases: s, se, find
 
 ## DESCRIPTION
 
@@ -32,7 +32,7 @@ fall on multiple lines.
  * Default: https://registry.npmjs.org/
  * Type   : url
 
-Search the specified registry for modules. If you have configured npm to point to a different default registry, 
+Search the specified registry for modules. If you have configured npm to point to a different default registry,
 such as your internal private module repository, `npm search` will default to that registry when searching.
 Pass a different registry url such as the default above in order to override this setting.
 

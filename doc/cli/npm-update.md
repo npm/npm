@@ -5,6 +5,8 @@ npm-update(1) -- Update a package
 
     npm update [-g] [<name> [<name> ...]]
 
+    aliases: up, upgrade
+
 ## DESCRIPTION
 
 This command will update all the packages listed to the latest version

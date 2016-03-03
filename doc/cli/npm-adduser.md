@@ -5,6 +5,8 @@ npm-adduser(1) -- Add a registry user account
 
     npm adduser [--registry=url] [--scope=@orgname] [--always-auth]
 
+    aliases: login, add-user
+
 ## DESCRIPTION
 
 Create or verify a user named `<username>` in the specified registry, and
