@@ -1,6 +1,70 @@
+### v3.8.1 (2016-03-03):
+
+This week the install summary got better, killing your npm process now
+also kills the scripts it was running and a rarely used search flag got
+documented.
+
+Our improvements on the test suite on Windows are beginning to pick up
+steam, you can follow along by
+[watching the PR](https://github.com/npm/npm/pull/11444).
+
+#### BETTER INSTALL SUMMARIES
+
+* [`e40d457`](https://github.com/npm/npm/commit/e40d4572cc98db06757df5b8bb6b7dbd0546d3d7)
+  [#11699](https://github.com/npm/npm/issues/11699)
+  Ensure that flags like `--production` passed to install don't result in
+  the summary at the end being incorrectly filtered. That summary is
+  produced by the same code as `npm ls` and therefore responds to flags
+  the same way it does. This is undesirable when it's an install summary,
+  however, as we don't want it to filter anything.
+
+  This fixes an issue where `npm install --production <module>` would
+  result in npm exiting with an error code. The `--production` flag would
+  make `npm ls` filter out `<module>` as it wasn't saved to the
+  `package.json` and thus wans't a production dependency. The install
+  report is limited to show just the modules installed, so with that
+  filtered out nothing is available. With nothing available `npm ls`
+  would set `npm` to exit with an error code.
+  ([@ixalon](https://github.com/ixalon))
+* [`99337b4`](https://github.com/npm/npm/commit/99337b469163a4b211b9c6ff1aa9712ae0d601d2)
+  [#11600](https://github.com/npm/npm/pull/11600)
+  Make the report of installed modules really only show those modules
+  that were installed. Previously it selected which modules from your
+  tree to display based on `name@version` which worked great when your
+  tree was deduped but would list things it hadn't touched when there
+  were duplicates.
+  ([@iarna](https://github.com/iarna))
+
+#### SCRIPTS BETTER FOLLOW THE LEADER
+
+* [`5454347`](https://github.com/npm/npm/commit/545434766eb3681d3f40b745f9f3187ed63f310a)
+  [#10868](https://github.com/npm/npm/pull/10868)
+  When running a lifecycle script, say through `npm start`, killing npm
+  wouldn't forward that on to the children. It does now.
+  ([@daniel-pedersen](https://github.com/daniel-pedersen))
+
+#### SEARCHING SPECIFIC REGISTRIES
+
+* [`6020447`](https://github.com/npm/npm/commit/60204479f76458a9864aa530cda2b3333f95c2b0)
+  [#11490](https://github.com/npm/npm/pull/11490)
+  Add docs for using the `--registry` flag with search.
+  ([@plumlee](https://github.com/plumlee))
+
+#### LODASH UPDATES
+
+* [`bb14204`](https://github.com/npm/npm/commit/bb14204183dad620a6650452a26cdc64111f8136)
+  `lodash.without@4.1.1`
+  ([@jdalton](https://github.com/jdalton))
+* [`0089059`](https://github.com/npm/npm/commit/0089059c562aee9ad0398e55d2c12c68a6150e79)
+  `lodash.keys@4.0.5`
+  ([@jdalton](https://github.com/jdalton))
+* [`6ee1de4`](https://github.com/npm/npm/commit/6ee1de4474d9683a1f7023067d440780eeb10311)
+  `lodash.clonedeep@4.3.1`
+  ([@jdalton](https://github.com/jdalton))
+
 ### v3.8.0 (2016-02-25):
 
-This week brings a quality of life improvement for some windows users, and
+This week brings a quality of life improvement for some Windows users, and
 an important knob to be tuned for folks experiencing network problems.
 
 #### LIMIT CONCURRENT REQUESTS
@@ -622,7 +686,7 @@ version of Node.js and now suppress those other warnings.
   ([@chrisirhc](https://github.com/chrisirhc))
 * [`00720db`](https://github.com/npm/npm/commit/00720db2c326cf8f968c662444a4575ae8c3020a)
   [#11158](https://github.com/npm/npm/pull/11158)
-  On windows, the `node-gyp` wrapper would fail if your path to `node-gyp`
+  On Windows, the `node-gyp` wrapper would fail if your path to `node-gyp`
   contained spaces. This fixes that problem by quoting use of that path.
   ([@orangemocha](https://github.com/orangemocha))
 * [`69ac933`](https://github.com/npm/npm/commit/69ac9333506752bf2e5af70b3b3e03c6181de3e7)
@@ -753,13 +817,13 @@ particularly with Windows, so there's not too much to call out here.
   `glob@6.0.3`: Remove deprecated features and fix a bunch of bugs.
   ([@isaacs](https://github.com/isaacs))
 * [`5b820c4`](https://github.com/npm/npm/commit/5b820c4e17c907fa8c23771c0cd8e74dd5fdaa51)
-  `has-unicode@2.0.0`: Change the default on windows to be false, as
-  international windows installs often install to non-unicode codepages and
+  `has-unicode@2.0.0`: Change the default on Windows to be false, as
+  international Windows installs often install to non-unicode codepages and
   there's no way to detect this short of a system call or a call to a
   command line program.
   ([@iarna](https://github.com/iarna))
 * [`238fe84`](https://github.com/npm/npm/commit/238fe84ac61297f1d71701d80368afaa40463305)
-  `which@1.2.1`: Fixed bugs with uid/gid checks and with quoted windows PATH
+  `which@1.2.1`: Fixed bugs with uid/gid checks and with quoted Windows PATH
   parts.
   ([@isaacs](https://github.com/isaacs))
 * [`5e510e1`](https://github.com/npm/npm/commit/5e510e13d022a22d58742b126482d3b38a14cc83)
@@ -1857,7 +1921,7 @@ Unix-specific, so on Windows it just threw up its hands and
 stopped removing installed binaries at all. Not great.
 
 So today we're fixing that– it let us maintain the same safety
-that we added in #9198, but ALSO works with windows.
+that we added in #9198, but ALSO works with Windows.
 
 * [`25fbaed`](https://github.com/npm/npm/commit/25fbaed)
   [#9394](https://github.com/npm/npm/issues/9394)
@@ -1886,7 +1950,7 @@ release candidate.
 
 * [`6665e54`](https://github.com/npm/npm/commit/6665e54)
   [#9505](https://github.com/npm/npm/pull/9505)
-  Allow npm link to run on windows with prerelease versions of
+  Allow npm link to run on Windows with prerelease versions of
   node
   ([@jon-hall](https://github.com/jon-hall))
 
@@ -2847,7 +2911,7 @@ nesting.  You'll only see modules nested underneath one another when two (or
 more) modules have conflicting dependencies.
 
 * [#3697](https://github.com/npm/npm/issues/3697)
-  This will hopefully eliminate most cases where windows users ended up
+  This will hopefully eliminate most cases where Windows users ended up
   with paths that were too long for Explorer and other standard tools to
   deal with.
 * [#6912](https://github.com/npm/npm/issues/6912)
