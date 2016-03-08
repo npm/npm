@@ -188,7 +188,7 @@ test('npm view . --json author name version', function (t) {
         author: 'Evan Lucas <evanlucas@me.com>',
         name: 'test-repo-url-https',
         version: '0.0.1'
-      }, null, 2);
+      }, null, 2)
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')
       t.equal(stdout.trim(), expected, 'should print ' + expected)
@@ -214,7 +214,7 @@ test('npm view .@<version> --json author name version', function (t) {
         author: 'Evan Lucas <evanlucas@me.com>',
         name: 'test-repo-url-https',
         version: '0.0.0'
-      }, null, 2);
+      }, null, 2)
       t.ifError(err, 'view command finished successfully')
       t.equal(code, 0, 'exit ok')
       t.equal(stdout.trim(), expected, 'should print ' + expected)
