@@ -12,12 +12,13 @@ npm-link(1) -- Symlink a package folder
 
 Package linking is a two-step process.
 
-First, `npm link` in a package folder will create a globally-installed
-symbolic link from `prefix/package-name` to the current folder (see
-`npm-config(7)` for the value of `prefix`).
+First, `npm link` in a package folder will create a symlink from
+the local `node_modules` folder to the global folder `{prefix}/lib/node_modules/`
+(see `npm-config(7)` for the value of `prefix`).
 
 Next, in some other location, `npm link package-name` will create a
-symlink from the local `node_modules` folder to the global symlink.
+symbolic link from globally-installed `package-name` to `node_modules/`
+of the current folder.
 
 Note that `package-name` is taken from `package.json`,
 not from directory name.
