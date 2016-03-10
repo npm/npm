@@ -1,3 +1,58 @@
+### v2.15.0 (2016-03-10):
+
+#### WHY IS THIS SEMVER-MINOR I THOUGHT THIS WAS LTS
+
+A brief note about LTS this week!
+
+npm, as you may know if you're using this `2.x` branch, has an LTS process for
+releases. We also try and play nice with [Node.js' own LTS release
+process](https://github.com/nodejs/LTS#lts-plan). That means we generally try to
+avoid things like minor version bumps on our `2.x` branch (which is also tagged
+`lts` in the `dist-tag`s).
+
+That said, we had a minor-bump update recently for `npm@3.8.0` which added a
+`maxSockets` option to allow users to configure the number of concurrent sockets
+that npm would keep open at a time -- a setting that has the potential to help a
+bunch for people with fussy routers or internet connections that aren't very
+happy with Node.js applications' usual concurrency storm. This change was done
+to `npm-registry-client`, which we don't have a parallel LTS-tracking branch
+for.
+
+After talking it over, we ended up deciding that this was a reasonable enough
+addition to LTS, even though it's *technically* a `semver-minor` bump, taking
+into account both its potential for bugfixing (specially on `2.x`!) and the
+general hassle it would be to maintain another branch for `npm-registry-client`.
+
+
+* [`6dd61e7`](https://github.com/npm/npm/commit/6dd61e781c145480dc255a3e6a748729868443fd)
+  Expose `maxsockets` config setting from new `npm-registry-client`.
+  ([@misterbyrne](https://github.com/misterbyrne))
+* [`8a021c3`](https://github.com/npm/npm/commit/8a021c35184e665bd1f3f70ae2f478af812ab614)
+  `npm-registry-client@7.1.0`:
+  Adds support for configuring the max number of concurrent sockets, defaulting
+  to `50`.
+  ([@iarna](https://github.com/iarna))
+
+#### DOC PATCH IS HERE TOO
+
+* [`0ae9f74`](https://github.com/npm/npm/commit/0ae9f740001a1bdf5920bc464cf9e284d5d139f0)
+  [#11748](https://github.com/npm/npm/pull/11748)
+  Add command aliases as a separate section in documentation for npm
+  subcommands.
+  ([@watilde](https://github.com/watilde))
+
+#### DEP UPDATES
+
+* [`bfc3888`](https://github.com/npm/npm/commit/bfc38887f832f701c16b7ee410c4e0220a90399f)
+  `strip-ansi@3.0.1`
+  ([@jbnicolai](https://github.com/jbnicolai))
+* [`d5f4d51`](https://github.com/npm/npm/commit/d5f4d51a1b7ea78d7431c7ed4fed30200b2622f8)
+  `node-gyp@3.3.1`: Fixes Android generator
+  ([@bnoordhuis](https://github.com/bnoordhuis))
+* [`4119df8`](https://github.com/npm/npm/commit/4119df8aecd2ae57b0492ad8c9a480d900833008)
+  `glob@7.0.3`: Some path-related fixes for Windows.
+  ([@isaacs](https://github.com/isaacs))
+
 ### v2.14.22 (2016-03-03):
 
 This week is all documentation improvements. In case you hadn't noticed, we
