@@ -1,3 +1,5 @@
+var isWindowsShell = require('../lib/utils/is-windows-shell.js')
+
 // cheesy hackaround for test deps (read: nock) that rely on setImmediate
 if (!global.setImmediate || !require('timers').setImmediate) {
   require('timers').setImmediate = global.setImmediate = function () {
@@ -24,7 +26,20 @@ process.env.random_env_var = 'foo'
 // suppress warnings about using a prerelease version of node
 process.env.npm_config_node_version = process.version.replace(/-.*$/, '')
 
-var bin = exports.bin = require.resolve('../bin/npm-cli.js')
+function quotify (str) {
+  if (!/ /.test(str)) return str
+  return '"' + str + '"'
+}
+function escapify (str) {
+  if (isWindowsShell) {
+    return str.split(/\\/).map(quotify).join('\\')
+  } else {
+    return quotify(str)
+  }
+}
+
+var bin = exports.bin = escapify(require.resolve('../bin/npm-cli.js'))
+
 var chain = require('slide').chain
 var once = require('once')
 
