@@ -106,6 +106,3 @@ exports.makeGitRepo = function (params, cb) {
   chain(commands, cb)
 }
 
-var isWindows = exports.isWindows = process.platform === 'win32'
-// Differentiate cmd/powershell from gitbash (mintty & mingw)
-exports.isWindowsShell = isWindows && process.env.TERM !== 'xterm'
