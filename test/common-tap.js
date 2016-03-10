@@ -1,3 +1,5 @@
+'use strict'
+var isWindows = require('../lib/utils/is-windows.js')
 var isWindowsShell = require('../lib/utils/is-windows-shell.js')
 
 // cheesy hackaround for test deps (read: nock) that rely on setImmediate
@@ -106,3 +108,10 @@ exports.makeGitRepo = function (params, cb) {
   chain(commands, cb)
 }
 
+exports.skipIfWindows = function (why) {
+  if (!isWindows) return
+  console.log('1..1')
+  if (!why) why = 'this test not available on windows'
+  console.log('ok 1 # skip ' + why)
+  process.exit(0)
+}
