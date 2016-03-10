@@ -1,3 +1,100 @@
+### v3.8.2 (2016-03-10):
+
+#### HAVING TROUBLE INSTALLING C MODULES ON ANDROID?
+
+This release includes an updated `node-gyp` with fixes for Android.
+
+* [`634ecba`](https://github.com/npm/npm/commit/634ecba320fb5a3287e8b7debfd8b931827b9e19)
+  `node-gyp@3.3.1`:
+  Fix bug in builds for Android.
+  ([@bnoordhuis](https://github.com/bnoordhuis))
+
+#### NPM LOGOUT CLEANS UP BETTER
+
+* [`460ed21`](https://github.com/npm/npm/commit/460ed217876ac78d21477c288f1c06563fb770b4)
+  [#10529](https://github.com/npm/npm/issues/10529)
+  If you ran `npm logout` with a scope, while we did invalidate your auth
+  token, we weren't removing the auth token from your config file. This patch causes
+  the auth token to be removed.
+  ([@wyze](https://github.com/wyze))
+
+#### HELP MORE HELPFUL
+
+* [`d1d0233`](https://github.com/npm/npm/commit/d1d02335d297da2734b538de44d8967bdcd354cf)
+  [#11003](https://github.com/npm/npm/issues/11003)
+  Update help to only show command names and their shortcuts. Previously
+  some typo corrections were shown, along with various alternate
+  spellings.
+  ([@watilde](https://github.com/watilde))
+* [`47928cd`](https://github.com/npm/npm/commit/47928cd6264e1d6d0ef67435b71c66d01bea664a)
+  [#11003](https://github.com/npm/npm/issues/11003)
+  Remove "verison" typo from the help listing.
+  ([@doug-wade](https://github.com/doug-wade))
+
+#### MORE COMPLETE CONFIG LISTINGS
+
+* [`cf5fd40`](https://github.com/npm/npm/commit/cf5fd401494d96325d74a8bb8c326aa0045a714c)
+  [#11472](https://github.com/npm/npm/issues/11472)
+  Make `npm config list` include the per-project `.npmrc` in the output.
+  ([@mjomble](https://github.com/mjomble))
+
+#### DEPTH LIMITED PARSEABLE DEP LISTINGS
+
+* [`611070f`](https://github.com/npm/npm/commit/611070f0f7a1e185c75cadae46179194084b398f)
+  [#11495](https://github.com/npm/npm/issues/11495)
+  Made `npm ls --parseable` honor the `--depth=#` option.
+  ([@zacdoe](https://github.com/zacdoe))
+
+#### PROGRESS FOR THE (NON) UNICODE REVOLUTION
+
+* [`ff90382`](https://github.com/npm/npm/commit/ff9038227a1976b5e936442716d9877f43c6c9b4)
+  [#11781](https://github.com/npm/npm/issues/11781)
+  Make the progress bars honor the unicode option.
+  ([@watilde](https://github.com/watilde))
+
+#### `npm view --json`, NOW ACTUALLY JSON
+
+* [`24ab70a`](https://github.com/npm/npm/commit/24ab70a4ccfeaa005b80252da313bb589510668e)
+  [#11808](https://github.com/npm/npm/issues/11808)
+  Make `npm view` produce valid JSON when requested with `--json`.
+  Previously `npm view` produced some sort of weird hybrid output, with multiple
+  JSON docs.
+  ([@doug-wade](https://github.com/doug-wade))
+
+#### DOCUMENTATION CHANGES
+
+* [`6fb0499`](https://github.com/npm/npm/commit/6fb0499bea868fdc637656d210c94f051481ecd4)
+  [#11726](https://github.com/npm/npm/issues/11726)
+  Previously we patched the `npm update` docs to suggest using `--depth
+  Infinity` instead of `--depth 9999`, but that was a mistake. We forgot
+  that `npm outdated` (on which `npm update` is built) has a special
+  case where it treats `Infinity` as `0`. This reverts that patch.
+  ([@GriffinSchneider](https://github.com/GriffinSchneider))
+* [`f0bf684`](https://github.com/npm/npm/commit/f0bf684a87ea5eea03432a17f38678fed4960d43)
+  [#11748](https://github.com/npm/npm/pull/11748)
+  Document all of the various aliases for commands in the documentation
+  for those commands.
+  ([@watilde](https://github.com/watilde))
+* [`fe04443`](https://github.com/npm/npm/commit/fe04443d8988e2e41bd4047078e06a26d05d380d)
+  [#10968](https://github.com/npm/npm/issues/10968)
+  The `npm-scope` document notes that scopes have been available on the
+  public registry for a while. This adds that you'll need `npm@2` or later
+  to use them.
+  ([@doug-wade](https://github.com/doug-wade))
+* [`3db37a5`](https://github.com/npm/npm/commit/3db37a52b2b2e3193ef250ad2cf96dfd2def2777)
+  [#11820](https://github.com/npm/npm/pull/11820)
+  The command `npm link` should be linking package from local folder to
+  global, and `npm link package-name` should be from global to local. The
+  description in the documentation was reversed and this fixes that.
+  ([@rhgb](https://github.com/rhgb))
+
+#### GLOB FOR THE GLOB THRONE
+
+* [`be55882`](https://github.com/npm/npm/commit/be55882dc4ee5ce0777b4badc9141dab5bf5be4d)
+  `glob@7.0.3`:
+  Fix a race condition and some windows edge cases.
+  ([@isaacs](https://github.com/isaacs))
+
 ### v3.8.1 (2016-03-03):
 
 This week the install summary got better, killing your npm process now
@@ -21,7 +118,7 @@ steam, you can follow along by
   This fixes an issue where `npm install --production <module>` would
   result in npm exiting with an error code. The `--production` flag would
   make `npm ls` filter out `<module>` as it wasn't saved to the
-  `package.json` and thus wans't a production dependency. The install
+  `package.json` and thus wasn't a production dependency. The install
   report is limited to show just the modules installed, so with that
   filtered out nothing is available. With nothing available `npm ls`
   would set `npm` to exit with an error code.
