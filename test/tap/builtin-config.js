@@ -14,7 +14,8 @@ var folder = path.resolve(__dirname, 'builtin-config')
 var test = require('tap').test
 var npm = path.resolve(__dirname, '../..')
 var spawn = require('child_process').spawn
-var node = process.execPath
+var node = common.nodeBin
+var nodeEscaped = common.nodeBinEscaped
 
 test('setup', function (t) {
   t.plan(1)
@@ -34,8 +35,9 @@ test('install npm into first folder', function (t) {
               '--prefix=' + folder + '/first',
               '--ignore-scripts',
               '--cache=' + folder + '/cache',
-              '--loglevel=silent',
-              '--tmp=' + folder + '/tmp']
+              '--tmp=' + folder + '/tmp',
+              '--loglevel=warn',
+              '--progress']
   common.npm(args, {stdio: 'inherit'}, function (er, code) {
     if (er) throw er
     t.equal(code, 0)
@@ -50,7 +52,7 @@ test('write npmrc file', function (t) {
               '--cache=' + folder + '/cache',
               '--tmp=' + folder + '/tmp',
               '--',
-              node, __filename, 'write-builtin', process.pid
+              nodeEscaped, __filename, 'write-builtin', process.pid
              ],
              {'stdio': 'inherit'},
              function (er, code) {
@@ -73,9 +75,9 @@ test('use first npm to install second npm', function (t) {
     {},
     function (er, code, so) {
       if (er) throw er
-      t.equal(code, 0)
+      t.equal(code, 0, 'got npm root')
       var root = so.trim()
-      t.ok(fs.statSync(root).isDirectory())
+      t.ok(fs.statSync(root).isDirectory(), 'npm root is dir')
 
       var bin = path.resolve(root, 'npm/bin/npm-cli.js')
       spawn(
@@ -87,11 +89,12 @@ test('use first npm to install second npm', function (t) {
           '--prefix=' + folder + '/second',
           '--cache=' + folder + '/cache',
           '--tmp=' + folder + '/tmp'
-        ]
+        ],
+        {stdio: 'inherit'}
       )
       .on('error', function (er) { throw er })
       .on('close', function (code) {
-        t.equal(code, 0, 'code is zero')
+        t.equal(code, 0, 'second npm install')
         t.end()
       })
     }
@@ -120,9 +123,9 @@ test('verify that the builtin config matches', function (t) {
                             var secondRoot = so.trim()
                             var firstRc = path.resolve(firstRoot, 'npm', 'npmrc')
                             var secondRc = path.resolve(secondRoot, 'npm', 'npmrc')
-                            var firstData = fs.readFileSync(firstRc, 'utf8')
-                            var secondData = fs.readFileSync(secondRc, 'utf8')
-                            t.equal(firstData, secondData)
+                            var firstData = fs.readFileSync(firstRc, 'utf8').split(/\r?\n/)
+                            var secondData = fs.readFileSync(secondRc, 'utf8').split(/\r?\n/)
+                            t.isDeeply(firstData, secondData)
                             t.end()
                           })
              })
