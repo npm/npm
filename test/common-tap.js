@@ -43,6 +43,9 @@ var bin = exports.bin = escapify(require.resolve('../bin/npm-cli.js'))
 var chain = require('slide').chain
 var once = require('once')
 
+var nodeBin = exports.nodeBin = process.env.npm_node_execpath || process.env.NODE || process.execPath
+exports.nodeBinEscaped = escapify(exports.nodeBin)
+
 exports.npm = function (cmd, opts, cb) {
   cb = once(cb)
   cmd = [bin].concat(cmd)
@@ -55,8 +58,7 @@ exports.npm = function (cmd, opts, cb) {
 
   var stdout = ''
   var stderr = ''
-  var node = process.execPath
-  var child = spawn(node, cmd, opts)
+  var child = spawn(nodeBin, cmd, opts)
 
   if (child.stderr) {
     child.stderr.on('data', function (chunk) {
