@@ -3,11 +3,12 @@ var LRU = require('../')
 
 test('forEach', function (t) {
   var l = new LRU(5)
-  for (var i = 0; i < 10; i ++) {
+  var i
+  for (i = 0; i < 10; i++) {
     l.set(i, i.toString(2))
   }
 
-  var i = 9
+  i = 9
   l.forEach(function (val, key, cache) {
     t.equal(cache, l)
     t.equal(key, i)
@@ -20,10 +21,10 @@ test('forEach', function (t) {
   l.get(8)
 
   var order = [ 8, 6, 9, 7, 5 ]
-  var i = 0
+  i = 0
 
   l.forEach(function (val, key, cache) {
-    var j = order[i ++]
+    var j = order[i++]
     t.equal(cache, l)
     t.equal(key, j)
     t.equal(val, j.toString(2))
@@ -33,7 +34,7 @@ test('forEach', function (t) {
   i = 0
   order.reverse()
   l.rforEach(function (val, key, cache) {
-    var j = order[i ++]
+    var j = order[i++]
     t.equal(cache, l)
     t.equal(key, j)
     t.equal(val, j.toString(2))
@@ -45,7 +46,8 @@ test('forEach', function (t) {
 
 test('keys() and values()', function (t) {
   var l = new LRU(5)
-  for (var i = 0; i < 10; i ++) {
+  var i
+  for (i = 0; i < 10; i++) {
     l.set(i, i.toString(2))
   }
 
@@ -62,13 +64,14 @@ test('keys() and values()', function (t) {
   t.end()
 })
 
-test('all entries are iterated over', function(t) {
+test('all entries are iterated over', function (t) {
   var l = new LRU(5)
-  for (var i = 0; i < 10; i ++) {
+  var i
+  for (i = 0; i < 10; i++) {
     l.set(i.toString(), i.toString(2))
   }
 
-  var i = 0
+  i = 0
   l.forEach(function (val, key, cache) {
     if (i > 0) {
       cache.del(key)
@@ -82,13 +85,14 @@ test('all entries are iterated over', function(t) {
   t.end()
 })
 
-test('all stale entries are removed', function(t) {
+test('all stale entries are removed', function (t) {
   var l = new LRU({ max: 5, maxAge: -5, stale: true })
-  for (var i = 0; i < 10; i ++) {
+  var i
+  for (i = 0; i < 10; i++) {
     l.set(i.toString(), i.toString(2))
   }
 
-  var i = 0
+  i = 0
   l.forEach(function () {
     i += 1
   })
@@ -104,11 +108,12 @@ test('expires', function (t) {
     max: 10,
     maxAge: 50
   })
-  for (var i = 0; i < 10; i++) {
+  var i
+  for (i = 0; i < 10; i++) {
     l.set(i.toString(), i.toString(2), ((i % 2) ? 25 : undefined))
   }
 
-  var i = 0
+  i = 0
   var order = [ 8, 6, 4, 2, 0 ]
   setTimeout(function () {
     l.forEach(function (val, key, cache) {
@@ -117,14 +122,13 @@ test('expires', function (t) {
       t.equal(key, j.toString())
       t.equal(val, j.toString(2))
     })
-    t.equal(i, order.length);
+    t.equal(i, order.length)
 
     setTimeout(function () {
-      var count = 0;
-      l.forEach(function (val, key, cache) { count++; })
-      t.equal(0, count);
+      var count = 0
+      l.forEach(function (val, key, cache) { count++ })
+      t.equal(0, count)
       t.end()
     }, 25)
-
   }, 26)
 })
