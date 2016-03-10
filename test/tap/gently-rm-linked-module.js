@@ -1,11 +1,11 @@
+var common = require('../common-tap.js')
+
 var basename = require('path').basename
 var resolve = require('path').resolve
 var fs = require('graceful-fs')
 var test = require('tap').test
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
-
-var common = require('../common-tap.js')
 
 var base = resolve(__dirname, basename(__filename, '.js'))
 var pkg = resolve(base, 'gently-rm-linked')
@@ -97,7 +97,7 @@ function cleanup () {
 function setup () {
   mkdirp.sync(pkg)
   mkdirp.sync(glb)
-  fs.symlinkSync(glb, lnk)
+  fs.symlinkSync(glb, lnk, 'junction')
   // so it doesn't try to install into npm's own node_modules
   mkdirp.sync(resolve(pkg, 'node_modules'))
   mkdirp.sync(dep)
