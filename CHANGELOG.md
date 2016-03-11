@@ -11,7 +11,7 @@ avoid things like minor version bumps on our `2.x` branch (which is also tagged
 `lts` in the `dist-tag`s).
 
 That said, we had a minor-bump update recently for `npm@3.8.0` which added a
-`maxSockets` option to allow users to configure the number of concurrent sockets
+`maxsockets` option to allow users to configure the number of concurrent sockets
 that npm would keep open at a time -- a setting that has the potential to help a
 bunch for people with fussy routers or internet connections that aren't very
 happy with Node.js applications' usual concurrency storm. This change was done
