@@ -269,7 +269,7 @@ The `--global-style` argument will cause npm to install the package into
 your local `node_modules` folder with the same layout it uses with the
 global `node_modules` folder. Only your direct dependencies will show in
 `node_modules` and everything they depend on will be flattened in their
-`node_modules` folders. This obviously will elminate some deduping.
+`node_modules` folders. This obviously will eliminate some deduping.
 
 The `--legacy-bundling` argument will cause npm to install the package such
 that versions of npm prior to 1.4, such as the one included with node 0.8,
