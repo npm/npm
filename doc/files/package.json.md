@@ -206,6 +206,7 @@ Conversely, some files are always ignored:
 * `._*`
 * `npm-debug.log`
 * `.npmrc`
+* `node_modules`
 
 ## main
 
