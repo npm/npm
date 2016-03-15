@@ -5,8 +5,9 @@ var common = require('../common-tap.js')
 var path = require('path')
 var rimraf = require('rimraf')
 var mkdirp = require('mkdirp')
+var osenv = require('osenv')
 var npmpath = path.resolve(__dirname, '../..')
-var basepath = path.resolve(__dirname, path.basename(__filename, '.js'))
+var basepath = path.resolve(osenv.tmpdir(), path.basename(__filename, '.js'))
 var globalpath = path.resolve(basepath, 'global')
 var extend = Object.assign || require('util')._extend
 var isWin32 = process.platform === 'win32'
