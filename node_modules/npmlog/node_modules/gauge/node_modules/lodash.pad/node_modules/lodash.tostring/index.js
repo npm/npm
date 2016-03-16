@@ -1,5 +1,5 @@
 /**
- * lodash 4.1.1 (Custom Build) <https://lodash.com/>
+ * lodash 4.1.2 (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
  * Copyright 2012-2016 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -76,7 +76,7 @@ var Symbol = root.Symbol;
 
 /** Used to convert symbols to primitives and strings. */
 var symbolProto = Symbol ? Symbol.prototype : undefined,
-    symbolToString = Symbol ? symbolProto.toString : undefined;
+    symbolToString = symbolProto ? symbolProto.toString : undefined;
 
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
@@ -155,7 +155,7 @@ function toString(value) {
     return '';
   }
   if (isSymbol(value)) {
-    return Symbol ? symbolToString.call(value) : '';
+    return symbolToString ? symbolToString.call(value) : '';
   }
   var result = (value + '');
   return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
