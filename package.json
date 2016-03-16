@@ -91,7 +91,7 @@
     "semver": "~5.1.0",
     "sha": "~2.0.1",
     "slide": "~1.1.6",
-    "sorted-object": "~1.0.0",
+    "sorted-object": "~2.0.0",
     "strip-ansi": "~3.0.1",
     "tar": "~2.2.1",
     "text-table": "~0.2.0",
