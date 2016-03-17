@@ -1,3 +1,44 @@
+### v2.15.1 (2016-03-17):
+
+It's another one of those releases again! Docs and tests, it turns out, have a
+pretty easy time getting into LTS releases, and boring is exactly how LTS should
+be. 💁
+
+#### DOCS
+
+* [`981c89c`](https://github.com/npm/npm/commit/981c89c8e398ca22ab6bf466123b25728ef6f543)
+  [#11820](https://github.com/npm/npm/pull/11820)
+  The basic explanation for how `npm link` works was a bit confusing, and
+  somewhat incorrect. It should be clearer now.
+  ([@rhgb](https://github.com/rhgb))
+* [`35b2b45`](https://github.com/npm/npm/commit/35b2b45f181dcbfb297f53b577dc1f26efcf3aba)
+  [#11787](https://github.com/npm/npm/pull/11787)
+  The `verison` alias for `npm version` no longer shows up in the command list
+  when you do `npm -h`.
+  ([@doug-wade](https://github.com/doug-wade))
+* [`1c9d00f`](https://github.com/npm/npm/commit/1c9d00f788298a81a8a7293d7dcf430f01bdd7fd)
+  [#11786](https://github.com/npm/npm/pull/11786)
+  Add a comment to the `npm-scope.md` docs about `npm@>=2` being required in
+  order to use scoped packaged.
+  ([@doug-wade](https://github.com/doug-wade))
+* [`7d64fb1`](https://github.com/npm/npm/commit/7d64fb1452d360aa736f31c85d6776ce570b2365)
+  [#11762](https://github.com/npm/npm/pull/11762)
+  Roll back patch that previously advised people to use `--depth Infinity`
+  instead of `--depth 9999`. Just keep using `--depth 9999`.
+  ([@GriffinSchneider](https://github.com/GriffinSchneider))
+
+#### TESTS
+
+* [`98a9ee4`](https://github.com/npm/npm/commit/98a9ee4773f83994b8eb63c0ff75a9283408ba1a)
+  [#11912](https://github.com/npm/npm/pull/11912)
+  Did you know npm can install itself? `npm install -g npm` is the way to
+  upgrade! Turns out that one of the tests that verified this functionality got
+  rewritten as part of our recent push for better tests, and in the process
+  omitted a detail about *how* the test ran. We're testing that corner case
+  again, now, by moving the install folder to `/tmp`, where the original legacy
+  test ran.
+  ([@iarna](https://github.com/iarna))
+
 ### v2.15.0 (2016-03-10):
 
 #### WHY IS THIS SEMVER-MINOR I THOUGHT THIS WAS LTS
