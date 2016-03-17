@@ -59,9 +59,11 @@ registries. Can be used with `--registry` and / or `--scope`, e.g.
     npm adduser --registry=http://private-registry.example.com --always-auth
 
 This will ensure that all requests to that registry (including for tarballs)
-include an authorization header. See `always-auth` in `npm-config(7)` for more
-details on always-auth. Registry-specific configuration of `always-auth` takes
-precedence over any global configuration.
+include an authorization header. This setting may be necessary for use with
+private registries where metadata and package tarballs are stored on hosts with
+different hostnames. See `always-auth` in `npm-config(7)` for more details on
+always-auth. Registry-specific configuration of `always-auth` takes precedence
+over any global configuration.
 
 ## SEE ALSO
 
