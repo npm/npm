@@ -1,3 +1,71 @@
+### v3.8.3 (2016-03-17):
+
+#### PERFORMANCE IMPROVEMENTS
+
+The updated [`are-we-there-yet`](https://npm.com/package/are-we-there-yet)
+changes how it tracks how complete things are to be much more efficient.
+The summary is that `are-we-there-yet` was refactored to remove an expensive
+tree walk.
+
+The result for you should be faster installs when working with very large trees.
+
+Previously `are-we-there-yet` computed this when you asked by passing the request down
+its tree of progress indicators, totaling up the results. In doing so, it had to walk the
+entire tree of progress indicators.
+
+By contrast, `are-we-there-yet` now updates a running total when a change
+is made, bubbling that up the tree from whatever branch made progress.  This
+bubbling was already going on so there was nearly no cost associated with taking advantage of it.
+
+* [`32f2bd0`](https://github.com/npm/npm/commit/32f2bd0e26116db253e619d67c4feae1de3ad2c2)
+  `npmlog@2.0.3`:
+  Bring in substantial performance improvements from `are-we-there-yet`.
+  ([@iarna](https://github.com/iarna))
+
+#### DUCT TAPE FOR BUGS
+
+* [`473d324`](https://github.com/npm/npm/commit/473d3244a8ddfd6b260d0aa0d395b119d595bf97)
+  [#11947](https://github.com/npm/npm/pull/11947)
+  Guard against bugs that could cause the installer to crash with errors like:
+
+  ```
+  TypeError: Cannot read property 'target' of null
+  ```
+
+  This doesn't fix the bugs, but it does at least make the installer less
+  likely to explode.
+  ([@thefourtheye](https://github.com/thefourtheye))
+
+#### DOC FIXES
+
+* [`ffa428a`](https://github.com/npm/npm/commit/ffa428a4eee482aa620819bc8df994a76fad7b0c)
+  [#11880](https://github.com/npm/npm/pull/11880)
+  Fix typo in `npm install` documentation.
+  ([@watilde](https://github.com/watilde))
+
+#### DEPENDENCY UPDATES
+
+* [`7537fe1`](https://github.com/npm/npm/commit/7537fe1748c27e6f1144b279b256cd3376d5c41c)
+  `sorted-object@2.0.0`:
+  Create objects with `{}` instead of `Object.create(null)` to make the results
+  strictly equal to what, say, parsed JSON would provide.
+  ([@domenic](https://github.com/domenic))
+* [`8defb0f`](https://github.com/npm/npm/commit/8defb0f7b3ebdbe15c9ef5036052c10eda7e3161)
+  `readable-stream@2.0.6`:
+  Fix sync write issue on 0.10.
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+
+#### TEST FIXES FOR THE SELF TESTS
+
+* [`c3edeab`](https://github.com/npm/npm/commit/c3edeabece4400308264e7cf4bc4448bd2729f55)
+  [#11912](https://github.com/npm/npm/pull/11912)
+  Change the self installation test to do its work in `/tmp`.
+  Previously this was installing into a temp subdir in `test/tap`, which
+  wouldn't catch the case where a module was installed in the local
+  `node_modules` folder but not in dependencies, as node would look up
+  the tree and use the copy from the version of npm being tested.
+  ([@iarna](https://github.com/iarna))
+
 ### v3.8.2 (2016-03-10):
 
 #### HAVING TROUBLE INSTALLING C MODULES ON ANDROID?
