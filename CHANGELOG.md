@@ -2,7 +2,7 @@
 
 #### PERFORMANCE IMPROVEMENTS
 
-The updated [`are-we-there-yet`](https://npm.com/package/are-we-there-yet)
+The updated [`are-we-there-yet`](https://npmjs.com/package/are-we-there-yet)
 changes how it tracks how complete things are to be much more efficient.
 The summary is that `are-we-there-yet` was refactored to remove an expensive
 tree walk.
