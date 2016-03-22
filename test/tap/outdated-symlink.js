@@ -34,7 +34,7 @@ test('setup', function (t) {
     JSON.stringify(json, null, 2)
   )
   process.chdir(pkg)
-  common.npm(['install', '-g', 'async@0.2.9', 'underscore@1.3.1'], OPTS, function (err, c, out) {
+  common.npm(['install', '-g', 'text-table@0.1.1', 'underscore@1.3.1'], OPTS, function (err, c, out) {
     t.ifError(err, 'global install did not error')
     common.npm(['link'], OPTS, function (err, c, out) {
       t.ifError(err, 'link did not error')
@@ -51,12 +51,16 @@ test('setup', function (t) {
 
 test('when outdated is called linked packages should be displayed as such', function (t) {
   var regOutLinked = /my-local-package\s*1.0.0\s*linked\s*linked\n/
-  var regOutInstallOne = /async\s*0.2.9\s*0.2.9\s*1.5.2\n/
+  var regOutInstallOne = /text-table\s*0.1.1\s*0.1.1\s*0.2.0\n/
   var regOutInstallTwo = /underscore\s*1.3.1\s*1.3.1\s*1.8.3\n/
 
   console.log = function () {}
   mr({ port: common.port }, function (er, s) {
     common.npm(['outdated', '-g'], OPTS, function (err, c, out, stderr) {
+      console.info('--------------')
+      console.info(out)
+      console.info('--------------')
+
       t.ifError(err)
       t.ok(out.match(regOutLinked), 'Global Link format as expected')
       t.ok(out.match(regOutInstallOne), 'Global Install format as expected')
