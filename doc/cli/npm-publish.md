@@ -45,8 +45,7 @@ Fails if the package name and version combination already exists in
 the specified registry.
 
 Once a package is published with a given name and version, that
-specific name and version combination can never be used again, even if
-it is removed with npm-unpublish(1).
+specific name and version combination can never be used again.
 
 ## SEE ALSO
 
