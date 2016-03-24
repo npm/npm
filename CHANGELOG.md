@@ -1,3 +1,60 @@
+### v3.8.4 (2016-03-24)
+
+Like my esteemed colleague [@zkat](https://github.com/zkat) said in this
+week's [LTS release notes](https://github.com/npm/npm/releases/tag/v2.15.2),
+this week is another small release but we are continuing to work on our
+[Windows efforts](https://github.com/npm/npm/pull/11444).
+
+You may also be interested in reading the [LTS process and
+policy](https://github.com/npm/npm/wiki/LTS) that
+[@othiym23](https://github.com/othiym23) put together recently. If you have any
+feedback, we would love to hear.
+
+#### DOCTOR IT HURTS WHEN LINK TO MY LINK
+
+Well then, don't do that.
+
+* [`0930858`](https://github.com/npm/npm/commit/09308588dba7109c57462a321c6ec06f3f44c541)
+  [#11442](https://github.com/npm/npm/pull/11442)
+  Fail if the user asks us to make a link from a module back on to itself.
+  ([@antialias](https://github.com/antialias))
+
+#### ERR MODULE LIST TOO LONG
+
+* [`58efee6`](https://github.com/npm/npm/commit/58efee6c77402cd998182d803b19f55799a1e52d)
+  [#11983](https://github.com/npm/npm/issues/11983)
+  Exit early if no arguments were provided to search instead of trying to display all the modules,
+  running out of memory, and then crashing.
+  ([@SimenB](https://github.com/SimenB))
+
+#### ELIMINATE UNUSED MODULE
+
+* [`ca830eb`](https://github.com/npm/npm/commit/ca830eb8a59ba96f3b779090073b13e1e1907cd7)
+  [#12000](https://github.com/npm/npm/pull/12000)
+  Stop depending on [`async-some`](https://npmjs.com/package/async-some) as it's no
+  longer used in npm.
+  ([@watilde](https://github.com/watilde))
+
+#### DOCUMENTATION IMPROVEMENTS
+
+* [`f9fac98`](https://github.com/npm/npm/commit/f9fac98c94bb895fe355be704f195741379aefc5)
+  [#11884](https://github.com/npm/npm/pull/11884)
+  Include `node_modules` in the list of files and directories that npm won't
+  include in packages ordinarily. (Modules listed in `bundledDependencies` and things
+  that those modules rely on, ARE included of course.)
+  ([@Jameskmonger](https://github.com/Jameskmonger))
+* [`54d9dff`](https://github.com/npm/npm/commit/54d9dffde798d03d324877269bc08bbc9a27d44e)
+  [#12006](https://github.com/npm/npm/pull/12006)
+  Fix typo in npm-orgs documentation, where teams docs went to access docs and vice versa.
+  ([@yaelz](https://github.com/yaelz))
+
+#### FEWER NETWORK TESTS
+
+* [`004cc53`](https://github.com/npm/npm/commit/004cc53c2ce2e300b07a58490d9cebccf51e49a8)
+  [#11987](https://github.com/npm/npm/pull/11987)
+  Fix test that was inappropriately hitting the network
+  ([@yodeyer](https://github.com/yodeyer))
+
 ### v3.8.3 (2016-03-17):
 
 #### PERFORMANCE IMPROVEMENTS
