@@ -67,6 +67,12 @@ regardless of the justification.  When humans solve their problems by
 talking to other humans with respect, everyone has the chance to end up
 feeling good about the interaction.
 
+When npm Inc resolves a dispute, it will reach out to the original author
+of the package in a private email 24 hours before giving the package to
+the new author. This exchange gives the original author an oppurtunity
+to discuss the issue by talking to other humans, even if the ownership
+of the package ultimately changes hands to a new author.
+
 ## EXCEPTIONS
 
 Some things are not allowed, and will be removed without discussion if
