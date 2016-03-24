@@ -1,3 +1,65 @@
+### v3.8.5 (2016-03-24)
+
+Like my esteemed colleague [@zkat](https://github.com/zkat) said in this
+week's [LTS release notes](https://github.com/npm/npm/releases/tag/v2.15.2),
+this week is another small release but we are continuing to work on our
+[Windows efforts](https://github.com/npm/npm/pull/11444).
+
+You may also be interested in reading the [LTS process and
+policy](https://github.com/npm/npm/wiki/LTS) that
+[@othiym23](https://github.com/othiym23) put together recently. If you have any
+feedback, we would love to hear.
+
+#### DOCTOR IT HURTS WHEN LINK TO MY LINK
+
+Well then, don't do that.
+
+* [`0d4a0b1`](https://github.com/npm/npm/commit/0d4a0b1)
+  [#11442](https://github.com/npm/npm/pull/11442)
+  Fail if the user asks us to make a link from a module back on to itself.
+  ([@antialias](https://github.com/antialias))
+
+#### ERR MODULE LIST TOO LONG
+
+* [`b271ed2`](https://github.com/npm/npm/commit/b271ed2)
+  [#11983](https://github.com/npm/npm/issues/11983)
+  Exit early if no arguments were provided to search instead of trying to display all the modules,
+  running out of memory, and then crashing.
+  ([@SimenB](https://github.com/SimenB))
+
+#### ELIMINATE UNUSED MODULE
+
+* [`b8c7cd7`](https://github.com/npm/npm/commit/b8c7cd7)
+  [#12000](https://github.com/npm/npm/pull/12000)
+  Stop depending on [`async-some`](https://npmjs.com/package/async-some) as it's no
+  longer used in npm.
+  ([@watilde](https://github.com/watilde))
+
+#### DOCUMENTATION IMPROVEMENTS
+
+* [`fdd6b28`](https://github.com/npm/npm/commit/fdd6b28)
+  [#11884](https://github.com/npm/npm/pull/11884)
+  Include `node_modules` in the list of files and directories that npm won't
+  include in packages ordinarily. (Modules listed in `bundledDependencies` and things
+  that those modules rely on, ARE included of course.)
+  ([@Jameskmonger](https://github.com/Jameskmonger))
+* [`aac15eb`](https://github.com/npm/npm/commit/aac15eb)
+  [#12006](https://github.com/npm/npm/pull/12006)
+  Fix typo in npm-orgs documentation, where teams docs went to access docs and vice versa.
+  ([@yaelz](https://github.com/yaelz))
+
+#### FEWER NETWORK TESTS
+
+* [`3e41360`](https://github.com/npm/npm/commit/3e41360)
+  [#11987](https://github.com/npm/npm/pull/11987)
+  Fix test that was inappropriately hitting the network
+  ([@yodeyer](https://github.com/yodeyer))
+
+### v3.8.4 (2016-03-24)
+
+Was erroneously released with just a changelog typo correction and was
+otherwise the same as 3.8.3.
+
 ### v3.8.3 (2016-03-17):
 
 #### PERFORMANCE IMPROVEMENTS
