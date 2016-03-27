@@ -19,7 +19,7 @@
     "url": "https://github.com/npm/npm"
   },
   "bugs": {
-    "url": "http://github.com/npm/npm/issues"
+    "url": "https://github.com/npm/npm/issues"
   },
   "directories": {
     "bin": "./bin",
