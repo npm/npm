@@ -202,7 +202,7 @@
   },
   "scripts": {
     "dumpconf": "env | grep npm | sort | uniq",
-    "prepublish": "node bin/npm-cli.js prune --prefix=. --no-global && rimraf test/*/*/node_modules && make -j4 doc",
+    "prepublish": "node bin/npm-cli.js prune --prefix=. --no-global && rimraf test/*/*/node_modules && make doc-clean && make -j4 doc",
     "preversion": "bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
     "tap": "tap --timeout 240",
     "test": "standard && npm run test-tap",
