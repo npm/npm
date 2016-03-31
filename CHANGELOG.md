@@ -151,6 +151,57 @@ otherwise the same as 3.8.3.
 
 ### v3.8.3 (2016-03-17):
 
+#### SECURITY ADVISORY: BEARER TOKEN DISCLOSURE
+
+This release includes [the fix for a
+vulnerability](https://github.com/npm/npm/commit/f67ecad59e99a03e5aad8e93cd1a086ae087cb29)
+that could cause the unintentional leakage of bearer tokens.
+
+Here are details on this vulnerability and how it affects you.
+
+##### DETAILS
+
+Since 2014, npm’s registry has used HTTP bearer tokens to authenticate requests
+from the npm’s command-line interface. A design flaw meant that the CLI was
+sending these bearer tokens with _every_ request made by logged-in users,
+regardless of the destination of their request. (The bearers only should have
+been included for requests made against a registry or registries used for the
+current install.)
+
+An attacker could exploit this flaw by setting up an HTTP server that could
+collect authentication information, then use this authentication information to
+impersonate the users whose tokens they collected. This impersonation would
+allow them to do anything the compromised users could do, including publishing
+new versions of packages.
+
+With the fixes we’ve released, the CLI will only send bearer tokens with
+requests made against a registry.
+
+##### THINK YOU'RE AT RISK? REGENERATE YOUR TOKENS
+
+If you believe that your bearer token may have been leaked, [invalidate your
+current npm bearer tokens](https://www.npmjs.com/settings/tokens) and rerun
+`npm login` to generate new tokens. Keep in mind that this may cause continuous
+integration builds in services like Travis to break, in which case you’ll need
+to update the tokens in your CI server’s configuration.
+
+##### WILL THIS BREAK MY CURRENT SETUP?
+
+Maybe.
+
+npm’s CLI team believes that the fix won’t break any existing registry setups.
+Due to the large number of registry software suites out in the wild, though,
+it’s possible our change will be breaking in some cases.
+
+If so, please [file an issue](https://github.com/npm/npm/issues/new) describing
+the software you’re using and how it broke. Our team will work with you to
+mitigate the breakage.
+
+##### CREDIT & THANKS
+
+Thanks to Mitar, Will White & the team at Mapbox, Max Motovilov, and James
+Taylor for reporting this vulnerability to npm.
+
 #### PERFORMANCE IMPROVEMENTS
 
 The updated [`are-we-there-yet`](https://npmjs.com/package/are-we-there-yet)
