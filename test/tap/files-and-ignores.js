@@ -276,32 +276,6 @@ test('.npmignore completely overrides .gitignore', function (t) {
   })
 })
 
-test('files array overrides .npmignore', function (t) {
-  var fixture = new Tacks(
-    Dir({
-      'package.json': File({
-        name: 'npm-test-files',
-        version: '1.2.5',
-        files: [
-          'include',
-          'sub/include'
-        ]
-      }),
-      '.npmignore': File(
-        'include\n' +
-        'sub/include\n'
-      ),
-      include: File(''),
-      sub: Dir({ include: File('') })
-    })
-  )
-  withFixture(t, fixture, function (done) {
-    t.ok(fileExists('include'), 'toplevel file included')
-    t.ok(fileExists('sub/include'), 'nested file included')
-    done()
-  })
-})
-
 test('includes files regardless of emptiness', function (t) {
   var fixture = new Tacks(
     Dir({
@@ -339,6 +313,24 @@ test('.npmignore itself gets included', function (t) {
   )
   withFixture(t, fixture, function (done) {
     t.ok(fileExists('.npmignore'), '.npmignore included')
+    done()
+  })
+})
+
+test('warn when required files are missing from files array', function (t) {
+  var fixture = new Tacks(
+    Dir({
+      'package.json': File({
+        name: 'npm-test-files',
+        version: '1.2.5',
+        files: ['foo.js', 'bar.js']
+      }),
+      'foo.js': File('')
+    })
+  )
+  withFixture(t, fixture, function (done, stdout, stderr) {
+    t.ok(fileExists('foo.js'), 'foo.js included')
+    t.match(stderr, /WARN.* bar\.js/, 'bar.js warning output')
     done()
   })
 })
@@ -543,11 +535,11 @@ function fileExists (file) {
 function withFixture (t, fixture, tester) {
   fixture.create(fixturepath)
   mkdirp.sync(modulepath)
-  common.npm(['install', fixturepath], {cwd: basepath}, installCheckAndTest)
-  function installCheckAndTest (err, code) {
+  common.npm(['install', fixturepath, '--loglevel=warn'], {cwd: basepath}, installCheckAndTest)
+  function installCheckAndTest (err, code, stdout, stderr) {
     if (err) throw err
     t.is(code, 0, 'install went ok')
-    tester(removeAndDone)
+    tester(removeAndDone, stdout, stderr)
   }
   function removeAndDone (err) {
     if (err) throw err
