@@ -1,3 +1,49 @@
+### v3.8.7 (2016-04-07)
+
+#### IMPROVED DIAGNOSTICS
+
+* [`38cf79f`](https://github.com/npm/npm/commit/38cf79ffa564ef5cb6677b476e06d0e45351592a)
+  [#12083](https://github.com/npm/npm/pull/12083)
+  If you `ignore-scripts` to disable lifecycles, this makes npm report when it skips running
+  a script.
+  ([@bfred-it](https://github.com/bfred-it))
+
+#### IMPROVE AUTO-INCLUDES
+
+* [`c615182`](https://github.com/npm/npm/commit/c615182c8b47e418338eb1317b99bb66987cda54)
+  [#11995](https://github.com/npm/npm/pull/11995)
+  There were bugs where modules whose names matched the special files that npm always
+  includes would be included, for example, the `history` package was always included.
+
+  With `npm@3` such extraneously bundled modules would not be ordinarily
+  used, as things in `node_modules` in packages are ignored entirely if the
+  package isn't marked as bundling modules.
+
+  Because of this `npm@3` behavior, the `files-and-ignores` test failed to catch this as
+  it was testing _install output_ not what got packed. That has also been fixed.
+  ([@glenjamin](https://github.com/glenjamin))
+
+#### DOCUMENTATION UPDATES
+
+* [`823d9df`](https://github.com/npm/npm/commit/823d9dfa91d7086a26620f007aee4e3cd77b6153)
+  [#12107](https://github.com/npm/npm/pull/12107)
+  In the command summary for `adduser` mention that `login` is an alias.
+  ([@gnerkus](https://github.com/gnerkus))
+* [`7aaf47e`](https://github.com/npm/npm/commit/7aaf47e124c45dde72c961638b770ee535fb2776)
+  [#12244](https://github.com/npm/npm/pull/12244)
+  Update the README to suggest npm@3 for Windows users. Also add a reference to
+  [Microsoft's npm upgrade tool](https://github.com/felixrieseberg/npm-windows-upgrade).
+  ([@felixrieseberg](https://github.com/felixrieseberg))
+
+#### DEPENDENCY UPDATES
+
+* [`486bbc0`](https://github.com/npm/npm/commit/486bbc0e1b101f847e890e6f1925dc8cb253cf3e)
+  `request@2.70.0`
+  ([@simov](https://github.com/simov))
+* [`b1aff34`](https://github.com/npm/npm/commit/b1aff346fc41f13e3306b437e1831942aacf2f54)
+  `lodash.keys@4.0.6`
+  ([@jdalton](https://github.com/jdalton))
+
 ### v3.8.6 (2016-03-31)
 
 Heeeeeey y'all.
