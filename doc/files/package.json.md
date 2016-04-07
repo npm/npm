@@ -70,9 +70,8 @@ discover your package as it's listed in `npm search`.
 
 The url to the project homepage.
 
-**NOTE**: This is *not* the same as "url".  If you put a "url" field,
-then the registry will think it's a redirection to your package that has
-been published somewhere else, and spit at you.
+**NOTE**: If you put a "url" field, the registry will think it's a redirection
+to your package that has been published somewhere else, and spit at you.
 
 Literally.  Spit.  I'm so not kidding.
 
