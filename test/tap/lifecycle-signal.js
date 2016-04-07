@@ -35,7 +35,7 @@ test('setup', function (t) {
 
 test('lifecycle signal abort', function (t) {
   // windows does not use lifecycle signals, abort
-  if (process.platform === 'win32' || process.env.TRAVIS) return t.end()
+  if (process.platform === 'win32') return t.end()
 
   var child = spawn(node, [npm, 'install'], {
     cwd: pkg
@@ -49,7 +49,7 @@ test('lifecycle signal abort', function (t) {
 
 test('lifecycle propagate signal term to child', function (t) {
   // windows does not use lifecycle signals, abort
-  if (process.platform === 'win32' || process.env.TRAVIS) return t.end()
+  if (process.platform === 'win32') return t.end()
 
   var innerChildPid
   var child = spawn(npm, ['run', 'forever'], {
