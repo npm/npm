@@ -1,0 +1,34 @@
+environment:
+  matrix:
+    # LTS first
+    - nodejs_version: "4"
+    # latest next
+    - nodejs_version: "5"
+    # I like 0.10 better than 0.12
+    - nodejs_version: "0.10"
+    - nodejs_version: "0.12"
+    - nodejs_version: "0.8"
+platform:
+  - x86
+  - x64
+install:
+  - ps: Install-Product node $env:nodejs_version $env:platform
+  - npm config set spin false
+  - npm rebuild
+  - node . install -g .
+  - set PATH=%APPDATA%\npm;%PATH%
+  - npm install --loglevel=http
+test_script:
+  - node --version
+  - npm --version
+  - npm test
+# notifications:
+# - provider: Slack
+#   auth_token:
+#     secure: i3Suz1hD0d1liX3M/sCcLq44Mb5dnT9Qb35vOxNgKUU=
+#   channel: '#cli-gh-updates'
+# GO_FAST
+matrix:
+  fast_finish: true
+# we don't need the builds, we just need tests
+build: off
