@@ -4,6 +4,8 @@ var test = require('tap').test
 var requireInject = require('require-inject')
 var dezalgo = require('dezalgo')
 var mkdirp = require('mkdirp')
+var path = require('path')
+var isWindows = require('../../lib/utils/is-windows.js')
 
 test('gently/force', function (t) {
   t.plan(5)
@@ -178,6 +180,27 @@ function linkNotOk (t, msg, opts) {
   })
 }
 
+function platformPath (unixPath) {
+  var dirs = unixPath.split('/')
+  var prefix = dirs[0] !== '' ? '' : isWindows ? 'C:\\' : '/'
+  return prefix + path.join.apply(path, dirs)
+}
+
+function platformerize (obj) {
+  Object.keys(obj).forEach(function (key) {
+    var newKey = platformPath(key)
+    if (typeof obj[key] === 'object') {
+      platformerize(obj[key])
+    } else if (typeof obj[key] === 'string') {
+      obj[key] = platformPath(obj[key])
+    }
+    if (newKey !== key) {
+      obj[newKey] = obj[key]
+      delete obj[key]
+    }
+  })
+}
+
 function testLink (opts, cb) {
   var mkdirpMock = dezalgo(function (dir, cb) {
     if (opts.mkdir[dir]) {
@@ -190,6 +213,9 @@ function testLink (opts, cb) {
   // we shouldn't have to do this ;.;
   // require-inject and/or instanbul will need patching
   mkdirpMock.sync = mkdirp.sync
+
+  // convert any paths in our opts into platform specific paths, for windows support.
+  platformerize(opts)
 
   var link = requireInject('../../lib/utils/link.js', {
     '../../lib/npm.js': {
