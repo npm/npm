@@ -100,20 +100,8 @@ test('shrinkwrap', function (t) {
     var actual = JSON.parse(stdout)
     var expected = require(path.resolve(basepath, 'npm-shrinkwrap.json'))
     // from is expected to vary
-    t.isDeeply(rmFrom(actual), rmFrom(expected))
+    t.isDeeply(common.rmFrom(actual), common.rmFrom(expected))
     t.done()
-  }
-
-  function rmFrom (obj) {
-    for (var i in obj) {
-      if (i === 'from') {
-        delete obj[i]
-      } else if (i === 'dependencies') {
-        for (var j in obj[i]) {
-          rmFrom(obj[i][j])
-        }
-      }
-    }
   }
 })
 

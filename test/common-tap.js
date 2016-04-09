@@ -5,7 +5,7 @@ if (!global.setImmediate || !require('timers').setImmediate) {
     setTimeout.apply(this, args)
   }
 }
-
+var common = require('./common')
 var spawn = require('child_process').spawn
 var path = require('path')
 
@@ -85,3 +85,5 @@ exports.makeGitRepo = function (params, cb) {
 
   chain(commands, cb)
 }
+
+exports.rmFrom = common.rmFrom
