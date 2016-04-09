@@ -38,7 +38,7 @@ test('saving configs', function (t) {
     cwd: pkg,
     env: {
       PATH: process.env.PATH,
-      EDITOR: editorPath
+      EDITOR: 'node ' + editorPath
     }
   }
   common.npm(
