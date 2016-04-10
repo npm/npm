@@ -9,6 +9,7 @@ npm-debug.log
 /node_modules/.bin
 /html/doc/
 /man/
+/locales/
 /doc/*/npm-index.md
 /npmrc
 /release/
