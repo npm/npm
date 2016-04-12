@@ -8,7 +8,6 @@ var common = require('../common-tap.js')
 
 var pkg = path.join(__dirname, 'publish-access-unscoped')
 
-
 test('setup', function (t) {
   mkdirp.sync(pkg)
   fs.writeFileSync(
