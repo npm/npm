@@ -181,9 +181,11 @@ function linkNotOk (t, msg, opts) {
 }
 
 function platformPath (unixPath) {
-  var dirs = unixPath.split('/')
-  var prefix = dirs[0] !== '' ? '' : isWindows ? 'C:\\' : '/'
-  return prefix + path.join.apply(path, dirs)
+  if (unixPath[0] === '/') {
+    return path.resolve(unixPath)
+  } else {
+    return path.join.apply(path, unixPath.split('/'))
+  }
 }
 
 function platformerize (obj) {
