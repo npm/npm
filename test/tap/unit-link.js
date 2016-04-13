@@ -5,7 +5,6 @@ var requireInject = require('require-inject')
 var dezalgo = require('dezalgo')
 var mkdirp = require('mkdirp')
 var path = require('path')
-var isWindows = require('../../lib/utils/is-windows.js')
 
 test('gently/force', function (t) {
   t.plan(5)

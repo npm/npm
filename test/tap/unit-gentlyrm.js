@@ -2,7 +2,6 @@
 var test = require('tap').test
 var requireInject = require('require-inject')
 var path = require('path')
-var isWindows = require('../../lib/utils/is-windows.js')
 
 function error (code) {
   var er = new Error()
@@ -267,7 +266,7 @@ test('areAnyInsideAny', function (t) {
   var lastToSecond = areAnyInsideAny(['/!!!', '/???', '/abc/def'], ['/nope', '/abc', '/xyz'])
   pathIsDeeply(t, lastToSecond, {target: '/abc/def', path: '/abc'}, 'last to second: many to many')
   var lastToLast = areAnyInsideAny(['/!!!', '/???', '/abc/def'], ['/nope', '/nooo', '/abc'])
-  pathIsDeeply(t,lastToLast, {target: '/abc/def', path: '/abc'}, 'last to last: many to many')
+  pathIsDeeply(t, lastToLast, {target: '/abc/def', path: '/abc'}, 'last to last: many to many')
 
   t.done()
 })
