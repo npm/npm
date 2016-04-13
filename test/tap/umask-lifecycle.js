@@ -9,21 +9,25 @@ var sprintf = require('sprintf-js').sprintf
 var common = require('../common-tap.js')
 var pkg = path.resolve(__dirname, 'umask-lifecycle')
 
+var nodeCmd = common.nodeBinEscaped
+var npmCmd = nodeCmd + ' ' + common.bin
+var umaskScript = npmCmd + ' config get umask && ' + nodeCmd + ' -pe "[process.env.npm_config_umask, process.umask()]"'
+
 var pj = JSON.stringify({
   name: 'x',
   version: '1.2.3',
-  scripts: { umask: '$npm_execpath config get umask && echo "$npm_config_umask" && node -pe "process.umask()"' }
+  scripts: { umask: umaskScript }
 }, null, 2) + '\n'
 
 var umask = process.umask()
 var expected = [
   '',
   '> x@1.2.3 umask ' + path.join(__dirname, 'umask-lifecycle'),
-  '> $npm_execpath config get umask && echo "$npm_config_umask" && node -pe "process.umask()"',
+  '> ' + umaskScript,
   '',
   sprintf('%04o', umask),
-  sprintf('%04o', umask),
-  sprintf('%d', umask),
+  "[ '" + sprintf('%04o', umask) + "', " +
+    sprintf('%d', umask) + ' ]',
   ''
 ].join('\n')
 
