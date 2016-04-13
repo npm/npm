@@ -125,3 +125,11 @@ exports.skipIfWindows = function (why) {
   console.log('ok 1 # skip ' + why)
   process.exit(0)
 }
+
+exports.pendIfWindows = function (why) {
+  if (!isWindows) return
+  console.log('1..1')
+  if (!why) why = 'this test is pending further changes on windows'
+  console.log('not ok 1 # todo ' + why)
+  process.exit(0)
+}
