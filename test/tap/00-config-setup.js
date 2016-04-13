@@ -21,7 +21,7 @@ exports.ucData =
     'sign-git-tag': true,
     message: 'v%s',
     'strict-ssl': false,
-    'tmp': process.env.HOME + '/.tmp',
+    'tmp': path.normalize(process.env.HOME + '/.tmp'),
     _auth: 'dXNlcm5hbWU6cGFzc3dvcmQ=',
     _token:
      { AuthSession: 'yabba-dabba-doodle',
