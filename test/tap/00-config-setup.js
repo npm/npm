@@ -38,10 +38,10 @@ Object.keys(process.env).forEach(function (k) {
   }
 })
 process.env.npm_config_userconfig = exports.userconfig
-process.env.npm_config_other_env_thing = 1000
+process.env.npm_config_other_env_thing = '1000'
 process.env.random_env_var = 'asdf'
 process.env.npm_config__underbar_env_thing = 'underful'
-process.env.NPM_CONFIG_UPPERCASE_ENV_THING = 42
+process.env.NPM_CONFIG_UPPERCASE_ENV_THING = '42'
 
 exports.envData = {
   userconfig: exports.userconfig,
