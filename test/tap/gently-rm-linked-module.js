@@ -88,10 +88,7 @@ function doesModuleExist () {
 }
 
 function cleanup () {
-  rimraf.sync(pkg)
-  rimraf.sync(dep)
-  rimraf.sync(lnk)
-  rimraf.sync(glb)
+  rimraf.sync(base)
 }
 
 function setup () {
