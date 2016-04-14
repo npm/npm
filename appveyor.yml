@@ -22,11 +22,13 @@ test_script:
   - node --version
   - npm --version
   - npm test
-# notifications:
-# - provider: Slack
-#   auth_token:
-#     secure: i3Suz1hD0d1liX3M/sCcLq44Mb5dnT9Qb35vOxNgKUU=
-#   channel: '#cli-gh-updates'
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: y+f32OuLBNyKzc39cD/5HLR9OadLIhyQBemVvIsVxZ0Po330JMfPeiABIDc1hAIO
+notifications:
+- provider: Slack
+  incoming_webhook:
+    secure: 48SDnPPTpndwEPd3ydG47Qzd9XiOmo4D9Ad77sCes/hZRsp3pT8sVy8YC+rSvK3OwgEjYCOcKTpYUrCrjlKHdPl/LnaLsWmpsJ3aUJeP9ts=
 # GO_FAST
 matrix:
   fast_finish: true
