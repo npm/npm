@@ -22,7 +22,7 @@ function makeObjUsePlatformPaths (obj) {
     return platformPath(obj)
   } else if (obj == null) {
     return obj
-  } else {
+  } else if (typeof obj === 'object') {
     Object.keys(obj).forEach(function (key) {
       var newKey = platformPath(key)
       obj[key] = makeObjUsePlatformPaths(obj[key])
