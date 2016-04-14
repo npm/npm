@@ -20,7 +20,7 @@ function platformPath (unixPath) {
 function makeObjUsePlatformPaths (obj) {
   if (typeof obj === 'string') {
     return platformPath(obj)
-  } else if (obj == null) {
+  } else if (obj == null || typeof obj !== 'object') {
     return obj
   } else {
     Object.keys(obj).forEach(function (key) {
