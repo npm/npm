@@ -40,6 +40,12 @@ you should write:
 
 instead of `"scripts": {"test": "node_modules/.bin/tap test/\*.js"}` to run your tests.
 
+Scripts are run from the root of the module, regardless of what your current
+working directory is when you call `npm run`.  If you want your script to
+have different behavior based on what subdirectory your in you can use the
+`INIT_CWD` environment variable, which holds the full path you were in when
+you ran `npm run`.
+
 `npm run` sets the `NODE` environment variable to the `node` executable with
 which `npm` is executed. Also, if the `--scripts-prepend-node-path` is passed,
 the directory within which `node` resides is added to the
