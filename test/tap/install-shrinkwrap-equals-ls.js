@@ -252,8 +252,10 @@ test('An npm install with shrinkwrap equals npm ls --json', function (t) {
         function (err, code, out) {
           t.ifError(err, 'npm ls --json ran without issue')
           t.notOk(code, 'npm ls --json exited with code 0')
-          var actual = common.rmFrom(JSON.parse(out))
-          var expected = common.rmFrom(JSON.parse(JSON.stringify(shrinkwrap)))
+          var actual = common.rmFromInShrinkwrap(JSON.parse(out))
+          var expected = common.rmFromInShrinkwrap(
+            JSON.parse(JSON.stringify(shrinkwrap))
+          )
           t.deepEqual(actual, expected)
           t.end()
         })

@@ -100,7 +100,10 @@ test('shrinkwrap', function (t) {
     var actual = JSON.parse(stdout)
     var expected = require(path.resolve(basepath, 'npm-shrinkwrap.json'))
     // from is expected to vary
-    t.isDeeply(common.rmFrom(actual), common.rmFrom(expected))
+    t.isDeeply(
+      common.rmFromInShrinkwrap(actual), 
+      common.rmFromInShrinkwrap(expected)
+    )
     t.done()
   }
 })
