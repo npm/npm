@@ -54,6 +54,10 @@ test('make sure the path is correct', function (t) {
       }
       return p.replace(/\\/g, '/')
     })
+    // spawn-wrap adds itself to the path when coverage is enabled
+    actual = actual.filter(function (p) {
+      return !p.match(/\.node-spawn-wrap/)
+    })
 
     // get the ones we tacked on, then the system-specific requirements
     var expect = [
