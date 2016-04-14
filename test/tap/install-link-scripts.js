@@ -28,11 +28,11 @@ var dependency = {
   }
 }
 
-var foo = function () {/*
+var foo = function () { /*
 #!/usr/bin/env node
 
 console.log('hey sup')
-*/}.toString().split('\n').slice(1, -1).join('\n')
+*/ }.toString().split('\n').slice(1, -1).join('\n')
 
 process.env.npm_config_prefix = tmp
 
