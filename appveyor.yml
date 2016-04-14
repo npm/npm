@@ -1,5 +1,5 @@
 environment:
-  - matrix:
+  matrix:
     # LTS first
     - nodejs_version: "4"
     # latest next
@@ -8,7 +8,7 @@ environment:
     - nodejs_version: "0.10"
     - nodejs_version: "0.12"
     - nodejs_version: "0.8"
-  - COVERALLS_REPO_TOKEN:
+  COVERALLS_REPO_TOKEN:
     secure: y+f32OuLBNyKzc39cD/5HLR9OadLIhyQBemVvIsVxZ0Po330JMfPeiABIDc1hAIO
 platform:
   - x86
