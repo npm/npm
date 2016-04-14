@@ -32,7 +32,6 @@ test('sorting dependencies', function (t) {
         'npm_config_registry': common.registry,
         'npm_config_cache': cache,
         'npm_config_tmp': tmp,
-        'npm_config_prefix': pkg,
         'npm_config_global': 'false',
         HOME: process.env.HOME,
         Path: process.env.PATH,
