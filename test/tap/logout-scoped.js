@@ -12,11 +12,11 @@ var pkg = path.resolve(__dirname, 'logout')
 var outfile = path.join(pkg, '_npmrc')
 var opts = { cwd: pkg }
 
-var contents = function () {/*
+var contents = function () { /*
 foo=boo
 @bar:registry=http://localhost:1337
 //localhost:1337/:_authToken=glarb
-*/}.toString().split('\n').slice(1, -1).join('\n')
+*/ }.toString().split('\n').slice(1, -1).join('\n')
 
 function mocks (server) {
   server.delete('/-/user/token/glarb')

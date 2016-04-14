@@ -2,7 +2,6 @@ var test = require('tap').test
 var path = require('path')
 var rimraf = require('rimraf')
 var mkdirp = require('mkdirp')
-var node = process.execPath
 var pkg = path.resolve(__dirname, 'sorted-package-json')
 var tmp = path.join(pkg, 'tmp')
 var cache = path.join(pkg, 'cache')
@@ -19,7 +18,6 @@ test('setup', function (t) {
 })
 
 test('sorting dependencies', function (t) {
-
   var before = JSON.parse(fs.readFileSync(packageJson).toString())
 
   mr({ port: common.port }, function (er, s) {
