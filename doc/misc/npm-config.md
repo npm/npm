@@ -537,6 +537,12 @@ if one of the two conditions are met:
 The IP address of the local interface to use when making connections
 to the npm registry.  Must be IPv4 in versions of Node prior to 0.12.
 
+### locale-file-directory
+* Default: '/locales/en'
+* Type: string
+
+Pass locale file directory.
+
 ### loglevel
 
 * Default: "warn"
