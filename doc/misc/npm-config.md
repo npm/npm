@@ -238,6 +238,12 @@ explicitly used, and that only GET requests use the cache.
 
 A client certificate to pass when accessing the registry.
 
+Note that this is the certificate _contents_ – for example:
+
+    cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
+
+It is _not_ the path to a certificate file (and there is no "certfile" option).
+
 ### color
 
 * Default: true
@@ -502,6 +508,12 @@ change.  Only the output from `npm ls --json` is currently valid.
 * Type: String
 
 A client key to pass when accessing the registry.
+
+Note that this is the key _contents_ – for example:
+
+    key="-----BEGIN PRIVATE KEY-----\nXXXX\nXXXX\n-----END PRIVATE KEY-----"
+
+It is _not_ the path to a key file (and there is no "keyfile" option).
 
 ### legacy-bundling
 
