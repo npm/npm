@@ -236,9 +236,8 @@ explicitly used, and that only GET requests use the cache.
 * Default: `null`
 * Type: String
 
-A client certificate to pass when accessing the registry.
-
-Note that this is the certificate _contents_ – for example:
+A client certificate to pass when accessing the registry.  Values should be in
+PEM format with newlines replaced by the string "\n". For example:
 
     cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 
@@ -507,9 +506,8 @@ change.  Only the output from `npm ls --json` is currently valid.
 * Default: `null`
 * Type: String
 
-A client key to pass when accessing the registry.
-
-Note that this is the key _contents_ – for example:
+A client key to pass when accessing the registry.  Values should be in PEM
+format with newlines replaced by the string "\n". For example:
 
     key="-----BEGIN PRIVATE KEY-----\nXXXX\nXXXX\n-----END PRIVATE KEY-----"
 
