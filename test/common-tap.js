@@ -1,3 +1,8 @@
+'use strict'
+var fs = require('graceful-fs')
+var readCmdShim = require('read-cmd-shim')
+var isWindows = require('../lib/utils/is-windows.js')
+
 // cheesy hackaround for test deps (read: nock) that rely on setImmediate
 if (!global.setImmediate || !require('timers').setImmediate) {
   require('timers').setImmediate = global.setImmediate = function () {
@@ -25,8 +30,11 @@ process.env.random_env_var = 'foo'
 process.env.npm_config_node_version = process.version.replace(/-.*$/, '')
 
 var bin = exports.bin = require.resolve('../bin/npm-cli.js')
+
 var chain = require('slide').chain
 var once = require('once')
+
+var nodeBin = exports.nodeBin = process.env.npm_node_execpath || process.env.NODE || process.execPath
 
 exports.npm = function (cmd, opts, cb) {
   cb = once(cb)
