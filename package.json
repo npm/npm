@@ -69,7 +69,7 @@
     "normalize-package-data": "~2.3.5",
     "npm-cache-filename": "~1.0.2",
     "npm-install-checks": "~3.0.0",
-    "npm-package-arg": "~4.1.0",
+    "npm-package-arg": "~4.1.1",
     "npm-registry-client": "~7.1.0",
     "npm-user-validate": "~0.1.2",
     "npmlog": "~2.0.3",
