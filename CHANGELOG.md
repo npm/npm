@@ -1,3 +1,53 @@
+### v2.15.4 (2016-04-21):
+
+Gosh, it's been a peaceful couple of weeks!
+
+Overall, the CLI team has been focused on the project to [get the test suite
+passing on Windows](https://github.com/npm/npm/pull/11444). Our efforts should
+be paying off soon -- there's only a couple of tests left!
+
+It's very unlikely those particular changes will make their way into our current
+`npm@2` LTS release, I think, but it will help `npm@3` a lot, as well as
+whatever version makes it into [`node@6`, which will eventually be the next
+Node.js LTS](https://github.com/nodejs/node/pull/6155).
+
+As far as this week goes, we've got a couple of dep updates and doc fixes.
+Always happy to see community contributions flying in. 💚
+
+#### DEP UPDATE MAGIC
+
+* [`b178c4a`](https://github.com/npm/npm/commit/b178c4ac9ce91c0a0794526a38b553c759132d18)
+  `spdx-license-ids@1.2.1`:
+  Minor project-related tweaks -- no license changes.
+  ([@shinnn](https://github.com/shinnn))
+* [`1adf179`](https://github.com/npm/npm/commit/1adf179948ab8cb97dfb2f46a61e9f37d944c42a)
+  `normalize-git-url@3.0.2`:
+  Fixes `file://` URLs on Windows. Turns out stuff like `file://C:\hello` is
+  actually fairly weird for a URL (it's not actually a valid URL, but we're just
+  gonna pretend.😉)
+  ([@zkat](https://github.com/zkat))
+* [`9cfd56c`](https://github.com/npm/npm/commit/9cfd56cdadc040c0b2fa7654cdb5e7d22dbef7cb)
+  `fs-vacuum@1.2.9`:
+  This one goes out to our fans at Big Blue: There was an AIX-specific issue
+  where `fs.rmDir` was failing with `EEXIST` instead of `ENOTEMPTY` with
+  non-empty directories.
+  ([@richardlau](https://github.com/richardlau))
+
+#### HOORAY DOC CONTRIBUTIONS
+
+No seriously, we love these. Keep 'em comin'!
+
+* [`2afe8bf`](https://github.com/npm/npm/commit/2afe8bf415a159baa181a8102f72c96e1d189bc9)
+  [#12415](https://github.com/npm/npm/pull/12415)
+  Clarify that the `--cert` and `--key` options are actual certs and keys, not
+  paths to files containing them.
+  ([@rvedotrc](https://github.com/rvedotrc))
+* [`3522560`](https://github.com/npm/npm/commit/3522560b0a4bb6c9717a34f9728f156fd9760cad)
+  [#12107](https://github.com/npm/npm/pull/12107)
+  Document `npm login` as an alias to `npm adduser`. People are still surprised
+  by this so often.
+  ([@gnerkus](https://github.com/gnerkus))
+
 ### v2.15.3 (2016-03-31):
 
 Hiiiiiii!~👋
