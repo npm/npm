@@ -64,7 +64,7 @@
     "mkdirp": "~0.5.1",
     "node-gyp": "~3.3.1",
     "nopt": "~3.0.6",
-    "normalize-git-url": "~3.0.1",
+    "normalize-git-url": "~3.0.2",
     "normalize-package-data": "~2.3.5",
     "npm-cache-filename": "~1.0.2",
     "npm-install-checks": "~1.0.7",
