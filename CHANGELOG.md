@@ -1,3 +1,101 @@
+### v3.8.8 (2016-04-21)
+
+Hi all! Long time no see! We've been heads-down working through getting
+[our test suite passing on Windows](https://github.com/npm/npm/pull/11444).
+Did you know that we have
+[Windows CI](https://ci.appveyor.com/project/npm/npm) now running over at
+Appveyor?  In the meantime, we've got a bunch of dependency updates, some
+nice documentation improvements and error messages when your `package.json`
+contains invalid JSON. (Yeah, I thought we did that last one before too!)
+
+#### BAD JSON IS BAD
+
+* [`769e620`](https://github.com/npm/npm/commit/769e6200722d8060b6769e47354032c51cfa85a1)
+  [#12406](https://github.com/npm/npm/pull/12406)
+  Failing to parse the top level `package.json` should be an error.
+  ([@watilde](https://github.com/watilde))
+
+#### DOCUMENTATION
+
+* [`7d64301`](https://github.com/npm/npm/commit/7d643018af5051c920cc73f17bfe32b7ff86e108)
+  [#12415](https://github.com/npm/npm/pull/12415)
+  Clarify that when configuring client-side certificates for authenticating
+  to non-npm registries that `cert` and `key` are not filesystem paths and should
+  actually include the certificate and key data.
+  ([@rvedotrc](https://github.com/rvedotrc))
+* [`f8539b8`](https://github.com/npm/npm/commit/f8539b8c986e81771ccc8ced7e716718423d3187)
+  [#12324](https://github.com/npm/npm/pull/12324)
+  Describe how `npm run` sets `NODE` and `PATH` in more detail.
+  Note that `npm run` changes `PATH` to include the current node
+  interpreter’s directory.
+  ([@addaleax](https://github.com/addaleax))
+* [`2b57606`](https://github.com/npm/npm/commit/2b57606852a2c2a03e4c4b7dcda85b807619c2cf)
+  [#11461](https://github.com/npm/npm/pull/11461)
+  Clarify the documentation for the package.json homepage field.
+  ([@stevemao](https://github.com/stevemao))
+
+#### TESTS
+
+* [`b5a0fbb`](https://github.com/npm/npm/commit/b5a0fbb9e1a2c4fb003dd748264571aa6e3c9e70)
+  [#12329](https://github.com/npm/npm/pull/12329)
+  Fix progress config testing to ignore local user configs.
+  Previously, _any_ local setting would cause the tests to fail as
+  they were trying to test what the default values for the progress
+  bar would be in different environments and any explicit setting
+  overrides those defaults.
+  ([@iarna](https://github.com/iarna))
+* [`3d195bc`](https://github.com/npm/npm/commit/3d195bc0a72b40df02a5c56e4f3be44152e8222b)
+  The lifecycle-signal test could crash on v0.8 due to its use of `Number.parseInt`, which
+  isn't available in that version of node.  Fortunately `global.parseInt` _is_, so
+  we just use that instead.
+  ([@iarna](https://github.com/iarna))
+
+#### DEPENDENCY UPDATES
+
+* [`05a28e3`](https://github.com/npm/npm/commit/05a28e38586082ac4bbf26ee6f863cc8d07054d6)
+  `npm-package-arg@4.1.1`:
+  Under some circumstances `file://` URLs on Windows were not handled correctly.
+
+  Also, stop converting local module/tarballs into full paths in this
+  module.  We do already do that in `realize-package-specifier`, which is
+  more appropriate as it knows what package we're installing relative to.
+  ([@zkat](https://github.com/zkat))
+* [`ada2e93`](https://github.com/npm/npm/commit/ada2e93e8b276000150a9aa93fff69ec366e03d6)
+  `realize-package-specifier@3.0.3`:
+  Require the new `npm-package-arg`, plus fix a case where specifiers that were
+  maybe a tag, maybe a local filename were resolved differently than those that were
+  definitely a local filename.
+  ([@zkat](https://github.com/zkat)) ([@iarna](https://github.com/iarna))
+* [`adc515b`](https://github.com/npm/npm/commit/adc515b22775871386cd62390079fb4bf8e1714a)
+  `fs-vacuum@1.2.9`:
+  A fix for AIX where a non-empty directory can cause `fs.rmDir` to fail with `EEXIST` instead of `ENOTEMPTY`
+  and three new tests
+  ([@richardlau](https://github.com/richardlau))
+
+  Code cleanup, CI & dependency updates.
+  ([@othiym23](https://github.com/othiym23))
+* [`ef53a46`](https://github.com/npm/npm/commit/ef53a46906ce872a4541b605dd42a563cc26e614)
+  `tap@5.7.1`
+  ([@isaacs](https://github.com/isaacs))
+* [`df1f2e4`](https://github.com/npm/npm/commit/df1f2e4838b4d7ea2ea2321a95ae868c0ec0a520)
+  `request@2.72.0`:
+  Fix crashes when response headers indicate gzipped content but the body is
+  empty.
+  Add support for the deflate content encoding.
+  ([@simov](https://github.com/simov))
+* [`776c599`](https://github.com/npm/npm/commit/776c599b204632aca9d29fd92ea5c4f099fdea9f)
+  `readable-stream@2.1.0`:
+  Adds READABLE_STREAM env var that, if set to `disable`, will make
+  `readable-stream` use the local native node streams instead.
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+* [`10d6d55`](https://github.com/npm/npm/commit/10d6d5547354fcf50e930c7932ba4d63c0b6009c)
+  `normalize-git-url@3.0.2`:
+  Add support `git+file://` type URLs.
+  ([@zkat](https://github.com/zkat))
+* [`75017ae`](https://github.com/npm/npm/commit/75017aeecec69a1efd546df908aa5befc4467f36)
+  `lodash.union@4.3.0`
+  ([@jdalton](https://github.com/jdalton))
+
 ### v3.8.7 (2016-04-07)
 
 #### IMPROVED DIAGNOSTICS
