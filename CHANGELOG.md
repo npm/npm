@@ -1,3 +1,46 @@
+### v3.8.9 (2016-04-28)
+
+Our biggest news this week is that we got the
+[Windows test suite passing](https://github.com/npm/npm/pull/11444)!
+It'll take a little longer to get it passing in our
+[Windows CI](https://ci.appveyor.com/project/npm/npm/) but that's coming
+soon too.
+
+That means we'll be shifting gears away from tests to fixing
+[Big Bugs™](https://github.com/npm/npm/issues?q=is%3Aopen+is%3Aissue+label%3Abig-bug) again.
+Join us at our [team meeting](https://github.com/npm/npm/issues/12517) next
+Tuesday to learn more about that.
+
+#### BUG FIXES AND REFACTORING
+
+* [`60da618`](https://github.com/npm/npm/commit/60da61862885fa904afba7d121860b4282a5b0df)
+  [#12347](https://github.com/npm/npm/issues/12347)
+  Fix a bug that could result in shrinkwraps missing the `resolved` field, which is
+  necessary in producing a fully reproducible build.
+  ([@sminnee](https://github.com/sminnee))
+* [`8597ba4`](https://github.com/npm/npm/commit/8597ba432e91245a1000953b612eb01308178bad)
+  [#12009](https://github.com/npm/npm/issues/12009)
+  Fix a bug in `npm view <packagename> versions` that resulted in bad output if you
+  didn't also pass in `--json`.
+  ([@watilde](https://github.com/watilde))
+* [`20125f1`](https://github.com/npm/npm/commit/20125f19b96fd05af63f8c0bd243ffb25780279a)
+  [`a53feac`](https://github.com/npm/npm/commit/a53feac2647f7dc4245f1700dfbdd1aba8745672)
+  [`6cfbae4`](https://github.com/npm/npm/commit/6cfbae403abc3cf690565b09569f71cdd41a8372)
+  [#12485](https://github.com/npm/npm/pull/12485)
+  Refactor how the help summaries for commands are produced, such that we only have
+  one list of command aliases.
+  ([@watilde](https://github.com/watilde))
+* [`2ae210c`](https://github.com/npm/npm/commit/2ae210c76ab6fd15fcf15dc1808b01ca0b94fc9e)
+  `read-package-json@2.0.4`:
+  Fix a crash we discovered while fixing up the Windows test suite where if
+  you had a file in your `node_modules` it would cause a crash on Windows
+  (but not MacOS/Linux).
+
+  This makes the error code you get on Windows match that from MacOS/Linux
+  if you try to read a `package.json` from a path that includes a file, not
+  a folder.
+  ([@zkat](https://github.com/zkat))
+
 ### v3.8.8 (2016-04-21)
 
 Hi all! Long time no see! We've been heads-down working through getting
