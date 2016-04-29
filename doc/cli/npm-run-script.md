@@ -47,6 +47,16 @@ which `npm` is executed, and adds the directory within which it resides to the
 If you try to run a script without having a `node_modules` directory and it fails,
 you will be given a warning to run `npm install`, just in case you've forgotten.
 
+## CONFIGURATION
+
+### shell
+
+* Default: SHELL environment variable, or "bash" on Posix, or "cmd" on
+  Windows
+* Type: path
+
+The shell to run for the `npm run-script` command.
+
 ## SEE ALSO
 
 * npm-scripts(7)
