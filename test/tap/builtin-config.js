@@ -84,6 +84,7 @@ test('use first npm to install second npm', function (t) {
           bin,
           'install', npm,
           '-g',
+          '--ignore-scripts',
           '--prefix=' + folder + '/second',
           '--cache=' + folder + '/cache',
           '--tmp=' + folder + '/tmp'
