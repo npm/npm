@@ -49,7 +49,7 @@ function runTests () {
         env: env,
         stdio: 'inherit'
       }
-      common.npm(['test', '--', '-Rtap'], opts, function (err, code) {
+      common.npm(['test', '--', '-Rtap', '--no-coverage'], opts, function (err, code) {
         if (err) { throw err }
         if (code) {
           return test('need test to work', function (t) {
