@@ -654,10 +654,10 @@ field is advisory only will produce warnings when your package is installed as a
 
 ## engineStrict
 
-**This feature was deprecated with npm 3.0.0**
+**This feature was removed in npm 3.0.0**
 
 Prior to npm 3.0.0, this feature was used to treat this package as if the
-user had set `engine-strict`.
+user had set `engine-strict`. It is no longer used.
 
 ## os
 
