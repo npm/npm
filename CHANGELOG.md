@@ -1,3 +1,60 @@
+### v2.15.5 (2016-05-05):
+
+This is a minor LTS release, bringing dependencies up to date and updating
+our CI matrix to match what we support.
+
+Some of the dependency updates come out of our getting the development
+branch's tests passing on Windows and so bring in fixes for a few Windows
+related corner cases.
+
+#### CI UPDATES
+
+* [`bb6f0e5`](https://github.com/npm/npm/commit/bb6f0e5c95d4ad186768b1c962dd4c399f90ddb1)
+  [#12487](https://github.com/npm/npm/pull/12487)
+  Remove iojs from CI, add Node.js 6, prioritize 4 over 5.
+  ([@othiym23](https://github.com/othiym23))
+
+#### DEPENDENCY UPDATES
+
+* [`2831ea8`](https://github.com/npm/npm/commit/2831ea874bc11ae0193d029ff1063da9754aea76)
+  `which@1.2.8`:
+  Properly handle relative path executables.
+  ([@isaacs](https://github.com/isaacs))
+* [`1109230`](https://github.com/npm/npm/commit/1109230f6165683cc97a12e8d8f6e0e0eefd794c)
+  `read-package-json@2.0.4`:
+  Fix Windows issue with ENOTDIR detection.
+  ([@zkat](https://github.com/zkat))
+* [`4b0475b`](https://github.com/npm/npm/commit/4b0475bfc39209eeb1acc87dd726c1d2e407c3da)
+  `realize-package-specifier@3.0.3`:
+  Use npa with windows fix.
+  Fix relative path resolution when the local file might also be a tag.
+  ([@zkat](https://github.com/zkat))
+  ([@iarna](https://github.com/iarna))
+* [`0f3dcb7`](https://github.com/npm/npm/commit/0f3dcb70ccb59a00ecc63d2d4d3c0cba36080866)
+  `npm-package-arg@4.1.1`:
+  Fix some file:// urls on windows.
+  Stop resolving local paths in npa.
+  ([@zkat](https://github.com/zkat))
+* [`a475c9a`](https://github.com/npm/npm/commit/a475c9a4e4b36d00080b11f379657ce68185adc6)
+  `lru-cache@4.0.1`:
+  Use Symbol if available.
+  ([@isaacs](https://github.com/isaacs))
+* [`57e8eef`](https://github.com/npm/npm/commit/57e8eef2c997057eeb8c9b9e3c67fc84e76aae7b)
+  `sorted-object@2.0.0`
+  ([@iamstarkov](https://github.com/iamstarkov))
+* [`569564d`](https://github.com/npm/npm/commit/569564de9c6a14798c11b8064bad3bc12edb5acb)
+  `request@2.72.0`
+  ([@simov](https://github.com/simov))
+* [`042fec9`](https://github.com/npm/npm/commit/042fec9d8641a3cef17434d55e8c453177fc47cf)
+  `readable-stream@2.1.2`
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+* [`b1715f8`](https://github.com/npm/npm/commit/b1715f805426403273225bcfa91d1a52d7b56eb8)
+  `graceful-fs@4.1.4`
+  ([@isaacs](https://github.com/isaacs))
+* [`ca97de6`](https://github.com/npm/npm/commit/ca97de6c18059ef420235f4706898ad8758904e6)
+  `block-stream@0.0.9`
+  ([@isaacs](https://github.com/isaacs))
+
 ### v2.15.4 (2016-04-21):
 
 Gosh, it's been a peaceful couple of weeks!
