@@ -63,6 +63,9 @@ function writejson (dir, file, content) {
 function writefile (dir, file, content) {
   fs.writeFileSync(path.join(dir, file), content)
 }
+function readjson (dir, file) {
+  return JSON.parse(fs.readFileSync(path.join(dir, file), 'utf-8'))
+}
 
 function setup () {
   mkdirp.sync(testdir)
@@ -109,6 +112,29 @@ test('bundled', function (t) {
     // would have consider modB@1 to have fulfilled modC's requirement.
     fs.stat(path.join(testdir, 'node_modules', 'modC', 'node_modules', 'modB', 'B2'), function (missing) {
       t.ok(!missing, 'modC got the right version of modB')
+      t.end()
+    })
+  })
+})
+
+test('incremental install', function (t) {
+  // write out a shrinkwrap (which should include a nested entry for modC/modB)
+  common.npm(['shrinkwrap'], {cwd: testdir}, function (err, code, out, stderr) {
+    t.is(err, null, 'No fatal errors running npm')
+    t.is(code, 0, 'npm itself completed ok')
+
+    // modify the shrinkwrap to simulate an upstream sub-dependency version bump of modB/modC
+    // being pulled from SCC (e.g. Git)
+    var sw = readjson(testdir, 'npm-shrinkwrap.json')
+    sw.dependencies.modC.dependencies.modB = { version: '1.0.0', from: 'modB@1', resolved: 'file:../../modB@1' }
+    writejson(testdir, 'npm-shrinkwrap.json', sw)
+
+    common.npm(['install'], {cwd: testdir}, function (err, code, out, stderr) {
+      console.log(stderr)
+      t.is(err, null, 'No fatal errors running npm')
+      t.is(code, 0, 'npm itself completed ok')
+      var pkg = readjson(testdir, 'node_modules/modC/node_modules/modB/package.json')
+      t.equal(pkg.version, '1.0.0', 'Correct version of sub-dependency should be installed')
       t.end()
     })
   })
