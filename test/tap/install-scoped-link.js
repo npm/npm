@@ -12,34 +12,38 @@ var escapeExecPath = require('../../lib/utils/escape-exec-path')
 
 var common = require('../common-tap.js')
 
-var pkg = path.join(__dirname, 'install-scoped-link')
-var work = path.join(__dirname, 'install-scoped-link-TEST')
+var base = path.join(__dirname, path.basename(__filename, '.js'))
+var pkg = path.join(base, 'pkg')
+var work = path.join(base, 'work')
 var modules = path.join(work, 'node_modules')
+var Tacks = require('tacks')
+var File = Tacks.File
+var Dir = Tacks.Dir
 
 var EXEC_OPTS = { cwd: work }
 
-var world = '#!/usr/bin/env node\nconsole.log("hello blrbld")\n'
-
-var json = {
-  name: '@scoped/package',
-  version: '0.0.0',
-  bin: {
-    hello: './world.js'
-  }
-}
+var fixture = new Tacks(Dir({
+  'pkg': Dir({
+    'package.json': File({
+      name: '@scoped/package',
+      version: '0.0.0',
+      bin: {
+        hello: './world.js'
+      }
+    }),
+    'world.js': File(
+      '#!/usr/bin/env node\n' +
+      'console.log("hello blrbld")\n'
+    )
+  }),
+  'work': Dir({
+    'node_modules': Dir()
+  })
+}))
 
 test('setup', function (t) {
   cleanup()
-  mkdirp.sync(pkg)
-  fs.writeFileSync(
-    path.join(pkg, 'package.json'),
-    JSON.stringify(json, null, 2)
-  )
-  fs.writeFileSync(path.join(pkg, 'world.js'), world)
-
-  mkdirp.sync(modules)
-  process.chdir(work)
-
+  fixture.create(base)
   t.end()
 })
 
@@ -80,7 +84,5 @@ test('cleanup', function (t) {
 })
 
 function cleanup () {
-  process.chdir(osenv.tmpdir())
-  rimraf.sync(work)
-  rimraf.sync(pkg)
+  fixture.remove(base)
 }
