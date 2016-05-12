@@ -1,3 +1,27 @@
+### v2.15.6 (2016-05-12):
+
+I have a couple of doc fixes and a shrinkwrap fix for you all this week.
+
+#### PEER DEPENDENCIES AND SHRINKWRAPS
+
+* [`55c998a`](https://github.com/npm/npm/commit/55c998a098a306b90a84beef163a8890f9a616b1)
+  [#5135](https://github.com/npm/npm/issues/5135)
+  Fix a bug where peerDependencies & shrinkwraps didn't play nice together. (Where
+  the peerDependency resolver would end up installing its dep when it wasn't needed.)
+  ([@majgis](https://github.com/majgis))
+
+#### NPM AND `node-gyp` DOCS IMPROVEMENTS
+
+* [`1826908`](https://github.com/npm/npm/commit/1826908b991510d8fbc71a0d0f2c01ff24fd83c2)
+  [#12636](https://github.com/npm/npm/pull/12636)
+  Improve `npm-scripts` documentation regarding when `node-gyp` is used.
+  ([@reconbot](https://github.com/reconbot))
+* [`f9ff7f3`](https://github.com/npm/npm/commit/f9ff7f36cc2c2c3fbb4f6eef91491b589d049d5f)
+  [#12586](https://github.com/npm/npm/pull/12586)
+  Correct `package.json` documentation as to when `node-gyp rebuild` called.
+  This now matches https://docs.npmjs.com/misc/scripts#default-values
+  ([@reconbot](https://github.com/reconbot))
+
 ### v2.15.5 (2016-05-05):
 
 This is a minor LTS release, bringing dependencies up to date and updating
