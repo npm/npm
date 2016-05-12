@@ -58,7 +58,7 @@
     "lodash._baseuniq": "~4.5.1",
     "lodash.clonedeep": "~4.3.2",
     "lodash.isarray": "~4.0.0",
-    "lodash.keys": "~4.0.6",
+    "lodash.keys": "~4.0.7",
     "lodash.union": "~4.4.0",
     "lodash.uniq": "~4.3.0",
     "lodash.without": "~4.2.0",
