@@ -1,3 +1,63 @@
+### v3.9.1 (2016-05-12)
+
+HI all!  We have bug fixes to a couple of the hairy corners of `npm`, in the
+form of shrinkwraps and bundled dependencies. Plus some documentation improvements
+and our lodash deps bot a bump.
+
+This is our first week really focused on getting the
+[big bugs](https://github.com/npm/npm/issues?q=is%3Aopen+is%3Aissue+label:big-bug)
+list down.  Our work from this week will be landing next week, and I can't
+wait to tell you about that! (It's about symlinks!)
+
+#### SHRINKWRAP FIX
+
+* [`b894413`](https://github.com/npm/npm/commit/b8944139a935680c4a267468bb2d3c3082b5609f)
+  [#12372](https://github.com/npm/npm/issues/12372)
+  Changing a nested dependency in an `npm-shrinkwrap.json` and then running `npm install`
+  would not get up the updated package. This corrects that.
+  ([@misterbyrne](https://github.com/misterbyrne))
+
+#### BUNDLED DEPENDENCIES FIX
+
+* [`d0c6d19`](https://github.com/npm/npm/commit/d0c6d194471be8ce3e7b41b744b24f63dd1a3f6f)
+  [#12476](https://github.com/npm/npm/pull/12476)
+  Protects against a crasher when a bundled dep is missing a package.json.
+  ([@dflupu](https://github.com/dflupu))
+
+#### DOCS IMPROVEMENTS
+
+* [`6699aa5`](https://github.com/npm/npm/commit/6699aa53c0a729cfc921ac1d8107c320e5a5ac95)
+  [#12585](https://github.com/npm/npm/pull/12585)
+  Document that engineStrict is quite gone. Not "deprecated" so much as "extirpated".
+  ([@othiym23](https://github.com/othiym23))
+* [`7a41a84`](https://github.com/npm/npm/commit/7a41a84b655be3204d2e80848278a510e42c80e7)
+  [#12636](https://github.com/npm/npm/pull/12636)
+  Improve `npm-scripts` documentation regarding when `node-gyp` is used.
+  ([@reconbot](https://github.com/reconbot))
+* [`4c4b4ba`](https://github.com/npm/npm/commit/4c4b4badf09b9b50cdca85314429a0111bb35cb1)
+  [#12586](https://github.com/npm/npm/pull/12586)
+  Correct `package.json` documentation as to when `node-gyp rebuild` called.
+  This now matches https://docs.npmjs.com/misc/scripts#default-values
+  ([@reconbot](https://github.com/reconbot))
+
+#### DEPENDENCY UPDATES
+
+* [`cfa797f`](https://github.com/npm/npm/commit/cfa797fedd34696d45b61e3ae0398407afece880)
+  `lodash._baseuniq@4.6.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`ab6f180`](https://github.com/npm/npm/commit/ab6f1801971b513f9294b4b8902034ab402af02d)
+  `lodash.keys@4.0.7`
+  ([@jdalton](https://github.com/jdalton))
+* [`4b8d8b6`](https://github.com/npm/npm/commit/4b8d8b63e760a8aa03e8bffa974495dfafbfcb06)
+  `lodash.union@4.4.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`46099d3`](https://github.com/npm/npm/commit/46099d34542760098e5d13c7468a405a724ca407)
+  `lodash.uniq@4.3.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`fff89c6`](https://github.com/npm/npm/commit/fff89c6826c86e9e789adcc9c398385539306042)
+  `lodash.without@4.2.0`
+  ([@jdalton](https://github.com/jdalton))
+
 ### v3.9.0 (2016-05-05)
 
 Wow!  This is a big release week!  We've completed the fixes that let the
