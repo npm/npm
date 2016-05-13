@@ -848,6 +848,17 @@ The shell to run for the `npm explore` command.
 If set to false, then ignore `npm-shrinkwrap.json` files when
 installing.
 
+### sign-git-commit
+
+* Default: false
+* Type: Boolean
+
+If set to true, then the `npm version` command will commit the new package
+version using `-S` to add a signature.
+
+Note that git requires you to have set up GPG keys in your git configs
+for this to work properly.
+
 ### sign-git-tag
 
 * Default: false
