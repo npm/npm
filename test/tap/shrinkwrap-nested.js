@@ -94,6 +94,26 @@ var newShrinkwrap = new Tacks(Dir({
         }
       }
     }
+  }),
+  'node_modules': Dir({
+    'modB@1': Dir({
+      'package.json': File({
+        _requested: {
+          name: 'modB',
+          raw: 'modB@file:' + modB1dir,
+          rawSpec: 'file:' + modB1dir,
+          scope: null,
+          spec: modB1dir,
+          type: 'directory'
+        },
+        dependencies: { },
+        devDependencies: { },
+        name: 'modB',
+        optionalDependencies: { },
+        readme: 'ERROR: No README data found!',
+        version: '1.0.0'
+      })
+    })
   })
 }))
 
