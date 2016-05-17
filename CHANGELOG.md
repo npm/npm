@@ -1,3 +1,15 @@
+### v3.9.2 (2016-05-17)
+
+This is a quick patch release.  The previous release, 3.9.1, introduced a
+bug where npm would crash given a combination of specific package tree on
+disk and a shrinkwrap.
+
+* [`cde367f`](https://github.com/npm/npm/commit/cde367fbb6eebc5db68a44b12a5c7bea158d70db)
+  [#12724](https://github.com/npm/npm/issues/12724)
+  Fix crasher when inflating shrinkwraps with packages on disk that were
+  installed by older npm versions.
+  ([@iarna](https://github.com/iarna))
+
 ### v3.9.1 (2016-05-12)
 
 HI all!  We have bug fixes to a couple of the hairy corners of `npm`, in the
