@@ -1,6 +1,11 @@
 # Changes
 
 
+## v1.2.9
+
+* fix for paths starting with ../
+* Remove unused `is-absolute` module
+
 ## v1.2.8
 
 * bullet items in changelog that contain (but don't start with) #
