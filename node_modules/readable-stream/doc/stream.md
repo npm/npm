@@ -160,7 +160,8 @@ Emitted when the stream and any of its underlying resources (a file
 descriptor, for example) have been closed. The event indicates that
 no more events will be emitted, and no further computation will occur.
 
-Not all streams will emit the `'close'` event.
+Not all streams will emit the `'close'` event as the `'close'` event is
+optional.
 
 #### Event: 'data'
 
@@ -201,7 +202,7 @@ readable.on('end', () => {
 
 #### Event: 'error'
 
-* {Error Object}
+* {Error}
 
 Emitted if there was an error receiving data.
 
@@ -490,7 +491,7 @@ function parseHeader(stream, callback) {
         var split = str.split(/\n\n/);
         header += split.shift();
         var remaining = split.join('\n\n');
-        var buf = new Buffer(remaining, 'utf8');
+        var buf = Buffer.from(remaining, 'utf8');
         if (buf.length)
           stream.unshift(buf);
         stream.removeListener('error', callback);
@@ -572,6 +573,15 @@ Examples of writable streams include:
 * [TCP sockets][]
 * [child process stdin][]
 * [`process.stdout`][], [`process.stderr`][]
+
+#### Event: 'close'
+
+Emitted when the stream and any of its underlying resources (a file descriptor,
+for example) have been closed. The event indicates that no more events will be
+emitted, and no further computation will occur.
+
+Not all streams will emit the `'close'` event as the `'close'` event is
+optional.
 
 #### Event: 'drain'
 
@@ -695,6 +705,7 @@ file.end('world!');
 #### writable.setDefaultEncoding(encoding)
 
 * `encoding` {String} The new default encoding
+* Return: `this`
 
 Sets the default encoding for a writable stream.
 
@@ -985,7 +996,7 @@ Counter.prototype._read = function() {
     this.push(null);
   else {
     var str = '' + i;
-    var buf = new Buffer(str, 'ascii');
+    var buf = Buffer.from(str, 'ascii');
     this.push(buf);
   }
 };
@@ -1717,30 +1728,30 @@ horribly wrong.
 [`'end'`]: #stream_event_end
 [`'finish'`]: #stream_event_finish
 [`'readable'`]: #stream_event_readable
-[`buf.toString(encoding)`]: https://nodejs.org/docs/v5.9.1/api/buffer.html#buffer_buf_tostring_encoding_start_end
-[`EventEmitter`]: https://nodejs.org/docs/v5.9.1/api/events.html#events_class_eventemitter
-[`process.stderr`]: https://nodejs.org/docs/v5.9.1/api/process.html#process_process_stderr
-[`process.stdin`]: https://nodejs.org/docs/v5.9.1/api/process.html#process_process_stdin
-[`process.stdout`]: https://nodejs.org/docs/v5.9.1/api/process.html#process_process_stdout
+[`buf.toString(encoding)`]: https://nodejs.org/docs/v6.1.0/api/buffer.html#buffer_buf_tostring_encoding_start_end
+[`EventEmitter`]: https://nodejs.org/docs/v6.1.0/api/events.html#events_class_eventemitter
+[`process.stderr`]: https://nodejs.org/docs/v6.1.0/api/process.html#process_process_stderr
+[`process.stdin`]: https://nodejs.org/docs/v6.1.0/api/process.html#process_process_stdin
+[`process.stdout`]: https://nodejs.org/docs/v6.1.0/api/process.html#process_process_stdout
 [`stream.cork()`]: #stream_writable_cork
 [`stream.pipe()`]: #stream_readable_pipe_destination_options
 [`stream.uncork()`]: #stream_writable_uncork
 [`stream.unpipe()`]: #stream_readable_unpipe_destination
 [`stream.wrap()`]: #stream_readable_wrap_stream
-[`tls.CryptoStream`]: https://nodejs.org/docs/v5.9.1/api/tls.html#tls_class_cryptostream
-[`util.inherits()`]: https://nodejs.org/docs/v5.9.1/api/util.html#util_util_inherits_constructor_superconstructor
+[`tls.CryptoStream`]: https://nodejs.org/docs/v6.1.0/api/tls.html#tls_class_cryptostream
+[`util.inherits()`]: https://nodejs.org/docs/v6.1.0/api/util.html#util_util_inherits_constructor_superconstructor
 [API for Stream Consumers]: #stream_api_for_stream_consumers
 [API for Stream Implementors]: #stream_api_for_stream_implementors
-[child process stdin]: https://nodejs.org/docs/v5.9.1/api/child_process.html#child_process_child_stdin
-[child process stdout and stderr]: https://nodejs.org/docs/v5.9.1/api/child_process.html#child_process_child_stdout
+[child process stdin]: https://nodejs.org/docs/v6.1.0/api/child_process.html#child_process_child_stdin
+[child process stdout and stderr]: https://nodejs.org/docs/v6.1.0/api/child_process.html#child_process_child_stdout
 [Compatibility]: #stream_compatibility_with_older_node_js_versions
 [crypto]: crypto.html
 [Duplex]: #stream_class_stream_duplex
-[fs read streams]: https://nodejs.org/docs/v5.9.1/api/fs.html#fs_class_fs_readstream
-[fs write streams]: https://nodejs.org/docs/v5.9.1/api/fs.html#fs_class_fs_writestream
-[HTTP requests, on the client]: https://nodejs.org/docs/v5.9.1/api/http.html#http_class_http_clientrequest
-[HTTP responses, on the server]: https://nodejs.org/docs/v5.9.1/api/http.html#http_class_http_serverresponse
-[http-incoming-message]: https://nodejs.org/docs/v5.9.1/api/http.html#http_class_http_incomingmessage
+[fs read streams]: https://nodejs.org/docs/v6.1.0/api/fs.html#fs_class_fs_readstream
+[fs write streams]: https://nodejs.org/docs/v6.1.0/api/fs.html#fs_class_fs_writestream
+[HTTP requests, on the client]: https://nodejs.org/docs/v6.1.0/api/http.html#http_class_http_clientrequest
+[HTTP responses, on the server]: https://nodejs.org/docs/v6.1.0/api/http.html#http_class_http_serverresponse
+[http-incoming-message]: https://nodejs.org/docs/v6.1.0/api/http.html#http_class_http_incomingmessage
 [Object mode]: #stream_object_mode
 [Readable]: #stream_class_stream_readable
 [SimpleProtocol v2]: #stream_example_simpleprotocol_parser_v2
@@ -1755,7 +1766,7 @@ horribly wrong.
 [stream-read]: #stream_readable_read_size
 [stream-resume]: #stream_readable_resume
 [stream-write]: #stream_writable_write_chunk_encoding_callback
-[TCP sockets]: https://nodejs.org/docs/v5.9.1/api/net.html#net_class_net_socket
+[TCP sockets]: https://nodejs.org/docs/v6.1.0/api/net.html#net_class_net_socket
 [Transform]: #stream_class_stream_transform
 [Writable]: #stream_class_stream_writable
 [zlib]: zlib.html
