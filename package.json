@@ -48,7 +48,7 @@
     "glob": "~7.0.3",
     "graceful-fs": "~4.1.4",
     "has-unicode": "~2.0.0",
-    "hosted-git-info": "~2.1.4",
+    "hosted-git-info": "~2.1.5",
     "iferr": "~0.1.5",
     "inflight": "~1.0.4",
     "inherits": "~2.0.1",
