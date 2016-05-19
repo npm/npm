@@ -1,3 +1,67 @@
+### v3.9.3 (2016-05-19):
+
+This week continues our `big-bug` squashing adventure! Things are churning along
+nicely, and we've gotten a lot of fantastic contributions from the community.
+Please keep it up!
+
+A quick note on last week's release: We had a small `npm shrinkwrap`-related
+crasher in `npm@3.9.1`, so once this release goes out, `v3.9.2` is going to be
+`npm@latest`. Please update if you ended up in with that previous version!
+
+Remember we have a weekly team meeting, and you can [suggest agenda items in the
+GitHub issue](https://github.com/npm/npm/issues/12761). Keep an eye out for the
+`#npmweekly` tag on Twitter, too, and join the conversation! We'll do our best
+to address questions y'all send us. ✌
+
+#### FIXES
+
+* [`42d71be`](https://github.com/npm/npm/commit/42d71be2cec674dd9e860ad414f53184f667620d)
+  [#12685](https://github.com/npm/npm/pull/12685)
+  When using `npm ls <pkg>` without a semver specifier, `npm ls` would skip
+  any packages in your tree that matched by name, but had a prerelease version
+  in their `package.json`. This patch fixes it so `npm ls` does a simple name
+  match unless you use the `npm ls <pkg>@<version>` format.
+  ([@zkat](https://github.com/zkat))
+* [`c698ae6`](https://github.com/npm/npm/commit/c698ae666afc92fbc0fcba3c082cfa9b34a4420d)
+  [#12685](https://github.com/npm/npm/pull/12685)
+  Added some tests for more basic `npm ls` functionality.
+  ([@zkat](https://github.com/zkat))
+
+### NOTABLE DEPENDENCY UPDATES
+
+* [`3a6fe23`](https://github.com/npm/npm/commit/3a6fe2373c45e80a1f28aaf176d552f6f97cf131)
+  [npm/fstream-npm#17](https://github.com/npm/fstream-npm/pull/17)
+  `fstream-npm@1.1.0`:
+  `fstream-npm` always includes NOTICE files now.
+  ([@kemitchell](https://github.com/kemitchell))
+* [`df04e05`](https://github.com/npm/npm/commit/df04e05af1f257a1903372e1baf334c0969fbdbd)
+  [#10013](https://github.com/npm/npm/issues/10013)
+  `read-package-tree@5.1.4`:
+  Fixes an issue where `npm install` would fail if your `node_modules` was
+  symlinked.
+  ([@iarna](https://github.com/iarna))
+* [`584676f`](https://github.com/npm/npm/commit/584676f85eaebcb9d6c4d70d2ad320be8a8d6a74)
+  [npm/init-package-json#62](https://github.com/npm/init-package-json/pull/62)
+  `init-package-json@1.9.4`:
+  Stop using `package` for a variable, which defeats some bundlers and linters.
+  ([@adius](https://github.com/adius))
+* [`935a7e3`](https://github.com/npm/npm/commit/935a7e359535e13924934811b77924cbad82619a)
+  `readable-stream@2.1.3`:
+  Node 6 build and buffer-related updates.
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+
+#### OTHER DEPENDENCY UPDATES
+
+* [`4c4609e`](https://github.com/npm/npm/commit/4c4609ea49e77303f9d72af6757620e6b3a9a6a9)
+  `inflight@1.0.5`
+  ([@zkat](https://github.com/zkat))
+* [`7a3030d`](https://github.com/npm/npm/commit/7a3030d3d44ea2136425f72950ba22e6efd441d9)
+  `hosted-git-info@2.1.5`
+  ([@zkat](https://github.com/zkat))
+* [`5ed4b58`](https://github.com/npm/npm/commit/5ed4b58409eeb134bca1c96252682fd7600d9906)
+  `which@1.2.9`
+  ([@isaacs](https://github.com/isaacs))
+
 ### v3.9.2 (2016-05-17)
 
 This is a quick patch release.  The previous release, 3.9.1, introduced a
