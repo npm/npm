@@ -30,7 +30,7 @@ var myreg = require('http').createServer(function (q, s) {
   s.end(JSON.stringify({'error': 'forbidden'}) + '\n')
 }).listen(common.port)
 
-test('setup', function (t) {
+function setup (cb) {
   rimraf.sync(root)
   mkdirp.sync(root)
   mkdirp.sync(path.resolve(pkg, 'node_modules'))
@@ -40,25 +40,50 @@ test('setup', function (t) {
   fs.writeFileSync(path.resolve(pkg, 'package.json'), JSON.stringify(pkgj))
   fs.writeFileSync(path.resolve(dep, 'package.json'), JSON.stringify(depj))
   fs.symlinkSync(dep, target, 'dir')
-  t.end()
-})
+  cb()
+}
 
 test('ignore install if package is linked', function (t) {
-  common.npm(['install'], {
-    cwd: pkg,
-    env: {
-      PATH: process.env.PATH || process.env.Path,
-      HOME: process.env.HOME,
-      'npm_config_prefix': globalPath,
-      'npm_config_cache': cache,
-      'npm_config_registry': common.registry,
-      'npm_config_loglevel': 'silent'
-    },
-    stdio: 'inherit'
-  }, function (er, code) {
-    if (er) throw er
-    t.equal(code, 0, 'npm install exited with code')
-    t.end()
+  setup(function () {
+    common.npm(['install'], {
+      cwd: pkg,
+      env: {
+        PATH: process.env.PATH || process.env.Path,
+        HOME: process.env.HOME,
+        'npm_config_prefix': globalPath,
+        'npm_config_cache': cache,
+        'npm_config_registry': common.registry,
+        'npm_config_loglevel': 'silent'
+      },
+      stdio: 'inherit'
+    }, function (er, code) {
+      if (er) throw er
+      t.equal(code, 0, 'npm install exited with code')
+      t.end()
+    })
+  })
+})
+
+test('ignore install if package is linked and has no version specifier', function (t) {
+  pkgj.dependencies.dep = '../aFakePath'
+
+  setup(function () {
+    common.npm(['install'], {
+      cwd: pkg,
+      env: {
+        PATH: process.env.PATH || process.env.Path,
+        HOME: process.env.HOME,
+        'npm_config_prefix': globalPath,
+        'npm_config_cache': cache,
+        'npm_config_registry': common.registry,
+        'npm_config_loglevel': 'silent'
+      },
+      stdio: 'inherit'
+    }, function (er, code) {
+      if (er) throw er
+      t.equal(code, 0, 'npm install exited with code')
+      t.end()
+    })
   })
 })
 
