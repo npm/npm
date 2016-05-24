@@ -32,6 +32,8 @@ following scripts:
 * prerestart, restart, postrestart:
   Run by the `npm restart` command. Note: `npm restart` will run the
   stop and start scripts if no `restart` script is provided.
+* preshrinkwrap, shrinkwrap, postshrinkwrap:
+  Run by the `npm shrinkwrap` command.
 
 Additionally, arbitrary scripts can be executed by running `npm
 run-script <stage>`. *Pre* and *post* commands with matching
