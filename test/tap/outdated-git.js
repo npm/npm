@@ -20,7 +20,9 @@ var json = {
   dependencies: {
     'foo-github': 'robertkowalski/foo',
     'foo-private': 'git://github.com/robertkowalski/foo-private.git',
-    'foo-private-credentials': 'git://user:pass@github.com/robertkowalski/foo-private.git'
+    'foo-private-credentials': 'git://user:pass@github.com/robertkowalski/foo-private.git',
+    'npm-outdated-git-test': 'goloroden/npm-outdated-git-test#0.1.0',
+    'npm-outdated-git-test-outdated': 'goloroden/npm-outdated-git-test#0.0.1'
   }
 }
 
@@ -31,7 +33,7 @@ test('setup', function (t) {
 
 test('discovers new versions in outdated', function (t) {
   process.chdir(pkg)
-  t.plan(5)
+  t.plan(9)
   npm.load({cache: cache, registry: common.registry, loglevel: 'silent'}, function () {
     npm.commands.outdated([], function (er, d) {
       t.equal(d[0][3], 'git')
@@ -39,6 +41,10 @@ test('discovers new versions in outdated', function (t) {
       t.equal(d[0][5], 'github:robertkowalski/foo')
       t.equal(d[1][5], 'git://github.com/robertkowalski/foo-private.git')
       t.equal(d[2][5], 'git://user:pass@github.com/robertkowalski/foo-private.git')
+      t.equal(d[3][3], '0.1.0')
+      t.equal(d[3][4], '0.1.0')
+      t.equal(d[4][3], '0.0.1')
+      t.equal(d[4][4], '0.1.0')
     })
   })
 })
