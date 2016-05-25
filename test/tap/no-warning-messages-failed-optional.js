@@ -91,8 +91,8 @@ test('tree-style', function (t) {
     if (err) throw err
     t.is(code, 0, 'result code')
     t.match(stdout, /modA@1.0.0/, 'modA got installed')
-    t.notMatch(stdout, /modB/, 'modB not installed')    
-    t.is(stderr.length, 0, 'no warnings')    
+    t.notMatch(stdout, /modB/, 'modB not installed')
+    t.is(stderr.length, 0, 'no warnings')
     exists(t, modJoin(base, 'modA'), 'module A')
     notExists(t, modJoin(base, 'modB'), 'module B')
     t.done()
