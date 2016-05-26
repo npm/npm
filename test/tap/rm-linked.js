@@ -96,6 +96,7 @@ test('uninstall the global linked package', function (t) {
       t.ifError(err)
       t.equal(c, 0)
       t.has(out, /baz@1.0.0/, "uninstall didn't remove dep")
+      t.notMatch(out, /extraneous/, "doesn't leave behind extraneous packages")
       t.end()
     })
   })

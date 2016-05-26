@@ -9,6 +9,7 @@ var writeFileSync = require('fs').writeFileSync
 var common = require('../common-tap.js')
 
 var link = path.join(__dirname, 'link')
+var linkDep = path.join(link, 'node_modules', 'link-dep')
 var linkScoped = path.join(__dirname, 'link-scoped')
 var linkInstall = path.join(__dirname, 'link-install')
 var linkInside = path.join(linkInstall, 'node_modules', 'inside')
@@ -25,6 +26,21 @@ var OPTS = {
 
 var readJSON = {
   name: 'foo',
+  version: '1.0.0',
+  description: '',
+  main: 'index.js',
+  scripts: {
+    test: 'echo \"Error: no test specified\" && exit 1'
+  },
+  dependencies: {
+    'fooDep': '1.0.0'
+  },
+  author: '',
+  license: 'ISC'
+}
+
+var readDepJSON = {
+  name: 'fooDep',
   version: '1.0.0',
   description: '',
   main: 'index.js',
@@ -90,6 +106,8 @@ test('create global link', function (t) {
       t.equal(c, 0)
       t.equal(stderr, '', 'got expected stderr')
       t.has(out, /foo@1.0.0/, 'creates global link ok')
+      t.notMatch(out, /extraneous/, 'ls does not list any extraneous dependencies')
+      t.notMatch(out, /fooDep/, 'ls does not list transitive dependencies of linked packages')
       t.end()
     })
   })
@@ -190,6 +208,11 @@ function setup () {
   writeFileSync(
     path.join(link, 'package.json'),
     JSON.stringify(readJSON, null, 2)
+  )
+  mkdirp.sync(linkDep)
+  writeFileSync(
+    path.join(linkDep, 'package.json'),
+    JSON.stringify(readDepJSON, null, 2)
   )
   mkdirp.sync(linkScoped)
   writeFileSync(
