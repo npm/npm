@@ -14,7 +14,6 @@ var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
 
-
 test('README files shouldn`t be ignored with .npmignore', function (t) {
   var fixture = new Tacks(
     Dir({
@@ -56,7 +55,7 @@ test('README files shouldn`t be ignored with .npmignore', function (t) {
     t.ok(fileExists('README.en.md'), 'README.en.md included')
     done()
   })
-});
+})
 
 test('All README variants should always be included with `files` directive in package.json', function (t) {
   var fixture = new Tacks(
@@ -89,7 +88,7 @@ test('All README variants should always be included with `files` directive in pa
     t.ok(fileExists('README.en.md'), 'README.en.md included')
     done()
   })
-});
+})
 
 test('.npmignore should exclude files when it contains any of `unconditionally` included files', function (t) {
   var fixture = new Tacks(
@@ -110,7 +109,6 @@ test('.npmignore should exclude files when it contains any of `unconditionally` 
     done()
   })
 })
-
 
 function fileExists (file) {
   try {
