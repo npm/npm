@@ -91,7 +91,7 @@ test('tree-style', function (t) {
     if (err) throw err
     t.is(code, 0, 'result code')
     t.match(stdout, /modA@1.0.0/, 'modA got installed')
-    t.notMatch(stdout, /modB/, 'modB not installed')    
+    t.notMatch(stdout, /modB/, 'modB not installed')
     t.match(stderr, /Skipping failed optional dependency/, 'expected optional failure warning')
     t.match(stderr, /Not compatible with your operating system or architecture/, 'reason for optional failure')
     exists(t, modJoin(base, 'modA'), 'module A')
