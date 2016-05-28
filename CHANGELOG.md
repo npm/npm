@@ -1,3 +1,17 @@
+### v3.9.5 (2016-05-27):
+
+Just a quick point release. We had an issue where I (Kat) included the
+`.nyc_output/` directory in `npm@3.9.3` and `npm@3.9.4`. The issue got reported
+right after that second release
+([`#12873`](https://github.com/npm/npm/issues/12873)), and now there's this
+small point release that's there to fix the issue sooner.
+
+* [`f96aea0`](https://github.com/npm/npm/commit/f96aea085be981cdb59bd09f16da40717426f981)
+  [#12878](https://github.com/npm/npm/pull/12878)
+  Ignore `.nyc_output` to avoid an accidental publish or commit filled with
+  code coverage data.
+  ([@TheAlphaNerd](https://github.com/TheAlphaNerd))
+
 ### v3.9.4 (2016-05-26):
 
 Hey all! It's that time again!
