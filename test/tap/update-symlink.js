@@ -73,9 +73,36 @@ test('setup', function (t) {
 test('when update is called linked packages should be excluded', function (t) {
   common.npm(['update'], OPTS, function (err, c, out, stderr) {
     t.ifError(err)
+    t.equal(c, 0)
     t.has(out, /async@0.2.10/, 'updated ok')
     t.doesNotHave(stderr, /ERR!/, 'no errors in stderr')
-    server.done()
+    t.end()
+  })
+})
+
+test('when install is called and the package already exists as a link, outputs a warning if the requested version is not the same as the linked one', function (t) {
+  common.npm(['install', 'underscore'], OPTS, function (err, c, out, stderr) {
+    t.ifError(err)
+    t.equal(c, 0)
+
+    t.comment(out.trim())
+    t.comment(stderr.trim())
+    t.doesNotHave(out, /underscore/, 'linked package not updated')
+    t.has(stderr, /underscore/, 'warning output relating to linked package')
+    t.doesNotHave(stderr, /ERR!/, 'no errors in stderr')
+    t.end()
+  })
+})
+
+test('when install is called and the package already exists as a link, does not warn if the requested version is same as the linked one', function (t) {
+  common.npm(['install', 'underscore@1.3.1'], OPTS, function (err, c, out, stderr) {
+    t.ifError(err)
+    t.equal(c, 0)
+    t.comment(out.trim())
+    t.comment(stderr.trim())
+    t.doesNotHave(out, /underscore/, 'linked package not updated')
+    t.doesNotHave(stderr, /underscore/, 'no warning or error relating to linked package')
+    t.doesNotHave(stderr, /ERR!/, 'no errors in stderr')
     t.end()
   })
 })
