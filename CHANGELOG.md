@@ -1,3 +1,33 @@
+### v3.9.6 (2016-06-02):
+
+#### SMALL OUTPUT TWEAK
+
+* [`0bdc9d1`](https://github.com/npm/npm/commit/0bdc9d13b73df07e63a58470ea001fda490e5869)
+  [#12879](https://github.com/npm/npm/pull/12879)
+  The usage output for npm commands was somehow under the impression that
+  the singular form of `aliases` is `aliase`. This has been corrected to show
+  `alias` instead.
+  ([@intelliot](https://github.com/intelliot))
+
+#### DOC UPDATES
+
+* [`f771b49`](https://github.com/npm/npm/commit/f771b49f5d65bbef540c231fbfcca71cacdce4db)
+  [#12933](https://github.com/npm/npm/pull/12933)
+  Add `config.gypi` to list of files that are always ignored in the
+  `package.json` manpage.
+  ([@Jokero](https://github.com/Jokero))
+
+#### DEPENDENCY UPDATES
+
+* [`61c1d9c`](https://github.com/npm/npm/commit/61c1d9cd4b2296bd41d55a5c58e35ca5f028b9bc)
+  [#12926](https://github.com/npm/npm/pull/12926)
+  Removed unused dependency `lodash.isarray`.
+  ([@mmalecki](https://github.com/mmalecki))
+* [`168ed28`](https://github.com/npm/npm/commit/168ed2834b2c6db8bb39f81baadc0bf275807328)
+  [#12926](https://github.com/npm/npm/pull/12926)
+  Removed unused dependency `lodash.keys`.
+  ([@mmalecki](https://github.com/mmalecki))
+
 ### v3.9.5 (2016-05-27):
 
 Just a quick point release. We had an issue where I (Kat) included the
