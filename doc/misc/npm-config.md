@@ -663,6 +663,15 @@ standard output.
 The location to install global items.  If set on the command line, then
 it forces non-global commands to run in the specified folder.
 
+### preid
+
+* Default: null
+* Type: string
+
+A string to use as the prerelease identifier when incrementing the version of a package. For
+example, when performing a `patch` increment from `1.0.0` with `preid` set to `beta`, the new
+version will be `1.0.1-beta.0`.
+
 ### production
 
 * Default: false

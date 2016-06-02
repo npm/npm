@@ -33,6 +33,13 @@ resulting version number.  For example:
 
     npm version patch -m "Upgrade to %s for reasons"
 
+If supplied with the `--preid` (prerelease identifier) option and the `newVersion` argument is a
+prerelease version (one of `prerelease`, `prepatch`, `preminor`, `premajor`), the version will be
+incremented using the prerelease identifier given. For example, assuming that the current version is
+`1.0.0`, the following will increment the version to `1.0.1-rc.0`:
+
+    npm version prepatch --preid=rc
+
 If the `sign-git-tag` config is set, then the tag will be signed using
 the `-s` flag to git.  Note that you must have a default GPG key set up
 in your git config for this to work properly.  For example:
