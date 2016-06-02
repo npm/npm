@@ -202,6 +202,8 @@ Conversely, some files are always ignored:
 * `npm-debug.log`
 * `.npmrc`
 * `node_modules`
+* `.npmrc`
+* `config.gypi`
 
 ## main
 
