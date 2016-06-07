@@ -36,7 +36,8 @@ following scripts:
 Additionally, arbitrary scripts can be executed by running `npm
 run-script <stage>`. *Pre* and *post* commands with matching
 names will be run for those as well (e.g. `premyscript`, `myscript`,
-`postmyscript`).
+`postmyscript`). Scripts from dependencies can be run with `npm explore
+<pkg> -- npm run <stage>`.
 
 ## COMMON USES
 
