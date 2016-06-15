@@ -14,7 +14,7 @@ Scopes are a way of grouping related packages together, and also affect a few
 things about the way npm treats the package.
 
 Scoped packages can be published and installed as of `npm@2` and are supported
-by the public npm registry. The npm client is backwards-compatible with
+by the primary npm registry. The npm client is backwards-compatible with
 un-scoped registries, so it can be used to work with scoped and un-scoped
 registries at the same time.
 
@@ -56,11 +56,11 @@ Scoped packages can be published from the CLI as of `npm@2` and can be
 published to any registry that supports them, including the public npm
 registry.
 
-(As of 2015-04-19, the public npm registry **does** support scoped packages)
+(As of 2015-04-19, the primary npm registry **does** support scoped packages)
 
 If you wish, you may associate a scope with a registry; see below.
 
-### Publishing public scoped packages to the public npm registry
+### Publishing public scoped packages to the primary npm registry
 
 To publish a public scoped package, you must specify `--access public` with
 the initial publication.  This will publish the package and set access
@@ -80,7 +80,7 @@ desired, with `npm access` or on the npmjs.com website.
 ## Associating a scope with a registry
 
 Scopes can be associated with a separate registry. This allows you to
-seamlessly use a mix of packages from the public npm registry and one or more
+seamlessly use a mix of packages from the primary npm registry and one or more
 private registries, such as npm Enterprise.
 
 You can associate a scope with a registry at login, e.g.
