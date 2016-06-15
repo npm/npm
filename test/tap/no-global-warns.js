@@ -14,11 +14,7 @@ var toInstall = path.join(base, 'to-install')
 var config = 'prefix = ' + base
 var configPath = path.join(base, '_npmrc')
 
-var OPTS = {
-  env: {
-    'npm_config_userconfig': configPath
-  }
-}
+var OPTS = { }
 
 var installJSON = {
   name: 'to-install',
@@ -38,11 +34,18 @@ test('setup', function (t) {
 })
 
 test('no-global-warns', function (t) {
-  common.npm(['install', '-g', toInstall], OPTS, function (err, code, stdout, stderr) {
-    t.ifError(err, 'installed w/o error')
-    t.is(stderr, '', 'no warnings printed to stderr')
-    t.end()
-  })
+  common.npm(
+    [
+      'install', '-g',
+      '--userconfig=' + configPath,
+      toInstall
+    ],
+    OPTS,
+    function (err, code, stdout, stderr) {
+      t.ifError(err, 'installed w/o error')
+      t.is(stderr, '', 'no warnings printed to stderr')
+      t.end()
+    })
 })
 
 test('cleanup', function (t) {

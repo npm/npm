@@ -34,7 +34,7 @@ following scripts:
   stop and start scripts if no `restart` script is provided.
 
 Additionally, arbitrary scripts can be executed by running `npm
-run-script <pkg> <stage>`. *Pre* and *post* commands with matching
+run-script <stage>`. *Pre* and *post* commands with matching
 names will be run for those as well (e.g. `premyscript`, `myscript`,
 `postmyscript`).
 
@@ -71,7 +71,8 @@ npm will default some script values based on package contents.
 
 * `"install": "node-gyp rebuild"`:
 
-  If there is a `binding.gyp` file in the root of your package, npm will
+  If there is a `binding.gyp` file in the root of your package and you
+  haven't defined your own `install` or `preinstall` scripts, npm will
   default the `install` command to compile using node-gyp.
 
 ## USER
@@ -157,10 +158,10 @@ For example, if your package.json contains this:
       }
     }
 
-then the `scripts/install.js` will be called for the install,
-post-install, stages of the lifecycle, and the `scripts/uninstall.js`
-would be called when the package is uninstalled.  Since
-`scripts/install.js` is running for three different phases, it would
+then `scripts/install.js` will be called for the install
+and post-install stages of the lifecycle, and `scripts/uninstall.js`
+will be called when the package is uninstalled.  Since
+`scripts/install.js` is running for two different phases, it would
 be wise in this case to look at the `npm_lifecycle_event` environment
 variable.
 
@@ -210,7 +211,7 @@ above.
   by simply describing your package appropriately.  In general, this
   will lead to a more robust and consistent state.
 * Inspect the env to determine where to put things.  For instance, if
-  the `npm_config_binroot` environ is set to `/home/user/bin`, then
+  the `npm_config_binroot` environment variable is set to `/home/user/bin`, then
   don't try to install executables into `/usr/local/bin`.  The user
   probably set it up that way for a reason.
 * Don't prefix your script commands with "sudo".  If root permissions

@@ -35,12 +35,14 @@ var dependency = {
   bin: [ 'bin/foo' ]
 }
 
-var foo = function () {/*
+var extend = Object.assign || require('util')._extend
+
+var foo = function () { /*
 #!/usr/bin/env node
 
 if (process.argv.length === 8)
   console.log('npm-test-fine')
-*/}.toString().split('\n').slice(1, -1).join('\n')
+*/ }.toString().split('\n').slice(1, -1).join('\n')
 
 test('setup', function (t) {
   cleanup()
@@ -63,12 +65,12 @@ test('setup', function (t) {
 
   common.npm(['i', dep], {
     cwd: pkg,
-    env: {
+    env: extend({
       npm_config_cache: cache,
       npm_config_tmp: tmp,
       npm_config_prefix: pkg,
       npm_config_global: 'false'
-    }
+    }, process.env)
   }, function (err, code, stdout, stderr) {
     t.ifErr(err, 'npm i ' + dep + ' finished without error')
     t.equal(code, 0, 'npm i ' + dep + ' exited ok')

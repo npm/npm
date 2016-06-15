@@ -56,7 +56,7 @@ Scoped packages can be published from the CLI as of `npm@2` and can be
 published to any registry that supports them, including the public npm
 registry.
 
-(As of 2015-04-19, the primary npm registry **does** support scoped packages)
+(As of 2015-04-19, and with npm 2.0 or better, the primary npm registry **does** support scoped packages)
 
 If you wish, you may associate a scope with a registry; see below.
 
