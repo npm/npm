@@ -52,7 +52,7 @@ just specifying to require the module `mypackage` in the folder called `@myorg`.
 
 ## Publishing scoped packages
 
-Scoped packages can be published from the cli as of `npm@2` and can be
+Scoped packages can be published from the CLI as of `npm@2` and can be
 published to any registry that supports them, including the public npm
 registry.
 
