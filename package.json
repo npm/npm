@@ -98,7 +98,7 @@
     "unique-filename": "~1.1.0",
     "unpipe": "~1.0.0",
     "validate-npm-package-name": "~2.2.2",
-    "which": "~1.2.9",
+    "which": "~1.2.10",
     "wrappy": "~1.0.1",
     "write-file-atomic": "~1.1.4"
   },
