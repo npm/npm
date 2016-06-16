@@ -5,6 +5,7 @@ var fs = require("graceful-fs")
 var join = require("path").join
 var mkdirp = require("mkdirp")
 var rimraf = require("rimraf")
+var semver = require("semver")
 
 var pkg = join(__dirname, "prepublish_package")
 var tmp = join(pkg, "tmp")
@@ -57,7 +58,12 @@ test("test", function (t) {
     t.equal(code, 0, "pack finished successfully")
     t.ifErr(err, "pack finished successfully")
 
-    t.notOk(stderr, "got stderr data:" + JSON.stringify("" + stderr))
+    // https://github.com/npm/npm/pull/13077
+    if (semver.gte(process.version, "6.0.0")) {
+      t.is(stderr.trim().split(/\n/).length, 3)
+    } else {
+      t.notOk(stderr, "got stderr data: " + JSON.stringify("" + stderr))
+    }
     var c = stdout.trim()
     var regex = new RegExp("" +
       "> npm-test-prepublish@1.2.5 prepublish [^\\r\\n]+\\r?\\n" +

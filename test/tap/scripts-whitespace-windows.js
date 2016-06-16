@@ -4,6 +4,7 @@ var path = require('path')
 var mkdirp = require('mkdirp')
 var osenv = require('osenv')
 var rimraf = require('rimraf')
+var semver = require('semver')
 var test = require('tap').test
 
 var common = require('../common-tap')
@@ -21,7 +22,7 @@ var json = {
   description: 'a test',
   repository: 'git://github.com/robertkowalski/bogus',
   scripts: {
-    foo: 'foo --title \"Analysis of\" --recurse -d report src'
+    foo: 'foo --title "Analysis of" --recurse -d report src'
   },
   dependencies: {
     'scripts-whitespace-windows-dep': '0.0.1'
@@ -35,12 +36,12 @@ var dependency = {
   bin: [ 'bin/foo' ]
 }
 
-var foo = function () {/*
+var foo = function () { /*
 #!/usr/bin/env node
 
 if (process.argv.length === 8)
   console.log('npm-test-fine')
-*/}.toString().split('\n').slice(1, -1).join('\n')
+*/ }.toString().split('\n').slice(1, -1).join('\n')
 
 test('setup', function (t) {
   cleanup()
@@ -72,7 +73,12 @@ test('setup', function (t) {
   }, function (err, code, stdout, stderr) {
     t.ifErr(err, 'npm i ' + dep + ' finished without error')
     t.equal(code, 0, 'npm i ' + dep + ' exited ok')
-    t.notOk(stderr, 'no output stderr')
+    // https://github.com/npm/npm/pull/13077
+    if (semver.gte(process.version, '6.0.0')) {
+      t.is(stderr.trim().split(/\n/).length, 3)
+    } else {
+      t.notOk(stderr, 'no output stderr')
+    }
     t.end()
   })
 })

@@ -5,6 +5,7 @@ var fs = require("graceful-fs")
 var join = require("path").join
 var mkdirp = require("mkdirp")
 var rimraf = require("rimraf")
+var semver = require("semver")
 
 var pkg      = join(__dirname, "scoped_package")
 var manifest = join(pkg, "package.json")
@@ -66,7 +67,12 @@ test("test", function (t) {
   }, function(err, code, stdout, stderr) {
     t.ifErr(err, "npm pack finished without error")
     t.equal(code, 0, "npm pack exited ok")
-    t.notOk(stderr, "got stderr data: " + JSON.stringify("" + stderr))
+    // https://github.com/npm/npm/pull/13077
+    if (semver.gte(process.version, "6.0.0")) {
+      t.is(stderr.trim().split(/\n/).length, 3)
+    } else {
+      t.notOk(stderr, "got stderr data: " + JSON.stringify("" + stderr))
+    }
     stdout = stdout.trim()
     var regex = new RegExp("scope-generic-package-90000.100001.5.tgz", "ig")
     t.ok(stdout.match(regex), "found package")
