@@ -28,6 +28,7 @@ test('childDependencySpecifier', function (t) {
       foo: {
         '^1.0.0': {
           raw: 'foo@^1.0.0',
+          escapedName: 'foo',
           scope: null,
           name: 'foo',
           rawSpec: '^1.0.0',
