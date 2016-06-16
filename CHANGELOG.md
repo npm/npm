@@ -1,3 +1,235 @@
+### v3.10.0 (2016-06-16):
+
+Do we have a release for you!  We have our first new lifecycle since
+`version`, a new progress bar and a bunch of bug fixes.
+[I'm](https://github.com/iarna) really excited about this release, let me
+tell you!!
+
+#### DANGER: PUBLISHING ON NODE 6.0.0
+
+Publishing and packing are buggy under Node versions greater than 6.0.0.
+Please use Node.js LTS (4.4.x) to publish packages.  See
+[#5082](https://github.com/npm/npm/issues/5082) for details and current
+status.
+
+* [`4e52cef`](https://github.com/npm/npm/commit/4e52cef3d4170c8abab98149666ec599f8363233)
+  [#13077](https://github.com/npm/npm/pull/13077)
+  Warn when using Node 6+.
+  ([@othiym23](https://github.com/othiym23))
+
+#### NEW LIFECYCLE SCRIPT: `shrinkwrap`
+
+* [`e8c80f2`](https://github.com/npm/npm/commit/e8c80f20bfd5d1618e85dbab41660d6f3e5ce405)
+  [#10744](https://github.com/npm/npm/issues/10744)
+  You can now add `preshrinkwrap`, `shrinkwrap` and `postshrinkwrap` to your `package.json`
+  scripts section. They are run when you run `npm shrinkwrap` or `npm install --save` with
+  an `npm-shrinkwrap.json` present in your module directory.
+
+  `preshrinkwrap` is run prior to generating the new `npm-shrinkwrap.json` and the other two
+  are run after.
+  ([@SimenB](https://github.com/SimenB))
+
+#### NEW PROGRESS BAR
+
+![Install with new progress bar](http://shared.by.re-becca.org/misc-images/new-gauge-color.gif)
+
+We have a new progress bar and a bunch of related improvements!
+
+##### BLOCKING BLOCKING
+
+**!!WARNING!!** As a part of this change we now explicitly set
+`process.stdout` and `process.stderr` to be _blocking_ if they are ttys,
+using [set-blocking](https://www.npmjs.com/package/set-blocking). This is
+necessary to ensure that we can fully erase the progress bar before we start
+writing other things out to the console.
+
+Prior to Node.js 6.0.0, they were already blocking on Windows, and MacOS. 
+Meanwhile, on Linux they were always non-blocking but had large (64kb)
+buffers, which largely made this a non-issue there.  Starting with Node.js
+6.0.0 they became non-blocking on MacOS and that caused some unexpected
+issues (see [nodejs/node#6456](https://github.com/nodejs/node/issues/6456)).
+
+If you are a Linux user, it's plausible that this might have a performance
+impact if your terminal can't keep up with output rate.  If you experience
+this, we want to know! Please [file an
+issue](https://github.com/npm/npm/issues/new) at our issue tracker.
+
+##### BETTER LAYOUT
+
+Let's start by talking about what goes into the new progress bar:
+
+```
+⸨░░░░░░░░░░⠂⠂⠂⠂⠂⠂⠂⠂⸩ ⠹ loadExtraneous: verb afterAdd /Users/rebecca/.npm/null/0.0.0/package/package.json written
+ ↑‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾  ↑ ‾‾‾‾‾‾‾‾‾↑‾‾‾‾   ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾↑‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+ percent complete     spinner    current thing we're doing     most recent log line
+```
+
+The _spinner_ is intended as an activity indicator–it moves whenever
+npm sends something to its logs.  It also spins at a constant speed while
+waiting on the network.
+
+The _current thing we're doing_ relates to how we track how much work has
+been done.  It's the name of the unit of work we most recently started or
+completed some of.  Sometimes these names are more obvious than others and
+that's something we'll look at improving over time.
+
+And finally, the _most recent log line_ is exactly that, it's the most
+recent line that you would have seen if you were running with
+`--loglevel=silly` or were watching the `npm-debug.log`.  These are written
+to be useful to the npm developers above all else, so they may sometimes be
+a little cryptic.
+
+* [`6789978`](https://github.com/npm/npm/commit/6789978ab0713f67928177a9109fed43953ccbda)
+  [#13075](https://github.com/npm/npm/pull/13075)
+  `npmlog@3.1.2`: Update to the latest npmlog, which includes the new and
+  improved progress bar layout.
+  ([@iarna](https://github.com/iarna))
+
+##### MORE PERFORMANT
+
+The underlying code for the progress bar was rewritten, in part with
+performance in mind.  Previously whenever you updated the progress bar it
+would check an internal variable for how long it had been since the last
+update and if it had been long enough, it would print out what you gave it. 
+With the new progress bar we do updates at a fixed interval (with
+`setInterval`) and "updating" the progress bar just updates some variables
+that will be used when the next tick of the progress bar happens. Currently
+progress bar updates happen every 50ms, although that's open to tuning.
+
+##### WIDE(R) COMPATIBILITY
+
+I spent a lot of time working our Unicode support.  There were a few issues
+that plagued us:
+
+Previously one of the characters we used was _ambiguous width_ which means
+that it was possible to configure your terminal to display it as _full
+width_.  If you did this, the output would be broken because we assumed it
+was a _half width_ character. We no longer use any of these characters.
+
+Previously, we defaulted to using Unicode on Windows.  This isn't a safe
+assumption, however, as folks in non-US locales often use other code pages
+for their terminals.  Windows doesn't provide* any facility available to
+Node.js for determining the current code page, so we no longer try to use
+Unicode on Windows.
+
+_\* The facilities it does provide are a command line tool and a windows
+system call.  The former isn't satisfactory for speed reasons and the latter
+can't be accessed from a JS-only Node.js program._
+
+##### FOR THE FUTURE: THEMES
+
+The new version of the progress bar library supports plugable themes. Adding
+support to npm shouldn't be too difficult. The built in themes are:
+
+* `ASCII` – The fallback theme which is always available.
+* `colorASCII` – Inverts the color of the completed portion of the progress
+  bar.  The default on Windows and usually on Linux.  (Color support is
+  determined by looking at the `TERM` environment variable.)
+* `brailleSpinner` – A braille based spinner and other unicode enhancements. MacOS only.
+* `colorBrailleSpinner` – The default on MacOS, a combination of the above two.
+
+##### LESS GARBLED OUTPUT
+
+As a part of landing this I've also taken the opportunity to more
+systematically disable the progress bar prior to printing to `stdout` or
+running external commands (in particular: git).  This should ensure that the
+progress bar doesn't get left on screen after something else prints
+something.  We also are now much more zealous about erasing the progress bar
+on exit, so if you `Ctrl-C` out of an install we'll still cleanup the
+progress bar.
+
+* [`63f153c`](https://github.com/npm/npm/commit/63f153c743f9354376bfb9dad42bd028a320fd1f)
+  [#13075](https://github.com/npm/npm/pull/13075)
+  Consistently make sure that the progress bar is hidden before we try to
+  write to stdout.
+  ([@iarna](https://github.com/iarna))
+* [`8da79fa`](https://github.com/npm/npm/commit/8da79fa60de4972dca406887623d4e430d1609a1)
+  [#13075](https://github.com/npm/npm/pull/13075)
+  Be more methodical about disabling progress bars before running external
+  commands.
+  ([@iarna](https://github.com/iarna))
+
+#### REPLACE `process.nextTick` WITH `asap` ASAP
+
+* [`5873b56`](https://github.com/npm/npm/commit/5873b56cb315437dfe97e747811c0b9c297bfd38)
+  [`254ad7e`](https://github.com/npm/npm/commit/254ad7e38f978b81046d242297fe8b122bfb5852)
+  [#12754](https://github.com/npm/npm/issues/12754)
+  Use `asap` in preference over `process.nextTick` to avoid recursion warnings.
+  Under the hood `asap` uses `setImmediate` when available and falls back to
+  `process.nextTick` when it's not.  Versions of node that don't support
+  `setImmediate` have a version of `process.nextTick` that actually behaves
+  like the current `setImmediate`.
+  ([@lxe](https://github.com/lxe))
+
+#### FIXES AND REFACTORING
+
+Sometimes the installer would get it into its head that it could move or
+remove things that it really shouldn't have.  While the reproducers for this were
+often a bit complicated (the core reproducer involved five symlinks(!)), it turns
+out this is an easy scenario to end up in if your project has a bunch of small
+modules and you're linking them while developing them.
+
+Fixing this ended up involving doing an important and overdue rewrite of how
+the installer keeps track of (and interrogates) the relationships between
+modules.  This likely fixes other related bugs, and in the coming weeks
+we'll verify and close them as we find them.  There are a whole slew of
+commits related to this rewrite, and if you'd like to learn more check
+out the PR where I describe what I did in detail: [#12775](https://github.com/npm/npm/pull/12775)
+
+* [`8f3e111`](https://github.com/npm/npm/commit/8f3e111fdd2ce7824864f77b04e5206bdaf961a1)
+  [`c0b0ed1`](https://github.com/npm/npm/commit/c0b0ed1e9945c01b2e68bf22af3fe4005aa4bcd4)
+  [#10800](https://github.com/npm/npm/issues/10800)
+  Remove install pruning stage–this was obsoleted by making the installer keep
+  itself up to date as it goes along. This is NOT related to `npm prune`.
+  ([@iarna](https://github.com/iarna))
+
+#### MAKE OUTDATED MORE WIDELY LEGIBLE
+
+* [`21c60e9`](https://github.com/npm/npm/commit/21c60e9bb56d47da17b79681f2142b3dcf4c804b)
+  [#12843](https://github.com/npm/npm/pull/12843)
+  In `npm outdated, stop coloring the _Location_ and _Package Type_ columns.
+  Previously they were colored dark gray, which was hard to read for some
+  users.
+  ([@tribou](https://github.com/tribou))
+
+#### DOCUMENTATION UPDATE
+
+* [`eb0a72e`](https://github.com/npm/npm/commit/eb0a72eb95862c1d0d41a259d138ab601d538793)
+  [#12983](https://github.com/npm/npm/pull/12983)
+  Describe how to run the lifecycle scripts of dependencies. How you do
+  this changed with `npm` v2.
+  ([@Tapppi](https://github.com/Tapppi))
+
+### DEPENDENCY UPDATES
+
+* [`da743dc`](https://github.com/npm/npm/commit/da743dc2153fed8baca3dada611b188f53ab5931)
+  `which@1.2.10`:
+  Fix bug where unnecessary special case path handling for Windows could
+  produce unexpected results on Unix systems.
+  ([@isaacs](https://github.com/isaacs))
+* [`4533bd5`](https://github.com/npm/npm/commit/4533bd501d54aeedfec3884f4fd54e8c2edd6020)
+  `npm-user-validate@0.1.4`:
+  Validate the length of usernames.
+  ([@aredridel](https://github.com/aredridel))
+* [`4a18922`](https://github.com/npm/npm/commit/4a18922e56f9dc902fbb4daa8f5fafa4a1b89376)
+  `glob@7.0.4`:
+  Fixes issues with Node 6 and "long or excessively symlink-looping paths".
+  ([@isaacs](https://github.com/isaacs))
+* [`257fe11`](https://github.com/npm/npm/commit/257fe11052987e5cfec2abdf52392dd95a6c6ef3)
+  `npm-package-arg@4.2.0`:
+  Add `escapedName` to the result.  It is suitable for passing through to a
+  registry without further processing.
+  ([@nexdrew](https://github.com/nexdrew))
+* [`dda3ca7`](https://github.com/npm/npm/commit/dda3ca70f74879106589ef29e167c8b91ef5aa4c)
+  `wrappy@1.0.2`
+  ([@zkat](https://github.com/zkat))
+* [`25f1db5`](https://github.com/npm/npm/commit/25f1db504d0fd8c97211835f0027027fe95e0ef3)
+  `readable-stream@2.1.4`
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+* [`9d64fe6`](https://github.com/npm/npm/commit/9d64fe676ebc6949c687ffb85bd93eca3137fc0d)
+  `abbrev@1.0.9`
+  ([@isaacs](https://github.com/isaacs))
+
 ### v3.9.6 (2016-06-02):
 
 #### SMALL OUTPUT TWEAK
