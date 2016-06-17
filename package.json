@@ -97,7 +97,7 @@
     "validate-npm-package-license": "~3.0.1",
     "validate-npm-package-name": "~2.2.2",
     "which": "~1.2.8",
-    "wrappy": "~1.0.1",
+    "wrappy": "~1.0.2",
     "write-file-atomic": "~1.1.4"
   },
   "bundleDependencies": [
