@@ -44,7 +44,7 @@
     "editor": "~1.0.0",
     "fs-vacuum": "~1.2.9",
     "fs-write-stream-atomic": "~1.0.8",
-    "fstream": "~1.0.8",
+    "fstream": "~1.0.10",
     "fstream-npm": "~1.1.0",
     "glob": "~7.0.4",
     "graceful-fs": "~4.1.4",
