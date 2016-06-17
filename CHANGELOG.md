@@ -25,8 +25,8 @@ status.
   scripts section. They are run when you run `npm shrinkwrap` or `npm install --save` with
   an `npm-shrinkwrap.json` present in your module directory.
 
-  `preshrinkwrap` is run prior to generating the new `npm-shrinkwrap.json` and the other two
-  are run after.
+  `preshrinkwrap` and `shrinkwrap` is run prior to generating the new `npm-shrinkwrap.json`
+  and `postshrinkwrap` is run after.
   ([@SimenB](https://github.com/SimenB))
 
 #### NEW PROGRESS BAR
