@@ -1,3 +1,92 @@
+### v2.15.7 (2016-06-16):
+
+It pains me greatly that we haven't been able to fix
+[#5082](https://github.com/npm/npm/issues/5082) yet, but warning you away from
+potentially publishing incomplete packages takes priority over feeling cheesy
+about landing a warning to help keep y'all out of trouble, so here you go
+(_please read this next bit_ (_please clap_)):
+
+#### DANGER: PUBLISHING ON NODE 6.0.0
+
+Publishing and packing are buggy under Node versions greater than 6.0.0.
+Please use Node.js LTS (4.4.x) to publish packages.  See
+[#5082](https://github.com/npm/npm/issues/5082) for details and current
+status.
+
+* [`dff00ce`](https://github.com/npm/npm/commit/dff00cedd56b9c04370f840299a7e657a7a835c6)
+  [#13077](https://github.com/npm/npm/pull/13077)
+  Warn when using Node 6+.
+  ([@othiym23](https://github.com/othiym23))
+
+#### PACKAGING CHANGES
+
+* [`1877171`](https://github.com/npm/npm/commit/1877171648e20595a82de34073b643f7e01a339f)
+  [#12873](https://github.com/npm/npm/issues/12873)
+  Ignore `.nyc_output`. This will help avoid an accidental publish or commit filled with
+  code coverage data.
+  ([@TheAlphaNerd](https://github.com/TheAlphaNerd))
+
+#### DOCUMENTATION CHANGES
+
+* [`470ae86`](https://github.com/npm/npm/commit/470ae86e052ae2f29ebec15b7547230b6240042e)
+  [#12983](https://github.com/npm/npm/pull/12983)
+  Describe how to run the lifecycle scripts of dependencies. How you do
+  this changed with `npm` v2.
+  ([@Tapppi](https://github.com/Tapppi))
+* [`9cedf37`](https://github.com/npm/npm/commit/9cedf37e5a3e26d0ffd6351af8cac974e3e011c2)
+  [#12776](https://github.com/npm/npm/pull/12776)
+  Remove mention of `<pkg>` arg for `run-script`.
+  ([@fibo](https://github.com/fibo))
+* [`55b8424`](https://github.com/npm/npm/commit/55b8424d7229f2021cac55f0b03de72403e7c0ff)
+  [#12840](https://github.com/npm/npm/pull/12840)
+  Remove sexualized language from comment.
+  ([@geek](https://github.com/geek))
+* [`d6bf0c3`](https://github.com/npm/npm/commit/d6bf0c393788a6398bf80b41c57956f2dbcf3b39)
+  [#12802](https://github.com/npm/npm/pull/12802)
+  Small grammar fix in `doc/cli/npm.md`.
+  ([@andresilveira](https://github.com/andresilveira))
+
+#### DEPENDENCY UPDATES
+
+* [`2c2c568`](https://github.com/npm/npm/commit/2c2c56857ff801d5fe1b6d3157870cd16e65891b)
+  `readable-stream@2.1.4`: Brought up to date with Node 6.1.0's streams implementation.
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+* [`d682e64`](https://github.com/npm/npm/commit/d682e6445845b0a2584935d5e2942409c43f6916)
+  [npm/npm-user-validate#8](https://github.com/npm/npm-user-validate/pull/8)
+  `npm-user-validate@0.1.4`: Add a maximum length limit for usernames based on
+  the (arbitrary) limit imposed by the primary npm registry.
+  ([@aredridel](https://github.com/aredridel))
+* [`448b65b`](https://github.com/npm/npm/commit/448b65b48cda3b782b714057fb4b8311cc1fa36a)
+  `which@1.2.10`: Remove unused dependency `is-absolute`, bug fixes.
+  ([@isaacs](https://github.com/isaacs))
+* [`7d15434`](https://github.com/npm/npm/commit/7d15434f0b0af8e70b119835b21968217224664f)
+  `require-inject@1.4.0`: Add `requireInject.withEmptyCache` and
+  `requireInject.installGlobally.andClearCache` to support loading modules to be
+  injected with an empty cache.
+  ([@iarna](https://github.com/iarna))
+* [`31845c0`](https://github.com/npm/npm/commit/31845c081bc6f3f8a2f3d83a3c792dccffbaa2a8)
+  `init-package-json@1.9.4`:
+  Replace use of reserved identifier `package` in, uh, the package.
+  ([@adius](https://github.com/adius))
+* [`d73ef3e`](https://github.com/npm/npm/commit/d73ef3e6b18d4905de668c5115bc6042905a02d9)
+  `glob@7.0.4`: Use userland `fs.realpath` implementation to get glob working under Node 6.
+  ([@isaacs](https://github.com/isaacs))
+* [`b47da85`](https://github.com/npm/npm/commit/b47da85cf83b946f2c8d29ab612c92028f31f6b0)
+  `inflight@1.0.5`: Correct link to package repository, add `"files"` stanza.
+  ([@iarna](https://github.com/iarna), [@jamestalmage](https://github.com/jamestalmage))
+* [`04815e4`](https://github.com/npm/npm/commit/04815e436035de785279fd000cdbc821cc1f3447)
+  [npm/npmlog#32](https://github.com/npm/npmlog/pull/32)
+  `npmlog@2.0.4`: Add `"files"` stanza to `package.json`.
+  ([@jamestalmage](https://github.com/jamestalmage))
+* [`9e29ad2`](https://github.com/npm/npm/commit/9e29ad227300bb970e7bcd21029944d4733e40db)
+  `wrappy@1.0.2`: Add `"files"` stanza to `package.json`.
+  ([@jamestalmage](https://github.com/jamestalmage))
+* [`44af4d4`](https://github.com/npm/npm/commit/44af4d475ac65bdce6d088173273ce4a4f74a49e)
+  `abbrev@1.0.9` ([@jorrit](https://github.com/jorrit))
+* [`6c977c0`](https://github.com/npm/npm/commit/6c977c0031d074479a26c7bec6ec83fd6c6526b2)
+  `npm-registry-client@7.1.2`: Add support for newer versions of `npmlog`.
+  ([@iarna](https://github.com/iarna))
+
 ### v2.15.6 (2016-05-12):
 
 I have a couple of doc fixes and a shrinkwrap fix for you all this week.
