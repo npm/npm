@@ -40,7 +40,7 @@ var fixture = new Tacks(
           version: '1.0.0'
         })
       })
-    }),
+    })
   })
 )
 
