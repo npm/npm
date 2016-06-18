@@ -3,6 +3,7 @@ var test = require('tap').test
 var path = require('path')
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
+var semver = require('semver')
 var fs = require('graceful-fs')
 var common = require('../common-tap')
 
@@ -93,7 +94,12 @@ test('tree-style', function (t) {
     t.match(stdout, /modA@1.0.0/, 'modA got installed')
     t.notMatch(stdout, /modB/, 'modB not installed')
     var stderrlines = stderr.trim().split(/\n/)
-    t.is(stderrlines.length, 2, 'two lines of warnings')
+    // https://github.com/npm/npm/pull/13077
+    if (semver.gte(process.version, '6.0.0')) {
+      t.is(stderrlines.length, 5)
+    } else {
+      t.is(stderrlines.length, 2, 'two lines of warnings')
+    }
     t.match(stderr, /Skipping failed optional dependency/, 'expected optional failure warning')
     t.match(stderr, /Not compatible with your operating system or architecture/, 'reason for optional failure')
     exists(t, modJoin(base, 'modA'), 'module A')
