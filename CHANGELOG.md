@@ -1,3 +1,21 @@
+### v3.10.2 (2016-06-17):
+
+This is a quick hotfix release with two small bug fixes.  First, there was
+an issue where the new progress bar would overwrite interactive prompts,
+that is, those found in `npm login` and `npm init`.  Second, if the
+directory you were running `npm outdated` on was a bad link or otherwise had
+unrecoverable errors then npm would crash instead of printing the error.
+
+* [`fbefb86`](https://github.com/npm/npm/commit/fbefb8675b26320b295f481b4872ce99f0180807)
+  [`7779e9f`](https://github.com/npm/npm/commit/7779e9fb9430f6547532c67f2471864d62bbd5bc)
+  [#13105](https://github.com/npm/npm/issues/13105)
+  Disable progress bar in `adduser` and `init`.
+* [`6a33b2c`](https://github.com/npm/npm/commit/6a33b2c13f637a41e25cd0339925bc430b50358a)
+  [#13115](https://github.com/npm/npm/issues/13115)
+  Ensure that errors reading the package tree for `outdated` does not result
+  in crashs.
+  ([@iarna](https://github.com/iarna))
+
 ### v3.10.1 (2016-06-17):
 
 There are two very important bug fixes and one long-awaited (and signifcant!)
