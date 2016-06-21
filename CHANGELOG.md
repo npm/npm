@@ -88,12 +88,12 @@ unrecoverable errors then npm would crash instead of printing the error.
 * [`6a33b2c`](https://github.com/npm/npm/commit/6a33b2c13f637a41e25cd0339925bc430b50358a)
   [#13115](https://github.com/npm/npm/issues/13115)
   Ensure that errors reading the package tree for `outdated` does not result
-  in crashs.
+  in crashes.
   ([@iarna](https://github.com/iarna))
 
 ### v3.10.1 (2016-06-17):
 
-There are two very important bug fixes and one long-awaited (and signifcant!)
+There are two very important bug fixes and one long-awaited (and significant!)
 deprecation in this hotfix release. [Hold on.](http://butt.holdings/)
 
 #### *WHOA*
@@ -225,7 +225,7 @@ Node.js 0.10 and 0.12, it's unlikely that patches that rely on ES 2015
 functionality will land anytime soon.
 
 Looking forward, the team's current plan is to drop support for Node.js 0.10
-when its LTS maintenace window expires in October, 2016, and 0.12 when its
+when its LTS maintenance window expires in October, 2016, and 0.12 when its
 maintenance / LTS window ends at the end of 2016. We will also drop support for
 Node.js 5.x when Node.js 6 becomes LTS and Node.js 7 is released, also in the
 October-December 2016 timeframe.
