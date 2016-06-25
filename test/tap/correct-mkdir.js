@@ -57,6 +57,37 @@ test('correct-mkdir: no race conditions', function (t) {
   correctMkdir(cache_dir, handleCallFinish)
 })
 
+test('correct-mkdir: ignore ENOENTs from chownr', function (t) {
+  var mock_fs = {}
+  mock_fs.stat = function (path, cb) {
+    if (path === cache_dir) {
+      cb(null, {
+        isDirectory: function () {
+          return true
+        }
+      })
+    } else {
+      assert.ok(false, 'Unhandled stat path: ' + path)
+    }
+  }
+  var mock_chownr = function (path, uid, gid, cb) {
+    cb({code: 'ENOENT'})
+  }
+  var mocks = {
+    'graceful-fs': mock_fs,
+    'chownr': mock_chownr
+  }
+  var correctMkdir = requireInject('../../lib/utils/correct-mkdir.js', mocks)
+
+  function handleCallFinish (err) {
+    t.ifErr(err, 'chownr\'s ENOENT errors were ignored')
+    t.end()
+  }
+  correctMkdir(cache_dir, handleCallFinish)
+})
+
+// NEED TO RUN LAST
+
 // These test checks that Windows users are protected by crashes related to
 // unexpectedly having a UID/GID other than 0 if a user happens to add these
 // variables to their environment. There are assumptions in correct-mkdir
