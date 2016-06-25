@@ -1,16 +1,17 @@
-<!-- Thank you for contributing to npm! Please review this checklist
-      before submitting your issue.
+<!--
+    Thank you for contributing to npm! Please review this checklist
+    before submitting your issue.
 
-      Please check if there's a solution in the troubleshooting wiki:
-        https://github.com/npm/npm/wiki/Troubleshooting
+    - Please check if there's a solution in the troubleshooting wiki:
+      https://github.com/npm/npm/wiki/Troubleshooting
 
-      Also ensure that your new issue conforms to npm's contribution guidelines:
-        https://github.com/npm/npm/wiki/Contributing-Guidelines
+    - Also ensure that your new issue conforms to npm's contribution guidelines:
+      https://github.com/npm/npm/wiki/Contributing-Guidelines
 
-      Participation in this open source project is subject to the npm Code of Conduct:
-        https://www.npmjs.com/policies/conduct
+    - Participation in this open source project is subject to the npm Code of Conduct:
+      https://www.npmjs.com/policies/conduct
 
-      If you're here to provide a feature request, uncomment the final block below.
+    If you're here to provide a feature request, uncomment the final block below.
 -->
 
 ### I'm opening this issue because:
@@ -34,9 +35,10 @@
 
 #### Operating system version and distribution:
 
-<!-- operating systems: Linux, Windows 7, Windows 10, OS X 10.11.5, SmartOS
-     distributions: Ubuntu, Arch
-     ('uname -a' output is also helpful here, on non-Windows systems)
+<!--
+    operating systems: Linux, Windows 7, Windows 10, OS X 10.11.5, SmartOS
+    distributions: Ubuntu, Arch
+    ('uname -a' output is also helpful here, on non-Windows systems)
 -->
 
 #### Containerization or virtualization environment:
@@ -49,10 +51,11 @@
 
 #### How can the problem be reproduced?
 
-<!-- Please provide minimal steps to reproducing the problem.
-     Include a gist of your npm-debug.log file.
-     If you've never used gist, read here:
-      https://github.com/EmmaRamirez/how-to-submit-your-npm-debug-log
+<!--
+    Please provide minimal steps to reproducing the problem.
+    Include a gist of your npm-debug.log file.
+    If you've never used gist, read here:
+     https://github.com/EmmaRamirez/how-to-submit-your-npm-debug-log
 -->
 
 <!--
