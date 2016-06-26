@@ -271,6 +271,12 @@ global `node_modules` folder. Only your direct dependencies will show in
 `node_modules` and everything they depend on will be flattened in their
 `node_modules` folders. This obviously will eliminate some deduping.
 
+The `--ignore-versions-after=date` will cause npm to ignore versions of any package
+released after the given date.  This is a useful workaround for bugs in recent releases
+of subdeps that you don't have controlled by a shrinkwrap.  `date` may be anything
+that the `Date` constructor would parse correctly; if it is invalid, this option will
+have no effect.
+
 The `--ignore-scripts` argument will cause npm to not execute any 
 scripts defined in the package.json. See `npm-scripts(7)`.
 
