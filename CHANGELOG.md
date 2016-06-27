@@ -1,3 +1,251 @@
+### v3.10.3 (2016-06-23)
+
+Given that we had not one, but two updates to our RC this past week, it
+should come as no surprise that this week's full release is a bit
+lighter. We have some documentation patches and a couple of bug fixes via
+dependency updates.
+
+If you haven't yet checked out last week's release,
+[v3.10.0](https://github.com/npm/npm/releases/tag/v3.10.0)
+and the two follow up releases
+[v3.10.1](https://github.com/npm/npm/releases/tag/v3.10.1)
+and
+[v3.10.2](https://github.com/npm/npm/releases/tag/v3.10.2),
+you really should do so. They're the most important releases we've had in
+quite a while, fixing a bunch of critical bugs (including an issue
+impacting publishing with Node.js 6.x) and of course, bringing in the new
+and improved progress bar.
+
+#### BUM SYMLINKS BURN NO MORE
+
+There's been a bug lurking where broken symlinks in your `node_modules`
+folder could cause all manner of mischief, from crashes to empty `npm ls`
+results. The intrepid [@watilde](https://github.com/watilde) tracked this
+down for us.
+
+This addresses the root cause of the outdated crasher we protected
+against earlier this week in
+[#13115](https://github.com/npm/npm/issues/13115).
+
+This also fixes [#9564](https://github.com/npm/npm/issues/9564), the
+problem where a bad symlink in your global modules would result in an
+empty result when you ran `npm ls -g`.
+
+This ALSO likely fixes numerous "Missing argument #1" errors. (But surely
+not all of them as that's actually just a generic arity and
+type-validation failure.)
+
+* [`ca92ac4`](https://github.com/npm/npm/commit/ca92ac455b841a708dd89262ff88d503b125d717)
+  [npm/read-package-tree#6](https://github.com/npm/read-package-tree/pull/6)
+  `read-package-tree@5.1.5`:
+  Make bad symlinks be non-fatal errors when reading the tree off disk.
+  ([@watilde](https://github.com/watilde))
+
+#### BETTER UNICODE DETECTION
+
+* [`6c3f7f0`](https://github.com/npm/npm/commit/6c3f7f043f09fc2aa19ffd3f956787635fa6f4d0)
+  `has-unicode@2.0.1`:
+  Fix unicode detection on a number of Linux distributions.
+  ([@Darkhogg](https://github.com/Darkhogg)) ([@gagern](https://github.com/gagern))
+
+
+#### DOCUMENTATION FIXES
+
+* [`b9243ee`](https://github.com/npm/npm/commit/b9243ee60a3d60505c2502dc8633811b42c8aaea)
+  [#13127](https://github.com/npm/npm/pull/13127)
+  Remove extra backtick from `npm ls` documentation.
+  ([@shvaikalesh](https://github.com/shvaikalesh))
+* [`e05c0c2`](https://github.com/npm/npm/commit/e05c0c243cc702f9c392c001f668a90b57eaeb0e)
+  [iarna/has-unicode#3](https://github.com/iarna/has-unicode/pull/3)
+  [iarna/has-unicode#4](https://github.com/iarna/has-unicode/pull/4)
+  [#13084](https://github.com/npm/npm/pull/13084)
+  Correct changelog entry for shrinkwrap lifecycle order.
+  ([@SimenB](https://github.com/SimenB))
+* [`823994f`](https://github.com/npm/npm/commit/823994f100a0e59e1dd109e312811f971968ec75)
+  [#13080](https://github.com/npm/npm/pull/13080)
+  Describe using `npm pack` to see a dry run of publication results in
+  the `npm publish` documentation.
+  ([@laughinghan](https://github.com/laughinghan))
+
+#### DEPENDENCY UPDATES
+
+* [`e44d2db`](https://github.com/npm/npm/commit/e44d2db1ad0d860ca08e99c81135bd399fb733b1)
+  `aproba@1.0.4`: Documentation updates and minor refactoring.
+  ([@iarna](https://github.com/iarna))
+
+### v3.10.2 (2016-06-17):
+
+This is a quick hotfix release with two small bug fixes.  First, there was
+an issue where the new progress bar would overwrite interactive prompts,
+that is, those found in `npm login` and `npm init`.  Second, if the
+directory you were running `npm outdated` on was a bad link or otherwise had
+unrecoverable errors then npm would crash instead of printing the error.
+
+* [`fbefb86`](https://github.com/npm/npm/commit/fbefb8675b26320b295f481b4872ce99f0180807)
+  [`7779e9f`](https://github.com/npm/npm/commit/7779e9fb9430f6547532c67f2471864d62bbd5bc)
+  [#13105](https://github.com/npm/npm/issues/13105)
+  Disable progress bar in `adduser` and `init`.
+* [`6a33b2c`](https://github.com/npm/npm/commit/6a33b2c13f637a41e25cd0339925bc430b50358a)
+  [#13115](https://github.com/npm/npm/issues/13115)
+  Ensure that errors reading the package tree for `outdated` does not result
+  in crashs.
+  ([@iarna](https://github.com/iarna))
+
+### v3.10.1 (2016-06-17):
+
+There are two very important bug fixes and one long-awaited (and signifcant!)
+deprecation in this hotfix release. [Hold on.](http://butt.holdings/)
+
+#### *WHOA*
+
+When Node.js 6.0.0 was released, the CLI team noticed an alarming upsurge in
+bugs related to important files (like `README.md`) not being included in
+published packages. The new bugs looked much like
+[#5082](https://github.com/npm/npm/issues/5082), which had been around in one
+form or another since April, 2014. #5082 used to be a very rare (and obnoxious)
+bug that the CLI team hadn't had much luck reproducing, and we'd basically
+marked it down as a race condition that arose on machines using slow and / or
+rotating-media-based hard drives.
+
+Under 6.0.0, the behavior was reliable enough to be nearly deterministic, and
+made it very difficult for publishers using `.npmignore` files in combination
+with `"files"` stanzas in `package.json` to get their packages onto the
+registry without one or more files missing from the packed tarball. The entire
+saga is contained within [the issue](https://github.com/npm/npm/issues/5082),
+but the summary is that an improvement to the performance of
+[`fs.realpath()`](https://nodejs.org/api/fs.html#fs_fs_realpath_path_options_callback)
+made it much more likely that the packing code would lose the race.
+
+Fixing this has proven to be very difficult, in part because the code used by
+npm to produce package tarballs is more complicated than, strictly speaking, it
+needs to be. [**@evanlucas**](https://github.com/evanlucas) contributed [a
+patch](https://github.com/npm/fstream/pull/50) that passed the tests in a
+[special test suite](https://github.com/othiym23/eliminate-5082) that I
+([**@othiym23**](https://github.com/othiym23)) created (with help from
+[**@addaleax**](https://github.com/addaleax)), but only _after_ we'd released
+the fixed version of that package did we learn that it actually made the
+problem _worse_ in other situations in npm proper. Eventually,
+[**@rvagg**](https://github.com/rvagg) put together a more durable fix that
+appears to completely address the errant behavior under Node.js 6.0.0. That's
+the patch included in this release. Everybody should chip in for redback
+insurance for Rod and his family; he's done the community a huge favor.
+
+Does this mean the long (2+ year) saga of #5082 is now over? At this point, I'm
+going to quote from my latest summary on the issue:
+
+> The CLI team (mostly me, with input from the rest of the team) has decided that
+> the overall complexity of the interaction between `fstream`, `fstream-ignore`,
+> `fstream-npm`, and `node-tar` has grown more convoluted than the team is
+> comfortable (maybe even capable of) supporting.
+>
+> - While I believe that @rvagg's (very targeted) fix addresses _this_ issue, I
+>   would be shocked if there aren't other race conditions in npm's packing
+>   logic. I've already identified a couple other places in the code that are
+>   most likely race conditions, even if they're harder to trigger than the
+>   current one.
+> - The way that dependency bundling is integrated leads to a situation in
+>   which a bunch of logic is duplicated between `fstream-npm` and
+>   `lib/utils/tar.js` in npm itself, and the way `fstream`'s extension
+>   mechanism works makes this difficult to clean up. This caused a nasty
+>   regression ([#13088](https://github.com/npm/fstream/pull/50), see below) as
+>   of ~`npm@3.8.7` where the dependencies of `bundledDependencies` were no
+>   longer being included in the built package tarballs.
+> - The interaction between `.npmignore`, `.gitignore`, and `files` is hopelessly
+>   complicated, scattered in many places throughout the code. We've been
+>   discussing [making the ignores and includes logic clearer and more
+>   predictable](https://github.com/npm/npm/wiki/Files-and-Ignores), and the
+>   current code fights our efforts to clean that up.
+>
+> So, our intention is still to replace `fstream`, `fstream-ignore`, and
+> `fstream-npm` with something much simpler and purpose-built. There's no real
+> reason to have a stream abstraction here when a simple recursive-descent
+> filesystem visitor and a synchronous function that can answer whether a given
+> path should be included in the packed tarball would do the job adequately.
+>
+> What's not yet clear is whether we'll need to replace `node-tar` in the
+> process. `node-tar` is a very robust implementation of tar (it handles, like,
+> everything), and it also includes some very important tweaks to prevent several
+> classes of security exploits involving maliciously crafted packages. However,
+> its packing API involves passing in an `fstream` instance, so we'd either need
+> to produce something that follows enough of `fstream`'s contract for `node-tar`
+> to keep working, or swap `node-tar` out for something like `tar-stream` (and
+> then ensuring that our use of `tar-stream` is secure, which could involve
+> security patches for either npm or `tar-stream`).
+
+The testing and review of `fstream@1.0.10` that the team has done leads us to
+believe that this bug is fixed, but I'm feeling more than a little paranoid
+about fstream now, so it's important that people keep a close eye on their
+publishes for a while and let us know immediately if they notice any
+irregularities.
+
+* [`8802f6c`](https://github.com/npm/npm/commit/8802f6c152ea35cb9e5269c077c3a2f9df411afc)
+  [#5082](https://github.com/npm/npm/issues/5082) `fstream@1.0.10`: Ensure that
+  entries are collected after a paused stream resumes.
+  ([@rvagg](https://github.com/rvagg))
+* [`c189723`](https://github.com/npm/npm/commit/c189723110497a17dac3b0596f2916deeed93ee7)
+  [#5082](https://github.com/npm/npm/issues/5082) Remove the warning introduced
+  in `npm@3.10.0`, because it should no longer be necessary.
+  ([@othiym23](https://github.com/othiym23))
+
+#### *ERK*
+
+Because the interaction between `fstream`, `fstream-ignore`, `fsream-npm`, and
+`node-tar` is so complex, it's proven difficult to add support for npm features
+like `bundledDependencies` without duplicating some logic within npm's code
+base. While [fixing a completely unrelated
+bug](https://github.com/npm/npm/issues/9642), we "cleaned up" some of this
+seemingly duplicated code, and in the process removed the code that ensured
+that the dependencies of `bundledDependencies` are themselves bundled. We've
+brought that code back into the code base (without reopening #9642), and added
+a test to ensure that this regression can't recur.
+
+* [`1b6ceca`](https://github.com/npm/npm/commit/1b6ceca32fc81ca7cc7ac2eb7d11f687e6f87f26)
+  [#13088](https://github.com/npm/npm/issues/13088) Partially restore npm's own
+  version of the `fstream-npm` function `applyIgnores` to ensure that the
+  dependencies of `bundledDependencies` are included in published packages.
+  ([@iarna](https://github.com/iarna))
+
+#### GOODBYE, FAITHFUL FRIEND
+
+At NodeConf Adventure 2016 (RIP in peace, Mikeal Rogers's NodeConf!), the CLI
+team had an opportunity to talk to representatives from some of the larger
+companies that we knew were still using Node.js 0.8 in production. After asking
+them whether they were still using 0.8, we got back blank stares and questions
+like, "0.8? You mean, from four years ago?" After establishing that being able
+to run npm in their legacy environments was no longer necessary, the CLI team
+made the decision to drop support for 0.8. (Faithful observers of our [team
+meetings](https://github.com/npm/npm/issues?utf8=%E2%9C%93&q=is%3Aissue+npm+cli+team+meeting+)
+will have known this was the plan for NodeConf since the beginning of 2016.)
+
+In practice, this means only what's in the commit below: we've removed 0.8 from
+our continuous integration test matrix below, and will no longer be habitually
+testing changes under Node 0.8.  We may also give ourselves permission to use
+`setImmediate()` in test code. However, since the project still supports
+Node.js 0.10 and 0.12, it's unlikely that patches that rely on ES 2015
+functionality will land anytime soon.
+
+Looking forward, the team's current plan is to drop support for Node.js 0.10
+when its LTS maintenace window expires in October, 2016, and 0.12 when its
+maintenance / LTS window ends at the end of 2016. We will also drop support for
+Node.js 5.x when Node.js 6 becomes LTS and Node.js 7 is released, also in the
+October-December 2016 timeframe.
+
+(Confused about Node.js's LTS policy? [Don't
+be!](https://github.com/nodejs/LTS) If you look at [this
+diagram](https://github.com/nodejs/LTS/blob/ce364a94b0e0619eba570cd57be396573e1ef889/schedule.png),
+it should make all of the preceding clear.)
+
+If, in practice, this doesn't work with distribution packagers or other
+community stakeholders responsible for packaging and distributing Node.js and
+npm, please reach out to us. Aligning the npm CLI's LTS policy with Node's
+helps everybody minimize the amount of work they need to do, and since all of
+our teams are small and very busy, this is somewhere between a necessity and
+non-negotiable.
+
+* [`d6afd5f`](https://github.com/npm/npm/commit/d6afd5ffb1b19e5d94aeee666afcb8adaced58db)
+  Remove 0.8 from the Node.js testing matrix, and reorder to match real-world
+  priority, with comments. ([@othiym23](https://github.com/othiym23))
+
 ### v3.10.0 (2016-06-16):
 
 Do we have a release for you!  We have our first new lifecycle since
@@ -25,8 +273,8 @@ status.
   scripts section. They are run when you run `npm shrinkwrap` or `npm install --save` with
   an `npm-shrinkwrap.json` present in your module directory.
 
-  `preshrinkwrap` is run prior to generating the new `npm-shrinkwrap.json` and the other two
-  are run after.
+  `preshrinkwrap` and `shrinkwrap` is run prior to generating the new `npm-shrinkwrap.json`
+  and `postshrinkwrap` is run after.
   ([@SimenB](https://github.com/SimenB))
 
 #### NEW PROGRESS BAR
@@ -43,7 +291,7 @@ using [set-blocking](https://www.npmjs.com/package/set-blocking). This is
 necessary to ensure that we can fully erase the progress bar before we start
 writing other things out to the console.
 
-Prior to Node.js 6.0.0, they were already blocking on Windows, and MacOS. 
+Prior to Node.js 6.0.0, they were already blocking on Windows, and MacOS.
 Meanwhile, on Linux they were always non-blocking but had large (64kb)
 buffers, which largely made this a non-issue there.  Starting with Node.js
 6.0.0 they became non-blocking on MacOS and that caused some unexpected
@@ -90,7 +338,7 @@ a little cryptic.
 The underlying code for the progress bar was rewritten, in part with
 performance in mind.  Previously whenever you updated the progress bar it
 would check an internal variable for how long it had been since the last
-update and if it had been long enough, it would print out what you gave it. 
+update and if it had been long enough, it would print out what you gave it.
 With the new progress bar we do updates at a fixed interval (with
 `setInterval`) and "updating" the progress bar just updates some variables
 that will be used when the next tick of the progress bar happens. Currently
