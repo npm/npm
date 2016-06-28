@@ -62,7 +62,7 @@
     "lodash.uniq": "~4.3.0",
     "lodash.without": "~4.2.0",
     "mkdirp": "~0.5.1",
-    "node-gyp": "~3.3.1",
+    "node-gyp": "~3.4.0",
     "nopt": "~3.0.6",
     "normalize-git-url": "~3.0.2",
     "normalize-package-data": "~2.3.5",
