@@ -24,6 +24,7 @@ var exceptions = [
   path.resolve(nm, 'npm-registry-client', 'lib', 'publish.js'),
   path.resolve(nm, 'npm-registry-client', 'lib', 'request.js')
 ]
+var cacheFolder = path.resolve(nm, './.cache')
 
 test('get files', function (t) {
   walk(nm)
@@ -67,7 +68,7 @@ test('get lines', function (t) {
               line: i
             }
           }
-        } else if (exceptions.indexOf(f) === -1) {
+        } else if (exceptions.indexOf(f) === -1 && f.indexOf(cacheFolder) === -1) {
           t.fail('non-string-literal config used in ' + f + ':' + i)
         }
       })
