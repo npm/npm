@@ -24,6 +24,8 @@ matrix:
     - node_js: "0.12"
       env: DEPLOY_VERSION=testing
 before_install:
+  # explicitly install rimraf for LTS self-install
+  - "npm install -g rimraf"
   - "node . install -g ."
   # required by test/tap/registry.js
   - "mkdir -p /var/run/couchdb"
