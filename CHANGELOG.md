@@ -1,3 +1,120 @@
+### v3.10.4 (2016-06-30)
+
+Hey y'all! This release includes a bunch of fixes we've been working on as we
+continue on our `big-bug` push. There's still [a lot of it left to
+do](https://github.com/npm/npm/labels/big-bug), but once this is done, things
+should just generally be more stable, installs should be more reliable and
+correct, and we'll be able to move on to more future work. We'll keep doing our
+best! 🙌
+
+#### RACES AS WACKY AS [REDLINE](https://en.wikipedia.org/wiki/Redline_\(2009_film\))
+
+Races are notoriously hard to squash, and tend to be some of the more common
+recurring bugs we see on the CLI. [@julianduque](https://github.com/julianduque)
+did some pretty awesome [sleuthing
+work](https://github.com/npm/npm/issues/12669) to track down a cache race and
+helpfully submitted a patch. There were some related races in the same area that
+also got fixed at around the same time, mostly affecting Windows users.
+
+* [`2a37c97`](https://github.com/npm/npm/commit/2a37c97121483db2b6f817fe85c2a5a77b76080e)
+  [#12669](https://github.com/npm/npm/issues/12669)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  The CLI is pretty aggressive about correcting permissions across the cache
+  whenever it writes to it. This aggressiveness caused a couple of races where
+  temporary cache files would get picked up by `fs.readdir`, and removed before
+  `chownr` was called on them, causing `ENOENT` errors. While the solution might
+  seem a bit hamfisted, it's actually perfectly safe and appropriate in this
+  case to just ignore those resulting `ENOENT` errors.
+  ([@julianduque](https://github.com/julianduque))
+* [`ea018b9`](https://github.com/npm/npm/commit/ea018b9e3856d1798d199ae3ebce4ed07eea511b)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  If a user were to have SUDO_UID and SUDO_GID, they'd be able to get into a
+  pretty weird state. This fixes that corner case.
+  ([@zkat](https://github.com/zkat))
+* [`703ca3a`](https://github.com/npm/npm/commit/703ca3abbf4f1cb4dff08be32acd2142d5493482)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  A missing `return` was causing `chownr` to be called on Windows, even though
+  that's literally pointless, and causing crashes in the process, instead of
+  short-circuiting. This was entirely dependent on which callback happened to be
+  called first, and in some cases, the failing one would win the race. This
+  should prevent this from happening in the future.
+  ([@zkat](https://github.com/zkat))
+* [`69267f4`](https://github.com/npm/npm/commit/69267f4fbd1467ce576f173909ced361f8fe2a9d)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  Added tests to verify `correct-mkdir` race patch.
+  ([@zkat](https://github.com/zkat))
+* [`e5f50ea`](https://github.com/npm/npm/commit/e5f50ea9f84fe8cac6978d18f7efdf43834928e7)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  Added tests to verify `addLocal` race patch.
+  ([@zkat](https://github.com/zkat))
+
+#### SHRINKWRAP IS COMPLICATED BUT IT'S BETTER NOW
+
+[@iarna](https://github.com/iarna) did some heroic hacking to refactor a bunch
+of `shrinkwrap`-related bits and fixed some resolution and pathing issues that
+were biting users. The code around that stuff got more readable/maintainable in
+the process, too!
+
+* [`346bba1`](https://github.com/npm/npm/commit/346bba1e1fee9cc814b07c56f598a73be5c21686)
+  [#13214](https://github.com/npm/npm/pull/13214)
+  Resolve local dependencies in `npm-shrinkwrap.json` relative to the top of the
+  tree.
+  ([@iarna](https://github.com/iarna))
+* [`4a67fdb`](https://github.com/npm/npm/commit/4a67fdbd0f160deb6644a9c4c5b587357db04d2d)
+  [#13213](https://github.com/npm/npm/pull/13213)
+  If you run `npm install modulename` it should, if a `npm-shrinkwrap.json` is
+  present, use the version found there.  If not, it'll use the version found in
+  your `package.json`, and failing *that*, use `latest`.
+  This fixes a case where the first check was being bypassed because version
+  resolution was being done prior to loading the shrinkwrap, and so checks to
+  match the shrinkwrap version couldn't succeed.
+  ([@iarna](https://github.com/iarna))
+* [`afa2133`](https://github.com/npm/npm/commit/afa2133a5d8ac4f6f44cdc6083d89ad7f946f5bb)
+  [#13214](https://github.com/npm/npm/pull/13214)
+  Refactor shrinkwrap specifier lookup into shared function.
+  ([@iarna](https://github.com/iarna))
+* [`2820b56`](https://github.com/npm/npm/commit/2820b56a43e1cc1e12079a4c886f6c14fe8c4f10)
+  [#13214](https://github.com/npm/npm/pull/13214)
+  Refactor operations in `inflate-shrinkwrap.js` into separate functions for
+  added clarity.
+  ([@iarna](https://github.com/iarna))
+* [`ee5bfb3`](https://github.com/npm/npm/commit/ee5bfb3e56ee7ae582bec9f741f32b224c279947)
+  Fix Windows path issue in a shrinkwrap test.
+  ([@zkat](https://github.com/zkat))
+
+#### OTHER BUGFIXES
+
+* [`a11a7b2`](https://github.com/npm/npm/commit/a11a7b2e7df9478ac9101b06eead4a74c41a648d)
+  [#13212](https://github.com/npm/npm/pull/13212)
+  Resolve local paths passed in through the command line relative to current
+  directory, instead of relative to the `package.json`.
+  ([@iarna](https://github.com/iarna))
+
+#### DEPENDENCY UPDATES
+
+* [`900a5b7`](https://github.com/npm/npm/commit/900a5b7f18b277786397faac05853c030263feb8)
+  [#13199](https://github.com/npm/npm/pull/13199)
+  [`node-gyp@3.4.0`](https://github.com/nodejs/node-gyp/blob/master/CHANGELOG.md):
+  AIX, Visual Studio 2015, and logging improvements. Oh my~!
+  ([@rvagg](https://github.com/rvagg))
+
+#### DOCUMENTATION FIXES
+
+* [`c6942a7`](https://github.com/npm/npm/commit/c6942a7d6acb2b8c73206353bbec03380a056af4)
+  [#13134](https://github.com/npm/npm/pull/13134)
+  Fixed a few typos in `CHANGELOG.md`.
+  ([@watilde](https://github.com/watilde))
+* [`e63d913`](https://github.com/npm/npm/commit/e63d913127731ece56dcd69c7c0182af21be58f8)
+  [#13156](https://github.com/npm/npm/pull/13156)
+  Fix old reference to `doc/install` in a source comment.
+  ([@sheerun](https://github.com/sheerun))
+* [`099d23c`](https://github.com/npm/npm/commit/099d23cc8f38b524dc19a25857b2ebeca13c49d6)
+  [#13113](https://github.com/npm/npm/issues/13113)
+  [#13189](https://github.com/npm/npm/pull/13189)
+  Fixes a link to `npm-tag(3)` that was breaking to instead point to
+  `npm-dist-tag(1)`, as reported by [@SimenB](https://github.com/SimenB)
+  ([@macdonst](https://github.com/macdonst))
+
 ### v3.10.3 (2016-06-23)
 
 Given that we had not one, but two updates to our RC this past week, it
