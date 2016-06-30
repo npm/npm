@@ -17,13 +17,13 @@ var shrinkwrap = {
   dependencies: {
     mod2: {
       version: '1.0.0',
-      from: 'mods/mod2',
-      resolved: 'file:mods/mod2',
+      from: path.join('mods', 'mod2'),
+      resolved: 'file:' + path.join('mods', 'mod2'),
       dependencies: {
         mod1: {
           version: '1.0.0',
-          from: 'mods/mod1',
-          resolved: 'file:mods/mod1'
+          from: path.join('mods', 'mod1'),
+          resolved: 'file:' + path.join('mods', 'mod1')
         }
       }
     }
@@ -45,7 +45,7 @@ var fixture = new Tacks(
           name: 'mod2',
           version: '1.0.0',
           dependencies: {
-            mod1: 'file:../mod1'
+            mod1: 'file:' + path.join('..', 'mod1')
           }
         })
       })
@@ -54,7 +54,7 @@ var fixture = new Tacks(
       name: 'shrinkwrap-local-dependency',
       version: '1.0.0',
       dependencies: {
-        mod2: 'file:mods/mod2'
+        mod2: 'file:' + path.join('mods', 'mod2')
       }
     })
   })
@@ -121,4 +121,3 @@ test('cleanup', function (t) {
   cleanup()
   t.end()
 })
-
