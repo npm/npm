@@ -1,3 +1,13 @@
+### v3.10.5 (2016-07-05)
+
+This is a fix to this week's testing release to correct the update of
+`node-gyp` which somehow got mangled.
+
+* [`ca97ce2`](https://github.com/npm/npm/commit/ca97ce2e8d8ba44c445b39ffa40daf397d5601b3)
+  [#13256](https://github.com/npm/npm/issues/13256)
+  Fresh reinstall of `node-gyp@3.4.0`.
+  ([@zkat](https://github.com/zkat))
+
 ### v3.10.4 (2016-06-30)
 
 Hey y'all! This release includes a bunch of fixes we've been working on as we
