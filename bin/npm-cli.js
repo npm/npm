@@ -23,13 +23,9 @@
 
   var path = require('path')
   var npm = require('../lib/npm.js')
-  var npmconf = require('../lib/config/core.js')
   var errorHandler = require('../lib/utils/error-handler.js')
 
-  var configDefs = npmconf.defs
-  var shorthands = configDefs.shorthands
-  var types = configDefs.types
-  var nopt = require('nopt')
+  var buildConf = require('../lib/utils/build-conf.js')
 
   // if npm is called as "npmg" or "npm_g", then
   // run in global mode.
@@ -39,7 +35,7 @@
 
   log.verbose('cli', process.argv)
 
-  var conf = nopt(types, shorthands)
+  var conf = buildConf()
   npm.argv = conf.argv.remain
   if (npm.deref(npm.argv[0])) npm.command = npm.argv.shift()
   else conf.usage = true
