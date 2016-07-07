@@ -43,7 +43,7 @@ test('lifecycle scripts execute in the proper order', function (t) {
   // If code is 1 and/or all three files do not exist
   // Then lifecycle scripts are not executed in proper order
   child.on('close', function (code, signal) {
-    t.equal(code, 0);
+    t.equal(code, 0)
 
     // All three files should exist
     t.equal(fs.existsSync(path.join(pkg, 'preinstall-step')), true)
