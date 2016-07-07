@@ -1,3 +1,81 @@
+### v3.10.6 (2016-07-07)
+
+This week we have a bunch of bug fixes for ya!  A shrinkwrap regression
+introduced in 3.10.0, better lifecycle `PATH` behavior, improvements when
+working with registries other than `registry.npmjs.org` and a fix for
+hopefully the last _don't print a progress bar over my interactive thingy_
+bug.
+
+#### SHRINKWRAP AND DEV DEPENDENCIES
+
+The rewrite in 3.10.0 triggered a bug where dependencies of devDependencies
+would be included in your shrinkwrap even if you didn't request
+devDependencies.
+
+* [`2484529`](https://github.com/npm/npm/commit/2484529ab56a42e5d6f13c48006f39a596d9e327)
+  [#13308](https://github.com/npm/npm/pull/13308)
+  Fix bug where deps of devDependencies would be incorrectly included in
+  shrinkwraps.
+  ([@iarna](https://github.com/iarna))
+
+#### BETTER PATH LIFECYCLE BEHAVIOR
+
+We've been around the details on this one a few times in recent months and
+hopefully this will bring is to where we want to be.
+
+* [`81051a9`](https://github.com/npm/npm/commit/81051a90eee66a843f76eb8cccedbb1d0a5c1f47)
+  [#12968](https://github.com/npm/npm/pull/12968)
+  When running lifecycle scripts, only prepend directory containing the node
+  binary to PATH if not already in PATH.
+  ([@segrey](https://github.com/segrey))
+
+#### BETTER INTERACTIONS WITH THIRD PARTY REGISTRIES
+
+* [`071193c`](https://github.com/npm/npm/commit/071193c8e193767dd1656cb27556cb3751d77a3b)
+  [#10869](https://github.com/npm/npm/pull/10869)
+  If the registry returns a list of versions some of which are invalid, skip
+  those when picking a version to install.  This can't happen with
+  registry.npmjs.org as it will normalize versions published with it, but it
+  can happen with other registries.
+  ([@gregersrygg](https://github.com/gregersrygg))
+
+#### ONE LAST TOO-MUCH-PROGRESS CORNER
+
+* [`1244cc1`](https://github.com/npm/npm/commit/1244cc16dc5a0536acf26816a1deeb8e221d67eb)
+  [#13305](https://github.com/npm/npm/pull/13305)
+  Disable progress bar in `npm edit` and `npm config edit`.
+  ([@watilde](https://github.com/watilde))
+
+#### HTML DOCS IMPROVEMENTS
+
+* [`58da923`](https://github.com/npm/npm/commit/58da9234ae72a5474b997f890a1155ee9785e6f1)
+  [#npm/npm](https://github.com/npm/npm/issues/npm/npm)
+  Fix HTML character set declaration in generated HTML documentation.
+  ([@KenanY](https://github.com/KenanY))
+* [`d1f0bf4`](https://github.com/npm/npm/commit/d1f0bf4303566f8690502034f82bbb449850958d)
+  [#13250](https://github.com/npm/npm/pull/13250)
+  Optimize png images using zopflipng.
+  ([@PeterDaveHello](https://github.com/PeterDaveHello))
+
+#### DEPENDENCY UPDATES (THAT MATTER)
+
+* [`c7567e5`](https://github.com/npm/npm/commit/c7567e58618b63f97884afa104d2f560c9272dd5)
+  [npm/npm-user-validate#9](https://github.com/npm/npm-user-validate/pull/9)
+  `npm-user-validate@0.1.5`:
+  Lower the username length limits to 214 from 576 to match `registry.npmjs.org`'s limits.
+  ([@aredridel](https://github.com/aredridel))
+* [`22802c9`](https://github.com/npm/npm/commit/22802c9db3cf990c905e8f61304db9b5571d7964)
+  [#isaacs/rimraf](https://github.com/npm/npm/issues/isaacs/rimraf)
+  `rimraf@2.5.3`:
+  Fixes EPERM errors when running `lstat` on read-only directories.
+  ([@isaacs](https://github.com/isaacs))
+* [`ce6406f`](https://github.com/npm/npm/commit/ce6406f4b6c4dffbb5cd8a3c049f6663a5665522)
+  `glob@7.0.5`:
+  Forces the use of `minimatch` to 3.0.2, which improved handling of long and
+  complicated patterns.
+  ([@isaacs](https://github.com/isaacs))
+
+
 ### v3.10.5 (2016-07-05)
 
 This is a fix to this week's testing release to correct the update of
