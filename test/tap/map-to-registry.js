@@ -1,3 +1,4 @@
+require('../fixtures/clean-process-env.js')
 var test = require('tap').test
 var npm = require('../../')
 
