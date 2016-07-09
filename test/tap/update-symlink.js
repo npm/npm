@@ -14,7 +14,8 @@ var originalLog
 var fakeRoot = path.join(__dirname, 'fakeRoot')
 var OPTS = {
   env: {
-    'npm_config_prefix': fakeRoot
+    'npm_config_prefix': fakeRoot,
+    'npm_config_registry': common.registry
   }
 }
 
