@@ -66,6 +66,7 @@ test('when update is called linked packages should be excluded', function (t) {
     common.npm(['update'], OPTS, function (err, c, out, stderr) {
       t.ifError(err)
       t.has(out, /async@0.2.10/, 'updated ok')
+      t.doesNotHave(out, /underscore/, 'linked package not updated')
       t.doesNotHave(stderr, /ERR!/, 'no errors in stderr')
       s.close()
       t.end()
