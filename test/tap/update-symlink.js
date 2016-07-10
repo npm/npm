@@ -14,7 +14,8 @@ var originalLog
 var fakeRoot = path.join(__dirname, 'fakeRoot')
 var OPTS = {
   env: {
-    'npm_config_prefix': fakeRoot
+    'npm_config_prefix': fakeRoot,
+    'npm_config_registry': common.registry
   }
 }
 
@@ -32,24 +33,27 @@ test('setup', function (t) {
   cleanup()
   originalLog = console.log
   mkdirp.sync(pkg)
-  common.npm(['install', '-g', 'underscore@1.3.1'], OPTS, function (err, c, out) {
-    t.ifError(err, 'global install did not error')
-    process.chdir(pkg)
-    fs.writeFileSync(
-      path.join(pkg, 'package.json'),
-      JSON.stringify(jsonLocal, null, 2)
-    )
-    common.npm(['link', 'underscore'], OPTS, function (err, c, out) {
-      t.ifError(err, 'link did not error')
-      common.npm(['install', 'async@0.2.9'], OPTS, function (err, c, out) {
-        t.ifError(err, 'local install did not error')
-        common.npm(['ls'], OPTS, function (err, c, out, stderr) {
-          t.ifError(err)
-          t.equal(c, 0)
-          t.equal(stderr, '', 'got expected stderr')
-          t.has(out, /async@0.2.9/, 'installed ok')
-          t.has(out, /underscore@1.3.1/, 'creates local link ok')
-          t.end()
+  mr({ port: common.port }, function (er, s) {
+    common.npm(['install', '-g', 'underscore@1.3.1'], OPTS, function (err, c, out) {
+      t.ifError(err, 'global install did not error')
+      process.chdir(pkg)
+      fs.writeFileSync(
+        path.join(pkg, 'package.json'),
+        JSON.stringify(jsonLocal, null, 2)
+      )
+      common.npm(['link', 'underscore'], OPTS, function (err, c, out) {
+        t.ifError(err, 'link did not error')
+        common.npm(['install', 'async@0.2.9'], OPTS, function (err, c, out) {
+          t.ifError(err, 'local install did not error')
+          common.npm(['ls'], OPTS, function (err, c, out, stderr) {
+            t.ifError(err)
+            t.equal(c, 0)
+            t.equal(stderr, '', 'got expected stderr')
+            t.has(out, /async@0.2.9/, 'installed ok')
+            t.has(out, /underscore@1.3.1/, 'creates local link ok')
+            s.close()
+            t.end()
+          })
         })
       })
     })
@@ -61,7 +65,36 @@ test('when update is called linked packages should be excluded', function (t) {
   mr({ port: common.port }, function (er, s) {
     common.npm(['update'], OPTS, function (err, c, out, stderr) {
       t.ifError(err)
-      t.has(out, /async@1.5.2/, 'updated ok')
+      t.has(out, /async@0.2.10/, 'updated ok')
+      t.doesNotHave(out, /underscore/, 'linked package not updated')
+      t.doesNotHave(stderr, /ERR!/, 'no errors in stderr')
+      s.close()
+      t.end()
+    })
+  })
+})
+
+test('when install is called and the package already exists as a link, outputs a warning if the requested version is not the same as the linked one', function (t) {
+  console.log = function () {}
+  mr({ port: common.port }, function (er, s) {
+    common.npm(['install', 'underscore'], OPTS, function (err, c, out, stderr) {
+      t.ifError(err)
+      t.doesNotHave(out, /underscore/, 'linked package not updated')
+      t.has(stderr, /underscore/, 'warning output relating to linked package')
+      t.doesNotHave(stderr, /ERR!/, 'no errors in stderr')
+      s.close()
+      t.end()
+    })
+  })
+})
+
+test('when install is called and the package already exists as a link, does not warn if the requested version is same as the linked one', function (t) {
+  console.log = function () {}
+  mr({ port: common.port }, function (er, s) {
+    common.npm(['install', 'underscore@1.3.1'], OPTS, function (err, c, out, stderr) {
+      t.ifError(err)
+      t.doesNotHave(out, /underscore/, 'linked package not updated')
+      t.doesNotHave(stderr, /underscore/, 'no warning or error relating to linked package')
       t.doesNotHave(stderr, /ERR!/, 'no errors in stderr')
       s.close()
       t.end()
