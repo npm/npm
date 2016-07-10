@@ -33,24 +33,27 @@ test('setup', function (t) {
   cleanup()
   originalLog = console.log
   mkdirp.sync(pkg)
-  common.npm(['install', '-g', 'underscore@1.3.1'], OPTS, function (err, c, out) {
-    t.ifError(err, 'global install did not error')
-    process.chdir(pkg)
-    fs.writeFileSync(
-      path.join(pkg, 'package.json'),
-      JSON.stringify(jsonLocal, null, 2)
-    )
-    common.npm(['link', 'underscore'], OPTS, function (err, c, out) {
-      t.ifError(err, 'link did not error')
-      common.npm(['install', 'async@0.2.9'], OPTS, function (err, c, out) {
-        t.ifError(err, 'local install did not error')
-        common.npm(['ls'], OPTS, function (err, c, out, stderr) {
-          t.ifError(err)
-          t.equal(c, 0)
-          t.equal(stderr, '', 'got expected stderr')
-          t.has(out, /async@0.2.9/, 'installed ok')
-          t.has(out, /underscore@1.3.1/, 'creates local link ok')
-          t.end()
+  mr({ port: common.port }, function (er, s) {
+    common.npm(['install', '-g', 'underscore@1.3.1'], OPTS, function (err, c, out) {
+      t.ifError(err, 'global install did not error')
+      process.chdir(pkg)
+      fs.writeFileSync(
+        path.join(pkg, 'package.json'),
+        JSON.stringify(jsonLocal, null, 2)
+      )
+      common.npm(['link', 'underscore'], OPTS, function (err, c, out) {
+        t.ifError(err, 'link did not error')
+        common.npm(['install', 'async@0.2.9'], OPTS, function (err, c, out) {
+          t.ifError(err, 'local install did not error')
+          common.npm(['ls'], OPTS, function (err, c, out, stderr) {
+            t.ifError(err)
+            t.equal(c, 0)
+            t.equal(stderr, '', 'got expected stderr')
+            t.has(out, /async@0.2.9/, 'installed ok')
+            t.has(out, /underscore@1.3.1/, 'creates local link ok')
+            s.close()
+            t.end()
+          })
         })
       })
     })
