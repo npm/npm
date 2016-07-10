@@ -74,6 +74,34 @@ test('when update is called linked packages should be excluded', function (t) {
   })
 })
 
+test('when install is called and the package already exists as a link, outputs a warning if the requested version is not the same as the linked one', function (t) {
+  console.log = function () {}
+  mr({ port: common.port }, function (er, s) {
+    common.npm(['install','underscore'], OPTS, function (err, c, out, stderr) {
+      t.ifError(err)
+      t.doesNotHave(out, /underscore/, 'linked package not updated')
+      t.has(stderr, /underscore/, 'warning output relating to linked package')
+      t.doesNotHave(stderr, /ERR!/, 'no errors in stderr')
+      s.close()
+      t.end()
+    })
+  })
+})
+
+test('when install is called and the package already exists as a link, does not warn if the requested version is same as the linked one', function (t) {
+  console.log = function () {}
+  mr({ port: common.port }, function (er, s) {
+    common.npm(['install','underscore@1.3.1'], OPTS, function (err, c, out, stderr) {
+      t.ifError(err)
+      t.doesNotHave(out, /underscore/, 'linked package not updated')
+      t.doesNotHave(stderr, /underscore/, 'no warning or error relating to linked package')
+      t.doesNotHave(stderr, /ERR!/, 'no errors in stderr')
+      s.close()
+      t.end()
+    })
+  })
+})
+
 test('cleanup', function (t) {
   common.npm(['rm', 'underscore', 'async'], OPTS, function (err, code) {
     t.ifError(err, 'npm removed the linked package without error')
