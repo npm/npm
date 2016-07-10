@@ -1,3 +1,718 @@
+### v3.10.6 (2016-07-07)
+
+This week we have a bunch of bug fixes for ya!  A shrinkwrap regression
+introduced in 3.10.0, better lifecycle `PATH` behavior, improvements when
+working with registries other than `registry.npmjs.org` and a fix for
+hopefully the last _don't print a progress bar over my interactive thingy_
+bug.
+
+#### SHRINKWRAP AND DEV DEPENDENCIES
+
+The rewrite in 3.10.0 triggered a bug where dependencies of devDependencies
+would be included in your shrinkwrap even if you didn't request
+devDependencies.
+
+* [`2484529`](https://github.com/npm/npm/commit/2484529ab56a42e5d6f13c48006f39a596d9e327)
+  [#13308](https://github.com/npm/npm/pull/13308)
+  Fix bug where deps of devDependencies would be incorrectly included in
+  shrinkwraps.
+  ([@iarna](https://github.com/iarna))
+
+#### BETTER PATH LIFECYCLE BEHAVIOR
+
+We've been around the details on this one a few times in recent months and
+hopefully this will bring is to where we want to be.
+
+* [`81051a9`](https://github.com/npm/npm/commit/81051a90eee66a843f76eb8cccedbb1d0a5c1f47)
+  [#12968](https://github.com/npm/npm/pull/12968)
+  When running lifecycle scripts, only prepend directory containing the node
+  binary to PATH if not already in PATH.
+  ([@segrey](https://github.com/segrey))
+
+#### BETTER INTERACTIONS WITH THIRD PARTY REGISTRIES
+
+* [`071193c`](https://github.com/npm/npm/commit/071193c8e193767dd1656cb27556cb3751d77a3b)
+  [#10869](https://github.com/npm/npm/pull/10869)
+  If the registry returns a list of versions some of which are invalid, skip
+  those when picking a version to install.  This can't happen with
+  registry.npmjs.org as it will normalize versions published with it, but it
+  can happen with other registries.
+  ([@gregersrygg](https://github.com/gregersrygg))
+
+#### ONE LAST TOO-MUCH-PROGRESS CORNER
+
+* [`1244cc1`](https://github.com/npm/npm/commit/1244cc16dc5a0536acf26816a1deeb8e221d67eb)
+  [#13305](https://github.com/npm/npm/pull/13305)
+  Disable progress bar in `npm edit` and `npm config edit`.
+  ([@watilde](https://github.com/watilde))
+
+#### HTML DOCS IMPROVEMENTS
+
+* [`58da923`](https://github.com/npm/npm/commit/58da9234ae72a5474b997f890a1155ee9785e6f1)
+  [#npm/npm](https://github.com/npm/npm/issues/npm/npm)
+  Fix HTML character set declaration in generated HTML documentation.
+  ([@KenanY](https://github.com/KenanY))
+* [`d1f0bf4`](https://github.com/npm/npm/commit/d1f0bf4303566f8690502034f82bbb449850958d)
+  [#13250](https://github.com/npm/npm/pull/13250)
+  Optimize png images using zopflipng.
+  ([@PeterDaveHello](https://github.com/PeterDaveHello))
+
+#### DEPENDENCY UPDATES (THAT MATTER)
+
+* [`c7567e5`](https://github.com/npm/npm/commit/c7567e58618b63f97884afa104d2f560c9272dd5)
+  [npm/npm-user-validate#9](https://github.com/npm/npm-user-validate/pull/9)
+  `npm-user-validate@0.1.5`:
+  Lower the username length limits to 214 from 576 to match `registry.npmjs.org`'s limits.
+  ([@aredridel](https://github.com/aredridel))
+* [`22802c9`](https://github.com/npm/npm/commit/22802c9db3cf990c905e8f61304db9b5571d7964)
+  [#isaacs/rimraf](https://github.com/npm/npm/issues/isaacs/rimraf)
+  `rimraf@2.5.3`:
+  Fixes EPERM errors when running `lstat` on read-only directories.
+  ([@isaacs](https://github.com/isaacs))
+* [`ce6406f`](https://github.com/npm/npm/commit/ce6406f4b6c4dffbb5cd8a3c049f6663a5665522)
+  `glob@7.0.5`:
+  Forces the use of `minimatch` to 3.0.2, which improved handling of long and
+  complicated patterns.
+  ([@isaacs](https://github.com/isaacs))
+
+
+### v3.10.5 (2016-07-05)
+
+This is a fix to this week's testing release to correct the update of
+`node-gyp` which somehow got mangled.
+
+* [`ca97ce2`](https://github.com/npm/npm/commit/ca97ce2e8d8ba44c445b39ffa40daf397d5601b3)
+  [#13256](https://github.com/npm/npm/issues/13256)
+  Fresh reinstall of `node-gyp@3.4.0`.
+  ([@zkat](https://github.com/zkat))
+
+### v3.10.4 (2016-06-30)
+
+Hey y'all! This release includes a bunch of fixes we've been working on as we
+continue on our `big-bug` push. There's still [a lot of it left to
+do](https://github.com/npm/npm/labels/big-bug), but once this is done, things
+should just generally be more stable, installs should be more reliable and
+correct, and we'll be able to move on to more future work. We'll keep doing our
+best! 🙌
+
+#### RACES AS WACKY AS [REDLINE](https://en.wikipedia.org/wiki/Redline_\(2009_film\))
+
+Races are notoriously hard to squash, and tend to be some of the more common
+recurring bugs we see on the CLI. [@julianduque](https://github.com/julianduque)
+did some pretty awesome [sleuthing
+work](https://github.com/npm/npm/issues/12669) to track down a cache race and
+helpfully submitted a patch. There were some related races in the same area that
+also got fixed at around the same time, mostly affecting Windows users.
+
+* [`2a37c97`](https://github.com/npm/npm/commit/2a37c97121483db2b6f817fe85c2a5a77b76080e)
+  [#12669](https://github.com/npm/npm/issues/12669)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  The CLI is pretty aggressive about correcting permissions across the cache
+  whenever it writes to it. This aggressiveness caused a couple of races where
+  temporary cache files would get picked up by `fs.readdir`, and removed before
+  `chownr` was called on them, causing `ENOENT` errors. While the solution might
+  seem a bit hamfisted, it's actually perfectly safe and appropriate in this
+  case to just ignore those resulting `ENOENT` errors.
+  ([@julianduque](https://github.com/julianduque))
+* [`ea018b9`](https://github.com/npm/npm/commit/ea018b9e3856d1798d199ae3ebce4ed07eea511b)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  If a user were to have SUDO_UID and SUDO_GID, they'd be able to get into a
+  pretty weird state. This fixes that corner case.
+  ([@zkat](https://github.com/zkat))
+* [`703ca3a`](https://github.com/npm/npm/commit/703ca3abbf4f1cb4dff08be32acd2142d5493482)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  A missing `return` was causing `chownr` to be called on Windows, even though
+  that's literally pointless, and causing crashes in the process, instead of
+  short-circuiting. This was entirely dependent on which callback happened to be
+  called first, and in some cases, the failing one would win the race. This
+  should prevent this from happening in the future.
+  ([@zkat](https://github.com/zkat))
+* [`69267f4`](https://github.com/npm/npm/commit/69267f4fbd1467ce576f173909ced361f8fe2a9d)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  Added tests to verify `correct-mkdir` race patch.
+  ([@zkat](https://github.com/zkat))
+* [`e5f50ea`](https://github.com/npm/npm/commit/e5f50ea9f84fe8cac6978d18f7efdf43834928e7)
+  [#13023](https://github.com/npm/npm/pull/13023)
+  Added tests to verify `addLocal` race patch.
+  ([@zkat](https://github.com/zkat))
+
+#### SHRINKWRAP IS COMPLICATED BUT IT'S BETTER NOW
+
+[@iarna](https://github.com/iarna) did some heroic hacking to refactor a bunch
+of `shrinkwrap`-related bits and fixed some resolution and pathing issues that
+were biting users. The code around that stuff got more readable/maintainable in
+the process, too!
+
+* [`346bba1`](https://github.com/npm/npm/commit/346bba1e1fee9cc814b07c56f598a73be5c21686)
+  [#13214](https://github.com/npm/npm/pull/13214)
+  Resolve local dependencies in `npm-shrinkwrap.json` relative to the top of the
+  tree.
+  ([@iarna](https://github.com/iarna))
+* [`4a67fdb`](https://github.com/npm/npm/commit/4a67fdbd0f160deb6644a9c4c5b587357db04d2d)
+  [#13213](https://github.com/npm/npm/pull/13213)
+  If you run `npm install modulename` it should, if a `npm-shrinkwrap.json` is
+  present, use the version found there.  If not, it'll use the version found in
+  your `package.json`, and failing *that*, use `latest`.
+  This fixes a case where the first check was being bypassed because version
+  resolution was being done prior to loading the shrinkwrap, and so checks to
+  match the shrinkwrap version couldn't succeed.
+  ([@iarna](https://github.com/iarna))
+* [`afa2133`](https://github.com/npm/npm/commit/afa2133a5d8ac4f6f44cdc6083d89ad7f946f5bb)
+  [#13214](https://github.com/npm/npm/pull/13214)
+  Refactor shrinkwrap specifier lookup into shared function.
+  ([@iarna](https://github.com/iarna))
+* [`2820b56`](https://github.com/npm/npm/commit/2820b56a43e1cc1e12079a4c886f6c14fe8c4f10)
+  [#13214](https://github.com/npm/npm/pull/13214)
+  Refactor operations in `inflate-shrinkwrap.js` into separate functions for
+  added clarity.
+  ([@iarna](https://github.com/iarna))
+* [`ee5bfb3`](https://github.com/npm/npm/commit/ee5bfb3e56ee7ae582bec9f741f32b224c279947)
+  Fix Windows path issue in a shrinkwrap test.
+  ([@zkat](https://github.com/zkat))
+
+#### OTHER BUGFIXES
+
+* [`a11a7b2`](https://github.com/npm/npm/commit/a11a7b2e7df9478ac9101b06eead4a74c41a648d)
+  [#13212](https://github.com/npm/npm/pull/13212)
+  Resolve local paths passed in through the command line relative to current
+  directory, instead of relative to the `package.json`.
+  ([@iarna](https://github.com/iarna))
+
+#### DEPENDENCY UPDATES
+
+* [`900a5b7`](https://github.com/npm/npm/commit/900a5b7f18b277786397faac05853c030263feb8)
+  [#13199](https://github.com/npm/npm/pull/13199)
+  [`node-gyp@3.4.0`](https://github.com/nodejs/node-gyp/blob/master/CHANGELOG.md):
+  AIX, Visual Studio 2015, and logging improvements. Oh my~!
+  ([@rvagg](https://github.com/rvagg))
+
+#### DOCUMENTATION FIXES
+
+* [`c6942a7`](https://github.com/npm/npm/commit/c6942a7d6acb2b8c73206353bbec03380a056af4)
+  [#13134](https://github.com/npm/npm/pull/13134)
+  Fixed a few typos in `CHANGELOG.md`.
+  ([@watilde](https://github.com/watilde))
+* [`e63d913`](https://github.com/npm/npm/commit/e63d913127731ece56dcd69c7c0182af21be58f8)
+  [#13156](https://github.com/npm/npm/pull/13156)
+  Fix old reference to `doc/install` in a source comment.
+  ([@sheerun](https://github.com/sheerun))
+* [`099d23c`](https://github.com/npm/npm/commit/099d23cc8f38b524dc19a25857b2ebeca13c49d6)
+  [#13113](https://github.com/npm/npm/issues/13113)
+  [#13189](https://github.com/npm/npm/pull/13189)
+  Fixes a link to `npm-tag(3)` that was breaking to instead point to
+  `npm-dist-tag(1)`, as reported by [@SimenB](https://github.com/SimenB)
+  ([@macdonst](https://github.com/macdonst))
+
+### v3.10.3 (2016-06-23)
+
+Given that we had not one, but two updates to our RC this past week, it
+should come as no surprise that this week's full release is a bit
+lighter. We have some documentation patches and a couple of bug fixes via
+dependency updates.
+
+If you haven't yet checked out last week's release,
+[v3.10.0](https://github.com/npm/npm/releases/tag/v3.10.0)
+and the two follow up releases
+[v3.10.1](https://github.com/npm/npm/releases/tag/v3.10.1)
+and
+[v3.10.2](https://github.com/npm/npm/releases/tag/v3.10.2),
+you really should do so. They're the most important releases we've had in
+quite a while, fixing a bunch of critical bugs (including an issue
+impacting publishing with Node.js 6.x) and of course, bringing in the new
+and improved progress bar.
+
+#### BUM SYMLINKS BURN NO MORE
+
+There's been a bug lurking where broken symlinks in your `node_modules`
+folder could cause all manner of mischief, from crashes to empty `npm ls`
+results. The intrepid [@watilde](https://github.com/watilde) tracked this
+down for us.
+
+This addresses the root cause of the outdated crasher we protected
+against earlier this week in
+[#13115](https://github.com/npm/npm/issues/13115).
+
+This also fixes [#9564](https://github.com/npm/npm/issues/9564), the
+problem where a bad symlink in your global modules would result in an
+empty result when you ran `npm ls -g`.
+
+This ALSO likely fixes numerous "Missing argument #1" errors. (But surely
+not all of them as that's actually just a generic arity and
+type-validation failure.)
+
+* [`ca92ac4`](https://github.com/npm/npm/commit/ca92ac455b841a708dd89262ff88d503b125d717)
+  [npm/read-package-tree#6](https://github.com/npm/read-package-tree/pull/6)
+  `read-package-tree@5.1.5`:
+  Make bad symlinks be non-fatal errors when reading the tree off disk.
+  ([@watilde](https://github.com/watilde))
+
+#### BETTER UNICODE DETECTION
+
+* [`6c3f7f0`](https://github.com/npm/npm/commit/6c3f7f043f09fc2aa19ffd3f956787635fa6f4d0)
+  `has-unicode@2.0.1`:
+  Fix unicode detection on a number of Linux distributions.
+  ([@Darkhogg](https://github.com/Darkhogg)) ([@gagern](https://github.com/gagern))
+
+
+#### DOCUMENTATION FIXES
+
+* [`b9243ee`](https://github.com/npm/npm/commit/b9243ee60a3d60505c2502dc8633811b42c8aaea)
+  [#13127](https://github.com/npm/npm/pull/13127)
+  Remove extra backtick from `npm ls` documentation.
+  ([@shvaikalesh](https://github.com/shvaikalesh))
+* [`e05c0c2`](https://github.com/npm/npm/commit/e05c0c243cc702f9c392c001f668a90b57eaeb0e)
+  [iarna/has-unicode#3](https://github.com/iarna/has-unicode/pull/3)
+  [iarna/has-unicode#4](https://github.com/iarna/has-unicode/pull/4)
+  [#13084](https://github.com/npm/npm/pull/13084)
+  Correct changelog entry for shrinkwrap lifecycle order.
+  ([@SimenB](https://github.com/SimenB))
+* [`823994f`](https://github.com/npm/npm/commit/823994f100a0e59e1dd109e312811f971968ec75)
+  [#13080](https://github.com/npm/npm/pull/13080)
+  Describe using `npm pack` to see a dry run of publication results in
+  the `npm publish` documentation.
+  ([@laughinghan](https://github.com/laughinghan))
+
+#### DEPENDENCY UPDATES
+
+* [`e44d2db`](https://github.com/npm/npm/commit/e44d2db1ad0d860ca08e99c81135bd399fb733b1)
+  `aproba@1.0.4`: Documentation updates and minor refactoring.
+  ([@iarna](https://github.com/iarna))
+
+### v3.10.2 (2016-06-17):
+
+This is a quick hotfix release with two small bug fixes.  First, there was
+an issue where the new progress bar would overwrite interactive prompts,
+that is, those found in `npm login` and `npm init`.  Second, if the
+directory you were running `npm outdated` on was a bad link or otherwise had
+unrecoverable errors then npm would crash instead of printing the error.
+
+* [`fbefb86`](https://github.com/npm/npm/commit/fbefb8675b26320b295f481b4872ce99f0180807)
+  [`7779e9f`](https://github.com/npm/npm/commit/7779e9fb9430f6547532c67f2471864d62bbd5bc)
+  [#13105](https://github.com/npm/npm/issues/13105)
+  Disable progress bar in `adduser` and `init`.
+* [`6a33b2c`](https://github.com/npm/npm/commit/6a33b2c13f637a41e25cd0339925bc430b50358a)
+  [#13115](https://github.com/npm/npm/issues/13115)
+  Ensure that errors reading the package tree for `outdated` does not result
+  in crashes.
+  ([@iarna](https://github.com/iarna))
+
+### v3.10.1 (2016-06-17):
+
+There are two very important bug fixes and one long-awaited (and significant!)
+deprecation in this hotfix release. [Hold on.](http://butt.holdings/)
+
+#### *WHOA*
+
+When Node.js 6.0.0 was released, the CLI team noticed an alarming upsurge in
+bugs related to important files (like `README.md`) not being included in
+published packages. The new bugs looked much like
+[#5082](https://github.com/npm/npm/issues/5082), which had been around in one
+form or another since April, 2014. #5082 used to be a very rare (and obnoxious)
+bug that the CLI team hadn't had much luck reproducing, and we'd basically
+marked it down as a race condition that arose on machines using slow and / or
+rotating-media-based hard drives.
+
+Under 6.0.0, the behavior was reliable enough to be nearly deterministic, and
+made it very difficult for publishers using `.npmignore` files in combination
+with `"files"` stanzas in `package.json` to get their packages onto the
+registry without one or more files missing from the packed tarball. The entire
+saga is contained within [the issue](https://github.com/npm/npm/issues/5082),
+but the summary is that an improvement to the performance of
+[`fs.realpath()`](https://nodejs.org/api/fs.html#fs_fs_realpath_path_options_callback)
+made it much more likely that the packing code would lose the race.
+
+Fixing this has proven to be very difficult, in part because the code used by
+npm to produce package tarballs is more complicated than, strictly speaking, it
+needs to be. [**@evanlucas**](https://github.com/evanlucas) contributed [a
+patch](https://github.com/npm/fstream/pull/50) that passed the tests in a
+[special test suite](https://github.com/othiym23/eliminate-5082) that I
+([**@othiym23**](https://github.com/othiym23)) created (with help from
+[**@addaleax**](https://github.com/addaleax)), but only _after_ we'd released
+the fixed version of that package did we learn that it actually made the
+problem _worse_ in other situations in npm proper. Eventually,
+[**@rvagg**](https://github.com/rvagg) put together a more durable fix that
+appears to completely address the errant behavior under Node.js 6.0.0. That's
+the patch included in this release. Everybody should chip in for redback
+insurance for Rod and his family; he's done the community a huge favor.
+
+Does this mean the long (2+ year) saga of #5082 is now over? At this point, I'm
+going to quote from my latest summary on the issue:
+
+> The CLI team (mostly me, with input from the rest of the team) has decided that
+> the overall complexity of the interaction between `fstream`, `fstream-ignore`,
+> `fstream-npm`, and `node-tar` has grown more convoluted than the team is
+> comfortable (maybe even capable of) supporting.
+>
+> - While I believe that @rvagg's (very targeted) fix addresses _this_ issue, I
+>   would be shocked if there aren't other race conditions in npm's packing
+>   logic. I've already identified a couple other places in the code that are
+>   most likely race conditions, even if they're harder to trigger than the
+>   current one.
+> - The way that dependency bundling is integrated leads to a situation in
+>   which a bunch of logic is duplicated between `fstream-npm` and
+>   `lib/utils/tar.js` in npm itself, and the way `fstream`'s extension
+>   mechanism works makes this difficult to clean up. This caused a nasty
+>   regression ([#13088](https://github.com/npm/fstream/pull/50), see below) as
+>   of ~`npm@3.8.7` where the dependencies of `bundledDependencies` were no
+>   longer being included in the built package tarballs.
+> - The interaction between `.npmignore`, `.gitignore`, and `files` is hopelessly
+>   complicated, scattered in many places throughout the code. We've been
+>   discussing [making the ignores and includes logic clearer and more
+>   predictable](https://github.com/npm/npm/wiki/Files-and-Ignores), and the
+>   current code fights our efforts to clean that up.
+>
+> So, our intention is still to replace `fstream`, `fstream-ignore`, and
+> `fstream-npm` with something much simpler and purpose-built. There's no real
+> reason to have a stream abstraction here when a simple recursive-descent
+> filesystem visitor and a synchronous function that can answer whether a given
+> path should be included in the packed tarball would do the job adequately.
+>
+> What's not yet clear is whether we'll need to replace `node-tar` in the
+> process. `node-tar` is a very robust implementation of tar (it handles, like,
+> everything), and it also includes some very important tweaks to prevent several
+> classes of security exploits involving maliciously crafted packages. However,
+> its packing API involves passing in an `fstream` instance, so we'd either need
+> to produce something that follows enough of `fstream`'s contract for `node-tar`
+> to keep working, or swap `node-tar` out for something like `tar-stream` (and
+> then ensuring that our use of `tar-stream` is secure, which could involve
+> security patches for either npm or `tar-stream`).
+
+The testing and review of `fstream@1.0.10` that the team has done leads us to
+believe that this bug is fixed, but I'm feeling more than a little paranoid
+about fstream now, so it's important that people keep a close eye on their
+publishes for a while and let us know immediately if they notice any
+irregularities.
+
+* [`8802f6c`](https://github.com/npm/npm/commit/8802f6c152ea35cb9e5269c077c3a2f9df411afc)
+  [#5082](https://github.com/npm/npm/issues/5082) `fstream@1.0.10`: Ensure that
+  entries are collected after a paused stream resumes.
+  ([@rvagg](https://github.com/rvagg))
+* [`c189723`](https://github.com/npm/npm/commit/c189723110497a17dac3b0596f2916deeed93ee7)
+  [#5082](https://github.com/npm/npm/issues/5082) Remove the warning introduced
+  in `npm@3.10.0`, because it should no longer be necessary.
+  ([@othiym23](https://github.com/othiym23))
+
+#### *ERK*
+
+Because the interaction between `fstream`, `fstream-ignore`, `fsream-npm`, and
+`node-tar` is so complex, it's proven difficult to add support for npm features
+like `bundledDependencies` without duplicating some logic within npm's code
+base. While [fixing a completely unrelated
+bug](https://github.com/npm/npm/issues/9642), we "cleaned up" some of this
+seemingly duplicated code, and in the process removed the code that ensured
+that the dependencies of `bundledDependencies` are themselves bundled. We've
+brought that code back into the code base (without reopening #9642), and added
+a test to ensure that this regression can't recur.
+
+* [`1b6ceca`](https://github.com/npm/npm/commit/1b6ceca32fc81ca7cc7ac2eb7d11f687e6f87f26)
+  [#13088](https://github.com/npm/npm/issues/13088) Partially restore npm's own
+  version of the `fstream-npm` function `applyIgnores` to ensure that the
+  dependencies of `bundledDependencies` are included in published packages.
+  ([@iarna](https://github.com/iarna))
+
+#### GOODBYE, FAITHFUL FRIEND
+
+At NodeConf Adventure 2016 (RIP in peace, Mikeal Rogers's NodeConf!), the CLI
+team had an opportunity to talk to representatives from some of the larger
+companies that we knew were still using Node.js 0.8 in production. After asking
+them whether they were still using 0.8, we got back blank stares and questions
+like, "0.8? You mean, from four years ago?" After establishing that being able
+to run npm in their legacy environments was no longer necessary, the CLI team
+made the decision to drop support for 0.8. (Faithful observers of our [team
+meetings](https://github.com/npm/npm/issues?utf8=%E2%9C%93&q=is%3Aissue+npm+cli+team+meeting+)
+will have known this was the plan for NodeConf since the beginning of 2016.)
+
+In practice, this means only what's in the commit below: we've removed 0.8 from
+our continuous integration test matrix below, and will no longer be habitually
+testing changes under Node 0.8.  We may also give ourselves permission to use
+`setImmediate()` in test code. However, since the project still supports
+Node.js 0.10 and 0.12, it's unlikely that patches that rely on ES 2015
+functionality will land anytime soon.
+
+Looking forward, the team's current plan is to drop support for Node.js 0.10
+when its LTS maintenance window expires in October, 2016, and 0.12 when its
+maintenance / LTS window ends at the end of 2016. We will also drop support for
+Node.js 5.x when Node.js 6 becomes LTS and Node.js 7 is released, also in the
+October-December 2016 timeframe.
+
+(Confused about Node.js's LTS policy? [Don't
+be!](https://github.com/nodejs/LTS) If you look at [this
+diagram](https://github.com/nodejs/LTS/blob/ce364a94b0e0619eba570cd57be396573e1ef889/schedule.png),
+it should make all of the preceding clear.)
+
+If, in practice, this doesn't work with distribution packagers or other
+community stakeholders responsible for packaging and distributing Node.js and
+npm, please reach out to us. Aligning the npm CLI's LTS policy with Node's
+helps everybody minimize the amount of work they need to do, and since all of
+our teams are small and very busy, this is somewhere between a necessity and
+non-negotiable.
+
+* [`d6afd5f`](https://github.com/npm/npm/commit/d6afd5ffb1b19e5d94aeee666afcb8adaced58db)
+  Remove 0.8 from the Node.js testing matrix, and reorder to match real-world
+  priority, with comments. ([@othiym23](https://github.com/othiym23))
+
+### v3.10.0 (2016-06-16):
+
+Do we have a release for you!  We have our first new lifecycle since
+`version`, a new progress bar and a bunch of bug fixes.
+[I'm](https://github.com/iarna) really excited about this release, let me
+tell you!!
+
+#### DANGER: PUBLISHING ON NODE 6.0.0
+
+Publishing and packing are buggy under Node versions greater than 6.0.0.
+Please use Node.js LTS (4.4.x) to publish packages.  See
+[#5082](https://github.com/npm/npm/issues/5082) for details and current
+status.
+
+* [`4e52cef`](https://github.com/npm/npm/commit/4e52cef3d4170c8abab98149666ec599f8363233)
+  [#13077](https://github.com/npm/npm/pull/13077)
+  Warn when using Node 6+.
+  ([@othiym23](https://github.com/othiym23))
+
+#### NEW LIFECYCLE SCRIPT: `shrinkwrap`
+
+* [`e8c80f2`](https://github.com/npm/npm/commit/e8c80f20bfd5d1618e85dbab41660d6f3e5ce405)
+  [#10744](https://github.com/npm/npm/issues/10744)
+  You can now add `preshrinkwrap`, `shrinkwrap` and `postshrinkwrap` to your `package.json`
+  scripts section. They are run when you run `npm shrinkwrap` or `npm install --save` with
+  an `npm-shrinkwrap.json` present in your module directory.
+
+  `preshrinkwrap` and `shrinkwrap` is run prior to generating the new `npm-shrinkwrap.json`
+  and `postshrinkwrap` is run after.
+  ([@SimenB](https://github.com/SimenB))
+
+#### NEW PROGRESS BAR
+
+![Install with new progress bar](http://shared.by.re-becca.org/misc-images/new-gauge-color.gif)
+
+We have a new progress bar and a bunch of related improvements!
+
+##### BLOCKING BLOCKING
+
+**!!WARNING!!** As a part of this change we now explicitly set
+`process.stdout` and `process.stderr` to be _blocking_ if they are ttys,
+using [set-blocking](https://www.npmjs.com/package/set-blocking). This is
+necessary to ensure that we can fully erase the progress bar before we start
+writing other things out to the console.
+
+Prior to Node.js 6.0.0, they were already blocking on Windows, and MacOS.
+Meanwhile, on Linux they were always non-blocking but had large (64kb)
+buffers, which largely made this a non-issue there.  Starting with Node.js
+6.0.0 they became non-blocking on MacOS and that caused some unexpected
+issues (see [nodejs/node#6456](https://github.com/nodejs/node/issues/6456)).
+
+If you are a Linux user, it's plausible that this might have a performance
+impact if your terminal can't keep up with output rate.  If you experience
+this, we want to know! Please [file an
+issue](https://github.com/npm/npm/issues/new) at our issue tracker.
+
+##### BETTER LAYOUT
+
+Let's start by talking about what goes into the new progress bar:
+
+```
+⸨░░░░░░░░░░⠂⠂⠂⠂⠂⠂⠂⠂⸩ ⠹ loadExtraneous: verb afterAdd /Users/rebecca/.npm/null/0.0.0/package/package.json written
+ ↑‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾  ↑ ‾‾‾‾‾‾‾‾‾↑‾‾‾‾   ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾↑‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+ percent complete     spinner    current thing we're doing     most recent log line
+```
+
+The _spinner_ is intended as an activity indicator–it moves whenever
+npm sends something to its logs.  It also spins at a constant speed while
+waiting on the network.
+
+The _current thing we're doing_ relates to how we track how much work has
+been done.  It's the name of the unit of work we most recently started or
+completed some of.  Sometimes these names are more obvious than others and
+that's something we'll look at improving over time.
+
+And finally, the _most recent log line_ is exactly that, it's the most
+recent line that you would have seen if you were running with
+`--loglevel=silly` or were watching the `npm-debug.log`.  These are written
+to be useful to the npm developers above all else, so they may sometimes be
+a little cryptic.
+
+* [`6789978`](https://github.com/npm/npm/commit/6789978ab0713f67928177a9109fed43953ccbda)
+  [#13075](https://github.com/npm/npm/pull/13075)
+  `npmlog@3.1.2`: Update to the latest npmlog, which includes the new and
+  improved progress bar layout.
+  ([@iarna](https://github.com/iarna))
+
+##### MORE PERFORMANT
+
+The underlying code for the progress bar was rewritten, in part with
+performance in mind.  Previously whenever you updated the progress bar it
+would check an internal variable for how long it had been since the last
+update and if it had been long enough, it would print out what you gave it.
+With the new progress bar we do updates at a fixed interval (with
+`setInterval`) and "updating" the progress bar just updates some variables
+that will be used when the next tick of the progress bar happens. Currently
+progress bar updates happen every 50ms, although that's open to tuning.
+
+##### WIDE(R) COMPATIBILITY
+
+I spent a lot of time working our Unicode support.  There were a few issues
+that plagued us:
+
+Previously one of the characters we used was _ambiguous width_ which means
+that it was possible to configure your terminal to display it as _full
+width_.  If you did this, the output would be broken because we assumed it
+was a _half width_ character. We no longer use any of these characters.
+
+Previously, we defaulted to using Unicode on Windows.  This isn't a safe
+assumption, however, as folks in non-US locales often use other code pages
+for their terminals.  Windows doesn't provide* any facility available to
+Node.js for determining the current code page, so we no longer try to use
+Unicode on Windows.
+
+_\* The facilities it does provide are a command line tool and a windows
+system call.  The former isn't satisfactory for speed reasons and the latter
+can't be accessed from a JS-only Node.js program._
+
+##### FOR THE FUTURE: THEMES
+
+The new version of the progress bar library supports plugable themes. Adding
+support to npm shouldn't be too difficult. The built in themes are:
+
+* `ASCII` – The fallback theme which is always available.
+* `colorASCII` – Inverts the color of the completed portion of the progress
+  bar.  The default on Windows and usually on Linux.  (Color support is
+  determined by looking at the `TERM` environment variable.)
+* `brailleSpinner` – A braille based spinner and other unicode enhancements. MacOS only.
+* `colorBrailleSpinner` – The default on MacOS, a combination of the above two.
+
+##### LESS GARBLED OUTPUT
+
+As a part of landing this I've also taken the opportunity to more
+systematically disable the progress bar prior to printing to `stdout` or
+running external commands (in particular: git).  This should ensure that the
+progress bar doesn't get left on screen after something else prints
+something.  We also are now much more zealous about erasing the progress bar
+on exit, so if you `Ctrl-C` out of an install we'll still cleanup the
+progress bar.
+
+* [`63f153c`](https://github.com/npm/npm/commit/63f153c743f9354376bfb9dad42bd028a320fd1f)
+  [#13075](https://github.com/npm/npm/pull/13075)
+  Consistently make sure that the progress bar is hidden before we try to
+  write to stdout.
+  ([@iarna](https://github.com/iarna))
+* [`8da79fa`](https://github.com/npm/npm/commit/8da79fa60de4972dca406887623d4e430d1609a1)
+  [#13075](https://github.com/npm/npm/pull/13075)
+  Be more methodical about disabling progress bars before running external
+  commands.
+  ([@iarna](https://github.com/iarna))
+
+#### REPLACE `process.nextTick` WITH `asap` ASAP
+
+* [`5873b56`](https://github.com/npm/npm/commit/5873b56cb315437dfe97e747811c0b9c297bfd38)
+  [`254ad7e`](https://github.com/npm/npm/commit/254ad7e38f978b81046d242297fe8b122bfb5852)
+  [#12754](https://github.com/npm/npm/issues/12754)
+  Use `asap` in preference over `process.nextTick` to avoid recursion warnings.
+  Under the hood `asap` uses `setImmediate` when available and falls back to
+  `process.nextTick` when it's not.  Versions of node that don't support
+  `setImmediate` have a version of `process.nextTick` that actually behaves
+  like the current `setImmediate`.
+  ([@lxe](https://github.com/lxe))
+
+#### FIXES AND REFACTORING
+
+Sometimes the installer would get it into its head that it could move or
+remove things that it really shouldn't have.  While the reproducers for this were
+often a bit complicated (the core reproducer involved five symlinks(!)), it turns
+out this is an easy scenario to end up in if your project has a bunch of small
+modules and you're linking them while developing them.
+
+Fixing this ended up involving doing an important and overdue rewrite of how
+the installer keeps track of (and interrogates) the relationships between
+modules.  This likely fixes other related bugs, and in the coming weeks
+we'll verify and close them as we find them.  There are a whole slew of
+commits related to this rewrite, and if you'd like to learn more check
+out the PR where I describe what I did in detail: [#12775](https://github.com/npm/npm/pull/12775)
+
+* [`8f3e111`](https://github.com/npm/npm/commit/8f3e111fdd2ce7824864f77b04e5206bdaf961a1)
+  [`c0b0ed1`](https://github.com/npm/npm/commit/c0b0ed1e9945c01b2e68bf22af3fe4005aa4bcd4)
+  [#10800](https://github.com/npm/npm/issues/10800)
+  Remove install pruning stage–this was obsoleted by making the installer keep
+  itself up to date as it goes along. This is NOT related to `npm prune`.
+  ([@iarna](https://github.com/iarna))
+
+#### MAKE OUTDATED MORE WIDELY LEGIBLE
+
+* [`21c60e9`](https://github.com/npm/npm/commit/21c60e9bb56d47da17b79681f2142b3dcf4c804b)
+  [#12843](https://github.com/npm/npm/pull/12843)
+  In `npm outdated, stop coloring the _Location_ and _Package Type_ columns.
+  Previously they were colored dark gray, which was hard to read for some
+  users.
+  ([@tribou](https://github.com/tribou))
+
+#### DOCUMENTATION UPDATE
+
+* [`eb0a72e`](https://github.com/npm/npm/commit/eb0a72eb95862c1d0d41a259d138ab601d538793)
+  [#12983](https://github.com/npm/npm/pull/12983)
+  Describe how to run the lifecycle scripts of dependencies. How you do
+  this changed with `npm` v2.
+  ([@Tapppi](https://github.com/Tapppi))
+
+### DEPENDENCY UPDATES
+
+* [`da743dc`](https://github.com/npm/npm/commit/da743dc2153fed8baca3dada611b188f53ab5931)
+  `which@1.2.10`:
+  Fix bug where unnecessary special case path handling for Windows could
+  produce unexpected results on Unix systems.
+  ([@isaacs](https://github.com/isaacs))
+* [`4533bd5`](https://github.com/npm/npm/commit/4533bd501d54aeedfec3884f4fd54e8c2edd6020)
+  `npm-user-validate@0.1.4`:
+  Validate the length of usernames.
+  ([@aredridel](https://github.com/aredridel))
+* [`4a18922`](https://github.com/npm/npm/commit/4a18922e56f9dc902fbb4daa8f5fafa4a1b89376)
+  `glob@7.0.4`:
+  Fixes issues with Node 6 and "long or excessively symlink-looping paths".
+  ([@isaacs](https://github.com/isaacs))
+* [`257fe11`](https://github.com/npm/npm/commit/257fe11052987e5cfec2abdf52392dd95a6c6ef3)
+  `npm-package-arg@4.2.0`:
+  Add `escapedName` to the result.  It is suitable for passing through to a
+  registry without further processing.
+  ([@nexdrew](https://github.com/nexdrew))
+* [`dda3ca7`](https://github.com/npm/npm/commit/dda3ca70f74879106589ef29e167c8b91ef5aa4c)
+  `wrappy@1.0.2`
+  ([@zkat](https://github.com/zkat))
+* [`25f1db5`](https://github.com/npm/npm/commit/25f1db504d0fd8c97211835f0027027fe95e0ef3)
+  `readable-stream@2.1.4`
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+* [`9d64fe6`](https://github.com/npm/npm/commit/9d64fe676ebc6949c687ffb85bd93eca3137fc0d)
+  `abbrev@1.0.9`
+  ([@isaacs](https://github.com/isaacs))
+
+### v3.9.6 (2016-06-02):
+
+#### SMALL OUTPUT TWEAK
+
+* [`0bdc9d1`](https://github.com/npm/npm/commit/0bdc9d13b73df07e63a58470ea001fda490e5869)
+  [#12879](https://github.com/npm/npm/pull/12879)
+  The usage output for npm commands was somehow under the impression that
+  the singular form of `aliases` is `aliase`. This has been corrected to show
+  `alias` instead.
+  ([@intelliot](https://github.com/intelliot))
+
+#### DOC UPDATES
+
+* [`f771b49`](https://github.com/npm/npm/commit/f771b49f5d65bbef540c231fbfcca71cacdce4db)
+  [#12933](https://github.com/npm/npm/pull/12933)
+  Add `config.gypi` to list of files that are always ignored in the
+  `package.json` manpage.
+  ([@Jokero](https://github.com/Jokero))
+
+#### DEPENDENCY UPDATES
+
+* [`61c1d9c`](https://github.com/npm/npm/commit/61c1d9cd4b2296bd41d55a5c58e35ca5f028b9bc)
+  [#12926](https://github.com/npm/npm/pull/12926)
+  Removed unused dependency `lodash.isarray`.
+  ([@mmalecki](https://github.com/mmalecki))
+* [`168ed28`](https://github.com/npm/npm/commit/168ed2834b2c6db8bb39f81baadc0bf275807328)
+  [#12926](https://github.com/npm/npm/pull/12926)
+  Removed unused dependency `lodash.keys`.
+  ([@mmalecki](https://github.com/mmalecki))
+
 ### v3.9.5 (2016-05-27):
 
 Just a quick point release. We had an issue where I (Kat) included the
