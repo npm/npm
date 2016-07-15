@@ -23,12 +23,14 @@ var desired = {
     request: {
       version: '0.9.0',
       from: 'request@0.9.0',
-      resolved: common.registry + '/request/-/request-0.9.0.tgz'
+      resolved: common.registry + '/request/-/request-0.9.0.tgz',
+      shasum: '1049f59a6f46588e6d030921fbb84ca2f0c2714e'
     },
     underscore: {
       version: '1.3.1',
       from: 'underscore@1.3.1',
-      resolved: common.registry + '/underscore/-/underscore-1.3.1.tgz'
+      resolved: common.registry + '/underscore/-/underscore-1.3.1.tgz',
+      shasum: '6cb8aad0e77eb5dbbfb54b22bcd8697309cf9641'
     }
   }
 }

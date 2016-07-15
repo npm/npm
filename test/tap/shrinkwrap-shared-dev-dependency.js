@@ -47,12 +47,14 @@ var desired = {
       version: '0.0.0',
       from: 'test-package-with-one-dep@0.0.0',
       resolved: common.registry +
-        '/test-package-with-one-dep/-/test-package-with-one-dep-0.0.0.tgz'
+        '/test-package-with-one-dep/-/test-package-with-one-dep-0.0.0.tgz',
+      shasum: '256c1596dbac2b23d12268dab5a802bb2e365ac8'
     },
     'test-package': {
       version: '0.0.0',
       from: 'test-package@0.0.0',
-      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz'
+      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz',
+      shasum: 'b0d32b6c45c259c578ba2003762b205131bdfbd1'
     }
   }
 }

@@ -64,7 +64,8 @@ var desired = {
     'test-package': {
       version: '0.0.0',
       from: 'test-package@0.0.0',
-      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz'
+      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz',
+      shasum: 'b0d32b6c45c259c578ba2003762b205131bdfbd1'
     }
   }
 }
