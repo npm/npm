@@ -72,10 +72,11 @@ function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
       return /^PATH=/i.test(line)
     }
     // extract just the path value
-    stdout = stdout.split(/\r?\n/).filter(lineMatch).pop().replace(/^PATH=/, '')
+    stdout = stdout.split(/\r?\n/)
+    var observedPath = stdout.filter(lineMatch).pop().replace(/^PATH=/, '')
     var pathSplit = process.platform === 'win32' ? ';' : ':'
     var root = path.resolve(__dirname, '../..')
-    var actual = stdout.split(pathSplit).map(function (p) {
+    var actual = observedPath.split(pathSplit).map(function (p) {
       if (p.indexOf(root) === 0) {
         p = '{{ROOT}}' + p.substr(root.length)
       }
@@ -89,7 +90,15 @@ function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
     // get the ones we tacked on, then the system-specific requirements
     var expectedPaths = ['{{ROOT}}/bin/node-gyp-bin',
                          '{{ROOT}}/test/tap/lifecycle-path/node_modules/.bin']
-    if (withDirOfCurrentNode && !withIgnoreNodePath) {
+
+    // Check that the behaviour matches the configuration that was actually
+    // used by the child process, as the coverage tooling may set the
+    // --scripts-prepend-node-path option on its own.
+    var realPrependNodePathSetting = stdout.filter(function (line) {
+      return line.match(/npm_config_scripts_prepend_node_path=true/)
+    }).length > 0
+
+    if (withDirOfCurrentNode && realPrependNodePathSetting) {
       expectedPaths.push('{{ROOT}}/test/tap/lifecycle-path/node-bin')
     }
     var expect = expectedPaths.concat(newPATH.split(pathSplit)).map(function (p) {
