@@ -808,6 +808,22 @@ in to a private registry for the first time:
 will cause `@organization` to be mapped to the registry for future installation
 of packages specified according to the pattern `@organization/package`.
 
+### scripts-prepend-node-path
+
+* Default: "auto"
+* Type: Boolean or `"auto"`
+
+If set to `true`, add the directory in which the current `node` executable
+resides to the `PATH` environment variable when running scripts,
+even if that means that `npm` will invoke a different `node` executable than
+the one which it is running.
+
+If set to `false`, never do that.
+
+If set to `auto`, only add that directory to the `PATH` environment variable
+if the `node` executable with which `npm` was invoked and the one that is found
+first on the `PATH` are different.
+
 ### searchopts
 
 * Default: ""

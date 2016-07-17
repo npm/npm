@@ -32,14 +32,18 @@ test('setup', function (t) {
 })
 
 test('make sure the path is correct, without directory of current node', function (t) {
-  checkPath(false, t)
+  checkPath(false, false, t)
 })
 
 test('make sure the path is correct, with directory of current node', function (t) {
-  checkPath(true, t)
+  checkPath(true, false, t)
 })
 
-function checkPath (withDirOfCurrentNode, t) {
+test('make sure the path is correct, with directory of current node but ignored node path', function (t) {
+  checkPath(true, true, t)
+})
+
+function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
   var newPATH = PATH
   var currentNodeExecPath = process.execPath
   if (withDirOfCurrentNode) {
@@ -57,7 +61,8 @@ function checkPath (withDirOfCurrentNode, t) {
     cwd: pkg,
     nodeExecPath: currentNodeExecPath,
     env: {
-      PATH: newPATH
+      PATH: newPATH,
+      npm_config_scripts_prepend_node_path: prependNodePathSetting
     },
     stdio: [ 0, 'pipe', 2 ]
   }, function (er, code, stdout) {
@@ -84,7 +89,7 @@ function checkPath (withDirOfCurrentNode, t) {
     // get the ones we tacked on, then the system-specific requirements
     var expectedPaths = ['{{ROOT}}/bin/node-gyp-bin',
                          '{{ROOT}}/test/tap/lifecycle-path/node_modules/.bin']
-    if (withDirOfCurrentNode) {
+    if (withDirOfCurrentNode && !withIgnoreNodePath) {
       expectedPaths.push('{{ROOT}}/test/tap/lifecycle-path/node-bin')
     }
     var expect = expectedPaths.concat(newPATH.split(pathSplit)).map(function (p) {
