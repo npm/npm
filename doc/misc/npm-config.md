@@ -810,6 +810,26 @@ in to a private registry for the first time:
 will cause `@organization` to be mapped to the registry for future installation
 of packages specified according to the pattern `@organization/package`.
 
+### scripts-prepend-node-path
+
+* Default: "auto"
+* Type: Boolean, `"auto"` or `"warn-only"`
+
+If set to `true`, add the directory in which the current `node` executable
+resides to the `PATH` environment variable when running scripts,
+even if that means that `npm` will invoke a different `node` executable than
+the one which it is running.
+
+If set to `false`, never modify `PATH` with that.
+
+If set to `"warn-only"`, never modify `PATH` but print a warning if `npm` thinks
+that you may want to run it with `true`, e.g. because the `node` executable
+in the `PATH` is not the one `npm` was invoked with.
+
+If set to `auto`, only add that directory to the `PATH` environment variable
+if the `node` executable with which `npm` was invoked and the one that is found
+first on the `PATH` are different.
+
 ### searchexclude
 
 * Default: ""

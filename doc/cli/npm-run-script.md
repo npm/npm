@@ -42,7 +42,8 @@ instead of `"scripts": {"test": "node_modules/.bin/tap test/\*.js"}` to run your
 
 `npm run` sets the `NODE` environment variable to the `node` executable with
 which `npm` is executed. Also, the directory within which it resides is added to the
-`PATH`, if the `node` executable is not in the `PATH`.
+`PATH`, if the `node` executable is not in the `PATH`. This behaviour can be
+overridden by running `npm` with the `--scripts-prepend-node-path` flag.
 
 If you try to run a script without having a `node_modules` directory and it fails,
 you will be given a warning to run `npm install`, just in case you've forgotten.
