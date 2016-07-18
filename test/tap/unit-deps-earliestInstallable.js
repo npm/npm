@@ -56,3 +56,37 @@ test('earliestInstallable should consider devDependencies', function (t) {
   t.isDeeply(earliest, dep1, 'should hoist package when an incompatible devDependency is present')
   t.end()
 })
+
+test('earliestInstallable should reuse shared prod/dev deps when they are identical', function (t) {
+  var dep1 = {
+    children: [],
+    package: {
+      name: 'dep1',
+      dependencies: { dep2: '1.0.0' }
+    }
+  }
+
+  var dep2 = {
+    package: {
+      name: 'dep2',
+      version: '1.0.0'
+    }
+  }
+
+  var pkg = {
+    children: [dep1],
+    package: {
+      name: 'pkg',
+      dependencies: { dep1: '1.0.0' },
+      devDependencies: { dep2: '1.0.0' }
+    }
+  }
+
+  dep1.parent = pkg
+  dep2.parent = pkg
+
+  var earliest = earliestInstallable(dep1, dep1, dep2.package)
+  t.isDeeply(earliest, pkg, 'should reuse identical shared dev/prod deps when installing both')
+  t.end()
+})
+
