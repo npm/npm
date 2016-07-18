@@ -183,9 +183,10 @@ Certain files are always included, regardless of settings:
 * `README`
 * `CHANGES` / `CHANGELOG` / `HISTORY`
 * `LICENSE` / `LICENCE`
+* `NOTICE`
 * The file in the "main" field
 
-`README`, `CHANGES` & `LICENSE` can have any case and extension.
+`README`, `CHANGES`, `LICENSE` & `NOTICE` can have any case and extension.
 
 Conversely, some files are always ignored:
 
@@ -201,6 +202,7 @@ Conversely, some files are always ignored:
 * `npm-debug.log`
 * `.npmrc`
 * `node_modules`
+* `config.gypi`
 
 ## main
 
