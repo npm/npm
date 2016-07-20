@@ -1,4 +1,9 @@
-## [**6.1.0**](https://github.com/ljharb/qs/issues?milestone=34&state=closed)
+## [**6.2.0**](https://github.com/ljharb/qs/issues?milestone=36&state=closed)
+- [New] pass Buffers to the encoder/decoder directly (#161)
+- [New] add "encoder" and "decoder" options, for custom param encoding/decoding (#160)
+- [Fix] fix compacting of nested sparse arrays (#150)
+
+## [**6.1.0**](https://github.com/ljharb/qs/issues?milestone=35&state=closed)
 - [New] allowDots option for `stringify` (#151)
 - [Fix] "sort" option should work at a depth of 3 or more (#151)
 - [Fix] Restore `dist` directory; will be removed in v7 (#148)
