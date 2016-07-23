@@ -19,8 +19,8 @@ Example:
 In global mode (ie, with `-g` or `--global` appended to the command),
 it uninstalls the current package context as a global package.
 
-`npm uninstall` takes 3 exclusive, optional flags which save or update
-the package version in your main package.json:
+`npm uninstall` takes 3 exclusive, optional flags which remove
+the package from your main package.json dependencies:
 
 * `-S, --save`: Package will be removed from your `dependencies`.
 
