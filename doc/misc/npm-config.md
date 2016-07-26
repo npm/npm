@@ -27,7 +27,7 @@ same.
 The four relevant files are:
 
 * per-project config file (/path/to/my/project/.npmrc)
-* per-user config file (~/.npmrc)
+* per-user config file (${NPM_CONFIG_USERCONFIG:-~/.npmrc})
 * global config file ($PREFIX/npmrc)
 * npm builtin config file (/path/to/npm/npmrc)
 
