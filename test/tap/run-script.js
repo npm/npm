@@ -323,6 +323,103 @@ test('npm run-script no-params (direct only)', function (t) {
   })
 })
 
+test('npm run-script catchall', function (t) {
+  writeMetadata({
+    name: 'scripted',
+    version: '1.2.3',
+    scripts: {
+      '__catchall': 'echo'
+    }
+  })
+  common.npm(['run-script', 'foobar'], opts, testOutput.bind(null, t, 'foobar'))
+})
+
+test('npm run-script catchall with pre', function (t) {
+  writeMetadata({
+    name: 'scripted',
+    version: '1.2.3',
+    scripts: {
+      'prefoobar': 'echo prefoobar',
+      '__catchall': 'echo'
+    }
+  })
+  common.npm(['run-script', 'foobar'], opts, testOutput.bind(null, t, 'prefoobar;foobar'))
+})
+
+test('npm run-script catchall with post', function (t) {
+  writeMetadata({
+    name: 'scripted',
+    version: '1.2.3',
+    scripts: {
+      'postfoobar': 'echo postfoobar',
+      '__catchall': 'echo'
+    }
+  })
+  common.npm(['run-script', 'foobar'], opts, testOutput.bind(null, t, 'foobar;postfoobar'))
+})
+
+test('npm run-script catchall with pre and post', function (t) {
+  writeMetadata({
+    name: 'scripted',
+    version: '1.2.3',
+    scripts: {
+      'prefoobar': 'echo prefoobar',
+      'postfoobar': 'echo postfoobar',
+      '__catchall': 'echo'
+    }
+  })
+  common.npm(['run-script', 'foobar'], opts, testOutput.bind(null, t, 'prefoobar;foobar;postfoobar'))
+})
+
+test('npm run-script catchall should not catch prepublish', function (t) {
+  writeMetadata({
+    name: 'scripted',
+    version: '1.2.3',
+    scripts: {
+      '__catchall': 'echo'
+    }
+  })
+  common.npm(['run-script', 'prepublish'], opts, function (er, code, stdout, stderr) {
+    t.equal(code, 1, 'should exit with status code 1')
+    t.ok(stderr, 'should generate errors')
+    t.match(stderr, /missing script: prepublish/, 'should report the script missing')
+    t.end()
+  })
+})
+
+test('npm run-script catchall error message', function (t) {
+  writeMetadata({
+    name: 'scripted',
+    version: '1.2.3',
+    scripts: {
+      '__catchall': 'exit 1 --'
+    }
+  })
+  common.npm(['run-script', 'willerror'], opts, function (er, code, stdout, stderr) {
+    t.equal(code, 1, 'should exit with status code 1')
+    t.ok(stderr, 'should generate errors')
+    t.match(stderr, /errored when passed to catchall script/, 'should report the catchall error')
+    t.end()
+  })
+})
+
+test('npm run-script catchall with pre-hook error message', function (t) {
+  writeMetadata({
+    name: 'scripted',
+    version: '1.2.3',
+    scripts: {
+      'prefoo': 'exit 1',
+      '__catchall': 'echo'
+    }
+  })
+  common.npm(['run-script', 'foo'], opts, function (er, code, stdout, stderr) {
+    t.equal(code, 1, 'should exit with status code 1')
+    t.ok(stderr, 'should generate errors')
+    t.match(stderr, /Failed at the scripted@1.2.3 prefoo script 'exit 1'./, 'should report the normal lifecycle hook error')
+    t.end()
+  })
+})
+
 test('cleanup', function (t) {
   cleanup()
   t.end()
