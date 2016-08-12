@@ -1,3 +1,176 @@
+### v3.10.7 (2016-08-11)
+
+Hi all, today's our first release coming out of the new monthly release
+cadence. See below for details. We're all recovered from conferences now
+and raring to go! We've got some pretty keen bug fixes and a bunch of
+documentation and dependency updates. It's hard to narrow it down to just a
+few, but of note are scoped packages in bundled dependencies, the
+`preinstall` lifecycle fix, the shrinkwrap and Git dependencies fix and the
+fix to a crasher involving cycles in development dependencies.
+
+#### NEW RELEASE CADENCE
+
+Releasing npm has been, for the most part, a very prominent part of our
+weekly process process. As part of our efforts to find the most effective
+ways to allocate our team's resources, we decided last month that we would
+try and slow our releases down to a monthly cadence, and see if we found
+ourselves with as much extra time and attention as we expected to have.
+Process experiments are useful for finding more effective ways to do our
+work, and we're at least going to keep doing this for a whole quarter, and
+then measure how well it worked out. It's entirely likely that we'll switch
+back to a more frequent cadence, specially if we find that the value that
+weekly cadence was providing the community is not worth sacrificing for a
+bit of extra time. Does this affect you significantly? Let us know!
+
+#### SCOPED PACKAGES IN BUNDLED DEPENDENCIES
+
+Prior to this release and
+[v2.15.10](https://github.com/npm/npm/releases/v2.15.10), npm had ignored
+scoped modules found in `bundleDependencies`.
+
+* [`29cf56d`](https://github.com/npm/npm/commit/29cf56dbae8e3dd16c24876f998051623842116a)
+  [#8614](https://github.com/npm/npm/issues/8614)
+  Include scoped packages in bundled dependencies.
+  ([@forivall](https://github.com/forivall))
+
+#### `preinstall` LIFECYCLE IN CURRENT PROJECT
+
+* [`b7f13bc`](https://github.com/npm/npm/commit/b7f13bc80b89b025be0c53d81b90ec8f2cebfab7)
+  [#13259](https://github.com/npm/npm/pull/13259)
+  Run top level preinstall before installing dependencies
+  ([@palmerj3](https://github.com/palmerj3))
+
+#### BETTER SHRINKWRAP WITH GIT DEPENDENCIES
+
+* [`0f7e319`](https://github.com/npm/npm/commit/0f7e3197bcec7a328b603efdffd3681bbc40f585)
+  [#12718](https://github.com/npm/npm/issues/12718.)
+  Update outdated git dependencies found in shrinkwraps. Previously, if the
+  module version was the same then no update would be completed even if the
+  committish had changed.
+  ([@kossnocorp](https://github.com/kossnocorp))
+
+
+#### CYCLES IN DEVELOPMENT DEPENDENCIES NO LONGER CRASH
+
+* [`1691de6`](https://github.com/npm/npm/commit/1691de668d34cd92ab3de08bf3a06085388f2f07)
+  [#13327](https://github.com/npm/npm/issues/13327)
+  Fix bug where cycles found in development dependencies could result in
+  infinite recursion that resulted in crashes.
+  ([@iarna](https://github.com/iarna))
+
+#### IMPROVE "NOT UPDATING LINKED MODULE" WARNINGS
+
+* [`1619871`](https://github.com/npm/npm/commit/1619871ac0cc8839dc9962c78e736095976c1eb4)
+  [#12893](https://github.com/npm/npm/pull/12893)
+  Only warn about symlink update if version number differs
+  The update-linked action outputs a warning that it needs to update the
+  linked package, but can't, There is no need for the package to be updated if
+  it is already at the correct version.  This change does a check before
+  logging the warning.
+  ([@DaveEmmerson](https://github.com/DaveEmmerson))
+
+#### MORE BUG FIXES
+
+* [`8f8d1b3`](https://github.com/npm/npm/commit/8f8d1b33a78c79aff9de73df362abaa7f05751d2)
+  [#11398](https://github.com/npm/npm/issues/11398)
+  Fix bug where `package.json` files that contained a `type` property could
+  cause crashes. `type` is not a `package.json` property that npm makes use
+  of and having it should be (and now is) harmless.
+  ([@zkat](https://github.com/zkat))
+* [`e7fa6c6`](https://github.com/npm/npm/commit/e7fa6c6a2c1de2a214479daa8c6901eebb350381)
+  [#13353](https://github.com/npm/npm/issues/13353)
+  Add GIT_EXEC_PATH to Git environment whitelist.
+  ([@mhart](https://github.com/mhart))
+* [`c23af21`](https://github.com/npm/npm/commit/c23af21d4cedd7fedcb4168672044db76ad054a8)
+  [#13626](https://github.com/npm/npm/pull/13626)
+  Use HTTPS issues URL in the error message for type validation errors.
+  ([@watilde](https://github.com/watilde))
+
+#### INCLUDE `npm login` IN COMMAND SUMMARY
+
+* [`ab0c4b1`](https://github.com/npm/npm/commit/ab0c4b137b05762e75e0913038b606f087b58aa0)
+  [#13581](https://github.com/npm/npm/issues/13581)
+  The `login` command has long been an alias for `adduser`.
+  At the same time, there is an expectation not just of that
+  particular word being something to look for, but of there being
+  clear symmetry with `logout`.
+  So it was a bit confusing when `login` didn't show up in
+  `npm help` on a technicality. This seems like an acceptable
+  exception to the rule that says "no aliases in `npm help`".
+  ([@zkat](https://github.com/zkat))
+
+#### DOCUMENTATION
+
+* [`e2d7e78`](https://github.com/npm/npm/commit/e2d7e7820a7875ed96e0382dc1e91b8df4e83746)
+  [#13319](https://github.com/npm/npm/pull/13319)
+  As Node.js 0.8 is no longer supported, remove mention of it from the README.
+  ([@watilde](https://github.com/watilde))
+* [`c565d89`](https://github.com/npm/npm/commit/c565d893a38efb6006e841450503329c9e58f100)
+  [#13349](https://github.com/npm/npm/pull/13349)
+  Updated the scripts documentation to explain the different between `version` and `preversion`.
+  ([@christophehurpeau](https://github.com/christophehurpeau))
+* [`fa8f87f`](https://github.com/npm/npm/commit/fa8f87f1ec92e543dd975156c4b184eb3e0b80cb)
+  [#10167](https://github.com/npm/npm/pull/10167)
+  Clarify in scope documentation that npm@2 is required for scoped packages.
+  ([@danpaz](https://github.com/danpaz))
+
+#### DEPENDENCIES
+
+* [`124427e`](https://github.com/npm/npm/commit/124427eabbfd200aa145114e389e19692559ff1e)
+  [#8614](https://github.com/npm/npm/issues/8614)
+  `fstream-npm@1.1.1`:
+  Fixes bug with inclusion of scoped bundled dependencies.
+  ([@forivall](https://github.com/forivall))
+* [`7e0cdff`](https://github.com/npm/npm/commit/7e0cdff04714709f6dc056b19422d3f937502f1c)
+  [#13497](https://github.com/npm/npm/pull/13497)
+  `graceful-fs@4.1.5`:
+  `graceful-fs` had a [bug fix](https://github.com/isaacs/node-graceful-fs/pull/71) which
+  fixes a problem ([nodejs/node#7846](https://github.com/nodejs/node/pull/7846)) exposed
+  by recent changes to Node.js.
+  ([@thefourtheye](https://github.com/thefourtheye))
+* [`9b88cb8`](https://github.com/npm/npm/commit/9b88cb89f138443f324094685f4de073f33ecef0)
+  [#9984](https://github.com/npm/npm/issues/9984)
+  `request@2.74.0`:
+  Update request library to at least 2.73 to fix a bug where `npm install` would crash with
+  _Cannot read property 'emit' of null._
+
+  Update `request` dependency `tough-cookie` to `2.3.0` to
+  to address [https://nodesecurity.io/advisories/130](https://nodesecurity.io/advisories/130).
+  Versions 0.9.7 through 2.2.2 contain a vulnerable regular expression that,
+  under certain conditions involving long strings of semicolons in the
+  "Set-Cookie" header, causes the event loop to block for excessive amounts of
+  time.
+  ([@zarenner](https://github.com/zarenner))
+  ([@stash-sfdc](https://github.com/stash-sfdc))
+* [`bf78ce5`](https://github.com/npm/npm/commit/bf78ce5ef5d2d6e95177193cca5362dd27bff968)
+  [#13387](https://github.com/npm/npm/issues/13387)
+  `minimatch@3.0.3`:
+  Handle extremely long and terrible patterns more gracefully.
+  There were some magic numbers that assumed that every extglob pattern starts
+  and ends with a specific number of characters in the regular expression.
+  Since !(||) patterns are a little bit more complicated, this led to creating
+  an invalid regular expression and throwing.
+  ([@isaacs](https://github.com/isaacs))
+* [`803e538`](https://github.com/npm/npm/commit/803e538efaae4b56a764029742adcf6761e8398b)
+  [isaacs/rimraf#111](https://github.com/isaacs/rimraf/issues/111)
+  `rimraf@2.5.4`: Clarify assertions: cb is required, options are not.
+  ([@isaacs](https://github.com/isaacs))
+* [`a9f84ef`](https://github.com/npm/npm/commit/a9f84ef61b4c719b646bf9cda00577ef16e3a113)
+  `lodash.without@4.2.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`f59ff1c`](https://github.com/npm/npm/commit/f59ff1c2701f1bfd21bfdb97b4571823b614f694)
+  `lodash.uniq@4.4.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`8cc027e`](https://github.com/npm/npm/commit/8cc027e5e81623260a49b31fe406ce483258b203)
+  `lodash.union@4.5.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`0a6c1e4`](https://github.com/npm/npm/commit/0a6c1e4302a153fb055f495043ed33afd8324193)
+  `lodash.without@4.3.0`
+  ([@jdalton](https://github.com/jdalton))
+* [`4ab0181`](https://github.com/npm/npm/commit/4ab0181fca2eda18888b865ef691b83d30fb0c33)
+  `lodash.clonedeep@4.4.1`
+  ([@jdalton](https://github.com/jdalton))
+
 ### v3.10.6 (2016-07-07)
 
 This week we have a bunch of bug fixes for ya!  A shrinkwrap regression
@@ -49,7 +222,7 @@ hopefully this will bring is to where we want to be.
 #### HTML DOCS IMPROVEMENTS
 
 * [`58da923`](https://github.com/npm/npm/commit/58da9234ae72a5474b997f890a1155ee9785e6f1)
-  [#npm/npm](https://github.com/npm/npm/issues/npm/npm)
+  [#13225](https://github.com/npm/npm/issues/13225)
   Fix HTML character set declaration in generated HTML documentation.
   ([@KenanY](https://github.com/KenanY))
 * [`d1f0bf4`](https://github.com/npm/npm/commit/d1f0bf4303566f8690502034f82bbb449850958d)
