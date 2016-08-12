@@ -43,10 +43,11 @@ npm!_
 
 #### Comments
 
-Because lines in an npm config file follow the `key = value` pattern, lines may be effectivly commmented-out by placing any character at the beginning of the line (creating a `key` which is not recoginized, or used). Common comment characters are `;`, `#`, or `//`.
+Lines in `.npmrc` files are interpreted as comments when they begin with a `;` or `#` character. `.npmrc` files are parsed by [npm/ini](https://github.com/npm/ini), which specifies this comment syntax.
 
 For example:
 
+    # last modified: 01 Jan 2016
     ; Set a new registry for a scoped package
     @myscope:registry=https://mycustomregistry.example.org
 
