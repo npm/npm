@@ -41,6 +41,15 @@ sensitive credentials, they must be readable and writable _only_ by your user
 account (i.e. must have a mode of `0600`), otherwise they _will be ignored by
 npm!_
 
+#### Comments
+
+Because lines in an npm config file follow the `key = value` pattern, lines may be effectivly commmented-out by placing any character at the beginning of the line (creating a `key` which is not recoginized, or used). Common comment characters are `;`, `#`, or `//`.
+
+For example:
+
+    ; Set a new registry for a scoped package
+    @myscope:registry=https://mycustomregistry.example.org
+
 ### Per-project config file
 
 When working locally in a project, a `.npmrc` file in the root of the
