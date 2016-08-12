@@ -14,13 +14,6 @@ the result to the changelog.
 const execSync = require('child_process').execSync
 const branch = process.argv[2] || 'master'
 const log = execSync(`git log --reverse --pretty='format:%h %H%d %s (%aN)%n%b%n---%n' ${branch}...`).toString().split(/\n/)
-const authormap = {
-  'Rebecca Turner': 'iarna',
-  'Forrest L Norvell': 'othiym23',
-  'Kyle Mitchell': 'kemitchell',
-  'Chris Rebert': 'cvrebert',
-  'Kat Marchán': 'zkat'
-}
 
 main()
 
@@ -32,7 +25,7 @@ function shortname (url) {
   if (repo !== 'npm/npm') {
     return `${repo}#${id}`
   } else {
-    return `#${id}`
+    return `${id}`
   }
 }
 
@@ -87,7 +80,7 @@ function main () {
         fullid: m[2],
         branch: m[3],
         message: m[4],
-        author: authormap[m[5]] || m[5],
+        author: m[5],
         prurl: null,
         fixes: null,
         credit: null
@@ -97,7 +90,7 @@ function main () {
     } else if (m = line.match(/^Credit: @(.*)/)) {
       if (!commit.credit) commit.credit = []
       commit.credit.push(m[1])
-    } else if (m = line.match(/^Fixes: (?:#|https:[/][/]github.com[/]([^/]+[/][^/]+)[/]issues[/])(.*)/)) {
+    } else if (m = line.match(/^Fixes: (.*)/)) {
       commit.fixes = m[1]
     } else if (m = line.match(/^Reviewed-By: @(.*)/)) {
       commit.reviewed = m[1]
