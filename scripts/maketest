@@ -59,11 +59,11 @@ var fixture = new Tacks(Dir({
 
 function setup () {
   cleanup()
-  fixture.create(testdir)
+  fixture.create(basedir)
 }
 
 function cleanup () {
-  fixture.remove(testdir)
+  fixture.remove(basedir)
 }
 
 test('setup', function (t) {
