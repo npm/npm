@@ -203,6 +203,7 @@ Conversely, some files are always ignored:
 * `.npmrc`
 * `node_modules`
 * `config.gypi`
+* `*.orig`
 
 ## main
 
