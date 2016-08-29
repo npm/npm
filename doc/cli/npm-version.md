@@ -3,7 +3,7 @@ npm-version(1) -- Bump a package version
 
 ## SYNOPSIS
 
-    npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]
+    npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease [prerelease-id] | from-git]
 
     'npm [-v | --version]' to print npm version
     'npm view <pkg> version' to view a package's published version
@@ -16,8 +16,17 @@ data back to `package.json` and, if present, `npm-shrinkwrap.json`.
 
 The `newversion` argument should be a valid semver string, a
 valid second argument to [semver.inc](https://github.com/npm/node-semver#functions) (one of `patch`, `minor`, `major`,
-`prepatch`, `preminor`, `premajor`, `prerelease`), or `from-git`. In the second case,
-the existing version will be incremented by 1 in the specified field.
+`prepatch`, `preminor`, `premajor`, `prerelease`), or `from-git`.
+
+Prerelease Identifiers: `prerelease` second argument accepts a third argument as an additional identifier string argument that will append the value of the string as a prerelease identifier.
+
+```
+$ npm version prerelease beta
+$ 1.2.4-beta.0
+```
+
+In the second case, the existing version will be incremented by 1 in the specified field.
+
 `from-git` will try to read the latest git tag, and use that as the new npm version.
 
 If run in a git repo, it will also create a version commit and tag.
