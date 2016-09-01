@@ -43,6 +43,14 @@ test('make sure the path is correct, with directory of current node but ignored 
   checkPath(true, true, t)
 })
 
+test('make sure the path is correct, without directory of current node and automatic detection', function (t) {
+  checkPath(false, 'auto', t)
+})
+
+test('make sure the path is correct, with directory of current node and automatic detection', function (t) {
+  checkPath(true, 'auto', t)
+})
+
 function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
   var newPATH = PATH
   var currentNodeExecPath = process.execPath
@@ -95,7 +103,7 @@ function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
     // used by the child process, as the coverage tooling may set the
     // --scripts-prepend-node-path option on its own.
     var realPrependNodePathSetting = stdout.filter(function (line) {
-      return line.match(/npm_config_scripts_prepend_node_path=true/)
+      return line.match(/npm_config_scripts_prepend_node_path=(true|auto)/)
     }).length > 0
 
     if (withDirOfCurrentNode && realPrependNodePathSetting) {
