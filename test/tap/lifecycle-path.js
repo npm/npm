@@ -51,6 +51,14 @@ test('make sure the path is correct, with directory of current node and automati
   checkPath(true, 'auto', t)
 })
 
+test('make sure the path is correct, without directory of current node and warn-only detection', function (t) {
+  checkPath(false, 'warn-only', t)
+})
+
+test('make sure the path is correct, with directory of current node and warn-only detection', function (t) {
+  checkPath(true, 'warn-only', t)
+})
+
 function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
   var newPATH = PATH
   var currentNodeExecPath = process.execPath
@@ -65,6 +73,7 @@ function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
     // so the PATH won't be prepended with its parent directory
     newPATH = [path.dirname(process.execPath), PATH].join(process.platform === 'win32' ? ';' : ':')
   }
+
   common.npm(['run-script', 'env'], {
     cwd: pkg,
     nodeExecPath: currentNodeExecPath,
@@ -72,9 +81,10 @@ function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
       PATH: newPATH,
       npm_config_scripts_prepend_node_path: prependNodePathSetting
     },
-    stdio: [ 0, 'pipe', 2 ]
-  }, function (er, code, stdout) {
+    stdio: [ 0, 'pipe', 'pipe' ]
+  }, function (er, code, stdout, stderr) {
     if (er) throw er
+    if (!stderr.match(/^(npm WARN.*)?\n*$/)) console.error(stderr)
     t.equal(code, 0, 'exit code')
     var lineMatch = function (line) {
       return /^PATH=/i.test(line)
@@ -105,6 +115,18 @@ function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
     var realPrependNodePathSetting = stdout.filter(function (line) {
       return line.match(/npm_config_scripts_prepend_node_path=(true|auto)/)
     }).length > 0
+
+    if (prependNodePathSetting === 'warn-only') {
+      if (withDirOfCurrentNode) {
+        t.match(stderr, new RegExp(
+          'npm WARN lifecycle The node binary used for scripts is \\(none\\) ' +
+          'but npm uses .*/test/tap/lifecycle-path/node-bin/my_bundled_node ' +
+          'itself.'
+        ))
+      } else {
+        t.same(stderr, '')
+      }
+    }
 
     if (withDirOfCurrentNode && realPrependNodePathSetting) {
       expectedPaths.push('{{ROOT}}/test/tap/lifecycle-path/node-bin')
