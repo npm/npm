@@ -812,7 +812,7 @@ of packages specified according to the pattern `@organization/package`.
 
 ### scripts-prepend-node-path
 
-* Default: "auto"
+* Default: "warn-only"
 * Type: Boolean, `"auto"` or `"warn-only"`
 
 If set to `true`, add the directory in which the current `node` executable
