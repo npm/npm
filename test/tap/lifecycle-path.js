@@ -120,7 +120,7 @@ function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
       if (withDirOfCurrentNode) {
         t.match(stderr, new RegExp(
           'npm WARN lifecycle The node binary used for scripts is \\(none\\) ' +
-          'but npm uses .*/test/tap/lifecycle-path/node-bin/my_bundled_node ' +
+          'but npm uses .*test.tap.lifecycle-path.node-bin.my_bundled_node(.exe)? ' +
           'itself.'
         ))
       } else {
