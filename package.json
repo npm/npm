@@ -81,7 +81,7 @@
     "read-package-json": "~2.0.4",
     "readable-stream": "~2.1.5",
     "realize-package-specifier": "~3.0.1",
-    "request": "~2.72.0",
+    "request": "~2.74.0",
     "retry": "~0.9.0",
     "rimraf": "~2.5.2",
     "semver": "~5.1.0",

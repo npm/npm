@@ -162,7 +162,7 @@ FormData.prototype._multiPartHeader = function(field, value, options) {
   // custom header specified (as string)?
   // it becomes responsible for boundary
   // (e.g. to handle extra CRLFs on .NET servers)
-  if (options.header) {
+  if (typeof options.header == 'string') {
     return options.header;
   }
 
@@ -177,9 +177,28 @@ FormData.prototype._multiPartHeader = function(field, value, options) {
     'Content-Type': [].concat(contentType || [])
   };
 
+  // allow custom headers.
+  if (typeof options.header == 'object') {
+    populate(headers, options.header);
+  }
+
+  var header;
   for (var prop in headers) {
-    if (headers[prop].length) {
-      contents += prop + ': ' + headers[prop].join('; ') + FormData.LINE_BREAK;
+    header = headers[prop];
+
+    // skip nullish headers.
+    if (header == null) {
+      continue;
+    }
+
+    // convert all headers to arrays.
+    if (!Array.isArray(header)) {
+      header = [header];
+    }
+
+    // add non-empty headers.
+    if (header.length) {
+      contents += prop + ': ' + header.join('; ') + FormData.LINE_BREAK;
     }
   }
 
@@ -192,7 +211,8 @@ FormData.prototype._getContentDisposition = function(value, options) {
 
   // custom filename takes precedence
   // fs- and request- streams have path property
-  var filename = options.filename || value.path;
+  // formidable and the browser add a name property.
+  var filename = options.filename || value.name || value.path;
 
   // or try http response
   if (!filename && value.readable && value.hasOwnProperty('httpVersion')) {
@@ -210,6 +230,11 @@ FormData.prototype._getContentType = function(value, options) {
 
   // use custom content-type above all
   var contentType = options.contentType;
+
+  // or try `name` from formidable, browser
+  if (!contentType && value.name) {
+    contentType = mime.lookup(value.name);
+  }
 
   // or try `path` from fs-, request- streams
   if (!contentType && value.path) {
@@ -266,6 +291,7 @@ FormData.prototype.getHeaders = function(userHeaders) {
   return formHeaders;
 };
 
+// TODO: Looks like unused function
 FormData.prototype.getCustomHeaders = function(contentType) {
   contentType = contentType ? contentType : 'multipart/form-data';
 
