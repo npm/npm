@@ -86,7 +86,7 @@
     "request": "~2.74.0",
     "retry": "~0.10.0",
     "rimraf": "~2.5.4",
-    "semver": "~5.1.0",
+    "semver": "~5.3.0",
     "sha": "~2.0.1",
     "slide": "~1.1.6",
     "sorted-object": "~2.0.0",
