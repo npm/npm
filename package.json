@@ -81,7 +81,7 @@
     "read-installed": "~4.0.3",
     "read-package-json": "~2.0.4",
     "read-package-tree": "~5.1.5",
-    "readable-stream": "~2.1.4",
+    "readable-stream": "~2.1.5",
     "realize-package-specifier": "~3.0.3",
     "request": "~2.74.0",
     "retry": "~0.9.0",
