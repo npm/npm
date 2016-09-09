@@ -1,3 +1,84 @@
+### v2.15.11 (2016-09-08):
+
+On we go with our monthly release cadence! This week is pretty much all
+dependency updates and some documentation changes, as can be expected by now.
+
+Note that `npm@4` will almost certainly be released next month! It's not final
+what we'll end up doing as far as LTS support goes, but the current thinking is
+that, considering how small and resource-constrained our team is, support for
+`npm@2` will be reduced to essentially maintenance, so we can better focus on
+`npm@3` as the new LTS version (which will go into `node@6`), and `npm@4` as our
+next main development version.
+
+#### DOCUMENTATION UPDATES
+
+* [`8f71038`](https://github.com/npm/npm/commit/8f71038310501ad5bc7445b2fa2ff0eaa377919a)
+  [#13892](https://github.com/npm/npm/pull/13892)
+  Update `LICENSE` file to match license on `master`.
+  ([@rvagg](https://github.com/rvagg))
+* [`e81b4f1`](https://github.com/npm/npm/commit/e81b4f1d18a4d79b7af8342747f2ed7dc3e84f0a)
+  [#12438](https://github.com/npm/npm/issues/12438)
+  Remind folks to use `#!/usr/bin/env node` in their `bin` scripts to make files
+  executable directly.
+  ([@mxstbr](https://github.com/mxstbr))
+* [`f89789f`](https://github.com/npm/npm/commit/f89789f43d65bfc74f64f15a99356841377e1af3)
+  [#13655](https://github.com/npm/npm/pull/13655)
+  Document line comment syntax for `.npmrc`.
+  ([@mdjasper](https://github.com/mdjasper))
+* [`5cd3abc`](https://github.com/npm/npm/commit/5cd3abc3511515e09b4a1b781c0520e84c267c5b)
+  [#13493](https://github.com/npm/npm/pull/13493)
+  Document that the user config file can itself be configured either through the
+  `$NPM_CONFIG_USERCONFIG` environment variable, or `--userconfig` command line
+  flag.
+  ([@jasonkarns](https://github.com/jasonkarns))
+* [`dd71ca0`](https://github.com/npm/npm/commit/dd71ca0efc2094b824ccc9e23af0fc915499f2e6)
+  [#13911](https://github.com/npm/npm/pull/13911)
+  Minor documentation reword and cleanup.
+  ([@othiym23](https://github.com/othiym23))
+* [`f7a320c`](https://github.com/npm/npm/commit/f7a320c816947d578a050c97e0fb9878954be0e8)
+  [#13682](https://github.com/npm/npm/pull/13682)
+  Minor grammar fix in documentation for `npm scripts`.
+  ([@Ajedi32](https://github.com/Ajedi32))
+* [`e5cb5e8`](https://github.com/npm/npm/commit/e5cb5e8fcf4642836fedf3f3421c994a8e27e19b)
+  [#13717](https://github.com/npm/npm/pull/13717)
+  Document that `npm link` will link the files specified in the `bin` field of
+  `package.json` to `{prefix}/bin/{name}`.
+  ([@legodude17](https://github.com/legodude17))
+
+#### DEPENDENCY UPDATES
+* [`8bef026`](https://github.com/npm/npm/commit/8bef026603b6da888edf0d41308d9e532abfcd54)
+  `graceful-fs@4.1.6`
+  ([@francescoinfante](https://github.com/francescoinfante))
+* [`9f73f4a`](https://github.com/npm/npm/commit/9f73f4aab5f56b256c5cf9e461e81abfa2844945)
+  `glob@7.0.6`
+  ([@isaacs](https://github.com/isaacs))
+* [`5391b7e`](https://github.com/npm/npm/commit/5391b7e8cd4401fbadbf54e810fdc965a3662a21)
+  `which@1.2.1`
+  ([@isaacs](https://github.com/isaacs))
+* [`43bfec8`](https://github.com/npm/npm/commit/43bfec8376dd8ded7d56a8dabd6139919544760e)
+  `retry@0.10.0`
+  ([@tim-kos](https://github.com/tim-kos))
+* [`39305f1`](https://github.com/npm/npm/commit/39305f1c76f74bf9789c769ef72a94ea9a81d119)
+  `readable-stream@2.1.5`
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+* [`a5512fa`](https://github.com/npm/npm/commit/a5512fafd72e23755e77e28f1122b008bc12a733)
+  `once@1.4.0`
+  ([@zkochan](https://github.com/zkochan))
+* [`06a208b`](https://github.com/npm/npm/commit/06a208b178c1de3d0da58bc35a854d200fea8ef0)
+  `npm-registry-client@7.2.1`:
+  * [npm/npm-registry-client#142](https://github.com/npm/npm-registry-client/pull/142) Fix `EventEmitter` warning spam from error handlers on socket. ([@addaleax](https://github.com/addaleax))
+  * [npm/npm-registry-client#131](https://github.com/npm/npm-registry-client/pull/131) Adds support for streaming request bodies. ([@aredridel](https://github.com/aredridel))
+  * Fixes [#13656](https://github.com/npm/npm/issues/13656).
+  * Dependency updates.
+  * Documentation improvements.
+  ([@othiym23](https://github.com/othiym23))
+* [`4f759be`](https://github.com/npm/npm/commit/4f759be1fb5e23180b970350e58f40a513daa680)
+  `inherits@2.0.3`
+  ([@isaacs](https://github.com/isaacs))
+* [`4258b76`](https://github.com/npm/npm/commit/4258b764e2565f6294ae1e34a5653895290b62e3)
+  `tap@7.1.1`
+  ([@isaacs](https://github.com/isaacs))
+
 ### v2.15.10 (2016-08-11):
 
 Hi all, today's our first release coming out of the new monthly release
