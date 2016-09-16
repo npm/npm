@@ -179,6 +179,9 @@ after packing it up into a tarball (b).
     If the repository makes use of submodules, those submodules will
     be cloned as well.
 
+    If you set the "git-shallow-clone" config, the clone will be shallow with
+    depth 1, unless `<commit-ish>` is a SHA.
+
     The following git environment variables are recognized by npm and will be added
     to the environment when running git:
 

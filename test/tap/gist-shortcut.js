@@ -35,7 +35,7 @@ test('gist-shortcut', function (t) {
           if (args[0] !== 'clone') return cb(null, '', '')
           var cloneUrl = cloneUrls.shift()
           if (cloneUrl) {
-            t.is(args[3], cloneUrl[0], cloneUrl[1])
+            t.is(args[args.length - 2], cloneUrl[0], cloneUrl[1])
           } else {
             t.fail('too many attempts to clone')
           }
