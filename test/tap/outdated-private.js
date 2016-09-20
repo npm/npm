@@ -66,7 +66,7 @@ test('outdated ignores private modules', function (t) {
           t.ifError(err, 'install success')
           bumpLocalPrivate()
           npm.outdated(function (er, d) {
-            t.ifError(er, 'outdated success')
+            t.ifError(err, 'npm outdated ran with a error message')
             t.deepEqual(d, [[
               path.resolve(__dirname, 'outdated-private'),
               'underscore',
