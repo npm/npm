@@ -115,7 +115,7 @@ test('outdated support local modules', function (t) {
           t.ifError(err, 'install success')
           bumpLocalModules()
           npm.outdated(function (er, d) {
-            t.ifError(er, 'outdated success')
+            t.ifError(err, 'npm outdated ran with a error message')
             t.ok(verify(d, [
               [
                 path.resolve(__dirname, 'outdated-local'),
