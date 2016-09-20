@@ -62,7 +62,7 @@ test('outdated depth integer', function (t) {
       npm.install('request@0.9.0', function (er) {
         if (er) throw new Error(er)
         npm.outdated(function (err, d) {
-          if (err) throw new Error(err)
+          t.ok(err, 'npm outdated ran with a error message')
           t.deepEqual(d, expected)
           s.close()
           t.end()

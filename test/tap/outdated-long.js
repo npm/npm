@@ -75,8 +75,7 @@ test('it should not throw', function (t) {
           t.ifError(err, 'install success')
           npm.config.set('long', true)
           npm.outdated(function (er, d) {
-            t.ifError(er, 'outdated success')
-
+            t.ifError(err, 'npm outdated ran with a error message')
             console.log = originalLog
 
             t.same(output, expOut)

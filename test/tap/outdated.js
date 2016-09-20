@@ -103,7 +103,7 @@ test('it should not throw', function (t) {
             output.push.apply(output, arguments)
           }
           npm.outdated(function (er, d) {
-            t.ifError(er, 'outdated success')
+            t.ifError(err, 'npm outdated ran with a error message')
             output = output.map(function (x) { return x.replace(/\r/g, '') })
             console.log = originalLog
 
