@@ -277,6 +277,27 @@ test('npm view <package name>@<semver range> versions', function (t) {
   })
 })
 
+test('npm view <package name>@<semver range> version --json', function (t) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
+    common.npm([
+      'view',
+      'underscore@~1.5.0',
+      'version',
+      '--json',
+      '--registry=' + common.registry
+    ], { cwd: t2dir }, function (err, code, stdout) {
+      t.ifError(err, 'view command finished successfully')
+      t.equal(code, 0, 'exit ok')
+      t.equal(stdout.trim(), JSON.stringify([
+        '1.5.0',
+        '1.5.1'
+      ], null, 2), 'should have three versions')
+      s.close()
+      t.end()
+    })
+  })
+})
+
 test('npm view <package name> --json', function (t) {
   t.plan(3)
   mr({ port: common.port, plugin: plugin }, function (er, s) {
@@ -297,6 +318,39 @@ test('npm view <package name> --json', function (t) {
       } catch (er) {
         t.fail('Unable to parse JSON')
       }
+    })
+  })
+})
+
+test('npm view <package name>@<invalid version>', function (t) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
+    common.npm([
+      'view',
+      'underscore@12345',
+      '--registry=' + common.registry
+    ], { cwd: t2dir }, function (err, code, stdout) {
+      t.ifError(err, 'view command finished successfully')
+      t.equal(code, 0, 'exit ok')
+      t.equal(stdout.trim(), '', 'should return empty')
+      s.close()
+      t.end()
+    })
+  })
+})
+
+test('npm view <package name>@<invalid version> --json', function (t) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
+    common.npm([
+      'view',
+      'underscore@12345',
+      '--json',
+      '--registry=' + common.registry
+    ], { cwd: t2dir }, function (err, code, stdout) {
+      t.ifError(err, 'view command finished successfully')
+      t.equal(code, 0, 'exit ok')
+      t.equal(stdout.trim(), '', 'should return empty')
+      s.close()
+      t.end()
     })
   })
 })
