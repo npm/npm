@@ -301,6 +301,39 @@ test('npm view <package name> --json', function (t) {
   })
 })
 
+test('npm view <package name>@<invalid version>', function (t) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
+    common.npm([
+      'view',
+      'underscore@12345',
+      '--registry=' + common.registry
+    ], { cwd: t2dir }, function (err, code, stdout) {
+      t.ifError(err, 'view command finished successfully')
+      t.equal(code, 0, 'exit ok')
+      t.equal(stdout.trim(), '', 'should return empty')
+      s.close()
+      t.end()
+    })
+  })
+})
+
+test('npm view <package name>@<invalid version> --json', function (t) {
+  mr({ port: common.port, plugin: plugin }, function (er, s) {
+    common.npm([
+      'view',
+      'underscore@12345',
+      '--json',
+      '--registry=' + common.registry
+    ], { cwd: t2dir }, function (err, code, stdout) {
+      t.ifError(err, 'view command finished successfully')
+      t.equal(code, 0, 'exit ok')
+      t.equal(stdout.trim(), '', 'should return empty')
+      s.close()
+      t.end()
+    })
+  })
+})
+
 test('npm view <package name> <field>', function (t) {
   mr({ port: common.port, plugin: plugin }, function (er, s) {
     common.npm([
