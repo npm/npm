@@ -791,7 +791,7 @@ patch upgrades.
 
 ### scope
 
-* Default: ""
+* Default: the scope of the current project, if any, or ""
 * Type: String
 
 Associate an operation with a scope for a scoped registry. Useful when logging
