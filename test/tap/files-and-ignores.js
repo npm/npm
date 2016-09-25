@@ -325,25 +325,6 @@ test('includes files regardless of emptiness', function (t) {
   })
 })
 
-test('.npmignore itself gets included', function (t) {
-  var fixture = new Tacks(
-    Dir({
-      'package.json': File({
-        name: 'npm-test-files',
-        version: '1.2.5',
-        files: [
-          '.npmignore'
-        ]
-      }),
-      '.npmignore': File('')
-    })
-  )
-  withFixture(t, fixture, function (done) {
-    t.ok(fileExists('.npmignore'), '.npmignore included')
-    done()
-  })
-})
-
 test('include default files when missing files spec', function (t) {
   var fixture = new Tacks(
     Dir({
@@ -401,6 +382,7 @@ test('certain files ignored unconditionally', function (t) {
           '.wafpickle-50',
           'build/config.gypi',
           'npm-debug.log',
+          '.npmignore',
           '.npmrc',
           '.foo.swp',
           '.DS_Store',
@@ -418,6 +400,7 @@ test('certain files ignored unconditionally', function (t) {
       '.wafpickle-50': File(''),
       'build': Dir({'config.gypi': File('')}),
       'npm-debug.log': File(''),
+      '.npmignore': File(''),
       '.npmrc': File(''),
       '.foo.swp': File(''),
       '.DS_Store': Dir({foo: File('')}),
@@ -437,6 +420,7 @@ test('certain files ignored unconditionally', function (t) {
     t.notOk(fileExists('.wafpickle-50'), '.wafpickle-50 not included')
     t.notOk(fileExists('build/config.gypi'), 'build/config.gypi not included')
     t.notOk(fileExists('npm-debug.log'), 'npm-debug.log not included')
+    t.notOk(fileExists('.npmignore'), '.npmignore not included')
     t.notOk(fileExists('.npmrc'), '.npmrc not included')
     t.notOk(fileExists('.foo.swp'), '.foo.swp not included')
     t.notOk(fileExists('.DS_Store'), '.DS_Store not included')
