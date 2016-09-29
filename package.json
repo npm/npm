@@ -30,6 +30,7 @@
   "main": "./lib/npm.js",
   "bin": "./bin/npm-cli.js",
   "dependencies": {
+    "JSONStream": "~1.2.1",
     "abbrev": "~1.0.9",
     "ansicolors": "~0.3.2",
     "ansistyles": "~0.1.3",
@@ -131,7 +132,7 @@
     "inherits",
     "ini",
     "init-package-json",
-    "jsonstream",
+    "JSONStream",
     "lockfile",
     "lodash._baseindexof",
     "lodash._baseuniq",
