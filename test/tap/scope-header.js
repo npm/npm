@@ -5,7 +5,6 @@ var mr = require('npm-registry-mock')
 var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
-var extend = Object.assign || require('util')._extend
 var common = require('../common-tap.js')
 
 var basedir = path.join(__dirname, path.basename(__filename, '.js'))
@@ -16,16 +15,18 @@ var cachedir = path.join(basedir, 'cache')
 var globaldir = path.join(basedir, 'global')
 var tmpdir = path.join(basedir, 'tmp')
 
+var env = common.newEnv().extend({
+  npm_config_cache: cachedir,
+  npm_config_tmp: tmpdir,
+  npm_config_prefix: globaldir,
+  npm_config_registry: common.registry,
+  npm_config_loglevel: 'warn'
+})
+
 var conf = function (cwd) {
   return {
     cwd: cwd || testdir,
-    env: extend(extend({}, process.env), extend({
-      npm_config_cache: cachedir,
-      npm_config_tmp: tmpdir,
-      npm_config_prefix: globaldir,
-      npm_config_registry: common.registry,
-      npm_config_loglevel: 'warn'
-    }))
+    env: env
   }
 }
 var server
