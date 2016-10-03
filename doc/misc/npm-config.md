@@ -499,9 +499,9 @@ version number, if not already set in package.json.
 
 Whether or not to output JSON data, rather than the normal output.
 
-This feature is currently experimental, and the output data structures
-for many commands is either not implemented in JSON yet, or subject to
-change.  Only the output from `npm ls --json` is currently valid.
+This feature is currently experimental, and the output data structures for many
+commands is either not implemented in JSON yet, or subject to change.  Only the
+output from `npm ls --json` and `npm search --json` are currently valid.
 
 ### key
 
@@ -655,7 +655,7 @@ process is not aborted.
 * Type: Boolean
 
 Output parseable results from commands that write to
-standard output.
+standard output. For `npm search`, this will be tab-separated table format.
 
 ### prefix
 
@@ -810,13 +810,6 @@ in to a private registry for the first time:
 will cause `@organization` to be mapped to the registry for future installation
 of packages specified according to the pattern `@organization/package`.
 
-### searchopts
-
-* Default: ""
-* Type: String
-
-Space-separated options that are always passed to search.
-
 ### searchexclude
 
 * Default: ""
@@ -824,15 +817,19 @@ Space-separated options that are always passed to search.
 
 Space-separated options that limit the results from search.
 
-### searchsort
+### searchopts
 
-* Default: "name"
+* Default: ""
 * Type: String
-* Values: "name", "-name", "date", "-date", "description",
-  "-description", "keywords", "-keywords"
 
-Indication of which field to sort search results by.  Prefix with a `-`
-character to indicate reverse sort.
+Space-separated options that are always passed to search.
+
+### searchstaleness
+
+* Default: 900 (15 minutes)
+* Type: Number
+
+The age of the cache, in seconds, before another registry request is made.
 
 ### shell
 
