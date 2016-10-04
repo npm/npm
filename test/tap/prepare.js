@@ -1,4 +1,4 @@
-// verify that prepublish runs on install, pack, and publish
+// verify that prepare runs on pack and publish
 var common = require('../common-tap')
 var test = require('tap').test
 var fs = require('graceful-fs')
@@ -6,7 +6,7 @@ var join = require('path').join
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
 
-var pkg = join(__dirname, 'prepublish_package')
+var pkg = join(__dirname, 'prepare_package')
 var tmp = join(pkg, 'tmp')
 var cache = join(pkg, 'cache')
 
@@ -26,9 +26,9 @@ test('setup', function (t) {
 
   function next () {
     fs.writeFile(join(pkg, 'package.json'), JSON.stringify({
-      name: 'npm-test-prepublish',
+      name: 'npm-test-prepare',
       version: '1.2.5',
-      scripts: { prepublish: 'echo ok' }
+      scripts: { prepare: 'echo ok' }
     }), 'ascii', function (er) {
       if (er) throw er
 
@@ -61,14 +61,15 @@ test('test', function (t) {
 
     t.notOk(stderr, 'got stderr data:' + JSON.stringify('' + stderr))
     var c = stdout.trim()
-    var regex = new RegExp('' +
-      '> npm-test-prepublish@1.2.5 prepublish [^\\r\\n]+\\r?\\n' +
+    var regex = new RegExp(
+      '> npm-test-prepare@1.2.5 prepare [^\\r\\n]+\\r?\\n' +
       '> echo ok\\r?\\n' +
       '\\r?\\n' +
       'ok\\r?\\n' +
-      'npm-test-prepublish-1.2.5.tgz', 'ig')
+      'npm-test-prepare-1.2.5.tgz', 'ig'
+    )
 
-    t.ok(c.match(regex))
+    t.match(c, regex)
     t.end()
   })
 })
