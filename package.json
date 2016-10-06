@@ -46,7 +46,7 @@
     "fs-write-stream-atomic": "~1.0.8",
     "fstream": "~1.0.10",
     "fstream-npm": "~1.2.0",
-    "glob": "~7.0.6",
+    "glob": "~7.1.0",
     "graceful-fs": "~4.1.6",
     "has-unicode": "~2.0.1",
     "hosted-git-info": "~2.1.5",
