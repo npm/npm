@@ -39,7 +39,7 @@
     "chownr": "~1.0.1",
     "cmd-shim": "~2.0.2",
     "columnify": "~1.5.4",
-    "config-chain": "~1.1.10",
+    "config-chain": "~1.1.11",
     "dezalgo": "~1.0.3",
     "editor": "~1.0.0",
     "fs-vacuum": "~1.2.9",
