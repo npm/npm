@@ -364,6 +364,14 @@ The command to use for git commands.  If git is installed on the
 computer, but is not in the `PATH`, then set this to the full path to
 the git binary.
 
+### git-shallow-clone
+
+* Default: `false`
+* Type: Boolean
+
+Use shallow clone when fetching git repositories.  This will only fetch the
+newest commit, making clones faster.  Only supported with Git 1.9+.
+
 ### git-tag-version
 
 * Default: `true`
