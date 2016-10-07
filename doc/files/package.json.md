@@ -200,6 +200,7 @@ Conversely, some files are always ignored:
 * `.DS_Store`
 * `._*`
 * `npm-debug.log`
+* `.npmignore`
 * `.npmrc`
 * `node_modules`
 * `config.gypi`

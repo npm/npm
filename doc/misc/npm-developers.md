@@ -120,6 +120,7 @@ need to add them to `.npmignore` explicitly:
 * `.DS_Store`
 * `.git`
 * `.hg`
+* `.npmignore`
 * `.npmrc`
 * `.lock-wscript`
 * `.svn`
