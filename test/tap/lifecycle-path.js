@@ -32,14 +32,34 @@ test('setup', function (t) {
 })
 
 test('make sure the path is correct, without directory of current node', function (t) {
-  checkPath(false, t)
+  checkPath(false, false, t)
 })
 
 test('make sure the path is correct, with directory of current node', function (t) {
-  checkPath(true, t)
+  checkPath(true, false, t)
 })
 
-function checkPath (withDirOfCurrentNode, t) {
+test('make sure the path is correct, with directory of current node but ignored node path', function (t) {
+  checkPath(true, true, t)
+})
+
+test('make sure the path is correct, without directory of current node and automatic detection', function (t) {
+  checkPath(false, 'auto', t)
+})
+
+test('make sure the path is correct, with directory of current node and automatic detection', function (t) {
+  checkPath(true, 'auto', t)
+})
+
+test('make sure the path is correct, without directory of current node and warn-only detection', function (t) {
+  checkPath(false, 'warn-only', t)
+})
+
+test('make sure the path is correct, with directory of current node and warn-only detection', function (t) {
+  checkPath(true, 'warn-only', t)
+})
+
+function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
   var newPATH = PATH
   var currentNodeExecPath = process.execPath
   if (withDirOfCurrentNode) {
@@ -53,24 +73,28 @@ function checkPath (withDirOfCurrentNode, t) {
     // so the PATH won't be prepended with its parent directory
     newPATH = [path.dirname(process.execPath), PATH].join(process.platform === 'win32' ? ';' : ':')
   }
+
   common.npm(['run-script', 'env'], {
     cwd: pkg,
     nodeExecPath: currentNodeExecPath,
     env: {
-      PATH: newPATH
+      PATH: newPATH,
+      npm_config_scripts_prepend_node_path: prependNodePathSetting
     },
-    stdio: [ 0, 'pipe', 2 ]
-  }, function (er, code, stdout) {
+    stdio: [ 0, 'pipe', 'pipe' ]
+  }, function (er, code, stdout, stderr) {
     if (er) throw er
+    if (!stderr.match(/^(npm WARN.*)?\n*$/)) console.error(stderr)
     t.equal(code, 0, 'exit code')
     var lineMatch = function (line) {
       return /^PATH=/i.test(line)
     }
     // extract just the path value
-    stdout = stdout.split(/\r?\n/).filter(lineMatch).pop().replace(/^PATH=/, '')
+    stdout = stdout.split(/\r?\n/)
+    var observedPath = stdout.filter(lineMatch).pop().replace(/^PATH=/, '')
     var pathSplit = process.platform === 'win32' ? ';' : ':'
     var root = path.resolve(__dirname, '../..')
-    var actual = stdout.split(pathSplit).map(function (p) {
+    var actual = observedPath.split(pathSplit).map(function (p) {
       if (p.indexOf(root) === 0) {
         p = '{{ROOT}}' + p.substr(root.length)
       }
@@ -84,7 +108,27 @@ function checkPath (withDirOfCurrentNode, t) {
     // get the ones we tacked on, then the system-specific requirements
     var expectedPaths = ['{{ROOT}}/bin/node-gyp-bin',
                          '{{ROOT}}/test/tap/lifecycle-path/node_modules/.bin']
-    if (withDirOfCurrentNode) {
+
+    // Check that the behaviour matches the configuration that was actually
+    // used by the child process, as the coverage tooling may set the
+    // --scripts-prepend-node-path option on its own.
+    var realPrependNodePathSetting = stdout.filter(function (line) {
+      return line.match(/npm_config_scripts_prepend_node_path=(true|auto)/)
+    }).length > 0
+
+    if (prependNodePathSetting === 'warn-only') {
+      if (withDirOfCurrentNode) {
+        t.match(stderr, new RegExp(
+          'npm WARN lifecycle The node binary used for scripts is \\(none\\) ' +
+          'but npm uses .*test.tap.lifecycle-path.node-bin.my_bundled_node(.exe)? ' +
+          'itself.'
+        ))
+      } else {
+        t.same(stderr, '')
+      }
+    }
+
+    if (withDirOfCurrentNode && realPrependNodePathSetting) {
       expectedPaths.push('{{ROOT}}/test/tap/lifecycle-path/node-bin')
     }
     var expect = expectedPaths.concat(newPATH.split(pathSplit)).map(function (p) {
