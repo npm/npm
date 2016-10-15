@@ -59,7 +59,7 @@ test('test', function (t) {
     t.equal(code, 0, 'pack finished successfully')
     t.ifErr(err, 'pack finished successfully')
 
-    t.notOk(stderr, 'got stderr data:' + JSON.stringify('' + stderr))
+    t.match(stderr, /`prepublish` scripts will run only for `npm publish`/)
     var c = stdout.trim()
     var regex = new RegExp('' +
       '> npm-test-prepublish@1.2.5 prepublish [^\\r\\n]+\\r?\\n' +
