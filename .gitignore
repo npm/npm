@@ -4,6 +4,7 @@ npm-debug.log
 /test/bin
 /test/output.log
 /test/*/*/node_modules
+/test/npm_cache
 /test/packages/npm-test-depends-on-spark/which-spark.log
 /test/packages/test-package/random-data.txt
 /test/root
