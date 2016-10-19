@@ -59,16 +59,22 @@ test('make sure the path is correct, with directory of current node and warn-onl
   checkPath(true, 'warn-only', t)
 })
 
+test('make sure the path is correct, with directory of current node and warn-only detection', function (t) {
+  checkPath('extra-node', 'warn-only', t)
+})
+
 function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
   var newPATH = PATH
   var currentNodeExecPath = process.execPath
   if (withDirOfCurrentNode) {
-    var newNodeExeDir = path.join(pkg, 'node-bin')
+    var newNodeExeDir = path.join(pkg, 'node-bin', 'my_bundled_node')
     mkdirp.sync(newNodeExeDir)
-    currentNodeExecPath = path.join(newNodeExeDir, 'my_bundled_' + path.basename(process.execPath))
+    currentNodeExecPath = path.join(newNodeExeDir, path.basename(process.execPath))
     fs.writeFileSync(currentNodeExecPath, fs.readFileSync(process.execPath))
     fs.chmodSync(currentNodeExecPath, '755')
-  } else {
+  }
+
+  if (!withDirOfCurrentNode || withDirOfCurrentNode === 'extra-node') {
     // Ensure that current node interpreter will be found in the PATH,
     // so the PATH won't be prepended with its parent directory
     newPATH = [path.dirname(process.execPath), PATH].join(process.platform === 'win32' ? ';' : ':')
@@ -120,6 +126,14 @@ function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
       if (withDirOfCurrentNode) {
         t.match(stderr, /npm WARN lifecycle/, 'spit out a warning')
         t.match(stderr, /npm is using .*test.tap.lifecycle-path.node-bin.my_bundled_node(.exe)?/, 'mention the path of the binary npm itself is using.')
+        if (withDirOfCurrentNode === 'extra-node') {
+          var regex = new RegExp(
+            'The node binary used for scripts is.*' +
+            process.execPath.replace(/[/\\]/g, '.'))
+          t.match(stderr, regex, 'reports the current binary vs conflicting')
+        } else {
+          t.match(stderr, /there is no node binary in the current PATH/, 'informs user that there is no node binary in PATH')
+        }
       } else {
         t.same(stderr, '')
       }
