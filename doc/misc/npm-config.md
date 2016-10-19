@@ -280,9 +280,6 @@ Show the description in `npm search`
 
 Install `dev-dependencies` along with packages.
 
-Note that `dev-dependencies` are also installed if the `npat` flag is
-set.
-
 ### dry-run
 
 * Default: false
@@ -606,13 +603,6 @@ Any "%s" in the message will be replaced with the version number.
 * Type: semver or false
 
 The node version to use when checking a package's `engines` map.
-
-### npat
-
-* Default: false
-* Type: Boolean
-
-Run tests on installation.
 
 ### onload-script
 
