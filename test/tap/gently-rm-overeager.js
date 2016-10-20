@@ -3,6 +3,7 @@ var fs = require('graceful-fs')
 var test = require('tap').test
 var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
+var glob = require('glob')
 
 var common = require('../common-tap.js')
 
@@ -32,9 +33,11 @@ test('cache add', function (t) {
     t.ok(c, 'test-whoops install also failed')
     fs.readdir(pkg, function (er, files) {
       t.ifError(er, 'package directory is still there')
-      t.deepEqual(files, ['npm-debug.log'], 'only debug log remains')
-
-      t.end()
+      t.deepEqual(files, [], 'only debug log remains')
+      glob(resolve(common.npm_config_cache, '_logs', '*-debug.log'), function (er, files) {
+        t.ok(files.length > 0, 'debug log is saved')
+        t.end()
+      })
     })
   })
 })
