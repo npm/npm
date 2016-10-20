@@ -56,7 +56,7 @@ test('does not use ansi styling', function (t) {
       ],
     EXEC_OPTS,
     function (err, code, stdout) {
-      t.ifError(err, 'npm outdated ran with a error message')
+      t.ifError(err)
       t.is(code, 1, 'npm outdated exited with code 1')
       t.ok(stdout, stdout.length)
       t.ok(!hasControlCodes(stdout))
