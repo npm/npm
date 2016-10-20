@@ -71,7 +71,7 @@ test('outdated depth deep (9999)', function (t) {
 
   function thenValidateOutput (err, code, stdout, stderr) {
     if (err) throw err
-    t.ifError(err, 'npm outdated ran with a error message')
+    t.ifError(err)
     t.is(code, 1, 'npm outdated exited with code 1')
     t.match(
       stdout,
