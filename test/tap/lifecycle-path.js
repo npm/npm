@@ -80,9 +80,12 @@ test('make sure the path is correct, with directory of current node and warn-onl
   }, t)
 })
 
-test('make sure there is no warning with a symlinked node and warn-only detection', function (t) {
+test('make sure there is no warning with a symlinked node and warn-only detection', {
+  skip: isWindows && 'symlinks are weird on windows'
+}, function (t) {
   checkPath({
-    withDirOfCurrentNode: 'extra-node',
+    withDirOfCurrentNode: false,
+    extraNode: true,
     prependNodePathSetting: 'warn-only',
     symlinkNodeInsteadOfCopying: true
   }, t)
@@ -90,7 +93,8 @@ test('make sure there is no warning with a symlinked node and warn-only detectio
 
 test('make sure the path is correct, with directory of current node and warn-only detection and an extra node in path', function (t) {
   checkPath({
-    withDirOfCurrentNode: 'extra-node',
+    withDirOfCurrentNode: false,
+    extraNode: true,
     prependNodePathSetting: 'warn-only'
   }, t)
 })
@@ -99,6 +103,7 @@ function checkPath (testconfig, t) {
   var withDirOfCurrentNode = testconfig.withDirOfCurrentNode
   var prependNodePathSetting = testconfig.prependNodePathSetting
   var symlinkedNode = testconfig.symlinkNodeInsteadOfCopying
+  var extraNode = testconfig.extraNode
 
   var newPATH = PATH
   var currentNodeExecPath = process.execPath
@@ -116,7 +121,7 @@ function checkPath (testconfig, t) {
     }
   }
 
-  if (!withDirOfCurrentNode || withDirOfCurrentNode === 'extra-node') {
+  if (!withDirOfCurrentNode) {
     // Ensure that current node interpreter will be found in the PATH,
     // so the PATH won't be prepended with its parent directory
     newPATH = [path.dirname(process.execPath), PATH].join(process.platform === 'win32' ? ';' : ':')
@@ -170,7 +175,7 @@ function checkPath (testconfig, t) {
       } else if (withDirOfCurrentNode) {
         t.match(stderr, /npm WARN lifecycle/, 'spit out a warning')
         t.match(stderr, /npm is using .*test.tap.lifecycle-path.node-bin.my_bundled_node(.exe)?/, 'mention the path of the binary npm itself is using.')
-        if (withDirOfCurrentNode === 'extra-node') {
+        if (extraNode) {
           var regex = new RegExp(
             'The node binary used for scripts is.*' +
             process.execPath.replace(/[/\\]/g, '.'))
