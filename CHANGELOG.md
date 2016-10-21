@@ -87,7 +87,7 @@ of the npm community.
 
 #### SCRIPT NODE PATH (**BREAKING**)
 
-Thanks to some great with by [@addaleax](https://github.com/addaleax), we've
+Thanks to some great work by [@addaleax](https://github.com/addaleax), we've
 addressed a fairly tricky issue involving the node process used by `npm
 scripts`.
 
