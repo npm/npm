@@ -32,49 +32,96 @@ test('setup', function (t) {
 })
 
 test('make sure the path is correct, without directory of current node', function (t) {
-  checkPath(false, false, t)
+  checkPath({
+    withDirOfCurrentNode: false,
+    prependNodePathSetting: false
+  }, t)
 })
 
 test('make sure the path is correct, with directory of current node', function (t) {
-  checkPath(true, false, t)
+  checkPath({
+    withDirOfCurrentNode: true,
+    prependNodePathSetting: false
+  }, t)
 })
 
 test('make sure the path is correct, with directory of current node but ignored node path', function (t) {
-  checkPath(true, true, t)
+  checkPath({
+    withDirOfCurrentNode: true,
+    prependNodePathSetting: true
+  }, t)
 })
 
 test('make sure the path is correct, without directory of current node and automatic detection', function (t) {
-  checkPath(false, 'auto', t)
+  checkPath({
+    withDirOfCurrentNode: false,
+    prependNodePathSetting: 'auto'
+  }, t)
 })
 
 test('make sure the path is correct, with directory of current node and automatic detection', function (t) {
-  checkPath(true, 'auto', t)
+  checkPath({
+    withDirOfCurrentNode: true,
+    prependNodePathSetting: 'auto'
+  }, t)
 })
 
 test('make sure the path is correct, without directory of current node and warn-only detection', function (t) {
-  checkPath(false, 'warn-only', t)
+  checkPath({
+    withDirOfCurrentNode: false,
+    prependNodePathSetting: 'warn-only'
+  }, t)
 })
 
 test('make sure the path is correct, with directory of current node and warn-only detection', function (t) {
-  checkPath(true, 'warn-only', t)
+  checkPath({
+    withDirOfCurrentNode: true,
+    prependNodePathSetting: 'warn-only'
+  }, t)
+})
+
+test('make sure there is no warning with a symlinked node and warn-only detection', {
+  skip: isWindows && 'symlinks are weird on windows'
+}, function (t) {
+  checkPath({
+    withDirOfCurrentNode: false,
+    extraNode: true,
+    prependNodePathSetting: 'warn-only',
+    symlinkNodeInsteadOfCopying: true
+  }, t)
 })
 
 test('make sure the path is correct, with directory of current node and warn-only detection and an extra node in path', function (t) {
-  checkPath('extra-node', 'warn-only', t)
+  checkPath({
+    withDirOfCurrentNode: false,
+    extraNode: true,
+    prependNodePathSetting: 'warn-only'
+  }, t)
 })
 
-function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
+function checkPath (testconfig, t) {
+  var withDirOfCurrentNode = testconfig.withDirOfCurrentNode
+  var prependNodePathSetting = testconfig.prependNodePathSetting
+  var symlinkedNode = testconfig.symlinkNodeInsteadOfCopying
+  var extraNode = testconfig.extraNode
+
   var newPATH = PATH
   var currentNodeExecPath = process.execPath
   if (withDirOfCurrentNode) {
     var newNodeExeDir = path.join(pkg, 'node-bin', 'my_bundled_node')
     mkdirp.sync(newNodeExeDir)
     currentNodeExecPath = path.join(newNodeExeDir, path.basename(process.execPath))
-    fs.writeFileSync(currentNodeExecPath, fs.readFileSync(process.execPath))
-    fs.chmodSync(currentNodeExecPath, '755')
+    rimraf.sync(currentNodeExecPath)
+
+    if (!symlinkedNode) {
+      fs.writeFileSync(currentNodeExecPath, fs.readFileSync(process.execPath))
+      fs.chmodSync(currentNodeExecPath, '755')
+    } else {
+      fs.symlinkSync(process.execPath, currentNodeExecPath)
+    }
   }
 
-  if (!withDirOfCurrentNode || withDirOfCurrentNode === 'extra-node') {
+  if (!withDirOfCurrentNode) {
     // Ensure that current node interpreter will be found in the PATH,
     // so the PATH won't be prepended with its parent directory
     newPATH = [path.dirname(process.execPath), PATH].join(process.platform === 'win32' ? ';' : ':')
@@ -123,10 +170,12 @@ function checkPath (withDirOfCurrentNode, prependNodePathSetting, t) {
     }).length > 0
 
     if (prependNodePathSetting === 'warn-only') {
-      if (withDirOfCurrentNode) {
+      if (symlinkedNode) {
+        t.equal(stderr, '', 'does not spit out a warning')
+      } else if (withDirOfCurrentNode) {
         t.match(stderr, /npm WARN lifecycle/, 'spit out a warning')
         t.match(stderr, /npm is using .*test.tap.lifecycle-path.node-bin.my_bundled_node(.exe)?/, 'mention the path of the binary npm itself is using.')
-        if (withDirOfCurrentNode === 'extra-node') {
+        if (extraNode) {
           var regex = new RegExp(
             'The node binary used for scripts is.*' +
             process.execPath.replace(/[/\\]/g, '.'))
