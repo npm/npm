@@ -6,12 +6,13 @@ npm-scripts(7) -- How npm handles the "scripts" field
 npm supports the "scripts" property of the package.json script, for the
 following scripts:
 
-* prepare:
-  Run both before the package is published, and on local `npm
-  install` without any arguments. (See below.)
 * prepublish:
   Run BEFORE the package is published.  (Also run on local `npm
   install` without any arguments. See below.)
+* prepare:
+  Run both BEFORE the package is published, and on local `npm
+  install` without any arguments. (See below.) This is run
+  AFTER `prepublish`, but BEFORE `prepublishOnly`.
 * prepublishOnly:
   Run BEFORE the package is published. (See below.)
 * publish, postpublish:
