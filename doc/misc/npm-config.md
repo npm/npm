@@ -55,6 +55,7 @@ The following shorthands are parsed on the command-line:
 * `-C`: `--prefix`
 * `-l`: `--long`
 * `-m`: `--message`
+* `-offline`: `--cache-min 999999`
 * `-p`, `--porcelain`: `--parseable`
 * `-reg`: `--registry`
 * `-f`: `--force`
