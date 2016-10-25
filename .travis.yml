@@ -12,7 +12,7 @@ matrix:
       # only gather coverage info for LTS
       env: DEPLOY_VERSION=testing COVERALLS_REPO_TOKEN="$COVERALLS_OPTIONAL_TOKEN"
       script:
-        - "node . run tap-cover -- \"test/tap/*.js\""
+        - "node . run tap-cover -- \"test/tap/*.js\" \"test/tap/network/*.js\""
         - "unset COVERALLS_REPO_TOKEN ; node . run tap -- \"test/broken-under-*/*.js\""
     # previous LTS is next most important
     - node_js: "4"
@@ -35,4 +35,4 @@ cache:
 install:
   - "node . install"
 script:
-  - "node . run tap -- \"test/tap/*.js\" \"test/broken-under-nyc/*.js\""
+  - "node . run tap -- \"test/tap/*.js\" \"test/network/*.js\" \"test/broken-under-nyc/*.js\""
