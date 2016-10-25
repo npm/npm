@@ -13,7 +13,7 @@ matrix:
       env: DEPLOY_VERSION=testing COVERALLS_REPO_TOKEN="$COVERALLS_OPTIONAL_TOKEN"
       script:
         - "node . run tap-cover -- \"test/tap/*.js\""
-        - "unset COVERALLS_REPO_TOKEN ; node . run tap -- \"test/slow/*.js\" \"test/broken-under-travis-and-nyc/*.js\""
+        - "unset COVERALLS_REPO_TOKEN ; node . run tap -- \"test/slow/*.js\" \"test/broken-under-*/*.js\""
     # next LTS and master is next most important
     - node_js: "6"
       env: DEPLOY_VERSION=testing
@@ -51,4 +51,4 @@ install:
   - "node . install --ignore-scripts"
   - "make -j4 doc"
 script:
-  - "node . run tap -- \"test/tap/*.js\" \"test/slow/*.js\" \"test/broken-under-travis-and-nyc/*.js\""
+  - "node . run tap -- \"test/tap/*.js\" \"test/slow/*.js\" \"test/broken-under-nyc/*.js\""
