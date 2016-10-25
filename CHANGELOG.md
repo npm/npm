@@ -1,3 +1,57 @@
+### v4.0.1 (2016-10-24)
+
+Ayyyy~ 🌊
+
+So thanks to folks who were running on `npm@next`, we managed to find a few
+issues of notes in that preview version, and we're rolling out a small patch
+change to fix them. Most notably, anyone who was using a symlinked `node` binary
+(for example, if they installed Node.js through `homebrew`), was getting a very
+loud warning every time they ran scripts. Y'all should get warnings in a more
+useful way, now that we're resolving those path symlinks.
+
+Another fairly big change that we decided to slap into this version, since
+`npm@4.0.0` is never going to be `latest`, is to make it so `devDependencies`
+are included in `npm-shrinkwrap.json` by default -- if you do not want this, use
+`--production` with `npm shrinkwrap`.
+
+#### BIG FIXES/CHANGES
+
+* [`eff46dd`](https://github.com/npm/npm/commit/eff46dd498ed007bfa77ab7782040a3a828b852d)
+  [#14374](https://github.com/npm/npm/pull/14374)
+  Fully resolve the path for `node` executables in both `$PATH` and
+  `process.execPath` to avoid issues with symlinked `node`.
+  ([@addaleax](https://github.com/addaleax))
+* [`964f2d3`](https://github.com/npm/npm/commit/964f2d3a0675584267e6ece95b0115a53c6ca6a9)
+  [#14375](https://github.com/npm/npm/pull/14375)
+  Make including `devDependencies` in `npm-shrinkwrap.json` the default. This
+  should help make the transition to `npm@5` smoother in the future.
+  ([@iarna](https://github.com/iarna))
+
+#### BUGFIXES
+
+* [`a5b0a8d`](https://github.com/npm/npm/commit/a5b0a8db561916086fc7dbd6eb2836c952a42a7e)
+  [#14400](https://github.com/npm/npm/pull/14400)
+  Recently, we've had some consistent timeout failures while running the test
+  suite under Travis. This tweak to tests should take care of those issues and
+  Travis should go back to being reliably green.
+  ([@iarna](https://github.com/iarna))
+
+#### DOC PATCHES
+
+* [`c5907b2`](https://github.com/npm/npm/commit/c5907b2fc1a82ec919afe3b370ecd34d8895c7a2)
+  [#14251](https://github.com/npm/npm/pull/14251)
+  Update links to Node.js downloads. They previously pointed to 404 pages.😬
+  ([@ArtskydJ](https://github.com/ArtskydJ))
+* [`0c122f2`](https://github.com/npm/npm/commit/0c122f24ff1d4d400975edda2b7262aaaf6f7d69)
+  [#14380](https://github.com/npm/npm/pull/14380)
+  Add note and clarification on when `prepare` script is run. Make it more
+  consistent with surrounding descriptions.
+  ([@SimenB](https://github.com/SimenB))
+* [`51a62ab`](https://github.com/npm/npm/commit/51a62abd88324ba3dad18e18ca5e741f1d60883c)
+  [#14359](https://github.com/npm/npm/pull/14359)
+  Fixes typo in `npm@4` changelog.
+  ([@kimroen](https://github.com/kimroen))
+
 ### v4.0.0 (2016-10-20)
 
 Welcome to `npm@4`, friends!
