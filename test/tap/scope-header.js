@@ -11,6 +11,7 @@ var basedir = path.join(__dirname, path.basename(__filename, '.js'))
 var testdir = path.join(basedir, 'testdir')
 var withScope = path.join(testdir, 'with-scope')
 var withoutScope = path.join(testdir, 'without-scope')
+var onlyProjectScope = path.join(testdir, 'only-project-scope')
 var cachedir = path.join(basedir, 'cache')
 var globaldir = path.join(basedir, 'global')
 var tmpdir = path.join(basedir, 'tmp')
@@ -44,6 +45,13 @@ var fixture = new Tacks(Dir({
     'without-scope': Dir({
       'package.json': File({
         name: 'without-scope',
+        version: '1.0.0'
+      })
+    }),
+    'only-project-scope': Dir({
+      '.npmrc': File('@example:registry=thisisinvalid\n'),
+      'package.json': File({
+        name: '@example/only-project-scope',
         version: '1.0.0'
       })
     })
@@ -111,6 +119,36 @@ test('without-scope', function (t) {
     t.is(code, 0, 'command ran ok')
     t.comment(stderr.trim())
     t.is(stdout.trim(), 'false', 'got version matched to NO scope header')
+    t.done()
+  })
+})
+
+test('scope can be forced by having an explicit one', function (t) {
+  common.npm([
+    'view',
+    '--cache-min=0',
+    '--scope=example',
+    'scope-header-test',
+    'gotScope'
+  ], conf(withoutScope), function (err, code, stdout, stderr) {
+    if (err) throw err
+    t.is(code, 0, 'command ran ok')
+    t.comment(stderr.trim())
+    t.is(stdout.trim(), 'true', 'got version matched to scope header')
+    t.done()
+  })
+})
+
+test('only the project scope is used', function (t) {
+  common.npm([
+    'view',
+    '--cache-min=0',
+    'scope-header-test', 'gotScope'
+  ], conf(onlyProjectScope), function (err, code, stdout, stderr) {
+    if (err) throw err
+    t.is(code, 0, 'command ran ok')
+    t.comment(stderr.trim())
+    t.is(stdout.trim(), 'true', 'got version scope')
     t.done()
   })
 })
