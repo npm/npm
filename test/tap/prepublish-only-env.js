@@ -33,7 +33,7 @@ test('setup', function (t) {
     fs.writeFileSync(join(bin, 'test-build'), '#!/usr/bin/env node\nconsole.log(\'ok\')', 'ascii', function (er) {
       if (er) throw er
     })
-    fs.chmodSync(join(bin, 'test-build'), 0755)
+    fs.chmodSync(join(bin, 'test-build'), '755')
     fs.writeFile(join(pkg, 'package.json'), JSON.stringify({
       name: 'npm-test-prepublish-only',
       version: '1.2.5',
