@@ -343,6 +343,10 @@ folder structures that npm creates.
 
 ### Limitations of npm's Install Algorithm
 
+npm will refuse to install any package with an identical name to the
+current package. This can be overridden with the `--force` flag, but in
+most cases can simply be addressed by changing the local package name.
+
 There are some very rare and pathological edge-cases where a cycle can
 cause npm to try to install a never-ending tree of packages.  Here is
 the simplest case:
