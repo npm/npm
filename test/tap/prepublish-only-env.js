@@ -12,6 +12,8 @@ var tmp = join(pkg, 'tmp')
 var cache = join(pkg, 'cache')
 var bin = join(pkg, 'node_modules', '.bin')
 
+var isWin = process.platform === 'win32'
+var binName = isWin ? 'test-build.cmd' : 'test-build'
 var server
 
 test('setup', function (t) {
@@ -30,14 +32,14 @@ test('setup', function (t) {
   }
 
   function next () {
-    fs.writeFileSync(join(bin, 'test-build'), '#!/usr/bin/env node\nconsole.log(\'ok\')', 'ascii', function (er) {
+    fs.writeFileSync(join(bin, binName), isWin ? 'echo ok' : '#!/usr/bin/env node\nconsole.log(\'ok\')', 'ascii', function (er) {
       if (er) throw er
     })
-    fs.chmodSync(join(bin, 'test-build'), '755')
+    fs.chmodSync(join(bin, binName), '755')
     fs.writeFile(join(pkg, 'package.json'), JSON.stringify({
       name: 'npm-test-prepublish-only',
       version: '1.2.5',
-      scripts: { build: './node_modules/.bin/test-build', prepublishOnly: 'npm run build' }
+      scripts: { build: './node_modules/.bin/' + binName, prepublishOnly: 'npm run build' }
     }), 'ascii', function (er) {
       if (er) throw er
 
@@ -99,8 +101,10 @@ test('test', function (t) {
         '\\r?\\n' +
         '\\r?\\n' +
         '> npm-test-prepublish-only@1.2.5 build [^\\r\\n]+\\r?\\n' +
-        '> test-build\\r?\\n' +
+        '> ' + binName + '\\r?\\n' +
         '\\r?\\n' +
+        '(\\r?\\n)?' +
+        '([^\\r\\n]+\\r?\\n)?' +
         'ok\\r?\\n' +
         '\\+ npm-test-prepublish-only@1.2.5', 'ig'
       )
