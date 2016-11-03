@@ -158,9 +158,9 @@
       }
     },
     "glob": {
-      "version": "7.1.0",
-      "from": "glob@7.1.0",
-      "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.0.tgz",
+      "version": "7.1.1",
+      "from": "glob@>=7.1.1 <8.0.0",
+      "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.1.tgz",
       "dependencies": {
         "fs.realpath": {
           "version": "1.0.0",
