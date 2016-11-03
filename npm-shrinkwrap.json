@@ -224,9 +224,9 @@
       "resolved": "https://registry.npmjs.org/imurmurhash/-/imurmurhash-0.1.4.tgz"
     },
     "inflight": {
-      "version": "1.0.5",
-      "from": "inflight@latest",
-      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz"
+      "version": "1.0.6",
+      "from": "inflight@>=1.0.6 <2.0.0",
+      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz"
     },
     "inherits": {
       "version": "2.0.3",
