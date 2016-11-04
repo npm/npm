@@ -12,7 +12,7 @@ the result to the changelog.
 
 */
 const execSync = require('child_process').execSync
-const branch = process.argv[2] || 'latest'
+const branch = process.argv[2] || 'origin/latest'
 const log = execSync(`git log --reverse --pretty='format:%h %H%d %s (%aN)%n%b%n---%n' ${branch}...`).toString().split(/\n/)
 
 main()
