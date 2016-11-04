@@ -1,3 +1,145 @@
+### v4.0.2 (2016-11-03)
+
+Hola, amigxs. I know it's been a long time since I rapped at ya, but I
+been spending a lotta time quietly reflecting on all the things going on
+in my life. I was, like, [in Japan for a while](https://gist.github.com/othiym23/c98bd4ef5d9fb3f496835bd481ef40ae),
+and before that my swell colleagues [@zkat](https://github.com/zkat) and
+[@iarna](https://github.com/iarna) have been very capably managing the release
+process for quite a while. But I returned from Japan somewhat refreshed, very
+jetlagged, and filled with a burning urge to get `npm@4` as stable as possible
+before we push it out to the user community at large, so I decided to do this
+release myself. (Also, huge thanks to Kat and Rebecca for putting out `npm@4`
+so capably while I was on vacation! So cool to return to a major release having
+gone so well without my involvement!)
+
+That said...
+
+#### NEVER TRUST AN X.0.0 RELEASE
+
+Even though 4.0.1 came out hard on the heels of 4.0.0 with a couple
+critical fixes, we've found a couple other major issues that we want to
+see fixed before making `npm@4` into `npm@latest`. Some of these are
+arguably breaking changes on their own, so now is the time to get them
+out if we're going to do so before `npm@5`, and all of them are pretty
+significant blockers for a substantial number of users, so now is the
+best time to fix them.
+
+##### PREPUBLISHONLY WHOOPS
+
+The code running the `publish*` lifecycle events was very confusingly written.
+In fact, we didn't really figure out what it was doing until we added the new
+`prepublishOnly` event and it was running people's scripts from the wrong
+directory. We made it simpler. See the [commit
+message](https://github.com/npm/npm/commit/8b32d67aa277fd7e62edbed886387a855f58387f)
+for details.
+
+Because the change is no longer running publish events when publishing prebuilt
+artifacts, it's technically a breaking / semver-major change. In the off chance
+that the new behavior breaks any of y'all's workflows, let us know, and we can
+roll some or all of this change back until `npm@5` (or forever, if that works
+better for you).
+
+* [`8b32d67`](https://github.com/npm/npm/commit/8b32d67aa277fd7e62edbed886387a855f58387f)
+  [#14502](https://github.com/npm/npm/pull/14502)
+  Simplify lifecycle invocation and fix `prepublishOnly`.
+  ([@othiym23](https://github.com/othiym23))
+
+##### G'BYE NODE.JS 0.10, 0.12, and 5.X; HI THERE, NODE 7
+
+With the advent of the second official Node.js LTS release, Node 6.x
+'Boron', the Node.js project has now officially dropped versions 0.10
+and 0.12 out of the maintenance phase of LTS. (Also, Node 5 was never
+part of LTS, and will see no further support now that Node 7 has been
+released.) As a small team with limited resources, the npm CLI team is
+following suit and dropping those versions of Node from its CI test
+matrix.
+
+What this means:
+
+* Your contributions will no longer block on the tests passing on 0.10 and 0.12.
+* We will no longer block dependency upgrades on working with 0.10 and 0.12.
+* Bugs filed on the npm CLI that are due to incompatibilities with 0.10
+  or 0.12 (and older versions) will be closed with a strong urging to
+  upgrade to a supported version of Node.
+* On the flip side, we'll continue to (happily!) accept patches that
+  address regressions seen when running the CLI with Node.js 0.10 and
+  0.12.
+
+What this doesn't mean:
+
+* The CLI is going to start depending on ES2015+ features. npm continues
+  to work, in almost all cases, all the way back to Node.js 0.8, and our
+  long history of backwards compatibility is a source of pride for the
+  team.
+* We aren't concerned about the problems of users who, for whatever
+  reason, can't update to newer versions of npm. As mentioned above, we're
+  happy to take community patches intended to address regressions.
+
+We're not super interested in taking sides on what version of Node.js
+you "should" be running. We're a workflow tool, and we understand that
+you all have a diverse set of operational environments you need to be
+able to support. At the same time, we _are_ a small team, and we need
+to put some limits on what we support. Tracking what's supported by our
+runtime's own team seems most practical, so that's what we're doing.
+
+* [`ab630c9`](https://github.com/npm/npm/commit/ab630c9a7a1b40cdd4f1244be976c25ab1525907)
+  [#14503](https://github.com/npm/npm/pull/14503)
+  Node 6 is LTS; 5.x, 0.10, and 0.12 are unsupported.
+  ([@othiym23](https://github.com/othiym23))
+* [`731ae52`](https://github.com/npm/npm/commit/731ae526fb6e9951c43d82a26ccd357b63cc56c2)
+  [#14503](https://github.com/npm/npm/pull/14503)
+  Update supported version expression.
+  ([@othiym23](https://github.com/othiym23))
+
+##### DISENTANGLING SCOPE
+
+The new `Npm-Scope` header was previously reusing the `scope`
+configuration option to pass the current scope back to your current
+registry (which, as [described
+previously](https://github.com/npm/npm/blob/release-next/CHANGELOG.md#send-extra-headers-to-registry), is meant to set up some upcoming
+registry features). It turns out that had some [seriously weird
+consequences](https://github.com/npm/npm/issues/14412) in the case where
+you were already configuring `scope` in your own environment. The CLI
+now uses separate configuration for this.
+
+* [`39358f7`](https://github.com/npm/npm/commit/39358f732ded4aa46d86d593393a0d6bca5dc12a)
+  [#14477](https://github.com/npm/npm/pull/14477)
+  Differentiate registry scope from project scope in configuration.
+  ([@zkat](https://github.com/zkat))
+
+#### SMALLER CHANGES
+
+* [`7f41295`](https://github.com/npm/npm/commit/7f41295775f28b958a926f9cb371cb37b05771dd)
+  [#14519](https://github.com/npm/npm/pull/14519)
+  Document that as of `npm@4.0.1`, `npm shrinkwrap` now includes `devDependencies` unless
+  instructed otherwise.
+  ([@iarna](https://github.com/iarna))
+* [`bdc2f9e`](https://github.com/npm/npm/commit/bdc2f9e255ddf1a47fd13ec8749d17ed41638b2c)
+  [#14501](https://github.com/npm/npm/pull/14501)
+  The `ENOSELF` error message is tricky to word. It's also an error that
+  normally bites new users. Clean it up in an effort to make it easier
+  to understand what's going on.
+  ([@snopeks](https://github.com/snopeks), [@zkat](https://github.com/zkat))
+
+#### DEPENDENCY UPGRADES
+
+* [`a52d0f0`](https://github.com/npm/npm/commit/a52d0f0c9cf2de5caef77e12eabd7dca9e89b49c)
+  `glob@7.1.1`:
+  - Handle files without associated perms on Windows.
+  - Fix failing case with `absolute` option.
+  ([@isaacs](https://github.com/isaacs), [@phated](https://github.com/phated))
+* [`afda66d`](https://github.com/npm/npm/commit/afda66d9afcdcbae1d148f589287583c4182d124)
+  [isaacs/node-graceful-fs#97](https://github.com/isaacs/node-graceful-fs/pull/97)
+  `graceful-fs@4.1.10`: Better backoff for EPERM on Windows.
+  ([@sam-github](https://github.com/sam-github))
+* [`e0023c0`](https://github.com/npm/npm/commit/e0023c089ded9161fbcbe544f12b07e12e3e5729)
+  [npm/inflight#3](https://github.com/npm/inflight/pull/3)
+  `inflight@1.0.6`: Clean up even if / when a callback throws.
+  ([@phated](https://github.com/phated))
+* [`1d91594`](https://github.com/npm/npm/commit/1d9159440364d2fe21e8bc15e08e284aaa118347)
+  `request@2.78.0`
+  ([@othiym23](https://github.com/othiym23))
+
 ### v4.0.1 (2016-10-24)
 
 Ayyyy~ 🌊
