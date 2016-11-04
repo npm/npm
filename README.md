@@ -1,6 +1,6 @@
 npm(1) -- a JavaScript package manager
 ==============================
-[![Build Status](https://img.shields.io/travis/npm/npm/master.svg)](https://travis-ci.org/npm/npm)
+[![Build Status](https://img.shields.io/travis/npm/npm/latest.svg)](https://travis-ci.org/npm/npm) [![Coverage Status](https://coveralls.io/repos/github/npm/npm/badge.svg?branch=latest)](https://coveralls.io/github/npm/npm?branch=latest)
 ## SYNOPSIS
 
 This is just enough info to get you up and running.
