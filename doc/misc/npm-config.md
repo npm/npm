@@ -20,7 +20,10 @@ interpreted as a configuration parameter.  For example, putting
 configuration parameter to `bar`.  Any environment configurations that
 are not given a value will be given the value of `true`.  Config
 values are case-insensitive, so `NPM_CONFIG_FOO=bar` will work the
-same.
+same. However, please note that inside [npm-scripts](/misc/scripts)
+npm will set it's own environment variables and Node will prefer
+those lowercase versions over any uppercase ones that you might set.
+For details see [this issue](https://github.com/npm/npm/issues/14528).
 
 ### npmrc Files
 
