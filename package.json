@@ -59,6 +59,7 @@
     "lockfile": "~1.0.2",
     "lodash._baseuniq": "~4.6.0",
     "lodash.clonedeep": "~4.5.0",
+    "lodash.includes": "~4.3.0",
     "lodash.union": "~4.6.0",
     "lodash.uniq": "~4.5.0",
     "lodash.without": "~4.4.0",
