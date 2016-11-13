@@ -209,7 +209,7 @@
     "prepublish": "node bin/npm-cli.js prune --prefix=. --no-global && rimraf test/*/*/node_modules && make doc-clean && make -j4 doc",
     "preversion": "bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
     "tap": "tap --timeout 300",
-    "tap-cover": "tap --coverage --timeout 600",
+    "tap-cover": "tap --nyc-arg='--cache' --coverage --timeout 600",
     "test": "standard && npm run test-tap",
     "test-coverage": "npm run tap-cover -- \"test/tap/*.js\" \"test/network/*.js\" \"test/slow/*.js\" \"test/broken-under-*/*.js\"",
     "test-tap": "npm run tap -- \"test/tap/*.js\" \"test/network/*.js\" \"test/slow/*.js\" \"test/broken-under-*/*.js\"",
