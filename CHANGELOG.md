@@ -1,3 +1,100 @@
+### v4.0.3 (2016-11-17)
+
+Hey you all, we've got a couple of bug fixes for you, a slew of
+documentation improvements and some improvements to our CI environment.  I
+know we just got v4 out the door, but the CLI team is already busy planning
+v5.  We'll have more for you in early December.
+
+#### BUG FIXES
+
+* [`45d40d9`](https://github.com/npm/npm/commit/45d40d96d2cd145f1e36702d6ade8cd033f7f332)
+  [`ba2adc2`](https://github.com/npm/npm/commit/ba2adc2e822d5e75021c12f13e3f74ea2edbde32)
+  [`1dc8908`](https://github.com/npm/npm/commit/1dc890807bd78a1794063688af31287ed25a2f06)
+  [`2ba19ee`](https://github.com/npm/npm/commit/2ba19ee643d612d103cdd8f288d313b00d05ee87)
+  [#14403](https://github.com/npm/npm/pull/14403)
+  Fix a bug where a scoped module could produce crashes when incorrectly
+  computing the paths related to their location. This patch reorganizes how path information
+  is passed in to eliminate the possibility of this sort of bug.
+  ([@iarna](https://github.com/iarna))
+  ([@NatalieWolfe](https://github.com/NatalieWolfe))
+* [`1011ec6`](https://github.com/npm/npm/commit/1011ec61230288c827a1c256735c55cf03d6228f)
+  [npm/npmlog#46](https://github.com/npm/npmlog/pull/46)
+  `npmlog@4.0.1`: Fix a bug where the progress bar would still display even if
+  you passed in `--no-progress`.
+  ([@iarna](https://github.com/iarna))
+
+#### DOCUMENTATION UPDATES
+
+* [`c3ac177`](https://github.com/npm/npm/commit/c3ac177236124c80524c5f252ba8f6670f05dcd8)
+  [#14406](https://github.com/npm/npm/pull/14406)
+  Sync up the dispute policy included with the CLI with the [current official text](https://www.npmjs.com/policies/disputes).
+  ([@mike-engel](https://github.com/mike-engel))
+* [`9c663b2`](https://github.com/npm/npm/commit/9c663b2dd8552f892dc0205330bbc73a484ecd81)
+  [#14627](https://github.com/npm/npm/pull/14627)
+  Update build status branch in README.
+  ([@cameronroe](https://github.com/cameronroe))
+* [`8a8a0a3`](https://github.com/npm/npm/commit/8a8a0a3d490fc767def208f925cdff57e16e565b)
+  [#14609](https://github.com/npm/npm/pull/14609)
+  Update examples URLs of GitHub repos where those repos have moved to new URLs.
+  ([@dougwilson](https://github.com/dougwilson))
+* [`7a6425b`](https://github.com/npm/npm/commit/7a6425bcd4decde5d4b0af8b507e98723a07c680)
+  [#14472](https://github.com/npm/npm/pull/14472)
+  Document `sign-git-tag` in
+  [npm-version(1)](https://github.com/npm/npm/blob/release-next/doc/cli/npm-version.md)'s
+  configuration section.
+  ([@strugee](https://github.com/strugee))
+* [`f3087cc`](https://github.com/npm/npm/commit/f3087cc58c903d9a70275be805ebaf0eadbcbe1b)
+  [#14546](https://github.com/npm/npm/pull/14546)
+  Add a note about the dangers of configuring npm via uppercase env vars.
+  ([@tuhoojabotti](https://github.com/tuhoojabotti))
+* [`50e51b0`](https://github.com/npm/npm/commit/50e51b04a143959048cf9e1e4c8fe15094f480b0)
+  [#14559](https://github.com/npm/npm/pull/14559)
+  Remove documentation that incorrectly stated that we check `.npmrc` permissions.
+  ([@iarna](https://github.com/iarna))
+
+##### OH UH, HELLO AGAIN NODE.JS 0.12
+
+* [`6f0c353`](https://github.com/npm/npm/commit/6f0c353e4e89b0378a4c88c829ccf9a1c5ae829d)
+  [`f78bde6`](https://github.com/npm/npm/commit/f78bde6983bdca63d5fcb9c220c87e8f75ffb70e)
+  [#14591](https://github.com/npm/npm/pull/14591)
+  Reintroduce Node.js 0.12 to our support matrix.  We jumped the gun when
+  removing it.  We won't drop support for it till the Node.js project does
+  so at the end of December 2016.
+  ([@othiym23](https://github.com/othiym23))
+
+#### TEST/CI UPDATES
+
+* [`aa73d1c`](https://github.com/npm/npm/commit/aa73d1c1cc22608f95382a35b33da252addff38e)
+  [`c914e80`](https://github.com/npm/npm/commit/c914e80f5abcb16c572fe756c89cf0bcef4ff991)
+* [`58fe064`](https://github.com/npm/npm/commit/58fe064dcc80bc08c677647832f2adb4a56b538a)
+  [#14602](https://github.com/npm/npm/pull/14602)
+  When running tests with coverage, use nyc's cache. This provides an 8x speedup!
+  ([@bcoe](https://github.com/bcoe))
+* [`ba091ce`](https://github.com/npm/npm/commit/ba091ce843af5d694f4540e825b095435b3558d8)
+  [#14435](https://github.com/npm/npm/pull/14435)
+  Remove an unused zero byte `package.json` found in the test fixtures.
+  ([@baderbuddy](https://github.com/baderbuddy))
+
+#### DEPENDENCY UPDATES
+
+* [`442e01e`](https://github.com/npm/npm/commit/442e01e42d8a439809f6726032e3b73ac0d2b2f8)
+  `readable-stream@2.2.2`:
+  Bring in latest changes from Node.js 7.x.
+  ([@calvinmetcalf](https://github.com/calvinmetcalf))
+* [`bfc4a1c`](https://github.com/npm/npm/commit/bfc4a1c0c17ef0a00dfaa09beba3389598a46535)
+  `which@1.2.12`:
+  Remove unused require.
+  ([@isaacs](https://github.com/isaacs))
+
+#### DEV DEPENDENCY UPDATES
+
+* [`7075b05`](https://github.com/npm/npm/commit/7075b054d8d2452bb53bee9b170498a48a0dc4e9)
+  `marked-man@0.1.6`
+  ([@kapouer](https://github.com/kapouer))
+* [`3e13fea`](https://github.com/npm/npm/commit/3e13fea907ee1141506a6de7d26cbc91c28fdb80)
+  `tap@8.0.0`
+  ([@isaacs](https://github.com/isaacs))
+
 ### v4.0.2 (2016-11-03)
 
 Hola, amigxs. I know it's been a long time since I rapped at ya, but I
