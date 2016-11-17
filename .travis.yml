@@ -12,7 +12,7 @@ matrix:
       # only gather coverage info for LTS
       env: DEPLOY_VERSION=testing COVERALLS_REPO_TOKEN="$COVERALLS_OPTIONAL_TOKEN"
       script:
-        - "node . run tap-cover -- \"test/tap/*.js\" \"test/slow/*.js\""
+        - "node . run tap-cover -- \"test/tap/*.js\""
         - "unset COVERALLS_REPO_TOKEN ; node . run tap -- \"test/broken-under-*/*.js\""
     # previous LTS is next most important
     - node_js: "4"
@@ -50,4 +50,4 @@ install:
   - "node . install --ignore-scripts"
   - "make -j4 doc"
 script:
-  - "node . run tap -- \"test/tap/*.js\" \"test/slow/*.js\" \"test/broken-under-nyc/*.js\""
+  - "node . run tap -- \"test/tap/*.js\" \"test/broken-under-nyc/*.js\""
