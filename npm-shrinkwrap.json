@@ -5182,9 +5182,9 @@
       }
     },
     "which": {
-      "version": "1.2.11",
-      "from": "which@1.2.11",
-      "resolved": "https://registry.npmjs.org/which/-/which-1.2.11.tgz",
+      "version": "1.2.12",
+      "from": "which@1.2.12",
+      "resolved": "https://registry.npmjs.org/which/-/which-1.2.12.tgz",
       "dependencies": {
         "isexe": {
           "version": "1.1.2",
