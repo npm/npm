@@ -1458,9 +1458,9 @@
       "resolved": "https://registry.npmjs.org/npm-user-validate/-/npm-user-validate-0.1.5.tgz"
     },
     "npmlog": {
-      "version": "4.0.0",
-      "from": "npmlog@4.0.0",
-      "resolved": "https://registry.npmjs.org/npmlog/-/npmlog-4.0.0.tgz",
+      "version": "4.0.1",
+      "from": "npmlog@4.0.1",
+      "resolved": "https://registry.npmjs.org/npmlog/-/npmlog-4.0.1.tgz",
       "dependencies": {
         "are-we-there-yet": {
           "version": "1.1.2",
@@ -1480,9 +1480,9 @@
           "resolved": "https://registry.npmjs.org/console-control-strings/-/console-control-strings-1.1.0.tgz"
         },
         "gauge": {
-          "version": "2.6.0",
-          "from": "gauge@>=2.6.0 <2.7.0",
-          "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.6.0.tgz",
+          "version": "2.7.1",
+          "from": "gauge@>=2.7.1 <2.8.0",
+          "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.7.1.tgz",
           "dependencies": {
             "has-color": {
               "version": "0.1.7",
@@ -1505,16 +1505,9 @@
               "resolved": "https://registry.npmjs.org/string-width/-/string-width-1.0.2.tgz",
               "dependencies": {
                 "code-point-at": {
-                  "version": "1.0.0",
+                  "version": "1.1.0",
                   "from": "code-point-at@>=1.0.0 <2.0.0",
-                  "resolved": "https://registry.npmjs.org/code-point-at/-/code-point-at-1.0.0.tgz",
-                  "dependencies": {
-                    "number-is-nan": {
-                      "version": "1.0.0",
-                      "from": "number-is-nan@>=1.0.0 <2.0.0",
-                      "resolved": "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.0.tgz"
-                    }
-                  }
+                  "resolved": "https://registry.npmjs.org/code-point-at/-/code-point-at-1.1.0.tgz"
                 },
                 "is-fullwidth-code-point": {
                   "version": "1.0.0",
@@ -1522,9 +1515,9 @@
                   "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-1.0.0.tgz",
                   "dependencies": {
                     "number-is-nan": {
-                      "version": "1.0.0",
-                      "from": "number-is-nan@^1.0.0",
-                      "resolved": "http://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.0.tgz"
+                      "version": "1.0.1",
+                      "from": "number-is-nan@>=1.0.0 <2.0.0",
+                      "resolved": "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.1.tgz"
                     }
                   }
                 }
