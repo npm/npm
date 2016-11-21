@@ -41,7 +41,7 @@ For fields that are arrays, requesting a non-numeric field will return
 all of the values from the objects in the list.  For example, to get all
 the contributor names for the "express" project, you can do this:
 
-    npm view express contributors.email
+    npm view express contributors.name
 
 You may also use numeric indices in square braces to specifically select
 an item in an array field.  To just get the email address of the first
