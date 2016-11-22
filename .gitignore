@@ -16,6 +16,7 @@ npm-debug.log
 /npm-*.tgz
 /node_modules/npm-registry-client/test/fixtures
 /test/fixtures/config/userconfig-with-gc
+/test/npm_cache
 /node_modules/npm-registry-couchapp
 *.pyc
 .jshintrc
