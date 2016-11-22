@@ -93,7 +93,11 @@ git, and mess with it directly.
 
 ## Installing on Cygwin
 
-No.
+Yes, but it is **not** supported. Just install the latest native Windows installer of *nodejs*, as it already include *npm*. Then upgrade *npm* with: 
+
+```sh
+npm install npm@latest -g
+```
 
 ## Uninstalling
 
