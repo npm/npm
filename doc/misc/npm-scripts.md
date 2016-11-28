@@ -11,9 +11,7 @@ following scripts:
   install` without any arguments.)
 * publish, postpublish:
   Run AFTER the package is published.
-* preinstall:
-  Run BEFORE the package is installed
-* install, postinstall:
+* install, preinstall, postinstall:
   Run AFTER the package is installed.
 * preuninstall, uninstall:
   Run BEFORE the package is uninstalled.
