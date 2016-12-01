@@ -199,9 +199,9 @@
       }
     },
     "graceful-fs": {
-      "version": "4.1.10",
-      "from": "graceful-fs@>=4.1.10 <5.0.0",
-      "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.10.tgz"
+      "version": "4.1.11",
+      "from": "graceful-fs@4.1.11",
+      "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.11.tgz"
     },
     "has-unicode": {
       "version": "2.0.1",
