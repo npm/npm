@@ -34,12 +34,22 @@ test('earliestInstallable should consider devDependencies', function (t) {
   var dep2a = {
     package: {
       name: 'dep2',
-      version: '2.0.0'
+      version: '2.0.0',
+      _from: {
+        raw: 'dep2@1.0.0',
+        scope: null,
+        escapedName: 'dep2',
+        name: 'dep2',
+        rawSpec: '1.0.0',
+        spec: '1.0.0',
+        type: 'version'
+      }
     },
     parent: dep1
   }
 
   var pkg = {
+    isTop: true,
     children: [dep1],
     package: {
       name: 'pkg',
@@ -69,16 +79,26 @@ test('earliestInstallable should reuse shared prod/dev deps when they are identi
   var dep2 = {
     package: {
       name: 'dep2',
-      version: '1.0.0'
+      version: '1.0.0',
+      _from: {
+        raw: 'dep2@^1.0.0',
+        scope: null,
+        escapedName: 'dep2',
+        name: 'dep2',
+        rawSpec: '^1.0.0',
+        spec: '>=1.0.0 <2.0.0',
+        type: 'range'
+      }
     }
   }
 
   var pkg = {
+    isTop: true,
     children: [dep1],
     package: {
       name: 'pkg',
       dependencies: { dep1: '1.0.0' },
-      devDependencies: { dep2: '1.0.0' }
+      devDependencies: { dep2: '^1.0.0' }
     }
   }
 
