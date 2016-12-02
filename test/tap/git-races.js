@@ -44,7 +44,7 @@ bar#4.0.0 shouldn't have gotten its own copy if buzz, and if it did, it shouldn'
 */
 
 ;['bar', 'foo', 'buzz'].forEach(function (name) {
-  var mockurl = 'ssh://git@github.com/BryanDonovan/dummy-npm-' + name + '.git'
+  var mockurl = 'git://github.com/BryanDonovan/dummy-npm-' + name + '.git'
   var realrepo = path.resolve(wd, 'github-com-BryanDonovan-dummy-npm-' + name + '.git')
   var tgz = path.resolve(fixtures, 'github-com-BryanDonovan-dummy-npm-' + name + '.git.tar.gz')
 
