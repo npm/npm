@@ -1,3 +1,76 @@
+### v4.0.5 (2016-12-01)
+
+It's that time of year! December is upon us, which means y'all are just going to
+be doing a lot less, in general, for the next month or so. The "Xmas Chasm", as
+we like to call it, has already begun. So for those of you reading it from the
+other side: Hi! Welcome back!
+
+This week's release is a relatively small one, involving just a few bugfixes and
+dependency upgrades. The CLI team has been busy recently with scoping out
+`npm@5`, and starting to do initial spec work for in-scope stuff.
+
+#### BUGFIXES
+
+On to the actual changes!
+
+* [`9776d8f`](https://github.com/npm/npm/commit/9776d8f70a0ea8d921cbbcab7a54e52c15fc455f)
+  [#15081](https://github.com/npm/npm/pull/15081)
+  `bundledDependencies` are intended to be left untouched by the installer, as
+  much as possible -- if they're bundled, we assume that you want to be
+  particular about the contents of your bundle.
+
+  The installer used to have a corner case where existing dependencies that had
+  bundledDependencies would get clobbered by as the installer moved stuff
+  around, even though the installer already avoided moving deps that were
+  themselves bundled. This is now fixed, along with the connected crasher, and
+  your bundledDeps should be left even more intact than before!
+  ([@iarna](https://github.com/iarna))
+* [`fc61c08`](https://github.com/npm/npm/commit/fc61c082122104031ccfb2a888432c9f809a0e8b)
+  [#15082](https://github.com/npm/npm/pull/15082)
+  Initialize nodes from bundled dependencies. This should address
+  [#14427](https://github.com/npm/npm/issues/14427) and related issues, but it's
+  turned out to be a tremendously difficult issue to reproduce in a test. We
+  decided to include it even pending tests, because we found the root cause of
+  the errors.
+  ([@iarna](https://github.com/iarna))
+* [`d8471a2`](https://github.com/npm/npm/commit/d8471a294ef848fc893f60e17d6ec6695b975d16)
+  [#12811](https://github.com/npm/npm/pull/12811)
+  Consider `devDependencies` when deciding whether to hoist a package. This
+  should resolve a variety of missing dependency issues some folks were seeing
+  when `devDependencies` happened to also be dependencies of your
+  `dependencies`. This often manifested as modules going missing, or only being
+  installed, after `npm install` was called twice.
+  ([@schmod](https://github.com/schmod))
+
+#### DEPENDENCY UPDATES
+
+* [`5978703`](https://github.com/npm/npm/commit/5978703da8669adae464789b1b15ee71d7f8d55d)
+  `graceful-fs@4.1.11`:
+  `EPERM` errors are Windows are now handled more gracefully. Windows users that
+  tended to see these errors due to, say, an antivirus-induced race condition,
+  should see them much more rarely, if at all.
+  ([@Kat Marchán](https://github.com/Kat Marchán))
+* [`85b0174`](https://github.com/npm/npm/commit/85b0174ba9842e8e89f3c33d009e4b4a9e877c7d)
+  `request@2.79.0`
+  ([@Kat Marchán](https://github.com/Kat Marchán))
+* [`9664d36`](https://github.com/npm/npm/commit/9664d36653503247737630440bc2ff657de965c3)
+  `tap@8.0.1`
+  ([@Kat Marchán](https://github.com/Kat Marchán))
+
+#### MISCELLANEOUS
+
+* [`f0f7b0f`](https://github.com/npm/npm/commit/f0f7b0fd025daa2b69994130345e6e8fdaaa0304)
+  [#15083](https://github.com/npm/npm/pull/15083)
+  Removed dead code.
+  ([@iarna](https://github.com/iarna))* [`bc32afe`](https://github.com/npm/npm/commit/bc32afe4d12e3760fb5a26466dc9c26a5a2981d5) [`c8a22fe`](https://github.com/npm/npm/commit/c8a22fe5320550e09c978abe560b62ce732686f4) [`db2666d`](https://github.com/npm/npm/commit/db2666d8c078fc69d0c02c6a3de9b31be1e995e9)
+  [#15085](https://github.com/npm/npm/pull/15085)
+  Change some network tests so they can run offline.
+  ([@iarna](https://github.com/iarna))
+* [`744a39b`](https://github.com/npm/npm/commit/744a39b836821b388ad8c848bd898c1d006689a9)
+  [#15085](https://github.com/npm/npm/pull/15085)
+  Make Node.js tests compatible with Windows.
+  ([@iarna](https://github.com/iarna))
+
 ### v4.0.3 (2016-11-17)
 
 Hey you all, we've got a couple of bug fixes for you, a slew of
