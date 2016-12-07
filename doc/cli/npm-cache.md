@@ -14,7 +14,7 @@ npm-cache(1) -- Manipulates packages cache
 
 ## DESCRIPTION
 
-Used to add, list, or clear the npm cache folder.
+Used to add, list, or clean the npm cache folder.
 
 * add:
   Add the specified package to the local cache.  This command is primarily
@@ -29,7 +29,7 @@ Used to add, list, or clear the npm cache folder.
 * clean:
   Delete data out of the cache folder.  If an argument is provided, then
   it specifies a subpath to delete.  If no argument is provided, then
-  the entire cache is cleared.
+  the entire cache is cleaned.
 
 ## DETAILS
 
