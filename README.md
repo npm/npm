@@ -137,6 +137,47 @@ must remove them yourself manually if you want them gone.  Note that
 this means that future npm installs will not remember the settings that
 you have chosen.
 
+
+## How to create or edit package.json file?
+
+`cd` into your project folder and execute `npm init`
+
+You'll get asked a few questions, after which npm will generate package.json for you.
+
+when you done with your module then publish it like:
+
+`npm adduser` 
+
+`npm publish` 
+
+\* In package.json, remember to change the node version (to something like '>=0.3.5') along with your version.
+
+## How to add dependencies to your package.json file?
+
+package.json is meant to be edited manually. See `npm help json` for help about package.json.
+
+you may also: `cd` into your project folder and execute: 
+
+`npm ls`
+
+to see what versions of modules are installed.
+
+for an automatic way see [require-analyzer](https://github.com/nodejitsu/require-analyzer)
+
+
+## How to install modules to your project?
+
+`cd` into your project folder and execute:
+
+`npm search PackageName` // first search takes little longer.
+
+`npm install PackageName`
+
+or to install packages as global like tools for example, use:
+
+`npm install -g PackageName`
+
+
 ## More Docs
 
 Check out the [docs](https://docs.npmjs.com/),
