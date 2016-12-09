@@ -764,9 +764,9 @@
       "resolved": "https://registry.npmjs.org/npm-package-arg/-/npm-package-arg-4.2.0.tgz"
     },
     "npm-registry-client": {
-      "version": "7.3.0",
-      "from": "npm-registry-client@7.3.0",
-      "resolved": "https://registry.npmjs.org/npm-registry-client/-/npm-registry-client-7.3.0.tgz",
+      "version": "7.4.5",
+      "from": "npm-registry-client@>=7.4.5 <7.5.0",
+      "resolved": "https://registry.npmjs.org/npm-registry-client/-/npm-registry-client-7.4.5.tgz",
       "dependencies": {
         "concat-stream": {
           "version": "1.5.2",
@@ -805,102 +805,6 @@
               "version": "0.0.6",
               "from": "typedarray@>=0.0.5 <0.1.0",
               "resolved": "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz"
-            }
-          }
-        },
-        "npmlog": {
-          "version": "3.1.2",
-          "from": "npmlog@>=2.0.0 <2.1.0||>=3.1.0 <3.2.0",
-          "resolved": "https://registry.npmjs.org/npmlog/-/npmlog-3.1.2.tgz",
-          "optional": true,
-          "dependencies": {
-            "are-we-there-yet": {
-              "version": "1.1.2",
-              "from": "are-we-there-yet@~1.1.2",
-              "resolved": "https://registry.npmjs.org/are-we-there-yet/-/are-we-there-yet-1.1.2.tgz",
-              "optional": true,
-              "dependencies": {
-                "delegates": {
-                  "version": "1.0.0",
-                  "from": "delegates@^1.0.0",
-                  "resolved": "https://registry.npmjs.org/delegates/-/delegates-1.0.0.tgz",
-                  "optional": true
-                }
-              }
-            },
-            "console-control-strings": {
-              "version": "1.1.0",
-              "from": "console-control-strings@~1.1.0",
-              "resolved": "https://registry.npmjs.org/console-control-strings/-/console-control-strings-1.1.0.tgz"
-            },
-            "gauge": {
-              "version": "2.6.0",
-              "from": "gauge@~2.6.0",
-              "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.6.0.tgz",
-              "optional": true,
-              "dependencies": {
-                "has-color": {
-                  "version": "0.1.7",
-                  "from": "has-color@^0.1.7",
-                  "resolved": "https://registry.npmjs.org/has-color/-/has-color-0.1.7.tgz",
-                  "optional": true
-                },
-                "object-assign": {
-                  "version": "4.1.0",
-                  "from": "object-assign@^4.1.0",
-                  "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz",
-                  "optional": true
-                },
-                "signal-exit": {
-                  "version": "3.0.1",
-                  "from": "signal-exit@^3.0.0",
-                  "resolved": "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.1.tgz",
-                  "optional": true
-                },
-                "string-width": {
-                  "version": "1.0.2",
-                  "from": "string-width@^1.0.1",
-                  "resolved": "https://registry.npmjs.org/string-width/-/string-width-1.0.2.tgz",
-                  "dependencies": {
-                    "code-point-at": {
-                      "version": "1.0.1",
-                      "from": "code-point-at@>=1.0.0 <2.0.0",
-                      "resolved": "https://registry.npmjs.org/code-point-at/-/code-point-at-1.0.1.tgz",
-                      "dependencies": {
-                        "number-is-nan": {
-                          "version": "1.0.1",
-                          "from": "number-is-nan@>=1.0.0 <2.0.0",
-                          "resolved": "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.1.tgz"
-                        }
-                      }
-                    },
-                    "is-fullwidth-code-point": {
-                      "version": "1.0.0",
-                      "from": "is-fullwidth-code-point@^1.0.0",
-                      "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-1.0.0.tgz",
-                      "dependencies": {
-                        "number-is-nan": {
-                          "version": "1.0.1",
-                          "from": "number-is-nan@^1.0.0",
-                          "resolved": "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.1.tgz"
-                        }
-                      }
-                    }
-                  }
-                },
-                "wide-align": {
-                  "version": "1.1.0",
-                  "from": "wide-align@^1.1.0",
-                  "resolved": "https://registry.npmjs.org/wide-align/-/wide-align-1.1.0.tgz",
-                  "optional": true
-                }
-              }
-            },
-            "set-blocking": {
-              "version": "2.0.0",
-              "from": "set-blocking@~2.0.0",
-              "resolved": "https://registry.npmjs.org/set-blocking/-/set-blocking-2.0.0.tgz",
-              "optional": true
             }
           }
         }
