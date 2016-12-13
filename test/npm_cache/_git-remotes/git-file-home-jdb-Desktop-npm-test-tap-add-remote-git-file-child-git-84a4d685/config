@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = file:///home/jdb/Desktop/npm/test/tap/add-remote-git-file/child.git
+	fetch = +refs/*:refs/*
+	mirror = true
