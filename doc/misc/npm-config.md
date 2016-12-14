@@ -428,6 +428,14 @@ A proxy to use for outgoing https requests. If the `HTTPS_PROXY` or
 `https_proxy` or `HTTP_PROXY` or `http_proxy` environment variables are set,
 proxy settings will be honored by the underlying `request` library.
 
+### no-proxy
+
+* Default: null
+* Type: url
+
+The url(s) to never use a proxy for. This just sets the `no_proxy` environment
+variable that is honored by the `request` library.
+
 ### if-present
 
 * Default: false

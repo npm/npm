@@ -1,8 +1,0 @@
-[core]
-	repositoryformatversion = 0
-	filemode = true
-	bare = true
-[remote "origin"]
-	url = git://localhost:1234/child.git
-	fetch = +refs/*:refs/*
-	mirror = true
