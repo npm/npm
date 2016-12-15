@@ -1,3 +1,189 @@
+### v4.1.0 (2016-12-15)
+
+#### ANONYMOUS METRIC REPORTING
+
+We're adding the ability for you all to help us track the quality of your
+experiences using `npm`. Metrics will be sent if you run:
+
+```
+npm config set send-metrics true
+```
+
+Then `npm` will report to `registry.npmjs.org` the number of successful and
+failed installations you've had.  The data contains no identifying
+information and npm will not attempt to correlate things like IP address with
+the metrics being submitted.
+
+Currently we only track number of successful and failed installations.  In
+the future we would like to find additional metrics to help us better
+quantify the quality of the `npm` experience.
+
+* [`190a658`](https://github.com/npm/npm/commit/190a658c4222f6aa904cbc640fc394a5c875e4db)
+  [#15084](https://github.com/npm/npm/pull/15084)
+  Add facility for recording and reporting success metrics.
+  ([@iarna](https://github.com/iarna))
+* [`87afc8b`](https://github.com/npm/npm/commit/87afc8b466f553fb49746c932c259173de48d0a4)
+  [npm/npm-registry-client#147](https://github.com/npm/npm-registry-client/pull/148)
+  `npm-registry-client@7.4.5`:
+  Add support for sending anonymous CLI metrics.
+  ([@iarna](https://github.com/iarna))
+  ([@sisidovski](https://github.com/sisidovski))
+
+### NPM DOCTOR
+
+<pre>
+<u>Check</u>                               <u>Value</u>                        <u>Recommendation</u>
+npm ping                            ok
+npm -v                              v4.0.5
+node -v                             v7.2.1
+npm config get registry             https://registry.npmjs.org/
+which git                           /Users/rebecca/bin/git
+Perms check on cached files         ok
+Perms check on global node_modules  ok
+Perms check on local node_modules   ok
+Checksum cached files               ok
+</pre>
+
+It's a rare day that we add a new command to `npm`, so I'm excited to
+present to you `npm doctor`. It checks for a number of common problems and provides
+some recommended solutions. It was put together through the hard work of
+[@watilde](https://github.com/watilde).
+
+* [`2359505`](https://github.com/npm/npm/commit/23595055669f76c9fe8f5f1cf4a705c2e794f0dc)
+  [`0209ee5`](https://github.com/npm/npm/commit/0209ee50448441695fbf9699019d34178b69ba73)
+  [#14582](https://github.com/npm/npm/pull/14582)
+  Add new `npm doctor` to give your project environment a health check.
+  ([@watilde](https://github.com/watilde))
+
+#### FIX MAJOR SOURCE OF SHASUM ERRORS
+
+If you've been getting intermittent shasum errors then you'll be pleased to
+know that we've tracked down at least one source of them, if not THE source of them.
+
+* [`87afc8b`](https://github.com/npm/npm/commit/87afc8b466f553fb49746c932c259173de48d0a4)
+  [npm/npm-registry-client#147](https://github.com/npm/npm-registry-client/pull/148)
+  [npm/npm-registry-client#148](https://github.com/npm/npm-registry-client/pull/148)
+  `npm-registry-client@7.4.5`:
+  Fix a bug where an `ECONNRESET` while fetching a package file would result in
+  a partial download that would be reported as a "shasum mismatch". It now throws
+  away the partial download and retries it.
+  ([@iarna](https://github.com/iarna))
+
+#### FILE URLS AND NODE.JS 7
+
+When `npm` was formatting `file` URLs we took advantage of `url.format` to
+construct them.  Node.js 7 changed the behavior in such a way that our use
+of `url.format` stopped producing URLs that we could make use of.
+
+The reasons for this have to do with the `file` URL specification and how
+invalid (according to the specification) URLs are handled. How this changed
+is most easily explained with a table:
+
+<table>
+<tr><th></th><th>URL</th><th>Node.js &lt;= 6</th><th><tt>npm</tt>'s understanding</th><th>Node.js 7</th><th><tt>npm</tt>'s understanding</th></tr>
+<tr><td>VALID</td><td><tt>file:///abc/def</tt></td><td><tt>file:///abc/def</tt></td><td><tt>/abc/def</tt></td><td><tt>file:///abc/def</tt></td><td><tt>/abc/def</tt></td></tr>
+<tr><td>invalid</td><td><tt>file:/abc/def</tt></td><td><tt>file:/abc/def</tt></td><td><tt>/abc/def</tt></td><td><tt>file:///abc/def</tt></td><td><tt>/abc/def</tt></td></tr>
+<tr><td>invalid</td><td><tt>file:abc/def</tt></td><td><tt>file:abc/def</tt></td><td><tt>$CWD/abc/def</tt></td><td><tt>file://abc/def</tt></td><td><tt>/def</tt> on the <tt>abc</tt> host</td></tr>
+<tr><td>invalid</td><td><tt>file:../abc/def</tt></td><td><tt>file:../abc/def</tt></td><td><tt>$CWD/../abc/def</tt></td><td><tt>file://../abc/def</tt></td><td><tt>/abc/def</tt> on the <tt>..</tt> host</td></tr>
+</table>
+
+So the result was that passing a `file` URL that npm had received that used
+through Node.js 7's `url.format` changed its meaning as far as `npm` was
+concerned.  As those kinds of URLs are, per the specification, invalid, how
+they should be handled is undefined and so the change in Node.js wasn't a
+bug per se.
+
+Our solution is to stop using `url.format` when constructing this kind of URL.
+
+* [`173935b`](https://github.com/npm/npm/commit/173935b4298e09c4fdcb8f3a44b06134d5aff181)
+  [#15114](https://github.com/npm/npm/issues/15114)
+  Stop using `url.format` for relative local dep paths.
+  ([@zkat](https://github.com/zkat))
+
+#### EXTRANEOUS LIFECYCLE SCRIPT EXECUTION WHEN REMOVING
+
+* [`afb1dfd`](https://github.com/npm/npm/commit/afb1dfd944e57add25a05770c0d52d983dc4e96c)
+  [#15090](https://github.com/npm/npm/pull/15090)
+  Skip top level lifecycles when uninstalling. 
+  ([@iarna](https://github.com/iarna))
+
+#### REFACTORING AND INTERNALS
+
+* [`c9b279a`](https://github.com/npm/npm/commit/c9b279aca0fcb8d0e483e534c7f9a7250e2a9392)
+  [#15205](https://github.com/npm/npm/pull/15205)
+  [#15196](https://github.com/npm/npm/pull/15196)
+  Only have one function that determines which version of a package to use
+  given a specifier and a list of versions.
+  ([@iarna](https://github.com/iarna))
+  ([@zkat](https://github.com/zkat))
+
+* [`981ce63`](https://github.com/npm/npm/commit/981ce6395e7892dde2591b44e484e191f8625431)
+  [#15090](https://github.com/npm/npm/pull/15090)
+  Rewrite prune to use modern npm plumbing.
+  ([@iarna](https://github.com/iarna))
+
+* [`bc4b739`](https://github.com/npm/npm/commit/bc4b73911f58a11b4a2d28b49e24b4dd7365f95b)
+  [#15089](https://github.com/npm/npm/pull/15089)
+  Rename functions and variables in the module that computes what changes to make to your installation.
+  ([@iarna](https://github.com/iarna))
+
+* [`2449f74`](https://github.com/npm/npm/commit/2449f74a202b3efdb1b2f5a83356a78ea9ecbe35)
+  [#15089](https://github.com/npm/npm/pull/15089)
+  When computing changes to make to your installation, use a function to add new actions to take instead
+  of just pushing on a list.
+  ([@iarna](https://github.com/iarna))
+
+#### IMPROVED LOGGING
+
+* [`335933a`](https://github.com/npm/npm/commit/335933a05396258eead139d27eea3f7668ccdfab)
+  [#15089](https://github.com/npm/npm/pull/15089)
+  Log when we remove obsolete dependencies in the tree.
+  ([@iarna](https://github.com/iarna))
+
+#### DOCUMENTATION
+
+* [`33ca4e6`](https://github.com/npm/npm/commit/33ca4e6db3c1878cbc40d5e862ab49bb0e82cfb2)
+  [#15157](https://github.com/npm/npm/pull/15157)
+  Update `npm cache` docs to use more consistent language
+  ([@JonahMoses](https://github.com/JonahMoses))
+
+#### DEPENDENCY UPDATES
+
+* [`c2d22fa`](https://github.com/npm/npm/commit/c2d22faf916e8260136a1cc95913ca474421c0d3)
+  [#15215](https://github.com/npm/npm/pull/15215)
+  `nopt@4.0.1`:
+  The breaking change is a small tweak to how empty string values are
+  handled. See the brand-new CHANGELOG.md for nopt for further details
+  about what's changed in this release!
+  ([@adius](https://github.com/adius))
+  ([@samjonester](https://github.com/samjonester))
+  ([@elidoran](https://github.com/elidoran))
+  ([@helio](https://github.com/helio))
+  ([@silkentrance](https://github.com/silkentrance))
+  ([@othiym23](https://github.com/othiym23))
+* [`54d949b`](https://github.com/npm/npm/commit/54d949b05adefffeb7b5b10229c5fe0ccb929ac3)
+  [npm/lockfile#24](https://github.com/npm/lockfile/pull/24)
+  `lockfile@1.0.3`:
+  Handled case where callback was not passed in by the user.
+  ([@ORESoftware](https://github.com/ORESoftware))
+* [`54acc03`](https://github.com/npm/npm/commit/54acc0389b39850c0725d0868cb5e61317b57503)
+  `npmlog@4.0.2`:
+  Documentation update.
+  ([@helio-frota](https://github.com/helio-frota))
+* [`57f4bc1`](https://github.com/npm/npm/commit/57f4bc1150322294c1ea0a287ad0a8e457c151e6)
+  `osenv@0.1.4`:
+  Test changes.
+  ([@isaacs](https://github.com/isaacs))
+* [`bea1a2d`](https://github.com/npm/npm/commit/bea1a2d0db566560e13ecc1d5f42e55811269c88)
+  `retry@0.10.1`:
+  No changes.
+  ([@tim-kos](https://github.com/tim-kos))
+* [`6749e39`](https://github.com/npm/npm/commit/6749e395f868109afd97f79d36507e6567dd48fb)
+  [kapouer/marked-man#9](https://github.com/kapouer/marked-man/pull/9)
+  `marked-man@0.2.0`:
+  Add table support.
+  ([@gholk](https://github.com/gholk))
+
 ### v4.0.5 (2016-12-01)
 
 It's that time of year! December is upon us, which means y'all are just going to
