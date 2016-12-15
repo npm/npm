@@ -1968,9 +1968,9 @@
       }
     },
     "retry": {
-      "version": "0.10.0",
-      "from": "retry@0.10.0",
-      "resolved": "https://registry.npmjs.org/retry/-/retry-0.10.0.tgz"
+      "version": "0.10.1",
+      "from": "retry@0.10.1",
+      "resolved": "https://registry.npmjs.org/retry/-/retry-0.10.1.tgz"
     },
     "rimraf": {
       "version": "2.5.4",
