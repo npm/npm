@@ -302,9 +302,9 @@
       }
     },
     "lockfile": {
-      "version": "1.0.2",
-      "from": "lockfile@1.0.2",
-      "resolved": "https://registry.npmjs.org/lockfile/-/lockfile-1.0.2.tgz"
+      "version": "1.0.3",
+      "from": "lockfile@>=1.0.3 <2.0.0",
+      "resolved": "https://registry.npmjs.org/lockfile/-/lockfile-1.0.3.tgz"
     },
     "lodash._baseindexof": {
       "version": "3.1.0",
