@@ -7,38 +7,96 @@ npm-doctor(1) -- Check your environments
 
 ## DESCRIPTION
 
-npm command is just a single command, but depends on several things outside
-the code base. Broadly speaking, it is the following three types:
+`npm doctor` runs a set of checks to ensure that your npm installation has
+what it needs to manage your JavaScript packages. npm is mostly a standalone tool, but it does
+have some basic requirements that must be met:
 
-+ Technology stack: Node.js, git
-+ Registry: `registry.npmjs.com`
-+ Files: `node_modules` in local/global, cached files in `npm config get cache`
++ Node.js and git must be executable by npm.
++ The primary npm registry, `registry.npmjs.com`, or another service that uses
+  the registry API, is available.
++ The directories that npm uses, `node_modules` (both locally and globally),
+  exist and can be written by the current user.
++ The npm cache exists, and the package tarballs within it aren't corrupt.
 
-Without all of these working properly, the npm command will not work properly.
-Many issue reports that arrive under us are often attributable to things that
-are outside the code base as described above, and it is necessary to confirm
-that this is correctly set with one command would help you solve your issue.
+Without all of these working properly, npm may not work properly.  Many issues
+are often attributable to things that are outside npm's code base, so `npm
+doctor` confirms that the npm installation is in a good state.
+
 Also, in addition to this, there are also very many issue reports due to using
-old versions of npm. Since npm is constantly improving, in every aspect the
-`latest` npm is better than the old version(it should be, and we are trying).
+old versions of npm. Since npm is constantly improving, running `npm@latest` is
+better than an old version.
 
-From the above reasons, `npm doctor` will investigate the following items in
-your environment and if there are any other recommended settings, it will
-display the recommended example.
+`npm doctor` verifies the following items in your environment, and if there are
+any recommended changes, it will display them.
 
-|What to check|What we recommend|
-|---|---|
-|`npm ping`|It must be able to communicate with the registry|
-|`npm -v`|It is preferable that the latest version of LTS is used|
-|`node -v`|It is preferable that the latest version of LTS is used|
-|`npm config get registry`|In order not to consider exceptions, it is better to set default values `registry.npmjs.org`|
-|`which git`|Git has to be installed|
-|`Perms check on cached files`|All cached module files must be readable.|
-|`Perms check on global node_modules`|All global module files must be executable.|
-|`Perms check on local node_modules`|All local module files must be executable.|
-|`Checksum cached files`|All cached files must not be broken|
+### `npm ping`
+
+By default, npm installs from the primary npm registry, `registry.npmjs.org`.
+`npm doctor` hits a special ping endpoint within the registry. This can also be
+checked with `npm ping`. If this check fails, you may be using a proxy that
+needs to be configured, or may need to talk to your IT staff to get access over
+HTTPS to `registry.npmjs.org`.
+
+This check is done against whichever registry you've configured (you can see
+what that is by running `npm config get registry`), and if you're using a
+private registry that doesn't support the `/whoami` endpoint supported by the
+primary registry, this check may fail.
+
+### `npm -v`
+
+While Node.js may come bundled with a particular version of npm, it's the
+policy of the CLI team that we recommend all users run `npm@latest` if they
+can. As the CLI is maintained by a small team of contributors, there are only
+resources for a single line of development, so npm's own long-term support
+releases typically only receive critical security and regression fixes. The
+team believes that the latest tested version of npm is almost always likely to
+be the most functional and defect-free version of npm.
+
+### `node -v`
+
+For most users, in most circumstances, the best version of Node will be the
+latest long-term support (LTS) release. Those of you who want access to new
+ECMAscript features or bleeding-edge changes to Node's standard library may be
+running a newer version, and some of you may be required to run an older
+version of Node because of enterprise change control policies. That's OK! But
+in general, the npm team recommends that most users run Node.js LTS.
+
+### `npm config get registry`
+
+Some of you may be installing from private package registries for your project
+or company. That's great! Others of you may be following tutorials or
+StackOverflow questions in an effort to troubleshoot problems you may be
+having. Sometimes, this may entail changing the registry you're pointing at.
+This part of `npm doctor` just lets you, and maybe whoever's helping you with
+support, know that you're not using the default registry.
+
+### `which git`
+
+While it's documented in the README, it may not be obvious that npm needs Git
+installed to do many of the things that it does. Also, in some cases
+– especially on Windows – you may have Git set up in such a way that it's not
+accessible via your `PATH` so that npm can find it. This check ensures that Git
+is available.
+
+### Permissions checks
+
+* Your cache must be readable and writable by the user running npm.
+* Global package binaries must be writable by the user running npm.
+* Your local `node_modules` path, if you're running `npm doctor` with a project
+  directory, must be readable and writable by the user running npm.
+
+### Validate the checksums of cached packages
+
+When an npm package is published, the publishing process generates a checksum
+that npm uses at install time to verify that the package didn't get corrupted
+in transit. `npm doctor` uses these checksums to validate the package tarballs
+in your local cache (you can see where that cache is located with `npm config
+get cache`, and see what's in that cache with `npm cache ls` – probably more
+than you were expecting!). In the event that there are corrupt packages in your
+cache, you should probably run `npm cache clean` and reset the cache.
 
 ## SEE ALSO
 
 * npm-bugs(1)
 * npm-help(1)
+* npm-ping(1)
