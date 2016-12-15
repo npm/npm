@@ -1386,9 +1386,9 @@
       "resolved": "https://registry.npmjs.org/npm-user-validate/-/npm-user-validate-0.1.5.tgz"
     },
     "npmlog": {
-      "version": "4.0.1",
-      "from": "npmlog@4.0.1",
-      "resolved": "https://registry.npmjs.org/npmlog/-/npmlog-4.0.1.tgz",
+      "version": "4.0.2",
+      "from": "npmlog@4.0.2",
+      "resolved": "https://registry.npmjs.org/npmlog/-/npmlog-4.0.2.tgz",
       "dependencies": {
         "are-we-there-yet": {
           "version": "1.1.2",
@@ -1408,24 +1408,19 @@
           "resolved": "https://registry.npmjs.org/console-control-strings/-/console-control-strings-1.1.0.tgz"
         },
         "gauge": {
-          "version": "2.7.1",
+          "version": "2.7.2",
           "from": "gauge@>=2.7.1 <2.8.0",
-          "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.7.1.tgz",
+          "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.7.2.tgz",
           "dependencies": {
-            "has-color": {
-              "version": "0.1.7",
-              "from": "has-color@>=0.1.7 <0.2.0",
-              "resolved": "https://registry.npmjs.org/has-color/-/has-color-0.1.7.tgz"
-            },
             "object-assign": {
               "version": "4.1.0",
               "from": "object-assign@>=4.0.1 <5.0.0",
               "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz"
             },
             "signal-exit": {
-              "version": "3.0.1",
-              "from": "signal-exit@^3.0.0",
-              "resolved": "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.1.tgz"
+              "version": "3.0.2",
+              "from": "signal-exit@>=3.0.0 <4.0.0",
+              "resolved": "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.2.tgz"
             },
             "string-width": {
               "version": "1.0.2",
@@ -1450,6 +1445,11 @@
                   }
                 }
               }
+            },
+            "supports-color": {
+              "version": "0.2.0",
+              "from": "supports-color@>=0.2.0 <0.3.0",
+              "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-0.2.0.tgz"
             },
             "wide-align": {
               "version": "1.1.0",
