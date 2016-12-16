@@ -1,3 +1,19 @@
+### v4.1.1 (2016-12-16)
+
+This fixes a bug in the metrics reporting where, if you had enabled it then
+installs would create a metrics reporting process, that would create a
+metrics reporting process, that would… well, you get the idea.  The only
+way to actually kill these processes is to turn off your networking, then
+on MacOS/Linux kill them with `kill -9`. Alternatively you can just reboot.
+
+Anyway, this is a quick release to fix that bug:
+
+* [`51c393f`](https://github.com/npm/npm/commit/51c393feff5f4908c8a9fb02baef505b1f2259be)
+  [#15237](https://github.com/npm/npm/pull/15237)
+  Don't launch a metrics sender process if we're runnning from a metrics
+  sender process.
+  ([@iarna](https://github.com/iarna))
+
 ### v4.1.0 (2016-12-15)
 
 I'm really excited about `npm@4.1.0`. I know, I know, I'm kinda overexcited
