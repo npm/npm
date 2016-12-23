@@ -459,7 +459,13 @@ Git urls can be of the form:
     git+https://user@hostname/project/blah.git#commit-ish
 
 The `commit-ish` can be any tag, sha, or branch which can be supplied as
-an argument to `git checkout`.  The default is `master`.
+an argument to `git checkout`. The default is `master`.
+
+In addition, a semver range may be used to resolve against git tags. In order to
+differentiate between a `commit-ish` and a range, the range must be prefixed by
+`semver:`. For example:
+
+    git://github.com/user/project.git#semver:^1.0.0
 
 ## GitHub URLs
 
