@@ -81,7 +81,7 @@ resulting combination is unambiguously not some other configuration
 param, then it is expanded to its various component pieces.  For
 example:
 
-    npm ls -gpld
+    npm ls -gpld info
     # same as:
     npm ls --global --parseable --long --loglevel info
 
