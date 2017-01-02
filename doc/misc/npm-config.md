@@ -87,7 +87,7 @@ example:
 
 ## Per-Package Config Settings
 
-When running scripts (see `npm-scripts(7)`) the package.json "config"
+When running scripts (see [`npm-scripts(7)`](https://docs.npmjs.com/misc/scripts)) the package.json "config"
 keys are overwritten in the environment if there is a config param of
 `<name>[@<version>]:<key>`.  For example, if the package.json has
 this:
@@ -991,8 +991,8 @@ Set to `"browser"` to view html help content in the default web browser.
 
 ## SEE ALSO
 
-* npm-config(1)
-* npmrc(5)
-* npm-scripts(7)
-* npm-folders(5)
-* npm(1)
+* [npm-config(1)](https://docs.npmjs.com/cli/config)
+* [npmrc(5)](https://docs.npmjs.com/files/npmrc)
+* [npm-scripts(7)](https://docs.npmjs.com/cli/run-script)
+* [npm-folders(5)](https://docs.npmjs.com/files/folders)
+* [npm(1)](https://docs.npmjs.com/getting-started/what-is-npm)
