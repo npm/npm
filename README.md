@@ -46,6 +46,8 @@ paths, etc.) then read on.
 
 ## Fancy Install (Unix)
 
+You can install npm with `npm install npm`.
+
 There's a pretty robust install script at
 <https://www.npmjs.com/install.sh>.  You can download that and run it.
 
