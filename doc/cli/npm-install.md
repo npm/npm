@@ -192,6 +192,18 @@ after packing it up into a tarball (b).
 
     See the git man page for details.
 
+    The following git environment variables are recognized by npm and will be added
+    to the environment when running git:
+
+    * `GIT_ASKPASS`
+    * `GIT_PROXY_COMMAND`
+    * `GIT_SSH`
+    * `GIT_SSH_COMMAND`
+    * `GIT_SSL_CAINFO`
+    * `GIT_SSL_NO_VERIFY`
+
+    See the git man page for details.
+
     Examples:
 
           npm install git+ssh://git@github.com:npm/npm.git#v1.0.27
