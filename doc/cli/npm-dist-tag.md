@@ -5,7 +5,7 @@ npm-dist-tag(1) -- Modify package distribution tags
 
     npm dist-tag add <pkg>@<version> [<tag>]
     npm dist-tag rm <pkg> <tag>
-    npm dist-tag ls [<pkg>]
+    npm dist-tag ls <pkg>
 
     aliases: dist-tags
 
