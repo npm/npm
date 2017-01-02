@@ -1,0 +1,25 @@
+{loop() 
+
+
+ 
+-  function loop (er) { 
+
+
+ 
+-    if (er) return cb(er) 
+
+
+ 
+-    var fn = fns.shift() 
+
+
+ 
+-    if (fn) return fn(c, u, loop) 
+
+
+ 
+-    cb() 
+
+
+ 
+-  } 
