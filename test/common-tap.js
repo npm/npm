@@ -37,6 +37,10 @@ var once = require('once')
 var nodeBin = exports.nodeBin = process.env.npm_node_execpath || process.env.NODE || process.execPath
 
 exports.npm = function (cmd, opts, cb) {
+  if (typeof cb !== 'function') {
+    throw new Error('must call common.npm(arr, opts, func)')
+  }
+
   cb = once(cb)
   cmd = [bin].concat(cmd)
   opts = opts || {}
