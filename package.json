@@ -64,7 +64,7 @@
     "lodash.without": "~4.4.0",
     "mississippi": "~1.2.0",
     "mkdirp": "~0.5.1",
-    "node-gyp": "~3.4.0",
+    "node-gyp": "~3.5.0",
     "nopt": "~4.0.1",
     "normalize-git-url": "~3.0.2",
     "normalize-package-data": "~2.3.5",
