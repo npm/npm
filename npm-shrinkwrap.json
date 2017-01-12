@@ -3200,15 +3200,15 @@
       }
     },
     "tap": {
-      "version": "8.0.1",
-      "from": "tap@8.0.1",
-      "resolved": "https://registry.npmjs.org/tap/-/tap-8.0.1.tgz",
+      "version": "9.0.3",
+      "from": "tap@latest",
+      "resolved": "https://registry.npmjs.org/tap/-/tap-9.0.3.tgz",
       "dev": true,
       "dependencies": {
         "bluebird": {
-          "version": "3.4.6",
+          "version": "3.4.7",
           "from": "bluebird@>=3.3.1 <4.0.0",
-          "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-3.4.6.tgz",
+          "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-3.4.7.tgz",
           "dev": true
         },
         "clean-yaml-object": {
@@ -3456,9 +3456,9 @@
                           }
                         },
                         "jsonpointer": {
-                          "version": "4.0.0",
-                          "from": "jsonpointer@^4.0.0",
-                          "resolved": "https://registry.npmjs.org/jsonpointer/-/jsonpointer-4.0.0.tgz",
+                          "version": "4.0.1",
+                          "from": "jsonpointer@>=4.0.0 <5.0.0",
+                          "resolved": "https://registry.npmjs.org/jsonpointer/-/jsonpointer-4.0.1.tgz",
                           "dev": true
                         },
                         "xtend": {
@@ -3614,9 +3614,9 @@
                           "optional": true
                         },
                         "tweetnacl": {
-                          "version": "0.14.3",
-                          "from": "tweetnacl@~0.14.0",
-                          "resolved": "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.3.tgz",
+                          "version": "0.14.5",
+                          "from": "tweetnacl@>=0.14.0 <0.15.0",
+                          "resolved": "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.5.tgz",
                           "dev": true,
                           "optional": true
                         }
@@ -3711,9 +3711,9 @@
           "dev": true
         },
         "foreground-child": {
-          "version": "1.5.3",
+          "version": "1.5.6",
           "from": "foreground-child@>=1.3.3 <2.0.0",
-          "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-1.5.3.tgz",
+          "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-1.5.6.tgz",
           "dev": true,
           "dependencies": {
             "cross-spawn": {
@@ -3773,9 +3773,9 @@
           }
         },
         "nyc": {
-          "version": "9.0.1",
-          "from": "nyc@>=9.0.1 <10.0.0",
-          "resolved": "https://registry.npmjs.org/nyc/-/nyc-9.0.1.tgz",
+          "version": "10.0.0",
+          "from": "nyc@>=10.0.0 <11.0.0",
+          "resolved": "https://registry.npmjs.org/nyc/-/nyc-10.0.0.tgz",
           "dev": true,
           "dependencies": {
             "align-text": {
@@ -3851,9 +3851,9 @@
               "dev": true
             },
             "babel-generator": {
-              "version": "6.18.0",
+              "version": "6.19.0",
               "from": "babel-generator@>=6.18.0 <7.0.0",
-              "resolved": "https://registry.npmjs.org/babel-generator/-/babel-generator-6.18.0.tgz",
+              "resolved": "https://registry.npmjs.org/babel-generator/-/babel-generator-6.19.0.tgz",
               "dev": true
             },
             "babel-messages": {
@@ -3875,21 +3875,21 @@
               "dev": true
             },
             "babel-traverse": {
-              "version": "6.18.0",
+              "version": "6.19.0",
               "from": "babel-traverse@>=6.18.0 <7.0.0",
-              "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.18.0.tgz",
+              "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.19.0.tgz",
               "dev": true
             },
             "babel-types": {
-              "version": "6.18.0",
+              "version": "6.19.0",
               "from": "babel-types@>=6.18.0 <7.0.0",
-              "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.18.0.tgz",
+              "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.19.0.tgz",
               "dev": true
             },
             "babylon": {
-              "version": "6.13.1",
+              "version": "6.14.1",
               "from": "babylon@>=6.13.0 <7.0.0",
-              "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.13.1.tgz",
+              "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.14.1.tgz",
               "dev": true
             },
             "balanced-match": {
@@ -3995,9 +3995,15 @@
               "dev": true
             },
             "debug": {
-              "version": "2.3.2",
+              "version": "2.3.3",
               "from": "debug@>=2.2.0 <3.0.0",
-              "resolved": "https://registry.npmjs.org/debug/-/debug-2.3.2.tgz",
+              "resolved": "https://registry.npmjs.org/debug/-/debug-2.3.3.tgz",
+              "dev": true
+            },
+            "debug-log": {
+              "version": "1.0.1",
+              "from": "debug-log@>=1.0.1 <2.0.0",
+              "resolved": "https://registry.npmjs.org/debug-log/-/debug-log-1.0.1.tgz",
               "dev": true
             },
             "decamelize": {
@@ -4127,9 +4133,9 @@
               "dev": true
             },
             "globals": {
-              "version": "9.13.0",
+              "version": "9.14.0",
               "from": "globals@>=9.0.0 <10.0.0",
-              "resolved": "https://registry.npmjs.org/globals/-/globals-9.13.0.tgz",
+              "resolved": "https://registry.npmjs.org/globals/-/globals-9.14.0.tgz",
               "dev": true
             },
             "graceful-fs": {
@@ -4189,9 +4195,9 @@
               "dev": true
             },
             "invariant": {
-              "version": "2.2.1",
+              "version": "2.2.2",
               "from": "invariant@>=2.2.0 <3.0.0",
-              "resolved": "https://registry.npmjs.org/invariant/-/invariant-2.2.1.tgz",
+              "resolved": "https://registry.npmjs.org/invariant/-/invariant-2.2.2.tgz",
               "dev": true
             },
             "invert-kv": {
@@ -4384,9 +4390,9 @@
               "dev": true
             },
             "lodash": {
-              "version": "4.17.0",
+              "version": "4.17.2",
               "from": "lodash@>=4.2.0 <5.0.0",
-              "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.0.tgz",
+              "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.2.tgz",
               "dev": true
             },
             "longest": {
@@ -4747,9 +4753,9 @@
               "dev": true
             },
             "test-exclude": {
-              "version": "3.2.2",
-              "from": "test-exclude@>=3.2.2 <4.0.0",
-              "resolved": "https://registry.npmjs.org/test-exclude/-/test-exclude-3.2.2.tgz",
+              "version": "3.3.0",
+              "from": "test-exclude@>=3.3.0 <4.0.0",
+              "resolved": "https://registry.npmjs.org/test-exclude/-/test-exclude-3.3.0.tgz",
               "dev": true
             },
             "to-fast-properties": {
@@ -4910,9 +4916,9 @@
           "dev": true
         },
         "signal-exit": {
-          "version": "3.0.1",
+          "version": "3.0.2",
           "from": "signal-exit@>=3.0.0 <4.0.0",
-          "resolved": "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.1.tgz",
+          "resolved": "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.2.tgz",
           "dev": true
         },
         "stack-utils": {
@@ -4922,15 +4928,15 @@
           "dev": true
         },
         "tap-mocha-reporter": {
-          "version": "2.0.1",
-          "from": "tap-mocha-reporter@>=2.0.0 <3.0.0",
-          "resolved": "https://registry.npmjs.org/tap-mocha-reporter/-/tap-mocha-reporter-2.0.1.tgz",
+          "version": "3.0.1",
+          "from": "tap-mocha-reporter@>=3.0.1 <4.0.0",
+          "resolved": "https://registry.npmjs.org/tap-mocha-reporter/-/tap-mocha-reporter-3.0.1.tgz",
           "dev": true,
           "dependencies": {
             "debug": {
-              "version": "2.3.3",
+              "version": "2.6.0",
               "from": "debug@>=2.1.3 <3.0.0",
-              "resolved": "https://registry.npmjs.org/debug/-/debug-2.3.3.tgz",
+              "resolved": "https://registry.npmjs.org/debug/-/debug-2.6.0.tgz",
               "dev": true,
               "dependencies": {
                 "ms": {
@@ -4970,9 +4976,9 @@
           }
         },
         "tap-parser": {
-          "version": "2.2.3",
-          "from": "tap-parser@>=2.2.0 <3.0.0",
-          "resolved": "https://registry.npmjs.org/tap-parser/-/tap-parser-2.2.3.tgz",
+          "version": "4.2.4",
+          "from": "tap-parser@>=4.2.2 <5.0.0",
+          "resolved": "https://registry.npmjs.org/tap-parser/-/tap-parser-4.2.4.tgz",
           "dev": true,
           "dependencies": {
             "events-to-array": {
