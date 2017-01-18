@@ -13,6 +13,11 @@ followed by a slash, e.g.
 Scopes are a way of grouping related packages together, and also affect a few
 things about the way npm treats the package.
 
+Each npm user/organization has their own scope, and only you can add packages
+in your scope. This means you don't have to worry about someone taking your
+package name ahead of you. Thus it is also a good way to signal official packages
+for organizations.
+
 Scoped packages can be published and installed as of `npm@2` and are supported
 by the primary npm registry. The npm client is backwards-compatible with
 un-scoped registries, so it can be used to work with scoped and un-scoped
