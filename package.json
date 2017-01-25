@@ -63,7 +63,7 @@
     "lodash.union": "~4.6.0",
     "lodash.uniq": "~4.5.0",
     "lodash.without": "~4.4.0",
-    "mississippi": "~1.2.0",
+    "mississippi": "~1.3.0",
     "mkdirp": "~0.5.1",
     "node-gyp": "~3.5.0",
     "nopt": "~4.0.1",
