@@ -11,6 +11,17 @@ test('lifecycle: make env correctly', function (t) {
   })
 })
 
+test('lifecycle: make env with arrays', function (t) {
+  var services = ['overlord', 'job-1', 'job-2']
+  npm.load({}, function () {
+    var env = lifecycle.makeEnv({nonconfig: ['Bob', 'John'], config: {services: services}}, null, process.env)
+
+    t.notOk(env.npm_package_nonconfig)
+    t.equal(env.npm_package_config_services, services.toString())
+    t.end()
+  })
+})
+
 test('lifecycle : accepts wd for package that matches project\'s name', function (t) {
   npm.load({}, function () {
     var wd = '/opt/my-time/node_modules/time'
