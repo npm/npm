@@ -8,9 +8,9 @@
       "resolved": "https://registry.npmjs.org/abbrev/-/abbrev-1.0.9.tgz"
     },
     "ansi-regex": {
-      "version": "2.0.0",
-      "from": "ansi-regex@2.0.0",
-      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.0.0.tgz"
+      "version": "2.1.1",
+      "from": "ansi-regex@2.1.1",
+      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.1.1.tgz"
     },
     "ansicolors": {
       "version": "0.3.2",
