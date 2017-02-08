@@ -1,3 +1,73 @@
+### v4.3.0 (2017-02-09):
+
+Yay! Release time! It's a rainy day, and we have another smallish release for
+y'all. These things are not necessarily related. Or are they 🌧🤔
+
+As far as news go, you may have noticed that the CLI team dropped support for
+`node@0.12` when that version went out of maintenance. Still, we've avoided
+explicitly breaking it and `node@0.10` so far -- but not much longer.
+
+Sometime soon, the CLI team plans on switching over to language features only
+available as of `node@4 LTS`, and will likely start dropping old versions of node
+as they go out of maintenance. The new features are exciting! We're really
+looking forward to using them in the core CLI (and its dependencies) as we keep up
+with our current feature work.
+
+And speaking of features, this release is a minor bump due to a small change in
+how `npm login` works for the sake of supporting OAuth-based login for npm
+Enterprise users. But we won't leave the rest of y'all out -- we're working on a
+larger version of this feature. Soon enough, you'll be able to log in to npm
+with, say, GitHub -- and use some shiny features that come from the integration.
+Or turn on 2FA and other such security features. Keep your eyes peeled for new
+on this in the next few releases and our weekly newsletter!
+
+#### NEW AUTH TYPES
+
+There's a new command line option: `--auth-type`, which can be used to log in to
+a supporting registry with OAuth2 or SAML. The current implementation is mainly
+meant to support npmE customers, so if you're one of those: ask us about using
+it! If not, just hold off cause we'll have a much more complete version of this
+feature out soon.
+
+* [`ac8595e`](https://github.com/npm/npm/commit/ac8595e3c9b615ff95abc3301fac1262c434792c) [`bcf2dd8`](https://github.com/npm/npm/commit/bcf2dd8a165843255c06515fa044c6e4d3b71ca4) [`9298d20`](https://github.com/npm/npm/commit/9298d20af58b92572515bfa9cf7377bd4221dc7d) [`66b61bc`](https://github.com/npm/npm/commit/66b61bc42e81ee8a1ee00fc63517f62284140688) [`dc85de7`](https://github.com/npm/npm/commit/dc85de7df6bb61f7788611813ee82ae695a18f1f)
+  [#13389](https://github.com/npm/npm/pull/13389)
+  Implement single-sign-on support with `--auth-type` option.
+  ([@zkat](https://github.com/zkat))
+
+#### FASTER STARTUP. SOMETIMES!
+
+`request` is pretty heavy. And it loads a bunch of things. It's actually a
+pretty big chunk of npm's load time. This small patch by Rebecca will make it so
+npm only loads that module when we're actually intending to make network
+requests. Those of you who use npm commands that run offline might see a small
+speedup in startup time.
+
+* [`ac73568`](https://github.com/npm/npm/commit/ac735682e666e8724549d56146821f3b8b018e25)
+  [#15631](https://github.com/npm/npm/pull/15631)
+  Lazy load `caching-registry-client`.
+  ([@iarna](https://github.com/iarna))
+
+#### DOCUMENTATION
+
+* [`4ad9247`](https://github.com/npm/npm/commit/4ad9247aa82f7553c9667ee93c74ec7399d6ceec)
+  [#15630](https://github.com/npm/npm/pull/15630)
+  Fix formatting/rendering for root npm README.
+  ([@ungoldman](https://github.com/ungoldman))
+
+#### DEPENDENCY UPDATES
+
+* [`8cc1112`](https://github.com/npm/npm/commit/8cc1112958638ff88ac2c24c4a065acacb93d64b)
+  [npm/hosted-git-info#21](https://github.com/npm/hosted-git-info/pull/21)
+  `hosted-git-info@2.2.0`:
+  Add support for `.tarball()` URLs.
+  ([@zkat](https://github.com/zkat))
+* [`6eacc1b`](https://github.com/npm/npm/commit/6eacc1bc1925fe3cc79fc97bdc3194d944fce55e)
+  `npm-registry-mock@1.1.0`
+  ([@addaleax](https://github.com/addaleax))
+* [`a9b6d77`](https://github.com/npm/npm/commit/a9b6d775e61cf090df0e13514c624f99bf31d1e7)
+  `aproba@1.1.1`
+  ([@iarna](https://github.com/iarna))
+
 ### v4.2.0 (2017-01-26):
 
 Hi all! I'm Kat, and I'm currently sitting in a train traveling at ~300km/h
