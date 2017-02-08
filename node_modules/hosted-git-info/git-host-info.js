@@ -9,19 +9,22 @@ var gitHosts = module.exports = {
     'treepath': 'tree',
     'filetemplate': 'https://{auth@}raw.githubusercontent.com/{user}/{project}/{committish}/{path}',
     'bugstemplate': 'https://{domain}/{user}/{project}/issues',
-    'gittemplate': 'git://{auth@}{domain}/{user}/{project}.git{#committish}'
+    'gittemplate': 'git://{auth@}{domain}/{user}/{project}.git{#committish}',
+    'tarballtemplate': 'https://{domain}/{user}/{project}/archive/{committish}.tar.gz'
   },
   bitbucket: {
     'protocols': [ 'git+ssh', 'git+https', 'ssh', 'https' ],
     'domain': 'bitbucket.org',
-    'treepath': 'src'
+    'treepath': 'src',
+    'tarballtemplate': 'https://{domain}/{user}/{project}/get/{committish}.tar.gz'
   },
   gitlab: {
     'protocols': [ 'git+ssh', 'git+https', 'ssh', 'https' ],
     'domain': 'gitlab.com',
     'treepath': 'tree',
     'docstemplate': 'https://{domain}/{user}/{project}{/tree/committish}#README',
-    'bugstemplate': 'https://{domain}/{user}/{project}/issues'
+    'bugstemplate': 'https://{domain}/{user}/{project}/issues',
+    'tarballtemplate': 'https://{domain}/{user}/{project}/repository/archive.tar.gz?ref={committish}'
   },
   gist: {
     'protocols': [ 'git', 'git+ssh', 'git+https', 'ssh', 'https' ],
@@ -36,7 +39,8 @@ var gitHosts = module.exports = {
     'docstemplate': 'https://{domain}/{project}{/committish}',
     'httpstemplate': 'git+https://{domain}/{project}.git{#committish}',
     'shortcuttemplate': '{type}:{project}{#committish}',
-    'pathtemplate': '{project}{#committish}'
+    'pathtemplate': '{project}{#committish}',
+    'tarballtemplate': 'https://{domain}/{user}/{project}/archive/{committish}.tar.gz'
   }
 }
 

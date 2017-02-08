@@ -75,6 +75,10 @@ eg, `git@github.com:npm/hosted-git-info.git`
 
 eg, `npm/hosted-git-info`
 
+* info.tarball()
+
+eg, `https://github.com/npm/hosted-git-info/archive/v1.2.0.tar.gz`
+
 * info.getDefaultRepresentation()
 
 Returns the default output type. The default output type is based on the
