@@ -301,6 +301,11 @@
         }
       }
     },
+    "lazy-property": {
+      "version": "1.0.0",
+      "from": "lazy-property@latest",
+      "resolved": "https://registry.npmjs.org/lazy-property/-/lazy-property-1.0.0.tgz"
+    },
     "lockfile": {
       "version": "1.0.3",
       "from": "lockfile@>=1.0.3 <2.0.0",
