@@ -23,7 +23,7 @@ test('invalid url format returns appropriate error', function (t) {
     t.ifError(err, 'install ran without error')
     t.equals(code, 1, 'inall exited with code 1')
     t.match(stderr,
-      /ERR.*Unsupported URL Type/,
+      /Unsupported URL Type/,
       'Error should report that invalid url-style formats are used')
     t.end()
   })
