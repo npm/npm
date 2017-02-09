@@ -179,8 +179,8 @@ test('npm dist-tags rm @scoped/another nonexistent', function (t) {
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm dist-tag')
       t.ok(code, 'expecting nonzero exit code')
-      t.notOk(stderr, 'no error output')
-      t.notOk(stdout, 'not expecting output')
+      t.ok(stderr, 'error output')
+      t.is(stdout, '', 'not expecting output')
 
       t.end()
     }

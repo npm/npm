@@ -41,7 +41,7 @@ test('scoped package names not mangled on error with non-root registry', functio
     function (er, code, stdout, stderr) {
       t.ifError(er, 'correctly handled 404')
       t.equal(code, 1, 'exited with error')
-      t.match(stderr, /E404/, 'should notify the sort of error as a 404')
+      t.match(stderr, /404/, 'should notify the sort of error as a 404')
       t.match(stderr, /@scope\/foo/, 'should have package name in error')
       server.done()
       t.end()
