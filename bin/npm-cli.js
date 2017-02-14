@@ -25,6 +25,10 @@
 
   unsupported.checkForUnsupportedNode()
 
+  var updater = require('update-notifier')
+  var pkg = require('../package.json')
+  updater({pkg: pkg}).notify({defer: true})
+
   var path = require('path')
   var npm = require('../lib/npm.js')
   var npmconf = require('../lib/config/core.js')
