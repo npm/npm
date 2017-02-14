@@ -616,7 +616,7 @@ Any "%s" in the message will be replaced with the version number.
 
 ### metrics-registry
 
-* Default: "https://registry.npmjs.org/"
+* Default: The value of  `registry` (which defaults to "https://registry.npmjs.org/")
 * Type: String
 
 The registry you want to send cli metrics to if `send-metrics` is true.

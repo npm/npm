@@ -16,6 +16,8 @@ var globaldir = path.join(basedir, 'global')
 var tmpdir = path.join(basedir, 'tmp')
 var metricsFile = path.join(cachedir, 'anonymous-cli-metrics.json')
 
+delete process.env.npm_config_metrics_registry
+
 var conf = {
   cwd: testdir,
   env: extend(extend({}, process.env), {
@@ -23,7 +25,7 @@ var conf = {
     npm_config_tmp: tmpdir,
     npm_config_prefix: globaldir,
     npm_config_registry: common.registry,
-    npm_config_metrics_registry: common.registry,
+    npm_config_metrics_registry: null,
     npm_config_loglevel: 'warn'
   })
 }
