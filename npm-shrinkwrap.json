@@ -3388,11 +3388,17 @@
       }
     },
     "tap": {
-      "version": "9.0.3",
-      "from": "tap@9.0.3",
-      "resolved": "https://registry.npmjs.org/tap/-/tap-9.0.3.tgz",
+      "version": "10.2.0",
+      "from": "tap@10.2.0",
+      "resolved": "https://registry.npmjs.org/tap/-/tap-10.2.0.tgz",
       "dev": true,
       "dependencies": {
+        "bind-obj-methods": {
+          "version": "1.0.0",
+          "from": "bind-obj-methods@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/bind-obj-methods/-/bind-obj-methods-1.0.0.tgz",
+          "dev": true
+        },
         "bluebird": {
           "version": "3.4.7",
           "from": "bluebird@>=3.3.1 <4.0.0",
@@ -3425,7 +3431,7 @@
               "dependencies": {
                 "argparse": {
                   "version": "1.0.9",
-                  "from": "argparse@>=1.0.7 <2.0.0",
+                  "from": "argparse@^1.0.7",
                   "resolved": "https://registry.npmjs.org/argparse/-/argparse-1.0.9.tgz",
                   "dev": true
                 },
@@ -3499,6 +3505,18 @@
             }
           }
         },
+        "fs-exists-cached": {
+          "version": "1.0.0",
+          "from": "fs-exists-cached@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/fs-exists-cached/-/fs-exists-cached-1.0.0.tgz",
+          "dev": true
+        },
+        "function-loop": {
+          "version": "1.0.1",
+          "from": "function-loop@>=1.0.1 <2.0.0",
+          "resolved": "https://registry.npmjs.org/function-loop/-/function-loop-1.0.1.tgz",
+          "dev": true
+        },
         "isexe": {
           "version": "1.1.2",
           "from": "isexe@>=1.0.0 <2.0.0",
@@ -3507,7 +3525,7 @@
         },
         "js-yaml": {
           "version": "3.8.1",
-          "from": "js-yaml@>=3.3.1 <4.0.0",
+          "from": "js-yaml@^3.3.1",
           "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.8.1.tgz",
           "dev": true,
           "dependencies": {
@@ -3519,7 +3537,7 @@
             },
             "esprima": {
               "version": "3.1.3",
-              "from": "esprima@>=3.1.1 <4.0.0",
+              "from": "esprima@^3.1.1",
               "resolved": "https://registry.npmjs.org/esprima/-/esprima-3.1.3.tgz",
               "dev": true
             }
@@ -4664,16 +4682,42 @@
           "resolved": "https://registry.npmjs.org/os-homedir/-/os-homedir-1.0.1.tgz",
           "dev": true
         },
+        "own-or": {
+          "version": "1.0.0",
+          "from": "own-or@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/own-or/-/own-or-1.0.0.tgz",
+          "dev": true
+        },
+        "own-or-env": {
+          "version": "1.0.0",
+          "from": "own-or-env@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/own-or-env/-/own-or-env-1.0.0.tgz",
+          "dev": true
+        },
         "signal-exit": {
           "version": "3.0.2",
           "from": "signal-exit@>=3.0.0 <4.0.0",
           "resolved": "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.2.tgz",
           "dev": true
         },
+        "source-map-support": {
+          "version": "0.4.11",
+          "from": "source-map-support@>=0.4.3 <0.5.0",
+          "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.11.tgz",
+          "dev": true,
+          "dependencies": {
+            "source-map": {
+              "version": "0.5.6",
+              "from": "source-map@>=0.5.3 <0.6.0",
+              "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.5.6.tgz",
+              "dev": true
+            }
+          }
+        },
         "stack-utils": {
-          "version": "0.4.0",
-          "from": "stack-utils@>=0.4.0 <0.5.0",
-          "resolved": "https://registry.npmjs.org/stack-utils/-/stack-utils-0.4.0.tgz",
+          "version": "1.0.0",
+          "from": "stack-utils@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/stack-utils/-/stack-utils-1.0.0.tgz",
           "dev": true
         },
         "tap-mocha-reporter": {
@@ -4684,7 +4728,7 @@
           "dependencies": {
             "debug": {
               "version": "2.6.1",
-              "from": "debug@>=2.1.3 <3.0.0",
+              "from": "debug@^2.1.3",
               "resolved": "https://registry.npmjs.org/debug/-/debug-2.6.1.tgz",
               "dev": true,
               "dependencies": {
@@ -4704,23 +4748,9 @@
             },
             "escape-string-regexp": {
               "version": "1.0.5",
-              "from": "escape-string-regexp@>=1.0.3 <2.0.0",
+              "from": "escape-string-regexp@^1.0.3",
               "resolved": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz",
               "dev": true
-            },
-            "tap-parser": {
-              "version": "5.3.3",
-              "from": "tap-parser@>=5.1.0 <6.0.0",
-              "resolved": "https://registry.npmjs.org/tap-parser/-/tap-parser-5.3.3.tgz",
-              "dev": true,
-              "dependencies": {
-                "events-to-array": {
-                  "version": "1.0.2",
-                  "from": "events-to-array@>=1.0.1 <2.0.0",
-                  "resolved": "https://registry.npmjs.org/events-to-array/-/events-to-array-1.0.2.tgz",
-                  "dev": true
-                }
-              }
             },
             "unicode-length": {
               "version": "1.0.3",
@@ -4730,7 +4760,7 @@
               "dependencies": {
                 "punycode": {
                   "version": "1.4.1",
-                  "from": "punycode@>=1.3.2 <2.0.0",
+                  "from": "punycode@^1.3.2",
                   "resolved": "https://registry.npmjs.org/punycode/-/punycode-1.4.1.tgz",
                   "dev": true
                 }
@@ -4739,9 +4769,9 @@
           }
         },
         "tap-parser": {
-          "version": "4.2.4",
-          "from": "tap-parser@>=4.2.2 <5.0.0",
-          "resolved": "https://registry.npmjs.org/tap-parser/-/tap-parser-4.2.4.tgz",
+          "version": "5.3.3",
+          "from": "tap-parser@>=5.3.1 <6.0.0",
+          "resolved": "https://registry.npmjs.org/tap-parser/-/tap-parser-5.3.3.tgz",
           "dev": true,
           "dependencies": {
             "events-to-array": {
@@ -4756,6 +4786,18 @@
           "version": "3.0.0",
           "from": "tmatch@>=3.0.0 <4.0.0",
           "resolved": "https://registry.npmjs.org/tmatch/-/tmatch-3.0.0.tgz",
+          "dev": true
+        },
+        "trivial-deferred": {
+          "version": "1.0.1",
+          "from": "trivial-deferred@>=1.0.1 <2.0.0",
+          "resolved": "https://registry.npmjs.org/trivial-deferred/-/trivial-deferred-1.0.1.tgz",
+          "dev": true
+        },
+        "yapool": {
+          "version": "1.0.0",
+          "from": "yapool@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/yapool/-/yapool-1.0.0.tgz",
           "dev": true
         }
       }
