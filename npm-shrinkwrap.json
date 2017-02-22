@@ -1823,9 +1823,9 @@
       "resolved": "https://registry.npmjs.org/read-package-tree/-/read-package-tree-5.1.5.tgz"
     },
     "readable-stream": {
-      "version": "2.2.2",
-      "from": "readable-stream@2.2.2",
-      "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.2.2.tgz",
+      "version": "2.2.3",
+      "from": "readable-stream@2.2.3",
+      "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.2.3.tgz",
       "dependencies": {
         "buffer-shims": {
           "version": "1.0.0",
