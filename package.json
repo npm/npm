@@ -206,7 +206,7 @@
     "require-inject": "~1.4.0",
     "sprintf-js": "~1.0.3",
     "standard": "~6.0.8",
-    "tacks": "~1.2.2",
+    "tacks": "~1.2.6",
     "tap": "~9.0.3"
   },
   "scripts": {

@@ -3284,9 +3284,9 @@
       "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-3.0.1.tgz"
     },
     "tacks": {
-      "version": "1.2.2",
-      "from": "tacks@1.2.2",
-      "resolved": "https://registry.npmjs.org/tacks/-/tacks-1.2.2.tgz",
+      "version": "1.2.6",
+      "from": "tacks@>=1.2.2 <1.3.0",
+      "resolved": "https://registry.npmjs.org/tacks/-/tacks-1.2.6.tgz",
       "dev": true,
       "dependencies": {
         "yargs": {
@@ -3345,25 +3345,25 @@
             },
             "string-width": {
               "version": "1.0.2",
-              "from": "string-width@>=1.0.1 <2.0.0",
+              "from": "string-width@^1.0.1",
               "resolved": "https://registry.npmjs.org/string-width/-/string-width-1.0.2.tgz",
               "dev": true,
               "dependencies": {
                 "code-point-at": {
                   "version": "1.1.0",
-                  "from": "code-point-at@>=1.0.0 <2.0.0",
+                  "from": "code-point-at@^1.0.0",
                   "resolved": "https://registry.npmjs.org/code-point-at/-/code-point-at-1.1.0.tgz",
                   "dev": true
                 },
                 "is-fullwidth-code-point": {
                   "version": "1.0.0",
-                  "from": "is-fullwidth-code-point@>=1.0.0 <2.0.0",
+                  "from": "is-fullwidth-code-point@^1.0.0",
                   "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-1.0.0.tgz",
                   "dev": true,
                   "dependencies": {
                     "number-is-nan": {
                       "version": "1.0.1",
-                      "from": "number-is-nan@>=1.0.0 <2.0.0",
+                      "from": "number-is-nan@^1.0.0",
                       "resolved": "https://registry.npmjs.org/number-is-nan/-/number-is-nan-1.0.1.tgz",
                       "dev": true
                     }
