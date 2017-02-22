@@ -3,9 +3,9 @@
   "version": "4.3.0",
   "dependencies": {
     "abbrev": {
-      "version": "1.0.9",
-      "from": "abbrev@1.0.9",
-      "resolved": "https://registry.npmjs.org/abbrev/-/abbrev-1.0.9.tgz"
+      "version": "1.1.0",
+      "from": "abbrev@latest",
+      "resolved": "https://registry.npmjs.org/abbrev/-/abbrev-1.1.0.tgz"
     },
     "ansi-regex": {
       "version": "2.1.1",
