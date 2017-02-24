@@ -1,3 +1,120 @@
+### v4.4.0 (2017-02-23):
+
+Aaaah, [@iarna](https://github.com/iarna) here, it's been a little while
+since I did one of these! This is a nice little release, we've got an
+update notifier, vastly less verbose error messages, new warnings on package
+metadata that will probably give you a bad day, and a sprinkling of bug
+fixes.
+
+#### UPDATE NOTIFICATIONS
+
+We now have a little nudge to update your `npm`, courtesy of
+[update-notifier](https://www.npmjs.com/package/update-notifier).
+
+* [`148ee66`](https://github.com/npm/npm/commit/148ee663740aa05877c64f16cdf18eba33fbc371)
+  [#15774](https://github.com/npm/npm/pull/15774)
+  `npm` will now check at start up to see if a newer version is available.
+  It will check once a day. If you want to disable this, set `optOut` to `true` in
+  `~/.config/configstore/update-notifier-npm.json`.
+  ([@ceejbot](https://github.com/ceejbot))
+
+#### LESS VERBOSE ERROR MESSAGES
+
+`npm` has, for a long time, had very verbose error messages.  There was a
+lot of info in there, including the cause of the error you were seeing but
+without a lot of experience reading them pulling that out was time consuming
+and difficult.
+
+With this change the output is cut down substantially, centering the error
+message.  So, for example if you try to `npm run sdlkfj` then the entire
+error you'll get will be:
+
+```
+npm ERR! missing script: sldkfj
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/rebecca/.npm/_logs/2017-02-24T00_41_36_988Z-debug.log
+```
+
+The CLI team has discussed cutting this down even further and stripping the
+`npm ERR!` prefix off those lines too.  We'd appreciate your feedback on
+this!
+
+* [`e544124`](https://github.com/npm/npm/commit/e544124592583654f2970ec332003cfd00d04f2b)
+  [#15716](https://github.com/npm/npm/pull/15716)
+  Make error output less verbose.
+  ([@iarna](https://github.com/iarna))
+* [`166bda9`](https://github.com/npm/npm/commit/166bda97410d0518b42ed361020ade1887e684af)
+  [#15716](https://github.com/npm/npm/pull/15716)
+  Stop encouraging users to visit the issue tracker unless we know for
+  certain that it's an npm bug.
+  ([@iarna](https://github.com/iarna))
+
+#### OTHER NEW FEATURES
+
+* [`53412eb`](https://github.com/npm/npm/commit/53412eb22c1c75d768e30f96d69ed620dfedabde)
+  [#15772](https://github.com/npm/npm/pull/15772)
+  We now warn if you have a module listed in both dependencies and
+  devDependencies.
+  ([@TedYav](https://github.com/TedYav))
+* [`426b180`](https://github.com/npm/npm/commit/426b1805904a13bdc5c0dd504105ba037270cbee)
+  [#15757](https://github.com/npm/npm/pull/15757)
+  Default reporting metrics to default registry. Previously it defaulted to using
+  `https://registry.npmjs.org`, now it will default to the result of
+  `npm config get registry`. For most folks this won't actually change anything, but it
+  means that folks who use a private registry will have metrics routed there by default.
+  This has the potential to be interesting because it means that in the
+  future private registry products ([npme](https://npme.npmjs.com/docs/)!)
+  will be able to report on these metrics.
+  ([@iarna](https://github.com/iarna))
+
+#### BUG FIXES
+
+* [`8ea0de9`](https://github.com/npm/npm/commit/8ea0de98563648ba0db032acd4d23d27c4a50a66)
+  [#15716](https://github.com/npm/npm/pull/15716)
+  Write logs for `cb() never called` errors.
+* [`c4e83dc`](https://github.com/npm/npm/commit/c4e83dca830b24305e3cb3201a42452d56d2d864)
+  Make it so that errors while reading the existing node_modules tree can't
+  result in installer crashes.
+  ([@iarna](https://github.com/iarna))
+* [`2690dc2`](https://github.com/npm/npm/commit/2690dc2684a975109ef44953c2cf0746dbe343bb)
+  Update `npm doctor` to not treat broken symlinks in your global modules as
+  a permission failure. This is particularly important if you link modules and your text
+  editor uses the convention of creating symlinks from `.#filename.js` to a
+  machine name and pid to lock files (eg emacs and compatible things).
+  ([@iarna](https://github.com/iarna))
+* [`f4c3f48`](https://github.com/npm/npm/commit/f4c3f489aa5787cf0d60e8436be2190e4b0d0ff7)
+  [#15777](https://github.com/npm/npm/pull/15777)
+  Not exactly a bug, but change a parameterless `.apply` to `.call`.
+  ([@notarseniy](https://github.com/notarseniy))
+
+#### DEPENDENCY UPDATES
+
+* [`549dcff`](https://github.com/npm/npm/commit/549dcff58c7aaa1e7ba71abaa14008fdf2697297)
+  `rimraf@2.6.0`:
+  Retry EBUSY, ENOTEMPTY and EPERM on non-Windows platforms too.
+  More reliable `rimraf.sync` on Windows.
+  ([@isaacs](https://github.com/isaacs))
+* [`052dfb6`](https://github.com/npm/npm/commit/052dfb623da508f2b5f681da0258125552a18a4a)
+  `validate-npm-package-name@3.0.0`:
+  Remove ableist language in README.
+  Stop allowing ~'!()* in package names.
+  ([@tomdale](https://github.com/tomdale))
+  ([@chrisdickinson](https://github.com/chrisdickinson))
+* [`6663ea6`](https://github.com/npm/npm/commit/6663ea6ac0f0ecec5a3f04a3c01a71499632f4dc)
+  `abbrev@1.1.0` ([@isaacs](https://github.com/isaacs))
+* [`be6de9a`](https://github.com/npm/npm/commit/be6de9aab9e20b6eac70884e8626161eebf8721a)
+  `opener@1.4.3` ([@dominic](https://github.com/dominic))
+* [`900a5e3`](https://github.com/npm/npm/commit/900a5e3e3411ec221306455f99b24b9ce35757c0)
+  `readable-stream@2.2.3` ([@RangerMauve](https://github.com/RangerMauve)) ([@mcollina](https://github.com/mcollina))
+* [`c972a8b`](https://github.com/npm/npm/commit/c972a8b0f20a61a79c45b6642f870bea8c55c7e4)
+  `tacks@1.2.6`
+  ([@iarna](https://github.com/iarna))
+* [`85a36ef`](https://github.com/npm/npm/commit/85a36efdac0c24501876875cb9ad40292024e0b0)
+  [`7ac9265`](https://github.com/npm/npm/commit/7ac9265c56b4d9eeaca6fcfb29513f301713e7bb)
+  `tap@10.2.0`
+  ([@isaacs](https://github.com/saacs))
+
 ### v4.3.0 (2017-02-09):
 
 Yay! Release time! It's a rainy day, and we have another smallish release for
