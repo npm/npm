@@ -960,6 +960,17 @@ Because other tools may rely on the convention that npm version tags look like
 `v1.0.0`, _only use this property if it is absolutely necessary_. In
 particular, use care when overriding this setting for public packages.
 
+### timing
+
+* Default: `false`
+* Type: Boolean
+
+If true, writes an `npm-debug` log to `_logs` and timing information to
+`_timing.json`, both in your cache.  `_timing.json` is a newline delimited
+list of JSON objects.  You can quickly view it with this
+[json](https://www.npmjs.com/package/json) command line:
+`json -g < ~/.npm/_timing.json`.
+
 ### tmp
 
 * Default: TMPDIR environment variable, or "/tmp"

@@ -57,7 +57,7 @@
 
   if (conf.version) {
     console.log(npm.version)
-    return
+    return errorHandler.exit(0)
   }
 
   if (conf.versions) {
