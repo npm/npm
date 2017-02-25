@@ -143,12 +143,12 @@ html/doc/misc/%.html: doc/misc/%.md $(html_docdeps)
 marked: node_modules/.bin/marked
 
 node_modules/.bin/marked:
-	node cli.js install marked --no-global
+	node cli.js install marked --no-global --no-timing
 
 marked-man: node_modules/.bin/marked-man
 
 node_modules/.bin/marked-man:
-	node cli.js install marked-man --no-global
+	node cli.js install marked-man --no-global --no-timing
 
 doc: man
 
@@ -158,7 +158,7 @@ test: doc
 	node cli.js test
 
 tag:
-	npm tag npm@$(PUBLISHTAG) latest
+	node bin/npm-cli.js tag npm@$(PUBLISHTAG) latest
 
 ls-ok:
 	node . ls >/dev/null
@@ -167,10 +167,10 @@ gitclean:
 	git clean -fd
 
 publish: gitclean ls-ok link doc-clean doc
-	@git push origin :v$(shell npm -v) 2>&1 || true
+	@git push origin :v$(shell node bin/npm-cli.js --no-timing -v) 2>&1 || true
 	git push origin $(BRANCH) &&\
 	git push origin --tags &&\
-	npm publish --tag=$(PUBLISHTAG)
+	node bin/npm-cli.js publish --tag=$(PUBLISHTAG)
 
 release: gitclean ls-ok markedclean marked-manclean doc-clean doc
 	node cli.js prune --production

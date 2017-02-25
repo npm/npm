@@ -219,7 +219,7 @@
   },
   "scripts": {
     "dumpconf": "env | grep npm | sort | uniq",
-    "prepare": "node bin/npm-cli.js prune --prefix=. --no-global && rimraf test/*/*/node_modules && make -j4 doc",
+    "prepare": "node bin/npm-cli.js --no-timing prune --prefix=. --no-global && rimraf test/*/*/node_modules && make -j4 doc",
     "preversion": "bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
     "tap": "tap --timeout 300",
     "tap-cover": "tap --nyc-arg='--cache' --coverage --timeout 600",
