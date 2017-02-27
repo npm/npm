@@ -2,11 +2,11 @@
 
 ## Using this Document
 
-Search for the error message you're getting and see if there's a match, or simply skim the table of contents below for topics that seem relevant to the issue you're having. Each issue section has steps to work around or fix the particular issue, and have examples of common error messages.
+Search for the error message you're getting and see if there's a match, or skim the [table of contents](#table-of-contents) below for topics that seem relevant to the issue you're having. Each issue section has steps to work around or fix the particular issue, and have examples of common error messages.
 
 If you do not find the issue below, try searching the issue tracker itself for potential duplicates before opening a new issue.
 
-If you're reading this document because you noticed an issue with npm's web site, you may want to let the [web team](https://github.com/npm/www/issues) know.
+If you're reading this document because you noticed an issue with npm's web site, please let the [web team](https://github.com/npm/www/issues) know.
 
 ### Updating this Document
 
@@ -34,7 +34,7 @@ Whenever you get npm errors, it's a good idea to first check your npm version an
 You can check your npm version by running `npm -v`.
 
 ### Steps to Fix
-* Upgrading on *nix (OSX, Linux, etc.)
+* Upgrading on \*nix (OSX, Linux, etc.)
 
 (You may need to prefix these commands with sudo, especially on Linux, or OS X if you installed Node using its default installer.)
 You can upgrade to the latest version of npm using:
@@ -48,11 +48,11 @@ We have a [detailed guide](https://github.com/npm/npm/wiki/Troubleshooting#upgra
 
 ## Proxy and Networking Issues
 
-npm might not be able to connect to the registry for various reasons. Perhaps your machine is behind a firewall that needs to be opened, or you require a corporate proxy to access the npm registry. This issue can manifest in a wide number of different ways. Usually, strange network errors are simply this specific problem.
+npm might not be able to connect to the registry for various reasons. Perhaps your machine is behind a firewall that needs to be opened, or you require a corporate proxy to access the npm registry. This issue can manifest in a wide number of different ways. Usually, strange network errors are an instance of this specific problem.
 
 Sometimes, users may have install failures due to Git/Github access issues. Git/GitHub access is separate from npm registry access. For users in some locations (India in particular), problems installing packages may be due to connectivity problems reaching GitHub and not the npm registry.
 
-If you believe your network is configured and working correctly, and you're still having problems installing, you may want to let the [registry team](https://github.com/npm/registry/issues) know you're having trouble.
+If you believe your network is configured and working correctly, and you're still having problems installing, please let the [registry team](https://github.com/npm/registry/issues) know you're having trouble.
 
 ### Steps to Fix
 
@@ -64,7 +64,7 @@ If you believe your network is configured and working correctly, and you're stil
 
 0. If you're in China, consider using https://npm.taobao.org/ as a registry, which sits behind the Firewall.
 
-0. On Windows, npm does not access proxies configured at the system level, so you need to configure them manually in order for npm to access them. Make sure [you have added the appropriate proxy configuration to `.npmrc`](#link-goes-here).
+0. On Windows, npm does not access proxies configured at the system level, so you need to configure them manually in order for npm to access them. Make sure [you have added the appropriate proxy configuration to `.npmrc`](https://docs.npmjs.com/misc/config#https-proxy).
 
 0. If you already have a proxy configured, it might be configured incorrectly or use the wrong credentials. Verify your credentials, test the specific credentials with a separate application.
 
@@ -131,7 +131,7 @@ If this happens when trying to start your application, you might not have instal
 
 0. If this happens when you try to start your application, try running `npm install` to install the app's dependencies. Make sure all its actual dependencies are listed in `package.json`
 
-0. If this happens on any npm command, please [reinstall](#idk-the-guide).
+0. If this happens on any npm command, please reinstall.
 
 ### Examples
 
@@ -147,7 +147,7 @@ Error: Cannot find module
 
 ## Shasum Check Fails
 
-This is a common issue which used to be caused by caching issues. Nowadays, the cache has been improved, so it's likely to be an install issue, which can be caused by network problems (sometimes even [proxy issues](#proxy-and-networking-issues) ), a node bug, or possibly some sort of npm bug.
+This is a common issue which used to be caused by caching issues. Nowadays, the cache has been improved, so it's likely to be an install issue, which can be caused by network problems (sometimes even [proxy issues](#proxy-and-networking-issues)), a node bug, or possibly some sort of npm bug.
 
 ### Steps to Fix
 
