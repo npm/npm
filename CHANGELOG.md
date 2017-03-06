@@ -1,3 +1,14 @@
+### v4.4.1 (2017-03-06):
+
+This is a quick little patch release to forgo the update notification
+checker if you're on an unsuported (but not otherwise broken) version of
+Node.js.  Right now that means 0.10 or 0.12.
+
+* [`56ac249`](https://github.com/npm/npm/commit/56ac249ef8ede1021f1bc62a0e4fe1e9ba556af2)
+  [#15864](https://github.com/npm/npm/pull/15864)
+  Only use `update-notifier` on supported versions.
+  ([@legodude17](https://github.com/legodude17))
+
 ### v4.4.0 (2017-02-23):
 
 Aaaah, [@iarna](https://github.com/iarna) here, it's been a little while
