@@ -2,6 +2,23 @@
   "name": "npm",
   "version": "4.4.1",
   "dependencies": {
+    "@npmcorp/move": {
+      "version": "1.0.0",
+      "from": "@npmcorp/move@latest",
+      "resolved": "file:../move",
+      "dependencies": {
+        "@npmcorp/copy": {
+          "version": "1.0.0",
+          "from": "@npmcorp/copy@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/@npmcorp/copy/-/copy-1.0.0.tgz"
+        },
+        "run-queue": {
+          "version": "1.0.3",
+          "from": "run-queue@>=1.0.3 <2.0.0",
+          "resolved": "https://registry.npmjs.org/run-queue/-/run-queue-1.0.3.tgz"
+        }
+      }
+    },
     "abbrev": {
       "version": "1.1.0",
       "from": "abbrev@latest",
@@ -36,6 +53,11 @@
       "version": "2.0.5",
       "from": "asap@2.0.5",
       "resolved": "https://registry.npmjs.org/asap/-/asap-2.0.5.tgz"
+    },
+    "bluebird": {
+      "version": "3.4.7",
+      "from": "bluebird@latest",
+      "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-3.4.7.tgz"
     },
     "call-limit": {
       "version": "1.1.0",
