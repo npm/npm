@@ -350,10 +350,13 @@ function rmkidsSync (p, options) {
   var retries = isWindows ? 100 : 1
   var i = 0
   do {
+    var threw = true
     try {
-      return options.rmdirSync(p, options)
+      var ret = options.rmdirSync(p, options)
+      threw = false
+      return ret
     } finally {
-      if (++i < retries)
+      if (++i < retries && threw)
         continue
     }
   } while (true)
