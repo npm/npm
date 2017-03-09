@@ -1218,9 +1218,9 @@
       "resolved": "https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz"
     },
     "update-notifier": {
-      "version": "2.0.0",
+      "version": "2.1.0",
       "from": "update-notifier@latest",
-      "resolved": "https://registry.npmjs.org/update-notifier/-/update-notifier-2.0.0.tgz",
+      "resolved": "https://registry.npmjs.org/update-notifier/-/update-notifier-2.1.0.tgz",
       "dependencies": {
         "boxen": {
           "version": "1.0.0",
@@ -1409,9 +1409,9 @@
           "resolved": "https://registry.npmjs.org/configstore/-/configstore-3.0.0.tgz",
           "dependencies": {
             "dot-prop": {
-              "version": "4.1.0",
+              "version": "4.1.1",
               "from": "dot-prop@>=4.1.0 <5.0.0",
-              "resolved": "https://registry.npmjs.org/dot-prop/-/dot-prop-4.1.0.tgz",
+              "resolved": "https://registry.npmjs.org/dot-prop/-/dot-prop-4.1.1.tgz",
               "dependencies": {
                 "is-obj": {
                   "version": "1.0.1",
@@ -1445,9 +1445,9 @@
           "resolved": "https://registry.npmjs.org/latest-version/-/latest-version-3.0.0.tgz",
           "dependencies": {
             "package-json": {
-              "version": "3.0.0",
+              "version": "3.1.0",
               "from": "package-json@>=3.0.0 <4.0.0",
-              "resolved": "https://registry.npmjs.org/package-json/-/package-json-3.0.0.tgz",
+              "resolved": "https://registry.npmjs.org/package-json/-/package-json-3.1.0.tgz",
               "dependencies": {
                 "got": {
                   "version": "6.7.1",
@@ -1531,9 +1531,9 @@
                   "resolved": "https://registry.npmjs.org/registry-auth-token/-/registry-auth-token-3.1.0.tgz",
                   "dependencies": {
                     "rc": {
-                      "version": "1.1.6",
+                      "version": "1.1.7",
                       "from": "rc@>=1.1.6 <2.0.0",
-                      "resolved": "https://registry.npmjs.org/rc/-/rc-1.1.6.tgz",
+                      "resolved": "https://registry.npmjs.org/rc/-/rc-1.1.7.tgz",
                       "dependencies": {
                         "deep-extend": {
                           "version": "0.4.1",
@@ -1546,9 +1546,9 @@
                           "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz"
                         },
                         "strip-json-comments": {
-                          "version": "1.0.4",
-                          "from": "strip-json-comments@>=1.0.4 <1.1.0",
-                          "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-1.0.4.tgz"
+                          "version": "2.0.1",
+                          "from": "strip-json-comments@>=2.0.1 <2.1.0",
+                          "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz"
                         }
                       }
                     }
@@ -1560,9 +1560,9 @@
                   "resolved": "https://registry.npmjs.org/registry-url/-/registry-url-3.1.0.tgz",
                   "dependencies": {
                     "rc": {
-                      "version": "1.1.6",
+                      "version": "1.1.7",
                       "from": "rc@^1.0.1",
-                      "resolved": "https://registry.npmjs.org/rc/-/rc-1.1.6.tgz",
+                      "resolved": "https://registry.npmjs.org/rc/-/rc-1.1.7.tgz",
                       "dependencies": {
                         "deep-extend": {
                           "version": "0.4.1",
@@ -1575,9 +1575,9 @@
                           "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz"
                         },
                         "strip-json-comments": {
-                          "version": "1.0.4",
-                          "from": "strip-json-comments@~1.0.4",
-                          "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-1.0.4.tgz"
+                          "version": "2.0.1",
+                          "from": "strip-json-comments@~2.0.1",
+                          "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz"
                         }
                       }
                     }

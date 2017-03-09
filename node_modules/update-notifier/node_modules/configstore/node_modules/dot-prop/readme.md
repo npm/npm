@@ -57,7 +57,7 @@ console.log(obj);
 
 ## API
 
-### get(obj, path, [value])
+### get(obj, path, [defaultValue])
 
 ### set(obj, path, value)
 
@@ -83,7 +83,13 @@ Use `\\.` if you have a `.` in the key.
 
 Type: `any`
 
-Value to set at `path` or optional default value to return from get.
+Value to set at `path`.
+
+#### defaultValue
+
+Type: `any`
+
+Default value.
 
 
 ## License

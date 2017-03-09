@@ -20,8 +20,8 @@ module.exports = (name, version) => {
 		.then(res => {
 			let data = res.body;
 
-			if (version === 'latest') {
-				data = data.versions[data['dist-tags'].latest];
+			if (data['dist-tags'][version]) {
+				data = data.versions[data['dist-tags'][version]];
 			} else if (version) {
 				if (!data.versions[version]) {
 					const versions = Object.keys(data.versions);
