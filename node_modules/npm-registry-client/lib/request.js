@@ -269,7 +269,7 @@ function requestDone (method, where, cb) {
     }
 
     // for the search endpoint, the 'error' property can be an object
-    if (parsed && parsed.error && typeof parsed.error !== 'object' ||
+    if ((parsed && parsed.error && typeof parsed.error !== 'object') ||
         response.statusCode >= 400) {
       var w = url.parse(where).pathname.substr(1)
       var name

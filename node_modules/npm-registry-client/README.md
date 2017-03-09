@@ -125,7 +125,7 @@ Add (or replace) a single dist-tag onto the named package.
 * `cb` {Function}
 
 Set all of the `dist-tags` for the named package at once, creating any
-`dist-tags` that do not already exit. Any `dist-tags` not included in the
+`dist-tags` that do not already exist. Any `dist-tags` not included in the
 `distTags` map will be removed.
 
 ### client.distTags.update(uri, params, cb)
