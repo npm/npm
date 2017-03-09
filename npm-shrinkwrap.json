@@ -582,9 +582,9 @@
       "from": "npm-install-checks@3.0.0"
     },
     "npm-package-arg": {
-      "version": "4.2.0",
-      "from": "npm-package-arg@4.2.0",
-      "resolved": "https://registry.npmjs.org/npm-package-arg/-/npm-package-arg-4.2.0.tgz"
+      "version": "4.2.1",
+      "from": "npm-package-arg@latest",
+      "resolved": "https://registry.npmjs.org/npm-package-arg/-/npm-package-arg-4.2.1.tgz"
     },
     "npm-registry-client": {
       "version": "7.4.5",
