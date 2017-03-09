@@ -132,8 +132,9 @@
       "resolved": "https://registry.npmjs.org/fs-vacuum/-/fs-vacuum-1.2.9.tgz"
     },
     "fs-write-stream-atomic": {
-      "version": "1.0.8",
-      "from": "fs-write-stream-atomic@1.0.8"
+      "version": "1.0.10",
+      "from": "fs-write-stream-atomic@latest",
+      "resolved": "https://registry.npmjs.org/fs-write-stream-atomic/-/fs-write-stream-atomic-1.0.10.tgz"
     },
     "fstream": {
       "version": "1.0.10",
