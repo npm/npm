@@ -273,14 +273,14 @@
       }
     },
     "JSONStream": {
-      "version": "1.3.0",
-      "from": "JSONStream@1.3.0",
-      "resolved": "https://registry.npmjs.org/JSONStream/-/JSONStream-1.3.0.tgz",
+      "version": "1.3.1",
+      "from": "JSONStream@latest",
+      "resolved": "https://registry.npmjs.org/JSONStream/-/JSONStream-1.3.1.tgz",
       "dependencies": {
         "jsonparse": {
-          "version": "1.2.0",
+          "version": "1.3.0",
           "from": "jsonparse@>=1.2.0 <2.0.0",
-          "resolved": "https://registry.npmjs.org/jsonparse/-/jsonparse-1.2.0.tgz"
+          "resolved": "https://registry.npmjs.org/jsonparse/-/jsonparse-1.3.0.tgz"
         },
         "through": {
           "version": "2.3.8",
