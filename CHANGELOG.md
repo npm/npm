@@ -1,3 +1,76 @@
+### v4.4.2 (2016-03-09):
+
+This week, the focus on the release was mainly going through [all of npm's deps
+that we manage
+ourselves](https://github.com/npm/npm/wiki/npm-maintained-dependencies), and
+making sure all their PRs and versions were up to date. That means there's a few
+fixes here and there. Nothing too big codewise, though.
+
+The most exciting part of this release is probably our [shiny new
+Contributing](https://github.com/npm/npm/blob/latest/CONTRIBUTING.md) and
+[Troubleshooting](https://github.com/npm/npm/blob/latest/TROUBLESHOOTING.md)
+docs! [@snopeks](https://github.com/snopeks) did some ✨fantastic✨ work hashing it
+out, and we're really hoping this is a nice big step towards making contributing
+to npm easier. The troubleshooting doc will also hopefully solve common issues
+for people! Do you think something is missing from it? File a PR and we'll add
+it! The current document is just a baseline for further editing and additions.
+
+Also there's maybe a bit of an easter egg in this release. 'Cause those are fun and I'm a huge nerd. 😉
+
+#### DOCUMENTATION AHOY
+
+* [`07e997a`](https://github.com/npm/npm/commit/07e997a7ecedba7b29ad76ffb2ce990d5c0200fc)
+  [#15756](https://github.com/npm/npm/pull/15756)
+  Overhaul `CONTRIBUTING.md` and add new `TROUBLESHOOTING.md` files. 🙌🏼
+  ([@snopeks](https://github.com/snopeks))
+* [`2f3e4b6`](https://github.com/npm/npm/commit/2f3e4b645cdc268889cf95ba24b2aae572d722ad)
+  [#15833](https://github.com/npm/npm/pull/15833)
+  Mention the [24-hour unpublish
+  policy](http://blog.npmjs.org/post/141905368000/changes-to-npms-unpublish-policy)
+  on the main registry.
+  ([@carols10cents](https://github.com/carols10cents))
+
+#### NOT REALLY FEATURES, NOT REALLY BUGFIXES. MORE LIKE TWEAKS? 🤔
+
+* [`84be534`](https://github.com/npm/npm/commit/84be534aedb78c65cd8012427fc04871ceeccf90)
+  [#15888](https://github.com/npm/npm/pull/15888)
+  Stop flattening `ls`-tree output. From now on, deduped deps will be marked as
+  such in the place where they would've been before getting hoisted by the
+  installer.
+  ([@iarna](https://github.com/iarna))
+* [`e9a5dca`](https://github.com/npm/npm/commit/e9a5dca369ead646ab5922326cede1406c62bd3b)
+  [#15967](https://github.com/npm/npm/pull/15967)
+  Limit metadata fetches to 10 concurrent requests.
+  ([@iarna](https://github.com/iarna))
+* [`46aa9bc`](https://github.com/npm/npm/commit/46aa9bcae088740df86234fc199f7aef53b116df)
+  [#15967](https://github.com/npm/npm/pull/15967)
+  Limit concurrent installer actions to 10.
+  ([@iarna](https://github.com/iarna))
+
+#### BUGFIXES
+
+* [`c3b994b`](https://github.com/npm/npm/commit/c3b994b71565eb4f943cce890bb887d810e6e2d4)
+  [#15901](https://github.com/npm/npm/pull/15901)
+  Use EXDEV aware move instead of rename. This will allow moving across devices
+  and moving when filesystems don't support renaming directories full of files. It might make folks using Docker a bit happier.
+  ([@iarna](https://github.com/iarna))
+* [`0de1a9c`](https://github.com/npm/npm/commit/0de1a9c1db90e6705c65c068df1fe82899e60d68)
+  [#15735](https://github.com/npm/npm/pull/15735)
+  Autocomplete support for npm scripts with `:` colons in the name.
+  ([@beyondcompute](https://github.com/beyondcompute))
+* [`84b0b92`](https://github.com/npm/npm/commit/84b0b92e7f78ec4add42e8161c555325c99b7f98)
+  [#15874](https://github.com/npm/npm/pull/15874)
+  Stop using [undocumented](https://github.com/nodejs/node/pull/11355)
+  `res.writeHeader` alias for `res.writeHead`.
+  ([@ChALkeR](https://github.com/ChALkeR))
+* [`895ffe4`](https://github.com/npm/npm/commit/895ffe4f3eecd674796395f91c30eda88aca6b36)
+  [#15824](https://github.com/npm/npm/pull/15824)
+  Fix empty versions column in `npm search` output.
+  ([@bcoe](https://github.com/bcoe))
+* [`38c8d7a`](https://github.com/npm/npm/commit/38c8d7adc1f43ab357d1e729ae7cd5d801a26e68)
+  `init-package-json@1.9.5`: [npm/init-package-json#61](https://github.com/npm/init-package-json/pull/61) Exclude existing `devDependencies` from being added to `dependencies`. Fixes [#12260](https://github.com/npm/npm/issues/12260).
+  ([@addaleax](https://github.com/addaleax))
+
 ### v4.4.1 (2017-03-06):
 
 This is a quick little patch release to forgo the update notification
