@@ -88,7 +88,7 @@ experience if you run a recent version of npm. To upgrade, either use [Microsoft
 upgrade tool](https://github.com/felixrieseberg/npm-windows-upgrade),
 [download a new version of Node](https://nodejs.org/en/download/),
 or follow the Windows upgrade instructions in the
-[npm Troubleshooting Guide](https://github.com/npm/npm/wiki/Troubleshooting#upgrading-on-windows).
+[npm Troubleshooting Guide](./TROUBLESHOOTING.md).
 
 If that's not fancy enough for you, then you can fetch the code with
 git, and mess with it directly.

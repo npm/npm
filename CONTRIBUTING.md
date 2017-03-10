@@ -35,7 +35,7 @@ This includes anyone who may show up to the npm/npm repo with issues, PRs, comme
 * Comment on issues when they have a reference to the answer.
 * If community members aren't sure they are correct and don't have a reference to the answer, please leave the issue and try another one.
 * Defer to collaborators and npm employees for answers.
-* Make sure to search for the troubleshooting doc and search on the issue tracker for similar issues before opening a new one.
+* Make sure to search for [the troubleshooting doc](./TROUBLESHOOTING.md) and search on the issue tracker for similar issues before opening a new one.
 * Any users with urgent support needs are welcome to email support@npmjs.com, and our dedicated support team will be happy to help.
 
 PLEASE don't @ collaborators or npm employees on issues. The CLI team is small, and has many outstanding commitments to fulfill.
@@ -61,7 +61,7 @@ Collaborators who become inactive for 3 months or longer may have their collabor
 * If they've responded to an issue, it becomes their responsibility to see it to resolution.
 * Close issues if there's no response within a month.
 * Defer to fellow Collaborators & npm employees for answers (Again, please don't @ collaborators or npm employees, thank you!)
-* Make sure to search for the troubleshooting doc and search on the issue tracker for similar issues before opening a new one.
+* Make sure to search for [the troubleshooting doc](./TROUBLESHOOTING.md) and search on the issue tracker for similar issues before opening a new one.
 
 ### npm, Inc Employees
 
