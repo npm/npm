@@ -47,7 +47,7 @@
     "config-chain": "~1.1.11",
     "dezalgo": "~1.0.3",
     "editor": "~1.0.0",
-    "fs-vacuum": "~1.2.9",
+    "fs-vacuum": "~1.2.10",
     "fs-write-stream-atomic": "~1.0.10",
     "fstream": "~1.0.11",
     "fstream-npm": "~1.2.0",
