@@ -4,8 +4,8 @@
   "dependencies": {
     "@npmcorp/move": {
       "version": "1.0.0",
-      "from": "@npmcorp/move@latest",
-      "resolved": "file:../move",
+      "from": "@npmcorp/move@>=1.0.0 <1.1.0",
+      "resolved": "https://registry.npmjs.org/@npmcorp/move/-/move-1.0.0.tgz",
       "dependencies": {
         "@npmcorp/copy": {
           "version": "1.0.0",
