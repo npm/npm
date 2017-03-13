@@ -6,7 +6,6 @@ var http = require('http')
   , util = require('util')
   , stream = require('stream')
   , zlib = require('zlib')
-  , bl = require('bl')
   , hawk = require('hawk')
   , aws2 = require('aws-sign2')
   , aws4 = require('aws4')
@@ -29,6 +28,8 @@ var http = require('http')
   , Multipart = require('./lib/multipart').Multipart
   , Redirect = require('./lib/redirect').Redirect
   , Tunnel = require('./lib/tunnel').Tunnel
+  , now = require('performance-now')
+  , Buffer = require('safe-buffer').Buffer
 
 var safeStringify = helpers.safeStringify
   , isReadStream = helpers.isReadStream
@@ -289,13 +290,10 @@ Request.prototype.init = function (options) {
   self.setHost = false
   if (!self.hasHeader('host')) {
     var hostHeaderName = self.originalHostHeaderName || 'host'
-    self.setHeader(hostHeaderName, self.uri.hostname)
-    if (self.uri.port) {
-      if ( !(self.uri.port === 80 && self.uri.protocol === 'http:') &&
-           !(self.uri.port === 443 && self.uri.protocol === 'https:') ) {
-        self.setHeader(hostHeaderName, self.getHeader('host') + (':' + self.uri.port) )
-      }
-    }
+    // When used with an IPv6 address, `host` will provide
+    // the correct bracketed format, unlike using `hostname` and
+    // optionally adding the `port` when necessary.
+    self.setHeader(hostHeaderName, self.uri.host)
     self.setHost = true
   }
 
@@ -413,12 +411,14 @@ Request.prototype.init = function (options) {
 
   if (options.time) {
     self.timing = true
+
+    // NOTE: elapsedTime is deprecated in favor of .timings
     self.elapsedTime = self.elapsedTime || 0
   }
 
   function setContentLength () {
     if (isTypedArray(self.body)) {
-      self.body = new Buffer(self.body)
+      self.body = Buffer.from(self.body)
     }
 
     if (!self.hasHeader('content-length')) {
@@ -714,6 +714,16 @@ Request.prototype.start = function () {
   // this is usually called on the first write(), end() or on nextTick()
   var self = this
 
+  if (self.timing) {
+    // All timings will be relative to this request's startTime.  In order to do this,
+    // we need to capture the wall-clock start time (via Date), immediately followed
+    // by the high-resolution timer (via now()).  While these two won't be set
+    // at the _exact_ same time, they should be close enough to be able to calculate
+    // high-resolution, monotonically non-decreasing timestamps relative to startTime.
+    var startTime = new Date().getTime()
+    var startTimeNow = now()
+  }
+
   if (self._aborted) {
     return
   }
@@ -736,6 +746,11 @@ Request.prototype.start = function () {
 
   debug('make request', self.uri.href)
 
+  // node v6.8.0 now supports a `timeout` value in `http.request()`, but we
+  // should delete it for now since we handle timeouts manually for better
+  // consistency with node versions before v6.8.0
+  delete reqOptions.timeout
+
   try {
     self.req = self.httpModule.request(reqOptions)
   } catch (err) {
@@ -744,41 +759,20 @@ Request.prototype.start = function () {
   }
 
   if (self.timing) {
-    self.startTime = new Date().getTime()
+    self.startTime = startTime
+    self.startTimeNow = startTimeNow
+
+    // Timing values will all be relative to startTime (by comparing to startTimeNow
+    // so we have an accurate clock)
+    self.timings = {}
   }
 
+  var timeout
   if (self.timeout && !self.timeoutTimer) {
-    var timeout = self.timeout < 0 ? 0 : self.timeout
-    // Set a timeout in memory - this block will throw if the server takes more
-    // than `timeout` to write the HTTP status and headers (corresponding to
-    // the on('response') event on the client). NB: this measures wall-clock
-    // time, not the time between bytes sent by the server.
-    self.timeoutTimer = setTimeout(function () {
-      var connectTimeout = self.req.socket && self.req.socket.readable === false
-      self.abort()
-      var e = new Error('ETIMEDOUT')
-      e.code = 'ETIMEDOUT'
-      e.connect = connectTimeout
-      self.emit('error', e)
-    }, timeout)
-
-    if (self.req.setTimeout) { // only works on node 0.6+
-      // Set an additional timeout on the socket, via the `setsockopt` syscall.
-      // This timeout sets the amount of time to wait *between* bytes sent
-      // from the server, and may or may not correspond to the wall-clock time
-      // elapsed from the start of the request.
-      //
-      // In particular, it's useful for erroring if the server fails to send
-      // data halfway through streaming a response.
-      self.req.setTimeout(timeout, function () {
-        if (self.req) {
-          self.req.abort()
-          var e = new Error('ESOCKETTIMEDOUT')
-          e.code = 'ESOCKETTIMEDOUT'
-          e.connect = false
-          self.emit('error', e)
-        }
-      })
+    if (self.timeout < 0) {
+      timeout = 0
+    } else if (typeof self.timeout === 'number' && isFinite(self.timeout)) {
+      timeout = self.timeout
     }
   }
 
@@ -788,6 +782,83 @@ Request.prototype.start = function () {
     self.emit('drain')
   })
   self.req.on('socket', function(socket) {
+    // `._connecting` was the old property which was made public in node v6.1.0
+    var isConnecting = socket._connecting || socket.connecting
+    if (self.timing) {
+      self.timings.socket = now() - self.startTimeNow
+
+      if (isConnecting) {
+        var onLookupTiming = function() {
+          self.timings.lookup = now() - self.startTimeNow
+        }
+
+        var onConnectTiming = function() {
+          self.timings.connect = now() - self.startTimeNow
+        }
+
+        socket.once('lookup', onLookupTiming)
+        socket.once('connect', onConnectTiming)
+
+        // clean up timing event listeners if needed on error
+        self.req.once('error', function() {
+          socket.removeListener('lookup', onLookupTiming)
+          socket.removeListener('connect', onConnectTiming)
+        })
+      }
+    }
+
+    var setReqTimeout = function() {
+      // This timeout sets the amount of time to wait *between* bytes sent
+      // from the server once connected.
+      //
+      // In particular, it's useful for erroring if the server fails to send
+      // data halfway through streaming a response.
+      self.req.setTimeout(timeout, function () {
+        if (self.req) {
+          self.abort()
+          var e = new Error('ESOCKETTIMEDOUT')
+          e.code = 'ESOCKETTIMEDOUT'
+          e.connect = false
+          self.emit('error', e)
+        }
+      })
+    }
+    if (timeout !== undefined) {
+      // Only start the connection timer if we're actually connecting a new
+      // socket, otherwise if we're already connected (because this is a
+      // keep-alive connection) do not bother. This is important since we won't
+      // get a 'connect' event for an already connected socket.
+      if (isConnecting) {
+        var onReqSockConnect = function() {
+          socket.removeListener('connect', onReqSockConnect)
+          clearTimeout(self.timeoutTimer)
+          self.timeoutTimer = null
+          setReqTimeout()
+        }
+
+        socket.on('connect', onReqSockConnect)
+
+        self.req.on('error', function(err) {
+          socket.removeListener('connect', onReqSockConnect)
+        })
+
+        // Set a timeout in memory - this block will throw if the server takes more
+        // than `timeout` to write the HTTP status and headers (corresponding to
+        // the on('response') event on the client). NB: this measures wall-clock
+        // time, not the time between bytes sent by the server.
+        self.timeoutTimer = setTimeout(function () {
+          socket.removeListener('connect', onReqSockConnect)
+          self.abort()
+          var e = new Error('ETIMEDOUT')
+          e.code = 'ETIMEDOUT'
+          e.connect = true
+          self.emit('error', e)
+        }, timeout)
+      } else {
+        // We're already connected
+        setReqTimeout()
+      }
+    }
     self.emit('socket', socket)
   })
 
@@ -815,12 +886,52 @@ Request.prototype.onRequestError = function (error) {
 
 Request.prototype.onRequestResponse = function (response) {
   var self = this
+
+  if (self.timing) {
+    self.timings.response = now() - self.startTimeNow
+  }
+
   debug('onRequestResponse', self.uri.href, response.statusCode, response.headers)
   response.on('end', function() {
     if (self.timing) {
-      self.elapsedTime += (new Date().getTime() - self.startTime)
-      debug('elapsed time', self.elapsedTime)
+      self.timings.end = now() - self.startTimeNow
+      response.timingStart = self.startTime
+
+      // fill in the blanks for any periods that didn't trigger, such as
+      // no lookup or connect due to keep alive
+      if (!self.timings.socket) {
+        self.timings.socket = 0
+      }
+      if (!self.timings.lookup) {
+        self.timings.lookup = self.timings.socket
+      }
+      if (!self.timings.connect) {
+        self.timings.connect = self.timings.lookup
+      }
+      if (!self.timings.response) {
+        self.timings.response = self.timings.connect
+      }
+
+      debug('elapsed time', self.timings.end)
+
+      // elapsedTime includes all redirects
+      self.elapsedTime += Math.round(self.timings.end)
+
+      // NOTE: elapsedTime is deprecated in favor of .timings
       response.elapsedTime = self.elapsedTime
+
+      // timings is just for the final fetch
+      response.timings = self.timings
+
+      // pre-calculate phase timings as well
+      response.timingPhases = {
+        wait: self.timings.socket,
+        dns: self.timings.lookup - self.timings.socket,
+        tcp: self.timings.connect - self.timings.lookup,
+        firstByte: self.timings.response - self.timings.connect,
+        download: self.timings.end - self.timings.response,
+        total: self.timings.end
+      }
     }
     debug('response end', self.uri.href, response.statusCode, response.headers)
   })
@@ -893,7 +1004,7 @@ Request.prototype.onRequestResponse = function (response) {
       }
     })
 
-    response.on('end', function () {
+    response.once('end', function () {
       self._ended = true
     })
 
@@ -914,11 +1025,20 @@ Request.prototype.onRequestResponse = function (response) {
       var contentEncoding = response.headers['content-encoding'] || 'identity'
       contentEncoding = contentEncoding.trim().toLowerCase()
 
+      // Be more lenient with decoding compressed responses, since (very rarely)
+      // servers send slightly invalid gzip responses that are still accepted
+      // by common browsers.
+      // Always using Z_SYNC_FLUSH is what cURL does.
+      var zlibOptions = {
+        flush: zlib.Z_SYNC_FLUSH
+      , finishFlush: zlib.Z_SYNC_FLUSH
+      }
+
       if (contentEncoding === 'gzip') {
-        responseContent = zlib.createGunzip()
+        responseContent = zlib.createGunzip(zlibOptions)
         response.pipe(responseContent)
       } else if (contentEncoding === 'deflate') {
-        responseContent = zlib.createInflate()
+        responseContent = zlib.createInflate(zlibOptions)
         response.pipe(responseContent)
       } else {
         // Since previous versions didn't check for Content-Encoding header,
@@ -960,12 +1080,14 @@ Request.prototype.onRequestResponse = function (response) {
     responseContent.on('data', function (chunk) {
       if (self.timing && !self.responseStarted) {
         self.responseStartTime = (new Date()).getTime()
+
+        // NOTE: responseStartTime is deprecated in favor of .timings
         response.responseStartTime = self.responseStartTime
       }
       self._destdata = true
       self.emit('data', chunk)
     })
-    responseContent.on('end', function (chunk) {
+    responseContent.once('end', function (chunk) {
       self.emit('end', chunk)
     })
     responseContent.on('error', function (error) {
@@ -993,14 +1115,16 @@ Request.prototype.onRequestResponse = function (response) {
 Request.prototype.readResponseBody = function (response) {
   var self = this
   debug('reading response\'s body')
-  var buffer = bl()
+  var buffers = []
+    , bufferLength = 0
     , strings = []
 
   self.on('data', function (chunk) {
-    if (Buffer.isBuffer(chunk)) {
-      buffer.append(chunk)
-    } else {
+    if (!Buffer.isBuffer(chunk)) {
       strings.push(chunk)
+    } else if (chunk.length) {
+      bufferLength += chunk.length
+      buffers.push(chunk)
     }
   })
   self.on('end', function () {
@@ -1009,22 +1133,21 @@ Request.prototype.readResponseBody = function (response) {
       debug('aborted', self.uri.href)
       // `buffer` is defined in the parent scope and used in a closure it exists for the life of the request.
       // This can lead to leaky behavior if the user retains a reference to the request object.
-      buffer.destroy()
+      buffers = []
+      bufferLength = 0
       return
     }
 
-    if (buffer.length) {
-      debug('has body', self.uri.href, buffer.length)
-      if (self.encoding === null) {
-        // response.body = buffer
-        // can't move to this until https://github.com/rvagg/bl/issues/13
-        response.body = buffer.slice()
-      } else {
-        response.body = buffer.toString(self.encoding)
+    if (bufferLength) {
+      debug('has body', self.uri.href, bufferLength)
+      response.body = Buffer.concat(buffers, bufferLength)
+      if (self.encoding !== null) {
+        response.body = response.body.toString(self.encoding)
       }
       // `buffer` is defined in the parent scope and used in a closure it exists for the life of the Request.
       // This can lead to leaky behavior if the user retains a reference to the request object.
-      buffer.destroy()
+      buffers = []
+      bufferLength = 0
     } else if (strings.length) {
       // The UTF8 BOM [0xEF,0xBB,0xBF] is converted to [0xFE,0xFF] in the JS UTC16/UCS2 representation.
       // Strip this value out when the encoding is set to 'utf8', as upstream consumers won't expect it and it breaks JSON.parse().
@@ -1043,7 +1166,7 @@ Request.prototype.readResponseBody = function (response) {
     }
     debug('emitting complete', self.uri.href)
     if (typeof response.body === 'undefined' && !self._json) {
-      response.body = self.encoding === null ? new Buffer(0) : ''
+      response.body = self.encoding === null ? Buffer.alloc(0) : ''
     }
     self.emit('complete', response, response.body)
   })
@@ -1259,10 +1382,14 @@ Request.prototype.aws = function (opts, now) {
     }
     var signRes = aws4.sign(options, {
       accessKeyId: opts.key,
-      secretAccessKey: opts.secret
+      secretAccessKey: opts.secret,
+      sessionToken: opts.session
     })
     self.setHeader('authorization', signRes.headers.Authorization)
     self.setHeader('x-amz-date', signRes.headers['X-Amz-Date'])
+    if (signRes.headers['X-Amz-Security-Token']) {
+      self.setHeader('x-amz-security-token', signRes.headers['X-Amz-Security-Token'])
+    }
   }
   else {
     // default: use aws-sign2
