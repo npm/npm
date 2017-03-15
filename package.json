@@ -114,6 +114,7 @@
   },
   "bundleDependencies": [
     "@npmcorp/move",
+    "@npmcorp/copy",
     "abbrev",
     "ansi-regex",
     "ansicolors",
@@ -184,6 +185,7 @@
     "request",
     "retry",
     "rimraf",
+    "run-queue",
     "semver",
     "sha",
     "slide",

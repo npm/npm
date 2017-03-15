@@ -2,22 +2,15 @@
   "name": "npm",
   "version": "4.4.2",
   "dependencies": {
+    "@npmcorp/copy": {
+      "version": "1.0.0",
+      "from": "@npmcorp/copy@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/@npmcorp/copy/-/copy-1.0.0.tgz"
+    },
     "@npmcorp/move": {
       "version": "1.0.0",
       "from": "@npmcorp/move@>=1.0.0 <1.1.0",
-      "resolved": "https://registry.npmjs.org/@npmcorp/move/-/move-1.0.0.tgz",
-      "dependencies": {
-        "@npmcorp/copy": {
-          "version": "1.0.0",
-          "from": "@npmcorp/copy@>=1.0.0 <2.0.0",
-          "resolved": "https://registry.npmjs.org/@npmcorp/copy/-/copy-1.0.0.tgz"
-        },
-        "run-queue": {
-          "version": "1.0.3",
-          "from": "run-queue@>=1.0.3 <2.0.0",
-          "resolved": "https://registry.npmjs.org/run-queue/-/run-queue-1.0.3.tgz"
-        }
-      }
+      "resolved": "https://registry.npmjs.org/@npmcorp/move/-/move-1.0.0.tgz"
     },
     "abbrev": {
       "version": "1.1.0",
@@ -2100,6 +2093,11 @@
       "version": "2.6.1",
       "from": "rimraf@latest",
       "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.6.1.tgz"
+    },
+    "run-queue": {
+      "version": "1.0.3",
+      "from": "run-queue@>=1.0.3 <2.0.0",
+      "resolved": "https://registry.npmjs.org/run-queue/-/run-queue-1.0.3.tgz"
     },
     "semver": {
       "version": "5.3.0",
