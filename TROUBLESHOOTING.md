@@ -26,6 +26,7 @@ For more details of the content and formatting of these entries, refer to exampl
 * [Cannot find module](#cannot-find-module)
 * [Shasum Check Fails](#shasum-check-fails)
 * [No Git](#no-git)
+* [Cannot read property](#cannot-read-property)
 
 ## Upgrading npm
 
@@ -190,3 +191,23 @@ ENOGIT
 ### Related Issues
 
 * [#11095](https://github.com/npm/npm/issues/11095)
+
+## Cannot Read property
+If your install fails and it says something like `Cannot read property 'path' of null`, then it is most likely a network issue in disguise.
+
+### Steps to Fix
+
+0. Follow the steps in [Proxies and Network](#proxy-and-networking-issues) steps.
+
+### Examples
+
+`27 verbose stack TypeError: Cannot read property 'path' of null`
+
+`33 error Cannot read property 'path' of null`
+
+`npm ERR! Cannot read property 'path' of null`
+
+## Related Issues
+
+* [#16023](https://github.com/npm/npm/issues/16023)
+* [#15972](https://github.com/npm/npm/issues/15972)
