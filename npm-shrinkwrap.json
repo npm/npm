@@ -1590,7 +1590,7 @@
         "are-we-there-yet": {
           "version": "1.1.2",
           "from": "are-we-there-yet@>=1.1.2 <1.2.0",
-          "resolved": "http://registry.npmjs.org/are-we-there-yet/-/are-we-there-yet-1.1.2.tgz",
+          "resolved": "https://registry.npmjs.org/are-we-there-yet/-/are-we-there-yet-1.1.2.tgz",
           "dependencies": {
             "delegates": {
               "version": "1.0.0",
