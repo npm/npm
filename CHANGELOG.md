@@ -1,3 +1,30 @@
+### v4.4.4 (2017-03-10)
+
+😩😤😅 Okay!  We have another `next`
+release for ya today.  So, yes!  With v4.4.3 we fixed the bug that made
+bundled scoped modules uninstallable.  But somehow I overlooked the fact
+that we: A) were using these and B) that made upgrading to v4.4.3 impossible. 😭
+
+So I've renamed those two scoped modules to no longer use scopes and we now
+have a shiny new test to ensure that scoped modules don't creep into our
+transitive deps and make it impossible to upgrade to `npm`.
+
+(None of our woes applies to most of you all because most of you all don't
+use bundled dependencies. `npm` does because we want the published artifact to be
+installable without having to already have `npm`.)
+
+* [`2a7409fcb`](https://github.com/npm/npm/commit/2a7409fcba6a8fab716c80f56987b255983e048e)
+  [#16066](https://github.com/npm/npm/pull/16066)
+  Ensure we aren't using any scoped modules
+  Because `npm`s prior 4.4.3 can't install dependencies that have bundled scoped
+  modules.  This didn't show up sooner because they ALSO had a bug that caused
+  bundled scoped modules to not be included in the bundle.
+  ([@iarna](https://github.com/iarna))
+* [`eb4c70796`](https://github.com/npm/npm/commit/eb4c70796c38f24ee9357f5d4a0116db582cc7a9)
+  [#16066](https://github.com/npm/npm/pull/16066)
+  Switch to move-concurrently to remove scoped dependency
+  ([@iarna](https://github.com/iarna))
+
 ### v4.4.3 (2017-03-09)
 
 This is a small patch release, mostly because the published tarball for
