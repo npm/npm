@@ -1,3 +1,57 @@
+### v4.4.3 (2016-03-09)
+
+This is a small patch release, mostly because the published tarball for
+v4.4.2 was missing a couple of modules, due to a bug involving scoped
+modules, bundled dependencies and legacy tree layouts.
+
+There are a couple of other things here that happened to be ready to go.  So
+without further ado…
+
+#### BUG FIXES
+
+* [`3d80f8f70`](https://github.com/npm/npm/commit/3d80f8f70679ad2b8ce7227d20e8dbce257a47b9)
+  [npm/fs-vacuum#6](https://github.com/npm/fs-vacuum/pull/6)
+  `fs-vacuum@1.2.1`: Make sure we never, ever remove home directories. Previously if your
+  home directory was entirely empty then we might `rmdir` it.
+  ([@helio-frota](https://github.com/helio-frota))
+* [`1af85ca9f`](https://github.com/npm/npm/commit/1af85ca9f4d625f948e85961372de7df3f3774e2)
+  [#16040](https://github.com/npm/npm/pull/16040)
+  Fix bug where bundled transitive dependencies that happened to be
+  installed under bundled scoped dependencies wouldn't be included in the
+  tarball when building a package.
+  ([@iarna](https://github.com/iarna))
+* [`13c7fdc2e`](https://github.com/npm/npm/commit/13c7fdc2e87456a87b1c9385a3daeae228ed7c95)
+  [#16040](https://github.com/npm/npm/pull/16040)
+  Fix a bug where bundled scoped dependencies couldn't be extracted.
+  ([@iarna](https://github.com/iarna))
+* [`d6cde98c2`](https://github.com/npm/npm/commit/d6cde98c2513fe160eab41e31c3198dfde993207)
+  [#16040](https://github.com/npm/npm/pull/16040)
+  Stop printing `ENOENT` errors more than once.
+  ([@iarna](https://github.com/iarna))
+* [`722fbf0f6`](https://github.com/npm/npm/commit/722fbf0f6cf4413cdc24b610bbd60a7dbaf2adfe)
+  [#16040](https://github.com/npm/npm/pull/16040)
+  Rewrite the `extract` action for greater clarity.
+  Specifically, this involves moving things around structurally to do the same
+  thing [`d0c6d194`](https://github.com/npm/npm/commit/d0c6d194) did, but in a more comprehensive manner.
+  This also fixes a long standing bug where errors from the move step would be
+  eaten during this phase and as a result we would get mysterious crashes in
+  the finalize phase when finalize tried to act on them.
+  ([@iarna](https://github.com/iarna))
+* [`6754dabb6`](https://github.com/npm/npm/commit/6754dabb6bd3301504efb3b62f36d3fe70958c19)
+  [#16040](https://github.com/npm/npm/pull/16040)
+  Flatten out `@npmcorp/move`'s deps for backwards compatibility reasons. Versions prior to this
+  one will fail to install any package that bundles a scoped dependency. This was responsible
+  for `ENOENT` errors during the `finalize` phase.
+  ([@iarna](https://github.com/iarna))
+
+#### DOC UPDATES
+
+* [`fba51c582`](https://github.com/npm/npm/commit/fba51c582d1d08dd4aa6eb27f9044dddba91bb18)
+  [#15960](https://github.com/npm/npm/pull/15960)
+  Update troubleshooting and contribution guide links.
+  ([@watilde](https://github.com/watilde))
+
+
 ### v4.4.2 (2016-03-09):
 
 This week, the focus on the release was mainly going through [all of npm's deps
