@@ -1,4 +1,4 @@
-### v4.4.3 (2016-03-09)
+### v4.4.3 (2017-03-09)
 
 This is a small patch release, mostly because the published tarball for
 v4.4.2 was missing a couple of modules, due to a bug involving scoped
@@ -52,7 +52,7 @@ without further ado…
   ([@watilde](https://github.com/watilde))
 
 
-### v4.4.2 (2016-03-09):
+### v4.4.2 (2017-03-09):
 
 This week, the focus on the release was mainly going through [all of npm's deps
 that we manage
