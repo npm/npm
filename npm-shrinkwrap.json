@@ -1,6 +1,6 @@
 {
   "name": "npm",
-  "version": "4.4.3",
+  "version": "4.4.4",
   "dependencies": {
     "abbrev": {
       "version": "1.1.0",
