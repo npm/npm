@@ -1,6 +1,6 @@
 {
   "name": "npm",
-  "version": "4.4.2",
+  "version": "4.4.3",
   "dependencies": {
     "@npmcorp/copy": {
       "version": "1.0.0",
