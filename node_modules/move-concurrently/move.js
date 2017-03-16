@@ -4,7 +4,7 @@ module.exports = move
 var nodeFs = require('fs')
 var rimraf = require('rimraf')
 var validate = require('aproba')
-var copy = require('@npmcorp/copy')
+var copy = require('copy-concurrently')
 var RunQueue = require('run-queue')
 var extend = Object.assign || require('util')._extend
 

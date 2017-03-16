@@ -30,7 +30,6 @@
   "main": "./lib/npm.js",
   "bin": "./bin/npm-cli.js",
   "dependencies": {
-    "@npmcorp/move": "~1.0.0",
     "JSONStream": "~1.3.1",
     "abbrev": "~1.1.0",
     "ansi-regex": "~2.1.1",
@@ -69,6 +68,7 @@
     "lodash.without": "~4.4.0",
     "mississippi": "~1.3.0",
     "mkdirp": "~0.5.1",
+    "move-concurrently": "~1.0.1",
     "node-gyp": "~3.5.0",
     "nopt": "~4.0.1",
     "normalize-git-url": "~3.0.2",
@@ -113,8 +113,6 @@
     "write-file-atomic": "~1.3.1"
   },
   "bundleDependencies": [
-    "@npmcorp/move",
-    "@npmcorp/copy",
     "abbrev",
     "ansi-regex",
     "ansicolors",
@@ -160,6 +158,8 @@
     "lodash.uniq",
     "lodash.without",
     "mkdirp",
+    "mississippi",
+    "move-concurrently",
     "node-gyp",
     "nopt",
     "normalize-git-url",
@@ -185,7 +185,6 @@
     "request",
     "retry",
     "rimraf",
-    "run-queue",
     "semver",
     "sha",
     "slide",
@@ -199,13 +198,12 @@
     "unique-filename",
     "unpipe",
     "update-notifier",
+    "uuid",
     "validate-npm-package-license",
     "validate-npm-package-name",
     "which",
     "wrappy",
-    "write-file-atomic",
-    "mississippi",
-    "uuid"
+    "write-file-atomic"
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",

@@ -2,16 +2,6 @@
   "name": "npm",
   "version": "4.4.3",
   "dependencies": {
-    "@npmcorp/copy": {
-      "version": "1.0.0",
-      "from": "@npmcorp/copy@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/@npmcorp/copy/-/copy-1.0.0.tgz"
-    },
-    "@npmcorp/move": {
-      "version": "1.0.0",
-      "from": "@npmcorp/move@>=1.0.0 <1.1.0",
-      "resolved": "https://registry.npmjs.org/@npmcorp/move/-/move-1.0.0.tgz"
-    },
     "abbrev": {
       "version": "1.1.0",
       "from": "abbrev@latest",
@@ -497,6 +487,23 @@
           "version": "0.0.8",
           "from": "minimist@0.0.8",
           "resolved": "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz"
+        }
+      }
+    },
+    "move-concurrently": {
+      "version": "1.0.1",
+      "from": "move-concurrently@latest",
+      "resolved": "https://registry.npmjs.org/move-concurrently/-/move-concurrently-1.0.1.tgz",
+      "dependencies": {
+        "copy-concurrently": {
+          "version": "1.0.3",
+          "from": "copy-concurrently@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/copy-concurrently/-/copy-concurrently-1.0.3.tgz"
+        },
+        "run-queue": {
+          "version": "1.0.3",
+          "from": "run-queue@>=1.0.3 <2.0.0",
+          "resolved": "https://registry.npmjs.org/run-queue/-/run-queue-1.0.3.tgz"
         }
       }
     },
@@ -2093,11 +2100,6 @@
       "version": "2.6.1",
       "from": "rimraf@latest",
       "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.6.1.tgz"
-    },
-    "run-queue": {
-      "version": "1.0.3",
-      "from": "run-queue@>=1.0.3 <2.0.0",
-      "resolved": "https://registry.npmjs.org/run-queue/-/run-queue-1.0.3.tgz"
     },
     "semver": {
       "version": "5.3.0",
