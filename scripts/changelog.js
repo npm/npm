@@ -75,7 +75,6 @@ function main () {
     if (/^---$/.test(line)) {
       print_commit(commit)
     } else if (m = line.match(/^([a-f0-9]{7,9}) ([a-f0-9]+) (?:[(]([^)]+)[)] )?(.*?) [(](.*?)[)]/)) {
-
       commit = {
         shortid: m[1],
         fullid: m[2],
