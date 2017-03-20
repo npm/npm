@@ -107,6 +107,8 @@ executing the scripts.  So, if your package.json has this:
 then you could run `npm start` to execute the `bar` script, which is
 exported into the `node_modules/.bin` directory on `npm install`.
 
+This is especially important for proper Windows support.
+
 ### package.json vars
 
 The package.json fields are tacked onto the `npm_package_` prefix. So,
