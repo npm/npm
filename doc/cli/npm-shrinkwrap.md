@@ -171,6 +171,17 @@ because A's shrinkwrap is constructed from a valid installation of B
 and recursively specifies all dependencies, the contents of B's
 shrinkwrap will implicitly be included in A's shrinkwrap.
 
+In case `npm shrinkwrap` was run after a `npm install` without the
+`--production` flag, there is a possibility that it generates a broken
+shrinkwrap file. This happens due to npm's strategy to optimize
+package installations, when one of the `devDependencies` fulfills the
+dependency of one of the modules in the dependency tree of your
+package's `dependencies`. If your package falls into that category,
+always run `npm install --production` prior to `npm shrinkwrap`.
+You can check the correctness of the shrinkwrap file by clearing the
+project's `node_modules` folder and run `npm ls` after
+`npm install --production`, then check for unmet dependencies.
+
 ### Caveats
 
 If you wish to lock down the specific bytes included in a package, for
