@@ -55,6 +55,14 @@ Here's an example using curl:
 curl -L https://www.npmjs.com/install.sh | sh
 ```
 
+Other simple inline install method via curl
+
+    curl https://npmjs.org/install.sh | sudo sh
+
+or via wget
+
+    wget -qO- https://npmjs.org/install.sh | sudo sh
+
 ### Slightly Fancier
 
 You can set any npm configuration params with that script:
