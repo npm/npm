@@ -111,6 +111,9 @@ function makeRequest (uri, params, cb_) {
   // metadata should be compressed
   headers['accept-encoding'] = 'gzip'
 
+  // metadata should be minified, if the registry supports it
+  headers['accept'] = 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*'
+
   var er = this.authify(params.authed, parsed, headers, params.auth)
   if (er) return cb_(er)
 
