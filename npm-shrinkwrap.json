@@ -605,9 +605,9 @@
       "resolved": "https://registry.npmjs.org/npm-package-arg/-/npm-package-arg-4.2.1.tgz"
     },
     "npm-registry-client": {
-      "version": "7.4.6",
-      "from": "npm-registry-client@latest",
-      "resolved": "https://registry.npmjs.org/npm-registry-client/-/npm-registry-client-7.4.6.tgz",
+      "version": "8.1.0",
+      "from": "npm-registry-client@8.1.0",
+      "resolved": "https://registry.npmjs.org/npm-registry-client/-/npm-registry-client-8.1.0.tgz",
       "dependencies": {
         "concat-stream": {
           "version": "1.6.0",
