@@ -220,9 +220,9 @@
       "resolved": "https://registry.npmjs.org/has-unicode/-/has-unicode-2.0.1.tgz"
     },
     "hosted-git-info": {
-      "version": "2.2.0",
-      "from": "hosted-git-info@latest",
-      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.2.0.tgz"
+      "version": "2.4.1",
+      "from": "hosted-git-info@2.4.1",
+      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.4.1.tgz"
     },
     "iferr": {
       "version": "0.1.5",
@@ -3263,7 +3263,7 @@
     },
     "tap": {
       "version": "10.3.0",
-      "from": "tap@>=10.3.0 <10.4.0",
+      "from": "https://registry.npmjs.org/tap/-/tap-10.3.0.tgz",
       "resolved": "https://registry.npmjs.org/tap/-/tap-10.3.0.tgz",
       "dev": true,
       "dependencies": {
@@ -3546,11 +3546,17 @@
                       "dev": true
                     },
                     "jsprim": {
-                      "version": "1.3.1",
-                      "from": "jsprim@>=1.2.2 <2.0.0",
-                      "resolved": "https://registry.npmjs.org/jsprim/-/jsprim-1.3.1.tgz",
+                      "version": "1.4.0",
+                      "from": "jsprim@^1.2.2",
+                      "resolved": "https://registry.npmjs.org/jsprim/-/jsprim-1.4.0.tgz",
                       "dev": true,
                       "dependencies": {
+                        "assert-plus": {
+                          "version": "1.0.0",
+                          "from": "assert-plus@1.0.0",
+                          "resolved": "https://registry.npmjs.org/assert-plus/-/assert-plus-1.0.0.tgz",
+                          "dev": true
+                        },
                         "extsprintf": {
                           "version": "1.0.2",
                           "from": "extsprintf@1.0.2",
@@ -3745,9 +3751,9 @@
                       "dev": true
                     },
                     "yallist": {
-                      "version": "2.0.0",
-                      "from": "yallist@>=2.0.0 <3.0.0",
-                      "resolved": "https://registry.npmjs.org/yallist/-/yallist-2.0.0.tgz",
+                      "version": "2.1.2",
+                      "from": "yallist@^2.0.0",
+                      "resolved": "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz",
                       "dev": true
                     }
                   }
@@ -4952,9 +4958,9 @@
           "dev": true
         },
         "source-map-support": {
-          "version": "0.4.11",
-          "from": "source-map-support@>=0.4.3 <0.5.0",
-          "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.11.tgz",
+          "version": "0.4.14",
+          "from": "source-map-support@^0.4.3",
+          "resolved": "https://registry.npmjs.org/source-map-support/-/source-map-support-0.4.14.tgz",
           "dev": true,
           "dependencies": {
             "source-map": {
@@ -4978,9 +4984,9 @@
           "dev": true,
           "dependencies": {
             "debug": {
-              "version": "2.6.1",
+              "version": "2.6.3",
               "from": "debug@^2.1.3",
-              "resolved": "https://registry.npmjs.org/debug/-/debug-2.6.1.tgz",
+              "resolved": "https://registry.npmjs.org/debug/-/debug-2.6.3.tgz",
               "dev": true,
               "dependencies": {
                 "ms": {

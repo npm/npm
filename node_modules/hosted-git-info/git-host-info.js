@@ -53,7 +53,7 @@ var gitHostDefaults = {
   'filetemplate': 'https://{domain}/{user}/{project}/raw/{committish}/{path}',
   'shortcuttemplate': '{type}:{user}/{project}{#committish}',
   'pathtemplate': '{user}/{project}{#committish}',
-  'pathmatch': /^[/]([^/]+)[/]([^/]+?)(?:[.]git)?$/
+  'pathmatch': /^[/]([^/]+)[/]([^/]+?)(?:[.]git|[/])?$/
 }
 
 Object.keys(gitHosts).forEach(function (name) {
@@ -63,6 +63,6 @@ Object.keys(gitHosts).forEach(function (name) {
   })
   gitHosts[name].protocols_re = RegExp('^(' +
     gitHosts[name].protocols.map(function (protocol) {
-      return protocol.replace(/([\\+*{}()\[\]$^|])/g, '\\$1')
+      return protocol.replace(/([\\+*{}()[\]$^|])/g, '\\$1')
     }).join('|') + '):$')
 })
