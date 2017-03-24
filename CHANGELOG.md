@@ -1,3 +1,70 @@
+### v4.5.0 (2017-03-24)
+
+Welcome a wrinkle on npm's registry API!
+
+Codename: Corgi
+
+![corgi-meme](https://cloud.githubusercontent.com/assets/757502/24126107/64c14268-0d89-11e7-871b-d457e6d0082b.jpg)
+
+This release has some bug fixes, but it's mostly about bringing support for
+MUCH smaller package metadata.  How much smaller?  Well, for npm itself it
+reduces 416K of gzip compressed JSON to 24K.
+
+As a user, all you have to do is update to get to use the new API.  If
+you're interested in the details we've [documented the
+changes](https://github.com/npm/registry/blob/master/docs/responses/package-metadata.md)
+in detail.
+
+#### CORGUMENTS
+
+Package metadata: now smaller. This means a smaller cache and less to download.
+
+* [`86dad0d74`](https://github.com/npm/npm/commit/86dad0d747f288eab467d49c9635644d3d44d6f0)
+  Add support for filtered package metadata.
+  ([@iarna](https://github.com/iarna))
+* [`41789cffa`](https://github.com/npm/npm/commit/41789cffac9845603f4bdf3f5b03f412144a0e9f)
+  `npm-registry-client@8.1.0`
+  ([@iarna](https://github.com/iarna))
+
+#### NO SHRINKWRAP, NO PROBLEM
+
+Previously we needed to extract every package's tarball to look for an
+`npm-shrinkwrap.json` before we could begin working through what its
+dependencies were.  This was one of the things stopping npm's network
+accesses from happening more concurrently.  The new filtered package
+metadata provides a new key, `_hasShrinkwrap`.  When that's set to `false`
+then we know we don't have to look for one.
+
+* [`4f5060eb3`](https://github.com/npm/npm/commit/4f5060eb31b9091013e1d6a34050973613a294a3)
+  [#15969](https://github.com/npm/npm/pull/15969)
+  Add support for skipping `npm-shrinkwrap.json` extraction when the
+  registry can affirm that one doesn't exist.
+  ([@iarna](https://github.com/iarna))
+
+#### INTERRUPTING SCRIPTS
+
+* [`878aceb25`](https://github.com/npm/npm/commit/878aceb25e6d6052dac15da74639ce274c8e62c5)
+  [#16129](https://github.com/npm/npm/pull/16129)
+  Better handle Ctrl-C while running scripts.  `npm` will now no longer exit
+  until the script it is running has exited.  If you press Ctrl-C a second
+  time it kill the script rather than just forwarding the Ctrl-C.
+  ([@jaridmargolin](https://github.com/jaridmargolin))
+
+#### DEPENDENCY UPDATES:
+
+* [`def75eebf`](https://github.com/npm/npm/commit/def75eebf1ad437bf4fd3f5e103cc2d963bd2a73)
+  `hosted-git-info@2.4.1`:
+  Preserve case of the user name part of shortcut specifiers, previously they were lowercased.
+  ([@iarna](https://github.com/iarna))
+* [`eb3789fd1`](https://github.com/npm/npm/commit/eb3789fd18cfb063de9e6f80c3049e314993d235)
+  `node-gyp@3.6.0`: Add support for VS2017 and Chakracore improvements.
+  ([@refack](https://github.com/refack))
+  ([@kunalspathak](https://github.com/kunalspathak))
+* [`245e25315`](https://github.com/npm/npm/commit/245e25315524b95c0a71c980223a27719392ba75)
+  `readable-stream@2.2.6` ([@mcollina](https://github.com/mcollina))
+* [`30357ebc5`](https://github.com/npm/npm/commit/30357ebc5691d7c9e9cdc6e0fe7dc6253220c9c2)
+  `which@1.2.14` ([@isaacs](https://github.com/isaacs))
+
 ### v4.4.4 (2017-03-10)
 
 😩😤😅 Okay!  We have another `next`
