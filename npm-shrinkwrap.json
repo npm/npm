@@ -508,9 +508,9 @@
       }
     },
     "node-gyp": {
-      "version": "3.5.0",
-      "from": "node-gyp@3.5.0",
-      "resolved": "https://registry.npmjs.org/node-gyp/-/node-gyp-3.5.0.tgz",
+      "version": "3.6.0",
+      "from": "node-gyp@3.6.0",
+      "resolved": "https://registry.npmjs.org/node-gyp/-/node-gyp-3.6.0.tgz",
       "dependencies": {
         "minimatch": {
           "version": "3.0.3",
