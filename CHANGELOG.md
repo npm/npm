@@ -65,7 +65,7 @@ then we know we don't have to look for one.
 * [`30357ebc5`](https://github.com/npm/npm/commit/30357ebc5691d7c9e9cdc6e0fe7dc6253220c9c2)
   `which@1.2.14` ([@isaacs](https://github.com/isaacs))
 
-### v4.4.4 (2017-03-10)
+### v4.4.4 (2017-03-16)
 
 😩😤😅 Okay!  We have another `next`
 release for ya today.  So, yes!  With v4.4.3 we fixed the bug that made
@@ -92,7 +92,7 @@ installable without having to already have `npm`.)
   Switch to move-concurrently to remove scoped dependency
   ([@iarna](https://github.com/iarna))
 
-### v4.4.3 (2017-03-09)
+### v4.4.3 (2017-03-15)
 
 This is a small patch release, mostly because the published tarball for
 v4.4.2 was missing a couple of modules, due to a bug involving scoped
