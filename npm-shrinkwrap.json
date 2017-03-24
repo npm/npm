@@ -5542,14 +5542,14 @@
       }
     },
     "which": {
-      "version": "1.2.12",
-      "from": "which@1.2.12",
-      "resolved": "https://registry.npmjs.org/which/-/which-1.2.12.tgz",
+      "version": "1.2.14",
+      "from": "which@1.2.14",
+      "resolved": "https://registry.npmjs.org/which/-/which-1.2.14.tgz",
       "dependencies": {
         "isexe": {
-          "version": "1.1.2",
-          "from": "isexe@>=1.1.1 <2.0.0",
-          "resolved": "https://registry.npmjs.org/isexe/-/isexe-1.1.2.tgz"
+          "version": "2.0.0",
+          "from": "isexe@^2.0.0",
+          "resolved": "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz"
         }
       }
     },
