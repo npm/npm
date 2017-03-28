@@ -1,3 +1,29 @@
+1.26.0 / 2017-01-14
+===================
+
+  * Add `application/coap-payload`
+  * Add `application/cose`
+  * Add `application/cose-key`
+  * Add `application/cose-key-set`
+  * Add `application/mud+json`
+  * Add `application/trig`
+  * Add `application/vnd.dataresource+json`
+  * Add `application/vnd.hc+json`
+  * Add `application/vnd.tableschema+json`
+  * Add `application/yang-patch+json`
+  * Add `application/yang-patch+xml`
+  * Add extension `.geojson` to `application/geo+json`
+
+1.25.0 / 2016-11-11
+===================
+
+  * Add `application/dicom+json`
+  * Add `application/dicom+xml`
+  * Add `application/vnd.openstreetmap.data+xml`
+  * Add `application/vnd.tri.onesource`
+  * Add `application/yang-data+json`
+  * Add `application/yang-data+xml`
+
 1.24.0 / 2016-09-18
 ===================
 

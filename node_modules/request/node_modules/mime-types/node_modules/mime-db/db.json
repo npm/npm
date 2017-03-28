@@ -186,10 +186,22 @@
     "source": "iana",
     "compressible": true
   },
+  "application/coap-payload": {
+    "source": "iana"
+  },
   "application/commonground": {
     "source": "iana"
   },
   "application/conference-info+xml": {
+    "source": "iana"
+  },
+  "application/cose": {
+    "source": "iana"
+  },
+  "application/cose-key": {
+    "source": "iana"
+  },
+  "application/cose-key-set": {
     "source": "iana"
   },
   "application/cpl+xml": {
@@ -242,6 +254,13 @@
     "source": "iana"
   },
   "application/dicom": {
+    "source": "iana"
+  },
+  "application/dicom+json": {
+    "source": "iana",
+    "compressible": true
+  },
+  "application/dicom+xml": {
     "source": "iana"
   },
   "application/dii": {
@@ -362,10 +381,11 @@
   },
   "application/geo+json": {
     "source": "iana",
-    "compressible": true
+    "compressible": true,
+    "extensions": ["geojson"]
   },
   "application/gml+xml": {
-    "source": "apache",
+    "source": "iana",
     "extensions": ["gml"]
   },
   "application/gpx+xml": {
@@ -697,6 +717,10 @@
     "source": "iana",
     "compressible": false,
     "extensions": ["doc","dot"]
+  },
+  "application/mud+json": {
+    "source": "iana",
+    "compressible": true
   },
   "application/mxf": {
     "source": "iana",
@@ -1166,6 +1190,9 @@
     "source": "iana",
     "extensions": ["tsd"]
   },
+  "application/trig": {
+    "source": "iana"
+  },
   "application/ttml+xml": {
     "source": "iana"
   },
@@ -1608,6 +1635,10 @@
   "application/vnd.data-vision.rdz": {
     "source": "iana",
     "extensions": ["rdz"]
+  },
+  "application/vnd.dataresource+json": {
+    "source": "iana",
+    "compressible": true
   },
   "application/vnd.debian.binary-package": {
     "source": "iana"
@@ -2141,6 +2172,10 @@
   "application/vnd.hbci": {
     "source": "iana",
     "extensions": ["hbci"]
+  },
+  "application/vnd.hc+json": {
+    "source": "iana",
+    "compressible": true
   },
   "application/vnd.hcl-bireports": {
     "source": "iana"
@@ -3206,6 +3241,9 @@
     "source": "apache",
     "extensions": ["oxt"]
   },
+  "application/vnd.openstreetmap.data+xml": {
+    "source": "iana"
+  },
   "application/vnd.openxmlformats-officedocument.custom-properties+xml": {
     "source": "iana"
   },
@@ -3931,6 +3969,10 @@
   "application/vnd.syncml.ds.notification": {
     "source": "iana"
   },
+  "application/vnd.tableschema+json": {
+    "source": "iana",
+    "compressible": true
+  },
   "application/vnd.tao.intent-module-archive": {
     "source": "iana",
     "extensions": ["tao"]
@@ -3948,6 +3990,9 @@
   "application/vnd.tmobile-livetv": {
     "source": "iana",
     "extensions": ["tmo"]
+  },
+  "application/vnd.tri.onesource": {
+    "source": "iana"
   },
   "application/vnd.trid.tpt": {
     "source": "iana",
@@ -4871,6 +4916,20 @@
   "application/yang": {
     "source": "iana",
     "extensions": ["yang"]
+  },
+  "application/yang-data+json": {
+    "source": "iana",
+    "compressible": true
+  },
+  "application/yang-data+xml": {
+    "source": "iana"
+  },
+  "application/yang-patch+json": {
+    "source": "iana",
+    "compressible": true
+  },
+  "application/yang-patch+xml": {
+    "source": "iana"
   },
   "application/yin+xml": {
     "source": "iana",
