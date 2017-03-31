@@ -121,6 +121,14 @@ you want your scoped package to be publicly viewable (and installable) set
 `--access=public`. The only valid values for `access` are `public` and
 `restricted`. Unscoped packages _always_ have an access level of `public`.
 
+### allow-same-version
+
+* Default: false
+* Type: Boolean
+
+Prevents throwing an error when `npm version` is used to set the new version 
+to the same value as the current version.
+
 ### always-auth
 
 * Default: false
