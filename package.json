@@ -1,5 +1,5 @@
 {
-  "version": "3.10.8-1",
+  "version": "3.10.8-2",
   "name": "npm",
   "description": "a package manager for JavaScript",
   "keywords": [
@@ -14,12 +14,16 @@
   },
   "homepage": "https://docs.npmjs.com/",
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
+  "contributors": [{
+    "name": "Simon Ruetzler",
+    "email": "sruetzler@arigo-software.de"
+  }],
   "repository": {
     "type": "git",
-    "url": "https://github.com/npm/npm"
+    "url": "https://github.com/arigo-software/npm"
   },
   "bugs": {
-    "url": "https://github.com/npm/npm/issues"
+    "url": "https://github.com/arigo-software/npm/issues"
   },
   "directories": {
     "bin": "./bin",
