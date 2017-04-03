@@ -2,6 +2,8 @@ var fs = require('graceful-fs')
 var path = require('path')
 
 var mkdirp = require('mkdirp')
+var osenv = require('osenv')
+var rimraf = require('rimraf')
 var test = require('tap').test
 
 var common = require('../common-tap.js')
@@ -23,7 +25,7 @@ test('npm version <semver> with same version without --allow-same-version', func
     var version = require('../../lib/version')
     version(['0.0.1'], function (err) {
       t.ok(err)
-      t.ok(err.message.match(/Version not changed.*/))
+      t.like(err.message, /Version not changed/)
       t.end()
     })
   })
@@ -43,6 +45,16 @@ test('npm version <semver> with same version with --allow-same-version', functio
       function () { t.end() })
   })
 })
+test('cleanup', function (t) {
+  cleanup()
+  t.end()
+})
+
+function cleanup () {
+  // windows fix for locked files
+  process.chdir(osenv.tmpdir())
+  rimraf.sync(pkg)
+}
 
 function setup () {
   mkdirp.sync(pkg)
