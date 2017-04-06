@@ -3,7 +3,7 @@ npm-link-tip-account(1) -- Link a tipping account to send tips
 
 ## SYNOPSIS
 
-    npm link-bitcoin-account <type> <token> [secretToken ...]
+    npm link-tip-account <type> <token> [secretToken ...]
 
 ## DESCRIPTION
 
