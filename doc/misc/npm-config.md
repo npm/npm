@@ -679,6 +679,13 @@ standard output. For `npm search`, this will be tab-separated table format.
 The location to install global items.  If set on the command line, then
 it forces non-global commands to run in the specified folder.
 
+### primary-tip-account
+
+* Default: null
+* Type: String
+
+The default tipping account to use when sending using `npm tip`.
+
 ### production
 
 * Default: false
@@ -959,6 +966,21 @@ to the empty string: `""`.
 Because other tools may rely on the convention that npm version tags look like
 `v1.0.0`, _only use this property if it is absolutely necessary_. In
 particular, use care when overriding this setting for public packages.
+
+### tip-amount
+
+* Default: `0.001`
+* Type: Number
+
+The default amount to send when using `npm tip`.
+
+### tip-unit
+
+* Default `"BTC"`
+* Type: String
+
+The default unit when using `npm tip`. This is dependent upon the account type
+used to send tips.
 
 ### tmp
 
