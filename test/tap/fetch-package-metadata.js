@@ -45,7 +45,7 @@ test('fetch-package-metadata provides resolved metadata', function (t) {
     scope: null,
     name: 'test-package',
     rawSpec: '>=0.0.0',
-    spec: '>=0.0.0',
+    fetchSpec: '>=0.0.0',
     type: 'range'
   }
 

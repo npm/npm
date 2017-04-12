@@ -19,7 +19,7 @@ t.test('setup', function (t) {
 })
 
 function test (t, args) {
-  var child = spawn(node, [npm, 'cache', 'ls', '--cache=' + dir].concat(args))
+  var child = spawn(node, [npm, 'cache', 'ls', '--cache=' + dir].concat(args), {stdio: [0, 'pipe', 2]})
   var out = ''
   child.stdout.on('data', function (c) {
     out += c
