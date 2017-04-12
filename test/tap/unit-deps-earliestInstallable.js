@@ -1,6 +1,7 @@
 'use strict'
 var test = require('tap').test
 var requireInject = require('require-inject')
+var npa = require('npm-package-arg')
 
 // we're just mocking to avoid having to call `npm.load`
 var deps = requireInject('../../lib/install/deps.js', {
@@ -38,15 +39,7 @@ test('earliestInstallable should consider devDependencies', function (t) {
     package: {
       name: 'dep2',
       version: '2.0.0',
-      _from: {
-        raw: 'dep2@1.0.0',
-        scope: null,
-        escapedName: 'dep2',
-        name: 'dep2',
-        rawSpec: '1.0.0',
-        spec: '1.0.0',
-        type: 'version'
-      }
+      _requested: npa('dep2@2.0.0')
     },
     parent: dep1
   }
@@ -83,15 +76,7 @@ test('earliestInstallable should reuse shared prod/dev deps when they are identi
     package: {
       name: 'dep2',
       version: '1.0.0',
-      _from: {
-        raw: 'dep2@^1.0.0',
-        scope: null,
-        escapedName: 'dep2',
-        name: 'dep2',
-        rawSpec: '^1.0.0',
-        spec: '>=1.0.0 <2.0.0',
-        type: 'range'
-      }
+      _requested: npa('dep2@^1.0.0')
     }
   }
 
@@ -112,4 +97,3 @@ test('earliestInstallable should reuse shared prod/dev deps when they are identi
   t.isDeeply(earliest, pkg, 'should reuse identical shared dev/prod deps when installing both')
   t.end()
 })
-

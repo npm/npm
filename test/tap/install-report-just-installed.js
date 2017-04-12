@@ -50,7 +50,7 @@ test('setup', function (t) {
 })
 
 test('install-report', function (t) {
-  common.npm(['install', '--json', 'b-src'], {cwd: testdir}, function (err, code, stdout, stderr) {
+  common.npm(['install', '--json', './b-src'], {cwd: testdir}, function (err, code, stdout, stderr) {
     if (err) throw err
     t.is(code, 0, 'installed successfully')
     t.is(stderr, '', 'no warnings')

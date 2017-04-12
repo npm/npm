@@ -20,7 +20,7 @@ test('addLocal directory race on Windows', function (t) {
     name: 'test',
     version: '1.0.0',
     type: 'directory',
-    spec: pkg
+    fetchSpec: pkg
   }
   var fixture = new Tacks(
     Dir({
@@ -71,7 +71,7 @@ test('addLocal temporary cache file race', function (t) {
     name: 'test',
     version: '1.0.0',
     type: 'directory',
-    spec: pkg
+    fetchSpec: pkg
   }
   var fixture = new Tacks(
     Dir({

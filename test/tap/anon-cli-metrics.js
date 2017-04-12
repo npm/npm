@@ -91,7 +91,7 @@ test('setup', function (t) {
 })
 
 test('record success', function (t) {
-  common.npm(['install', '--no-send-metrics', 'success'], conf, function (err, code, stdout, stderr) {
+  common.npm(['install', '--no-send-metrics', 'file:success'], conf, function (err, code, stdout, stderr) {
     if (err) throw err
     t.is(code, 0, 'always succeeding install succeeded')
     t.comment(stdout.trim())
@@ -108,7 +108,7 @@ test('record failure', function (t) {
     successfulInstalls: 1,
     failedInstalls: 0
   }).reply(500, {ok: false})
-  common.npm(['install', '--send-metrics', 'failure'], conf, function (err, code, stdout, stderr) {
+  common.npm(['install', '--send-metrics', 'file:failure'], conf, function (err, code, stdout, stderr) {
     if (err) throw err
     t.notEqual(code, 0, 'always failing install fails')
     t.comment(stdout.trim())
@@ -127,7 +127,7 @@ test('report', function (t) {
     successfulInstalls: 1,
     failedInstalls: 1
   }).reply(200, {ok: true})
-  common.npm(['install', '--send-metrics', 'slow'], conf, function (err, code, stdout, stderr) {
+  common.npm(['install', '--send-metrics', 'file:slow'], conf, function (err, code, stdout, stderr) {
     if (err) throw err
     t.is(code, 0, 'command ran ok')
     t.comment(stdout.trim())
