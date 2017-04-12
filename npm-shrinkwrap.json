@@ -567,10 +567,6 @@
         }
       }
     },
-    "normalize-git-url": {
-      "version": "3.0.2",
-      "from": "normalize-git-url@>=3.0.2 <3.1.0"
-    },
     "normalize-package-data": {
       "version": "2.3.8",
       "from": "normalize-package-data@2.3.8",
