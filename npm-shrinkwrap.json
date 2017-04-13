@@ -220,9 +220,9 @@
       "resolved": "https://registry.npmjs.org/has-unicode/-/has-unicode-2.0.1.tgz"
     },
     "hosted-git-info": {
-      "version": "2.4.1",
-      "from": "hosted-git-info@2.4.1",
-      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.4.1.tgz"
+      "version": "2.4.2",
+      "from": "hosted-git-info@2.4.2",
+      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.4.2.tgz"
     },
     "iferr": {
       "version": "0.1.5",
