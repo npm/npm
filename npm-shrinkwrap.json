@@ -32,11 +32,6 @@
       "from": "archy@>=1.0.0 <1.1.0",
       "resolved": "https://registry.npmjs.org/archy/-/archy-1.0.0.tgz"
     },
-    "asap": {
-      "version": "2.0.5",
-      "from": "asap@2.0.5",
-      "resolved": "https://registry.npmjs.org/asap/-/asap-2.0.5.tgz"
-    },
     "bluebird": {
       "version": "3.5.0",
       "from": "bluebird@latest",
@@ -108,7 +103,15 @@
     },
     "dezalgo": {
       "version": "1.0.3",
-      "from": "dezalgo@>=1.0.3 <1.1.0"
+      "from": "dezalgo@1.0.3",
+      "resolved": "https://registry.npmjs.org/dezalgo/-/dezalgo-1.0.3.tgz",
+      "dependencies": {
+        "asap": {
+          "version": "2.0.5",
+          "from": "asap@>=2.0.0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/asap/-/asap-2.0.5.tgz"
+        }
+      }
     },
     "editor": {
       "version": "1.0.0",
