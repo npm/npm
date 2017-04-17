@@ -1,6 +1,6 @@
 {
-  "version": "4.6.1",
-  "name": "npm",
+  "version": "5.0.0-beta.69",
+  "name": "npm5",
   "description": "a package manager for JavaScript",
   "keywords": [
     "install",
