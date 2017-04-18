@@ -52,7 +52,7 @@ test('npm install', function (t) {
     '--loglevel', 'silent',
     '--production', 'false'
   ], EXEC_OPTS, function (err, code, stdout, stderr) {
-    t.ifErr(err, 'install finished successfully')
+    if (err) throw err
     t.notOk(code, 'exit ok')
     t.notOk(stderr, 'Should not get data on stderr: ' + stderr)
     t.end()
@@ -67,7 +67,7 @@ test('npm install test-package', function (t) {
     '--loglevel', 'silent',
     '--production', 'false'
   ], EXEC_OPTS, function (err, code, stdout, stderr) {
-    t.ifErr(err, 'install finished successfully')
+    if (err) throw err
     t.notOk(code, 'exit ok')
     t.notOk(stderr, 'Should not get data on stderr: ' + stderr)
     t.end()
@@ -86,7 +86,7 @@ test('npm prune', function (t) {
     '--loglevel', 'silent',
     '--production', 'false'
   ], EXEC_OPTS, function (err, code, stdout, stderr) {
-    t.ifErr(err, 'prune finished successfully')
+    if (err) throw err
     t.notOk(code, 'exit ok')
     t.notOk(stderr, 'Should not get data on stderr: ' + stderr)
     t.end()
@@ -103,11 +103,12 @@ test('npm prune', function (t) {
   common.npm([
     'prune',
     '--loglevel', 'silent',
+    '--parseable',
     '--production'
-  ], EXEC_OPTS, function (err, code, stderr) {
-    t.ifErr(err, 'prune finished successfully')
+  ], EXEC_OPTS, function (err, code, stdout) {
+    if (err) throw err
     t.notOk(code, 'exit ok')
-    t.equal(stderr, '- mkdirp@0.3.5 node_modules/mkdirp\n')
+    t.equal(stdout.trim(), 'remove\tmkdirp\t0.3.5\tnode_modules/mkdirp')
     t.end()
   })
 })

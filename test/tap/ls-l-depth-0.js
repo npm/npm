@@ -53,19 +53,18 @@ test('#6311: npm ll --depth=0 duplicates listing', function (t) {
     [
       '--loglevel', 'silent',
       '--registry', common.registry,
-      '--unicode=true',
+      '--parseable',
       'install', dep
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
-      t.ifError(err, 'npm install ran without error')
+      if (err) throw err
       t.notOk(code, 'npm install exited cleanly')
-      t.notOk(stderr, 'npm install ran silently')
+      t.is(stderr, '', 'npm install ran silently')
       t.equal(
         stdout.trim(),
-        resolve(__dirname, 'ls-l-depth-0') +
-          '\n└─┬ glock@1.8.7 ' +
-          '\n  └── underscore@1.5.1',
+        'add\tunderscore\t1.5.1\tnode_modules/underscore\t\t\n' +
+        'add\tglock\t1.8.7\tnode_modules/glock',
         'got expected install output'
       )
 
@@ -78,9 +77,9 @@ test('#6311: npm ll --depth=0 duplicates listing', function (t) {
         ],
         EXEC_OPTS,
         function (err, code, stdout, stderr) {
-          t.ifError(err, 'npm ll ran without error')
+          if (err) throw err
           t.is(code, 0, 'npm ll exited cleanly')
-          t.notOk(stderr, 'npm ll ran silently')
+          t.is(stderr, '', 'npm ll ran silently')
           t.equal(
             stdout,
             expected,

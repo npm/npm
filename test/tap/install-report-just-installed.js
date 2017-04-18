@@ -63,9 +63,8 @@ test('install-report', function (t) {
       t.skip(2)
       return t.end()
     }
-    var depNames = Object.keys(report.dependencies)
-    t.is(depNames.length, 1, 'one dependency reported as installed')
-    t.ok(report.dependencies.b, 'that dependency was `b`')
+    t.is(report.added.length, 1, 'one dependency reported as installed')
+    t.match(report.added, [{name: 'b'}], 'that dependency was `b`')
     t.end()
   })
 })

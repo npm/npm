@@ -130,15 +130,14 @@ test('shared-linked', function (t) {
     '--unicode', 'false'
   ]
 
-  common.npm(config.concat(['install', '--dry-run']), options, function (err, code, stdout, stderr) {
+  common.npm(config.concat(['install', '--dry-run', '--parseable']), options, function (err, code, stdout, stderr) {
     if (err) throw err
     t.is(code, 0)
     var got = stdout.trim().replace(/\s+\n/g, '\n')
     var expected =
-      'bug@10800.0.0 ' + bugdir + '\n' +
-      '`-- optimist@0.6.0\n' +
-      '  +-- minimist@0.0.5\n' +
-      '  `-- wordwrap@0.0.2'
+      'add\tminimist\t0.0.5\tnode_modules/minimist\n' +
+      'add\twordwrap\t0.0.2\tnode_modules/wordwrap\n' +
+      'add\toptimist\t0.6.0\tnode_modules/optimist'
     t.is(got, expected, 'just an optimist install please')
     server.done()
     t.end()
