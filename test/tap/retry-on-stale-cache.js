@@ -177,12 +177,13 @@ test('install does not hit server again', function (t) {
   // The mock server route definitions ensure we don't hit the server again
   common.npm(config.concat([
     '--cache-min', 'Infinity',
+    '--parseable',
     'install', 'good-night'
   ]), {stdio: [0, 'pipe', 2]}, function (err, code, stdout) {
     if (err) throw err
     t.is(code, 0, 'install succeeded')
 
-    t.match(stdout, /@1\.0\.0/, 'installed latest version')
+    t.match(stdout, /^update\tgood-night\t1.0.0\t/, 'installed latest version')
     server.done()
     t.end()
   })

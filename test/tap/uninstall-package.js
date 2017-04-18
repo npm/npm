@@ -50,14 +50,15 @@ test('returns a list of removed items', function (t) {
           [
             '--registry', common.registry,
             '--loglevel', 'error',
+            '--parseable',
             'uninstall', 'underscore', 'request', 'lala'
           ],
           EXEC_OPTS,
           function (err, code, stdout, stderr) {
             if (err) throw err
             t.notOk(code, 'uninstall ran without raising error code')
-            t.has(stdout, /- underscore@1.3.3/, 'underscore uninstalled')
-            t.has(stdout, /- request@0.9.5/, 'request uninstalled')
+            t.has(stdout, /^remove\tunderscore\t1.3.3\t/m, 'underscore uninstalled')
+            t.has(stdout, /^remove\trequest\t0.9.5\t/m, 'request uninstalled')
 
             s.close()
             t.end()
