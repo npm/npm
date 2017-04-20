@@ -362,9 +362,9 @@
       "dev": true
     },
     "marked-man": {
-      "version": "0.2.0",
-      "from": "marked-man@>=0.2.0 <0.3.0",
-      "resolved": "https://registry.npmjs.org/marked-man/-/marked-man-0.2.0.tgz",
+      "version": "0.2.1",
+      "from": "marked-man@0.2.1",
+      "resolved": "https://registry.npmjs.org/marked-man/-/marked-man-0.2.1.tgz",
       "dev": true
     },
     "mississippi": {
