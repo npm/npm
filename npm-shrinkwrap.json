@@ -220,9 +220,9 @@
       "resolved": "https://registry.npmjs.org/has-unicode/-/has-unicode-2.0.1.tgz"
     },
     "hosted-git-info": {
-      "version": "2.4.1",
-      "from": "hosted-git-info@2.4.1",
-      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.4.1.tgz"
+      "version": "2.4.2",
+      "from": "hosted-git-info@2.4.2",
+      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.4.2.tgz"
     },
     "iferr": {
       "version": "0.1.5",
@@ -3287,7 +3287,7 @@
         },
         "coveralls": {
           "version": "2.12.0",
-          "from": "coveralls@>=2.11.2 <3.0.0",
+          "from": "coveralls@https://registry.npmjs.org/coveralls/-/coveralls-2.12.0.tgz",
           "resolved": "https://registry.npmjs.org/coveralls/-/coveralls-2.12.0.tgz",
           "dev": true,
           "dependencies": {
@@ -3299,7 +3299,7 @@
               "dependencies": {
                 "argparse": {
                   "version": "1.0.9",
-                  "from": "argparse@^1.0.7",
+                  "from": "argparse@>=1.0.7 <2.0.0",
                   "resolved": "https://registry.npmjs.org/argparse/-/argparse-1.0.9.tgz",
                   "dev": true
                 },
@@ -3381,7 +3381,7 @@
                 },
                 "form-data": {
                   "version": "2.1.2",
-                  "from": "form-data@>=2.1.1 <2.2.0",
+                  "from": "form-data@https://registry.npmjs.org/form-data/-/form-data-2.1.2.tgz",
                   "resolved": "https://registry.npmjs.org/form-data/-/form-data-2.1.2.tgz",
                   "dev": true,
                   "dependencies": {
@@ -3547,7 +3547,7 @@
                     },
                     "jsprim": {
                       "version": "1.4.0",
-                      "from": "jsprim@^1.2.2",
+                      "from": "jsprim@>=1.2.2 <2.0.0",
                       "resolved": "https://registry.npmjs.org/jsprim/-/jsprim-1.4.0.tgz",
                       "dev": true,
                       "dependencies": {
@@ -3579,7 +3579,7 @@
                     },
                     "sshpk": {
                       "version": "1.11.0",
-                      "from": "sshpk@>=1.7.0 <2.0.0",
+                      "from": "sshpk@https://registry.npmjs.org/sshpk/-/sshpk-1.11.0.tgz",
                       "resolved": "https://registry.npmjs.org/sshpk/-/sshpk-1.11.0.tgz",
                       "dev": true,
                       "dependencies": {
@@ -3666,13 +3666,13 @@
                 },
                 "mime-types": {
                   "version": "2.1.14",
-                  "from": "mime-types@>=2.1.7 <2.2.0",
+                  "from": "mime-types@https://registry.npmjs.org/mime-types/-/mime-types-2.1.14.tgz",
                   "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.14.tgz",
                   "dev": true,
                   "dependencies": {
                     "mime-db": {
                       "version": "1.26.0",
-                      "from": "mime-db@>=1.26.0 <1.27.0",
+                      "from": "mime-db@https://registry.npmjs.org/mime-db/-/mime-db-1.26.0.tgz",
                       "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.26.0.tgz",
                       "dev": true
                     }
@@ -3782,7 +3782,7 @@
         },
         "js-yaml": {
           "version": "3.8.2",
-          "from": "js-yaml@>=3.3.1 <4.0.0",
+          "from": "js-yaml@https://registry.npmjs.org/js-yaml/-/js-yaml-3.8.2.tgz",
           "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.8.2.tgz",
           "dev": true,
           "dependencies": {
@@ -3794,7 +3794,7 @@
             },
             "esprima": {
               "version": "3.1.3",
-              "from": "esprima@^3.1.1",
+              "from": "esprima@>=3.1.1 <4.0.0",
               "resolved": "https://registry.npmjs.org/esprima/-/esprima-3.1.3.tgz",
               "dev": true
             }
@@ -3802,7 +3802,7 @@
         },
         "nyc": {
           "version": "10.1.2",
-          "from": "nyc@>=10.0.0 <11.0.0",
+          "from": "nyc@https://registry.npmjs.org/nyc/-/nyc-10.1.2.tgz",
           "resolved": "https://registry.npmjs.org/nyc/-/nyc-10.1.2.tgz",
           "dev": true,
           "dependencies": {
@@ -5033,7 +5033,7 @@
           "dependencies": {
             "events-to-array": {
               "version": "1.0.2",
-              "from": "events-to-array@^1.0.1",
+              "from": "events-to-array@https://registry.npmjs.org/events-to-array/-/events-to-array-1.0.2.tgz",
               "resolved": "https://registry.npmjs.org/events-to-array/-/events-to-array-1.0.2.tgz",
               "dev": true
             }
