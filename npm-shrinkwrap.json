@@ -1755,9 +1755,9 @@
       "resolved": "https://registry.npmjs.org/read-package-tree/-/read-package-tree-5.1.5.tgz"
     },
     "readable-stream": {
-      "version": "2.2.6",
-      "from": "readable-stream@2.2.6",
-      "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.2.6.tgz",
+      "version": "2.2.9",
+      "from": "readable-stream@2.2.9",
+      "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.2.9.tgz",
       "dependencies": {
         "buffer-shims": {
           "version": "1.0.0",
@@ -1779,8 +1779,9 @@
           "resolved": "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-1.0.7.tgz"
         },
         "string_decoder": {
-          "version": "0.10.31",
-          "from": "string_decoder@>=0.10.0 <0.11.0"
+          "version": "1.0.0",
+          "from": "string_decoder@>=1.0.0 <1.1.0",
+          "resolved": "https://registry.npmjs.org/string_decoder/-/string_decoder-1.0.0.tgz"
         },
         "util-deprecate": {
           "version": "1.0.2",
