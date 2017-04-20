@@ -58,7 +58,7 @@
     "inflight": "~1.0.6",
     "inherits": "~2.0.3",
     "ini": "~1.3.4",
-    "init-package-json": "~1.9.5",
+    "init-package-json": "~1.9.6",
     "lazy-property": "~1.0.0",
     "lockfile": "~1.0.3",
     "lodash._baseuniq": "~4.6.0",
