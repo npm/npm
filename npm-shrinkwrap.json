@@ -572,9 +572,9 @@
       "from": "normalize-git-url@>=3.0.2 <3.1.0"
     },
     "normalize-package-data": {
-      "version": "2.3.6",
-      "from": "normalize-package-data@latest",
-      "resolved": "https://registry.npmjs.org/normalize-package-data/-/normalize-package-data-2.3.6.tgz",
+      "version": "2.3.8",
+      "from": "normalize-package-data@2.3.8",
+      "resolved": "https://registry.npmjs.org/normalize-package-data/-/normalize-package-data-2.3.8.tgz",
       "dependencies": {
         "is-builtin-module": {
           "version": "1.0.0",
