@@ -250,9 +250,9 @@
       "resolved": "https://registry.npmjs.org/ini/-/ini-1.3.4.tgz"
     },
     "init-package-json": {
-      "version": "1.9.6",
-      "from": "init-package-json@1.9.6",
-      "resolved": "https://registry.npmjs.org/init-package-json/-/init-package-json-1.9.6.tgz",
+      "version": "1.10.0",
+      "from": "init-package-json@1.10.0",
+      "resolved": "https://registry.npmjs.org/init-package-json/-/init-package-json-1.10.0.tgz",
       "dependencies": {
         "promzard": {
           "version": "0.3.0",
