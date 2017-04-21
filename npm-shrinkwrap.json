@@ -1595,9 +1595,9 @@
       "resolved": "https://registry.npmjs.org/npmlog/-/npmlog-4.0.2.tgz",
       "dependencies": {
         "are-we-there-yet": {
-          "version": "1.1.2",
+          "version": "1.1.4",
           "from": "are-we-there-yet@>=1.1.2 <1.2.0",
-          "resolved": "https://registry.npmjs.org/are-we-there-yet/-/are-we-there-yet-1.1.2.tgz",
+          "resolved": "https://registry.npmjs.org/are-we-there-yet/-/are-we-there-yet-1.1.4.tgz",
           "dependencies": {
             "delegates": {
               "version": "1.0.0",
@@ -1612,14 +1612,14 @@
           "resolved": "https://registry.npmjs.org/console-control-strings/-/console-control-strings-1.1.0.tgz"
         },
         "gauge": {
-          "version": "2.7.2",
+          "version": "2.7.4",
           "from": "gauge@>=2.7.1 <2.8.0",
-          "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.7.2.tgz",
+          "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.7.4.tgz",
           "dependencies": {
             "object-assign": {
-              "version": "4.1.0",
-              "from": "object-assign@>=4.0.1 <5.0.0",
-              "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz"
+              "version": "4.1.1",
+              "from": "object-assign@>=4.1.0 <5.0.0",
+              "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz"
             },
             "signal-exit": {
               "version": "3.0.2",
@@ -1649,11 +1649,6 @@
                   }
                 }
               }
-            },
-            "supports-color": {
-              "version": "0.2.0",
-              "from": "supports-color@>=0.2.0 <0.3.0",
-              "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-0.2.0.tgz"
             },
             "wide-align": {
               "version": "1.1.0",
