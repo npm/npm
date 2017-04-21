@@ -197,7 +197,11 @@ If your install fails and it says something like `Cannot read property 'path' of
 
 ### Steps to Fix
 
-0. Follow the steps in [Proxies and Network](#proxy-and-networking-issues) steps.
+0. Open up your `npm-debug.log`
+0. Look near the bottom, above the error part
+0. Compare the contents there with the rest of this guide
+0. If you find something, then follow those instructions
+0. If you dont't find anything, open an [issue](https://github.com/npm/npm/issues/new).
 
 ### Examples
 
