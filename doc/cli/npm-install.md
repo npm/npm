@@ -174,7 +174,12 @@ after packing it up into a tarball (b).
 
     `<protocol>` is one of `git`, `git+ssh`, `git+http`, `git+https`,
     or `git+file`.
-    If no `<commit-ish>` is specified, then `master` is used.
+    If no `<commit-ish>` is specified, then `master` is used. A  semver range
+    may be used in place of a `<commit-ish>` to resolve against git tags. In
+    order to differentiate between a `<commit-ish>` and a range, the range must
+    be prefixed by `semver:`. For example:
+
+        git://github.com/user/project.git#semver:^1.0.0
 
     If the repository makes use of submodules, those submodules will
     be cloned as well.
