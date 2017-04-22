@@ -15,10 +15,6 @@ function niceName (n) {
   return n.replace(/^node-|[.-]js$/g, '').toLowerCase()
 }
 
-function conf (name) {
-  return config.get(name) || config.get(name.split('.').join('-'))
-}
-
 function readDeps (test, excluded) { return function (cb) {
   fs.readdir('node_modules', function (er, dir) {
     if (er) return cb()
@@ -39,7 +35,7 @@ function readDeps (test, excluded) { return function (cb) {
         if (p._requiredBy) {
           if (!p._requiredBy.some(function (req) { return req === '#USER' })) return next()
         }
-        deps[d] = conf('save.exact') ? p.version : conf('save.prefix') + p.version
+        deps[d] = config.get('save-exact') ? p.version : config.get('save-prefix') + p.version
         return next()
       })
     })
@@ -51,7 +47,7 @@ function readDeps (test, excluded) { return function (cb) {
 
 var name = package.name || basename
 var spec = npa(name)
-var scope = conf('scope')
+var scope = config.get('scope')
 if (scope) {
   if (scope.charAt(0) !== '@') scope = '@' + scope
   if (spec.scope) {
@@ -69,7 +65,10 @@ exports.name =  yes ? name : prompt('package name', niceName(name), function (da
   return er
 })
 
-var version = package.version || conf('init.version') || '1.0.0'
+var version = package.version ||
+              config.get('init.version') ||
+              config.get('init-version') ||
+              '1.0.0'
 exports.version = yes ?
   version :
   prompt('version', version, function (version) {
@@ -213,15 +212,23 @@ if (!package.keywords) {
 }
 
 if (!package.author) {
-  var a = conf('init.author.name')
-  exports.author = a ? {
-    "name": a,
-    "email": conf('init.author.email'),
-    "url": conf('init.author.url')
-  } : yes ? '' : prompt('author')
+  exports.author = config.get('init.author.name') ||
+                   config.get('init-author-name')
+  ? {
+      "name" : config.get('init.author.name') ||
+               config.get('init-author-name'),
+      "email" : config.get('init.author.email') ||
+                config.get('init-author-email'),
+      "url" : config.get('init.author.url') ||
+              config.get('init-author-url')
+    }
+  : yes ? '' : prompt('author')
 }
 
-var license = package.license || conf('init.license') || 'ISC'
+var license = package.license ||
+              config.get('init.license') ||
+              config.get('init-license') ||
+              'ISC'
 exports.license = yes ? license : prompt('license', license, function (data) {
   var its = validateLicense(data)
   if (its.validForNewPackages) return data
