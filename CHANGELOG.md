@@ -10,7 +10,6 @@ A little release to tide you over while we hammer out the last bits for npm@5.
 
   The default package name is now a valid package name. For example: If your package directory
   has mixed case, the default package name will be all lower case.
-  ([@iarna](https://github.com/iarna))
 * [`f08c66323`](https://github.com/npm/npm/commit/f08c663231099f7036eb82b92770806a3a79cdf1)
   [#16213](https://github.com/npm/npm/pull/16213)
   Add `--allow-same-version` option to `npm version` so that you can use `npm version` to run
@@ -36,7 +35,6 @@ A little release to tide you over while we hammer out the last bits for npm@5.
   Shorten the ELIFECYCLE error message. The shorter error message should make it much
   easier to discern the actual cause of the error.
   ([@j-f1](https://github.com/j-f1))
-  ([@iarna](https://github.com/iarna))
 * [`a87a4a835`](https://github.com/npm/npm/commit/a87a4a8359693518ee41dfeb13c5a8929136772a)
   `npmlog@4.0.2`:
   Fix flashing of the progress bar when your terminal is very narrow.
