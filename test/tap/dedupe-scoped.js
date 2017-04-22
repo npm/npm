@@ -15,7 +15,7 @@ var body = [
   'move\t@scope/shared\t2.1.6\tnode_modules/@scope/shared\t\tnode_modules/first/node_modules/@scope/shared',
   'move\tfirstUnique\t0.6.0\tnode_modules/firstUnique\t\tnode_modules/first/node_modules/firstUnique',
   'remove\t@scope/shared\t2.1.6\tnode_modules/second/node_modules/@scope/shared',
-  'move\tsecondUnique\t1.2.0\tnode_modules/secondUnique\t\tnode_modules/second/node_modules/secondUnique',
+  'move\tsecondUnique\t1.2.0\tnode_modules/secondUnique\t\tnode_modules/second/node_modules/secondUnique'
 ]
 
 var deduper = {
