@@ -66,7 +66,10 @@ function _writeFile (filename, data, options, callback) {
   function writeFileAsync (file, data, mode, encoding, cb) {
     fs.open(file, 'w', options.mode, function (err, fd) {
       if (err) return cb(err)
-      fs.write(fd, data, encoding, function (err) {
+      var write = Buffer.isBuffer(data)
+        ? function (_cb) { fs.write(fd, data, 0, data.length, _cb) }
+        : function (_cb) { fs.write(fd, data, encoding, _cb) }
+      write(function (err) {
         if (err) return cb(err)
         fs.fsync(fd, function (err) {
           if (err) return cb(err)
@@ -105,7 +108,11 @@ function writeFileSync (filename, data, options) {
     }
 
     var fd = fs.openSync(tmpfile, 'w', options.mode)
-    fs.writeSync(fd, data, 0, options.encoding || 'utf8')
+    if (Buffer.isBuffer(data)) {
+      fs.writeSync(fd, data, 0, data.length)
+    } else {
+      fs.writeSync(fd, data, options.encoding || 'utf8')
+    }
     fs.fsyncSync(fd)
     fs.closeSync(fd)
     if (options.chown) fs.chownSync(tmpfile, options.chown.uid, options.chown.gid)
