@@ -1,4 +1,4 @@
-## v4.6.0 (2017-04-21)
+## v4.6.1 (2017-04-21)
 
 A little release to tide you over while we hammer out the last bits for npm@5.
 
