@@ -23,7 +23,9 @@ test('earliestInstallable should consider devDependencies', function (t) {
     package: {
       name: 'dep1',
       dependencies: { dep2: '2.0.0' }
-    }
+    },
+    path: '/dep1',
+    realpath: '/dep1'
   }
 
   // a library required by the base package
@@ -31,7 +33,9 @@ test('earliestInstallable should consider devDependencies', function (t) {
     package: {
       name: 'dep2',
       version: '1.0.0'
-    }
+    },
+    path: '/dep2',
+    realpath: '/dep2'
   }
 
   // an incompatible verson of dep2. required by dep1
@@ -41,17 +45,21 @@ test('earliestInstallable should consider devDependencies', function (t) {
       version: '2.0.0',
       _requested: npa('dep2@2.0.0')
     },
-    parent: dep1
+    parent: dep1,
+    path: '/dep1/node_modules/dep2a',
+    realpath: '/dep1/node_modules/dep2a'
   }
 
   var pkg = {
     isTop: true,
-    children: [dep1],
+    children: [dep1, dep2],
     package: {
       name: 'pkg',
       dependencies: { dep1: '1.0.0' },
       devDependencies: { dep2: '1.0.0' }
-    }
+    },
+    path: '/',
+    realpath: '/'
   }
 
   dep1.parent = pkg
@@ -69,7 +77,9 @@ test('earliestInstallable should reuse shared prod/dev deps when they are identi
     package: {
       name: 'dep1',
       dependencies: { dep2: '1.0.0' }
-    }
+    },
+    path: '/dep1',
+    realpath: '/dep1'
   }
 
   var dep2 = {
@@ -77,7 +87,9 @@ test('earliestInstallable should reuse shared prod/dev deps when they are identi
       name: 'dep2',
       version: '1.0.0',
       _requested: npa('dep2@^1.0.0')
-    }
+    },
+    path: '/dep2',
+    realpath: '/dep2'
   }
 
   var pkg = {
@@ -87,7 +99,9 @@ test('earliestInstallable should reuse shared prod/dev deps when they are identi
       name: 'pkg',
       dependencies: { dep1: '1.0.0' },
       devDependencies: { dep2: '^1.0.0' }
-    }
+    },
+    path: '/',
+    realpath: '/'
   }
 
   dep1.parent = pkg
