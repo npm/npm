@@ -76,7 +76,7 @@
     "npm-cache-filename": "~1.0.2",
     "npm-install-checks": "~3.0.0",
     "npm-package-arg": "~4.2.1",
-    "npm-registry-client": "~8.1.1",
+    "npm-registry-client": "~8.3.0",
     "npm-user-validate": "~0.1.5",
     "npmlog": "~4.0.2",
     "once": "~1.4.0",
