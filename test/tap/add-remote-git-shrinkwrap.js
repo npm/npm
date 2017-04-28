@@ -66,12 +66,6 @@ test('shrinkwrap gets correct _from and _resolved (#7121)', function (t) {
       t.equal(stderr.trim(), '', 'no error output on successful shrinkwrap')
 
       var shrinkwrap = require(resolve(pkg, 'npm-shrinkwrap.json'))
-      t.equal(
-        shrinkwrap.dependencies.child.from,
-        'git://localhost:1234/child.git#master',
-        'npm shrinkwrapped from correctly'
-      )
-
       git.whichAndExec(
         ['rev-list', '-n1', 'master'],
         { cwd: repo, env: process.env },

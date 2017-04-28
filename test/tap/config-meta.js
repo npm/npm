@@ -18,6 +18,7 @@ var DOC = {}
 var exceptions = [
   path.resolve(lib, 'adduser.js'),
   path.resolve(lib, 'config.js'),
+  path.resolve(lib, 'config', 'pacote.js'),
   path.resolve(lib, 'publish.js'),
   path.resolve(lib, 'utils', 'lifecycle.js'),
   path.resolve(lib, 'utils', 'map-to-registry.js'),

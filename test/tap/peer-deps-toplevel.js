@@ -35,12 +35,10 @@ var expected = {
   dependencies: {
     'npm-test-peer-deps': {
       version: '0.0.0',
-      from: 'npm-test-peer-deps@*',
       resolved: common.registry + '/npm-test-peer-deps/-/npm-test-peer-deps-0.0.0.tgz',
       dependencies: {
         underscore: {
           version: '1.3.1',
-          from: 'underscore@1.3.1',
           resolved: common.registry + '/underscore/-/underscore-1.3.1.tgz'
         }
       }
@@ -133,4 +131,3 @@ test('cleanup', function (t) {
   cleanup()
   t.done()
 })
-

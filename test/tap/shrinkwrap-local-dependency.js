@@ -17,12 +17,10 @@ var shrinkwrap = {
   dependencies: {
     mod2: {
       version: '1.0.0',
-      from: path.join('mods', 'mod2'),
       resolved: 'file:' + path.join('mods', 'mod2'),
       dependencies: {
         mod1: {
           version: '1.0.0',
-          from: path.join('mods', 'mod1'),
           resolved: 'file:' + path.join('mods', 'mod1')
         }
       }

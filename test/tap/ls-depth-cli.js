@@ -120,16 +120,16 @@ test('npm ls --depth=0 --json', function (t) {
     function (er, c, out) {
       t.ifError(er, 'npm ls ran without issue')
       t.equal(c, 0, 'ls ran without raising error code')
-      t.has(
-        out,
-        /test-package-with-one-dep@0\.0\.0/,
-        'output contains test-package-with-one-dep@0.0.0'
-      )
-      t.doesNotHave(
-        out,
-        /test-package@0\.0\.0/,
-        'output not contains test-package@0.0.0'
-      )
+      t.deepEqual(JSON.parse(out), {
+        'name': 'ls-depth-cli',
+        'version': '0.0.0',
+        'dependencies': {
+          'test-package-with-one-dep': {
+            'version': '0.0.0',
+            'resolved': 'http://localhost:1337/test-package-with-one-dep/-/test-package-with-one-dep-0.0.0.tgz'
+          }
+        }
+      })
       t.end()
     }
   )
@@ -144,16 +144,22 @@ test('npm ls --depth=Infinity --json', function (t) {
     function (er, c, out) {
       t.ifError(er, 'npm ls ran without issue')
       t.equal(c, 0, 'ls ran without raising error code')
-      t.has(
-        out,
-        /test-package-with-one-dep@0\.0\.0/,
-        'output contains test-package-with-one-dep@0.0.0'
-      )
-      t.has(
-        out,
-        /test-package@0\.0\.0/,
-        'output contains test-package@0.0.0'
-      )
+      t.deepEqual(JSON.parse(out), {
+        'name': 'ls-depth-cli',
+        'version': '0.0.0',
+        'dependencies': {
+          'test-package-with-one-dep': {
+            'version': '0.0.0',
+            'resolved': 'http://localhost:1337/test-package-with-one-dep/-/test-package-with-one-dep-0.0.0.tgz',
+            'dependencies': {
+              'test-package': {
+                'version': '0.0.0',
+                'resolved': 'http://localhost:1337/test-package/-/test-package-0.0.0.tgz'
+              }
+            }
+          }
+        }
+      })
       t.end()
     }
   )
