@@ -66,16 +66,20 @@ function _writeFile (filename, data, options, callback) {
   function writeFileAsync (file, data, mode, encoding, cb) {
     fs.open(file, 'w', options.mode, function (err, fd) {
       if (err) return cb(err)
-      var write = Buffer.isBuffer(data)
-        ? function (_cb) { fs.write(fd, data, 0, data.length, _cb) }
-        : function (_cb) { fs.write(fd, data, encoding, _cb) }
-      write(function (err) {
+      if (Buffer.isBuffer(data)) {
+        return fs.write(fd, data, 0, data.length, 0, syncAndClose)
+      } else if (data != null) {
+        return fs.write(fd, String(data), 0, String(encoding), syncAndClose)
+      } else {
+        return syncAndClose()
+      }
+      function syncAndClose (err) {
         if (err) return cb(err)
         fs.fsync(fd, function (err) {
           if (err) return cb(err)
           fs.close(fd, cb)
         })
-      })
+      }
     })
   }
 }
@@ -109,9 +113,9 @@ function writeFileSync (filename, data, options) {
 
     var fd = fs.openSync(tmpfile, 'w', options.mode)
     if (Buffer.isBuffer(data)) {
-      fs.writeSync(fd, data, 0, data.length)
-    } else {
-      fs.writeSync(fd, data, options.encoding || 'utf8')
+      fs.writeSync(fd, data, 0, data.length, 0)
+    } else if (data != null) {
+      fs.writeSync(fd, String(data), 0, String(options.encoding || 'utf8'))
     }
     fs.fsyncSync(fd)
     fs.closeSync(fd)
