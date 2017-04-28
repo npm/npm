@@ -63,8 +63,8 @@ var desired = {
   dependencies: {
     'test-package': {
       version: '0.0.0',
-      from: 'test-package@0.0.0',
-      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz'
+      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz',
+      integrity: 'sha1-sNMrbEXCWcV4uiADdisgUTG9+9E='
     }
   }
 }

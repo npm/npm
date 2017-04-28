@@ -53,14 +53,14 @@ var desired = {
   dependencies: {
     'test-package': {
       version: '0.0.0',
-      from: 'test-package@0.0.0',
-      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz'
+      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz',
+      integrity: 'sha1-sNMrbEXCWcV4uiADdisgUTG9+9E='
     },
     'underscore': {
       version: '1.3.3',
-      from: 'underscore@1.3.3',
       resolved: 'http://localhost:1337/underscore/-/underscore-1.3.3.tgz',
-      optional: true
+      optional: true,
+      integrity: 'sha1-R6xTaD2vgyv6lS4XdEF9pHgXrkI='
     }
   }
 }

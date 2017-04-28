@@ -22,13 +22,13 @@ var desired = {
   dependencies: {
     request: {
       version: '0.9.0',
-      from: 'request@0.9.0',
-      resolved: common.registry + '/request/-/request-0.9.0.tgz'
+      resolved: common.registry + '/request/-/request-0.9.0.tgz',
+      integrity: 'sha1-EEn1mm9GWI5tAwkh+7hMovDCcU4='
     },
     underscore: {
       version: '1.3.1',
-      from: 'underscore@1.3.1',
-      resolved: common.registry + '/underscore/-/underscore-1.3.1.tgz'
+      resolved: common.registry + '/underscore/-/underscore-1.3.1.tgz',
+      integrity: 'sha1-bLiq0Od+tdu/tUsivNhpcwnPlkE='
     }
   }
 }
