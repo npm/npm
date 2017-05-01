@@ -1,31 +1,24 @@
-// Type definitions for iconv-lite
-// Project: https://github.com/ashtuchkin/iconv-lite
-// Definitions by: Martin Poelstra <https://github.com/poelstra>
-// Definitions: https://github.com/borisyankov/DefinitelyTyped
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License.
+ *  REQUIREMENT: This definition is dependent on the @types/node definition.
+ *  Install with `npm install @types/node --save-dev`
+ *--------------------------------------------------------------------------------------------*/
 
-import stream = require("stream");
+declare module 'iconv-lite' {
+	export function decode(buffer: NodeBuffer, encoding: string, options?: Options): string;
+
+	export function encode(content: string, encoding: string, options?: Options): NodeBuffer;
+
+	export function encodingExists(encoding: string): boolean;
+
+	export function decodeStream(encoding: string, options?: Options): NodeJS.ReadWriteStream;
+
+	export function encodeStream(encoding: string, options?: Options): NodeJS.ReadWriteStream;
+}
 
 export interface Options {
-    stripBOM: boolean;
-    addBOM: boolean;
-    defaultEncoding: string;
+    stripBOM?: boolean;
+    addBOM?: boolean;
+    defaultEncoding?: string;
 }
-
-export function decode(buffer: Buffer, encoding: string, options?: Options): string;
-export function encode(source: string, encoding: string, options?: Options): Buffer;
-export function encodingExists(encoding: string): boolean;
-
-export class DecodeStream extends stream.Transform {
-    collect(cb: (err: Error, decoded: string) => any): DecodeStream;
-}
-
-export class EncodeStream extends stream.Transform {
-    collect(cb: (err: Error, decoded: Buffer) => any): EncodeStream;
-}
-
-export function decodeStream(encoding: string, options?: Options): DecodeStream;
-export function encodeStream(encoding: string, options?: Options): EncodeStream;
-
-// NOTE: These are deprecated.
-export function extendNodeEncodings(): void;
-export function undoExtendNodeEncodings(): void;

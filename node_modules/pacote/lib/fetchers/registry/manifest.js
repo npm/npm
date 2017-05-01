@@ -73,7 +73,7 @@ function clearMemoized () {
 
 function fetchPackument (uri, spec, registry, opts) {
   const mem = pickMem(opts)
-  if (mem && mem.has(uri)) {
+  if (mem && !opts.preferOnline && mem.has(uri)) {
     return BB.resolve(mem.get(uri))
   }
 

@@ -1,4 +1,9 @@
 
+# 0.4.17 / 2017-04-22
+
+ * Updated typescript definition file to support Angular 2 AoT mode (#153 by @larssn)
+
+
 # 0.4.16 / 2017-04-22
 
  * Added support for React Native (#150)

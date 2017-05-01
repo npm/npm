@@ -16,7 +16,7 @@ function extract (spec, dest, opts) {
   spec = typeof spec === 'string' ? npa(spec, opts.where) : spec
   const startTime = Date.now()
   if (opts.integrity && opts.cache && !opts.preferOnline) {
-    opts.log.silly('pacote', 'trying', spec.name, 'by hash:', opts.integrity.toString())
+    opts.log.silly('pacote', `trying ${spec} by hash: ${opts.integrity}`)
     return extractByDigest(
       startTime, spec, dest, opts
     ).catch(err => {
@@ -62,7 +62,7 @@ function extractByDigest (start, spec, dest, opts) {
   const xtractor = extractStream(dest, opts)
   const cached = cacache.get.stream.byDigest(opts.cache, opts.integrity, opts)
   return pipe(cached, xtractor).then(() => {
-    opts.log.verbose('pacote', `${spec.name}@${spec.saveSpec || spec.fetchSpec} extracted to ${dest} by content address ${Date.now() - start}ms`)
+    opts.log.verbose('pacote', `${spec} extracted to ${dest} by content address ${Date.now() - start}ms`)
   })
 }
 
@@ -75,7 +75,7 @@ function extractByManifest (start, spec, dest, opts) {
     }
     return pipe(fetch.tarball(spec, opts), xtractor)
   }).then(() => {
-    opts.log.verbose('pacote', `${spec.name}@${spec.saveSpec || spec.fetchSpec} extracted in ${Date.now() - start}ms`)
+    opts.log.verbose('pacote', `${spec} extracted in ${Date.now() - start}ms`)
   })
 }
 

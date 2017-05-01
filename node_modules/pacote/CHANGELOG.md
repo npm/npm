@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.1"></a>
+## [2.7.1](https://github.com/zkat/pacote/compare/v2.7.0...v2.7.1) (2017-05-01)
+
+
+### Bug Fixes
+
+* **logging:** log specs correctly on extract ([4b5bab0](https://github.com/zkat/pacote/commit/4b5bab0))
+* **manifest:** obey opts.preferOnline when fetching from memoized ([26928a7](https://github.com/zkat/pacote/commit/26928a7))
+
+
+
 <a name="2.7.0"></a>
 # [2.7.0](https://github.com/zkat/pacote/compare/v2.6.0...v2.7.0) (2017-04-29)
 
