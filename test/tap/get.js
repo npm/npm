@@ -1,11 +1,9 @@
 var common = require('../common-tap.js')
 var test = require('tap').test
 var npm = require('../../')
-var mkdirp = require('mkdirp')
 var rimraf = require('rimraf')
 var path = require('path')
 var mr = require('npm-registry-mock')
-var fs = require('graceful-fs')
 
 function nop () {}
 
