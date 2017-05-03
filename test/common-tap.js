@@ -41,10 +41,10 @@ var nodeBin = exports.nodeBin = process.env.npm_node_execpath || process.env.NOD
 exports.npm = function (cmd, opts, cb) {
   cb = once(cb)
   cmd = [bin].concat(cmd)
-  opts = opts || {}
+  opts = extend({}, opts || {})
 
   opts.env = opts.env || process.env
-  if (opts.env._storage) opts.env = opts.env._storage
+  if (opts.env._storage) opts.env = Object.assign({}, opts.env._storage)
   if (!opts.env.npm_config_cache) {
     opts.env.npm_config_cache = npm_config_cache
   }
@@ -133,7 +133,11 @@ exports.newEnv = function () {
 }
 
 function Environment (env) {
-  this._storage = extend({}, env)
+  if (env instanceof Environment) return env.clone()
+
+  Object.defineProperty(this, '_storage', {
+    value: extend({}, env)
+  })
 }
 Environment.prototype = {}
 
@@ -151,7 +155,7 @@ Environment.prototype.clone = function () {
 }
 
 Environment.prototype.extend = function (env) {
-  var self = this
+  var self = this.clone()
   var args = Array.isArray(env) ? env : arguments
   var ii
   for (ii = 0; ii < args.length; ++ii) {
@@ -161,5 +165,5 @@ Environment.prototype.extend = function (env) {
       self._storage[name] = arg[name]
     })
   }
-  return this
+  return self
 }
