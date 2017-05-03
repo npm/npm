@@ -49,6 +49,7 @@ test('npm-self-install', function (t) {
   env.npm_config_user_agent = null
   env.npm_config_color = 'always'
   env.npm_config_progress = 'always'
+  env.npm_config_shrinkwrap = 'false'
   var PATH = env.PATH ? env.PATH.split(pathsep) : []
   var binpath = isWin32 ? globalpath : path.join(globalpath, 'bin')
   var cmdname = isWin32 ? 'npm.cmd' : 'npm'
