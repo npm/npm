@@ -43,6 +43,8 @@ cache:
   - node_modules/tacks
   - node_modules/tap
 install:
+  - "npm i -g 'npm/npm#release-beta-5'"
+  - "npm5 install"
   - "node . prune"
   - "node . rebuild --depth=0"
   - "node . install --ignore-scripts"
