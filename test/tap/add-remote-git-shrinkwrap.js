@@ -62,7 +62,6 @@ test('shrinkwrap gets correct _from and _resolved (#7121)', function (t) {
     function (er, code, stdout, stderr) {
       t.ifError(er, 'npm shrinkwrapped without errors')
       t.is(code, 0, '`npm shrinkwrap` exited ok')
-      t.equal(stdout.trim(), 'wrote npm-shrinkwrap.json')
       t.equal(stderr.trim(), '', 'no error output on successful shrinkwrap')
 
       var shrinkwrap = require(resolve(pkg, 'npm-shrinkwrap.json'))
