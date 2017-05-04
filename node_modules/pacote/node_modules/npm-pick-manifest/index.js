@@ -6,6 +6,7 @@ const semver = require('semver')
 module.exports = pickManifest
 function pickManifest (packument, wanted, opts) {
   opts = opts || {}
+  wanted = wanted.trim()
   const spec = npa.resolve(packument.name, wanted)
   const type = spec.type
   const distTags = packument['dist-tags'] || {}
