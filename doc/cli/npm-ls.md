@@ -18,8 +18,8 @@ nested packages will *also* show the paths to the specified packages.
 For example, running `npm ls promzard` in npm's source tree will show:
 
     npm@@VERSION@ /path/to/npm
-    └─┬ init-package-json@0.0.4
-      └── promzard@0.1.5
+    |-- init-package-json@0.0.4
+      |-- promzard@0.1.5
 
 It will print out extraneous, missing, and invalid packages.
 

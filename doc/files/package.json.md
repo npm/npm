@@ -560,8 +560,8 @@ This ensures your package `tea-latte` can be installed *along* with the second
 major version of the host package `tea` only. `npm install tea-latte` could
 possibly yield the following dependency graph:
 
-    ├── tea-latte@1.3.5
-    └── tea@2.2.0
+    |-- tea-latte@1.3.5
+    `-- tea@2.2.0
 
 **NOTE: npm versions 1 and 2 will automatically install `peerDependencies` if
 they are not explicitly depended upon higher in the dependency tree. In the
