@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.5"></a>
+## [2.7.5](https://github.com/zkat/pacote/compare/v2.7.4...v2.7.5) (2017-05-04)
+
+
+### Bug Fixes
+
+* **registry-key:** Use pathname instead of path in registryKey (#85) ([5339831](https://github.com/zkat/pacote/commit/5339831))
+
+
+
 <a name="2.7.4"></a>
 ## [2.7.4](https://github.com/zkat/pacote/compare/v2.7.3...v2.7.4) (2017-05-04)
 

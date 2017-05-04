@@ -9,7 +9,7 @@ function registryKey (registry) {
   const parsed = url.parse(registry)
   const formatted = url.format({
     host: parsed.host,
-    path: parsed.path,
+    pathname: parsed.pathname,
     slashes: parsed.slashes
   })
   return url.resolve(formatted, '.')
