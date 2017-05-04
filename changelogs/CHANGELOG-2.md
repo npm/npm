@@ -35,7 +35,7 @@ next main development version.
   ([@rvagg](https://github.com/rvagg))
 * [`e81b4f1`](https://github.com/npm/npm/commit/e81b4f1d18a4d79b7af8342747f2ed7dc3e84f0a)
   [#12438](https://github.com/npm/npm/issues/12438)
-  Remind folks to use `#!/usr/bin/env node` in their `bin` scripts to make files
+  Remind folks to use `#!/usr/bin/nodejs` in their `bin` scripts to make files
   executable directly.
   ([@mxstbr](https://github.com/mxstbr))
 * [`f89789f`](https://github.com/npm/npm/commit/f89789f43d65bfc74f64f15a99356841377e1af3)

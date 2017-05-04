@@ -15,7 +15,7 @@ tmp="$cli".tmp
 
 node="$1"
 if [ "x$node" = "x" ]; then
-  node="/usr/bin/env node"
+  node="/usr/bin/nodejs"
 fi
 node="#!$node"
 

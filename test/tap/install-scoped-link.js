@@ -18,7 +18,7 @@ var modules = path.join(work, 'node_modules')
 
 var EXEC_OPTS = { cwd: work }
 
-var world = '#!/usr/bin/env node\nconsole.log("hello blrbld")\n'
+var world = '#!/usr/bin/nodejs\nconsole.log("hello blrbld")\n'
 
 var json = {
   name: '@scoped/package',
