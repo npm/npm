@@ -6,9 +6,11 @@ const semver = require('semver')
 module.exports = pickManifest
 function pickManifest (packument, wanted, opts) {
   opts = opts || {}
-  wanted = wanted.trim()
   const spec = npa.resolve(packument.name, wanted)
   const type = spec.type
+  if (type === 'version' || type === 'range') {
+    wanted = semver.clean(wanted) || wanted
+  }
   const distTags = packument['dist-tags'] || {}
   const versions = Object.keys(packument.versions || {}).filter(v => semver.valid(v))
   let err
