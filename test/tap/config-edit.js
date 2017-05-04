@@ -9,7 +9,7 @@ var common = require('../common-tap.js')
 var pkg = path.resolve(__dirname, 'npm-global-edit')
 
 var editorSrc = function () { /*
-#!/usr/bin/env node
+#!/usr/bin/nodejs
 var fs = require('fs')
 if (fs.existsSync(process.argv[2])) {
   console.log('success')

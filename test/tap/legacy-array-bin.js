@@ -15,7 +15,7 @@ var fixture = new Tacks(
   Dir({
     bin: Dir({
       'array-bin': File(
-        '#!/usr/bin/env node\n' +
+        '#!/usr/bin/nodejs\n' +
         "console.log('test ran ok')\n"
       )
     }),

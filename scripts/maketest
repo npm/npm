@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/nodejs
 'use strict'
 var loadFromDir = require('tacks/load-from-dir.js')
 

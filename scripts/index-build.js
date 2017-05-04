@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/nodejs
 var fs = require('fs')
 var path = require('path')
 var root = path.resolve(__dirname, '..')

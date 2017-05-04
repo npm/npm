@@ -29,7 +29,7 @@ var dependency = {
 }
 
 var foo = function () { /*
-#!/usr/bin/env node
+#!/usr/bin/nodejs
 
 console.log('hey sup')
 */ }.toString().split('\n').slice(1, -1).join('\n')

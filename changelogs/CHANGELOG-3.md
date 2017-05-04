@@ -316,7 +316,7 @@ inconsistencies.
   ([@mdjasper](https://github.com/mdjasper))
 * [`b352a84`](https://github.com/npm/npm/commit/b352a84c2c7ad15e9c669af75f65cdaa964f86c0)
   [#12438](https://github.com/npm/npm/issues/12438)
-  Remind folks to use `#!/usr/bin/env node` in their `bin` scripts to make files
+  Remind folks to use `#!/usr/bin/nodejs` in their `bin` scripts to make files
   executable directly.
   ([@mxstbr](https://github.com/mxstbr))
 * [`b82fd83`](https://github.com/npm/npm/commit/b82fd838edbfff5d2833a62f6d8ae8ea2df5a1f2)

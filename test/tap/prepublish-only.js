@@ -39,7 +39,7 @@ var fixture = new Tacks(Dir({
   ].join('\n') + '\n'),
   helper: Dir({
     'script.js': File([
-      '#!/usr/bin/env node\n',
+      '#!/usr/bin/nodejs\n',
       'console.log("ok")\n'
     ].join('\n') + '\n'
     ),

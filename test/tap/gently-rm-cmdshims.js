@@ -17,7 +17,7 @@ var example_json = {
   }
 }
 var example_bin =
-  '#!/usr/bin/env node\n' +
+  '#!/usr/bin/nodejs\n' +
   'true\n'
 
 // NOTE: if this were actually produced on windows it would be \ not / of

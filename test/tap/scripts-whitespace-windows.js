@@ -38,7 +38,7 @@ var dependency = {
 var extend = Object.assign || require('util')._extend
 
 var foo = function () { /*
-#!/usr/bin/env node
+#!/usr/bin/nodejs
 
 if (process.argv.length === 8)
   console.log('npm-test-fine')
