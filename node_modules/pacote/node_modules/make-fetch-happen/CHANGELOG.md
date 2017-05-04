@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.4.2"></a>
+## [2.4.2](https://github.com/zkat/make-fetch-happen/compare/v2.4.1...v2.4.2) (2017-05-04)
+
+
+### Bug Fixes
+
+* **cache:** reduce race condition window by checking for content ([24544b1](https://github.com/zkat/make-fetch-happen/commit/24544b1))
+* **match:** Rewrite the conditional stream logic (#25) ([66bba4b](https://github.com/zkat/make-fetch-happen/commit/66bba4b))
+
+
+
 <a name="2.4.1"></a>
 ## [2.4.1](https://github.com/zkat/make-fetch-happen/compare/v2.4.0...v2.4.1) (2017-04-28)
 

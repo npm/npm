@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.2"></a>
+## [2.7.2](https://github.com/zkat/pacote/compare/v2.7.1...v2.7.2) (2017-05-04)
+
+
+### Bug Fixes
+
+* **extract:** missing or corrupted content properly re-fetched again ([46f60c2](https://github.com/zkat/pacote/commit/46f60c2))
+
+
+
 <a name="2.7.1"></a>
 ## [2.7.1](https://github.com/zkat/pacote/compare/v2.7.0...v2.7.1) (2017-05-01)
 

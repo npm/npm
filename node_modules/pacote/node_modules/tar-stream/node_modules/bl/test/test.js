@@ -560,9 +560,11 @@ tape('shallow slice across buffer boundaries', function (t) {
 })
 
 tape('shallow slice within single buffer', function (t) {
+  t.plan(2)
   var bl = new BufferList(['First', 'Second', 'Third'])
 
   t.equal(bl.shallowSlice(5, 10).toString(), 'Secon')
+  t.equal(bl.shallowSlice(7, 10).toString(), 'con')
   t.end()
 })
 
