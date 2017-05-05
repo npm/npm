@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.6"></a>
+## [2.7.6](https://github.com/zkat/pacote/compare/v2.7.5...v2.7.6) (2017-05-05)
+
+
+### Bug Fixes
+
+* **git:** only use longpaths on win32 because old gits ([32846fc](https://github.com/zkat/pacote/commit/32846fc))
+
+
+
 <a name="2.7.5"></a>
 ## [2.7.5](https://github.com/zkat/pacote/compare/v2.7.4...v2.7.5) (2017-05-04)
 

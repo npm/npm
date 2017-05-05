@@ -50,14 +50,10 @@ try {
 module.exports.clone = fullClone
 function fullClone (repo, committish, target, opts) {
   opts = optCheck(opts)
-  const gitArgs = [
-    'clone',
-    '-q',
-    // Mainly for windows, but no harm done
-    '-c', 'core.longpaths=true',
-    repo,
-    target
-  ]
+  const gitArgs = ['clone', '-q', repo, target]
+  if (process.platform === 'win32') {
+    gitArgs.push('--config', 'core.longpaths=true')
+  }
   return execGit(gitArgs, {
     cwd: path.dirname(target)
   }, opts).then(() => {
@@ -72,16 +68,10 @@ function fullClone (repo, committish, target, opts) {
 module.exports.shallow = shallowClone
 function shallowClone (repo, branch, target, opts) {
   opts = optCheck(opts)
-  const gitArgs = [
-    'clone',
-    '--depth=1',
-    '-q',
-    '-b', branch,
-    // Mainly for windows, but no harm done
-    '-c', 'core.longpaths=true',
-    repo,
-    target
-  ]
+  const gitArgs = ['clone', '--depth=1', '-q', '-b', branch, repo, target]
+  if (process.platform === 'win32') {
+    gitArgs.push('--config', 'core.longpaths=true')
+  }
   return execGit(gitArgs, {
     cwd: target
   }, opts).then(() => {
@@ -90,13 +80,7 @@ function shallowClone (repo, branch, target, opts) {
 }
 
 function updateSubmodules (localRepo, opts) {
-  const gitArgs = [
-    'submodule',
-    'update',
-    '-q',
-    '--init',
-    '--recursive'
-  ]
+  const gitArgs = ['submodule', 'update', '-q', '--init', '--recursive']
   return execGit(gitArgs, {
     cwd: localRepo
   }, opts)
