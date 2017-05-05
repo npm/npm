@@ -78,7 +78,7 @@
     "npm-package-arg": "~5.0.1",
     "npm-registry-client": "~8.3.0",
     "npm-user-validate": "~0.1.5",
-    "npmlog": "~4.0.2",
+    "npmlog": "~4.1.0",
     "once": "~1.4.0",
     "opener": "~1.4.3",
     "osenv": "~0.1.4",
