@@ -126,7 +126,7 @@ you want your scoped package to be publicly viewable (and installable) set
 * Default: false
 * Type: Boolean
 
-Prevents throwing an error when `npm version` is used to set the new version 
+Prevents throwing an error when `npm version` is used to set the new version
 to the same value as the current version.
 
 ### always-auth
@@ -449,6 +449,13 @@ a script that isn't defined in the `scripts` section of `package.json`. This
 option can be used when it's desirable to optionally run a script when it's
 present and fail if the script fails. This is useful, for example, when running
 scripts that may only apply for some builds in an otherwise generic CI setup.
+
+### ignore-prepublish
+
+* Default: false
+* Type: Boolean
+
+If true, npm will not run `prepublish` scripts.
 
 ### ignore-scripts
 
