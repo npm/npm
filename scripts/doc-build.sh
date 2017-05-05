@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ ! "$NODEJS" ]; then
+    echo "need NODEJS environment variable" >&1
+    exit 99
+fi
+
 if [[ $DEBUG != "" ]]; then
   set -x
 fi
@@ -62,7 +67,7 @@ src=$1
 dest=$2
 name=$(basename ${src%.*})
 date=$(date -u +'%Y-%m-%d %H:%M:%S')
-version=$(node cli.js -v)
+version=$($NODEJS cli.js -v)
 
 mkdir -p $(dirname $dest)
 
@@ -99,14 +104,14 @@ man_replace_tokens () {
 
 case $dest in
   *.[1357])
-    ./node_modules/.bin/marked-man --roff $src \
+    $NODEJS ./node_modules/.bin/marked-man --roff $src \
     | man_replace_tokens > $dest
     exit $?
     ;;
   *.html)
     url=${dest/html\//}
     (cat html/dochead.html && \
-     cat $src | ./node_modules/.bin/marked &&
+     cat $src | $NODEJS ./node_modules/.bin/marked &&
      cat html/docfoot.html)\
     | html_replace_tokens $url \
     > $dest

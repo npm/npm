@@ -1,6 +1,9 @@
 # vim: set softtabstop=2 shiftwidth=2:
 SHELL = bash
 
+## the nodeJS command to be run at build time
+NODEJS ?= node
+
 PUBLISHTAG = $(shell node scripts/publish-tag.js)
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
@@ -53,23 +56,23 @@ latest:
 	@echo "Installing latest published npm"
 	@echo "Use 'make install' or 'make link' to install the code"
 	@echo "in this folder that you're looking at right now."
-	node cli.js install -g -f npm ${NPMOPTS}
+	$(NODEJS) cli.js install -g -f npm ${NPMOPTS}
 
 install: all
-	node cli.js install -g -f ${NPMOPTS}
+	$(NODEJS) cli.js install -g -f ${NPMOPTS}
 
 # backwards compat
 dev: install
 
 link: uninstall
-	node cli.js link -f
+	$(NODEJS) cli.js link -f
 
 clean: markedclean marked-manclean doc-clean uninstall
 	rm -rf npmrc
-	node cli.js cache clean
+	$(NODEJS) cli.js cache clean
 
 uninstall:
-	node cli.js rm npm -g -f
+	$(NODEJS) cli.js rm npm -g -f
 
 doc: $(mandocs) $(htmldocs)
 
@@ -90,11 +93,11 @@ doc-clean:
 # use `npm install marked-man` for this to work.
 man/man1/npm-README.1: README.md scripts/doc-build.sh package.json
 	@[ -d man/man1 ] || mkdir -p man/man1
-	scripts/doc-build.sh $< $@
+	NODEJS="$(NODEJS)" scripts/doc-build.sh $< $@
 
 man/man1/%.1: doc/cli/%.md scripts/doc-build.sh package.json
 	@[ -d man/man1 ] || mkdir -p man/man1
-	scripts/doc-build.sh $< $@
+	NODEJS="$(NODEJS)" scripts/doc-build.sh $< $@
 
 man/man5/npm-json.5: man/man5/package.json.5
 	cp $< $@
@@ -104,26 +107,26 @@ man/man5/npm-global.5: man/man5/npm-folders.5
 
 man/man5/%.5: doc/files/%.md scripts/doc-build.sh package.json
 	@[ -d man/man5 ] || mkdir -p man/man5
-	scripts/doc-build.sh $< $@
+	NODEJS="$(NODEJS)" scripts/doc-build.sh $< $@
 
 doc/misc/npm-index.md: scripts/index-build.js package.json
-	node scripts/index-build.js > $@
+	$(NODEJS) scripts/index-build.js > $@
 
 html/doc/index.html: doc/misc/npm-index.md $(html_docdeps)
 	@[ -d html/doc ] || mkdir -p html/doc
-	scripts/doc-build.sh $< $@
+	NODEJS="$(NODEJS)" scripts/doc-build.sh $< $@
 
 man/man7/%.7: doc/misc/%.md scripts/doc-build.sh package.json
 	@[ -d man/man7 ] || mkdir -p man/man7
-	scripts/doc-build.sh $< $@
+	NODEJS="$(NODEJS)" scripts/doc-build.sh $< $@
 
 html/doc/README.html: README.md $(html_docdeps)
 	@[ -d html/doc ] || mkdir -p html/doc
-	scripts/doc-build.sh $< $@
+	NODEJS="$(NODEJS)" scripts/doc-build.sh $< $@
 
 html/doc/cli/%.html: doc/cli/%.md $(html_docdeps)
 	@[ -d html/doc/cli ] || mkdir -p html/doc/cli
-	scripts/doc-build.sh $< $@
+	NODEJS="$(NODEJS)" scripts/doc-build.sh $< $@
 
 html/doc/files/npm-json.html: html/doc/files/package.json.html
 	cp $< $@
@@ -133,47 +136,47 @@ html/doc/files/npm-global.html: html/doc/files/npm-folders.html
 
 html/doc/files/%.html: doc/files/%.md $(html_docdeps)
 	@[ -d html/doc/files ] || mkdir -p html/doc/files
-	scripts/doc-build.sh $< $@
+	NODEJS="$(NODEJS)" scripts/doc-build.sh $< $@
 
 html/doc/misc/%.html: doc/misc/%.md $(html_docdeps)
 	@[ -d html/doc/misc ] || mkdir -p html/doc/misc
-	scripts/doc-build.sh $< $@
+	NODEJS="$(NODEJS)" scripts/doc-build.sh $< $@
 
 
 marked: node_modules/.bin/marked
 
 node_modules/.bin/marked:
-	node cli.js install marked --no-global --no-timing
+	$(NODEJS) cli.js install marked --no-global --no-timing
 
 marked-man: node_modules/.bin/marked-man
 
 node_modules/.bin/marked-man:
-	node cli.js install marked-man --no-global --no-timing
+	$(NODEJS) cli.js install marked-man --no-global --no-timing
 
 doc: man
 
 man: $(cli_docs)
 
 test: doc
-	node cli.js test
+	$(NODEJS) cli.js test
 
 tag:
-	node bin/npm-cli.js tag npm@$(PUBLISHTAG) latest
+	$(NODEJS) bin/npm-cli.js tag npm@$(PUBLISHTAG) latest
 
 ls-ok:
-	node . ls >/dev/null
+	$(NODEJS) . ls >/dev/null
 
 gitclean:
 	git clean -fd
 
 publish: gitclean ls-ok link doc-clean doc
-	@git push origin :v$(shell node bin/npm-cli.js --no-timing -v) 2>&1 || true
+	@git push origin :v$(shell $(NODEJS) bin/npm-cli.js --no-timing -v) 2>&1 || true
 	git push origin $(BRANCH) &&\
 	git push origin --tags &&\
-	node bin/npm-cli.js publish --tag=$(PUBLISHTAG)
+	$(NODEJS) bin/npm-cli.js publish --tag=$(PUBLISHTAG)
 
 release: gitclean ls-ok markedclean marked-manclean doc-clean doc
-	node cli.js prune --production
+	$(NODEJS) cli.js prune --production
 	@bash scripts/release.sh
 
 sandwich:

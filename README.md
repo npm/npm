@@ -46,6 +46,15 @@ Run `make install`.  npm will be installed with node.
 If you want a more fancy pants install (a different version, customized
 paths, etc.) then read on.
 
+## Expert install / packaging
+
+### Specify interpreter
+
+For installations where the interpreter is not named 'node' (eg. 'nodejs'
+in most distro packages), the command name can be specified:
+
+* For build process of NPM itself: the environment/make variable NODEJS
+
 ## Fancy Install (Unix)
 
 There's a pretty robust install script at
