@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.4.3"></a>
+## [2.4.3](https://github.com/zkat/make-fetch-happen/compare/v2.4.2...v2.4.3) (2017-05-06)
+
+
+### Bug Fixes
+
+* **redirect:** redirects now delete authorization if hosts fail to match ([c071805](https://github.com/zkat/make-fetch-happen/commit/c071805))
+
+
+
 <a name="2.4.2"></a>
 ## [2.4.2](https://github.com/zkat/make-fetch-happen/compare/v2.4.1...v2.4.2) (2017-05-04)
 

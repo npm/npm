@@ -20,7 +20,7 @@ function prefetch (spec, opts) {
     opts.log.silly('prefetch', 'checking if', opts.integrity, 'is already cached')
     return cacache.get.hasContent(opts.cache, opts.integrity).then(info => {
       if (info) {
-        opts.log.silly('prefetch', 'content already exists for', spec.raw, `(${Date.now() - startTime}ms)`)
+        opts.log.silly('prefetch', `content already exists for ${spec} (${Date.now() - startTime}ms)`)
         return {
           spec,
           integrity: info.integrity,
@@ -32,7 +32,7 @@ function prefetch (spec, opts) {
       }
     })
   } else {
-    opts.log.silly('prefetch', 'no integrity hash provided for', spec, '- fetching by manifest')
+    opts.log.silly('prefetch', `no integrity hash provided for ${spec} - fetching by manifest`)
     return prefetchByManifest(startTime, spec, opts)
   }
 }
@@ -52,7 +52,7 @@ function prefetchByManifest (start, spec, opts) {
     stream.on('integrity', i => { integrity = i })
     return finished(stream)
   }).then(() => {
-    opts.log.verbose('prefetch', `${spec.name}@${spec.saveSpec || spec.fetchSpec} done in ${Date.now() - start}ms`)
+    opts.log.verbose('prefetch', `${spec} done in ${Date.now() - start}ms`)
     return {
       manifest,
       spec,
