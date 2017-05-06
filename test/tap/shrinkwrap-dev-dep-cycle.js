@@ -49,7 +49,16 @@ var fixture = new Tacks(
 var expectedShrinkwrap = {
   name: 'test',
   version: '1.0.0',
-  dependencies: {}
+  dependencies: {
+    a: {
+      version: '1.0.0',
+      dev: true
+    },
+    b: {
+      version: '1.0.0',
+      dev: true
+    }
+  }
 }
 
 function setup () {
