@@ -130,6 +130,7 @@
     "columnify",
     "config-chain",
     "debuglog",
+    "detect-indent",
     "dezalgo",
     "editor",
     "fs-vacuum",
