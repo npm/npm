@@ -140,8 +140,8 @@ function setup (cb) {
 
   common.npm(
     [
-      '--loglevel', 'warn',
-      'cache', 'clean'
+      '--loglevel', 'error',
+      'cache', 'clean', '--force'
     ],
     NPM_OPTS,
     function (er, code, _, stderr) {
