@@ -37,7 +37,11 @@ Fetcher.impl(fetchGit, {
     const stream = new PassThrough()
     this.manifest(spec, opts).then(manifest => {
       stream.emit('manifest', manifest)
-      return pipe(this.fromManifest(manifest, spec, opts), stream)
+      return pipe(
+        this.fromManifest(
+          manifest, spec, opts
+        ).on('integrity', i => stream.emit('integrity', i)), stream
+      )
     }, err => stream.emit('error', err))
     return stream
   },
@@ -51,7 +55,7 @@ Fetcher.impl(fetchGit, {
       opts.cache &&
       cacache.get.stream(
         opts.cache, cacheKey('packed-dir', cacheName), opts
-      )
+      ).on('integrity', i => stream.emit('integrity', i))
     )
     cacheStream.pipe(stream)
     cacheStream.on('error', err => {

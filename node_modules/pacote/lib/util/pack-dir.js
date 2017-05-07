@@ -32,7 +32,9 @@ function packDir (manifest, label, dir, target, opts) {
   } else {
     const cacher = cacache.put.stream(
       opts.cache, cacheKey('packed-dir', label), opts
-    )
+    ).on('integrity', i => {
+      target.emit('integrity', i)
+    })
     return BB.all([
       pipe(packer, cacher),
       pipe(packer, target)

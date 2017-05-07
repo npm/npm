@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.8"></a>
+## [2.7.8](https://github.com/zkat/pacote/compare/v2.7.7...v2.7.8) (2017-05-07)
+
+
+### Bug Fixes
+
+* **git:** integrity hash was not always emitted ([97ed9e1](https://github.com/zkat/pacote/commit/97ed9e1))
+
+
+
 <a name="2.7.7"></a>
 ## [2.7.7](https://github.com/zkat/pacote/compare/v2.7.6...v2.7.7) (2017-05-06)
 
