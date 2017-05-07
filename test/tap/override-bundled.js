@@ -119,9 +119,9 @@ test('setup', function (t) {
 })
 
 test('bundled', function (t) {
-  common.npm(['install', '--loglevel=warn'], {cwd: testdir}, function (err, code, stdout, stderr) {
+  common.npm(['install', '--loglevel=verbose'], {cwd: testdir}, function (err, code, stdout, stderr) {
     if (err) throw err
-    t.plan(8)
+    t.plan(9)
     t.is(code, 0, 'npm itself completed ok')
 
     // This tests that after the install we have a freshly installed version
@@ -133,8 +133,9 @@ test('bundled', function (t) {
     // _things_ to it.  Things like chmod in particular, which in turn results
     // in the dreaded ENOENT errors.
     t.like(stderr, new RegExp('npm WARN ' + testname), "didn't stomp on other warnings")
-    t.like(stderr, /npm WARN.*bundle-update/, 'included update warning about bundled dep')
-    t.like(stderr, /npm WARN.*bundle-deep-update/, 'included update warning about deeply bundled dep')
+    t.like(stderr, /npm verb.*bundle-update/, 'included update warning about bundled dep')
+    t.like(stderr, /npm verb.*bundle-deep-update/, 'included update warning about deeply bundled dep')
+    t.like(stderr, /npm WARN top-test@1\.0\.0 had bundled packages that do not match/, 'single grouped warning')
     fs.stat(bundleupdateNEWpostinstall, function (missing) {
       t.ok(!missing, 'package.json overrode bundle')
     })
