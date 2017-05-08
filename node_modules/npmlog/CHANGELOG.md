@@ -1,7 +1,11 @@
+### v4.0.2
+
+* Added installation instructions.
+
 ### v4.0.1
 
 * Fix bugs where `log.progressEnabled` got out of sync with how `gauge` kept
-  track of these things resulting in a progressbar that couldn't be disabled. 
+  track of these things resulting in a progressbar that couldn't be disabled.
 
 ### v4.0.0
 
