@@ -107,7 +107,7 @@ function plainManifest (repo, spec, opts) {
     repo, rawRef, spec.name, opts
   ).then(ref => {
     if (ref) {
-      const resolved = spec.saveSpec.replace(/#.*/, `#${ref.sha}`)
+      const resolved = spec.saveSpec.replace(/(?:#.*)?$/, `#${ref.sha}`)
       return {
         _repo: repo,
         _resolved: resolved,
@@ -121,7 +121,7 @@ function plainManifest (repo, spec, opts) {
       //
       // If we're confident enough that `rawRef` is a commit SHA,
       // then we can at least get `finalize-manifest` to cache its result.
-      const resolved = spec.saveSpec.replace(/#.*/, `#${rawRef}`)
+      const resolved = spec.saveSpec.replace(/(?:#.*)?$/, `#${rawRef}`)
       return {
         _repo: repo,
         _rawRef: rawRef,
