@@ -3,6 +3,7 @@ var fs = require('graceful-fs')
 var readCmdShim = require('read-cmd-shim')
 var isWindows = require('../lib/utils/is-windows.js')
 var extend = Object.assign || require('util')._extend
+var Bluebird = require('bluebird')
 
 // cheesy hackaround for test deps (read: nock) that rely on setImmediate
 if (!global.setImmediate || !require('timers').setImmediate) {
@@ -39,6 +40,14 @@ var once = require('once')
 var nodeBin = exports.nodeBin = process.env.npm_node_execpath || process.env.NODE || process.execPath
 
 exports.npm = function (cmd, opts, cb) {
+  if (!cb) {
+    var prom = new Bluebird((resolve, reject) => {
+      cb = function (err, code, stdout, stderr) {
+        if (err) return reject(err)
+        return resolve([code, stdout, stderr])
+      }
+    })
+  }
   cb = once(cb)
   cmd = [bin].concat(cmd)
   opts = extend({}, opts || {})
@@ -75,7 +84,7 @@ exports.npm = function (cmd, opts, cb) {
   child.on('close', function (code) {
     cb(null, code, stdout, stderr)
   })
-  return child
+  return prom || child
 }
 
 exports.makeGitRepo = function (params, cb) {
