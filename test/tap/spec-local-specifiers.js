@@ -383,11 +383,12 @@ testdirContent['install-behavior'] = Dir({
   )),
   'not-module': Dir({}),
   'test-preinstall': Dir({
+    'preinstall.js': File('console.log("CWD:" + process.cwd())'),
     'package.json': File({
       name: 'test-preinstall',
       version: '1.0.0',
       scripts: {
-        'preinstall': 'node -p "\'CWD:\' + process.cwd()"'
+        'preinstall': 'node ' + ibdir + '/test-preinstall/preinstall.js'
       }
     })
   })
