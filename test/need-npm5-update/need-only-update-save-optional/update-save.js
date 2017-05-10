@@ -111,6 +111,7 @@ test('update devDependencies only', function (t) {
 
 test('update optionalDependencies only', function (t) {
   setup({ optionalDependencies: { underscore: '~1.3.1' } })
+  var pkgdata = JSON.parse(fs.readFileSync(path.join(pkg, 'package.json'), 'utf8'))
 
   common.npm(['update', '--save-optional'], EXEC_OPTS, function (err, code) {
     t.ifError(err)
