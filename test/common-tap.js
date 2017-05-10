@@ -18,19 +18,21 @@ var path = require('path')
 
 var port = exports.port = 1337
 exports.registry = 'http://localhost:' + port
-process.env.npm_config_loglevel = 'error'
-process.env.npm_config_progress = 'false'
+const ourenv = {}
+ourenv.npm_config_loglevel = 'error'
+ourenv.npm_config_progress = 'false'
 
 var npm_config_cache = path.resolve(__dirname, 'npm_cache')
-process.env.npm_config_cache = exports.npm_config_cache = npm_config_cache
-process.env.npm_config_userconfig = exports.npm_config_userconfig = path.join(__dirname, 'fixtures', 'config', 'userconfig')
-process.env.npm_config_globalconfig = exports.npm_config_globalconfig = path.join(__dirname, 'fixtures', 'config', 'globalconfig')
-process.env.npm_config_global_style = 'false'
-process.env.npm_config_legacy_bundling = 'false'
-process.env.npm_config_fetch_retries = '0'
-process.env.random_env_var = 'foo'
+ourenv.npm_config_cache = exports.npm_config_cache = npm_config_cache
+ourenv.npm_config_userconfig = exports.npm_config_userconfig = path.join(__dirname, 'fixtures', 'config', 'userconfig')
+ourenv.npm_config_globalconfig = exports.npm_config_globalconfig = path.join(__dirname, 'fixtures', 'config', 'globalconfig')
+ourenv.npm_config_global_style = 'false'
+ourenv.npm_config_legacy_bundling = 'false'
+ourenv.npm_config_fetch_retries = '0'
+ourenv.random_env_var = 'foo'
 // suppress warnings about using a prerelease version of node
-process.env.npm_config_node_version = process.version.replace(/-.*$/, '')
+ourenv.npm_config_node_version = process.version.replace(/-.*$/, '')
+for (let key of Object.keys(ourenv)) process.env[key] = ourenv[key]
 
 var bin = exports.bin = require.resolve('../bin/npm-cli.js')
 
@@ -139,6 +141,17 @@ exports.pendIfWindows = function (why) {
 
 exports.newEnv = function () {
   return new Environment(process.env)
+}
+
+exports.emptyEnv = function () {
+  const filtered = {}
+  for (let key of Object.keys(process.env)) {
+    if (!/^npm_/.test(key)) filtered[key] = process.env[key]
+  }
+  for (let key of Object.keys(ourenv)) {
+    filtered[key] = ourenv[key]
+  }
+  return new Environment(filtered)
 }
 
 function Environment (env) {

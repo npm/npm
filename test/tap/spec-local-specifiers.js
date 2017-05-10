@@ -19,7 +19,7 @@ var tmpdir = path.join(basedir, 'tmp')
 
 var conf = {
   cwd: testdir,
-  env: common.newEnv().extend({
+  env: common.emptyEnv().extend({
     npm_config_cache: cachedir,
     npm_config_tmp: tmpdir,
     npm_config_prefix: globaldir,
