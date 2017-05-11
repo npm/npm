@@ -10,7 +10,7 @@ var test = require('tap').test
 var common = require('../common-tap')
 var server
 
-var pkg = path.resolve(__dirname, 'prune')
+var pkg = path.resolve(__dirname, path.basename(__filename, '.js'))
 var cache = path.resolve(pkg, 'cache')
 
 var json = {
@@ -64,6 +64,7 @@ test('npm install test-package', function (t) {
     'install', 'test-package',
     '--cache', cache,
     '--registry', common.registry,
+    '--no-save',
     '--loglevel', 'silent',
     '--production', 'false'
   ], EXEC_OPTS, function (err, code, stdout, stderr) {
@@ -74,13 +75,13 @@ test('npm install test-package', function (t) {
   })
 })
 
-test('verify installs', function (t) {
+test('setup: verify installs', function (t) {
   var dirs = fs.readdirSync(pkg + '/node_modules').sort()
   t.same(dirs, [ 'test-package', 'mkdirp', 'underscore' ].sort())
   t.end()
 })
 
-test('npm prune', function (t) {
+test('dev: npm prune', function (t) {
   common.npm([
     'prune',
     '--loglevel', 'silent',
@@ -93,13 +94,13 @@ test('npm prune', function (t) {
   })
 })
 
-test('verify installs', function (t) {
+test('dev: verify installs', function (t) {
   var dirs = fs.readdirSync(pkg + '/node_modules').sort()
   t.same(dirs, [ 'mkdirp', 'underscore' ])
   t.end()
 })
 
-test('npm prune', function (t) {
+test('production: npm prune', function (t) {
   common.npm([
     'prune',
     '--loglevel', 'silent',
@@ -113,7 +114,7 @@ test('npm prune', function (t) {
   })
 })
 
-test('verify installs', function (t) {
+test('pruduction: verify installs', function (t) {
   var dirs = fs.readdirSync(pkg + '/node_modules').sort()
   t.same(dirs, [ 'underscore' ])
   t.end()
