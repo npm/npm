@@ -2,7 +2,8 @@ var fs = require('graceful-fs')
 var path = require('path')
 
 var mkdirp = require('mkdirp')
-var mr = require('npm-registry-mock')
+var Bluebird = require('bluebird')
+var mr = Bluebird.promisify(require('npm-registry-mock'))
 var osenv = require('osenv')
 var rimraf = require('rimraf')
 var test = require('tap').test
@@ -11,7 +12,13 @@ var common = require('../common-tap')
 
 var pkg = path.resolve(__dirname, 'ls-depth-cli')
 
-var EXEC_OPTS = { cwd: pkg }
+var EXEC_OPTS = {
+  cwd: pkg,
+  env: common.newEnv().extend({
+    npm_config_registry: common.registry
+  }),
+  stdio: [0, 'pipe', 2]
+}
 
 var json = {
   name: 'ls-depth-cli',
@@ -28,43 +35,27 @@ test('setup', function (t) {
     path.join(pkg, 'package.json'),
     JSON.stringify(json, null, 2)
   )
-  mr({ port: common.port }, function (er, s) {
-    common.npm(
-      [
-        '--registry', common.registry,
-        'install'
-      ],
-      EXEC_OPTS,
-      function (er, c) {
-        t.ifError(er, 'setup installation ran without issue')
-        t.equal(c, 0)
-        s.close()
-        t.end()
-      }
-    )
+  return mr({ port: common.port }).then((s) => {
+    return common.npm(['install'], EXEC_OPTS).spread((c) => {
+      t.is(c, 0)
+    }).finally(() => s.close())
   })
 })
 
 test('npm ls --depth=0', function (t) {
-  common.npm(
-    ['ls', '--depth=0'],
-    EXEC_OPTS,
-    function (er, c, out) {
-      t.ifError(er, 'npm ls ran without issue')
-      t.equal(c, 0, 'ls ran without raising error code')
-      t.has(
-        out,
-        /test-package-with-one-dep@0\.0\.0/,
-        'output contains test-package-with-one-dep@0.0.0'
-      )
-      t.doesNotHave(
-        out,
-        /test-package@0\.0\.0/,
-        'output not contains test-package@0.0.0'
-      )
-      t.end()
-    }
-  )
+  return common.npm(['ls', '--depth=0'], EXEC_OPTS).spread((c, out) => {
+    t.equal(c, 0, 'ls ran without raising error code')
+    t.has(
+      out,
+      /test-package-with-one-dep@0\.0\.0/,
+      'output contains test-package-with-one-dep@0.0.0'
+    )
+    t.doesNotHave(
+      out,
+      /test-package@0\.0\.0/,
+      'output not contains test-package@0.0.0'
+    )
+  })
 })
 
 test('npm ls --depth=1', function (t) {
@@ -120,7 +111,7 @@ test('npm ls --depth=0 --json', function (t) {
     function (er, c, out) {
       t.ifError(er, 'npm ls ran without issue')
       t.equal(c, 0, 'ls ran without raising error code')
-      t.deepEqual(JSON.parse(out), {
+      t.has(JSON.parse(out), {
         'name': 'ls-depth-cli',
         'version': '0.0.0',
         'dependencies': {
@@ -144,7 +135,7 @@ test('npm ls --depth=Infinity --json', function (t) {
     function (er, c, out) {
       t.ifError(er, 'npm ls ran without issue')
       t.equal(c, 0, 'ls ran without raising error code')
-      t.deepEqual(JSON.parse(out), {
+      t.has(JSON.parse(out), {
         'name': 'ls-depth-cli',
         'version': '0.0.0',
         'dependencies': {
