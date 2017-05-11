@@ -2,7 +2,8 @@ var cat = require('graceful-fs').writeFileSync
 var resolve = require('path').resolve
 
 var mkdirp = require('mkdirp')
-var mr = require('npm-registry-mock')
+var Bluebird = require('bluebird')
+var mr = Bluebird.promisify(require('npm-registry-mock'))
 var rimraf = require('rimraf')
 var test = require('tap').test
 var tmpdir = require('osenv').tmpdir
@@ -21,6 +22,7 @@ var expected =
   '    an inexplicably hostile sample package\n' +
   '    git+https://github.com/npm/glo.ck.git\n' +
   '    https://glo.ck\n' +
+  '    file:glock-1.8.7.tgz\n' +
   '\n'
 
 var server
@@ -39,12 +41,16 @@ var fixture = {
   }
 }
 
+var deppack
+
 test('setup', function (t) {
   setup()
-  mr({ port: common.port }, function (er, s) {
+  return mr({ port: common.port }).then((s) => {
     server = s
-
-    t.end()
+    return common.npm(['pack', dep], EXEC_OPTS)
+  }).spread((code, stdout) => {
+    t.is(code, 0, 'pack')
+    deppack = stdout.trim()
   })
 })
 
@@ -54,7 +60,7 @@ test('#6311: npm ll --depth=0 duplicates listing', function (t) {
       '--loglevel', 'silent',
       '--registry', common.registry,
       '--parseable',
-      'install', dep
+      'install', deppack
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
