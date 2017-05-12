@@ -52,7 +52,7 @@ function prefetchByManifest (start, spec, opts) {
     stream.on('integrity', i => { integrity = i })
     return finished(stream)
   }).then(() => {
-    opts.log.verbose('prefetch', `${spec} done in ${Date.now() - start}ms`)
+    opts.log.silly('prefetch', `${spec} done in ${Date.now() - start}ms`)
     return {
       manifest,
       spec,

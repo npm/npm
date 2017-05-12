@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.10"></a>
+## [2.7.10](https://github.com/zkat/pacote/compare/v2.7.9...v2.7.10) (2017-05-12)
+
+
+### Bug Fixes
+
+* **logging:** shhhhhhh ([e7ea56e](https://github.com/zkat/pacote/commit/e7ea56e))
+* **manifest:** _resolved is the only main field we do not overwrite ([4c12421](https://github.com/zkat/pacote/commit/4c12421))
+
+
+
 <a name="2.7.9"></a>
 ## [2.7.9](https://github.com/zkat/pacote/compare/v2.7.8...v2.7.9) (2017-05-09)
 
