@@ -33,7 +33,9 @@ var first = {
   'dependencies': {
     'firstUnique': '0.6.0',
     '@scope/shared': '2.1.6'
-  }
+  },
+  '_resolved': 'foo',
+  '_integrity': 'sha1-deadbeef'
 }
 
 var second = {
@@ -42,22 +44,30 @@ var second = {
   'dependencies': {
     'secondUnique': '1.2.0',
     '@scope/shared': '2.1.6'
-  }
+  },
+  '_resolved': 'foo',
+  '_integrity': 'sha1-deadbeef'
 }
 
 var shared = {
   'name': '@scope/shared',
-  'version': '2.1.6'
+  'version': '2.1.6',
+  '_resolved': 'foo',
+  '_integrity': 'sha1-deadbeef'
 }
 
 var firstUnique = {
   'name': 'firstUnique',
-  'version': '0.6.0'
+  'version': '0.6.0',
+  '_resolved': 'foo',
+  '_integrity': 'sha1-deadbeef'
 }
 
 var secondUnique = {
   'name': 'secondUnique',
-  'version': '1.2.0'
+  'version': '1.2.0',
+  '_resolved': 'foo',
+  '_integrity': 'sha1-deadbeef'
 }
 
 test('setup', function (t) {
