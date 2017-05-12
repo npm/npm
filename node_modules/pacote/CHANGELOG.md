@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.11"></a>
+## [2.7.11](https://github.com/zkat/pacote/compare/v2.7.10...v2.7.11) (2017-05-12)
+
+
+### Bug Fixes
+
+* **fetch:** make it play nicer with bundlers ([67cd713](https://github.com/zkat/pacote/commit/67cd713))
+
+
+
 <a name="2.7.10"></a>
 ## [2.7.10](https://github.com/zkat/pacote/compare/v2.7.9...v2.7.10) (2017-05-12)
 
