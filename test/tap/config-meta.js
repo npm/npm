@@ -20,6 +20,7 @@ var exceptions = [
   path.resolve(lib, 'config.js'),
   path.resolve(lib, 'config', 'pacote.js'),
   path.resolve(lib, 'publish.js'),
+  path.resolve(lib, 'install', 'inflate-shrinkwrap.js'),
   path.resolve(lib, 'utils', 'lifecycle.js'),
   path.resolve(lib, 'utils', 'map-to-registry.js'),
   path.resolve(nm, 'npm-registry-client', 'lib', 'publish.js'),
