@@ -31,7 +31,7 @@ function manifest (spec, opts) {
         manifest._where = opts.where
       }
       const elapsedTime = Date.now() - startTime
-      opts.log.verbose('pacote', `${spec.type} manifest for ${spec.name}@${spec.saveSpec || spec.fetchSpec} fetched in ${elapsedTime}ms`)
+      opts.log.silly('pacote', `${spec.type} manifest for ${spec.name}@${spec.saveSpec || spec.fetchSpec} fetched in ${elapsedTime}ms`)
       return manifest
     })
   })

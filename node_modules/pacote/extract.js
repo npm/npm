@@ -62,7 +62,7 @@ function extractByDigest (start, spec, dest, opts) {
   const xtractor = extractStream(dest, opts)
   const cached = cacache.get.stream.byDigest(opts.cache, opts.integrity, opts)
   return pipe(cached, xtractor).then(() => {
-    opts.log.verbose('pacote', `${spec} extracted to ${dest} by content address ${Date.now() - start}ms`)
+    opts.log.silly('pacote', `${spec} extracted to ${dest} by content address ${Date.now() - start}ms`)
   })
 }
 
@@ -75,7 +75,7 @@ function extractByManifest (start, spec, dest, opts) {
     }
     return pipe(fetch.tarball(spec, opts), xtractor)
   }).then(() => {
-    opts.log.verbose('pacote', `${spec} extracted in ${Date.now() - start}ms`)
+    opts.log.silly('pacote', `${spec} extracted in ${Date.now() - start}ms`)
   })
 }
 

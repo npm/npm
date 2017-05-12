@@ -9,6 +9,7 @@ npm install tar-stream
 ```
 
 [![build status](https://secure.travis-ci.org/mafintosh/tar-stream.png)](http://travis-ci.org/mafintosh/tar-stream)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 ## Usage
 
@@ -50,18 +51,18 @@ pack.pipe(process.stdout)
 
 ## Extracting
 
-To extract a stream use `tar.extract()` and listen for `extract.on('entry', header, stream, callback)`
+To extract a stream use `tar.extract()` and listen for `extract.on('entry', (header, stream, next) )`
 
 ``` js
 var extract = tar.extract()
 
-extract.on('entry', function(header, stream, callback) {
+extract.on('entry', function(header, stream, next) {
   // header is the tar header
   // stream is the content body (might be an empty stream)
   // call next when you are done with this entry
 
   stream.on('end', function() {
-    callback() // ready for next entry
+    next() // ready for next entry
   })
 
   stream.resume() // just auto drain the stream
@@ -73,6 +74,8 @@ extract.on('finish', function() {
 
 pack.pipe(extract)
 ```
+
+The tar archive is streamed sequentially, meaning you **must** drain each entry's stream as you get them or else the main extract stream will receive backpressure and stop reading.
 
 ## Headers
 
@@ -124,6 +127,36 @@ oldTarballStream.pipe(extract)
 
 // pipe the new tarball the another stream
 pack.pipe(newTarballStream)
+```
+
+## Saving tarball to fs
+
+
+``` js
+var fs = require('fs')
+var tar = require('tar-stream')
+
+var pack = tar.pack() // pack is a streams2 stream
+var path = 'YourTarBall.tar'
+var yourTarball = fs.createWriteStream(path)
+
+// add a file called YourFile.txt with the content "Hello World!"
+pack.entry({name: 'YourFile.txt'}, 'Hello World!', function (err) {
+  if (err) throw err
+  pack.finalize()
+})
+
+// pipe the pack stream to your file
+pack.pipe(yourTarball)
+
+yourTarball.on('close', function () {
+  console.log(path + ' has been written')
+  fs.stat(path, function(err, stats) {
+    if (err) throw err
+    console.log(stats)
+    console.log('Got file info successfully!')
+  })
+})
 ```
 
 ## Performance

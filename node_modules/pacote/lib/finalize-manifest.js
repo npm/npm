@@ -162,6 +162,7 @@ function tarballedProps (pkg, spec, opts) {
       needsExtract && pipe(tarStream, gunzip(), extracted),
       (sr, mani, paths, hash) => {
         const extraProps = mani || {}
+        delete extraProps._resolved
         // drain out the rest of the tarball
         tarStream.unpipe()
         tarStream.on('data', () => {})
