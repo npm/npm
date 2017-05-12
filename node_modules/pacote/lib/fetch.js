@@ -26,17 +26,6 @@ function fromManifest (manifest, spec, opts) {
   return getFetcher(spec.type).fromManifest(manifest, spec, opts)
 }
 
-const TYPES = new Set([
-  'directory',
-  'file',
-  'git',
-  'hosted',
-  'range',
-  'remote',
-  'tag',
-  'version'
-])
-
 const fetchers = {}
 
 module.exports.clearMemoized = clearMemoized
@@ -47,17 +36,37 @@ function clearMemoized () {
 }
 
 function getFetcher (type) {
-  if (!TYPES.has(type)) {
-    throw new Error(`Invalid dependency type requested: ${type}`)
-  } else if (fetchers[type]) {
-    return fetchers[type]
-  } else {
-    const fetcher = (
-      fetchers[type] ||
-      (
-        fetchers[type] = require(`./fetchers/${type}`)
-      )
-    )
-    return fetcher
+  if (!fetchers[type]) {
+    // This is spelled out both to prevent sketchy stuff and to make life
+    // easier for bundlers/preprocessors.
+    switch (type) {
+      case 'directory':
+        fetchers[type] = require('./fetchers/directory')
+        break
+      case 'file':
+        fetchers[type] = require('./fetchers/file')
+        break
+      case 'git':
+        fetchers[type] = require('./fetchers/git')
+        break
+      case 'hosted':
+        fetchers[type] = require('./fetchers/hosted')
+        break
+      case 'range':
+        fetchers[type] = require('./fetchers/range')
+        break
+      case 'remote':
+        fetchers[type] = require('./fetchers/remote')
+        break
+      case 'tag':
+        fetchers[type] = require('./fetchers/tag')
+        break
+      case 'version':
+        fetchers[type] = require('./fetchers/version')
+        break
+      default:
+        throw new Error(`Invalid dependency type requested: ${type}`)
+    }
   }
+  return fetchers[type]
 }
