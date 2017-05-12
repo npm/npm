@@ -27,6 +27,7 @@ var optimist = Dir({
     minimist: Dir({
       'package.json': File({
         _shasum: 'd7aa327bcecf518f9106ac6b8f003fa3bcea8566',
+        _resolve: 'foo',
         name: 'minimist',
         version: '0.0.5'
       })
@@ -34,6 +35,7 @@ var optimist = Dir({
     wordwrap: Dir({
       'package.json': File({
         _shasum: 'b79669bb42ecb409f83d583cad52ca17eaa1643f',
+        _resolve: 'foo',
         name: 'wordwrap',
         version: '0.0.2'
       })
