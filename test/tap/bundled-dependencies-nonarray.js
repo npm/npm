@@ -50,7 +50,7 @@ test('errors on non-array bundleddependencies', function (t) {
 })
 
 test('cleanup', function (t) {
-//  cleanup()
+  cleanup()
   t.end()
 })
 
