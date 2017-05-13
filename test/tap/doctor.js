@@ -5,6 +5,7 @@ const http = require('http')
 const mr = require('npm-registry-mock')
 const npm = require('../../lib/npm.js')
 const path = require('path')
+const rimraf = require('rimraf')
 const Tacks = require('tacks')
 const test = require('tap').test
 const which = require('which')
@@ -96,4 +97,9 @@ test('npm doctor', function (t) {
       t.done()
     })
   })
+})
+
+test('cleanup', (t) => {
+  rimraf.sync(ROOT)
+  t.done()
 })
