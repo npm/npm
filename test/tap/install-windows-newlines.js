@@ -42,7 +42,7 @@ test('setup', function (t) {
     path.join(pkg, 'cli-dependency', 'hashbang.js'),
     '#!/usr/bin/env node\r\nconsole.log(\'Hello, world!\')\r\n'
   )
-  fs.writeFileSync(
+  fs.writeFileSync(
     path.join(pkg, 'cli-dependency', 'nohashbang.js'),
     '\'use strict\'\r\nconsole.log(\'Goodbye, world!\')\r\n'
   )
