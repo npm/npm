@@ -58,11 +58,11 @@ test('setup', function (t) {
     t.ifError(err, 'install successful')
     t.equal(code, 0, 'npm install did not raise error code')
     t.ok(
-      existsSync(path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js')),
+      existsSync(path.resolve(pkg, 'node_modules/.bin/hashbang')),
       'cli installed'
     )
     t.ok(
-      existsSync(path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js')),
+      existsSync(path.resolve(pkg, 'node_modules/.bin/nohashbang')),
       'cli installed'
     )
     t.end()
