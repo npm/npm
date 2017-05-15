@@ -59,13 +59,15 @@ test('setup', function (t) {
     t.equal(code, 0, 'npm install did not raise error code')
     t.ok(
       fs.readFileSync(
-        path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js'), 'utf8')
+        path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js'),
+        'utf8'
       ).length,
       'cli installed'
     )
     t.ok(
       fs.readFileSync(
-        path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js'), 'utf8')
+        path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js'),
+        'utf8'
       ).length,
       'cli installed'
     )
@@ -76,7 +78,8 @@ test('setup', function (t) {
 test('\'npm install\' should convert newlines to Unix/Linux style in hashbang cli scripts', function (t) {
   t.notOk(
     fs.readFileSync(
-      path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js'), 'utf8')
+      path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js'),
+      'utf8'
     ).includes('\r\n'),
     'dependency cli newlines converted'
   )
@@ -86,7 +89,8 @@ test('\'npm install\' should convert newlines to Unix/Linux style in hashbang cl
 test('\'npm install\' should not convert newlines to Unix/Linux style in non-hashbang cli files', function (t) {
   t.ok(
     fs.readFileSync(
-      path.resolve(pkg, 'node_modules/cli-dependency/nohashbang.js'), 'utf8')
+      path.resolve(pkg, 'node_modules/cli-dependency/nohashbang.js'),
+      'utf8'
     ).includes('\r\n'),
     'dependency cli newlines retained'
   )
