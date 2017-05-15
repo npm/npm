@@ -43,7 +43,7 @@ test('setup', function (t) {
     '#!/usr/bin/env node\r\nconsole.log(\'Hello, world!\')\r\n'
   )
   fs.writeFileSync(
-    path.join(pkg, 'cli-dependency', 'nohashbang.js'),
+    path.join(pkg, 'cli-dependency', 'nohashbang.js'),
     '\'use strict\'\r\nconsole.log(\'Goodbye, world!\')\r\n'
   )
 
@@ -54,21 +54,15 @@ test('setup', function (t) {
   )
 
   process.chdir(pkg)
-  common.npm(['install'], EXEC_OPTS, function (err, code) {
+  common.npm(['install'], EXEC_OPTS, function (err, code) {
     t.ifError(err, 'install successful')
     t.equal(code, 0, 'npm install did not raise error code')
     t.ok(
-      fs.readFileSync(
-        path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js'),
-        'utf8'
-      ).length,
+      existsSync(path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js')),
       'cli installed'
     )
-    t.ok(
-      fs.readFileSync(
-        path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js'),
-        'utf8'
-      ).length,
+    t.ok(
+      existsSync(path.resolve(pkg, 'node_modules/cli-dependency/hashbang.js')),
       'cli installed'
     )
     t.end()
