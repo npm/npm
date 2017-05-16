@@ -12,16 +12,14 @@ const shrinkwrap = require('../../lib/shrinkwrap.js')
 const ssri = require('ssri')
 const test = require('tap').test
 
-const pkg = path.resolve(__dirname, 'shrinkwrap-empty-deps')
+const pkg = path.join(__dirname, path.basename(__filename, '.js'))
 
 const EXEC_OPTS = { cwd: pkg }
 
 const json = {
   author: 'Rockbert',
-  name: 'shrinkwrap-empty-deps',
-  version: '0.0.0',
-  dependencies: {},
-  devDependencies: {}
+  name: 'shrinkwrap-extra-metadata',
+  version: '0.0.0'
 }
 
 test('setup', function (t) {
@@ -36,7 +34,7 @@ test('setup', function (t) {
   t.end()
 })
 
-test('returns a list of removed items', function (t) {
+test('adds additional metadata fields from the pkglock spec', function (t) {
   mr({ port: common.port }, function (er, s) {
     common.npm(
       [
@@ -53,7 +51,7 @@ test('returns a list of removed items', function (t) {
           t.ifError(err, 'read npm-shrinkwrap.json without issue')
           t.same(
             {
-              'name': 'shrinkwrap-empty-deps',
+              'name': 'shrinkwrap-extra-metadata',
               'version': '0.0.0',
               'createdWith': `npm@${npm.version}`,
               'lockfileVersion': shrinkwrap.PKGLOCK_VERSION,
@@ -62,7 +60,7 @@ test('returns a list of removed items', function (t) {
               }).toString()
             },
             JSON.parse(desired),
-            'shrinkwrap handled empty deps without exploding'
+            'shrinkwrap wrote the expected metadata fields'
           )
 
           s.close()

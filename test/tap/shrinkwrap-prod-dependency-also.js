@@ -46,7 +46,11 @@ test("shrinkwrap --also=development doesn't strip out prod dependencies", functi
             t.ifError(ex, 'read shrinkwrap')
           }
         }
-        t.deepEqual(results, desired, 'results have dev dep')
+        t.deepEqual(
+          results.dependencies,
+          desired.dependencies,
+          'results have dev dep'
+        )
         s.done()
         t.end()
       })

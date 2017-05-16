@@ -26,7 +26,7 @@ test("shrinkwrap --dev doesn't strip out prod dependencies", function (t) {
         npm.commands.shrinkwrap([], true, function (err, results) {
           if (err) return t.fail(err)
 
-          t.deepEqual(results, desired)
+          t.deepEqual(results.dependencies, desired.dependencies)
           s.close()
           t.end()
         })

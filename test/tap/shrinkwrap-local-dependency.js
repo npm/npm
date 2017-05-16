@@ -85,7 +85,11 @@ test('shrinkwrap uses resolved with file: on local deps', function (t) {
       t.comment(stderr.trim())
       t.equal(code, 0, 'npm exited normally')
       var data = fs.readFileSync(path.join(testdir, 'npm-shrinkwrap.json'), { encoding: 'utf8' })
-      t.deepEqual(JSON.parse(data), shrinkwrap, 'shrinkwrap looks correct')
+      t.deepEqual(
+        JSON.parse(data).dependencies,
+        shrinkwrap.dependencies,
+        'shrinkwrap looks correct'
+      )
       t.end()
     })
   })

@@ -83,7 +83,7 @@ test('shrinkwrap-default-dev', function (t) {
     t.comment(stdout.trim())
     t.comment(stderr.trim())
     var swrap = JSON.parse(fs.readFileSync(shrinkwrapPath))
-    t.isDeeply(swrap, shrinkwrapWithDev, 'Shrinkwrap included dev deps by default')
+    t.isDeeply(swrap.dependencies, shrinkwrapWithDev.dependencies, 'Shrinkwrap included dev deps by default')
     t.done()
   })
 })
