@@ -94,6 +94,7 @@ test('install from git repo with prepare script', function (t) {
 
   common.npm([
     'install',
+    '--no-save',
     '--registry', common.registry,
     '--cache', cache,
     '--loglevel', 'error'
