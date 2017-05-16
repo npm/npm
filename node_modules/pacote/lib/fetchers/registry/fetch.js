@@ -28,16 +28,6 @@ function regFetch (uri, registry, opts) {
       opts.log.warn('notice', res.headers.get('npm-notice'))
     }
     checkWarnings(res, registry, opts)
-    res.body.on('end', () => {
-      const elapsedTime = Date.now() - startTime
-      const attempt = res.headers.get('x-fetch-attempts')
-      const attemptStr = attempt && attempt > 1 ? ` attempt #${attempt}` : ''
-      const cacheStr = res.headers.get('x-local-cache') ? ' (from cache)' : ''
-      opts.log.http(
-        'fetch',
-        `GET ${res.status} ${uri} ${elapsedTime}ms${attemptStr}${cacheStr}`
-      )
-    })
     if (res.status >= 400) {
       const err = new Error(`${res.status} ${res.statusText}: ${
         opts.spec ? opts.spec : uri
@@ -46,11 +36,24 @@ function regFetch (uri, registry, opts) {
       err.uri = uri
       err.response = res
       err.spec = opts.spec
+      logRequest(uri, res, startTime, opts)
       throw err
     } else {
+      res.body.on('end', () => logRequest(uri, res, startTime, opts))
       return res
     }
   })
+}
+
+function logRequest (uri, res, startTime, opts) {
+  const elapsedTime = Date.now() - startTime
+  const attempt = res.headers.get('x-fetch-attempts')
+  const attemptStr = attempt && attempt > 1 ? ` attempt #${attempt}` : ''
+  const cacheStr = res.headers.get('x-local-cache') ? ' (from cache)' : ''
+  opts.log.http(
+    'fetch',
+    `GET ${res.status} ${uri} ${elapsedTime}ms${attemptStr}${cacheStr}`
+  )
 }
 
 function getCacheMode (opts) {

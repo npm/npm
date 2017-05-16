@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.12"></a>
+## [2.7.12](https://github.com/zkat/pacote/compare/v2.7.11...v2.7.12) (2017-05-16)
+
+
+### Bug Fixes
+
+* **fetch:** fix default userAgent ([4b9d344](https://github.com/zkat/pacote/commit/4b9d344))
+* **registry:** log failed requests too ([0f23f06](https://github.com/zkat/pacote/commit/0f23f06))
+* **remote:** send a useful pkg id header for remote tarballs ([ac13356](https://github.com/zkat/pacote/commit/ac13356))
+
+
+
 <a name="2.7.11"></a>
 ## [2.7.11](https://github.com/zkat/pacote/compare/v2.7.10...v2.7.11) (2017-05-12)
 

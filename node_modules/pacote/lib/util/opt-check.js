@@ -23,7 +23,7 @@ function PacoteOptions (opts) {
   this.registry = opts.registry || 'https://registry.npmjs.org'
   this.retry = opts.retry // for npm-registry-client
   this.scope = opts.scope
-  this.userAgent = opts.userAgent || `${pkg.name}@${pkg.version}/node@{process.version}+${process.arch} (${process.platform})`
+  this.userAgent = opts.userAgent || `${pkg.name}@${pkg.version}/node@${process.version}+${process.arch} (${process.platform})`
   this.where = opts.where
   this.preferOnline = opts.preferOnline
   this.isFromCI = !!(
