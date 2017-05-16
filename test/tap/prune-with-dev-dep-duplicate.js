@@ -14,12 +14,14 @@ var pkg = path.resolve(__dirname, 'prune')
 var cache = path.resolve(pkg, 'cache')
 
 var json = {
-  name: 'prune-with-only-dev-deps',
+  name: 'prune-with-dev-dep-duplicate',
   description: 'fixture',
   version: '0.0.1',
   main: 'index.js',
+  dependencies: {
+    'test-package': '0.0.0'
+  },
   devDependencies: {
-    'test-package-with-one-dep': '0.0.0',
     'test-package': '0.0.0'
   }
 }
@@ -59,7 +61,7 @@ test('npm install', function (t) {
 
 test('verify installs', function (t) {
   var dirs = fs.readdirSync(pkg + '/node_modules').sort()
-  t.same(dirs, [ 'test-package', 'test-package-with-one-dep' ].sort())
+  t.same(dirs, [ 'test-package' ].sort())
   t.end()
 })
 
@@ -78,7 +80,7 @@ test('npm prune', function (t) {
 
 test('verify installs', function (t) {
   var dirs = fs.readdirSync(pkg + '/node_modules').sort()
-  t.same(dirs, [ 'test-package', 'test-package-with-one-dep' ])
+  t.same(dirs, [ 'test-package' ])
   t.end()
 })
 
@@ -90,16 +92,14 @@ test('npm prune', function (t) {
   ], EXEC_OPTS, function (err, code, stderr) {
     t.ifErr(err, 'prune finished successfully')
     t.notOk(code, 'exit ok')
-    t.equal(stderr,
-      '- test-package@0.0.0 node_modules/test-package\n' +
-      '- test-package-with-one-dep@0.0.0 node_modules/test-package-with-one-dep\n')
+    t.notOk(stderr, 'Should not get data on stderr: ' + stderr)
     t.end()
   })
 })
 
 test('verify installs', function (t) {
   var dirs = fs.readdirSync(pkg + '/node_modules').sort()
-  t.same(dirs, [])
+  t.same(dirs, [ 'test-package' ])
   t.end()
 })
 
