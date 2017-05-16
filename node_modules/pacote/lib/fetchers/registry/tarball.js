@@ -37,7 +37,11 @@ function fromManifest (manifest, spec, opts) {
   fetch(uri, registry, Object.assign({
     headers: {
       'pacote-req-type': 'tarball',
-      'pacote-pkg-id': `registry:${manifest.name}@${manifest.version}`
+      'pacote-pkg-id': `registry:${
+        spec.type === 'remote'
+        ? spec
+        : `${manifest.name}@${manifest.version}`
+      }`
     },
     integrity: manifest._integrity,
     algorithms: [
