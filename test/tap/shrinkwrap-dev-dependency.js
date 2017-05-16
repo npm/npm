@@ -79,7 +79,7 @@ test("shrinkwrap doesn't strip out the dependency", function (t) {
         } catch (ex) {
           t.comment(ex)
         }
-        t.deepEqual(results, desired)
+        t.deepEqual(results.dependencies, desired.dependencies)
         s.close()
         t.end()
       })
