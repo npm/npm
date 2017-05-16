@@ -143,12 +143,12 @@ html/doc/misc/%.html: doc/misc/%.md $(html_docdeps)
 marked: node_modules/.bin/marked
 
 node_modules/.bin/marked:
-	node bin/npm-cli.js install marked --no-global --no-timing
+	node bin/npm-cli.js install marked --no-global --no-timing --no-save
 
 marked-man: node_modules/.bin/marked-man
 
 node_modules/.bin/marked-man:
-	node bin/npm-cli.js install marked-man --no-global --no-timing
+	node bin/npm-cli.js install marked-man --no-global --no-timing --no-save
 
 doc: man
 
@@ -173,7 +173,7 @@ publish: gitclean ls-ok link doc-clean doc
 	node bin/npm-cli.js publish --tag=$(PUBLISHTAG)
 
 release: gitclean ls-ok markedclean marked-manclean doc-clean doc
-	node bin/npm-cli.js prune --production
+	node bin/npm-cli.js prune --production --no-save
 	@bash scripts/release.sh
 
 sandwich:
