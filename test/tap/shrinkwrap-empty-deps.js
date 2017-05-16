@@ -8,7 +8,6 @@ const npm = require('../../lib/npm.js')
 const osenv = require('osenv')
 const path = require('path')
 const rimraf = require('rimraf')
-const shrinkwrap = require('../../lib/shrinkwrap.js')
 const ssri = require('ssri')
 const test = require('tap').test
 
@@ -56,7 +55,7 @@ test('returns a list of removed items', function (t) {
               'name': 'shrinkwrap-empty-deps',
               'version': '0.0.0',
               'createdWith': `npm@${npm.version}`,
-              'lockfileVersion': shrinkwrap.PKGLOCK_VERSION,
+              'lockfileVersion': npm.lockfileVersion,
               'packageIntegrity': ssri.fromData(JSON.stringify(json, null, 2), {
                 algorithms: ['sha512']
               }).toString()
