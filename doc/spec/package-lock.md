@@ -23,33 +23,6 @@ The name of the package this is a package-lock for. This must match what's in `p
 
 The version of the package this is a package-lock for. This must match what's in `package.json`.
 
-### createdWith *(new)*
-
-An object with the the following properties:
-
-* `installer` - The package manager used to create this `package-lock`.
-* `runtime` - The runtime used to run the installer.
-* `platform` - The platform used to run the installer.
-* `arch` - The architecture used to run the installer.
-
-The values of `installer` and `runtime` must be `name@version`.  The name part must be
-a valid npm package name.  The version part must be a valid semver version
-string. The values of `platform` and `arch` are strings. For example:
-
-```
-{
-  "installer": "npm@5.0.0",
-  "runtime": "nodejs@8.0.0",
-  "platform": "darwin",
-  "arch": "x64"
-}
-```
-
-Installers should not make decisions based on this field.  And if they do,
-they should be limited to working around known bugs in very specific
-versions.  The inteded purpose of this field is in helping with isolating
-the source of bugs.
-
 ### lockfileVersion *(new)*
 
 An integer version, starting at `1` with the version number of this document
@@ -183,8 +156,6 @@ Refresh the data from the installer's ideal tree.
 
 The top level `name` and `version` come from the `package.json`.  It is an
 error if either are missing or invalid.
-
-`createdWith` should be filled in from `npm` itself.
 
 #### dependencies.dev
 
