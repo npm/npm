@@ -4,10 +4,8 @@ const common = require('../common-tap.js')
 const fs = require('fs')
 const mkdirp = require('mkdirp')
 const mr = require('npm-registry-mock')
-const npm = require('../../lib/npm.js')
 const osenv = require('osenv')
 const path = require('path')
-const pkgSri = require('../../lib/utils/package-integrity.js')
 const rimraf = require('rimraf')
 const test = require('tap').test
 

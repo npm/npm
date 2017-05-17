@@ -13,7 +13,8 @@ const test = require('tap').test
 
 const pkg = path.join(__dirname, path.basename(__filename, '.js'))
 
-const EXEC_OPTS = { cwd: pkg }
+const EXEC_OPTS = {
+  cwd: pkg }
 
 const json = {
   author: 'Rockbert',
@@ -41,7 +42,7 @@ test('adds additional metadata fields from the pkglock spec', function (t) {
         '--loglevel', 'silent',
         'shrinkwrap'
       ],
-      EXEC_OPTS,
+      { cwd: pkg, env: { NODE_PRESERVE_SYMLINKS: 'foo' } },
       function (err, code, stdout, stderr) {
         t.ifError(err, 'shrinkwrap ran without issue')
         t.notOk(code, 'shrinkwrap ran without raising error code')
@@ -54,7 +55,7 @@ test('adds additional metadata fields from the pkglock spec', function (t) {
               'version': '0.0.0',
               'lockfileVersion': npm.lockfileVersion,
               'packageIntegrity': pkgSri.hash(json),
-              'preserveSymlinks': process.env.NODE_PRESERVE_SYMLINKS
+              'preserveSymlinks': 'foo'
             },
             JSON.parse(desired),
             'shrinkwrap wrote the expected metadata fields'
