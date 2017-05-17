@@ -13,9 +13,6 @@ const test = require('tap').test
 
 const pkg = path.join(__dirname, path.basename(__filename, '.js'))
 
-const EXEC_OPTS = {
-  cwd: pkg }
-
 const json = {
   author: 'Rockbert',
   name: 'shrinkwrap-extra-metadata',
