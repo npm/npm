@@ -7,8 +7,8 @@ const mr = require('npm-registry-mock')
 const npm = require('../../lib/npm.js')
 const osenv = require('osenv')
 const path = require('path')
+const pkgSri = require('../../lib/utils/package-integrity.js')
 const rimraf = require('rimraf')
-const ssri = require('ssri')
 const test = require('tap').test
 
 const pkg = path.resolve(__dirname, 'shrinkwrap-empty-deps')
@@ -56,9 +56,7 @@ test('returns a list of removed items', function (t) {
               'version': '0.0.0',
               'createdWith': `npm@${npm.version}`,
               'lockfileVersion': npm.lockfileVersion,
-              'packageIntegrity': ssri.fromData(JSON.stringify(json, null, 2), {
-                algorithms: ['sha512']
-              }).toString()
+              'packageIntegrity': pkgSri.hash(json)
             },
             JSON.parse(desired),
             'shrinkwrap handled empty deps without exploding'
