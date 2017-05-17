@@ -52,7 +52,14 @@ test('adds additional metadata fields from the pkglock spec', function (t) {
             {
               'name': 'shrinkwrap-extra-metadata',
               'version': '0.0.0',
-              'createdWith': `npm@${npm.version}`,
+              'createdWith': {
+                installer: `${npm.name}@${npm.version}`,
+                runtime: `${process.release.name}@${
+                  process.version.slice(process.version[0] === 'v' ? 1 : 0)
+                }`,
+                platform: process.platform,
+                arch: process.arch
+              },
               'lockfileVersion': npm.lockfileVersion,
               'packageIntegrity': pkgSri.hash(json)
             },
