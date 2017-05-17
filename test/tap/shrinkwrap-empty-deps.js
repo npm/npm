@@ -48,17 +48,11 @@ test('returns a list of removed items', function (t) {
         t.ifError(err, 'shrinkwrap ran without issue')
         t.notOk(code, 'shrinkwrap ran without raising error code')
 
-        fs.readFile(path.resolve(pkg, 'npm-shrinkwrap.json'), function (err, desired) {
+        fs.readFile(path.resolve(pkg, 'npm-shrinkwrap.json'), function (err, found) {
           t.ifError(err, 'read npm-shrinkwrap.json without issue')
           t.same(
-            {
-              'name': 'shrinkwrap-empty-deps',
-              'version': '0.0.0',
-              'createdWith': `npm@${npm.version}`,
-              'lockfileVersion': npm.lockfileVersion,
-              'packageIntegrity': pkgSri.hash(json)
-            },
-            JSON.parse(desired),
+            JSON.parse(found).dependencies,
+            undefined,
             'shrinkwrap handled empty deps without exploding'
           )
 
