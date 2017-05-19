@@ -8,6 +8,8 @@ npm-install(1) -- Install a package
     npm install [<@scope>/]<name>@<tag>
     npm install [<@scope>/]<name>@<version>
     npm install [<@scope>/]<name>@<version range>
+    npm install <git-host>:<git-user>/<repo-name>
+    npm install <git repo url>
     npm install <tarball file>
     npm install <tarball url>
     npm install <folder>
@@ -176,10 +178,17 @@ after packing it up into a tarball (b).
     Installs the package from the hosted git provider, cloning it with `git`.
     For a full git remote url, only that URL will be attempted.
 
-          <protocol>://[<user>[:<password>]@]<hostname>[:<port>][:][/]<path>[#<commit-ish>]
+          <protocol>://[<user>[:<password>]@]<hostname>[:<port>][:][/]<path>[#<commit-ish> | #semver:<semver>]
 
     `<protocol>` is one of `git`, `git+ssh`, `git+http`, `git+https`, or
-    `git+file`. If no `<commit-ish>` is specified, then `master` is used.
+    `git+file`.
+
+    If `#<commit-ish>` is provided, it will be used to clone exactly that
+    commit. If the commit-ish has the format `#semver:<semver>`, `<semver>` can
+    be any valid semver range or exact version, and npm will look for any tags
+    or refs matching that range in the remote repository, much as it would for a
+    registry dependency. If neither `#<commit-ish>` or `#semver:<semver>` is
+    specified, then `master` is used.
 
     If the repository makes use of submodules, those submodules will be cloned
     as well.
@@ -204,6 +213,7 @@ after packing it up into a tarball (b).
     Examples:
 
           npm install git+ssh://git@github.com:npm/npm.git#v1.0.27
+          npm install git+ssh://git@github.com:npm/npm#semver:^5.0
           npm install git+https://isaacs@github.com/npm/npm.git
           npm install git://github.com/npm/npm.git#v1.0.27
           GIT_SSH_COMMAND='ssh -i ~/.ssh/custom_ident' npm install git+ssh://git@github.com:npm/npm.git
@@ -214,7 +224,12 @@ after packing it up into a tarball (b).
     Install the package at `https://github.com/githubname/githubrepo` by
     attempting to clone it using `git`.
 
-    If you don't specify a *commit-ish* then `master` will be used.
+    If `#<commit-ish>` is provided, it will be used to clone exactly that
+    commit. If the commit-ish has the format `#semver:<semver>`, `<semver>` can
+    be any valid semver range or exact version, and npm will look for any tags
+    or refs matching that range in the remote repository, much as it would for a
+    registry dependency. If neither `#<commit-ish>` or `#semver:<semver>` is
+    specified, then `master` is used.
 
     As with regular git dependencies, `dependencies` and `devDependencies` will
     be installed if the package has a `prepare` script, before the package is
@@ -225,13 +240,11 @@ after packing it up into a tarball (b).
           npm install mygithubuser/myproject
           npm install github:mygithubuser/myproject
 
-* `npm install gist:[<githubname>/]<gistID>[#<commit-ish>]`:
+* `npm install gist:[<githubname>/]<gistID>[#<commit-ish>|#semver:<semver>]`:
 
     Install the package at `https://gist.github.com/gistID` by attempting to
     clone it using `git`. The GitHub username associated with the gist is
     optional and will not be saved in `package.json`.
-
-    If you don't specify a *commit-ish* then `master` will be used.
 
     As with regular git dependencies, `dependencies` and `devDependencies` will
     be installed if the package has a `prepare` script, before the package is
@@ -246,7 +259,12 @@ after packing it up into a tarball (b).
     Install the package at `https://bitbucket.org/bitbucketname/bitbucketrepo`
     by attempting to clone it using `git`.
 
-    If you don't specify a *commit-ish* then `master` will be used.
+    If `#<commit-ish>` is provided, it will be used to clone exactly that
+    commit. If the commit-ish has the format `#semver:<semver>`, `<semver>` can
+    be any valid semver range or exact version, and npm will look for any tags
+    or refs matching that range in the remote repository, much as it would for a
+    registry dependency. If neither `#<commit-ish>` or `#semver:<semver>` is
+    specified, then `master` is used.
 
     As with regular git dependencies, `dependencies` and `devDependencies` will
     be installed if the package has a `prepare` script, before the package is
@@ -261,7 +279,12 @@ after packing it up into a tarball (b).
     Install the package at `https://gitlab.com/gitlabname/gitlabrepo`
     by attempting to clone it using `git`.
 
-    If you don't specify a *commit-ish* then `master` will be used.
+    If `#<commit-ish>` is provided, it will be used to clone exactly that
+    commit. If the commit-ish has the format `#semver:<semver>`, `<semver>` can
+    be any valid semver range or exact version, and npm will look for any tags
+    or refs matching that range in the remote repository, much as it would for a
+    registry dependency. If neither `#<commit-ish>` or `#semver:<semver>` is
+    specified, then `master` is used.
 
     As with regular git dependencies, `dependencies` and `devDependencies` will
     be installed if the package has a `prepare` script, before the package is
@@ -270,6 +293,7 @@ after packing it up into a tarball (b).
     Example:
 
           npm install gitlab:mygitlabuser/myproject
+          npm install gitlab:myusr/myproj#semver:^5.0
 
 You may combine multiple arguments, and even multiple types of arguments.
 For example:
@@ -314,7 +338,7 @@ The `--no-optional` argument will prevent optional dependencies from
 being installed.
 
 The `--no-shrinkwrap` argument, which will ignore an available
-shrinkwrap file and use the package.json instead.
+package lock or shrinkwrap file and use the package.json instead.
 
 The `--nodedir=/path/to/node/source` argument will allow npm to find the
 node source code so that npm can compile native modules.
