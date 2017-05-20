@@ -63,6 +63,7 @@ The following shorthands are parsed on the command-line:
 * `-f`: `--force`
 * `-desc`: `--description`
 * `-S`: `--save`
+* `-P`: `--save-prod`
 * `-D`: `--save-dev`
 * `-O`: `--save-optional`
 * `-B`: `--save-bundle`
@@ -802,6 +803,17 @@ If a package would be saved at install time by the use of `--save`,
 
 When used with the `npm rm` command, it removes it from the
 bundledDependencies list.
+
+### save-prod
+
+* Default: false
+* Type: Boolean
+
+Makes sure that a package will be saved into `dependencies` specifically. This
+is useful if a package already exists in `devDependencies` or
+`optionalDependencies`, but you want to move it to be a production dep. This is
+also the default behavior if `--save` is true, and neither `--save-dev` or
+`--save-optional` are true.
 
 ### save-dev
 
