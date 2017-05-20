@@ -15,7 +15,7 @@ npm-install(1) -- Install a package
     npm install <folder>
 
     alias: npm i
-    common options: [-D|--save-dev|-O|--save-optional] [-E|--save-exact] [-B|--save-bundle] [--no-save] [--dry-run]
+    common options: [-P|--save-prod|-D|--save-dev|-O|--save-optional] [-E|--save-exact] [-B|--save-bundle] [--no-save] [--dry-run]
 
 ## DESCRIPTION
 
@@ -97,6 +97,9 @@ after packing it up into a tarball (b).
     `npm install` saves any specified packages into `dependencies` by default.
     Additionally, you can control where and how they get saved with some
     additional flags:
+
+    * `-P, --save-prod`: Package will appear in your `dependencies`. This is the
+                         default unless `-D` or `-O` are present.
 
     * `-D, --save-dev`: Package will appear in your `devDependencies`.
 
