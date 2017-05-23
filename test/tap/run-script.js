@@ -75,11 +75,11 @@ var exitCode = {
   }
 }
 
-var tcshOnly = {
+var shell = {
   name: 'scripted',
   version: '1.2.3',
   scripts: {
-    'start': 'setenv foo 1 && echo $foo'
+    'start': 'echo foo'
   }
 }
 
@@ -316,23 +316,10 @@ test('npm run-script no-params (direct only)', function (t) {
   })
 })
 
-test('npm run-script invalid bash command', function (t) {
-    writeMetadata(tcshOnly)
-
-    common.npm(['run-script', 'start'], opts, function (err, code, stdout, stderr) {
-        t.ifError(err, 'ran command that works in tcsh but not bash without crashing')
-        t.equal(code, 1, 'npm exited with error code')
-        t.match(stderr,
-            new RegExp('setenv: command not found'),
-            'missing setenv command printed to stderr')
-        t.end()
-    })
-})
-
 test('npm run-script command-shell config', function (t) {
-    writeMetadata(tcshOnly)
+    writeMetadata(shell)
 
-    common.npm(['run-script', 'start', '--command-shell', '/bin/tcsh'], opts, testOutput.bind(null, t, '1'))
+    common.npm(['run-script', 'start', '--command-shell', 'echo'], opts, testOutput.bind(null, t, '-c echo foo'))
 })
 
 test('npm run-script no-params (direct only)', function (t) {
