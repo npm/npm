@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.13"></a>
+## [2.7.13](https://github.com/zkat/pacote/compare/v2.7.12...v2.7.13) (2017-05-23)
+
+
+### Bug Fixes
+
+* **deps:** bump dep versions to fix http redirect issues ([b23a9fa](https://github.com/zkat/pacote/commit/b23a9fa))
+
+
+
 <a name="2.7.12"></a>
 ## [2.7.12](https://github.com/zkat/pacote/compare/v2.7.11...v2.7.12) (2017-05-16)
 
