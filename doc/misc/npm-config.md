@@ -271,6 +271,13 @@ It is _not_ the path to a certificate file (and there is no "certfile" option).
 If false, never shows colors.  If `"always"` then always shows colors.
 If true, then only prints color codes for tty file descriptors.
 
+### command-shell
+
+* Default: `null`
+* Type: path
+
+The shell to use for scripts run with the `npm run` command.
+
 ### depth
 
 * Default: Infinity
