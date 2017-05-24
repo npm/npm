@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.15"></a>
+## [2.7.15](https://github.com/zkat/pacote/compare/v2.7.14...v2.7.15) (2017-05-24)
+
+
+### Bug Fixes
+
+* **proxy:** bump m-f-h with more patches ([26d4170](https://github.com/zkat/pacote/commit/26d4170))
+
+
+
 <a name="2.7.14"></a>
 ## [2.7.14](https://github.com/zkat/pacote/compare/v2.7.13...v2.7.14) (2017-05-24)
 
