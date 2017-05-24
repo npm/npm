@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.4.6"></a>
+## [2.4.6](https://github.com/zkat/make-fetch-happen/compare/v2.4.5...v2.4.6) (2017-05-24)
+
+
+### Bug Fixes
+
+* **proxy:** choose agent for http(s)-proxy by protocol of destUrl ([ea4832a](https://github.com/zkat/make-fetch-happen/commit/ea4832a))
+* **proxy:** make socks proxy working ([1de810a](https://github.com/zkat/make-fetch-happen/commit/1de810a))
+* **proxy:** revert previous proxy solution ([563b0d8](https://github.com/zkat/make-fetch-happen/commit/563b0d8))
+
+
+
 <a name="2.4.5"></a>
 ## [2.4.5](https://github.com/zkat/make-fetch-happen/compare/v2.4.4...v2.4.5) (2017-05-24)
 
