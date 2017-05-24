@@ -919,6 +919,14 @@ using `-s` to add a signature.
 Note that git requires you to have set up GPG keys in your git configs
 for this to work properly.
 
+### silent
+
+* Default: false
+* Type: Boolean
+
+If true, `npm outdated` will return a 0 exit status code even if packages are
+outdated.
+
 ### sso-poll-frequency
 
 * Default: 500

@@ -104,6 +104,13 @@ project.
 
 Max depth for checking dependency tree.
 
+### silent
+
+* Default: false
+* Type: Boolean
+
+Exit with status code of 0 even if packages are out of date.
+
 ## SEE ALSO
 
 * npm-update(1)
