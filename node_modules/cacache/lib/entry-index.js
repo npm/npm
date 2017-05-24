@@ -215,7 +215,9 @@ function formatEntry (cache, entry) {
 }
 
 function readdirOrEmpty (dir) {
-  return readdirAsync(dir).catch({code: 'ENOENT'}, () => [])
+  return readdirAsync(dir)
+  .catch({code: 'ENOENT'}, () => [])
+  .catch({code: 'ENOTDIR'}, () => [])
 }
 
 function nop () {

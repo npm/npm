@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.4.7"></a>
+## [2.4.7](https://github.com/zkat/make-fetch-happen/compare/v2.4.6...v2.4.7) (2017-05-24)
+
+
+### Bug Fixes
+
+* **deps:** pull in various fixes from deps ([fc2a587](https://github.com/zkat/make-fetch-happen/commit/fc2a587))
+
+
+
 <a name="2.4.6"></a>
 ## [2.4.6](https://github.com/zkat/make-fetch-happen/compare/v2.4.5...v2.4.6) (2017-05-24)
 
