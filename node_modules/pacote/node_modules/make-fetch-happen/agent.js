@@ -34,7 +34,7 @@ function getAgent (uri, opts) {
   }
 
   if (pxuri) {
-    const proxy = getProxy(pxuri, opts)
+    const proxy = getProxy(pxuri, parsedUri, opts)
     AGENT_CACHE.set(key, proxy)
     return proxy
   }
@@ -120,7 +120,7 @@ function getProxyUri (uri, opts) {
 let HttpProxyAgent
 let HttpsProxyAgent
 let SocksProxyAgent
-function getProxy (proxyUrl, opts) {
+function getProxy (proxyUrl, destUrl, opts) {
   let popts = {
     host: proxyUrl.hostname,
     port: proxyUrl.port,
@@ -134,14 +134,14 @@ function getProxy (proxyUrl, opts) {
     rejectUnauthorized: opts.strictSSL
   }
 
-  if (proxyUrl.protocol === 'http:') {
+  if (destUrl.protocol === 'http:') {
     if (!HttpProxyAgent) {
       HttpProxyAgent = require('http-proxy-agent')
     }
 
     return new HttpProxyAgent(popts)
   }
-  if (proxyUrl.protocol === 'https:') {
+  if (destUrl.protocol === 'https:') {
     if (!HttpsProxyAgent) {
       HttpsProxyAgent = require('https-proxy-agent')
     }
