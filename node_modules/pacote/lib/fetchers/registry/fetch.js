@@ -79,14 +79,17 @@ function getHeaders (uri, registry, opts) {
   }, opts.headers)
   const auth = (
     opts.auth &&
-    // If these two are on different hosts, don't send credentials.
-    // This is mainly used by the tarball fetcher.
-    url.parse(uri).host === url.parse(registry).host &&
     opts.auth[registryKey(registry)]
   )
-  if (auth && auth.token) {
+  // If a tarball is hosted on a different place than the manifest, only send
+  // credentials on `alwaysAuth`
+  const shouldAuth = auth && (
+    auth.alwaysAuth ||
+    url.parse(uri).host === url.parse(registry).host
+  )
+  if (shouldAuth && auth.token) {
     headers.authorization = `Bearer ${auth.token}`
-  } else if (auth && opts.alwaysAuth && auth.username && auth.password) {
+  } else if (shouldAuth && auth.username && auth.password) {
     const encoded = Buffer.from(
       `${auth.username}:${auth.password}`, 'utf8'
     ).toString('base64')
