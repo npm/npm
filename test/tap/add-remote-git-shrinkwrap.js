@@ -45,8 +45,9 @@ test('setup', function (t) {
 
 test('install from repo', function (t) {
   process.chdir(pkg)
-  npm.commands.install('.', [], function (er) {
-    t.ifError(er, 'npm installed via git')
+  common.npm(['install'], {cwd: pkg, stdio: [0, 1, 2]}, function (er, code) {
+    if (er) throw er
+    t.is(code, 0, 'npm installed via git')
 
     t.end()
   })
@@ -56,13 +57,12 @@ test('shrinkwrap gets correct _from and _resolved (#7121)', function (t) {
   common.npm(
     [
       'shrinkwrap',
-      '--loglevel', 'silent'
+      '--loglevel', 'error'
     ],
-    { cwd: pkg },
-    function (er, code, stdout, stderr) {
-      t.ifError(er, 'npm shrinkwrapped without errors')
+    { cwd: pkg, stdio: [0, 'pipe', 2] },
+    function (er, code, stdout) {
+      if (er) throw er
       t.is(code, 0, '`npm shrinkwrap` exited ok')
-      t.equal(stderr.trim(), '', 'no error output on successful shrinkwrap')
 
       var shrinkwrap = require(resolve(pkg, 'npm-shrinkwrap.json'))
       git.whichAndExec(
@@ -73,9 +73,7 @@ test('shrinkwrap gets correct _from and _resolved (#7121)', function (t) {
           t.notOk(stderr, 'no error output')
           var treeish = stdout.trim()
 
-          t.equal(
-            shrinkwrap.dependencies.child.resolved,
-            'git://localhost:1234/child.git#' + treeish,
+          t.like(shrinkwrap, {dependencies: {child: {version: 'git://localhost:1234/child.git#' + treeish}}},
             'npm shrinkwrapped resolved correctly'
           )
 
@@ -95,6 +93,7 @@ test('clean', function (t) {
 })
 
 function bootstrap () {
+  cleanup()
   mkdirp.sync(pkg)
   fs.writeFileSync(resolve(pkg, 'package.json'), pjParent)
 }
