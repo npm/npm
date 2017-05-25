@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.20"></a>
+## [2.7.20](https://github.com/zkat/pacote/compare/v2.7.19...v2.7.20) (2017-05-25)
+
+
+### Bug Fixes
+
+* **registry:** encode username and password for auth ([c48b651](https://github.com/zkat/pacote/commit/c48b651))
+
+
+
 <a name="2.7.19"></a>
 ## [2.7.19](https://github.com/zkat/pacote/compare/v2.7.18...v2.7.19) (2017-05-25)
 
