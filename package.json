@@ -83,7 +83,7 @@
     "once": "~1.4.0",
     "opener": "~1.4.3",
     "osenv": "~0.1.4",
-    "pacote": "~2.7.19",
+    "pacote": "~2.7.20",
     "path-is-inside": "~1.0.2",
     "promise-inflight": "~1.0.1",
     "read": "~1.0.7",
