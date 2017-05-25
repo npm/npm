@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.18"></a>
+## [2.7.18](https://github.com/zkat/pacote/compare/v2.7.17...v2.7.18) (2017-05-25)
+
+
+### Bug Fixes
+
+* **cache:** pass uid/gid settings through to mfh ([d8845df](https://github.com/zkat/pacote/commit/d8845df))
+* **deps:** update m-f-h for cache opts fix ([faab6cd](https://github.com/zkat/pacote/commit/faab6cd))
+
+
+
 <a name="2.7.17"></a>
 ## [2.7.17](https://github.com/zkat/pacote/compare/v2.7.16...v2.7.17) (2017-05-25)
 
