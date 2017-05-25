@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="9.2.5"></a>
+## [9.2.5](https://github.com/zkat/cacache/compare/v9.2.4...v9.2.5) (2017-05-25)
+
+
+### Bug Fixes
+
+* **deps:** fix lockfile issues and bump ssri ([84e1d7e](https://github.com/zkat/cacache/commit/84e1d7e))
+
+
+
 <a name="9.2.4"></a>
 ## [9.2.4](https://github.com/zkat/cacache/compare/v9.2.3...v9.2.4) (2017-05-24)
 
