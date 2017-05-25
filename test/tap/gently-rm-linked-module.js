@@ -47,7 +47,7 @@ env.npm_config_prefix = linkedGlobal
 var EXEC_OPTS = {
   cwd: workingDir,
   env: env,
-  stdio: [0, 1, 2]
+  stdio: [0, 'pipe', 2]
 }
 
 test('setup', function (t) {
@@ -58,11 +58,12 @@ test('setup', function (t) {
 })
 
 test('install and link', function (t) {
+  var globalBin = resolve(linkedGlobal, isWindows ? '.' : 'bin', 'linked')
+  var globalModule = resolve(linkedGlobal, isWindows ? '.' : 'lib', 'node_modules', '@test', 'linked')
   // link our test module into the global folder
-  return common.npm(['--loglevel', 'error', 'link', toInstall], EXEC_OPTS).spread((code) => {
+  return common.npm(['--loglevel', 'error', 'link', toInstall], EXEC_OPTS).spread((code, out) => {
+    t.comment(out)
     t.is(code, 0, 'link succeeded')
-    var globalBin = resolve(linkedGlobal, isWindows ? '.' : 'bin', 'linked')
-    var globalModule = resolve(linkedGlobal, isWindows ? '.' : 'lib', 'node_modules', '@test', 'linked')
     var localBin = resolve(workingDir, 'node_modules', '.bin', 'linked')
     var localModule = resolve(workingDir, 'node_modules', '@test', 'linked')
     try {
@@ -76,8 +77,9 @@ test('install and link', function (t) {
     if (code !== 0) throw new Error('aborting')
 
     // and try removing it and make sure that succeeds
-    return common.npm(['--global', '--loglevel', 'error', 'rm', '@test/linked' ], EXEC_OPTS)
-  }).spread((code) => {
+    return common.npm(['--global', '--loglevel', 'error', 'rm', '@test/linked'], EXEC_OPTS)
+  }).spread((code, out) => {
+    t.comment(out)
     t.is(code, 0, 'rm succeeded')
     t.throws(function () { fs.statSync(globalBin) }, 'global bin removed')
     t.throws(function () { fs.statSync(globalModule) }, 'global module removed')
