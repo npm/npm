@@ -52,7 +52,7 @@ function initializeCache (opts) {
       Cache = require('./cache')
     }
 
-    opts.cacheManager = new Cache(opts.cacheManager)
+    opts.cacheManager = new Cache(opts.cacheManager, opts)
   }
 
   opts.cache = opts.cache || 'default'

@@ -1,5 +1,6 @@
 'use strict'
 
+const BB = require('bluebird')
 const Buffer = require('safe-buffer').Buffer
 
 const checkWarnings = require('./check-warning-header')
@@ -19,10 +20,13 @@ function regFetch (uri, registry, opts) {
     integrity: opts.integrity,
     memoize: opts.memoize,
     noProxy: opts.noProxy,
+    Promise: BB,
     proxy: opts.proxy,
     referer: opts.refer,
     retry: opts.retry,
-    timeout: opts.timeout
+    timeout: opts.timeout,
+    uid: opts.uid,
+    gid: opts.gid
   }).then(res => {
     if (res.headers.has('npm-notice') && !res.headers.has('x-local-cache')) {
       opts.log.warn('notice', res.headers.get('npm-notice'))
