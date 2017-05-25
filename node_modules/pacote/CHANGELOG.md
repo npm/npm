@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.19"></a>
+## [2.7.19](https://github.com/zkat/pacote/compare/v2.7.18...v2.7.19) (2017-05-25)
+
+
+### Bug Fixes
+
+* **registry:** respect alwaysAuth ([150788a](https://github.com/zkat/pacote/commit/150788a))
+
+
+
 <a name="2.7.18"></a>
 ## [2.7.18](https://github.com/zkat/pacote/compare/v2.7.17...v2.7.18) (2017-05-25)
 
