@@ -90,9 +90,9 @@ function getHeaders (uri, registry, opts) {
   if (shouldAuth && auth.token) {
     headers.authorization = `Bearer ${auth.token}`
   } else if (shouldAuth && auth.username && auth.password) {
-    const username = encodeURIComponent(auth.username)
-    const password = encodeURIComponent(auth.password)
-    const encoded = Buffer.from(`${username}:${password}`).toString('base64')
+    const encoded = Buffer.from(
+      `${auth.username}:${auth.password}`, 'utf8'
+    ).toString('base64')
     headers.authorization = `Basic ${encoded}`
   }
   return headers
