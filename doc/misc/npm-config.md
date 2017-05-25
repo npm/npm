@@ -683,6 +683,16 @@ Attempt to install packages in the `optionalDependencies` object.  Note
 that if these packages fail to install, the overall installation
 process is not aborted.
 
+### package-lock
+
+* Default: true
+* Type: Boolean
+
+If set to false, then ignore `package-lock.json` files when installing. This
+will also prevent _writing_ `package-lock.json` if `save` is true.
+
+This option is an alias for `--shrinkwrap`.
+
 ### parseable
 
 * Default: false
@@ -946,8 +956,10 @@ The shell to run for the `npm explore` command.
 * Default: true
 * Type: Boolean
 
-If set to false, then ignore `npm-shrinkwrap.json` files when
-installing.
+If set to false, then ignore `npm-shrinkwrap.json` files when installing. This
+will also prevent _writing_ `npm-shrinkwrap.json` if `save` is true.
+
+This option is an alias for `--package-lock`.
 
 ### sign-git-tag
 
