@@ -20,7 +20,10 @@ interpreted as a configuration parameter.  For example, putting
 configuration parameter to `bar`.  Any environment configurations that
 are not given a value will be given the value of `true`.  Config
 values are case-insensitive, so `NPM_CONFIG_FOO=bar` will work the
-same.
+same. However, please note that inside [npm-scripts](/misc/scripts)
+npm will set it's own environment variables and Node will prefer
+those lowercase versions over any uppercase ones that you might set.
+For details see [this issue](https://github.com/npm/npm/issues/14528).
 
 ### npmrc Files
 
@@ -60,6 +63,7 @@ The following shorthands are parsed on the command-line:
 * `-f`: `--force`
 * `-desc`: `--description`
 * `-S`: `--save`
+* `-P`: `--save-prod`
 * `-D`: `--save-dev`
 * `-O`: `--save-optional`
 * `-B`: `--save-bundle`
@@ -118,6 +122,14 @@ you want your scoped package to be publicly viewable (and installable) set
 `--access=public`. The only valid values for `access` are `public` and
 `restricted`. Unscoped packages _always_ have an access level of `public`.
 
+### allow-same-version
+
+* Default: false
+* Type: Boolean
+
+Prevents throwing an error when `npm version` is used to set the new version
+to the same value as the current version.
+
 ### always-auth
 
 * Default: false
@@ -133,6 +145,13 @@ even for `GET` requests.
 
 When "dev" or "development" and running local `npm shrinkwrap`,
 `npm outdated`, or `npm update`, is an alias for `--dev`.
+
+### auth-type
+
+* Default: `'legacy'`
+* Type: `'legacy'`, `'sso'`, `'saml'`, `'oauth'`
+
+What authentication strategy to use with `adduser`/`login`.
 
 ### bin-links
 
@@ -216,22 +235,18 @@ Number of ms to wait for cache lock files to expire.
 * Default: Infinity
 * Type: Number
 
-The maximum time (in seconds) to keep items in the registry cache before
-re-checking against the registry.
+**DEPRECATED**: This option has been deprecated in favor of `--prefer-online`.
 
-Note that no purging is done unless the `npm cache clean` command is
-explicitly used, and that only GET requests use the cache.
+`--cache-max=0` is an alias for `--prefer-online`.
 
 ### cache-min
 
 * Default: 10
 * Type: Number
 
-The minimum time (in seconds) to keep items in the registry cache before
-re-checking against the registry.
+**DEPRECATED**: This option has been deprecated in favor of `--prefer-offline`.
 
-Note that no purging is done unless the `npm cache clean` command is
-explicitly used, and that only GET requests use the cache.
+`--cache-min=9999 (or bigger)` is an alias for `--prefer-offline`.
 
 ### cert
 
@@ -279,9 +294,6 @@ Show the description in `npm search`
 * Type: Boolean
 
 Install `dev-dependencies` along with packages.
-
-Note that `dev-dependencies` are also installed if the `npat` flag is
-set.
 
 ### dry-run
 
@@ -439,6 +451,13 @@ option can be used when it's desirable to optionally run a script when it's
 present and fail if the script fails. This is useful, for example, when running
 scripts that may only apply for some builds in an otherwise generic CI setup.
 
+### ignore-prepublish
+
+* Default: false
+* Type: Boolean
+
+If true, npm will not run `prepublish` scripts.
+
 ### ignore-scripts
 
 * Default: false
@@ -499,9 +518,9 @@ version number, if not already set in package.json.
 
 Whether or not to output JSON data, rather than the normal output.
 
-This feature is currently experimental, and the output data structures
-for many commands is either not implemented in JSON yet, or subject to
-change.  Only the output from `npm ls --json` is currently valid.
+This feature is currently experimental, and the output data structures for many
+commands is either not implemented in JSON yet, or subject to change.  Only the
+output from `npm ls --json` and `npm search --json` are currently valid.
 
 ### key
 
@@ -576,6 +595,13 @@ stderr.
 If the `color` config is set to true, then this stream will receive
 colored output if it is a TTY.
 
+### logs-max
+
+* Default: 10
+* Type: Number
+
+The maximum number of log files to store.
+
 ### long
 
 * Default: false
@@ -600,6 +626,13 @@ Commit message which is used by `npm version` when creating version commit.
 
 Any "%s" in the message will be replaced with the version number.
 
+### metrics-registry
+
+* Default: The value of  `registry` (which defaults to "https://registry.npmjs.org/")
+* Type: String
+
+The registry you want to send cli metrics to if `send-metrics` is true.
+
 ### node-version
 
 * Default: process.version
@@ -607,12 +640,13 @@ Any "%s" in the message will be replaced with the version number.
 
 The node version to use when checking a package's `engines` map.
 
-### npat
+### offline
 
 * Default: false
 * Type: Boolean
 
-Run tests on installation.
+Force offline mode: no network requests will be done during install. To allow
+the CLI to fill in missing cache data, see `--prefer-offline`.
 
 ### onload-script
 
@@ -649,13 +683,41 @@ Attempt to install packages in the `optionalDependencies` object.  Note
 that if these packages fail to install, the overall installation
 process is not aborted.
 
+### package-lock
+
+* Default: true
+* Type: Boolean
+
+If set to false, then ignore `package-lock.json` files when installing. This
+will also prevent _writing_ `package-lock.json` if `save` is true.
+
+This option is an alias for `--shrinkwrap`.
+
 ### parseable
 
 * Default: false
 * Type: Boolean
 
 Output parseable results from commands that write to
-standard output.
+standard output. For `npm search`, this will be tab-separated table format.
+
+### prefer-offline
+
+* Default: false
+* Type: Boolean
+
+If true, staleness checks for cached data will be bypassed, but missing data
+will be requested from the server. To force full offline mode, use `--offline`.
+
+This option is effectively equivalent to `--cache-min=9999999`.
+
+### prefer-online
+
+* Default: false
+* Type: Boolean
+
+If true, staleness checks for cached data will be forced, making the CLI look
+for updates immediately even for fresh package data.
 
 ### prefix
 
@@ -752,6 +814,17 @@ If a package would be saved at install time by the use of `--save`,
 When used with the `npm rm` command, it removes it from the
 bundledDependencies list.
 
+### save-prod
+
+* Default: false
+* Type: Boolean
+
+Makes sure that a package will be saved into `dependencies` specifically. This
+is useful if a package already exists in `devDependencies` or
+`optionalDependencies`, but you want to move it to be a production dep. This is
+also the default behavior if `--save` is true, and neither `--save-dev` or
+`--save-optional` are true.
+
 ### save-dev
 
 * Default: false
@@ -801,7 +874,7 @@ patch upgrades.
 
 ### scope
 
-* Default: ""
+* Default: the scope of the current project, if any, or ""
 * Type: String
 
 Associate an operation with a scope for a scoped registry. Useful when logging
@@ -810,12 +883,25 @@ in to a private registry for the first time:
 will cause `@organization` to be mapped to the registry for future installation
 of packages specified according to the pattern `@organization/package`.
 
-### searchopts
+### scripts-prepend-node-path
 
-* Default: ""
-* Type: String
+* Default: "warn-only"
+* Type: Boolean, `"auto"` or `"warn-only"`
 
-Space-separated options that are always passed to search.
+If set to `true`, add the directory in which the current `node` executable
+resides to the `PATH` environment variable when running scripts,
+even if that means that `npm` will invoke a different `node` executable than
+the one which it is running.
+
+If set to `false`, never modify `PATH` with that.
+
+If set to `"warn-only"`, never modify `PATH` but print a warning if `npm` thinks
+that you may want to run it with `true`, e.g. because the `node` executable
+in the `PATH` is not the one `npm` was invoked with.
+
+If set to `auto`, only add that directory to the `PATH` environment variable
+if the `node` executable with which `npm` was invoked and the one that is found
+first on the `PATH` are different.
 
 ### searchexclude
 
@@ -824,15 +910,38 @@ Space-separated options that are always passed to search.
 
 Space-separated options that limit the results from search.
 
-### searchsort
+### searchopts
 
-* Default: "name"
+* Default: ""
 * Type: String
-* Values: "name", "-name", "date", "-date", "description",
-  "-description", "keywords", "-keywords"
 
-Indication of which field to sort search results by.  Prefix with a `-`
-character to indicate reverse sort.
+Space-separated options that are always passed to search.
+
+### searchlimit
+
+* Default: 20
+* Type: Number
+
+Number of items to limit search results to. Will not apply at all to legacy
+searches.
+
+### searchstaleness
+
+* Default: 900 (15 minutes)
+* Type: Number
+
+The age of the cache, in seconds, before another registry request is made if
+using legacy search endpoint.
+
+### send-metrics
+
+* Default: false
+* Type: Boolean
+
+If true, success/failure metrics will be reported to the registry stored in
+`metrics-registry`.  These requests contain the number of successful and
+failing runs of the npm CLI and the time period overwhich those counts were
+gathered. No identifying information is included in these requests.
 
 ### shell
 
@@ -847,8 +956,10 @@ The shell to run for the `npm explore` command.
 * Default: true
 * Type: Boolean
 
-If set to false, then ignore `npm-shrinkwrap.json` files when
-installing.
+If set to false, then ignore `npm-shrinkwrap.json` files when installing. This
+will also prevent _writing_ `npm-shrinkwrap.json` if `save` is true.
+
+This option is an alias for `--package-lock`.
 
 ### sign-git-tag
 
@@ -860,6 +971,21 @@ using `-s` to add a signature.
 
 Note that git requires you to have set up GPG keys in your git configs
 for this to work properly.
+
+### sso-poll-frequency
+
+* Default: 500
+* Type: Number
+
+When used with SSO-enabled `auth-type`s, configures how regularly the registry
+should be polled while the user is completing authentication.
+
+### sso-type
+
+* Default: 'oauth'
+* Type: 'oauth', 'saml', or null
+
+If `--auth-type=sso`, the type of SSO type to use.
 
 ### strict-ssl
 
@@ -894,6 +1020,17 @@ to the empty string: `""`.
 Because other tools may rely on the convention that npm version tags look like
 `v1.0.0`, _only use this property if it is absolutely necessary_. In
 particular, use care when overriding this setting for public packages.
+
+### timing
+
+* Default: `false`
+* Type: Boolean
+
+If true, writes an `npm-debug` log to `_logs` and timing information to
+`_timing.json`, both in your cache.  `_timing.json` is a newline delimited
+list of JSON objects.  You can quickly view it with this
+[json](https://www.npmjs.com/package/json) command line:
+`json -g < ~/.npm/_timing.json`.
 
 ### tmp
 
