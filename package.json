@@ -77,6 +77,7 @@
     "npm-cache-filename": "~1.0.2",
     "npm-install-checks": "~3.0.0",
     "npm-package-arg": "~5.1.1",
+    "npm-packlist": "~1.0.1",
     "npm-registry-client": "~8.3.0",
     "npm-user-validate": "~1.0.0",
     "npmlog": "~4.1.0",
@@ -103,7 +104,7 @@
     "sorted-union-stream": "~2.1.3",
     "ssri": "~4.1.5",
     "strip-ansi": "~3.0.1",
-    "tar": "~2.2.1",
+    "tar": "~3.1.3",
     "text-table": "~0.2.0",
     "uid-number": "0.0.6",
     "umask": "~1.1.0",
@@ -211,7 +212,8 @@
     "which",
     "wrappy",
     "write-file-atomic",
-    "safe-buffer"
+    "safe-buffer",
+    "npm-packlist"
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",
