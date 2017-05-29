@@ -6,24 +6,17 @@ These can be handed to [tar](http://npm.im/tar) like so to make an npm
 package tarball:
 
 ```js
-const pack = require('npm-packlist')
+const packlist = require('npm-packlist')
 const tar = require('tar')
 const packageDir = '/path/to/package'
 const packageTarball = '/path/to/package.tgz'
 
-pack({ path: packageDir })
+packlist({ path: packageDir })
   .then(files => tar.create({
     prefix: 'package/',
     cwd: packageDir,
     file: packageTarball,
-    gzip: true,
-    bundled: [
-      'some',
-      'deps',
-      'that-are',
-      'bundled-dependencies-in-node_modules',
-      'this-is-optional-of-course'
-    ]
+    gzip: true
   }, files))
   .then(_ => {
     // tarball has been created, continue with your day
@@ -45,8 +38,7 @@ This uses the following rules:
 4. Everything in the root `node_modules` is ignored, unless it's a
    bundled dependency.  If it IS a bundled dependency, and it's a
    symbolic link, then the target of the link is included, not the
-   symlink itself.  (The `bundled` option determines which packages
-   are to be considered bundled deps.)
+   symlink itself.
 4. Unless they're explicitly included (by being in a `files` list, or
    a `!negated` rule in a relevant `.npmignore` or `.gitignore`),
    always ignore certain common cruft files:
@@ -67,5 +59,9 @@ This uses the following rules:
 ## API
 
 Same API as [ignore-walk](http://npm.im/ignore-walk), just hard-coded
-file list and rule sets, and takes the `bundled` list of package names
-to include.
+file list and rule sets.
+
+The `Walker` and `WalkerSync` classes take a `bundled` argument, which
+is a list of package names to include from node_modules.  When calling
+the top-level `packlist()` and `packlist.sync()` functions, this
+module calls into `npm-bundled` directly.
