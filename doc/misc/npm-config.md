@@ -748,18 +748,6 @@ operations, if `process.stderr` is a TTY.
 
 Set to `false` to suppress the progress bar.
 
-### proprietary-attribs
-
-* Default: true
-* Type: Boolean
-
-Whether or not to include proprietary extended attributes in the
-tarballs created by npm.
-
-Unless you are expecting to unpack package tarballs with something other
-than npm -- particularly a very outdated tar implementation -- leave
-this as true.
-
 ### proxy
 
 * Default: null
