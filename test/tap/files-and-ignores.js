@@ -383,30 +383,12 @@ test('include main file', function (t) {
   })
 })
 
-test('certain files ignored unconditionally', function (t) {
+test('certain files ignored by default', function (t) {
   var fixture = new Tacks(
     Dir({
       'package.json': File({
         name: 'npm-test-files',
-        version: '1.2.5',
-        files: [
-          '.git',
-          '.svn',
-          'CVS',
-          '.hg',
-          '.lock-wscript',
-          '.wafpickle-0',
-          '.wafpickle-5',
-          '.wafpickle-50',
-          'build/config.gypi',
-          'npm-debug.log',
-          '.npmrc',
-          '.foo.swp',
-          '.DS_Store',
-          '._ohno',
-          'foo.orig',
-          'package-lock.json'
-        ]
+        version: '1.2.5'
       }),
       '.git': Dir({foo: File('')}),
       '.svn': Dir({foo: File('')}),
@@ -445,6 +427,73 @@ test('certain files ignored unconditionally', function (t) {
     t.notOk(fileExists('._ohnoes'), '._ohnoes not included')
     t.notOk(fileExists('foo.orig'), 'foo.orig not included')
     t.notOk(fileExists('package-lock.json'), 'package-lock.json not included')
+    done()
+  })
+})
+
+test('default-ignored files can be explicitly included', function (t) {
+  var fixture = new Tacks(
+    Dir({
+      'package.json': File({
+        name: 'npm-test-files',
+        version: '1.2.5',
+        files: [
+          '.git',
+          '.svn',
+          'CVS',
+          '.hg',
+          '.lock-wscript',
+          '.wafpickle-0',
+          '.wafpickle-5',
+          '.wafpickle-50',
+          'build/config.gypi',
+          'npm-debug.log',
+          '.npmrc',
+          '.foo.swp',
+          '.DS_Store',
+          '._ohno',
+          '._ohnoes',
+          'foo.orig',
+          'package-lock.json'
+        ]
+      }),
+      '.git': Dir({foo: File('')}),
+      '.svn': Dir({foo: File('')}),
+      'CVS': Dir({foo: File('')}),
+      '.hg': Dir({foo: File('')}),
+      '.lock-wscript': File(''),
+      '.wafpickle-0': File(''),
+      '.wafpickle-5': File(''),
+      '.wafpickle-50': File(''),
+      'build': Dir({'config.gypi': File('')}),
+      'npm-debug.log': File(''),
+      '.npmrc': File(''),
+      '.foo.swp': File(''),
+      '.DS_Store': Dir({foo: File('')}),
+      '._ohno': File(''),
+      '._ohnoes': Dir({noes: File('')}),
+      'foo.orig': File(''),
+      'package-lock.json': File('')
+    })
+  )
+  withFixture(t, fixture, function (done) {
+    t.ok(fileExists('.git'), '.git included')
+    t.ok(fileExists('.svn'), '.svn included')
+    t.ok(fileExists('CVS'), 'CVS included')
+    t.ok(fileExists('.hg'), '.hg included')
+    t.ok(fileExists('.lock-wscript'), '.lock-wscript included')
+    t.ok(fileExists('.wafpickle-0'), '.wafpickle-0 included')
+    t.ok(fileExists('.wafpickle-5'), '.wafpickle-5 included')
+    t.ok(fileExists('.wafpickle-50'), '.wafpickle-50 included')
+    t.ok(fileExists('build/config.gypi'), 'build/config.gypi included')
+    t.ok(fileExists('npm-debug.log'), 'npm-debug.log included')
+    t.ok(fileExists('.npmrc'), '.npmrc included')
+    t.ok(fileExists('.foo.swp'), '.foo.swp included')
+    t.ok(fileExists('.DS_Store'), '.DS_Store included')
+    t.ok(fileExists('._ohno'), '._ohno included')
+    t.ok(fileExists('._ohnoes'), '._ohnoes included')
+    t.ok(fileExists('foo.orig'), 'foo.orig included')
+    t.ok(fileExists('package-lock.json'), 'package-lock.json included')
     done()
   })
 })
