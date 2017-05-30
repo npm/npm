@@ -8,7 +8,7 @@ var Dir = Tacks.Dir
 var common = require('../common-tap.js')
 var npm = require('../../lib/npm.js')
 var tar = require('tar')
-
+var mkdirp = require('mkdirp')
 var testdir = path.join(__dirname, path.basename(__filename, '.js'))
 var packed = path.join(testdir, 'packed')
 
@@ -87,9 +87,11 @@ test('bundled-transitive-deps', function (t) {
     var tarball = stdout.trim()
     t.comment(stderr.trim())
     t.is(code, 0, 'pack successful')
+    mkdirp.sync(packed)
     tar.extract({
       file: path.join(testdir, tarball),
       cwd: packed,
+      strip: 1,
       sync: true
     })
     var transitivePackedDep = path.join(packed, 'node_modules', 'b')
