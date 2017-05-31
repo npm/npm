@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="9.2.6"></a>
+## [9.2.6](https://github.com/zkat/cacache/compare/v9.2.5...v9.2.6) (2017-05-31)
+
+
+### Bug Fixes
+
+* **node:** update ssri to prevent old node 4 crash ([5209ffe](https://github.com/zkat/cacache/commit/5209ffe))
+
+
+
 <a name="9.2.5"></a>
 ## [9.2.5](https://github.com/zkat/cacache/compare/v9.2.4...v9.2.5) (2017-05-25)
 

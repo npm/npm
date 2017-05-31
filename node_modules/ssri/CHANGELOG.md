@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.4"></a>
+## [4.1.4](https://github.com/zkat/ssri/compare/v4.1.3...v4.1.4) (2017-05-31)
+
+
+### Bug Fixes
+
+* **node:** older versions of node[@4](https://github.com/4) do not support base64buffer string parsing ([513df4e](https://github.com/zkat/ssri/commit/513df4e))
+
+
+
 <a name="4.1.3"></a>
 ## [4.1.3](https://github.com/zkat/ssri/compare/v4.1.2...v4.1.3) (2017-05-24)
 
