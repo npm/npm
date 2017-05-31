@@ -228,7 +228,10 @@ explicitly used, and that only GET requests use the cache.
 * Type: Number
 
 The minimum time (in seconds) to keep items in the registry cache before
-re-checking against the registry.
+re-checking against the registry, if higher than the process run time. This
+means that items added to the cache during an install are valid for the
+duration of the install, even if `npm install` takes longer than `cache-min`
+seconds.
 
 Note that no purging is done unless the `npm cache clean` command is
 explicitly used, and that only GET requests use the cache.
