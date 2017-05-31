@@ -54,12 +54,14 @@ var desired = {
     'test-package': {
       version: '0.0.0',
       from: 'test-package@0.0.0',
-      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz'
+      resolved: common.registry + '/test-package/-/test-package-0.0.0.tgz',
+      shasum: 'b0d32b6c45c259c578ba2003762b205131bdfbd1'
     },
     'underscore': {
       version: '1.3.3',
       from: 'underscore@1.3.3',
       resolved: 'http://localhost:1337/underscore/-/underscore-1.3.3.tgz',
+      shasum: '47ac53683daf832bfa952e1774417da47817ae42',
       optional: true
     }
   }
