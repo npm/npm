@@ -16,10 +16,20 @@
 
   process.title = 'npm'
 
+  var unsupported = require('../lib/utils/unsupported.js')
+  unsupported.checkForBrokenNode()
+
   var log = require('npmlog')
   log.pause() // will be unpaused when config is loaded.
-
   log.info('it worked if it ends with', 'ok')
+
+  unsupported.checkForUnsupportedNode()
+
+  if (!unsupported.checkVersion(process.version).unsupported) {
+    var updater = require('update-notifier')
+    var pkg = require('../package.json')
+    updater({pkg: pkg}).notify({defer: true})
+  }
 
   var path = require('path')
   var npm = require('../lib/npm.js')

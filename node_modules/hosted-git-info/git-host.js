@@ -81,6 +81,10 @@ GitHost.prototype.path = function () {
   return this._fill(this.pathtemplate)
 }
 
+GitHost.prototype.tarball = function () {
+  return this._fill(this.tarballtemplate)
+}
+
 GitHost.prototype.file = function (P) {
   return this._fill(this.filetemplate, {
     path: P.replace(/^[/]+/g, '')
