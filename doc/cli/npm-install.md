@@ -300,6 +300,10 @@ The `--only={prod[uction]|dev[elopment]}` argument will cause either only
 See `npm-config(7)`.  Many of the configuration params have some
 effect on installation, since that's most of what npm does.
 
+By default, after `npm install` finishes installing successfully it prints
+a dependency tree, similar to `npm ls`. If `loglevel` is set to `silent`, this
+behavior is disabled.
+
 ## ALGORITHM
 
 To install a package, npm uses the following algorithm:
