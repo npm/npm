@@ -15,9 +15,18 @@ var fixture = {
   name: '@test/whoops',
   version: '1.0.0',
   scripts: {
-    postinstall: 'echo \'nope\' && exit 1'
+    postinstall: 'echo \'nope\' && node failinstall.js'
   }
 }
+
+var failscript = [
+  '#!/usr/bin/env node',
+  '"use strict"',
+  'var path = require("path")',
+  'var test = "node_modules" + path.sep + "@test" + path.sep + "whoops"',
+  'console.log(__dirname, test)',
+  'process.exit(__dirname.indexOf(test)>=0 ? 1 : 0)'
+].join('\n')
 
 test('setup', function (t) {
   cleanup()
@@ -56,4 +65,5 @@ function setup () {
   mkdirp.sync(resolve(pkg, 'node_modules'))
   mkdirp.sync(dep)
   fs.writeFileSync(resolve(dep, 'package.json'), JSON.stringify(fixture))
+  fs.writeFileSync(resolve(dep, 'failinstall.js'), failscript)
 }
