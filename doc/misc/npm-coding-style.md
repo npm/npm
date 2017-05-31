@@ -79,7 +79,7 @@ Some examples of good semicolon usage:
       end()
     }
 
-Note that starting lines with `-` and `+` also should be prefixed
+Note that starting lines with `-`, `+`, and `/` also should be prefixed
 with a semicolon, but this is much less common.
 
 ## Comma First
