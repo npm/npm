@@ -1,3 +1,85 @@
+## v5.0.1 (2017-05-31):
+
+Hey y'all! Hope you're enjoying the new npm!
+
+As you all know, fresh software that's gone through major overhauls tends to
+miss a lot of spots the old one used to handle well enough, and `npm@5` is no
+exception. The CLI team will be doing faster release cycles that go directly to
+the `latest` tag for a couple of weeks while 5 stabilizes a bit and we're
+confident the common low-hanging fruit people are running into are all taken
+care of.
+
+With that said: this is our first patch release! The biggest focus is fixing up
+a number of git-related issues that folks ran into right out the door. It also
+fixes other things, like some proxy/auth-related issues, and even has a neat
+speed boost! (You can expect more speed bumps in the coming releases as pending
+work starts landing, too!)
+
+Thanks everyone who's been reporting issues and submitting patches!
+
+### BUGFIXES
+
+* [`e61e68dac`](https://github.com/npm/npm/commit/e61e68dac4fa51c0540a064204a75b19f8052e58)
+  [#16762](https://github.com/npm/npm/pull/16762)
+  Make `npm publish` obey the `--tag` flag again.
+  ([@zkat](https://github.com/zkat))
+* [`923fd58d3`](https://github.com/npm/npm/commit/923fd58d312f40f8c17b232ad1dfc8e2ff622dbd)
+  [#16749](https://github.com/npm/npm/pull/16749)
+  Speed up installations by nearly 20% by... removing one line of code. (hah)
+  ([@mikesherov](https://github.com/mikesherov))
+* [`9aac984cb`](https://github.com/npm/npm/commit/9aac984cbbfef22182ee42b51a193c0b47146ad6)
+  Guard against a particular failure mode for a bug still being hunted down.
+  ([@iarna](https://github.com/iarna))
+* [`80ab521f1`](https://github.com/npm/npm/commit/80ab521f18d34df109de0c5dc9eb1cde5ff6d7e8)
+  Pull in dependency updates for various core deps:
+  * New `pacote` fixes several git-related bugs.
+  * `ssri` update fixes crash on early node@4 versions.
+  * `make-fetch-happen` update fixes proxy authentication issue.
+  * `npm-user-validate` adds regex for blocking usernames with illegal chars.
+  ([@zkat](https://github.com/zkat))
+* [`7e5ce87b8`](https://github.com/npm/npm/commit/7e5ce87b84880c7433ee4c07d2dd6ce8806df436)
+  `pacote@2.7.26`:
+  Fixes various other git issues related to commit hashes.
+  ([@zkat](https://github.com/zkat))
+* [`acbe85bfc`](https://github.com/npm/npm/commit/acbe85bfc1a68d19ca339a3fb71da0cffbf58926)
+  [#16791](https://github.com/npm/npm/pull/16791)
+  `npm view` was calling `cb` prematurely and giving partial output when called
+  in a child process.
+  ([@zkat](https://github.com/zkat))
+* [`ebafe48af`](https://github.com/npm/npm/commit/ebafe48af91f702ccefc8c619d52fed3b8dfd3c7)
+  [#16750](https://github.com/npm/npm/pull/16750)
+  Hamilpatch the Musical: Talk less, complete more.
+  ([@aredridel](https://github.com/aredridel))
+
+### DOCUMENTATION
+
+* [`dc2823a6c`](https://github.com/npm/npm/commit/dc2823a6c5fc098041e61515c643570819d059d2)
+  [#16799](https://github.com/npm/npm/pull/16799)
+  Document that `package-lock.json` is never allowed in tarballs.
+  ([@sonicdoe](https://github.com/sonicdoe))
+* [`f3cb84b44`](https://github.com/npm/npm/commit/f3cb84b446c51d628ee0033cdf13752c15b31a29)
+  [#16771](https://github.com/npm/npm/pull/16771)
+  Fix `npm -l` usage information for the `test` command.
+  ([@grawlinson](https://github.com/grawlinson))
+
+### OTHER CHANGES
+
+* [`661262309`](https://github.com/npm/npm/commit/66126230912ab5ab35287b40a9908e036fa73994)
+  [#16756](https://github.com/npm/npm/pull/16756)
+  remove unused argument
+  ([@Aladdin-ADD](https://github.com/Aladdin-ADD))
+* [`c3e0b4287`](https://github.com/npm/npm/commit/c3e0b4287ea69735cc367aa7bb7e7aa9a6d9804b)
+  [#16296](https://github.com/npm/npm/pull/16296)
+  preserve same name convention for command
+  ([@desfero](https://github.com/desfero))
+* [`9f814831d`](https://github.com/npm/npm/commit/9f814831d330dde7702973186aea06caaa77ff31)
+  [#16757](https://github.com/npm/npm/pull/16757)
+  remove unused argument
+  ([@Aladdin-ADD](https://github.com/Aladdin-ADD))
+* [`3cb843239`](https://github.com/npm/npm/commit/3cb8432397b3666d88c31131dbb4599016a983ff)
+  minor linter fix
+  ([@zkat](https://github.com/zkat))
+
 ## v5.0.0 (2017-05-25)
 
 Wowowowowow npm@5!
