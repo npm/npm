@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.27"></a>
+## [2.7.27](https://github.com/zkat/pacote/compare/v2.7.26...v2.7.27) (2017-06-01)
+
+
+### Bug Fixes
+
+* **git:** fix semver range detection. oops ([76d9233](https://github.com/zkat/pacote/commit/76d9233))
+
+
+
 <a name="2.7.26"></a>
 ## [2.7.26](https://github.com/zkat/pacote/compare/v2.7.25...v2.7.26) (2017-06-01)
 
