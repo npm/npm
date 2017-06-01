@@ -46,7 +46,7 @@ test('install npm into first folder', function (t) {
 
 test('write npmrc file', function (t) {
   t.plan(1)
-  common.npm(['explore', 'npm', '-g',
+  common.npm(['explore', 'npmc', '-g',
               '--prefix=' + folder + '/first',
               '--cache=' + folder + '/cache',
               '--tmp=' + folder + '/tmp',
@@ -120,8 +120,8 @@ test('verify that the builtin config matches', function (t) {
                             if (er) throw er
                             t.equal(code, 0)
                             var secondRoot = so.trim()
-                            var firstRc = path.resolve(firstRoot, 'npm', 'npmrc')
-                            var secondRc = path.resolve(secondRoot, 'npm', 'npmrc')
+                            var firstRc = path.resolve(firstRoot, 'npmc', 'npmrc')
+                            var secondRc = path.resolve(secondRoot, 'npmc', 'npmrc')
                             var firstData = fs.readFileSync(firstRc, 'utf8').split(/\r?\n/)
                             var secondData = fs.readFileSync(secondRc, 'utf8').split(/\r?\n/)
                             t.isDeeply(firstData, secondData)
