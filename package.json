@@ -76,7 +76,7 @@
     "normalize-package-data": "~2.3.8",
     "npm-cache-filename": "~1.0.2",
     "npm-install-checks": "~3.0.0",
-    "npm-package-arg": "~5.0.1",
+    "npm-package-arg": "~5.1.1",
     "npm-registry-client": "~8.3.0",
     "npm-user-validate": "~1.0.0",
     "npmlog": "~4.1.0",
