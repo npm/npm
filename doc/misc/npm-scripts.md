@@ -263,6 +263,11 @@ above.
   there is another option. The only valid use of `install` or `preinstall`
   scripts is for compilation which must be done on the target architecture.
 
+## VIDEO COURSE
+
+To see scripts in action you can watch the free [How to Use npm scripts as Your Build
+Tool](https://egghead.io/courses/how-to-use-npm-scripts-as-your-build-tool) course on [egghead.io](https://egghead.io) by [Elijah Manor](https://twitter.com/elijahmanor).
+
 ## SEE ALSO
 
 * npm-run-script(1)
