@@ -110,7 +110,8 @@ const WriteEntry = warner(class WriteEntry extends MiniPass {
       uid: this.portable ? null : this.stat.uid,
       gid: this.portable ? null : this.stat.gid,
       size: this.stat.size,
-      mtime: this.stat.mtime,
+      mtime: this.type === 'Directory' && this.portable
+        ? null : this.stat.mtime,
       type: this.type,
       uname: this.portable ? null :
         this.stat.uid === this.myuid ? this.myuser : '',

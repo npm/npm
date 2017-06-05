@@ -297,9 +297,10 @@ const Pack = warner(class Pack extends MiniPass {
   [ENTRY] (job) {
     this[JOBS] += 1
     try {
-      return new this[WRITEENTRYCLASS](job.path, this[ENTRYOPT](job)).on('end', _ => {
-        this[JOBDONE](job)
-      })
+      return new this[WRITEENTRYCLASS](
+        job.path, this[ENTRYOPT](job)).on('end', _ => {
+          this[JOBDONE](job)
+        }).on('error', er => this.emit('error', er))
     } catch (er) {
       this.emit('error', er)
     }

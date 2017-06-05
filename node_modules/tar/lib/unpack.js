@@ -146,11 +146,6 @@ class Unpack extends Parser {
       case 'BlockDevice':
       case 'FIFO':
         return this[UNSUPPORTED](entry)
-
-      // this should be impossible
-      /* istanbul ignore next */
-      default:
-        return this.emit('error', new Error('unknown type: ' + entry.type))
     }
   }
 
@@ -273,11 +268,6 @@ class Unpack extends Parser {
       case 'Directory':
       case 'GNUDumpDir':
         return this[DIRECTORY](entry)
-
-      // should be impossible
-      /* istanbul ignore next */
-      default:
-        return this.emit('error', new Error('unknown type: ' + entry.type))
     }
   }
 
