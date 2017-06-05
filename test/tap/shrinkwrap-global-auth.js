@@ -8,7 +8,6 @@ var rimraf = require('rimraf')
 var test = require('tap').test
 
 var common = require('../common-tap.js')
-var toNerfDart = require('../../lib/config/nerf-dart.js')
 
 var pkg = path.resolve(__dirname, path.basename(__filename, '.js'))
 var outfile = path.resolve(pkg, '_npmrc')
