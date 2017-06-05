@@ -259,6 +259,7 @@ function integrityStream (opts) {
     const match = (
       // Integrity verification mode
       opts.integrity &&
+      newSri[algorithm] &&
       digests &&
       digests.find(hash => {
         return newSri[algorithm].find(newhash => {

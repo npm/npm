@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.4.11"></a>
+## [2.4.11](https://github.com/zkat/make-fetch-happen/compare/v2.4.10...v2.4.11) (2017-06-05)
+
+
+### Bug Fixes
+
+* **deps:** bump deps with ssri fix ([bef1994](https://github.com/zkat/make-fetch-happen/commit/bef1994))
+
+
+
 <a name="2.4.10"></a>
 ## [2.4.10](https://github.com/zkat/make-fetch-happen/compare/v2.4.9...v2.4.10) (2017-05-31)
 

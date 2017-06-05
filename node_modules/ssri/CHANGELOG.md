@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.1.5"></a>
+## [4.1.5](https://github.com/zkat/ssri/compare/v4.1.4...v4.1.5) (2017-06-05)
+
+
+### Bug Fixes
+
+* **integrityStream:** stop crashing if opts.algorithms and opts.integrity have an algo mismatch ([fb1293e](https://github.com/zkat/ssri/commit/fb1293e))
+
+
+
 <a name="4.1.4"></a>
 ## [4.1.4](https://github.com/zkat/ssri/compare/v4.1.3...v4.1.4) (2017-05-31)
 
