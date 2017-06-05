@@ -1,3 +1,37 @@
+## v5.0.3 (2017-06-05)
+
+Happy Monday, y'all! We've got another npm release for you with the fruits of
+our ongoing bugsquashing efforts. You can expect at least one more this week,
+but probably more -- and as we announced last week, we'll be merging fixes more
+rapidly into the `npmc` canary so you can get everything as soon as possible!
+
+Hope y'all are enjoying npm5 in the meantime, and don't hesitate to file issues
+for anything you find! The goal is to get this release rock-solid as soon as we
+can. 💚
+
+* [`6e12a5cc0`](https://github.com/npm/npm/commit/6e12a5cc022cb5a157a37df7283b6d7b3d49bdab)
+  Bump several dependencies to get improvements and bugfixes:
+  * `cacache`: content files (the tarballs) are now read-only.
+  * `pacote`: fix failing clones with bad heads, send extra TLS-related opts to proxy, enable global auth configurations and `_auth`-based auth.
+  * `ssri`: stop crashing with `can't call method find of undefined` when running into a weird `opts.integrity`/`opts.algorithms` conflict during verification.
+  ([@zkat](https://github.com/zkat))
+* [`89cc8e3e1`](https://github.com/npm/npm/commit/89cc8e3e12dad67fd9844accf4d41deb4c180c5c)
+  [#16917](https://github.com/npm/npm/pull/16917)
+  Send `ca`, `cert` and `key` config through to network layer.
+  ([@colinrotherham](https://github.com/colinrotherham))
+* [`6a9b51c67`](https://github.com/npm/npm/commit/6a9b51c67ba3df0372991631992748329b84f2e7)
+  [#16929](https://github.com/npm/npm/pull/16929)
+  Send `npm-session` header value with registry requests again.
+  ([@zarenner](https://github.com/zarenner))
+* [`662a15ab7`](https://github.com/npm/npm/commit/662a15ab7e790e87f5e5a35252f05d5a4a0724a1)
+  Fix `npm doctor` so it stop complaining about read-only content files in the
+  cache.
+  ([@Kat Marchán](https://github.com/Kat Marchán))
+* [`191d10a66`](https://github.com/npm/npm/commit/191d10a6616d72e26d89fd00f5a4f6158bfbc526)
+  [#16918](https://github.com/npm/npm/pull/16918)
+  Clarify prepublish deprecation message.
+  ([@Hirse](https://github.com/Hirse))
+
 ## v5.0.2 (2017-06-02)
 
 Here's another patch release, soon after the other!
