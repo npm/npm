@@ -26,7 +26,7 @@ can. 💚
 * [`662a15ab7`](https://github.com/npm/npm/commit/662a15ab7e790e87f5e5a35252f05d5a4a0724a1)
   Fix `npm doctor` so it stop complaining about read-only content files in the
   cache.
-  ([@Kat Marchán](https://github.com/Kat Marchán))
+  ([@zkat](https://github.com/zkat))
 * [`191d10a66`](https://github.com/npm/npm/commit/191d10a6616d72e26d89fd00f5a4f6158bfbc526)
   [#16918](https://github.com/npm/npm/pull/16918)
   Clarify prepublish deprecation message.
