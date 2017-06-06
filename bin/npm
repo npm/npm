@@ -31,4 +31,6 @@ case `uname` in
     ;;
 esac
 
+export NODE_EXE
+
 "$NODE_EXE" "$NPM_CLI_JS" "$@"
