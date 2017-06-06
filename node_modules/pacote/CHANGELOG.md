@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.31"></a>
+## [2.7.31](https://github.com/zkat/pacote/compare/v2.7.30...v2.7.31) (2017-06-06)
+
+
+### Bug Fixes
+
+* **extract:** always return a bluebird promise ([06ca91d](https://github.com/zkat/pacote/commit/06ca91d))
+* **registry:** bump make-fetch-happen for local cache header issue fix ([868615c](https://github.com/zkat/pacote/commit/868615c))
+
+
+
 <a name="2.7.30"></a>
 ## [2.7.30](https://github.com/zkat/pacote/compare/v2.7.29...v2.7.30) (2017-06-05)
 
