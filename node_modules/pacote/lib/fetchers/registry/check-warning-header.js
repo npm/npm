@@ -23,9 +23,11 @@ function checkWarnings (res, registry, opts) {
     BAD_HOSTS.set(registry, true)
     if (warnings['199'] && warnings['199'].message.match(/ENOTFOUND/)) {
       opts.log.warn('registry', `Using stale data from ${registry} because the host is inaccessible -- are you offline?`)
-    } else if (warnings['199']) {
+    }
+    if (warnings['199']) {
       opts.log.warn('registry', `Unexpected warning for ${registry}: ${warnings['199'].message}`)
-    } else if (warnings['111']) {
+    }
+    if (warnings['111']) {
       // 111 Revalidation failed -- we're using stale data
       opts.log.warn(
         'registry',
