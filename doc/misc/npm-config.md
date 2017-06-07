@@ -9,8 +9,14 @@ npm gets its configuration values from the following sources, sorted by priority
 
 Putting `--foo bar` on the command line sets the `foo` configuration
 parameter to `"bar"`.  A `--` argument tells the cli parser to stop
-reading flags.  A `--flag` parameter that is at the *end* of the
-command will be given the value of `true`.
+reading flags.  Using `--flag` without specifying any value will set
+the value to `true`.  
+
+Example: `--flag1 --flag2` will set both configuration parameters
+to `true`, while `--flag1 --flag2 bar` will set `flag1` to `true`,
+and `flag2` to `bar`.  Finally, `--flag1 --flag2 -- bar` will set
+both configuration parameters to `true`, and the `bar` is taken
+as a command argument.
 
 ### Environment Variables
 
