@@ -81,7 +81,7 @@ Comparators can be joined by whitespace to form a `comparator set`,
 which is satisfied by the **intersection** of all of the comparators
 it includes.
 
-A range is composed of one or more comparator sets, joined by `||`.  A
+A range is composed of one or more comparator sets, joined by `||` (an 'or').  A
 version matches a range if and only if every comparator in at least
 one of the `||`-separated comparator sets is satisfied by the version.
 
