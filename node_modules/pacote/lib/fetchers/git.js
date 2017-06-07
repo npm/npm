@@ -15,7 +15,6 @@ const PassThrough = require('stream').PassThrough
 const path = require('path')
 const pipe = BB.promisify(require('mississippi').pipe)
 const rimraf = BB.promisify(require('rimraf'))
-const semver = require('semver')
 const uniqueFilename = require('unique-filename')
 
 // `git` dependencies are fetched from git repositories and packed up.
@@ -102,7 +101,7 @@ function hostedManifest (spec, opts) {
 function plainManifest (repo, spec, opts) {
   const rawRef = spec.gitCommittish || spec.gitRange
   return resolve(
-    repo, rawRef, spec.name, opts
+    repo, spec, spec.name, opts
   ).then(ref => {
     if (ref) {
       const resolved = spec.saveSpec.replace(/(?:#.*)?$/, `#${ref.sha}`)
@@ -111,7 +110,7 @@ function plainManifest (repo, spec, opts) {
         _resolved: resolved,
         _spec: spec,
         _ref: ref,
-        _rawRef: rawRef,
+        _rawRef: spec.gitCommittish || spec.gitRange,
         _uniqueResolved: resolved
       }
     } else {
@@ -130,18 +129,18 @@ function plainManifest (repo, spec, opts) {
   })
 }
 
-function resolve (url, rawRef, name, opts) {
-  const isSemver = semver.validRange(rawRef)
+function resolve (url, spec, name, opts) {
+  const isSemver = !!spec.gitRange
   return git.revs(url, opts).then(remoteRefs => {
     return isSemver
     ? pickManifest({
       versions: remoteRefs.versions,
       'dist-tags': remoteRefs['dist-tags'],
       name: name
-    }, rawRef, opts)
+    }, spec.gitRange, opts)
     : remoteRefs
     ? BB.resolve(
-      remoteRefs.refs[rawRef] || remoteRefs.refs[remoteRefs.shas[rawRef]]
+      remoteRefs.refs[spec.gitCommittish] || remoteRefs.refs[remoteRefs.shas[spec.gitCommittish]]
     )
     : null
   })

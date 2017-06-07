@@ -105,7 +105,7 @@ function revs (repo, opts) {
     return BB.resolve(cached)
   }
   return pinflight(`ls-remote:${repo}`, () => {
-    return spawnGit(['ls-remote', repo], {
+    return spawnGit(['ls-remote', '-h', '-t', repo], {
       env: gitEnv()
     }, opts).then(child => {
       let stdout = ''
