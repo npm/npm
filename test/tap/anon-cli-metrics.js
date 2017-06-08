@@ -17,6 +17,8 @@ var globaldir = path.join(basedir, 'global')
 var tmpdir = path.join(basedir, 'tmp')
 var metricsFile = path.join(cachedir, 'anonymous-cli-metrics.json')
 
+delete process.env.npm_config_metrics_registry
+
 var conf = {
   cwd: testdir,
   env: extend(extend({}, process.env), {
