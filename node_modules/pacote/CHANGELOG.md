@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.34"></a>
+## [2.7.34](https://github.com/zkat/pacote/compare/v2.7.33...v2.7.34) (2017-06-09)
+
+
+### Bug Fixes
+
+* **git:** whitelist specific shallow-cloneable hosts ([b210cc8](https://github.com/zkat/pacote/commit/b210cc8))
+
+
+
 <a name="2.7.33"></a>
 ## [2.7.33](https://github.com/zkat/pacote/compare/v2.7.32...v2.7.33) (2017-06-08)
 
