@@ -2,11 +2,17 @@
 npm-debug.log
 .nyc_output/
 /test/bin
+/test/npm_cache
 /test/output.log
 /test/*/*/node_modules
 /test/packages/npm-test-depends-on-spark/which-spark.log
 /test/packages/test-package/random-data.txt
 /test/root
+/test/tap/shrinkwrap-dev-dependency
+/test/tap/shrinkwrap-lifecycle-cwd
+/test/tap/shrinkwrap-prod-dependency
+/test/tap/shrinkwrap-prod-dependency-also
+/test/tap/shrinkwrap-shared-dev-dependency
 /node_modules/.bin
 /html/doc/
 /man/
