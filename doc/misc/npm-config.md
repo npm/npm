@@ -383,6 +383,13 @@ the git binary.
 
 Tag the commit when using the `npm version` command.
 
+### git-tag-hooks
+
+* Default: `true`
+* Type: Boolean
+
+Run git commit hooks when using the `npm version` command.
+
 ### global
 
 * Default: false
