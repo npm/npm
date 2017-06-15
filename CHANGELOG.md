@@ -1,3 +1,52 @@
+## v5.0.4 (2017-06-13):
+
+Hey y'all. This is another minor patch release with a variety of little fixes
+we've been accumulating~
+
+* [`f0a37ace9`](https://github.com/npm/npm/commit/f0a37ace9ab7879cab20f2b0fcd7840bfc305feb)
+  Fix `npm doctor` when hitting registries without `ping`.
+  ([@zkat](https://github.com/zkat))
+* [`64f0105e8`](https://github.com/npm/npm/commit/64f0105e81352b42b72900d83b437b90afc6d9ce)
+  Fix invalid format error when setting cache-related headers.
+  ([@Kat Marchán](https://github.com/Kat Marchán))
+* [`d2969c80e`](https://github.com/npm/npm/commit/d2969c80e4178faebf0f7c4cab6eb610dd953cc6)
+  Fix spurious `EINTEGRITY` issue.
+  ([@zkat](https://github.com/zkat))
+* [`800cb2b4e`](https://github.com/npm/npm/commit/800cb2b4e2d0bd00b5c9082a896f2110e907eb0b)
+  [#17076](https://github.com/npm/npm/pull/17076)
+  Use legacy `from` field to improve upgrade experience from legacy shrinkwraps
+  and installs.
+  ([@zkat](https://github.com/zkat))
+* [`4100d47ea`](https://github.com/npm/npm/commit/4100d47ea58b4966c02604f71350b5316108df6a)
+  [#17007](https://github.com/npm/npm/pull/17007)
+  Restore loose semver parsing to match older npm behavior when running into
+  invalid semver ranges in dependencies.
+  ([@zkat](https://github.com/zkat))
+* [`35316cce2`](https://github.com/npm/npm/commit/35316cce2ca2d8eb94161ec7fe7e8f7bec7b3aa7)
+  [#17005](https://github.com/npm/npm/pull/17005)
+  Emulate npm@4's behavior of simply marking the peerDep as invalid, instead of
+  crashing.
+  ([@zkat](https://github.com/zkat))
+* [`e7e8ee5c5`](https://github.com/npm/npm/commit/e7e8ee5c57c7238655677e118a8809b652019f53)
+  [#16937](https://github.com/npm/npm/pull/16937)
+  Workaround for separate bug where `requested` was somehow null.
+  ([@forivall](https://github.com/forivall))
+* [`2d9629bb2`](https://github.com/npm/npm/commit/2d9629bb2043cff47eaad2654a64d2cef5725356)
+  Better logging output for git errors.
+  ([@zkat](https://github.com/zkat))
+* [`2235aea73`](https://github.com/npm/npm/commit/2235aea73569fb9711a06fa6344ef31247177dcd)
+  More scp-url fixes: parsing only worked correctly when a committish was
+  present.
+  ([@zkat](https://github.com/zkat))
+* [`80c33cf5e`](https://github.com/npm/npm/commit/80c33cf5e6ef207450949764de41ea96538c636e)
+  Standardize package permissions on tarball extraction, instead of using perms
+  from the tarball. This matches previous npm behavior and fixes a number of
+  incompatibilities in the wild.
+  ([@zkat](https://github.com/zkat))
+* [`2b1e40efb`](https://github.com/npm/npm/commit/2b1e40efba0b3d1004259efa4275cf42144e3ce3)
+  Limit shallow cloning to hosts which are known to support it.
+  ([@zkat](https://github.com/zkat))
+
 ## v5.0.3 (2017-06-05)
 
 Happy Monday, y'all! We've got another npm release for you with the fruits of
