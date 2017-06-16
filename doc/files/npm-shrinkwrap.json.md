@@ -5,7 +5,7 @@ npm-shrinkwrap.json(5) -- A publishable lockfile
 
 `npm-shrinkwrap.json` is a file created by npm-shrinkwrap(1). It is identical to
 `package-lock.json`, with one major caveat: Unlike `package-lock.json`,
-`npm-shrinwkrap.json` may be included when publishing a package.
+`npm-shrinkwrap.json` may be included when publishing a package.
 
 The recommended use-case for `npm-shrinkwrap.json` is applications deployed
 through the publishing process on the registry: for example, daemons and
