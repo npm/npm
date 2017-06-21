@@ -28,7 +28,7 @@ The four relevant files are:
 
 * per-project configuration file (`/path/to/my/project/.npmrc`)
 * per-user configuration file (defaults to `$HOME/.npmrc`; configurable via CLI
-  option `--userconfig` or environment variable `$NPM_CONF_USERCONFIG`)
+  option `--userconfig` or environment variable `$NPM_CONFIG_USERCONFIG`)
 * global configuration file (defaults to `$PREFIX/etc/npmrc`; configurable via
   CLI option `--globalconfig` or environment variable `$NPM_CONF_GLOBALCONFIG`)
 * npm's built-in configuration file (`/path/to/npm/npmrc`)
