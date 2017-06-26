@@ -220,7 +220,7 @@
     "npm-registry-couchapp": "~2.6.13",
     "npm-registry-mock": "~1.1.0",
     "require-inject": "~1.4.2",
-    "sprintf-js": "~1.0.3",
+    "sprintf-js": "~1.1.1",
     "standard": "~6.0.8",
     "tacks": "~1.2.6",
     "tap": "~10.3.2"
