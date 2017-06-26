@@ -7,6 +7,10 @@ var fs = require('fs')
 var path = require('path')
 var common = require('../common-tap.js')
 
+// NOTE: This test will only remain relavent until npm@5 when
+// npm-shrinkwrap.json will override EVERYTHING in you package.json.
+// If you're working on npm@5 and this broke, just remove the test.
+
 var testdir = path.resolve(__dirname, path.basename(__filename, '.js'))
 var modAdir = path.resolve(testdir, 'modA')
 var modB1dir = path.resolve(testdir, 'modB@1')
@@ -16,7 +20,9 @@ var modCdir = path.resolve(testdir, 'modC')
 var fixture = new Tacks(Dir({
   'package.json': File({
     dependencies: {
-      modA: 'file://' + modAdir,
+      modA: 'file://' + modAdir
+    },
+    devDependencies: {
       modC: 'file://' + modCdir
     }
   }),
@@ -24,12 +30,10 @@ var fixture = new Tacks(Dir({
     dependencies: {
       modA: {
         version: '1.0.0',
-        from: 'modA',
         resolved: 'file://' + modAdir
       },
       modB: {
         version: '1.0.0',
-        from: 'modB@1',
         resolved: 'file://' + modB1dir
       }
     }
