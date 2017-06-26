@@ -8,7 +8,7 @@ we've been accumulating~
   ([@zkat](https://github.com/zkat))
 * [`64f0105e8`](https://github.com/npm/npm/commit/64f0105e81352b42b72900d83b437b90afc6d9ce)
   Fix invalid format error when setting cache-related headers.
-  ([@Kat Marchán](https://github.com/Kat Marchán))
+  ([@zkat](https://github.com/zkat))
 * [`d2969c80e`](https://github.com/npm/npm/commit/d2969c80e4178faebf0f7c4cab6eb610dd953cc6)
   Fix spurious `EINTEGRITY` issue.
   ([@zkat](https://github.com/zkat))
