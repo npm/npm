@@ -182,7 +182,7 @@ log.log = function (lvl, prefix, message) {
     // resolve stack traces to a plain string.
     if (typeof arg === 'object' && arg &&
         (arg instanceof Error) && arg.stack) {
-      arg.stack = stack = arg.stack + ''
+      Object.defineProperty(arg, 'stack', arg.stack = stack = arg.stack + '')
     }
   }
   if (stack) a.unshift(stack + '\n')
