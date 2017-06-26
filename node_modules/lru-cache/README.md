@@ -66,6 +66,10 @@ away.
   `stale:true`, it'll return the stale value before deleting it.  If
   you don't set this, then it'll return `undefined` when you try to
   get a stale entry, as if it had already been deleted.
+* `noDisposeOnSet` By default, if you set a `dispose()` method, then
+  it'll be called whenever a `set()` operation overwrites an existing
+  key.  If you set this option, `dispose()` will only be called when a
+  key falls out of the cache, not when it is overwritten.
 
 ## API
 
