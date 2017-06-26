@@ -1,4 +1,11 @@
 
+2.1.1 / 2017-06-13
+==================
+
+  * fix a bug where `close` would emit before `end`
+  * use "raw-body" module for tests
+  * prettier
+
 2.1.0 / 2017-05-24
 ==================
 
