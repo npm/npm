@@ -62,15 +62,15 @@ function stripBOM (content) {
 function jsonClone (obj) {
   if (obj == null) {
     return obj
+  } else if (Array.isArray(obj)) {
+    var newarr = new Array(obj.length)
+    for (var ii in obj) {
+      newarr[ii] = obj[ii]
+    }
   } else if (typeof obj === 'object') {
     var newobj = {}
     for (var kk in obj) {
       newobj[kk] = jsonClone[kk]
-    }
-  } else if (typeof obj === 'array') {
-    var newarr = new Array(obj.length)
-    for (var ii in obj) {
-      newarr[ii] = obj[ii]
     }
   } else {
     return obj
