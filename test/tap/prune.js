@@ -1,5 +1,6 @@
 var fs = require('fs')
 var path = require('path')
+var existsSync = fs.existsSync || path.existsSync
 
 var mkdirp = require('mkdirp')
 var mr = require('npm-registry-mock')
@@ -114,10 +115,34 @@ test('production: npm prune', function (t) {
   })
 })
 
-test('pruduction: verify installs', function (t) {
-  var dirs = fs.readdirSync(pkg + '/node_modules').sort()
-  t.same(dirs, [ 'underscore' ])
-  t.end()
+test('prune should touch the lock file if it exists', function (t) {
+  common.npm([
+    'prune',
+    '--loglevel', 'silent'
+  ], EXEC_OPTS, function (err, code, stdout) {
+    if (err) throw err
+    t.notOk(code, 'exit ok')
+    var lock = JSON.parse(fs.readFileSync(
+      path.join(pkg, 'package-lock.json'),
+      'utf8'
+    ))
+    t.notOk(lock.dependencies.mkdirp)
+    t.ok(lock.dependencies.underscore)
+    t.end()
+  })
+})
+
+test('prune does not create the lock file if it does not exists', function (t) {
+  rimraf.sync(path.join(pkg, 'package-lock.json'))
+  common.npm([
+    'prune',
+    '--loglevel', 'silent'
+  ], EXEC_OPTS, function (err, code, stdout) {
+    if (err) throw err
+    t.notOk(code, 'exit ok')
+    t.notOk(existsSync(path.join(pkg, 'package-lock.json')))
+    t.end()
+  })
 })
 
 test('cleanup', function (t) {
