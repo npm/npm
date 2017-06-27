@@ -89,7 +89,7 @@
     "read": "~1.0.7",
     "read-cmd-shim": "~1.0.1",
     "read-installed": "~4.0.3",
-    "read-package-json": "~2.0.7",
+    "read-package-json": "~2.0.8",
     "read-package-tree": "~5.1.6",
     "readable-stream": "~2.3.2",
     "request": "~2.81.0",

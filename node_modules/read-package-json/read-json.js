@@ -59,6 +59,24 @@ function stripBOM (content) {
   return content
 }
 
+function jsonClone (obj) {
+  if (obj == null) {
+    return obj
+  } else if (typeof obj === 'object') {
+    var newobj = {}
+    for (var kk in obj) {
+      newobj[kk] = jsonClone[kk]
+    }
+  } else if (typeof obj === 'array') {
+    var newarr = new Array(obj.length)
+    for (var ii in obj) {
+      newarr[ii] = obj[ii]
+    }
+  } else {
+    return obj
+  }
+}
+
 function parseJson (file, er, d, log, strict, cb) {
   if (er && er.code === 'ENOENT') {
     return fs.stat(path.dirname(file), function (err, stat) {
@@ -74,7 +92,7 @@ function parseJson (file, er, d, log, strict, cb) {
   }
   if (er) return cb(er)
 
-  if (cache[d]) return cb(null, cache[d])
+  if (cache[d]) return cb(null, jsonClone(cache[d]))
 
   var data
 
@@ -91,7 +109,7 @@ function parseJson (file, er, d, log, strict, cb) {
 function extrasCached (file, d, data, log, strict, cb) {
   extras(file, data, log, strict, (err, data) => {
     if (!err) {
-      cache[d] = data
+      cache[d] = jsonClone(data)
     }
     cb(err, data)
   })
