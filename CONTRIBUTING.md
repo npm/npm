@@ -3,6 +3,7 @@
 ## Table of Contents
 
 * [Introduction](#introduction)
+* [Submitting a pull request](#submit-pr)
 * [Roles](#roles)
   * [Community Members](#community-members)
   * [Collaborators](#collaborators)
@@ -14,6 +15,14 @@
 Welcome to the npm CLI Contributor Guide! This document outlines the npm CLI repository's process for community interaction and contribution. This includes the issue tracker, pull requests, wiki pages, and, to a certain extent, outside communication in the context of the npm CLI. It defines roles, responsibilities, and procedures, and is an entry point for anyone wishing to contribute their time and effort to making npm a better tool for the JavaScript community!
 
 All interactions in the npm repository are covered by the [npm Code of Conduct](https://www.npmjs.com/policies/conduct)
+
+## Submitting a pull request
+
+If you are submitting are pull request, here are few things that you can keep in mind
+
+* Submit your pull request against `release-next` (preferable) or `latest` branch.
+* Your commit summary line should look like this `actions: support setup and teardown` i.e, part of repo changes effect and the short summary of the changes you made.
+
 
 ## Roles
 
