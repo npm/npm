@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.38"></a>
+## [2.7.38](https://github.com/zkat/pacote/compare/v2.7.37...v2.7.38) (2017-06-29)
+
+
+### Bug Fixes
+
+* **manifest:** bump npm-pick-manifest for loose semver fix ([b3d45ef](https://github.com/zkat/pacote/commit/b3d45ef))
+
+
+
 <a name="2.7.37"></a>
 ## [2.7.37](https://github.com/zkat/pacote/compare/v2.7.36...v2.7.37) (2017-06-29)
 
