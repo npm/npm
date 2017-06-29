@@ -36,7 +36,11 @@ property match that environment variable.
 
 ### dependencies
 
-A mapping of package name to dependency object.  Dependency objects have the
+These are the modules installed in the `node_modules`.  Some of these are
+dependencies some of these are transitive dependencies (that is,
+dependencies of our dependencies).
+
+This is a mapping of package name to dependency object.  Dependency objects have the
 following properties:
 
 #### version *(changed)*
@@ -108,9 +112,17 @@ on the current platform.
 This is a record of what specifier was used to originally install this
 package.  This should not be included in new `package-lock.json` files.
 
+#### requires
+
+This is a mapping of module name to version.  This is a list of everything
+this module requires, regardless of where it will be installed.  The version
+should match via normal matching rules a dependency either in our
+`dependencies` or in a level higher than us.
+
 #### dependencies
 
-The dependencies of this dependency, exactly as at the top level.
+Exactly like `dependencies` at the top level, this is a list of modules to
+isntall in the `node_modules` of this module.
 
 ## Generating
 
