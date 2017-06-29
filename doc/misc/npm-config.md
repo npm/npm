@@ -701,6 +701,14 @@ This option is an alias for `--shrinkwrap`.
 Output parseable results from commands that write to
 standard output. For `npm search`, this will be tab-separated table format.
 
+### portable
+
+* Default: true
+* Type: Boolean
+
+When packing tarfiles, omit metadata that is system-specific: `ctime`,`atime`,
+`uid`, `gid`, `uname`, `gname`, `dev`, `ino`, and `nlink`.
+
 ### prefer-offline
 
 * Default: false
