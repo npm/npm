@@ -28,15 +28,6 @@ The version of the package this is a package-lock for. This must match what's in
 An integer version, starting at `1` with the version number of this document
 whose semantics were used when generating this `package-lock.json`.
 
-### packageIntegrity *(new)*
-
-This is a
-[subresource integrity](https://w3c.github.io/webappsec/specs/subresourceintegrity/)
-value created from the `pacakge.json`. No preprocessing of the
-`package.json` should be done.  Subresource integrity strings can be
-produced by modules like
-[`ssri`](https://www.npmjs.com/package/ssri).
-
 ### preserveSymlinks *(new)*
 
 Indicates that the install was done with the environment variable
