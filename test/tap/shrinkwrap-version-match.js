@@ -30,12 +30,10 @@ var fixture = new Tacks(Dir({
     dependencies: {
       modA: {
         version: '1.0.0',
-        from: 'modA',
         resolved: 'file://' + modAdir
       },
       modB: {
         version: '1.0.0',
-        from: 'modB@1',
         resolved: 'file://' + modB1dir
       }
     }

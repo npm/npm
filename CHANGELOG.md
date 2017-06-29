@@ -1,3 +1,205 @@
+## v5.0.4 (2017-06-13):
+
+Hey y'all. This is another minor patch release with a variety of little fixes
+we've been accumulating~
+
+* [`f0a37ace9`](https://github.com/npm/npm/commit/f0a37ace9ab7879cab20f2b0fcd7840bfc305feb)
+  Fix `npm doctor` when hitting registries without `ping`.
+  ([@zkat](https://github.com/zkat))
+* [`64f0105e8`](https://github.com/npm/npm/commit/64f0105e81352b42b72900d83b437b90afc6d9ce)
+  Fix invalid format error when setting cache-related headers.
+  ([@zkat](https://github.com/zkat))
+* [`d2969c80e`](https://github.com/npm/npm/commit/d2969c80e4178faebf0f7c4cab6eb610dd953cc6)
+  Fix spurious `EINTEGRITY` issue.
+  ([@zkat](https://github.com/zkat))
+* [`800cb2b4e`](https://github.com/npm/npm/commit/800cb2b4e2d0bd00b5c9082a896f2110e907eb0b)
+  [#17076](https://github.com/npm/npm/pull/17076)
+  Use legacy `from` field to improve upgrade experience from legacy shrinkwraps
+  and installs.
+  ([@zkat](https://github.com/zkat))
+* [`4100d47ea`](https://github.com/npm/npm/commit/4100d47ea58b4966c02604f71350b5316108df6a)
+  [#17007](https://github.com/npm/npm/pull/17007)
+  Restore loose semver parsing to match older npm behavior when running into
+  invalid semver ranges in dependencies.
+  ([@zkat](https://github.com/zkat))
+* [`35316cce2`](https://github.com/npm/npm/commit/35316cce2ca2d8eb94161ec7fe7e8f7bec7b3aa7)
+  [#17005](https://github.com/npm/npm/pull/17005)
+  Emulate npm@4's behavior of simply marking the peerDep as invalid, instead of
+  crashing.
+  ([@zkat](https://github.com/zkat))
+* [`e7e8ee5c5`](https://github.com/npm/npm/commit/e7e8ee5c57c7238655677e118a8809b652019f53)
+  [#16937](https://github.com/npm/npm/pull/16937)
+  Workaround for separate bug where `requested` was somehow null.
+  ([@forivall](https://github.com/forivall))
+* [`2d9629bb2`](https://github.com/npm/npm/commit/2d9629bb2043cff47eaad2654a64d2cef5725356)
+  Better logging output for git errors.
+  ([@zkat](https://github.com/zkat))
+* [`2235aea73`](https://github.com/npm/npm/commit/2235aea73569fb9711a06fa6344ef31247177dcd)
+  More scp-url fixes: parsing only worked correctly when a committish was
+  present.
+  ([@zkat](https://github.com/zkat))
+* [`80c33cf5e`](https://github.com/npm/npm/commit/80c33cf5e6ef207450949764de41ea96538c636e)
+  Standardize package permissions on tarball extraction, instead of using perms
+  from the tarball. This matches previous npm behavior and fixes a number of
+  incompatibilities in the wild.
+  ([@zkat](https://github.com/zkat))
+* [`2b1e40efb`](https://github.com/npm/npm/commit/2b1e40efba0b3d1004259efa4275cf42144e3ce3)
+  Limit shallow cloning to hosts which are known to support it.
+  ([@zkat](https://github.com/zkat))
+
+## v5.0.3 (2017-06-05)
+
+Happy Monday, y'all! We've got another npm release for you with the fruits of
+our ongoing bugsquashing efforts. You can expect at least one more this week,
+but probably more -- and as we announced last week, we'll be merging fixes more
+rapidly into the `npmc` canary so you can get everything as soon as possible!
+
+Hope y'all are enjoying npm5 in the meantime, and don't hesitate to file issues
+for anything you find! The goal is to get this release rock-solid as soon as we
+can. 💚
+
+* [`6e12a5cc0`](https://github.com/npm/npm/commit/6e12a5cc022cb5a157a37df7283b6d7b3d49bdab)
+  Bump several dependencies to get improvements and bugfixes:
+  * `cacache`: content files (the tarballs) are now read-only.
+  * `pacote`: fix failing clones with bad heads, send extra TLS-related opts to proxy, enable global auth configurations and `_auth`-based auth.
+  * `ssri`: stop crashing with `can't call method find of undefined` when running into a weird `opts.integrity`/`opts.algorithms` conflict during verification.
+  ([@zkat](https://github.com/zkat))
+* [`89cc8e3e1`](https://github.com/npm/npm/commit/89cc8e3e12dad67fd9844accf4d41deb4c180c5c)
+  [#16917](https://github.com/npm/npm/pull/16917)
+  Send `ca`, `cert` and `key` config through to network layer.
+  ([@colinrotherham](https://github.com/colinrotherham))
+* [`6a9b51c67`](https://github.com/npm/npm/commit/6a9b51c67ba3df0372991631992748329b84f2e7)
+  [#16929](https://github.com/npm/npm/pull/16929)
+  Send `npm-session` header value with registry requests again.
+  ([@zarenner](https://github.com/zarenner))
+* [`662a15ab7`](https://github.com/npm/npm/commit/662a15ab7e790e87f5e5a35252f05d5a4a0724a1)
+  Fix `npm doctor` so it stop complaining about read-only content files in the
+  cache.
+  ([@zkat](https://github.com/zkat))
+* [`191d10a66`](https://github.com/npm/npm/commit/191d10a6616d72e26d89fd00f5a4f6158bfbc526)
+  [#16918](https://github.com/npm/npm/pull/16918)
+  Clarify prepublish deprecation message.
+  ([@Hirse](https://github.com/Hirse))
+
+## v5.0.2 (2017-06-02)
+
+Here's another patch release, soon after the other!
+
+This particular release includes a slew of fixes to npm's git support, which was
+causing some issues for a chunk of people, specially those who were using
+self-hosted/Enterprise repos. All of those should be back in working condition
+now.
+
+There's another shiny thing you might wanna know about: npm has a Canary release
+now! The `npm5` experiment we did during our beta proved to be incredibly
+successful: users were able to have a tight feedback loop between reports and
+getting the bugfixes they needed, and the CLI team was able to roll out
+experimental patches and have the community try them out right away. So we want
+to keep doing that.
+
+From now on, you'll be able to install the 'npm canary' with `npm i -g npmc`.
+This release will be a separate binary (`npmc`. Because canary. Get it?), which
+will update independently of the main CLI. Most of the time, this will track
+`release-next` or something close to it. We might occasionally toss experimental
+branches in there to see if our more adventurous users run into anything
+interesting with it. For example, the current canary (`npmc@5.0.1-canary.6`)
+includes an [experimental multiproc
+branch](https://github.com/npm/npm/pull/16633) that parallelizes tarball
+extraction across multiple processes.
+
+If you find any issues while running the canary version, please report them and
+let us know it came from `npmc`! It would be tremendously helpful, and finding
+things early is a huge reason to have it there. Happy hacking!
+
+### A NOTE ABOUT THE ISSUE TRACKER
+
+Just a heads up: We're preparing to do a massive cleanup of the issue tracker.
+It's been a long time since it was something we could really keep up with, and
+we didn't have a process for dealing with it that could actually be sustainable.
+
+We're still sussing the details out, and we'll talk about it more when we're
+about to do it, but the plan is essentially to close old, abandoned issues and
+start over. We will also [add some automation](https://github.com/probot) around
+issue management so that things that we can't keep up with don't just stay
+around forever.
+
+Stay tuned!
+
+### GIT YOLO
+
+* [`1f26e9567`](https://github.com/npm/npm/commit/1f26e9567a6d14088704e121ebe787c38b6849a4)
+  `pacote@2.7.27`: Fixes installing committishes that look like semver, even
+  though they're not using the required `#semver:` syntax.
+  ([@zkat](https://github.com/zkat))
+* [`85ea1e0b9`](https://github.com/npm/npm/commit/85ea1e0b9478551265d03d545e7dc750b9edf547)
+  `npm-package-arg@5.1.1`: This includes the npa git-parsing patch to make it so
+  non-hosted SCP-style identifiers are correctly handled. Previously, npa would
+  mangle them (even though hosted-git-info is doing the right thing for them).
+  ([@zkat](https://github.com/zkat))
+
+### COOL NEW OUTPUT
+
+The new summary output has been really well received! One downside that reared
+its head as more people used it, though, is that it doesn't really tell you
+anything about the toplevel versions it installed. So, if you did `npm i -g
+foo`, it would just say "added 1 package". This patch by
+[@rmg](https://github.com/rmg) keeps things concise while still telling you
+what you got! So now, you'll see something like this:
+
+```
+$ npm i -g foo bar
++ foo@1.2.3
++ bar@3.2.1
+added 234 packages in .005ms
+```
+
+* [`362f9fd5b`](https://github.com/npm/npm/commit/362f9fd5bec65301082416b4292b8fe3eb7f824a)
+  [#16899](https://github.com/npm/npm/pull/16899)
+  For every package that is given as an argument to install, print the name and
+  version that was actually installed.
+  ([@rmg](https://github.com/rmg))
+
+### OTHER BUGFIXES
+
+* [`a47593a98`](https://github.com/npm/npm/commit/a47593a98a402143081d7077d2ac677d13083010)
+  [#16835](https://github.com/npm/npm/pull/16835)
+  Fix a crash while installing with `--no-shrinkwrap`.
+  ([@jacknagel](https://github.com/jacknagel))
+
+### DOC UPATES
+
+* [`89e0cb816`](https://github.com/npm/npm/commit/89e0cb8165dd9c3c7ac74d531617f367099608f4)
+  [#16818](https://github.com/npm/npm/pull/16818)
+  Fixes a spelling error in the docs. Because the CLI team has trouble spelling
+  "package", I guess.
+  ([@ankon](https://github.com/ankon))
+* [`c01fbc46e`](https://github.com/npm/npm/commit/c01fbc46e151bcfb359fd68dd7faa392789b4f55)
+  [#16895](https://github.com/npm/npm/pull/16895)
+  Remove `--save` from `npm init` instructions, since it's now the default.
+  ([@jhwohlgemuth](https://github.com/jhwohlgemuth))
+* [`80c42d218`](https://github.com/npm/npm/commit/80c42d2181dd4d1b79fcee4e9233df268dfb30b7)
+  Guard against cycles when inflating bundles, as symlinks are bundles now.
+  ([@iarna](https://github.com/iarna))
+* [`7fe7f8665`](https://github.com/npm/npm/commit/7fe7f86658798db6667df89afc75588c0e43bc94)
+  [#16674](https://github.com/npm/npm/issues/16674)
+  Write the builtin config for `npmc`, not just `npm`. This is hardcoded for npm
+  self-installations and is needed for Canary to work right.
+  ([@zkat](https://github.com/zkat))
+
+### DEP UPDATES
+
+* [`63df4fcdd`](https://github.com/npm/npm/commit/63df4fcddc7445efb50cc7d8e09cdd45146d3e39)
+  [#16894](https://github.com/npm/npm/pull/16894)
+  [`node-gyp@3.6.2`](https://github.com/nodejs/node-gyp/blob/master/CHANGELOG.md#v362-2017-06-01):
+  Fixes an issue parsing SDK versions on Windows, among other things.
+  ([@refack](https://github.com/refack))
+* [`5bb15c3c4`](https://github.com/npm/npm/commit/5bb15c3c4f0d7d77c73fd6dafa38ac36549b6e00)
+  `read-package-tree@5.1.6`: Fixes some racyness while reading the tree.
+  ([@iarna](https://github.com/iarna))
+* [`a6f7a52e7`](https://github.com/npm/npm/commit/a6f7a52e7)
+  `aproba@1.1.2`: Remove nested function declaration for speed up
+  ([@mikesherov](https://github.com/mikesherov))
+
 ## v5.0.1 (2017-05-31):
 
 Hey y'all! Hope you're enjoying the new npm!
