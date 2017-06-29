@@ -1,4 +1,11 @@
 
+3.0.0 / 2017-06-13
+==================
+
+  * [BREAKING] drop support for Node < 4
+  * update deps, remove `extend` dependency
+  * rename `socks-proxy-agent.js` to `index.js`
+
 2.1.1 / 2017-06-13
 ==================
 
