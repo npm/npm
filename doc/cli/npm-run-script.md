@@ -40,6 +40,20 @@ you should write:
 
 instead of `"scripts": {"test": "node_modules/.bin/tap test/\*.js"}` to run your tests.
 
+Also, `npm run` adds current working directory to `INIT_CWD`. You can run scripts in subdirectory of project. For example, you want to run babel in specific subdirectory. You should write:
+
+    "scripts": {
+      "build": "babel $INIT_CWD/src -d $INIT_CWD/lib"
+    }
+    
+or you can write:
+
+    "scripts": {
+      "build": "cd $INIT_CWD && babel src -d lib"
+    }
+    
+Now, you can run script, `npm run build` in any subdirectory you want to compiler JavaScript.
+
 `npm run` sets the `NODE` environment variable to the `node` executable with
 which `npm` is executed. Also, if the `--scripts-prepend-node-path` is passed,
 the directory within which `node` resides is added to the
