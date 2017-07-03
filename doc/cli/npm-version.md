@@ -20,8 +20,8 @@ valid second argument to [semver.inc](https://github.com/npm/node-semver#functio
 the existing version will be incremented by 1 in the specified field.
 `from-git` will try to read the latest git tag, and use that as the new npm version.
 
-If run in a git repo, it will also create a version commit and tag.
-This behavior is controlled by `git-tag-version` (see below), and can
+If run in a git repo, it will create a version commit and tag.
+The tag creation is controlled by `git-tag-version` (see below), and can
 be disabled on the command line by running `npm --no-git-tag-version version`.
 It will fail if the working directory is not clean, unless the `-f` or
 `--force` flag is set.
@@ -91,7 +91,7 @@ to the same value as the current version.
 * Default: true
 * Type: Boolean
 
-Commit and tag the version change.
+Tag the commit containing the version change.
 
 ### sign-git-tag
 
