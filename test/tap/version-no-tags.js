@@ -28,9 +28,8 @@ test('npm version <semver> without git tag', function (t) {
         })
       }
 
-      var child2 = spawn(git, ['init'])
-      child2.stdout.pipe(process.stdout)
-      child2.on('exit', function () {
+      common.makeGitRepo({ path: pkg }, function (er) {
+        t.ifErr(er, 'git bootstrap ran without error')
         npm.config.set('git-tag-version', false)
         npm.commands.version(['patch'], function (err) {
           if (err) return t.fail('Error perform version patch')
@@ -42,7 +41,12 @@ test('npm version <semver> without git tag', function (t) {
             t.ifError(err, 'tag found to exist')
             t.equal(exists, false, 'git tag DOES exist')
             t.pass('git tag does not exist')
-            t.end()
+            spawn(git, ['rev-parse', 'HEAD^']).on('exit', function (code) {
+              if (code !== 0) {
+                t.fail('git commit not created')
+              }
+              t.end()
+            })
           })
         })
       })
