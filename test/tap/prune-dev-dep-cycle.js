@@ -60,7 +60,6 @@ test('setup', function (t) {
   t.end()
 })
 
-
 function readdir (dir) {
   try {
     return fs.readdirSync(dir)
