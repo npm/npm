@@ -316,10 +316,10 @@ test('npm run-script no-params (direct only)', function (t) {
   })
 })
 
-test('npm run-script command-shell config', function (t) {
+test('npm run-script script-shell config', function (t) {
     writeMetadata(shell)
 
-    common.npm(['run-script', 'start', '--command-shell', 'echo'], opts, testOutput.bind(null, t, '-c echo foo'))
+    common.npm(['run-script', 'start', '--script-shell', 'echo'], opts, testOutput.bind(null, t, '-c echo foo'))
 })
 
 test('npm run-script no-params (direct only)', function (t) {
