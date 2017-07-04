@@ -889,6 +889,13 @@ in to a private registry for the first time:
 will cause `@organization` to be mapped to the registry for future installation
 of packages specified according to the pattern `@organization/package`.
 
+### script-shell
+
+* Default: `null`
+* Type: path
+
+The shell to use for scripts run with the `npm run` command.
+
 ### scripts-prepend-node-path
 
 * Default: "warn-only"
