@@ -4,6 +4,7 @@ var fs = require('fs')
 var rimraf = require('rimraf')
 var common = require('../common-tap.js')
 var Tacks = require('tacks')
+var unixFormatPath = require('../../lib/utils/unix-format-path.js')
 var File = Tacks.File
 var Dir = Tacks.Dir
 
@@ -16,10 +17,10 @@ var shrinkwrap = {
   version: '1.0.0',
   dependencies: {
     mod2: {
-      version: 'file:' + path.join('mods', 'mod2'),
+      version: 'file:' + unixFormatPath(path.join('mods', 'mod2')),
       dependencies: {
         mod1: {
-          version: 'file:' + path.join('mods', 'mod1'),
+          version: 'file:' + unixFormatPath(path.join('mods', 'mod1')),
           bundled: true
         }
       }
