@@ -738,10 +738,80 @@ test('removal', function (t) {
   })
 })
 
+var misc = testdir + '/misc'
+testdirContent['misc'] = Dir({
+  'package.json': File({
+    name: 'misc',
+    version: '1.0.0',
+    dependencies: {
+      dep1: 'file:dep1',
+      depa: 'file:depa',
+      depb: 'file:depb',
+      depc: 'file:depc'
+    }
+  }),
+  dep1: Dir({
+    'package.json': File({
+      name: 'dep1',
+      version: '1.0.0',
+      dependencies: {
+        dep2: 'file:../dep2'
+      }
+    }),
+    'node_modules': Dir({
+      dep2: Symlink('../../dep2')
+    })
+  }),
+  dep2: Dir({
+    'package.json': File({
+      name: 'dep2',
+      version: '1.0.0'
+    })
+  }),
+  depb: Dir({
+    'package.json': File({
+      name: 'depb',
+      version: '1.0.0'
+    })
+  }),
+  'node_modules': Dir({
+    dep1: Symlink('../dep1'),
+    depc: Symlink('../depb')
+  })
+})
 test('misc', function (t) {
   t.plan(3)
-  t.test('listing: should look right, not include version')
-  t.test('outdated: show LOCAL for wanted / latest')
+  const miscconf = {cwd: misc, env: conf.env, stdio: conf.stdio}
+  // note: depc should be INVALID
+  t.test('listing: should look right, not include version', t => {
+    return common.npm(['ls'], miscconf).spread((code, stdout) => {
+      t.is(code, 1, 'ls found missing dep')
+//      t.comment(stdout.trim())
+      t.like(stdout, /dep1 -> /, 'linked dep has no version in listing')
+      t.like(stdout, /UNMET.* depa/, 'found missing depa')
+      return common.npm(['ls', '--json'], miscconf)
+    }).spread((code, stdout) => {
+      t.is(code, 1, 'ls --json found missing dep')
+      const out = JSON.parse(stdout)
+      t.like(out, {problems: [/missing: depa/]}, 'json: depa is reported as missing in problems')
+      t.like(out, {dependencies: {depa: {missing: true}}}, 'json: depa is reported missing in tree')
+      t.like(out, {dependencies: {dep1: {version: 'file:dep1'}}}, 'json: dep1 has a file spec version')
+    })
+  })
+  t.test('outdated: show mising symlinks', t => {
+    return common.npm(['outdated'], miscconf).spread((code, stdout) => {
+      t.like(stdout, /depa.*MISSING.*linked/, 'depa shows as missing')
+      t.like(stdout, /depa.*MISSING.*linked/, 'depc shows as missing')
+      t.notLike(stdout, /dep1/, 'dep1 does not show as missing')
+      return common.npm(['outdated', '--json'], miscconf)
+    }).spread((code, stdout) => {
+      const out = JSON.parse(stdout)
+      t.like(out, {"depa": {"wanted": "linked"}}, 'depa shows as missing')
+      t.like(out, {"depc": {"wanted": "linked"}}, 'depc shows as missing')
+      // depc should be invalid
+      t.is(out.dep1, undefined, 'dep1 is not outdated')
+    })
+  })
   t.test('update: if specifier exists, do nothing. otherwise as if `npm install`.')
 })
 
