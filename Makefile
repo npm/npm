@@ -56,7 +56,7 @@ latest:
 	node bin/npm-cli.js install -g -f npm ${NPMOPTS}
 
 install: all
-	node bin/npm-cli.js install -g -f ${NPMOPTS}
+	node bin/npm-cli.js install -g -f ${NPMOPTS} $(shell node bin/npm-cli.js pack | tail -1)
 
 # backwards compat
 dev: install
