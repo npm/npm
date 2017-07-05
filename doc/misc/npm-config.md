@@ -560,6 +560,13 @@ if one of the two conditions are met:
 * the globally installed version is identical to the version that is
   being installed locally.
 
+### link-only
+
+* Type: Boolean
+* Default: false
+
+Only list packages which are linked.
+
 ### local-address
 
 * Default: undefined
