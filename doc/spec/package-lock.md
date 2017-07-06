@@ -122,7 +122,7 @@ should match via normal matching rules a dependency either in our
 #### dependencies
 
 Exactly like `dependencies` at the top level, this is a list of modules to
-isntall in the `node_modules` of this module.
+install in the `node_modules` of this module.
 
 ## Generating
 
