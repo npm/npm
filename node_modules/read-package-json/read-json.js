@@ -107,7 +107,7 @@ function parseJson (file, er, d, log, strict, cb) {
 }
 
 function extrasCached (file, d, data, log, strict, cb) {
-  extras(file, data, log, strict, (err, data) => {
+  extras(file, data, log, strict, function (err, data) {
     if (!err) {
       cache[d] = jsonClone(data)
     }
