@@ -616,7 +616,7 @@ testdirContent['remove-behavior'] = Dir({
       name: 'remove-behavior',
       version: '1.0.0',
       dependencies: {
-        dep1: 'file:dep1',
+        dep1: 'file:dep1'
       }
     }),
     'package-lock.json': File({
@@ -666,7 +666,7 @@ testdirContent['remove-behavior'] = Dir({
       name: 'remove-behavior',
       version: '1.0.0',
       dependencies: {
-        edep1: 'file:../edep1',
+        edep1: 'file:../edep1'
       }
     }),
     'package-lock.json': File({
@@ -710,13 +710,13 @@ testdirContent['remove-behavior'] = Dir({
       name: 'edep2',
       version: '1.0.0'
     })
-  }),
+  })
 })
 
 test('removal', function (t) {
   t.plan(2)
 
-  t.test('should remove the symlink', t => {
+  t.test('should remove the symlink', (t) => {
     const rmconf = {cwd: `${rmdir}/rmsymlink`, env: conf.env, stdio: conf.stdio}
     return common.npm(['uninstall', 'dep1'], rmconf).spread((code, stdout) => {
       t.is(code, 0, 'uninstall ran ok')
@@ -726,7 +726,7 @@ test('removal', function (t) {
       fileExists(t, `${rmdir}/rmsymlink/dep2`, 'original transitive dep still exists')
     })
   })
-  t.test("should not remove transitive deps if it's outside the package and --preserver-symlinks isn't set", t => {
+  t.test("should not remove transitive deps if it's outside the package and --preserver-symlinks isn't set", (t) => {
     const rmconf = {cwd: `${rmdir}/rmesymlink`, env: conf.env, stdio: conf.stdio}
     return common.npm(['uninstall', 'edep1'], rmconf).spread((code, stdout) => {
       t.is(code, 0, 'uninstall ran ok')
