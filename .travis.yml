@@ -22,6 +22,9 @@ matrix:
       # then master
     - node_js: "8"
       env: DEPLOY_VERSION=testing
+      script:
+       - "standard"
+       - "node . run tap -- \"test/tap/*.js\" \"test/broken-under-nyc/*.js\""
 before_install:
   # required by test/tap/registry.js
   - "mkdir -p /var/run/couchdb"
