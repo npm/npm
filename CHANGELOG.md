@@ -113,8 +113,8 @@ right? Here's what's bumping that number for us this time:
   locks. If you were previously having issues with missing dependencies or
   unwanted removals, this might have fixed it:
   * It introduces a new `package-lock.json` field, called `requires`, which tracks which modules a given module requires.
-  * It fixes [#16839](https://github.com/npm/npm/issue/16839) which was caused by not having this information available, particularly when git dependencies were involved.
-  * It fixes [#16866](https://github.com/npm/npm/issue/16866), allowing the `package.json` to trump the `package-lock.json`.
+  * It fixes [#16839](https://github.com/npm/npm/issues/16839) which was caused by not having this information available, particularly when git dependencies were involved.
+  * It fixes [#16866](https://github.com/npm/npm/issues/16866), allowing the `package.json` to trump the `package-lock.json`.
   * `npm ls` now loads the shrinkwrap, which opens the door to showing a full tree of dependencies even when nothing is yet installed. (It doesn't do that yet though.)
   ([@iarna](https://github.com/iarna))
 * [`656544c31`](https://github.com/npm/npm/commit/656544c31cdef3cef64fc10c24f03a8ae2685e35) [`d21ab57c3`](https://github.com/npm/npm/commit/d21ab57c3ef4f01d41fb6c2103debe884a17dc22)
@@ -135,7 +135,7 @@ right? Here's what's bumping that number for us this time:
   installed with `npm@<5`.
   ([@iarna](https://github.com/iarna))
 * [`c3b586aaf`](https://github.com/npm/npm/commit/c3b586aafa9eabac572eb6e2b8a7266536dbc65b)
-  [#17141](https://github.com/npm/npm/issue/17141)
+  [#17141](https://github.com/npm/npm/issues/17141)
   Don't update the package.json when modifying packages that don't go there.
   This was previously causing `package.json` to get a `"false": {}` field added.
   ([@iarna](https://github.com/iarna))
