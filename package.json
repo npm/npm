@@ -223,7 +223,7 @@
     "npm-registry-mock": "~1.1.0",
     "require-inject": "~1.4.2",
     "sprintf-js": "~1.1.1",
-    "standard": "~6.0.8",
+    "standard": "~10.0.2",
     "tacks": "~1.2.6",
     "tap": "~10.7.0"
   },
