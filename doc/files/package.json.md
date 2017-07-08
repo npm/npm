@@ -462,7 +462,7 @@ Git urls can be of the form:
 The `commit-ish` can be any tag, sha, or branch which can be supplied as
 an argument to `git checkout`.  The default is `master`.
 
-## GitHub URLs
+### GitHub URLs
 
 As of version 1.1.65, you can refer to GitHub urls as just "foo":
 "user/foo-project".  Just as with git URLs, a `commit-ish` suffix can be
@@ -478,7 +478,7 @@ included.  For example:
       }
     }
 
-## Local Paths
+### Local Paths
 
 As of version 2.0.0 you can provide a path to a local directory that contains a
 package. Local paths can be saved using `npm install -S` or
