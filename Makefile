@@ -14,7 +14,8 @@ html_docdeps = html/dochead.html \
 cli_mandocs = $(shell find doc/cli -name '*.md' \
                |sed 's|.md|.1|g' \
                |sed 's|doc/cli/|man/man1/|g' ) \
-               man/man1/npm-README.1
+               man/man1/npm-README.1 \
+               man/man1/npx.1
 
 files_mandocs = $(shell find doc/files -name '*.md' \
                |sed 's|.md|.5|g' \
@@ -95,6 +96,9 @@ man/man1/npm-README.1: README.md scripts/doc-build.sh package.json
 man/man1/%.1: doc/cli/%.md scripts/doc-build.sh package.json
 	@[ -d man/man1 ] || mkdir -p man/man1
 	scripts/doc-build.sh $< $@
+
+man/man1/npx.1: node_modules/libnpx/libnpx.1
+	cat $< | sed s/libnpx/npx/ > $@
 
 man/man5/npm-json.5: man/man5/package.json.5
 	cp $< $@
