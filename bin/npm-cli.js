@@ -14,6 +14,14 @@
     return
   }
 
+  if (process.argv[2] === 'x' || process.argv[2] === 'exec') {
+    const Module = require('module')
+    const path = require('path')
+    // remove both the npm-cli.js path, and 'x'/'exec' and hand over control
+    process.argv.splice(1, 2, path.join(__dirname, 'npx-cli.js'))
+    return Module.runMain()
+  }
+
   process.title = 'npm'
 
   var unsupported = require('../lib/utils/unsupported.js')
