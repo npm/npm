@@ -1,3 +1,84 @@
+## v5.2.0 (2017-07-05):
+
+It's only been a couple of days but we've got some bug fixes we wanted to
+get out to you all.  We also believe that
+[`npx`](https://medium.com/@maybekatz/55f7d4bd282b) is ready to be bundled
+with npm, which we're really excited about!
+
+### npx!!!
+
+npx is a tool intended to help round out the experience of using packages
+from the npm registry — the same way npm makes it super easy to install and
+manage dependencies hosted on the registry, npx is meant to make it easy to
+use CLI tools and other executables hosted on the registry.  It greatly
+simplifies a number of things that, until now, required a bit of ceremony to
+do with plain npm.
+
+![](https://cdn-images-1.medium.com/max/1600/1*OlIRsvVO5aK7ja9HmwXz_Q.gif)
+
+[@zkat](https://github.com/zkat) has a [great introduction post to npx](https://medium.com/@maybekatz/55f7d4bd282b)
+that I highly recommend you give a read
+
+* [`fb040bee0`](https://github.com/npm/npm/commit/fb040bee0710759c60e45bf8fa2a3b8ddcf4212a)
+  [#17685](https://github.com/npm/npm/pull/17685)
+  Bundle npx with npm itself.
+  ([@zkat](https://github.com/zkat))
+
+### BUG FIXES
+
+* [`9fe905c39`](https://github.com/npm/npm/commit/9fe905c399d07a3c00c7b22035ddb6b7762731e6)
+  [#17652](https://github.com/npm/npm/pull/17652)
+  Fix max callstack exceeded loops with trees with circular links.
+  ([@iarna](https://github.com/iarna))
+* [`c0a289b1b`](https://github.com/npm/npm/commit/c0a289b1ba6b99652c43a955b23acbf1de0b56ae)
+  [#17606](https://github.com/npm/npm/pull/17606)
+  Make sure that when write package.json and package-lock.json we always use unix path separators.
+  ([@Standard8](https://github.com/Standard8))
+* [`1658b79ca`](https://github.com/npm/npm/commit/1658b79cad89ccece5ae5ce3c2f691d44b933116)
+  [#17654](https://github.com/npm/npm/pull/17654)
+  Make `npm outdated` show results for globals again. Previously it never thought they were out of date.
+  ([@iarna](https://github.com/iarna))
+* [`06c154fd6`](https://github.com/npm/npm/commit/06c154fd653d18725d2e760ba825d43cdd807420)
+  [#17678](https://github.com/npm/npm/pull/17678)
+  Stop flattening modules that have peer dependencies.  We're making this
+  change to support scenarios where the module requiring a peer dependency
+  is flattened but the peer dependency itself is not, due to conflicts.  In
+  those cases the module requiring the peer dep can't be flattened past the
+  location its peer dep was placed in.  This initial fix is naive, never
+  flattening peer deps, and we can look into doing something more
+  sophisticated later on.
+  ([@iarna](https://github.com/iarna))
+* [`88aafee8b`](https://github.com/npm/npm/commit/88aafee8b5b232b7eeb5690279a098d056575791)
+  [#17677](https://github.com/npm/npm/pull/17677)
+  There was an issue where updating a flattened dependency would sometimes
+  unflatten it.  This only happened when the dependency had dependencies
+  that in turn required the original dependency.
+  ([@iarna](https://github.com/iarna))
+* [`b58ec8eab`](https://github.com/npm/npm/commit/b58ec8eab3b4141e7f1b8b42d8cc24f716a804d8)
+  [#17626](https://github.com/npm/npm/pull/17626)
+  Integrators who were building their own copies of npm ran into issues because
+  `make install` and https://npmjs.com/install.sh weren't aware that
+  `npm install` creates links now when given a directory to work on. This does not impact folks
+  installing npm with `npm install -g npm`.
+  ([@iarna](https://github.com/iarna))
+
+### DOC FIXES
+
+* [`10bef735e`](https://github.com/npm/npm/commit/10bef735e825acc8278827d34df415dfcd8c67d4)
+  [#17645](https://github.com/npm/npm/pull/17645)
+  Fix some github issue links in the 5.1.0 changelog
+  ([@schmod](https://github.com/schmod))
+* [`85fa9dcb2`](https://github.com/npm/npm/commit/85fa9dcb2f0b4f51b515358e0184ec82a5845227)
+  [#17634](https://github.com/npm/npm/pull/17634)
+  Fix typo in package-lock docs.
+  ([@sonicdoe](https://github.com/sonicdoe))
+* [`688699bef`](https://github.com/npm/npm/commit/688699befc2d147288c69a9405fb8354ecaebe36)
+  [#17628](https://github.com/npm/npm/pull/17628)
+  Recommend that folks looking for support join us on https://package.community/ or message
+  [@npm_support](https://twitter.com/npm_support) on Twitter.
+  ([@strugee](https://github.com/strugee))
+
+
 ## v5.1.0 (2017-07-05):
 
 Hey y'all~
