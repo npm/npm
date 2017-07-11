@@ -451,16 +451,26 @@ install time.
 
 ### Git URLs as Dependencies
 
-Git urls can be of the form:
+Git urls are of the form:
 
-    git://github.com/user/project.git#commit-ish
-    git+ssh://user@hostname:project.git#commit-ish
-    git+ssh://user@hostname/project.git#commit-ish
-    git+http://user@hostname/project/blah.git#commit-ish
-    git+https://user@hostname/project/blah.git#commit-ish
+    <protocol>://[<user>[:<password>]@]<hostname>[:<port>][:][/]<path>[#<commit-ish> | #semver:<semver>]
 
-The `commit-ish` can be any tag, sha, or branch which can be supplied as
-an argument to `git checkout`.  The default is `master`.
+`<protocol>` is one of `git`, `git+ssh`, `git+http`, `git+https`, or
+`git+file`.
+
+If `#<commit-ish>` is provided, it will be used to clone exactly that
+commit. If the commit-ish has the format `#semver:<semver>`, `<semver>` can
+be any valid semver range or exact version, and npm will look for any tags
+or refs matching that range in the remote repository, much as it would for a
+registry dependency. If neither `#<commit-ish>` or `#semver:<semver>` is
+specified, then `master` is used.
+
+Examples:
+
+    git+ssh://git@github.com:npm/npm.git#v1.0.27
+    git+ssh://git@github.com:npm/npm#semver:^5.0
+    git+https://isaacs@github.com/npm/npm.git
+    git://github.com/npm/npm.git#v1.0.27
 
 ## GitHub URLs
 
