@@ -2,7 +2,7 @@
 
 It's only been a couple of days but we've got some bug fixes we wanted to
 get out to you all.  We also believe that
-[`npx`](https://medium.com/@maybekatz/55f7d4bd282b) is ready to be bundled
+[`npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) is ready to be bundled
 with npm, which we're really excited about!
 
 ### npx!!!
@@ -16,7 +16,7 @@ do with plain npm.
 
 ![](https://cdn-images-1.medium.com/max/1600/1*OlIRsvVO5aK7ja9HmwXz_Q.gif)
 
-[@zkat](https://github.com/zkat) has a [great introduction post to npx](https://medium.com/@maybekatz/55f7d4bd282b)
+[@zkat](https://github.com/zkat) has a [great introduction post to npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b)
 that I highly recommend you give a read
 
 * [`fb040bee0`](https://github.com/npm/npm/commit/fb040bee0710759c60e45bf8fa2a3b8ddcf4212a)
