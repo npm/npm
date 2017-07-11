@@ -93,7 +93,7 @@ to the same value as the current version.
 
 Commit and tag the version change.
 
-### git-tag-hooks
+### commit-hooks
 
 * Default: true
 * Type: Boolean
