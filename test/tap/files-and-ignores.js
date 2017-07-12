@@ -477,6 +477,7 @@ test('certain files included unconditionally', function (t) {
       'README': File(''),
       'Readme': File(''),
       'readme.md': File(''),
+      'readme.md~': File(''),
       'readme.randomext': File(''),
       'changelog': File(''),
       'CHAngelog': File(''),
@@ -495,6 +496,7 @@ test('certain files included unconditionally', function (t) {
     t.ok(fileExists('README'), 'README included')
     t.ok(fileExists('Readme'), 'Readme included')
     t.ok(fileExists('readme.md'), 'readme.md included')
+    t.notOk(fileExists('readme.md~'), 'readme.md~ not included')
     t.ok(fileExists('readme.randomext'), 'readme.randomext included')
     t.ok(fileExists('changelog'), 'changelog included')
     t.ok(fileExists('CHAngelog'), 'CHAngelog included')
