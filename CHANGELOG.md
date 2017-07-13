@@ -1,3 +1,81 @@
+## v5.3.0 (2017-07-12):
+
+As mentioned before, we're continuing to do relatively rapid, smaller releases
+as we keep working on stomping out `npm@5` issues! We've made a lot of progress
+since 5.0 already, and this release is no exception.
+
+### FEATURES
+
+* [`1e3a46944`](https://github.com/npm/npm/commit/1e3a469448b5db8376e6f64022c4c0c78cdb1686)
+  [#17616](https://github.com/npm/npm/pull/17616)
+  Add `--link` filter option to `npm ls`.
+  ([@richardsimko](https://github.com/richardsimko))
+* [`45f49bbee`](https://github.com/npm/npm/commit/45f49bbee38dab4ff05d97c66d88fb1fe91c0e3c)
+  `libnpx@9.1.0`:
+  * 3 new languages - Czech, Italian, and Turkish!
+  * New --node-arg option lets you pass CLI arguments directly to node when the target binary is found to be a Node.js script.
+  ([@zkat](https://github.com/zkat))
+
+### BUGFIXES
+
+* [`45f49bbee`](https://github.com/npm/npm/commit/45f49bbee38dab4ff05d97c66d88fb1fe91c0e3c)
+  `libnpx@9.1.0`:
+  * npx should now work on (most) Windows installs. A couple of issues remain.
+  * Prevent auto-fallback from going into an infinite loop when npx disappears.
+  * `npx npx npx npx npx npx npx npx` works again.
+  * `update-notifier` will no longer run for the npx bundled with npm.
+  ([@zkat](https://github.com/zkat))
+* [`8e979bf80`](https://github.com/npm/npm/commit/8e979bf80fb93233f19db003f08443e26cfc5e64)
+  Revert change where npm stopped flattening modules that required peerDeps.
+  This caused problems because folks were using peer deps to indicate that the
+  target of the peer dep needed to be able to require the dependency and had
+  been relying on the fact that peer deps didn't change the shape of the tree
+  (as of npm@3).
+  The fix that will actually work for people is for a peer dep to insist on
+  never being installed deeper than the the thing it relies on.  At the moment
+  this is tricky because the thing the peer dep relies on may not yet have
+  been added to the tree, so we don't know where it is.
+  ([@iarna](https://github.com/iarna))
+* [`7f28a77f3`](https://github.com/npm/npm/commit/7f28a77f33ef501065f22e8d5e8cffee3195dccd)
+  [#17733](https://github.com/npm/npm/pull/17733)
+  Split remove and unbuild actions into two to get uninstall lifecycles and the
+  removal of transitive symlinks during uninstallation to run in the right
+  order.
+  ([@iarna](https://github.com/iarna))
+* [`637f2548f`](https://github.com/npm/npm/commit/637f2548facae011eebf5e5c38bfe56a6c2db9fa)
+  [#17748](https://github.com/npm/npm/pull/17748)
+  When rolling back use symlink project-relative path, fixing some issues with
+  `fs-vacuum` getting confused while removing symlinked things.
+  ([@iarna](https://github.com/iarna))
+* [`f153b5b22`](https://github.com/npm/npm/commit/f153b5b22f647d4d403f5b8cecd2ce63ac75b07c)
+  [#17706](https://github.com/npm/npm/pull/17706)
+  Use semver to compare node versions in npm doctor instead of plain `>`
+  comparison.
+  ([@leo-shopify](https://github.com/leo-shopify))
+* [`542f7561`](https://github.com/npm/npm/commit/542f7561d173eca40eb8d838a16a0ed582fef989)
+  [#17742](https://github.com/npm/npm/pull/17742)
+  Fix issue where `npm version` would sometimes not commit package-locks.
+  ([@markpeterfejes](https://github.com/markpeterfejes))
+
+### DOCUMENTATION
+
+Have we mentioned we really like documentation patches? Keep sending them in!
+Small patches are just fine, and they're a great way to get started contributing
+to npm!
+
+* [`fb42d55a9`](https://github.com/npm/npm/commit/fb42d55a9a97afa5ab7db38b3b99088cf68684ea)
+  [#17728](https://github.com/npm/npm/pull/17728)
+  Document semver git urls in package.json docs.
+  ([@sankethkatta](https://github.com/sankethkatta))
+* [`f398c700f`](https://github.com/npm/npm/commit/f398c700fb0f2f3665ebf45995a910ad16cd8d05)
+  [#17684](https://github.com/npm/npm/pull/17684)
+  Tweak heading hierarchy in package.json docs.
+  ([@sonicdoe](https://github.com/sonicdoe))
+* [`d5ad65e50`](https://github.com/npm/npm/commit/d5ad65e50a573cdf9df4155225e869cd6c88ca5e)
+  [#17691](https://github.com/npm/npm/pull/17691)
+  Explicitly document `--no-save` flag for uninstall.
+  ([@timneedham](https://github.com/timneedham))
+
 ## v5.2.0 (2017-07-05):
 
 It's only been a couple of days but we've got some bug fixes we wanted to
