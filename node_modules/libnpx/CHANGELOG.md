@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="9.2.0"></a>
+# [9.2.0](https://github.com/zkat/npx/compare/v9.1.0...v9.2.0) (2017-07-14)
+
+
+### Bug Fixes
+
+* **binpath:** fix calling binaries from subdirectories ([f185d0d](https://github.com/zkat/npx/commit/f185d0d))
+* **i18n:** Fix typos in french locale (#78) ([f277fc7](https://github.com/zkat/npx/commit/f277fc7)), closes [#78](https://github.com/zkat/npx/issues/78)
+
+
+### Features
+
+* **i18n:** Add German translations (#79) ([c81e26d](https://github.com/zkat/npx/commit/c81e26d))
+* **i18n:** add zh_TW translation (#80) ([98288d8](https://github.com/zkat/npx/commit/98288d8))
+
+
+
 <a name="9.1.0"></a>
 # [9.1.0](https://github.com/zkat/npx/compare/v9.0.7...v9.1.0) (2017-07-12)
 

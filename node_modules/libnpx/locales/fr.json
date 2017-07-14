@@ -8,9 +8,9 @@
   "Shell to execute the command with, if any.": "Shell a utiliser pour exécuter la commande, s'il y en a un.",
   "Generate shell code to use npx as the \"command not found\" fallback.": "Générer le code du shell pour utiliser npx comme solution de rechange à  \"command not found\"",
   "Ignores existing binaries in $PATH, or in the local project. This forces npx to do a temporary install and use the latest version.": "Ignorer les binaires dans le $PATH ou dans le projet local. Cela force npm à faire une installation temporaire et utiliser la dernière version.",
-  "npm binary to use for internal operations.": "Binaire de npm a utiliser pour les opérations internes.",
+  "npm binary to use for internal operations.": "Binaire de npm à utiliser pour les opérations internes.",
   "For the full documentation, see the manual page for npx(1).": "Pour la documentation complète, regarder la page du manuel pour npx(1).",
-  "Unable to guess a binary name from %s. Please use --package.": "Impossible de deviner le nom du binaire de %s, utilisez --Package s'il vous plaît.",
+  "Unable to guess a binary name from %s. Please use --package.": "Impossible de deviner le nom du binaire de %s, utilisez --package s'il vous plaît.",
   "\nERROR: You must supply a command.\n": "\nERROR: Vous devez fournir une commande.\n",
   "Command failed: %s %s": "La commande a échoué: %s %s",
   "Install for %s failed with code %s": "L'installation de %s a échoué avec le code %s",
@@ -23,7 +23,7 @@
   "command-string": "chaine-de-caractères-de-la-commande",
   "shell": "shell",
   "package": "paquet",
-  "npx: installed %s in %ss": "npx: a installé %s dans %ss",
+  "npx: installed %s in %ss": "npx: %s installé(s) en %ss",
   "Suppress output from npx itself. Subcommands will not be affected.": "Supprimer les sorties générées par npx. Les sous-commandes ne seront pas affectées."
 }
 
