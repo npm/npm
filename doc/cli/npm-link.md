@@ -4,7 +4,7 @@ npm-link(1) -- Symlink a package folder
 ## SYNOPSIS
 
     npm link (in package dir)
-    npm link [<@scope>/]<pkg>[@<version>]
+    npm link [<@scope>/]<pkg>[@<version>] [--save|--save-dev|--save-optional] [--save-exact]
 
     alias: npm ln
 
