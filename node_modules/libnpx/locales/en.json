@@ -24,5 +24,6 @@
   "shell": "shell",
   "package": "package",
   "npx: installed %s in %ss": "npx: installed %s in %ss",
-  "Suppress output from npx itself. Subcommands will not be affected.": "Suppress output from npx itself. Subcommands will not be affected."
+  "Suppress output from npx itself. Subcommands will not be affected.": "Suppress output from npx itself. Subcommands will not be affected.",
+  "Extra node argument when calling a node binary.": "Extra node argument when calling a node binary."
 }
