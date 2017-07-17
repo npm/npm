@@ -891,6 +891,32 @@ of packages specified according to the pattern `@organization/package`.
 
 The shell to use for scripts run with the `npm run` command.
 
+### script-shell-opts
+
+* Default: `null`
+* Type: String
+
+Possible options when using a custom script-shell.
+
+Example:
+
+It is possible to make npm return error on pipe-chained commands which are very
+common when one uses npm as a build tool with lots of npm scripts.
+
+Here is an npm script relying on pipe-chained commands:
+
+    "scripts": {
+      "build:js": "browserify -g envify -e www/js/main.js | uglifyjs -c -m | tee www/bundle/bundle.js | gzip > www/bundle/bundle.js.gz"
+    }
+
+And here is the custom setting:
+
+    npm config set script-shell /bin/bash
+    npm config set script-shell-opts "-o pipefail -c"
+
+Now if any of the pipe-chained commands fails the npm script will produce an
+error, thus providing a much safer situation.
+
 ### scripts-prepend-node-path
 
 * Default: "warn-only"

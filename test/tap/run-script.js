@@ -322,6 +322,14 @@ test('npm run-script script-shell config', function (t) {
   common.npm(['run-script', 'start', '--script-shell', 'echo'], opts, testOutput.bind(null, t, '-c echo foo'))
 })
 
+test('npm run-script script-shell-opts config', function (t) {
+  writeMetadata(shell)
+
+  common.npm(['run-script', 'start', '--script-shell', 'echo',
+              '--script-shell-opts', '-o pipefail -c'], opts,
+             testOutput.bind(null, t, '-o pipefail -c echo foo'))
+})
+
 test('npm run-script no-params (direct only)', function (t) {
   var expected = [
     'Lifecycle scripts included in scripted:',
