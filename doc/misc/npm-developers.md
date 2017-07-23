@@ -140,7 +140,7 @@ The following paths and files are never ignored, so adding them to
 * `CHANGELOG` (and its variants)
 * `LICENSE` / `LICENCE`
 
-If, given the structure of your project, you find `.npmignore to be a
+If, given the structure of your project, you find `.npmignore` to be a
 maintenance headache, you might instead try populating the `files`
 property of `package.json`, which is an array of file or directory names
 that should be included in your package. Sometimes a whitelist is easier
