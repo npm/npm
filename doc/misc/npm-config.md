@@ -184,7 +184,7 @@ The browser that is called by the `npm docs` command to open websites.
 * Type: String, Array or null
 
 The Certificate Authority signing certificate that is trusted for SSL
-connections to the registry. Values should be in PEM format with newlines
+connections to the registry. Values should be in PEM format (Windows calls it "Base-64 encoded X.509 (.CER)") with newlines
 replaced by the string "\n". For example:
 
     ca="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
@@ -260,7 +260,7 @@ Number of ms to wait for cache lock files to expire.
 * Type: String
 
 A client certificate to pass when accessing the registry.  Values should be in
-PEM format with newlines replaced by the string "\n". For example:
+PEM format (Windows calls it "Base-64 encoded X.509 (.CER)") with newlines replaced by the string "\n". For example:
 
     cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 
