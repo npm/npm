@@ -406,7 +406,11 @@ test('certain files ignored unconditionally', function (t) {
           '.DS_Store',
           '._ohno',
           'foo.orig',
-          'package-lock.json'
+          'package-lock.json',
+          'README~',
+          'LICENSE.txt~',
+          'changelog.md~',
+          'notice~'
         ]
       }),
       '.git': Dir({foo: File('')}),
@@ -425,7 +429,11 @@ test('certain files ignored unconditionally', function (t) {
       '._ohno': File(''),
       '._ohnoes': Dir({noes: File('')}),
       'foo.orig': File(''),
-      'package-lock.json': File('')
+      'package-lock.json': File(''),
+      'README~': File(''),
+      'LICENSE.txt~': File(''),
+      'changelog.md~': File(''),
+      'notice~': File('')
     })
   )
   withFixture(t, fixture, function (done) {
@@ -446,6 +454,10 @@ test('certain files ignored unconditionally', function (t) {
     t.notOk(fileExists('._ohnoes'), '._ohnoes not included')
     t.notOk(fileExists('foo.orig'), 'foo.orig not included')
     t.notOk(fileExists('package-lock.json'), 'package-lock.json not included')
+    t.notOk(fileExists('README~'), 'README~ not included')
+    t.notOk(fileExists('LICENSE.txt~'), 'LICENSE.txt~ not included')
+    t.notOk(fileExists('changelog.md~'), 'changelog.md~ not included')
+    t.notOk(fileExists('notice~'), 'notice~ not included')
     done()
   })
 })
