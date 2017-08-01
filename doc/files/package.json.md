@@ -119,7 +119,7 @@ array of license objects:
     // Not valid metadata
     { "license" :
       { "type" : "ISC"
-      , "url" : "http://opensource.org/licenses/ISC"
+      , "url" : "https://opensource.org/licenses/ISC"
       }
     }
 
@@ -127,10 +127,10 @@ array of license objects:
     { "licenses" :
       [
         { "type": "MIT"
-        , "url": "http://www.opensource.org/licenses/mit-license.php"
+        , "url": "https://www.opensource.org/licenses/mit-license.php"
         }
       , { "type": "Apache-2.0"
-        , "url": "http://opensource.org/licenses/apache2.0.php"
+        , "url": "https://opensource.org/licenses/apache2.0.php"
         }
       ]
     }
@@ -144,7 +144,7 @@ Those styles are now deprecated. Instead, use SPDX expressions, like this:
 Finally, if you do not wish to grant others the right to use a private or
 unpublished package under any terms:
 
-    { "license": "UNLICENSED"}
+    { "license": "UNLICENSED" }
 
 Consider also setting `"private": true` to prevent accidental publication.
 
@@ -204,6 +204,7 @@ Conversely, some files are always ignored:
 * `node_modules`
 * `config.gypi`
 * `*.orig`
+* `package-lock.json` (use shrinkwrap instead)
 
 ## main
 
@@ -420,7 +421,7 @@ See semver(7) for more details about specifying version ranges.
 * `range1 || range2` Passes if either range1 or range2 are satisfied.
 * `git...` See 'Git URLs as Dependencies' below
 * `user/repo` See 'GitHub URLs' below
-* `tag` A specific version tagged and published as `tag`  See `npm-tag(1)`
+* `tag` A specific version tagged and published as `tag`  See `npm-dist-tag(1)`
 * `path/path/path` See [Local Paths](#local-paths) below
 
 For example, these are all valid:
@@ -450,18 +451,28 @@ install time.
 
 ### Git URLs as Dependencies
 
-Git urls can be of the form:
+Git urls are of the form:
 
-    git://github.com/user/project.git#commit-ish
-    git+ssh://user@hostname:project.git#commit-ish
-    git+ssh://user@hostname/project.git#commit-ish
-    git+http://user@hostname/project/blah.git#commit-ish
-    git+https://user@hostname/project/blah.git#commit-ish
+    <protocol>://[<user>[:<password>]@]<hostname>[:<port>][:][/]<path>[#<commit-ish> | #semver:<semver>]
 
-The `commit-ish` can be any tag, sha, or branch which can be supplied as
-an argument to `git checkout`.  The default is `master`.
+`<protocol>` is one of `git`, `git+ssh`, `git+http`, `git+https`, or
+`git+file`.
 
-## GitHub URLs
+If `#<commit-ish>` is provided, it will be used to clone exactly that
+commit. If the commit-ish has the format `#semver:<semver>`, `<semver>` can
+be any valid semver range or exact version, and npm will look for any tags
+or refs matching that range in the remote repository, much as it would for a
+registry dependency. If neither `#<commit-ish>` or `#semver:<semver>` is
+specified, then `master` is used.
+
+Examples:
+
+    git+ssh://git@github.com:npm/npm.git#v1.0.27
+    git+ssh://git@github.com:npm/npm#semver:^5.0
+    git+https://isaacs@github.com/npm/npm.git
+    git://github.com/npm/npm.git#v1.0.27
+
+### GitHub URLs
 
 As of version 1.1.65, you can refer to GitHub urls as just "foo":
 "user/foo-project".  Just as with git URLs, a `commit-ish` suffix can be
@@ -471,13 +482,13 @@ included.  For example:
       "name": "foo",
       "version": "0.0.0",
       "dependencies": {
-        "express": "visionmedia/express",
-        "mocha": "visionmedia/mocha#4727d357ea",
+        "express": "expressjs/express",
+        "mocha": "mochajs/mocha#4727d357ea",
         "module": "user/repo#feature\/branch"
       }
     }
 
-## Local Paths
+### Local Paths
 
 As of version 2.0.0 you can provide a path to a local directory that contains a
 package. Local paths can be saved using `npm install -S` or
@@ -517,7 +528,7 @@ from the root of a package, and can be managed like any other npm
 configuration param.  See `npm-config(7)` for more on the topic.
 
 For build steps that are not platform-specific, such as compiling
-CoffeeScript or other languages to JavaScript, use the `prepublish`
+CoffeeScript or other languages to JavaScript, use the `prepare`
 script to do this, and make the required package a devDependency.
 
 For example:
@@ -529,12 +540,12 @@ For example:
         "coffee-script": "~1.6.3"
       },
       "scripts": {
-        "prepublish": "coffee -o lib/ -c src/waza.coffee"
+        "prepare": "coffee -o lib/ -c src/waza.coffee"
       },
       "main": "lib/waza.js"
     }
 
-The `prepublish` script will be run before publishing, so that users
+The `prepare` script will be run before publishing, so that users
 can consume the functionality without requiring them to compile it
 themselves.  In dev mode (ie, locally running `npm install`), it'll
 run this script as well, so that you can test it easily.
@@ -699,12 +710,11 @@ The host architecture is determined by `process.arch`
 
 ## preferGlobal
 
-If your package is primarily a command-line application that should be
-installed globally, then set this value to `true` to provide a warning
-if it is installed locally.
+**DEPRECATED**
 
-It doesn't actually prevent users from installing it locally, but it
-does help prevent some confusion if it doesn't work as expected.
+This option used to trigger an npm warning, but it will no longer warn. It is
+purely there for informational purposes. It is now recommended that you install
+any binaries as local devDependencies wherever possible.
 
 ## private
 

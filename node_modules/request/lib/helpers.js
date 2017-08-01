@@ -2,18 +2,11 @@
 
 var jsonSafeStringify = require('json-stringify-safe')
   , crypto = require('crypto')
+  , Buffer = require('safe-buffer').Buffer
 
-function deferMethod() {
-  if (typeof setImmediate === 'undefined') {
-    return process.nextTick
-  }
-
-  return setImmediate
-}
-
-function isFunction(value) {
-  return typeof value === 'function'
-}
+var defer = typeof setImmediate === 'undefined'
+  ? process.nextTick
+  : setImmediate
 
 function paramsHaveRequestBody(params) {
   return (
@@ -43,7 +36,7 @@ function isReadStream (rs) {
 }
 
 function toBase64 (str) {
-  return (new Buffer(str || '', 'utf8')).toString('base64')
+  return Buffer.from(str || '', 'utf8').toString('base64')
 }
 
 function copy (obj) {
@@ -63,7 +56,6 @@ function version () {
   }
 }
 
-exports.isFunction            = isFunction
 exports.paramsHaveRequestBody = paramsHaveRequestBody
 exports.safeStringify         = safeStringify
 exports.md5                   = md5
@@ -71,4 +63,4 @@ exports.isReadStream          = isReadStream
 exports.toBase64              = toBase64
 exports.copy                  = copy
 exports.version               = version
-exports.defer                 = deferMethod()
+exports.defer                 = defer
