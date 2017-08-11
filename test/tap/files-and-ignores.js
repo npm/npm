@@ -210,7 +210,7 @@ test('.npmignore should always be overridden by files array', function (t) {
       include: File(''),
       ignore: File(''),
       sub: Dir({
-        include: File('')
+        included: File('')
       })
     })
   )
