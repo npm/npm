@@ -172,11 +172,6 @@ The "files" field is an array of files to include in your project.  If
 you name a folder in the array, then it will also include the files
 inside that folder. (Unless they would be ignored by another rule.)
 
-You can also provide a ".npmignore" file in the root of your package or
-in subdirectories, which will keep files from being included, even
-if they would be picked up by the files array.  The `.npmignore` file
-works just like a `.gitignore`.
-
 Certain files are always included, regardless of settings:
 
 * `package.json`
