@@ -1,3 +1,67 @@
+## v5.4.0 (2017-07-28):
+
+Here's another small release, with a handful of fixes and a couple of small new
+features!
+
+### FEATURES
+
+* [`1ac470dd2`](https://github.com/npm/npm/commit/1ac470dd283cc7758dc37721dd6331d5b316dc99)
+  [#10382](https://github.com/npm/npm/pull/10382)
+  If you make a typo when writing a command now, npm will print a brief "did you
+  mean..." message with some possible alternatives to what you meant.
+  ([@watilde](https://github.com/watilde))
+* [`20c46228d`](https://github.com/npm/npm/commit/20c46228d8f9243910f8c343f4830d52455d754e)
+  [#12356](https://github.com/npm/npm/pull/12356)
+  When running lifecycle scripts, `INIT_CWD` will now contain the original
+  working directory that npm was executed from. Remember that you can use `npm
+  run-script` even if you're not inside your package root directory!
+  ([@MichaelQQ](https://github.com/MichaelQQ))
+* [`be91e1726`](https://github.com/npm/npm/commit/be91e1726e9c21c4532723e4f413b73a93dd53d1)
+  `libnpx@9.5.0`: Fixes a number of issues on Windows and adds support for
+  several more languages: Korean, Norwegian (bokmål and nynorsk), Ukrainian,
+  Serbian, Bahasa Indonesia, and Polish.
+  ([@zkat](https://github.com/zkat))
+
+### BUGFIXES
+
+* [`b6d5549d2`](https://github.com/npm/npm/commit/b6d5549d2c2d38dd0e4319c56b69ad137f0d50cd)
+  [#17844](https://github.com/npm/npm/pull/17844)
+  Make package-lock.json sorting locale-agnostic. Previously, sorting would vary
+  by locale, due to using `localeCompare` for key sorting.
+  ([@LotharSee](https://github.com/LotharSee))
+* [`44b98b9dd`](https://github.com/npm/npm/commit/44b98b9ddcfcccf68967fdf106fca52bf0c3da4b)
+  [#17919](https://github.com/npm/npm/pull/17919)
+  Fix crash where `npm prune --production` would fail while removing `.bin`.
+  ([@fasterthanlime](https://github.com/fasterthanlime))
+* [`c3d1d3ba8`](https://github.com/npm/npm/commit/c3d1d3ba82aa41dfb2bd135e6cdc59f8d33cd9fb)
+  [#17816](https://github.com/npm/npm/pull/17816)
+  Fail more smoothly when attempting to install an invalid package name.
+  ([@SamuelMarks](https://github.com/SamuelMarks))
+
+### DOCUMENTATION
+
+* [`b019680db`](https://github.com/npm/npm/commit/b019680db78ae0a6dff2289dbfe9f61fccbbe824)
+  [#10846](https://github.com/npm/npm/pull/10846)
+  Remind users that they have to install missing `peerDependencies` manually.
+  ([@ryanflorence](https://github.com/ryanflorence))
+* [`3aee5986a`](https://github.com/npm/npm/commit/3aee5986a65add2f815b24541b9f4b69d7fb445f)
+  [#17898](https://github.com/npm/npm/pull/17898)
+  Minor punctuation fixes.
+  ([@AndersDJohnson](https://github.com/AndersDJohnson))
+* [`e0d0a7e1d`](https://github.com/npm/npm/commit/e0d0a7e1dda2c43822b17eb71f4d51900575cc61)
+  [#17832](https://github.com/npm/npm/pull/17832)
+  Fix grammar, format, and spelling in documentation for `run-script`.
+  ([@simonua](https://github.com/simonua))
+* [`3fd6a5f2f`](https://github.com/npm/npm/commit/3fd6a5f2f8802a9768dba2ec32c593b5db5a878d)
+  [#17897](https://github.com/npm/npm/pull/17897)
+  Add more info about using `files` with `npm pack`/`npm publish`.
+  ([@davidjgoss](https://github.com/davidjgoss))
+* [`f00cdc6eb`](https://github.com/npm/npm/commit/f00cdc6eb90a0735bc3c516720de0b1428c79c31)
+  [#17785](https://github.com/npm/npm/pull/17785)
+  Add a note about filenames for certificates on Windows, which use a different
+  extension and file type.
+  ([@lgp1985](https://github.com/lgp1985))
+
 ## v5.3.0 (2017-07-12):
 
 As mentioned before, we're continuing to do relatively rapid, smaller releases
