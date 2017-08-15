@@ -9,7 +9,7 @@ var path = require('path')
 
 var glob = require('glob')
 var normalizeData = require('normalize-package-data')
-var safeJSON = require('json-parse-helpfulerror')
+var safeJSON = require('json-parse-better-errors')
 var util = require('util')
 
 module.exports = readJson
@@ -97,7 +97,7 @@ function parseJson (file, er, d, log, strict, cb) {
   var data
 
   try {
-    data = safeJSON.parse(stripBOM(d))
+    data = safeJSON(stripBOM(d))
   } catch (er) {
     data = parseIndex(d)
     if (!data) return cb(parseError(er, file))
@@ -425,7 +425,7 @@ function parseIndex (data) {
   data = data.replace(/^\s*\*/mg, '')
 
   try {
-    return safeJSON.parse(data)
+    return safeJSON(data)
   } catch (er) {
     return null
   }
