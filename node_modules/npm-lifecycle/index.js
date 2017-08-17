@@ -37,10 +37,6 @@ function lifecycle (pkg, stage, wd, opts) {
     opts.log.info('lifecycle', logid(pkg, stage), pkg._id)
     if (!pkg.scripts) pkg.scripts = {}
 
-    if (opts.ignoreScripts) {
-      opts.log.info('lifecycle', logid(pkg, stage), 'ignored because ignore-scripts is set to true', pkg._id)
-      pkg.scripts = {}
-    }
     if (stage === 'prepublish' && opts.ignorePrepublish) {
       opts.log.info('lifecycle', logid(pkg, stage), 'ignored because ignore-prepublish is set to true', pkg._id)
       delete pkg.scripts.prepublish
@@ -107,7 +103,10 @@ function lifecycle_ (pkg, stage, wd, opts, env, cb) {
 
   var packageLifecycle = pkg.scripts && pkg.scripts.hasOwnProperty(stage)
 
-  if (packageLifecycle) {
+  if (opts.ignoreScripts) {
+    opts.log.info('lifecycle', logid(pkg, stage), 'ignored because ignore-scripts is set to true', pkg._id)
+    packageLifecycle = false
+  } else if (packageLifecycle) {
     // define this here so it's available to all scripts.
     env.npm_lifecycle_script = pkg.scripts[stage]
   } else {
