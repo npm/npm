@@ -234,7 +234,7 @@
     "sprintf-js": "~1.1.1",
     "standard": "~6.0.8",
     "tacks": "~1.2.6",
-    "tap": "~10.7.1"
+    "tap": "~10.7.2"
   },
   "scripts": {
     "dumpconf": "env | grep npm | sort | uniq",
