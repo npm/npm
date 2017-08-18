@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="9.6.0"></a>
+# [9.6.0](https://github.com/zkat/npx/compare/v9.5.0...v9.6.0) (2017-08-17)
+
+
+### Features
+
+* **i18n:** add Arabic translation (#111) ([3c5b99a](https://github.com/zkat/npx/commit/3c5b99a))
+* **i18n:** add Dutch (#108) ([ed116fd](https://github.com/zkat/npx/commit/ed116fd))
+
+
+
 <a name="9.5.0"></a>
 # [9.5.0](https://github.com/zkat/npx/compare/v9.4.1...v9.5.0) (2017-07-28)
 
