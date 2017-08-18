@@ -210,14 +210,14 @@ test('.npmignore should always be overridden by files array', function (t) {
       include: File(''),
       ignore: File(''),
       sub: Dir({
-        include: File('')
+        included: File('')
       })
     })
   )
   withFixture(t, fixture, function (done) {
     t.notOk(fileExists('ignore'), 'toplevel file excluded')
     t.ok(fileExists('include'), 'unignored file included')
-    t.ok(fileExists('sub/include'), 'nested file included')
+    t.ok(fileExists('sub/included'), 'nested file included')
     done()
   })
 })
