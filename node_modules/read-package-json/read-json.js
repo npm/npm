@@ -11,6 +11,7 @@ var glob = require('glob')
 var normalizeData = require('normalize-package-data')
 var safeJSON = require('json-parse-better-errors')
 var util = require('util')
+var slash = require('slash')
 
 module.exports = readJson
 
@@ -316,7 +317,7 @@ function bins_ (file, data, bins, cb) {
   data.bin = bins.reduce(function (acc, mf) {
     if (mf && mf.charAt(0) !== '.') {
       var f = path.basename(mf)
-      acc[f] = path.join(m, mf)
+      acc[f] = slash(path.join(m, mf))
     }
     return acc
   }, {})
