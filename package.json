@@ -83,6 +83,7 @@
     "npm-install-checks": "~3.0.0",
     "npm-lifecycle": "~1.0.2",
     "npm-package-arg": "~5.1.2",
+    "npm-packlist": "~1.1.8",
     "npm-registry-client": "~8.4.0",
     "npm-user-validate": "~1.0.0",
     "npmlog": "~4.1.2",
@@ -222,7 +223,8 @@
     "write-file-atomic",
     "safe-buffer",
     "worker-farm",
-    "libnpx"
+    "libnpx",
+    "npm-packlist"
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",
