@@ -129,7 +129,7 @@ const Pack = warner(class Pack extends MiniPass {
   [ADDTARENTRY] (p) {
     const absolute = path.resolve(this.cwd, p.path)
     if (this.prefix)
-      p.path = this.prefix + '/' + p.path.replace(/^\.\/*/, '')
+      p.path = this.prefix + '/' + p.path.replace(/^\.(\/+|$)/, '')
 
     // in this case, we don't have to wait for the stat
     if (!this.filter(p.path, p))
@@ -148,7 +148,7 @@ const Pack = warner(class Pack extends MiniPass {
   [ADDFSENTRY] (p) {
     const absolute = path.resolve(this.cwd, p)
     if (this.prefix)
-      p = this.prefix + '/' + p.replace(/^\.\/*/, '')
+      p = this.prefix + '/' + p.replace(/^\.(\/+|$)/, '')
 
     this[QUEUE].push(new PackJob(p, absolute))
     this[PROCESS]()
