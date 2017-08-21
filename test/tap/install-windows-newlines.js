@@ -3,7 +3,6 @@ var path = require('path')
 var existsSync = fs.existsSync || path.existsSync
 
 var mkdirp = require('mkdirp')
-var osenv = require('osenv')
 var rimraf = require('rimraf')
 var test = require('tap').test
 
