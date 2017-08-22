@@ -8,6 +8,8 @@ var pkg = path.resolve(__dirname, 'version-commit-hooks')
 var test = require('tap').test
 var npm = require('../../')
 
+delete process.env['npm_config_commit_hooks']
+
 test('npm version <semver> with commit-hooks disabled in .npmrc', function (t) {
   mkdirp.sync(pkg)
   var npmrc = path.resolve(pkg, '.npmrc')
