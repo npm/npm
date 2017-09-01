@@ -22,6 +22,9 @@ are not given a value will be given the value of `true`.  Config
 values are case-insensitive, so `NPM_CONFIG_FOO=bar` will work the
 same.
 
+Notice that you need to use underscores instead of dashes, so `--allow-same-version`
+would become `npm_config_allow_same_version=true`.
+
 ### npmrc Files
 
 The four relevant files are:
