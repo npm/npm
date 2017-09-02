@@ -164,8 +164,7 @@ Or you can shorten that all into a single string, and npm will parse it for you:
 
 Both email and url are optional either way.
 
-npm also sets a top-level "
-tainers" field with your npm user info.
+npm also sets a top-level "maintainers" field with your npm user info.
 
 ## files
 
