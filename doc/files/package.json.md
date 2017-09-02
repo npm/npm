@@ -164,7 +164,8 @@ Or you can shorten that all into a single string, and npm will parse it for you:
 
 Both email and url are optional either way.
 
-npm also sets a top-level "maintainers" field with your npm user info.
+npm also sets a top-level "
+tainers" field with your npm user info.
 
 ## files
 
@@ -215,6 +216,12 @@ This should be a module ID relative to the root of your package folder.
 
 For most modules, it makes the most sense to have a main script and often not
 much else.
+
+## browser
+
+If your module is meant to be used client-side the browser field should be
+used instead of the main field. This is helpful to hint users that it might
+rely on primitives that aren't available in Node.js modules. (e.g. `window`)
 
 ## bin
 
