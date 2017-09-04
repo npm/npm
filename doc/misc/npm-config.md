@@ -583,15 +583,15 @@ to the npm registry.  Must be IPv4 in versions of Node prior to 0.12.
 
 ### loglevel
 
-* Default: "warn"
+* Default: "notice"
 * Type: String
-* Values: "silent", "error", "warn", "http", "info", "verbose", "silly"
+* Values: "silent", "error", "warn", "notice", "http", "timing", "info",
+  "verbose", "silly"
 
 What level of logs to report.  On failure, *all* logs are written to
 `npm-debug.log` in the current working directory.
 
-Any logs of a higher level than the setting are shown.
-The default is "warn", which shows warn and error output.
+Any logs of a higher level than the setting are shown. The default is "notice".
 
 ### logstream
 
