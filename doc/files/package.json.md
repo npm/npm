@@ -168,7 +168,9 @@ npm also sets a top-level "maintainers" field with your npm user info.
 
 ## files
 
-The "files" field is an array of files to include in your project.  If
+The "files" field is an array of files to include in your project. If "files" is
+specified then the only files that will be included in your project are those
+specified in the array (other than those always included, noted below). If
 you name a folder in the array, then it will also include the files
 inside that folder. (Unless they would be ignored by another rule.)
 
