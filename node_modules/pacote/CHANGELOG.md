@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.0.2"></a>
+## [6.0.2](https://github.com/zkat/pacote/compare/v6.0.1...v6.0.2) (2017-09-06)
+
+
+### Bug Fixes
+
+* **extract:** preserve executable perms on extracted files ([19b3dfd](https://github.com/zkat/pacote/commit/19b3dfd))
+
+
+### Performance Improvements
+
+* replace some calls to .match() with .starts/endsWith() (#115) ([192a02f](https://github.com/zkat/pacote/commit/192a02f))
+
+
+
 <a name="6.0.1"></a>
 ## [6.0.1](https://github.com/zkat/pacote/compare/v6.0.0...v6.0.1) (2017-08-22)
 
