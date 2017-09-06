@@ -1,3 +1,14 @@
+## v5.4.1 (2017-09-06):
+
+This is a very small bug fix release to fix a problem where permissions on
+installed binaries were being set incorrectly.
+
+* [`767ff6eee`](https://github.com/npm/npm/commit/767ff6eee7fa3a0f42ad677dedc0ec1f0dc15e7c)
+  [zkat/pacote#117](https://github.com/zkat/pacote/pull/117)
+  [#18324](https://github.com/npm/npm/issues/18324)
+  `pacote@6.0.2`
+  ([@zkat](https://github.com/zkat))
+
 ## v5.4.0 (2017-08-22):
 
 Here's another ~~small~~ big release, with a ~~handful~~ bunch of fixes and
