@@ -120,7 +120,7 @@
     "which": "~1.3.0",
     "worker-farm": "~1.5.0",
     "wrappy": "~1.0.2",
-    "write-file-atomic": "~2.3.0"
+    "write-file-atomic": "~2.1.0"
   },
   "bundleDependencies": [
     "abbrev",
