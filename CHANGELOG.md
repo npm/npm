@@ -1,3 +1,43 @@
+## v5.4.2 (2017-09-14):
+
+This is a small bug fix release wrapping up most of the issues introduced with 5.4.0.
+
+### Bugs
+
+* [`0b28ac72d`](https://github.com/npm/npm/commit/0b28ac72d29132e9b761717aba20506854465865)
+  [#18458](https://github.com/npm/npm/pull/18458)
+  Fix a bug on Windows where rolling back of failed optional dependencies would fail.
+  ([@marcins](https://github.com/marcins))
+* [`3a1b29991`](https://github.com/npm/npm/commit/3a1b299913ce94fdf25ed3ae5c88fe6699b04e24)
+  `write-file-atomic@2.1.0` Revert update of `write-file-atomic`. There were changes made to it
+  that were resulting in EACCES errors for many users.
+  ([@iarna](https://github.com/iarna))
+* [`cd8687e12`](https://github.com/npm/npm/commit/cd8687e1257f59a253436d69e8d79a29c85d00c8)
+  Fix a bug where if npm decided it needed to move a module during an upgrade it would strip
+  out much of the `package.json`. This would result in broken trees after package updates.
+* [`5bd0244ee`](https://github.com/npm/npm/commit/5bd0244eec347ce435e88ff12148c35da7c69efe)
+  [#18385](https://github.com/npm/npm/pull/18385)
+  Fix `npm outdated` when run on non-registry dependencies. 
+  ([@joshclow](https://github.com/joshclow))
+  ([@iarna](https://github.com/iarna))
+
+### Ux
+
+* [`339f17b1e`](https://github.com/npm/npm/commit/339f17b1e6816eccff7df97875db33917eccdd13)
+  Report unsupported node versions with greater granularity.
+  ([@iarna](https://github.com/iarna))
+
+### Docs
+
+* [`b2ab6f43b`](https://github.com/npm/npm/commit/b2ab6f43b8ae645134238acd8dd3083e5ba8846e)
+  [#18397](https://github.com/npm/npm/pull/18397)
+  Document that the default loglevel with `npm@5` is `notice`.
+  ([@KenanY](https://github.com/KenanY))
+* [`e5aedcd82`](https://github.com/npm/npm/commit/e5aedcd82af81fa9e222f9210f6f890c72a18dd3)
+  [#18372](https://github.com/npm/npm/pull/18372)
+  In npm-config documentation, note that env vars use \_ in place of -.
+  ([@jakubholynet](https://github.com/jakubholynet))
+
 ## v5.4.1 (2017-09-06):
 
 This is a very small bug fix release to fix a problem where permissions on
