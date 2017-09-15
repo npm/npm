@@ -79,7 +79,7 @@
     "normalize-package-data": "~2.4.0",
     "npm-cache-filename": "~1.0.2",
     "npm-install-checks": "~3.0.0",
-    "npm-lifecycle": "~1.0.2",
+    "npm-lifecycle": "~1.0.3",
     "npm-package-arg": "~5.1.2",
     "npm-packlist": "~1.1.8",
     "npm-registry-client": "~8.4.0",
