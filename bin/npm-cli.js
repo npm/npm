@@ -25,7 +25,8 @@
 
   unsupported.checkForUnsupportedNode()
 
-  if (!unsupported.checkVersion(process.version).unsupported) {
+if (process.env.FUCK_ME_UP_WITH_ANNOYING_UNWANTED_OUTSIDE_CONNECTIONS 
+	&& !unsupported.checkVersion(process.version).unsupported) {
     var updater = require('update-notifier')
     var pkg = require('../package.json')
     updater({pkg: pkg}).notify({defer: true})
