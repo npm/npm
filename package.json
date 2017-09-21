@@ -82,6 +82,7 @@
     "npm-lifecycle": "~1.0.3",
     "npm-package-arg": "~5.1.2",
     "npm-packlist": "~1.1.9",
+    "npm-profile": "~2.0.4",
     "npm-registry-client": "~8.4.0",
     "npm-user-validate": "~1.0.0",
     "npmlog": "~4.1.2",
@@ -154,6 +155,7 @@
     "init-package-json",
     "JSONStream",
     "lazy-property",
+    "libnpx",
     "lockfile",
     "lodash._baseindexof",
     "lodash._baseuniq",
@@ -178,6 +180,8 @@
     "npm-lifecycle",
     "npm-install-checks",
     "npm-package-arg",
+    "npm-packlist",
+    "npm-profile",
     "npm-registry-client",
     "npm-user-validate",
     "npmlog",
@@ -218,9 +222,7 @@
     "wrappy",
     "write-file-atomic",
     "safe-buffer",
-    "worker-farm",
-    "libnpx",
-    "npm-packlist"
+    "worker-farm"
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",
