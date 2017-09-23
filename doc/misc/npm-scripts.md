@@ -10,8 +10,8 @@ following scripts:
   Run BEFORE the package is packed and published, as well as on local `npm
   install` without any arguments. (See below)
 * prepare:
-  Run both BEFORE the package is packed and published, and on local `npm
-  install` without any arguments (See below). This is run
+  Run both BEFORE the package is packed and published, on local `npm
+  install` without any arguments (See below) and before `npm link`. This is run
   AFTER `prepublish`, but BEFORE `prepublishOnly`.
 * prepublishOnly:
   Run BEFORE the package is prepared and packed, ONLY on `npm publish`. (See
