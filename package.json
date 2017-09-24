@@ -47,7 +47,7 @@
     "fstream": "~1.0.10",
     "fstream-npm": "~1.2.0",
     "glob": "~7.1.0",
-    "graceful-fs": "~4.1.9",
+    "graceful-fs": "~4.1.11",
     "has-unicode": "~2.0.1",
     "hosted-git-info": "~2.1.5",
     "iferr": "~0.1.5",
