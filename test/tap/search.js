@@ -15,6 +15,8 @@ var CACHE_DIR = path.resolve(PKG_DIR, 'cache')
 var cacheBase = cacheFile(CACHE_DIR)(common.registry + '/-/all')
 var cachePath = path.join(cacheBase, '.cache.json')
 
+var npm = require('../../lib/npm')
+
 var server
 
 test('setup', function (t) {
@@ -154,6 +156,161 @@ test('tab mode does not notify on empty', function (t) {
     t.equal(stderr, '', 'no error output')
     t.equal(code, 0, 'search gives 0 error code even if no matches')
     t.done()
+  })
+})
+
+test('mute mode should not print results to stdout', function (t) {
+  setup()
+  server.get('/-/v1/search?text=oo&size=20').once().reply(200, {
+    objects: [
+      { package: { name: 'cool', version: '1.0.0' } },
+      { package: { name: 'foo', description: 'this\thas\ttabs', version: '2.0.0' } }
+    ]
+  })
+  common.npm([
+    'search', 'oo',
+    '--mute',
+    '--registry', common.registry,
+    '--loglevel', 'error',
+    '--cache', CACHE_DIR
+  ], {}, function (err, code, stdout, stderr) {
+    if (err) throw err
+    t.equal(stdout, '', 'no results output')
+    t.equal(stderr, '', 'no error output')
+    t.equal(code, 0, 'search gives 0 error code even if no matches')
+    t.done()
+  })
+})
+
+test('mute mode does not notify on empty', function (t) {
+  setup()
+  server.get('/-/v1/search?text=oo&size=20').once().reply(200, {
+    objects: []
+  })
+  common.npm([
+    'search', 'oo',
+    '--mute',
+    '--registry', common.registry,
+    '--loglevel', 'error',
+    '--cache', CACHE_DIR
+  ], {}, function (err, code, stdout, stderr) {
+    if (err) throw err
+    t.equal(stdout, '', 'no notification about no results')
+    t.equal(stderr, '', 'no error output')
+    t.equal(code, 0, 'search gives 0 error code even if no matches')
+    t.done()
+  })
+})
+
+test('should include all data in JSON mode', function (t) {
+  setup()
+  server.get('/-/v1/search?text=oo&size=20').once().reply(200, {
+    objects: [
+      { package: { name: 'cool', version: '1.0.0', license: 'MIT', homepage: 'cool.where.net' } },
+      { package: { name: 'foo', version: '2.0.0', license: 'BSD' } }
+    ]
+  })
+  common.npm([
+    'search', 'oo',
+    '--json',
+    '--full',
+    '--registry', common.registry,
+    '--loglevel', 'error',
+    '--cache', CACHE_DIR
+  ], {}, function (err, code, stdout, stderr) {
+    if (err) throw err
+    t.equal(stderr, '', 'no error output')
+    t.equal(code, 0, 'search gives 0 error code even if no matches')
+    t.deepEquals(JSON.parse(stdout), [
+      { name: 'cool', version: '1.0.0', license: 'MIT', homepage: 'cool.where.net', date: null },
+      { name: 'foo', version: '2.0.0', license: 'BSD', date: null }
+    ], 'results returned as valid json')
+    t.done()
+  })
+})
+
+test('should pass string result to callback', function (t) {
+  setup()
+  server.get('/-/v1/search?text=oo&size=20').once().reply(200, {
+    objects: [
+      { package: { name: 'cool', version: '1.0.0' } },
+      { package: { name: 'foo', description: 'this\thas\ttabs', version: '2.0.0' } }
+    ]
+  })
+  npm.load({
+    mute: true,
+    registry: common.registry,
+    loglevel: 'error',
+    cache: CACHE_DIR
+  }, function (err, npmObj) {
+    if (err) throw err
+    npmObj.config.set('json', false)
+    npmObj.config.set('parseable', true)
+    t.ok(npmObj, 'got value')
+    t.type(npmObj, 'object', 'got configured object')
+    npmObj.commands.search(['oo'], function (err, result) {
+      if (err) throw err
+      t.equal(result, 'cool\t\t\tprehistoric\t1.0.0\t\nfoo\tthis has tabs\t\tprehistoric\t2.0.0\t\n', 'correct output, including replacing tabs in descriptions')
+      t.done()
+    })
+  })
+})
+
+test('should pass array of results to callback', function (t) {
+  setup()
+  server.get('/-/v1/search?text=oo&size=20').once().reply(200, {
+    objects: [
+      { package: { name: 'cool', version: '1.0.0' } },
+      { package: { name: 'foo', description: 'some text', version: '2.0.0' } }
+    ]
+  })
+  npm.load({
+    mute: true,
+    registry: common.registry,
+    loglevel: 'error',
+    cache: CACHE_DIR
+  }, function (err, npmObj) {
+    if (err) throw err
+    npmObj.config.set('json', true)
+    npmObj.config.set('parseable', false)
+    t.ok(npmObj, 'got value')
+    t.type(npmObj, 'object', 'got configured object')
+    npmObj.commands.search(['oo'], function (err, result) {
+      if (err) throw err
+      t.ok(result, 'got result')
+      t.type(result, Array, 'got array result')
+      t.deepEquals(result, [
+        { name: 'cool', version: '1.0.0', date: null },
+        { name: 'foo', description: 'some text', version: '2.0.0', date: null }
+      ], 'results returned as array')
+      t.done()
+    })
+  })
+})
+
+test('should pass empty array to callback', function (t) {
+  setup()
+  server.get('/-/v1/search?text=oo&size=20').once().reply(200, {
+    objects: []
+  })
+  npm.load({
+    mute: true,
+    registry: common.registry,
+    loglevel: 'error',
+    cache: CACHE_DIR
+  }, function (err, npmObj) {
+    if (err) throw err
+    npmObj.config.set('json', true)
+    npmObj.config.set('parseable', false)
+    t.ok(npmObj, 'got value')
+    t.type(npmObj, 'object', 'got configured object')
+    npmObj.commands.search(['oo'], function (err, result) {
+      if (err) throw err
+      t.ok(result, 'got result')
+      t.type(result, Array, 'got array result')
+      t.equal(result.length, 0, 'got empty array')
+      t.done()
+    })
   })
 })
 
