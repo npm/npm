@@ -85,7 +85,7 @@
     "npm-package-arg": "~5.1.2",
     "npm-packlist": "~1.1.9",
     "npm-profile": "~2.0.4",
-    "npm-registry-client": "~8.4.0",
+    "npm-registry-client": "~8.5.0",
     "npm-user-validate": "~1.0.0",
     "npmlog": "~4.1.2",
     "once": "~1.4.0",
