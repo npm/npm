@@ -376,6 +376,13 @@ packages.
 The "maxTimeout" config for the `retry` module to use when fetching
 packages.
 
+### full
+
+* Default: false
+* Type: Boolean
+
+Indicates whether all fields should be included in search results.
+
 ### git
 
 * Default: `"git"`
@@ -648,6 +655,14 @@ Any "%s" in the message will be replaced with the version number.
 * Type: String
 
 The registry you want to send cli metrics to if `send-metrics` is true.
+
+### mute
+
+* Default: false
+* Type: Boolean
+
+Suppress output of results to console.
+Should be used when search command is called from a script.
 
 ### node-version
 
