@@ -21,7 +21,7 @@ function verifyStdout (runner, successMessage, t) {
       remaining--
 
       var label = chunk.toString('utf8').split(':')[0]
-      runner.stdin.write(responses[label])
+      if (responses[label]) runner.stdin.write(responses[label])
 
       if (remaining === 0) runner.stdin.end()
     } else {
@@ -41,11 +41,11 @@ function mocks (server) {
     .reply(201, { username: 'u', password: 'p', email: 'u@p.me' })
 }
 
-test('npm login', function (t) {
+test('npm adduser', function (t) {
   mr({ port: common.port, plugin: mocks }, function (er, s) {
     var runner = common.npm(
       [
-        'login',
+        'adduser',
         '--registry', common.registry,
         '--loglevel', 'silent',
         '--userconfig', outfile
@@ -68,7 +68,7 @@ test('npm login', function (t) {
   })
 })
 
-test('npm login --scope <scope> uses <scope>:registry as its URI', function (t) {
+test('npm adduser --scope <scope> uses <scope>:registry as its URI', function (t) {
   var port = common.port + 1
   var uri = 'http://localhost:' + port + '/'
   var scope = '@myco'
@@ -88,7 +88,7 @@ test('npm login --scope <scope> uses <scope>:registry as its URI', function (t) 
     mr({ port: port, plugin: mocks }, function (er, s) {
       var runner = common.npm(
         [
-          'login',
+          'adduser',
           '--loglevel', 'silent',
           '--userconfig', outfile,
           '--scope', scope
@@ -112,7 +112,7 @@ test('npm login --scope <scope> uses <scope>:registry as its URI', function (t) 
   })
 })
 
-test('npm login --scope <scope> makes sure <scope> is prefixed by an @', function (t) {
+test('npm adduser --scope <scope> makes sure <scope> is prefixed by an @', function (t) {
   var port = common.port + 1
   var uri = 'http://localhost:' + port + '/'
   var scope = 'myco'
@@ -133,7 +133,7 @@ test('npm login --scope <scope> makes sure <scope> is prefixed by an @', functio
     mr({ port: port, plugin: mocks }, function (er, s) {
       var runner = common.npm(
         [
-          'login',
+          'adduser',
           '--loglevel', 'silent',
           '--userconfig', outfile,
           '--scope', scope
@@ -157,7 +157,7 @@ test('npm login --scope <scope> makes sure <scope> is prefixed by an @', functio
   })
 })
 
-test('npm login --scope <scope> --registry <registry> uses <registry> as its URI', function (t) {
+test('npm adduser --scope <scope> --registry <registry> uses <registry> as its URI', function (t) {
   var scope = '@myco'
   common.npm(
     [
@@ -175,7 +175,7 @@ test('npm login --scope <scope> --registry <registry> uses <registry> as its URI
     mr({ port: common.port, plugin: mocks }, function (er, s) {
       var runner = common.npm(
         [
-          'login',
+          'adduser',
           '--registry', common.registry,
           '--loglevel', 'silent',
           '--userconfig', outfile,
@@ -200,11 +200,11 @@ test('npm login --scope <scope> --registry <registry> uses <registry> as its URI
   })
 })
 
-test('npm login --always-auth', function (t) {
+test('npm adduser --always-auth', function (t) {
   mr({ port: common.port, plugin: mocks }, function (er, s) {
     var runner = common.npm(
       [
-        'login',
+        'adduser',
         '--registry', common.registry,
         '--loglevel', 'silent',
         '--userconfig', outfile,
@@ -228,11 +228,11 @@ test('npm login --always-auth', function (t) {
   })
 })
 
-test('npm login --no-always-auth', function (t) {
+test('npm adduser --no-always-auth', function (t) {
   mr({ port: common.port, plugin: mocks }, function (er, s) {
     var runner = common.npm(
       [
-        'login',
+        'adduser',
         '--registry', common.registry,
         '--loglevel', 'silent',
         '--userconfig', outfile,
