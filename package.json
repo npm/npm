@@ -103,7 +103,7 @@
     "read-package-json": "~2.0.12",
     "read-package-tree": "~5.1.6",
     "readable-stream": "~2.3.3",
-    "request": "~2.81.0",
+    "request": "~2.83.0",
     "retry": "~0.10.1",
     "rimraf": "~2.6.1",
     "safe-buffer": "~5.1.1",
