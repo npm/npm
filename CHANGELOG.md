@@ -1,3 +1,11 @@
+## v5.5.1 (2017-10-04):
+
+A very quick, record time, patch release, of a bug fix to a (sigh) last minute bug fix.
+
+* [`e628e058b`](https://github.com/npm/npm/commit/e628e058b)
+  Fix login to properly recognize OTP request and store bearer tokens.
+  ([@Rebecca Turner](https://github.com/Rebecca Turner))
+
 ## v5.5.0 (2017-10-04):
 
 Hey y'all, this is a big new feature release!  We've got some security
