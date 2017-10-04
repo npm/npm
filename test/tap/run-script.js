@@ -132,16 +132,24 @@ test('npm run-script with args that contain spaces', function (t) {
   common.npm(['run-script', 'start', '--', 'hello world'], opts, testOutput.bind(null, t, 'hello world'))
 })
 
-test('npm run-script with args that contain single quotes', function (t) {
-  common.npm(['run-script', 'start', '--', 'they"re awesome'], opts, testOutput.bind(null, t, 'they"re awesome'))
-})
-
 test('npm run-script with args that contain double quotes', function (t) {
   common.npm(['run-script', 'start', '--', 'what"s "up"?'], opts, testOutput.bind(null, t, 'what"s "up"?'))
 })
 
 test('npm run-script with args that contain ticks', function (t) {
   common.npm(['run-script', 'start', '--', 'what\'s \'up\'?'], opts, testOutput.bind(null, t, 'what\'s \'up\'?'))
+})
+
+test('npm run-script with args that contain dollar signs', function (t) {
+  common.npm(['run-script', 'start', '--', '$PWD'], opts, testOutput.bind(null, t, '$PWD'))
+})
+
+test('npm run-script with args that contain percents', function (t) {
+  common.npm(['run-script', 'start', '--', '%CD%'], opts, testOutput.bind(null, t, '%CD%'))
+})
+
+test('npm run-script with args that end in backslash', function (t) {
+  common.npm(['run-script', 'start', '--', 'C:\\foo\\'], opts, testOutput.bind(null, t, 'C:\\foo\\'))
 })
 
 test('npm run-script with pre script', function (t) {
