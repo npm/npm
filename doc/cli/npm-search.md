@@ -65,6 +65,21 @@ lines. When disabled (default) search results are truncated to fit
 neatly on a single line. Modules with extremely long names will
 fall on multiple lines.
 
+### full
+
+* Default: false
+* Type: Boolean
+
+Include all fields in search results.
+
+### mute
+
+* Default: false
+* Type: Boolean
+
+Suppress output of search results to console.
+Should be used when search is called from a script.
+
 ### searchopts
 
 * Default: ""

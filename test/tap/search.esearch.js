@@ -126,6 +126,57 @@ test('only returns certain fields for each package', function (t) {
   })
 })
 
+test('returns all fields for each package', function (t) {
+  setup()
+  var date = new Date()
+  server.get(SEARCH + '?text=oo&size=1').once().reply(200, {
+    objects: [{
+      package: {
+        name: 'cool',
+        version: '1.0.0',
+        description: 'desc',
+        maintainers: [
+          {username: 'x', email: 'a@b.c'},
+          {username: 'y', email: 'c@b.a'}
+        ],
+        keywords: ['a', 'b', 'c'],
+        date: date.toISOString(),
+        homepage: 'cool.where.net',
+        license: 'MIT'
+      }
+    }]
+  })
+  var results = []
+  var s = esearch({
+    full: true,
+    include: ['oo'],
+    limit: 1
+  })
+  t.ok(s, 'got a stream')
+  s.on('data', function (d) {
+    results.push(d)
+  })
+  finished(s, function (err) {
+    if (err) { throw err }
+    t.ok(true, 'stream finished without error')
+    t.deepEquals(results, [{
+      name: 'cool',
+      version: '1.0.0',
+      description: 'desc',
+      maintainers: [
+        {username: 'x', email: 'a@b.c'},
+        {username: 'y', email: 'c@b.a'}
+      ],
+      keywords: ['a', 'b', 'c'],
+      homepage: 'cool.where.net',
+      license: 'MIT',
+      date: date
+    }])
+    server.done()
+    t.done()
+  })
+})
+
 test('accepts a limit option', function (t) {
   setup()
   server.get(SEARCH + '?text=oo&size=3').once().reply(200, {
