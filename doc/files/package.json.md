@@ -373,11 +373,13 @@ shortcut syntax you use for `npm install`:
 
     "repository": "npm/npm"
 
+    "repository": "github:user/repo"
+
     "repository": "gist:11081aaa281"
 
-    "repository": "bitbucket:example/repo"
+    "repository": "bitbucket:user/repo"
 
-    "repository": "gitlab:another/repo"
+    "repository": "gitlab:user/repo"
 
 ## scripts
 
