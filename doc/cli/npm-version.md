@@ -68,7 +68,7 @@ Take the following example:
 
     "scripts": {
       "preversion": "npm test",
-      "version": "npm run build && git add -A dist",
+      "version": "npm run build && git add -A",
       "postversion": "git push && git push --tags && rm -rf build/temp"
     }
 
