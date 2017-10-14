@@ -204,8 +204,8 @@ function checkGit () {
   }
 }
 
-const REFS_TAGS = '/refs/tags/'
-const REFS_HEADS = '/refs/heads/'
+const REFS_TAGS = 'refs/tags/'
+const REFS_HEADS = 'refs/heads/'
 const HEAD = 'HEAD'
 function refType (ref) {
   return ref.indexOf(REFS_TAGS) !== -1
