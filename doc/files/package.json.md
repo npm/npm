@@ -39,7 +39,7 @@ Some tips:
 * You may want to check the npm registry to see if there's something by that name
   already, before you get too attached to it. <https://www.npmjs.com/>
 
-A name can be optionally prefixed by a scope, e.g. `@myorg/mypackage`. See
+A name can be optionally prefixed by a scope, e.g., `@myorg/mypackage`. See
 `npm-scope(7)` for more detail.
 
 ## version
@@ -68,11 +68,11 @@ discover your package as it's listed in `npm search`.
 
 ## homepage
 
-The url to the project homepage.
+The URL to the project homepage.
 
 ## bugs
 
-The url to your project's issue tracker and / or the email address to which
+The URL to your project's issue tracker and / or the email address to which
 issues should be reported. These are helpful for people who encounter issues
 with your package.
 
@@ -82,10 +82,10 @@ It should look like this:
     , "email" : "project@hostname.com"
     }
 
-You can specify either one or both values. If you want to provide only a url,
+You can specify either one or both values. If you want to provide only a URL,
 you can specify the value for "bugs" as a simple string instead of an object.
 
-If a url is provided, it will be used by the `npm bugs` command.
+If a URL is provided, it will be used by the `npm bugs` command.
 
 ## license
 
@@ -98,7 +98,7 @@ current SPDX license identifier for the license you're using, like this:
     { "license" : "BSD-3-Clause" }
 
 You can check [the full list of SPDX license IDs](https://spdx.org/licenses/).
-Ideally you should pick one that is
+Ideally, you should pick one that is
 [OSI](https://opensource.org/licenses/alphabetical) approved.
 
 If your package is licensed under multiple common licenses, use an [SPDX license
@@ -162,7 +162,7 @@ Or you can shorten that all into a single string, and npm will parse it for you:
 
     "Barney Rubble <b@rubble.com> (http://barnyrubble.tumblr.com/)"
 
-Both email and url are optional either way.
+Both "email" and "url" are optional either way.
 
 npm also sets a top-level "maintainers" field with your npm user info.
 
@@ -223,7 +223,7 @@ install into the PATH. npm makes this pretty easy (in fact, it uses this
 feature to install the "npm" executable.)
 
 To use this, supply a `bin` field in your package.json which is a map of
-command name to local file name. On install, npm will symlink that file into
+command name to a local file name. On install, npm will symlink that file into
 `prefix/bin` for global installs, or `./node_modules/.bin/` for local
 installs.
 
@@ -249,7 +249,7 @@ would be the same as this:
     , "bin" : { "my-program" : "./path/to/program" } }
 
 Please make sure that your file(s) referenced in `bin` starts with
-`#!/usr/bin/env node`, otherwise the scripts are started without the node
+`#!/usr/bin/env node`, otherwise the scripts are started without the Node
 executable!
 
 ## man
@@ -298,7 +298,7 @@ will create entries for `man foo` and `man 2 foo`
 The CommonJS [Packages](http://wiki.commonjs.org/wiki/Packages/1.0) spec details a
 few ways that you can indicate the structure of your package using a `directories`
 object. If you look at [npm's package.json](https://registry.npmjs.org/npm/latest),
-you'll see that it has directories for doc, lib, and man.
+you'll see that it has directories for `doc`, `lib`, and `man`.
 
 In the future, this information may be used in other creative ways.
 
@@ -354,9 +354,9 @@ Do it like this:
       , "url" : "https://v8.googlecode.com/svn/trunk/"
       }
 
-The URL should be a publicly available (perhaps read-only) url that can be handed
-directly to a VCS program without any modification.  It should not be a url to an
-html project page that you put in your browser.  It's for computers.
+The URL should be a publicly available (perhaps read-only) URL that can be handed
+directly to a VCS program without any modification.  It should not be a URL to an
+HTML project page that you put in your browser.  It's for computers.
 
 For GitHub, GitHub gist, Bitbucket, or GitLab repositories you can use the same
 shortcut syntax you use for `npm install`:
@@ -450,7 +450,7 @@ install time.
 
 ### Git URLs as Dependencies
 
-Git urls can be of the form:
+Git URLs can be of the form:
 
     git://github.com/user/project.git#commit-ish
     git+ssh://user@hostname:project.git#commit-ish
@@ -463,7 +463,7 @@ an argument to `git checkout`.  The default is `master`.
 
 ## GitHub URLs
 
-As of version 1.1.65, you can refer to GitHub urls as just "foo":
+As of version 1.1.65, you can refer to GitHub URLs as just "foo":
 "user/foo-project".  Just as with git URLs, a `commit-ish` suffix can be
 included.  For example:
 
@@ -479,7 +479,7 @@ included.  For example:
 
 ## Local Paths
 
-As of version 2.0.0 you can provide a path to a local directory that contains a
+As of version 2.0.0, you can provide a path to a local directory that contains a
 package. Local paths can be saved using `npm install -S` or
 `npm install --save`, using any of these forms:
 
@@ -536,7 +536,7 @@ For example:
 
 The `prepublish` script will be run before publishing, so that users
 can consume the functionality without requiring them to compile it
-themselves.  In dev mode (ie, locally running `npm install`), it'll
+themselves.  In dev mode (i.e., locally running `npm install`), it'll
 run this script as well, so that you can test it easily.
 
 ## peerDependencies
@@ -613,7 +613,7 @@ If this is spelled `"bundleDependencies"`, then that is also honored.
 
 If a dependency can be used, but you would like npm to proceed if it cannot be
 found or fails to install, then you may put it in the `optionalDependencies`
-object.  This is a map of package name to version or url, just like the
+object.  This is a map of package name to version or URL, just like the
 `dependencies` object.  The difference is that build failures do not cause
 installation to fail.
 
@@ -641,16 +641,16 @@ Entries in `optionalDependencies` will override entries of the same name in
 
 ## engines
 
-You can specify the version of node that your stuff works on:
+You can specify the version of Node that your stuff works on:
 
     { "engines" : { "node" : ">=0.10.3 <0.12" } }
 
 And, like with dependencies, if you don't specify the version (or if you
-specify "\*" as the version), then any version of node will do.
+specify "\*" as the version), then any version of Node will do.
 
 If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list. If "engines" is omitted, then npm will just assume
-that it works on node.
+that it works on Node.
 
 You can also use the "engines" field to specify which versions of npm
 are capable of properly installing your program.  For example:
@@ -658,7 +658,8 @@ are capable of properly installing your program.  For example:
     { "engines" : { "npm" : "~1.0.20" } }
 
 Unless the user has set the `engine-strict` config flag, this
-field is advisory only will produce warnings when your package is installed as a dependency.
+field is advisory only and will produce only warnings when your package is
+installed as a dependency.
 
 ## engineStrict
 
@@ -686,7 +687,7 @@ good reason to do this.
 
 ## cpu
 
-If your code only runs on certain cpu architectures,
+If your code only runs on certain CPU architectures,
 you can specify which ones.
 
     "cpu" : [ "x64", "ia32" ]
@@ -747,7 +748,7 @@ npm will default some values based on package contents.
 * `"contributors": [...]`
 
   If there is an `AUTHORS` file in the root of your package, npm will
-  treat each line as a `Name <email> (url)` format, where email and url
+  treat each line as a `Name <email> (url)` format, where email and URL
   are optional.  Lines which start with a `#` or are blank, will be
   ignored.
 
