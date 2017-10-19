@@ -3,6 +3,14 @@ npm(1) -- a JavaScript package manager
 
 [![Build Status](https://img.shields.io/travis/npm/npm/latest.svg)](https://travis-ci.org/npm/npm)
 
+# NOTE: This is a "Canary" version of npm itself!
+
+This version of npm is meant to be rapid-release and unstable, essentially
+tracking `release-next` on the main npm repository (but not necessarily).
+
+The code in this package might be experimental, unreviewed, or have specific
+errors while adding other features.
+
 ## SYNOPSIS
 
 This is just enough info to get you up and running.

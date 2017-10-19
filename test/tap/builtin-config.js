@@ -103,6 +103,7 @@ test('use first npm to install second npm', function (t) {
 test('verify that the builtin config matches', function (t) {
   t.plan(3)
   common.npm([ 'root', '-g',
+<<<<<<< HEAD
     '--prefix=' + folder + '/first',
     '--cache=' + folder + '/cache',
     '--tmp=' + folder + '/tmp'
@@ -128,6 +129,59 @@ test('verify that the builtin config matches', function (t) {
       t.end()
     })
   })
+||||||| parent of c54631e5d... FLOATING PATCH: Canarification™
+               '--prefix=' + folder + '/first',
+               '--cache=' + folder + '/cache',
+               '--tmp=' + folder + '/tmp'
+             ], {},
+             function (er, code, so) {
+               if (er) throw er
+               t.equal(code, 0)
+               var firstRoot = so.trim()
+               common.npm([ 'root', '-g',
+                            '--prefix=' + folder + '/second',
+                            '--cache=' + folder + '/cache',
+                            '--tmp=' + folder + '/tmp'
+                          ], {},
+                          function (er, code, so) {
+                            if (er) throw er
+                            t.equal(code, 0)
+                            var secondRoot = so.trim()
+                            var firstRc = path.resolve(firstRoot, 'npm', 'npmrc')
+                            var secondRc = path.resolve(secondRoot, 'npm', 'npmrc')
+                            var firstData = fs.readFileSync(firstRc, 'utf8').split(/\r?\n/)
+                            var secondData = fs.readFileSync(secondRc, 'utf8').split(/\r?\n/)
+                            t.isDeeply(firstData, secondData)
+                            t.end()
+                          })
+             })
+=======
+               '--prefix=' + folder + '/first',
+               '--cache=' + folder + '/cache',
+               '--tmp=' + folder + '/tmp'
+             ], {},
+             function (er, code, so) {
+               if (er) throw er
+               t.equal(code, 0)
+               var firstRoot = so.trim()
+               common.npm([ 'root', '-g',
+                            '--prefix=' + folder + '/second',
+                            '--cache=' + folder + '/cache',
+                            '--tmp=' + folder + '/tmp'
+                          ], {},
+                          function (er, code, so) {
+                            if (er) throw er
+                            t.equal(code, 0)
+                            var secondRoot = so.trim()
+                            var firstRc = path.resolve(firstRoot, 'npmc', 'npmrc')
+                            var secondRc = path.resolve(secondRoot, 'npmc', 'npmrc')
+                            var firstData = fs.readFileSync(firstRc, 'utf8').split(/\r?\n/)
+                            var secondData = fs.readFileSync(secondRc, 'utf8').split(/\r?\n/)
+                            t.isDeeply(firstData, secondData)
+                            t.end()
+                          })
+             })
+>>>>>>> c54631e5d... FLOATING PATCH: Canarification™
 })
 
 test('clean', function (t) {

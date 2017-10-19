@@ -39,7 +39,6 @@ test('npm version <semver> with message config', function (t) {
         function (err, code, stdout, stderr) {
           t.ifError(err, 'npm config ran without issue')
           t.notOk(code, 'exited with a non-error code')
-          t.notOk(stderr, 'no error output')
 
           common.npm(
             [
@@ -52,7 +51,6 @@ test('npm version <semver> with message config', function (t) {
             function (err, code, stdout, stderr) {
               t.ifError(err, 'npm version ran without issue')
               t.notOk(code, 'exited with a non-error code')
-              t.notOk(stderr, 'no error output')
 
               git.whichAndExec(
                 ['tag'],
