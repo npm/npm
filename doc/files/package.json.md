@@ -401,7 +401,7 @@ space-separated descriptors.  Dependencies can also be identified with a
 tarball or git URL.
 
 **Please do not put test harnesses or transpilers in your
-`dependencies` object.**  See `devDependencies`, below.
+`dependencies` object.**  See [`devDependencies`](#devDependencies).
 
 See semver(7) for more details about specifying version ranges.
 
