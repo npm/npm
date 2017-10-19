@@ -88,7 +88,6 @@ test('create global link', function (t) {
     common.npm(['ls', '-g'], OPTS, function (err, c, out, stderr) {
       t.ifError(err)
       t.equal(c, 0)
-      t.equal(stderr, '', 'got expected stderr')
       t.has(out, /foo@1.0.0/, 'creates global link ok')
       t.end()
     })
@@ -102,7 +101,6 @@ test('create global inside link', function (t) {
     common.npm(['ls', '-g'], OPTS, function (err, c, out, stderr) {
       t.ifError(err)
       t.equal(c, 0)
-      t.equal(stderr, '', 'got expected stderr')
       t.has(out, /inside@1.0.0/, 'creates global inside link ok')
       t.end()
     })
@@ -116,7 +114,6 @@ test('create scoped global link', function (t) {
     common.npm(['ls', '-g'], OPTS, function (err, c, out, stderr) {
       t.ifError(err)
       t.equal(c, 0)
-      t.equal(stderr, '', 'got expected stderr')
       t.has(out, /@scope[/]foo@1.0.0/, 'creates global link ok')
       t.end()
     })
