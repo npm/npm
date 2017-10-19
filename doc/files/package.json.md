@@ -680,7 +680,7 @@ are capable of properly installing your program.  For example:
     { "engines" : { "npm" : "~1.0.20" } }
 
 Unless the user has set the `engine-strict` config flag, this
-field is advisory only will produce warnings when your package is installed as a dependency.
+field is advisory only and will only produce warnings when your package is installed as a dependency.
 
 ## engineStrict
 
