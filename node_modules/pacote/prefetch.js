@@ -10,7 +10,7 @@ const npa = require('npm-package-arg')
 module.exports = prefetch
 function prefetch (spec, opts) {
   opts = optCheck(opts)
-  spec = typeof spec === 'string' ? npa(spec, opts.where) : spec
+  spec = npa(spec, opts.where)
   const startTime = Date.now()
   if (!opts.cache) {
     opts.log.info('prefetch', 'skipping prefetch: no cache provided')
