@@ -1,6 +1,6 @@
 {
-  "version": "5.5.1",
-  "name": "npm",
+  "version": "5.5.1-canary.4",
+  "name": "npmc",
   "description": "a package manager for JavaScript",
   "keywords": [
     "install",
@@ -29,8 +29,8 @@
   },
   "main": "./lib/npm.js",
   "bin": {
-    "npm": "./bin/npm-cli.js",
-    "npx": "./bin/npx-cli.js"
+    "npmc": "./bin/npm-cli.js",
+    "npxc": "./bin/npx-cli.js"
   },
   "dependencies": {
     "JSONStream": "~1.3.1",
