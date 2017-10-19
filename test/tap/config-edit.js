@@ -54,7 +54,6 @@ test('saving configs', function (t) {
     function (err, code, stdout, stderr) {
       t.ifError(err, 'command ran without issue')
 
-      t.equal(stderr, '', 'got nothing on stderr')
       t.equal(code, 0, 'exit ok')
       t.equal(stdout, 'success\n', 'got success message')
       t.end()
