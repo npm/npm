@@ -284,6 +284,14 @@ This is a list of CIDR address to be used when configuring limited access tokens
 If false, never shows colors.  If `"always"` then always shows colors.
 If true, then only prints color codes for tty file descriptors.
 
+### delete-symlinks
+
+* Default: false
+* Type: Boolean
+
+If true, do not delete symlinks in `node_modules` nor any `node_modules`
+directories inside a symlinked directory during tree pruning.
+
 ### depth
 
 * Default: Infinity
