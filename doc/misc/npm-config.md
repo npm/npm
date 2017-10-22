@@ -162,6 +162,13 @@ When "dev" or "development" and running local `npm shrinkwrap`,
 
 What authentication strategy to use with `adduser`/`login`.
 
+### auto-prune
+
+* Default: `true`
+* Type: Boolean
+
+Whether to delete unused packages in `node_modules`.
+
 ### bin-links
 
 * Default: `true`
