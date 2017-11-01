@@ -17,10 +17,13 @@ matrix:
     # previous LTS is next most important
     - node_js: "4"
       env: DEPLOY_VERSION=testing
-    - node_js: "7"
-      env: DEPLOY_VERSION=testing
       # then master
     - node_js: "8"
+      env: DEPLOY_VERSION=testing
+      script:
+       - "standard"
+       - "node . run tap -- \"test/tap/*.js\" \"test/broken-under-nyc/*.js\""
+    - node_js: "9"
       env: DEPLOY_VERSION=testing
       script:
        - "standard"
