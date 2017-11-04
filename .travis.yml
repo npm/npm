@@ -27,7 +27,5 @@ before_install:
   # explicitly install rimraf for LTS self-install
   - "npm install -g rimraf"
   - "node . install -g ."
-  # required by test/tap/registry.js
-  - "mkdir -p /var/run/couchdb"
 notifications:
     slack: npm-inc:kRqQjto7YbINqHPb1X6nS3g8
