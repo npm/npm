@@ -1,12 +1,15 @@
 environment:
   matrix:
     # LTS is our most important target
-    - nodejs_version: "6"
+    - nodejs_version: "8"
     # previous LTS is next most important
+    - nodejs_version: "6"
+    # oldest LTS is next most important
     - nodejs_version: "4"
+    # node 7 is out of support, test it anyway
     - nodejs_version: "7"
     # then master
-    - nodejs_version: "8"
+    - nodejs_version: "9"
   COVERALLS_REPO_TOKEN:
     secure: XdC0aySefK0HLh1GNk6aKrzZPbCfPQLyA4mYtFGEp4DrTuZA/iuCUS0LDqFYO8JQ
 platform:
