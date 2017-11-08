@@ -656,6 +656,15 @@ Any "%s" in the message will be replaced with the version number.
 
 The registry you want to send cli metrics to if `send-metrics` is true.
 
+### node-options
+
+* Default: null
+* Type: String
+
+Options to pass through to Node.js via the `NODE_OPTIONS` environment
+variable.  This does not impact how npm itself is executed but it does
+impact how lifecycle scripts are called.
+
 ### node-version
 
 * Default: process.version
