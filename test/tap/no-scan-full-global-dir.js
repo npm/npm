@@ -57,8 +57,8 @@ test('installer', function (t) {
 
   var Installer = installer.Installer
   class TestInstaller extends Installer {
-    constructor (where, dryrun, args) {
-      super(where, dryrun, args)
+    constructor (where, dryrun, packageLockOnly, args) {
+      super(where, dryrun, packageLockOnly, args)
       this.global = true
     }
     loadArgMetadata (cb) {
@@ -67,7 +67,7 @@ test('installer', function (t) {
     }
   }
 
-  var inst = new TestInstaller(__dirname, false, ['def', 'abc'])
+  var inst = new TestInstaller(__dirname, false, false, ['def', 'abc'])
   inst.loadCurrentTree(function () {
     var kids = inst.currentTree.children.map(function (child) { return child.package.name })
     t.isDeeply(kids, ['abc', 'def'])
@@ -86,13 +86,13 @@ test('uninstaller', function (t) {
 
   var Uninstaller = uninstaller.Uninstaller
   class TestUninstaller extends Uninstaller {
-    constructor (where, dryrun, args) {
-      super(where, dryrun, args)
+    constructor (where, dryrun, packageLockOnly, args) {
+      super(where, dryrun, packageLockOnly, args)
       this.global = true
     }
   }
 
-  var uninst = new TestUninstaller(__dirname, false, ['ghi', 'jkl'])
+  var uninst = new TestUninstaller(__dirname, false, false, ['ghi', 'jkl'])
   uninst.loadCurrentTree(function () {
     var kids = uninst.currentTree.children.map(function (child) { return child.package.name })
     t.isDeeply(kids, ['ghi', 'jkl'])

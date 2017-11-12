@@ -25,7 +25,7 @@ test('setup', function (t) {
 
 test('abc', function (t) {
   var Installer = require('../../lib/install.js').Installer
-  var inst = new Installer(__dirname, false, [])
+  var inst = new Installer(__dirname, false, false, [])
   inst.progress = {executeActions: log}
   inst.todo = [
     ['unbuild', {package: {name: 'first'}}],

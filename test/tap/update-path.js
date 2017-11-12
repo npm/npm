@@ -23,7 +23,7 @@ test('update', function (t) {
   var update = requireInject('../../lib/update.js', {
     '../../lib/npm.js': mockNpm,
     '../../lib/install.js': {
-      'Installer': function (where, dryrun, args) {
+      'Installer': function (where, dryrun, packageLockOnly, args) {
         t.is(where, '/correct', 'We should be installing to the parent of the modules being updated')
         this.run = function (cb) { cb() }
       }
