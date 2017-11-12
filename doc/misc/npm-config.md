@@ -322,6 +322,14 @@ commands that modify your local installation, eg, `install`, `update`,
 `dedupe`, `uninstall`.  This is NOT currently honored by network related
 commands, eg `dist-tags`, `owner`, `publish`, etc.
 
+### package-lock-only
+
+* Default: false
+* Type: Boolean
+
+If set to true, it will update only the `package-lock.json`,
+instead of checking `node_modules` and dowloading dependencies.
+
 ### editor
 
 * Default: `EDITOR` environment variable if set, or `"vi"` on Posix,
