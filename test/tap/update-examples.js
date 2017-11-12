@@ -120,7 +120,7 @@ function mockCommand (npm, name, fn) {
   npm.commands[name] = fn
 }
 
-function mockInstaller (where, dryrun, what) {
+function mockInstaller (where, dryrun, packageLockOnly, what) {
   installAskedFor = what[0]
 }
 mockInstaller.prototype = {}
