@@ -663,6 +663,13 @@ The registry you want to send cli metrics to if `send-metrics` is true.
 
 The node version to use when checking a package's `engines` map.
 
+### no-proxy
+
+* Default: null
+* Type: String or Array
+
+A comma-separated string or an array of domain extensions that a proxy should not be used for.
+
 ### offline
 
 * Default: false
