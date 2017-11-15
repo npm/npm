@@ -11,6 +11,7 @@ module.exports = prefetch
 function prefetch (spec, opts) {
   opts = optCheck(opts)
   spec = npa(spec, opts.where)
+  opts.log.warn('prefetch', 'pacote.prefetch() is deprecated. Please use pacote.tarball() instead.')
   const startTime = Date.now()
   if (!opts.cache) {
     opts.log.info('prefetch', 'skipping prefetch: no cache provided')
