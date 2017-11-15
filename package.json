@@ -85,7 +85,7 @@
     "npm-install-checks": "~3.0.0",
     "npm-lifecycle": "~1.0.3",
     "npm-package-arg": "~6.0.0",
-    "npm-packlist": "~1.1.9",
+    "npm-packlist": "~1.1.10",
     "npm-profile": "~2.0.5",
     "npm-registry-client": "~8.5.0",
     "npm-user-validate": "~1.0.0",
