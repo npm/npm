@@ -135,12 +135,46 @@ test('\'npm install --save-dev local/path\' should save to package.json', functi
       var dependencyPackageJson = path.resolve(
         pkg, 'node_modules', 'package-local-dev-dependency', 'package.json'
       )
+
       t.ok(JSON.parse(fs.readFileSync(dependencyPackageJson, 'utf8')))
 
       var pkgJson = JSON.parse(fs.readFileSync(pkg + '/package.json', 'utf8'))
       t.is(Object.keys(pkgJson.devDependencies).length, 1, 'only one dep')
       t.ok(
         /file:package-local-dev-dependency$/.test(pkgJson.devDependencies['package-local-dev-dependency']),
+        'local package saved correctly'
+      )
+
+      t.end()
+    }
+  )
+})
+
+test('\'npm install --save-dev --package-json-file foobar.json local/path\' should save to foobar.json', function (t) {
+  setup('foobar.json')
+  common.npm(
+    [
+      '--loglevel', 'silent',
+      '--save-dev',
+      '--package-json-file', 'foobar.json',
+      'install', 'package-local-dev-dependency/'
+    ],
+    EXEC_OPTS,
+    function (err, code) {
+      t.ifError(err, 'npm install ran without issue')
+      t.notOk(code, 'npm install exited with code 0')
+
+      var dependencyPackageJson = path.resolve(
+        pkg, 'node_modules', 'package-local-dev-dependency', 'package.json'
+      )
+
+      t.ok(JSON.parse(fs.readFileSync(dependencyPackageJson, 'utf8')))
+
+      var pkgJson = JSON.parse(fs.readFileSync(pkg + '/foobar.json', 'utf8'))
+
+      t.is(Object.keys(pkgJson.devDependencies).length, 1, 'only one dep')
+      t.ok(
+          /file:package-local-dev-dependency$/.test(pkgJson.devDependencies['package-local-dev-dependency']),
         'local package saved correctly'
       )
 
@@ -160,11 +194,12 @@ function cleanup () {
   rimraf.sync(root)
 }
 
-function setup () {
+function setup (packageJsonFilename) {
+  if (!packageJsonFilename) { packageJsonFilename = 'package.json' }
   cleanup()
   mkdirp.sync(pkg)
   fs.writeFileSync(
-    path.join(pkg, 'package.json'),
+    path.join(pkg, packageJsonFilename),
     JSON.stringify(json, null, 2)
   )
 
@@ -191,5 +226,6 @@ function setup () {
     path.join(pkg, 'package-local-dev-dependency', 'package.json'),
     JSON.stringify(localDevDependency, null, 2)
   )
+
   process.chdir(pkg)
 }

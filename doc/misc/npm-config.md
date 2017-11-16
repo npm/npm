@@ -714,6 +714,15 @@ process is not aborted.
 This is a one-time password from a two-factor authenticator.  It's needed
 when publishing or changing package permissions with `npm access`.
 
+### package-json-file
+
+* Default: package.json
+* Type: String
+
+If set, npm will look for this name instead of package.json for the root project.
+It's useful when you want to split your dependencies up and be able to npm install
+them in seperate commands (ex: docker cache infrequently changed packages)
+
 ### package-lock
 
 * Default: true
