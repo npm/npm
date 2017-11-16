@@ -19,7 +19,7 @@ var tarballPath = '/scoped-underscore/-/scoped-underscore-1.3.1.tgz'
 var tarballURL = 'http://127.0.0.1:' + common.port + tarballPath
 var tarball = resolve(__dirname, '../fixtures/scoped-underscore-1.3.1.tgz')
 
-var EXEC_OPTS = { cwd: pkg, stdio: [0,'pipe', 2] }
+var EXEC_OPTS = { cwd: pkg, stdio: [0, 'pipe', 2] }
 
 var auth = 'Bearer 0xabad1dea'
 var server = http.createServer()
@@ -37,7 +37,6 @@ server.on('request', (req, res) => {
     res.end()
   }
 })
-
 
 test('setup', function (t) {
   server.listen(common.port, () => {
@@ -57,6 +56,7 @@ test('authed npm install with tarball not on registry', function (t) {
     ],
     EXEC_OPTS,
     function (err, code, stdout, stderr) {
+      if (err) throw err
       t.equal(code, 0, 'npm install exited OK')
       t.comment(stdout.trim())
       t.comment(stderr.trim())
