@@ -724,6 +724,14 @@ will also prevent _writing_ `package-lock.json` if `save` is true.
 
 This option is an alias for `--shrinkwrap`.
 
+### package-lock-only
+
+* Default: false
+* Type: Boolean
+
+If set to true, it will update only the `package-json`,
+instead of checking `node_modules` and downloading dependencies.
+
 ### parseable
 
 * Default: false
