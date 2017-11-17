@@ -1,8 +1,9 @@
 'use strict'
 
-var uuid = require('node-uuid')
+var uuid = require('uuid')
   , CombinedStream = require('combined-stream')
   , isstream = require('isstream')
+  , Buffer = require('safe-buffer').Buffer
 
 
 function Multipart (request) {
@@ -71,7 +72,7 @@ Multipart.prototype.build = function (parts, chunked) {
     if (typeof part === 'number') {
       part = part.toString()
     }
-    return chunked ? body.append(part) : body.push(new Buffer(part))
+    return chunked ? body.append(part) : body.push(Buffer.from(part))
   }
 
   if (self.request.preambleCRLF) {
