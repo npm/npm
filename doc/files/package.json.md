@@ -620,7 +620,7 @@ If we define a package.json like this:
   "name": "awesome-web-framework",
   "version": "1.0.0",
   "bundledDependencies": [
-    'renderized', 'super-streams'
+    "renderized", "super-streams"
   ]
 }
 ```
