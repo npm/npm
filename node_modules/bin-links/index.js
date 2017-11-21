@@ -117,7 +117,10 @@ function linkBins (pkg, folder, parent, gtop, opts, cb) {
         }
         if (er) return cb(er)
         isHashbangFile(src).then((isHashbang) => {
-          if (isHashbang) return dos2Unix(src)
+          if (isHashbang) {
+            opts.log.silly('linkBins', 'Converting line endings of hashbang file:', src)
+            return dos2Unix(src)
+          }
         }).then(() => {
           if (!gtop) return cb()
           var dest = path.resolve(binRoot, bin)
