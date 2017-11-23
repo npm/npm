@@ -1,4 +1,5 @@
 'use strict'
+var fs = require('fs')
 var path = require('path')
 var test = require('tap').test
 var Tacks = require('tacks')
@@ -22,6 +23,26 @@ var conf = {
     npm_config_registry: common.registry,
     npm_config_loglevel: 'warn'
   })
+}
+
+var shrinkwrapContents = {
+  name: 'shrinkwrap-optional-platform',
+  version: '1.0.0',
+  lockfileVersion: 1,
+  requires: true,
+  dependencies: {
+    mod1: {
+      version: 'file:mod1',
+      optional: true,
+      requires: {
+        mod2: 'file:mod2'
+      }
+    },
+    mod2: {
+      version: 'file:mod2',
+      optional: true
+    }
+  }
 }
 
 var fixture = new Tacks(Dir({
@@ -48,22 +69,7 @@ var fixture = new Tacks(Dir({
         os: ['nosuchos']
       })
     }),
-    'npm-shrinkwrap.json': File({
-      name: 'shrinkwrap-optional-platform',
-      version: '1.0.0',
-      dependencies: {
-        mod1: {
-          version: '1.0.0',
-          resolved: 'file:mod1',
-          optional: true
-        },
-        mod2: {
-          version: '1.0.0',
-          resolved: 'file:mod2',
-          optional: true
-        }
-      }
-    }),
+    'npm-shrinkwrap.json': File(shrinkwrapContents),
     'package.json': File({
       name: 'shrinkwrap-optional-platform',
       version: '1.0.0',
@@ -91,6 +97,10 @@ test('setup', function (t) {
   t.done()
 })
 
+function readJson (file) {
+  return JSON.parse(fs.readFileSync(file, 'utf8'))
+}
+
 test('example', function (t) {
   common.npm(['install'], conf, function (err, code, stdout, stderr) {
     if (err) throw err
@@ -98,6 +108,9 @@ test('example', function (t) {
     t.comment(stdout.trim())
     t.comment(stderr.trim())
     t.notMatch(stderr, /Exit status 1/, 'did not try to install opt dep')
+    var shrinkwrapPath = path.join(testdir, 'npm-shrinkwrap.json')
+    var postinstallContents = readJson(shrinkwrapPath)
+    t.deepEqual(postinstallContents, shrinkwrapContents, 'does not remove failed deps from shrinkwrap')
     t.done()
   })
 })
