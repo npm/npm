@@ -164,7 +164,7 @@ function withTmp (opts, cb) {
 const SHALLOW_HOSTS = new Set(['github', 'gist', 'gitlab', 'bitbucket'])
 function cloneRepo (spec, repo, resolvedRef, rawRef, tmp, opts) {
   const ref = resolvedRef ? resolvedRef.ref : rawRef
-  if (spec.hosted && SHALLOW_HOSTS.has(spec.hosted.type)) {
+  if (resolvedRef && spec.hosted && SHALLOW_HOSTS.has(spec.hosted.type)) {
     return git.shallow(repo, ref, tmp, opts)
   } else {
     return git.clone(repo, ref, tmp, opts)

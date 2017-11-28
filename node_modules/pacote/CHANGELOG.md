@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.0.2"></a>
+## [7.0.2](https://github.com/zkat/pacote/compare/v7.0.1...v7.0.2) (2017-11-28)
+
+
+### Bug Fixes
+
+* **git:** only resolvedRefs can be shallow-cloned ([899720f](https://github.com/zkat/pacote/commit/899720f))
+
+
+
 <a name="7.0.1"></a>
 ## [7.0.1](https://github.com/zkat/pacote/compare/v7.0.0...v7.0.1) (2017-11-15)
 
