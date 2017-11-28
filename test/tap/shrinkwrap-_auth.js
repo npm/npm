@@ -10,7 +10,6 @@ var http = require('http')
 var rimraf = require('rimraf')
 var ssri = require('ssri')
 var test = require('tap').test
-var util = require('util')
 
 var common = require('../common-tap.js')
 
@@ -34,7 +33,7 @@ server.on('request', (req, res) => {
       res.end(fs.readFileSync(tarball))
     } else {
       res.writeHead(403, 'unauthorized')
-      errors.push("Got authorization of '" + req.headers.authorization +"' expected '" + auth + "'")
+      errors.push("Got authorization of '" + req.headers.authorization + "' expected '" + auth + "'")
       res.end()
     }
   } else {
@@ -65,7 +64,7 @@ test('authed npm install with shrinkwrapped global package using _auth', functio
     function (err, code, stdout) {
       if (err) throw err
       t.equal(code, 0, 'npm install exited OK')
-      errors.forEach(err => t.comment('Error: ' + err))
+      errors.forEach((err) => t.comment('Error: ' + err))
       try {
         var results = JSON.parse(stdout)
         t.match(results, {added: [{name: '@scoped/underscore', version: '1.3.1'}]}, '@scoped/underscore installed')
