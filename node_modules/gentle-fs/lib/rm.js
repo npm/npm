@@ -18,9 +18,10 @@ function rm (target, opts, cb) {
     return cb(new Error('May not delete: ' + targetPath))
   }
   var options = {}
+  if (opts.force) { options.purge = true }
   if (opts.base) options.base = path.normalize(path.resolve(opts.prefix, opts.base))
 
-  if (opts.force || !opts.gently) {
+  if (!opts.gently) {
     options.purge = true
     return vacuum(targetPath, options, cb)
   }

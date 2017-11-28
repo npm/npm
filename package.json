@@ -55,7 +55,7 @@
     "find-npm-prefix": "~1.0.1",
     "fs-vacuum": "~1.2.10",
     "fs-write-stream-atomic": "~1.0.10",
-    "gentle-fs": "~2.0.0",
+    "gentle-fs": "^2.0.1",
     "glob": "~7.1.2",
     "graceful-fs": "~4.1.11",
     "has-unicode": "~2.0.1",
