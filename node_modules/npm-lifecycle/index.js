@@ -46,8 +46,6 @@ function lifecycle (pkg, stage, wd, opts) {
       delete pkg.scripts.prepublish
     }
 
-    if (!pkg.scripts[stage]) return resolve()
-
     validWd(wd || path.resolve(opts.dir, pkg.name), function (er, wd) {
       if (er) return reject(er)
 
