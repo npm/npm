@@ -29,11 +29,6 @@ You may have noticed this is a semver-minor bump. Wondering why? This is why!
   will allow npm to explicitly cache git dependencies.
   ([@isaacs](https://github.com/isaacs))
 
-### Performance
-
-* [`39ba4aa74`](https://github.com/npm/npm/commit/39ba4aa7479220e61573c0c1977124c2199f49d0)
-  `tar@4.1.0`: Reduce number of overall fs operations during packing/unpacking.
-
 ### Node 9
 
 Previously, it turns out npm broke on the latest Node, `node@9`. We went ahead
