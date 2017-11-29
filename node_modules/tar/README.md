@@ -226,6 +226,10 @@ The following options are supported:
 - `noPax` Suppress pax extended headers.  Note that this means that
   long paths and linkpaths will be truncated, and large or negative
   numeric values may be interpreted incorrectly.
+- `noMtime` Set to true to omit writing `mtime` values for entries.
+  Note that this prevents using other mtime-based features like
+  `tar.update` or the `keepNewer` option with the resulting tar archive.
+  [Alias: `m`, `no-mtime`]
 
 The following options are mostly internal, but can be modified in some
 advanced use cases, such as re-using caches between runs.
@@ -310,6 +314,8 @@ The following options are supported:
   specified group id, regardless of the `gid` field in the archive.
   Cannot be used along with `preserveOwner`.  Requires also setting a
   `uid` option.
+- `noMtime` Set to true to omit writing `mtime` value for extracted
+  entries. [Alias: `m`, `no-mtime`]
 
 The following options are mostly internal, but can be modified in some
 advanced use cases, such as re-using caches between runs.
@@ -405,6 +411,10 @@ The following options are supported:
 - `noPax` Suppress pax extended headers.  Note that this means that
   long paths and linkpaths will be truncated, and large or negative
   numeric values may be interpreted incorrectly.
+- `noMtime` Set to true to omit writing `mtime` values for entries.
+  Note that this prevents using other mtime-based features like
+  `tar.update` or the `keepNewer` option with the resulting tar archive.
+  [Alias: `m`, `no-mtime`]
 
 ### tar.r(options, fileList, callback) [alias: tar.replace]
 
@@ -450,6 +460,11 @@ The following options are supported:
 - `noPax` Suppress pax extended headers.  Note that this means that
   long paths and linkpaths will be truncated, and large or negative
   numeric values may be interpreted incorrectly.
+- `noMtime` Set to true to omit writing `mtime` values for entries.
+  Note that this prevents using other mtime-based features like
+  `tar.update` or the `keepNewer` option with the resulting tar archive.
+  [Alias: `m`, `no-mtime`]
+
 
 ## Low-Level API
 
@@ -496,6 +511,10 @@ The following options are supported:
 - `noPax` Suppress pax extended headers.  Note that this means that
   long paths and linkpaths will be truncated, and large or negative
   numeric values may be interpreted incorrectly.
+- `noMtime` Set to true to omit writing `mtime` values for entries.
+  Note that this prevents using other mtime-based features like
+  `tar.update` or the `keepNewer` option with the resulting tar archive.
+
 
 #### add(path)
 
@@ -583,6 +602,8 @@ Most unpack errors will cause a `warn` event to be emitted.  If the
   specified group id, regardless of the `gid` field in the archive.
   Cannot be used along with `preserveOwner`.  Requires also setting a
   `uid` option.
+- `noMtime` Set to true to omit writing `mtime` value for extracted
+  entries.
 
 ### class tar.Unpack.Sync
 
@@ -693,6 +714,10 @@ It has the following fields:
 - `noPax` Suppress pax extended headers.  Note that this means that
   long paths and linkpaths will be truncated, and large or negative
   numeric values may be interpreted incorrectly.
+- `noMtime` Set to true to omit writing `mtime` values for entries.
+  Note that this prevents using other mtime-based features like
+  `tar.update` or the `keepNewer` option with the resulting tar archive.
+
 
 #### constructor(path, options)
 
@@ -721,6 +746,9 @@ The following options are supported:
   replace `\` with `/`.
 - `onwarn` A function that will get called with `(message, data)` for
   any warnings encountered.
+- `noMtime` Set to true to omit writing `mtime` values for entries.
+  Note that this prevents using other mtime-based features like
+  `tar.update` or the `keepNewer` option with the resulting tar archive.
 
 #### warn(message, data)
 
@@ -752,6 +780,9 @@ The following options are supported:
 - `strict` Treat warnings as crash-worthy errors.  Default false.
 - `onwarn` A function that will get called with `(message, data)` for
   any warnings encountered.
+- `noMtime` Set to true to omit writing `mtime` values for entries.
+  Note that this prevents using other mtime-based features like
+  `tar.update` or the `keepNewer` option with the resulting tar archive.
 
 ### class tar.Header
 

@@ -324,7 +324,10 @@ module.exports = warner(class Parser extends EE {
   }
 
   [MAYBEEND] () {
-    if (this[ENDED] && !this[EMITTEDEND] && !this[ABORTED]) {
+    if (this[ENDED] &&
+        !this[EMITTEDEND] &&
+        !this[ABORTED] &&
+        !this[CONSUMING]) {
       this[EMITTEDEND] = true
       const entry = this[WRITEENTRY]
       if (entry && entry.blockRemain) {
