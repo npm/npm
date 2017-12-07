@@ -645,8 +645,8 @@ You can specify the version of node that your stuff works on:
 
     { "engines" : { "node" : ">=0.10.3 <0.12" } }
 
-And, like with dependencies, if you don't specify the version (or if you
-specify "\*" as the version), then any version of node will do.
+Like with dependencies, if you don't specify the version (or if you
+specify "\*" as the version), then any version of node will do. With the exception that`"6"` behaves like `">=6"`.
 
 If you specify an "engines" field, then npm will require that "node" be
 somewhere on that list. If "engines" is omitted, then npm will just assume
