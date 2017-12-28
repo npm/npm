@@ -70,6 +70,10 @@ discover your package as it's listed in `npm search`.
 
 The url to the project homepage.
 
+Example:
+
+    "homepage": "https://github.com/owner/project#readme"
+
 ## bugs
 
 The url to your project's issue tracker and / or the email address to which
