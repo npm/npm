@@ -273,7 +273,7 @@ global `node_modules` folder. Only your direct dependencies will show in
 `node_modules` folders. This obviously will eliminate some deduping.
 
 The `--ignore-scripts` argument will cause npm to not execute any 
-scripts defined in the package.json. See `npm-scripts(7)`.
+scripts defined in the top-level package.json, nor those defined in the package.json of any dependencies or sub-dependencies. See `npm-scripts(7)`.
 
 The `--legacy-bundling` argument will cause npm to install the package such
 that versions of npm prior to 1.4, such as the one included with node 0.8,
