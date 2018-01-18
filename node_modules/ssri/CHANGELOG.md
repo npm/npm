@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/zkat/ssri/compare/v5.0.0...v5.1.0) (2018-01-18)
+
+
+### Bug Fixes
+
+* **checkStream:** integrityStream now takes opts.integrity algos into account ([d262910](https://github.com/zkat/ssri/commit/d262910))
+
+
+### Features
+
+* **sha3:** do some guesswork about upcoming sha3 ([7fdd9df](https://github.com/zkat/ssri/commit/7fdd9df))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/zkat/ssri/compare/v4.1.6...v5.0.0) (2017-10-23)
 
