@@ -114,7 +114,7 @@
     "slide": "~1.1.6",
     "sorted-object": "~2.0.1",
     "sorted-union-stream": "~2.1.3",
-    "ssri": "^5.1.0",
+    "ssri": "^5.2.1",
     "strip-ansi": "~4.0.0",
     "tar": "^4.1.1",
     "text-table": "~0.2.0",
