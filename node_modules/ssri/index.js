@@ -93,6 +93,19 @@ class Integrity {
   hexDigest () {
     return parse(this, {single: true}).hexDigest()
   }
+  match (integrity, opts) {
+    const other = parse(integrity, opts)
+    const algo = other.pickAlgorithm(opts)
+    return (
+      this[algo] &&
+      other[algo] &&
+      this[algo].find(hash =>
+        other[algo].find(otherhash =>
+          hash.digest === otherhash.digest
+        )
+      )
+    ) || false
+  }
   pickAlgorithm (opts) {
     const pickAlgorithm = (opts && opts.pickAlgorithm) || getPrioritizedHash
     const keys = Object.keys(this)
@@ -205,9 +218,8 @@ function checkData (data, sri, opts) {
   sri = parse(sri, opts)
   if (!Object.keys(sri).length) { return false }
   const algorithm = sri.pickAlgorithm(opts)
-  const digests = sri[algorithm] || []
   const digest = crypto.createHash(algorithm).update(data).digest('base64')
-  return digests.find(hash => hash.digest === digest) || false
+  return parse({algorithm, digest}).match(sri, opts)
 }
 
 module.exports.checkStream = checkStream
@@ -254,17 +266,8 @@ function integrityStream (opts) {
     const newSri = parse(hashes.map((h, i) => {
       return `${algorithms[i]}-${h.digest('base64')}${optString}`
     }).join(' '), opts)
-    const match = (
-      // Integrity verification mode
-      opts.integrity &&
-      newSri[algorithm] &&
-      digests &&
-      digests.find(hash => {
-        return newSri[algorithm].find(newhash => {
-          return hash.digest === newhash.digest
-        })
-      })
-    )
+    // Integrity verification mode
+    const match = goodSri && newSri.match(sri, opts)
     if (typeof opts.size === 'number' && streamSize !== opts.size) {
       const err = new Error(`stream size mismatch when checking ${sri}.\n  Wanted: ${opts.size}\n  Found: ${streamSize}`)
       err.code = 'EBADSIZE'
