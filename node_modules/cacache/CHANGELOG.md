@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="10.0.2"></a>
+## [10.0.2](https://github.com/zkat/cacache/compare/v10.0.1...v10.0.2) (2018-01-07)
+
+
+### Bug Fixes
+
+* **ls:** deleted entries could cause a premature stream EOF ([347dc36](https://github.com/zkat/cacache/commit/347dc36))
+
+
+
 <a name="10.0.1"></a>
 ## [10.0.1](https://github.com/zkat/cacache/compare/v10.0.0...v10.0.1) (2017-11-15)
 
