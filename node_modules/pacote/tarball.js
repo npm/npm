@@ -8,8 +8,15 @@ const getStream = require('get-stream')
 const mkdirp = BB.promisify(require('mkdirp'))
 const npa = require('npm-package-arg')
 const optCheck = require('./lib/util/opt-check')
+const PassThrough = require('stream').PassThrough
 const path = require('path')
 const pipe = BB.promisify(require('mississippi').pipe)
+const pipeline = require('mississippi').pipeline
+const ssri = require('ssri')
+const url = require('url')
+
+const readFileAsync = BB.promisify(fs.readFile)
+const statAsync = BB.promisify(fs.stat)
 
 module.exports = tarball
 function tarball (spec, opts) {
@@ -17,13 +24,39 @@ function tarball (spec, opts) {
   spec = npa(spec, opts.where)
   const startTime = Date.now()
   if (opts.integrity && !opts.preferOnline) {
-    opts.log.silly('tarball', 'checking if', opts.integrity, 'is already cached')
-    return cacache.get.byDigest(opts.cache, opts.integrity).then(data => {
+    const resolved = (
+      opts.resolved &&
+      url.parse(opts.resolved).protocol === 'file:' &&
+      opts.resolved.substr(5)
+    )
+    const tryFile = resolved
+    ? readFileAsync(resolved).then(
+      data => {
+        if (ssri.checkData(data, opts.integrity)) {
+          opts.log.silly('tarball', `using local file content for ${spec}, found at ${opts.resolved} (${Date.now() - startTime}ms)`)
+          return data
+        } else {
+          opts.log.silly('tarball', `content for ${spec} found at ${opts.resolved} invalid.`)
+        }
+      },
+      err => { if (err.code === 'ENOENT') { return null } else { throw err } }
+    )
+    : BB.resolve(false)
+
+    return tryFile
+    .then(data => {
       if (data) {
-        opts.log.silly('tarball', `cached content available for ${spec} (${Date.now() - startTime}ms)`)
         return data
       } else {
-        return getStream.buffer(tarballByManifest(startTime, spec, opts))
+        opts.log.silly('tarball', 'checking if', opts.integrity, 'is already cached')
+        return cacache.get.byDigest(opts.cache, opts.integrity).then(data => {
+          if (data) {
+            opts.log.silly('tarball', `cached content available for ${spec} (${Date.now() - startTime}ms)`)
+            return data
+          } else {
+            return getStream.buffer(tarballByManifest(startTime, spec, opts))
+          }
+        })
       }
     })
   } else {
@@ -37,20 +70,50 @@ function tarballStream (spec, opts) {
   opts = optCheck(opts)
   spec = npa(spec, opts.where)
   const startTime = Date.now()
+  const stream = new PassThrough()
   if (opts.integrity && !opts.preferOnline) {
-    opts.log.silly('tarball', 'checking if', opts.integrity, 'is already cached')
-    return cacache.get.hasContent(opts.cache, opts.integrity).then(info => {
-      if (info) {
-        opts.log.silly('tarball', `cached content available for ${spec} (${Date.now() - startTime}ms)`)
-        return cacache.get.stream.byDigest(opts.cache, opts.integrity, opts)
+    const resolved = (
+      opts.resolved &&
+      url.parse(opts.resolved).protocol === 'file:' &&
+      opts.resolved.substr(5)
+    )
+    const hasFile = resolved
+    ? statAsync(resolved).then(
+      () => true,
+      err => { if (err.code === 'ENOENT') { return false } else { throw err } }
+    )
+    : BB.resolve(false)
+
+    hasFile
+    .then(hasFile => {
+      if (hasFile) {
+        opts.log.silly('tarball', `using local file content for ${spec}, found at ${opts.resolved}`)
+        return pipeline(
+          fs.createReadStream(resolved),
+          ssri.integrityStream(opts.integrity)
+        )
       } else {
-        return tarballByManifest(startTime, spec, opts)
+        opts.log.silly('tarball', 'checking if', opts.integrity, 'is already cached')
+        return cacache.get.hasContent(opts.cache, opts.integrity)
+        .then(info => {
+          if (info) {
+            opts.log.silly('tarball', `cached content available for ${spec} (${Date.now() - startTime}ms)`)
+            return cacache.get.stream.byDigest(opts.cache, opts.integrity, opts)
+          } else {
+            return tarballByManifest(startTime, spec, opts)
+          }
+        })
       }
     })
+    .then(
+      tarStream => pipe(tarStream, stream),
+      err => stream.emit('error', err)
+    )
   } else {
     opts.log.silly('tarball', `no integrity hash provided for ${spec} - fetching by manifest`)
-    return tarballByManifest(startTime, spec, opts)
+    pipe(tarballByManifest(startTime, spec, opts), stream)
   }
+  return stream
 }
 
 module.exports.toFile = tarballToFile
