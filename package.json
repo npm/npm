@@ -116,7 +116,7 @@
     "sorted-union-stream": "~2.1.3",
     "ssri": "^5.1.0",
     "strip-ansi": "~4.0.0",
-    "tar": "^4.1.1",
+    "tar": "^4.3.3",
     "text-table": "~0.2.0",
     "uid-number": "0.0.6",
     "umask": "~1.1.0",
