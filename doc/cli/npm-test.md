@@ -5,7 +5,7 @@ npm-test(1) -- Test a package
 
       npm test [-- <args>]
 
-      aliases: t, tst
+      aliases: t, tes, tst
 
 ## DESCRIPTION
 
