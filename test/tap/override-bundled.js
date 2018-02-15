@@ -65,6 +65,8 @@ var bundlekeepjson = {
   _requested: {
     rawSpec: bundlekeeptgz
   },
+  _resolved: bundlekeeptgz,
+  _shasum: 'baadf00d',
   files: ['OLD', 'NEW']
 
 }
@@ -77,6 +79,8 @@ var bundledeepjson = {
   _requested: {
     rawSpec: bundledeeptgz
   },
+  _resolved: bundlekeeptgz,
+  _shasum: 'deadbeef',
   files: ['OLD', 'NEW']
 
 }
