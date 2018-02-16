@@ -22,6 +22,9 @@ var json = {
     underscore: '1.3.1',
     async: '0.2.9',
     checker: '0.5.1'
+  },
+  optionalDependencies: {
+    request: '~0.9.0'
   }
 }
 
