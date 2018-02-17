@@ -445,7 +445,7 @@ ssri.checkStream(
 ) // -> Promise<Error<{code: 'EINTEGRITY'}>>
 ```
 
-#### <a name="integrity-stream"></a> `> integrityStream(sri, [opts]) -> IntegrityStream`
+#### <a name="integrity-stream"></a> `> integrityStream([opts]) -> IntegrityStream`
 
 Returns a `Transform` stream that data can be piped through in order to generate
 and optionally check data integrity for piped data. When the stream completes
@@ -480,5 +480,5 @@ may intentionally deprioritize algorithms with known vulnerabilities.
 ```javascript
 const integrity = ssri.fromData(fs.readFileSync('index.js'))
 fs.createReadStream('index.js')
-.pipe(ssri.checkStream(integrity))
+.pipe(ssri.integrityStream({integrity}))
 ```
