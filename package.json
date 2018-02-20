@@ -93,7 +93,7 @@
     "npmlog": "~4.1.2",
     "once": "~1.4.0",
     "opener": "~1.4.3",
-    "osenv": "~0.1.4",
+    "osenv": "^0.1.5",
     "pacote": "^7.3.3",
     "path-is-inside": "~1.0.2",
     "promise-inflight": "~1.0.1",
