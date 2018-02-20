@@ -2,7 +2,7 @@
 
 const DEFAULT_OPTIONS = {
           maxCallsPerWorker           : Infinity
-        , maxConcurrentWorkers        : require('os').cpus().length
+        , maxConcurrentWorkers        : (require('os').cpus() || { length: 1 }).length
         , maxConcurrentCallsPerWorker : 10
         , maxConcurrentCalls          : Infinity
         , maxCallTime                 : Infinity // exceed this and the whole worker is terminated
