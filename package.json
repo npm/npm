@@ -33,7 +33,7 @@
     "npx": "./bin/npx-cli.js"
   },
   "dependencies": {
-    "JSONStream": "~1.3.1",
+    "JSONStream": "^1.3.2",
     "abbrev": "~1.1.1",
     "ansi-regex": "~3.0.0",
     "ansicolors": "~0.3.2",
