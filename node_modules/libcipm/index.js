@@ -156,26 +156,12 @@ class Installer {
           })
           : BB.resolve(false)
         )
-        .then(wasBundled => {
-          const hasBundled = Array.from(dep.dependencies.values())
-          .some(d => d.bundled)
-
-          if (hasBundled) {
-            return BB.resolve(
-              wasBundled ||
-              extract.child(dep.name, dep, depPath, this.config, this.opts)
-            )
-            .then(next)
-          } else {
-            // If it has no bundled children, we can extract children
-            // concurrently
-            return BB.join(
-              wasBundled ||
-              extract.child(dep.name, dep, depPath, this.config, this.opts),
-              next()
-            )
-          }
-        })
+        .then(wasBundled => (
+          // Don't extract if a bundled dep is actually present
+          wasBundled ||
+          extract.child(dep.name, dep, depPath, this.config, this.opts)
+        ))
+        .then(next)
         .then(() => { this.pkgCount++ })
       }
     }, {concurrency: 50, Promise: BB})
