@@ -213,6 +213,7 @@ Conversely, some files are always ignored:
 * `node_modules`
 * `config.gypi`
 * `*.orig`
+* Non-root `package.json`
 * `package-lock.json` (use shrinkwrap instead)
 
 ## main
