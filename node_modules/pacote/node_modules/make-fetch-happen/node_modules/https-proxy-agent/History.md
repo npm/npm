@@ -1,4 +1,10 @@
 
+2.2.0 / 2018-03-03
+==================
+
+  * Add "engines" to package.json - requires Node.js >= 4.5.0
+  * Use `Buffer.from()`
+
 2.1.1 / 2017-11-28
 ==================
 

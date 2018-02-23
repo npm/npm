@@ -60,20 +60,20 @@ function fromManifest (manifest, spec, opts) {
     integrity: manifest._integrity,
     algorithms: [
       manifest._integrity
-      ? ssri.parse(manifest._integrity).pickAlgorithm()
-      : 'sha1'
+        ? ssri.parse(manifest._integrity).pickAlgorithm()
+        : 'sha1'
     ],
     spec
   }, opts))
-  .then(res => {
-    const hash = res.headers.get('x-local-cache-hash')
-    if (hash) {
-      stream.emit('integrity', decodeURIComponent(hash))
-    }
-    res.body.on('error', err => stream.emit('error', err))
-    res.body.pipe(stream)
-  })
-  .catch(err => stream.emit('error', err))
+    .then(res => {
+      const hash = res.headers.get('x-local-cache-hash')
+      if (hash) {
+        stream.emit('integrity', decodeURIComponent(hash))
+      }
+      res.body.on('error', err => stream.emit('error', err))
+      res.body.pipe(stream)
+    })
+    .catch(err => stream.emit('error', err))
   return stream
 }
 

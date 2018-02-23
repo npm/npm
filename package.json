@@ -95,7 +95,7 @@
     "once": "~1.4.0",
     "opener": "~1.4.3",
     "osenv": "^0.1.5",
-    "pacote": "^7.3.3",
+    "pacote": "^7.6.1",
     "path-is-inside": "~1.0.2",
     "promise-inflight": "~1.0.1",
     "qrcode-terminal": "~0.11.0",
