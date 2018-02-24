@@ -164,6 +164,18 @@ When "true" submit audit reports alongside `npm install` runs to the default
 registry and all registries configured for scopes.  See the documentation
 for npm-audit(1) for details on what is submitted.
 
+### archive
+
+* Default: true
+* Type: Boolean
+
+If false (with `--no-archive`), an existing `archived-packages/` directory
+will not be modified on save.
+
+This flag has no effect if the archive directory does not alredy exist.
+
+See also npm-archive(1).
+
 ### auth-type
 
 * Default: `'legacy'`
