@@ -150,6 +150,7 @@
     "config-chain",
     "debuglog",
     "detect-indent",
+    "detect-newline",
     "dezalgo",
     "editor",
     "find-npm-prefix",
