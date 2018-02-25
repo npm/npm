@@ -45,6 +45,7 @@
     "cacache": "^10.0.4",
     "call-limit": "~1.1.0",
     "chownr": "~1.0.1",
+    "cli-columns": "^3.1.2",
     "cli-table2": "~0.2.0",
     "cmd-shim": "~2.0.2",
     "columnify": "~1.5.4",
@@ -244,7 +245,8 @@
     "write-file-atomic",
     "safe-buffer",
     "worker-farm",
-    "tiny-relative-date"
+    "tiny-relative-date",
+    "cli-columns"
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",
