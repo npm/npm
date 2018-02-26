@@ -311,6 +311,13 @@ Show the description in `npm search`
 
 Install `dev-dependencies` along with packages.
 
+### do-the-opt
+
+* Default: 'default-value'
+* Type: String
+
+Adds some detail to the thing.
+
 ### dry-run
 
 * Default: false
