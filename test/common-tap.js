@@ -1,5 +1,6 @@
 'use strict'
 /* eslint-disable camelcase */
+
 var fs = require('graceful-fs')
 var readCmdShim = require('read-cmd-shim')
 var isWindows = require('../lib/utils/is-windows.js')
@@ -137,6 +138,20 @@ exports.pendIfWindows = function (why) {
   if (!why) why = 'this test is pending further changes on windows'
   console.log('not ok 1 # todo ' + why)
   process.exit(0)
+}
+
+let mr
+exports.withServer = cb => {
+  if (!mr) { mr = Bluebird.promisify(require('npm-registry-mock')) }
+  return mr({port: port++, throwOnUnmatched: true})
+    .tap(server => {
+      server.registry = exports.registry.replace(exports.port, server.port)
+      return cb(server)
+    })
+    .then((server) => {
+      server.done()
+      return server.close()
+    })
 }
 
 exports.newEnv = function () {
