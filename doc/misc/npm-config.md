@@ -284,6 +284,9 @@ This is a list of CIDR address to be used when configuring limited access tokens
 If false, never shows colors.  If `"always"` then always shows colors.
 If true, then only prints color codes for tty file descriptors.
 
+This option can also be changed using the environment: colors are
+disabled when the environment variable `NO_COLOR` is set to any value.
+
 ### depth
 
 * Default: Infinity
