@@ -203,7 +203,7 @@ test('removes existing node_modules/ before installing', (t) => {
     t.equal(stdout.trim(), '', 'no output on stdout')
     t.match(
       stderr.trim(),
-      /^npm.*WARN.*init.*removing existing node_modules/,
+      /^npm.*WARN.*removing existing node_modules/,
       'user warned that existing node_modules were removed'
     )
     return fs.readdirAsync(path.join(testDir, 'node_modules'))

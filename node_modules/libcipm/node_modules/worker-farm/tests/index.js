@@ -265,9 +265,9 @@ tape('single concurrent call', function (t) {
       child(defer, function () {
         if (++cbc == count) {
           let time = Date.now() - start
-          // upper-limit tied closely to `count`, 1.2 is generous but accounts for all the timers
+          // upper-limit tied closely to `count`, 1.3 is generous but accounts for all the timers
           // coming back at the same time and the IPC overhead
-          t.ok(time > (defer * count) && time < (defer * count * 1.2), 'processed tasks sequentially (' + time + 'ms)')
+          t.ok(time > (defer * count) && time < (defer * count * 1.3), 'processed tasks sequentially (' + time + ')')
           workerFarm.end(child, function () {
             t.ok(true, 'workerFarm ended')
           })
@@ -325,7 +325,7 @@ tape('durability', function (t) {
   let child = workerFarm({ maxConcurrentWorkers: 2 }, childPath, [ 'killable' ])
     , ids   = []
     , pids  = []
-    , count = 10
+    , count = 20
     , i     = count
 
   while (i--) {
