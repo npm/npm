@@ -167,6 +167,7 @@
     "ini",
     "init-package-json",
     "is-cidr",
+    "json-parse-better-errors",
     "JSONStream",
     "lazy-property",
     "libcipm",
