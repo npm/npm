@@ -1,4 +1,3 @@
-*.swp
 npm-debug.log
 .nyc_output/
 /test/bin
