@@ -128,7 +128,7 @@
     "uuid": "^3.2.1",
     "validate-npm-package-name": "~3.0.0",
     "which": "~1.3.0",
-    "worker-farm": "^1.5.2",
+    "worker-farm": "^1.5.4",
     "wrappy": "~1.0.2",
     "write-file-atomic": "~2.1.0"
   },

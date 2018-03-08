@@ -132,7 +132,7 @@ Farm.prototype.stopChild = function (childId) {
     setTimeout(function () {
       if (child.exitCode === null)
         child.child.kill('SIGKILL')
-    }, this.options.forcedKillTime)
+    }, this.options.forcedKillTime).unref()
     ;delete this.children[childId]
     this.activeChildren--
   }
