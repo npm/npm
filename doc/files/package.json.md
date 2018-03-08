@@ -232,6 +232,12 @@ This should be a module ID relative to the root of your package folder.
 For most modules, it makes the most sense to have a main script and often not
 much else.
 
+## browser
+
+If your module is meant to be used client-side the browser field should be
+used instead of the main field. This is helpful to hint users that it might
+rely on primitives that aren't available in Node.js modules. (e.g. `window`)
+
 ## bin
 
 A lot of packages have one or more executable files that they'd like to
