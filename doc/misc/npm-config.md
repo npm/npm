@@ -842,7 +842,7 @@ Remove failed installs.
 
 ### save
 
-* Default: false
+* Default: true
 * Type: Boolean
 
 Save installed packages to a package.json file as dependencies.
