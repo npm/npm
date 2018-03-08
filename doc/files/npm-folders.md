@@ -20,10 +20,9 @@ This document will tell you what it puts where.
 ### prefix Configuration
 
 The `prefix` config defaults to the location where node is installed.
-On most systems, this is `/usr/local`. On windows, this is the exact
-location of the node.exe binary.  On Unix systems, it's one level up,
-since node is typically installed at `{prefix}/bin/node` rather than
-`{prefix}/node.exe`.
+On most systems, this is `/usr/local`. On Windows, it's `%AppData%\npm`.
+On Unix systems, it's one level up, since node is typically installed at
+`{prefix}/bin/node` rather than `{prefix}/node.exe`.
 
 When the `global` flag is set, npm installs things into this prefix.
 When it is not set, it uses the root of the current package, or the
@@ -69,7 +68,7 @@ Man pages are not installed on Windows systems.
 ### Cache
 
 See `npm-cache(1)`.  Cache files are stored in `~/.npm` on Posix, or
-`~/npm-cache` on Windows.
+`%AppData%/npm-cache` on Windows.
 
 This is controlled by the `cache` configuration param.
 

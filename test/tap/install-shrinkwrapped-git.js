@@ -30,6 +30,7 @@ var childPackageJSON = JSON.stringify({
 })
 
 test('setup', function (t) {
+  cleanup()
   setup(function (err, result) {
     t.ifError(err, 'git started up successfully')
 
@@ -50,12 +51,10 @@ test('shrinkwrapped git dependency got updated', function (t) {
     chain([
       // Install & shrinkwrap child package's first commit
       [npm.commands.install, ['git://localhost:1234/child.git#' + refs[0]]],
-      [npm.commands.shrinkwrap, []],
       // Backup node_modules with the first commit
       [fs.rename, parentNodeModulesPath, outdatedNodeModulesPath],
       // Install & shrinkwrap child package's second commit
       [npm.commands.install, ['git://localhost:1234/child.git#' + refs[1]]],
-      [npm.commands.shrinkwrap, []],
       // Restore node_modules with the first commit
       [rimraf, parentNodeModulesPath],
       [fs.rename, outdatedNodeModulesPath, parentNodeModulesPath],

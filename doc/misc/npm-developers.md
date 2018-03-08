@@ -57,7 +57,7 @@ least, you need:
   use the name to specify that it runs on node, or is in JavaScript.
   You can use the "engines" field to explicitly state the versions of
   node (or whatever else) that your program requires, and it's pretty
-  well assumed that it's javascript.
+  well assumed that it's JavaScript.
 
   It does not necessarily need to match your github repository name.
 
@@ -139,6 +139,19 @@ The following paths and files are never ignored, so adding them to
 * `README` (and its variants)
 * `CHANGELOG` (and its variants)
 * `LICENSE` / `LICENCE`
+
+If, given the structure of your project, you find `.npmignore` to be a
+maintenance headache, you might instead try populating the `files`
+property of `package.json`, which is an array of file or directory names
+that should be included in your package. Sometimes a whitelist is easier
+to manage than a blacklist.
+
+### Testing whether your `.npmignore` or `files` config works
+
+If you want to double check that your package will include only the files
+you intend it to when published, you can run the `npm pack` command locally
+which will generate a tarball in the working directory, the same way it
+does for publishing.
 
 ## Link Packages
 
