@@ -172,13 +172,15 @@ npm also sets a top-level "maintainers" field with your npm user info.
 
 ## files
 
-The optional "files" field is an array of file patterns that describes
+The optional `files` field is an array of file patterns that describes
 the entries to be included when your package is installed as a
-dependency. If the files array is omitted, everything except
-automatically-excluded files will be included in your publish. If you
-name a folder in the array, then it will also include the files inside
-that folder (unless they would be ignored by another rule in this
-section.).
+dependency. File patterns follow a similar syntax to `.gitignore`, but
+reversed: including a file, directory, or glob pattern (`*`, `**/*`, and such)
+will make it so that file is included in the tarball when it's packed. Omitting
+the field will make it default to `["*"]`, which means it will include all files.
+
+Some special files and directories are also included or excluded regardless of
+whether they exist in the `files` array (see below).
 
 You can also provide a `.npmignore` file in the root of your package or
 in subdirectories, which will keep files from being included. At the
