@@ -45,6 +45,7 @@ const WriteEntry = warner(class WriteEntry extends MiniPass {
     this.strict = !!opt.strict
     this.noPax = !!opt.noPax
     this.noMtime = !!opt.noMtime
+    this.mtime = opt.mtime || null
 
     if (typeof opt.onwarn === 'function')
       this.on('warn', opt.onwarn)
@@ -115,7 +116,7 @@ const WriteEntry = warner(class WriteEntry extends MiniPass {
       uid: this.portable ? null : this.stat.uid,
       gid: this.portable ? null : this.stat.gid,
       size: this.stat.size,
-      mtime: this.noMtime ? null : this.stat.mtime,
+      mtime: this.noMtime ? null : this.mtime || this.stat.mtime,
       type: this.type,
       uname: this.portable ? null :
         this.stat.uid === this.myuid ? this.myuser : '',
@@ -128,7 +129,7 @@ const WriteEntry = warner(class WriteEntry extends MiniPass {
         atime: this.portable ? null : this.header.atime,
         ctime: this.portable ? null : this.header.ctime,
         gid: this.portable ? null : this.header.gid,
-        mtime: this.noMtime ? null : this.header.mtime,
+        mtime: this.noMtime ? null : this.mtime || this.header.mtime,
         path: this.path,
         linkpath: this.linkpath,
         size: this.header.size,
@@ -318,7 +319,7 @@ const WriteEntryTar = warner(class WriteEntryTar extends MiniPass {
     this.uname = this.portable ? null : readEntry.uname
     this.gname = this.portable ? null : readEntry.gname
     this.size = readEntry.size
-    this.mtime = this.noMtime ? null : readEntry.mtime
+    this.mtime = this.noMtime ? null : opt.mtime || readEntry.mtime
     this.atime = this.portable ? null : readEntry.atime
     this.ctime = this.portable ? null : readEntry.ctime
     this.linkpath = readEntry.linkpath

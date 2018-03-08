@@ -89,6 +89,7 @@ const Pack = warner(class Pack extends MiniPass {
     this.noDirRecurse = !!opt.noDirRecurse
     this.follow = !!opt.follow
     this.noMtime = !!opt.noMtime
+    this.mtime = opt.mtime || null
 
     this.filter = typeof opt.filter === 'function' ? opt.filter : _ => true
 
@@ -293,7 +294,8 @@ const Pack = warner(class Pack extends MiniPass {
       portable: this.portable,
       linkCache: this.linkCache,
       statCache: this.statCache,
-      noMtime: this.noMtime
+      noMtime: this.noMtime,
+      mtime: this.mtime
     }
   }
 
