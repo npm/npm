@@ -26,7 +26,6 @@ npm-debug.log
 /node_modules/deep-equal/
 /node_modules/marked/
 /node_modules/marked-man/
-/node_modules/nock/
 /node_modules/npm-registry-couchapp/
 /node_modules/npm-registry-mock/
 /node_modules/require-inject/
