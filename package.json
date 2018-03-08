@@ -69,7 +69,7 @@
     "is-cidr": "~1.0.0",
     "lazy-property": "~1.0.0",
     "libcipm": "^1.6.0",
-    "libnpx": "~9.7.1",
+    "libnpx": "^10.0.1",
     "lockfile": "~1.0.3",
     "lodash._baseuniq": "~4.6.0",
     "lodash.clonedeep": "~4.5.0",
