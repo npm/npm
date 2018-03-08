@@ -45,8 +45,8 @@ function PacoteOptions (opts) {
   this.fullMetadata = opts.fullMetadata
   this.alwaysAuth = opts.alwaysAuth
   this.includeDeprecated = opts.includeDeprecated == null
-  ? true
-  : opts.includeDeprecated
+    ? true
+    : opts.includeDeprecated
 
   this.dirPacker = opts.dirPacker || null
 

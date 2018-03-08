@@ -45,7 +45,7 @@ function tarballStream (spec, opts) {
       })
     }
   })
-  .catch(err => output.emit('error', err))
+    .catch(err => output.emit('error', err))
   return output
 }
 
@@ -54,14 +54,14 @@ function tarballToFile (spec, dest, opts) {
   opts = optCheck(opts)
   spec = npa(spec, opts.where)
   return mkdirp(path.dirname(dest))
-  .then(() => withTarballStream(spec, opts, stream => {
-    return rimraf(dest)
-    .then(() => new BB((resolve, reject) => {
-      const writer = fs.createWriteStream(dest)
-      stream.on('error', reject)
-      writer.on('error', reject)
-      writer.on('close', resolve)
-      stream.pipe(writer)
+    .then(() => withTarballStream(spec, opts, stream => {
+      return rimraf(dest)
+        .then(() => new BB((resolve, reject) => {
+          const writer = fs.createWriteStream(dest)
+          stream.on('error', reject)
+          writer.on('error', reject)
+          writer.on('close', resolve)
+          stream.pipe(writer)
+        }))
     }))
-  }))
 }

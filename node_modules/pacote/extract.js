@@ -24,27 +24,27 @@ function extract (spec, dest, opts) {
   return withTarballStream(spec, opts, stream => {
     return tryExtract(spec, stream, dest, opts)
   })
-  .then(() => {
-    if (!opts.resolved) {
-      const pjson = path.join(dest, 'package.json')
-      return readFileAsync(pjson, 'utf8')
-      .then(str => truncateAsync(pjson)
-      .then(() => appendFileAsync(pjson, str.replace(
-        /}\s*$/,
-        `\n,"_resolved": ${
-          JSON.stringify(opts.resolved || '')
-        }\n,"_integrity": ${
-          JSON.stringify(opts.integrity || '')
-        }\n,"_from": ${
-          JSON.stringify(spec.toString())
-        }\n}`
-      ))))
-    }
-  })
-  .then(() => opts.log.silly(
-    'extract',
-    `${spec} extracted to ${dest} (${Date.now() - startTime}ms)`
-  ))
+    .then(() => {
+      if (!opts.resolved) {
+        const pjson = path.join(dest, 'package.json')
+        return readFileAsync(pjson, 'utf8')
+          .then(str => truncateAsync(pjson)
+            .then(() => appendFileAsync(pjson, str.replace(
+              /}\s*$/,
+              `\n,"_resolved": ${
+                JSON.stringify(opts.resolved || '')
+              }\n,"_integrity": ${
+                JSON.stringify(opts.integrity || '')
+              }\n,"_from": ${
+                JSON.stringify(spec.toString())
+              }\n}`
+            ))))
+      }
+    })
+    .then(() => opts.log.silly(
+      'extract',
+      `${spec} extracted to ${dest} (${Date.now() - startTime}ms)`
+    ))
 }
 
 function tryExtract (spec, tarStream, dest, opts) {
@@ -52,19 +52,19 @@ function tryExtract (spec, tarStream, dest, opts) {
     tarStream.on('error', reject)
     setImmediate(resolve)
   })
-  .then(() => rimraf(dest))
-  .then(() => mkdirp(dest))
-  .then(() => new BB((resolve, reject) => {
-    const xtractor = extractStream(spec, dest, opts)
-    tarStream.on('error', reject)
-    xtractor.on('error', reject)
-    xtractor.on('close', resolve)
-    tarStream.pipe(xtractor)
-  }))
-  .catch(err => {
-    if (err.code === 'EINTEGRITY') {
-      err.message = `Verification failed while extracting ${spec}:\n${err.message}`
-    }
-    throw err
-  })
+    .then(() => rimraf(dest))
+    .then(() => mkdirp(dest))
+    .then(() => new BB((resolve, reject) => {
+      const xtractor = extractStream(spec, dest, opts)
+      tarStream.on('error', reject)
+      xtractor.on('error', reject)
+      xtractor.on('close', resolve)
+      tarStream.pipe(xtractor)
+    }))
+    .catch(err => {
+      if (err.code === 'EINTEGRITY') {
+        err.message = `Verification failed while extracting ${spec}:\n${err.message}`
+      }
+      throw err
+    })
 }
