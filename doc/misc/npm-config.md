@@ -745,7 +745,7 @@ This option is an alias for `--shrinkwrap`.
 * Default: false
 * Type: Boolean
 
-If set to true, it will update only the `package-json`,
+If set to true, it will update only the `package-lock.json`,
 instead of checking `node_modules` and downloading dependencies.
 
 ### parseable
