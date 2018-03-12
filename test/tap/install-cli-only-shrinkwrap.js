@@ -18,10 +18,10 @@ var json = {
   description: 'fixture',
   version: '0.0.0',
   dependencies: {
-    dependency: 'file:./dependency'
+    dependency: 'file:dependency'
   },
   devDependencies: {
-    'dev-dependency': 'file:./dev-dependency'
+    'dev-dependency': 'file:dev-dependency'
   }
 }
 
@@ -31,12 +31,10 @@ var shrinkwrap = {
   version: '0.0.0',
   dependencies: {
     dependency: {
-      version: '0.0.0',
-      from: 'file:./dependency'
+      version: 'file:dependency'
     },
     'dev-dependency': {
-      version: '0.0.0',
-      from: 'file:./dev-dependency',
+      version: 'file:dev-dependency',
       dev: true
     }
   }
