@@ -79,12 +79,12 @@ This `libcipm` release includes a number of improvements:
 * **PERFORMANCE** Reduce calls to `read-package-json` and separate JSON update phase from man/bin linking phase. `npm ci` should be noticeably faster.
 * **FEATURE** Progress bar now fills up as packages are installed, instead of sitting there doing nothing.
 * **BUGFIX** Add support for `--only` and `--also` options.
-* **BUFGIX** Linking binaries and running scripts in parallel was causing packages to sometimes clobber each other when hoisted, as well as potentially running too many run-sripts in parallel. This is now a serial operation, and it turns out to have had relatively little actual performance impact.
+* **BUFGIX** Linking binaries and running scripts in parallel was causing packages to sometimes clobber each other when hoisted, as well as potentially running too many run-scripts in parallel. This is now a serial operation, and it turns out to have had relatively little actual performance impact.
 * **BUGFIX** Stop adding `_from` to directory deps (aka `file:packages/my-dep`).
 
 ### BUGFIXES
 
-* [`58d2aa58d5f9c4db49f57a5f33952b3106778669`](https://github.com/npm/npm/commit/58d2aa58d5f9c4db49f57a5f33952b3106778669)
+* [`58d2aa58d`](https://github.com/npm/npm/commit/58d2aa58d5f9c4db49f57a5f33952b3106778669)
   [#20027](https://github.com/npm/npm/pull/20027)
   Use a specific mtime when packing tarballs instead of the beginning of epoch
   time. This should allow `npm pack` to generate tarballs with identical hashes
