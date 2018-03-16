@@ -588,6 +588,26 @@ test('unconditional inclusion does not capture modules', function (t) {
   })
 })
 
+test('inclusion does not capture temp files', function (t) {
+  var fixture = new Tacks(
+    Dir({
+      'package.json': File({
+        name: 'npm-test-files',
+        version: '1.2.5'
+      }),
+      '.npmignore': File(
+        '*~'
+      ),
+      'README.md~': File('')
+    })
+  )
+  withFixture(t, fixture, function (done) {
+    t.notOk(fileExists('README.md~'), 'readme module not included')
+
+    done()
+  })
+})
+
 test('folder-based inclusion works', function (t) {
   var fixture = new Tacks(
     Dir({
