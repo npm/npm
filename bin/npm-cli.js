@@ -25,12 +25,6 @@
 
   unsupported.checkForUnsupportedNode()
 
-  if (!unsupported.checkVersion(process.version).unsupported) {
-    var updater = require('update-notifier')
-    var pkg = require('../package.json')
-    updater({pkg: pkg}).notify({defer: true})
-  }
-
   var path = require('path')
   var npm = require('../lib/npm.js')
   var npmconf = require('../lib/config/core.js')
@@ -80,6 +74,50 @@
   conf._exit = true
   npm.load(conf, function (er) {
     if (er) return errorHandler(er)
+    if (!unsupported.checkVersion(process.version).unsupported) {
+      const pkg = require('../package.json')
+      let notifier = require('update-notifier')({pkg})
+      if (
+        notifier.update &&
+        notifier.update.latest !== pkg.version
+      ) {
+        const color = require('ansicolors')
+        const useColor = npm.config.get('color')
+        const useUnicode = npm.config.get('unicode')
+        const old = notifier.update.current
+        const latest = notifier.update.latest
+        let type = notifier.update.type
+        if (useColor) {
+          switch (type) {
+            case 'major':
+              type = color.red(type)
+              break
+            case 'minor':
+              type = color.yellow(type)
+              break
+            case 'patch':
+              type = color.green(type)
+              break
+          }
+        }
+        const changelog = `https://github.com/npm/npm/releases/tag/v${latest}`
+        notifier.notify({
+          message: `New ${type} version of npm available! ${
+            useColor ? color.red(old) : old
+          } ${useUnicode ? '→' : '->'} ${
+            useColor ? color.green(latest) : latest
+          }\n` +
+          `${
+            useColor ? color.yellow('Changelog:') : 'Changelog:'
+          } ${
+            useColor ? color.cyan(changelog + ':') : changelog + ':'
+          }\n` +
+          `Run ${
+            useColor ? color.green('npm install -g npm') : 'npm i -g npm'
+          } to update!`
+        })
+      }
+    }
     npm.commands[npm.command](npm.argv, function (err) {
       // https://genius.com/Lin-manuel-miranda-your-obedient-servant-lyrics
       if (
