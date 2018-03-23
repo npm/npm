@@ -1,8 +1,8 @@
 'use strict'
+/* eslint-disable camelcase */
 var fs = require('graceful-fs')
 var readCmdShim = require('read-cmd-shim')
 var isWindows = require('../lib/utils/is-windows.js')
-var extend = Object.assign || require('util')._extend
 var Bluebird = require('bluebird')
 
 // cheesy hackaround for test deps (read: nock) that rely on setImmediate
@@ -52,7 +52,7 @@ exports.npm = function (cmd, opts, cb) {
   }
   cb = once(cb)
   cmd = [bin].concat(cmd)
-  opts = extend({}, opts || {})
+  opts = Object.assign({}, opts || {})
 
   opts.env = opts.env || process.env
   if (opts.env._storage) opts.env = Object.assign({}, opts.env._storage)
@@ -158,7 +158,7 @@ function Environment (env) {
   if (env instanceof Environment) return env.clone()
 
   Object.defineProperty(this, '_storage', {
-    value: extend({}, env)
+    value: Object.assign({}, env)
   })
 }
 Environment.prototype = {}

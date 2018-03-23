@@ -389,6 +389,9 @@ If `opts.pickAlgorithm` is provided, it will be used by
 [`Integrity#pickAlgorithm`](#integrity-pick-algorithm) when deciding which of
 the available digests to match against.
 
+If `opts.error` is true, and verification fails, `checkData` will throw either
+an `EBADSIZE` or an `EINTEGRITY` error, instead of just returning false.
+
 ##### Example
 
 ```javascript
@@ -396,6 +399,7 @@ const data = fs.readFileSync('index.js')
 ssri.checkData(data, ssri.fromData(data)) // -> 'sha512'
 ssri.checkData(data, 'sha256-l981iLWj8kurw4UbNy8Lpxqdzd7UOxS50Glhv8FwfZ0')
 ssri.checkData(data, 'sha1-BaDDigEST') // -> false
+ssri.checkData(data, 'sha1-BaDDigEST', {error: true}) // -> Error! EINTEGRITY
 ```
 
 #### <a name="check-stream"></a> `> ssri.checkStream(stream, sri, [opts]) -> Promise<Hash>`

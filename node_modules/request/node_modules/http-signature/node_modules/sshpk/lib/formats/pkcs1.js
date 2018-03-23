@@ -55,6 +55,11 @@ function readPkcs1(alg, type, der) {
 		else if (type === 'public')
 			return (readPkcs1ECDSAPublic(der));
 		throw (new Error('Unknown key type: ' + type));
+	case 'EDDSA':
+	case 'EdDSA':
+		if (type === 'private')
+			return (readPkcs1EdDSAPrivate(der));
+		throw (new Error(type + ' keys not supported with EdDSA'));
 	default:
 		throw (new Error('Unknown key algo: ' + alg));
 	}
@@ -128,6 +133,31 @@ function readPkcs1DSAPrivate(der) {
 			{ name: 'g', data: g },
 			{ name: 'y', data: y },
 			{ name: 'x', data: x }
+		]
+	};
+
+	return (new PrivateKey(key));
+}
+
+function readPkcs1EdDSAPrivate(der) {
+	var version = readMPInt(der, 'version');
+	assert.strictEqual(version.readUInt8(0), 1);
+
+	// private key
+	var k = der.readString(asn1.Ber.OctetString, true);
+
+	der.readSequence(0xa0);
+	var oid = der.readOID();
+	assert.strictEqual(oid, '1.3.101.112', 'the ed25519 curve identifier');
+
+	der.readSequence(0xa1);
+	var A = utils.readBitString(der);
+
+	var key = {
+		type: 'ed25519',
+		parts: [
+			{ name: 'A', data: utils.zeroPadToLength(A, 32) },
+			{ name: 'k', data: k }
 		]
 	};
 
@@ -236,6 +266,12 @@ function writePkcs1(der, key) {
 		else
 			writePkcs1ECDSAPublic(der, key);
 		break;
+	case 'ed25519':
+		if (PrivateKey.isPrivateKey(key))
+			writePkcs1EdDSAPrivate(der, key);
+		else
+			writePkcs1EdDSAPublic(der, key);
+		break;
 	default:
 		throw (new Error('Unknown key algo: ' + key.type));
 	}
@@ -317,4 +353,24 @@ function writePkcs1ECDSAPrivate(der, key) {
 	var Q = utils.ecNormalize(key.part.Q.data, true);
 	der.writeBuffer(Q, asn1.Ber.BitString);
 	der.endSequence();
+}
+
+function writePkcs1EdDSAPrivate(der, key) {
+	var ver = new Buffer(1);
+	ver[0] = 1;
+	der.writeBuffer(ver, asn1.Ber.Integer);
+
+	der.writeBuffer(key.part.k.data, asn1.Ber.OctetString);
+
+	der.startSequence(0xa0);
+	der.writeOID('1.3.101.112');
+	der.endSequence();
+
+	der.startSequence(0xa1);
+	utils.writeBitString(der, key.part.A.data);
+	der.endSequence();
+}
+
+function writePkcs1EdDSAPublic(der, key) {
+	throw (new Error('Public keys are not supported for EdDSA PKCS#1'));
 }

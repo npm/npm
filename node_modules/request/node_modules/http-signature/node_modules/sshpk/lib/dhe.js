@@ -79,7 +79,8 @@ function DiffieHellman(key) {
 			nacl = require('tweetnacl');
 
 		if (this._isPriv) {
-			this._priv = key.part.r.data;
+			utils.assertCompatible(key, PrivateKey, [1, 5], 'key');
+			this._priv = key.part.k.data;
 		}
 
 	} else {
@@ -143,7 +144,10 @@ DiffieHellman.prototype.setKey = function (pk) {
 		}
 
 	} else if (pk.type === 'curve25519') {
-		this._priv = pk.part.r.data;
+		var k = pk.part.k;
+		if (!pk.part.k)
+			k = pk.part.r;
+		this._priv = k.data;
 		if (this._priv[0] === 0x00)
 			this._priv = this._priv.slice(1);
 		this._priv = this._priv.slice(0, 32);
@@ -175,13 +179,12 @@ DiffieHellman.prototype.computeSecret = function (otherpk) {
 		}
 
 	} else if (this._algo === 'curve25519') {
-		pub = otherpk.part.R.data;
+		pub = otherpk.part.A.data;
 		while (pub[0] === 0x00 && pub.length > 32)
 			pub = pub.slice(1);
+		var priv = this._priv;
 		assert.strictEqual(pub.length, 32);
-		assert.strictEqual(this._priv.length, 64);
-
-		var priv = this._priv.slice(0, 32);
+		assert.strictEqual(priv.length, 32);
 
 		var secret = nacl.box.before(new Uint8Array(pub),
 		    new Uint8Array(priv));
@@ -261,8 +264,8 @@ DiffieHellman.prototype.generateKey = function () {
 		assert.strictEqual(priv.length, 64);
 		assert.strictEqual(pub.length, 32);
 
-		parts.push({name: 'R', data: pub});
-		parts.push({name: 'r', data: priv});
+		parts.push({name: 'A', data: pub});
+		parts.push({name: 'k', data: priv});
 		this._key = new PrivateKey({
 			type: 'curve25519',
 			parts: parts
@@ -327,8 +330,8 @@ function generateED25519() {
 	assert.strictEqual(pub.length, 32);
 
 	var parts = [];
-	parts.push({name: 'R', data: pub});
-	parts.push({name: 'r', data: priv});
+	parts.push({name: 'A', data: pub});
+	parts.push({name: 'k', data: priv.slice(0, 32)});
 	var key = new PrivateKey({
 		type: 'ed25519',
 		parts: parts
@@ -369,7 +372,6 @@ function generateECDSA(curve) {
 			parts: parts
 		});
 		return (key);
-
 	} else {
 		if (ecdh === undefined)
 			ecdh = require('ecc-jsbn');
