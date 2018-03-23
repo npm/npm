@@ -1,4 +1,5 @@
 'use strict'
+const Buffer = require('./buffer.js')
 const MiniPass = require('minipass')
 const Pax = require('./pax.js')
 const Header = require('./header.js')

@@ -121,7 +121,7 @@
     "sorted-union-stream": "~2.1.3",
     "ssri": "^5.2.4",
     "strip-ansi": "~4.0.0",
-    "tar": "^4.4.0",
+    "tar": "^4.4.1",
     "text-table": "~0.2.0",
     "tiny-relative-date": "^1.3.0",
     "uid-number": "0.0.6",
