@@ -5,7 +5,6 @@ const mr = require('npm-registry-mock')
 const Tacks = require('tacks')
 const File = Tacks.File
 const Dir = Tacks.Dir
-const extend = Object.assign || require('util')._extend
 const common = require('../common-tap.js')
 
 const basedir = path.join(__dirname, path.basename(__filename, '.js'))
@@ -16,7 +15,7 @@ const tmpdir = path.join(basedir, 'tmp')
 
 const conf = {
   cwd: testdir,
-  env: extend(extend({}, process.env), {
+  env: Object.assign({}, process.env, {
     npm_config_cache: cachedir,
     npm_config_tmp: tmpdir,
     npm_config_prefix: globaldir,

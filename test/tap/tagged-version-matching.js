@@ -5,7 +5,6 @@ var Tacks = require('tacks')
 var File = Tacks.File
 var Dir = Tacks.Dir
 var Symlink = Tacks.Symlink
-var extend = Object.assign || require('util')._extend
 var common = require('../common-tap.js')
 
 var basedir = path.join(__dirname, path.basename(__filename, '.js'))
@@ -16,7 +15,7 @@ var tmpdir = path.join(basedir, 'tmp')
 
 var conf = {
   cwd: testdir,
-  env: extend({
+  env: Object.assign({
     npm_config_cache: cachedir,
     npm_config_tmp: tmpdir,
     npm_config_prefix: globaldir,

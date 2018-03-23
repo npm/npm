@@ -30,7 +30,7 @@ test('conflicts in shrinkwrap are auto-resolved on install', (t) => {
       }
     }),
     'npm-shrinkwrap.json': File(
-`
+      `
 {
   "name": "foo",
   "requires": true,
@@ -84,34 +84,34 @@ test('conflicts in shrinkwrap are auto-resolved on install', (t) => {
       cb(err || (code && new Error('non-zero exit code')) || null, out)
     })
   })
-  .then(() => BB.join(
-    readJson('npm-shrinkwrap.json'),
-    readJson('node_modules/modA/package.json'),
-    readJson('node_modules/modB/package.json'),
-    readJson('node_modules/modC/package.json'),
-    (lockfile, A, B, C) => {
-      t.deepEqual(lockfile, {
-        name: 'foo',
-        requires: true,
-        lockfileVersion: 1,
-        dependencies: {
-          modA: {
-            version: 'file:modA'
-          },
-          modB: {
-            version: 'file:modB'
-          },
-          modC: {
-            version: 'file:modC',
-            dev: true
+    .then(() => BB.join(
+      readJson('npm-shrinkwrap.json'),
+      readJson('node_modules/modA/package.json'),
+      readJson('node_modules/modB/package.json'),
+      readJson('node_modules/modC/package.json'),
+      (lockfile, A, B, C) => {
+        t.deepEqual(lockfile, {
+          name: 'foo',
+          requires: true,
+          lockfileVersion: 1,
+          dependencies: {
+            modA: {
+              version: 'file:modA'
+            },
+            modB: {
+              version: 'file:modB'
+            },
+            modC: {
+              version: 'file:modC',
+              dev: true
+            }
           }
-        }
-      }, 'resolved lockfile matches expectations')
-      t.equal(A.name, 'modA', 'installed modA')
-      t.equal(B.name, 'modB', 'installed modB')
-      t.equal(C.name, 'modC', 'installed modC')
-    }
-  ))
+        }, 'resolved lockfile matches expectations')
+        t.equal(A.name, 'modA', 'installed modA')
+        t.equal(B.name, 'modB', 'installed modB')
+        t.equal(C.name, 'modC', 'installed modC')
+      }
+    ))
 })
 
 test('cleanup', () => rimraf(testDir))
