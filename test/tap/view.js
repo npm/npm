@@ -367,7 +367,7 @@ test('npm view with valid but non existent package name', function (t) {
     t.equal(code, 1, 'exit not ok')
 
     t.similar(stderr,
-      new RegExp("'valid-but-non-existent-package' is not in the npm registry\."),
+      new RegExp("'valid-but-non-existent-package' is not in the npm registry\\."),
       'Package should NOT be found')
 
     t.similar(stderr, new RegExp('use the name yourself!'),
