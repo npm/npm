@@ -1,3 +1,98 @@
+## v5.9.0 (2018-03-23):
+
+Coming to you this week are a fancy new package view, pack/publish previews
+and a handful of bug fixes! Let's get right in!
+
+### NEW PACKAGE VIEW
+
+There's a new `npm view` in town.  You might it as `npm info` or `npm show`. 
+The new output gives you a nicely summarized view that for most packages
+fits on one screen.  If you ask it for `--json` you'll still get the same
+results, so your scripts should still work fine.
+
+* [`143cdbf13`](https://github.com/npm/npm/commit/143cdbf1327f7d92ccae405bc05d95d28939a837)
+  [#19910](https://github.com/npm/npm/pull/19910)
+  Add humanized default view.
+  ([@zkat](https://github.com/zkat))
+* [`ca84be91c`](https://github.com/npm/npm/commit/ca84be91c434fb7fa472ee4c0b7341414acf52b5)
+  [#19910](https://github.com/npm/npm/pull/19910)
+  `tiny-relative-date@1.3.0`
+  ([@zkat](https://github.com/zkat))
+* [`9a5807c4f`](https://github.com/npm/npm/commit/9a5807c4f813c49b854170b6111c099b3054faa2)
+  [#19910](https://github.com/npm/npm/pull/19910)
+  `cli-columns@3.1.2`
+  ([@zkat](https://github.com/zkat))
+* [`23b4a4fac`](https://github.com/npm/npm/commit/23b4a4fac0fbfe8e03e2f65d9f674f163643d15d)
+  [#19910](https://github.com/npm/npm/pull/19910)
+  `byte-size@4.0.2`
+
+### PACK AND PUBLISH PREVIEWS
+
+The `npm pack` and `npm publish` commands print out a summary of the files
+included in the package.  They also both now take the `--dry-run` flag, so
+you can double check your `.npmignore` settings before doing a publish.
+
+* [`116e9d827`](https://github.com/npm/npm/commit/116e9d8271d04536522a7f02de1dde6f91ca5e6e)
+  [#19908](https://github.com/npm/npm/pull/19908)
+  Add package previews to pack and publish.  Also add --dry-run and --json
+  flags.
+  ([@zkat](https://github.com/zkat))
+
+### MERGE CONFLICT, SMERGE CONFLICT
+
+If you resolve a `package-lock.json` merge conflict with `npm install` we
+now suggest you setup a merge driver to handle these automatically for you. 
+If you're reading this and you'd like to set it up now, run:
+
+```console
+npx npm-merge-driver install -g
+```
+
+* [`5ebe99719`](https://github.com/npm/npm/commit/5ebe99719d11fedeeec7a55f1b389dcf556f32f3)
+  [#20071](https://github.com/npm/npm/pull/20071)
+  suggest installing the merge driver
+  ([@zkat](https://github.com/zkat))
+
+### MISC BITS
+
+* [`a05e27b71`](https://github.com/npm/npm/commit/a05e27b7104f9a79f5941e7458c4658872e5e0cd)
+  Going forward, record requested ranges not versions in the package-lock.
+  ([@iarna](https://github.com/iarna))
+* [`f721eec59`](https://github.com/npm/npm/commit/f721eec599df4bdf046d248e0f50822d436654b4)
+  Add 10 to Node.js supported version list. It's not out yet, but soon my pretties...
+  ([@iarna](https://github.com/iarna))
+
+### DEPENDENCY UPDATES
+
+* [`40aabb94e`](https://github.com/npm/npm/commit/40aabb94e3f24a9feabb9c490403e10ec9dc254f)
+  `libcipm@1.6.1`:
+  Fix bugs on docker and with some `prepare` scripts and `npm ci`.
+  Fix a bug where script hooks wouldn't be called with `npm ci`.
+  Fix a bug where `npm ci` and `--prefix` weren't compatible.
+  ([@isaacseymour](https://github.com/isaacseymour))
+  ([@umarov](https://github.com/umarov))
+  ([@mikeshirov](https://github.com/mikeshirov))
+  ([@billjanitsch](https://github.com/billjanitsch))
+* [`a85372e67`](https://github.com/npm/npm/commit/a85372e671eab46e62caa46631baa30900e32114)
+  `tar@4.4.1`:
+  Switch to safe-buffer and Buffer.from.
+  ([@isaacs](https://github.com/isaacs))
+  ([@ChALkeR](https://github.com/ChALkeR))
+* [`588eabd23`](https://github.com/npm/npm/commit/588eabd23fa04420269b9326cab26d974d9c151f)
+  `lru-cache@4.1.2`:
+* [`07f27ee89`](https://github.com/npm/npm/commit/07f27ee898f3c3199e75427017f2b6a189b1a85b)
+  `qrcode-terminal@0.12.0`:
+* [`01e4e29bc`](https://github.com/npm/npm/commit/01e4e29bc879bdaa0e92f0b58e3725a41377d21c)
+  `request@2.85.0`
+* [`344ba8819`](https://github.com/npm/npm/commit/344ba8819f485c72e1c7ac3e656d7e9210ccf607)
+  `worker-farm@1.6.0`
+* [`dc6df1bc4`](https://github.com/npm/npm/commit/dc6df1bc4677164b9ba638e87c1185b857744720)
+  `validate-npm-package-license@3.0.3`
+* [`97a976696`](https://github.com/npm/npm/commit/97a9766962ab5125af3b2a1f7b4ef550a2e3599b)
+  `ssri@5.3.0`
+* [`9b629d0c6`](https://github.com/npm/npm/commit/9b629d0c69599635ee066cb71fcc1b0155317f19)
+  `query-string@5.1.1`
+
 ## v5.8.0 (2018-03-08):
 
 Hey again, everyone! While last release was focused largely around PRs from the

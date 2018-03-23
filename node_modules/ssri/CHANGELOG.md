@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.3.0"></a>
+# [5.3.0](https://github.com/zkat/ssri/compare/v5.2.4...v5.3.0) (2018-03-13)
+
+
+### Features
+
+* **checkData:** optionally throw when checkData fails ([bf26b84](https://github.com/zkat/ssri/commit/bf26b84))
+
+
+
 <a name="5.2.4"></a>
 ## [5.2.4](https://github.com/zkat/ssri/compare/v5.2.3...v5.2.4) (2018-02-16)
 

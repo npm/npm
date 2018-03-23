@@ -30,7 +30,7 @@ const Entry = require('./read-entry.js')
 const Pax = require('./pax.js')
 const zlib = require('minizlib')
 
-const gzipHeader = new Buffer([0x1f, 0x8b])
+const gzipHeader = Buffer.from([0x1f, 0x8b])
 const STATE = Symbol('state')
 const WRITEENTRY = Symbol('writeEntry')
 const READENTRY = Symbol('readEntry')

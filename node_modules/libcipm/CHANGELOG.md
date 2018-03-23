@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/zkat/cipm/compare/v1.6.0...v1.6.1) (2018-03-13)
+
+
+### Bug Fixes
+
+* **bin:** Set non-zero exit code on error ([#41](https://github.com/zkat/cipm/issues/41)) ([54d0106](https://github.com/zkat/cipm/commit/54d0106))
+* **lifecycle:** defer to lifecycle’s internal logic as to whether or not to execute a run-script ([#42](https://github.com/zkat/cipm/issues/42)) ([7f27a52](https://github.com/zkat/cipm/commit/7f27a52)), closes [npm/npm#19258](https://github.com/npm/npm/issues/19258)
+* **prefix:** don't reference prefix before computing it ([#40](https://github.com/zkat/cipm/issues/40)) ([08ed1cc](https://github.com/zkat/cipm/commit/08ed1cc))
+* **prefix:** Resolve to promise when passing --prefix to npm ci ([#43](https://github.com/zkat/cipm/issues/43)) ([401d466](https://github.com/zkat/cipm/commit/401d466))
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/zkat/cipm/compare/v1.5.1...v1.6.0) (2018-03-01)
 
