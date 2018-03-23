@@ -1,6 +1,7 @@
 var util = require('util');
 var Stream = require('stream').Stream;
 var DelayedStream = require('delayed-stream');
+var defer = require('./defer.js');
 
 module.exports = CombinedStream;
 function CombinedStream() {
@@ -88,7 +89,7 @@ CombinedStream.prototype._getNext = function() {
       this._handleErrors(stream);
     }
 
-    this._pipeNext(stream);
+    defer(this._pipeNext.bind(this, stream));
   }.bind(this));
 };
 

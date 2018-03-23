@@ -136,14 +136,25 @@ Identity.prototype.toAsn1 = function (der, tag) {
 		/*
 		 * If we fit in a PrintableString, use that. Otherwise use an
 		 * IA5String or UTF8String.
+		 *
+		 * If this identity was parsed from a DN, use the ASN.1 types
+		 * from the original representation (otherwise this might not
+		 * be a full match for the original in some validators).
 		 */
-		if (c.value.match(NOT_IA5)) {
+		if (c.asn1type === asn1.Ber.Utf8String ||
+		    c.value.match(NOT_IA5)) {
 			var v = new Buffer(c.value, 'utf8');
 			der.writeBuffer(v, asn1.Ber.Utf8String);
-		} else if (c.value.match(NOT_PRINTABLE)) {
+
+		} else if (c.asn1type === asn1.Ber.IA5String ||
+		    c.value.match(NOT_PRINTABLE)) {
 			der.writeString(c.value, asn1.Ber.IA5String);
+
 		} else {
-			der.writeString(c.value, asn1.Ber.PrintableString);
+			var type = asn1.Ber.PrintableString;
+			if (c.asn1type !== undefined)
+				type = c.asn1type;
+			der.writeString(c.value, type);
 		}
 		der.endSequence();
 		der.endSequence();
@@ -253,7 +264,7 @@ Identity.parseAsn1 = function (der, top) {
 		default:
 			throw (new Error('Unknown asn1 type ' + type));
 		}
-		components.push({ oid: oid, value: value });
+		components.push({ oid: oid, asn1type: type, value: value });
 		der._offset = after;
 	}
 	der._offset = end;

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // -*- mode: js -*-
 // vim: set filetype=javascript :
-// Copyright 2015 Joyent, Inc.  All rights reserved.
+// Copyright 2015 Joyent, Inc.	All rights reserved.
 
 var dashdash = require('dashdash');
 var sshpk = require('../lib/index');
@@ -76,11 +76,12 @@ if (require.main === module) {
 		console.error('sshpk-conv: converts between SSH key formats\n');
 		console.error(help);
 		console.error('\navailable formats:');
-		console.error('  - pem, pkcs1     eg id_rsa');
-		console.error('  - ssh            eg id_rsa.pub');
-		console.error('  - pkcs8          format you want for openssl');
-		console.error('  - openssh        like output of ssh-keygen -o');
-		console.error('  - rfc4253        raw OpenSSH wire format');
+		console.error('	 - pem, pkcs1	  eg id_rsa');
+		console.error('	 - ssh		  eg id_rsa.pub');
+		console.error('	 - pkcs8	  format you want for openssl');
+		console.error('	 - openssh	  like output of ssh-keygen -o');
+		console.error('	 - rfc4253	  raw OpenSSH wire format');
+		console.error('	 - dnssec	  dnssec-keygen format');
 		process.exit(1);
 	}
 
