@@ -31,11 +31,15 @@ function mkdirP (p, opts, f, made) {
         }
         switch (er.code) {
             case 'ENOENT':
-                mkdirP(path.dirname(p), opts, function (er, made) {
-                    if (er) cb(er, made);
-                    else mkdirP(p, opts, cb, made);
-                });
-                break;
+                const parentdir = path.dirname(p);
+                if (parentdir != p) {
+                    mkdirP(path.dirname(p), opts, function (er, made) {
+                        if (er) cb(er, made);
+                        else mkdirP(p, opts, cb, made);
+                    });
+                    break;
+                }
+            // Fall through
 
             // In the case of any other error, just see if there's a dir
             // there already.  If so, then hooray!  If not, then something
