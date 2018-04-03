@@ -35,7 +35,6 @@
   var npm = require('../lib/npm.js')
   var npmconf = require('../lib/config/core.js')
   var errorHandler = require('../lib/utils/error-handler.js')
-  var output = require('../lib/utils/output.js')
 
   var configDefs = npmconf.defs
   var shorthands = configDefs.shorthands
@@ -82,9 +81,23 @@
   npm.load(conf, function (er) {
     if (er) return errorHandler(er)
     npm.commands[npm.command](npm.argv, function (err) {
-      // https://www.youtube.com/watch?v=7nfPu8qTiQU
-      if (!err && npm.config.get('ham-it-up') && !npm.config.get('json') && !npm.config.get('parseable') && npm.command !== 'completion') {
-        output('\n 🎵 I Have the Honour to Be Your Obedient Servant,🎵 ~ npm 📜🖋\n')
+      // https://genius.com/Lin-manuel-miranda-your-obedient-servant-lyrics
+      if (
+        !err &&
+        npm.config.get('ham-it-up') &&
+        !npm.config.get('json') &&
+        !npm.config.get('parseable') &&
+        npm.command !== 'completion'
+      ) {
+        console.error(
+          `\n ${
+            npm.config.get('unicode') ? '🎵 ' : ''
+          } I Have the Honour to Be Your Obedient Servant,${
+            npm.config.get('unicode') ? '🎵 ' : ''
+          } ~ npm ${
+            npm.config.get('unicode') ? '📜🖋 ' : ''
+          }\n`
+        )
       }
       errorHandler.apply(this, arguments)
     })
