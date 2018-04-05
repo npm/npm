@@ -39,9 +39,12 @@ const getNpmPrefix = () => {
 		return globalConfigPrefix;
 	}
 
-	if (process.platform === 'win32') {
+	if (process.platform === 'win32' && process.env.APPDATA) {
 		// Hardcoded contents of `c:\Program Files\nodejs\node_modules\npm\.npmrc`
-		return path.join(process.env.APPDATA, 'npm');
+		const prefix = path.join(process.env.APPDATA, 'npm');
+		if (fs.existsSync(prefix)) {
+			return prefix;
+		}
 	}
 
 	return defaultNpmPrefix;
@@ -54,12 +57,10 @@ const getYarnPrefix = () => {
 		return process.env.PREFIX;
 	}
 
-	if (process.platform === 'win32') {
-		if (process.env.LOCALAPPDATA) {
-			const prefix = path.join(process.env.LOCALAPPDATA, 'Yarn');
-			if (fs.existsSync(prefix)) {
-				return prefix;
-			}
+	if (process.platform === 'win32' && process.env.LOCALAPPDATA) {
+		const prefix = path.join(process.env.LOCALAPPDATA, 'Yarn');
+		if (fs.existsSync(prefix)) {
+			return prefix;
 		}
 	}
 
