@@ -255,7 +255,7 @@
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",
-    "marked": "^0.3.18",
+    "marked": "^0.3.19",
     "marked-man": "~0.2.1",
     "npm-registry-couchapp": "^2.7.1",
     "npm-registry-mock": "~1.1.0",
