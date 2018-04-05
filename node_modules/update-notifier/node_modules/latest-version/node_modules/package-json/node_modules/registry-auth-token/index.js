@@ -100,7 +100,9 @@ function getTokenForUsernameAndPassword (username, password) {
 
   // passwords are base64 encoded, so we need to decode it
   // See https://github.com/npm/npm/blob/v3.10.6/lib/config/set-credentials-by-uri.js#L26
-  var pass = decodeBase64(password)
+  var pass = decodeBase64(password.replace(/^\$\{?([^}]*)\}?$/, function (fullMatch, envVar) {
+    return process.env[envVar]
+  }))
 
   // a basic auth token is base64 encoded 'username:password'
   // See https://github.com/npm/npm/blob/v3.10.6/lib/config/get-credentials-by-uri.js#L70

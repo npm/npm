@@ -12,6 +12,7 @@ const isNpm = importLazy('is-npm');
 const isInstalledGlobally = importLazy('is-installed-globally');
 const boxen = importLazy('boxen');
 const xdgBasedir = importLazy('xdg-basedir');
+const isCi = importLazy('is-ci');
 const ONE_DAY = 1000 * 60 * 60 * 24;
 
 class UpdateNotifier {
@@ -37,7 +38,8 @@ class UpdateNotifier {
 		this.hasCallback = typeof options.callback === 'function';
 		this.callback = options.callback || (() => {});
 		this.disabled = 'NO_UPDATE_NOTIFIER' in process.env ||
-			process.argv.indexOf('--no-update-notifier') !== -1;
+			process.argv.indexOf('--no-update-notifier') !== -1 ||
+			isCi();
 
 		if (!this.disabled && !this.hasCallback) {
 			try {
