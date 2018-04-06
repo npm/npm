@@ -84,6 +84,7 @@
     "mississippi": "^3.0.0",
     "mkdirp": "~0.5.1",
     "move-concurrently": "^1.0.1",
+    "node-gyp": "^3.6.2",
     "nopt": "~4.0.1",
     "normalize-package-data": "~2.4.0",
     "npm-cache-filename": "~1.0.2",
@@ -249,7 +250,8 @@
     "safe-buffer",
     "worker-farm",
     "tiny-relative-date",
-    "cli-columns"
+    "cli-columns",
+    "node-gyp"
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",
