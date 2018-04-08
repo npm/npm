@@ -25,12 +25,6 @@
 
   unsupported.checkForUnsupportedNode()
 
-  if (!unsupported.checkVersion(process.version).unsupported) {
-    var updater = require('update-notifier')
-    var pkg = require('../package.json')
-    updater({pkg: pkg}).notify({defer: true})
-  }
-
   var path = require('path')
   var npm = require('../lib/npm.js')
   var npmconf = require('../lib/config/core.js')
@@ -80,6 +74,9 @@
   conf._exit = true
   npm.load(conf, function (er) {
     if (er) return errorHandler(er)
+    if (!unsupported.checkVersion(process.version).unsupported) {
+      require('../lib/notifier.js')(npm)
+    }
     npm.commands[npm.command](npm.argv, function (err) {
       // https://genius.com/Lin-manuel-miranda-your-obedient-servant-lyrics
       if (
