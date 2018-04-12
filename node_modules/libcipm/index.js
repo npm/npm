@@ -243,6 +243,10 @@ class Installer {
           ? pkg
           : this.updateFromField(dep, pkg).then(() => pkg)
         )
+        .then(pkg => (pkg.scripts && pkg.scripts.install)
+          ? pkg
+          : this.updateInstallScript(dep, pkg).then(() => pkg)
+        )
         .tap(pkg => { pkgJsons.set(dep, pkg) })
     }, {concurrency: 100, Promise: BB})
       .then(() => pkgJsons)
@@ -308,6 +312,21 @@ class Installer {
       .then(from => npa.resolve(dep.name, from))
       .then(from => { pkg._from = from.toString() })
       .then(() => writeFileAsync(depPkgPath, JSON.stringify(pkg, null, 2)))
+      .then(pkg)
+  }
+
+  updateInstallScript (dep, pkg) {
+    const depPath = dep.path(this.prefix)
+    return statAsync(path.join(depPath, 'binding.gyp'))
+      .catch(err => { if (err.code !== 'ENOENT') { throw err } })
+      .then(stat => {
+        if (stat) {
+          if (!pkg.scripts) {
+            pkg.scripts = {}
+          }
+          pkg.scripts.install = 'node-gyp rebuild'
+        }
+      })
       .then(pkg)
   }
 
