@@ -70,16 +70,14 @@ try {
 module.exports.clone = fullClone
 function fullClone (repo, committish, target, opts) {
   opts = optCheck(opts)
-  const gitArgs = ['clone', '-q', repo, target]
+  const gitArgs = ['clone', '--mirror', '-q', repo, path.join(target, '.git')]
   if (process.platform === 'win32') {
     gitArgs.push('--config', 'core.longpaths=true')
   }
-  return execGit(gitArgs, {
-    cwd: path.dirname(target)
-  }, opts).then(() => {
-    return committish && execGit(['checkout', committish], {
-      cwd: target
-    })
+  return execGit(gitArgs, {cwd: target}).then(() => {
+    return execGit(['init'], {cwd: target})
+  }).then(() => {
+    return execGit(['checkout', committish || 'HEAD'], {cwd: target})
   }).then(() => {
     return updateSubmodules(target, opts)
   }).then(() => headSha(target, opts))

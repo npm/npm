@@ -56,6 +56,7 @@ function HttpsProxyAgent(opts) {
   }
 
   this.proxy = proxy;
+  this.defaultPort = 443;
 }
 inherits(HttpsProxyAgent, Agent);
 

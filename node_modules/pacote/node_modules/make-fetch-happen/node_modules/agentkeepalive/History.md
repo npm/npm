@@ -1,4 +1,13 @@
 
+3.4.1 / 2018-03-08
+==================
+
+**fixes**
+  * [[`4d3a3b1`](http://github.com/node-modules/agentkeepalive/commit/4d3a3b1f7b16595febbbd39eeed72b2663549014)] - fix: Handle ipv6 addresses in host-header correctly with TLS (#53) (Mattias Holmlund <<u376@m1.holmlund.se>>)
+
+**others**
+  * [[`55a7a5c`](http://github.com/node-modules/agentkeepalive/commit/55a7a5cd33e97f9a8370083dcb041c5552f10ac9)] - test: stop timer after test end (fengmk2 <<fengmk2@gmail.com>>)
+
 3.4.0 / 2018-02-27
 ==================
 

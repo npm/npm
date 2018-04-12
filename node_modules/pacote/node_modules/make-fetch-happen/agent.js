@@ -16,8 +16,8 @@ function getAgent (uri, opts) {
   const key = [
     `https:${isHttps}`,
     pxuri
-    ? `proxy:${pxuri.protocol}//${pxuri.host}:${pxuri.port}`
-    : '>no-proxy<',
+      ? `proxy:${pxuri.protocol}//${pxuri.host}:${pxuri.port}`
+      : '>no-proxy<',
     `local-address:${opts.localAddress || '>no-local-address<'}`,
     `strict-ssl:${isHttps ? !!opts.strictSSL : '>no-strict-ssl<'}`,
     `ca:${(isHttps && opts.ca) || '>no-ca<'}`,
@@ -118,8 +118,8 @@ function getProxyUri (uri, opts) {
   const proxy = opts.proxy || (
     protocol === 'https:' && getProcessEnv('https_proxy')
   ) || (
-    protocol === 'http:' && getProcessEnv(['https_proxy', 'http_proxy', 'proxy'])
-  )
+      protocol === 'http:' && getProcessEnv(['https_proxy', 'http_proxy', 'proxy'])
+    )
   if (!proxy) { return null }
 
   const parsedProxy = (typeof proxy === 'string') ? url.parse(proxy) : proxy

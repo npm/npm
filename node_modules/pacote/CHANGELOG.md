@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="8.0.0"></a>
+# [8.0.0](https://github.com/zkat/pacote/compare/v7.6.1...v8.0.0) (2018-04-12)
+
+
+### Bug Fixes
+
+* **git:** make full clones do a full mirror ([85b269b](https://github.com/zkat/pacote/commit/85b269b))
+
+
+### deps
+
+* bump deps ([6737bf6](https://github.com/zkat/pacote/commit/6737bf6))
+
+
+### meta
+
+* drop support for node@4 ([11478ff](https://github.com/zkat/pacote/commit/11478ff))
+
+
+### BREAKING CHANGES
+
+* some dependencies were upgraded to versions that do not
+support node@4.
+* node@4 is no longer supported
+
+
+
 <a name="7.6.1"></a>
 ## [7.6.1](https://github.com/zkat/pacote/compare/v7.6.0...v7.6.1) (2018-03-08)
 

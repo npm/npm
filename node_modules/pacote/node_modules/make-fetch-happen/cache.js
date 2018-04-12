@@ -234,15 +234,7 @@ function matchDetails (req, cached) {
     }
   }
   if (cached.integrity) {
-    const cachedSri = ssri.parse(cached.cacheIntegrity)
-    const sri = ssri.parse(cached.integrity)
-    const algo = sri.pickAlgorithm()
-    if (cachedSri[algo] && !sri[algo].some(hash => {
-      // cachedSri always has exactly one item per algorithm
-      return cachedSri[algo][0].digest === hash.digest
-    })) {
-      return false
-    }
+    return ssri.parse(cached.integrity).match(cached.cacheIntegrity)
   }
   reqUrl.hash = null
   cacheUrl.hash = null
