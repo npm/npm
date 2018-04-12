@@ -15,6 +15,8 @@
 * [API](#api)
   * [`figgyPudding(spec)`](#figgy-pudding)
   * [`Opts(values)`](#opts)
+    * [`opts.get()`](#opts-get)
+    * [`opts.concat()`](#opts-concat)
 
 ### Example
 
@@ -116,6 +118,32 @@ opts.get('log') // => Error: ReqOpts does not define `log`
 const MoreOpts = figgyPudding({
   log: {}
 })
-MoreOpts(opts).log // => npmlog object (passed in from original plain obj)
+MoreOpts(opts).get('log') // => npmlog object (passed in from original plain obj)
 MoreOpts(opts).get('follow') // => Error: MoreOpts does not define `follow`
+```
+
+#### <a name="opts-get"></a> `> opts.get(key)`
+
+Gets a value from the options object.
+
+##### Example
+
+```js
+const opts = MyOpts(config)
+opts.get('foo') // value of `foo`
+```
+
+#### <a name="opts-concat"></a> `> opts.concat(...moreProviders)`
+
+Creates a new opts object of the same type as `opts` with additional providers.
+Providers further to the right shadow providers to the left, with properties in
+the original `opts` being shadows by the new providers.
+
+##### Example
+
+```js
+const opts = MyOpts({x: 1})
+opts.get('x') // 1
+opts.concat({x: 2}).get('x') // 2
+opts.get('x') // 1 (original opts object left intact)
 ```
