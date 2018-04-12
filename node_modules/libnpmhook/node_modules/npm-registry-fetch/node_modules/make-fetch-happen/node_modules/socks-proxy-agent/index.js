@@ -6,7 +6,7 @@ var tls; // lazy-loaded...
 var url = require('url');
 var dns = require('dns');
 var Agent = require('agent-base');
-var SocksClient = require('socks');
+var SocksClient = require('socks').SocksClient;
 var inherits = require('util').inherits;
 
 /**
@@ -90,7 +90,9 @@ SocksProxyAgent.prototype.callback = function connect(req, opts, fn) {
   var proxy = this.proxy;
 
   // called once the SOCKS proxy has connected to the specified remote endpoint
-  function onhostconnect(err, socket) {
+  function onhostconnect(err, result) {
+    var socket = result.socket
+
     if (err) return fn(err);
     var s = socket;
     if (opts.secureEndpoint) {
@@ -104,14 +106,14 @@ SocksProxyAgent.prototype.callback = function connect(req, opts, fn) {
       opts.port = null;
       s = tls.connect(opts);
     }
-    socket.resume();
+
     fn(null, s);
   }
 
   // called for the `dns.lookup()` callback
   function onlookup(err, ip) {
     if (err) return fn(err);
-    options.target.host = ip;
+    options.destination.host = ip;
     SocksClient.createConnection(options, onhostconnect);
   }
 
@@ -121,11 +123,12 @@ SocksProxyAgent.prototype.callback = function connect(req, opts, fn) {
       port: +proxy.port,
       type: proxy.version
     },
-    target: {
+    destination: {
       port: +opts.port
     },
     command: 'connect'
   };
+
   if (proxy.authentication) {
     options.proxy.authentication = proxy.authentication;
     options.proxy.userid = proxy.userid;

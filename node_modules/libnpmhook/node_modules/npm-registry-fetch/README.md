@@ -88,21 +88,6 @@ Fetch options are optional, and can be passed in as either a Map-like object
 (one with a `.get()` method), a plain javascript object, or a
 [`figgy-pudding`](https://npm.im/figgy-pudding) instance.
 
-##### <a name="opts-auth-token"></a> `opts._authToken`
-
-* Type: String
-* Default: null
-
-Authentication token string.
-
-Can be scoped to a registry by using a "nerf dart" for that registry. That is:
-
-```
-{
-  '//registry.npmjs.org/:_authToken': 't0k3nH34r'
-}
-```
-
 ##### <a name="opts-agent"></a> `opts.agent`
 
 * Type: http.Agent
@@ -362,7 +347,7 @@ account.
 * Default: null
 
 Password used for basic authentication. For the more modern authentication
-method, please use the (more secure) [`opts._authToken`](#opts-auth-token)
+method, please use the (more secure) [`opts.token`](#opts-token)
 
 Can optionally be scoped to a registry by using a "nerf dart" for that registry.
 That is:
@@ -513,6 +498,22 @@ See also [`opts.ca`](#opts-ca).
 
 Time before a hanging request times out.
 
+##### <a name="opts-token"></a> `opts.token`
+
+* Alias: `opts._authToken`
+* Type: String
+* Default: null
+
+Authentication token string.
+
+Can be scoped to a registry by using a "nerf dart" for that registry. That is:
+
+```
+{
+  '//registry.npmjs.org/:token': 't0k3nH34r'
+}
+```
+
 ##### <a name="opts-user-agent"></a> `opts.user-agent`
 
 * Type: String
@@ -526,7 +527,7 @@ User agent string to send in the `User-Agent` header.
 * Default: null
 
 Username used for basic authentication. For the more modern authentication
-method, please use the (more secure) [`opts._authToken`](#opts-auth-token)
+method, please use the (more secure) [`opts.token`](#opts-token)
 
 Can optionally be scoped to a registry by using a "nerf dart" for that registry.
 That is:
@@ -545,4 +546,4 @@ See also [`opts.password`](#opts-password)
 * Default: null
 
 ** DEPRECATED ** This is a legacy authentication token supported only for
-*compatibility. Please us [`opts._authToken`](#opts-auth-token) instead.
+*compatibility. Please use [`opts.token`](#opts-token) instead.

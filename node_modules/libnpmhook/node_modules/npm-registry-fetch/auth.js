@@ -10,6 +10,7 @@ function getAuth (registry, opts) {
   let AUTH = {}
   const regKey = registry && registryKey(registry)
   const doKey = (key, alias) => addKey(opts, AUTH, regKey, key, alias)
+  doKey('token')
   doKey('_authToken', 'token')
   doKey('username')
   doKey('password')
