@@ -253,7 +253,7 @@ function installPackages (specs, prefix, opts) {
 module.exports._execCommand = execCommand
 function execCommand (_existing, argv) {
   return findNodeScript(_existing, argv).then(existing => {
-    if (existing && !argv.nodeArg && !argv.shell && existing !== process.argv[1]) {
+    if (existing && !argv.alwaysSpawn && !argv.nodeArg && !argv.shell && existing !== process.argv[1]) {
       const Module = require('module')
       // let it take over the process. This means we can skip node startup!
       if (!argv.noYargs) {
