@@ -1,7 +1,5 @@
 'use strict'
 
-const Buffer = require('safe-buffer').Buffer
-
 const crypto = require('crypto')
 const Transform = require('stream').Transform
 
