@@ -74,7 +74,7 @@
     "lazy-property": "~1.0.0",
     "libcipm": "^1.6.2",
     "libnpmhook": "^3.0.0",
-    "libnpx": "^10.0.1",
+    "libnpx": "^10.1.1",
     "lockfile": "~1.0.3",
     "lodash._baseuniq": "~4.6.0",
     "lodash.clonedeep": "~4.5.0",
