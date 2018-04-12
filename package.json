@@ -115,7 +115,7 @@
     "read-package-tree": "~5.1.6",
     "readable-stream": "^2.3.6",
     "request": "^2.85.0",
-    "retry": "~0.10.1",
+    "retry": "^0.12.0",
     "rimraf": "~2.6.2",
     "safe-buffer": "~5.1.1",
     "semver": "^5.5.0",
