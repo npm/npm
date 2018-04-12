@@ -92,7 +92,7 @@
     "npm-cache-filename": "~1.0.2",
     "npm-install-checks": "~3.0.0",
     "npm-lifecycle": "^2.0.1",
-    "npm-package-arg": "~6.0.0",
+    "npm-package-arg": "^6.1.0",
     "npm-packlist": "~1.1.10",
     "npm-pick-manifest": "^2.1.0",
     "npm-profile": "^3.0.1",
