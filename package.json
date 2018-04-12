@@ -43,7 +43,7 @@
     "bin-links": "^1.1.2",
     "bluebird": "~3.5.1",
     "byte-size": "^4.0.2",
-    "cacache": "^10.0.4",
+    "cacache": "^11.0.1",
     "call-limit": "~1.1.0",
     "chownr": "~1.0.1",
     "cli-columns": "^3.1.2",
