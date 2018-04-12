@@ -34,10 +34,14 @@ function print_commit (c) {
   if (c.fixes) {
     let label = shortname(c.fixes)
     if (label) {
+
       console.log(`  [${label}](${c.fixes})`)
+      
     } else {
+
       console.log(`  [#${c.fixes}](https://github.com/npm/npm/issues/${c.fixes})`)
     }
+
   } else if (c.prurl) {
     let label = shortname(c.prurl)
     if (label) {
