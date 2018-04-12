@@ -71,7 +71,7 @@
     "is-cidr": "~1.0.0",
     "json-parse-better-errors": "^1.0.2",
     "lazy-property": "~1.0.0",
-    "libcipm": "^1.6.1",
+    "libcipm": "^1.6.2",
     "libnpx": "^10.0.1",
     "lockfile": "~1.0.3",
     "lodash._baseuniq": "~4.6.0",
