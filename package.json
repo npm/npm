@@ -112,7 +112,7 @@
     "read-cmd-shim": "~1.0.1",
     "read-installed": "~4.0.3",
     "read-package-json": "^2.0.13",
-    "read-package-tree": "~5.1.6",
+    "read-package-tree": "^5.2.1",
     "readable-stream": "^2.3.6",
     "request": "^2.85.0",
     "retry": "^0.12.0",
