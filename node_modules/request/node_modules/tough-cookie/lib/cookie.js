@@ -44,37 +44,24 @@ try {
   console.warn("cookie: can't load punycode; won't use punycode for domain normalization");
 }
 
-var DATE_DELIM = /[\x09\x20-\x2F\x3B-\x40\x5B-\x60\x7B-\x7E]/;
-
 // From RFC6265 S4.1.1
 // note that it excludes \x3B ";"
-var COOKIE_OCTET  = /[\x21\x23-\x2B\x2D-\x3A\x3C-\x5B\x5D-\x7E]/;
-var COOKIE_OCTETS = new RegExp('^'+COOKIE_OCTET.source+'+$');
+var COOKIE_OCTETS = /^[\x21\x23-\x2B\x2D-\x3A\x3C-\x5B\x5D-\x7E]+$/;
 
 var CONTROL_CHARS = /[\x00-\x1F]/;
 
-// For COOKIE_PAIR and LOOSE_COOKIE_PAIR below, the number of spaces has been
-// restricted to 256 to side-step a ReDoS issue reported here:
-// https://github.com/salesforce/tough-cookie/issues/92
-
-// Double quotes are part of the value (see: S4.1.1).
-// '\r', '\n' and '\0' should be treated as a terminator in the "relaxed" mode
-// (see: https://github.com/ChromiumWebApps/chromium/blob/b3d3b4da8bb94c1b2e061600df106d590fda3620/net/cookies/parsed_cookie.cc#L60)
-// '=' and ';' are attribute/values separators
-// (see: https://github.com/ChromiumWebApps/chromium/blob/b3d3b4da8bb94c1b2e061600df106d590fda3620/net/cookies/parsed_cookie.cc#L64)
-var COOKIE_PAIR = /^(([^=;]+))\s{0,256}=\s*([^\n\r\0]*)/;
-
-// Used to parse non-RFC-compliant cookies like '=abc' when given the `loose`
-// option in Cookie.parse:
-var LOOSE_COOKIE_PAIR = /^((?:=)?([^=;]*)\s{0,256}=\s*)?([^\n\r\0]*)/;
+// From Chromium // '\r', '\n' and '\0' should be treated as a terminator in
+// the "relaxed" mode, see:
+// https://github.com/ChromiumWebApps/chromium/blob/b3d3b4da8bb94c1b2e061600df106d590fda3620/net/cookies/parsed_cookie.cc#L60
+var TERMINATORS = ['\n', '\r', '\0'];
 
 // RFC6265 S4.1.1 defines path value as 'any CHAR except CTLs or ";"'
 // Note ';' is \x3B
 var PATH_VALUE = /[\x20-\x3A\x3C-\x7E]+/;
 
-var DAY_OF_MONTH = /^(\d{1,2})[^\d]*$/;
-var TIME = /^(\d{1,2})[^\d]*:(\d{1,2})[^\d]*:(\d{1,2})[^\d]*$/;
-var MONTH = /^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/i;
+// date-time parsing constants (RFC6265 S5.1.1)
+
+var DATE_DELIM = /[\x09\x20-\x2F\x3B-\x40\x5B-\x60\x7B-\x7E]/;
 
 var MONTH_TO_NUM = {
   jan:0, feb:1, mar:2, apr:3, may:4, jun:5,
@@ -87,13 +74,80 @@ var NUM_TO_DAY = [
   'Sun','Mon','Tue','Wed','Thu','Fri','Sat'
 ];
 
-var YEAR = /^(\d{2}|\d{4})$/; // 2 to 4 digits
-
 var MAX_TIME = 2147483647000; // 31-bit max
 var MIN_TIME = 0; // 31-bit min
 
+/*
+ * Parses a Natural number (i.e., non-negative integer) with either the
+ *    <min>*<max>DIGIT ( non-digit *OCTET )
+ * or
+ *    <min>*<max>DIGIT
+ * grammar (RFC6265 S5.1.1).
+ *
+ * The "trailingOK" boolean controls if the grammar accepts a
+ * "( non-digit *OCTET )" trailer.
+ */
+function parseDigits(token, minDigits, maxDigits, trailingOK) {
+  var count = 0;
+  while (count < token.length) {
+    var c = token.charCodeAt(count);
+    // "non-digit = %x00-2F / %x3A-FF"
+    if (c <= 0x2F || c >= 0x3A) {
+      break;
+    }
+    count++;
+  }
 
-// RFC6265 S5.1.1 date parser:
+  // constrain to a minimum and maximum number of digits.
+  if (count < minDigits || count > maxDigits) {
+    return null;
+  }
+
+  if (!trailingOK && count != token.length) {
+    return null;
+  }
+
+  return parseInt(token.substr(0,count), 10);
+}
+
+function parseTime(token) {
+  var parts = token.split(':');
+  var result = [0,0,0];
+
+  /* RF6256 S5.1.1:
+   *      time            = hms-time ( non-digit *OCTET )
+   *      hms-time        = time-field ":" time-field ":" time-field
+   *      time-field      = 1*2DIGIT
+   */
+
+  if (parts.length !== 3) {
+    return null;
+  }
+
+  for (var i = 0; i < 3; i++) {
+    // "time-field" must be strictly "1*2DIGIT", HOWEVER, "hms-time" can be
+    // followed by "( non-digit *OCTET )" so therefore the last time-field can
+    // have a trailer
+    var trailingOK = (i == 2);
+    var num = parseDigits(parts[i], 1, 2, trailingOK);
+    if (num === null) {
+      return null;
+    }
+    result[i] = num;
+  }
+
+  return result;
+}
+
+function parseMonth(token) {
+  token = String(token).substr(0,3).toLowerCase();
+  var num = MONTH_TO_NUM[token];
+  return num >= 0 ? num : null;
+}
+
+/*
+ * RFC6265 S5.1.1 date parser (see RFC for full grammar)
+ */
 function parseDate(str) {
   if (!str) {
     return;
@@ -109,9 +163,9 @@ function parseDate(str) {
   }
 
   var hour = null;
-  var minutes = null;
-  var seconds = null;
-  var day = null;
+  var minute = null;
+  var second = null;
+  var dayOfMonth = null;
   var month = null;
   var year = null;
 
@@ -129,22 +183,12 @@ function parseDate(str) {
      * the date-token, respectively.  Skip the remaining sub-steps and continue
      * to the next date-token.
      */
-    if (seconds === null) {
-      result = TIME.exec(token);
+    if (second === null) {
+      result = parseTime(token);
       if (result) {
-        hour = parseInt(result[1], 10);
-        minutes = parseInt(result[2], 10);
-        seconds = parseInt(result[3], 10);
-        /* RFC6265 S5.1.1.5:
-         * [fail if]
-         * *  the hour-value is greater than 23,
-         * *  the minute-value is greater than 59, or
-         * *  the second-value is greater than 59.
-         */
-        if(hour > 23 || minutes > 59 || seconds > 59) {
-          return;
-        }
-
+        hour = result[0];
+        minute = result[1];
+        second = result[2];
         continue;
       }
     }
@@ -154,16 +198,11 @@ function parseDate(str) {
      * the day-of-month-value to the number denoted by the date-token.  Skip
      * the remaining sub-steps and continue to the next date-token.
      */
-    if (day === null) {
-      result = DAY_OF_MONTH.exec(token);
-      if (result) {
-        day = parseInt(result, 10);
-        /* RFC6265 S5.1.1.5:
-         * [fail if] the day-of-month-value is less than 1 or greater than 31
-         */
-        if(day < 1 || day > 31) {
-          return;
-        }
+    if (dayOfMonth === null) {
+      // "day-of-month = 1*2DIGIT ( non-digit *OCTET )"
+      result = parseDigits(token, 1, 2, true);
+      if (result !== null) {
+        dayOfMonth = result;
         continue;
       }
     }
@@ -174,47 +213,63 @@ function parseDate(str) {
      * continue to the next date-token.
      */
     if (month === null) {
-      result = MONTH.exec(token);
-      if (result) {
-        month = MONTH_TO_NUM[result[1].toLowerCase()];
+      result = parseMonth(token);
+      if (result !== null) {
+        month = result;
         continue;
       }
     }
 
-    /* 2.4. If the found-year flag is not set and the date-token matches the year
-     * production, set the found-year flag and set the year-value to the number
-     * denoted by the date-token.  Skip the remaining sub-steps and continue to
-     * the next date-token.
+    /* 2.4. If the found-year flag is not set and the date-token matches the
+     * year production, set the found-year flag and set the year-value to the
+     * number denoted by the date-token.  Skip the remaining sub-steps and
+     * continue to the next date-token.
      */
     if (year === null) {
-      result = YEAR.exec(token);
-      if (result) {
-        year = parseInt(result[0], 10);
+      // "year = 2*4DIGIT ( non-digit *OCTET )"
+      result = parseDigits(token, 2, 4, true);
+      if (result !== null) {
+        year = result;
         /* From S5.1.1:
          * 3.  If the year-value is greater than or equal to 70 and less
          * than or equal to 99, increment the year-value by 1900.
          * 4.  If the year-value is greater than or equal to 0 and less
          * than or equal to 69, increment the year-value by 2000.
          */
-        if (70 <= year && year <= 99) {
+        if (year >= 70 && year <= 99) {
           year += 1900;
-        } else if (0 <= year && year <= 69) {
+        } else if (year >= 0 && year <= 69) {
           year += 2000;
-        }
-
-        if (year < 1601) {
-          return; // 5. ... the year-value is less than 1601
         }
       }
     }
   }
 
-  if (seconds === null || day === null || month === null || year === null) {
-    return; // 5. ... at least one of the found-day-of-month, found-month, found-
-            // year, or found-time flags is not set,
+  /* RFC 6265 S5.1.1
+   * "5. Abort these steps and fail to parse the cookie-date if:
+   *     *  at least one of the found-day-of-month, found-month, found-
+   *        year, or found-time flags is not set,
+   *     *  the day-of-month-value is less than 1 or greater than 31,
+   *     *  the year-value is less than 1601,
+   *     *  the hour-value is greater than 23,
+   *     *  the minute-value is greater than 59, or
+   *     *  the second-value is greater than 59.
+   *     (Note that leap seconds cannot be represented in this syntax.)"
+   *
+   * So, in order as above:
+   */
+  if (
+    dayOfMonth === null || month === null || year === null || second === null ||
+    dayOfMonth < 1 || dayOfMonth > 31 ||
+    year < 1601 ||
+    hour > 23 ||
+    minute > 59 ||
+    second > 59
+  ) {
+    return;
   }
 
-  return new Date(Date.UTC(year, month, day, hour, minutes, seconds));
+  return new Date(Date.UTC(year, month, dayOfMonth, hour, minute, second));
 }
 
 function formatDate(date) {
@@ -321,6 +376,50 @@ function defaultPath(path) {
   return path.slice(0, rightSlash);
 }
 
+function trimTerminator(str) {
+  for (var t = 0; t < TERMINATORS.length; t++) {
+    var terminatorIdx = str.indexOf(TERMINATORS[t]);
+    if (terminatorIdx !== -1) {
+      str = str.substr(0,terminatorIdx);
+    }
+  }
+
+  return str;
+}
+
+function parseCookiePair(cookiePair, looseMode) {
+  cookiePair = trimTerminator(cookiePair);
+
+  var firstEq = cookiePair.indexOf('=');
+  if (looseMode) {
+    if (firstEq === 0) { // '=' is immediately at start
+      cookiePair = cookiePair.substr(1);
+      firstEq = cookiePair.indexOf('='); // might still need to split on '='
+    }
+  } else { // non-loose mode
+    if (firstEq <= 0) { // no '=' or is at start
+      return; // needs to have non-empty "cookie-name"
+    }
+  }
+
+  var cookieName, cookieValue;
+  if (firstEq <= 0) {
+    cookieName = "";
+    cookieValue = cookiePair.trim();
+  } else {
+    cookieName = cookiePair.substr(0, firstEq).trim();
+    cookieValue = cookiePair.substr(firstEq+1).trim();
+  }
+
+  if (CONTROL_CHARS.test(cookieName) || CONTROL_CHARS.test(cookieValue)) {
+    return;
+  }
+
+  var c = new Cookie();
+  c.key = cookieName;
+  c.value = cookieValue;
+  return c;
+}
 
 function parse(str, options) {
   if (!options || typeof options !== 'object') {
@@ -330,23 +429,9 @@ function parse(str, options) {
 
   // We use a regex to parse the "name-value-pair" part of S5.2
   var firstSemi = str.indexOf(';'); // S5.2 step 1
-  var pairRe = options.loose ? LOOSE_COOKIE_PAIR : COOKIE_PAIR;
-  var result = pairRe.exec(firstSemi === -1 ? str : str.substr(0,firstSemi));
-
-  // Rx satisfies the "the name string is empty" and "lacks a %x3D ("=")"
-  // constraints as well as trimming any whitespace.
-  if (!result) {
-    return;
-  }
-
-  var c = new Cookie();
-  if (result[1]) {
-    c.key = result[2].trim();
-  } else {
-    c.key = '';
-  }
-  c.value = result[3].trim();
-  if (CONTROL_CHARS.test(c.key) || CONTROL_CHARS.test(c.value)) {
+  var cookiePair = (firstSemi === -1) ? str : str.substr(0, firstSemi);
+  var c = parseCookiePair(cookiePair, !!options.loose);
+  if (!c) {
     return;
   }
 

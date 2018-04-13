@@ -62,6 +62,18 @@ function readPkcs8(alg, type, der) {
 			return (readPkcs8ECDSAPublic(der));
 		else
 			return (readPkcs8ECDSAPrivate(der));
+	case '1.3.101.112':
+		if (type === 'public') {
+			return (readPkcs8EdDSAPublic(der));
+		} else {
+			return (readPkcs8EdDSAPrivate(der));
+		}
+	case '1.3.101.110':
+		if (type === 'public') {
+			return (readPkcs8X25519Public(der));
+		} else {
+			return (readPkcs8X25519Private(der));
+		}
 	default:
 		throw (new Error('Unknown key type OID ' + oid));
 	}
@@ -322,6 +334,83 @@ function readPkcs8ECDSAPublic(der) {
 	return (new Key(key));
 }
 
+function readPkcs8EdDSAPublic(der) {
+	if (der.peek() === 0x00)
+		der.readByte();
+
+	var A = utils.readBitString(der);
+
+	var key = {
+		type: 'ed25519',
+		parts: [
+			{ name: 'A', data: utils.zeroPadToLength(A, 32) }
+		]
+	};
+
+	return (new Key(key));
+}
+
+function readPkcs8X25519Public(der) {
+	var A = utils.readBitString(der);
+
+	var key = {
+		type: 'curve25519',
+		parts: [
+			{ name: 'A', data: utils.zeroPadToLength(A, 32) }
+		]
+	};
+
+	return (new Key(key));
+}
+
+function readPkcs8EdDSAPrivate(der) {
+	if (der.peek() === 0x00)
+		der.readByte();
+
+	der.readSequence(asn1.Ber.OctetString);
+	var k = der.readString(asn1.Ber.OctetString, true);
+	k = utils.zeroPadToLength(k, 32);
+
+	var A;
+	if (der.peek() === asn1.Ber.BitString) {
+		A = utils.readBitString(der);
+		A = utils.zeroPadToLength(A, 32);
+	} else {
+		A = utils.calculateED25519Public(k);
+	}
+
+	var key = {
+		type: 'ed25519',
+		parts: [
+			{ name: 'A', data: utils.zeroPadToLength(A, 32) },
+			{ name: 'k', data: utils.zeroPadToLength(k, 32) }
+		]
+	};
+
+	return (new PrivateKey(key));
+}
+
+function readPkcs8X25519Private(der) {
+	if (der.peek() === 0x00)
+		der.readByte();
+
+	der.readSequence(asn1.Ber.OctetString);
+	var k = der.readString(asn1.Ber.OctetString, true);
+	k = utils.zeroPadToLength(k, 32);
+
+	var A = utils.calculateX25519Public(k);
+
+	var key = {
+		type: 'curve25519',
+		parts: [
+			{ name: 'A', data: utils.zeroPadToLength(A, 32) },
+			{ name: 'k', data: utils.zeroPadToLength(k, 32) }
+		]
+	};
+
+	return (new PrivateKey(key));
+}
+
 function writePkcs8(der, key) {
 	der.startSequence();
 
@@ -353,6 +442,13 @@ function writePkcs8(der, key) {
 			writePkcs8ECDSAPrivate(key, der);
 		else
 			writePkcs8ECDSAPublic(key, der);
+		break;
+	case 'ed25519':
+		der.writeOID('1.3.101.112');
+		if (PrivateKey.isPrivateKey(key))
+			throw (new Error('Ed25519 private keys in pkcs8 ' +
+			    'format are not supported'));
+		writePkcs8EdDSAPublic(key, der);
 		break;
 	default:
 		throw (new Error('Unsupported key type: ' + key.type));
@@ -501,5 +597,20 @@ function writePkcs8ECDSAPrivate(key, der) {
 	der.endSequence();
 
 	der.endSequence();
+	der.endSequence();
+}
+
+function writePkcs8EdDSAPublic(key, der) {
+	der.endSequence();
+
+	utils.writeBitString(der, key.part.A.data);
+}
+
+function writePkcs8EdDSAPrivate(key, der) {
+	der.endSequence();
+
+	var k = utils.mpNormalize(key.part.k.data, true);
+	der.startSequence(asn1.Ber.OctetString);
+	der.writeBuffer(k, asn1.Ber.OctetString);
 	der.endSequence();
 }

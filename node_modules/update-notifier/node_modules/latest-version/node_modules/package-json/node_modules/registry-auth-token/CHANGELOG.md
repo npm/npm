@@ -2,6 +2,18 @@
 
 All notable changes will be documented in this file.
 
+## [3.3.2] - 2018-01-26
+
+### Changes
+
+- Support password with ENV variable tokens (Nowell Strite)
+
+## [3.3.1] - 2017-05-02
+
+### Fixes
+
+- Auth legacy token is basic auth (Hutson Betts)
+
 ## [3.3.0] - 2017-04-24
 
 ### Changes

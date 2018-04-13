@@ -113,6 +113,10 @@ exports.merge = function (target, source, isNullOverride /* = true */, isMergeAr
     const keys = Object.keys(source);
     for (let i = 0; i < keys.length; ++i) {
         const key = keys[i];
+        if (key === '__proto__') {
+            continue;
+        }
+
         const value = source[key];
         if (value &&
             typeof value === 'object') {

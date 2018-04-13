@@ -8,7 +8,7 @@
 
 The ultimate javascript content-type utility.
 
-Similar to [the `mime` module](https://www.npmjs.com/package/mime), except:
+Similar to [the `mime@1.x` module](https://www.npmjs.com/package/mime), except:
 
 - __No fallbacks.__ Instead of naively returning the first available type,
   `mime-types` simply returns `false`, so do
@@ -17,7 +17,7 @@ Similar to [the `mime` module](https://www.npmjs.com/package/mime), except:
 - No `.define()` functionality
 - Bug fixes for `.lookup(path)`
 
-Otherwise, the API is compatible.
+Otherwise, the API is compatible with `mime` 1.x.
 
 ## Install
 
