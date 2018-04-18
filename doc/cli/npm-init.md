@@ -3,23 +3,38 @@ npm-init(1) -- Interactively create a package.json file
 
 ## SYNOPSIS
 
-    npm init [-f|--force|-y|--yes]
+    npm init [--force|-f|--yes|-y]
+    npm init <@scope> (same as `npx <@scope>/create`)
+    npm init [<@scope>/]<pkg> (same as `npx [<@scope>/]create-<pkg>`)
 
 ## DESCRIPTION
 
-This will ask you a bunch of questions, and then write a package.json for you.
+* `npm init [--force|-f|--yes|-y]`:
 
-It attempts to make reasonable guesses about what you want things to be set to,
-and then writes a package.json file with the options you've selected.
+    This will ask you a bunch of questions, and then write a package.json for
+    you.
 
-If you already have a package.json file, it'll read that first, and default to
-the options in there.
+    It attempts to make reasonable guesses about what you want things to be set
+    to, and then writes a package.json file with the options you've selected.
 
-It is strictly additive, so it does not delete options from your package.json
-without a really good reason to do so.
+    If you already have a package.json file, it'll read that first, and default
+    to the options in there.
 
-If you invoke it with `-f`, `--force`, `-y`, or `--yes`, it will use only
-defaults and not prompt you for any options.
+    It is strictly additive, so it does not delete options from your
+    package.json without a really good reason to do so.
+
+    If you invoke it with `--force`, `-f`, `--yes`, or `-y`, it will use only
+    defaults and not prompt you for any options.
+
+* `npm init <@scope>` (same as `npx <@scope>/create`):
+
+    Run `<@scope>/create` as the package initializer instead of
+    [`npm-init`](https://www.npmjs.com/package/init-package-json).
+
+* `npm init [<@scope>/]<pkg>` (same as `npx [<@scope>/]create-<pkg>`):
+
+    Run `[<@scope>/]create-<pkg>` as the package initializer instead of
+    [`npm-init`](https://www.npmjs.com/package/init-package-json).
 
 ## CONFIGURATION
 
