@@ -6,7 +6,7 @@ const cp = require('child_process')
 const execFileAsync = BB.promisify(cp.execFile, {
   multiArgs: true
 })
-const finished = BB.promisify(require('mississippi').finished)
+const finished = require('./finished')
 const LRU = require('lru-cache')
 const optCheck = require('./opt-check')
 const osenv = require('osenv')
@@ -213,7 +213,7 @@ function spawnGit (gitArgs, gitOpts, opts) {
       child.stdout.on('data', d => { stdout += d })
       child.stderr.on('data', d => { stderr += d })
 
-      return finished(child).catch(err => {
+      return finished(child, true).catch(err => {
         if (shouldRetry(stderr)) {
           retry(err)
         } else {

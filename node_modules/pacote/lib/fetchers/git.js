@@ -112,7 +112,8 @@ function plainManifest (repo, spec, opts) {
         _ref: ref,
         _rawRef: spec.gitCommittish || spec.gitRange,
         _uniqueResolved: resolved,
-        _integrity: false
+        _integrity: false,
+        _shasum: false
       }
     } else {
       // We're SOL and need a full clone :(
@@ -125,7 +126,8 @@ function plainManifest (repo, spec, opts) {
         _rawRef: rawRef,
         _resolved: rawRef && rawRef.match(/^[a-f0-9]{40}$/) && resolved,
         _uniqueResolved: rawRef && rawRef.match(/^[a-f0-9]{40}$/) && resolved,
-        _integrity: false
+        _integrity: false,
+        _shasum: false
       }
     }
   })

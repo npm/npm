@@ -91,9 +91,10 @@ SocksProxyAgent.prototype.callback = function connect(req, opts, fn) {
 
   // called once the SOCKS proxy has connected to the specified remote endpoint
   function onhostconnect(err, result) {
-    var socket = result.socket
-
     if (err) return fn(err);
+
+    var socket = result.socket;
+
     var s = socket;
     if (opts.secureEndpoint) {
       // since the proxy is connecting to an SSL server, we have

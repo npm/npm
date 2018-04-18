@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="8.1.0"></a>
+# [8.1.0](https://github.com/zkat/pacote/compare/v8.0.0...v8.1.0) (2018-04-18)
+
+
+### Bug Fixes
+
+* **git:** workaround for mississippi.finished intermitent failures ([#144](https://github.com/zkat/pacote/issues/144)) ([788fd13](https://github.com/zkat/pacote/commit/788fd13)), closes [#143](https://github.com/zkat/pacote/issues/143)
+
+
+### Features
+
+* **tarball:** calculate shasum when missing, not just integrity ([#149](https://github.com/zkat/pacote/issues/149)) ([ccc6e90](https://github.com/zkat/pacote/commit/ccc6e90))
+
+
+
 <a name="8.0.0"></a>
 # [8.0.0](https://github.com/zkat/pacote/compare/v7.6.1...v8.0.0) (2018-04-12)
 

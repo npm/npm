@@ -1,4 +1,5 @@
 /// <reference types="node" />
+import { Duplex } from 'stream';
 import { Socket } from 'net';
 declare const DEFAULT_TIMEOUT = 30000;
 declare type SocksProxyType = 4 | 5;
@@ -111,7 +112,7 @@ interface SocksClientOptions {
     destination: SocksRemoteHost;
     proxy: SocksProxy;
     timeout?: number;
-    existing_socket?: Socket;
+    existing_socket?: Duplex;
 }
 /**
  * SocksClient chain connection options.

@@ -1,8 +1,8 @@
 /// <reference types="node" />
 import { EventEmitter } from 'events';
-import * as net from 'net';
 import { SocksClientOptions, SocksClientChainOptions, SocksRemoteHost, SocksProxy, SocksClientBoundEvent, SocksClientEstablishedEvent, SocksUDPFrameDetails } from '../common/constants';
 import { SocksClientError } from '../common/util';
+import { Duplex } from 'stream';
 interface SocksClient {
     on(event: 'error', listener: (err: SocksClientError) => void): this;
     on(event: 'bound', listener: (info: SocksClientBoundEvent) => void): this;
@@ -67,7 +67,7 @@ declare class SocksClient extends EventEmitter implements SocksClient {
      * Starts the connection establishment to the proxy and destination.
      * @param existing_socket Connected socket to use instead of creating a new one (internal use).
      */
-    connect(existing_socket?: net.Socket): void;
+    connect(existing_socket?: Duplex): void;
     /**
      * Handles internal Socks timeout callback.
      * Note: If the Socks client is not BoundWaitingForConnection or Established, the connection will be closed.
