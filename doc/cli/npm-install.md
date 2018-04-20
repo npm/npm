@@ -359,6 +359,9 @@ node source code so that npm can compile native modules.
 The `--only={prod[uction]|dev[elopment]}` argument will cause either only
 `devDependencies` or only non-`devDependencies` to be installed regardless of the `NODE_ENV`.
 
+The `--no-audit` argument can be used to disable sending of audit reports to
+the configured registries.  See `npm-audit(1)` for details on what is sent.
+
 See `npm-config(7)`.  Many of the configuration params have some
 effect on installation, since that's most of what npm does.
 
@@ -434,6 +437,7 @@ affects a real use-case, it will be investigated.
 
 * npm-folders(5)
 * npm-update(1)
+* npm-audit(1)
 * npm-link(1)
 * npm-rebuild(1)
 * npm-scripts(7)
