@@ -155,6 +155,15 @@ even for `GET` requests.
 When "dev" or "development" and running local `npm shrinkwrap`,
 `npm outdated`, or `npm update`, is an alias for `--dev`.
 
+### audit
+
+* Default: true
+* Type: Boolean
+
+When "true" submit audit reports alongside `npm install` runs to the default
+registry and all registries configured for scopes.  See the documentation
+for npm-audit(1) for details on what is submitted.
+
 ### auth-type
 
 * Default: `'legacy'`
