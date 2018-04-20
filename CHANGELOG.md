@@ -1,7 +1,114 @@
-## v6.0.0 (2018-04-12):
+## v6.0.0 (2018-04-20):
+
+Hey y'all! Here's another `npm@6` release -- with `node@10` around the corner,
+this might well be the last prerelease before we tag `6.0.0`! There's two major
+features included with this release, along with a few miscellaneous fixes and
+changes.
+
+### EXTENDED `npm init` SCAFFOLDING
+
+Thanks to the wonderful efforts of [@jdalton](https://github.com/jdalton) of
+lodash fame, `npm init` can now be used to invoke custom scaffolding tools!
+
+You can now do things like `npm init react-app` or `npm init esm` to scaffold an
+npm package by running `create-react-app` and `create-esm`, respectively. This
+also adds an `npm create` alias, to correspond to Yarn's `yarn create` feature,
+which inspired this.
+
+* [`008a83642`](https://github.com/npm/npm/commit/008a83642e04360e461f56da74b5557d5248a726) [`ed81d1426`](https://github.com/npm/npm/commit/ed81d1426776bcac47492cabef43f65e1d4ab536) [`833046e45`](https://github.com/npm/npm/commit/833046e45fe25f75daffd55caf25599a9f98c148)
+  [#20303](https://github.com/npm/npm/pull/20303)
+  Add an `npm init` feature that calls out to `npx` when invoked with positional
+  arguments.  ([@jdalton](https://github.com/jdalton))
+
+### COMING SOON -- THAT SILKY SMOOTH ECOSYSTEM SECURITY FEELING
+
+This version of npm adds a new command, `npm audit`, which will run a security
+audit of your project's dependency tree and notify you about any actions you may
+need to take.
+
+The registry-side services required for this command to work will be available
+on the main npm registry in the coming weeks. Until then, you won't get much out
+of trying to use this on the CLI. Keep an eye out for the official announcement
+and more information about the feature, coming soon.
+
+As part of this change, the npm CLI now sends scrubbed and cryptographically
+anonymized metadata about your dependency tree to your configured registry, to
+allow us to notify you about the existence of critical security flaws without
+having to run `npm audit` itself. For details about how the CLI protects your
+privacy when it shares this metadata, see `npm help audit`, or [read the docs
+for `npm audit`
+online](https://github.com/npm/npm/blob/release-next/doc/cli/npm-audit.md). You
+can disable this altogether by doing `npm config set audit false`, but will no
+longer benefit from the service..
+
+* [`f4bc648ea`](https://github.com/npm/npm/commit/f4bc648ea7b19d63cc9878c9da2cb1312f6ce152)
+  [#20389](https://github.com/npm/npm/pull/20389)
+  `npm-registry-fetch@1.1.0`
+  ([@iarna](https://github.com/iarna))
+* [`594d16987`](https://github.com/npm/npm/commit/594d16987465014d573c51a49bba6886cc19f8e8)
+  [#20389](https://github.com/npm/npm/pull/20389)
+  `npm-audit-report@1.0.5`
+  ([@iarna](https://github.com/iarna))
+* [`8c77dde74`](https://github.com/npm/npm/commit/8c77dde74a9d8f9007667cd1732c3329e0d52617) [`1d8ac2492`](https://github.com/npm/npm/commit/1d8ac2492196c4752b2e41b23d5ddc92780aaa24) [`552ff6d64`](https://github.com/npm/npm/commit/552ff6d64a5e3bcecb33b2a861c49a3396adad6d) [`09c734803`](https://github.com/npm/npm/commit/09c73480329e75e44fb8e55ca522f798be68d448)
+  [#20389](https://github.com/npm/npm/pull/20389)
+  Add new `npm audit` command.
+  ([@iarna](https://github.com/iarna))
+* [`be393a290`](https://github.com/npm/npm/commit/be393a290a5207dc75d3d70a32973afb3322306c)
+  [#20389](https://github.com/npm/npm/pull/20389)
+  Temporarily suppress git metadata till there's an opt-in.
+  ([@iarna](https://github.com/iarna))
+* [`8e713344f`](https://github.com/npm/npm/commit/8e713344f6e0828ddfb7733df20d75e95a5382d8)
+  [#20389](https://github.com/npm/npm/pull/20389)
+  Document the new command.
+  ([@iarna](https://github.com/iarna))
+*
+  [#20389](https://github.com/npm/npm/pull/20389)
+  Default audit to off when running the npm test suite itself.
+  ([@iarna](https://github.com/iarna))
+
+### MORE `package-lock.json` FORMAT CHANGES?!
+
+* [`820f74ae2`](https://github.com/npm/npm/commit/820f74ae22b7feb875232d46901cc34e9ba995d6)
+  [#20384](https://github.com/npm/npm/pull/20384)
+  Add `from` field back into package-lock for git dependencies. This will give
+  npm the information it needs to figure out whether git deps are valid,
+  specially when running with legacy install metadata or in
+  `--package-lock-only` mode when there's no `node_modules`. This should help
+  remove a significant amount of git-related churn on the pkglock.
+  ([@zkat](https://github.com/zkat))
+
+### BUGFIXES
+
+* [`9d5d0a18a`](https://github.com/npm/npm/commit/9d5d0a18a5458655275056156b5aa001140ae4d7)
+  [#20358](https://github.com/npm/npm/pull/20358)
+  `npm install-test` (aka `npm it`) will no longer generate `package-lock.json`
+  when running with `--no-package-lock` or `package-lock=false`.
+  ([@raymondfeng](https://github.com/raymondfeng))
+
+### DEPENDENCIES
+
+* [`1c1f89b73`](https://github.com/npm/npm/commit/1c1f89b7319b2eef6adee2530c4619ac1c0d83cf)
+  `libnpx@10.2.0`
+  ([@zkat](https://github.com/zkat))
+* [`242d8a647`](https://github.com/npm/npm/commit/242d8a6478b725778c00be8ba3dc85f367006a61)
+  `pacote@8.1.0`
+  ([@zkat](https://github.com/zkat))
+
+### DOCS
+
+* [`a1c77d614`](https://github.com/npm/npm/commit/a1c77d614adb4fe6769631b646b817fd490d239c)
+  [#20331](https://github.com/npm/npm/pull/20331)
+  Fix broken link to 'private-modules' page. The redirect went away when the new
+  npm website went up, but the new URL is better anyway.
+  ([@vipranarayan14](https://github.com/vipranarayan14))
+* [`ad7a5962d`](https://github.com/npm/npm/commit/ad7a5962d758efcbcfbd9fda9a3d8b38ddbf89a1)
+  [#20279](https://github.com/npm/npm/pull/20279)
+  Document the `--if-present` option for `npm run-script`.
+  ([@aleclarson](https://github.com/aleclarson))
+
+## v6.0.0-next.1 (2018-04-12):
 
 ### NEW FEATURES
-
 
 * [`a9e722118`](https://github.com/npm/npm/commit/a9e7221181dc88e14820d0677acccf0648ac3c5a)
   [#20256](https://github.com/npm/npm/pull/20256)
@@ -231,7 +338,7 @@ is, something like:
 #!/usr/bin/env node
 ```
 
-If the file has Windows line endings we strip them off of the first line. 
+If the file has Windows line endings we strip them off of the first line.
 The reason for this is that shebangs are only used in Unix-like environments
 and the files with them can't be run if the shebang has a Windows line ending.
 
