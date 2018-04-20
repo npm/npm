@@ -17,7 +17,6 @@ if (!global.setImmediate || !require('timers').setImmediate) {
 var spawn = require('child_process').spawn
 var path = require('path')
 
-
 var port = exports.port = 1337
 exports.registry = 'http://localhost:' + port
 const ourenv = {}
