@@ -17,11 +17,14 @@ if (!global.setImmediate || !require('timers').setImmediate) {
 var spawn = require('child_process').spawn
 var path = require('path')
 
+
 var port = exports.port = 1337
 exports.registry = 'http://localhost:' + port
 const ourenv = {}
 ourenv.npm_config_loglevel = 'error'
 ourenv.npm_config_progress = 'false'
+ourenv.npm_config_metrics = 'false'
+ourenv.npm_config_audit = 'false'
 
 var npm_config_cache = path.resolve(__dirname, 'npm_cache')
 ourenv.npm_config_cache = exports.npm_config_cache = npm_config_cache
@@ -62,6 +65,9 @@ exports.npm = function (cmd, opts, cb) {
   }
   if (!opts.env.npm_config_send_metrics) {
     opts.env.npm_config_send_metrics = 'false'
+  }
+  if (!opts.env.npm_config_audit) {
+    opts.env.npm_config_audit = 'false'
   }
 
   nodeBin = opts.nodeExecPath || nodeBin
