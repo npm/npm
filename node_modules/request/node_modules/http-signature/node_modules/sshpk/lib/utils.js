@@ -4,18 +4,31 @@ module.exports = {
 	bufferSplit: bufferSplit,
 	addRSAMissing: addRSAMissing,
 	calculateDSAPublic: calculateDSAPublic,
+	calculateED25519Public: calculateED25519Public,
+	calculateX25519Public: calculateX25519Public,
 	mpNormalize: mpNormalize,
+	mpDenormalize: mpDenormalize,
 	ecNormalize: ecNormalize,
 	countZeros: countZeros,
 	assertCompatible: assertCompatible,
 	isCompatible: isCompatible,
 	opensslKeyDeriv: opensslKeyDeriv,
-	opensshCipherInfo: opensshCipherInfo
+	opensshCipherInfo: opensshCipherInfo,
+	publicFromPrivateECDSA: publicFromPrivateECDSA,
+	zeroPadToLength: zeroPadToLength,
+	writeBitString: writeBitString,
+	readBitString: readBitString
 };
 
 var assert = require('assert-plus');
 var PrivateKey = require('./private-key');
+var Key = require('./key');
 var crypto = require('crypto');
+var algs = require('./algs');
+var asn1 = require('asn1');
+
+var ec, jsbn;
+var nacl;
 
 var MAX_CLASS_DEPTH = 3;
 
@@ -178,11 +191,52 @@ function ecNormalize(buf, addZero) {
 	return (b);
 }
 
+function readBitString(der, tag) {
+	if (tag === undefined)
+		tag = asn1.Ber.BitString;
+	var buf = der.readString(tag, true);
+	assert.strictEqual(buf[0], 0x00, 'bit strings with unused bits are ' +
+	    'not supported (0x' + buf[0].toString(16) + ')');
+	return (buf.slice(1));
+}
+
+function writeBitString(der, buf, tag) {
+	if (tag === undefined)
+		tag = asn1.Ber.BitString;
+	var b = new Buffer(buf.length + 1);
+	b[0] = 0x00;
+	buf.copy(b, 1);
+	der.writeBuffer(b, tag);
+}
+
 function mpNormalize(buf) {
 	assert.buffer(buf);
 	while (buf.length > 1 && buf[0] === 0x00 && (buf[1] & 0x80) === 0x00)
 		buf = buf.slice(1);
 	if ((buf[0] & 0x80) === 0x80) {
+		var b = new Buffer(buf.length + 1);
+		b[0] = 0x00;
+		buf.copy(b, 1);
+		buf = b;
+	}
+	return (buf);
+}
+
+function mpDenormalize(buf) {
+	assert.buffer(buf);
+	while (buf.length > 1 && buf[0] === 0x00)
+		buf = buf.slice(1);
+	return (buf);
+}
+
+function zeroPadToLength(buf, len) {
+	assert.buffer(buf);
+	assert.number(len);
+	while (buf.length > len) {
+		assert.equal(buf[0], 0x00);
+		buf = buf.slice(1);
+	}
+	while (buf.length < len) {
 		var b = new Buffer(buf.length + 1);
 		b[0] = 0x00;
 		buf.copy(b, 1);
@@ -215,6 +269,26 @@ function calculateDSAPublic(g, p, x) {
 	return (ybuf);
 }
 
+function calculateED25519Public(k) {
+	assert.buffer(k);
+
+	if (nacl === undefined)
+		nacl = require('tweetnacl');
+
+	var kp = nacl.sign.keyPair.fromSeed(new Uint8Array(k));
+	return (new Buffer(kp.publicKey));
+}
+
+function calculateX25519Public(k) {
+	assert.buffer(k);
+
+	if (nacl === undefined)
+		nacl = require('tweetnacl');
+
+	var kp = nacl.box.keyPair.fromSeed(new Uint8Array(k));
+	return (new Buffer(kp.publicKey));
+}
+
 function addRSAMissing(key) {
 	assert.object(key);
 	assertCompatible(key, PrivateKey, [1, 1]);
@@ -244,6 +318,32 @@ function addRSAMissing(key) {
 		key.part.dmodq = {name: 'dmodq', data: buf};
 		key.parts.push(key.part.dmodq);
 	}
+}
+
+function publicFromPrivateECDSA(curveName, priv) {
+	assert.string(curveName, 'curveName');
+	assert.buffer(priv);
+	if (ec === undefined)
+		ec = require('ecc-jsbn/lib/ec');
+	if (jsbn === undefined)
+		jsbn = require('jsbn').BigInteger;
+	var params = algs.curves[curveName];
+	var p = new jsbn(params.p);
+	var a = new jsbn(params.a);
+	var b = new jsbn(params.b);
+	var curve = new ec.ECCurveFp(p, a, b);
+	var G = curve.decodePointHex(params.G.toString('hex'));
+
+	var d = new jsbn(mpNormalize(priv));
+	var pub = G.multiply(d);
+	pub = new Buffer(curve.encodePointHex(pub), 'hex');
+
+	var parts = [];
+	parts.push({name: 'curve', data: new Buffer(curveName)});
+	parts.push({name: 'Q', data: pub});
+
+	var key = new Key({type: 'ecdsa', curve: curve, parts: parts});
+	return (key);
 }
 
 function opensshCipherInfo(cipher) {

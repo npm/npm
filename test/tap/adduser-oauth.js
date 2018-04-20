@@ -33,7 +33,7 @@ test('setup', function (t) {
   mkdirp.sync(pkg)
   fs.writeFileSync(configfile, '')
   var s = '#!/usr/bin/env bash\n' +
-          'echo \"$@\" > ' + outfile + '\n'
+          'echo "$@" > ' + outfile + '\n'
   fs.writeFileSync(fakeBrowser, s, 'ascii')
   fs.chmodSync(fakeBrowser, '0755')
   t.pass('made script')

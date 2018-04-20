@@ -179,6 +179,10 @@ function yargsParser (argv, defaultNpm) {
       type: 'string',
       describe: Y()`Location of the npm cache.`
     })
+    .option('always-spawn', {
+      describe: Y()`Always spawn a child process to execute the command.`,
+      type: 'boolean'
+    })
     .option('no-install', {
       type: 'boolean',
       describe: Y()`Skip installation if a package is missing.`
