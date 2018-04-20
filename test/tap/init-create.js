@@ -59,3 +59,32 @@ test('npm init with scoped packages', function (t) {
     t.end()
   })
 })
+
+test('npm init forwards arguments', function (t) {
+  var libnpxMock = function () {
+    return Promise.resolve()
+  }
+
+  npm.load({ loglevel: 'silent' }, function () {
+    var origArgv = process.argv
+    var init = requireInject('../../lib/init', {
+      'libnpx': libnpxMock
+    })
+
+    libnpxMock.parseArgs = function (argv) {
+      process.argv = origArgv
+      t.same(argv.slice(4), ['a', 'b', 'c'])
+    }
+    process.argv = [
+      process.argv0,
+      'NPM_CLI_PATH',
+      'init',
+      'pkg-name',
+      'a', 'b', 'c'
+    ]
+
+    init(['pkg-name'], function () {})
+
+    t.end()
+  })
+})
