@@ -46,24 +46,24 @@ test('setup', () => {
   }))
   fixture.create(testDir)
   return mr({port: common.port})
-  .then((server) => {
-    SERVER = server
-    return common.npm([
-      'install',
-      '--registry', common.registry
-    ], EXEC_OPTS)
-    .then(() => fs.readFileAsync(
-      path.join(testDir, 'package-lock.json'),
-      'utf8')
-    )
-    .then((lock) => {
-      RAW_LOCKFILE = lock
+    .then((server) => {
+      SERVER = server
+      return common.npm([
+        'install',
+        '--registry', common.registry
+      ], EXEC_OPTS)
+        .then(() => fs.readFileAsync(
+          path.join(testDir, 'package-lock.json'),
+          'utf8')
+        )
+        .then((lock) => {
+          RAW_LOCKFILE = lock
+        })
+        .then(() => common.npm(['ls', '--json'], EXEC_OPTS))
+        .then((ret) => {
+          TREE = scrubFrom(JSON.parse(ret[1]))
+        })
     })
-    .then(() => common.npm(['ls', '--json'], EXEC_OPTS))
-    .then((ret) => {
-      TREE = scrubFrom(JSON.parse(ret[1]))
-    })
-  })
 })
 
 test('basic installation', (t) => {
@@ -72,65 +72,65 @@ test('basic installation', (t) => {
     'package-lock.json': File(RAW_LOCKFILE)
   }))
   return rimraf(testDir)
-  .then(() => fixture.create(testDir))
-  .then(() => common.npm([
-    'ci',
-    '--registry', common.registry,
-    '--loglevel', 'warn'
-  ], EXEC_OPTS))
-  .then((ret) => {
-    const code = ret[0]
-    const stdout = ret[1]
-    const stderr = ret[2]
-    t.equal(code, 0, 'command completed without error')
-    t.equal(stdout.trim(), '', 'no output on stdout')
-    t.match(
-      stderr.trim(),
-      /^added 6 packages in \d+(?:\.\d+)?s$/,
-      'no warnings on stderr, and final output has right number of packages'
-    )
-    return fs.readdirAsync(path.join(testDir, 'node_modules'))
-  })
-  .then((modules) => {
-    t.deepEqual(modules.sort(), [
-      'async', 'checker', 'clean', 'minimist', 'optimist', 'wordwrap'
-    ], 'packages installed')
-    return BB.all(modules.map((mod) => {
-      return fs.readFileAsync(
-        path.join(testDir, 'node_modules', mod, 'package.json')
+    .then(() => fixture.create(testDir))
+    .then(() => common.npm([
+      'ci',
+      '--registry', common.registry,
+      '--loglevel', 'warn'
+    ], EXEC_OPTS))
+    .then((ret) => {
+      const code = ret[0]
+      const stdout = ret[1]
+      const stderr = ret[2]
+      t.equal(code, 0, 'command completed without error')
+      t.equal(stdout.trim(), '', 'no output on stdout')
+      t.match(
+        stderr.trim(),
+        /^added 6 packages in \d+(?:\.\d+)?s$/,
+        'no warnings on stderr, and final output has right number of packages'
       )
-      .then((f) => JSON.parse(f))
-      .then((pkgjson) => {
-        t.equal(pkgjson.name, mod, `${mod} package name correct`)
-        t.match(
-          pkgjson._integrity,
-          /sha\d+-[a-z0-9=+/]+$/i,
-          `${mod} pkgjson has _integrity`
+      return fs.readdirAsync(path.join(testDir, 'node_modules'))
+    })
+    .then((modules) => {
+      t.deepEqual(modules.sort(), [
+        'async', 'checker', 'clean', 'minimist', 'optimist', 'wordwrap'
+      ], 'packages installed')
+      return BB.all(modules.map((mod) => {
+        return fs.readFileAsync(
+          path.join(testDir, 'node_modules', mod, 'package.json')
         )
-        t.match(
-          pkgjson._resolved,
-          new RegExp(`http.*/-/${mod}-${pkgjson.version}.tgz`),
-          `${mod} pkgjson has correct _resolved`
-        )
-        t.match(
-          pkgjson._from,
-          new RegExp(`${mod}@.*`),
-          `${mod} pkgjson has _from field`
-        )
-      })
-    }))
-  })
-  .then(() => fs.readFileAsync(
-    path.join(testDir, 'package-lock.json'),
-    'utf8')
-  )
-  .then((lock) => t.equal(lock, RAW_LOCKFILE, 'package-lock.json unchanged'))
-  .then(() => common.npm(['ls', '--json'], EXEC_OPTS))
-  .then((ret) => {
-    const lsResult = JSON.parse(ret[1])
-    t.equal(ret[0], 0, 'ls exited successfully')
-    t.deepEqual(scrubFrom(lsResult), TREE, 'tree matches one from `install`')
-  })
+          .then((f) => JSON.parse(f))
+          .then((pkgjson) => {
+            t.equal(pkgjson.name, mod, `${mod} package name correct`)
+            t.match(
+              pkgjson._integrity,
+              /sha\d+-[a-z0-9=+/]+$/i,
+              `${mod} pkgjson has _integrity`
+            )
+            t.match(
+              pkgjson._resolved,
+              new RegExp(`http.*/-/${mod}-${pkgjson.version}.tgz`),
+              `${mod} pkgjson has correct _resolved`
+            )
+            t.match(
+              pkgjson._from,
+              new RegExp(`${mod}@.*`),
+              `${mod} pkgjson has _from field`
+            )
+          })
+      }))
+    })
+    .then(() => fs.readFileAsync(
+      path.join(testDir, 'package-lock.json'),
+      'utf8')
+    )
+    .then((lock) => t.equal(lock, RAW_LOCKFILE, 'package-lock.json unchanged'))
+    .then(() => common.npm(['ls', '--json'], EXEC_OPTS))
+    .then((ret) => {
+      const lsResult = JSON.parse(ret[1])
+      t.equal(ret[0], 0, 'ls exited successfully')
+      t.deepEqual(scrubFrom(lsResult), TREE, 'tree matches one from `install`')
+    })
 })
 
 test('supports npm-shrinkwrap.json as well', (t) => {
@@ -139,43 +139,43 @@ test('supports npm-shrinkwrap.json as well', (t) => {
     'npm-shrinkwrap.json': File(RAW_LOCKFILE)
   }))
   return rimraf(testDir)
-  .then(() => fixture.create(testDir))
-  .then(() => common.npm([
-    'ci',
-    '--registry', common.registry,
-    '--loglevel', 'warn'
-  ], EXEC_OPTS))
-  .then((ret) => {
-    const code = ret[0]
-    const stdout = ret[1]
-    const stderr = ret[2]
-    t.equal(code, 0, 'command completed without error')
-    t.equal(stdout.trim(), '', 'no output on stdout')
-    t.match(
-      stderr.trim(),
-      /^added 6 packages in \d+(?:\.\d+)?s$/,
-      'no warnings on stderr, and final output has right number of packages'
+    .then(() => fixture.create(testDir))
+    .then(() => common.npm([
+      'ci',
+      '--registry', common.registry,
+      '--loglevel', 'warn'
+    ], EXEC_OPTS))
+    .then((ret) => {
+      const code = ret[0]
+      const stdout = ret[1]
+      const stderr = ret[2]
+      t.equal(code, 0, 'command completed without error')
+      t.equal(stdout.trim(), '', 'no output on stdout')
+      t.match(
+        stderr.trim(),
+        /^added 6 packages in \d+(?:\.\d+)?s$/,
+        'no warnings on stderr, and final output has right number of packages'
+      )
+    })
+    .then(() => common.npm(['ls', '--json'], EXEC_OPTS))
+    .then((ret) => {
+      t.equal(ret[0], 0, 'ls exited successfully')
+      t.deepEqual(
+        scrubFrom(JSON.parse(ret[1])),
+        TREE,
+        'tree matches one from `install`'
+      )
+    })
+    .then(() => fs.readFileAsync(
+      path.join(testDir, 'npm-shrinkwrap.json'),
+      'utf8')
     )
-  })
-  .then(() => common.npm(['ls', '--json'], EXEC_OPTS))
-  .then((ret) => {
-    t.equal(ret[0], 0, 'ls exited successfully')
-    t.deepEqual(
-      scrubFrom(JSON.parse(ret[1])),
-      TREE,
-      'tree matches one from `install`'
-    )
-  })
-  .then(() => fs.readFileAsync(
-    path.join(testDir, 'npm-shrinkwrap.json'),
-    'utf8')
-  )
-  .then((lock) => t.equal(lock, RAW_LOCKFILE, 'npm-shrinkwrap.json unchanged'))
-  .then(() => fs.readdirAsync(path.join(testDir)))
-  .then((files) => t.notOk(
-    files.some((f) => f === 'package-lock.json'),
-    'no package-lock.json created'
-  ))
+    .then((lock) => t.equal(lock, RAW_LOCKFILE, 'npm-shrinkwrap.json unchanged'))
+    .then(() => fs.readdirAsync(path.join(testDir)))
+    .then((files) => t.notOk(
+      files.some((f) => f === 'package-lock.json'),
+      'no package-lock.json created'
+    ))
 })
 
 test('removes existing node_modules/ before installing', (t) => {
@@ -189,37 +189,37 @@ test('removes existing node_modules/ before installing', (t) => {
     })
   }))
   return rimraf(testDir)
-  .then(() => fixture.create(testDir))
-  .then(() => common.npm([
-    'ci',
-    '--registry', common.registry,
-    '--loglevel', 'warn'
-  ], EXEC_OPTS))
-  .then((ret) => {
-    const code = ret[0]
-    const stdout = ret[1]
-    const stderr = ret[2]
-    t.equal(code, 0, 'command completed without error')
-    t.equal(stdout.trim(), '', 'no output on stdout')
-    t.match(
-      stderr.trim(),
-      /^npm.*WARN.*removing existing node_modules/,
-      'user warned that existing node_modules were removed'
+    .then(() => fixture.create(testDir))
+    .then(() => common.npm([
+      'ci',
+      '--registry', common.registry,
+      '--loglevel', 'warn'
+    ], EXEC_OPTS))
+    .then((ret) => {
+      const code = ret[0]
+      const stdout = ret[1]
+      const stderr = ret[2]
+      t.equal(code, 0, 'command completed without error')
+      t.equal(stdout.trim(), '', 'no output on stdout')
+      t.match(
+        stderr.trim(),
+        /^npm.*WARN.*removing existing node_modules/,
+        'user warned that existing node_modules were removed'
+      )
+      return fs.readdirAsync(path.join(testDir, 'node_modules'))
+    })
+    .then((modules) => {
+      t.deepEqual(modules.sort(), [
+        'async', 'checker', 'clean', 'minimist', 'optimist', 'wordwrap'
+      ], 'packages installed, with old node_modules dir gone')
+    })
+    .then(() => common.npm(['ls'], EXEC_OPTS))
+    .then((ret) => t.equal(ret[0], 0, 'ls exited successfully'))
+    .then(() => fs.readFileAsync(
+      path.join(testDir, 'package-lock.json'),
+      'utf8')
     )
-    return fs.readdirAsync(path.join(testDir, 'node_modules'))
-  })
-  .then((modules) => {
-    t.deepEqual(modules.sort(), [
-      'async', 'checker', 'clean', 'minimist', 'optimist', 'wordwrap'
-    ], 'packages installed, with old node_modules dir gone')
-  })
-  .then(() => common.npm(['ls'], EXEC_OPTS))
-  .then((ret) => t.equal(ret[0], 0, 'ls exited successfully'))
-  .then(() => fs.readFileAsync(
-    path.join(testDir, 'package-lock.json'),
-    'utf8')
-  )
-  .then((lock) => t.equal(lock, RAW_LOCKFILE, 'package-lock.json unchanged'))
+    .then((lock) => t.equal(lock, RAW_LOCKFILE, 'package-lock.json unchanged'))
 })
 
 test('installs all package types correctly')
@@ -229,32 +229,32 @@ test('errors if package-lock.json missing', (t) => {
     'package.json': File(PKG)
   }))
   return rimraf(testDir)
-  .then(() => fixture.create(testDir))
-  .then(() => common.npm([
-    'ci',
-    '--registry', common.registry,
-    '--loglevel', 'warn'
-  ], EXEC_OPTS))
-  .then((ret) => {
-    const code = ret[0]
-    const stdout = ret[1]
-    const stderr = ret[2]
-    t.equal(code, 1, 'command errored')
-    t.equal(stdout.trim(), '', 'no output on stdout')
-    t.match(
-      stderr.trim(),
-      /can only install packages with an existing package-lock/i,
-      'user informed about the issue'
-    )
-    return fs.readdirAsync(path.join(testDir))
-  })
-  .then((dir) => {
-    t.notOk(dir.some((f) => f === 'node_modules'), 'no node_modules installed')
-    t.notOk(
-      dir.some((f) => f === 'package-lock.json'),
-      'no package-lock.json created'
-    )
-  })
+    .then(() => fixture.create(testDir))
+    .then(() => common.npm([
+      'ci',
+      '--registry', common.registry,
+      '--loglevel', 'warn'
+    ], EXEC_OPTS))
+    .then((ret) => {
+      const code = ret[0]
+      const stdout = ret[1]
+      const stderr = ret[2]
+      t.equal(code, 1, 'command errored')
+      t.equal(stdout.trim(), '', 'no output on stdout')
+      t.match(
+        stderr.trim(),
+        /can only install packages with an existing package-lock/i,
+        'user informed about the issue'
+      )
+      return fs.readdirAsync(path.join(testDir))
+    })
+    .then((dir) => {
+      t.notOk(dir.some((f) => f === 'node_modules'), 'no node_modules installed')
+      t.notOk(
+        dir.some((f) => f === 'package-lock.json'),
+        'no package-lock.json created'
+      )
+    })
 })
 
 test('errors if package-lock.json invalid', (t) => {
@@ -265,37 +265,37 @@ test('errors if package-lock.json invalid', (t) => {
     'package-lock.json': File(badJson)
   }))
   return rimraf(testDir)
-  .then(() => fixture.create(testDir))
-  .then(() => common.npm([
-    'ci',
-    '--registry', common.registry,
-    '--loglevel', 'warn'
-  ], EXEC_OPTS))
-  .then((ret) => {
-    const code = ret[0]
-    const stdout = ret[1]
-    const stderr = ret[2]
-    t.equal(code, 1, 'command errored')
-    t.equal(stdout.trim(), '', 'no output on stdout')
-    t.match(
-      stderr.trim(),
-      /can only install packages when your package.json/i,
-      'user informed about the issue'
+    .then(() => fixture.create(testDir))
+    .then(() => common.npm([
+      'ci',
+      '--registry', common.registry,
+      '--loglevel', 'warn'
+    ], EXEC_OPTS))
+    .then((ret) => {
+      const code = ret[0]
+      const stdout = ret[1]
+      const stderr = ret[2]
+      t.equal(code, 1, 'command errored')
+      t.equal(stdout.trim(), '', 'no output on stdout')
+      t.match(
+        stderr.trim(),
+        /can only install packages when your package.json/i,
+        'user informed about the issue'
+      )
+      return fs.readdirAsync(path.join(testDir))
+    })
+    .then((dir) => {
+      t.notOk(dir.some((f) => f === 'node_modules'), 'no node_modules installed')
+    })
+    .then(() => fs.readFileAsync(
+      path.join(testDir, 'package-lock.json'),
+      'utf8')
     )
-    return fs.readdirAsync(path.join(testDir))
-  })
-  .then((dir) => {
-    t.notOk(dir.some((f) => f === 'node_modules'), 'no node_modules installed')
-  })
-  .then(() => fs.readFileAsync(
-    path.join(testDir, 'package-lock.json'),
-    'utf8')
-  )
-  .then((lock) => t.deepEqual(
-    JSON.parse(lock),
-    badJson,
-    'bad package-lock.json left unchanged')
-  )
+    .then((lock) => t.deepEqual(
+      JSON.parse(lock),
+      badJson,
+      'bad package-lock.json left unchanged')
+    )
 })
 
 test('cleanup', () => {

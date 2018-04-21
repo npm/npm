@@ -93,8 +93,8 @@ test('setup', function (t) {
 
 test('test', function (t) {
   server.filteringRequestBody(function () { return true })
-        .put('/npm-test-prepublish-only', true)
-        .reply(201, {ok: true})
+    .put('/npm-test-prepublish-only', true)
+    .reply(201, {ok: true})
 
   common.npm(
     [

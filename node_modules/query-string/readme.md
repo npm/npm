@@ -15,6 +15,8 @@
 $ npm install query-string
 ```
 
+The latest version targets Node.js 6 or later and modern browsers. If you want support for older browsers, use version 5: `npm install query-string@5`.
+
 <a href="https://www.patreon.com/sindresorhus">
 	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
 </a>

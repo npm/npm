@@ -13,6 +13,9 @@ var PrivateKey = require('../private-key');
 var pem = require('./pem');
 var ssh = require('./ssh');
 var rfc4253 = require('./rfc4253');
+var dnssec = require('./dnssec');
+
+var DNSSEC_PRIVKEY_HEADER_PREFIX = 'Private-key-format: v1';
 
 function read(buf, options) {
 	if (typeof (buf) === 'string') {
@@ -22,6 +25,8 @@ function read(buf, options) {
 			return (ssh.read(buf, options));
 		if (buf.match(/^\s*ecdsa-/))
 			return (ssh.read(buf, options));
+		if (findDNSSECHeader(buf))
+			return (dnssec.read(buf, options));
 		buf = new Buffer(buf, 'binary');
 	} else {
 		assert.buffer(buf);
@@ -29,6 +34,8 @@ function read(buf, options) {
 			return (pem.read(buf, options));
 		if (findSSHHeader(buf))
 			return (ssh.read(buf, options));
+		if (findDNSSECHeader(buf))
+			return (dnssec.read(buf, options));
 	}
 	if (buf.readUInt32BE(0) < buf.length)
 		return (rfc4253.read(buf, options));
@@ -66,6 +73,32 @@ function findPEMHeader(buf) {
 	    buf.slice(offset, offset + 5).toString('ascii') !== 'BEGIN')
 		return (false);
 	return (true);
+}
+
+function findDNSSECHeader(buf) {
+	// private case first
+	if (buf.length <= DNSSEC_PRIVKEY_HEADER_PREFIX.length)
+		return (false);
+	var headerCheck = buf.slice(0, DNSSEC_PRIVKEY_HEADER_PREFIX.length);
+	if (headerCheck.toString('ascii') === DNSSEC_PRIVKEY_HEADER_PREFIX)
+		return (true);
+
+	// public-key RFC3110 ?
+	// 'domain.com. IN KEY ...' or 'domain.com. IN DNSKEY ...'
+	// skip any comment-lines
+	if (typeof (buf) !== 'string') {
+		buf = buf.toString('ascii');
+	}
+	var lines = buf.split('\n');
+	var line = 0;
+	/* JSSTYLED */
+	while (lines[line].match(/^\;/))
+		line++;
+	if (lines[line].toString('ascii').match(/\. IN KEY /))
+		return (true);
+	if (lines[line].toString('ascii').match(/\. IN DNSKEY /))
+		return (true);
+	return (false);
 }
 
 function write(key, options) {

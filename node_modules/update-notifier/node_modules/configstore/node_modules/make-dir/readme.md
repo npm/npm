@@ -1,4 +1,4 @@
-# make-dir [![Build Status: macOS & Linux](https://travis-ci.org/sindresorhus/make-dir.svg?branch=master)](https://travis-ci.org/sindresorhus/make-dir) [![Build status: Windows](https://ci.appveyor.com/api/projects/status/e0vtt8y600w91gcs/branch/master?svg=true)](https://ci.appveyor.com/project/sindresorhus/make-dir/branch/master) [![Coverage Status](https://coveralls.io/repos/github/sindresorhus/make-dir/badge.svg)](https://coveralls.io/github/sindresorhus/make-dir)
+# make-dir [![Build Status: macOS & Linux](https://travis-ci.org/sindresorhus/make-dir.svg?branch=master)](https://travis-ci.org/sindresorhus/make-dir) [![Build status: Windows](https://ci.appveyor.com/api/projects/status/e0vtt8y600w91gcs/branch/master?svg=true)](https://ci.appveyor.com/project/sindresorhus/make-dir/branch/master) [![codecov](https://codecov.io/gh/sindresorhus/make-dir/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/make-dir)
 
 > Make a directory and its parents if needed - Think `mkdir -p`
 
@@ -16,7 +16,7 @@
 ## Install
 
 ```
-$ npm install --save make-dir
+$ npm install make-dir
 ```
 
 
@@ -106,6 +106,9 @@ Use a custom `fs` implementation. For example [`graceful-fs`](https://github.com
 - [make-dir-cli](https://github.com/sindresorhus/make-dir-cli) - CLI for this module
 - [del](https://github.com/sindresorhus/del) - Delete files and directories
 - [globby](https://github.com/sindresorhus/globby) - User-friendly glob matching
+- [cpy](https://github.com/sindresorhus/cpy) - Copy files
+- [cpy-cli](https://github.com/sindresorhus/cpy-cli) - Copy files on the command-line
+- [move-file](https://github.com/sindresorhus/move-file) - Move a file
 
 
 ## License

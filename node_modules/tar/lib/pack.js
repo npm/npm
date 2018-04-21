@@ -1,5 +1,7 @@
 'use strict'
 
+const Buffer = require('./buffer.js')
+
 // A readable tar stream creator
 // Technically, this is a transform stream that you write paths into,
 // and tar format comes out of.

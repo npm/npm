@@ -34,11 +34,11 @@ function read(buf, options, forceType) {
 	var lines = buf.trim().split('\n');
 
 	var m = lines[0].match(/*JSSTYLED*/
-	    /[-]+[ ]*BEGIN ([A-Z0-9]+ )?(PUBLIC|PRIVATE) KEY[ ]*[-]+/);
+	    /[-]+[ ]*BEGIN ([A-Z0-9][A-Za-z0-9]+ )?(PUBLIC|PRIVATE) KEY[ ]*[-]+/);
 	assert.ok(m, 'invalid PEM header');
 
 	var m2 = lines[lines.length - 1].match(/*JSSTYLED*/
-	    /[-]+[ ]*END ([A-Z0-9]+ )?(PUBLIC|PRIVATE) KEY[ ]*[-]+/);
+	    /[-]+[ ]*END ([A-Z0-9][A-Za-z0-9]+ )?(PUBLIC|PRIVATE) KEY[ ]*[-]+/);
 	assert.ok(m2, 'invalid PEM footer');
 
 	/* Begin and end banners must match key type */
@@ -135,7 +135,12 @@ function read(buf, options, forceType) {
 function write(key, options, type) {
 	assert.object(key);
 
-	var alg = {'ecdsa': 'EC', 'rsa': 'RSA', 'dsa': 'DSA'}[key.type];
+	var alg = {
+	    'ecdsa': 'EC',
+	    'rsa': 'RSA',
+	    'dsa': 'DSA',
+	    'ed25519': 'EdDSA'
+	}[key.type];
 	var header;
 
 	var der = new asn1.BerWriter();

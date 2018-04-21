@@ -1,3 +1,5 @@
+/* eslint-disable no-template-curly-in-string */
+
 const fs = require('fs')
 const mkdirp = require('mkdirp')
 const rimraf = require('rimraf')

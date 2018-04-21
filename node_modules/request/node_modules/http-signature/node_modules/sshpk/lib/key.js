@@ -31,6 +31,7 @@ formats['rfc4253'] = require('./formats/rfc4253');
 formats['ssh'] = require('./formats/ssh');
 formats['ssh-private'] = require('./formats/ssh-private');
 formats['openssh'] = formats['ssh-private'];
+formats['dnssec'] = require('./formats/dnssec');
 
 function Key(opts) {
 	assert.object(opts, 'options');
@@ -105,7 +106,6 @@ Key.prototype.hash = function (algo) {
 
 	if (this._hashCache[algo])
 		return (this._hashCache[algo]);
-
 	var hash = crypto.createHash(algo).
 	    update(this.toBuffer('rfc4253')).digest();
 	this._hashCache[algo] = hash;
@@ -256,8 +256,9 @@ Key.isKey = function (obj, ver) {
  * [1,3] -- added defaultHashAlgorithm
  * [1,4] -- added ed support, createDH
  * [1,5] -- first explicitly tagged version
+ * [1,6] -- changed ed25519 part names
  */
-Key.prototype._sshpkApiVersion = [1, 5];
+Key.prototype._sshpkApiVersion = [1, 6];
 
 Key._oldVersionDetect = function (obj) {
 	assert.func(obj.toBuffer);

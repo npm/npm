@@ -97,12 +97,25 @@ function read(partial, type, buf, options) {
 
 	var normalized = true;
 	for (var i = 0; i < algInfo.parts.length; ++i) {
-		parts[i].name = algInfo.parts[i];
-		if (parts[i].name !== 'curve' &&
-		    algInfo.normalize !== false) {
-			var p = parts[i];
-			var nd = utils.mpNormalize(p.data);
-			if (nd !== p.data) {
+		var p = parts[i];
+		p.name = algInfo.parts[i];
+		/*
+		 * OpenSSH stores ed25519 "private" keys as seed + public key
+		 * concat'd together (k followed by A). We want to keep them
+		 * separate for other formats that don't do this.
+		 */
+		if (key.type === 'ed25519' && p.name === 'k')
+			p.data = p.data.slice(0, 32);
+
+		if (p.name !== 'curve' && algInfo.normalize !== false) {
+			var nd;
+			if (key.type === 'ed25519') {
+				nd = utils.zeroPadToLength(p.data, 32);
+			} else {
+				nd = utils.mpNormalize(p.data);
+			}
+			if (nd.toString('binary') !==
+			    p.data.toString('binary')) {
 				p.data = nd;
 				normalized = false;
 			}
@@ -137,8 +150,14 @@ function write(key, options) {
 
 	for (i = 0; i < parts.length; ++i) {
 		var data = key.part[parts[i]].data;
-		if (algInfo.normalize !== false)
-			data = utils.mpNormalize(data);
+		if (algInfo.normalize !== false) {
+			if (key.type === 'ed25519')
+				data = utils.zeroPadToLength(data, 32);
+			else
+				data = utils.mpNormalize(data);
+		}
+		if (key.type === 'ed25519' && parts[i] === 'k')
+			data = Buffer.concat([data, key.part.A.data]);
 		buf.writeBuffer(data);
 	}
 

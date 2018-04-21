@@ -69,7 +69,7 @@ module.exports.sync = (input, opts) => {
 
 			try {
 				if (!opts.fs.statSync(pth).isDirectory()) {
-					throw new Error();
+					throw new Error('The path is not a directory');
 				}
 			} catch (_) {
 				throw err;
