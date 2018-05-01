@@ -16,7 +16,7 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
 
-  mode: 'none',
+  mode: 'production',
 }
 
 if (require.main === module) {
