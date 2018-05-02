@@ -12,6 +12,7 @@ const wc = require('./winchars.js')
 
 const ONENTRY = Symbol('onEntry')
 const CHECKFS = Symbol('checkFs')
+const ISREUSABLE = Symbol('isReusable')
 const MAKEFS = Symbol('makeFs')
 const FILE = Symbol('file')
 const DIRECTORY = Symbol('directory')
@@ -351,6 +352,17 @@ class Unpack extends Parser {
     entry.resume()
   }
 
+  // Check if we can reuse an existing filesystem entry safely and
+  // overwrite it, rather than unlinking and recreating
+  // Windows doesn't report a useful nlink, so we just never reuse entries
+  [ISREUSABLE] (entry, st) {
+    return entry.type === 'File' &&
+      !this.unlink &&
+      st.isFile() &&
+      st.nlink <= 1 &&
+      process.platform !== 'win32'
+  }
+
   // check if a thing is there, and if so, try to clobber it
   [CHECKFS] (entry) {
     this[PEND]()
@@ -360,7 +372,7 @@ class Unpack extends Parser {
       fs.lstat(entry.absolute, (er, st) => {
         if (st && (this.keep || this.newer && st.mtime > entry.mtime))
           this[SKIP](entry)
-        else if (er || (entry.type === 'File' && !this.unlink && st.isFile()))
+        else if (er || this[ISREUSABLE](entry, st))
           this[MAKEFS](null, entry)
         else if (st.isDirectory()) {
           if (entry.type === 'Directory') {
@@ -422,7 +434,7 @@ class UnpackSync extends Unpack {
       const st = fs.lstatSync(entry.absolute)
       if (this.keep || this.newer && st.mtime > entry.mtime)
         return this[SKIP](entry)
-      else if (entry.type === 'File' && !this.unlink && st.isFile())
+      else if (this[ISREUSABLE](entry, st))
         return this[MAKEFS](null, entry)
       else {
         try {

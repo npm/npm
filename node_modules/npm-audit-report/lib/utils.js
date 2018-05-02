@@ -1,29 +1,20 @@
 'use strict'
+exports.severityLabel = severityLabel
+exports.color = color
 
-const colors = require('ansicolors')
+const ccs = require('console-control-strings')
 
 const severityColors = {
-  critical: colors.magenta,
-  high: colors.red,
-  moderate: colors.yellow,
-  low: function (str) { return str }
+  critical: 'brightMagenta',
+  high: 'brightRed',
+  moderate: 'brightYellow',
+  low: null
 }
 
-const severityLabel = function (sev, withColor) {
-  if (withColor) {
-    return severityColors[sev](sev)
-  }
-  return sev
+function color (value, colorName, withColor) {
+  return (colorName && withColor) ? ccs.color(colorName) + value + ccs.color('reset') : value
 }
 
-const color = function (value, color, withColor) {
-  if (withColor) {
-    return colors[color](value)
-  }
-  return value
-}
-
-module.exports = {
-  severityLabel: severityLabel,
-  color: color
+function severityLabel (sev, withColor) {
+  return color(sev, severityColors[sev], withColor)
 }
