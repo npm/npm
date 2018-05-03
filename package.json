@@ -276,7 +276,8 @@
     "standard": "^11.0.1",
     "tacks": "~1.2.6",
     "tap": "^12.0.1",
-    "webpack": "^4.6.0"
+    "webpack": "^4.6.0",
+    "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
     "bundle": "node scripts/webpack-bundle.js",
