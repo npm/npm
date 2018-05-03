@@ -153,6 +153,13 @@ Default: `{padding: 1, margin: 1, align: 'center', borderColor: 'yellow', border
 
 Options object that will be passed to [`boxen`](https://github.com/sindresorhus/boxen).
 
+##### shouldNotifyInNpmScript
+
+Type: `boolean`<br>
+Default: `false`
+
+Allows notification to be shown when running as an npm script.
+
 ### User settings
 
 Users of your module have the ability to opt-out of the update notifier by changing the `optOut` property to `true` in `~/.config/configstore/update-notifier-[your-module-name].json`. The path is available in `notifier.config.path`.
