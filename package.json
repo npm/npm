@@ -120,7 +120,7 @@
     "request": "^2.85.0",
     "retry": "^0.12.0",
     "rimraf": "~2.6.2",
-    "safe-buffer": "~5.1.1",
+    "safe-buffer": "^5.1.2",
     "semver": "^5.5.0",
     "sha": "~2.0.1",
     "slide": "~1.1.6",
