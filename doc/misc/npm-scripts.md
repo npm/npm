@@ -139,6 +139,23 @@ then the user could change the behavior by doing:
 
     npm config set foo:port 80
 
+### conditionals and npmrc variables
+
+You can use bash conditionals to determine, for example, what your 
+script command does. Given a project-specific .npmrc file that 
+contains:
+
+    app_version=two
+    
+you can use this to run a different script:
+
+    "scripts" : 
+      { 
+        "start" : "if [[ ${npm_config_app_version} == \"two\" ]]; then npm run version:two; else npm run version:one; fi", 
+        "version:two" : "node server-two.js"
+        "version:one" : "node server-one.js",
+      }
+
 ### current lifecycle event
 
 Lastly, the `npm_lifecycle_event` environment variable is set to
