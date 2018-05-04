@@ -73,6 +73,7 @@
     "lazy-property": "~1.0.0",
     "libcipm": "^1.6.2",
     "libnpx": "^10.2.0",
+    "lock-verify": "^2.0.2",
     "lockfile": "^1.0.4",
     "lodash._baseuniq": "~4.6.0",
     "lodash.clonedeep": "~4.5.0",
@@ -255,7 +256,8 @@
     "cli-columns",
     "node-gyp",
     "npm-audit-report",
-    "npm-registry-fetch"
+    "npm-registry-fetch",
+    "lock-verify"
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",
