@@ -17,6 +17,8 @@ matrix:
     # previous LTS is next most important
     - node_js: "4"
       env: DEPLOY_VERSION=testing
+    - node_js: "10"
+      env: DEPLOY_VERSION=testing
     - node_js: "6"
       env: DEPLOY_VERSION=testing
     - node_js: "7"
