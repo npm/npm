@@ -21,6 +21,10 @@ UI.prototype.span = function () {
   cols.span = true
 }
 
+UI.prototype.resetOutput = function () {
+  this.rows = []
+}
+
 UI.prototype.div = function () {
   if (arguments.length === 0) this.div('')
   if (this.wrap && this._shouldApplyLayoutDSL.apply(this, arguments)) {
@@ -209,7 +213,7 @@ UI.prototype._rasterize = function (row) {
   row.forEach(function (col, c) {
     // leave room for left and right padding.
     col.width = widths[c]
-    if (_this.wrap) wrapped = wrap(col.text, _this._negatePadding(col), {hard: true}).split('\n')
+    if (_this.wrap) wrapped = wrap(col.text, _this._negatePadding(col), { hard: true }).split('\n')
     else wrapped = col.text.split('\n')
 
     if (col.border) {
