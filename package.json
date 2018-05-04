@@ -95,6 +95,7 @@
     "npm-packlist": "~1.1.10",
     "npm-profile": "^3.0.1",
     "npm-registry-client": "^8.5.1",
+    "npm-registry-fetch": "^1.1.0",
     "npm-user-validate": "~1.0.0",
     "npmlog": "~4.1.2",
     "once": "~1.4.0",
@@ -253,7 +254,8 @@
     "tiny-relative-date",
     "cli-columns",
     "node-gyp",
-    "npm-audit-report"
+    "npm-audit-report",
+    "npm-registry-fetch"
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",
