@@ -1,4 +1,39 @@
-## v6.0.1 (2018-05-03):
+## v6.0.1 (2018-05-09):
+
+### AUDIT SHOULDN'T WAIT FOREVER
+
+This will likely be reduced further with the goal that the audit process
+shouldn't noticibly slow down your builds regardless of your network
+situation.
+
+* [`3dcc240db`](https://github.com/npm/npm/commit/3dcc240dba5258532990534f1bd8a25d1698b0bf)
+  Timeout audit requests eventually.
+  ([@iarna](https://github.com/iarna))
+
+### MINOR UPDATE FIXES
+
+This lets you update all your modules to the most recent semver compatible
+versions without changing the limits in your `package.json`.  This is
+helpful when you want your lock to represent what your user's would get. You can do this with:
+
+```
+npm update --depth=99 --save-only-lock
+```
+
+* [`6947f1541`](https://github.com/npm/npm/commit/6947f1541101f863494e5626bb42628d7c2db370)
+  Don't clobber save-only-lock flag.
+  ([@iarna](https://github.com/iarna))
+
+### Looking forward
+
+We're still a way from having node@11, so now's a good time to ensure we
+don't warn about being used with it.
+
+* [`3440d5003`](https://github.com/npm/npm/commit/3440d5003869fcab0e42866344a97be38bd164c4)
+  Allow node@11, when it comes.
+  ([@iarna](https://github.com/iarna))
+
+## v6.0.1-next.0 (2018-05-03):
 
 ### CTRL-C OUT DURING PACKAGE EXTRACTION AS MUCH AS YOU WANT!
 
