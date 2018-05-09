@@ -156,6 +156,9 @@ you can use this to run a different script:
         "version:one" : "node server-one.js",
       }
 
+Note: this kind of scripting can vary in syntax across operating 
+systems. The conditional above will not work on Windows, for example.
+
 ### current lifecycle event
 
 Lastly, the `npm_lifecycle_event` environment variable is set to
