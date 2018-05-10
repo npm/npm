@@ -1,3 +1,16 @@
+## v5.10.0 (2018-05-10):
+
+### AUDIT SHOULDN'T WAIT FOREVER
+
+This will likely be reduced further with the goal that the audit process
+shouldn't noticibly slow down your builds regardless of your network
+situation.
+
+* [`3dcc240db`](https://github.com/npm/npm/commit/3dcc240dba5258532990534f1bd8a25d1698b0bf)
+  Timeout audit requests eventually.
+  ([@iarna](https://github.com/iarna))
+
+
 ## v5.10.0-next.1 (2018-05-07):
 
 ### EXTENDED `npm init` SCAFFOLDING
