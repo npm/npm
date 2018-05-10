@@ -45,7 +45,7 @@ test('npm login', function (t) {
     s.get(
       '/-/whoami', { authorization: 'Bearer foo' }
     ).max(1).reply(401, {})
-    var runner = common.npm(
+    common.npm(
       [
         'login',
         '--registry', common.registry,
