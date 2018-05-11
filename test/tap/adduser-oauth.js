@@ -45,7 +45,7 @@ test('npm login', function (t) {
     s.get(
       '/-/whoami', { authorization: 'Bearer foo' }
     ).max(1).reply(401, {})
-    var runner = common.npm(
+    common.npm(
       [
         'login',
         '--registry', common.registry,
@@ -69,15 +69,9 @@ test('npm login', function (t) {
       }
     )
 
-    var buf = ''
-    runner.stdout.on('data', function (chunk) {
-      buf += chunk.toString('utf8')
-      if (buf.match(/complete authentication/)) {
-        s.get(
-          '/-/whoami', { authorization: 'Bearer foo' }
-        ).reply(200, { username: 'igotauthed' })
-      }
-    })
+    s.get(
+      '/-/whoami', { authorization: 'Bearer foo' }
+    ).reply(200, { username: 'igotauthed' })
   })
 })
 
