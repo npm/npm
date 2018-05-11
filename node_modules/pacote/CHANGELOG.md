@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="8.1.1"></a>
+## [8.1.1](https://github.com/zkat/pacote/compare/v8.1.0...v8.1.1) (2018-04-24)
+
+
+### Bug Fixes
+
+* **tarball:** Remove promise handler error ([#148](https://github.com/zkat/pacote/issues/148)) ([47da3f6](https://github.com/zkat/pacote/commit/47da3f6)), closes [#145](https://github.com/zkat/pacote/issues/145)
+
+
+
 <a name="8.1.0"></a>
 # [8.1.0](https://github.com/zkat/pacote/compare/v8.0.0...v8.1.0) (2018-04-18)
 
