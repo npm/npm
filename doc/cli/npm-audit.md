@@ -3,7 +3,7 @@ npm-audit(1) -- Run a security audit
 
 ## SYNOPSIS
 
-    npm audit 
+    npm audit [--parseable] [--no-color]
 
 ## DESCRIPTION 
 
@@ -11,6 +11,14 @@ The audit command submits a description of the dependencies configured in
 your project to your default registry and asks for a report of known
 vulnerabilities.  The report returned includes instructions on how to act on
 this information.
+
+## PARAMETERS
+
+ `--no-color` prints the output without using any colors
+
+ `--parseable` prints a plain text result, separated by tab characters, allowing for
+ future reuse in scripting or command line post processing, like for example, selecting
+ some of the columns printed: `npm audit --parseable --no-color | awk -F $'\t' '{print $1,$4}'`
 
 ## CONTENT SUBMITTED
 
