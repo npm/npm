@@ -1,3 +1,8 @@
+## **6.5.2**
+- [Fix] use `safer-buffer` instead of `Buffer` constructor
+- [Refactor] utils: `module.exports` one thing, instead of mutating `exports` (#230)
+- [Dev Deps] update `browserify`, `eslint`, `iconv-lite`, `safer-buffer`, `tape`, `browserify`
+
 ## **6.5.1**
 - [Fix] Fix parsing & compacting very deep objects (#224)
 - [Refactor] name utils functions
