@@ -75,6 +75,7 @@
     "libcipm": "^1.6.2",
     "libnpmhook": "^4.0.1",
     "libnpx": "^10.2.0",
+    "libprecious": "^1.9.0",
     "lock-verify": "^2.0.2",
     "lockfile": "^1.0.4",
     "lodash._baseuniq": "~4.6.0",
@@ -157,6 +158,7 @@
     "bluebird",
     "bin-links",
     "chownr",
+    "cli-columns",
     "cli-table2",
     "cmd-shim",
     "columnify",
@@ -188,6 +190,7 @@
     "libcipm",
     "libnpmhook",
     "libnpx",
+    "libprecious",
     "lockfile",
     "lodash._baseindexof",
     "lodash._baseuniq",
@@ -205,6 +208,7 @@
     "mkdirp",
     "mississippi",
     "move-concurrently",
+    "node-gyp",
     "nopt",
     "normalize-package-data",
     "npm-audit-report",
@@ -238,6 +242,7 @@
     "request",
     "retry",
     "rimraf",
+    "safe-buffer",
     "semver",
     "sha",
     "slide",
@@ -247,6 +252,7 @@
     "strip-ansi",
     "tar",
     "text-table",
+    "tiny-relative-date",
     "uid-number",
     "umask",
     "unique-filename",
@@ -259,11 +265,20 @@
     "wrappy",
     "write-file-atomic",
     "safe-buffer",
+<<<<<<< HEAD
     "worker-farm",
     "tiny-relative-date",
     "cli-columns",
     "node-gyp",
     "lock-verify"
+||||||| parent of a53c28939... libprecious@1.9.0
+    "worker-farm",
+    "tiny-relative-date",
+    "cli-columns",
+    "node-gyp"
+=======
+    "worker-farm"
+>>>>>>> a53c28939... libprecious@1.9.0
   ],
   "devDependencies": {
     "deep-equal": "~1.0.1",
