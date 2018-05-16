@@ -90,7 +90,7 @@
     "node-gyp": "^3.6.2",
     "nopt": "~4.0.1",
     "normalize-package-data": "~2.4.0",
-    "npm-audit-report": "^1.1.0",
+    "npm-audit-report": "^1.2.1",
     "npm-cache-filename": "~1.0.2",
     "npm-install-checks": "~3.0.0",
     "npm-lifecycle": "^2.0.3",
