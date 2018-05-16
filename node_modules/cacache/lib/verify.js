@@ -197,7 +197,8 @@ function rebuildBucket (cache, bucket, stats, opts) {
         return index.insert(cache, entry.key, entry.integrity, {
           uid: opts.uid,
           gid: opts.gid,
-          metadata: entry.metadata
+          metadata: entry.metadata,
+          size: entry.size
         }).then(() => { stats.totalEntries++ })
       }).catch({code: 'ENOENT'}, () => {
         stats.rejectedEntries++
