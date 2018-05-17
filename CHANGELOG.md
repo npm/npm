@@ -1,3 +1,162 @@
+## v6.1.0 (2018-05-17):
+
+Look at that! A feature bump! `npm@6` was super-exciting not just because it
+used a bigger number than ever before, but also because it included a super
+shiny new command: `npm audit`. Well, we've kept working on it since then and
+have some really nice improvements for it. You can expect more of them, and the
+occasional fix, in the next few releases as more users start playing with it and
+we get more feedback about what y'all would like to see from something like
+this.
+
+I, for one, have started running it (and the new subcommand...) in all my
+projects, and it's one of those things that I don't know how I ever functioned
+-without- it! This will make a world of difference to so many people as far as
+making the npm ecosystem a higher-quality, safer commons for all of us.
+
+This is also a good time to remind y'all that we have a new [RFCs
+repository](https://github.com/npm/rfcs), along with a new process for them.
+This repo is open to anyone's RFCs, and has already received some great ideas
+about where we can take the CLI (and, to a certain extent, the registry). It's a
+great place to get feedback, and completely replaces feature requests in the
+main repo, so we won't be accepting feature requests there at all anymore. Check
+it out if you have something you'd like to suggest, or if you want to keep track
+of what the future might look like!
+
+### NEW FEATURE: `npm audit fix`
+
+This is the biggie with this release! `npm audit fix` does exactly what it says
+on the tin. It takes all the actionable reports from your `npm audit` and runs
+the installs automatically for you, so you don't have to try to do all that
+mechanical work yourself!
+
+Note that by default, `npm audit fix` will stick to semver-compatible changes,
+so you should be able to safely run it on most projects and carry on with your
+day without having to track down what breaking changes were included. If you
+want your (toplevel) dependencies to accept semver-major bumps as well, you can
+use `npm audit fix --force` and it'll toss those in, as well. Since it's running
+the npm installer under the hood, it also supports `--production` and
+`--only=dev` flags, as well as things like `--dry-run`, `--json`, and
+`--package-lock-only`, if you want more control over what it does.
+
+Give it a whirl and tell us what you think! See `npm help audit` for full docs!
+
+* [`3800a660d`](https://github.com/npm/npm/commit/3800a660d99ca45c0175061dbe087520db2f54b7)
+  Add `npm audit fix` subcommand to automatically fix detected vulnerabilities.
+  ([@zkat](https://github.com/zkat))
+
+### OTHER NEW `audit` FEATURES
+
+* [`1854b1c7f`](https://github.com/npm/npm/commit/1854b1c7f09afceb49627e539a086d8a3565601c)
+  [#20568](https://github.com/npm/npm/pull/20568)
+  Add support for `npm audit --json` to print the report in JSON format.
+  ([@finnp](https://github.com/finnp))
+* [`85b86169d`](https://github.com/npm/npm/commit/85b86169d9d0423f50893d2ed0c7274183255abe)
+  [#20570](https://github.com/npm/npm/pull/20570)
+  Include number of audited packages in `npm install` summary output.
+  ([@zkat](https://github.com/zkat))
+* [`957cbe275`](https://github.com/npm/npm/commit/957cbe27542d30c33e58e7e6f2f04eeb64baf5cd)
+  `npm-audit-report@1.2.1`:
+  Overhaul audit install and detail output format. The new format is terser and
+  fits more closely into the visual style of the CLI, while still providing you
+  with the important bits of information you need. They also include a bit more
+  detail on the footer about what actions you can take!
+  ([@zkat](https://github.com/zkat))
+
+### NEW FEATURE: GIT DEPS AND `npm init <pkg>`!
+
+Another exciting change that came with `npm@6` was the new `npm init` command
+that allows for community-authored generators. That means you can, for example,
+do `npm init react-app` and it'll one-off download, install, and run
+[`create-react-app`](https://npm.im/create-react-app) for you, without requiring
+or keeping around any global installs. That is, it basically just calls out to
+[`npx`](https://npm.im/npx).
+
+The first version of this command only really supported registry dependencies,
+but now, [@jdalton](https://github.com/jdalton) went ahead and extended this
+feature so you can use hosted git dependencies, and their shorthands.
+
+So go ahead and do `npm init facebook/create-react-app` and it'll grab the
+package from the github repo now! Or you can use it with a private github
+repository to maintain your organizational scaffolding tools or whatnot. ✨
+
+* [`483e01180`](https://github.com/npm/npm/commit/483e011803af82e63085ef41b7acce5b22aa791c)
+  [#20403](https://github.com/npm/npm/pull/20403)
+  Add support for hosted git packages to `npm init <name>`.
+  ([@jdalton](https://github.com/jdalton))
+
+### BUGFIXES
+
+* [`a41c0393c`](https://github.com/npm/npm/commit/a41c0393cba710761a15612c6c85c9ef2396e65f)
+  [#20538](https://github.com/npm/npm/pull/20538)
+  Make the new `npm view` work when the license field is an object instead of a
+  string.
+  ([@zkat](https://github.com/zkat))
+* [`eb7522073`](https://github.com/npm/npm/commit/eb75220739302126c94583cc65a5ff12b441e3c6)
+  [#20582](https://github.com/npm/npm/pull/20582)
+  Add support for environments (like Docker) where the expected binary for
+  opening external URLs is not available.
+  ([@bcoe](https://github.com/bcoe))
+* [`212266529`](https://github.com/npm/npm/commit/212266529ae72056bf0876e2cff4b8ba01d09d0f)
+  [#20536](https://github.com/npm/npm/pull/20536)
+  Fix a spurious colon in the new update notifier message and add support for
+  the npm canary.
+  ([@zkat](https://github.com/zkat))
+* [`5ee1384d0`](https://github.com/npm/npm/commit/5ee1384d02c3f11949d7a26ec6322488476babe6)
+  [#20597](https://github.com/npm/npm/pull/20597)
+  Infer a version range when a `package.json` has a dist-tag instead of a
+  version range in one of its dependency specs. Previously, this would cause
+  dependencies to be flagged as invalid.
+  ([@zkat](https://github.com/zkat))
+* [`4fa68ae41`](https://github.com/npm/npm/commit/4fa68ae41324293e59584ca6cf0ac24b3e0825bb)
+  [#20585](https://github.com/npm/npm/pull/20585)
+  Make sure scoped bundled deps are shown in the new publish preview, too.
+  ([@zkat](https://github.com/zkat))
+* [`1f3ee6b7e`](https://github.com/npm/npm/commit/1f3ee6b7e1b36b52bdedeb9241296d4e66561d48)
+  `cacache@11.0.2`:
+  Stop dropping `size` from metadata on `npm cache verify`.
+  ([@jfmartinez](https://github.com/jfmartinez))
+* [`91ef93691`](https://github.com/npm/npm/commit/91ef93691a9d6ce7c016fefdf7da97854ca2b2ca)
+  [#20513](https://github.com/npm/npm/pull/20513)
+  Fix nested command aliases.
+  ([@mmermerkaya](https://github.com/mmermerkaya))
+* [`18b2b3cf7`](https://github.com/npm/npm/commit/18b2b3cf71a438648ced1bd13faecfb50c71e979)
+  `npm-lifecycle@2.0.3`:
+  Make sure different versions of the `Path` env var on Windows all get
+  `node_modules/.bin` prepended when running lifecycle scripts.
+  ([@laggingreflex](https://github.com/laggingreflex))
+
+### DOCUMENTATION
+
+* [`a91d87072`](https://github.com/npm/npm/commit/a91d87072f292564e58dcab508b5a8c6702b9aae)
+  [#20550](https://github.com/npm/npm/pull/20550)
+  Update required node versions in README.
+  ([@legodude17](https://github.com/legodude17))
+* [`bf3cfa7b8`](https://github.com/npm/npm/commit/bf3cfa7b8b351714c4ec621e1a5867c8450c6fff)
+  Pull in changelogs from the last `npm@5` release.
+  ([@iarna](https://github.com/iarna))
+* [`b2f14b14c`](https://github.com/npm/npm/commit/b2f14b14ca25203c2317ac2c47366acb50d46e69)
+  [#20629](https://github.com/npm/npm/pull/20629)
+  Make tone in `publishConfig` docs more neutral.
+  ([@jeremyckahn](https://github.com/jeremyckahn))
+
+### DEPENDENCY BUMPS
+
+* [`5fca4eae8`](https://github.com/npm/npm/commit/5fca4eae8a62a7049b1ae06aa0bbffdc6e0ad6cc)
+  `byte-size@4.0.3`
+  ([@75lb](https://github.com/75lb))
+* [`d9ef3fba7`](https://github.com/npm/npm/commit/d9ef3fba79f87c470889a6921a91f7cdcafa32b9)
+  `lru-cache@4.1.3`
+  ([@isaacs](https://github.com/isaacs))
+* [`f1baf011a`](https://github.com/npm/npm/commit/f1baf011a0d164f8dc8aa6cd31e89225e3872e3b)
+  `request@2.86.0`
+  ([@simonv](https://github.com/simonv))
+* [`005fa5420`](https://github.com/npm/npm/commit/005fa542072f09a83f77a9d62c5e53b8f6309371)
+  `require-inject@1.4.3`
+  ([@iarna](https://github.com/iarna))
+* [`1becdf09a`](https://github.com/npm/npm/commit/1becdf09a2f19716726c88e9a2342e1e056cfc71)
+  `tap@11.1.5`
+  ([@isaacs](https://github.com/isaacs))
+
 ## v6.0.1 (2018-05-09):
 
 ### AUDIT SHOULDN'T WAIT FOREVER
