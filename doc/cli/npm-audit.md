@@ -3,7 +3,7 @@ npm-audit(1) -- Run a security audit
 
 ## SYNOPSIS
 
-    npm audit 
+    npm audit [--json]
 
 ## DESCRIPTION 
 
