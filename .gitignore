@@ -21,6 +21,7 @@ npm-debug.log
 .jshintrc
 .eslintrc
 .nyc_output
+.idea
 
 # dev dependencies
 /node_modules/deep-equal/

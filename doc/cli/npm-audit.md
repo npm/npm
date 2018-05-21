@@ -5,7 +5,7 @@ npm-audit(1) -- Run a security audit
 
     npm audit [--parseable] [--no-color]
 
-## DESCRIPTION 
+## DESCRIPTION
 
 The audit command submits a description of the dependencies configured in
 your project to your default registry and asks for a report of known
@@ -18,7 +18,11 @@ this information.
 
  `--parseable` prints a plain text result, separated by tab characters, allowing for
  future reuse in scripting or command line post processing, like for example, selecting
- some of the columns printed: `npm audit --parseable --no-color | awk -F $'\t' '{print $1,$4}'`
+ some of the columns printed: `npm audit --parseable | awk -F $'\t' '{print $1,$4}'`
+
+ `--json` prints a plain text result, separated by tab characters, allowing for
+ future reuse in scripting or command line post processing, like for example, selecting
+ some of the columns printed: `npm audit --parseable | awk -F $'\t' '{print $1,$4}'`
 
 ## CONTENT SUBMITTED
 
@@ -37,7 +41,7 @@ the following dependency types:
 
 * Any module referencing a scope that is configured for a non-default
   registry has its name scrubbed.  (That is, a scope you did a `npm login --scope=@ourscope` for.)
-* All git dependencies have their names and specifiers scrubbed. 
+* All git dependencies have their names and specifiers scrubbed.
 * All remote tarball dependencies have their names and specifiers scrubbed.
 * All local directory and tarball dependencies have their names and specifiers scrubbed.
 
