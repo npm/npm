@@ -208,7 +208,6 @@ function jsonFromStream (filename, dataStream) {
         entry.resume()
       } else {
         let data = ''
-        entry.on('data', d => { data += d })
         entry.on('error', cb)
         finished(entry).then(() => {
           try {
@@ -219,6 +218,7 @@ function jsonFromStream (filename, dataStream) {
         }, err => {
           cb(err)
         })
+        entry.on('data', d => { data += d })
       }
     })
   })
