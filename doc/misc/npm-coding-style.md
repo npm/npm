@@ -1317,7 +1317,133 @@ The following is an extract of the aforementioned document.
   This is the only gotcha with omitting semicolons, and `standard` protects you from this potential issue.
 
   (The full list is: `[`, `(`, `` ` ``, `+`, `*`, `/`, `-`, `,`, `.`, but most of these will never appear at the start of a line in real code.)
+## Functions
 
+Use named functions.  They make stack traces a lot easier to read.
+
+## Callbacks, Sync/async Style
+
+Use the asynchronous/non-blocking versions of things as much as possible.
+It might make more sense for npm to use the synchronous fs APIs, but this
+way, the fs and http and child process stuff all uses the same callback-passing
+methodology.
+
+The callback should always be the last argument in the list.  Its first
+argument is the Error or null.
+
+Be very careful never to ever ever throw anything.  It's worse than useless.
+Just send the error message back as the first argument to the callback.
+
+## Errors
+## Functions
+
+Use named functions.  They make stack traces a lot easier to read.
+
+## Callbacks, Sync/async Style
+
+Use the asynchronous/non-blocking versions of things as much as possible.
+It might make more sense for npm to use the synchronous fs APIs, but this
+way, the fs and http and child process stuff all uses the same callback-passing
+methodology.
+
+The callback should always be the last argument in the list.  Its first
+argument is the Error or null.
+
+Be very careful never to ever ever throw anything.  It's worse than useless.
+Just send the error message back as the first argument to the callback.
+
+## Errors
+
+Always create a new Error object with your message.  Don't just return a
+string message to the callback.  Stack traces are handy.
+
+## Logging
+
+Logging is done using the [npmlog](https://github.com/npm/npmlog)
+utility.
+
+Please clean up logs when they are no longer helpful.  In particular,
+logging the same object over and over again is not helpful.  Logs should
+report what's happening so that it's easier to track down where a fault
+occurs.
+
+Use appropriate log levels.  See `npm-config(7)` and search for
+"loglevel".
+
+## Case, naming, etc.
+
+Use `lowerCamelCase` for multiword identifiers when they refer to objects,
+functions, methods, properties, or anything not specified in this section.
+
+Use `UpperCamelCase` for class names (things that you'd pass to "new").
+
+Use `all-lower-hyphen-css-case` for multiword filenames and config keys.
+
+Use named functions.  They make stack traces easier to follow.
+
+Use `CAPS_SNAKE_CASE` for constants, things that should never change
+and are rarely used.
+
+Use a single uppercase letter for function names where the function
+would normally be anonymous, but needs to call itself recursively.  It
+makes it clear that it's a "throwaway" function.
+
+## null, undefined, false, 0
+
+Boolean variables and functions should always be either `true` or
+`false`.  Don't set it to 0 unless it's supposed to be a number.
+
+When something is intentionally missing or removed, set it to `null`.
+
+Don't set things to `undefined`.  Reserve that value to mean "not yet
+set to anything."
+
+Boolean objects are forbidden.
+Always create a new Error object with your message.  Don't just return a
+string message to the callback.  Stack traces are handy.
+
+## Logging
+
+Logging is done using the [npmlog](https://github.com/npm/npmlog)
+utility.
+
+Please clean up logs when they are no longer helpful.  In particular,
+logging the same object over and over again is not helpful.  Logs should
+report what's happening so that it's easier to track down where a fault
+occurs.
+
+Use appropriate log levels.  See `npm-config(7)` and search for
+"loglevel".
+
+## Case, naming, etc.
+
+Use `lowerCamelCase` for multiword identifiers when they refer to objects,
+functions, methods, properties, or anything not specified in this section.
+
+Use `UpperCamelCase` for class names (things that you'd pass to "new").
+
+Use `all-lower-hyphen-css-case` for multiword filenames and config keys.
+
+Use named functions.  They make stack traces easier to follow.
+
+Use `CAPS_SNAKE_CASE` for constants, things that should never change
+and are rarely used.
+
+Use a single uppercase letter for function names where the function
+would normally be anonymous, but needs to call itself recursively.  It
+makes it clear that it's a "throwaway" function.
+
+## null, undefined, false, 0
+
+Boolean variables and functions should always be either `true` or
+`false`.  Don't set it to 0 unless it's supposed to be a number.
+
+When something is intentionally missing or removed, set it to `null`.
+
+Don't set things to `undefined`.  Reserve that value to mean "not yet
+set to anything."
+
+Boolean objects are forbidden.
   eslint: [`no-unexpected-multiline`](http://eslint.org/docs/rules/no-unexpected-multiline)
 
   ```js
@@ -1365,7 +1491,70 @@ The following is an extract of the aforementioned document.
   var nums = [1, 2, 3]
   nums.forEach(bar)
   ```
+## Functions
 
+Use named functions.  They make stack traces a lot easier to read.
+
+## Callbacks, Sync/async Style
+
+Use the asynchronous/non-blocking versions of things as much as possible.
+It might make more sense for npm to use the synchronous fs APIs, but this
+way, the fs and http and child process stuff all uses the same callback-passing
+methodology.
+
+The callback should always be the last argument in the list.  Its first
+argument is the Error or null.
+
+Be very careful never to ever ever throw anything.  It's worse than useless.
+Just send the error message back as the first argument to the callback.
+
+## Errors
+
+Always create a new Error object with your message.  Don't just return a
+string message to the callback.  Stack traces are handy.
+
+## Logging
+
+Logging is done using the [npmlog](https://github.com/npm/npmlog)
+utility.
+
+Please clean up logs when they are no longer helpful.  In particular,
+logging the same object over and over again is not helpful.  Logs should
+report what's happening so that it's easier to track down where a fault
+occurs.
+
+Use appropriate log levels.  See `npm-config(7)` and search for
+"loglevel".
+
+## Case, naming, etc.
+
+Use `lowerCamelCase` for multiword identifiers when they refer to objects,
+functions, methods, properties, or anything not specified in this section.
+
+Use `UpperCamelCase` for class names (things that you'd pass to "new").
+
+Use `all-lower-hyphen-css-case` for multiword filenames and config keys.
+
+Use named functions.  They make stack traces easier to follow.
+
+Use `CAPS_SNAKE_CASE` for constants, things that should never change
+and are rarely used.
+
+Use a single uppercase letter for function names where the function
+would normally be anonymous, but needs to call itself recursively.  It
+makes it clear that it's a "throwaway" function.
+
+## null, undefined, false, 0
+
+Boolean variables and functions should always be either `true` or
+`false`.  Don't set it to 0 unless it's supposed to be a number.
+
+When something is intentionally missing or removed, set it to `null`.
+
+Don't set things to `undefined`.  Reserve that value to mean "not yet
+set to anything."
+
+Boolean objects are forbidden.
 
 ## SEE ALSO
 
