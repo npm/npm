@@ -1,3 +1,124 @@
+## v6.0.1 (2018-05-09):
+
+### AUDIT SHOULDN'T WAIT FOREVER
+
+This will likely be reduced further with the goal that the audit process
+shouldn't noticibly slow down your builds regardless of your network
+situation.
+
+* [`3dcc240db`](https://github.com/npm/npm/commit/3dcc240dba5258532990534f1bd8a25d1698b0bf)
+  Timeout audit requests eventually.
+  ([@iarna](https://github.com/iarna))
+
+### MINOR UPDATE FIXES
+
+This lets you update all your modules to the most recent semver compatible
+versions without changing the limits in your `package.json`.  This is
+helpful when you want your lock to represent what your user's would get. You can do this with:
+
+```
+npm update --depth=99 --save-only-lock
+```
+
+* [`6947f1541`](https://github.com/npm/npm/commit/6947f1541101f863494e5626bb42628d7c2db370)
+  Don't clobber save-only-lock flag.
+  ([@iarna](https://github.com/iarna))
+
+### Looking forward
+
+We're still a way from having node@11, so now's a good time to ensure we
+don't warn about being used with it.
+
+* [`3440d5003`](https://github.com/npm/npm/commit/3440d5003869fcab0e42866344a97be38bd164c4)
+  Allow node@11, when it comes.
+  ([@iarna](https://github.com/iarna))
+
+## v6.0.1-next.0 (2018-05-03):
+
+### CTRL-C OUT DURING PACKAGE EXTRACTION AS MUCH AS YOU WANT!
+
+* [`b267bbbb9`](https://github.com/npm/npm/commit/b267bbbb9ddd551e3dbd162cc2597be041b9382c)
+  [npm/lockfile#29](https://github.com/npm/lockfile/pull/29)
+  `lockfile@1.0.4`:
+  Switches to `signal-exit` to detect abnormal exits and remove locks.
+  ([@Redsandro](https://github.com/Redsandro))
+
+### SHRONKWRAPS AND LACKFILES
+
+If a published modules had legacy `npm-shrinkwrap.json` we were saving
+ordinary registry dependencies (`name@version`) to your `package-lock.json`
+as `https://` URLs instead of versions.
+
+* [`89102c0d9`](https://github.com/npm/npm/commit/89102c0d995c3d707ff2b56995a97a1610f8b532)
+  When saving the lock-file compute how the dependency is being required instead of using
+  `_resolved` in the `package.json`.  This fixes the bug that was converting
+  registry dependencies into `https://` dependencies.
+  ([@iarna](https://github.com/iarna))
+* [`676f1239a`](https://github.com/npm/npm/commit/676f1239ab337ff967741895dbe3a6b6349467b6)
+  When encountering a `https://` URL in our lockfiles that point at our default registry, extract
+  the version and use them as registry dependencies.  This lets us heal
+  `package-lock.json` files produced by 6.0.0
+  ([@iarna](https://github.com/iarna))
+
+### AUDIT AUDIT EVERYWHERE
+
+You can't use it _quite_ yet, but we do have a few last moment patches to `npm audit` to make
+it even better when it is turned on!
+
+* [`b2e4f48f5`](https://github.com/npm/npm/commit/b2e4f48f5c07b8ebc94a46ce01a810dd5d6cd20c)
+  Make sure we hide stream errors on background audit submissions. Previously some classes
+  of error could end up being displayed (harmlessly) during installs.
+  ([@iarna](https://github.com/iarna))
+* [`1fe0c7fea`](https://github.com/npm/npm/commit/1fe0c7fea226e592c96b8ab22fd9435e200420e9)
+  Include session and scope in requests (as we do in other requests to the registry).
+  ([@iarna](https://github.com/iarna))
+* [`d04656461`](https://github.com/npm/npm/commit/d046564614639c37e7984fff127c79a8ddcc0c92)
+  Exit with non-zero status when vulnerabilities are found. So you can have `npm audit` as a test or prepublish step!
+  ([@iarna](https://github.com/iarna))
+* [`fcdbcbacc`](https://github.com/npm/npm/commit/fcdbcbacc16d96a8696dde4b6d7c1cba77828337)
+  Verify lockfile integrity before running. You'd get an error either way, but this way it's
+  faster and can give you more concrete instructions on how to fix it.
+  ([@iarna](https://github.com/iarna))
+* [`2ac8edd42`](https://github.com/npm/npm/commit/2ac8edd4248f2393b35896f0300b530e7666bb0e)
+  Refuse to run in global mode. Audits require a lockfile and globals don't have one. Yet.
+  ([@iarna](https://github.com/iarna))
+
+### DOCUMENTATION IMPROVEMENTS
+
+* [`b7fca1084`](https://github.com/npm/npm/commit/b7fca1084b0be6f8b87ec0807c6daf91dbc3060a)
+  [#20407](https://github.com/npm/npm/pull/20407)
+  Update the lock-file spec doc to mention that we now generate the from field for `git`-type dependencies.
+  ([@watilde](https://github.com/watilde))
+* [`7a6555e61`](https://github.com/npm/npm/commit/7a6555e618e4b8459609b7847a9e17de2d4fa36e)
+  [#20408](https://github.com/npm/npm/pull/20408)
+  Describe what the colors in outdated mean.
+  ([@teameh](https://github.com/teameh))
+
+### DEPENDENCY UPDATES
+
+* [`5e56b3209`](https://github.com/npm/npm/commit/5e56b3209c4719e3c4d7f0d9346dfca3881a5d34)
+  `npm-audit-report@1.0.8`
+  ([@evilpacket](https://github.com/evilpacket))
+* [`58a0b31b4`](https://github.com/npm/npm/commit/58a0b31b43245692b4de0f1e798fcaf71f8b7c31)
+  `lock-verify@2.0.2`
+  ([@iarna](https://github.com/iarna))
+* [`e7a8c364f`](https://github.com/npm/npm/commit/e7a8c364f3146ffb94357d8dd7f643e5563e2f2b)
+  [zkat/pacote#148](https://github.com/zkat/pacote/pull/148)
+  `pacote@8.1.1`
+  ([@redonkulus](https://github.com/redonkulus))
+* [`46c0090a5`](https://github.com/npm/npm/commit/46c0090a517526dfec9b1b6483ff640227f0cd10)
+  `tar@4.4.2`
+  ([@isaacs](https://github.com/isaacs))
+* [`8a16db3e3`](https://github.com/npm/npm/commit/8a16db3e39715301fd085a8f4c80ae836f0ec714)
+  `update-notifier@2.5.0`
+  ([@alexccl](https://github.com/alexccl))
+* [`696375903`](https://github.com/npm/npm/commit/6963759032fe955c1404d362e14f458d633c9444)
+  `safe-buffer@5.1.2`
+  ([@feross](https://github.com/feross))
+* [`c949eb26a`](https://github.com/npm/npm/commit/c949eb26ab6c0f307e75a546f342bb2ec0403dcf)
+  `query-string@6.1.0`
+  ([@sindresorhus](https://github.com/sindresorhus))
+
 ## v6.0.0 (2018-04-20):
 
 Hey y'all! Here's another `npm@6` release -- with `node@10` around the corner,
