@@ -102,7 +102,7 @@
         }
         const changelog = `https://github.com/npm/npm/releases/tag/v${latest}`
         notifier.notify({
-          message: `New ${type} version of npm available! ${
+          message: `New ${type} version of ${pkg.name} available! ${
             useColor ? color.red(old) : old
           } ${useUnicode ? '→' : '->'} ${
             useColor ? color.green(latest) : latest
@@ -110,10 +110,12 @@
           `${
             useColor ? color.yellow('Changelog:') : 'Changelog:'
           } ${
-            useColor ? color.cyan(changelog + ':') : changelog + ':'
+            useColor ? color.cyan(changelog) : changelog
           }\n` +
           `Run ${
-            useColor ? color.green('npm install -g npm') : 'npm i -g npm'
+            useColor
+              ? color.green(`npm install -g ${pkg.name}`)
+              : `npm i -g ${pkg.name}`
           } to update!`
         })
       }

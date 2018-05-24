@@ -4,6 +4,7 @@ var test = require('tape');
 var qs = require('../');
 var utils = require('../lib/utils');
 var iconv = require('iconv-lite');
+var SaferBuffer = require('safer-buffer').Buffer;
 
 test('stringify()', function (t) {
     t.test('stringifies a querystring object', function (st) {
@@ -336,8 +337,8 @@ test('stringify()', function (t) {
     });
 
     t.test('stringifies buffer values', function (st) {
-        st.equal(qs.stringify({ a: new Buffer('test') }), 'a=test');
-        st.equal(qs.stringify({ a: { b: new Buffer('test') } }), 'a%5Bb%5D=test');
+        st.equal(qs.stringify({ a: SaferBuffer.from('test') }), 'a=test');
+        st.equal(qs.stringify({ a: { b: SaferBuffer.from('test') } }), 'a%5Bb%5D=test');
         st.end();
     });
 
@@ -481,7 +482,7 @@ test('stringify()', function (t) {
     });
 
     t.test('can use custom encoder for a buffer object', { skip: typeof Buffer === 'undefined' }, function (st) {
-        st.equal(qs.stringify({ a: new Buffer([1]) }, {
+        st.equal(qs.stringify({ a: SaferBuffer.from([1]) }, {
             encoder: function (buffer) {
                 if (typeof buffer === 'string') {
                     return buffer;

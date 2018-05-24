@@ -36,17 +36,17 @@ test('conflicts in shrinkwrap are auto-resolved on install', (t) => {
   "requires": true,
   "lockfileVersion": 1,
   "dependencies": {
-<<<<<<< HEAD
+<<`+`<<`+`<<`+`< HEAD
     "modA": {
       "version": "file:modA"
-||||||| merged common ancestors
+||`+`||`+`||`+`| merged common ancestors
     "modB": {
       "version": "file:modB"
-=======
+==`+`==`+`==`+`=
     "modC": {
       "version": "file:modC",
       "dev": true
->>>>>>> branch
+>>`+`>>`+`>>`+`> branch
     }
   }
 }

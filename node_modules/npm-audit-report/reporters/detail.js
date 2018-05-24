@@ -1,5 +1,6 @@
 'use strict'
 
+const summary = require('./install.js').summary
 const Table = require('cli-table2')
 const Utils = require('../lib/utils')
 
@@ -35,31 +36,46 @@ const report = function (data, options) {
     output = output + value + '\n'
   }
 
-  const footer = function (metadata) {
+  const footer = function (data) {
     let total = 0
     const sev = []
 
-    const keys = Object.keys(metadata.vulnerabilities)
+    const keys = Object.keys(data.metadata.vulnerabilities)
     for (let key of keys) {
-      const value = metadata.vulnerabilities[key]
+      const value = data.metadata.vulnerabilities[key]
       total = total + value
       if (value > 0) {
         sev.push([key, value])
       }
     }
-    const severities = sev.map((value) => {
-      return `${value[1]} ${Utils.severityLabel(value[0], false)}`
-    }).join(' | ')
-
     if (total > 0) {
       exit = 1
     }
-    if (total === 0) {
-      log(`${Utils.color('[+]', 'brightGreen', config.withColor)} no known vulnerabilities found`)
-      log(`    Packages audited: ${data.metadata.totalDependencies} (${data.metadata.devDependencies} dev, ${data.metadata.optionalDependencies} optional)`)
-    } else {
-      log(`\n${Utils.color('[!]', 'brightRed', config.withColor)} ${total} ${total === 1 ? 'vulnerability' : 'vulnerabilities'} found - Packages audited: ${data.metadata.totalDependencies} (${data.metadata.devDependencies} dev, ${data.metadata.optionalDependencies} optional)`)
-      log(`    Severity: ${severities}`)
+    log(`${summary(data, config)} in ${data.metadata.totalDependencies} scanned package${data.metadata.totalDependencies === 1 ? '' : 's'}`)
+    if (total) {
+      const counts = data.actions.reduce((acc, {action, isMajor, resolves}) => {
+        if (action === 'update' || (action === 'install' && !isMajor)) {
+          resolves.forEach(({id, path}) => acc.advisories.add(`${id}::${path}`))
+        }
+        if (isMajor) {
+          resolves.forEach(({id, path}) => acc.major.add(`${id}::${path}`))
+        }
+        if (action === 'review') {
+          resolves.forEach(({id, path}) => acc.review.add(`${id}::${path}`))
+        }
+        return acc
+      }, {advisories: new Set(), major: new Set(), review: new Set()})
+      if (counts.advisories.size) {
+        log(`  run \`npm audit fix\` to fix ${counts.advisories.size} of them.`)
+      }
+      if (counts.major.size) {
+        const maj = counts.major.size
+        log(`  ${maj} vulnerabilit${maj === 1 ? 'y' : 'ies'} require${maj === 1 ? 's' : ''} semver-major dependency updates.`)
+      }
+      if (counts.review.size) {
+        const rev = counts.review.size
+        log(`  ${rev} vulnerabilit${rev === 1 ? 'y' : 'ies'} require${rev === 1 ? 's' : ''} manual review. See the full report for details.`)
+      }
     }
   }
 
@@ -163,10 +179,10 @@ const report = function (data, options) {
   }
 
   actions(data, config)
-  footer(data.metadata)
+  footer(data)
 
   return {
-    report: output,
+    report: output.trim(),
     exitCode: exit
   }
 }
@@ -176,7 +192,7 @@ const getRecommendation = function (action, config) {
     const isDev = action.resolves[0].dev
 
     return {
-      cmd: `npm install ${isDev ? '--dev ' : ''}${action.module}@${action.target}`,
+      cmd: `npm install ${isDev ? '--save-dev ' : ''}${action.module}@${action.target}`,
       isBreaking: action.isMajor
     }
   } else {

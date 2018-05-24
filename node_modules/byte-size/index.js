@@ -61,7 +61,7 @@ class ByteSize {
     options.units = options.units || 'metric'
     options.precision = typeof options.precision === 'undefined' ? 1 : options.precision
 
-    var table = [
+    const table = [
       { expFrom: 0, expTo: 1, metric: 'B', iec: 'B', metric_octet: 'o', iec_octet: 'o' },
       { expFrom: 1, expTo: 2, metric: 'kB', iec: 'KiB', metric_octet: 'ko', iec_octet: 'Kio' },
       { expFrom: 2, expTo: 3, metric: 'MB', iec: 'MiB', metric_octet: 'Mo', iec_octet: 'Mio' },
@@ -73,26 +73,25 @@ class ByteSize {
       { expFrom: 8, expTo: 9, metric: 'YB', iec: 'YiB', metric_octet: 'Yo', iec_octet: 'Yio' }
     ]
 
-    var base = options.units === 'metric' || options.units === 'metric_octet' ? 1000 : 1024
+    const base = options.units === 'metric' || options.units === 'metric_octet' ? 1000 : 1024
 
-    for (var i = 0; i < table.length; i++) {
-      var lower = Math.pow(base, table[i].expFrom)
-      var upper = Math.pow(base, table[i].expTo)
+    for (let i = 0; i < table.length; i++) {
+      const lower = Math.pow(base, table[i].expFrom)
+      const upper = Math.pow(base, table[i].expTo)
       if (bytes >= lower && bytes < upper) {
-        var units = table[i][options.units]
+        const units = table[i][options.units]
         if (i === 0) {
           this.value = String(bytes)
           this.unit = units
-          return //{ value: String(bytes), unit: units }
+          return
         } else {
           this.value = (bytes / lower).toFixed(options.precision)
           this.unit = units
-          return //{ value: (bytes / lower).toFixed(options.precision), unit: units }
+          return
         }
       }
     }
 
-    // return { value: String(bytes), unit: '' }
     this.value = String(bytes)
     this.unit = ''
   }
