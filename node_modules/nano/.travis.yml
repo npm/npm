@@ -1,0 +1,15 @@
+language: "node_js"
+env: DEBUG=*
+node_js:
+  - "node"
+  - "6"
+  - "8"
+
+services:
+  - docker
+os:
+  - linux
+before_script:
+  - ./scripts/run_couchdb_on_travis.sh
+before_install:
+  - npm update -g npm

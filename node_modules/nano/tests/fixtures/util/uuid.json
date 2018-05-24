@@ -1,0 +1,22 @@
+[
+  { "method"   : "put"
+  , "path"     : "/util_uuid"
+  , "status"   : 201
+  , "response" : "{ \"ok\": true }"
+  }
+, { "method"   : "get"
+  , "path"     : "/_uuids?count=3"
+  , "status"   : 200
+  , "response" : "{ \"uuids\": [\"1\",\"2\",\"3\"] }"
+  }
+, { "method"   : "get"
+  , "path"     : "/_uuids?count=1"
+  , "status"   : 200
+  , "response" : "{ \"uuids\": [\"1\"] }"
+  }
+, { "method"   : "delete"
+  , "path"     : "/util_uuid"
+  , "status"   : 200
+  , "response" : "{ \"ok\": true }"
+  }
+]

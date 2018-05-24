@@ -1,0 +1,23 @@
+From fa5d61794143ecf36279f12e87f428dab3f76ab0 Mon Sep 17 00:00:00 2001
+From: James Sumners <james.sumners@gmail.com>
+Date: Fri, 2 Feb 2018 08:43:14 -0500
+Subject: [PATCH] Add missing dependency
+
+---
+ package.json | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/package.json b/package.json
+index 6e91184..f361f0a 100644
+--- a/package.json
++++ b/package.json
+@@ -15,5 +15,8 @@
+   "bugs": {
+     "url": "https://github.com/isaacs/own-or-env/issues"
+   },
+-  "homepage": "https://github.com/isaacs/own-or-env#readme"
++  "homepage": "https://github.com/isaacs/own-or-env#readme",
++  "dependencies": {
++    "own-or": "^1.0.0"
++  }
+ }

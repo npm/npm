@@ -1,0 +1,11 @@
+/tools
+/deps
+/tmp
+/perf
+/test
+/docs
+
+/TODO.md
+/AUTHORS
+/README.md
+/Makefile

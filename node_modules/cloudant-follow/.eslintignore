@@ -1,0 +1,11 @@
+.DS_Store
+browser/
+build/
+coverage/
+docs/
+jsdoc/
+node_modules/
+templates/
+test/
+tests/
+tmp/
