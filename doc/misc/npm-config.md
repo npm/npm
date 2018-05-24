@@ -171,6 +171,13 @@ for npm-audit(1) for details on what is submitted.
 
 What authentication strategy to use with `adduser`/`login`.
 
+### auto-prune
+
+* Default: `true`
+* Type: Boolean
+
+Whether to delete unused packages in `node_modules`.
+
 ### bin-links
 
 * Default: `true`
