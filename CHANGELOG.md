@@ -1,5 +1,58 @@
 ## v6.1.0 (2018-05-17):
 
+### FIX WRITE AFTER END ERROR
+
+First introduced in 5.8.0, this finally puts to bed errors where you would
+occasionally see `Error: write after end at MiniPass.write`.
+
+* [`171f3182f`](https://github.com/npm/npm/commit/171f3182f32686f2f94ea7d4b08035427e0b826e)
+  [node-tar#180](https://github.com/npm/node-tar/issues/180)
+  [npm.community#35](https://npm.community/t/write-after-end-when-installing-packages-with-5-8-and-later/35)
+  `pacote@8.1.5`: Fix write-after-end errors.
+  ([@zkat](https://github.com/zkat))
+
+### DETECT CHANGES IN GIT SPECIFIERS
+
+* [`0e1726c03`](https://github.com/npm/npm/commit/0e1726c0350a02d5a60f5fddb1e69c247538625e)
+  We can now determine if the commitid of a git dependency in the lockfile is derived
+  from the specifier in the package.json and if it isn't we now trigger an update for it.
+  ([@iarna](https://github.com/iarna))
+
+### OTHER BUGS
+
+* [`442d2484f`](https://github.com/npm/npm/commit/442d2484f686e3a371b07f8473a17708f84d9603)
+  [`2f0c88351`](https://github.com/npm/npm/commit/2f0c883519f17c94411dd1d9877c5666f260c12f)
+  [`631d30a34`](https://github.com/npm/npm/commit/631d30a340f5805aed6e83f47a577ca4125599b2)
+  When requesting the update of a direct dependency that was also a
+  transitive dependency to a version incompatible with the transitive
+  requirement and you had a lock-file but did not have a `node_modules`
+  folder then npm would fail to provide a new copy of the transitive
+  dependency, resulting in an invalid lock-file that could not self heal.
+  ([@iarna](https://github.com/iarna))
+* [`be5dd0f49`](https://github.com/npm/npm/commit/be5dd0f496ec1485b1ea3094c479dfc17bd50d82)
+  [#20715](https://github.com/npm/npm/pull/20715)
+  Cleanup output of `npm ci` summary report.
+  ([@legodude17](https://github.com/legodude17))
+* [`98ffe4adb`](https://github.com/npm/npm/commit/98ffe4adb55a6f4459271856de2e27e95ee63375)
+  Node.js now has a test that scans for things that look like conflict
+  markers in source code.  This was triggering false positives on a fixture in a test
+  of npm's ability to heal lockfiles with conflicts in them.
+  ([@iarna](https://github.com/iarna))
+
+### DEPENDENCY UPDATES
+
+* [`3f2e306b8`](https://github.com/npm/npm/commit/3f2e306b884a027df03f64524beb8658ce1772cb)
+  Using `npm audit fix`, replace some transitive dependencies with security
+  issues with versions that don't have any.
+  ([@iarna](https://github.com/iarna))
+* [`1d07134e0`](https://github.com/npm/npm/commit/1d07134e0b157f7484a20ce6987ff57951842954)
+  `tar@4.4.1`:
+  Dropping to 4.4.1 from 4.4.2 due to https://github.com/npm/node-tar/issues/183
+  ([@zkat](https://github.com/zkat))
+
+
+## v6.1.0-next.0 (2018-05-17):
+
 Look at that! A feature bump! `npm@6` was super-exciting not just because it
 used a bigger number than ever before, but also because it included a super
 shiny new command: `npm audit`. Well, we've kept working on it since then and
