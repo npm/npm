@@ -3,26 +3,76 @@ npm-audit(1) -- Run a security audit
 
 ## SYNOPSIS
 
-    npm audit [--parseable] [--no-color]
+    npm audit [--json|--parseable]
+    npm audit fix [--force|--package-lock-only|--dry-run|--production|--only=dev]
+
+## EXAMPLES
+
+Scan your project for vulnerabilities and automatically install any compatible
+updates to vulnerable dependencies:
+```
+$ npm audit fix
+```
+
+Run `audit fix` without modifying `node_modules`, but still updating the
+pkglock:
+```
+$ npm audit fix --package-lock-only
+```
+
+Skip updating `devDependencies`:
+```
+$ npm audit fix --only=prod
+```
+
+Have `audit fix` install semver-major updates to toplevel dependencies, not just
+semver-compatible ones:
+```
+$ npm audit fix --force
+```
+
+Do a dry run to get an idea of what `audit fix` will do, and _also_ output
+install information in JSON format:
+```
+$ npm audit fix --dry-run --json
+```
+
+Scan your project for vulnerabilities and just show the details, without fixing
+anything:
+```
+$ npm audit
+```
+
+Get the detailed audit report in JSON format:
+```
+$ npm audit --json
+```
+
+Get the detailed audit report in plain text result, separated by tab characters, allowing for
+future reuse in scripting or command line post processing, like for example, selecting
+some of the columns printed:
+```
+$ npm audit --parseable
+```
+
+To parse columns, you can use for example `awk`, and just print some of them:
+```
+$ npm audit --parseable | awk -F $'\t' '{print $1,$4}'
+```
 
 ## DESCRIPTION
 
 The audit command submits a description of the dependencies configured in
 your project to your default registry and asks for a report of known
-vulnerabilities.  The report returned includes instructions on how to act on
+vulnerabilities. The report returned includes instructions on how to act on
 this information.
 
-## PARAMETERS
-
- `--no-color` prints the output without using any colors
-
- `--parseable` prints a plain text result, separated by tab characters, allowing for
- future reuse in scripting or command line post processing, like for example, selecting
- some of the columns printed: `npm audit --parseable | awk -F $'\t' '{print $1,$4}'`
-
- `--json` prints a plain text result, separated by tab characters, allowing for
- future reuse in scripting or command line post processing, like for example, selecting
- some of the columns printed: `npm audit --parseable | awk -F $'\t' '{print $1,$4}'`
+You can also have npm automatically fix the vulnerabilities by running `npm
+audit fix`. Note that some vulnerabilities cannot be fixed automatically and
+will require manual intervention or review. Also note that since `npm audit fix`
+runs a full-fledged `npm install` under the hood, all configs that apply to the
+installer will also apply to `npm install` -- so things like `npm audit fix
+--package-lock-only` will work as expected.
 
 ## CONTENT SUBMITTED
 
@@ -52,4 +102,5 @@ different between runs.
 ## SEE ALSO
 
 * npm-install(1)
+* package-locks(5)
 * config(7)

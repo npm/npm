@@ -757,8 +757,8 @@ especially handy if you want to set the tag, registry or access, so that
 you can ensure that a given package is not tagged with "latest", published
 to the global public registry or that a scoped module is private by default.
 
-Any config values can be overridden, but of course only "tag", "registry" and
-"access" probably matter for the purposes of publishing.
+Any config values can be overridden, but only "tag", "registry" and "access"
+probably matter for the purposes of publishing.
 
 See `npm-config(7)` to see the list of config options that can be
 overridden.
