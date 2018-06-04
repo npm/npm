@@ -94,7 +94,7 @@ You can associate a scope with a registry at login, e.g.
     npm login --registry=http://reg.example.com --scope=@myco
 
 Scopes have a many-to-one relationship with registries: one registry can
-host multiple scopes, but a scope only ever points to one registry.
+host multiple scopes, but a scope only ever point to one registry.
 
 You can also associate a scope with a registry using `npm config`:
 
