@@ -117,7 +117,7 @@
     "read-package-json": "^2.0.13",
     "read-package-tree": "^5.2.1",
     "readable-stream": "^2.3.6",
-    "request": "^2.86.0",
+    "request": "^2.87.0",
     "retry": "^0.12.0",
     "rimraf": "~2.6.2",
     "safe-buffer": "^5.1.2",
