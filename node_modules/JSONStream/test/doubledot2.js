@@ -22,8 +22,9 @@
  })
 
  process.on('exit', function () {
-   it(called).equal(5)
+   var expectedValues = [0, [1], {"a": 2}, "3", 4]
+   it(called).equal(expectedValues.length)
    for (var i = 0 ; i < 5 ; i++)
-     it(parsed[i]).deepEqual(i)
+     it(parsed[i]).deepEqual(expectedValues[i])
    console.error('PASSED')
  })
