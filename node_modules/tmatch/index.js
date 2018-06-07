@@ -50,16 +50,41 @@ function match (obj, pattern) {
   return match_(obj, pattern, [], [])
 }
 
-function setMatch (obj, pattern) {
+function setMatch (obj, pattern, ca, cb) {
   var ret = true
   if (!isSet(obj))
     ret = false
   else if (pattern.size === 0)
     ret = true
   else {
+    var seen = new Set()
     pattern.forEach(function (entry) {
-      if (ret)
-        ret = obj.has(entry)
+      if (!ret)
+        return
+
+      if (obj.has(entry) && !seen.has(entry)) {
+        seen.add(entry)
+        return
+      }
+
+      // see if obj anything that matches
+      // but don't allow anything to match more than once.
+      var done = false
+      obj.forEach(function (objentry) {
+        if (done || seen.has(objentry))
+          return
+
+        if (match_(objentry, entry, ca, cb)) {
+          seen.add(objentry)
+          ret = true
+          done = true
+        }
+      })
+
+      // didn't find the match by walking the object
+      // not a match!
+      if (!done)
+        ret = false
     })
   }
   return ret
@@ -97,7 +122,7 @@ function match_ (obj, pattern, ca, cb) {
     : obj instanceof RegExp ? regexpSame(obj, pattern)
     : pattern.test('' + obj)
   )
-  : isSet(pattern) ? setMatch(obj, pattern)
+  : isSet(pattern) ? setMatch(obj, pattern, ca, cb)
   : isMap(pattern) ? mapMatch(obj, pattern, ca, cb)
   : typeof obj === 'string' && typeof pattern === 'string' && pattern ?
     obj.indexOf(pattern) !== -1

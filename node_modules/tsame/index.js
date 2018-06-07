@@ -17,15 +17,44 @@ function isMap (object) {
   return hasSet && (object instanceof Map)
 }
 
-function setSame (a, b) {
-  var ret = a.size === b.size
-  if (a.size && ret) {
+function setSame (a, b, ca, cb, fn) {
+  if (a.size !== b.size)
+    return false
+  else if (a.size === 0)
+    return true
+  else {
+    var ret = true
+    var seen = new Set()
     a.forEach(function (entry) {
-      if (ret)
-        ret = b.has(entry)
+      if (!ret)
+        return
+
+      if (b.has(entry) && !seen.has(entry)) {
+        seen.add(entry)
+        return
+      }
+
+      // see if b has anything that matches
+      // but don't allow anything to match more than once.
+      var done = false
+      b.forEach(function (bentry) {
+        if (done || seen.has(bentry))
+          return
+
+        if (fn(bentry, entry, ca, cb)) {
+          seen.add(bentry)
+          ret = true
+          done = true
+        }
+      })
+
+      // didn't find the match by walking the object
+      // not a match!
+      if (!done)
+        ret = false
     })
+    return ret
   }
-  return ret
 }
 
 function mapSame (a, b, ca, cb, fn) {
@@ -67,7 +96,7 @@ function deeper (a, b, ca, cb) {
       isArguments(b) && deeper(arrayFrom(a), arrayFrom(b), ca, cb)
     : isArguments(b) ? false
     : a.constructor !== b.constructor ? false
-    : isSet(a) && isSet(b) ? setSame(a, b)
+    : isSet(a) && isSet(b) ? setSame(a, b, ca, cb, deeper)
     : isMap(a) && isMap(b) ? mapSame(a, b, ca, cb, deeper)
     : deeperObj(a, b, Object.keys(a), Object.keys(b), ca, cb)
 }
@@ -160,7 +189,7 @@ function shallower (a, b, ca, cb) {
     : a instanceof RegExp && b instanceof RegExp ? regexpSame(a, b)
     : isArguments(a) || isArguments(b) ?
       shallower(arrayFrom(a), arrayFrom(b), ca, cb)
-    : isSet(a) && isSet(b) ? setSame(a, b)
+    : isSet(a) && isSet(b) ? setSame(a, b, ca, cb, shallower)
     : isMap(a) && isMap(b) ? mapSame(a, b, ca, cb, shallower)
     : shallowerObj(a, b, Object.keys(a), Object.keys(b), ca, cb)
 }

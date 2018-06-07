@@ -46,6 +46,11 @@ exports.builder = function (yargs) {
       type: 'boolean',
       description: 'should nyc handle instrumentation?'
     })
+    .option('exit-on-error', {
+      default: false,
+      type: 'boolean',
+      description: 'should nyc exit when an instrumentation failure occurs?'
+    })
     .example('$0 instrument ./lib ./output', 'instrument all .js files in ./lib with coverage and output in ./output')
 }
 
@@ -62,7 +67,8 @@ exports.handler = function (argv) {
     extension: argv.extension,
     require: argv.require,
     compact: argv.compact,
-    preserveComments: argv.preserveComments
+    preserveComments: argv.preserveComments,
+    exitOnError: argv.exitOnError
   })
 
   nyc.instrumentAllFiles(argv.input, argv.output, function (err) {

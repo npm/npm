@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="11.9.0"></a>
+# [11.9.0](https://github.com/istanbuljs/nyc/compare/v11.8.0...v11.9.0) (2018-05-31)
+
+
+### Features
+
+* add option that allows instrument to exit on error ([#850](https://github.com/istanbuljs/nyc/issues/850)) ([1329a3b](https://github.com/istanbuljs/nyc/commit/1329a3b))
+
+
+
 <a name="11.8.0"></a>
 # [11.8.0](https://github.com/istanbuljs/nyc/compare/v11.7.3...v11.8.0) (2018-05-14)
 

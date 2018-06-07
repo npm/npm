@@ -1,3 +1,5 @@
+'use strict'
+
 /* global __coverage__ */
 
 const arrify = require('arrify')
@@ -268,25 +270,27 @@ NYC.prototype._maybeInstrumentSource = function (code, filename, relFile) {
 }
 
 NYC.prototype._transformFactory = function (cacheDir) {
-  var _this = this
-  var instrumenter = this.instrumenter()
-  var instrumented
+  const instrumenter = this.instrumenter()
+  let instrumented
 
-  return function (code, metadata, hash) {
-    var filename = metadata.filename
-    var sourceMap = null
+  return (code, metadata, hash) => {
+    const filename = metadata.filename
+    let sourceMap = null
 
-    if (_this._sourceMap) sourceMap = _this.sourceMaps.extractAndRegister(code, filename, hash)
+    if (this._sourceMap) sourceMap = this.sourceMaps.extractAndRegister(code, filename, hash)
 
     try {
       instrumented = instrumenter.instrumentSync(code, filename, sourceMap)
     } catch (e) {
-      // don't fail external tests due to instrumentation bugs.
       debugLog('failed to instrument ' + filename + 'with error: ' + e.stack)
-      instrumented = code
+      if (this.config.exitOnError) {
+        process.exit(1)
+      } else {
+        instrumented = code
+      }
     }
 
-    if (_this.fakeRequire) {
+    if (this.fakeRequire) {
       return 'function x () {}'
     } else {
       return instrumented
