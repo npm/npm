@@ -279,6 +279,7 @@
   },
   "scripts": {
     "dumpconf": "env | grep npm | sort | uniq",
+    "postinstall": "node scripts/gen-dev-ignores.js",
     "prepare": "node bin/npm-cli.js --no-audit --no-timing prune --prefix=. --no-global && rimraf test/*/*/node_modules && make -j4 doc",
     "preversion": "bash scripts/update-authors.sh && git add AUTHORS && git commit -m \"update AUTHORS\" || true",
     "tap": "tap --reporter=classic --timeout 300",
