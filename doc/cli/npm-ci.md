@@ -52,6 +52,10 @@ In short, the main differences between using `npm install` and `npm ci` are:
 * If a `node_modules` is already present, it will be automatically removed before `npm ci` begins its install.
 * It will never write to `package.json` or any of the package-locks: installs are essentially frozen.
 
+## SINCE
+
+Command available since version 5.7.0
+
 ## SEE ALSO
 
 * npm-install(1)
