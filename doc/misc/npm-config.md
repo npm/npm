@@ -29,7 +29,7 @@ values are case-insensitive, so `NPM_CONFIG_FOO=bar` will work the
 same. However, please note that inside [npm-scripts](/misc/scripts)
 npm will set its own environment variables and Node will prefer
 those lowercase versions over any uppercase ones that you might set.
-For details see [this issue](https://github.com/npm/npm/issues/14528).
+For details see [this issue](https://github.com/npm/npm/issues/14528).administration
 
 Notice that you need to use underscores instead of dashes, so `--allow-same-version`
 would become `npm_config_allow_same_version=true`.
