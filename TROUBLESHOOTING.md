@@ -26,6 +26,7 @@ For more details of the content and formatting of these entries, refer to exampl
 * [Cannot find module](#cannot-find-module)
 * [Shasum Check Fails](#shasum-check-fails)
 * [No Git](#no-git)
+* [npm ERR! cb() never called!](#cb()-never-called)
 
 ## Upgrading npm
 
@@ -190,3 +191,11 @@ ENOGIT
 ### Related Issues
 
 * [#11095](https://github.com/npm/npm/issues/11095)
+
+## cb() never called
+This is a generic error with multiple causes and therefore users have reported a variety of issues with this error over the past few years.
+
+### Possible fixes
+* Update to the latest version of supported version of node and npm
+* In [PR 19353](https://github.com/npm/npm/issues/19353#issuecomment-369735511), a user reported the cause to be an incorret integrity hash in the `package-json.lock` file.
+* In older unsupported versions of node and npm, `npm cache clean` reportedly worked, as suggested by a popular Stackoverflow Q&A [npm ERR cb() never called](https://stackoverflow.com/questions/15393821/npm-err-cb-never-called). More recently, the npm cache self-corrects and `npm cache verify` is recommended to check its integrity.
