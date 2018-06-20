@@ -1,9 +1,5 @@
-const resolutionState = require("./resolutionState");
+const resolutionState = require('./resolutionState');
 
-function addResolution(action) {
-    action.state = resolutionState.get({});
-    return action;
-}
 
 module.exports = {
     addStatus(action) {

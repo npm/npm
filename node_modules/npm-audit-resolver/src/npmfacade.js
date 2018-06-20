@@ -1,8 +1,7 @@
 const fs = require('fs');
 const promiseCommand = require('./promiseCommand');
-const argv = require('./arguments')
+const argv = require('./arguments').get()
 
-let seq = 0;
 const runner = argv.mock ?
     (command) => {
         console.log('>>>mock ', command)

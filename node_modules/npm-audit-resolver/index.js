@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 const prompter = require('./src/prompter');
 const statusManager = require('./src/statusManager');
+const argv = require('./src/arguments')
 
 module.exports = {
-    resolveAudit(input) {
+    resolveAudit(input, args) {
+        argv.set(args)
         return input.actions
             .map(statusManager.addStatus)
             .filter(a => {
@@ -20,7 +22,22 @@ module.exports = {
                 Promise.resolve()
             )
     },
-    checkAudit(input){
+    skipResolvedActions(input, args) {
+        argv.set(args)
+        input.actions = input.actions
+            .map(statusManager.addStatus)
+            .filter(a => {
+                if (a.humanReviewComplete) {
+                    console.error(
+                        `skipping ${a.module} issue based on audit-resolv.json`
+                    );
+                }
+                return !a.humanReviewComplete;
+            })
+        return input
+    },
+    checkAudit(input, args) {
+        argv.set(args)
         return input.actions
             .map(statusManager.addStatus)
             .filter(a => {
