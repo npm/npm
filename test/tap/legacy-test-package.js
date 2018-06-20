@@ -42,7 +42,7 @@ test('test-package', function (t) {
 
   function testCheckAndRemove (err, code, stdout, stderr) {
     if (err) throw err
-    t.is(code, 0, 'npm test w/o test is ok')
+    t.is(code, 1, 'npm test w/o test should return error')
     common.npm(['rm', fixturepath], {cwd: basepath}, removeCheckAndDone)
   }
 
