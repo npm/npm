@@ -1130,6 +1130,14 @@ Set to true to suppress the UID/GID switching when running package
 scripts.  If set explicitly to false, then installing as a non-root user
 will fail.
 
+### update-notifier
+
+* Default: true
+* Type: Boolean
+
+Set to false to suppress the update notification when using an older
+version of npm than the latest.
+
 ### usage
 
 * Default: false
