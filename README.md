@@ -7,7 +7,7 @@ npm(1) -- a JavaScript package manager
 
 This is just enough info to get you up and running.
 
-Much more info available via `npm help` once it's installed.
+Much more info will be available via `npm help` once it's installed.
 
 ## IMPORTANT
 
