@@ -6,7 +6,7 @@
 * [Roles](#roles)
   * [Community Members](#community-members)
   * [Collaborators](#collaborators)
-  * [npm, Inc Employeees](#npm-inc-employees)
+  * [npm, Inc Employees](#npm-inc-employees)
 
 
 ## Introduction
