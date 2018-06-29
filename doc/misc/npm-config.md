@@ -164,6 +164,14 @@ When "true" submit audit reports alongside `npm install` runs to the default
 registry and all registries configured for scopes.  See the documentation
 for npm-audit(1) for details on what is submitted.
 
+### audit-level
+
+* Default: `"low"`
+* Type: `'low'`, `'moderate'`, `'high'`, `'critical'`
+
+The minimum level of vulnerability for `npm audit` to exit with
+a non-zero exit code.
+
 ### auth-type
 
 * Default: `'legacy'`
