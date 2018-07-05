@@ -1,4 +1,15 @@
-## v6.2.0 (2018-06-28):
+## v6.2.0 (2018-07-05):
+
+This is a quick patch to the release to fix an issue that was preventing users
+from installing `npm@next`.
+
+* [`ecdcbd745`](https://github.com/npm/npm/commit/ecdcbd745ae1edd9bdd102dc3845a7bc76e1c5fb)
+  [#21129](https://github.com/npm/npm/pull/21129)
+  Remove postinstall script that depended on source files, thus preventing
+  `npm@next` from being installable from the registry.
+  ([@zkat](https://github.com/zkat))
+
+## v6.2.0-next.0 (2018-06-28):
 
 ### NEW FEATURES
 
