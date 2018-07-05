@@ -74,7 +74,10 @@
   conf._exit = true
   npm.load(conf, function (er) {
     if (er) return errorHandler(er)
-    if (!unsupported.checkVersion(process.version).unsupported) {
+    if (
+      npm.config.get('update-notifier') &&
+      !unsupported.checkVersion(process.version).unsupported
+    ) {
       const pkg = require('../package.json')
       let notifier = require('update-notifier')({pkg})
       if (

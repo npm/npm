@@ -1,6 +1,7 @@
 *.swp
 npm-debug.log
 .nyc_output/
+/node_modules/.cache
 /test/bin
 /test/output.log
 /test/*/*/node_modules
@@ -21,15 +22,3 @@ npm-debug.log
 .jshintrc
 .eslintrc
 .nyc_output
-
-# dev dependencies
-/node_modules/deep-equal/
-/node_modules/marked/
-/node_modules/marked-man/
-/node_modules/npm-registry-couchapp/
-/node_modules/npm-registry-mock/
-/node_modules/require-inject/
-/node_modules/sprintf-js/
-/node_modules/standard/
-/node_modules/tap/
-/node_modules/tacks/

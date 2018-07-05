@@ -1,3 +1,150 @@
+## v6.2.0 (2018-07-05):
+
+This is a quick patch to the release to fix an issue that was preventing users
+from installing `npm@next`.
+
+* [`ecdcbd745`](https://github.com/npm/npm/commit/ecdcbd745ae1edd9bdd102dc3845a7bc76e1c5fb)
+  [#21129](https://github.com/npm/npm/pull/21129)
+  Remove postinstall script that depended on source files, thus preventing
+  `npm@next` from being installable from the registry.
+  ([@zkat](https://github.com/zkat))
+
+## v6.2.0-next.0 (2018-06-28):
+
+### NEW FEATURES
+
+* [`ce0793358`](https://github.com/npm/npm/commit/ce07933588ec2da1cc1980f93bdaa485d6028ae2)
+  [#20750](https://github.com/npm/npm/pull/20750)
+  You can now disable the update notifier entirely by using
+  `--no-update-notifier` or setting it in your config with `npm config set
+  update-notifier false`.
+  ([@travi](https://github.com/travi))
+* [`d2ad776f6`](https://github.com/npm/npm/commit/d2ad776f6dcd92ae3937465736dcbca171131343)
+  [#20879](https://github.com/npm/npm/pull/20879)
+  When `npm run-script <script>` fails due to a typo or missing script, npm will
+  now do a "did you mean?..." for scripts that do exist.
+  ([@watilde](https://github.com/watilde))
+
+### BUGFIXES
+
+* [`8f033d72d`](https://github.com/npm/npm/commit/8f033d72da3e84a9dbbabe3a768693817af99912)
+  [#20948](https://github.com/npm/npm/pull/20948)
+  Fix the regular expression matching in `xcode_emulation` in `node-gyp` to also
+  handle version numbers with multiple-digit major versions which would
+  otherwise break under use of XCode 10.
+  ([@Trott](https://github.com/Trott))
+* [`c8ba7573a`](https://github.com/npm/npm/commit/c8ba7573a4ea95789f674ce038762d6a77a8b047)
+  Stop trying to hoist/dedupe bundles dependencies.
+  ([@iarna](https://github.com/iarna))
+* [`cd698f068`](https://github.com/npm/npm/commit/cd698f06840b7c9407ac802efa96d16464722a7d)
+  [#20762](https://github.com/npm/npm/pull/20762)
+  Add synopsis to brief help for `npm audit` and suppress trailing newline.
+  ([@wyardley](https://github.com/wyardley))
+* [`6808ee3bd`](https://github.com/npm/npm/commit/6808ee3bd59560b1334a18aa6c6e0120094b03c0)
+  [#20881](https://github.com/npm/npm/pull/20881)
+  Exclude /.github directory from npm tarball.
+  ([@styfle](https://github.com/styfle))
+* [`177cbb476`](https://github.com/npm/npm/commit/177cbb4762c1402bfcbf0636c4bc4905fd684fc1)
+  [#21105](https://github.com/npm/npm/pull/21105)
+  Add suggestion to use a temporary cache instead of `npm cache clear --force`.
+  ([@karanjthakkar](https://github.com/karanjthakkar))
+
+### DOCS
+
+* [`7ba3fca00`](https://github.com/npm/npm/commit/7ba3fca00554b884eb47f2ed661693faf2630b27)
+  [#20855](https://github.com/npm/npm/pull/20855)
+  Direct people to npm.community instead of the GitHub issue tracker on error.
+  ([@zkat](https://github.com/zkat))
+* [`88efbf6b0`](https://github.com/npm/npm/commit/88efbf6b0b403c5107556ff9e1bb7787a410d14d)
+  [#20859](https://github.com/npm/npm/pull/20859)
+  Fix typo in registry docs.
+  ([@strugee](https://github.com/strugee))
+* [`61bf827ae`](https://github.com/npm/npm/commit/61bf827aea6f98bba08a54e60137d4df637788f9)
+  [#20947](https://github.com/npm/npm/pull/20947)
+  Fixed a small grammar error in the README.
+  ([@bitsol](https://github.com/bitsol))
+* [`f5230c90a`](https://github.com/npm/npm/commit/f5230c90afef40f445bf148cbb16d6129a2dcc19)
+  [#21018](https://github.com/npm/npm/pull/21018)
+  Small typo fix in CONTRIBUTING.md.
+  ([@reggi](https://github.com/reggi))
+* [`833efe4b2`](https://github.com/npm/npm/commit/833efe4b2abcef58806f823d77ab8bb8f4f781c6)
+  [#20986](https://github.com/npm/npm/pull/20986)
+  Document current structure/expectations around package tarballs.
+  ([@Maximaximum](https://github.com/Maximaximum))
+* [`9fc0dc4f5`](https://github.com/npm/npm/commit/9fc0dc4f58d728bac6a8db7143d04863d7b653db)
+  [#21019](https://github.com/npm/npm/pull/21019)
+  Clarify behavior of `npm link ../path` shorthand.
+  ([@davidgilbertson](https://github.com/davidgilbertson))
+* [`3924c72d0`](https://github.com/npm/npm/commit/3924c72d06b9216ac2b6a9d951fd565a1d5eda89)
+  [#21064](https://github.com/npm/npm/pull/21064)
+  Add missing "if"
+  ([@roblourens](https://github.com/roblourens))
+
+### DEPENDENCY SHUFFLE!
+
+We did some reshuffling and moving around of npm's own dependencies. This
+significantly reduces the total bundle size of the npm pack, from 8MB to 4.8MB
+for the distributed tarball! We also moved around what we actually commit to the
+repo as far as devDeps go.
+
+* [`0483f5c5d`](https://github.com/npm/npm/commit/0483f5c5deaf18c968a128657923103e49f4e67a)
+  Flatten and dedupe our dependencies!
+  ([@iarna](https://github.com/iarna))
+* [`ef9fa1ceb`](https://github.com/npm/npm/commit/ef9fa1ceb5f9d175fd453138b1a26d45a5071dfd)
+  Remove unused direct dependency `ansi-regex`.
+  ([@iarna](https://github.com/iarna))
+* [`0d14b0bc5`](https://github.com/npm/npm/commit/0d14b0bc59812f4e33798194e11ffacbea3c0493)
+  Reshuffle ansi-regex for better deduping.
+  ([@iarna](https://github.com/iarna))
+* [`68a101859`](https://github.com/npm/npm/commit/68a101859b2b6f78b2e7c3a936492acdb15f7c4a)
+  Reshuffle strip-ansi for better deduping.
+  ([@iarna](https://github.com/iarna))
+* [`0d5251f97`](https://github.com/npm/npm/commit/0d5251f97dc8b8b143064869e530d465c757ffbb)
+  Reshuffle is-fullwidth-code-point for better deduping.
+  ([@iarna](https://github.com/iarna))
+* [`2d0886632`](https://github.com/npm/npm/commit/2d08866327013522fc5fbe61ed872b8f30e92775)
+  Add fake-registry, npm-registry-mock replacement.
+  ([@iarna](https://github.com/iarna))
+
+### DEPENDENCIES
+
+* [`8cff8eea7`](https://github.com/npm/npm/commit/8cff8eea75dc34c9c1897a7a6f65d7232bb0c64c)
+  `tar@4.4.3`
+  ([@zkat](https://github.com/zkat))
+* [`bfc4f873b`](https://github.com/npm/npm/commit/bfc4f873bd056b7e3aee389eda4ecd8a2e175923)
+  `pacote@8.1.6`
+  ([@zkat](https://github.com/zkat))
+* [`532096163`](https://github.com/npm/npm/commit/53209616329119be8fcc29db86a43cc8cf73454d)
+  `libcipm@2.0.0`
+  ([@zkat](https://github.com/zkat))
+* [`4a512771b`](https://github.com/npm/npm/commit/4a512771b67aa06505a0df002a9027c16a238c71)
+  `request@2.87.0`
+  ([@iarna](https://github.com/iarna))
+* [`b7cc48dee`](https://github.com/npm/npm/commit/b7cc48deee45da1feab49aa1dd4d92e33c9bcac8)
+  `which@1.3.1`
+  ([@iarna](https://github.com/iarna))
+* [`bae657c28`](https://github.com/npm/npm/commit/bae657c280f6ea8e677509a9576e1b47c65c5441)
+  `tar@4.4.4`
+  ([@iarna](https://github.com/iarna))
+* [`3d46e5c4e`](https://github.com/npm/npm/commit/3d46e5c4e3c5fecd9bf05a7425a16f2e8ad5c833)
+  `JSONStream@1.3.3`
+  ([@iarna](https://github.com/iarna))
+* [`d0a905daf`](https://github.com/npm/npm/commit/d0a905dafc7e3fcd304e8053acbe3da40ba22554)
+  `is-cidr@2.0.6`
+  ([@iarna](https://github.com/iarna))
+* [`4fc1f815f`](https://github.com/npm/npm/commit/4fc1f815fec5a7f6f057cf305e01d4126331d1f2)
+  `marked@0.4.0`
+  ([@iarna](https://github.com/iarna))
+* [`f72202944`](https://github.com/npm/npm/commit/f722029441a088d03df94bdfdeeec51cfd318659)
+  `tap@12.0.1`
+  ([@iarna](https://github.com/iarna))
+* [`bdce96eb3`](https://github.com/npm/npm/commit/bdce96eb3c30fcff873aa3f1190e8ae4928d690b)
+  `npm-profile@3.0.2`
+  ([@iarna](https://github.com/iarna))
+* [`fe4240e85`](https://github.com/npm/npm/commit/fe4240e852144770bf76d7b1952056ca5baa63cf)
+  `uuid@3.3.2`
+  ([@zkat](https://github.com/zkat))
+
 ## v6.1.0 (2018-05-17):
 
 ### FIX WRITE AFTER END ERROR

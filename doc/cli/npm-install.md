@@ -69,8 +69,13 @@ after packing it up into a tarball (b).
 
     Install a package that is sitting on the filesystem.  Note: if you just want
     to link a dev directory into your npm root, you can do this more easily by
-    using `npm link`. The filename *must* use `.tar`, `.tar.gz`, or `.tgz` as
+    using `npm link`. 
+    
+    Tarball requirements:
+    * The filename *must* use `.tar`, `.tar.gz`, or `.tgz` as
     the extension.
+    * The package contents should reside in a subfolder inside the tarball (usually it is called `package/`). npm strips one directory layer when installing the package (an equivalent of `tar x --strip-components=1` is run).
+    * The package must contain a `package.json` file with `name` and `version` properties.
 
     Example:
 
