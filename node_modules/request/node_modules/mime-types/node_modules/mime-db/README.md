@@ -91,4 +91,4 @@ registered with the IANA are automatically pulled into this library.
 [coveralls-image]: https://img.shields.io/coveralls/jshttp/mime-db/master.svg
 [coveralls-url]: https://coveralls.io/r/jshttp/mime-db?branch=master
 [node-image]: https://img.shields.io/node/v/mime-db.svg
-[node-url]: http://nodejs.org/download/
+[node-url]: https://nodejs.org/en/download/

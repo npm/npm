@@ -37,6 +37,7 @@ formats['rfc4253'] = require('./formats/rfc4253');
 formats['ssh-private'] = require('./formats/ssh-private');
 formats['openssh'] = formats['ssh-private'];
 formats['ssh'] = formats['ssh-private'];
+formats['dnssec'] = require('./formats/dnssec');
 
 function PrivateKey(opts) {
 	assert.object(opts, 'options');
@@ -91,40 +92,36 @@ PrivateKey.prototype.derive = function (newType) {
 		if (nacl === undefined)
 			nacl = require('tweetnacl');
 
-		priv = this.part.r.data;
+		priv = this.part.k.data;
 		if (priv[0] === 0x00)
 			priv = priv.slice(1);
-		priv = priv.slice(0, 32);
 
 		pair = nacl.box.keyPair.fromSecretKey(new Uint8Array(priv));
 		pub = new Buffer(pair.publicKey);
-		priv = Buffer.concat([priv, pub]);
 
 		return (new PrivateKey({
 			type: 'curve25519',
 			parts: [
-				{ name: 'R', data: utils.mpNormalize(pub) },
-				{ name: 'r', data: priv }
+				{ name: 'A', data: utils.mpNormalize(pub) },
+				{ name: 'k', data: utils.mpNormalize(priv) }
 			]
 		}));
 	} else if (this.type === 'curve25519' && newType === 'ed25519') {
 		if (nacl === undefined)
 			nacl = require('tweetnacl');
 
-		priv = this.part.r.data;
+		priv = this.part.k.data;
 		if (priv[0] === 0x00)
 			priv = priv.slice(1);
-		priv = priv.slice(0, 32);
 
 		pair = nacl.sign.keyPair.fromSeed(new Uint8Array(priv));
 		pub = new Buffer(pair.publicKey);
-		priv = Buffer.concat([priv, pub]);
 
 		return (new PrivateKey({
 			type: 'ed25519',
 			parts: [
-				{ name: 'R', data: utils.mpNormalize(pub) },
-				{ name: 'r', data: priv }
+				{ name: 'A', data: utils.mpNormalize(pub) },
+				{ name: 'k', data: utils.mpNormalize(priv) }
 			]
 		}));
 	}
@@ -238,8 +235,9 @@ PrivateKey.generate = function (type, options) {
  * [1,2] -- added defaultHashAlgorithm
  * [1,3] -- added derive, ed, createDH
  * [1,4] -- first tagged version
+ * [1,5] -- changed ed25519 part names and format
  */
-PrivateKey.prototype._sshpkApiVersion = [1, 4];
+PrivateKey.prototype._sshpkApiVersion = [1, 5];
 
 PrivateKey._oldVersionDetect = function (obj) {
 	assert.func(obj.toPublic);

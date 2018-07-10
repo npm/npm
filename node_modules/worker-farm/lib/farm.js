@@ -1,7 +1,8 @@
 'use strict'
 
 const DEFAULT_OPTIONS = {
-          maxCallsPerWorker           : Infinity
+          workerOptions               : {}
+        , maxCallsPerWorker           : Infinity
         , maxConcurrentWorkers        : (require('os').cpus() || { length: 1 }).length
         , maxConcurrentCallsPerWorker : 10
         , maxConcurrentCalls          : Infinity
@@ -11,15 +12,14 @@ const DEFAULT_OPTIONS = {
         , autoStart                   : false
       }
 
-const extend                  = require('xtend')
-    , fork                    = require('./fork')
+const fork                    = require('./fork')
     , TimeoutError            = require('errno').create('TimeoutError')
     , ProcessTerminatedError  = require('errno').create('ProcessTerminatedError')
     , MaxConcurrentCallsError = require('errno').create('MaxConcurrentCallsError')
 
 
 function Farm (options, path) {
-  this.options     = extend(DEFAULT_OPTIONS, options)
+  this.options     = Object.assign({}, DEFAULT_OPTIONS, options)
   this.path        = path
   this.activeCalls = 0
 }
@@ -103,7 +103,7 @@ Farm.prototype.onExit = function (childId) {
 Farm.prototype.startChild = function () {
   this.childId++
 
-  let forked = fork(this.path)
+  let forked = fork(this.path, this.options.workerOptions)
     , id     = this.childId
     , c      = {
           send        : forked.send

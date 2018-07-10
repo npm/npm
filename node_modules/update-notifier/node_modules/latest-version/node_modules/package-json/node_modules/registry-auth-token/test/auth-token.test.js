@@ -288,6 +288,56 @@ describe('auth-token', function () {
       })
     })
 
+    it('should return password defined by reference to an environment variable (with curly braces)', function (done) {
+      var environmentVariable = '__REGISTRY_PASSWORD__'
+      var content = [
+        'registry=http://registry.foobar.cc/',
+        '//registry.foobar.cc/:username=username',
+        '//registry.foobar.cc/:_password=${' + environmentVariable + '}', ''
+      ].join('\n')
+      process.env[environmentVariable] = encodeBase64('password')
+
+      fs.writeFile(npmRcPath, content, function (err) {
+        var getAuthToken = requireUncached('../index')
+        assert(!err, err)
+        var token = getAuthToken()
+        assert.deepEqual(token, {
+          type: 'Basic',
+          username: 'username',
+          password: 'password',
+          token: 'dXNlcm5hbWU6cGFzc3dvcmQ='
+        })
+        assert.equal(decodeBase64(token.token), 'username:password')
+        delete process.env[environmentVariable]
+        done()
+      })
+    })
+
+    it('should return password defined by reference to an environment variable (without curly braces)', function (done) {
+      var environmentVariable = '__REGISTRY_PASSWORD__'
+      var content = [
+        'registry=http://registry.foobar.cc/',
+        '//registry.foobar.cc/:username=username',
+        '//registry.foobar.cc/:_password=$' + environmentVariable, ''
+      ].join('\n')
+      process.env[environmentVariable] = encodeBase64('password')
+
+      fs.writeFile(npmRcPath, content, function (err) {
+        var getAuthToken = requireUncached('../index')
+        assert(!err, err)
+        var token = getAuthToken()
+        assert.deepEqual(token, {
+          type: 'Basic',
+          username: 'username',
+          password: 'password',
+          token: 'dXNlcm5hbWU6cGFzc3dvcmQ='
+        })
+        assert.equal(decodeBase64(token.token), 'username:password')
+        delete process.env[environmentVariable]
+        done()
+      })
+    })
+
     it('should try with and without a slash at the end of registry url', function (done) {
       var content = [
         'registry=http://registry.foobar.eu',

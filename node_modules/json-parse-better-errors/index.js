@@ -6,6 +6,12 @@ function parseJson (txt, reviver, context) {
   try {
     return JSON.parse(txt, reviver)
   } catch (e) {
+    if (typeof txt !== 'string') {
+      const isEmptyArray = Array.isArray(txt) && txt.length === 0
+      const errorMessage = 'Cannot parse ' +
+      (isEmptyArray ? 'an empty array' : String(txt))
+      throw new TypeError(errorMessage)
+    }
     const syntaxErr = e.message.match(/^Unexpected token.*position\s+(\d+)/i)
     const errIdx = syntaxErr
     ? +syntaxErr[1]

@@ -41,6 +41,7 @@ function tarball (spec, opts) {
     )
     fetchStream.on('error', err => stream.emit('error', err))
     fetchStream.pipe(stream)
+    return null
   }).catch(err => stream.emit('error', err))
   return stream
 }
@@ -72,6 +73,7 @@ function fromManifest (manifest, spec, opts) {
       }
       res.body.on('error', err => stream.emit('error', err))
       res.body.pipe(stream)
+      return null
     })
     .catch(err => stream.emit('error', err))
   return stream
