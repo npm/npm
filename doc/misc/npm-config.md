@@ -798,6 +798,14 @@ for updates immediately even for fresh package data.
 The location to install global items.  If set on the command line, then
 it forces non-global commands to run in the specified folder.
 
+### preid
+
+* Default: ""
+* Type: String
+
+The "prerelease identifier" to use as a prefix for the "prerelease" part of a
+semver. Like the `rc` in `1.2.0-rc.8`.
+
 ### production
 
 * Default: false
