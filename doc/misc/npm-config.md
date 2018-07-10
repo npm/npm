@@ -1034,6 +1034,17 @@ will also prevent _writing_ `npm-shrinkwrap.json` if `save` is true.
 
 This option is an alias for `--package-lock`.
 
+### sign-git-commit
+
+* Default: false
+* Type: Boolean
+
+If set to true, then the `npm version` command will commit the new package
+version using `-S` to add a signature.
+
+Note that git requires you to have set up GPG keys in your git configs
+for this to work properly.
+
 ### sign-git-tag
 
 * Default: false
