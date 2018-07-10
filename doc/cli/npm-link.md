@@ -14,7 +14,8 @@ Package linking is a two-step process.
 
 First, `npm link` in a package folder will create a symlink in the global folder
 `{prefix}/lib/node_modules/<package>` that links to the package where the `npm
-link` command was executed. (see `npm-config(7)` for the value of `prefix`).
+link` command was executed. (see `npm-config(7)` for the value of `prefix`). It
+will also link any bins in the package to `{prefix}/bin/{name}`.
 
 Next, in some other location, `npm link package-name` will create a
 symbolic link from globally-installed `package-name` to `node_modules/`
@@ -52,10 +53,13 @@ above use-case in a shorter way:
 The second line is the equivalent of doing:
 
     (cd ../node-redis; npm link)
-    npm link node-redis
+    npm link redis
 
 That is, it first creates a global link, and then links the global
 installation target into your project's `node_modules` folder.
+
+Note that in this case, you are referring to the directory name, `node-redis`,
+rather than the package name `redis`.
 
 If your linked package is scoped (see `npm-scope(7)`) your link command must
 include that scope, e.g.

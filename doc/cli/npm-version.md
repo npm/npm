@@ -12,7 +12,7 @@ npm-version(1) -- Bump a package version
 ## DESCRIPTION
 
 Run this in a package directory to bump the version and write the new
-data back to `package.json` and, if present, `npm-shrinkwrap.json`.
+data back to `package.json`, `package-lock.json`, and, if present, `npm-shrinkwrap.json`.
 
 The `newversion` argument should be a valid semver string, a
 valid second argument to [semver.inc](https://github.com/npm/node-semver#functions) (one of `patch`, `minor`, `major`,
@@ -78,12 +78,36 @@ and tag up to the server, and deletes the `build/temp` directory.
 
 ## CONFIGURATION
 
+### allow-same-version
+
+* Default: false
+* Type: Boolean
+
+Prevents throwing an error when `npm version` is used to set the new version 
+to the same value as the current version.
+
 ### git-tag-version
 
 * Default: true
 * Type: Boolean
 
 Commit and tag the version change.
+
+### commit-hooks
+
+* Default: true
+* Type: Boolean
+
+Run git commit hooks when committing the version change.
+
+### sign-git-tag
+
+* Default: false
+* Type: Boolean
+
+Pass the `-s` flag to git to sign the tag.
+
+Note that you must have a default GPG key set up in your git config for this to work properly.
 
 ## SEE ALSO
 

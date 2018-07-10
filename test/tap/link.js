@@ -29,7 +29,7 @@ var readJSON = {
   description: '',
   main: 'index.js',
   scripts: {
-    test: 'echo \"Error: no test specified\" && exit 1'
+    test: 'echo "Error: no test specified" && exit 1'
   },
   author: '',
   license: 'ISC'
@@ -41,7 +41,7 @@ var readScopedJSON = {
   description: '',
   main: 'index.js',
   scripts: {
-    test: 'echo \"Error: no test specified\" && exit 1'
+    test: 'echo "Error: no test specified" && exit 1'
   },
   author: '',
   license: 'ISC'
@@ -53,7 +53,7 @@ var installJSON = {
   description: '',
   main: 'index.js',
   scripts: {
-    test: 'echo \"Error: no test specified\" && exit 1'
+    test: 'echo "Error: no test specified" && exit 1'
   },
   author: '',
   license: 'ISC'
@@ -65,7 +65,7 @@ var insideInstallJSON = {
   description: '',
   main: 'index.js',
   scripts: {
-    test: 'echo \"Error: no test specified\" && exit 1'
+    test: 'echo "Error: no test specified" && exit 1'
   },
   author: '',
   license: 'ISC'
@@ -157,6 +157,18 @@ test('link-install the scoped package', function (t) {
       t.has(out, /@scope[/]foo@1.0.0/, 'link-install ok')
       t.end()
     })
+  })
+})
+
+test('ls the linked packages', function (t) {
+  process.chdir(linkInstall)
+  common.npm(['ls', '--link'], OPTS, function (err, c, out) {
+    t.ifError(err, 'ls --link did not have an error')
+    t.equal(c, 1)
+    t.has(out, /@scope\/foo@1\.0\.0 ->/, 'output contains scoped link')
+    t.has(out, /foo@1\.0\.0 ->/, 'output contains link')
+    t.doesNotHave(out, /inside@1\.0\.0/, 'output does not contain unlinked dependency')
+    t.end()
   })
 })
 

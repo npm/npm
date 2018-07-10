@@ -3,7 +3,6 @@ var path = require('path')
 var mr = require('npm-registry-mock')
 var test = require('tap').test
 var common = require('../common-tap')
-var extend = Object.assign || require('util')._extend
 var Tacks = require('tacks')
 var Dir = Tacks.Dir
 var File = Tacks.File
@@ -23,7 +22,7 @@ var config = [
 var fixture = new Tacks(Dir({
   'cache': Dir(),
   'modules': Dir({
-    'good-night-0.1.0.tgz': File(new Buffer(
+    'good-night-0.1.0.tgz': File(Buffer.from(
       '1f8b0800000000000003ed934f4bc43010c57beea7187a59056dd36eff80' +
       'de85050541c1f3d8c634da4e4a925a8af8dd6db7bb8ba0e0c15559e9eff2' +
       '206f929909bc06f327143c6826f51f8d2267cf30c6d2388641c32c61ef75' +
@@ -37,7 +36,7 @@ var fixture = new Tacks(Dir({
       'f6795d000c0000',
       'hex'
     )),
-    'good-night-1.0.0.tgz': File(new Buffer(
+    'good-night-1.0.0.tgz': File(Buffer.from(
       '1f8b0800000000000003ed954d6bc24010863dfb2bb6b9a8503793b849a0' +
       'eda5979efa052d484184252e495a331b76d78a94fef76e8cf683163cd42a' +
       '957d2e03796777268187543c7de299f0aba6d2472db1b5650020668cd81a' +
@@ -79,9 +78,9 @@ var onlyOldMetadata = {
   }
 }
 
-var oldAndNewMetadata = extend({}, onlyOldMetadata)
+var oldAndNewMetadata = Object.assign({}, onlyOldMetadata)
 oldAndNewMetadata['dist-tags'] = { latest: '1.0.0' }
-oldAndNewMetadata.versions = extend({
+oldAndNewMetadata.versions = Object.assign({
   '1.0.0': {
     'name': 'good-night',
     'version': '1.0.0',
@@ -163,10 +162,11 @@ test('setup new server', function (t) {
 
 test('install new version', function (t) {
   common.npm(config.concat([
-    '--cache-min', 'Infinity',
+    '--prefer-offline',
     'install', 'good-night@1.0.0'
-  ]), {stdio: 'inherit'}, function (err, code) {
+  ]), {}, function (err, code, stdout, stderr) {
     if (err) throw err
+    t.equal(stderr, '', 'no error output')
     t.is(code, 0, 'install succeeded')
 
     t.end()
@@ -176,13 +176,14 @@ test('install new version', function (t) {
 test('install does not hit server again', function (t) {
   // The mock server route definitions ensure we don't hit the server again
   common.npm(config.concat([
-    '--cache-min', 'Infinity',
+    '--prefer-offline',
+    '--parseable',
     'install', 'good-night'
   ]), {stdio: [0, 'pipe', 2]}, function (err, code, stdout) {
     if (err) throw err
     t.is(code, 0, 'install succeeded')
 
-    t.match(stdout, /@1\.0\.0/, 'installed latest version')
+    t.match(stdout, /^update\tgood-night\t1.0.0\t/, 'installed latest version')
     server.done()
     t.end()
   })
