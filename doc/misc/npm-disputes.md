@@ -102,7 +102,7 @@ here to help.**
 
 If you think another npm publisher is infringing your trademark, such as by
 using a confusingly similar package name, email <abuse@npmjs.com> with a link to
-the package or user account on [https://npmjs.com](https://npmjs.com). Attach a
+the package or user account on [https://www.npmjs.com](https://www.npmjs.com). Attach a
 copy of your trademark registration certificate.
 
 If we see that the package's publisher is intentionally misleading others by

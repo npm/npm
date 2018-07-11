@@ -248,7 +248,7 @@ Also there's maybe a bit of an easter egg in this release. 'Cause those are fun 
 * [`2f3e4b6`](https://github.com/npm/npm/commit/2f3e4b645cdc268889cf95ba24b2aae572d722ad)
   [#15833](https://github.com/npm/npm/pull/15833)
   Mention the [24-hour unpublish
-  policy](http://blog.npmjs.org/post/141905368000/changes-to-npms-unpublish-policy)
+  policy](https://blog.npmjs.org/post/141905368000/changes-to-npms-unpublish-policy)
   on the main registry.
   ([@carols10cents](https://github.com/carols10cents))
 
@@ -1328,7 +1328,7 @@ This should make the experience much better, overall, and we believe this is an
 acceptable band-aid until we have that search endpoint in place.
 
 Incidentally, if you want a really nice search experience, we recommend checking
-out [npms.io](http://npms.io), which includes a handy-dandy
+out [npms.io](https://npms.io/), which includes a handy-dandy
 [`npms-cli`](https://npm.im/npms-cli) for command-line usage -- it's an npm
 search site that returns high-quality results quickly and is operated by members
 of the npm community.

@@ -58,7 +58,7 @@ If you believe your network is configured and working correctly, and you're stil
 
 0. Make sure you have a working internet connection. Can you reach https://registry.npmjs.org? Can you reach other sites? If other sites are unreachable, this is not a problem with npm.
 
-0. Check http://status.npmjs.org/ for any potential current service outages.
+0. Check https://status.npmjs.org/ for any potential current service outages.
 
 0. If your company has a process for domain whitelisting for developers, make sure https://registry.npmjs.org is a whitelisted domain.
 
@@ -153,7 +153,7 @@ This is a common issue which used to be caused by caching issues. Nowadays, the 
 
 0. Try running `npm install` again. It may have been a momentary hiccup or corruption during package download.
 
-0. Check http://status.npmjs.org/ for any potential current service outages.
+0. Check https://status.npmjs.org/ for any potential current service outages.
 
 0. If the shasum error specifically has `Actual: da39a3ee5e6b4b0d3255bfef95601890afd80709`, with this exact shasum, it means the package download was empty, which is certainly a networking issue.
 

@@ -496,7 +496,7 @@ up your CI work by **2-5x** in some cases! Have a good example? Tell us on
 Twitter!
 
 `npm ci` is, right now, [the fastest
-installer](http://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable)
+installer](https://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable)
 you can use in CI situations, so go check it out if you haven't already! We'll
 continue doing performance improvements on it, and a lot of those will help make
 `npm install` fast as well. 🏎😎
@@ -1186,7 +1186,7 @@ new features: [user profile editing](https://github.com/npm/registry/blob/master
 * [`5ee55dc71`](https://github.com/npm/npm/commit/5ee55dc71b8b74b8418c3d5ec17483a07b3b6777)
   install.sh: Drop support for upgrading from npm@1 as npm@5 can't run on
   any Node.js version that ships npm@1. This fixes an issue some folks were seeing when trying
-  to upgrade using `curl | http://npmjs.com/install.sh`.
+  to upgrade using `curl | https://www.npmjs.com/install.sh`.
   ([@iarna](https://github.com/iarna))
 * [`5cad1699a`](https://github.com/npm/npm/commit/5cad1699a7a0fc85ac7f77a95087a9647f75e344)
   `npm-lifecycle@1.0.3` Fix a bug where when more than one lifecycle script
@@ -1646,7 +1646,7 @@ that I highly recommend you give a read
 * [`b58ec8eab`](https://github.com/npm/npm/commit/b58ec8eab3b4141e7f1b8b42d8cc24f716a804d8)
   [#17626](https://github.com/npm/npm/pull/17626)
   Integrators who were building their own copies of npm ran into issues because
-  `make install` and https://npmjs.com/install.sh weren't aware that
+  `make install` and https://www.npmjs.com/install.sh weren't aware that
   `npm install` creates links now when given a directory to work on. This does not impact folks
   installing npm with `npm install -g npm`.
   ([@iarna](https://github.com/iarna))
