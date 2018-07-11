@@ -106,7 +106,7 @@ Ideally you should pick one that is
 [OSI](https://opensource.org/licenses/alphabetical) approved.
 
 If your package is licensed under multiple common licenses, use an [SPDX license
-expression syntax version 2.0 string](https://npmjs.com/package/spdx), like this:
+expression syntax version 2.0 string](https://www.npmjs.com/package/spdx), like this:
 
     { "license" : "(ISC OR GPL-3.0)" }
 
@@ -159,12 +159,12 @@ is an object with a "name" field and optionally "url" and "email", like this:
 
     { "name" : "Barney Rubble"
     , "email" : "b@rubble.com"
-    , "url" : "http://barnyrubble.tumblr.com/"
+    , "url" : "https://barnyrubble.tumblr.com/"
     }
 
 Or you can shorten that all into a single string, and npm will parse it for you:
 
-    "Barney Rubble <b@rubble.com> (http://barnyrubble.tumblr.com/)"
+    "Barney Rubble <b@rubble.com> (https://barnyrubble.tumblr.com/)"
 
 Both email and url are optional either way.
 
@@ -608,7 +608,7 @@ Trying to install another plugin with a conflicting requirement will cause an
 error. For this reason, make sure your plugin requirement is as broad as
 possible, and not to lock it down to specific patch versions.
 
-Assuming the host complies with [semver](http://semver.org/), only changes in
+Assuming the host complies with [semver](https://semver.org/), only changes in
 the host package's major version will break your plugin. Thus, if you've worked
 with every 1.x version of the host package, use `"^1.0"` or `"1.x"` to express
 this. If you depend on features introduced in 1.5.2, use `">= 1.5.2 < 2"`.

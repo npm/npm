@@ -865,7 +865,7 @@ unrecoverable errors then npm would crash instead of printing the error.
 ### v3.10.1 (2016-06-17):
 
 There are two very important bug fixes and one long-awaited (and significant!)
-deprecation in this hotfix release. [Hold on.](http://butt.holdings/)
+deprecation in this hotfix release. [Hold on.](https://butt.holdings/)
 
 #### *WHOA*
 
@@ -1050,7 +1050,7 @@ status.
 
 #### NEW PROGRESS BAR
 
-![Install with new progress bar](http://shared.by.re-becca.org/misc-images/new-gauge-color.gif)
+![Install with new progress bar](https://shared.by.re-becca.org/misc-images/new-gauge-color.gif)
 
 We have a new progress bar and a bunch of related improvements!
 
@@ -1965,7 +1965,7 @@ Well then, don't do that.
 
 * [`b8c7cd7`](https://github.com/npm/npm/commit/b8c7cd7)
   [#12000](https://github.com/npm/npm/pull/12000)
-  Stop depending on [`async-some`](https://npmjs.com/package/async-some) as it's no
+  Stop depending on [`async-some`](https://www.npmjs.com/package/async-some) as it's no
   longer used in npm.
   ([@watilde](https://github.com/watilde))
 
@@ -2049,7 +2049,7 @@ Taylor for reporting this vulnerability to npm.
 
 #### PERFORMANCE IMPROVEMENTS
 
-The updated [`are-we-there-yet`](https://npmjs.com/package/are-we-there-yet)
+The updated [`are-we-there-yet`](https://www.npmjs.com/package/are-we-there-yet)
 changes how it tracks how complete things are to be much more efficient.
 The summary is that `are-we-there-yet` was refactored to remove an expensive
 tree walk.
@@ -3363,7 +3363,7 @@ Thanksgiving to all our friends in the USA.
 
 This week heralds the general release of the primary npm registry's [new
 support for private packages for
-organizations](http://blog.npmjs.org/post/133542170540/private-packages-for-organizations).
+organizations](https://blog.npmjs.org/post/133542170540/private-packages-for-organizations).
 For many potential users, it's the missing piece needed to make it easy for you
 to move your organization's private work onto npm. And now it's here! The
 functionality to support it has been in place in the CLI for a while now,
@@ -4493,21 +4493,21 @@ maintenance or frontline continuous deployment just yet.
 * [`a8c8a13`](https://github.com/npm/npm/commit/a8c8a13)
   [#9050](https://github.com/npm/npm/issues/9050)
   Resolve peer deps relative to the parent of the requirer
-  ([@iarna](http://github.com/iarna))
+  ([@iarna](https://github.com/iarna))
 * [`05f0226`](https://github.com/npm/npm/commit/05f0226)
   [#9077](https://github.com/npm/npm/issues/9077)
   Fix crash when saving `git+ssh` urls
-  ([@iarna](http://github.com/iarna))
+  ([@iarna](https://github.com/iarna))
 * [`e4a3808`](https://github.com/npm/npm/commit/e4a3808)
   [#8951](https://github.com/npm/npm/issues/8951)
   Extend our patch to allow `*` to match something when a package only has
   prerelease versions to everything and not just the cache.
-  ([@iarna](http://github.com/iarna))
+  ([@iarna](https://github.com/iarna))
 * [`d135abf`](https://github.com/npm/npm/commit/d135abf)
   [#8871](https://github.com/npm/npm/issues/8871)
   Don't warn about a missing `package.json` or missing fields in the global
   install directory.
-  ([@iarna](http://github.com/iarna))
+  ([@iarna](https://github.com/iarna))
 
 #### DEP VERSION BUMPS
 
@@ -4952,7 +4952,7 @@ design improvements to you all.
 
 [@othiym23](https://github.com/othiym23) and
 [@isaacs](https://github.com/isaacs) have been
-[talking about the changes](http://blog.npmjs.org/post/91303926460/npm-cli-roadmap-a-periodic-update)
+[talking about the changes](https://blog.npmjs.org/post/91303926460/npm-cli-roadmap-a-periodic-update)
 in this release for well over a year, and it's been the primary focus of
 [@iarna](https://github.com/iarna) since she joined the team.
 
@@ -5227,7 +5227,7 @@ release, and very much worth checking out:
   (and GitHub support now extends to projects hosted as gists as well as
   traditional repositories).
 * [`5be4008a`](https://github.com/npm/npm/commit/5be4008a09730cfa3891d9f145e4ec7f2accd144)
-  npm has been cleaned up to pass the [`standard`](http://npm.im/standard)
+  npm has been cleaned up to pass the [`standard`](https://npm.im/standard)
   style checker. Forrest and Rebecca both feel this makes it easier to read
   and understand the code, and should also make it easier for new
   contributors to put merge-ready patches.

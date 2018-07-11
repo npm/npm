@@ -150,7 +150,7 @@ will no doubt tell you to put the output in a gist or email.
 
 [Isaac Z. Schlueter](http://blog.izs.me/) ::
 [isaacs](https://github.com/isaacs/) ::
-[@izs](http://twitter.com/izs) ::
+[@izs](https://twitter.com/izs) ::
 <i@izs.me>
 
 ## SEE ALSO

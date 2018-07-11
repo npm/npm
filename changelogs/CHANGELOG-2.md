@@ -259,7 +259,7 @@ Happy hacking!
 ### v2.15.8 (2016-06-17):
 
 There's a very important bug fix and a long-awaited (and significant!)
-deprecation in this hotfix release. [Hold on.](http://butt.holdings/)
+deprecation in this hotfix release. [Hold on.](https://butt.holdings/)
 
 #### *WHOA*
 
@@ -1441,7 +1441,7 @@ Thanksgiving to all our friends in the USA.
 
 This week heralds the general release of the primary npm registry's [new
 support for private packages for
-organizations](http://blog.npmjs.org/post/133542170540/private-packages-for-organizations).
+organizations](https://blog.npmjs.org/post/133542170540/private-packages-for-organizations).
 For many potential users, it's the missing piece needed to make it easy for you
 to move your organization's private work onto npm. And now it's here! The
 functionality to support it has been in place in the CLI for a while now,
@@ -1687,7 +1687,7 @@ official LTS release!
 
 #### MORE RELEASE STAGGERING?!
 
-Hi all, and greetings from [Open Source & Feelings](http://osfeels.com)!
+Hi all, and greetings from [Open Source & Feelings](http://www.osfeels.com/)!
 
 So we're switching gears a little with how we handle our weekly releases: from
 now on, we're going to stagger release weeks between dependency bumps and
@@ -2481,7 +2481,7 @@ made, So you can add additional metadata files, more automated changes to
 `package.json`, or even generate `CHANGELOG.md` automatically pre-commit if
 you're into that sort of thing. I'm so happy this is there I can't even. Do you
 have other fun usecases for this? Tell
-[npmbot (@npmjs)](http://twitter.com/npmjs) about it!
+[npmbot (@npmjs)](https://twitter.com/npmjs) about it!
 
 * [`582f170`](https://github.com/npm/npm/commit/582f170)
   [#8620](https://github.com/npm/npm/issues/8620) version: Allow scripts to add
@@ -2580,7 +2580,7 @@ Yep. Pretty sure. Maybe. Hmm... I hope.
 
 *Sighs audibly.*
 
-[Let us know](http://github.com/npm/npm/issues/new) if we broke something else
+[Let us know](https://github.com/npm/npm/issues/new) if we broke something else
 with this fix.
 
 * [`94ca4a7`](https://github.com/npm/npm/commit/94ca4a711619ba8e40ce3d20bc42b13cdb7611b7)
@@ -2595,7 +2595,7 @@ with this fix.
 #### YEP, THERE ARE STILL DEPENDENCY UPGRADES
 
 * [`679bf47`](https://github.com/npm/npm/commit/679bf4745ac2cfbb01c9ce273e189807fd04fa33)
-  [#40](http://github.com/npm/read-installed/issues/40) `read-installed@4.0.1`:
+  [#40](https://github.com/npm/read-installed/issues/40) `read-installed@4.0.1`:
   Handle prerelease versions in top-level dependencies not in `package.json`
   without marking those packages as invalid.
   ([@benjamn](https://github.com/benjamn))
@@ -2953,12 +2953,12 @@ usability improvement for npm!
 #### SPDX LICENSE UPDATES
 
 * Switch license to
-  [BSD-2-Clause](http://spdx.org/licenses/BSD-2-Clause.html#licenseText) from
+  [BSD-2-Clause](https://spdx.org/licenses/BSD-2-Clause.html#licenseText) from
   plain "BSD" ([@isaacs](https://github.com/isaacs)):
     * [`efdb733`](https://github.com/npm/npm/commit/efdb73332eeedcad4c609796929070b62abb37ab) `npm-user-validate@0.1.2`
     * [`e926783`](https://github.com/npm/npm/commit/e9267830ab261c751f12723e84d2458ae9238646) `normalize-package-data@2.2.0`
-* Switch license to [ISC](http://spdx.org/licenses/ISC.html#licenseText) from
-  [BSD](http://spdx.org/licenses/BSD-2-Clause.html#licenseText)
+* Switch license to [ISC](https://spdx.org/licenses/ISC.html#licenseText) from
+  [BSD](https://spdx.org/licenses/BSD-2-Clause.html#licenseText)
   ([@isaacs](https://github.com/isaacs)):
     * [`c300956`](https://github.com/npm/npm/commit/c3009565a964f0ead4ac4ab234b1a458e2365f17) `block-stream@0.0.8`
     * [`1de1253`](https://github.com/npm/npm/commit/1de125355765fecd31e682ed0ff9d2edbeac0bb0) `lockfile@1.0.1`
@@ -2968,8 +2968,8 @@ usability improvement for npm!
     * [`01eb7f6`](https://github.com/npm/npm/commit/01eb7f60acba584346ad8aae846657899f3b6887) `chownr@0.0.2`
     * [`294336f`](https://github.com/npm/npm/commit/294336f0f31c7b9fe31a50075ed750db6db134d1) `read@1.0.6`
     * [`ebdf6a1`](https://github.com/npm/npm/commit/ebdf6a14d17962cdb7128402c53b452f91d44ca7) `graceful-fs@3.0.7`
-* Switch license to [ISC](http://spdx.org/licenses/ISC.html#licenseText) from
-  [MIT](http://spdx.org/licenses/MIT.html#licenseText)
+* Switch license to [ISC](https://spdx.org/licenses/ISC.html#licenseText) from
+  [MIT](https://spdx.org/licenses/MIT.html#licenseText)
   ([@isaacs](https://github.com/isaacs)):
     * [`e5d237f`](https://github.com/npm/npm/commit/e5d237fc0f436dd2a89437ebf8a9632a2e35ccbe) `nopt@3.0.2`
     * [`79fef14`](https://github.com/npm/npm/commit/79fef1421b78f044980f0d1bf0e97039b6992710) `rimraf@2.3.4`
@@ -3009,7 +3009,7 @@ usability improvement for npm!
 * [`a2d6578`](https://github.com/npm/npm/commit/a2d6578b6554c5c9d48fe2006751759f4da57520)
   `glob@1.0.3`: Updated to use `tap@1`. ([@isaacs](https://github.com/isaacs))
 * [`64cd1a5`](https://github.com/npm/npm/commit/64cd1a570aaa5f24ccba190948ec9456297c97f5)
-  `fstream@ 1.0.6`: Made compliant with [`standard`](http://npm.im/standard)
+  `fstream@ 1.0.6`: Made compliant with [`standard`](https://npm.im/standard)
   (done by [@othiym23](https://github.com/othiym23), and then debugged and
   fixed by [@iarna](https://github.com/iarna)), and license changed to ISC.
   ([@othiym23](https://github.com/othiym23) /
@@ -3036,7 +3036,7 @@ tools.
 The Linux Foundation has been working on a machine-parseable syntax for license
 expressions in the form of [SPDX](https://spdx.org/), an appropriately
 enterprisey acronym. IP attorney and JavaScript culture hero [Kyle
-Mitchell](http://kemitchell.com/) has put a considerable amount of effort into
+Mitchell](https://kemitchell.com/) has put a considerable amount of effort into
 bringing SPDX to JavaScript and Node. He's written
 [`spdx.js`](https://github.com/kemitchell/spdx.js), a JavaScript SPDX
 expression parser, and has integrated it into npm in a few different ways.
@@ -3063,7 +3063,7 @@ to run their own automated license validators, but in the long run, if
 everybody switches to this format, many people's lives will be made much
 simpler. I think this is an important improvement for npm and am very thankful
 to Kyle for taking the lead on this. Also, even if you think all of this is
-completely stupid, just [choose a license](http://en.wikipedia.org/wiki/License-free_software)
+completely stupid, just [choose a license](https://en.wikipedia.org/wiki/License-free_software)
 anyway. Future you will thank past you someday, unless you are
 [djb](http://cr.yp.to/), in which case you are djb, and more power to you.
 
@@ -3433,7 +3433,7 @@ had to say about this work:
 And here's a little extra context from a comment I left on [#7929](https://github.com/npm/npm/issues/7929):
 
 > One of the other things that encouraged me was looking at this
-> [presentation on technical debt](http://www.slideshare.net/nnja/pycon-2015-technical-debt-the-monster-in-your-closet)
+> [presentation on technical debt](https://www.slideshare.net/nnja/pycon-2015-technical-debt-the-monster-in-your-closet)
 > from Pycon 2015, especially slide 53, which I interpreted in terms of
 > difficulty getting new contributors to submit patches to an OSS project like
 > npm. npm has a long ways to go, but I feel good about this change.
@@ -4267,7 +4267,7 @@ code (and the upgrade of `request` to the latest version) has changed.
 
 ### v2.4.1 (2015-01-23):
 
-![bridge that doesn't meet in the middle](http://www.static-18.themodernnomad.com/wp-content/uploads/2011/08/bridge-fail.jpg)
+![bridge that doesn't meet in the middle](https://www.static-18.themodernnomad.com/wp-content/uploads/2011/08/bridge-fail.jpg)
 
 Let's accentuate the positive: the `dist-tag` endpoints for `npm dist-tag
 {add,rm,ls}` are now live on the public npm registry.
