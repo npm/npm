@@ -2,6 +2,8 @@
 
 Hi! This repository is no longer being used and has been archived for historical purposes.
 
+* CLI source code and pull requests now live at [github.com/npm/cli](https://github.com/npm/cli) instead of here!
+
 * Requests for help, diagnostics and other support questions go in the [support category on npm.community](https://npm.community/c/support).
 
 * Reports of bugs go in the [bugs category](https://npm.community/c/bugs).
