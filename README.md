@@ -10,7 +10,7 @@ Hi! This repository is no longer being used and has been archived for historical
 
 * 📃 **RFCs**: Create a more formal proposal/idea via our [github.com/npm/rfcs](https://github.com/npm/rfcs)
 
-* 🗂 **Documentation**: References docs & how-tos can be found at [docs.nmpmjs.com](https://docs.npmjs.com/)
+* 🗂 **Documentation**: References docs & how-tos can be found at [docs.npmjs.com](https://docs.npmjs.com/)
 
 * 📫 **Support**: You can find links to all our various help channels via [npm.community](https://npm.community/) or file an issue at [npmjs.com/support](https://www.npmjs.com/support)
 
